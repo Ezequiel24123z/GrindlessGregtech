@@ -83,8 +83,13 @@
     })
     return changed
   }
+  // inside the box and, when the box carries a centre and radius (the circular gate), within that distance of the centre along the plane
   E.inside = function (box, x, y, z) {
-    return x >= box.minX && x < box.maxX + 1 && y >= box.minY && y < box.maxY + 1 && z >= box.minZ && z < box.maxZ + 1
+    if (!(x >= box.minX && x < box.maxX + 1 && y >= box.minY && y < box.maxY + 1 && z >= box.minZ && z < box.maxZ + 1)) return false
+    if (!box.center || !(box.radius > 0)) return true
+    var along = box.maxX > box.minX ? x - box.center.x : z - box.center.z
+    var up = y - box.center.y
+    return along * along + up * up <= box.radius * box.radius
   }
 
   // the first player inside an open gate's box (same dimension, not a spectator) who belongs to the gate's team and has not crossed in this run:

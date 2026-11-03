@@ -2,9 +2,13 @@
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 17, the Hyperstargate (docs/eras/maxplus.md "The Hyperstargate", lines 414 to 472; package XP-G1). This file registers:
 //
-//   gtceu:hyperstargate        41 x 43 x 9: a vertical ring of 160 cells (151 grindless:hyperstargate_ring_block and the nine locked chevrons set
-//                              into it) with a base row below it: four power units, the horizon iris, the base block, one 4,096 A wireless MAX+
-//                              hatch (the dial's 2^43 EU/t) and the buses. The ring's interior is air, so the plane stays open
+//   gtceu:hyperstargate        59 x 60 x 23, about 9,000 cells, the largest structure in the pack (docs/eras/lines-opv-maxplus.md 6.4, Decision H-1):
+//                              a circle of 160 ring cells (151 grindless:hyperstargate_ring_block and the nine locked chevrons, 40 degrees apart)
+//                              in the plane z = 11, held in a jacket of horizon gate casing (z 5 to 17) with a primordial cryostat cold channel
+//                              round the ring and void diamond windows every 30 degrees, on a stepped pedestal of Fe-56 shield casing with two
+//                              cradle buttresses. On the pedestal's front: the controller and the hatches (one 4,096 A wireless MAX+ hatch, the
+//                              dial's 2^43 EU/t, and the buses) on the first ledge, the four power units, the horizon iris and the base block
+//                              on the risers above it. The disc inside the ring is air, so the plane stays open
 //   gtceu:hyperstargate_dial   its recipe type: c1, the dial, 2^43 EU/t for 1,200 t, no overclock and no parallels
 //   grindless:spent_dial_charge  what a dial leaves; the condensate refinery recharges it (server_scripts/.../maxplus/hyperstargate.js)
 //
@@ -14,7 +18,9 @@
 //
 // The open state, for XP-Z1b (which does the player check and the teleport): global.grindless.hyperstargate
 //   isOpen(machine)            formed and running its dial
-//   box(pos, facing)           the interior plane in world coordinates { minX, minY, minZ, maxX, maxY, maxZ } (inclusive block coordinates)
+//   box(pos, facing)           the interior disc's bounding box in world coordinates { minX, minY, minZ, maxX, maxY, maxZ } (inclusive block
+//                              coordinates), plus its centre { x, y, z } (block centres) and radius: the plane is the disc, so the crossing tests
+//                              the distance from the centre (maxplus/ending.js)
 //   gates()                    [{ dimension, pos: { x, y, z }, facing, open, run, team, box }] of every formed gate that has been asked to start a dial;
 //                              team is the controller owner's team id ('server' when it has none): the dial draws on that team's wireless store
 //                              and the crossing admits that team (B13-DIAL, #238)
@@ -30,7 +36,7 @@
   var TYPE = 'hyperstargate_dial'
   var KEY = 'grindless_hyperstargate_dial'
   var MACHINE = 'gtceu:hyperstargate'
-  var CASING = 'grindless:horizon_machine_casing'
+  var CASING = 'grindless:fe56_shield_casing'
   var RECHECK_TICKS = 20
 
   HS.machine = MACHINE
@@ -39,47 +45,106 @@
   HS.spent = 'grindless:spent_dial_charge'
   HS.maxIO = { itemsIn: 5, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }
 
-  // x left to right, y bottom to top, z back (0) to front (8). Row 0 a floor of casing and atomic casing; row 1 the base row (the controller
-  // at the middle of the front, eight part cells either side of it, four power units, the iris and the base block on the ring's plane, two
-  // coils, a glass band at the back); rows 2 to 42 the ring on slice z = 4, its interior air.
-  var W_ = 41
-  var H_ = 43
-  var D_ = 9
-  var MID = 20
-  var PLANE = 4
-  var CHEVRONS = [[20, 42], [10, 42], [30, 42], [0, 34], [40, 34], [0, 22], [40, 22], [0, 10], [40, 10]]
+  // x left to right, y bottom to top, z back (0) to front (22). The gate is a circle of radius 27 round the cell (29, 30) in the plane z = 11
+  // (the ring: 26.5 <= d <= 27.5, 160 cells), its disc d < 26.5 open. Round it a jacket of horizon gate casing (H) for z 5 to 17, 27.5 < d <= 29.5,
+  // its inner half a primordial cryostat cold channel (C) for z 9 to 13 and void diamond windows (L) every 30 degrees on its outer face and on its
+  // front and back faces. Below, a stepped pedestal of Fe-56 shield casing (F), 35 x 23 at the floor to 27 x 15 at the top step, with two cradle
+  // buttresses climbing the jacket's lower arc. The controller and the part cells (X) are on the first ledge at the front, the four power units
+  // (W), the iris (I) and the base block (G) on the risers above it.
+  var W_ = 59
+  var H_ = 60
+  var D_ = 23
+  var MID = 29
+  var CY = 30
+  var PLANE = 11
+  var R_RING = 27
+  var R_OPEN = 26.5
+  var R_JACKET = 29.5
+  var R_CHANNEL = 28.5
+  var PEDESTAL_ROWS = 5
+  var STEP_X0 = 12
+  var STEP_X1 = 46
+  var BUTTRESS_SLOPE = 0.342
+  var POWER_X = [19, 24, 34, 39]
+  var CHEVRON_STEP = 40
 
-  function isChevron(x, y) {
-    for (var i = 0; i < CHEVRONS.length; i++) {
-      if (CHEVRONS[i][0] === x && CHEVRONS[i][1] === y) return true
+  function rad(x, y) {
+    var dx = x - MID
+    var dy = y - CY
+    return Math.sqrt(dx * dx + dy * dy)
+  }
+
+  // the nearest ring cell to each chevron's position on the circle, every 40 degrees from the top: 'x,y' -> true
+  var chevrons = null
+  function chevronCells() {
+    if (chevrons !== null) return chevrons
+    var set = {}
+    var n = Math.round(360 / CHEVRON_STEP)
+    for (var k = 0; k < n; k++) {
+      var a = (k * CHEVRON_STEP * Math.PI) / 180
+      var tx = MID + R_RING * Math.sin(a)
+      var ty = CY + R_RING * Math.cos(a)
+      var best = null
+      var bestD = 1e9
+      for (var x = 0; x < W_; x++) {
+        for (var y = 0; y < H_; y++) {
+          if (Math.abs(rad(x, y) - R_RING) > 0.5) continue
+          var e = (x - tx) * (x - tx) + (y - ty) * (y - ty)
+          if (e < bestD) {
+            bestD = e
+            best = x + ',' + y
+          }
+        }
+      }
+      set[best] = true
     }
-    return false
+    chevrons = set
+    return set
+  }
+
+  // a window every 30 degrees, three cells wide, on the outer face (z 8 to 14) and on the front and back faces (z 5 and 17)
+  function windowAt(x, y, z, d) {
+    var deg = (Math.atan2(x - MID, y - CY) * 180) / Math.PI
+    var phase = ((((deg + 15) % 30) + 30) % 30) - 15
+    if (Math.abs(phase) > 3) return false
+    if (z === 5 || z === 17) return true
+    return d > R_CHANNEL && z >= 8 && z <= 14
+  }
+
+  // the pedestal: row y spans x 8 + y to 50 - y, z from y (back) to 22 (the ledge rows 0 and 1) or 22 - y (the steps above)
+  function onPedestal(x, y, z) {
+    if (y >= PEDESTAL_ROWS) return false
+    if (x < STEP_X0 + y || x > STEP_X1 - y || z < y) return false
+    return z <= (y < 2 ? D_ - 1 : D_ - 1 - y)
+  }
+
+  function onButtress(x, y, z, d) {
+    if (d <= R_OPEN || d > R_JACKET || y - CY > -BUTTRESS_SLOPE * d) return false
+    return (z >= 3 && z <= 4) || (z >= 18 && z <= 20)
   }
 
   function cell(x, y, z) {
-    if (y === 0) return (x + z) % 2 === 0 ? 'F' : 'A'
-    if (y === 1) {
-      if (z === D_ - 1 && x >= MID - 4 && x <= MID + 4 && x !== MID) return 'X'
-      if (z === PLANE) {
-        if (x === 10 || x === 15 || x === 25 || x === 30) return 'W'
-        if (x === MID) return 'I'
-        if (x === 3 || x === 37) return 'C'
-      }
-      if (z === PLANE + 1 && x === MID) return 'G'
-      if (z === 0 && x % 5 === 0 && x >= 5 && x <= 35) return 'L'
-      return ' '
+    if (y === 1 && z === D_ - 1 && x >= MID - 4 && x <= MID + 4 && x !== MID) return 'X'
+    if (y === 2 && z === D_ - 3) {
+      if (x === MID) return 'I'
+      if (POWER_X.indexOf(x) >= 0) return 'W'
     }
-    if (z === PLANE) {
-      if (y === 2 || y === H_ - 1 || x === 0 || x === W_ - 1) return isChevron(x, y) ? 'K' : 'R'
-      return '#'
+    if (y === 3 && z === D_ - 4 && x === MID) return 'G'
+    var d = rad(x, y)
+    if (z === PLANE && Math.abs(d - R_RING) <= 0.5) return chevronCells()[x + ',' + y] === true ? 'K' : 'R'
+    if (d < R_OPEN) return z === PLANE ? '#' : ' '
+    if (z >= 5 && z <= 17 && d <= R_JACKET) {
+      if (windowAt(x, y, z, d)) return 'L'
+      return d <= R_CHANNEL && z >= 9 && z <= 13 ? 'C' : 'H'
     }
+    if (onPedestal(x, y, z) || onButtress(x, y, z, d)) return 'F'
     return ' '
   }
   HS.cell = cell
 
   HS.size = { width: W_, height: H_, depth: D_ }
   HS.pal = {
-    F: CASING, A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass',
+    F: CASING, H: 'grindless:horizon_gate_casing', C: 'grindless:primordial_cryostat_casing', L: 'grindless:void_diamond_window',
     R: 'grindless:hyperstargate_ring_block', K: 'grindless:hyperstargate_locked_chevron', W: 'grindless:hyperstargate_power_unit',
     I: 'grindless:horizon_iris', G: 'grindless:hyperstargate_base'
   }
@@ -95,8 +160,11 @@
 
   // horizontal step of each facing (by name)
   var STEPS = { north: [0, -1], south: [0, 1], west: [-1, 0], east: [1, 0] }
-  // the interior plane's two corners relative to the controller: up, back (away from the front face), side
-  var CORNERS = [{ up: 2, back: D_ - 1 - PLANE, side: -(MID - 1) }, { up: H_ - 3, back: D_ - 1 - PLANE, side: MID - 1 }]
+  // the open disc's bounding square relative to the controller: up, back (away from the front face), side. The disc is d < 26.5 round (29, 30) in
+  // the plane z = 11: 53 x 53 cells in the square.
+  var REACH = Math.floor(R_OPEN)
+  var CORNERS = [{ up: CY - REACH - 1, back: D_ - 1 - PLANE, side: -REACH }, { up: CY + REACH - 1, back: D_ - 1 - PLANE, side: REACH }]
+  var CENTER_UP = CY - 1
 
   function num(v) { return Number(v) }
   function coord(pos, k) {
@@ -118,8 +186,10 @@
       xs.push(px - fx * c.back + fz * c.side)
       zs.push(pz - fz * c.back - fx * c.side)
     })
+    var back = D_ - 1 - PLANE
     return { minX: Math.min(xs[0], xs[1]), maxX: Math.max(xs[0], xs[1]), minY: py + CORNERS[0].up, maxY: py + CORNERS[1].up,
-      minZ: Math.min(zs[0], zs[1]), maxZ: Math.max(zs[0], zs[1]) }
+      minZ: Math.min(zs[0], zs[1]), maxZ: Math.max(zs[0], zs[1]),
+      center: { x: px - fx * back + 0.5, y: py + CENTER_UP + 0.5, z: pz - fz * back + 0.5 }, radius: R_OPEN }
   }
   HS.box = box
 
@@ -391,6 +461,6 @@
         Text.translate('grindless.machine.hyperstargate.tooltip.1'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + TYPE))
       ])
-      .workableCasingModel('grindless:block/maxplus/horizon_machine_casing', 'grindless:block/multiblock/hyperstargate')
+      .workableCasingModel('grindless:block/maxplus/fe56_shield_casing', 'grindless:block/multiblock/hyperstargate')
   })
 })()

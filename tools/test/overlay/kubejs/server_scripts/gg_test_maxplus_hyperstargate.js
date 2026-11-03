@@ -4,10 +4,10 @@
 // its dial type and the spent charge are part of the pack.
 //   T1 (named uncertainty: the run-start check refuses a dial the banks cannot cover and a broken ring, and lets a covered dial run at exactly 2^43 EU/t):
 //     lookup    the controller row, the dial row and the recharge row are in the recipe manager
-//     formed    the 41 x 43 x 9 gate forms with one 4,096 A MAX+ wireless hatch, an input bus pair and an output bus
+//     formed    the 59 x 60 x 23 circular gate forms with one 4,096 A MAX+ wireless hatch, an input bus pair and an output bus
 //     refused   the network answers one EU short of a dial: no run, and the controller's refusal is 'charge'
 //     eut       with the dial covered the run starts at exactly 2^43 EU/t for 1,200 t
-//     open      the gate reads open while the dial runs (and its box is the 39 x 39 x 1 plane)
+//     open      the gate reads open while the dial runs (and its box is the 53 x 53 x 1 square of the round plane)
 //     run_counter, reregistered, resume_same_run   (M8-10) the dial start counts run 1; after forget() the running dial registers the gate again in the same run;
 //                                                   switching the controller off and on again keeps run 1 (paused is a NOTE)
 //     spent     the dial's end puts one spent charge in the output bus, keeps the horizon lock and reads closed again
@@ -32,7 +32,7 @@
   var Y1 = 160
   var CX = 46943
   var CY = 100
-  var CZ = 20
+  var CZ = 30
   var SITE = 'gcyr:black_hole_orbit'
   var MACHINE = 'gtceu:hyperstargate'
   var HATCH = 'gtceu:max_wireless_energy_hatch_4096a'
@@ -336,7 +336,7 @@
       var p = S.ctrl
       var b = HS().box(p, 'north')
       var gate = HS().gateAt(SITE, p.x, p.y, p.z)
-      check('open', HS().isOpen(m) && !!gate && gate.open === true && b.maxX - b.minX === 38 && b.maxY - b.minY === 38 && b.maxZ === b.minZ,
+      check('open', HS().isOpen(m) && !!gate && gate.open === true && b.maxX - b.minX === 52 && b.maxY - b.minY === 52 && b.maxZ === b.minZ,
         'isOpen ' + HS().isOpen(m) + ', gate ' + JSON.stringify(gate && gate.box))
       S.at = S.tick
       S.phase = 'run'
