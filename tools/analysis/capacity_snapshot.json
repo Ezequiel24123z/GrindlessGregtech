@@ -1263,20 +1263,12 @@
     0
    ]
   },
-  "gtceu:ice_annealing": {
-   "io": [
-    2,
-    0,
-    0,
-    4
-   ]
-  },
   "gtceu:ice_fractionation": {
    "io": [
     2,
     1,
     0,
-    3
+    4
    ]
   },
   "gtceu:ice_giant_siphon": {
@@ -9969,7 +9961,6 @@
   "gtceu:hot_rolling",
   "gtceu:hyper_assembly_array",
   "gtceu:hyperstargate_dial",
-  "gtceu:ice_annealing",
   "gtceu:ice_fractionation",
   "gtceu:ice_giant_siphon",
   "gtceu:implosion_compressor",
