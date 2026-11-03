@@ -44,6 +44,7 @@
   PD.table = 'kubejs/data/grindless/tables/power_devices.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
   PD.items = {
+    sic_source_powder: { stack: 64 },
     sic_boule: { stack: 16 },
     sic_wafer: { stack: 64 },
     sic_device_wafer: { stack: 64 },
@@ -52,6 +53,7 @@
     cerium_coverglass: { stack: 64 }
   }
   PD.ids = {
+    sicSourcePowder: 'grindless:sic_source_powder',
     sicBoule: 'grindless:sic_boule',
     sicWafer: 'grindless:sic_wafer',
     sicDeviceWafer: 'grindless:sic_device_wafer',

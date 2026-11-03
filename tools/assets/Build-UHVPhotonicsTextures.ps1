@@ -216,6 +216,9 @@ $items = @(
     # grey silicon carrying the LN film (L) with two bright waveguides (G)
     @{ Name = 'lnoi_wafer'; Pal = 'K=2A2E38 W=B8C0D0 D=4A5060 B=6A7080 L=E4DCC4 G=FFF8E0'
         Map = (Get-FilledMap $WaferBase { param($x, $y) if ($y -eq 6 -or $y -eq 9) { 'G' } elseif ($y -ge 4 -and $y -le 11) { 'L' } else { 'B' } }) },
+    # LNOI with the ridge waveguides milled in: dark trenches (T) either side of each bright ridge (G)
+    @{ Name = 'etched_lnoi_wafer'; Pal = 'K=2A2E38 W=B8C0D0 D=4A5060 B=6A7080 L=E4DCC4 G=FFF8E0 T=3A3E48'
+        Map = (Get-FilledMap $WaferBase { param($x, $y) if ($y -eq 6 -or $y -eq 9) { 'G' } elseif ($y -eq 5 -or $y -eq 7 -or $y -eq 8 -or $y -eq 10) { 'T' } elseif ($y -ge 4 -and $y -le 11) { 'L' } else { 'B' } }) },
     # a GST disc (B, with grain G) bonded to a copper backing plate (K, W, D)
     @{ Name = 'gst_target'; Pal = 'K=7A4022 W=D88A50 D=A05A30 B=5A5C64 G=7A7C86'
         Map = (Get-FilledMap $WaferBase { param($x, $y) if ((($x * 3 + $y * 5) % 7) -eq 0) { 'G' } else { 'B' } }) },
