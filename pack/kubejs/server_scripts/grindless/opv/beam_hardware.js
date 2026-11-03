@@ -89,8 +89,8 @@
       [item('grindless:cooler_electron_gun', 1)], [], OPV_VA, 400),
     // line 25: one activated chamber (the getter pumps the wall itself) in a stainless frame between two chain lamina stacks
     row('opv/neg_xhv_casing', 'assembler', null, [item('grindless:activated_neg_chamber', 1), item('grindless:chain_lamina_stack', 2),
-      item('gtceu:stainless_steel_frame', 1)], [],
-      [item('grindless:neg_xhv_casing', 4)], [], 268435456, 400)
+      item('gtceu:stainless_steel_frame', 1)], [fluid(NITROGEN, 1000)],
+      [item('grindless:neg_xhv_casing', 4)], [], OPV_VA, 400)
   ]
 
   function missingIds(r) {

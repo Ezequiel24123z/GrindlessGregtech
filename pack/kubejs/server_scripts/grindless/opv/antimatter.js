@@ -217,8 +217,9 @@
     var b = event.recipes.gtceu.assembler('grindless:annihilation_shield_casing')
     b.itemInputs('4x grindless:gamma_absorber_tile')
     b.itemInputs('grindless:li6_hydride_shield', '2x grindless:chain_lamina_stack', '2x gtceu:tungsten_plate')
+    b.inputFluids(Fluid.of('gtceu:superfluid_helium_3', 250))
     b.itemOutputs('4x ' + OUT)
-    b.EUt(268435456).duration(400)
+    b.EUt(503316480).duration(400)
     AM.casingRecipe = 'grindless:assembler/annihilation_shield_casing'
   }
 

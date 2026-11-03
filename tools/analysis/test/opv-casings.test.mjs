@@ -14,7 +14,7 @@ const recipes = run.docs.recipes.recipes;
 const find = (id) => recipes.find((r) => r.i === id);
 const text = (id) => JSON.stringify(find(id).j);
 const plain = (x) => JSON.parse(JSON.stringify(x));
-const EUT = 268435456;
+const EUT = 503316480;
 const NEW = ['chain_lamina_casing', 'tpv_wall_casing', 'kugelblitz_cavity_casing'];
 
 test('the three new casings are made, none skipped', () => {

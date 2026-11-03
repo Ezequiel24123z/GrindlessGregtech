@@ -13,10 +13,10 @@
   C.skipped = []
 
   var ROWS = [
-    { id: 'chain_lamina_casing', type: 'assembler', out: 4, eut: 268435456, duration: 200,
-      items: ['4x grindless:chain_lamina_stack', '8x gtceu:chain_strand_single_wire', '2x gtceu:neutronium_plate', 'gtceu:neutronium_frame'] },
-    { id: 'tpv_wall_casing', type: 'assembler', out: 4, eut: 268435456, duration: 400,
-      items: ['2x grindless:tpv_panel', 'grindless:gamma_absorber_tile', '2x gtceu:copper_plate', 'grindless:chain_lamina_stack'] },
+    { id: 'chain_lamina_casing', type: 'assembler', out: 4, eut: 503316480, duration: 200, fluid: 500,
+      items: ['4x grindless:chain_lamina_stack', '8x gtceu:chain_strand_single_wire', '2x gtceu:neutronium_plate', 'gtceu:neutronium_frame', '2x gtceu:tungsten_plate', '2x gtceu:stainless_steel_plate'] },
+    { id: 'tpv_wall_casing', type: 'assembler', out: 4, eut: 503316480, duration: 400, fluid: 250,
+      items: ['2x grindless:tpv_panel', 'grindless:gamma_absorber_tile', '2x gtceu:copper_plate', 'grindless:chain_lamina_stack', '2x gtceu:tungsten_plate', '2x gtceu:stainless_steel_plate'] },
     { id: 'kugelblitz_cavity_casing', type: 'assembly_line', out: 2, eut: 503316480, duration: 600,
       research: 'grindless:gamma_multilayer_mirror',
       items: ['grindless:gamma_multilayer_mirror', '2x grindless:field_frozen_plate', 'grindless:annihilation_shield_casing', '4x gtceu:chain_strand_single_wire'] }
@@ -34,6 +34,10 @@
     }
     var b = event.recipes.gtceu[row.type]('grindless:' + row.id)
     row.items.forEach(function (s) { b.itemInputs(s) })
+    if (row.fluid) {
+      b.inputFluids(Fluid.of('gtceu:superfluid_helium_3', row.fluid))
+      b.inputFluids(Fluid.of('gtceu:nitrogen', 1000))
+    }
     b.itemOutputs(row.out + 'x grindless:' + row.id)
     if (row.research) {
       b.stationResearch(function (r) { return r.researchStack(Item.of(row.research)).dataStack(Item.of('gtceu:data_module')).CWUt(256).EUt(row.eut) })
