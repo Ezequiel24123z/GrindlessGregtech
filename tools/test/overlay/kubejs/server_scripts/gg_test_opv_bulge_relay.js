@@ -1,7 +1,7 @@
 // priority: -6424
 // TEST ONLY, OpV-A0. Command: kubejs custom_command gg_test_opv_bulge_relay, sent twice: before and after one @restart.
 // Markers: GGTEST|opv_bulge_relay|PHASE1|DONE (leg 1 is done: restart now), then GGTEST|opv_bulge_relay|DONE|failures=N (leg 2).
-// Band ONLY: X 37824-37887, Z 0-63, Y 98-115, in grindless:cygnus_x1_orbit. The far platform is kerr_sling.js's (grindless:sgr1806_orbit at
+// Band ONLY: X 37824-37887, Z 0-63, Y 98-128, in grindless:cygnus_x1_orbit. The far platform is kerr_sling.js's (grindless:sgr1806_orbit at
 // 64,100,64); this test only drops its chunk tickets. Leg 1 keeps its blocks and tickets for leg 2 (persistent data ggTestOpvBulgeRelay), which
 // removes them before DONE.
 // Doubt: the c11 throw survives a restart. AF-1 (#203): GTM keeps the running recipe across a restart, and the gate's afterWorking queues the

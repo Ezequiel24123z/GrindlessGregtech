@@ -1,7 +1,7 @@
 // priority: -6524
 // TEST ONLY, OpV-A0 chain matter (process lines 1 and 2). Command: kubejs custom_command gg_test_opv_chain_matter
 // Markers: GGTEST|opv_chain_matter|<check>|PASS/FAIL|..., then GGTEST|opv_chain_matter|DONE|failures=N.
-// Band ONLY: X 37824-37887, Z 0-63, Y 98-115 (zones.json row opv_bulge_relay), built in grindless:sgr1806_orbit, the dimension the OpV-A0 rows of
+// Band ONLY: X 37824-37887, Z 0-63, Y 98-128 (zones.json row opv_bulge_relay), built in grindless:sgr1806_orbit, the dimension the OpV-A0 rows of
 // tables/vela_pasta.json are locked to. gg_test_opv_bulge_relay uses the same band in grindless:cygnus_x1_orbit; the SGR platform (64,100,64) is far.
 // Doubt: UXV-B4's four pasta machines form at SGR 1806-20 with UXV hatches and run the new circuit 3-5 rows there (the rows existed only at Vela).
 //   lookup      the 11 OpV-A0 rows, the PBO plant's c8 braid and the strand cable covering are in the recipe manager
