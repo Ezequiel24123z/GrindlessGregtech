@@ -80,7 +80,8 @@
   function makeSpec(m) {
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: pressCell(),
-      pal: G.uevShapes.palette(ROBUST),
+      // bootstrap: the press makes the LaH10 of the superhydride magnet casing, so its field bands are HfTaCN lining
+      pal: G.uevShapes.palette(ROBUST, { M: G.uevShapes.family.H }),
       parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 }),

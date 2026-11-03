@@ -153,9 +153,10 @@
 
   function specOf(k, casing, parts) {
     var m = EB.machines[k]
+    // bootstrap (uev/shapes.js T.bootstrap): the furnace refines the 6N tantalum of the SiC composite casing
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
-      pal: G.uevShapes.palette(casing)
+      pal: G.uevShapes.palette(casing, k === 'furnace' ? G.uevShapes.bootstrap(casing, 'RM') : null)
     })
   }
   function makeSpec(k) {

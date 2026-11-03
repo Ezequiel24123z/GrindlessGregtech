@@ -41,8 +41,9 @@
     var casing = Pat.block(o.pal.F)
     var symbols = { S: Pat.controller(), X: Pat.oneOf.apply(null, [casing].concat(o.parts)), F: casing, '#': Pat.air() }
     Object.keys(o.pal).forEach(function (ch) {
-      if (ch === 'F') return
-      symbols[ch] = Pat.block(o.pal[ch])
+      if (ch === 'F' || !o.pal[ch]) return
+      // Q names a frame material (as in uev/shapes.js), not a block
+      symbols[ch] = ch === 'Q' ? Pat.frame([o.pal[ch]]) : Pat.block(o.pal[ch])
     })
     return { slices: T.slices(o.w, o.h, o.d, o.fn, o.ctl), symbols: symbols }
   }
