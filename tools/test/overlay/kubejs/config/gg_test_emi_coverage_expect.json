@@ -2597,7 +2597,7 @@
     {"id":"gtceu:polar_cap_tap","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:polarised_proton_source","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:polarized_fusion_stellarator","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"],"used":["emi:info"]},
-    {"id":"gtceu:polyacrylonitrile_dust","kind":"item","needUse":true,"needMade":true,"made":[],"used":[]},
+    {"id":"gtceu:polyacrylonitrile_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:large_chemical_reactor"],"used":["gtceu:chemical_bath"]},
     {"id":"gtceu:polycarbonate_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:assembler","gtceu:chemical_reactor","gtceu:large_chemical_reactor","gtceu:nitride_magnet_synthesis"]},
     {"id":"gtceu:polymer_works","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembler","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:polystyrene_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:assembler","gtceu:chemical_reactor","gtceu:large_chemical_reactor"]},
