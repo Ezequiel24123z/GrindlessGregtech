@@ -41,8 +41,8 @@
     { name: 'annihilation_b', dim: HOME, machine: 'annihilation_engine', cx: 38710, z: 24, bus: [[CIRCUIT, 1, '{Configuration:2}'], ['grindless:acmf_pellet', 1], ['grindless:antiproton_stack_opv', 1], ['grindless:gamma_absorber_tile', 1]] },
     { name: 'hawking_a', dim: CYG, machine: 'hawking_collector', cx: 38666, z: 40, bus: [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:stable_exotic_matter', 1], ['grindless:kugelblitz_core', 1], ['grindless:gamma_absorber_tile', 1]] },
     { name: 'hawking_b', dim: CYG, machine: 'hawking_collector', cx: 38710, z: 40, bus: [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:stable_exotic_matter', 1], ['grindless:kugelblitz_core', 1], ['grindless:gamma_absorber_tile', 1]] },
-    { name: 'bulge_a', dim: TERZ, machine: 'bulge_collector', cx: 38666, z: 32, bus: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:deployed_node_pack', 16]] },
-    { name: 'bulge_b', dim: TERZ, machine: 'bulge_collector', cx: 38710, z: 32, bus: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:deployed_node_pack', 16]] }
+    { name: 'bulge_a', dim: TERZ, machine: 'bulge_collector', cx: 38672, z: 32, bus: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:deployed_node_pack', 16]] },
+    { name: 'bulge_b', dim: TERZ, machine: 'bulge_collector', cx: 38704, z: 32, bus: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:deployed_node_pack', 16]] }
   ]
 
   function classes() {

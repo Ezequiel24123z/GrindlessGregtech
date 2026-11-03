@@ -1,6 +1,6 @@
 // priority: -7759
 // TEST ONLY, UEV-M2 (gtceu:stellar_forge). Command: kubejs custom_command gg_test_uev_stellar_forge
-// Band ONLY: X 35136-35199, Z 0-63, Overworld Y 98-115.
+// Band ONLY: X 35136-35199, Z 0-63, Overworld Y 98-125.
 //   T1 (named uncertainty: the forge's modifier chain on 7.5.3: ebf_temp read, plasma added by the last modifier, veto, clamp):
 //     formed     forge A (no hatch) and forge B (UEV parallel hatch) form <= 16 tall with HfTaCN coils (12,600 K)
 //     noplasma   a 9,000 K probe (8 EU/t, non-consumed stick) runs 256 copies, nothing drained
@@ -15,7 +15,7 @@
   var X0 = 35136
   var X1 = 35199
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 125
   var NAME = 'uev_stellar_forge'
   var ID = 'gtceu:stellar_forge'
   var STICK = 'minecraft:stick'

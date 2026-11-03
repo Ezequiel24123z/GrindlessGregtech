@@ -1,6 +1,6 @@
 // priority: -6819
 // TEST ONLY, OpV-E1 (gtceu:magnetic_pair_converter). Command: kubejs custom_command gg_test_opv_pair_converter
-// Band ONLY: X 38208-38271, Z 0-63, Y 98-115, grindless:sgr1806_orbit (tools/test/zones.json: opv_pair_converter). It takes its turn
+// Band ONLY: X 38208-38271, Z 0-63, Y 98-120, grindless:sgr1806_orbit (tools/test/zones.json: opv_pair_converter). It takes its turn
 // on the wireless network with the other wireless fixtures (the queue ggTestWirelessQueue in global): a one-cell OpV SMES tower feeds
 // the converter's own OpV wireless energy hatch; the cell's recipe waits on other packages, so the network's energy is set directly
 // (W.setStored) and the settlement is paused and run by hand each tick (so the hatch charges without waiting on real time), then put
@@ -25,7 +25,7 @@
   var Z0 = 0
   var Z1 = 63
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 120
   var ID = 'gtceu:magnetic_pair_converter'
   var CX = 38240
   var CZ = 40
