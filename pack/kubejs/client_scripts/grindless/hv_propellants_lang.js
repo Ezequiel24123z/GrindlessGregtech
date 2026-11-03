@@ -1,3 +1,4 @@
+// priority: 9625
 // Gregtech Grindless - names and tooltips of the HV propellant fluid (startup_scripts/grindless/hv/propellant_items.js):
 //
 //   material.gtceu.aerozine_50   the GT material (GTM names its fluid and bucket from it)

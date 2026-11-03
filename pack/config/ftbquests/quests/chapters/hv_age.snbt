@@ -417,16 +417,172 @@
 		{
 			dependencies: ["35719B747A75F7B6"]
 			description: [
-				"&6Rocket Fuel&r is dimethylhydrazine and oxygen out of the mixer, and the hydrazine comes from methanol, ammonia and hypochlorous acid."
+				"&6Rocket Fuel&r is Aerozine 50 mixed with dinitrogen tetroxide. The Aerozine is hydrazine from the chemical plant plus UDMH from dimethylamine and monochloramine, and the plant must be built with HV machine casings."
 				"A Moon launch needs at least 8 buckets in the tanks. Make extra, because every static fire burns some too."
 			]
-			icon: "gtceu:hv_chemical_reactor"
+			icon: "gtceu:rocket_fuel_bucket"
 			id: "76D281E9D9C6FD20"
 			rewards: [{ id: "3E3E25931D1CA960", type: "xp", xp: 40 }]
-			tasks: [{ id: "437D6750BF09654E", type: "checkmark" }]
+			tasks: [{ count: 8L, id: "437D6750BF09654E", item: "gtceu:rocket_fuel_bucket", type: "item" }]
 			title: "Rocket Fuel"
 			x: 22.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["471A024EBFCA8459"]
+			description: ["Starts the propellant line: coal tar distilled into &6naphthalene&r. Coal tar from the LV coke battery's gas, and a distillery. Phthalic anhydride, the first reagent of the peroxide cycle. Coal tar by pipe off the coke battery, naphthalene on to the reactor, the coke dust to the sinter."]
+			icon: "gtceu:naphthalene_bucket"
+			id: "5ADAD2566FD74648"
+			rewards: [{ id: "3D45B1AC65E4F473", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F7205F6A66B4F98", item: "gtceu:naphthalene_bucket", type: "item" }]
+			title: "Naphthalene"
+			x: 10.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["5ADAD2566FD74648"]
+			description: ["Burns naphthalene over vanadium pentoxide in air into &6phthalic anhydride&r. It takes 480 EU/t now, so it needs HV power. Naphthalene, air and small vanadium pentoxide dust, in a chemical reactor on an HV hatch. 2-ethylanthraquinone in the chemical plant. Naphthalene and air by pipe, vanadium dust by bus, the anhydride out by bus to the plant."]
+			icon: "gtceu:phthalic_anhydride_dust"
+			id: "5D511A6DD8DA757A"
+			rewards: [{ id: "37121CFEAAEC9AF5", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 15L, id: "186016EC2C83A578", item: "gtceu:phthalic_anhydride_dust", type: "item" }]
+			title: "Phthalic Anhydride"
+			x: 12.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["5D511A6DD8DA757A"]
+			description: ["Joins phthalic anhydride and ethylbenzene into &62-ethylanthraquinone&r in GT--'s chemical plant. Build the plant with HV machine casings: it runs a recipe only up to its casings' tier and sits idle above it, with no error. The chemical plant on HV casings, phthalic anhydride and ethylbenzene from the coal gas distillery. The hydrogenation step. The EAQ then circulates and is never used up. Anhydride by bus, ethylbenzene by pipe, the EAQ on to the hydrogenation hatch."]
+			icon: "gtnn:exxonmobil_chemical_plant"
+			id: "31DFB4094256A533"
+			rewards: [{ id: "77CC09A91047DA64", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3253FB0AE1D62B75", item: "gtnn:exxonmobil_chemical_plant", type: "item" }]
+			title: "2-Ethylanthraquinone"
+			x: 14.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["31DFB4094256A533"]
+			description: ["Adds hydrogen to EAQ over a palladium-vanadium catalyst: &6EAHQ&r, the carrier that holds the hydrogen for the peroxide. EAQ, hydrogen from the syngas plant, and the catalyst built from the MV platline's palladium. Hydrogen peroxide. Hydrogen by pipe from the syngas plant, the catalyst by bus; the EAQ comes back round the loop."]
+			icon: "gtceu:ethyl_anthra_hydro_quinone_bucket"
+			id: "1DCB925CCCB2B473"
+			rewards: [{ id: "7033C130AE2785E8", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3A463F34C4A3E00B", item: "gtceu:ethyl_anthra_hydro_quinone_bucket", type: "item" }]
+			title: "Hydrogenation to EAHQ"
+			x: 16.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["1DCB925CCCB2B473"]
+			description: ["Air oxidizes EAHQ back to EAQ and releases &6hydrogen peroxide&r. This is the only route: the direct hydrogen and oxygen reactors are gone. EAHQ and air in the chemical plant, whose machine casings must be HV (480 EU/t), plus a little anthracene to make up losses. Hydrazine. The EAQ it returns goes back into the hydrogenation. Close the loop: EAQ back by pipe, peroxide on to the hydrazine step, anthracene by bus."]
+			icon: "gtceu:hydrogen_peroxide_bucket"
+			id: "7DF6770260AAEE58"
+			rewards: [{ id: "5C026F2B9BF10620", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "50017F83A611C5A4", item: "gtceu:hydrogen_peroxide_bucket", type: "item" }]
+			title: "Hydrogen Peroxide"
+			x: 18.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["7DF6770260AAEE58"]
+			description: ["Ammonia and peroxide make &6hydrazine&r by the peroxide process. Ammonia, hydrogen peroxide and the chemical plant on HV machine casings (480 EU/t). Aerozine 50. Ammonia from the coke-oven or Haber line by pipe, hydrazine on to the mixer."]
+			icon: "gtceu:hydrazine_bucket"
+			id: "140DA37B98D4C09F"
+			rewards: [{ id: "321556EEE980D7B0", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "30C01ADF0781C534", item: "gtceu:hydrazine_bucket", type: "item" }]
+			title: "Hydrazine"
+			x: 20.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["471A024EBFCA8459"]
+			description: ["Starts the UDMH branch: chlorine in water gives &6hypochlorous acid&r. Chlorine and water in the large chemical reactor. Monochloramine. The diluted hydrochloric acid goes to the distillery. Chlorine by pipe from the electrolyzer, the dilute acid distilled back to acid."]
+			icon: "gtceu:hypochlorous_acid_bucket"
+			id: "7A7E498B5331D889"
+			rewards: [{ id: "74BAF22C4F50C2C8", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1013A4FA6DD79D47", item: "gtceu:hypochlorous_acid_bucket", type: "item" }]
+			title: "Hypochlorous Acid"
+			x: 10.0d
+			y: -9.0d
+		}
+		{
+			dependencies: ["7A7E498B5331D889"]
+			description: ["Ammonia takes the oxygen's place on the chlorine: &6monochloramine&r. Hypochlorous acid and ammonia. UDMH, together with dimethylamine. Both by pipe, the product straight to the UDMH reactor."]
+			icon: "gtceu:monochloramine_bucket"
+			id: "7E3A4B8700C27D11"
+			rewards: [{ id: "70477C0C8F4FAD1B", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7B6179F65E1E3ABF", item: "gtceu:monochloramine_bucket", type: "item" }]
+			title: "Monochloramine"
+			x: 12.0d
+			y: -9.0d
+		}
+		{
+			dependencies: ["7E3A4B8700C27D11"]
+			description: ["Methanol and ammonia condense into &6dimethylamine&r, the other half of UDMH. Methanol from the MV biorefinery or syngas, and ammonia. UDMH. Methanol and ammonia by pipe; the water leaves by its own hatch."]
+			icon: "gtceu:dimethylamine_bucket"
+			id: "53FE272A75A229D9"
+			rewards: [{ id: "53B24D829C970302", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "54671C0C015E2E1D", item: "gtceu:dimethylamine_bucket", type: "item" }]
+			title: "Dimethylamine"
+			x: 14.0d
+			y: -10.5d
+		}
+		{
+			dependencies: ["7E3A4B8700C27D11", "53FE272A75A229D9"]
+			description: ["Monochloramine and dimethylamine react by the Raschig route into &6unsymmetrical dimethylhydrazine&r. The old methanol shortcut is gone. Both feeds in a large chemical reactor at 480 EU/t. Aerozine 50. The hydrochloric acid goes to PVC and epoxy. Both feeds by pipe, UDMH on to the mixer, the acid into the PVC loop."]
+			icon: "gtceu:dimethylhydrazine_bucket"
+			id: "1CAED3D02E02B699"
+			rewards: [{ id: "56800830FAD9A3BF", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5A2573D216045381", item: "gtceu:dimethylhydrazine_bucket", type: "item" }]
+			title: "UDMH"
+			x: 16.0d
+			y: -9.0d
+		}
+		{
+			dependencies: ["140DA37B98D4C09F", "1CAED3D02E02B699"]
+			description: ["Half hydrazine, half UDMH: &6Aerozine 50&r, the storable fuel of the Titan II. Equal parts hydrazine and UDMH in a mixer. Rocket fuel. Both by pipe in one to one, the blend on to the rocket fuel mixer."]
+			icon: "gtceu:dimethylhydrazine_bucket"
+			id: "766F5C6E9A08D3ED"
+			rewards: [{ id: "133BFC3269BC7F1C", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "72BB7D6E160C64C8", type: "checkmark" }]
+			title: "Aerozine 50"
+			x: 20.0d
+			y: -9.0d
+		}
+		{
+			dependencies: ["140DA37B98D4C09F"]
+			description: ["Dimerizes the nitrogen dioxide of the nitric acid line into &6N2O4&r, the oxidizer. Nitrogen dioxide from the LV Ostwald line and a chemical reactor. Rocket fuel, mixed with Aerozine 50. Nitrogen dioxide by pipe off the acid plant, N2O4 to a tank beside the fuel mixer."]
+			icon: "gtceu:dinitrogen_tetroxide_bucket"
+			id: "1957298693A19C50"
+			rewards: [{ id: "3535928CAF6B1197", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5AD439320006991B", item: "gtceu:dinitrogen_tetroxide_bucket", type: "item" }]
+			title: "Dinitrogen Tetroxide"
+			x: 22.0d
+			y: -7.5d
 		}
 		{
 			dependencies: ["35719B747A75F7B6"]

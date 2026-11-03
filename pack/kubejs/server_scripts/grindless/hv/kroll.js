@@ -1,3 +1,4 @@
+// priority: -13449
 // -----------------------------------------------------------------------------------------------
 // D1-KROLL (docs/eras/lines-steam-hv.md, H4; owner decision D-2: titanium stays lunar). The Kroll line at HV, on the lunar ilmenite:
 //   1. rutile_from_ilmenite (GTM, unchanged)          ilmenite + carbon -> rutile + wrought iron (steel)

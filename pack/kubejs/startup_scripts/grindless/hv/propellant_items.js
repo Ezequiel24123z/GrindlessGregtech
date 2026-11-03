@@ -1,3 +1,4 @@
+// priority: -1875
 // Gregtech Grindless - D1-HV-PROP: the HV propellant fluid (docs/eras/lines-steam-hv.md, line H2).
 //
 //   gtceu:aerozine_50   hydrazine + unsymmetrical dimethylhydrazine, 1:1. The mixer in server_scripts/grindless/hv/propellants.js makes it,

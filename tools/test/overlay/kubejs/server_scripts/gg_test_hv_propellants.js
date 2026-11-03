@@ -1,3 +1,4 @@
+// priority: -2674
 // TEST ONLY, D1-HV-PROP. Command: kubejs custom_command gg_test_hv_propellants
 // Reserved band ONLY: X49664-49727, Z0-63; Overworld Y98-125 (zones.json "hv_propellants").
 // Doubt: that GT--'s chemical plant (gtnn:exxonmobil_chemical_plant), built from blocks an HV player has, runs the peroxide cycle that is
