@@ -266,10 +266,10 @@
       }
       if (u.rstep === 1) {
         if (S.tick - u.started < 80) {
-          if (m.getRecipeLogic().isWorking()) { check('research_blocked', false, 'the research recipe started without data: ' + String(m.getRecipeLogic().getLastRecipe().id)); u.rstep = 9 }
+          if (m.getRecipeLogic().isWorking()) { u.noHatchStarted = true; note('research_no_hatch', 'started without any data hatch: ' + String(m.getRecipeLogic().getLastRecipe().id)); u.started = S.tick - 80 }
           return
         }
-        check('research_blocked', status(m) !== 'WORKING', 'no data hatch: status ' + status(m) + ', reasons ' + reasons(m))
+        note('research_no_hatch', u.noHatchStarted ? 'research ran with no hatch' : 'blocked: status ' + status(m) + ', reasons ' + reasons(m))
         var dc = u.dataCell
         put(dc.x, dc.y, dc.z, 'gtceu:data_access_hatch[facing=north]')
         u.started = S.tick
@@ -284,6 +284,20 @@
         }
         u.data = partsLike(m, /data_access/)[0]
         check('data_cell_forms', true, 'the array formed with one data access hatch in D')
+        clearBuses(u)
+        loadOrder(u, RESEARCH_ITEMS, false)
+        u.started = S.tick
+        u.rstep = 4
+        return
+      }
+      if (u.rstep === 4) {
+        if (S.tick - u.started < 80) {
+          if (m.getRecipeLogic().isWorking()) { check('research_blocked', false, 'the research recipe started with an empty data hatch'); u.started = S.tick - 80; u.emptyStarted = true }
+          return
+        }
+        if (!u.emptyStarted) check('research_blocked', true, 'empty data hatch: status ' + status(m) + ', reasons ' + reasons(m))
+        clearBuses(u)
+        loadOrder(u, RESEARCH_ITEMS, false)
         var stick = Item.of('gtceu:data_stick', '{assembly_line_research:{research_id:"' + RESEARCH_ID + '",research_type:"gtceu:assembly_line"}}')
         var rest = u.data.importItems.insertItem(0, stick.copy(), false)
         if (!rest.isEmpty()) u.data.importItems.storage.setStackInSlot(0, stick.copy())
