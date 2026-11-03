@@ -261,10 +261,11 @@
         linked++
         var signal = 0
         io.itemsIn.forEach(function (x) { if (x.id === 'gtceu:uv_sensor' || x.id === 'gtceu:uv_emitter') signal += x.n })
-        if (signal !== 3) bad.push(r.id + ' takes ' + signal + ' UV sensors / emitters, want 3')
+        var wantSignal = /_cover$/.test(String(r.output)) ? 2 : 3
+        if (signal !== wantSignal) bad.push(r.id + ' takes ' + signal + ' UV sensors / emitters, want ' + wantSignal)
       }
     })
-    notes.push(uhv.length + ' UHV hatch and cover recipes at ' + UHV_VA + ' EU/t, ' + linked + ' with ' + LINK + ' and three UV sensors / emitters')
+    notes.push(uhv.length + ' UHV hatch and cover recipes at ' + UHV_VA + ' EU/t, ' + linked + ' with ' + LINK + ' and two (covers) or three (hatches) UV sensors / emitters')
     check('recipes', bad.length === 0, notes.join(' ; ') + (bad.length > 0 ? ' | problems: ' + bad.join(' ; ') : ''))
   }
   // ---------------------------------------------------------------- the network's persistent data (put back as it was at the end)
