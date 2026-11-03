@@ -66,7 +66,7 @@
       symbols: {
         S: Pat.controller(), F: casing, C: Pat.oneOf(Pat.block(cell), casing),
         A: Pat.block('gtceu:atomic_casing'), K: Pat.block('gtceu:superconducting_coil'),
-        B: Pat.block('grindless:bound_lattice_casing'), M: Pat.block('grindless:kerr_coil_casing'), R: Pat.block('grindless:primordial_cryostat_casing')
+        B: Pat.block('grindless:bound_lattice_casing'), M: Pat.block('grindless:kerr_coil_casing'), R: Pat.block('grindless:cryostat_casing')
       }
     }
   }

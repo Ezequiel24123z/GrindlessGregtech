@@ -154,7 +154,7 @@
     width: 33, height: 13, depth: 33,
     pal: {
       F: CASING, L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil',
-      B: 'grindless:bound_lattice_casing', K: 'grindless:kerr_coil_casing', R: 'grindless:primordial_cryostat_casing', W: 'grindless:void_diamond_window'
+      B: 'grindless:bound_lattice_casing', K: 'grindless:kerr_coil_casing', R: 'grindless:cryostat_casing', W: 'gtceu:cleanroom_glass'
     },
     parts: function () {
       return [

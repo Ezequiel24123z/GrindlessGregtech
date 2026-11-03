@@ -32,7 +32,7 @@
     width: 17, height: 51, depth: 17,
     pal: {
       F: CASING, B: 'grindless:bound_lattice_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil',
-      E: 'grindless:fe56_shield_casing', K: 'grindless:kerr_coil_casing', W: 'grindless:void_diamond_window'
+      E: 'gtceu:atomic_casing', K: 'grindless:kerr_coil_casing', W: 'gtceu:cleanroom_glass'
     },
     parts: parts
   }

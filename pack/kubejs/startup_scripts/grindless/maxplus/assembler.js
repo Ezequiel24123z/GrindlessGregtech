@@ -41,7 +41,7 @@
     width: 25, height: 15, depth: 25,
     pal: {
       F: CASING, B: 'grindless:bound_lattice_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil',
-      R: 'grindless:primordial_cryostat_casing', K: 'grindless:kerr_coil_casing', V: 'grindless:condensate_vessel_casing'
+      R: 'grindless:cryostat_casing', K: 'grindless:kerr_coil_casing', V: 'grindless:condensate_vessel_casing'
     },
     parts: parts
   }

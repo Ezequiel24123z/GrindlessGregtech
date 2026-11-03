@@ -97,8 +97,8 @@
         F: Pat.block(CASING),
         B: Pat.block('grindless:bound_lattice_casing'),
         K: Pat.block('grindless:kerr_coil_casing'),
-        R: Pat.block('grindless:primordial_cryostat_casing'),
-        W: Pat.block('grindless:void_diamond_window'),
+        R: Pat.block('grindless:cryostat_casing'),
+        W: Pat.block('gtceu:cleanroom_glass'),
         A: Pat.block('gtceu:atomic_casing'),
         C: Pat.block('gtceu:superconducting_coil'),
         X: Pat.oneOf(

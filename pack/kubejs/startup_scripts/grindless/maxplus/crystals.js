@@ -17,7 +17,7 @@
   const CASING = 'grindless:horizon_machine_casing'
   const PAL = {
     F: CASING, B: 'grindless:bound_lattice_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil',
-    R: 'grindless:primordial_cryostat_casing', E: 'grindless:fe56_shield_casing', K: 'grindless:kerr_coil_casing', W: 'grindless:void_diamond_window'
+    R: 'grindless:cryostat_casing', E: 'gtceu:atomic_casing', K: 'grindless:kerr_coil_casing', W: 'gtceu:cleanroom_glass'
   }
 
   // Eight plasmas feed the slurry row (c0), so the furnace takes up to twelve input hatches; the slurry leaves by an output hatch.
@@ -67,6 +67,8 @@
     s.room(0, 12, 0, 20, 12, 20, 'K', 'bt', null)
     s.room(0, 16, 0, 20, 16, 20, 'R', 'bt', null)
     s.room(0, 14, 0, 20, 14, 20, 'B', 'bt', null)
+    s.room(0, 18, 0, 20, 18, 20, 'B', 'bt', null)
+    s.box(0, 10, 0, 20, 10, 1, 'B').box(0, 10, 19, 20, 10, 20, 'B').box(0, 10, 2, 1, 10, 18, 'B').box(19, 10, 2, 20, 10, 18, 'B')
     s.room(0, 20, 0, 20, 21, 20, 'B', 'bt', null)
     s.box(0, 22, 0, 20, 22, 20, 'K')
     s.cyl('y', 10, 10, 7, 22, 22, 'B')

@@ -37,7 +37,7 @@
     overlay: 'grindless:block/multiblock/meta_material_loom',
     width: 33, height: 13, depth: 15,
     pal: {
-      F: CASING, B: 'grindless:bound_lattice_casing', K: 'grindless:kerr_coil_casing', R: 'grindless:primordial_cryostat_casing', L: 'gtceu:cleanroom_glass',
+      F: CASING, B: 'grindless:bound_lattice_casing', K: 'grindless:kerr_coil_casing', R: 'grindless:cryostat_casing', L: 'gtceu:cleanroom_glass',
       A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil'
     },
     parts: parts

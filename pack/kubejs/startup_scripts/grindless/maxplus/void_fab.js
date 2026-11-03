@@ -30,7 +30,7 @@
     overlay: 'grindless:block/multiblock/void_crystal_fab',
     width: 19, height: 19, depth: 19,
     pal: {
-      F: CASING, B: 'grindless:bound_lattice_casing', R: 'grindless:primordial_cryostat_casing', E: 'grindless:fe56_shield_casing', A: 'gtceu:atomic_casing',
+      F: CASING, B: 'grindless:bound_lattice_casing', R: 'grindless:cryostat_casing', E: 'gtceu:atomic_casing', A: 'gtceu:atomic_casing',
       C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass'
     },
     parts: parts
