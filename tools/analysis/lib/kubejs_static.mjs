@@ -751,6 +751,8 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
         if (v < 0) j.tickOutputs.eu.push({ content: -v, chance: 10000, maxChance: 10000, tierChanceBoost: 0 });
         else j.tickInputs.eu.push({ content: v, chance: 10000, maxChance: 10000, tierChanceBoost: 0 });
       },
+      // GTRecipeBuilder.duration(t): composed recipes (lib/compose.js) read it from the serialized JSON
+      duration: (p, a) => { j.duration = Number(a[0]); },
       dimension: (p, a) => { j.recipeConditions.push({ type: 'dimension', dimension: String(a[0]), reverse: !!a[1] }); },
       daytime: cond('daytime'), rain: cond('rain'), thunder: cond('thunder'), posY: cond('pos_y'), cleanroom: cond('cleanroom'),
       biome: cond('biome'), environmentalHazard: cond('environmental_hazard'),
