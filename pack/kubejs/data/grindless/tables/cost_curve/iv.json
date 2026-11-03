@@ -64,7 +64,7 @@
   "override": {},
   "keyFactor": {
     "gtceu:crystal_processor": 1.157,
-    "gtceu:iv_conveyor_module": 1.844,
+    "gtceu:iv_conveyor_module": 1.75,
     "gtceu:iv_electric_piston": 1.45,
     "gtceu:iv_energy_input_hatch": 1.299,
     "gtceu:iv_energy_input_hatch_4a": 1.255,
