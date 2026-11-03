@@ -28,11 +28,16 @@
       "fluidsOut": [{ "id": "gtceu:stochastically_cooled_beam", "amount": 1000 }]
     },
     {
-      "type": "beam_cooling", "name": "cold_antiproton_cell", "circuit": 2, "eut": 503316480, "duration": 1200,
-      "itemsIn": ["grindless:empty_penning_trap"],
-      "kept": ["grindless:octupole_trap_magnet"],
+      "type": "beam_cooling", "name": "decelerated_antiproton_beam", "circuit": 2, "eut": 536870912, "duration": 800,
       "wear": [{ "id": "grindless:electron_cooler", "chance": 156 }],
       "fluidsIn": [{ "id": "gtceu:stochastically_cooled_beam", "amount": 1000 }],
+      "fluidsOut": [{ "id": "gtceu:decelerated_antiproton_beam", "amount": 1000 }]
+    },
+    {
+      "type": "beam_cooling", "name": "cold_antiproton_cell", "circuit": 3, "eut": 268435456, "duration": 400,
+      "itemsIn": ["grindless:empty_penning_trap"],
+      "kept": ["grindless:octupole_trap_magnet"],
+      "fluidsIn": [{ "id": "gtceu:decelerated_antiproton_beam", "amount": 1000 }],
       "itemsOut": ["grindless:cold_antiproton_cell"]
     }
   ],
@@ -43,14 +48,9 @@
       "domain": ["grindless:chain_field_coil", "grindless:frc_cartridge", "grindless:field_frozen_plate"]
     },
     {
-      "name": "spallation_target_station", "research": "grindless:ir_spallation_target",
-      "parts": ["4x gtceu:opv_field_generator", "4x gtceu:opv_sensor", "2x gtceu:opv_electric_pump"],
-      "domain": ["grindless:li6_hydride_shield", "grindless:be_beam_window", "grindless:srf_cavity"]
-    },
-    {
       "name": "antiproton_decelerator", "research": "grindless:electron_cooler",
       "parts": ["4x gtceu:opv_field_generator", "4x gtceu:opv_sensor", "2x gtceu:opv_emitter"],
-      "domain": ["grindless:stochastic_cooling_pickup", "grindless:srf_cavity", "grindless:chain_field_coil"]
+      "domain": ["grindless:ir_spallation_target", "grindless:li6_hydride_shield", "grindless:stochastic_cooling_pickup", "grindless:srf_cavity", "grindless:chain_field_coil"]
     }
   ]
 }

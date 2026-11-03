@@ -2,8 +2,7 @@
 (function () {
   var names = {
     jet_beam_line: 'Jet Beam Line',
-    spallation_target_station: 'Spallation Target Station',
-    antiproton_decelerator: 'Antiproton Decelerator'
+    antiproton_decelerator: 'Antiproton Complex'
   }
   var types = {
     jet_beam_extraction: 'Jet Beam Extraction',
@@ -12,24 +11,21 @@
   }
   var fluids = {
     hot_antiproton_beam: 'Hot Antiproton Beam',
-    stochastically_cooled_beam: 'Stochastically Cooled Beam'
+    stochastically_cooled_beam: 'Stochastically Cooled Beam',
+    decelerated_antiproton_beam: 'Decelerated Antiproton Beam'
   }
   var tips = {
     jet_beam_line: 'Extracts and bunches jet protons with SRF cavities.',
-    spallation_target_station: 'Produces antiprotons in a shielded iridium target.',
-    antiproton_decelerator: 'Cools antiprotons and fills Penning traps.'
+    antiproton_decelerator: 'Makes antiprotons in an iridium target, then cools and traps them: target hall, decelerator ring and trap hall in one.'
   }
   var pages = {
     jet_beam_line: [
       'At Cygnus X-1 orbit, jet beam extraction bunches protons on an SRF cavity. A beam window wears about once per 32 runs. Flux-loaded plasma doubles the beam yield. Carry the beam to the later machines anywhere.',
-      'Feeds the spallation target station and the antiproton line. Jet electrons are dumped back into the black hole; they are not a recoverable item.'
-    ],
-    spallation_target_station: [
-      'Antiproton production consumes 4,000 mB of jet beam per 1,000 mB of hot beam. The iridium target wears at 1/16 and the Li-6 hydride shield at about 1/32 per run.',
-      'Spent iridium targets go through the IV hot cell to the EV platinum plant for 85% iridium recovery. D1 line 22 bakes spent Li-6 shields, then removes tritium in the IV tritium facility; He-3 feeds the superfluid line. Pions and neutrinos are lost in the dump. The hot beam stays here for cooling.'
+      'Feeds the Antiproton Complex. Jet electrons are dumped back into the black hole; they are not a recoverable item.'
     ],
     antiproton_decelerator: [
-      'Beam cooling first uses a stochastic pickup, then an electron cooler. Both wear about once per 64 runs. NEG vacuum and an octupole magnet hold the cooled antiprotons in a Penning trap. Residual-gas annihilation losses (3%) become heat, not an item.',
+      'The target hall consumes 4,000 mB of jet beam per 1,000 mB of hot beam (Antiproton Production). The iridium target wears at 1/16 and the Li-6 hydride shield at about 1/32 per run. Spent iridium targets go through the IV hot cell to the EV platinum plant for 85% iridium recovery. D1 line 22 bakes spent Li-6 shields, then removes tritium in the IV tritium facility; He-3 feeds the superfluid line. Pions and neutrinos are lost in the dump.',
+      'The ring (Beam Cooling) cools the hot beam with a stochastic pickup, decelerates it with an electron cooler (both wear about once per 64 runs), and captures it in a Penning trap held by NEG vacuum and an octupole magnet. Residual-gas annihilation losses (3%) become heat, not an item.',
       'Eight cold cells are stacked by the UV antimatter trap, circuit 6; 90% of the empty Penning traps return. The OpV stack supplies the antihydrogen foundry and annihilation engine. Antiprotons are sourced only here.'
     ]
   }

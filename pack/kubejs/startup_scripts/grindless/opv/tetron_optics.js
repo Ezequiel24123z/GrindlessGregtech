@@ -4,11 +4,11 @@
 // their recipe types and the package's own items. The recipes come from data/grindless/tables/tetron_optics.json
 // (server_scripts/grindless/opv/tetron_optics.js).
 //
-//   gtceu:tetron_fab           9 x 7 x 11 cleanroom bay, OpV (two UXV energy hatches). Recipe type gtceu:tetron_assembly (circuit 1
+//   gtceu:tetron_fab           15 x 11 x 17 cleanroom bay round a dilution-fridge mast, OpV (two UXV energy hatches). Recipe type gtceu:tetron_assembly (circuit 1
 //                              tetron dies, 2 tetron array). Between the two the dies are In-bumped (UXV MTJ c11), flip-chip bonded (UIV
 //                              ion slicing c8) and parity-tested (UIV millikelvin c6); a die that fails the array's calibration goes to
 //                              the EV extraction cascade (c25).
-//   gtceu:gamma_optics_works   7 x 7 x 15 optical bench, OpV. Recipe type gtceu:gamma_optics (circuit 1 Laue lens, 2 gamma multilayer
+//   gtceu:gamma_optics_works   9 x 9 x 31 optical bench, OpV. Recipe type gtceu:gamma_optics (circuit 1 Laue lens, 2 gamma multilayer
 //                              mirror). Line 35's tiles come from the UEV megabar (c8, bent Ge; c9 re-bends rejected tiles) and the UHV
 //                              crystal growth furnace (c24, GaAs), the frame from the UV synchrotron (c11). Line 34's blank from the UEV
 //                              CVI furnace (c10; c11 strips and re-coats a rejected mirror), the WC target from the UHV spark plasma
@@ -24,9 +24,10 @@
   const LOG = '[grindless/opv] '
 
   const PLASCRETE = 'gtceu:plascrete'
-  const PLASCRETE_TEXTURE = 'gtceu:block/casings/cleanroom/plascrete'
-  const HPC = 'gtceu:high_power_casing'
-  const HPC_TEXTURE = 'gtceu:block/casings/hpca/high_power_casing'
+  const LAMINA = 'grindless:chain_lamina_casing'
+  const LAMINA_TEXTURE = 'grindless:block/opv/chain_lamina_casing'
+  const NEG = 'grindless:neg_xhv_casing'
+  const SHIELD = 'grindless:annihilation_shield_casing'
 
   TO.table = 'kubejs/data/grindless/tables/tetron_optics.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -60,84 +61,23 @@
   TO.machines = [
     {
       name: 'tetron_fab', machine: 'gtceu:tetron_fab', type: 'tetron_assembly', dataKey: 'grindless_tetron_assembly',
-      lang: 'Tetron Fab', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: PLASCRETE, texture: PLASCRETE_TEXTURE,
-      width: 9, height: 7, depth: 11,
-      pal: { F: PLASCRETE, L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil', P: 'gtceu:tungstensteel_pipe_casing', Q: 'stainless_steel' },
+      lang: 'Tetron Fab', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: LAMINA, texture: LAMINA_TEXTURE,
+      width: 15, height: 11, depth: 17,
+      pal: { F: LAMINA, D: PLASCRETE, L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil', P: 'gtceu:tungstensteel_pipe_casing', Q: 'stainless_steel', N: NEG },
       parts: parts
     },
     {
       name: 'gamma_optics_works', machine: 'gtceu:gamma_optics_works', type: 'gamma_optics', dataKey: 'grindless_gamma_optics',
-      lang: 'Gamma Optics Works', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: HPC, texture: HPC_TEXTURE,
-      width: 7, height: 7, depth: 15,
-      pal: { F: HPC, L: 'gtceu:laminated_glass', Q: 'tungsten_steel', V: 'gtceu:heat_vent' },
+      lang: 'Gamma Optics Works', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: LAMINA, texture: LAMINA_TEXTURE,
+      width: 9, height: 9, depth: 31,
+      pal: { F: LAMINA, L: 'gtceu:laminated_glass', G: 'gtceu:laminated_glass', Q: 'tungsten_steel', P: 'gtceu:tungstensteel_pipe_casing', N: NEG, A: SHIELD },
       parts: parts
     }
   ]
 
-  function abs(n) { return n < 0 ? -n : n }
-
-  // x left to right, y bottom to top, z back to front. A cleanroom bay: plascrete shell with a cleanroom-glass band, stainless frame
-  // posts in the corners, the dilution-fridge mast in the middle (pipe column in a superconducting ring), the wafer handlers on both
-  // sides, the helium run from the mast to the back wall under a pipe cross in the roof, the energy row in the back wall and the
-  // load lock (buses in its floor) at the front.
-  function bayCell(x, y, z) {
-    var edgeX = x === 0 || x === 8
-    var edgeZ = z === 0 || z === 10
-    var dx = x - 4
-    var dz = z - 5
-    if (y === 0) return z === 10 && x >= 2 && x <= 6 ? 'X' : 'F'
-    if (y === 6) return x === 4 || z === 5 ? 'P' : 'F'
-    if (edgeX && edgeZ) return 'Q'
-    if (edgeX || edgeZ) {
-      if (z === 0 && y === 1 && x >= 2 && x <= 6) return 'X'
-      return y === 1 || y === 5 ? 'F' : 'L'
-    }
-    if (dx === 0 && dz === 0) return 'P'
-    if (abs(dx) <= 1 && abs(dz) <= 1) {
-      if (y === 3) return 'C'
-      if ((y === 2 || y === 4) && (dx === 0 || dz === 0)) return 'C'
-      return '#'
-    }
-    if ((x === 2 || x === 6) && z >= 3 && z <= 7 && y === 1) return 'Q'
-    if ((x === 2 || x === 6) && (z === 3 || z === 7) && y === 2) return 'Q'
-    if (x === 4 && y === 5 && z >= 1 && z <= 3) return 'P'
-    if (z === 9 && (x === 3 || x === 5) && y <= 2) return 'L'
-    if (z === 9 && x >= 3 && x <= 5 && y === 3) return 'F'
-    return '#'
-  }
-
-  // An optical bench: a casing bed with the part cells along both sides, a tungsten-steel frame row under the vacuum tube, the tube
-  // (casing ring with laminated-glass windows at its four cardinal points) on frame saddles every fourth slice, the lens frame and its
-  // window at the far (back) end, and heat vents closing both ends.
-  function opticsCell(x, y, z) {
-    var dx = x - 3
-    var dy = y - 4
-    var ax = abs(dx)
-    var ay = abs(dy)
-    if (y === 0) return (x === 0 || x === 6) && z % 2 === 1 ? 'X' : 'F'
-    if (y === 1) return x === 3 ? 'F' : 'Q'
-    var ring = ax <= 2 && ay <= 2 && (ax === 2 || ay === 2) && !(ax === 2 && ay === 2)
-    var inner = ax <= 1 && ay <= 1
-    if (z === 0) {
-      if (ring) return 'Q'
-      if (inner) return 'V'
-    } else if (z === 14) {
-      if (ring) return 'F'
-      if (inner) return 'V'
-    } else {
-      if (ring) return dx === 0 || dy === 0 ? 'L' : 'F'
-      if (inner) return z === 1 ? 'L' : '#'
-    }
-    if (z % 4 === 3 && (x === 0 || x === 6) && y <= 3) return 'Q'
-    if (z % 4 === 3 && ax === 2 && ay === 2 && y === 2) return 'Q'
-    return ' '
-  }
-
-  var CELLS = { tetron_fab: bayCell, gamma_optics_works: opticsCell }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: opv/shapes.js (G.opvShapes) may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.opvShapes.build(Pat, m.name, m.pal, m.parts())
   }
 
   // one EMI line per recipe, read from its data
