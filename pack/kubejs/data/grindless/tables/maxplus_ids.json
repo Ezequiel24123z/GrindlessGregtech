@@ -16,6 +16,14 @@
     "grindless:horizon_machine_casing", "grindless:condensate_vessel_casing", "grindless:bound_press_casing", "grindless:slingshot_coil_casing",
     "grindless:lift_nozzle_casing", "grindless:crucible_liner_casing"
   ],
+  "casingFamily": {
+    "_why": "D5-CAS-MAXP (docs/eras/lines-opv-maxplus.md 7.3): the horizon family, registered by foundation.js (FAMILY), made by server_scripts/grindless/maxplus/casings.js; iron-56 is the KubeJS material gtceu:iron_56",
+    "ids": [
+      "grindless:bound_lattice_casing", "grindless:kerr_coil_casing", "grindless:fe56_shield_casing", "grindless:primordial_cryostat_casing",
+      "grindless:void_diamond_window", "grindless:horizon_gate_casing"
+    ],
+    "material": "gtceu:iron_56"
+  },
   "standins": {
     "_why": "K1-K4: plain items that are never placeable and never gtceu:creative_*, ae2: or appflux ids",
     "ids": ["grindless:bottomless_store_core", "grindless:bottomless_tank_core", "grindless:horizon_cloud_core", "grindless:horizon_computation_core"]

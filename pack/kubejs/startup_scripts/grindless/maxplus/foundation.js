@@ -59,8 +59,12 @@
 
   // no texture yet: each casing shows the missing-texture cube until the asset phase
   var BLOCKS = {}
-  ;['horizon_machine_casing', 'condensate_vessel_casing', 'bound_press_casing', 'slingshot_coil_casing', 'lift_nozzle_casing', 'crucible_liner_casing']
+  ;['horizon_machine_casing', 'condensate_vessel_casing', 'bound_press_casing', 'slingshot_coil_casing', 'lift_nozzle_casing', 'crucible_liner_casing',
+    'bound_lattice_casing', 'kerr_coil_casing', 'fe56_shield_casing', 'primordial_cryostat_casing', 'void_diamond_window', 'horizon_gate_casing']
     .forEach(function (name) { BLOCKS[name] = { texture: 'grindless:block/maxplus/' + name } })
+  // the horizon family (D5-CAS-MAXP, docs/eras/lines-opv-maxplus.md 7.3): names and tooltips client_scripts/grindless/maxplus_casings_lang.js,
+  // recipes server_scripts/grindless/maxplus/casings.js; the first six casings above keep no tooltip
+  var FAMILY = ['bound_lattice_casing', 'kerr_coil_casing', 'fe56_shield_casing', 'primordial_cryostat_casing', 'void_diamond_window', 'horizon_gate_casing']
 
   // controllers of machines 1-17, named here and registered by the machine packages
   MXP.controllers = ['gtceu:condensate_refinery', 'gtceu:bound_matter_press', 'gtceu:hills_slingshot', 'gtceu:tarantula_stellar_lift',
@@ -127,6 +131,11 @@
         .requiresTool(true)
         .tagBlock('minecraft:mineable/pickaxe')
         .textureAll(BLOCKS[name].texture)
+        .item(function (item) {
+          if (FAMILY.indexOf(name) < 0) return
+          item.tooltip(Text.gray(Text.translate('tooltip.grindless.' + name + '.0')))
+          item.tooltip(Text.darkGray(Text.translate('tooltip.grindless.' + name + '.1')))
+        })
     })
   })
 
@@ -146,6 +155,9 @@
       else material.liquid()
       material.color(spec[1]).formula(spec[2]).flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
     })
+    // iron-56 (X5, the pack's isotope naming as gtceu:tungsten_184): dust, ingot and plate; the spent cask's hot cell row returns the dust
+    event.create('gtceu:iron_56').ingot().iconSet(GTMaterialIconSet.METALLIC).color(0x8C93A6).formula('56Fe')
+      .flags(GTMaterialFlags.GENERATE_PLATE, GTMaterialFlags.DISABLE_DECOMPOSITION)
   })
 
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {

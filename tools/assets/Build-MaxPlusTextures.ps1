@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Procedural 16x16 pixel art for the MAX+ era of Gregtech Grindless (package XP-V1): every item and the six casings that
+  Procedural 16x16 pixel art for the MAX+ era of Gregtech Grindless (package XP-V1): every item and the twelve casings that
   startup_scripts/grindless/maxplus/foundation.js registers, in the MAX+ era style of Era.Lib.ps1.
 
 .DESCRIPTION
@@ -15,7 +15,7 @@
 
   Writes (under pack/kubejs/assets/grindless/textures/):
       item/<name>.png for every item foundation.js registers (including horizon_frame_part).
-      block/maxplus/<name>.png for the six casings; seamless.
+      block/maxplus/<name>.png for the twelve casings; seamless.
 
   Run from the repo root:
       powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxPlusTextures.ps1
@@ -121,7 +121,8 @@ function New-Item16 {
 }
 
 # ---- casings: dark horizon-grade plates, each with one clear motif (the style adds rim halo, motes and seams at save time)
-$Blocks = @('horizon_machine_casing', 'condensate_vessel_casing', 'bound_press_casing', 'slingshot_coil_casing', 'lift_nozzle_casing', 'crucible_liner_casing')
+$Blocks = @('horizon_machine_casing', 'condensate_vessel_casing', 'bound_press_casing', 'slingshot_coil_casing', 'lift_nozzle_casing', 'crucible_liner_casing',
+    'bound_lattice_casing', 'kerr_coil_casing', 'fe56_shield_casing', 'primordial_cryostat_casing', 'void_diamond_window', 'horizon_gate_casing')
 
 function New-Block16 {
     param([string]$Name)
@@ -169,6 +170,43 @@ function New-Block16 {
                 $base = $steel
                 if ($y % 4 -eq 0 -or (($x + (($y -shr 2) % 2) * 4) % 8) -eq 0) { $base = $void }
                 if ($n -gt 930) { $base = $amber; $t = 1.0 }
+            }
+            'bound_lattice_casing' {
+                # near-black hexagonal lattice, condensate-blue lines
+                $base = Hex '1A1630'
+                $hx = ($x + (($y -shr 1) % 2) * 2) % 4
+                if ($hx -eq 0 -or ($y % 4) -eq 3) { $base = $ice; $t = 0.85 }
+            }
+            'kerr_coil_casing' {
+                # helical pale-gold bands, slanted, round a dark core; passive, no lit state
+                $base = $void
+                $gold = Hex 'E6D08A'
+                if ((($x + $y) % 6) -lt 2 -and $x -ge 1 -and $x -le 14) { $base = $gold; $t = 1.0 - 0.02 * ($y % 6) }
+            }
+            'fe56_shield_casing' {
+                # cold grey slabs with a violet seam
+                $base = Hex '8890A0'
+                if ($y % 8 -eq 0 -or $x % 8 -eq 0) { $base = $void }
+                if ($y -eq 4 -or $y -eq 12) { $base = Hex '7A5CC8'; $t = 1.0 }
+            }
+            'primordial_cryostat_casing' {
+                # frosted pale blue panels, bolted, with frost speckle
+                $base = Hex 'B8D8F0'
+                if ($x % 8 -eq 0 -or $y % 8 -eq 0) { $base = $steel }
+                if ($n -gt 840) { $base = Hex 'EAF6FF'; $t = 1.0 }
+            }
+            'void_diamond_window' {
+                # clear lilac-white pane in a steel frame, one diagonal glint
+                $base = Hex 'E4DCF4'
+                if ($x -lt 2 -or $x -gt 13 -or $y -lt 2 -or $y -gt 13) { $base = $steel }
+                elseif ($x + $y -eq 11 -or $x + $y -eq 12) { $base = Hex 'FFFFFF'; $t = 1.0 }
+            }
+            'horizon_gate_casing' {
+                # dark plate, gold-white chevron arcs, violet edge
+                $base = $void
+                $d = [Math]::Abs($x - 7.5)
+                if ((($y - [int][Math]::Floor($d)) % 5 + 5) % 5 -eq 0 -and $y -ge 2 -and $y -le 13) { $base = Hex 'F4E6B0'; $t = 1.0 }
+                if ($x -eq 0 -or $x -eq 15 -or $y -eq 0 -or $y -eq 15) { $base = Hex '7A5CC8'; $t = 1.0 }
             }
         }
         if ($n -lt 110) { $t *= 0.86 } elseif ($n -gt 900) { $t *= 1.12 }
