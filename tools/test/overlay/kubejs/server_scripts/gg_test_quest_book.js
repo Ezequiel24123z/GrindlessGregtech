@@ -15,8 +15,11 @@
 //     kubejs/exported/ (collected with the results) so the dependency lines can be looked at.
 //
 // HOW TO RUN (client suite only). Copy tools\test\overlay to a scratch folder, add kubejs\config\gg_test_quest_book.json =
-// {"enabled": true} to it, then
-//   powershell -File tools\test\Invoke-GGTest.ps1 -Suite client -OverlayDir <that folder> [-PackDir <copy of pack>]
+// {"enabled": true} and kubejs\config\gg_test_lean_world.json = {"enabled": true, "viewers": "absent"} to it, then
+//   powershell -File tools\test\Invoke-GGTest.ps1 -Suite client -OverlayDir <that folder> [-PackDir <copy of pack>] `
+//     -ClientExclude '^emi-1\.1\.22\+1\.20\.1\+forge\.jar$;;^jei-1\.20\.1-forge-15\.20\.0\.134\.jar$;;^emi_loot-0\.7\.9\+1\.20\.1\+forge\.jar$;;^craftingstationjei-1\.20\.1-Forge-2\.2\.1\.jar$'
+// Without the viewers and structures the 4 GB test client has room: with them it ran out of heap while the test area generated
+// (batch 14, vm-20261103-020722-d895335c-2899304; tools\test\README.md, the lean world). Players' instances get 10 GB.
 // One marker per run: the tests drive the same player.
 //
 // MARKERS: GGTEST|quest_book|<check>|PASS|FAIL|NOTE|<detail>; the last line is GGTEST|quest_book|DONE.
@@ -33,7 +36,8 @@
   var PICK_TARGET = { x: 4642, y: 99, z: 8 }
   var WALL = { x: 4646, y0: 99, y1: 101, z0: 7, z1: 9 }
   var WALL_SPOT = { x: 4644.5, y: 99, z: 8.5 }
-  var EXPECTED = { welcome: 16, steam_age: 45 }
+  // keep equal to the quest counts of gg_test_quests.js' GG_QUESTS_EXPECTED (the linter's numbers)
+  var EXPECTED = { welcome: 16, steam_age: 49 }
   var ARRIVAL = '69BDA9FBB0EB66F2'
   var TOOLBOX = '047B55ED9C952BC9'
   var TOOLS = [
