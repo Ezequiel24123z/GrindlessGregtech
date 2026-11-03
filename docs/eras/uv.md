@@ -1,5 +1,7 @@
 # UV (T8): Pluto, the Kuiper Belt and the first probe to another star
 
+Long process lines and multiblock sizes since batch 16 (D3-LINES): `docs/eras/lines-uv-uhv.md`, which supersedes *New process lines* and *Our multiblocks* below where they differ.
+
 UV leaves the planets behind. Neptune's orbit and Pluto's orbit become the fifth and sixth stations. Probes fall into Pluto's ice and catch a Kuiper Belt object on the way out. A gram-scale probe is pushed toward Proxima Centauri by a laser on the Moon.
 
 At home, the era is accelerators and isotopes:

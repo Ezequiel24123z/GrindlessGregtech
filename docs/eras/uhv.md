@@ -1,5 +1,7 @@
 # UHV (T9): Proxima Centauri b, the Dyson swarm and the gate
 
+Long process lines and multiblock sizes since batch 16 (D3-LINES): `docs/eras/lines-uv-uhv.md`, which supersedes *New process lines* and *Our multiblocks* below where they differ.
+
 UHV arrives. A level 8 rocket lands on Proxima Centauri b, 4.24 light years out, where the Starshot's approach data said it would be. Alien flora grows under a red dwarf, and its chemistry comes home through a planetary-protection facility. Mercury's orbit becomes the seventh station and the foundry of a Dyson swarm around the Sun: Kardashev II, generous but never free. A pair of warp gates joins Earth orbit and Proxima b's orbit, and GTCA's space elevator finally gets its recipes.
 
 At home, the era is isotopes, light and life:

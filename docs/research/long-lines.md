@@ -232,6 +232,7 @@ Most of StarT's long late lines are fantasy chemistry with labels inflated above
 - **Source:** GTNH `PurifiedWaterRecipes.java`, `AutoclaveRecipes.java`, `BlastFurnaceRecipes.java`. LGPL code, design CC BY-NC-SA: **ideas**. Verified.
 - **Steps:** clarifier with activated-carbon mesh, ozonation, flocculation (PAC), pH adjustment, plasma heating, UV treatment, degasification, particle extraction (quark creation catalyst), catalyst realignment loop, autoclave to seed crystal, blast furnace to phonon crystal solution.
 - **Mapping:** GTM has only distilled water. New: the grade train. The real unit operations make it the easiest late line to justify.
+- **Correction (D3-LINES, verified on dump 5d57213f3b83):** GTCA 2.2.0, in the pack, registers `gtca:purified_water_grade_1` to `_8` and seven purification units (clarifier, ozonation, flocculation, pH neutralisation, extreme temperature, high-energy laser, degasser). The pack gives the units no controller recipe (`server_scripts/grindless/integration/gtca.js`:49), so the fluids are registered and unused; D3 uses grades 1 to 5 as UHV's water train (`docs/eras/lines-uv-uhv.md` W4).
 - **Adaptation:** replace "plasma heating" with reverse osmosis and electrodeionisation, add per-grade recirculation and a brine byproduct.
 - **Touches:** carbon (mesh), aluminium, chlorine, phosphorus, helium, water.
 
@@ -304,6 +305,8 @@ Counts are chains of 4 or more steps from `tools/quests/processing-lines/pl-data
 | `uev.light` | 13 chains: 4, 5, 7, 9, 4, 5, 4, 5, 6, 5, 6, 4, 3 | `optical_computer` (9) as the trunk fed by `graphene_modulator` (7), `qd_source` (4), `snspd` (4) and `hollow_core_fibre` (5): 20 or more. `sdd` shares the float-zone wafer start of the optical computer. `spdc_source`, `ule_cavity`, `ktp_electroded_wafer` form a source and cavity group |
 | `uhv.mercury` 5 to `uhv.power` 9 to `uhv.photonics` 8 | 3 | A line of 22; `uiv.light` and `uiv.memory` chains hang off it (27 to 28) |
 | `uev.isotopes` (7, 5, 3, 5, 2), `uhv.isotopes` (4 x 3), `uiv.hydrogen` (10 chains), `uxv.wafers`, `opv.wafers` (11 chains) | many parallel short chains | One trunk per cluster with the others as branches |
+
+**Correction (D3-LINES, verified on dump 5d57213f3b83):** `uhv.mercury`, `uhv.power` and `uhv.photonics` do not form one chain of 22. Mercury's reflector film ends in the swarm segment; the SiC power module that `uhv.power` hands to the photonics chart's mainframe does not depend on the film. The longest real chain through the three is the SiC chain into the swarm control station (9 with the SiC source powder, `docs/eras/lines-uv-uhv.md` W5) or into the mainframe (8).
 
 ## 7. Licence table
 
