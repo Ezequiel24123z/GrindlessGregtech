@@ -10,10 +10,11 @@
 //   leg 1  static_*  the c11 row, the seed and hull recipes, the chain strand wire (16 A at V[OpV], no loss), the placer's row for the jump
 //          formed    one warp gate with two UXV 16 A energy hatches and UXV buses forms in Cygnus X-1's orbit
 //          hold      the gate runs grindless:warp_gate/hold_sgr1806 at 2,147,483,648 EU/t, the seed is spent and the bulge chart is not
-//          kept      nothing is queued and no c11 copy is kept; 1,500 ticks into the 2,400 there is no platform yet; PHASE1
-//   leg 2  the gate still holds the c11 recipe after the restart, the completed jump is queued and served, the platform is placed and its far
-//          ring formed, the queue is drained, the launched seed and the relay coordinates reach the output bus and the bulge chart stays in the
-//          input bus.
+//          kept      nothing is queued and no c11 copy is kept; the run is fast-forwarded to 1,500 of its 2,400 ticks (only the waiting is
+//                    skipped; the 600 s native budget holds two boots, not 120 s of waiting) and 20 ticks later there is no platform yet; PHASE1
+//   leg 2  the gate still holds the c11 recipe after the restart (then fast-forwarded to its last tick), the completed jump is queued and
+//          served, the platform is placed and its far ring formed, the queue is drained, the launched seed and the relay coordinates reach
+//          the output bus and the bulge chart stays in the input bus.
 // Not covered here: the four UXV pasta machines running the chain rows at SGR (gg_test_opv_chain_matter, same band, in grindless:sgr1806_orbit).
 (function () {
   var REQUEST = 'ggTestOpvBulgeRelayRequest'
@@ -172,6 +173,12 @@
     S.phaseAt = S.tick
     emit('stage', 'NOTE', name)
   }
+  // skips the waiting of the running hold (GTM finishes it with its real outputs; nothing else of the run changes)
+  function fastForward(logic, progress, name) {
+    var before = Number(logic.getProgress())
+    if (progress > before) logic.setProgress(progress)
+    emit(name, 'NOTE', 'progress ' + before + ' -> ' + logic.getProgress() + ' of ' + logic.getDuration() + ' (only the waiting is skipped)')
+  }
   function fillAt(level, pos) {
     ;['e0', 'e1'].forEach(function (k) {
       var m = pos && pos[k] ? atIn(level, pos[k]) : null
@@ -279,6 +286,7 @@
       var data = S.server.persistentData
       check('hold_not_queued', !queued() && !data.contains('opvBulgeHold') && S.G.opvBulgeRelay.hold === undefined,
         'a running jump queues nothing and bulge_relay.js keeps no copy of it; queue ' + JSON.stringify(S.G.relayPlatforms.due(S.server)))
+      fastForward(logic, RESTART_AT, 'leg1_FASTFORWARD')
       phase('run')
       return
     }
@@ -288,8 +296,8 @@
         finish()
         return
       }
-      if (S.tick - S.runStart >= RESTART_AT) {
-        check('no_platform_yet', !S.server.persistentData.contains(PLATFORM_KEY), (S.tick - S.runStart) + ' ticks into ' + DURATION)
+      if (elapsed >= 20) {
+        check('no_platform_yet', !S.server.persistentData.contains(PLATFORM_KEY), 'progress ' + logic.getProgress() + ' of ' + DURATION)
         save()
         emit('restart', 'NOTE', 'leg 1 kept ' + S.tickets.length + ' tickets and the box ' + JSON.stringify(S.box) + '; failures so far ' + S.failed)
         console.info('GGTEST|' + NAME + '|PHASE1|DONE')
@@ -317,7 +325,8 @@
     var R = S.G.relayPlatforms
     if (S.phase === 'restored') {
       if (lastId() === HOLD && String(S.ctrl.getRecipeLogic().getStatus()) === 'WORKING') {
-        check('run_kept', true, 'the gate still runs ' + HOLD + ' after the restart')
+        check('run_kept', true, 'the gate still runs ' + HOLD + ' after the restart, progress ' + S.ctrl.getRecipeLogic().getProgress())
+        fastForward(S.ctrl.getRecipeLogic(), DURATION - 1, 'leg2_FASTFORWARD')
         phase('platform')
       } else if (elapsed > 200) {
         check('run_kept', false, 'status ' + S.ctrl.getRecipeLogic().getStatus() + ', last ' + lastId())
@@ -335,8 +344,8 @@
         check('platform_ring_formed', !!m && m.isFormed(), 'far ring in ' + FAR + ': ' + (m ? 'formed ' + m.isFormed() : 'no controller block entity'))
         check('queue_drained', !queued(), 'the placer served the queued jump: ' + JSON.stringify(R.due(S.server)))
         phase('output')
-      } else if (elapsed > DURATION) {
-        check('platform_row', false, 'no ' + PLATFORM_KEY + ' after ' + elapsed + ' ticks; ' + why())
+      } else if (elapsed > 400) {
+        check('platform_row', false, 'no ' + PLATFORM_KEY + ' ' + elapsed + ' ticks after the run\'s last tick; ' + why())
         finish()
       }
       return
@@ -355,7 +364,7 @@
         var bus = contents(at(S.pos.bus).getInventory())
         check('chart_kept', bus.indexOf(CHART + 'x1') >= 0 && bus.indexOf(SEED) < 0, 'input bus ' + bus)
         finish()
-      } else if (elapsed > DURATION) {
+      } else if (elapsed > 400) {
         check('launched_output', false, 'no launched seed after ' + elapsed + ' ticks; output bus ' + out + '; ' + why())
         finish()
       }
