@@ -13,7 +13,7 @@ const ROWS = {
     ["m", "gtceu:condensate_refinery", [4]],
     ["f", "fluid:gtceu:settled_condensate", [5]],
     ["i", "grindless:condensate_boil_off", [5], 1],
-    ["l", "pl_opv:o7p_7", []],
+    ["l", "pl_opv:l5_6", []],
     ["i", "grindless:jacketed_condensate_cell", [6, 8]],
   ],
   P2: [
@@ -31,7 +31,7 @@ const ROWS = {
     ["f", "fluid:gtceu:kerr_condensate", [9], 1],
   ],
   P3: [
-    ["l", "pl_opv:o4_9", []],
+    ["l", "pl_opv:l36_7", []],
     ["m", "gtceu:strangelet_vault", [0]],
     ["i", "grindless:fed_strangelet", [1]],
     ["m", "gtceu:levitation_melter", [2]],
@@ -190,7 +190,7 @@ const ROWS = {
     ["i", "grindless:canned_counterweight", [8]],
   ],
   P16: [
-    ["l", "pl_opv:o6m_5", []],
+    ["l", "pl_opv:l38_6", []],
     ["m", "gtceu:von_neumann_foundry", [0]],
     ["i", "grindless:probe_seed", [1]],
     ["i", "grindless:kugelblitz_core", []],
@@ -729,7 +729,7 @@ const ROWS = {
     ["i", "grindless:pattern_memory_unit", [8], 0, 1],
   ],
   K1: [
-    ["l", "pl_opv:o3_11", []],
+    ["l", "pl_opv:l37_4", []],
     ["m", "gtceu:kugelblitz_forge", [0]],
     ["i", "grindless:caged_kugelblitz", [1]],
     ["m", "gtceu:strangelet_vault", [2]],
