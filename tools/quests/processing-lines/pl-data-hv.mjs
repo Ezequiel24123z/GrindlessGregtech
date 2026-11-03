@@ -8,7 +8,7 @@ export default {
   subtitle: 'Crude oil goes through the refinery, hydrogen comes from carbon, and the rocket\'s parts get cured and fired.',
   icon: 'gtceu:refinery',
   focus: 'oil',
-  bands: [['platline2'], ['kroll', 'epoxyline'], ['refinery', 'aromatics'], ['syngas', 'gasoline', 'ptfe'], ['rocket', 'sbr'], ['nichrome']],
+  bands: [['platline2'], ['kroll', 'epoxyline'], ['refinery', 'aromatics'], ['syngas', 'gasoline', 'ptfe'], ['propellants'], ['rocket', 'sbr'], ['nichrome']],
   clusters: {
     platline2: {
       name: 'H1: Platline II, slag to rhodium and the gauze',
@@ -163,6 +163,41 @@ export default {
         }),
       ],
     },
+    propellants: {
+      name: 'H2: Hydrazine and Aerozine 50',
+      nodes: [
+        L('coaltar', 0, 0, 'pl_lv:coaltar'),
+        n('naph', 2, 0, F('gtceu:naphthalene'), 'Naphthalene', { from: ['coaltar'], by: ['gtceu:distillery'], sub: 'Distillery' }),
+        n('v2o5', 2, 1.5, I('gtceu:small_vanadium_pentoxide_dust'), 'Vanadium Pentoxide', { kind: 'raw', sub: 'The catalyst, from the ore plant' }),
+        n('pa', 4, 0, I('gtceu:phthalic_anhydride_dust'), 'Phthalic Anhydride', { from: ['naph', 'v2o5'], by: ['gtceu:chemical_reactor'], sub: 'Chemical reactor, with air: an HV step' }),
+        n('ebz', 4, -1.5, F('gtceu:ethylbenzene'), 'Ethylbenzene', { kind: 'raw', sub: 'Coal gas distillery' }),
+        n('eaq', 6, 0, F('gtceu:ethyl_anthra_quinone'), '2-Ethylanthraquinone', { from: ['pa', 'ebz'], by: ['gtceu:chemical_plant'], sub: 'GT-- chemical plant' }),
+        n('pdcat', 8, 1.5, I('gtnn:orange_metal_catalyst'), 'Palladium-Vanadium Catalyst', { kind: 'raw', sub: 'Palladium from the MV platline' }),
+        n('eahq', 8, 0, F('gtceu:ethyl_anthra_hydro_quinone'), 'EAHQ', {
+          from: ['eaq', 'hydrogen', 'pdcat'], by: ['gtceu:chemical_plant'], sub: 'Hydrogenation, with hydrogen from the syngas plant',
+        }),
+        n('h2o2', 10, 0, F('gtceu:hydrogen_peroxide'), 'Hydrogen Peroxide', {
+          from: ['eahq'], by: ['gtceu:chemical_plant'], sub: 'Autoxidation in air; needs HV machine casings',
+          desc: 'The plant only runs a recipe up to the tier of its machine casings, and sits idle above it. Build it with HV casings, not the MV ones the preview shows.',
+        }),
+        n('eaqback', 10, -1.5, F('gtceu:ethyl_anthra_quinone'), 'EAQ, Back', { kind: 'ret', from: ['eahq'], by: ['gtceu:chemical_plant'], sub: 'Back into the hydrogenation; only anthracene is made up' }),
+        L('nh3', 12, 3, 'pl_lv:ammonia'),
+        n('hydrazine', 12, 0, F('gtceu:hydrazine'), 'Hydrazine', { from: ['h2o2', 'nh3'], by: ['gtceu:chemical_plant'], sub: 'Peroxide process; HV machine casings' }),
+        n('hocl', 0, 4.5, F('gtceu:hypochlorous_acid'), 'Hypochlorous Acid', { from: ['cl2'], by: ['gtceu:large_chemical_reactor'], sub: 'Chlorine and water' }),
+        n('dilhcl', 0, 6, F('gtceu:diluted_hydrochloric_acid'), 'Diluted Hydrochloric Acid', { kind: 'by', from: ['hocl'], end: 'distillery: hydrochloric acid', sub: 'Distil it back to acid' }),
+        n('mca', 2, 4.5, F('gtceu:monochloramine'), 'Monochloramine', { from: ['hocl', 'nh3'], by: ['gtceu:large_chemical_reactor'], sub: 'Hypochlorous acid and ammonia' }),
+        n('dma', 4, 3, F('gtceu:dimethylamine'), 'Dimethylamine', { from: ['methanol', 'nh3'], by: ['gtceu:large_chemical_reactor'], sub: 'Methanol and ammonia' }),
+        n('udmh', 6, 4.5, F('gtceu:dimethylhydrazine'), 'UDMH', { from: ['mca', 'dma'], by: ['gtceu:large_chemical_reactor'], sub: 'Raschig process; the methanol shortcut is gone' }),
+        n('udmhhcl', 6, 6, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { kind: 'by', from: ['udmh'], end: 'PVC, epoxy', sub: 'PVC, epoxy' }),
+        n('aerozine', 14, 1.5, F('gtceu:aerozine_50'), 'Aerozine 50', { from: ['hydrazine', 'udmh'], by: ['gtceu:mixer'], sub: 'Mixer, hydrazine and UDMH one to one' }),
+        L('no2', 12, 4.5, 'pl_lv:no2'),
+        n('n2o4', 14, 4.5, F('gtceu:dinitrogen_tetroxide'), 'Dinitrogen Tetroxide', { from: ['no2'], by: ['gtceu:chemical_reactor'], sub: 'Nitrogen dioxide, dimerised' }),
+        n('rfuel', 16, 3, F('gtceu:rocket_fuel'), 'Rocket Fuel', {
+          kind: 'product', from: ['aerozine', 'n2o4'], by: ['gtceu:mixer'], end: 'engine test stand', sub: 'Mixer; Aerozine 50 and N2O4',
+          desc: 'The hypergolic pair of the Titan II: it lights on contact, so no igniter is needed.',
+        }),
+      ],
+    },
     rocket: {
       name: 'Rocket parts',
       nodes: [
@@ -179,9 +214,8 @@ export default {
         n('tile', 5, 0, I('grindless:ablative_heat_shield_tile'), 'Ablative Tile', { from: ['autoclave'] }),
         n('copv', 5, 3, I('grindless:composite_overwrapped_tank'), 'Overwrapped Tank', { from: ['autoclave'] }),
         n('untested', 7, -0.75, I('grindless:untested_rocket_motor'), 'Untested Rocket Motor', { from: ['qthruster', 'tile'], sub: 'Assembler, with Kapton K' }),
-        n('fuel', 7, 0.75, F('gtceu:rocket_fuel'), 'Rocket Fuel', { kind: 'raw', sub: 'Dimethylhydrazine and oxygen' }),
         n('stand', 9, 0, M('gtceu:engine_test_stand'), 'Engine Test Stand', {
-          kind: 'ours', from: ['untested', 'fuel'],
+          kind: 'ours', from: ['untested', 'rfuel'],
           desc: 'The same stand as MV, now firing whole motors on the fuel they will fly on.',
         }),
         n('motor', 11, -0.75, I('gcyr:basic_rocket_motor'), 'Basic Rocket Motor', { kind: 'product', from: ['stand'] }),
