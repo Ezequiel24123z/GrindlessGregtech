@@ -7,7 +7,7 @@ global.grindless.recipes('uiv/casings', function (event) {
   var UIV_EUT = 31457280
 
   event.recipes.gtceu.powder_bed_fusion('grindless:rhea_casing')
-    .itemInputs('12x grindless:rhea_am_powder', '4x gtceu:rhea_plate', '2x grindless:wf_rhea_billet')
+    .itemInputs('16x grindless:rhea_am_powder', '6x gtceu:rhea_plate', '3x grindless:wf_rhea_billet')
     .itemOutputs('2x grindless:rhea_casing')
     .EUt(UIV_EUT)
     .duration(400)

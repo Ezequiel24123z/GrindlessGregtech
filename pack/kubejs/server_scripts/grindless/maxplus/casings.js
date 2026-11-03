@@ -25,17 +25,17 @@
   // type: assembler or assembly_line (the gate casing, with its research item)
   var CASINGS = [
     { name: 'bound_lattice_casing', out: 4, duration: 200, fluid: SF3,
-      items: ['grindless:bound_degenerate_billet', '2x grindless:kerr_strand_wire', '2x grindless:tensegrity_truss_casing', 'grindless:maxplus_electric_piston', SEAL] },
+      items: ['grindless:bound_degenerate_billet', '2x grindless:kerr_strand_wire', '2x grindless:tensegrity_truss_casing', 'grindless:max_sensor', SEAL] },
     { name: 'kerr_coil_casing', out: 2, duration: 400, fluid: SF3,
-      items: ['grindless:kerr_field_coil', LATTICE, 'grindless:maxplus_field_generator', SEAL] },
+      items: ['grindless:kerr_field_coil', LATTICE, 'grindless:max_emitter', 'grindless:max_electric_pump', SEAL] },
     { name: 'fe56_shield_casing', out: 4, duration: 400, fluid: SF3,
-      items: ['6x ' + PLATE, '2x gtceu:lithium_6_dust', 'gtceu:tungsten_plate', 'grindless:maxplus_electric_piston', SEAL] },
+      items: ['6x ' + PLATE, '2x gtceu:lithium_6_dust', 'gtceu:tungsten_plate', 'grindless:max_conveyor_module', 'grindless:max_sensor', SEAL] },
     { name: 'primordial_cryostat_casing', out: 2, duration: 400, fluid: HE3,
-      items: ['2x ' + PLATE, 'grindless:he4_dewar', 'grindless:neg_xhv_casing', 'grindless:maxplus_electric_pump', 'grindless:maxplus_fluid_regulator', SEAL] },
+      items: ['2x ' + PLATE, 'grindless:he4_dewar', 'grindless:neg_xhv_casing', '2x grindless:max_electric_pump', 'grindless:max_sensor', 'gtceu:opv_fluid_regulator', SEAL] },
     { name: 'void_diamond_window', out: 2, duration: 200, fluid: SF3,
-      items: ['2x grindless:void_grown_diamond', PLATE, 'grindless:maxplus_sensor', 'grindless:maxplus_emitter', SEAL] },
+      items: ['2x grindless:void_grown_diamond', PLATE, 'grindless:max_sensor', 'gtceu:opv_emitter', SEAL] },
     { name: 'horizon_gate_casing', out: 2, duration: 600, fluid: HE3, line: true, research: 'grindless:max_field_coil',
-      items: ['4x ' + PLATE, 'grindless:void_grown_diamond', 'grindless:max_field_coil', 'grindless:maxplus_field_generator', '2x grindless:maxplus_emitter', SEAL] }
+      items: ['4x ' + PLATE, 'grindless:void_grown_diamond', 'grindless:max_field_coil', 'grindless:max_field_generator', '2x gtceu:opv_emitter', SEAL] }
   ]
 
   ServerEvents.recipes(function (event) {
