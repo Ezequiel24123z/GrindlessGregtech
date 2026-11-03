@@ -6,7 +6,7 @@
       "recipes": [
         {
           "name": "pair_plasma", "circuit": 1, "eut": 31457280, "duration": 1200, "site": true,
-          "_why": "UIV-B3 machine 18: a metallic hydrogen coil block (the magnet, kept) traps a sample of the pulsar's pair wind. The annihilation gamma rays are absorbed as heat in the tungsten lining (voidable, no output); the unused electrons go back into the wind.",
+          "_why": "UIV-B3 machine 18: a metallic hydrogen coil block (the magnet, kept) traps a sample of the pulsar's pair wind. The annihilation gamma rays are absorbed as heat in the tungsten lining (voidable, no output); the unused electrons (wind electrons) are vented back into the wind: nothing consumes them, the output hatch voids them (principle 3, stated destination).",
           "itemsIn": [], "kept": [ { "id": "grindless:metallic_hydrogen_coil_block", "count": 1 } ], "fluidsIn": [],
           "itemsOut": [], "fluidsOut": [ { "id": "gtceu:pair_plasma", "amount": 4000 }, { "id": "gtceu:wind_electrons", "amount": 2000 } ]
         }
@@ -67,7 +67,7 @@
       "recipes": [
         {
           "name": "pair_plasma_cooling", "circuit": 4, "eut": 1966080, "duration": 600, "site": true,
-          "_why": "UIV-B3 line 34: the accumulator's Penning trap cools pair plasma into a bunch of cooled positrons (at J0437 only: pair plasma does not travel); the electrons go back.",
+          "_why": "UIV-B3 line 34: the accumulator's Penning trap cools pair plasma into a bunch of cooled positrons (at J0437 only: pair plasma does not travel); the electrons are vented back into the wind (voidable: wind electrons have no consumer by design, see the trap row).",
           "itemsIn": [], "kept": [], "fluidsIn": [ { "id": "gtceu:pair_plasma", "amount": 1000 } ],
           "itemsOut": [ { "id": "grindless:cooled_positron_bunch", "count": 1 } ], "fluidsOut": [ { "id": "gtceu:wind_electrons", "amount": 500 } ]
         }
