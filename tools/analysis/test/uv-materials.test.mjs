@@ -26,7 +26,7 @@ const table = JSON.parse(read('data/grindless/tables/am_powders.json'));
 const NEW_ITEMS = ['bnnt_dust', 'silver_tube', 'pit_billet', 'near_net_neutronium_gear', 'near_net_darmstadtium_rotor', 'near_net_tritanium_gear',
   'near_net_thruster_chamber', 'near_net_array_mount', 'near_net_probe_frame', 'printed_thruster_chamber', 'printed_array_mount', 'printed_probe_frame'];
 const MATERIALS = ['boric_acid', 'boron_trioxide'];
-const MACHINES = [['gtceu:boron_nitride_reactor', 'gtceu:boron_nitride', 7, 7, 9], ['gtceu:powder_in_tube_line', 'gtceu:powder_in_tube', 3, 5, 15],
+const MACHINES = [['gtceu:boron_nitride_reactor', 'gtceu:boron_nitride', 7, 7, 9], ['gtceu:powder_in_tube_line', 'gtceu:powder_in_tube', 17, 5, 5],
   ['gtceu:powder_bed_printer', 'gtceu:powder_bed_fusion', 7, 7, 7]];
 const WIRE = 'gtceu:enriched_naquadah_trinium_europium_duranide_single_wire';
 const VA_ZPM = 122880;

@@ -24,8 +24,8 @@
 //             spent_oxide_fragments, spent_nitride_fragments, u233_cathode_deposit (D3-TH-BACK)
 //   materials triton_nitric_oxide (the NO of Triton nitrogen), lead_bismuth_eutectic, polonium_210, thorium_uranium_metal,
 //             licl_salt, loaded_licl_salt, protactinium_bismuth
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the cell is 7 x 7 x 7 (a PTFE column in a heatproof and glass
-// vessel), the reactor 11 x 13 x 11 (a UV-casing pool ring, a pipe column up the core, the 4 SRF cryomodules in the back wall).
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the cell is a 22 x 8 x 7 hall (three hot cells in a row behind
+// lead glass: chopper bench, electrorefiner vessel, cathode furnace), the reactor 11 x 13 x 11 (a UV-casing pool ring, a pipe column up the core, the 4 SRF cryomodules in the back wall).
 // Textures: tools/assets/Build-UVThoriumTextures.ps1. Names: client_scripts/grindless/uv_thorium_lang.js.
 // Published for the recipe script and the smoke test: global.grindless.thorium.
 (function () {
@@ -46,6 +46,9 @@
   const CRYO = 'grindless:srf_cryomodule_block'
   const TUNGSTEN_PIPE = 'gtceu:tungstensteel_pipe_casing'
   const COIL = 'gtceu:superconducting_coil'
+  const VAULT = 'grindless:radiation_vault_casing'
+  const CUPRONICKEL = 'gtceu:cupronickel_coil_block'
+  const GEARBOX = 'gtceu:tungstensteel_gearbox'
 
   TH.table = 'kubejs/data/grindless/tables/thorium.json'
   TH.fabricationTable = 'kubejs/data/grindless/tables/thorium_fabrication.json'
@@ -79,7 +82,7 @@
       generator: false,
       // items in: spent fuel, the lithium charge and the circuit; out: metal, U-233, thorium; fluids in: the salt charge and the nitrogen
       maxIO: { itemsIn: 3, itemsOut: 3, fluidsIn: 2, fluidsOut: 2 },
-      width: 7, depth: 7, height: 7
+      width: 22, depth: 7, height: 8
     },
     reactor: {
       name: 'accelerator_driven_reactor',
@@ -121,14 +124,6 @@
     return slices
   }
 
-  function cellInner(r, si, c) {
-    var dx = Math.abs(c - 3)
-    var dz = Math.abs(si - 3)
-    if (dx === 0 && dz === 0) return 'P'
-    if (dx <= 1 && dz <= 1) return r === 1 ? 'H' : (r <= 4 ? 'L' : '#')
-    return '#'
-  }
-
   function reactorInner(r, si, c) {
     var dx = Math.abs(c - 5)
     var dz = Math.abs(si - 5)
@@ -160,21 +155,6 @@
         return out
       })
     })
-  }
-
-  // the pyroprocessing cell, an electrorefiner vessel: tungsten steel posts and roof ring, a heatproof furnace band at the foot and
-  // under the roof, glass sight windows between, a PTFE salt duct on the roof
-  function cellRule(x, y, z, W, H, D) {
-    var cx = x === 0 || x === W - 1
-    var cz = z === 0 || z === D - 1
-    if (y === H - 1) {
-      if (cx || cz) return 'M'
-      return Math.abs(x - 3) <= 1 && Math.abs(z - 3) <= 1 ? 'P' : null
-    }
-    if (cx && cz) return 'M'
-    if (y === 1 || y === 5) return 'H'
-    if ((y === 2 || y === 3 || y === 4) && (cx ? z : x) >= 2 && (cx ? z : x) <= 4) return 'L'
-    return null
   }
 
   // the reactor, a subcritical drum: tungsten steel posts and roof ring, a stack of heatproof blanket bands, two superconducting beam-ring
@@ -221,7 +201,121 @@
       }
     }
   }
-  TH.machines.cell.spec = specOf(TH.machines.cell, SHIELD, cellInner, null, [Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()], cellRule)
+  // The pyroprocessing hall, 22 x 8 x 7 (about 800 cells): three hot cells in a row behind lead glass, split by vault partitions with
+  // glass transfer ports: the head end (a chopper bench and its hopper), the electrorefiner (a heater-banded vessel under a lid) and
+  // the cathode processor (a furnace stack). A PTFE salt loop runs the back wall through all three, a crane rail runs under the roof
+  // and an argon duct crosses the roof with a drop into each cell. Vault casing (LuV) for the walls, radiation-proof casing for the
+  // floor, roof and front; nothing here needs a product of the cell.
+  var HALL = { W: 22, H: 8, D: 7 }
+  var HALL_POSTS = [0, 7, 14, 21]
+
+  function hallGrid() {
+    var g = []
+    for (var z = 0; z < HALL.D; z++) {
+      var layer = []
+      for (var y = 0; y < HALL.H; y++) {
+        var row = []
+        for (var x = 0; x < HALL.W; x++) row.push(' ')
+        layer.push(row)
+      }
+      g.push(layer)
+    }
+    return g
+  }
+
+  function hallFill(g, x0, y0, z0, x1, y1, z1, ch) {
+    for (var z = z0; z <= z1; z++) for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) g[z][y][x] = ch
+  }
+
+  // a vessel ring: the cells of the x0..x1 by z0..z1 rectangle that are not strictly inside it
+  function hallRing(g, x0, z0, x1, z1, y, ch) {
+    for (var z = z0; z <= z1; z++) {
+      for (var x = x0; x <= x1; x++) {
+        if (x === x0 || x === x1 || z === z0 || z === z1) g[z][y][x] = ch
+      }
+    }
+  }
+
+  function hallSpec() {
+    var W = HALL.W
+    var H = HALL.H
+    var D = HALL.D
+    var g = hallGrid()
+    hallFill(g, 0, 0, 0, W - 1, 0, D - 1, 'X')
+    hallFill(g, 0, H - 2, 0, W - 1, H - 2, D - 1, 'F')
+    hallFill(g, 1, 1, 1, W - 2, H - 3, D - 2, '#')
+    // outer walls
+    for (var y = 1; y <= H - 3; y++) {
+      for (var x = 0; x < W; x++) {
+        g[0][y][x] = 'V'
+        g[D - 1][y][x] = y === 1 || y === H - 3 ? 'F' : 'L'
+      }
+      for (var z = 0; z < D; z++) {
+        g[z][y][0] = 'V'
+        g[z][y][W - 1] = 'V'
+      }
+    }
+    // a lead-glass window in each end wall
+    hallFill(g, 0, 2, 3, 0, 4, 3, 'L')
+    hallFill(g, W - 1, 2, 3, W - 1, 4, 3, 'L')
+    // partitions, each with a glass transfer port
+    for (var p = 1; p < 3; p++) {
+      hallFill(g, HALL_POSTS[p], 1, 1, HALL_POSTS[p], H - 3, D - 2, 'V')
+      hallFill(g, HALL_POSTS[p], 2, 3, HALL_POSTS[p], 3, 3, 'L')
+    }
+    // posts at the partition lines of both long walls
+    for (var q = 0; q < 4; q++) {
+      hallFill(g, HALL_POSTS[q], 1, 0, HALL_POSTS[q], H - 3, 0, 'M')
+      hallFill(g, HALL_POSTS[q], 1, D - 1, HALL_POSTS[q], H - 3, D - 1, 'M')
+    }
+    g[D - 1][1][11] = 'S'
+    // head end: the chopper bench and its hopper
+    hallFill(g, 2, 1, 3, 5, 1, 3, 'G')
+    hallFill(g, 2, 2, 3, 2, 3, 3, 'P')
+    // electrorefiner: a vessel of heater coils and heatproof rings under a lid
+    hallRing(g, 9, 2, 12, 4, 1, 'K')
+    hallRing(g, 9, 2, 12, 4, 2, 'H')
+    hallRing(g, 9, 2, 12, 4, 3, 'K')
+    hallFill(g, 9, 4, 2, 12, 4, 4, 'H')
+    // cathode processor: a furnace stack
+    hallRing(g, 17, 2, 18, 4, 1, 'H')
+    hallRing(g, 17, 2, 18, 4, 2, 'K')
+    hallRing(g, 17, 2, 18, 4, 3, 'H')
+    hallRing(g, 17, 2, 18, 4, 4, 'L')
+    // salt loop along the back wall, through the partitions
+    hallFill(g, 1, 1, 1, W - 2, 1, 1, 'P')
+    // crane rails under the roof
+    hallFill(g, 1, H - 3, 2, W - 2, H - 3, 2, 'M')
+    hallFill(g, 1, H - 3, 4, W - 2, H - 3, 4, 'M')
+    // argon duct over the roof, with a drop into each cell
+    hallFill(g, 0, H - 1, 3, W - 1, H - 1, 3, 'P')
+    for (var d = 0; d < 3; d++) hallFill(g, 3 + d * 7, H - 3, 3, 3 + d * 7, H - 2, 3, 'P')
+    return {
+      slices: g.map(function (layer) { return layer.map(function (row) { return row.join('') }) }),
+      symbols: {
+        S: Pat.controller(),
+        X: Pat.oneOf(
+          Pat.block(SHIELD),
+          Pat.part('input_bus', { min: 1, max: 1 }),
+          Pat.part('input_hatch', { min: 1, max: 2 }),
+          Pat.part('output_bus', { min: 1, max: 2 }),
+          Pat.part('output_hatch', { min: 1, max: 2 }),
+          Pat.part('energy_input', { min: 1, max: 2 }),
+          G.parallelHatch.part()
+        ),
+        F: Pat.block(SHIELD),
+        V: Pat.block(VAULT),
+        P: Pat.block(PIPE),
+        L: Pat.block(GLASS),
+        H: Pat.block(HEAT),
+        G: Pat.block(GEARBOX),
+        M: Pat.frame(['tungsten_steel']),
+        K: Pat.block(CUPRONICKEL),
+        '#': Pat.air()
+      }
+    }
+  }
+  TH.machines.cell.spec = hallSpec()
   TH.machines.reactor.spec = specOf(TH.machines.reactor, ROBUST, reactorInner, reactorWall, [Pat.part('energy_output', { min: 1, max: 4 })], reactorRule)
 
   // ---------------------------------------------------------------- containment

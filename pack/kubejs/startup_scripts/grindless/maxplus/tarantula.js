@@ -4,10 +4,10 @@
 // item they use are XP-F1's (maxplus/foundation.js). The recipes, with lines P6, P7, P8, P17, P20 and P21's older-machine rows, are in
 // server_scripts/grindless/maxplus/tarantula.js.
 //
-//   gtceu:tarantula_stellar_lift    21 x 15 x 21 of lift nozzle casing. c1 lifts raw VMS plasma off an R136 star (wears a lift nozzle 1 in 32)
-//   gtceu:pair_instability_crucible 15 x 15 x 15 rounded cube of crucible liner casing. c1 burns confined VMS plasma into a nickel-56 slug and ime ash
+//   gtceu:tarantula_stellar_lift    31 x 21 x 31 (D5-SHAPE-MAXP-B1) of bound lattice, lift nozzle and Kerr coil casing. c1 lifts raw VMS plasma off an R136 star (wears a lift nozzle 1 in 32)
+//   gtceu:pair_instability_crucible 21 x 21 x 21 rounded cube of bound lattice, crucible liner and Kerr coil casing. c1 burns confined VMS plasma into a nickel-56 slug and ime ash
 //                                   (wears a crucible liner 1 in 16)
-//   gtceu:nickel_56_burner          15 x 9 x 15, a GENERATOR (lib/generators.js; S0-4): c1 2^34 EU/t out, c2 2^33 EU/t out, each on one MAX 16 A dynamo hatch
+//   gtceu:nickel_56_burner          25 x 13 x 25 of bound lattice, Kerr coil and droplet radiator casing, a GENERATOR (lib/generators.js; S0-4): c1 2^34 EU/t out, c2 2^33 EU/t out, each on one MAX 16 A dynamo hatch
 //                                   (V x A = 2^35). GTM's 64 A substation hatches do not fit the multiblock's energy slot, so no 64 A hatch is used.
 //
 // The lift and the crucible run at V[MAX] x 16 (2^35 EU/t) on the 1,024 A MAX+ energy hatch (INPUT_ENERGY). Rows run as written: no overclock, no
@@ -18,26 +18,26 @@
   const MT = G.maxPlusTarantula || (G.maxPlusTarantula = {})
   const LOG = '[grindless/maxplus] '
 
-  const LIFT_CASING = 'grindless:lift_nozzle_casing'
-  const LINER_CASING = 'grindless:crucible_liner_casing'
-  const BURNER_CASING = 'gtceu:atomic_casing'
+  const LATTICE = 'grindless:bound_lattice_casing'
+  const LATTICE_TEXTURE = 'grindless:block/maxplus/bound_lattice_casing'
+  const KERR = 'grindless:kerr_coil_casing'
 
   MT.lift = {
     name: 'tarantula_stellar_lift', machine: 'gtceu:tarantula_stellar_lift', type: 'tarantula_stellar_lift', dataKey: 'grindless_tarantula_stellar_lift',
-    lang: 'Tarantula Stellar Lift', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: LIFT_CASING,
-    texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/tarantula_stellar_lift',
-    width: 21, height: 15, depth: 21, generator: false,
-    pal: { F: LIFT_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
+    lang: 'Tarantula Stellar Lift', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: LATTICE,
+    texture: LATTICE_TEXTURE, overlay: 'grindless:block/multiblock/tarantula_stellar_lift',
+    width: 31, height: 21, depth: 31, generator: false,
+    pal: { F: LATTICE, N: 'grindless:lift_nozzle_casing', K: KERR, L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil', P: 'gtceu:tungstensteel_pipe_casing' },
     parts: function () {
       return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_hatch', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 })]
     }
   }
   MT.crucible = {
     name: 'pair_instability_crucible', machine: 'gtceu:pair_instability_crucible', type: 'pair_instability_crucible', dataKey: 'grindless_pair_instability_crucible',
-    lang: 'Pair-Instability Crucible', maxIO: { itemsIn: 2, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: LINER_CASING,
-    texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/pair_instability_crucible',
-    width: 15, height: 15, depth: 15, generator: false,
-    pal: { F: LINER_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
+    lang: 'Pair-Instability Crucible', maxIO: { itemsIn: 2, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: LATTICE,
+    texture: LATTICE_TEXTURE, overlay: 'grindless:block/multiblock/pair_instability_crucible',
+    width: 21, height: 21, depth: 21, generator: false,
+    pal: { F: LATTICE, G: 'grindless:crucible_liner_casing', K: KERR, A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass' },
     parts: function () {
       return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('input_hatch', { min: 1, max: 2 }),
         Pat.part('energy_input', { min: 1, max: 2 })]
@@ -45,85 +45,122 @@
   }
   MT.burner = {
     name: 'nickel_56_burner', machine: 'gtceu:nickel_56_burner', type: 'nickel_56_burner', dataKey: 'grindless_nickel_56_burner',
-    lang: 'Nickel-56 Burner', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, casing: BURNER_CASING,
-    texture: 'gtceu:block/casings/gcym/atomic_casing', overlay: 'grindless:block/multiblock/nickel_56_burner',
-    width: 15, height: 9, depth: 15, generator: true,
-    pal: { F: BURNER_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil' },
+    lang: 'Nickel-56 Burner', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, casing: LATTICE,
+    texture: LATTICE_TEXTURE, overlay: 'grindless:block/multiblock/nickel_56_burner',
+    width: 25, height: 13, depth: 25, generator: true,
+    pal: {
+      F: LATTICE, K: KERR, R: 'grindless:droplet_radiator_casing', A: 'gtceu:atomic_casing', P: 'gtceu:tungstensteel_pipe_casing',
+      L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil'
+    },
     parts: function () {
       return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('energy_output', { min: 1, max: 2 })]
     }
   }
   MT.machines = [MT.lift, MT.crucible, MT.burner]
 
-  function abs(n) { return n < 0 ? -n : n }
+  var TWO_PI = 6.283185307179586
 
-  // x left to right, y bottom to top, z back to front; the floor carries the part cells at the front edge
-  function floorCell(x, y, z, w) {
-    var mid = (w - 1) / 2
-    return y === 0 && z >= 0 && abs(x - mid) <= 3
+  // every cell of a shape function painted into a scene, then the front booth (controller wall, glass and the floor hatch cells) over them
+  function paint(w, h, d, cell) {
+    var s = G.uevShapes.scene(w, h, d)
+    for (var z = 0; z < d; z++) for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
+      var ch = cell(x, y, z)
+      if (ch !== ' ') s.set(x, y, z, ch)
+    }
+    s.booth('F', 3)
+    return s.fn()
   }
 
-  // the lift: glass-banded walls round a ring of coils at mid height, an atomic post at the axis
+  // The lift: a plinth under a funnel of lift nozzle lining in a lattice shell, 3.5 cells wide at the throat and 14.7 at the mouth (y 20). Kerr coil
+  // hoops gird it every third row, and three superconducting rings at the throat drive the plasma up.
   function liftCell(x, y, z) {
-    var m = MT.lift
-    if (y === 0) return z === m.depth - 1 && abs(x - 10) <= 3 ? 'X' : 'B'
-    if (y === m.height - 1) return 'B'
-    if (x === 0 || x === m.width - 1 || z === 0 || z === m.depth - 1) {
-      var along = x === 0 || x === m.width - 1 ? z : x
-      return y >= 4 && y <= 10 && along >= 3 && along <= 17 && along % 4 !== 1 ? 'L' : 'F'
-    }
-    var dx = x - 10
-    var dz = z - 10
-    var r2 = dx * dx + dz * dz
-    if (y === 7 && r2 >= 49 && r2 <= 72) return 'C'
-    if (dx === 0 && dz === 0 && y >= 2 && y <= 12) return 'A'
-    return '#'
+    var dx = x - 15
+    var dz = z - 15
+    var r = Math.sqrt(dx * dx + dz * dz)
+    var spoke = Math.abs(dx) <= 0.5 || Math.abs(dz) <= 0.5
+    if (y === 0) return r <= 15.4 && (r >= 10.5 || spoke) ? 'F' : ' '
+    if (y === 1 && r >= 13.4 && r <= 15.4) return 'F'
+    if (y === 1 && spoke && r >= 4.5 && r <= 13.4) return 'P'
+    var rf = y <= 2 ? 3.5 : 3.5 + (y - 2) * 0.62
+    var e = r - rf
+    if (e < -2.0) return e > -6 || y > 2 ? '#' : ' '
+    if (e < -0.6) return 'N'
+    if (e < 0.6) return y % 5 === 3 && Math.round(Math.atan2(dz, dx) * 4) % 2 === 0 ? 'L' : 'F'
+    if (e < 1.2 && (y === 4 || y === 7 || y === 10)) return 'C'
+    if (e < 2.4 && y >= 4 && y % 2 === 0) return 'K'
+    return ' '
   }
 
-  // the crucible: a cube of side 15 with its corners cut (|dx| + |dy| + |dz| <= 17), shell only
-  function inCrucible(x, y, z) {
-    var dx = abs(x - 7)
-    var dy = abs(y - 7)
-    var dz = abs(z - 7)
-    return dx <= 7 && dy <= 7 && dz <= 7 && dx + dy + dz <= 17
-  }
+  // The crucible: a sphere of radius 9.2 about (10, 10, 10): a liner shell inside a lattice shell, Kerr coil bands outside (three latitudes and two
+  // meridians), the burning core (atomic casing) in a plasma cavity and one superconducting ring round it. A cradle disc and a corridor link it to the booth.
   function crucibleCell(x, y, z) {
-    if (!inCrucible(x, y, z)) return ' '
-    var shell = !inCrucible(x - 1, y, z) || !inCrucible(x + 1, y, z) || !inCrucible(x, y - 1, z) || !inCrucible(x, y + 1, z) ||
-      !inCrucible(x, y, z - 1) || !inCrucible(x, y, z + 1)
-    if (shell) {
-      if (y === 0 && z === 14 && abs(x - 7) <= 3) return 'X'
-      if (y === 0 || y % 4 === 0) return 'B'
-      return y >= 3 && y <= 11 && (x + z) % 3 === 0 ? 'L' : 'F'
+    var dx = x - 10
+    var dy = y - 10
+    var dz = z - 10
+    var p = Math.sqrt(dx * dx + dy * dy + dz * dz)
+    if (y <= 1 && dx * dx + dz * dz <= 36) return 'F'
+    if (y === 0 && Math.abs(dx) <= 2 && z >= 10) return 'F'
+    if (p < 2.2) return 'A'
+    if (p < 3.4) return '#'
+    if (y === 10 && dx * dx + dz * dz >= 20 && dx * dx + dz * dz <= 31 && p < 6) return 'C'
+    if (p < 6) return '#'
+    if (p < 7) return 'A'
+    if (p < 8.4) return 'G'
+    if (p < 9.5) return 'F'
+    if (p < 10.6) {
+      var band = Math.abs(dy) <= 1.2 || Math.abs(Math.abs(dy) - 5) <= 1.2 || Math.abs(dx) <= 1.2 || Math.abs(dz) <= 1.2
+      return band ? 'K' : ' '
     }
-    var dx = x - 7
-    var dz = z - 7
-    if (y === 7 && dx * dx + dz * dz >= 16 && dx * dx + dz * dz <= 25) return 'C'
-    if (dx === 0 && dz === 0 && y >= 5 && y <= 9) return 'A'
-    return '#'
+    return ' '
   }
 
-  // the burner: a low hall with a ring of coils round the decay core
+  // The burner: a cask vault of lattice with cask columns (x 0 to 10) beside an sCO2 turbine hall (x 12 to 24). A pipe run carries the hot gas across; the turbine tube
+  // lies along the hall with coil rings, and droplet radiator ribs stand on its roof and flanks.
   function burnerCell(x, y, z) {
-    var m = MT.burner
-    if (y === 0) return z === m.depth - 1 && abs(x - 7) <= 3 ? 'X' : 'B'
-    if (y === m.height - 1) return 'B'
-    if (x === 0 || x === m.width - 1 || z === 0 || z === m.depth - 1) {
-      var along = x === 0 || x === m.width - 1 ? z : x
-      return y >= 3 && y <= 5 && along >= 3 && along <= 11 && along % 4 !== 1 ? 'L' : 'F'
+    if (y === 0) return z >= 1 ? (x >= 12 ? (x % 2 === 0 ? 'R' : 'F') : ((x + z) % 4 < 2 ? 'F' : 'K')) : ' '
+    if (z === 0) return ' '
+    if (x <= 10) {
+      if (y > 9) return ' '
+      var wall = x === 0 || x === 10 || z === 1 || z === 22 || y === 9
+      if (wall) return y === 5 && x === 10 ? 'P' : ((x + y + z) % 3 === 0 ? 'K' : 'F')
+      var cx = (x - 2) % 4
+      var cz = (z - 3) % 4
+      if (cx < 3 && cz < 3 && y >= 2 && y <= 7) return 'K'
+      return '#'
     }
-    var dx = x - 7
-    var dz = z - 7
-    var r2 = dx * dx + dz * dz
-    if (y === 4 && r2 >= 16 && r2 <= 25) return 'C'
+    if (x === 11) return y === 5 && z >= 10 && z <= 14 ? 'P' : ' '
+    var ex = x === 12 || x === 24
+    var ez = z === 1 || z === 23
+    if (y === 9) return x % 2 === 0 ? 'R' : 'F'
+    if (ex || ez) return ((ex ? z : x) % 4 === 2) && y >= 3 && y <= 6 ? 'L' : 'F'
+    var ty = 5
+    var tz = 12
+    var tr = Math.sqrt((y - ty) * (y - ty) + (z - tz) * (z - tz))
+    if (tr < 1.6) return '#'
+    if (tr < 2.7) return x % 3 === 0 && tr < 2.2 ? 'C' : 'A'
     return '#'
   }
+  function burnerFins(x, y, z) {
+    if (y >= 10 && y <= 11 && x >= 12 && x <= 24 && x % 2 === 0 && z >= 2 && z <= 22) return 'R'
+    if (y >= 1 && y <= 8 && (z === 0 || z === 24) && x >= 12 && x % 2 === 0) return 'R'
+    return ' '
+  }
 
-  var CELLS = { tarantula_stellar_lift: liftCell, pair_instability_crucible: crucibleCell, nickel_56_burner: burnerCell }
+  var CELLS = {
+    tarantula_stellar_lift: liftCell,
+    pair_instability_crucible: crucibleCell,
+    nickel_56_burner: function (x, y, z) { var c = burnerFins(x, y, z); return c !== ' ' ? c : burnerCell(x, y, z) }
+  }
+
+  MT.shapes = function () {
+    var o = {}
+    MT.machines.forEach(function (m) { o[m.name] = { w: m.width, h: m.height, d: m.depth, pal: m.pal, fn: paint(m.width, m.height, m.depth, CELLS[m.name]) } })
+    return o
+  }
 
   // built in the machine registry callback: uiv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: paint(m.width, m.height, m.depth, CELLS[m.name]) })
   }
 
   function infoOf(dataKey) {

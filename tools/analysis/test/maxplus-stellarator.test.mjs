@@ -108,17 +108,17 @@ test('lang: machine, type, tooltip, EMI info and every keyed row have an en_us e
   assert.deepEqual(emi.stacks, ['item:gtceu:polarized_fusion_stellarator']);
 });
 
-test('the shape is 31 x 11 x 31 with at most 192 coil cells', () => {
+test('the shape is 37 x 13 x 37 with at most 136 coil cells', () => {
   const m = MS.machine;
-  assert.deepEqual([m.width, m.height, m.depth], [31, 11, 31]);
+  assert.deepEqual([m.width, m.height, m.depth], [37, 13, 37]);
   assert.equal(m.maxParallels, 64);
-  assert.equal(m.maxCoils, 192);
+  assert.equal(m.maxCoils, 136);
   if (!m.spec) return; // the stand-in does not run the machine registry
   const slices = plain(m.spec.slices);
   const count = (ch) => slices.join('').split('').filter((c) => c === ch).length;
-  assert.ok(count('C') > 0 && count('C') <= 192, `coil cells ${count('C')}`);
+  assert.ok(count('C') > 0 && count('C') <= 136, `coil cells ${count('C')}`);
   assert.ok(count('A') > 0);
-  assert.equal(slices.length, 31);
+  assert.equal(slices.length, 37);
 });
 
 test('the zone row exists and does not overlap another', () => {
