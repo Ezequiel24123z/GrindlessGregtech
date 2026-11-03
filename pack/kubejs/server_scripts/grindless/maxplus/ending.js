@@ -225,7 +225,7 @@
     if (E.update(gates, rec)) saveRec(server)
     if (!anyOpen) return
     var c = E.claim(gates, players(server), rec)
-    if (c !== null) pending = { id: c.id, key: c.key, team: c.team, started: Number(server.getTickCount()), forced: false }
+    if (c !== null) pending = { id: c.id, key: c.key, team: c.team, started: Number(server.getTickCount()), forced: false, owned: [] }
   }
 
   function inDim(server, text) {
@@ -237,10 +237,39 @@
     return [o[0], o[2], o[0] + PLAZA.size[0] - 1, o[2] + PLAZA.size[2] - 1]
   }
 
+  // one [x, z] block position per chunk of the plaza
+  function plazaChunks() {
+    var c = corners()
+    var out = []
+    for (var x = Math.floor(c[0] / 16); x <= Math.floor(c[2] / 16); x++) {
+      for (var z = Math.floor(c[1] / 16); z <= Math.floor(c[3] / 16); z++) out.push([x * 16, z * 16])
+    }
+    return out
+  }
+
+  // the crossing takes a ticket only on chunks nobody had forced; those are the ones it owns
+  function acquire(server) {
+    plazaChunks().forEach(function (ch) {
+      if (inDim(server, 'forceload query ' + ch[0] + ' ' + ch[1]) > 0) return
+      if (inDim(server, 'forceload add ' + ch[0] + ' ' + ch[1]) > 0) pending.owned.push(ch)
+    })
+  }
+
+  // releases the crossing's own tickets, once, on every path
+  function release(server) {
+    if (pending === null || !pending.owned || pending.owned.length === 0) return
+    var owned = pending.owned
+    pending.owned = []
+    owned.forEach(function (ch) {
+      inDim(server, 'forceload remove ' + ch[0] + ' ' + ch[1])
+    })
+  }
+
   function advance(server) {
     var n = Number(server.getTickCount())
     var p = playerById(server, pending.id)
     if (p === null) {
+      release(server)
       pending = null
       return
     }
@@ -248,14 +277,14 @@
     if (!server.persistentData.getBoolean(K_PLAZA)) {
       if (!pending.forced) {
         pending.forced = true
-        inDim(server, 'forceload add ' + c[0] + ' ' + c[1] + ' ' + c[2] + ' ' + c[3])
+        acquire(server)
       }
       var o = PLAZA.origin
       if (inDim(server, 'place template ' + PLAZA.template + ' ' + o[0] + ' ' + o[1] + ' ' + o[2]) > 0) {
         server.persistentData.putBoolean(K_PLAZA, true)
       } else if (n - pending.started > PLACE_TIMEOUT) {
         console.error(LOG + 'the arrival plaza could not be placed in ' + PLACE_TIMEOUT + ' ticks; the crossing is cancelled')
-        inDim(server, 'forceload remove ' + c[0] + ' ' + c[1] + ' ' + c[2] + ' ' + c[3])
+        release(server)
         pending = null
         return
       } else return
@@ -263,7 +292,7 @@
     p.teleportTo(DIM, ARRIVAL.x, ARRIVAL.y, ARRIVAL.z, ARRIVAL.yaw, ARRIVAL.pitch)
     E.cross(rec, pending.key, pending.id, pending.team)
     saveRec(server)
-    inDim(server, 'forceload remove ' + c[0] + ' ' + c[1] + ' ' + c[2] + ' ' + c[3])
+    release(server)
     pending = null
     arrive(server, p, n)
   }
@@ -307,6 +336,11 @@
       if (queue.length > 0) rollCredits(server, n)
       if (pending === null && n % CHECK === 0) scan(server)
     } catch (e) {
+      try {
+        release(server)
+      } catch (e2) {
+        console.error(LOG + 'releasing the arrival tickets failed: ' + e2)
+      }
       pending = null
       if (!failed) {
         failed = true
