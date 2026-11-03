@@ -1,4 +1,4 @@
-// priority: 3058
+// priority: 3053
 // Gregtech Grindless - names and tooltips of the optical mainframe's compute module (startup_scripts/grindless/uiv/mainframe_module.js;
 // package D4-UIV-MAINFRAME):
 //
