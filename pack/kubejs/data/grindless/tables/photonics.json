@@ -462,13 +462,6 @@
           "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         },
         {
-          "_why": "UXV-A3 (uxv.md line 19): the MESO logic die, a magnetoelectric switch wafer bonded to the SOT readout stack under argon (returned). Circuits 17-22.",
-          "name": "meso_logic_die", "circuit": 17, "eut": 7864320, "duration": 600,
-          "itemsIn": [{ "id": "grindless:me_switch_wafer", "count": 1 }, { "id": "grindless:sot_readout_stack", "count": 1 }],
-          "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }, { "id": "gtceu:ultrapure_water", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:meso_logic_die", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
-        },
-        {
           "_why": "UXV-A3 (uxv.md line 7): the etched MRAM wafer gets its copper wiring layer, rinsed in ultrapure water.",
           "name": "mram_copper", "circuit": 18, "eut": 7864320, "duration": 600,
           "itemsIn": [{ "id": "grindless:etched_mram_wafer", "count": 1 }, { "id": "gtceu:copper_foil", "count": 2 }],
