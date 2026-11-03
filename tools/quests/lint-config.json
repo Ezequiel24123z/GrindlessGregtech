@@ -77,8 +77,13 @@
     { "chapter": "power", "why": "Power (docs/quests.md, section 18): EU/t, EU per mB of fuel and steam per tick are the tab's point, and pl-check.mjs checks every one against the dump." },
     { "quest": "76D281E9D9C6FD20", "why": "Rocket Fuel (hv_age): the launch threshold of 8 buckets is not a recipe amount and EMI does not show it." },
     { "chapter": "max_age", "why": "MAX (batch 16): structure quests give casing counts, block totals and Terminal passes, and line quests the recipe amounts, all read from the batch dump (shapes and recipes) and re-checked at each batch." },
-    { "chapter": "uxv_age", "why": "UXV (batch 16): structure quests give casing counts, block totals and Terminal passes read from the batch dump, re-checked at each batch." }
-  ],
+    { "chapter": "uxv_age", "why": "UXV (batch 16): structure quests give casing counts, block totals and Terminal passes read from the batch dump,     re-checked at each batch." },
+        { "quest": "19E1CF6EE30E5C44", "why": "Syngas Plant (pl_hv): rate card: figures checked by pl-check against the dump." },
+        { "quest": "36A6F7A9AB5D024C", "why": "Mond Process (pl_luv): rate card: figures checked by pl-check against the dump." },
+        { "quest": "370A40969E2539B9", "why": "Distillation Tower (pl_luv): rate card: figures checked by pl-check against the dump." },
+        { "quest": "1BB0F30B56CA828D", "why": "Carbonyl Decomposition (pl_luv): rate card: figures checked by pl-check against the dump." },
+        { "quest": "7A9A30E48F8CE513", "why": "Horizon Crystal Furnace (pl_maxplus): rate card: figures checked by pl-check against the dump." }
+      ],
   "bannedPhrases": [
     "this tab",
     "this chapter",

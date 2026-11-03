@@ -142,6 +142,7 @@ test('the card text is built from the checked claims', () => {
   const t = rateText(goodRate());
   assert.match(t, /HV, 480 EU\/t, 100 t per run/);
   assert.match(t, /48,000 mB hydrogen/);
-  assert.match(t, /room for 1,000 mB steam/);
+  assert.match(t, /12,000 mB steam, 0.6 cat in/);
   assert.match(rateText(goodCmp()), /Coal: 48,000\/min, 12,000 EU/);
+  assert.ok(t.split(/\s+/).length <= 70, 'one card fits a chart node');
 });
