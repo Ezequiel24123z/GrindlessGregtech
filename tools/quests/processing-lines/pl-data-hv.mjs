@@ -4,13 +4,12 @@ import { I, F, M, n, L, via, R, rateText } from './pl-lib.mjs';
 // The syngas plant's rate cards (AUD3-RATES): every figure is recomputed from the recipe dump by pl-check.mjs
 const SYN = 'grindless:syngas/hv/';
 const PLANT_CARD = R.rate(SYN + 'hydrogen_carbon', { tier: 'hv' }, {
-  title: 'One plant on the full conversion', eut: 480, ticks: 100,
+  title: 'Plant', eut: 480, ticks: 100,
   ins: { 'fluid:gtceu:steam': 24000, 'grindless:shift_catalyst': 0.01 },
   outs: { 'fluid:gtceu:hydrogen': 48000, 'fluid:gtceu:carbon_dioxide': 12000, 'gtceu:ash_dust': 1.33 },
   hatch: { 'fluid:gtceu:steam': 2000, 'fluid:gtceu:hydrogen': 4000, 'fluid:gtceu:carbon_dioxide': 1000 },
-  note: 'The catalyst is lost in 0.05% of runs (about one pellet in 2,000 runs); the coal dust is a tag, so coke, charcoal or carbon also feed it. Carbon dioxide and ash leave through their own hatch and bus.',
 });
-const H2_CARD = R.cmp('fluid:gtceu:hydrogen', 1000, 'Hydrogen routes of the plant', { tier: 'hv' }, [
+const H2_CARD = R.cmp('fluid:gtceu:hydrogen', 1000, 'Routes', { tier: 'hv' }, [
   { label: 'Full conversion', recipe: SYN + 'hydrogen_carbon', perMin: 48000, eu: 12000, ins: { 'fluid:gtceu:steam': 500 }, out: { 'fluid:gtceu:carbon_dioxide': 250, 'gtceu:ash_dust': 0.03 } },
   { label: 'Heavy fuel, converted', recipe: SYN + 'hydrogen_heavy_fuel', perMin: 72000, eu: 8000, ins: { 'fluid:gtceu:heavy_fuel': 166.67, 'fluid:gtceu:steam': 333.33 }, out: { 'fluid:gtceu:carbon_dioxide': 166.67 } },
   { label: 'Gasified coal', recipe: SYN + 'gasify_carbon', perMin: 40000, eu: 14400, ins: { 'fluid:gtceu:steam': 500 }, out: { 'fluid:gtceu:carbon_monoxide': 500, 'gtceu:ash_dust': 0.06 } },
@@ -18,7 +17,6 @@ const H2_CARD = R.cmp('fluid:gtceu:hydrogen', 1000, 'Hydrogen routes of the plan
   { label: 'Methanol syngas', recipe: SYN + 'methanol_syngas', perMin: 43636.36, eu: 13200, ins: { 'fluid:gtceu:steam': 500 }, out: { 'fluid:gtceu:carbon_monoxide': 250, 'fluid:gtceu:carbon_dioxide': 125, 'gtceu:ash_dust': 0.04 } },
 ], {
   dominates: [['Full conversion', 'Gasified coal'], ['Full conversion', 'Methanol syngas'], ['Methanol syngas', 'Gasified coal']],
-  verdict: 'All five run at 480 EU/t with no overclock and no parallels. On hydrogen alone the full conversion beats gasified coal and methanol syngas, and methanol syngas beats gasified coal; the latter two also make carbon monoxide, which is the only reason to build them. Proposed balance decision for the owner.',
 });
 
 export default {
@@ -144,7 +142,7 @@ export default {
         n('heavyfuel', 0, 2.25, F('gtceu:heavy_fuel'), 'Heavy Fuel', { kind: 'raw', sub: 'The refinery\'s bottoms' }),
         n('plant', 2.5, 0, M('gtceu:syngas_plant'), 'Syngas Plant', {
           kind: 'ours', from: ['shiftcat', 'carbon', 'steam2', 'heavyfuel'], figs: [PLANT_CARD, H2_CARD],
-          desc: ['Steam on hot carbon makes carbon monoxide and hydrogen; more steam over the catalyst turns the monoxide into more hydrogen.', 'Each gas leaves through its own hatch.', rateText(PLANT_CARD), rateText(H2_CARD)],
+          desc: ['Steam on hot carbon makes carbon monoxide and hydrogen.', rateText(PLANT_CARD), rateText(H2_CARD)],
         }),
         n('co', 5, -1.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { from: ['plant'], sub: 'Methanol, or shift it' }),
         n('hydrogen', 5, 0, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'product', from: ['plant'], sub: 'Refinery, ammonia, HF, the rocket' }),

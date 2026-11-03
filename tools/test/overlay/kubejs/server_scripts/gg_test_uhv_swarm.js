@@ -130,7 +130,7 @@
           if (!sym || sym.kind === 'controller' || sym.kind === 'air' || sym.kind === 'any') continue
           var bid = null
           var facing = false
-          if (si === ctl.si && next < PARTS.length && allows(sym, PARTS[next].ability)) {
+          if (next < PARTS.length && allows(sym, PARTS[next].ability)) {
             bid = PARTS[next].id
             pos[PARTS[next].key] = p
             facing = true
@@ -170,7 +170,7 @@
   // ---------------------------------------------------------------- static
   function statics() {
     var SW = S.G.uhvSwarm
-    if (!check('static_published', SW && SW.recipes && SW.recipes.length === 8, 'global.grindless.uhvSwarm recipes ' +
+    if (!check('static_published', SW && SW.recipes && SW.recipes.length === 12, 'global.grindless.uhvSwarm recipes ' +
       (SW && SW.recipes ? SW.recipes.length : 'none'))) return
     var missing = []
     var ids = SW.recipes.map(function (r) { return String(r.recipeId) }).concat(SW.crafting.map(String))

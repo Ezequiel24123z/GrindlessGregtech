@@ -160,8 +160,8 @@
       },
       // the back wall (rows 0-2) and the hall's outer side (column 0 of slices 1 and 2)
       parts: {
-        '0,0,0': 'energy', '0,0,1': 'energy2', '0,0,2': 'inBus', '0,0,3': 'outBus', '0,1,0': 'in1', '0,1,1': 'in2', '0,1,2': 'in3', '0,1,3': 'in4',
-        '0,2,0': 'in5', '0,2,3': 'parallel', '1,1,0': 'out1', '2,1,0': 'out2'
+        '0,1,1': 'energy', '0,1,2': 'energy2', '0,1,3': 'inBus', '0,1,4': 'outBus', '0,2,1': 'in1', '0,2,2': 'in2', '0,2,3': 'in3', '0,2,4': 'in4',
+        '0,3,1': 'in5', '0,3,4': 'parallel', '1,1,0': 'out1', '2,1,0': 'out2'
       },
       facing: { out1: 'east', out2: 'east' },
       energies: ['energy', 'energy2'], ins: ['in1', 'in2', 'in3', 'in4', 'in5'], outs: ['out1', 'out2'],
@@ -175,9 +175,9 @@
         out4: 'gtceu:ev_output_hatch'
       },
       // gg_test_naquadah_plant's platinum plant layout (IV-B3)
-      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,1,1': 'in3', '0,1,2': 'out1', '0,1,3': 'out2',
-        '1,1,0': 'out3', '1,1,4': 'out4' },
-      facing: { out3: 'east', out4: 'west' },
+      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,0,5': 'in3', '0,0,6': 'out1', '0,1,0': 'out2',
+        '0,1,6': 'out3', '1,1,0': 'out4' },
+      facing: { out4: 'east' },
       energies: ['energy'], ins: ['in1', 'in2', 'in3'], outs: ['out1', 'out2', 'out3', 'out4'],
       ids: [CONCENTRATE, ELECTRODE, IR, OS, PGS], fluids: []
     }
@@ -640,7 +640,7 @@
 
     safely('live_contents', function () {
       var np = NP()
-      var recs = np.recipes || []
+      var recs = (np.recipes || []).concat(np.directRecipes || [])
       var problems = []
       recs.forEach(function (rec) {
         problems = problems.concat(liveProblems(rec, { dataKey: np.dataKey || 'grindless_naquadah_plant', keepKey: np.keepKey || 'grindless_naquadah_keep' }))
@@ -649,11 +649,11 @@
       var live = allOfType(NAQ_TYPE)
       var ids = live.map(function (r) { return String(r.getId()) }).sort()
       var want = recs.map(function (r) { return r.recipeId }).sort()
-      if (ids.join(',') !== want.join(',') || recs.length !== 3) problems.push('the type holds [' + ids.join(', ') + '], published [' + want.join(', ') + ']')
+      if (ids.join(',') !== want.join(',') || recs.length !== 4) problems.push('the type holds [' + ids.join(', ') + '], published [' + want.join(', ') + ']')
       var circuits = live.map(circuitOf).sort()
-      if (circuits.join(',') !== '1,2,3') problems.push('circuits ' + circuits.join(','))
+      if (circuits.join(',') !== '1,2,3,4') problems.push('circuits ' + circuits.join(','))
       var keeping = live.filter(function (r) { return keeps(r, np.keepKey || 'grindless_naquadah_keep') }).map(circuitOf).sort()
-      if (keeping.join(',') !== '2,3') problems.push('the keep boolean on circuits ' + keeping.join(','))
+      if (keeping.join(',') !== '2,3,4') problems.push('the keep boolean on circuits ' + keeping.join(','))
       check('live_contents', problems.length === 0, withProblems(live.length + ' live ' + NAQ_TYPE + ' recipes [' + ids.join(', ') + '], circuits ' +
         circuits.join(',') + ', keep on ' + keeping.join(','), problems))
     })
@@ -795,7 +795,10 @@
       if (!y || (y.differ || []).length > 0) problems.push('yields ' + JSON.stringify(y))
       problems = problems.concat(liveProblems(rec, { keepKey: keepKey }))
     }
-    var live = allOfType(PGM_TYPE)
+    // later eras add their own rows (and keep booleans) to the same recipe type: the check covers the era dirs of the published rows
+    var dirs = {}
+    ;(pp.recipes || []).forEach(function (r) { dirs[String(r.recipeId).replace(/[^\/]*$/, '')] = true })
+    var live = allOfType(PGM_TYPE).filter(function (r) { return dirs[String(r.getId()).replace(/[^\/]*$/, '')] === true })
     var rest = live.filter(function (r) { return String(r.getId()) !== ASTEROID_ID })
     var c4 = rest.filter(function (r) { return circuitOf(r) === 4 }).map(function (r) { return String(r.getId()) })
     var keepers = rest.filter(function (r) { return keeps(r, keepKey) }).map(function (r) { return String(r.getId()) })
@@ -1349,10 +1352,48 @@
     begin(m, 'pt_void')
   }
 
+  function ptProbe(m) {
+    var out = []
+    function tryIt(label, fn) {
+      try { out.push(label + '=' + fn()) } catch (e) { out.push(label + '=ERR ' + e) }
+    }
+    var ctrl = m.ctrl
+    var rlg = ctrl.getRecipeLogic()
+    tryIt('reasonMap', function () {
+      var map = rlg.getFailureReasonMap()
+      return map.size() + ' [' + asArray(map.values()).map(function (c) { return String(c.getString()) }).join(' ; ') + ']'
+    })
+    tryIt('lastFailedMatches', function () {
+      var l = rlg.getLastFailedMatches()
+      return l === null ? 'null' : 'size ' + l.size()
+    })
+    tryIt('recipeDirty', function () { return rlg.isRecipeDirty() })
+    tryIt('status', function () { return rlg.getStatus() })
+    var found = null
+    tryIt('search', function () {
+      var it = ctrl.getRecipeType().searchRecipe(ctrl, function (r) { return true })
+      var ids = []
+      while (it.hasNext()) {
+        var r = it.next()
+        if (r === null) continue
+        ids.push(String(r.id))
+        if (String(r.id) === ASTEROID_ID) found = r
+      }
+      return ids.length + ' recipes, asteroid ' + (found !== null) + (found === null ? ' [' + ids.slice(0, 6).join(',') + ']' : '')
+    })
+    tryIt('modifier', function () {
+      if (found === null) return 'no recipe'
+      var mod = ctrl.getDefinition().getRecipeModifier().getModifier(ctrl, found)
+      var res = mod.apply(found)
+      return 'apply=' + (res === null ? 'null' : 'recipe') + ' failReason=' + String(mod.getFailReason().getString())
+    })
+    return out.join(' ; ')
+  }
+
   function ptStep(m, age) {
     var rec = m.rec
     if (m.phase === 'pt_void') {
-      if (age < HOLD_TICKS) return
+      if (age < Math.max(HOLD_TICKS, 120)) return
       var r = result(m)
       var intact = rec.itemsIn.every(function (x) { return (r.left[x.id] || 0) === x.count }) &&
         rec.fluidsIn.every(function (f, i) { return r.tanks[i].amount === f.amount })
@@ -1360,6 +1401,15 @@
       var shown = failureReasons(m.ctrl).some(function (x) { return PGM_REASON.test(x) })
       check('pt_no_voiding', still && shown, 'mode 4\'s inputs, circuit 4, the controller voiding items and fluids, ' + age + ' ticks: refusal shown=' + shown +
         ', ' + blockedText(m))
+      m.probeAt = S.t
+      m.probeText = ptProbe(m)
+      try { m.ctrl.getRecipeLogic().updateTickSubscription() } catch (e) { /* reported by the probe */ }
+      m.phase = 'pt_probe'
+      return
+    }
+    if (m.phase === 'pt_probe') {
+      if (S.t - m.probeAt < 5) return
+      note('pt_no_voiding_probe', m.probeText + ' | after updateTickSubscription + ' + (S.t - m.probeAt) + ' ticks: reasons=[' + failureReasons(m.ctrl).join(' ; ') + '] ' + state(m.ctrl))
       setVoiding(m, 'VOID_NONE')
       begin(m, 'pt_resume')
       return

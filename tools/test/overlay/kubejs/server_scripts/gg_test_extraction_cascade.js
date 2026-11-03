@@ -155,9 +155,12 @@
 
   // ---------------------------------------------------------------- static checks
 
-  function recipeCount(typeId) {
+  function recipeCount(typeId, dir) {
     var type = GTRegistries.RECIPE_TYPES.get(rl(typeId))
-    return type ? S.server.getRecipeManager().getAllRecipesFor(type).size() : -1
+    if (!type) return -1
+    var all = asArray(S.server.getRecipeManager().getAllRecipesFor(type))
+    if (!dir) return all.length
+    return all.filter(function (r) { return String(r.getId()).indexOf(dir) === 0 }).length
   }
 
   // the ids (and amounts, for the detail) a live GT recipe takes and gives, read through RecipeHelper (the ingredient getters are not
@@ -242,7 +245,8 @@
     // ---- the two recipes
     problems = []
     notes = []
-    var have = recipeCount(TYPE_ID)
+    // later eras (D5 horizon modules, the REE rows) add their own solvent_extraction recipes outside the cascade's ev/ directory
+    var have = recipeCount(TYPE_ID, 'grindless:solvent_extraction/ev/')
     EC().recipes.forEach(function (p) {
       var live = liveRecipe(p.recipeId)
       if (live === null) {
@@ -266,8 +270,8 @@
       })
       notes.push(p.recipeId + ' ' + live.duration + ' t x ' + eut + ' EU/t ' + ioText(lio))
     })
-    check('recipes', have === EC().recipes.length && problems.length === 0, 'solvent_extraction=' + have + ' ; ' + notes.join(' ; ') +
-      (problems.length > 0 ? ' | problems: ' + problems.join(' ; ') : ''))
+    check('recipes', have === EC().recipes.length && problems.length === 0,     'solvent_extraction=' + have + ' of ' + EC().recipes.length +
+          (problems.length > 0 ? ' | problems: ' + problems.join(' ; ') : '') + ' ; ' + notes.join(' ; '))
 
     // ---- GTM's decomposition of the chlorides (and none of the solution or the merrillite)
     problems = []
@@ -297,8 +301,9 @@
     var craft = liveRecipe(EC().craftingRecipe)
     var out = ''
     if (craft !== null) {
-      var res = craft.getResultItem(S.server.registryAccess())
-      out = String(res.getId()) + ' x' + res.getCount()
+      // an assembler (GT) recipe since batch 16: its result is the GT output, not a vanilla result item
+      var outs = liveIO(craft).itemsOut
+      out = outs.length === 1 ? outs[0].id + ' x' + outs[0].n : outs.map(function (o) { return o.id + ' x' + o.n }).join(',')
     }
     check('crafting', out === MACHINE_ID + ' x1', 'id=' + EC().craftingRecipe + ' gives ' + (craft === null ? 'nothing (missing)' : out))
   }

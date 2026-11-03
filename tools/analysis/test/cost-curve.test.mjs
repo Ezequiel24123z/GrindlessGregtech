@@ -115,6 +115,23 @@ test('scaleRecipe at factor 1 changes nothing', () => {
   assert.deepEqual(res.json, r.json);
 });
 
+test('an ordered type (the assembly line) gets each input over a stack as entries of at most 64, in place, with the same total', () => {
+  assert.equal(rule.isOrdered('gtceu:assembly_line'), true);
+  assert.equal(rule.isOrdered('gtceu:assembler'), false);
+  const r = recipe('gtceu:assembly_line/m', { type: 'gtceu:assembly_line', ins: [sizedIn('x:frame', 1), sizedIn('x:fine_wire', 64), sizedIn('x:foil', 121)] });
+  const res = plain(rule.scaleRecipe(plain(r.json), 2, 2, null, true));
+  const counts = res.json.inputs.item.map((e) => [e.content.ingredient.item, e.content.count]);
+  assert.deepEqual(counts, [['x:frame', 2], ['x:fine_wire', 64], ['x:fine_wire', 64], ['x:foil', 64], ['x:foil', 64], ['x:foil', 64], ['x:foil', 50]]);
+  assert.equal(res.split, 2);
+  assert.ok(counts.every(([, n]) => n <= 64));
+  const flat = plain(rule.scaleRecipe(plain(r.json), 2, 2));
+  assert.equal(flat.json.inputs.item.length, 3, 'an unordered type keeps one entry per input');
+  assert.equal(flat.json.inputs.item[2].content.count, 242);
+  const same = plain(rule.scaleRecipe(plain(r.json), 1, 1, null, true));
+  assert.equal(same.changed, true, 'an ordered input already over a stack is split even at factor 1');
+  assert.deepEqual(same.json.inputs.item.map((e) => e.content.count), [1, 64, 64, 57]);
+});
+
 test('selection: the era is the key item the recipe makes; include falls back to the EU/t tier; exclude and override', () => {
   const sel = rule.makeSelector([
     table('mv', { keys: ['gtceu:mv_machine_hull', 'gtceu:*_wire'] }),

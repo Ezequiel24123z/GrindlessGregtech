@@ -60,9 +60,9 @@ const TWO_PASS = 'GTM\'s Terminal places about 2,300 blocks per pass, so a struc
 export const QUESTS = [
   // ------------------------------------------------------------------ home: spintronics
   gear('MTJ', 'mtj_sputter_cluster', 'Spintronic Cluster Tool', ['M_L_MTJ'], 2, 0, {
-    for: 'The &6Spintronic Cluster Tool&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit. It also patterns racetrack nanowires and grows oxide films by pulsed laser.',
+    for: 'The &6Spintronic Cluster Tool&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit.',
     needs: 'A UIV hull, about 1,350 gum metal and 870 mu-metal shield casings, the magnetron parts, and sputter targets from the melter. The shape is about 31 by 11 by 31 and about 2,350 blocks: ' + TWO_PASS,
-    unlocks: 'The magnetic tunnel junction die, and through it the MRAM wafer, the racetrack chip and the multiferroic films of the MESO logic die. The Spintronic Cluster Tool also takes over the old racetrack fab and the oxide pulsed laser chamber: racetrack patterning and the oxide films run in it.',
+    unlocks: 'The magnetic tunnel junction die, and through it the MRAM wafer, the racetrack chip and the multiferroic films of the MESO logic die. It also replaces the old racetrack fab and oxide laser chamber.',
     automate: 'Targets and silicon-28 by ME; the dies come out in a chest.',
   }, [GUM, MU]),
   gear('YIG', 'yig_lpe_furnace', 'YIG LPE Furnace', ['M_L_YIG'], 2, 4.5, {
@@ -143,10 +143,10 @@ export const QUESTS = [
     automate: 'Neutronium pellets by ME; wait for a glitch and collect the haul.',
   }, [PULSE]),
   gear('SORT', 'pasta_phase_sorter', 'Pasta Mill', ['PEX'], 4.5, 15, {
-    for: 'The &6Pasta Mill&r separates the rods from the sheets inside a cage that keeps each one squeezed, pulls spaghetti phase through aerogel into strand wire, and presses lasagna phase onto a tungsten-fibre billet as plate. The anti-phase residue goes to the core sample the gate keeps. Pasta as wire or plate is fiction: outside a neutron star it would fly apart at once.',
-    needs: 'A UIV hull, about 1,670 pasta containment and 810 pulsed field casings and the pasta hatches. The mill also takes over the old draw bench and laminator: the draw line and the press line are modes of this one machine. The shape is about 55 by 13 by 19 and about 2,850 blocks: ' + TWO_PASS,
+    for: 'The &6Pasta Mill&r separates rods from sheets in a squeezing cage, pulls spaghetti phase through aerogel into strand wire and presses lasagna phase onto a tungsten-fibre billet as plate. The residue goes to the core sample. Outside a neutron star, pasta would fly apart.',
+    needs: 'A UIV hull, about 1,670 pasta containment and 810 pulsed field casings. It replaces the draw bench and laminator. About 55 by 13 by 19 and 2,850 blocks: ' + TWO_PASS,
     unlocks: 'Pasta strand wire, which the motor, the field generator and the SMES cell are wound with, and lasagna plate for the UXV hull.',
-    automate: 'Raw pasta by ME; send each phase to its own line, and stock a few spools and plates.',
+    automate: 'Raw pasta by ME; each phase to its own line.',
   }, [GUM, PULSE]),
   prod('LASP', 'Lasagna Plate', 'grindless:lasagna_plate', ['SORT'], 9.5, 16.5, [
   'The &6Lasagna Plate&r is the structural plate of the UXV hull and of every UXV part: a tungsten-fibre billet with a lasagna phase pressed onto it.',

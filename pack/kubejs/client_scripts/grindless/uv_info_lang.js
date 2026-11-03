@@ -160,7 +160,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.srf_cavity_works.4', 'Circuit 4: 8 cavities + 4,000 mB superfluid helium + 2 UV field generators + 1 mu-metal shield -> 1 SRF cryomodule. The spent acid is recovered as niobium and fluorite, and fluorite makes hydrofluoric acid again.')
     add('emi.grindless.info.srf_cavity_works.5', 'Needs 7 x 7 x 9 clean room casing (8 or more among the parts), 1 or 2 energy hatches (UV), input and output buses and hatches.')
 
-    add('emi.grindless.info.starchip_fab.0', "The Starchip Fab builds interstellar hardware. Circuit 1: starchip. 2: sailcraft. 3: relay seed. 4: ergosphere probe. It only works in Earth orbit and needs a clean room.")
+    add('emi.grindless.info.starchip_fab.0', "The Starchip Fab builds interstellar hardware. Circuit 1: starchip. 2: sailcraft. 3: relay seed. 4: ergosphere probe. It works in any dimension: its clean room is part of the hall.")
     add('emi.grindless.info.starchip_fab.1', "Sailcraft and relay seeds are launched by the Laser Sail Launcher.")
     add('emi.grindless.info.starchip_fab.2', 'A 9 x 6 x 9 clean room hall with a filter casing ceiling, a glass partition, a bonding line of five stainless steel gearboxes, a dicing saw and a test bench.')
     add('emi.grindless.info.starchip_fab.3', 'Circuit 1: a photonic chip, an NV diamond chip and an americium micro source bonded on a neutronium wafer: a starchip of a few grams.')
