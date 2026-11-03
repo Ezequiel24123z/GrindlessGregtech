@@ -135,7 +135,7 @@ export const QUESTS = [
     key: 'J_PLUTO', kind: 'reading', title: 'The Heart of Pluto', icon: 'grindless:sputnik_ice_core', size: 0.75,
     deps: ['STN6'], x: 12, y: 1.5,
     desc: [
-      "Sputnik Planitia is a plain of nitrogen ice that flows like a slow glacier. It's the softest place to land a probe, and the first sample comes from there.",
+      "Sputnik Planitia is a plain of nitrogen ice that flows like a slow glacier. It's the softest place to land a probe, and the first sample comes from there. The Penetrator Probe Bay drops the probe, and the Volatile Ice Fractionator then splits each core into its gases (both in the Machines chapter).",
     ],
     tasks: [ck()],
     rewards: [xp(20)],
@@ -245,7 +245,7 @@ export const QUESTS = [
     key: 'J_LAUNCH', kind: 'step', title: 'Starshot', icon: 'grindless:starshot_probe',
     deps: ['J_CRAFT'], x: 26, y: 0,
     desc: [
-      'On the Moon, a whole array of fibre lasers points at one sail and pushes. The heliopause data sets the course, and every launch wears the modules: keep the refurbishing going.',
+      'On the Moon, a whole array of fibre lasers points at one sail and pushes. The Laser Sail Launcher fires the sailcraft from the Starchip Fab (Machines chapter). The heliopause data sets the course and is kept, and every launch wears the modules: keep the refurbishing going.',
     ],
     tasks: [it('grindless:starshot_probe')],
     rewards: [xp(200)],

@@ -53,7 +53,7 @@ export const QUESTS = [
   prod('PU', 'Plutonium-244', 'gtceu:plutonium_244_dust', ['CAL'], 13.25, -41.5, ['The heavy target the beam hits. Keep a stock of it before the cyclotron.']),
   gear('HIC', 'heavy_ion_cyclotron', 'Superheavy Factory', ['CAL'], 14, -39.25, {
     for: 'The &6Superheavy Factory&r accelerates calcium-48 until it can fuse with a plutonium target, then picks the few new atoms out of the beam on the same line.',
-    needs: 'Four UHV hulls, eight UV sensors, seven UV field generators, fifteen UHV circuits, seven beam charges, three target wheels, three Nb3Sn cavities, eight etched membranes, four ion-tracked foils and the stable casing; the Calutron is its research. A very large structure (31x11x47), and GTM\'s Terminal places it in three passes.',
+    needs: 'Four UHV hulls, eight UV sensors, seven UV field generators, fifteen UHV circuits, seven calcium-48 beams, three target wheels, three Nb3Sn cavities, fifteen polycarbonate foils and the stable casing; the Calutron is its research. A very large structure (31x11x47), and GTM\'s Terminal places it in three passes.',
     unlocks: 'Irradiation and recoil separation in one machine: counted atoms of flerovium and heavier, ready for the chemistry lab.',
     automate: 'Beam, target, membranes and foils arrive by ME; sort the few atoms by element.',
   }, [STABLE]),
@@ -68,7 +68,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ pressure
   gear('MEGA', 'megabar_press', 'Megabar Press', ['H_NUC'], 10, -32.25, {
     for: 'The &6Megabar Press&r squeezes a sample between diamond anvils to a million atmospheres.',
-    needs: 'Two UHV hulls, two UV pistons, three LaY foils, three ammonia borane charges, a nanodiamond pellet, any UHV circuit and the robust casing.',
+    needs: 'Seven UHV hulls, twenty-one UHV pistons, motors and pumps each, twenty-seven UHV circuits, thirteen LaY foils, thirteen ammonia borane charges, seven nanodiamond pellets and the robust casing.',
     unlocks: 'Superhydrides, which hold their superconducting state under pressure.',
     automate: 'Feed samples and nanotwinned diamond by ME; anvils wear, so keep spares.',
   }, [ROBUST]),
@@ -77,13 +77,13 @@ export const QUESTS = [
   // ------------------------------------------------------------------ electron beam and single crystals
   gear('EBF', 'electron_beam_furnace', 'Electron Beam Furnace', ['H_NUC'], 11, -37.75, {
       for: 'The &6Electron Beam Furnace&r melts metal in a vacuum with a beam, so it comes out purer than a coil could make it.',
-      needs: 'Two UHV hulls, three UV emitters, three SRF cryomodules, six SRF cavities, two near-net neutronium gears, any UHV circuit and the clean casing.',
+      needs: 'Two UHV hulls, four UV emitters, eight UHV circuits, four SRF cryomodules, eight SRF cavities, three near-net neutronium gears and the clean casing.',
     unlocks: 'Six-nines hafnium and tantalum for the single-crystal foundry.',
     automate: 'Feed bars by ME; the vacuum pump has a hatch of its own.',
   }, [CLEAN]),
   gear('SX', 'single_crystal_foundry', 'Single-Crystal Foundry', ['EBF'], 19.75, -36.75, {
     for: 'The &6Single-Crystal Foundry&r pulls a metal blade as one grain, with no boundaries to fail.',
-    needs: 'Two UHV hulls, three UV robot arms, an SRF cryomodule, three SRF cavities, six neutronium gears, any UHV circuit and the heatproof casing; the pure metal comes from the Electron Beam Furnace.',
+    needs: 'Five UHV hulls, eight UV robot arms, sixteen UHV circuits, four SRF cryomodules, eight SRF cavities, seventeen near-net neutronium gears and the heatproof casing; the pure metal comes from the Electron Beam Furnace.',
     unlocks: 'The single-crystal blade: a turbine wheel of these survives a hot core.',
     automate: 'Pure metal by ME; keep a stock of blanks and send blades on by ME.',
   }, [HEAT]),
@@ -92,7 +92,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ magnets
   gear('MAG', 'nitride_magnet_works', 'Nitride Magnet Works', ['H_NUC'], 13.5, -36.25, {
     for: 'The &6Nitride Magnet Works&r makes a magnet of iron and nitrogen, stronger than any rare earth.',
-    needs: 'Two UHV hulls, three UV motors, three HfTaC-N dusts, an FFKM seal, a Ta2O5 dust, any UHV circuit and the heatproof casing.',
+    needs: 'Four UHV hulls, ten UHV motors, pumps and robot arms each, thirteen UHV circuits, seven HfTaC dusts, three FFKM seals, three Ta2O5 dusts and the heatproof casing.',
     unlocks: 'Bonded magnets for the UEV motor and the Mk2 drive.',
     automate: 'Iron and nitrogen come by ME and pipe; bonding runs on a timer.',
   }, [HEAT]),
@@ -101,14 +101,14 @@ export const QUESTS = [
   // ------------------------------------------------------------------ composites
   gear('FIBRE', 'sic_fibre_plant', 'SiC Fibre Plant', ['H_FIBRE'], 11, -13, {
     for: 'The &6SiC Fibre Plant&r spins silicon carbide into a fibre as strong as steel and a quarter of the weight.',
-    needs: 'Two UHV hulls, two UV pumps, a UV robot arm, three polycarbosilane dusts, a HfTaC dust, an FFKM seal, any UHV circuit and the clean casing; the Nitride Magnet Works is its research.',
+    needs: 'Three UHV hulls, nine UHV pumps, eight robot arms, eight conveyor modules, eleven UHV circuits, six polycarbosilane dusts, three HfTaC dusts, three FFKM seals and the clean casing; the Nitride Magnet Works is its research.',
     unlocks: 'Fibre for the SiC composite plates that the CVI furnace infiltrates.',
     automate: 'Feed the precursor by pipe; fibre rolls out by ME.',
   }, [CLEAN]),
   prod('FIBP', 'SiC Fibre', 'grindless:sic_fibre', ['FIBRE'], 14.75, -12.25, ['A spool of silicon carbide fibre. Keep a stock for the furnace.']),
   gear('CVI', 'cvi_furnace', 'CVI Furnace', ['FIBRE'], 16.5, -13.75, {
     for: 'The &6CVI Furnace&r fills a woven preform with gas that deposits carbide in the gaps.',
-    needs: 'Two UHV hulls, two UV pumps, a UV emitter, two SiC preforms, two tungsten preforms, an FFKM seal, any UHV circuit and the heatproof casing; the SiC Fibre Plant is its research.',
+    needs: 'Four UHV hulls, eleven UHV pumps, ten UHV emitters and sensors each, fourteen UHV circuits, four SiC preforms, four tungsten preforms, three FFKM seals and the heatproof casing; the SiC Fibre Plant is its research.',
     unlocks: 'SiC composite plates, and the HfTaCN coil that the stellar forge uses.',
     automate: 'Preforms arrive by ME; the cycle is long, so run several furnaces.',
   }, [HEAT]),
@@ -143,7 +143,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ fusion
   gear('POL', 'helium3_polariser', 'Helium-3 Polariser', ['H_FIBRE'], 15, -10.25, {
     for: 'The &6Helium-3 Polariser&r aligns the spin of each nucleus, so more of them fuse.',
-    needs: 'Two UHV hulls, three UV emitters, two 1083 nm lasers, three Wf/W tiles, a SiC/SiC plate, any UHV circuit and the clean casing.',
+    needs: 'Four UHV hulls, ten UHV emitters and sensors each, eleven UHV pumps, fourteen UHV circuits, four 1083 nm lasers, seven Wf/W tiles, three SiC/SiC plates and the clean casing.',
     unlocks: 'Polarised helium-3, the fuel of the Mk4 ring.',
     automate: 'Helium-3 by pipe; keep the polarised stock sealed and ready.',
   }, [CLEAN]),
@@ -158,7 +158,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ quantum gases and entanglement
   gear('QGL', 'quantum_gas_lab', 'Quantum Gas Lab', ['COOL'], 21.75, -9.75, {
     for: 'The &6Quantum Gas Lab&r holds a cloud of atoms a millionth of a degree above zero.',
-      needs: 'Two UHV hulls, three UV sensors, a lithium and a potassium cooling laser, an ULE cavity, any UHV circuit and the photonic casing; the atom interferometer is its research.',
+      needs: 'Eight UHV hulls, sixteen UV sensors, thirty-two UHV circuits, eight lithium and seven potassium cooling lasers, eight ULE cavities and the photonic casing; the atom interferometer is its research.',
       unlocks: 'The degenerate EOS model, and cold atoms for the entanglement station.',
     automate: 'Atoms by hatch and lasers by ME; the lab is slow and small, so run two.',
   }, [PHOTO]),
@@ -166,7 +166,7 @@ export const QUESTS = [
     prod('EOS', 'Degenerate EOS Model', 'grindless:degenerate_eos_model', ['QGL'], 28, -17, ['Computed in the Quantum Gas Lab in Earth orbit from the lithium and potassium isotope dusts, the two cooling lasers and helium. The Degenerate Harvester and the Warp Gate hold both consume one.'], 100),
     gear('ENT', 'entanglement_station', 'Entanglement Station', ['QGL', 'SNSPD'], 27.25, -13.25, {
       for: 'The &6Entanglement Station&r ties two photons together across a distance.',
-      needs: 'Two UHV hulls, three UV emitters, two SPDC sources, two hollow-core fibres, an SNSPD, any UHV circuit and the photonic casing; the Quantum Gas Lab is its research.',
+      needs: 'Eight UHV hulls, sixteen UV emitters, thirty-two UHV circuits, eight SPDC sources, eight hollow-core fibres, eight SNSPDs and the photonic casing; the Quantum Gas Lab is its research.',
       unlocks: 'The quantum repeater node, which the wireless hatches take.',
       automate: 'Parts by ME; send the nodes on by ME.',
     }, [PHOTO], 150),
@@ -194,7 +194,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Barnard b
   gear('MOND', 'carbonyl_refinery', 'Carbonyl Refinery', ['H_BARN', 'HULL'], 25.5, -20.75, {
     for: 'The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal.',
-      needs: 'A UEV hull, five UEV pumps, four fluid regulators, three UEV pistons, three FFKM seals, a Ta2O5 dust, any UEV circuit and the inert casing; the Barnard core drill is its research.',
+      needs: 'Two UEV hulls, fourteen UEV circuits, seven UEV pumps and fluid regulators each, five UEV pistons, five FFKM seals, two Ta2O5 dusts and the inert casing; the Barnard core drill is its research.',
     unlocks: 'Iron pentacarbonyl and pure iron, for the nitride magnets.',
     automate: 'Contain the carbon monoxide; keep the loop sealed and vented to a scrubber.',
   }, [it('gtceu:inert_machine_casing')], 150),

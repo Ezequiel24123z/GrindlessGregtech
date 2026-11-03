@@ -4,7 +4,7 @@
 // belong to opv_circuits, and the products the age keeps (tetron array, antihydrogen cell, strangelet seed, hawking drive, bulge debris, sinter casing,
 // node pack) are steps in opv_age, so none is asked for twice. Rows start at a link to an opv_age quest: START for home, and the place quests for the rest.
 // Moved here from opv_age with their keys: TFAB, GOPT, LAUE, SPALL, COOLER, LYMAN, VAULT, KFORGE, PRESS, FROZEN, FOUNDRY. The machine halves of ANTIH,
-// DISTIL, DEBRIS, SINTER and NODE are AHF, SDIST, HARV, REFINE and NODEW. New: GATED, SHLD, NEGC, SRF, HE3, JET and MPC. PACC and the PARHATCH, REPEAT
+// DISTIL, DEBRIS, SINTER and NODE are AHF, SDIST, HARV, REFINE and NODEW. New: GATED, SRF, HE3, JET and MPC. PACC and the PARHATCH, REPEAT
 // quests are not here: the positron accumulator is part of the antihydrogen foundry, the parallel hatch is in opv_integration, and REPEAT is a journey step.
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
@@ -84,11 +84,7 @@ export const QUESTS = [
     unlocks: 'The antihydrogen ice cell, which the Kugelblitz core and the annihilation engine need.',
     automate: 'Antiprotons and positrons by the beam lines; cells are the product to chest.',
   }, [NEG, SHIELD], 200),
-  prod('NEGC', 'NEG XHV Casing', 'grindless:neg_xhv_casing', ['AHF'], 4.5, 3,
-    ['The &6NEG XHV Casing&r is lined with a non-evaporable getter that soaks up the last stray gas and holds an extreme-high vacuum. The foundry and the decelerator are built of it.']),
-  prod('SHLD', 'Annihilation Shield Casing', 'grindless:annihilation_shield_casing', ['AHF'], 4.5, 4.5,
-    ['The &6Annihilation Shield Casing&r stops gammas, neutrons and charged debris. Every machine that holds antimatter or a black hole is lined with it.']),
-  prod('LYMAN', 'Th-229 Lasing Crystal', 'grindless:th229_lasing_crystal', ['NEGC'], 7, 3,
+  prod('LYMAN', 'Th-229 Lasing Crystal', 'grindless:th229_lasing_crystal', ['AHF'], 7, 3,
     ['The &6Th-229 Lasing Crystal&r is a thorium-doped crystal checked against the nuclear clock until it lases on the nucleus itself. The OpV emitter and the gamma optics works are built with one. The light that cools antihydrogen comes from a separate Lyman-alpha laser.']),
   gear('VAULT', 'strangelet_vault', 'Strangelet Vault', ['M_L_VAULT'], 2, 4.5, {
     for: 'The &6Strangelet Vault&r grows a strangelet seed inside a frozen field, where it cannot touch ordinary atoms, and feeds it until it is stable exotic matter. It also lines the cages and foils that strange matter needs.',
