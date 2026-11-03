@@ -29,7 +29,7 @@ test('the stand-in runs the UXV-A5 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SL.skipped), []);
   assert.deepEqual(plain(SL.clashes), []);
-  assert.equal(SL.recipes.length, 12 + 1 + 1 + 1 + 1); // XP-A3 appended racetrack c6 stacked_logic_wafer (Q1 step 5); MAX-B1 vdW c5 graphene_hbn_film (L2); MAX-H1 appended racetrack c3 racetrack_memory_die (line 38); MAX-A2 LPE c4 bi_yig_film (line 31)
+  assert.equal(SL.recipes.length, 12 + 1 + 1 + 1 + 1 + 6); // D4-UXV-SPIN appended MOCVD c10, foundry c17 and c30, vdW c7 and c8 and the cutter row (X1 steps 7, 8, 25 to 28); XP-A3 appended racetrack c6 stacked_logic_wafer (Q1 step 5); MAX-B1 vdW c5 graphene_hbn_film (L2); MAX-H1 appended racetrack c3 racetrack_memory_die (line 38); MAX-A2 LPE c4 bi_yig_film (line 31)
 });
 
 test('5 items registered by the startup file, named in en_us', () => {
@@ -123,8 +123,8 @@ test('the mainframe: one photonic hall row, circuit 7, the only maker of gtnn:sp
   const last = hall.find((r) => r.name === 'spintronic_mainframe');
   assert.ok(last);
   assert.equal(last.circuit, 7);
-  assert.match(last._why, /UXV-A5/);
-  assert.deepEqual(last.itemsIn.map((x) => x.id), ['grindless:meso_logic_die', 'grindless:racetrack_chip', 'grindless:mram_wafer', 'grindless:magnonic_bus', 'grindless:mtj_die', 'grindless:shielded_interposer', '#gtceu:circuits/uiv']);
+  assert.match(last._why, /D4-UXV-SPIN/);
+  assert.deepEqual(last.itemsIn.map((x) => x.id), ['grindless:spintronic_die', 'grindless:mtj_die', 'grindless:shielded_interposer', '#gtceu:circuits/uiv']);
   assert.ok(last.itemsIn.length + 1 <= 8);
   assert.deepEqual(last.itemsOut, [{ id: 'gtnn:spintronic_mainframe', count: 1 }]);
   assert.equal(new Set(hall.map((r) => r.circuit)).size, hall.length, 'no circuit twice');
@@ -157,7 +157,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('older rows: only the hall row sits outside this package\'s files', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_logic\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 1 + 1 + 1 + 1 + 3, 'rows, XP-A3\'s racetrack c6, MAX-B1\'s vdW c5, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4 and three controllers');
+  assert.equal(mine.length, 12 + 1 + 1 + 1 + 1 + 6 + 3, 'rows, XP-A3\'s racetrack c6, MAX-B1\'s vdW c5, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4, D4-UXV-SPIN\'s six X1 rows and three controllers');
 });
 
 test('the held F1 ids are free: the A5 hold rules are deleted, the pending EMI entries too', () => {

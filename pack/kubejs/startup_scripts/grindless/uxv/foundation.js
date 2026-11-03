@@ -50,7 +50,6 @@
     srruo3_electrode_wafer: { stack: 64 },
     me_switch_wafer: { stack: 64 },
     sot_readout_stack: { stack: 64 },
-    meso_logic_die: { stack: 64 },
     racetrack_chip: { stack: 64 },
     magnonic_bus: { stack: 64 },
     sin_membrane: { stack: 64 },

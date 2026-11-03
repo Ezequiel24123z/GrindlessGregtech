@@ -2025,7 +2025,6 @@
         "grindless:srruo3_electrode_wafer",
         "grindless:me_switch_wafer",
         "grindless:sot_readout_stack",
-        "grindless:meso_logic_die",
         "grindless:racetrack_chip",
         "grindless:magnonic_bus",
         "grindless:sin_membrane",

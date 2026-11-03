@@ -98,7 +98,6 @@
         ['gtceu.recipe.grindless_crystal_growth.ni_mn_ga_crystal_growth', 'Circuit 16: a Ni-Mn-Ga single crystal drawn from the ingot; the offcut returns as dust'],
         ['gtceu.recipe.grindless_crystal_growth.wte2_recrystallise', 'Circuit 17: WTe2 dust recrystallised by vapour transport'],
         ['gtceu.recipe.grindless_crystal_growth.fgt_recrystallise', 'Circuit 18: Fe3GeTe2 dust recrystallised by vapour transport'],
-        ['gtceu.recipe.grindless_photonic_foundry.meso_logic_die', 'Circuit 17: the MESO logic die bonded under argon; the argon is recovered'],
         ['gtceu.recipe.grindless_photonic_foundry.mram_copper', 'Circuit 18: the MRAM wafer wired with copper'],
         ['gtceu.recipe.grindless_photonic_foundry.rf_carpet_board', 'Circuit 19: a gold-plated RF carpet board'],
         ['gtceu.recipe.grindless_photonic_foundry.stno_contacts', 'Circuit 20: gold contacts on the planarised STNO wafer'],

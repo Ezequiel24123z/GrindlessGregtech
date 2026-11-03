@@ -28,7 +28,8 @@
           "itemsIn": [
             { "id": "grindless:heusler_target", "count": 1 },
             { "id": "grindless:mgo_target", "count": 1 },
-            { "id": "grindless:h_si28_wafer", "count": 1 }
+            { "id": "grindless:ta_seed_target", "count": 1 },
+            { "id": "grindless:si28_m1_wafer", "count": 1 }
           ],
           "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
@@ -43,7 +44,7 @@
           "name": "saf_track", "circuit": 3, "eut": 33554432, "duration": 600,
           "itemsIn": [
             { "id": "grindless:saf_target_set", "count": 1 },
-            { "id": "grindless:h_si28_wafer", "count": 1 }
+            { "id": "grindless:mram_wafer", "count": 1 }
           ],
           "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
@@ -59,8 +60,7 @@
           "itemsIn": [
             { "id": "grindless:heusler_target", "count": 1 },
             { "id": "grindless:mgo_target", "count": 1 },
-            { "id": "grindless:ta_seed_target", "count": 1 },
-            { "id": "grindless:h_si28_wafer", "count": 1 }
+            { "id": "grindless:racetrack_chip", "count": 1 }
           ],
           "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],

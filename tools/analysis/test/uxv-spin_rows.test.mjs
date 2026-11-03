@@ -125,7 +125,7 @@ test('levitation melter c9-16 under helium; megabar c6', () => {
 
 test('photonic foundry c17-22 rinse with ultrapure water; MOCVD c13-16; implanter c8-10', () => {
   const rows = mine('photonics.json', 'photonic_foundry');
-  assert.deepEqual(rows.map((r) => [r.name, r.circuit]), [['meso_logic_die', 17], ['mram_copper', 18], ['rf_carpet_board', 19], ['stno_contacts', 20], ['ga2o3_dicing', 21],
+  assert.deepEqual(rows.map((r) => [r.name, r.circuit]), [['mram_copper', 18], ['rf_carpet_board', 19], ['stno_contacts', 20], ['ga2o3_dicing', 21],
     ['shielded_interposer', 22]]);
   for (const r of rows) {
     assert.ok(r.fluidsIn.some((f) => f.id === 'gtceu:ultrapure_water' && f.amount === 1000), r.name);
@@ -171,7 +171,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
     'grindless:heusler_ingot': 'heusler_homogenise', 'grindless:terfenol_d_rod': 'terfenol_d_rod', 'grindless:ni_mn_ga_crystal': 'ni_mn_ga_twin_training',
     'grindless:hbn_crystal': 'hbn_leach', 'grindless:wte2_crystal': 'wte2_crystal', 'grindless:fgt_crystal': 'fgt_crystal', 'grindless:ga2o3_wafer': 'ga2o3_polish',
     'grindless:dysco3_substrate': 'dysco3_substrate', 'grindless:ggg_wafer': 'ggg_wafer', 'grindless:mtj_die': 'mtj_die', 'grindless:mram_wafer': 'mram_copper',
-    'grindless:sot_readout_stack': 'sot_anneal', 'grindless:meso_logic_die': 'meso_logic_die', 'grindless:sin_membrane': 'sin_membrane',
+    'grindless:sot_readout_stack': 'sot_anneal', 'grindless:sin_membrane': 'sin_membrane',
     'grindless:nanoaperture_array': 'nanoaperture_array', 'grindless:rf_carpet_board': 'rf_carpet_board', 'grindless:stno_array': 'stno_contacts',
     'grindless:ga2o3_power_die': 'ga2o3_dicing', 'grindless:mu_metal_foil': 'mu_metal_foil', 'grindless:shielded_interposer': 'shielded_interposer',
     'grindless:finemet_core': 'finemet_field_anneal', 'grindless:w184_cvi_preform': 'w184_fibre_preform',     'grindless:terfenol_d_ingot': 'terfenol_d_melt|terfenol_d_remelt',
@@ -191,7 +191,7 @@ test('older rows are appended, never edited: the pinned older rows keep their ci
   assert.equal(eb.filter((r) => (r._why || '').startsWith('UXV-A3')).length, 15);
   const n = (f, t) => mine(f, t).length;
   assert.equal(n('electron_beam.json', 'electron_beam_refining') + n('composites.json', 'nitride_magnet_synthesis') + n('composites.json', 'chemical_vapour_infiltration')
-    + n('crystals.json', 'crystal_growth') + n('levitation_melter.json', 'levitation_melting') + n('megabar.json', 'megabar_synthesis') + n('photonics.json', 'photonic_foundry'), 15 + 8 + 1 + 8 + 8 + 1 + 6);
+    + n('crystals.json', 'crystal_growth') + n('levitation_melter.json', 'levitation_melting') + n('megabar.json', 'megabar_synthesis') + n('photonics.json', 'photonic_foundry'), 15 + 8 + 1 + 8 + 8 + 1 + 5);
 });
 
 test('lang: every new table row has an EMI line in en_us', () => {

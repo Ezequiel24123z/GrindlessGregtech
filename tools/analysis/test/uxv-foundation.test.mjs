@@ -16,7 +16,7 @@ const assets = path.join(pack, 'kubejs', 'assets', 'grindless');
 const SPINTRONICS = ['cofeb_target', 'mgo_target', 'heusler_target', 'saf_target_set', 'ta_seed_target', 'srruo3_target', 'la_bfo_target',
   'cofeb_ingot', 'heusler_ingot', 'terfenol_d_ingot', 'ni_mn_ga_ingot', 'ta_foil', 'pt_sheet', 'dysco3_substrate', 'ggg_wafer', 'hbn_crystal',
   'wte2_crystal', 'fgt_crystal', 'mtj_stack_wafer', 'mram_stack_wafer', 'saf_track_wafer', 'mtj_die', 'mram_wafer', 'srruo3_electrode_wafer',
-  'me_switch_wafer', 'sot_readout_stack', 'meso_logic_die', 'racetrack_chip', 'magnonic_bus', 'sin_membrane', 'nanoaperture_array',
+  'me_switch_wafer', 'sot_readout_stack', 'racetrack_chip', 'magnonic_bus', 'sin_membrane', 'nanoaperture_array',
   'rf_carpet_board', 'kr_f2_premix', 'krf_excimer_laser', 'pt_lpe_crucible', 'gas_stopping_cell', 'shequid_gyro'];
 const LINES_44_49 = ['stno_stack_wafer', 'stno_array', 'gum_metal_billet', 'gum_metal_blank', 'gum_metal_flexspline', 'uxv_strain_wave_gear',
   'encoder_ring', 'multipole_encoder_ring', 'tmr_encoder', 'ga2o3_wafer', 'ga2o3_power_die', 'mu_metal_foil', 'shielded_interposer',
@@ -67,7 +67,7 @@ test('the stand-in runs the UXV foundation without errors', () => {
 });
 
 test('the id list is pinned: count and every id', () => {
-  assert.equal(ITEMS.length, 98);
+  assert.equal(ITEMS.length, 97);
   assert.equal(Object.keys(MATERIALS).length, 37);
   assert.equal(Object.values(MATERIALS).filter((f, i) => Object.keys(MATERIALS)[i].startsWith('grindless:')).length, 20, '20 fluids');
   const got = run.global.grindless.uxvFoundation;
