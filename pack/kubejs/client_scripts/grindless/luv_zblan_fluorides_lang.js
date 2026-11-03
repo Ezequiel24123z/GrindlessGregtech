@@ -1,4 +1,4 @@
-// priority: 7640
+// priority: 7170
 // Gregtech Grindless - names of LuV's ZBLAN fluorides (startup_scripts/grindless/luv/zblan_fluorides.js; package D2-ZBLAN).
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {

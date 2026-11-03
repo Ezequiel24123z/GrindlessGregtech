@@ -1,4 +1,4 @@
-// priority: -4040
+// priority: -4710
 // LuV L5 ZBLAN from fluorides (package D2-ZBLAN, docs/eras/lines-ev-zpm.md section 4): the four fluorides the fluorspar kiln makes and the
 // dopant blend the large chemical reactor kneads from three of them. ZrF4 is UHV's (startup_scripts/grindless/uhv/zblan.js).
 // Recipes: server_scripts/grindless/iv/fluorspar_kiln.js and luv/orbital_industry.js. Names: client_scripts/grindless/luv_zblan_fluorides_lang.js.
