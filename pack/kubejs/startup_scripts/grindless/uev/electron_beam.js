@@ -27,6 +27,10 @@
 
   const SIC = 'grindless:sic_composite_casing'
   const SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
+  // Bootstrap (integrator, batch 16): the SiC composite casing takes this furnace's 6N tantalum, and the CVI furnace's controller its
+  // 6N niobium, so the electron beam furnace keeps a GTM body (clean stainless) in its new shape.
+  const CLEAN = 'gtceu:clean_machine_casing'
+  const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
 
   EB.table = 'kubejs/data/grindless/tables/electron_beam.json'
   EB.foundryNoVoiding = 'grindless.machine.single_crystal_foundry.no_voiding'
@@ -156,7 +160,7 @@
   }
   function makeSpec(k) {
     if (k === 'furnace') {
-      return specOf(k, SIC, [
+      return specOf(k, CLEAN, [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('input_hatch', { min: 0, max: 1 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
@@ -251,14 +255,14 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(f.type)
       .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
-      .appearanceBlock(function () { return Block.getBlock(SIC) })
+      .appearanceBlock(function () { return Block.getBlock(CLEAN) })
       .pattern(function (def) { return Pat.build(def, f.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.electron_beam_furnace.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.electron_beam_refining')),
         Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
-      .workableCasingModel(SIC_TEXTURE, 'grindless:block/multiblock/electron_beam_furnace')
+      .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/electron_beam_furnace')
 
     event.create(d.name, 'multiblock')
       .langValue(d.lang)
