@@ -117,7 +117,7 @@ test('one recipe per lookup path: no refrigerator or line recipe has keys that a
   }
 });
 
-test('the coated conductor line: c1 substrate and c2 tape, from the table', () => {
+test('the coated conductor line: the substrate, the three stages and the conductor (D2-TAPE), from the table', () => {
   assert.deepEqual(plain(CCL.skipped), []);
   assert.deepEqual(plain(CCL.clashes), []);
   const c1 = byId.get('grindless:coated_conductor/nickel_tungsten_substrate');
@@ -128,13 +128,13 @@ test('the coated conductor line: c1 substrate and c2 tape, from the table', () =
   assert.deepEqual(c1.j.inputs.item.filter(isCircuit).length, 1, 'c1 has its programmed circuit');
   assert.deepEqual(c2.j.inputs.item.filter(isCircuit).length, 1, 'c2 has its programmed circuit');
   // UIV-A8 appends c3 gd_123_precursor (line 23), whose ids its own test proves; UXV-A8 appends c4 strand_tape
-  assert.deepEqual(plain(CCL.recipes.map((r) => [r.circuit, r.eut, r.duration])), [[1, 7680, 400], [2, 30720, 300], [3, 30720, 400], [4, 1966080, 300], [5, 7864320, 400], [6, 7864320, 400], [7, 7864320, 400], [8, 7864320, 400], [9, 7864320, 400]]); // MX-S3 c9 (L54), MAX-A4 c8 (L39) after; MAX-B1 c6 (L2) before MAX-W's last row
-  assert.deepEqual(solids(c1).map((x) => [x.id, x.count]), [['gtceu:nickel_dust', 19], ['gtceu:tungsten_dust', 1]]);
+  assert.deepEqual(plain(CCL.recipes.map((r) => [r.circuit, r.eut, r.duration])), [[1, 7680, 400], [1, 7680, 300], [1, 15360, 400], [2, 30720, 300], [2, 30720, 200], [2, 30720, 300], [3, 30720, 400], [4, 1966080, 300], [5, 7864320, 400], [6, 7864320, 400], [7, 7864320, 400], [8, 7864320, 400], [9, 7864320, 400]]); // MX-S3 c9 (L54), MAX-A4 c8 (L39) after; MAX-B1 c6 (L2) before MAX-W's last row
+  assert.deepEqual(solids(c1).map((x) => [x.id, x.count]), [['gtceu:nickel_tungsten_dust', 20]]); // D2-TAPE: the alloy is mixed upstream (luv-hts-tape.test.mjs)
   assert.deepEqual(c1.j.outputs.item.map(itemOf).map((x) => [x.id, x.count]), [['grindless:nickel_tungsten_tape', 20]]);
   assert.equal(euOf(c1), 7680);
-  assert.deepEqual(solids(c2).map((x) => [x.id, x.count]), [['grindless:nickel_tungsten_tape', 16], ['gtceu:indium_tin_barium_titanium_cuprate_dust', 1]]);
-  assert.deepEqual(c2.j.inputs.fluid.map(fluidOf).map((x) => [x.id, x.amount]), [['gtceu:oxygen', 1000], ['gtceu:silver', 36]]);
-  assert.deepEqual(c2.j.outputs.item.map(itemOf).map((x) => [x.id, x.count]), [['grindless:itbtc_coated_conductor', 16]]);
+  assert.deepEqual(solids(c2).map((x) => [x.id, x.count]), [['grindless:capped_tape', 20], ['gtceu:copper_foil', 20]]);
+  assert.deepEqual(c2.j.inputs.fluid.map(fluidOf).map((x) => [x.id, x.amount]), []);
+  assert.deepEqual(c2.j.outputs.item.map(itemOf).map((x) => [x.id, x.count]), [['grindless:itbtc_coated_conductor', 20]]);
   assert.equal(euOf(c2), 30720);
 });
 
@@ -161,13 +161,16 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
     'gtceu:laminated_glass', 'gtceu:robust_machine_casing', 'gtceu:tungstensteel_gearbox', 'gtceu:hssg_coil_block',
     'gtceu:naquadah_coil_block', 'gtceu:trinium_coil_block', 'gtceu:tritanium_coil_block', 'gtceu:inert_machine_casing',
     'gtceu:tempered_glass', 'gtceu:titanium_pipe_casing', 'gtceu:stainless_steel_frame', 'gtceu:nickel_dust', 'gtceu:tungsten_dust',
-    'gtceu:indium_tin_barium_titanium_cuprate_dust', 'gtceu:luv_machine_hull', 'gtceu:luv_electric_pump', 'gtceu:luv_electric_motor',
+    'gtceu:indium_tin_barium_titanium_cuprate_dust', 'gtceu:copper_foil', 'gtceu:cerium_dust', 'gtceu:luv_machine_hull', 'gtceu:luv_electric_pump', 'gtceu:luv_electric_motor',
     'gtceu:luv_emitter', 'gtceu:luv_conveyor_module', 'gtceu:ingot_casting_mold', 'gtceu:naquadah_alloy_ingot',
     'gtceu:luv_parallel_hatch', 'gtceu:iv_parallel_hatch',
   ]);
-  const nativeFluids = new Set(['gtceu:liquid_helium', 'gtceu:liquid_nitrogen', 'gtceu:nitrogen', 'gtceu:oxygen', 'gtceu:silver', 'gtceu:helium']);
+  const nativeFluids = new Set(['gtceu:liquid_helium', 'gtceu:liquid_nitrogen', 'gtceu:nitrogen', 'gtceu:oxygen', 'gtceu:silver', 'gtceu:helium', 'gtceu:hydrogen', 'gtceu:argon']);
   // ours: the two controllers (this package) and A1's tape items (startup_scripts/grindless/luv/foundation.js)
-  const registered = new Set(['gtceu:helium_refrigerator', 'gtceu:coated_conductor_line', 'grindless:nickel_tungsten_tape', 'grindless:itbtc_coated_conductor']);
+  const registered = new Set(['gtceu:helium_refrigerator', 'gtceu:coated_conductor_line', 'grindless:nickel_tungsten_tape', 'grindless:itbtc_coated_conductor',
+    // D2-TAPE (startup luv/hts_tape.js; items and the nickel-tungsten dust proven in luv-hts-tape.test.mjs); ysz and yttria: UEV's electron beam table
+    'grindless:textured_nickel_tungsten_tape', 'grindless:buffered_tape', 'grindless:coated_tape', 'grindless:capped_tape', 'gtceu:nickel_tungsten_dust',
+    'grindless:yttrium_oxide_dust', 'grindless:ysz_powder']);
   for (const id of registered) assert.ok(run.registry.items.has(id) || run.registry.machines.has(id), `${id} is not registered by the pack`);
   const problems = [];
   const item = (id, where) => { if (!nativeItems.has(id) && !registered.has(id)) problems.push(`${where}: item ${id}`); };

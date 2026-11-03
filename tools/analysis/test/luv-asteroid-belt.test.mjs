@@ -191,39 +191,32 @@ test('B5 drill veto: only grindless vein_drilling/luv/harpoon_*; every lower dri
   assert.match(script('startup_scripts', 'iv/mercury.js'), /rules\.recipeTier\(recipe\) !== DRILL_TIER \|\| !isMercuryRecipe/);
 });
 
-test('B5 asteroid processor: Mond on crushed and dust with a CO charge never used up, the magnetic split; the concentrate is kept', () => {
+test('B5 asteroid processor: the magnetic split only; the Mond process (D2-TAPE) is carbonyl chemistry that gives its CO back', () => {
   const { recipes, machines } = harness();
-  const mondC = byId(recipes, 'asteroid_processing', 'grindless:mond_crushed');
-  const mondD = byId(recipes, 'asteroid_processing', 'grindless:mond_dust');
   const split = byId(recipes, 'asteroid_processing', 'grindless:magnetic_split');
-  assert.equal(only(mondC, 'circuit'), 1);
   assert.equal(only(split, 'circuit'), 2);
+  assert.equal(byId(recipes, 'asteroid_processing', 'grindless:mond_crushed'), undefined, 'the processor has no fluid output');
+  assert.equal(byId(recipes, 'asteroid_processing', 'grindless:mond_dust'), undefined);
+  const lcr = (id) => byId(recipes, 'large_chemical_reactor', 'grindless:' + id);
+  const mondC = lcr('mond_crushed');
+  const mondD = lcr('mond_dust');
+  assert.equal(only(mondC, 'circuit'), 1);
   assert.equal(only(mondD, 'circuit'), 3);
   assert.equal(only(mondC, 'itemInputs'), '16x gtceu:crushed_meteoric_iron_ore');
   assert.equal(only(mondD, 'itemInputs'), '16x gtceu:meteoric_iron_dust');
   for (const r of [mondC, mondD]) {
-    assert.deepEqual({ ...only(r, 'notConsumableFluid') }, { id: 'gtceu:carbon_monoxide', amount: 1000 });
-    assert.deepEqual(call(r, 'itemOutputs').flat(), ['24x gtceu:iron_dust', '4x gtceu:nickel_dust', '1x gtceu:cobalt_dust',
-      '1x grindless:asteroid_pgm_concentrate']);
+    assert.deepEqual({ ...only(r, 'inputFluids') }, { id: 'gtceu:carbon_monoxide', amount: 36000 });
+    assert.deepEqual({ ...only(r, 'outputFluids') }, { id: 'gtceu:crude_metal_carbonyl', amount: 8000 });
+    assert.deepEqual(call(r, 'itemOutputs').flat(), ['20x gtceu:iron_dust', '1x gtceu:cobalt_dust', '1x grindless:asteroid_pgm_concentrate']);
     assert.equal(only(r, 'EUt'), 1920);
     assert.equal(only(r, 'duration'), 400);
-    assert.equal(call(r, 'dimension').length, 0, 'the processor works anywhere');
   }
   assert.equal(only(split, 'itemInputs'), '16x gtceu:crushed_tetrataenite_ore');
   assert.deepEqual(call(split, 'itemOutputs').flat(), ['12x gtceu:tetrataenite_dust', '4x gtceu:meteoric_iron_dust']);
   const calls = machines.get('asteroid_processor');
   const mod = calls.find((c) => c[0] === 'recipeModifier');
-  const start = calls.find((c) => c[0] === 'beforeWorking')[1];
-  assert.equal(mod[2], true);
-  const voids = { voids: true };
-  assert.match(mod[1](voids, recipe('grindless:asteroid_processing/mond_crushed')), /^cancel:grindless\.machine\.asteroid_processor\.no_voiding/);
-  assert.match(mod[1](voids, recipe('grindless:asteroid_processing/mond_dust')), /^cancel/);
-  assert.equal(mod[1](voids, recipe('grindless:asteroid_processing/magnetic_split')), 'overclock');
-  assert.equal(start(voids, recipe('grindless:asteroid_processing/mond_crushed')), false);
-  assert.equal(start(voids, recipe('grindless:asteroid_processing/magnetic_split')), true);
-  assert.equal(start({ voids: false }, recipe('grindless:asteroid_processing/mond_crushed')), true);
+  assert.equal(mod[1]({ voids: true }, recipe('grindless:asteroid_processing/magnetic_split')), 'overclock');
 });
-
 test('LD-LV2: GTM tetrataenite ore steps past the crushed ore are removed; the magnetic split stays the only crushed-to-dust route', () => {
   const { removed, recipes } = harness();
   assert.equal(removed.length, 14);
@@ -396,8 +389,10 @@ test('B5 ids that are not ours match the pinned native registry (power-quests-1 
     'ae2:quantum_entangled_singularity',
   ]);
   const nativeFluids = new Set(['minecraft:water', 'gtceu:carbon_dioxide', 'gtceu:carbon_monoxide', 'gtceu:helium_3',
-    'gtceu:distilled_water', 'gtceu:soldering_alloy', 'gtceu:lubricant']);
-  const ours = /^(grindless:|gtceu:(raw_|crushed_|tuff_)?(meteoric_iron|tetrataenite)|gtceu:(meteoric_iron|tetrataenite)_dust)/;
+    'gtceu:distilled_water', 'gtceu:soldering_alloy', 'gtceu:lubricant',
+    // D2-TAPE (luv-hts-tape.test.mjs): the Mond carbonyls; the crude and the tetracarbonyl are registered by startup luv/hts_tape.js
+    'gtceu:crude_metal_carbonyl', 'gtceu:nickel_tetracarbonyl', 'gtceu:iron_pentacarbonyl']);
+  const ours = /^(grindless:|gtceu:(nickel_tungsten|tungsten)_dust|gtceu:(raw_|crushed_|tuff_)?(meteoric_iron|tetrataenite)|gtceu:(meteoric_iron|tetrataenite)_dust)/;
   const checkItem = (text) => {
     const id = String(text).replace(/^\d+x /, '');
     if (id.startsWith('#') || ours.test(id) || MACHINES.includes(id.replace('gtceu:', ''))) return;
