@@ -1,4 +1,4 @@
-// priority: -27223
+// priority: -26874
 // -----------------------------------------------------------------------------------------------
 // Recipes of ZPM's PAN carbon fibre (docs/eras/lines-ev-zpm.md section 5, Z4; package D2-PAN): Titan's nitriles become carbon fibre.
 // Every row is ZPM voltage; carbon, hydrogen and nitrogen are conserved from acrylonitrile on (1,000 mB a molecule, one dust or item a monomer,

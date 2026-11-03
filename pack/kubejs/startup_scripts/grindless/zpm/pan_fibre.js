@@ -1,4 +1,4 @@
-// priority: -12000
+// priority: -11650
 // -----------------------------------------------------------------------------------------------
 // ZPM's PAN carbon fibre (docs/eras/lines-ev-zpm.md section 5, Z4; package D2-PAN): the materials and items of Titan's carbon-fibre line.
 //   gtceu:acrylonitrile        (liquid, C3H3N)   the nitrile mix's main cut, fractionated

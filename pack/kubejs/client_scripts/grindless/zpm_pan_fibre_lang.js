@@ -1,4 +1,4 @@
-// priority: 300
+// priority: 650
 // Gregtech Grindless - names and tooltips of ZPM's PAN carbon fibre (startup_scripts/grindless/zpm/pan_fibre.js).
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
