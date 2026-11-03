@@ -1,5 +1,5 @@
 // priority: -5604
-// TEST ONLY, MAX-S0 (bench overlay, never shipped; needs the startup overlay on: kubejs/config/gg_test_max_s0.json {"enabled": true}).
+// TEST ONLY, MAX-S0 (bench overlay, never shipped; the gate probe recipe is registered whenever the overlay is present).
 // Command: kubejs custom_command gg_test_max_s0_machines. Band ONLY: X 38720-38783, Z 0-63, Overworld Y 70-102. Everything placed is cleared before DONE.
 //   s0_2_*   gtceu:warp_gate on two gtceu:max_energy_input_hatch_16a runs a recipe at 2^35 EU/t (a long) for 1,200 ticks: per-tick draw, wrap, completion, tier readout
 (function () {
@@ -21,11 +21,7 @@
   var GATE_EUT = '34359738368'
   var GATE_TICKS = 1200
 
-  var marker = JsonIO.read('kubejs/config/gg_test_max_s0.json')
-  var ON = marker !== null && String(marker.get('enabled')) === 'true'
-
   ServerEvents.recipes(function (event) {
-    if (!ON) return
     var Long = Java.loadClass('java.lang.Long')
     try {
       event.recipes.gtceu.warp_gate('gg_test_max_s0:warp_gate/hold_s0_probe').notConsumable('1x ' + DANDELION).itemOutputs('1x ' + POPPY).EUt(Long.valueOf(GATE_EUT)).duration(GATE_TICKS)
