@@ -36,17 +36,18 @@ test('registration: the recipe type, the machine, the four items', () => {
   for (const n of NEW_ITEMS) assert.ok(run.registry.items.has('grindless:' + n), n);
 });
 
-test('pattern: one controller in the front slice, GTM part limits, 5 x 5 x 7, radiation proof casing', () => {
+test('pattern: one controller in the front slice, GTM part limits, 7 x 5 x 13, radiation vault casing with radiation-proof detail', () => {
   const s = run.docs.structures.structures['gtceu:heat_source_works'];
   assert.ok(s, 'described');
-  assert.equal(s.slices.length, 7);
+  assert.equal(s.slices.length, 13);
   const front = s.slices[s.slices.length - 1];
   assert.equal(front.join('').split('').filter((c) => c === 'S').length, 1, 'one controller');
-  assert.ok(s.slices.every((sl) => sl.length === 5 && sl.every((row) => row.length === 5)), 'uniform 5 x 5 slices');
+  assert.ok(s.slices.every((sl) => sl.length === 5 && sl.every((row) => row.length === 7)), 'uniform 7 x 5 slices');
   const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
   assert.deepEqual(lim.energy_input, { min: 1, max: 2 });
   for (const sl of s.slices) for (const row of sl) for (const c of row) assert.ok(s.symbols[c], 'symbol ' + c);
   const blocks = Object.values(s.symbols).flatMap((v) => v.blocks || []);
+  assert.ok(blocks.includes('grindless:radiation_vault_casing'));
   assert.ok(blocks.includes('gtnn:radiation_proof_machine_casing'));
 });
 
