@@ -1,6 +1,8 @@
 // QB-2: the LuV chapter layout. One era chapter, one section per data file; every quest's place and dependencies are decided here
 // (docs/quests.md, section 4b), so a dependency never points backwards and no line crosses another. A data file keeps its texts and
 // kinds and passes its quests through place(); the x, y and deps written in the file are the old, per-chapter layout.
+
+import { TEACH } from './teaching-rows.mjs';
 
 export const SECTIONS = {
   'quests': { name: "The Journey", origin: { x: 0, y: 0 }, heading: { key: 'H_LUV_AGE', x: 2.5, y: -1, deps: ["START"], desc: ["The road of the era, from the first step to the gate that leads on. Everything else here hangs from it."] } },
@@ -91,6 +93,7 @@ const LAYOUT = {
   SIXTEEN: [6, 9.5, null],
   MCC: [8.5, -3, null],
   AE2L: [10.5, 2, null],
+  ...Object.fromEntries(TEACH.map((q) => [q.key, [q.x, q.y, q.deps]])),
 };
 
 export function place(quests) {

@@ -7,6 +7,7 @@ const xp = (n) => ({ type: 'xp', xp: n });
 const ri = (item, count) => ({ type: 'item', item, count });
 
 import { SECTIONS, place } from './layout.mjs';
+import { TEACH } from './teaching-rows.mjs';
 
 export const CHAPTER = {
   section: SECTIONS.machines,
@@ -493,5 +494,6 @@ export const QUESTS = [
     tasks: [it('ae2:quantum_link'), it('ae2:quantum_ring')],
     rewards: [xp(100)],
   },
+  ...TEACH,
 ];
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

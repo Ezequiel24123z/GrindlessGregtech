@@ -1,5 +1,5 @@
-// Quest data for the LuV teaching section: the LuV multiblocks that no other quest of the era names. One row per theme, left to
-// right; every row starts under the one before it. Rewards are XP only.
+// Teaching rows for the LuV chapter: the LuV multiblocks that no other quest of the era names. They join luv_machines through
+// machines-data.mjs and layout.mjs; one row per theme, left to right, every row starting under the one before it. XP only.
 const PARENT = { key: 'COILQ', x: 18, y: 12 };
 const ROWS = [
   [
@@ -55,14 +55,10 @@ const ROWS = [
   ],
 ];
 
-export const CHAPTER = {
-  section: { name: 'Halls', origin: { x: 0, y: 0 }, heading: { key: 'LUV_H_TEACHING', x: PARENT.x, y: PARENT.y + 2.5, deps: [PARENT.key], icon: 'gtceu:power_substation', desc: ['The LuV halls that sit outside the lines: power storage, plasma turbines, miners, drilling and the hottest furnace yet.'] } },
-};
-
-export const QUESTS = ROWS.flatMap((row, r) => row.map(([key, title, item, f, n, u, a, xp], i) => ({
-  key, kind: 'machine', title, icon: item,
-  deps: [i > 0 ? row[i - 1][0] : r > 0 ? ROWS[r - 1][0][0] : 'LUV_H_TEACHING'],
-  x: PARENT.x + 2 + 2 * i, y: PARENT.y + 4.5 + 2 * r,
+export const TEACH = ROWS.flatMap((row, r) => row.map(([key, title, item, f, n, u, a, xp], i) => ({
+  key, kind: 'machine', title, icon: item, pkg: ['B1', 'B9'],
+  deps: [i > 0 ? row[i - 1][0] : r > 0 ? ROWS[r - 1][0][0] : PARENT.key],
+  x: PARENT.x + 2 + 2 * i, y: PARENT.y + 2.5 + 2 * r,
   teach: { for: f, needs: n, unlocks: u, automate: a },
   desc: [],
   tasks: [{ type: 'item', item }],
