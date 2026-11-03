@@ -1,4 +1,4 @@
-// priority: -4050
+// priority: -4610
 // LuV living-circuit line L2 (package D2-PEDOT, docs/eras/lines-ev-zpm.md section 4): the chemistry from butane to PEDOT:PSS.
 // Recipes: server_scripts/grindless/luv/pedot.js. Names: client_scripts/grindless/luv_pedot_lang.js.
 (function () {

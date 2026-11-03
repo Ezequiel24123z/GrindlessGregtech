@@ -1,4 +1,4 @@
-// priority: -18174
+// priority: -18830
 // LuV living-circuit line L2 (docs/eras/lines-ev-zpm.md section 4): butane to PEDOT:PSS, the interface polymer of the organoid's electrode array.
 // One run of the line: 1 butane + 4 sulfur -> 1 thiophene -> 1 tetrabromothiophene -> 1 dibromothiophene -> 1 DMT -> 1 EDOT -> 1 PEDOT:PSS.
 // Atoms are conserved in GTM units (dusts by atoms, fluids 1,000 mB a molecule, elemental gases and bromine 1,000 mB an atom).

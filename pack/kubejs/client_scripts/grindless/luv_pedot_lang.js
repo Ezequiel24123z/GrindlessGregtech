@@ -1,4 +1,4 @@
-// priority: 7650
+// priority: 7182
 // Gregtech Grindless - names of LuV's PEDOT:PSS line (startup_scripts/grindless/luv/pedot.js; package D2-PEDOT).
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {
