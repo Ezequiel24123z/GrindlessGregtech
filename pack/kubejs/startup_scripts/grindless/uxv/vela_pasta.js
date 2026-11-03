@@ -201,8 +201,39 @@
     return s.booth('F', 3).fn()
   }
 
+  // The Pasta Mill (19 x 13 x 55), z from the back (0) to the front (54, under the booth): a round sorter drum (cryostat bins and a coil
+  // deflector ring), then a narrow draw line (coil sheath, gearbox capstans) and a press hall (robust platen, gearbox rams) at the front.
+  function pastaMill() {
+    var s = G.uevShapes.scene(19, 13, 55)
+    var z
+    for (z = 0; z <= 20; z++) {
+      var ch = z % 5 === 0 ? 'M' : 'F'
+      s.cyl('z', 9, 6, 6, z, z, ch, true)
+    }
+    s.cyl('z', 9, 6, 6, 0, 0, 'F')
+    ;[4, 10, 16].forEach(function (zz) { s.cyl('z', 9, 6, 6, zz, zz, 'C', true, null) })
+    for (z = 1; z <= 19; z += 2) { s.set(5, 1, z, 'K'); s.set(13, 1, z, 'K') }
+    s.box(6, 0, 1, 12, 0, 20, 'F')
+    for (z = 21; z <= 38; z++) {
+      s.cyl('z', 9, 6, 3, z, z, z % 4 === 0 ? 'M' : 'F', true)
+      if (z % 6 === 3) s.cyl('z', 9, 6, 2, z, z, 'C', true, null)
+    }
+    ;[24, 30, 36].forEach(function (zz) { s.box(5, 1, zz, 5, 3, zz, 'B'); s.box(13, 1, zz, 13, 3, zz, 'B') })
+    s.box(3, 0, 21, 15, 0, 38, 'F')
+    s.room(0, 0, 39, 18, 9, 54, 'F', '', null)
+    s.box(6, 1, 44, 12, 2, 50, 'R')
+    s.box(9, 3, 44, 9, 8, 44, 'B'); s.box(9, 3, 50, 9, 8, 50, 'B')
+    s.box(2, 5, 41, 16, 5, 41, 'L')
+    for (z = 41; z <= 53; z += 4) s.box(0, 1, z, 0, 8, z, 'M')
+    s.box(0, 10, 39, 18, 10, 54, 'Q')
+    return s.booth('F', 3).fn()
+  }
+
   // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
   function spec(m) {
+    if (m.name === 'pasta_phase_sorter') {
+      return G.uevShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: pastaMill() })
+    }
     if (m.name === 'pasta_extractor' || m.name === 'polar_cap_tap') {
       return G.uevShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: m.name === 'pasta_extractor' ? crustTap() : capMast() })
     }

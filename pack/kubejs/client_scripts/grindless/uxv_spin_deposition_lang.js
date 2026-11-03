@@ -11,25 +11,17 @@
 (function () {
     // [key, en]
     var ENTRIES = [
-        ['block.gtceu.mtj_sputter_cluster', 'MTJ Sputter Cluster'],
-        ['block.gtceu.oxide_pld_chamber', 'Oxide PLD Chamber'],
+        ['block.gtceu.mtj_sputter_cluster', 'Spintronic Cluster Tool'],
         ['gtceu.mtj_sputtering', 'MTJ Sputtering'],
         ['gtceu.pulsed_laser_deposition', 'Pulsed Laser Deposition'],
 
         ['grindless.machine.mtj_sputter_cluster.tooltip.0',
-            '\u00a77Sputters the MTJ, MRAM, SAF and STNO spintronic stacks.'],
-        ['grindless.machine.oxide_pld_chamber.tooltip.0',
-            '\u00a77Pulsed laser deposition of oxide electrode, BiFeO3 and ME switch films.'],
+            '\u00a77Sputters the MTJ, MRAM, SAF and STNO stacks, deposits oxide films by pulsed laser and patterns racetracks.'],
 
         ['emi.grindless.info.mtj_sputter_cluster.0',
-            'Four magnetron guns sit on the diagonals of an octagonal hub and a load lock feeds the wafers. It needs two UIV energy hatches and a 6N helium-cooled controller.'],
+            'A central vacuum wafer handler feeds eight radial chambers: magnetron guns, a KrF pulsed-laser deposition chamber with its beam line, the racetrack e-beam bay, etch, anneal and the load locks. It needs two UIV energy hatches and a 6N helium-cooled controller.'],
         ['emi.grindless.info.mtj_sputter_cluster.1',
-            'Nothing is wasted: the spent CoFeB target goes to the powder-bed re-press, the Heusler and ruthenium overspray comes out as powder, and the argon is recovered.'],
-        ['emi.grindless.info.oxide_pld_chamber.0',
-            'A KrF excimer laser ablates a bonded oxide target and the plume lands on a heated substrate in oxygen. The laser is built on an assembly line and kept in the chamber, not consumed.'],
-        ['emi.grindless.info.oxide_pld_chamber.1',
-            'The volatile ruthenium tetroxide and the bismuth-rich BFO fume are collected, never vented: they feed the extraction cascade.'],
-
+            'Nothing is wasted: the spent CoFeB target goes to the powder-bed re-press, the Heusler and ruthenium overspray comes out as powder, the argon is recovered, and the volatile RuO4 and bismuth-rich BFO fume of the laser chamber are collected, never vented. The KrF excimer laser is built on an assembly line and kept in the tool, not consumed.'],
         ['gtceu.recipe.grindless_mtj_sputtering.mtj_stack',
             'Circuit 1: CoFeB, MgO, a Ta seed and ruthenium are sputtered on an H-terminated Si-28 wafer; the CoFeB target comes out spent.'],
         ['gtceu.recipe.grindless_mtj_sputtering.mram_stack',
