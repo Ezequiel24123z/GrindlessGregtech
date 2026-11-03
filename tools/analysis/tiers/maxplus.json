@@ -104,7 +104,7 @@
       "id": "maxplus-void-items",
       "era": "maxplus-void",
       "label": "MAX+ end of stage II: the loom, the condensate assembler, the hyper assembly array and the hyperfactory",
-      "items": ["m:gtceu:meta_material_loom", "m:gtceu:condensate_assembler", "m:gtceu:hyper_assembly_array", "m:gtceu:hyperfactory"]
+      "items": ["m:gtceu:meta_material_loom", "m:gtceu:condensate_assembler", "m:gtceu:hyper_assembly_array", "m:gtceu:hyperfactory@maxplus"]
     }
   ],
   "synthetic": [
