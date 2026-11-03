@@ -51,23 +51,17 @@ export const QUESTS = [
   }, [STABLE]),
   prod('CA48', 'Calcium-48', 'gtceu:calcium_48_dust', ['CAL'], 11, -42.25, ['The rare isotope that a superheavy run fires. The UEV Lines chart shows how much one run uses.']),
   prod('PU', 'Plutonium-244', 'gtceu:plutonium_244_dust', ['CAL'], 13.25, -41.5, ['The heavy target the beam hits. Keep a stock of it before the cyclotron.']),
-  gear('HIC', 'heavy_ion_cyclotron', 'Heavy Ion Cyclotron', ['CAL'], 14, -39.25, {
-    for: 'The &6Heavy Ion Cyclotron&r accelerates calcium-48 until it can fuse with a plutonium target.',
-    needs: 'Two UHV hulls, three UV sensors, three UV field generators, a Nb3Sn cavity, a target wheel, calcium-48 beam charges, any UHV circuit and the stable casing; the Calutron is its research.',
-    unlocks: 'Atoms of flerovium and heavier, which the recoil separator catches.',
-    automate: 'Beam and target arrive by ME; the output is a few atoms, so route it straight to the separator.',
+  gear('HIC', 'heavy_ion_cyclotron', 'Superheavy Factory', ['CAL'], 14, -39.25, {
+    for: 'The &6Superheavy Factory&r accelerates calcium-48 until it can fuse with a plutonium target, then picks the few new atoms out of the beam on the same line.',
+    needs: 'Two UHV hulls, three UV sensors, three UV field generators, a Nb3Sn cavity, a target wheel, calcium-48 beam charges, three etched membranes, two ion-tracked foils, any UHV circuit and the stable casing; the Calutron is its research.',
+    unlocks: 'Counted atoms of flerovium and heavier, ready for the chemistry lab.',
+    automate: 'Beam, target, membranes and foils arrive by ME; the output is a few atoms, so sort them by element and send them to the chemistry lab.',
   }, [STABLE]),
-  gear('REC', 'recoil_separator', 'Recoil Separator', ['HIC'], 20.5, -39.5, {
-    for: 'The &6Recoil Separator&r picks the few new atoms out of the beam, in the milliseconds they live.',
-    needs: 'Two UHV hulls, three UV sensors, three UV field generators, a Nb3Sn cavity, three etched membranes, two ion-tracked foils, any UHV circuit and the stable casing; the Heavy Ion Cyclotron is its research.',
-    unlocks: 'Counted superheavy atoms, ready for the chemistry lab.',
-    automate: 'Link it to the cyclotron by pipe and hatch; sort the atoms by element.',
-  }, [STABLE]),
-  gear('SHL', 'superheavy_chemistry_lab', 'Superheavy Chemistry Lab', ['REC'], 25, -40, {
+  gear('SHL', 'superheavy_chemistry_lab', 'Superheavy Chemistry Lab', ['HIC'], 25, -40, {
     for: 'The &6Superheavy Chemistry Lab&r studies a handful of atoms before they decay.',
-    needs: 'Two UHV hulls, three UV sensors, three UV field generators, three sealed capsules, a polycarbonate foil, an etched membrane, any UHV circuit and the stable casing; the Recoil Separator is its research.',
+    needs: 'Two UHV hulls, three UV sensors, three UV field generators, three sealed capsules, a polycarbonate foil, an etched membrane, any UHV circuit and the stable casing; the Superheavy Factory is its research.',
         unlocks: 'The tennessine sample and the superheavy census, which the Warp Gate hold and the later lines ask for.',
-    automate: 'Atoms come by hatch from the separator; log the results, then discard the decayed rest.',
+    automate: 'Atoms come by hatch from the Superheavy Factory; log the results, then discard the decayed rest.',
   }, [STABLE]),
   prod('CEN', 'Superheavy Census', 'grindless:superheavy_census', ['SHL'], 27.75, -41.5, ['A record of what the lab learned. The UEV Lines chart shows where it is spent.']),
 
@@ -210,23 +204,17 @@ export const QUESTS = [
   gear('SPEC', 'white_dwarf_spectrograph', 'White Dwarf Spectrograph', ['H_SIRIUS', 'HULL', 'SNSPD'], 30.75, -22.5, {
     for: 'The &6White Dwarf Spectrograph&r reads a dead star\'s light and from it the mass and radius.',
       needs: 'A UEV hull, four UEV sensors, five UEV emitters, three UEV pumps, an ULE cavity, three SNSPDs, two nuclear clocks, any UEV circuit and the photonic casing.',
-      unlocks: 'The mass-radius chart, made in Sirius B orbit, and the Degenerate Harvester.',
+      unlocks: 'The mass-radius chart, made in Sirius B orbit, and the Degenerate Works.',
     automate: 'The station asks for little by ME; keep a stock of charts.',
   }, [PHOTO], 150),
-    gear('DEG', 'degenerate_harvester', 'Degenerate Harvester', ['SPEC', 'EOS'], 33.25, -24, {
-    for: 'The &6Degenerate Harvester&r takes matter from a white dwarf, in which atoms are crushed together.',
-      needs: 'A UEV hull, five UEV robot arms, five UEV pumps, three UEV sensors, a degenerate EOS model, a mass-radius chart, two hollow-core fibres, any UEV circuit and the degenerate containment casing; the spectrograph is its research.',
-      unlocks: 'Degenerate matter, made in Sirius B orbit, which the Containment Works bottles.',
-    automate: 'Put the plant behind a safe containment loop; never route this matter by plain pipe.',
+    gear('DEG', 'degenerate_harvester', 'Degenerate Works', ['SPEC', 'EOS'], 33.25, -24, {
+    for: 'The &6Degenerate Works&r takes matter from a white dwarf, in which atoms are crushed together, and bottles it into a pellet that can be carried safely.',
+      needs: 'A UEV hull, five UEV robot arms, five UEV pumps, three UEV sensors, a degenerate EOS model, a mass-radius chart, two hollow-core fibres, three UEV emitters, two fluid regulators, a Faraday isolator, an SPDC source, any UEV circuit and the degenerate containment casing; the spectrograph is its research.',
+      unlocks: 'Degenerate matter, made in Sirius B orbit, which the same works bottles at once.',
+    automate: 'Put the plant behind a safe containment loop; never route this matter by plain pipe. An exotic matter cell comes by ME and the pellets leave by ME.',
   }, [it('grindless:degenerate_containment_casing')], 150),
-  gear('PEL', 'containment_works', 'Containment Works', ['DEG'], 35.25, -25.25, {
-    for: 'The &6Containment Works&r bottles degenerate matter into a pellet that can be carried safely.',
-      needs: 'A UEV hull, five UEV emitters, five UEV pumps, three fluid regulators, two Faraday isolators, two SPDC sources, any UEV circuit and the degenerate containment casing; the Degenerate Harvester is its research.',
-      unlocks: 'The degenerate pellet, which the UEV field generator and the Warp Gate hold take.',
-      automate: 'Feed the matter from the harvester by hatch and an exotic matter cell by ME; ship pellets by ME.',
-    }, [], 150),
-    { key: 'PELP', kind: 'step', title: 'Degenerate Pellet', icon: 'grindless:degenerate_pellet', deps: ['PEL'], x: 39, y: -26.25,
-      desc: ['The pellet is taught in &6A White Dwarf in a Bottle&r; tick this once the Containment Works runs.'], tasks: [{ type: 'checkmark' }], rewards: [xp(20)] },
+    { key: 'PELP', kind: 'step', title: 'Degenerate Pellet', icon: 'grindless:degenerate_pellet', deps: ['DEG'], x: 39, y: -26.25,
+      desc: ['The pellet is taught in &6A White Dwarf in a Bottle&r; tick this once the Degenerate Works runs.'], tasks: [{ type: 'checkmark' }], rewards: [xp(20)] },
     prod('TENS', 'Tennessine Sample', 'grindless:tennessine_sample', ['SHL'], 36.25, -32, ['Counted tennessine atoms sealed in a capsule with aerogel, made in the Superheavy Chemistry Lab. The Warp Gate hold takes one and keeps it stored.'], 100),
   {
     key: 'H_ALPHA', kind: 'reading', title: 'Work at Alpha Centauri', icon: 'gtceu:nebula_collector',

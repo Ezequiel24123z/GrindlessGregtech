@@ -136,7 +136,7 @@ test('the controllers are assembly lines with station research and the machines 
   assert.equal((srv.match(/gtceu\.assembly_line\(/g) || []).length, 1);
   assert.match(srv, /stationResearch/);
   const st = read('startup_scripts', 'grindless', 'uev', 'sirius.js');
-  for (const m of ['white_dwarf_spectrograph', 'degenerate_harvester', 'containment_works']) assert.match(st, new RegExp(`gtceu:${m}`));
+  for (const m of ['white_dwarf_spectrograph', 'degenerate_harvester']) assert.match(st, new RegExp(`gtceu:${m}`));
   for (const t of ['gravitational_redshift', 'degenerate_harvesting', 'degenerate_containment']) assert.match(st, new RegExp(`type: '${t}'`));
   assert.match(srv, /gtceu:uev_machine_hull/);
 });

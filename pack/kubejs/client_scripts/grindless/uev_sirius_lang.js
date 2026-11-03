@@ -11,8 +11,7 @@
     // [key, text]
     var ENTRIES = [
         ['block.gtceu.white_dwarf_spectrograph', 'White Dwarf Spectrograph'],
-        ['block.gtceu.degenerate_harvester', 'Degenerate Harvester'],
-        ['block.gtceu.containment_works', 'Containment Works'],
+        ['block.gtceu.degenerate_harvester', 'Degenerate Works'],
         ['gtceu.gravitational_redshift', 'Gravitational Redshift'],
         ['gtceu.degenerate_harvesting', 'Degenerate Harvesting'],
         ['gtceu.degenerate_containment', 'Degenerate Containment'],
@@ -37,14 +36,11 @@
         ['emi.grindless.info.degenerate_harvester.2',
             'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1 input hatch, 1-2 output buses. Accepts a parallel hatch.'],
 
-        ['grindless.machine.containment_works.tooltip.0',
-            '§7Seals degenerate matter into a carryable pellet.'],
-        ['grindless.machine.containment_works.tooltip.1', 'Works in Sirius B orbit only.'],
-        ['emi.grindless.info.containment_works.2',
-            'Seals degenerate matter in a stasis field into a pellet that can be carried. Works in Sirius B orbit only.'],
-        ['emi.grindless.info.containment_works.3',
-            'Circuit 1: 1 degenerate matter and 1 exotic matter cell (the Casimir array\'s stasis field) give 1 degenerate pellet. Nothing is released.'],
-        ['emi.grindless.info.containment_works.4',
+        ['emi.grindless.info.degenerate_works.2',
+            'The Degenerate Works is the harvester and the containment works in one hall: it takes degenerate matter and seals it in a stasis field into a pellet that can be carried. Works in Sirius B orbit only.'],
+        ['emi.grindless.info.degenerate_works.3',
+            'Degenerate Containment, circuit 1: 1 degenerate matter and 1 exotic matter cell (the Casimir array\'s stasis field) give 1 degenerate pellet. Nothing is released.'],
+        ['emi.grindless.info.degenerate_works.4',
             'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses. Accepts a parallel hatch.'],
 
         ['gtceu.recipe.grindless_gravitational_redshift.mass_radius_chart',
@@ -57,13 +53,13 @@
         ['emi.grindless.info.sirius_fiction.0',
             'Degenerate matter is named fiction, like the Casimir array\'s exotic matter: the pack gives the label to a step, it claims no physics.'],
         ['emi.grindless.info.sirius_fiction.1',
-            'It exists only in Sirius B orbit, comes out of the harvester (consuming the EOS model, keeping the chart) and is sealed at once into a pellet in the containment works. Nothing is voided and nothing escapes.'],
+            'It exists only in Sirius B orbit, comes out of the harvester (consuming the EOS model, keeping the chart) and is sealed at once into a pellet in the same Degenerate Works. Nothing is voided and nothing escapes.'],
         ['emi.grindless.info.white_dwarf_spectrograph.0',
             'The mass-radius chart is made only in Sirius B orbit. It is the harvester\'s kept catalyst and is never consumed.'],
-        ['emi.grindless.info.containment_works.0',
+        ['emi.grindless.info.degenerate_works.0',
             'The pellet is the core of the UEV field generator (assembler, with a pump rotor of single-crystal rhenium alloy) and the seed of the Sirius warp gate.'],
-        ['emi.grindless.info.containment_works.1',
-            'The degenerate containment casing (assembler) walls the harvester and the containment works; it is built only into those two shells.']
+        ['emi.grindless.info.degenerate_works.1',
+            'The degenerate containment casing (assembler) walls the Degenerate Works; it is built only into that one shell.']
     ]
 
     ClientEvents.lang('en_us', function (event) {

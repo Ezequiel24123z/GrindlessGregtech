@@ -83,7 +83,7 @@
       ;['heavy_ion_irradiation', 'recoil_separation', 'superheavy_chemistry'].forEach(function (t) {
         if (lazy().GTRegistries.RECIPE_TYPES.get(rl('gtceu:' + t)) == null) missing.push(t)
       })
-      ;['heavy_ion_cyclotron', 'recoil_separator', 'superheavy_chemistry_lab'].forEach(function (m) {
+      ;['heavy_ion_cyclotron', 'superheavy_chemistry_lab'].forEach(function (m) {
         if (!lazy().Registries.BLOCKS.containsKey(rl('gtceu:' + m))) missing.push(m)
       })
       check('registration', missing.length === 0, missing.length === 0 ? 'ok' : 'missing ' + missing.join(','))

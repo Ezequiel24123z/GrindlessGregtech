@@ -54,16 +54,11 @@
     ]
 
     var MACHINES = [
-        ['heavy_ion_cyclotron', 'Heavy Ion Cyclotron', 'heavy_ion_irradiation', 'Heavy Ion Irradiation',
-            'Dubna\'s U-400: a calcium-48 beam from the ion source is accelerated by the SRF cavity and hits an actinide target; a helium chamber takes the recoil. Neither the cavity nor the helium is used up.',
-            'Circuit 1: flerovium (plutonium-244). 2: livermorium (curium-248). 3: tennessine (target wheel). 4: oganesson (californium-249). 5: moscovium (americium). 6: xenon beam on polycarbonate foil.',
+        ['heavy_ion_cyclotron', 'Superheavy Factory', 'heavy_ion_irradiation', 'Heavy Ion Irradiation',
+            'Dubna\'s U-400 and its gas-filled separator on one beam line: a calcium-48 beam from the ion source is accelerated by the SRF cavity and hits an actinide target; a helium chamber takes the recoil, and dipole magnets bend the recoiling atoms away from the beam onto an etched membrane. Neither the cavity nor the helium is used up.',
+            'Heavy Ion Irradiation, circuit 1: flerovium (plutonium-244). 2: livermorium (curium-248). 3: tennessine (target wheel). 4: oganesson (californium-249). 5: moscovium (americium). 6: xenon beam on polycarbonate foil. Recoil Separation, circuits 1-5 as above: one recoil gas and one etched membrane give one atom item; the helium comes back.',
             'It uses energy. Parts go in the bottom layer: 1-4 energy hatches, 1-2 input buses, 1-2 output buses, up to 2 input and 2 output hatches.',
             'Voiding is off: the recoil gases, the helium and the activated wheel must never be thrown away.'],
-        ['recoil_separator', 'Recoil Separator', 'recoil_separation', 'Recoil Separation',
-            'A gas-filled separator: dipole magnets bend the recoiling atoms away from the beam and an etched membrane catches them.',
-            'Circuits 1-5, as the cyclotron: one recoil gas and one etched membrane give one atom item; the helium comes back.',
-            'It uses energy. Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, up to 2 input and 2 output hatches.',
-            'Voiding is off: the helium and the atoms must never be thrown away.'],
         ['superheavy_chemistry_lab', 'Superheavy Chemistry Lab', 'superheavy_chemistry', 'Superheavy Chemistry',
             'Gas chromatography on gold and the capsule line: a few atoms at a time are counted, sorted and sealed.',
             'Circuit 1: tennessine atoms in a sealed capsule give a tennessine sample (stored; no recipe uses it). 2: flerovium, livermorium, moscovium and oganesson atoms on gold foil give the superheavy census.',
@@ -77,9 +72,10 @@
     // [en tip 0] of each controller: the rest of the old tooltip moved to its EMI info page
     var TIP0 = {
         heavy_ion_cyclotron: ['§7Fires a calcium-48 beam at actinide targets to make superheavy atoms.'],
-        recoil_separator: ['§7Separates recoiling superheavy atoms from the beam with dipole magnets.'],
         superheavy_chemistry_lab: ['§7Counts, sorts and seals a few superheavy atoms at a time.']
     }
+
+    ENTRIES.push(['gtceu.recoil_separation', 'Recoil Separation'])
 
     MACHINES.forEach(function (m) {
         ENTRIES.push(['block.gtceu.' + m[0], m[1]])

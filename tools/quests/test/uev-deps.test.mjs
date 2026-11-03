@@ -11,7 +11,7 @@ const byKey = Object.fromEntries([...headings, ...CIRCUITS, ...MACHINES, ...INTE
 // AF-Q2c dropped these to clear layout lint. FIX-UEVQ re-laid the chapter and brought 30 back; QUEST-HIGH (#295) brought the
 // last 5 (HULL>NEB, SX>FIELD, SNSPD>SPEC, SNSPD>ENT, EOS>HOLD; their quests hide the long dependency lines).
 const RESTORED = [
-  'PARTS>MK1', 'I_DFD>MK1', 'PULS>A_CHART', 'SXB>MK2', 'MAGP>MK2', 'PEL>S_PELLET', 'NETUEV>WARP', 'TENS>HOLD',
+  'PARTS>MK1', 'I_DFD>MK1', 'PULS>A_CHART', 'SXB>MK2', 'MAGP>MK2', 'DEG>S_PELLET', 'NETUEV>WARP', 'TENS>HOLD',
   'CH_SNS>PARTS', 'S_PELLET>FIELD', 'PHOT>CH_WG', 'SNSPD>CH_SNS', 'VDW>CH_GRM', 'ENT>CH_REP',
   'HULL>FORGE', 'CH_SIN>SNSPD', 'CH_GRM>PHOT', 'CH_QD>PHOT', 'CH_SIN>PHOT', 'COIL>MK4', 'HULL>MK4',
   'HULL>MOND', 'HULL>SPEC', 'EOS>DEG', 'HULL>PARH', 'PARTS>PARH', 'I_OM_DEC>CELL', 'CH_REP>NETUEV', 'HATCH>NETUEV',

@@ -278,7 +278,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [
-      it('gtceu:calutron'), it('gtceu:heavy_ion_cyclotron'), it('gtceu:recoil_separator'),
+      it('gtceu:calutron'), it('gtceu:heavy_ion_cyclotron'),
       it('gtceu:superheavy_chemistry_lab'), it('gtceu:electron_beam_furnace'), it('gtceu:megabar_press'),
       it('gtceu:cvi_furnace'), it('gtceu:photonic_integration_hall'),
     ],

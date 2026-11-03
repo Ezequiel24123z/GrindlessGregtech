@@ -2,14 +2,14 @@
   "type": "emi:info",
   "stacks": [
     "item:gtceu:uev_field_generator",
-    "item:gtceu:containment_works",
+    "item:gtceu:degenerate_harvester",
     "item:grindless:degenerate_containment_casing"
   ],
   "text": [
-    "emi.grindless.info.containment_works.0",
-    "emi.grindless.info.containment_works.1",
-    "emi.grindless.info.containment_works.2",
-    "emi.grindless.info.containment_works.3",
-    "emi.grindless.info.containment_works.4"
+    "emi.grindless.info.degenerate_works.0",
+    "emi.grindless.info.degenerate_works.1",
+    "emi.grindless.info.degenerate_works.2",
+    "emi.grindless.info.degenerate_works.3",
+    "emi.grindless.info.degenerate_works.4"
   ]
 }

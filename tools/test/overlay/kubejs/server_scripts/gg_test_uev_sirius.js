@@ -172,8 +172,8 @@
       SI.recipes.length + ' rows; missing ' + (missing.join(' ') || 'none') + '; skipped ' + JSON.stringify(SI.skipped || []) + '; clashes ' + JSON.stringify(SI.clashes || []))
     var ctl = []
     ;(SI.controllerRecipes || []).forEach(function (id) { if (S.server.getRecipeManager().byKey(rl(id)).isPresent() === false) ctl.push(id) })
-    check('static_controllers', (SI.controllerRecipes || []).length === 3 && ctl.length === 0, 'controller recipes ' + (SI.controllerRecipes || []).length + ', missing ' + (ctl.join(' ') || 'none'))
-    ;['white_dwarf_spectrograph', 'degenerate_harvester', 'containment_works'].forEach(function (m) {
+    check('static_controllers', (SI.controllerRecipes || []).length === 2 && ctl.length === 0, 'controller recipes ' + (SI.controllerRecipes || []).length + ', missing ' + (ctl.join(' ') || 'none'))
+    ;['white_dwarf_spectrograph', 'degenerate_harvester'].forEach(function (m) {
       check('static_' + m, !!lazy().Registry.MACHINES.get(rl('gtceu:' + m)), 'gtceu:' + m)
     })
   }

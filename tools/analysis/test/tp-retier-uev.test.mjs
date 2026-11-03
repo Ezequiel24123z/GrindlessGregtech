@@ -10,7 +10,7 @@ const cfg = loadConfig();
 // Controllers after the UEV hull; the ones before it (the component chain) keep their baseline keys: they cannot take the
 // components, hull or circuits they themselves make possible (a cycle in the obtain model).
 const CONTROLLERS = [
-  'barnard_core_drill', 'carbonyl_refinery', 'containment_works', 'degenerate_harvester', 'interstellar_dust_lab', 'nebula_collector',
+  'barnard_core_drill', 'carbonyl_refinery', 'degenerate_harvester', 'interstellar_dust_lab', 'nebula_collector',
   'pulsar_timing_station', 'stellar_forge', 'uev_fusion_reactor', 'white_dwarf_spectrograph'
 ];
 const CYCLIC = [
@@ -18,7 +18,7 @@ const CYCLIC = [
   'grindless:assembly_line/calutron', 'grindless:assembly_line/cvi_furnace', 'grindless:assembly_line/electron_beam_furnace',
   'grindless:assembly_line/entanglement_station', 'grindless:assembly_line/heavy_ion_cyclotron', 'grindless:assembly_line/helium3_polariser',
   'grindless:assembly_line/megabar_press', 'grindless:assembly_line/nitride_magnet_works', 'grindless:assembly_line/photonic_integration_hall',
-  'grindless:assembly_line/quantum_gas_lab', 'grindless:assembly_line/recoil_separator', 'grindless:assembly_line/sic_fibre_plant',
+  'grindless:assembly_line/quantum_gas_lab', 'grindless:assembly_line/sic_fibre_plant',
   'grindless:assembly_line/single_crystal_foundry', 'grindless:assembly_line/snspd_foundry', 'grindless:assembly_line/superheavy_chemistry_lab',
   'grindless:assembly_line/vdw_stacker'
 ];
