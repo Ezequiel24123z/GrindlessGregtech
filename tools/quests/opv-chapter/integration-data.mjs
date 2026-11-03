@@ -234,10 +234,10 @@ export const QUESTS = [
     key: 'I_OM_BEAM', kind: 'process', title: 'Heavy Ions and Beams', icon: 'gtceu:calutron',
     deps: ['J_CYG'], x: 2, y: 21,
     teach: {
-      for: 'The &6Calutron&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r, &6Superheavy Chemistry Lab&r, &6Synchrotron&r and &6Electron Beam Furnace&r take rows: nickel-64, lead-208 and boron-10, the new beams, elements 124 and 126, census IV, mirror metrology and brazes.',
+      for: 'The &6Calutron&r, &6Superheavy Factory&r (the Heavy Ion Cyclotron, which runs both the irradiation and the recoil separation), &6Superheavy Chemistry Lab&r, &6Synchrotron&r and &6Electron Beam Furnace&r take rows: nickel-64, lead-208 and boron-10, the new beams, elements 124 and 126, census IV, mirror metrology and brazes.',
       needs: 'The UEV and UV controllers you already own.',
       unlocks: 'Census IV, the beam cells and the sealed parts of the antiproton line.',
-      automate: 'Recoils and targets by bus. The spent beam is an output, so route it.',
+      automate: 'Targets and etched membranes by bus. The recoil gas goes from the irradiation row to the separation row inside the factory, and the spent beam is an output, so route it.',
     },
     desc: [],
     tasks: [

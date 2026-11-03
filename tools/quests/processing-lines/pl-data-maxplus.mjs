@@ -5,7 +5,7 @@ import { I, F, M, L, n } from './pl-lib.mjs';
 
 const ROWS = {
   P1: [
-    ["l", "pl_max:l18_7", []],
+    ["l", "pl_max:lkx18_7", []],
     ["m", "gtceu:kugelblitz_forge", [0]],
     ["i", "grindless:seed_wave_packet", [1]],
     ["m", "gtceu:mirror_shell", [2]],
@@ -45,7 +45,7 @@ const ROWS = {
     ["f", "fluid:gtceu:kerr_condensate", [9], 1],
   ],
   P4: [
-    ["l", "pl_max:l1_8", []],
+    ["l", "pl_max:m2x1_7", []],
     ["m", "gtceu:condensate_refinery", [0]],
     ["i", "grindless:kerr_clad_strand", [1]],
     ["i", "grindless:condensate_boil_off", [1], 1],
@@ -389,7 +389,7 @@ const ROWS = {
     ["i", "grindless:condensate_boil_off", [7], 1],
   ],
   T5: [
-    ["l", "pl_max:l10_2", []],
+    ["l", "pl_max:m5x10_2", []],
     ["m", "gtceu:cvi_furnace", [0]],
     ["i", "grindless:sic_waveguide_tube", [1]],
     ["f", "fluid:gtceu:hydrochloric_acid", [1], 1],
@@ -545,7 +545,7 @@ const ROWS = {
     ["f", "fluid:gtceu:nitrogen", [8], 1],
   ],
   T16: [
-    ["l", "pl_max:l13_6", []],
+    ["l", "pl_max:m4x13_6", []],
     ["m", "gtceu:cluster_light_furnace", [0]],
     ["i", "grindless:segment_truss_billet", [1]],
     ["m", "gtceu:megabar_press", [2]],
@@ -696,7 +696,7 @@ const ROWS = {
     ["i", "grindless:horizon_interposer", [10]],
   ],
   A1: [
-    ["l", "pl_max:l38_6", []],
+    ["l", "pl_max:m4x38_6", []],
     ["m", "gtceu:mtj_sputter_cluster", [0]],
     ["i", "grindless:mram_stack_plus", [1]],
     ["m", "gtceu:beuv_scanner", [2]],
@@ -934,6 +934,47 @@ const ROWS = {
   ],
 };
 
+// The design lines X1-X8 (docs/eras/lines-opv-maxplus.md, sections 1 and 4) are drawn from the rows above: join(a, b, ...) continues a
+// row from the last main node of the one before it, cut(row, i, j) takes a stretch of a row as a branch that starts raw.
+const lastMain = (r) => { let i = r.length - 1; while (r[i][3]) i--; return i; };
+const join = (...rows) => rows.reduce((a, b) => {
+  const li = lastMain(a);
+  if (a[li][1] !== b[0][1]) throw new Error(`join: ${a[li][1]} is not ${b[0][1]}`);
+  return [...a, ...b.slice(1).map(([t, id, from, by, peek]) => [t, id, from.map((f) => (f === 0 ? li : a.length - 1 + f)), by, peek])];
+});
+const cut = (r, i, j = r.length) => r.slice(i, j).map(([t, id, from, by, peek], k) => [k === 0 && t === 'm' ? 'i' : t, id, k === 0 ? [] : from.map((f) => f - i), by, peek]);
+
+// X1: the qubit stage after the shielded quantum module (steps 30-34), linked from pl_max's M1 and tagged as the same si28 line; the logic die (Q1)
+// and the interposer (Q2) are its feeders
+ROWS.X1 = [
+  ['l', 'pl_max:m1_8', []],
+  ['m', 'gtceu:mtj_sputter_cluster', [0]],
+  ['i', 'grindless:stacked_horizon_module', [1]],
+  ['i', 'grindless:horizon_module_scrap', [1], 1],
+  ['m', 'gtceu:femtosecond_writer', [2]],
+  ['i', 'grindless:linked_horizon_module', [4]],
+  ['m', 'gtceu:condensate_refinery', [5]],
+  ['i', 'grindless:condensate_cooled_module', [6]],
+  ['m', 'gtceu:millikelvin_cryostat_works', [7]],
+  ['i', 'grindless:tested_horizon_module', [8]],
+  ['m', 'gtceu:photonic_integration_hall', [9]],
+  ['i', 'grindless:horizon_processor', [10]],
+];
+// X2: the Hyperstargate tree, from the strangelet to the iris
+ROWS.X2 = join(ROWS.P3, ROWS.T11, [
+  ['i', 'grindless:iris_blade', []],
+  ['m', 'gtceu:hyper_assembly_array', [0]],
+  ['i', 'grindless:horizon_iris', [1]],
+]);
+// X3: the Kerr strand to the tether; its insulated wire and braid sleeve are a branch
+ROWS.X3 = join(cut(ROWS.P4, 0, 6), ROWS.P13);
+ROWS.X3B = cut(ROWS.P4, 5);
+// X5: the lift nozzle coil, the very-massive-star plasma and the nickel-56 casks; the crucible liner and the ash return are a branch
+ROWS.X5 = join(ROWS.P20, ROWS.P6, ROWS.P7);
+ROWS.X5B = join(ROWS.P21, ROWS.P8);
+// X6: the magnetic scoop and the primordial deuterium
+ROWS.X6 = join(ROWS.P23, ROWS.P9, ROWS.P26);
+
 const NAMES = {
   P1: "Kerr condensate",
   P2: "Horizon-bound neutronium",
@@ -1044,10 +1085,19 @@ const ENDS = {
   P26: 'The polarized fusion stellarator',
 };
 const grp = (ids, text) => ids.forEach((id) => { ENDS[id] = text; });
-grp(['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17'], 'The Hyperstargate grid crafts');
+grp(['T2', 'T1', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17'], 'The Hyperstargate grid crafts');
 grp(['T5', 'T6'], "The condensate assembler's horizon frame part");
 grp(['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'], 'The MAX+ machine components');
 grp(['Q1', 'Q2', 'A1', 'A2', 'A3'], 'The AE2 parts and the MAX+ circuits');
+ENDS.Q1 = 'X1 step 30: two logic dies stacked on the shielded quantum module';
+ENDS.Q2 = 'X1 step 31: the interposer laid over the stack';
+ENDS.X1 = 'The power unit, the creative hatches and the gate';
+ENDS.X2 = 'The horizon iris, set under the Hyperstargate ring';
+ENDS.X3 = 'The Deep Horizon Tether for the stellar elevator';
+ENDS.X3B = 'The Kerr braid sleeve for the horizon belt and the field coil';
+ENDS.X5 = 'The spent iron-56 casks';
+ENDS.X5B = 'The recovered silicon for the crucible and the wafers';
+ENDS.X6 = 'The polarised helium-3 for the fusion line';
 grp(['K1', 'K2', 'K3', 'K4'], 'The creative items');
 
 const ENDS_TREE = {
@@ -1077,6 +1127,7 @@ const BYEND = {
   protium: 'To the GTM hydrogen line',
   kerr_condensate: 'Recycled into the condensate refinery',
   melter_dross: 'Solvent extraction recovers its metals',
+  horizon_module_scrap: 'Leached in the extraction cascade (circuit 29) for its indium and niobium',
   stellar_heavy_cut: 'Back to stellar condensation',
   ime_ash: 'To the ash return (P8)',
   ni56_slug: 'Canned for the Ni-56 burner (P17)',
@@ -1117,28 +1168,6 @@ const shortId = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '');
 const TREE =  new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19']);
 
 // A gate-grid craft is one step: it is the branch end of the line that makes its main input.
-const ext = (cl) => ({ extends: cl });
-const TAGS = {
-  H1: ext('pl_maxplus:tg2'),
-  H2: ext('pl_maxplus:tg1'),
-  H3: ext('pl_maxplus:tg1'),
-  H4: ext('pl_maxplus:tg1'),
-  H5: ext('pl_maxplus:tg1'),
-  H6: ext('pl_maxplus:tg4'),
-  H7: ext('pl_maxplus:tg1'),
-  H8: ext('pl_maxplus:tg4'),
-  H9: ext('pl_maxplus:tg4'),
-  H10: ext('pl_maxplus:qa'),
-  H11: ext('pl_maxplus:comp'),
-  H12: ext('pl_maxplus:creative'),
-  H13: ext('pl_maxplus:creative'),
-  H14: ext('pl_maxplus:creative'),
-  H15: ext('pl_maxplus:creative'),
-  H16: ext('pl_maxplus:comp'),
-  H17: ext('pl_maxplus:hg1'),
-  H18: ext('pl_max:lock'),
-  H19: ext('pl_maxplus:cond'),
-};
 
 // one line at row y: main nodes at 2.5 columns per step, by-products beside their source
 function line(num, y, x0 = 0) {
@@ -1204,52 +1233,53 @@ function tree(num, y) {
     const py = i < k ? y + (i - (k - 1) / 2) * 1.5 : y;
     const opt = { kind: t === 'm' ? 'ours' : peek ? 'peek' : i < k ? 'raw' : 'product' };
     if (from.length) opt.from = from.map(key);
-    if (i === nodes.length - 1) { opt.end = ENDS[num]; Object.assign(opt, TAGS[num]); }
+    if (i === nodes.length - 1) opt.end = ENDS[num];
     return n(key(i), px, py, res, title(id), opt);
   });
 }
-const cluster = (name, nums) => {
-  if (nums.every((num) => TREE.has(num))) return { name, nodes: nums.flatMap((num, i) => tree(num, 7.5 * i)) };
-  // each line gets the height its stacked columns need
+const cluster = (name, nums, extra = {}) => {
+  // the first row is the trunk; the others are branches that end as dest nodes. Each row gets the height its stacked columns need
   let cursor = 0;
   const out = [];
-  for (const num of nums) {
-    const alias = ROWS[num].find((r) => r[0] === 'x');
+  nums.forEach((num, r) => {
+    const isTree = TREE.has(num);
+    const alias = isTree ? null : ROWS[num].find((row) => row[0] === 'x');
     const x0 = alias ? (((out.find((nd) => nd.key === alias[1]) ?? line(alias[1].split('_')[0].toUpperCase(), 0).find((nd) => nd.key === alias[1]))?.x ?? 1.25) - 1.25) : 0;
-    const ns = line(num, 0, x0);
-    const lo = Math.min(...ns.map((nd) => nd.y));
-    const hi = Math.max(...ns.map((nd) => nd.y));
-    const shift = cursor - lo;
-    for (const nd of line(num, shift, x0)) out.push(nd);
+    const make = (y) => (isTree ? tree(num, y) : line(num, y, x0));
+    const probe = make(0);
+    const lo = Math.min(...probe.map((nd) => nd.y));
+    const hi = Math.max(...probe.map((nd) => nd.y));
+    const ns = make(cursor - lo);
+    const used = new Set(ns.flatMap((nd) => nd.from));
+    const ends = ns.filter((nd) => !used.has(nd.key) && !['by', 'link', 'raw', 'ours'].includes(nd.kind));
+    const sink = r === 0 ? ends.reduce((a, b) => (b.x > a.x ? b : a), ends[0]) : null;
+    for (const nd of ns) out.push(ends.includes(nd) && nd !== sink ? { ...nd, kind: 'dest', end: nd.end || ENDS[num] } : nd);
     cursor += hi - lo + 2.5;
-  }
-  return { name, nodes: out };
+  });
+  return { name, ...extra, nodes: out };
 };
+const tall = (nums) => [...nums].sort((a, b) => ROWS[b].length - ROWS[a].length);
 
 export default {
   file: 'pl_maxplus',
   order: 15,
   title: 'MAX+ Lines',
-  subtitle: 'Condensate and bound matter, stars and streams, cryo parts, the gate tree crafts, components, circuits and the creative cores',
+  subtitle: 'The horizon qubit stage, the gate tree, the Kerr strand, bound matter, 30 Doradus, the primordial fuels, the relay and the components',
   icon: 'gtceu:hyper_assembly_array',
-  focus: 'p1_4',
-  bands: [['cond', 'tara'], ['stream', 'sling'], ['cryo', 'tg1'], ['tg2', 'tg3'], ['tg4', 'comp'], ['qa', 'creative'], ['hg1', 'hg2'], ['hg3']],
+  focus: 'x1_1',
+  bands: [['x1', 'x4', 'x7'], ['x3', 'x5'], ['x6', 'x8'], ['a1', 'a2', 'a3'], ['x2']],
   clusters: {
-    cond: cluster('Condensate, bound matter and the cable', ['P1', 'P2', 'P3', 'P4', 'P5']),
-    tara: cluster('Stars, casks and ash', ['P6', 'P7', 'P8', 'P17']),
-    stream: cluster('Streams and the torus', ['P9', 'P10', 'P11', 'P12', 'P22', 'P23', 'P24', 'P26']),
-    sling: cluster('Tether, void and slingshot', ['P13', 'P14', 'P15', 'P16']),
-    cryo: cluster('Cryo parts', ['P18', 'P19', 'P20', 'P21', 'P25']),
-    tg1: cluster('Plates, mesh and frame', ['T2', 'T1', 'T3', 'T14', 'T15', 'T16', 'T17']),
-    tg2: cluster('Shielding, waveguide and conduit', ['T4', 'T5', 'T6', 'T7']),
-    tg3: cluster('Crystals', ['T8', 'T9', 'T10']),
-    tg4: cluster('Iris, matrix and chamber', ['T11', 'T12', 'T13']),
-    comp: cluster('Machine components', ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7']),
-    qa: cluster('Circuits and AE2 parts', ['Q1', 'Q2', 'A1', 'A2', 'A3']),
-    creative: cluster('Creative cores', ['K1', 'K2', 'K3', 'K4']),
-    hg1: cluster('Hyperstargate parts', ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10']),
-    hg2: cluster('Creative items', ['H11', 'H12', 'H13', 'H14', 'H15', 'H16']),
-    hg3: cluster('The Hyperstargate', ['H17', 'H18', 'H19']),
+    x1: cluster('X1: the horizon processor', ['X1', 'Q1', 'Q2'], { line: 'si28' }),
+    x2: cluster('X2: the Hyperstargate tree', ['X2', 'P12', 'P19', 'P24', 'T2', 'T1', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'K1', 'K2', 'K3', 'K4', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19']),
+    x3: cluster('X3: the Kerr strand and the tether', ['X3', 'X3B', 'C1', 'C6', 'P18']),
+    x4: cluster('X4: horizon-bound matter', ['P1', 'P2', 'P5']),
+    x5: cluster('X5: 30 Doradus', ['X5', 'X5B', 'P17']),
+    x6: cluster('X6: the primordial fuels', ['X6', 'P10', 'P11', 'P22', 'P25']),
+    x7: cluster('X7: the relay probe', ['P16', 'P15', 'P14']),
+    x8: cluster('X8: the machine components', tall(['C2', 'C3', 'C4', 'C5', 'C7'])),
+    a1: cluster('A1: AE2 parts', ['A1']),
+    a2: cluster('A2: AE2 parts', ['A2']),
+    a3: cluster('A3: AE2 parts', ['A3']),
   },
 };
 
