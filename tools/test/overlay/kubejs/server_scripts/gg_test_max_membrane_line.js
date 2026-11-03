@@ -118,7 +118,7 @@
     var missing = ids.filter(function (i) { return !rm.byKey(new RL(i)).isPresent() })
     check('lookup', missing.length === 0, ids.length + ' ids checked; missing: ' + (missing.length ? missing.join(', ') : 'none'))
     var ML = global.grindless.membraneLine
-    check('static', !!ML && ML.skipped.length === 0 && ML.recipes.length === 3 && ML.clashes.length === 0,
+    check('static', !!ML && ML.skipped.length === 0 && ML.recipes.length === 4 && ML.clashes.length === 0,
       'recipes ' + (ML ? ML.recipes.length : null) + ', skipped ' + JSON.stringify(ML ? ML.skipped : null) + ', clashes ' + JSON.stringify(ML ? ML.clashes : null))
   }
 
@@ -153,7 +153,7 @@
       census[m[1]] = (census[m[1]] || 0) + 1
     })
     var byCount = Object.keys(census).sort(function (a, b) { return census[b] - census[a] })
-    var casing = byCount.filter(function (id) { return /casing/.test(id) })[0] || byCount[0]
+    var casing = 'grindless:membrane_roller_casing'
     var energy = 0
     parsed.forEach(function (c) {
       if (!/energy_input_hatch/.test(c.id)) return
@@ -162,7 +162,7 @@
     // the preview shape shows one energy cell (min 1, max 2): a second hatch goes on a casing cell beside it, on the same floor row
     var firstE = parsed.filter(function (c) { return c.id === HATCH })[0]
     while (firstE && energy < want) {
-      var spare = parsed.filter(function (c) { return c.id === casing && c.y === firstE.y && Math.abs(c.x - firstE.x) + Math.abs(c.z - firstE.z) === 1 })[0]
+      var spare = parsed.filter(function (c) { return c.id === casing && c.y === firstE.y && c.z === firstE.z })[0]
       if (!spare) break
       spare.id = HATCH
       spare.props = firstE.props
@@ -170,7 +170,7 @@
     }
     // the first row takes two fluids (ferric chloride and the liquid nitrogen charge): a second fluid input hatch on the casing cell beside the first
     var firstH = parsed.filter(function (c) { return /^gtceu:[a-z0-9]+_input_hatch$/.test(c.id) })[0]
-    var spareH = firstH && parsed.filter(function (c) { return c.id === casing && c.y === firstH.y && Math.abs(c.x - firstH.x) + Math.abs(c.z - firstH.z) === 1 })[0]
+    var spareH = firstH && parsed.filter(function (c) { return c.id === casing && c.y === firstH.y && c.z === firstH.z })[0]
     if (spareH) { spareH.id = firstH.id; spareH.props = firstH.props }
     parsed.forEach(function (c) {
       if (/input_bus/.test(c.id)) c.id = 'gtceu:hv_input_bus'
@@ -196,10 +196,10 @@
     command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
     command('fill ' + X0 + ' ' + Y0 + ' 0 ' + X1 + ' ' + Y1 + ' 63 minecraft:air')
     try {
-      var g = placeShape(39530, 100, 20, 2)
+      var g = placeShape(39530, 100, 10, 2)
       note('placed', g.placed + ' blocks, ' + g.energy + ' OpV 4 A hatch cell(s); refused: ' + (g.refused.join(', ') || 'none'))
       S.main = { phase: 'forming', started: 0, pos: g.pos, next: 0 }
-      var n = placeShape(39560, 100, 20, 1)
+      var n = placeShape(39560, 100, 10, 1)
       note('neg_placed', n.placed + ' blocks, ' + n.energy + ' OpV 4 A hatch cell(s); refused: ' + (n.refused.join(', ') || 'none'))
       S.neg = { phase: 'forming', started: 0, pos: n.pos }
     } catch (e) { check('build', false, errText(e)); S.main = null; S.neg = null }

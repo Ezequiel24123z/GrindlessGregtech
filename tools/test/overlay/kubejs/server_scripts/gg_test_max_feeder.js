@@ -21,7 +21,7 @@
   var DIM = 'gcyr:black_hole_orbit'
   var CX = 40311
   var CY = 100
-  var CZ = 48
+  var CZ = 10
   var VH_MAX = 1073741824
   var DYNAMO = 'gtceu:opv_wireless_dynamo_hatch_16a'
   var CIRCUIT = 'gtceu:programmed_circuit'

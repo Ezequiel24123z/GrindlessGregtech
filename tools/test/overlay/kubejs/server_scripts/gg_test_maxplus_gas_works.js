@@ -19,7 +19,7 @@
   var Y1 = 125
   var CX = 49440
   var CY = 108
-  var CZ = 32
+  var CZ = 10
   var STREAM = 'grindless:magellanic_stream'
   var WORKS = 'gtceu:pristine_gas_works'
   var HATCH = 'gtceu:max_maxplus_energy_hatch_1024a'

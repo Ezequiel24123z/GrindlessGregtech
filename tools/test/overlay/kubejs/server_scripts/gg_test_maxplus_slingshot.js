@@ -18,7 +18,7 @@
   var Y1 = 125
   var NAME = 'maxplus_slingshot'
   var CY = 104
-  var CZ = 32
+  var CZ = 10
   var CIRCUIT = 'gtceu:programmed_circuit'
   var HATCH = 'gtceu:max_maxplus_energy_hatch_1024a'
   var DIM = 'gcyr:black_hole_orbit'

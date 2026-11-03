@@ -19,7 +19,7 @@
   var NAME = 'max_horizon_interferometer'
   var CX = 40736
   var CY = 100
-  var CZ = 32
+  var CZ = 10
   var VA_MAX = 2013265920
   var HATCH = 'gtceu:opv_energy_input_hatch_4a'
   var CIRCUIT = 'gtceu:programmed_circuit'

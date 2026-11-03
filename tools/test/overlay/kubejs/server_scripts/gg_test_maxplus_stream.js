@@ -15,7 +15,7 @@
   var Y0 = 98
   var Y1 = 125
   var CY = 104
-  var CZ = 32
+  var CZ = 10
   var CIRCUIT = 'gtceu:programmed_circuit'
   var DYNAMO = 'gtceu:max_energy_output_hatch_16a'
   var STREAM = 'grindless:magellanic_stream'

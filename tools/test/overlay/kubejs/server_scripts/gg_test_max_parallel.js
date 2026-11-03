@@ -1,6 +1,6 @@
 // priority: -5544
 // TEST ONLY, MAX-M1 (gtceu:max_parallel_hatch). Command: kubejs custom_command gg_test_max_parallel
-// Band ONLY: X 39320-39383, Z 0-63, Overworld Y 98-115 (the forge is 16 high; zones.json carries the same Y range).
+// Band ONLY: X 39320-39383, Z 0-63, Overworld Y 98-124 (the forge is 23 high; zones.json carries the same Y range).
 //   T1 (named uncertainty: at x1,048,576 on a GTM recipe the EU/t x parallel product stays long and the energy bound picks the parallel, not an overflow):
 //     registered    the UHV, UEV, UIV, UXV, OpV and MAX hatches are registered machines; the MAX one is in the hatch list once
 //     recipe        grindless:assembly_line/max_parallel_hatch is in the recipe manager (max/parallel.js reports no missing input)
@@ -18,7 +18,7 @@
   var X0 = 39320
   var X1 = 39383
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 124
   var NAME = 'max_parallel'
   var HATCH = 'gtceu:max_parallel_hatch'
   var ID = 'gtceu:stellar_forge'
@@ -36,8 +36,8 @@
   var BUDGET = 2 * 16 * 536870912
   var CX = 39352
   var CY = 100
-  // the forge's front parts row: column 4 is the controller, so the second energy hatch takes column 3
-  var PARTS = { 0: 'gtceu:maintenance_hatch', 1: ENERGY16, 2: 'gtceu:hv_input_bus', 3: ENERGY16, 5: 'gtceu:hv_output_hatch', 6: HATCH }
+  // the forge's front parts row: the controller is column 7, the X cells are columns 4-6 and 8-10; the second energy hatch sits beside it
+  var PARTS = { 4: 'gtceu:maintenance_hatch', 5: ENERGY16, 6: 'gtceu:hv_input_bus', 8: ENERGY16, 9: 'gtceu:hv_output_hatch', 10: HATCH }
   var PROBES = [
     { x: 39328, id: 'gtceu:uhv_parallel_hatch', want: 1024 },
     { x: 39330, id: 'gtceu:uev_parallel_hatch', want: 4096 },
