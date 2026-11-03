@@ -177,8 +177,8 @@
       fluidsOut: [['gtceu:crude_si28_trichlorosilane', 1000], ['gtceu:hydrochloric_acid', 1000]] },
     { type: 'chemical_reactor', name: 'chlorosilane_purge_hydrolysis', eut: 268435456, duration: 100,
       fluidsIn: [['gtceu:chlorosilane_purge', 1000], ['minecraft:water', 3000]],
-      itemsOut: ['1x gtceu:silicon_dioxide_dust'],
-      fluidsOut: [['gtceu:phosphoric_acid', 300], ['gtceu:sulfuric_acid', 300], ['gtceu:hydrochloric_acid', 2000]] }
+      itemsOut: ['1x gtceu:silicon_dioxide_dust', '1x gtceu:sulfur_dust'],
+      fluidsOut: [['gtceu:phosphoric_acid', 300], ['gtceu:hydrochloric_acid', 2000]] }
   ]
 
   function generateDirect(event) {
