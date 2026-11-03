@@ -655,8 +655,20 @@
         items = gtItemsIn(line)
         fluids = gtFluidsIn(line)
         var wantItems = AL_ITEMS.map(function (x) { return x[0] + ' x' + x[1] }).join(', ')
+        // GTCEu's form: an input over 64 is several consecutive entries of at most 64, one input bus each, in order
+        var merged = []
+        items.forEach(function (x) {
+          var prev = merged[merged.length - 1]
+          if (prev && prev[0] === x.id) prev[1] += x.count
+          else merged.push([x.id, x.count])
+        })
+        var gotMerged = merged.map(function (x) { return x[0] + ' x' + x[1] }).join(', ')
+        if (gotMerged !== wantItems) problems.push('items ' + gotMerged + ' (want ' + wantItems + ')')
+        items.forEach(function (x) { if (x.count > 64) problems.push(x.id + ' x' + x.count + ' does not fit one bus slot') })
+        // the line and the AE2 feed follow the live entries: one bus per entry
+        AL_ITEMS = items.map(function (x) { return [x.id, x.count] })
+        AL_SLICES = AL_ITEMS.length + 1
         var gotItems = items.map(function (x) { return x.id + ' x' + x.count }).join(', ')
-        if (gotItems !== wantItems) problems.push('items ' + gotItems + ' (want ' + wantItems + ')')
         var fluidOk = fluids.length === AL_FLUIDS.length && fluids.every(function (f, i) {
           return (f.id === AL_FLUIDS[i][0] || f.id === AL_FLUIDS[i][0].replace(':', ':flowing_')) && f.amount === AL_FLUIDS[i][1]
         })

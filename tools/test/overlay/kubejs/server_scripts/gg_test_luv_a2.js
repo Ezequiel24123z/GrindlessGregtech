@@ -1352,6 +1352,44 @@
     begin(m, 'pt_void')
   }
 
+  function ptProbe(m) {
+    var out = []
+    function tryIt(label, fn) {
+      try { out.push(label + '=' + fn()) } catch (e) { out.push(label + '=ERR ' + e) }
+    }
+    var ctrl = m.ctrl
+    var rlg = ctrl.getRecipeLogic()
+    tryIt('reasonMap', function () {
+      var map = rlg.getFailureReasonMap()
+      return map.size() + ' [' + asArray(map.values()).map(function (c) { return String(c.getString()) }).join(' ; ') + ']'
+    })
+    tryIt('lastFailedMatches', function () {
+      var l = rlg.getLastFailedMatches()
+      return l === null ? 'null' : 'size ' + l.size()
+    })
+    tryIt('recipeDirty', function () { return rlg.isRecipeDirty() })
+    tryIt('status', function () { return rlg.getStatus() })
+    var found = null
+    tryIt('search', function () {
+      var it = ctrl.getRecipeType().searchRecipe(ctrl, function (r) { return true })
+      var ids = []
+      while (it.hasNext()) {
+        var r = it.next()
+        if (r === null) continue
+        ids.push(String(r.id))
+        if (String(r.id) === ASTEROID_ID) found = r
+      }
+      return ids.length + ' recipes, asteroid ' + (found !== null) + (found === null ? ' [' + ids.slice(0, 6).join(',') + ']' : '')
+    })
+    tryIt('modifier', function () {
+      if (found === null) return 'no recipe'
+      var mod = ctrl.getDefinition().getRecipeModifier().getModifier(ctrl, found)
+      var res = mod.apply(found)
+      return 'apply=' + (res === null ? 'null' : 'recipe') + ' failReason=' + String(mod.getFailReason().getString())
+    })
+    return out.join(' ; ')
+  }
+
   function ptStep(m, age) {
     var rec = m.rec
     if (m.phase === 'pt_void') {
@@ -1363,6 +1401,15 @@
       var shown = failureReasons(m.ctrl).some(function (x) { return PGM_REASON.test(x) })
       check('pt_no_voiding', still && shown, 'mode 4\'s inputs, circuit 4, the controller voiding items and fluids, ' + age + ' ticks: refusal shown=' + shown +
         ', ' + blockedText(m))
+      m.probeAt = S.t
+      m.probeText = ptProbe(m)
+      try { m.ctrl.getRecipeLogic().updateTickSubscription() } catch (e) { /* reported by the probe */ }
+      m.phase = 'pt_probe'
+      return
+    }
+    if (m.phase === 'pt_probe') {
+      if (S.t - m.probeAt < 5) return
+      note('pt_no_voiding_probe', m.probeText + ' | after updateTickSubscription + ' + (S.t - m.probeAt) + ' ticks: reasons=[' + failureReasons(m.ctrl).join(' ; ') + '] ' + state(m.ctrl))
       setVoiding(m, 'VOID_NONE')
       begin(m, 'pt_resume')
       return
