@@ -138,6 +138,17 @@ function Invoke-Cut($ffmpeg, [string]$src, [object]$spec, [object]$row, [string]
     Invoke-LoopRotate $ffmpeg $wav $rot $k $row.id
     $e = Invoke-Native $ffmpeg @('-y', '-v', 'error', '-i', $rot, '-ac', '1', '-ar', "$rate", '-c:a', 'libvorbis', '-q:a', "$([int]$row.quality)", '-map_metadata', '-1', '-metadata', $masterTag, '-metadata', $cutTag, '-fflags', '+bitexact', '-flags:a', '+bitexact', $out)
     if ($e.Code) { throw "ffmpeg encode failed for $($row.id)" }
+    # the encoder may overshoot the peak limit: trim the gain once, which keeps the loop circular
+    $st = Invoke-Native $ffmpeg @('-hide_banner', '-i', $out, '-af', 'astats=measure_perchannel=none:measure_overall=Peak_level', '-f', 'null', '-')
+    $pm = [regex]::Matches($st.Text, 'Peak level dB:\s*(-?[\d.]+)')
+    if ($pm.Count -gt 0) {
+      $pk = [double]::Parse($pm[$pm.Count - 1].Groups[1].Value, [Globalization.CultureInfo]::InvariantCulture)
+      if ($pk -gt -2.3) {
+        $trimDb = (-2.6 - $pk).ToString('0.00', [Globalization.CultureInfo]::InvariantCulture)
+        $e = Invoke-Native $ffmpeg @('-y', '-v', 'error', '-i', $rot, '-af', "volume=${trimDb}dB", '-ac', '1', '-ar', "$rate", '-c:a', 'libvorbis', '-q:a', "$([int]$row.quality)", '-map_metadata', '-1', '-metadata', $masterTag, '-metadata', $cutTag, '-fflags', '+bitexact', '-flags:a', '+bitexact', $out)
+        if ($e.Code) { throw "ffmpeg encode failed for $($row.id)" }
+      }
+    }
     $v = Invoke-Native $ffmpeg @('-y', '-hide_banner', '-i', $out, '-ac', '1', '-ar', "$rate", '-c:a', 'pcm_f32le', $chk)
     if ($v.Code) { throw "ffmpeg verify decode failed for $($row.id)" }
     $mis = 0.0; $ratio = [LoopCut]::Measure([LoopCut]::ReadWav($chk), $rate, [ref]$mis)
