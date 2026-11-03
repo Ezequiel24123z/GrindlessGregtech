@@ -192,8 +192,8 @@
     var i = 0
     var o = 0
     placeCheck(u, placeMachine(RING, u.x, 80, u.run.z, function (c) {
-      if (c.ch === 'E' && e < 15) { e++; return HATCH16 }
-      if (c.ch === 'X' && x < 1) { x++; return HATCH16 }
+      if (c.ch === 'E' && e < 14) { e++; return HATCH16 }
+      if (c.ch === 'X' && x < 2) { x++; return HATCH16 }
       if (c.ch === 'I' && i < 1) { i++; return 'gtceu:hv_input_hatch' }
       if (c.ch === 'O' && o < 1) { o++; return 'gtceu:hv_output_hatch' }
       return null
