@@ -16,7 +16,7 @@
                 'Presses ceramic powder in a graphite die and drives a pulsed current through it: dense ultra-high-temperature ceramics in minutes. Programmed circuit 1: 8 UHTC blend + 1 graphite dust -> 2 UHTC tiles + 1 carbon dust (the worn die).',
                 'Circuit 2: 2 tantalum dust + 2 carbon dust -> 1 tantalum carbide liner. Circuit 3: 4 UHTC tiles + 1 tantalum carbide liner -> 1 UHTC nozzle, the ICAN rocket motor\'s throat.',
                 'The blend comes from zircon: zirconia in the electric blast furnace, zirconium diboride with boron carbide (its carbon monoxide goes to the syngas plant), then a mixer with silicon carbide.',
-                'Needs 5 x 5 x 7 robust tungsten steel casing with tungsten steel pipe casings, frames and gearboxes inside (4 or more casings among the floor parts of both ends), 1 or 2 energy hatches (UHV), input and output buses.'
+                'Needs an 11 x 8 x 9 hall of robust tungsten steel casing (heatproof casing ribs, laminated glass windows) around a heatproof die stack with tungsten steel frame rams, gearbox drives and four tungsten steel pipe casing water jackets (4 or more casings among the floor parts), 1 or 2 energy hatches (UHV), input and output buses.'
             ],
             motor: 'ICAN Rocket Motor',
             items: {

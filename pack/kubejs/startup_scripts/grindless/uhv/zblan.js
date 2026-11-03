@@ -5,7 +5,7 @@
 // and so is zirconia (gtceu:zirconia, made by UHV-A8); neither is registered here.
 //
 //   gtceu:zblan_draw_tower   ZBLAN fluoride glass melted and drawn in microgravity (machine 19, Earth orbit only: the recipes carry
-//                            .dimension(G.orbits.earth)). A 3 wide x 11 high x 3 deep tower of UV's draw tower casing (the clean room
+//                            .dimension(G.orbits.earth)). A 7 wide x 19 high x 7 deep tower of UV's draw tower casing (the clean room
 //                            casing of startup_scripts/grindless/uv/photonics.js): the parts in the floor, the capstan (gearbox) above
 //                            them, the empty draw path, the draw furnace (heatproof casing) under the preform feed, and the station
 //                            module's truss bulkhead as the roof.
@@ -75,43 +75,44 @@
     )
   }
 
-  // 5 x 15 x 5: row 0 the floor (parts), rows 1-2 a spool hall (the controller in its front wall, a gearbox spool drive), rows 3-10 a 3 x 3
-  // cooling shaft (frame posts, pipe collars, glass windows) round the fibre's air path, rows 11-13 the preform furnace (heatproof, with
-  // glass windows and frame posts), row 14 the truss roof with the feed gearbox. ' ' is anything.
+  // 7 x 19 x 7: row 0 the floor (parts), rows 1-3 a spool hall (the controller in its front wall, a gearbox spool drive), rows 4-13 a 5 x 5
+  // cooling shaft (frame posts, pipe collars, glass windows) round the fibre's air path, rows 14-17 the preform furnace (heatproof, with
+  // glass windows and frame posts), row 18 the truss roof with the feed gearbox. ' ' is anything.
   function towerCell(x, z, y) {
-    var rim = x === 0 || x === 4 || z === 0 || z === 4
-    var corner = (x === 0 || x === 4) && (z === 0 || z === 4)
-    var inShaft = x >= 1 && x <= 3 && z >= 1 && z <= 3
-    var shaftRing = inShaft && !(x === 2 && z === 2)
-    var shaftCorner = (x === 1 || x === 3) && (z === 1 || z === 3)
+    var N = 7
+    var H = 19
+    var c = 3
+    var rim = x === 0 || x === N - 1 || z === 0 || z === N - 1
+    var corner = (x === 0 || x === N - 1) && (z === 0 || z === N - 1)
+    var dx = Math.abs(x - c)
+    var dz = Math.abs(z - c)
+    var centre = dx === 0 && dz === 0
     if (y === 0) return 'X'
-    if (y === 14) return x === 2 && z === 2 ? 'G' : 'T'
-    if (y <= 2) {
-      if (x === 2 && z === 2) return y === 1 ? 'G' : '#'
-      if (y === 1 && z === 4 && x === 2) return 'S'
-      if (rim) return corner ? 'F' : 'R'
-      return '#'
+    if (y === H - 1) return centre ? 'G' : 'T'
+    if (y <= 3) {
+      if (z === N - 1 && x === c && y === 1) return 'S'
+      if (rim) return corner ? 'F' : (y === 2 ? 'W' : 'R')
+      if (centre) return y === 1 ? 'G' : '#'
+      return y === 1 && dx <= 1 && dz <= 1 ? 'R' : '#'
     }
-    if (y <= 10) {
-      if (!shaftRing) return x === 2 && z === 2 ? '#' : ' '
-      if (shaftCorner) return 'F'
-      if (y === 5 || y === 8) return 'P'
-      if (y === 6 || y === 7) return 'W'
-      return 'R'
+    if (y <= H - 6) {
+      if (centre) return '#'
+      if (Math.max(dx, dz) !== 2) return ' '
+      if (dx === 2 && dz === 2) return 'F'
+      if (y % 4 === 0) return 'P'
+      return y % 4 === 3 ? 'R' : 'W'
     }
-    if (x === 2 && z === 2) return '#'
-    if (!rim) return '#'
-    if (corner) return 'F'
-    if (y === 11 || y === 13) return 'H'
-    return 'W'
+    if (rim) return corner ? 'F' : (y === H - 5 || y === H - 3 ? 'H' : 'W')
+    if (centre) return '#'
+    return dx <= 1 && dz <= 1 && y === H - 4 ? 'H' : '#'
   }
   function towerSlices() {
     var slices = []
-    for (var z = 0; z < 5; z++) {
+    for (var z = 0; z < 7; z++) {
       var rows = []
-      for (var y = 0; y < 15; y++) {
+      for (var y = 0; y < 19; y++) {
         var row = ''
-        for (var x = 0; x < 5; x++) row += towerCell(x, z, y)
+        for (var x = 0; x < 7; x++) row += towerCell(x, z, y)
         rows.push(row)
       }
       slices.push(rows)

@@ -84,20 +84,20 @@ function keysOf(r) {
   return k;
 }
 
-test('the organoid array\'s pattern validates through the real helper: a 7x5x7 clean room, parts in the floor, 30+ plascrete', () => {
+test('the organoid array\'s pattern validates through the real helper: an 11x6x11 sterile hall, parts in the floor, 30+ plascrete', () => {
   const { W, G } = harness();
   const d = G.structures['gtceu:organoid_array'];
   assert.ok(d, 'registered');
-  assert.equal(d.slices.length, 7);
+  assert.equal(d.slices.length, 11);
   for (const rows of d.slices) {
-    assert.equal(rows.length, 5);
-    for (const row of rows) assert.equal(row.length, 7);
+    assert.equal(rows.length, 6);
+    for (const row of rows) assert.equal(row.length, 11);
   }
   const tally = {};
   for (const rows of d.slices) for (const row of rows) for (const ch of row) tally[ch] = (tally[ch] || 0) + 1;
-  assert.deepEqual({ S: tally.S, F: tally.F, R: tally.R, M: tally.M, W: tally.W, X: tally.X }, { S: 1, F: 9, R: 16, M: 8, W: 12, X: 49 });
-  assert.ok(d.slices[6].some((row) => row.includes('S')), 'the controller is in the front wall');
-  for (const rows of d.slices) assert.equal(rows[0], 'XXXXXXX', 'the floor holds the parts');
+  assert.deepEqual({ S: tally.S, F: tally.F, R: tally.R, M: tally.M, W: tally.W, X: tally.X }, { S: 1, F: 49, R: 56, M: 32, W: 20, X: 121 });
+  assert.ok(d.slices[10].some((row) => row.includes('S')), 'the controller is in the front wall');
+  for (const rows of d.slices) assert.equal(rows[0], 'X'.repeat(11), 'the floor holds the parts');
   const sym = d.symbols;
   assert.equal(sym.F.blocks[0], 'gtceu:sterilizing_filter_casing');
   assert.equal(sym.R.blocks[0], 'gtceu:ptfe_pipe_casing');
