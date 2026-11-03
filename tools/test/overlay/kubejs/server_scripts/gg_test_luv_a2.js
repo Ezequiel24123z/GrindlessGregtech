@@ -800,7 +800,7 @@
     ;(pp.recipes || []).forEach(function (r) { dirs[String(r.recipeId).replace(/[^\/]*$/, '')] = true })
     var live = allOfType(PGM_TYPE).filter(function (r) { return dirs[String(r.getId()).replace(/[^\/]*$/, '')] === true })
     var rest = live.filter(function (r) { return String(r.getId()) !== ASTEROID_ID })
-        var rest = live.filter(function (r) { return String(r.getId()) !== ASTEROID_ID })    var c4 = rest.filter(function (r) { return circuitOf(r) === 4 }).map(function (r) { return String(r.getId()) })
+    var c4 = rest.filter(function (r) { return circuitOf(r) === 4 }).map(function (r) { return String(r.getId()) })
     var keepers = rest.filter(function (r) { return keeps(r, keepKey) }).map(function (r) { return String(r.getId()) })
     if (c4.length > 0) problems.push('circuit 4 also in ' + c4.join(', '))
     if (keepers.length > 0) problems.push('the keep boolean also on ' + keepers.join(', '))

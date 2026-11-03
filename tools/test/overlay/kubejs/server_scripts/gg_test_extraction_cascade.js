@@ -155,9 +155,14 @@
 
   // ---------------------------------------------------------------- static checks
 
-  function recipeCount(typeId) {
+  function recipeCount(typeId, dir) {
     var type = GTRegistries.RECIPE_TYPES.get(rl(typeId))
-    return type ? S.server.getRecipeManager().getAllRecipesFor(type).size() : -1
+    if (!type) return -1
+    var all = S.server.getRecipeManager().getAllRecipesFor(type)
+    if (!dir) return all.size()
+    var n = 0
+    for (var i = 0; i < all.size(); i++) if (String(all.get(i).getId()).indexOf(dir) === 0) n++
+    return n
   }
 
   // the ids (and amounts, for the detail) a live GT recipe takes and gives, read through RecipeHelper (the ingredient getters are not
@@ -242,7 +247,8 @@
     // ---- the two recipes
     problems = []
     notes = []
-    var have = recipeCount(TYPE_ID)
+    // later eras (D5 horizon modules, the REE rows) add their own solvent_extraction recipes outside the cascade's ev/ directory
+    var have = recipeCount(TYPE_ID, 'grindless:solvent_extraction/ev/')
     EC().recipes.forEach(function (p) {
       var live = liveRecipe(p.recipeId)
       if (live === null) {
