@@ -100,6 +100,20 @@ const LAYOUT = {
   TRIT: [7.5, 12, ['H_ZPM_MACHINES']],
   DARM: [9, 12.5, null],
   ASMH: [11, 12, null],
+  EU_SUL: [20.5, 28.5, ['FUEL_EXC']],
+  EU_OX: [22.5, 28.5, null],
+  NQ_HEX: [20.5, 24, ['ZI_AUT']],
+  NQ_XEN: [22.5, 24, null],
+  NQ_SUL: [24.5, 24, null],
+  NQ_ING: [26.5, 24, null],
+  NQ_LOOP: [20.5, 25.5, null],
+  FUEL_EXC: [20.5, 27, ['NQ_LOOP']],
+  W_RADIUM: [20.5, 30, ['EU_SUL']],
+  NANO: [20.5, 31.5, ['W_RADIUM']],
+  Q_DOPED: [20.5, 33, ['NANO']],
+  PAN_FIB: [20.5, 34.5, ['Q_DOPED']],
+  UV_SMES: [22.5, 27, null],
+  NEP_SAMPLE: [20.5, 36, ['PAN_FIB']],
 };
 
 export function place(quests) {

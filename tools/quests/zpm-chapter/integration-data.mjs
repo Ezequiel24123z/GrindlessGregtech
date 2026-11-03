@@ -69,7 +69,7 @@ export const QUESTS = [
     key: 'BIG', kind: 'plant', title: 'The Big Reactor', icon: 'gtnn:large_naquadah_reactor', shape: 'gear', size: 1.5,
     deps: ['MK2'], x: 8, y: 0,
     teach: {
-      for: "GT--'s &6Large Naquadah Reactor&r burns excited fuel and is the era's main plant. Duranium frames are part of its price.",
+      for: "The &6Large Naquadah Reactor&r burns excited fuel and is the era's main plant. It sits at the top of the naquadah ladder, from the small reactors up to the large one, and gets the most energy from every naquadria ingot.",
       needs: 'Excited fuel from the Mk2, and a fuel works ready to take the spent fuel back.',
       unlocks: "Power on a scale ZPM's machines expect, with a fuel loop that never leaves the base.",
       automate: 'Pipe spent fuel straight back to the fuel works and let ME top up the radon.',
