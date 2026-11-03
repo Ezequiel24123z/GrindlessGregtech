@@ -191,6 +191,33 @@
       itemOut: { id: 'grindless:niobium_oxyfluoride_dust', count: 2 }, itemOut2: { id: 'gcyr:fluorite_dust', count: 6 },
       fluidOut: { id: 'minecraft:water', amount: 4500 },
       eut: 30, duration: 128
+    },
+    // D2-ZBLAN rows (docs/eras/lines-ev-zpm.md L5): the fluorides of the ZBLAN glass (ZrF4 is UHV's chemical reactor row). Dusts count atoms
+    // (BaF2 3, LaF3 4, AlF3 4, NaF 2, La2O3 and sapphire Al2O3 5, NaOH 3), 1,000 mB a molecule, hydrogen 1,000 mB an atom.
+    //   Ba + 2 HF -> BaF2 + H2;  La2O3 + 6 HF -> 2 LaF3 + 3 H2O;  Al2O3 + 6 HF -> 2 AlF3 + 3 H2O;  NaOH + HF -> NaF + H2O
+    {
+      name: 'barium_fluoride',
+      itemIn: { id: 'gtceu:barium_dust', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 2000 },
+      itemOut: { id: 'gtceu:barium_fluoride_dust', count: 3 }, fluidOut: { id: 'gtceu:hydrogen', amount: 2000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'lanthanum_fluoride',
+      itemIn: { id: 'gtceu:lanthanum_oxide_dust', count: 5 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 6000 },
+      itemOut: { id: 'gtceu:lanthanum_fluoride_dust', count: 8 }, fluidOut: { id: 'minecraft:water', amount: 3000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'aluminium_fluoride',
+      itemIn: { id: 'gtceu:sapphire_dust', count: 5 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 6000 },
+      itemOut: { id: 'gtceu:aluminium_fluoride_dust', count: 8 }, fluidOut: { id: 'minecraft:water', amount: 3000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'sodium_fluoride',
+      itemIn: { id: 'gtceu:sodium_hydroxide_dust', count: 3 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 1000 },
+      itemOut: { id: 'gtceu:sodium_fluoride_dust', count: 2 }, fluidOut: { id: 'minecraft:water', amount: 1000 },
+      eut: 30, duration: 64
     }
   ]
 

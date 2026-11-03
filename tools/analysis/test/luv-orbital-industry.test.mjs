@@ -132,21 +132,15 @@ test('pipe cut removes datapack recipes and requests late material-info clearing
   // GTRecipeBuilder.removeExistingMaterialInfo in pinned GTM 7.5.3 clears both maps.
   // The native fixture, not this stand-in, proves the recipes stay absent after injection.
 });
-test('ZBLAN uses the exact 53:20:4:3:20 cation ratio and 293 fluorine atoms in a quarter batch', () => {
+test('ZBLAN is mixed from the fluorides on the large chemical reactor: 10:4:1:1:4 mol, 20 cation shares, no fluorine gas', () => {
   const { recipes } = harness();
   const r = recipes.find(r => r.id === 'grindless:zblan');
-  // Pinned GTM 7.5.3 TagPrefix.dustSmall uses idPattern("small_%s_dust"),
-  // which GTMaterialItems applies to the material name when registering its item.
+  assert.equal(r.type, 'large_chemical_reactor');
   assert.deepEqual(calls(r, 'itemInputs'), [[[
-    '53x gtceu:small_zirconium_dust', '20x gtceu:small_barium_dust',
-    '4x gtceu:small_lanthanum_dust', '3x gtceu:small_aluminium_dust',
-    '20x gtceu:small_sodium_dust'
+    '50x gtceu:zirconium_tetrafluoride_dust', '12x gtceu:barium_fluoride_dust', '16x gtceu:zblan_dopant_blend_dust'
   ]]]);
-  const counts = calls(r, 'itemInputs')[0][0].map(s => Number(s.match(/^\d+/)[0]));
-  assert.deepEqual(counts, [53, 20, 4, 3, 20]);
-  assert.ok(counts.every(c => c <= 64));
-  assert.equal(calls(r, 'inputFluids')[0][0].amount, (53 * 4 + 20 * 2 + 4 * 3 + 3 * 3 + 20) * 250);
-  assert.deepEqual(calls(r, 'itemOutputs'), [['25x gtceu:zblan_dust']]);
+  assert.deepEqual(calls(r, 'inputFluids'), []);
+  assert.deepEqual(calls(r, 'itemOutputs'), [['20x gtceu:zblan_dust']]);
   assert.equal(r.calls.dimension, undefined);
   assert.deepEqual(calls(r, 'EUt'), [[7680]]);
   assert.deepEqual(calls(r, 'duration'), [[200]]);

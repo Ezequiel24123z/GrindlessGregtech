@@ -164,7 +164,7 @@
         out.length === 1 && itemId(out[0]) === expected.id && Number(out[0].getCount()) === expected.count,
       id + '; orbits=' + dimIds.join(',') + '; cleanroom=' + clean.length)
     })
-    ;['grindless:mixer/zblan', 'grindless:cutter/triple_junction_cells',
+    ;['grindless:large_chemical_reactor/zblan', 'grindless:large_chemical_reactor/zblan_dopant_blend', 'grindless:cutter/triple_junction_cells',
       'grindless:assembly_line/microgravity_smelter', 'grindless:assembly_line/wake_shield_facility'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })
