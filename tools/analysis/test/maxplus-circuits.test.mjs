@@ -56,13 +56,13 @@ test('the lines chain: every XP-A3 intermediate is made by one row and consumed 
   }
 });
 
-test('the horizon processor joins on the hall at VA[MAX]', () => {
+test('the horizon processor joins on the hall at VA[MAX], through the tested module only', () => {
   const r = find(ROWS[9]);
   assert.equal(r.eut, VA_MAX);
   assert.deepEqual(r.itemsIn.map((x) => [x.id, x.count]), [
-    ['grindless:horizon_logic_die', 2], ['grindless:horizon_interposer', 1], ['grindless:quantum_memory_node', 1],
+    ['grindless:tested_horizon_module', 1], ['grindless:quantum_memory_node', 1],
     ['grindless:rydberg_logic_array', 1], ['#gtceu:circuits/max', 2]]);
-  assert.deepEqual(r.fluidsIn, [{ id: 'gtceu:kerr_condensate', amount: 1000 }]);
+  assert.deepEqual(r.fluidsIn, []);
 });
 
 test('no duplicate lookup in the tables that gained rows', () => {

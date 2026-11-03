@@ -445,6 +445,15 @@
       fluidsOut: [{ id: 'gtceu:sn_li_eutectic', amount: 1000 }, { id: KEROSENE, amount: 950 }],
       eut: 1920, duration: 100
     },
+    // D5-QPU-MAXP (X1): a stack of the horizon module that fails (5%) is leached in HCl / Cl2: its indium bumps and niobium interconnect come back
+    {
+      name: 'horizon_module_scrap', mode: 'max', circuit: 29,
+      itemsIn: [{ id: 'grindless:horizon_module_scrap', count: 4 }],
+      fluidsIn: [{ id: HCL, amount: 2000 }, { id: 'gtceu:chlorine', amount: 500 }],
+      itemsOut: [{ id: 'gtceu:indium_dust', count: 1 }, { id: 'gtceu:niobium_dust', count: 1 }],
+      fluidsOut: [{ id: 'gtceu:diluted_hydrochloric_acid', amount: 2000 }],
+      eut: 1920, duration: 100
+    },
     // MX-S1 (max.md, L49 step 1, c31; repeat by item inputs): indium dust leached in sulfuric acid to indium sulfate; the hydrogen is the one the zone refiner's reduction consumes
     {
       name: 'indium_sulfate', mode: 'max', circuit: 31,

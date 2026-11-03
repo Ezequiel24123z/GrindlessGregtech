@@ -11,6 +11,7 @@ export const SECTIONS = {
 };
 
 // key: [x, y, deps]; null deps keep the quest's own (START hangs from the previous era's gate)
+const rowAt = (x0, y, keys) => Object.fromEntries(keys.map((k, i) => [k, [x0 + 2 * i, y, null]]));
 const LAYOUT = {
   START: [0, 0, null],
   LUVC: [4, -4, null],
@@ -93,6 +94,13 @@ const LAYOUT = {
   SIXTEEN: [6, 9.5, null],
   MCC: [8.5, -3, null],
   AE2L: [10.5, 2, null],
+  ...rowAt(22.5, 3, ['THIO', 'TBT', 'DBT', 'DMT', 'EDOT']),
+  PSS: [22.5, 1.5, ['STEM']],
+  PEDOT: [32.5, 1.5, ['EDOT', 'PSS']],
+  MEA: [34.5, 1.5, null],
+  ...rowAt(22.5, 8, ['GECL', 'PURE', 'GEO2', 'GE', 'BOULE', 'WAFER']),
+  ...rowAt(24.5, 10, ['ZRF4', 'BAF2', 'LAF3', 'BLEND', 'ZBLANQ']),
+  ...rowAt(28, -2, ['MONDR', 'DISTC', 'DECOMP', 'NIW', 'TAPES', 'TEX', 'SEED', 'BARR', 'BUFF', 'COAT', 'CAP']),
   ...Object.fromEntries(TEACH.map((q) => [q.key, [q.x, q.y, q.deps]])),
 };
 

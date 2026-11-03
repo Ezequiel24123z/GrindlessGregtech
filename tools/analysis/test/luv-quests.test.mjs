@@ -44,6 +44,17 @@ const NATIVE = new Set([
   // from the batch dump 5d57213f3b83)
   'gtceu:power_substation', 'gtceu:active_transformer', 'gtceu:plasma_large_turbine', 'gtceu:luv_large_miner',
   'gtceu:ev_fluid_drilling_rig', 'gtnn:large_dehydrator', 'gtceu:large_mixer', 'gtca:advanced_ebf', 'gtca:comet',
+  // D2-QUESTS-LUV (#386): the process rows (Mond, coated-conductor tape, PEDOT:PSS and MEA, germanium, ZBLAN); GTM's and this pack's
+  // ids registered outside luv/foundation.js, each checked against the batch dump fcbb1d552d77 (items.json) on 2026-11-03
+  'gtceu:large_chemical_reactor', 'gtceu:distillation_tower', 'gtceu:iron_dust', 'gtceu:crude_metal_carbonyl_bucket',
+  'gtceu:nickel_tetracarbonyl_bucket', 'gtceu:iron_pentacarbonyl_bucket', 'gtceu:nickel_tungsten_dust',
+  'grindless:textured_nickel_tungsten_tape', 'grindless:seeded_tape', 'grindless:barrier_tape', 'grindless:buffered_tape',
+  'grindless:coated_tape', 'grindless:capped_tape', 'gtceu:thiophene_bucket', 'gtceu:tetrabromothiophene_dust',
+  'gtceu:dibromothiophene_bucket', 'gtceu:dimethoxythiophene_bucket', 'gtceu:edot_bucket', 'gtceu:polystyrene_sulfonate_bucket',
+  'gtceu:pedot_pss_bucket', 'grindless:pedot_microelectrode_array', 'gtceu:germanium_tetrachloride_bucket', 'gtceu:extraction_cascade',
+  'gtceu:pure_germanium_tetrachloride_bucket', 'gtceu:germanium_dioxide_dust', 'grindless:germanium_boule', 'grindless:germanium_wafer',
+  'gtceu:zirconium_tetrafluoride_dust', 'gtceu:fluorspar_kiln', 'gtceu:barium_fluoride_dust', 'gtceu:lanthanum_fluoride_dust',
+  'gtceu:zblan_dopant_blend_dust',
 ]);
 // dimensions that exist without LuV-B1 (GCYR's own)
 const NATIVE_DIMENSIONS = new Set(['gcyr:overworld_orbit']);
