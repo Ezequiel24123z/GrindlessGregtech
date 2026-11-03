@@ -3,7 +3,7 @@
   "title": "ZPM era",
   "extends": "luv",
   "inheritTargets": true,
-  "dropTargets": ["europium-only-mk1","duranium-only-mk2","no-tritanium","npu-only-organoid-lab"],
+  "dropTargets": ["europium-only-mk1","duranium-only-mk2","no-tritanium","npu-only-organoid-lab","trinium-sulfide-needs-two-iv-hatches","trinium-only-mode2"],
   "note": "ZPM era per docs/eras/zpm.md (\"Validator (-Tier zpm)\", \"Gate to UV\"), in three substages: zpm (home and Earth orbit), zpm-saturn (Saturn orbit) and zpm-uranus (Uranus orbit, after Saturn: the aerogel tank needs Enceladus silica). Dimension ids come from the pack's tables (tables/orbits.json and tables/places.json) through the orbit and place tokens: none is hard-coded. LuV's three Mk1 checks that the Mk2 moves are replaced by mk2-only-metals and europium-only-mk1-or-reductor. Each package's targets WARN until a dump carries it (packages).",
   "eraOrder": ["steam","lv","mv","hv","ev","ev-mars","iv","iv-venus","iv-mercury","luv","luv-orbit","luv-belt","luv-io","luv-europa","luv-ganymede","luv-io-orbit","zpm","zpm-saturn","zpm-uranus","uv","uhv","uev","uiv","uxv","opv","max"],
   "packages": {

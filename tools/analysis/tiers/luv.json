@@ -115,7 +115,7 @@
     {"id":"enriched-naquadah-sulfate","label":"Enriched naquadah sulfate (mode 2)","item":"gtceu:enriched_naquadah_sulfate_dust","package":"A2"},
     {"id":"enriched-naquadah-ingot","label":"Enriched naquadah ingot (7,000 K EBF)","item":"gtceu:enriched_naquadah_ingot","package":"A2"},
     {"id":"impure-naquadria","label":"Impure naquadria solution (contained, stored for ZPM)","fluid":"gtceu:impure_naquadria_solution","package":"A2"},
-    {"id":"trinium-only-mode2","label":"Trinium only from mode 2 (Venus naquadah or spent rods): none without the naquadah plant","anyOf":["gtceu:trinium_sulfide_dust","gtceu:trinium_dust","gtceu:trinium_ingot","fluid:gtceu:trinium"],"without":["operate:gtceu:naquadah_plant*"],"expect":"unreachable","package":"A2"},
+    {"id":"trinium-only-mode2","label":"Trinium only from mode 2 (Venus naquadah or spent rods): none without the naquadah plant","anyOf":["gtceu:trinium_sulfide_dust","gtceu:trinium_dust","gtceu:trinium_ingot","fluid:gtceu:trinium"],"without":["operate:gtceu:naquadah_plant*"],"expect":"unreachable","package":"A2","note":"Guards IV and LuV only; zpm.json drops it. From ZPM, GT--'s enriched chain at its native tier (ZPM chemical plant plus the IV dehydrator) is a legitimate, worse second route (no recovery) that bypasses nothing."},
     {"id":"reactor-iii","label":"GT--'s naquadah reactor III","item":"gtnn:luv_naquadah_reactor","package":"A2"},
     {"id":"refrigerator","label":"Helium refrigerator (ours, Earth)","item":"gtceu:helium_refrigerator","package":"A3"},
     {"id":"refrigerator-formed","label":"Helium refrigerator formed","item":"m:gtceu:helium_refrigerator","package":"A3"},
