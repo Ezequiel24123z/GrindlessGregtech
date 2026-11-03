@@ -133,10 +133,10 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.transuranium_facility.3', 'Circuit 1: dissolve. 2: separate (the solvent comes back less 1 %). 3: decay store, thorium-229 milked from aged uranium-233, never overclocked. 4: the curium back into a new target. 5: the fission products evaporated to waste. 6: the spent solvent burned to phosphoric acid.')
     add('emi.grindless.info.transuranium_facility.4', 'The nitric acid comes back; the waste goes to the waste retrieval plant. Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output buses, 1-3 output hatches.')
 
-    add('emi.grindless.info.ultrapure_water_plant.0', "The Ultrapure Water Plant turns 8000 mB of water, sodium hydroxide, ion-exchange resin and hydrochloric acid into 6000 mB of ultrapure water.")
-    add('emi.grindless.info.ultrapure_water_plant.1', "The reverse-osmosis concentrate can be voided. It takes one parallel hatch.")
+    add('emi.grindless.info.ultrapure_water_plant.0', "The Ultrapure Water Plant climbs the purified water grades. Circuit 2: activated carbon (grade 1). 3: reverse osmosis (grade 2). 4: electrodeionisation (grade 3). 5: UV oxidation (grade 4). 6: degassing (grade 5). 1: mixed-bed polishing into ultrapure water. 8000 mB of water gives 6000 mB.")
+    add('emi.grindless.info.ultrapure_water_plant.1', "The salt water (reverse-osmosis concentrate and polishing brine) can be voided. It takes one parallel hatch.")
     add('emi.grindless.info.ultrapure_water_plant.2', 'A semiconductor fab\'s water train: PTFE pipe racks, reverse osmosis filters and an ion exchange bed. Plain water goes in; water for the UHV processes comes out.')
-    add('emi.grindless.info.ultrapure_water_plant.3', 'The resin is kept; hydrochloric acid and sodium hydroxide regenerate it. The reverse osmosis concentrate leaves as salt water. It is the only source of ultrapure water.')
+    add('emi.grindless.info.ultrapure_water_plant.3', 'The resin is kept; hydrochloric acid and sodium hydroxide regenerate it. The carbon bed wears slowly (5 % a run) and UV oxidation releases a little carbon dioxide. It is the only source of ultrapure water.')
     add('emi.grindless.info.ultrapure_water_plant.4', 'Parts in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output hatches, and one parallel hatch if you want.')
 
     add('emi.grindless.info.warp_gate.0', "The Warp Gate. Circuit 1: opens the gate and makes the Proxima gate seed from exotic matter cells, antihydrogen, approach data, a nuclear clock and an organoid processor. Circuit 2: holds the gate open for a minute with an exotic matter cell. Circuits 3 to 6 hold it with other catalysts.")

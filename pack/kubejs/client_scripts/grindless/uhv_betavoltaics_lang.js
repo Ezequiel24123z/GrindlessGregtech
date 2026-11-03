@@ -17,7 +17,7 @@
         ['gtceu.betavoltaic', 'Betavoltaic Fabrication'],
 
         ['grindless.machine.ultrapure_water_plant.tooltip.0',
-            '§7Climbs purified water grades 1 to 5 and polishes them into ultrapure water for UHV processes.'],
+            '§7Purifies water through grades 1 to 5 into ultrapure water for UHV processes.'],
 
         ['grindless.machine.betavoltaic_fab.tooltip.0',
             '§7Plates nickel-63 onto diamond diodes to make betavoltaic cells.'],
