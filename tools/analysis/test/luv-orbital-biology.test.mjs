@@ -171,7 +171,7 @@ test('B4 NPU preserves GTM materials and 48 M EU at LuV; all controllers have ex
   assert.equal(only(labAll[2], 'EUt'), 30720);
   assert.deepEqual(call(lab[0], 'itemInputs')[0], ['16x gtceu:stem_cells', 'grindless:neurotrophic_factor']);
   assert.deepEqual(call(lab[1], 'itemInputs')[0], ['gtceu:wetware_printed_circuit_board', 'grindless:neural_organoid',
-    '8x gtceu:polybenzimidazole_small_fluid_pipe', '8x gtceu:electrum_plate',
+    '8x gtceu:polybenzimidazole_small_fluid_pipe', 'grindless:pedot_microelectrode_array',
     '16x gtceu:silicone_rubber_foil', '8x gtceu:hsse_bolt']);
   lab.forEach((r, i) => {
     assert.equal(only(r, 'cleanroom'), 'native-cleanroom');
@@ -264,7 +264,7 @@ test('B4 preexisting item/fluid IDs match the pinned native registry, not naming
     'gtceu:exquisite_olivine_gem', 'gtceu:exquisite_emerald_gem', 'gtceu:exquisite_sapphire_gem',
     'gtceu:raw_crystal_chip_parts', 'gtceu:raw_crystal_chip', 'gtceu:sapphire_dust',
     'gtceu:collagen_dust', 'gtceu:stem_cells', 'gtceu:wetware_printed_circuit_board',
-    'gtceu:polybenzimidazole_small_fluid_pipe', 'gtceu:electrum_plate',
+    'gtceu:polybenzimidazole_small_fluid_pipe',
     'gtceu:silicone_rubber_foil', 'gtceu:hsse_bolt', 'gtceu:neuro_processing_unit',
     'gtceu:luv_electric_pump', 'gtceu:luv_sensor', 'gtceu:luv_electric_motor',
     'gtceu:luv_robot_arm', 'gtceu:luv_machine_hull', 'gtceu:inert_machine_casing',

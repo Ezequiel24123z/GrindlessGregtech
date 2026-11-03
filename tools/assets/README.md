@@ -83,6 +83,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UIVMk5Textures.ps1` | Writes the controller overlays of the polarised proton source and the UIV (Mk5) fusion ring and the sixteen item icons of the polarised fuel, first-wall and divertor lines (UIV-A9). `-Credits`. |
 | `Build-UIVMatrioshkaTextures.ps1` | Writes the controller overlays of the Matrioshka computer and the droplet radiator works, their five structure blocks and the twenty-eight item icons of the TPV, AQFP, C-12 diamond, droplet radiator and rad-hard controller lines (UIV-A10). `-Credits`. |
 | `Build-LuVGermaniumTextures.ps1` | Writes the germanium boule and wafer (LuV D2-GERMANIUM, `item/germanium_boule.png`, `item/germanium_wafer.png`). `-Credits`. |
+| `Build-LuVPedotMeaTextures.ps1` | Writes the PEDOT:PSS microelectrode array (LuV D2-MEA, `item/pedot_microelectrode_array.png`). `-Credits`. |
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
