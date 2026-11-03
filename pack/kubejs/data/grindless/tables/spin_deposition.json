@@ -245,7 +245,10 @@
           "itemsOut": [{ "id": "grindless:insulated_kerr_wire", "count": 4 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
         { "_why": "XP-A3 (maxplus.md, Q1 step 4, c32, a repeat on this type with its own inputs): the horizon logic wafer sputtered with the niobium and tantalum spin interconnect layers; the niobium overspray is scrap, most of the argon is recovered", "name": "spin_interconnect_wafer", "circuit": 32, "eut": 536870912, "duration": 1600,
           "itemsIn": [{ "id": "grindless:horizon_logic_wafer", "count": 1 }, { "id": "grindless:rrr_nb_target", "count": 2 }, { "id": "grindless:ta_seed_target", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 2000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:spin_interconnect_wafer", "count": 1 }, { "id": "grindless:niobium_scrap", "count": 2 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 1600 }] }
+          "itemsOut": [{ "id": "grindless:spin_interconnect_wafer", "count": 1 }, { "id": "grindless:niobium_scrap", "count": 2 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 1600 }] },
+        { "_why": "D5-QPU-MAXP (lines-opv-maxplus.md, X1 step 30, c28): two horizon logic dies stacked on the shielded quantum module and joined by the spin interconnect; one stack in twenty fails and leaves the module as scrap for the EV extraction cascade (In, Nb).", "name": "stacked_horizon_module", "circuit": 28, "eut": 2013265920, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:shielded_quantum_module", "count": 1 }, { "id": "grindless:horizon_logic_die", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:stacked_horizon_module", "count": 1 }, { "id": "grindless:horizon_module_scrap", "count": 1, "chance": 500 }], "fluidsOut": [] }
         ]
     },
     "pulsed_laser_deposition": {

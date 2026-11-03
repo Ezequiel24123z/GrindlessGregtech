@@ -892,16 +892,16 @@
 		}
 		{
 			dependencies: ["5F2EEA315A9E5CB3"]
-			description: ["The &6Asteroid Processor&r runs the Mond process: carbon monoxide carries the iron and nickel away as gas and leaves the platinum metals behind as a concentrate. Carbon monoxide, which stays in the machine, and meteoric iron from the harpoon drill. The concentrate exists nowhere else, so the processor won't void it. It also pulls tetrataenite apart by magnet. The meteoric iron dust that leaves goes back through Mond; close that loop with ME."]
+			description: ["The &6Asteroid Processor&r pulls tetrataenite ore apart by magnet: 16 crushed ore give 12 tetrataenite dust and 4 meteoric iron dust. Circuit 2 and crushed tetrataenite ore from the harpoon drill. The meteoric iron dust is the feed of the Mond line below, which ends in nickel-tungsten tape. Send the meteoric iron dust to the Large Chemical Reactor by ME and the loop closes itself."]
 			icon: "gtceu:asteroid_processor"
 			id: "5556DFCD2B6DD947"
-			rewards: [
-				{ id: "3E232CC68F44C448", type: "xp", xp: 100 }
-				{ count: 2, id: "162392BFEE00E911", item: "gtceu:carbon_monoxide_bucket", type: "item" }
-			]
+			rewards: [{ id: "3E232CC68F44C448", type: "xp", xp: 100 }]
 			shape: "gear"
 			size: 1.25d
-			tasks: [{ id: "1C58AD65259FF192", item: "gtceu:asteroid_processor", type: "item" }]
+			tasks: [
+				{ id: "1C58AD65259FF192", item: "gtceu:asteroid_processor", type: "item" }
+				{ id: "182FECCDBBCE8FBD", item: "gtceu:tetrataenite_dust", type: "item" }
+			]
 			title: "Mond"
 			x: 16.0d
 			y: -1.0d
@@ -975,7 +975,7 @@
 		}
 		{
 			dependencies: ["715B44AABDAFBFAE"]
-			description: ["The &6Fumarole Condenser&r sits over a field of vents and catches what the gas drops as it cools: sulfur dioxide, sulfur and a sublimate with germanium in it. Radiation vault casing round it, and the wireless hatch you brought. The only germanium before ZPM, and sulfur concrete, which needs no water. Jovian bases are built from it. Send the gas to the Volcanic Intake next door and ship the rest home."]
+			description: ["The &6Fumarole Condenser&r sits over a field of vents and catches what the gas drops as it cools: sulfur dioxide, sulfur and a sublimate with germanium in it. Radiation vault casing round it, and the wireless hatch you brought. Ionian sublimate, the start of the germanium line below, and sulfur concrete, which needs no water. Jovian bases are built from it. Send the gas to the Volcanic Intake next door and ship the rest home."]
 			icon: "gtceu:fumarole_condenser"
 			id: "3448ADF675EDD8E7"
 			rewards: [{ id: "5E7185555C94EB4E", type: "xp", xp: 100 }]
@@ -983,7 +983,7 @@
 			size: 1.25d
 			tasks: [
 				{ id: "73E53DF21AF01002", item: "gtceu:fumarole_condenser", type: "item" }
-				{ id: "599598C93A3EBE41", item: "gtceu:germanium_dust", type: "item" }
+				{ id: "1BB94300375E1FB2", item: "grindless:ionian_sublimate", type: "item" }
 			]
 			title: "Fumarole"
 			x: 12.0d
@@ -1184,6 +1184,413 @@
 			title: "The Bridge Reaches Out"
 			x: 10.5d
 			y: 2.0d
+		}
+		{
+			dependencies: ["31DC0512EB49BCD2"]
+			description: ["Carbon monoxide carries iron and nickel away from 16 crushed meteoric iron ore as a crude carbonyl gas. It leaves 20 iron dust, 1 cobalt dust and 1 platinum-metal concentrate behind. Crushed meteoric iron ore and carbon monoxide in the &6Large Chemical Reactor&r. Crude metal carbonyl, and the concentrate that feeds the platinum-group line. Feed the ore by ME and loop the carbon monoxide the next steps return."]
+			icon: "gtceu:large_chemical_reactor"
+			id: "72B33F44C499CAE1"
+			rewards: [{ id: "7E5426AC64754695", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7FF195B101D20FA8", item: "gtceu:large_chemical_reactor", type: "item" }
+				{ id: "7FAE49E205FACFE8", item: "gtceu:crude_metal_carbonyl_bucket", type: "item" }
+				{ id: "5EBB5609F8AA3B67", item: "grindless:asteroid_pgm_concentrate", type: "item" }
+			]
+			title: "Mond Process"
+			x: 28.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["72B33F44C499CAE1"]
+			description: ["A distillation tower splits the crude carbonyl into nickel tetracarbonyl and iron pentacarbonyl, which boil at different temperatures. Crude metal carbonyl from the Mond step. Two clean streams, one for nickel and one for iron. Pipe the crude gas straight in; both outputs leave by hatch."]
+			icon: "gtceu:nickel_tetracarbonyl_bucket"
+			id: "3045AAB797CF2EF2"
+			rewards: [{ id: "363D85A858D113CC", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5BF90E83DC295E09", item: "gtceu:distillation_tower", type: "item" }
+				{ id: "3A866CFC3E18B475", item: "gtceu:nickel_tetracarbonyl_bucket", type: "item" }
+				{ id: "19DD889747B6CDFD", item: "gtceu:iron_pentacarbonyl_bucket", type: "item" }
+			]
+			title: "Carbonyl Split"
+			x: 30.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3045AAB797CF2EF2"]
+			description: ["Heat breaks each carbonyl back into its metal dust and gives the carbon monoxide back for the Mond step. The two carbonyls, each in a Large Chemical Reactor. Very pure nickel dust, and the carbon monoxide to run Mond again. Return the carbon monoxide to the Mond step by pipe and the loop needs only ore."]
+			icon: "gtceu:nickel_dust"
+			id: "3B189D3D9C097DBA"
+			rewards: [{ id: "116C1A8C9C4F86CE", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1ED939408BFCA75B", item: "gtceu:nickel_dust", type: "item" }
+				{ id: "39135CA40743A537", item: "gtceu:iron_dust", type: "item" }
+			]
+			title: "Carbonyl Decomposition"
+			x: 32.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3B189D3D9C097DBA"]
+			description: ["A mixer blends 19 nickel dust with 1 tungsten dust into 20 nickel-tungsten dust, the alloy the tape is rolled from. Nickel dust from the Mond line and tungsten dust. The substrate of the coated conductor. One mixer on ME with both dusts as inputs."]
+			icon: "gtceu:nickel_tungsten_dust"
+			id: "15BC5A0177D64EAF"
+			rewards: [{ id: "367C18557085B0B8", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "59181F489B22DAE2", item: "gtceu:nickel_tungsten_dust", type: "item" }]
+			title: "Nickel-Tungsten"
+			x: 34.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["15BC5A0177D64EAF"]
+			description: ["The &6Coated Conductor Line&r rolls 20 nickel-tungsten dust into 20 bare substrate tape. The Coated Conductor Line and circuit 1 or 2. The blank every layer below is grown on. Keep all stages in one line, tape moving by conveyor or ME."]
+			icon: "grindless:nickel_tungsten_tape"
+			id: "31CA48C629A0187A"
+			rewards: [{ id: "11DA69B5FC9D50AA", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "347FBAF2CC90E872", item: "grindless:nickel_tungsten_tape", type: "item" }]
+			title: "Nickel-Tungsten Tape"
+			x: 36.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["31CA48C629A0187A"]
+			description: ["Hydrogen and argon treat the tape so its grains line up, giving 20 textured tape. Nickel-tungsten tape, hydrogen and argon. An aligned surface; every later layer copies its orientation. Pipe the two gases into the line."]
+			icon: "grindless:textured_nickel_tungsten_tape"
+			id: "59BDBA753851D49E"
+			rewards: [{ id: "32E18079D329BC18", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5EB0391A33C6AACB", item: "grindless:textured_nickel_tungsten_tape", type: "item" }]
+			title: "Textured Tape"
+			x: 38.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["59BDBA753851D49E"]
+			description: ["2 yttrium oxide dust lay a seed layer on 20 textured tape. Textured tape and yttrium oxide dust. The seed the barrier grows from. Yttrium oxide dust by ME input bus."]
+			icon: "grindless:seeded_tape"
+			id: "713652B2F37270A5"
+			rewards: [{ id: "3A05E2B0A9A3DB65", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3C544A464937050B", item: "grindless:seeded_tape", type: "item" }]
+			title: "Seeded Tape"
+			x: 40.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["713652B2F37270A5"]
+			description: ["2 YSZ powder form a barrier that stops the metal from poisoning the superconductor. Seeded tape and YSZ powder. A clean insulating layer. YSZ powder by ME input bus."]
+			icon: "grindless:barrier_tape"
+			id: "5959DCC45982C469"
+			rewards: [{ id: "5835EA3DCEEBA6D4", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "739C63690D4B8655", item: "grindless:barrier_tape", type: "item" }]
+			title: "Barrier Tape"
+			x: 42.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["5959DCC45982C469"]
+			description: ["2 cerium dust add the buffer that matches the barrier to the superconductor lattice. Barrier tape and cerium dust. A lattice the superconductor can grow on. Cerium dust by ME input bus."]
+			icon: "grindless:buffered_tape"
+			id: "132E9DA9BC6120BD"
+			rewards: [{ id: "16F6C54E434D6BDC", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "357DADD5F6E2D877", item: "grindless:buffered_tape", type: "item" }]
+			title: "Buffered Tape"
+			x: 44.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["132E9DA9BC6120BD"]
+			description: ["Oxygen and 1 ITBTC dust deposit the superconducting film on 20 buffered tape. Buffered tape, oxygen and ITBTC dust. The part that carries current without loss. Oxygen by pipe, ITBTC dust by ME input bus."]
+			icon: "grindless:coated_tape"
+			id: "3F1A4A9A70A170D2"
+			rewards: [{ id: "3B1A9A954311DE43", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "58055D07A0CE8BAE", item: "grindless:coated_tape", type: "item" }]
+			title: "Coated Tape"
+			x: 46.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3F1A4A9A70A170D2"]
+			description: ["Molten silver and oxygen cap the film and give 20 capped tape. Coated tape, molten silver and oxygen. Tape ready for the copper stage of the Coated and Cut quest. Silver by pipe from your smelter line."]
+			icon: "grindless:capped_tape"
+			id: "5D4425C70F86109D"
+			rewards: [{ id: "15663905C5A63AFF", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7FDA944DEAEAEB73", item: "grindless:capped_tape", type: "item" }]
+			title: "Capped Tape"
+			x: 48.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["712723D264B9CFED"]
+			description: ["A chemical reactor turns butane and 4 sulfur into thiophene, the ring that becomes the conductive polymer. Butane and sulfur. The ring the PEDOT line is built on. Butane by pipe, sulfur by ME input bus."]
+			icon: "gtceu:thiophene_bucket"
+			id: "1681E8F5E5E3C3B5"
+			rewards: [{ id: "38D01D676DB59621", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "75E6550EC79A9C27", item: "gtceu:thiophene_bucket", type: "item" }]
+			title: "Thiophene"
+			x: 22.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1681E8F5E5E3C3B5"]
+			description: ["Thiophene and bromine make tetrabromothiophene dust, a ring with every free site marked. Thiophene and bromine. A solid that stores well between steps. Bromine by pipe."]
+			icon: "gtceu:tetrabromothiophene_dust"
+			id: "33AFA0DCBC2A6DFF"
+			rewards: [{ id: "113B675AC2F077B7", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "134DAE6F97F64F96", item: "gtceu:tetrabromothiophene_dust", type: "item" }]
+			title: "Tetrabromothiophene"
+			x: 24.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["33AFA0DCBC2A6DFF"]
+			description: ["Tetrabromothiophene, 2 zinc, acetic acid and hydrogen bromide strip the ring down to the two bromines that matter. Tetrabromothiophene dust, zinc, acetic acid and hydrogen bromide. A ring with only the two sites that will take ether groups. Zinc by ME input bus, acids by pipe."]
+			icon: "gtceu:dibromothiophene_bucket"
+			id: "7FBD3C0F65127719"
+			rewards: [{ id: "7BB47F1E95CA981B", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1ACBAB86DF1679FE", item: "gtceu:dibromothiophene_bucket", type: "item" }]
+			title: "Dibromothiophene"
+			x: 26.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["7FBD3C0F65127719"]
+			description: ["In the Large Chemical Reactor, dibromothiophene and sodium methoxide swap bromine for methoxy groups. Dibromothiophene and sodium methoxide. The intermediate that EDOT is made from. Sodium methoxide by pipe."]
+			icon: "gtceu:dimethoxythiophene_bucket"
+			id: "5A7E5755F7F1DF9F"
+			rewards: [{ id: "507EFCAD69E3C8F7", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1758239AC05649E7", item: "gtceu:dimethoxythiophene_bucket", type: "item" }]
+			title: "Dimethoxythiophene"
+			x: 28.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5A7E5755F7F1DF9F"]
+			description: ["Dimethoxythiophene and ethylene glycol close the ether ring in the Large Chemical Reactor and return methanol. Dimethoxythiophene and ethylene glycol. EDOT, the monomer of PEDOT. Send the methanol back to make more sodium methoxide."]
+			icon: "gtceu:edot_bucket"
+			id: "12DFA456A278E8D7"
+			rewards: [{ id: "53BC0C5EC6DEB0B2", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5BF1158B6A966606", item: "gtceu:edot_bucket", type: "item" }]
+			title: "EDOT"
+			x: 30.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["712723D264B9CFED"]
+			description: ["Polystyrene dust and sulfur trioxide make polystyrene sulfonate, the water-soluble partner that keeps PEDOT dispersed. Polystyrene dust and sulfur trioxide. The second feed of PEDOT:PSS. Polystyrene dust by ME input bus, sulfur trioxide by pipe."]
+			icon: "gtceu:polystyrene_sulfonate_bucket"
+			id: "7506752C0AEFE08A"
+			rewards: [{ id: "5203FB9180325E4D", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "59387BCB3C654D63", item: "gtceu:polystyrene_sulfonate_bucket", type: "item" }]
+			title: "Polystyrene Sulfonate"
+			x: 22.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["12DFA456A278E8D7", "7506752C0AEFE08A"]
+			description: ["In the Large Chemical Reactor, EDOT, polystyrene sulfonate and sodium persulfate polymerise into PEDOT:PSS, giving sulfuric acid and sodium sulfate. EDOT, polystyrene sulfonate and sodium persulfate. A soft conductor that talks to living tissue. Recycle the sulfuric acid; the sodium sulfate may be voided."]
+			icon: "gtceu:pedot_pss_bucket"
+			id: "1E8C4396D6038336"
+			rewards: [{ id: "7483D79677EBDA75", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "327477CBE619DF0D", item: "gtceu:pedot_pss_bucket", type: "item" }]
+			title: "PEDOT:PSS"
+			x: 32.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1E8C4396D6038336"]
+			description: ["An assembler joins PEDOT:PSS with 4 sapphire plate, 16 gold foil, 8 platinum foil, 8 silver foil and 8 polystyrene dust into one array. PEDOT:PSS and the foils and plates above. The Organoid Lab uses it for the Neuro Processing Unit. Foils by ME input bus, PEDOT:PSS by pipe."]
+			icon: "grindless:pedot_microelectrode_array"
+			id: "1FB1A5E991A64F28"
+			rewards: [{ id: "7A953A0807C60B95", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5060106A46D7C8D7", item: "grindless:pedot_microelectrode_array", type: "item" }]
+			title: "Microelectrode Array"
+			x: 34.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1531C1737C6BE31B"]
+			description: ["The Fumarole Condenser takes 4 ionian sublimate and chlorine and separates germanium tetrachloride from indium chloride. Ionian sublimate, chlorine and circuit 2. The only source of germanium at this tier. Ship the sublimate home by ME."]
+			icon: "gtceu:germanium_tetrachloride_bucket"
+			id: "700867610B51145A"
+			rewards: [{ id: "7417F97370AD3575", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "559FD8112E9A6D4E", item: "gtceu:germanium_tetrachloride_bucket", type: "item" }]
+			title: "Germanium Tetrachloride"
+			x: 22.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["700867610B51145A"]
+			description: ["The &6Extraction Cascade&r scrubs the tetrachloride with hydrochloric acid until it is pure. Germanium tetrachloride and hydrochloric acid. Electronics-grade feed. Both by pipe; the acid is recycled."]
+			icon: "gtceu:pure_germanium_tetrachloride_bucket"
+			id: "3985708776AED8B4"
+			rewards: [{ id: "3FC1CBE23F65F1E2", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "50713659A699387C", item: "gtceu:extraction_cascade", type: "item" }
+				{ id: "5F75F5259955D98F", item: "gtceu:pure_germanium_tetrachloride_bucket", type: "item" }
+			]
+			title: "Pure Germanium Tetrachloride"
+			x: 24.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["3985708776AED8B4"]
+			description: ["A chemical reactor hydrolyses the pure tetrachloride into germanium dioxide dust. Pure germanium tetrachloride. A stable solid to reduce. One reactor on pipes and an output bus."]
+			icon: "gtceu:germanium_dioxide_dust"
+			id: "11D4C3327976C2D0"
+			rewards: [{ id: "79D3E5728768FA00", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "56557E37F18B98A9", item: "gtceu:germanium_dioxide_dust", type: "item" }]
+			title: "Germanium Dioxide"
+			x: 26.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["11D4C3327976C2D0"]
+			description: ["An electric blast furnace reduces the dioxide with hydrogen into germanium dust. Germanium dioxide dust and hydrogen. Germanium for crystal growth. Hydrogen by pipe, dust by ME."]
+			icon: "gtceu:germanium_dust"
+			id: "53B22C728809F80C"
+			rewards: [{ id: "15BCF1204C785D5D", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7E8E15315F4C8318", item: "gtceu:germanium_dust", type: "item" }]
+			title: "Germanium"
+			x: 28.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["53B22C728809F80C"]
+			description: ["An electric blast furnace under argon melts 16 germanium dust into a single crystal boule. Germanium dust, argon and circuit 1. A crystal that can be sliced. Argon by pipe."]
+			icon: "grindless:germanium_boule"
+			id: "573A716B12311B10"
+			rewards: [{ id: "30D430B80731F47E", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "16C13C0AC324291A", item: "grindless:germanium_boule", type: "item" }]
+			title: "Germanium Boule"
+			x: 30.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["573A716B12311B10"]
+			description: ["A cutter slices the boule into 16 germanium wafers. A germanium boule. Wafers for the optics and sensor lines. Cut by ME, one boule at a time."]
+			icon: "grindless:germanium_wafer"
+			id: "35C3C397B566A612"
+			rewards: [{ id: "536F1AC244F32FBC", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "381D9D600C9BDFC8", item: "grindless:germanium_wafer", type: "item" }]
+			title: "Germanium Wafer"
+			x: 32.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["1753F1FE9C989F6C"]
+			description: ["3 zirconia dust and hydrogen fluoride make zirconium tetrafluoride dust. Zirconia dust and hydrogen fluoride. The main component of ZBLAN glass. Hydrogen fluoride by pipe."]
+			icon: "gtceu:zirconium_tetrafluoride_dust"
+			id: "12183BC2EC5D223C"
+			rewards: [{ id: "1B9B285DF28728D2", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "78327F769601A6DF", item: "gtceu:zirconium_tetrafluoride_dust", type: "item" }]
+			title: "Zirconium Tetrafluoride"
+			x: 24.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["12183BC2EC5D223C"]
+			description: ["The &6Fluorspar Kiln&r digests barium with hydrogen fluoride into barium fluoride. Barium dust and hydrogen fluoride. The second component of the glass. Hydrogen fluoride by pipe."]
+			icon: "gtceu:barium_fluoride_dust"
+			id: "5E5E92012491F065"
+			rewards: [{ id: "197BC0F4AD5D764C", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "556517F336F77A7F", item: "gtceu:fluorspar_kiln", type: "item" }
+				{ id: "327187C534459153", item: "gtceu:barium_fluoride_dust", type: "item" }
+			]
+			title: "Barium Fluoride"
+			x: 26.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5E5E92012491F065"]
+			description: ["The Fluorspar Kiln digests 5 lanthanum oxide with hydrogen fluoride into lanthanum fluoride. Lanthanum oxide and hydrogen fluoride. The dopant of the blend. Hydrogen fluoride by pipe."]
+			icon: "gtceu:lanthanum_fluoride_dust"
+			id: "1B8C8867FA2D0505"
+			rewards: [{ id: "3A51FEB40CC2E6A8", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3554B767041A64DB", item: "gtceu:lanthanum_fluoride_dust", type: "item" }]
+			title: "Lanthanum Fluoride"
+			x: 28.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["1B8C8867FA2D0505"]
+			description: ["In the Large Chemical Reactor, 4 lanthanum fluoride, 4 aluminium fluoride and 8 sodium fluoride make 16 dopant blend. The three fluorides. The part that tunes the glass. Three ME input buses."]
+			icon: "gtceu:zblan_dopant_blend_dust"
+			id: "5C96C61BC45BF29A"
+			rewards: [{ id: "72F540A37B302F50", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3DC7F60ACC844216", item: "gtceu:zblan_dopant_blend_dust", type: "item" }]
+			title: "Dopant Blend"
+			x: 30.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5C96C61BC45BF29A"]
+			description: ["The Large Chemical Reactor melts 50 zirconium tetrafluoride, 12 barium fluoride and 16 dopant blend into 20 ZBLAN dust. The Microgravity Smelter draws it into optical pipe. The three feeds above. The glass for fibre optics. Keep the feeds on ME and the smelter takes the dust."]
+			icon: "gtceu:zblan_dust"
+			id: "5FC30B96A6313080"
+			rewards: [{ id: "7FFB72939CAE565E", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "592F8C14EB177A20", item: "gtceu:zblan_dust", type: "item" }]
+			title: "ZBLAN"
+			x: 32.5d
+			y: 10.0d
 		}
 		{
 			dependencies: ["31355CAB056CC9DC"]

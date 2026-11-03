@@ -197,7 +197,7 @@ test('the annihilation shield casing: an assembler at 2^28 EU/t, four per run, n
   assert.ok(r && r.t === 'gtceu:assembler');
   const text = JSON.stringify(r.j);
   assert.ok(text.includes('grindless:annihilation_shield_casing') && !text.includes('gtceu:circuits/'));
-  for (const id of ['grindless:gamma_absorber_tile', 'grindless:li6_hydride_shield', 'grindless:chain_lamina_stack', 'gtceu:tungsten_plate']) assert.ok(text.includes(id), id);
+  for (const id of ['grindless:gamma_absorber_tile', 'grindless:li6_hydride_shield', 'grindless:chain_lamina_stack', 'gtceu:tungsten_plate', 'gtceu:uxv_sensor', 'gtceu:uxv_electric_motor']) assert.ok(text.includes(id), id);
 });
 
 test('"only from": nothing else in the pack makes these ids', () => {
