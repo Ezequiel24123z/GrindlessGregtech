@@ -189,6 +189,7 @@
     }
   ],
   "machines": [
+    {"id":"gtceu:electric_blast_furnace@uhv-uv","machine":"gtceu:electric_blast_furnace","types":["gtceu:electric_blast_furnace"],"energy":{"voltage":524288,"hatches":2},"needs":["eu:uv"],"coilTemp":9001,"parts":["gtceu:heatproof_machine_casing","gtceu:trinium_coil_block","gtceu:uv_energy_input_hatch","gtceu:lv_input_bus","gtceu:lv_output_bus","gtceu:lv_input_hatch","gtceu:lv_output_hatch","gtceu:lv_muffler_hatch",{"anyOf":["gtceu:maintenance_hatch"],"onlyIf":{"config":"machines.enableMaintenance","equals":true}}],"note":"Trinium-coil EBF on two UV hatches (UHV voltage, 2,097,152 EU/t): the 1,966,080 EU/t rows, first D3-GATERING's MgB2 coil reaction for the warp gate casing. Reachability model only; in game the furnace accepts the UHV hatches too."},
     {"machine":"gtceu:quantum_fabricator","types":["gtceu:assembler","gtceu:circuit_assembler","gtceu:forming_press","gtceu:laser_engraver","gtceu:cutter"],"energy":{"voltage":2097152},"needs":["eu:uhv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:uhv_energy_input_hatch","gtceu:uhv_energy_input_hatch_4a","gtceu:uhv_energy_input_hatch_16a","gtceu:uhv_wireless_energy_hatch","gtceu:uhv_wireless_energy_hatch_4a","gtceu:uhv_wireless_energy_hatch_16a","gtceu:uhv_wireless_energy_hatch_64a"]},"package":"A1b-04","note":"Our UHV Quantum Fabricator (mega machine), modelled by A1b-04."},
     {
       "machine": "gtceu:high_flux_reactor",
