@@ -1,0 +1,56 @@
+{
+  "_what": "UV thorium front end (docs/eras/lines-uv-uhv.md, V1 rows 1-8): butanol to TBP to THOREX solvent, thorium dust to thoria. One row = one GTM recipe, id grindless:<type>/<name>, read by server_scripts/grindless/uv/thorium_refining.js. Pellets, pins and the cladding tube are rows of thorium_fabrication.json.",
+  "_nitric_acid": "Per 4 thorium: the dissolution takes 16000 mB HNO3 and 4000 mB NO2 leave (GTM turns NO2 and water back into HNO3); the extraction raffinate returns 4000 mB and the oxalate step 8000 mB, so no nitric acid is made from nothing.",
+  "_tbp_loss": "The strip returns 3920 of the 4000 mB solvent: 2 % is lost per cycle and made again by the mixer.",
+  "_circuits": "Chemical reactor and blast furnace rows take circuits 21-24 (GTM's own rows use the low numbers); the mixer, the large reactor and the extraction rows tell themselves apart by their inputs. The calcination burns the oxalate's carbon monoxide in the furnace's air, so it leaves as 16000 mB CO2 (the furnace has one fluid output).",
+  "rows": [
+    {
+      "name": "butanol_hydrogenation", "type": "chemical_reactor", "circuit": 21, "eut": 7680, "duration": 100,
+      "itemsIn": [], "kept": [{ "id": "gtceu:nickel_dust", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:butyraldehyde", "amount": 1000 }, { "id": "gtceu:hydrogen", "amount": 2000 }],
+      "itemsOut": [], "fluidsOut": [{ "id": "gtceu:n_butanol", "amount": 1000 }]
+    },
+    {
+      "name": "tbp_esterification", "type": "chemical_reactor", "circuit": 22, "eut": 7680, "duration": 160,
+      "itemsIn": [], "kept": [],
+      "fluidsIn": [{ "id": "gtceu:n_butanol", "amount": 3000 }, { "id": "gtceu:phosphoryl_chloride", "amount": 1000 }],
+      "itemsOut": [], "fluidsOut": [{ "id": "gtceu:tributyl_phosphate", "amount": 1000 }, { "id": "gtceu:hydrochloric_acid", "amount": 3000 }]
+    },
+    {
+      "name": "tbp_solvent_mixing", "type": "mixer", "circuit": 0, "eut": 7680, "duration": 100,
+      "itemsIn": [], "kept": [],
+      "fluidsIn": [{ "id": "gtceu:tributyl_phosphate", "amount": 300 }, { "id": "gtceu:kerosene", "amount": 700 }],
+      "itemsOut": [], "fluidsOut": [{ "id": "gtceu:tbp_solvent", "amount": 1000 }]
+    },
+    {
+      "name": "thorex_dissolution", "type": "large_chemical_reactor", "circuit": 0, "eut": 122880, "duration": 200,
+      "itemsIn": [{ "id": "gtceu:thorium_dust", "count": 4 }], "kept": [],
+      "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 16000 }, { "id": "gtceu:hydrofluoric_acid", "amount": 100 }],
+      "itemsOut": [], "fluidsOut": [{ "id": "gtceu:crude_thorium_nitrate", "amount": 4000 }, { "id": "gtceu:nitrogen_dioxide", "amount": 4000 }]
+    },
+    {
+      "name": "thorex_extraction", "type": "solvent_extraction", "circuit": 0, "eut": 122880, "duration": 200,
+      "itemsIn": [], "kept": [],
+      "fluidsIn": [{ "id": "gtceu:crude_thorium_nitrate", "amount": 4000 }, { "id": "gtceu:tbp_solvent", "amount": 4000 }],
+      "itemsOut": [], "fluidsOut": [{ "id": "gtceu:loaded_tbp_solvent", "amount": 4000 }, { "id": "gtceu:nitric_acid", "amount": 4000 }, { "id": "gtceu:lanthanide_nitrate", "amount": 1000 }]
+    },
+    {
+      "name": "thorex_strip", "type": "solvent_extraction", "circuit": 0, "eut": 122880, "duration": 200,
+      "itemsIn": [], "kept": [],
+      "fluidsIn": [{ "id": "gtceu:loaded_tbp_solvent", "amount": 4000 }, { "id": "gtceu:distilled_water", "amount": 4000 }],
+      "itemsOut": [], "fluidsOut": [{ "id": "gtceu:thorium_nitrate", "amount": 4000 }, { "id": "gtceu:tbp_solvent", "amount": 3920 }]
+    },
+    {
+      "name": "thorium_oxalate_precipitation", "type": "chemical_reactor", "circuit": 23, "eut": 122880, "duration": 200,
+      "itemsIn": [], "kept": [],
+      "fluidsIn": [{ "id": "gtceu:thorium_nitrate", "amount": 4000 }, { "id": "gtca:oxalate", "amount": 4000 }],
+      "itemsOut": [{ "id": "gtceu:thorium_oxalate_dust", "count": 4 }], "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 8000 }]
+    },
+    {
+      "name": "thoria_calcination", "type": "electric_blast_furnace", "circuit": 24, "eut": 122880, "duration": 300, "temp": 1073,
+      "itemsIn": [{ "id": "gtceu:thorium_oxalate_dust", "count": 4 }], "kept": [],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "gtceu:thoria_dust", "count": 4 }], "fluidsOut": [{ "id": "gtceu:carbon_dioxide", "amount": 16000 }]
+    }
+  ]
+}
