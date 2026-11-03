@@ -29,12 +29,16 @@
   B.recipes = recipes
   B.pipeRecycling = PIPE_RECYCLING
   B.pipeGate = PIPE_GATE
-  // Quarter of the 100-mole formulation: exact elemental ratios with integer mB, five modest stacks.
-  // A1's glass blend must disable decomposition: a ZBLAN dust denotes one cation share, not one atom.
-  // 73,250 mB exceeds a single mixer's 64 B tank: use IV's GCYM Large Mixing Vessel and a large input hatch.
-  B.zblan = { items: ['53x gtceu:small_zirconium_dust', '20x gtceu:small_barium_dust',
-    '4x gtceu:small_lanthanum_dust', '3x gtceu:small_aluminium_dust', '20x gtceu:small_sodium_dust'],
-    fluorine: 73250, output: 25 }
+  // D2-ZBLAN (lines-ev-zpm.md L5, D3-9): the glass batch is mixed from the fluorides on the large chemical reactor, multiblock only.
+  // 10 ZrF4 : 4 BaF2 : 1 LaF3 : 1 AlF3 : 4 NaF (mol, the spec's batch; 50/20/5/5/20 %), 20 cation shares -> 20 ZBLAN dust (one dust is one cation
+  // share, A1's glass blend disables decomposition). Dusts count atoms: ZrF4 5, BaF2 3, LaF3 4, AlF3 4, NaF 2, so 50 + 12 + 4 + 4 + 8 dust. The large
+  // reactor takes 3 item stacks and no circuit is needed, so the three small fluorides are kneaded first into 16 dopant blend dust (4 + 4 + 8).
+  B.zblan = {
+    blend: { items: ['4x gtceu:lanthanum_fluoride_dust', '4x gtceu:aluminium_fluoride_dust', '8x gtceu:sodium_fluoride_dust'],
+      output: '16x gtceu:zblan_dopant_blend_dust', eut: 7680, duration: 100 },
+    glass: { items: ['50x gtceu:zirconium_tetrafluoride_dust', '12x gtceu:barium_fluoride_dust', '16x gtceu:zblan_dopant_blend_dust'],
+      output: '20x gtceu:zblan_dust', eut: 7680, duration: 200 }
+  }
 
   global.grindless.recipes('luv/orbital_industry', function (event) {
     PIPE_RECYCLING.concat(PIPE_GATE).forEach(function (id) { event.remove({ id: id }) })
@@ -48,9 +52,10 @@
       // material info immediately before that generator runs; do not replace it with the cheaper inputs.
       if (r.name === 'zblan_optical_pipe') builder.removePreviousMaterialInfo()
     })
-    event.recipes.gtceu.mixer('grindless:zblan')
-      .itemInputs(B.zblan.items).inputFluids(Fluid.of('gtceu:fluorine', B.zblan.fluorine))
-      .itemOutputs(B.zblan.output + 'x gtceu:zblan_dust').EUt(7680).duration(200)
+    ;[['zblan_dopant_blend', B.zblan.blend], ['zblan', B.zblan.glass]].forEach(function (p) {
+      event.recipes.gtceu.large_chemical_reactor('grindless:' + p[0])
+        .itemInputs(p[1].items).itemOutputs(p[1].output).EUt(p[1].eut).duration(p[1].duration)
+    })
     event.recipes.gtceu.cutter('grindless:triple_junction_cells')
       .itemInputs('grindless:triple_junction_wafer').itemOutputs('4x grindless:triple_junction_cell')
       .cleanroom(Java.loadClass('com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType').CLEANROOM).EUt(7680).duration(200)
