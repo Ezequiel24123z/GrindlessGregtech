@@ -179,8 +179,8 @@ test('MBE row: circuit 4, the multilayer grown on glass; the cage line from NiCl
     // UXV-B4 adds a second cage_part source (the circuit-less cage_part_pressing companion row);
     // OpV-B2's EB ni_chain_thaw row returns the cage as a third
     assert.equal(tableProducers(id).length, id === 'grindless:cage_part' ? 3 : 1, id);
-    // UXV-B4's loader names cage_part (the circuit-less cage_part_pressing companion)
-    assert.deepEqual(scriptsMentioning(id).map((f) => path.basename(f)), id === 'grindless:cage_part' ? ['vela_pasta.js'] : [], id);
+    // UXV-B4's loader names cage_part (the circuit-less cage_part_pressing companion); D4-CASE-UXV's pasta containment casing consumes it
+    assert.deepEqual(scriptsMentioning(id).map((f) => path.basename(f)), id === 'grindless:cage_part' ? ['casings.js', 'vela_pasta.js'] : [], id);
   }
 });
 

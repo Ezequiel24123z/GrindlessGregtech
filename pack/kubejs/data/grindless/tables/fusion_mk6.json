@@ -5,10 +5,10 @@
     "assembler": {
       "recipes": [
         { "name": "uxv_fusion_casing", "circuit": 0, "eut": 125829120, "duration": 600,
-          "itemsIn": [{ "id": "grindless:wf_rhea_billet", "count": 1 }, { "id": "grindless:w184_cvi_preform", "count": 1 }, { "id": "grindless:mh_winding", "count": 1 },
-            { "id": "gtceu:uxv_field_generator", "count": 1 }, { "id": "gtceu:tritanium_frame", "count": 1 }], "kept": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:wf_rhea_billet", "count": 12 }, { "id": "grindless:w184_cvi_preform", "count": 12 }, { "id": "grindless:mh_winding", "count": 12 },
+            { "id": "gtceu:uxv_field_generator", "count": 1 }, { "id": "gtceu:tritanium_frame", "count": 12 }], "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:he_6n", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:uxv_fusion_casing", "count": 2 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:uxv_fusion_casing", "count": 24 }], "fluidsOut": [] }
       ]
     },
     "fusion_reactor": {

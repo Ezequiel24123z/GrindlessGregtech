@@ -88,11 +88,12 @@ test('the quench rows: circuits 3-8 once each, one item out at most, argon in ev
   }
 });
 
-test('the casing row takes the five line-38 items and 1,000 mB he_6n', () => {
+test('the casing row takes the five line-38 items and 1,000 mB he_6n; 12 of each part and one field generator make 24 (D4-CASE-UXV)', () => {
   const c = by('assembler', 'uxv_fusion_casing');
   assert.deepEqual(ids(c.itemsIn), ['grindless:wf_rhea_billet', 'grindless:w184_cvi_preform', 'grindless:mh_winding', 'gtceu:uxv_field_generator', 'gtceu:tritanium_frame']);
   assert.deepEqual(c.fluidsIn, [{ id: 'gtceu:he_6n', amount: 1000 }]);
-  assert.deepEqual(c.itemsOut, [{ id: 'grindless:uxv_fusion_casing', count: 2 }]);
+  assert.deepEqual(c.itemsIn.map((i) => i.count), [12, 12, 12, 1, 12]);
+  assert.deepEqual(c.itemsOut, [{ id: 'grindless:uxv_fusion_casing', count: 24 }]);
 });
 
 // every id the pack's tables write as an output

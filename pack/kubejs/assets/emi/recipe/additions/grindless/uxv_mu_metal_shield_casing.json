@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:mu_metal_shield_casing"],
+  "text": ["emi.grindless.info.mu_metal_shield_casing.0"]
+}
