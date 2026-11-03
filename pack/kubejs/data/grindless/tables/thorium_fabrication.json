@@ -66,21 +66,24 @@
       "itemsIn": [
         { "id": "gtceu:thorium_mononitride_dust", "count": 8 }
       ],
-      "fluidsIn": [],
+      "fluidsIn": [
+        { "id": "gtceu:nitrogen_15", "amount": 500 }
+      ],
       "fluidsKept": [],
       "fluidsOut": [],
       "itemsOut": [
         { "id": "grindless:thorium_nitride_pellet", "count": 8 }
       ],
       "energy": [
-        { "stage": "pressing and sintering the nitride pellets: two IV assembler stages", "eu": 1536000, "times": 2 }
+        { "stage": "pressing and sintering the nitride pellets under a 15N flush (the nitride sheds nitrogen near 2,000 C, and natural nitrogen would dilute the enrichment; the flush is lost): two IV assembler stages", "eu": 1536000, "times": 2 }
       ]
     },
     {
       "name": "thoria_pellet",
       "circuit": 15,
       "itemsIn": [
-        { "id": "gtceu:thoria_dust", "count": 8 }
+        { "id": "gtceu:thoria_dust", "count": 8 },
+        { "id": "gtceu:small_niobium_pentoxide_dust", "count": 1 }
       ],
       "fluidsIn": [],
       "fluidsKept": [],
@@ -89,7 +92,7 @@
         { "id": "grindless:thoria_pellet", "count": 8 }
       ],
       "energy": [
-        { "stage": "pressing and sintering the thoria pellets: two IV assembler stages", "eu": 1536000, "times": 2 }
+        { "stage": "pressing and sintering the thoria pellets with a niobia sintering aid (Nb2O5-doped ThO2 densifies hundreds of degrees below pure thoria; the dopant stays in the pellets): two IV assembler stages", "eu": 1536000, "times": 2 }
       ]
     },
     {

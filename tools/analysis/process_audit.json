@@ -1,6 +1,6 @@
 {
  "format": "gg-process-audit-1",
- "_comment": "Findings of tools/analysis/process-audit.mjs that are intentional (P8-H1). laser_cooled_ps (2026-11-02): the step is the kept 243 nm cooling laser, which the audit does not count; the lab has no fluid slot. The audit fails only on keys listed in neither list. Remove a key when its finding is fixed. options.ignore: globs of ids the audit skips. Reasons: uncraftable chain_strand_foil and double_chain_strand_plate are the retired CHAIN_UNUSED forms, their recipes removed by opv/cuts.js; trivial_step superfluid_helium_3 and superfluid_helium_4 are phase changes of one fluid (a cooling step, not a process line); trivial_step pathfinder_probe_core is the crafting-table unpack of the launched pathfinder probe (opv/pathfinder.js).",
+ "_comment": "Findings of tools/analysis/process-audit.mjs that are intentional (P8-H1). laser_cooled_ps (2026-11-02): the step is the kept 243 nm cooling laser, which the audit does not count; the lab has no fluid slot. The audit fails only on keys listed in neither list. Remove a key when its finding is fixed. options.ignore: globs of ids the audit skips. Reasons: uncraftable chain_strand_foil and double_chain_strand_plate are the retired CHAIN_UNUSED forms, their recipes removed by opv/cuts.js; trivial_step superfluid_helium_3 and superfluid_helium_4 are phase changes of one fluid (a cooling step, not a process line); trivial_step pathfinder_probe_core is the crafting-table unpack of the launched pathfinder probe (opv/pathfinder.js); trivial_step quantum_photonic_chip (batch 16): the step is the cryopackaging under the kept superfluid-helium bath (photonics_uev.json E1 step 24), a charge the audit does not count, as for laser_cooled_ps.",
  "options": {
   "ignore": [
    "gtceu:*_indicator"
@@ -26,7 +26,8 @@
   "trivial_step|fluid:gtceu:superfluid_helium_3",
   "trivial_step|fluid:gtceu:superfluid_helium_4",
   "trivial_step|grindless:pathfinder_probe_core",
-  "trivial_step|grindless:laser_cooled_ps"
+  "trivial_step|grindless:laser_cooled_ps",
+  "trivial_step|grindless:quantum_photonic_chip"
  ],
  "pending": []
 }

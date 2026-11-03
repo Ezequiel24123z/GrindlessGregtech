@@ -7,8 +7,8 @@
 (function () {
     var TEXT = {
         items: {
-            thoria_pellet: ['Thoria Pellet', 'A sintered cylinder of thorium dioxide, the most refractory fuel there is.', 'Pressed in the fuel fabrication plant (circuit 15).'],
-            thorium_nitride_pellet: ['Thorium Nitride Pellet', 'A dense sintered pellet of thorium nitride: more thorium per volume and a far better conductor of heat than the oxide.', 'Pressed in the fuel fabrication plant (circuit 14).'],
+            thoria_pellet: ['Thoria Pellet', 'A sintered cylinder of thorium dioxide, the most refractory fuel there is.', 'Pressed with a niobia sintering aid in the fuel fabrication plant (circuit 15).'],
+            thorium_nitride_pellet: ['Thorium Nitride Pellet', 'A dense sintered pellet of thorium nitride: more thorium per volume and a far better conductor of heat than the oxide.', 'Pressed and sintered under a nitrogen-15 flush in the fuel fabrication plant (circuit 14).'],
             thoria_fuel_pin: ['Thoria Fuel Pin', 'Four thoria pellets in a helium-filled 15-15Ti tube, plugs welded.', 'Made in the fuel fabrication plant (circuit 17).'],
             thorium_nitride_fuel_pin: ['Thorium Nitride Fuel Pin', 'Four thorium nitride pellets in a helium-filled 15-15Ti tube, plugs welded.', 'Made in the fuel fabrication plant (circuit 16).'],
             cladding_tube_15_15ti: ['15-15Ti Cladding Tube', 'Titanium-stabilised 15Cr-15Ni steel, drawn thin: it holds up to fast-neutron swelling better than zircaloy.', 'Made in the fuel fabrication plant (circuit 18).']

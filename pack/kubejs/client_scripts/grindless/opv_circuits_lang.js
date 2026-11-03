@@ -63,7 +63,7 @@
         ['gtceu.recipe.grindless_molecular_beam_epitaxy.inp_hemt_epi', 'Circuit 10: the InGaAs/InAlAs HEMT channel on semi-insulating InP; half the arsenic comes back'],
         ['gtceu.recipe.grindless_beuv_lithography.cryo_cmos_exposure', 'Circuit 4: the cryo-CMOS gates; the mirror comes out fouled'],
         ['gtceu.recipe.grindless_beuv_lithography.cmos_via_exposure', 'Circuit 17: vias and top metal of the cryo-CMOS back end; the mirror comes out fouled'],
-        ['gtceu.recipe.grindless_electron_beam.cmos_flash_anneal', 'Circuit 29: a millisecond flash anneal activates the dopants without letting them diffuse'],
+        ['gtceu.recipe.grindless_electron_beam.cmos_flash_anneal', 'Circuit 29: a millisecond flash anneal activates the dopants without letting them diffuse; the gun\'s LaB6 cathode wears (1 %)'],
         ['gtceu.recipe.grindless_beuv_lithography.tsv_exposure', 'Circuit 5: the through-silicon vias of the Nb interposer'],
         ['gtceu.recipe.grindless_beuv_lithography.hemt_gate_exposure', 'Circuit 6: the T-gates of the InP HEMT'],
         ['gtceu.recipe.grindless_beuv_lithography.gan_gate_exposure', 'Circuit 7: the gates of the GaN-on-SiC transistors'],
