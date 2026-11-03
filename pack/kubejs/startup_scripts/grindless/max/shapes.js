@@ -358,6 +358,7 @@
     var x
     var z
     var y
+    var i
     var oct = function (px, pz, r) { return abs(px - c) <= r && abs(pz - c) <= r && abs(px - c) + abs(pz - c) <= r * 1.5 + 0.5 }
     for (y = 0; y <= 12; y++) for (z = 0; z < 17; z++) for (x = 0; x < 17; x++) {
       if (!oct(x, z, 8)) continue
@@ -369,7 +370,7 @@
     for (y = 1; y <= 11; y += 5) for (z = 0; z < 17; z++) for (x = 0; x < 17; x++) {
       if (oct(x, z, 8) && !oct(x, z, 7)) cv.put(x, y, z, 'T')
     }
-    for (var i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
       var q = [[2, 2], [14, 2], [2, 14], [14, 14]][i]
       cv.box(q[0] - 1, 0, q[1] - 1, q[0], 12, q[1], 'T')
     }
@@ -448,7 +449,8 @@
     }
     cv.box(cx - 3, 1, cz - 3, cx + 3, 1, cz + 3, 'T')
     var arms = [[0, -1], [0, 1], [-1, 0], [1, 0]]
-    for (var i = 0; i < 4; i++) {
+    var i
+    for (i = 0; i < 4; i++) {
       var dx = arms[i][0]
       var dz = arms[i][1]
       for (var s = 5; s <= 7; s++) {
