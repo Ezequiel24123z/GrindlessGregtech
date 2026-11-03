@@ -122,8 +122,8 @@
  "gtceu:betavoltaic_fab": {
   "v": [],
   "bt": 6,
-  "ds": 0.34,
-  "c": 201
+  "ds": 0.373,
+  "c": 433
  },
  "gtceu:beuv_scanner": {
   "v": [],
@@ -1357,9 +1357,9 @@
  },
  "gtceu:sic_device_fab": {
   "v": [],
-  "bt": 5,
-  "ds": 0.364,
-  "c": 188
+  "bt": 7,
+  "ds": 0.487,
+  "c": 728
  },
  "gtceu:sic_fibre_plant": {
   "v": [],
@@ -1394,8 +1394,8 @@
  "gtceu:solar_array_fab": {
   "v": [],
   "bt": 6,
-  "ds": 0.352,
-  "c": 194
+  "ds": 0.402,
+  "c": 466
  },
  "gtceu:solar_probe_bay": {
   "v": [],
@@ -1652,8 +1652,8 @@
  "gtceu:ultrapure_water_plant": {
   "v": [],
   "bt": 6,
-  "ds": 0.333,
-  "c": 358
+  "ds": 0.374,
+  "c": 803
  },
  "gtceu:universal_assembly_factory": {
   "v": [],

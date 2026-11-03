@@ -5,8 +5,8 @@
 // (server_scripts/grindless/uhv/power_devices.js), which also holds two GTM side rows (the SiC boule cut into wafers, the cerium
 // coverglass). The MOCVD reactor's two UHV rows (IMM epi wafer, NbN-coated SiC plate) are in server_scripts/grindless/uv/photonics.js.
 //
-//   gtceu:sic_device_fab         silicon carbide switches kilovolts at 200 °C (Cree/Wolfspeed): a boule grown by physical vapour
-//                                transport at 2,500 °C, an epitaxial drift layer, ZPM's ion implanter's aluminium and a 1,700 °C
+//   gtceu:sic_device_fab         silicon carbide switches kilovolts at 200 Â°C (Cree/Wolfspeed): a boule grown by physical vapour
+//                                transport at 2,500 Â°C, an epitaxial drift layer, ZPM's ion implanter's aluminium and a 1,700 Â°C
 //                                anneal, then sintered power modules. Heatproof casing round an epi chamber (tungstensteel pipe).
 //   gtceu:silicon_carbide        its recipe type (EU in). Circuit 1: boule. 2: epi wafer. 3: anneal. 4: four power modules.
 //                                5: a reaction-bonded mirror blank (Herschel's SiC mirror). The only maker of the SiC power module and
@@ -21,7 +21,7 @@
 // nbn_coated_sic_plate, imm_solar_array, red_tuned_solar_array; A4 registered sic_epi_wafer and implanted_sic_wafer):
 //   items sic_boule (fab c1), sic_wafer (GTM cutter), sic_device_wafer (fab c3), imm_epi_wafer (MOCVD c7), imm_film (array fab c1),
 //         cerium_coverglass (GTM alloy smelter)
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): both machines are 7 wide x 5 high x 7 deep.
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the SiC fab is 15 x 7 x 11 (728 cells), the array fab 13 x 6 x 9 (466; D3-SIZE-UHV3).
 // Textures: tools/assets/Build-UHVPowerDevicesTextures.ps1. Names: client_scripts/grindless/uhv_power_devices_lang.js.
 // Published for the recipe script: global.grindless.uhvPowerDevices.
 (function () {
@@ -40,6 +40,7 @@
   const ROBUST = 'gtceu:robust_machine_casing'
   const STABLE = 'gtceu:stable_machine_casing'
   const GLASS = 'gtceu:laminated_glass'
+  const COIL = 'gtceu:tritanium_coil_block'
 
   PD.table = 'kubejs/data/grindless/tables/power_devices.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -72,7 +73,7 @@
       // items in: up to three (the module: device wafer, copper foil, silver) and the circuit; out: the product;
       // fluids in: silane, propane and hydrogen (the epi), or the argon charge; out: the hydrogen
       maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 3, fluidsOut: 1 },
-      width: 7, height: 5, depth: 7
+      width: 15, height: 7, depth: 11
     },
     arrays: {
       name: 'solar_array_fab',
@@ -83,7 +84,7 @@
       // items in: films, coverglass, module, the red junction and the circuit; out: film, substrates and the worn substrate's dust;
       // fluid in: hydrofluoric acid or the silicone adhesive; out: the arsine off the release layer
       maxIO: { itemsIn: 5, itemsOut: 3, fluidsIn: 1, fluidsOut: 1 },
-      width: 7, height: 5, depth: 7
+      width: 13, height: 6, depth: 9
     }
   }
 
@@ -124,17 +125,57 @@
     return slices
   }
 
-  // the epi chamber (T): a 3 x 3 x 2 block of tungstensteel pipe at the back; the PVT furnace space in front of it
-  function fabInner(r, si, c) {
-    if (si >= 1 && si <= 2 && c >= 2 && c <= 4) return 'T'
-    return '#'
+  // Interiors are painted on a grid [slice][row][column] (slices back -> front, rows bottom -> top; '#' is air), then read by shell().
+  function grid(m, paint) {
+    var g = []
+    for (var si = 0; si < m.depth; si++) {
+      g.push([])
+      for (var r = 0; r < m.height; r++) {
+        g[si].push([])
+        for (var c = 0; c < m.width; c++) g[si][r].push('#')
+      }
+    }
+    paint(g)
+    return function (r, si, c) { return g[si][r][c] }
   }
 
-  // filter casings under the ceiling in strips; the lamination press (B) on the floor in the middle
-  function arraysInner(r, si, c) {
-    if (r === 3 && si % 2 === 1) return 'P'
-    if (r === 1 && si >= 2 && si <= 4 && c >= 2 && c <= 4) return 'B'
-    return '#'
+  function box(g, c0, c1, r0, r1, s0, s1, ch) {
+    for (var s = s0; s <= s1; s++) for (var r = r0; r <= r1; r++) for (var c = c0; c <= c1; c++) g[s][r][c] = ch
+  }
+
+  // the SiC hall, back to front: two PVT furnace towers (coil rings round a tungstensteel pipe core), the epi reactor with its exhaust
+  // stack, an anneal furnace tunnel (coil floor, glass window, casing roof) and the module line (a gearbox conveyor with press blocks)
+  function fabPaint(g) {
+    for (var t = 0; t < 2; t++) {
+      var c0 = 2 + t * 4
+      for (var r = 1; r <= 5; r++) {
+        box(g, c0, c0 + 2, r, r, 2, 4, r % 2 === 1 && r < 5 ? 'K' : 'F')
+        g[3][r][c0 + 1] = 'T'
+      }
+      box(g, c0 + 1, c0 + 1, 1, 5, 3, 3, 'T')
+    }
+    box(g, 10, 12, 1, 2, 2, 4, 'T')
+    box(g, 11, 11, 3, 5, 3, 3, 'T')
+    box(g, 2, 12, 1, 1, 6, 6, 'K')
+    box(g, 2, 12, 2, 2, 6, 6, 'L')
+    box(g, 2, 12, 3, 3, 6, 6, 'F')
+    box(g, 2, 12, 1, 1, 8, 8, 'B')
+    g[8][2][4] = 'R'
+    g[8][2][8] = 'R'
+    g[8][2][12] = 'R'
+  }
+
+  // the laminating line under its clean hood: a gearbox conveyor down the middle with two press stations, filter ribs (the hood) under
+  // the ceiling and stable-casing pallet stacks at the ends
+  function arraysPaint(g) {
+    box(g, 1, 11, 1, 1, 4, 4, 'B')
+    box(g, 3, 4, 1, 2, 3, 5, 'B')
+    box(g, 8, 9, 1, 2, 3, 5, 'B')
+    for (var s = 2; s <= 6; s += 2) box(g, 1, 11, 4, 4, s, s, 'P')
+    box(g, 1, 1, 1, 2, 2, 2, 'A')
+    box(g, 1, 1, 1, 2, 6, 6, 'A')
+    box(g, 11, 11, 1, 2, 2, 2, 'A')
+    box(g, 11, 11, 1, 2, 6, 6, 'A')
   }
 
   function specOf(m, casing, accent, frame, inner, parts) {
@@ -148,13 +189,15 @@
         A: Pat.block(accent),
         L: Pat.block(GLASS),
         T: Pat.block(TUNGSTEN_PIPE),
+        K: Pat.block(COIL),
+        R: Pat.block(ROBUST),
         B: Pat.block(PRESS),
         P: Pat.block(FILTER),
         '#': Pat.air()
       }
     }
   }
-  PD.machines.fab.spec = specOf(PD.machines.fab, HEATPROOF, ROBUST, 'tungsten_steel', fabInner, [
+  PD.machines.fab.spec = specOf(PD.machines.fab, HEATPROOF, ROBUST, 'tungsten_steel', grid(PD.machines.fab, fabPaint), [
     Pat.part('input_bus', { min: 1, max: 3 }),
     Pat.part('input_hatch', { min: 1, max: 3 }),
     Pat.part('output_bus', { min: 1, max: 1 }),
@@ -162,7 +205,7 @@
     Pat.part('energy_input', { min: 1, max: 2 }),
     G.parallelHatch.part()
   ])
-  PD.machines.arrays.spec = specOf(PD.machines.arrays, CLEAN, STABLE, 'stainless_steel', arraysInner, [
+  PD.machines.arrays.spec = specOf(PD.machines.arrays, CLEAN, STABLE, 'stainless_steel', grid(PD.machines.arrays, arraysPaint), [
     Pat.part('input_bus', { min: 1, max: 3 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 3 }),

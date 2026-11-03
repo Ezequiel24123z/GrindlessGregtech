@@ -180,15 +180,16 @@ test('the MOCVD reactor\'s two UHV rows (circuits 7-8), published apart so UV\'s
   assert.deepEqual(madeBy('grindless:imm_epi_wafer'), ['grindless:mocvd/imm_epi']);
 });
 
-test('controllers and structures: own shapes, 7x5x7 with one controller', () => {
+test('controllers and structures: own shapes (D3-SIZE-UHV3: 15x7x11 and 13x6x9) with one controller', () => {
   const sts = Object.values(run.docs.structures.structures || {});
+  const dims = { sic_device_fab: [11, 7, 15], solar_array_fab: [9, 6, 13] };
   for (const m of ['sic_device_fab', 'solar_array_fab']) {
     const st = sts.find((x) => x.id === `gtceu:${m}`);
     assert.ok(st, m);
-    assert.equal(st.slices.length, 7, `${m}: depth`);
+    assert.equal(st.slices.length, dims[m][0], `${m}: depth`);
     for (const s of st.slices) {
-      assert.equal(s.length, 5, `${m}: height`);
-      for (const row of s) assert.equal(row.length, 7, `${m}: width`);
+      assert.equal(s.length, dims[m][1], `${m}: height`);
+      for (const row of s) assert.equal(row.length, dims[m][2], `${m}: width`);
     }
     const ctl = Object.entries(st.symbols).filter(([, v]) => v.kind === 'controller').map(([k]) => k);
     assert.equal(ctl.length, 1, m);
