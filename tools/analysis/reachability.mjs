@@ -117,7 +117,7 @@ function mainObtain(o, loaded) {
     fs.writeFileSync(file, renderHiddenTable(table), 'utf8');
     process.stdout.write(`Hidden table: ${file} (${table.groups.length} groups; ${table.groups.filter((x) => x.until === 'never').reduce((n, x) => n + (x.removeRecipes || []).length, 0)} recipes to remove)\n`);
   }
-  process.exit(res.verdict === 'PASS' ? 0 : 1);
+  process.exitCode = res.verdict === 'PASS' ? 0 : 1;
 }
 
 function main() {
@@ -125,7 +125,8 @@ function main() {
   if (!PASSES.includes(o.pass)) throw new Error(`--pass ${o.pass} isn't valid (${PASSES.join(', ')})`);
   if (o.help || (!o.tier && !o.config && o.pass !== 'obtain') || !o.dump) {
     process.stdout.write(usage());
-    process.exit(o.help ? 0 : 2);
+    process.exitCode = o.help ? 0 : 2;
+    return;
   }
   const loaded = o.tier || o.config ? loadConfig(o) : null;
   // an audit config (an "obtain" section, e.g. tiers/obtain.json) only has that step
@@ -154,12 +155,12 @@ function main() {
     const doc = runs.length === 1 ? one(runs[0]) : { tier: runs[0].model.cfg.tier, verdict, contexts: runs.map(one) };
     fs.writeFileSync(path.resolve(o.json), JSON.stringify(doc, null, 2), 'utf8');
   }
-  process.exit(verdict === 'PASS' ? 0 : 1);
+  process.exitCode = verdict === 'PASS' ? 0 : 1;
 }
 
 try {
   main();
 } catch (e) {
   process.stderr.write(`ERROR: ${e.message}\n`);
-  process.exit(2);
+  process.exitCode = 2;
 }

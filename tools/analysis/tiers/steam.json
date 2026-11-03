@@ -79,6 +79,13 @@
 
   "world": [
     {
+      "id": "bucket-fluids",
+      "mode": "manual",
+      "bootstrap": true,
+      "items": ["minecraft:water_bucket", "minecraft:lava_bucket"],
+      "note": "Water and lava sources are in the world: a bucket filled from them is a start item (A1a-07)."
+    },
+    {
       "id": "trees",
       "mode": "manual",
       "bootstrap": true,
