@@ -29,7 +29,7 @@ ClientEvents.lang('en_us', event => {
 
     add('grindless.machine.coated_conductor_line.tooltip.0', '§7Coats second-generation superconducting tape.')
 
-    add('gtceu.recipe.grindless_coated_conductor.nickel_tungsten_substrate', 'Step 1: nickel and tungsten, 19 to 1, rolled and annealed to a cube texture')
-    add('gtceu.recipe.grindless_coated_conductor.itbtc_coated_conductor', 'Step 2: a micron of ITBTC laser-deposited on the tape, annealed in oxygen and capped with silver')
+    add('gtceu.recipe.grindless_coated_conductor.nickel_tungsten_substrate', 'Step 1: the nickel-tungsten alloy (19 to 1) rolled into substrate tape; the next step anneals it to a cube texture')
+    add('gtceu.recipe.grindless_coated_conductor.itbtc_coated_conductor', 'Last step: the silver-capped tapes laminated with copper stabiliser foil into coated conductor')
 })
 

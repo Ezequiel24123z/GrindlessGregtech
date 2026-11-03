@@ -97,14 +97,14 @@ test('real tiers (uv): the Validator\'s checks exist, are leak checks with the r
     if (!w.startsWith('operate:') || w.endsWith('*')) continue;
     assert.ok(!entries.includes(w.slice('operate:'.length) + '@zpm2'), `${x.id}: ${w} misses the @zpm2 variant`);
   }
-  for (const id of ['kuiper-gas-only-annealer', 'proxima-only-station', 'heat-only-works', 'yb-only-strip', 'tholin-only-titan']) assert.equal(t[id]?.expect, 'unreachable', id);
+  for (const id of ['kuiper-gas-only-fractionator', 'proxima-only-station', 'heat-only-works', 'yb-only-strip', 'tholin-only-titan']) assert.equal(t[id]?.expect, 'unreachable', id);
   for (const gone of ['no-uv-neutronium', 'no-uv-mk3', 'no-uv-circuit']) assert.ok(!t[gone], `${gone} is dropped`);
   assert.ok(!Object.keys(t).some((k) => k.startsWith('mk2-cut-')), 'the Mk2 cut checks move to mk3-recipes-only-mk3');
   for (const kept of ['europium-only-mk1-or-reductor', 'mk2-only-metals', 'plume-only', 'qubit-only-fab']) assert.ok(t[kept], `${kept} stays`);
   assert.equal(raw.conditions.eu_to_start.max, 640000000);
   for (const id of ['gate-uhv-hull', 'gate-mk3', 'gate-network-uv', 'gate-stored', 'gate-proxima', 'gate-mainframes', 'gate-parallel']) assert.ok(t[id], id);
   for (const type of ['accelerator_driven', 'laser_fusion', 'muon_catalysed_fusion', 'triton_plume', 'penetrator_probe', 'ice_fractionation',
-    'kuiper_intercept', 'ice_annealing', 'precursor_probe', 'light_sail', 'antimatter_storage']) {
+    'kuiper_intercept', 'precursor_probe', 'light_sail', 'antimatter_storage']) {
     const run1 = Object.values(t).find((x) => x.id.startsWith('gate-run-') && x.type === `gtceu:${type}`);
     assert.ok(run1 && run1.expect !== 'unreachable', `gate run of ${type}`);
   }
