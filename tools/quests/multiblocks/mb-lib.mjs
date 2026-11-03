@@ -184,14 +184,17 @@ export function consumerCounts(recipes) {
 }
 
 const BY_FORM = /nugget|(?:^|_)(?:tiny|small)_|impure|pure_|_pile|crushed|scrap|slag/;
+// GTM's recycling rows (category <type>_recycling, as obtain.mjs reads them) take crafted items apart; they never name what a machine
+// unlocks, and their counts change between boots (GTM resolves material info in hash order)
+const isRecycling = (j) => typeof j.category === 'string' && /_recycling$/.test(j.category);
 
 // the products of the recipes of some recipe types worth naming: [{ id, n }]. Main outputs that other recipes consume come first, nuggets and
-// other by-forms last; then the more recipes make it, then the id
+// other by-forms last; then the more recipes make it, then the id. Recycling rows are skipped.
 export function mainProducts(recipes, typeIds, limit = 4, consumers = new Map()) {
   const types = new Set(typeIds);
   const n = new Map();
   for (const r of recipes) {
-    if (!r.j || !types.has(r.t)) continue;
+    if (!r.j || !types.has(r.t) || isRecycling(r.j)) continue;
     const id = mainProduct(r.j);
     if (id) n.set(id, (n.get(id) || 0) + 1);
   }
