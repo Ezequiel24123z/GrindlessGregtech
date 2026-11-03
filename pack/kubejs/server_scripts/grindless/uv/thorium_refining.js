@@ -104,7 +104,7 @@
         return
       }
       added++
-      var recipe = event.recipes.gtceu[r.type](r.recipeId)
+      var recipe = event.recipes.gtceu[r.type]('grindless:' + r.name)
       r.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
       r.kept.forEach(function (x) { recipe.notConsumable(x.count + 'x ' + x.id) })
       if (r.circuit > 0) recipe.circuit(r.circuit)

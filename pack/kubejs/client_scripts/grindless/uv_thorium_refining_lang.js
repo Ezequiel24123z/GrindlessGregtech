@@ -14,7 +14,7 @@
         },
         materials: {
             n_butanol: 'n-Butanol', tributyl_phosphate: 'Tributyl Phosphate', tbp_solvent: 'TBP Solvent', loaded_tbp_solvent: 'Loaded TBP Solvent',
-            crude_thorium_nitrate: 'Crude Thorium Nitrate Solution', thorium_nitrate: 'Thorium Nitrate Solution', thorium_oxalate: 'Thorium Oxalate', thoria: 'Thoria'
+            crude_thorium_nitrate: 'Crude Thorium Nitrate Solution', thorium_nitrate: 'Thorium Nitrate Solution', thorium_oxalate: 'Thorium Oxalate', thoria: 'Thoria', thorium_mononitride: 'Thorium Mononitride'
         }
     }
 

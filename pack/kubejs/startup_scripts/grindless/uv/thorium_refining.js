@@ -29,7 +29,8 @@
     crude_thorium_nitrate: { form: 'liquid', colour: 0xB8C890, formula: 'Th(NO3)4(aq)' },
     thorium_nitrate: { form: 'liquid', colour: 0xE0F0C0, formula: 'Th(NO3)4' },
     thorium_oxalate: { form: 'dust', colour: 0xF0F0E0, formula: 'Th(C2O4)2' },
-    thoria: { form: 'dust', colour: 0xF4F4F0, formula: 'ThO2' }
+    thoria: { form: 'dust', colour: 0xF4F4F0, formula: 'ThO2' },
+    thorium_mononitride: { form: 'dust', colour: 0x8C8C70, formula: 'ThN' }
   }
 
   TR.items = Object.keys(ITEMS).map(function (name) { return 'grindless:' + name })

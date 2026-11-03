@@ -61,7 +61,7 @@ test('fabrication: thoria to pellets to pins to assemblies, 8 thorium per assemb
   assert.ok(has(plant('thoria_pellet').itemsIn, 'gtceu:thoria_dust', 8) && has(plant('thoria_pellet').itemsOut, 'grindless:thoria_pellet', 8));
   const nit = plant('thorium_nitridation');
   assert.ok(has(nit.itemsIn, 'gtceu:thoria_dust', 2) && has(nit.fluidsIn, 'gtceu:nitrogen_15') && has(nit.fluidsOut, 'gtceu:carbon_monoxide'));
-  assert.ok(has(plant('thorium_nitride_pellet').itemsIn, 'gtceu:thorium_nitride_dust', 8));
+  assert.ok(has(plant('thorium_nitride_pellet').itemsIn, 'gtceu:thorium_mononitride_dust', 8));
   for (const r of fab) assert.ok(r.circuit >= 1 && r.circuit <= 32, r.name);
   assert.equal(new Set(fab.map((r) => r.circuit)).size, fab.length);
 });

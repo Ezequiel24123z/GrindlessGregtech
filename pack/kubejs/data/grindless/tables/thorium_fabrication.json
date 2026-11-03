@@ -54,7 +54,7 @@
         { "id": "gtceu:carbon_monoxide", "amount": 4000 }
       ],
       "itemsOut": [
-        { "id": "gtceu:thorium_nitride_dust", "count": 2 }
+        { "id": "gtceu:thorium_mononitride_dust", "count": 2 }
       ],
       "energy": [
         { "stage": "carbothermal nitridation of the thoria under 15N (ThO2 + 2 C + 1/2 N2 -> ThN + 2 CO): three IV assembler stages", "eu": 1536000, "times": 3 }
@@ -64,7 +64,7 @@
       "name": "thorium_nitride_pellet",
       "circuit": 14,
       "itemsIn": [
-        { "id": "gtceu:thorium_nitride_dust", "count": 8 }
+        { "id": "gtceu:thorium_mononitride_dust", "count": 8 }
       ],
       "fluidsIn": [],
       "fluidsKept": [],
