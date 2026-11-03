@@ -21,6 +21,8 @@
   var CASING = 'grindless:uxv_fusion_casing'
   var CASING_TEXTURE = 'grindless:block/uxv/uxv_fusion_casing'
   var COIL = 'grindless:metallic_hydrogen_coil_block'
+  var GUM = 'grindless:gum_metal_casing'
+  var PULSED = 'grindless:pulsed_field_casing'
 
   MK6.table = 'kubejs/data/grindless/tables/fusion_mk6.json'
   MK6.tier = UXV
@@ -40,46 +42,54 @@
     console.error(LOG + 'FusionReactorMachine.registerFusionTier(12) failed: ' + e)
   }
 
-  // the Mk6 ring: an octagonal annulus 15 x 7 x 17 round an open plasma channel. Coils line the channel, energy cells and fusion glass
-  // ports on the outer wall, a pipe course between, frame pylons on the cut corners.
-  var W = 15
-  var H = 7
-  var D = 17
+  // the Mk6 ring (D4-SHAPE-UXV-B): a 45 x 11 x 45 torus round a lit central solenoid, one cell of wall. The Mk6 fusion casing, the
+  // signature, is the outer port band only; gum metal is the body, pulsed-field toroidal magnets stand every third sector over the top and
+  // bottom, and a spoked base carries it. The controller stands on a pier at the front. Math.PI is undefined in Rhino: a literal.
+  var PI = 3.141592653589793
+  var N = 45
+  var H = 11
+  var CEN = 22
+  var RR = 17
+  var TY = 5
 
   function ringCell(x, y, z) {
-    var ex = x < W - 1 - x ? x : W - 1 - x
-    var ez = z < D - 1 - z ? z : D - 1 - z
-    if (ex + ez < 3) return ' '
-    var e = ex < ez ? ex : ez
-    if (e > 2) return y >= 1 && y <= H - 2 ? '#' : ' '
-    if (ex + ez === 3) return 'Q'
-    if (x === 0 && z === (D - 1) / 2 && (y === 2 || y === 4)) return 'I'
-    if (x === W - 1 && z === (D - 1) / 2 && y === 2) return 'O'
-    if (y === 0) return e === 0 ? 'E' : 'C'
-    if (y === H - 1) return e === 1 ? 'A' : 'C'
-    if (e === 2) return 'K'
-    if (e === 1) return y % 2 === 0 ? 'P' : 'C'
-    if (y === 3) return (x + z) % 3 === 0 ? 'C' : 'L'
-    return y === 1 || y === 5 ? 'E' : 'L'
+    var dx = x - CEN
+    var dz = z - CEN
+    var r = Math.sqrt(dx * dx + dz * dz)
+    if (z >= 40 && x >= 20 && x <= 24 && y <= 2) return 'G'
+    if (r < 2.5) return y === 0 || y === H - 1 ? 'G' : 'K'
+    var dr = r - RR
+    var dy = y - TY
+    var dd = Math.sqrt(dr * dr + dy * dy)
+    var bin = Math.floor((Math.atan2(dz, dx) + PI) / (PI / 8)) % 16
+    if (dd >= 4 && dd < 5) {
+      var phi = Math.abs(Math.atan2(dy, dr))
+      if (phi < 0.5) {
+        if (y === TY) {
+          if (bin === 4 || bin === 8 || bin === 12) return 'I'
+          if (bin === 0 || bin === 14) return 'O'
+          return bin % 2 === 1 ? 'E' : 'C'
+        }
+        return bin % 2 === 0 && y !== TY ? 'L' : 'C'
+      }
+      if (phi > 2.4) return 'G'
+      return bin % 3 === 0 ? 'M' : 'G'
+    }
+    if (dd < 4) return '#'
+    if (dd < 6 && bin % 3 === 0 && dd >= 5) {
+      var ph = Math.abs(Math.atan2(dy, dr))
+      if (ph > 0.8 && ph < 2.3) return 'M'
+    }
+    if (y === 0) {
+      if (Math.abs(dr) < 0.5) return 'G'
+      if ((dx === 0 || dz === 0) && r < 22) return 'G'
+    }
+    if (y === TY && r < 12 && (dx === 0 || dz === 0)) return 'Q'
+    return ' '
   }
 
   function ringSlices() {
-    var slices = []
-    var mid = (W - 1) / 2
-    for (var z = 0; z < D; z++) {
-      var rows = []
-      for (var y = 0; y < H; y++) {
-        var row = ''
-        for (var x = 0; x < W; x++) {
-          var ch = ringCell(x, y, z)
-          if (z === D - 1 && y === 1 && x === mid) ch = 'S'
-          row += ch
-        }
-        rows.push(row)
-      }
-      slices.push(rows)
-    }
-    return slices
+    return G.uevShapes.slices(N, H, N, ringCell)
   }
 
   function ringSpec() {
@@ -88,10 +98,10 @@
       symbols: {
         S: Pat.controller(),
         C: Pat.block(CASING),
+        G: Pat.block(GUM),
+        M: Pat.block(PULSED),
         K: Pat.block(COIL),
-        A: Pat.block('gtceu:high_power_casing'),
         L: Pat.block('gtceu:fusion_glass'),
-        P: Pat.block('gtceu:tungstensteel_pipe_casing'),
         Q: Pat.frame(['tungsten_steel']),
         E: Pat.oneOf(Pat.block(CASING), Pat.part('energy_input', { min: 1, max: 16 })),
         I: Pat.oneOf(Pat.block(CASING), Pat.part('input_hatch', { min: 1, max: 3 })),
