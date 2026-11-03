@@ -8,7 +8,7 @@
 //                             (circuit 1 WTe2 flakes, 2 FGT flakes, 3 hBN flakes, 4 the SOT heterostack).
 //   gtceu:racetrack_fab       13 x 7 x 9 lithography bay with an e-beam column and a wafer track, UXV. Recipe type gtceu:racetrack_patterning
 //                             (circuit 1 patterned track wafer, 2 racetrack chip).
-//   gtceu:yig_lpe_furnace     7 x 13 x 7 stepped tower with three coil bands and a dip head, UXV. Recipe type gtceu:liquid_phase_epitaxy
+//   gtceu:yig_lpe_furnace     13 x 21 x 13 vertical dipping furnace with three heater zones and a Pt crucible, UXV. Recipe type gtceu:liquid_phase_epitaxy
 //                             (circuit 1 lead-borate flux, 2 YIG film wafer with the platinum crucible kept, 3 flux skim).
 //
 // F1 ids (sot_heterostack, racetrack_chip, magnonic_bus, pt_lpe_crucible, lpe_dross, lpe_flux ...) are registered in uxv/foundation.js;
@@ -24,8 +24,8 @@
   const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
   const PLASCRETE = 'gtceu:plascrete'
   const PLASCRETE_TEXTURE = 'gtceu:block/casings/cleanroom/plascrete'
-  const ROBUST = 'gtceu:robust_machine_casing'
-  const ROBUST_TEXTURE = 'gtceu:block/casings/solid/machine_casing_robust_tungstensteel'
+  const LPE_BODY = 'grindless:sic_composite_casing'
+  const LPE_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   SL.table = 'kubejs/data/grindless/tables/spin_logic.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -69,8 +69,11 @@
     {
       name: 'yig_lpe_furnace', machine: 'gtceu:yig_lpe_furnace', type: 'liquid_phase_epitaxy', dataKey: 'grindless_liquid_phase_epitaxy',
       lang: 'YIG LPE Furnace', maxIO: { itemsIn: 5, itemsOut: 3, fluidsIn: 1, fluidsOut: 1 },
-      width: 7, height: 13, depth: 7, casing: ROBUST, texture: ROBUST_TEXTURE,
-      pal: { F: ROBUST, L: 'gtceu:laminated_glass', C: 'gtceu:tritanium_coil_block', G: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel' },
+      // BOOTSTRAP MACHINE (D4-SHAPE-UXV-A): its YIG film wafers feed the mu-metal foil chain, so it wears the UEV family (SiC composite body,
+      // HfTaCN hot-zone lining), never the UXV gum-metal or mu-metal casings whose recipes need its products.
+      width: 13, height: 21, depth: 13, casing: LPE_BODY, texture: LPE_TEXTURE,
+      pal: { F: LPE_BODY, H: 'grindless:hftacn_lining_casing', A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass',
+        C: 'gtceu:tritanium_coil_block', G: 'gtceu:tungstensteel_gearbox', P: 'gtceu:titanium_pipe_casing', Q: 'tungsten_steel' },
       parts: basicParts(2, 2)
     }
   ]
@@ -123,42 +126,47 @@
     return '#'
   }
 
-  // a tower in three steps (7, 5 and 3 wide); a coil band on each step, a viewport in each wall, the dip head on top
-  function lpeTower(x, y, z) {
-    var dx = abs(x - 3)
-    var dz = abs(z - 3)
-    var r = dx > dz ? dx : dz
-    if (y <= 3) {
-      if (r > 3) return ' '
-      if (y === 0) return (z === 0 || z === 6) && x !== 0 && x !== 6 ? 'X' : 'F'
-      if (y === 3) return r === 3 ? 'C' : (r === 0 ? '#' : 'F')
-      if (r < 3) return '#'
-      if (dx === 3 && dz === 3) return 'Q'
-      if (y === 2 && dz <= 1 && dx === 3) return 'L'
-      return 'F'
-    }
-    if (y <= 8) {
-      if (r > 2) return ' '
-      if (y === 8) return r === 2 ? 'C' : (r === 0 ? '#' : 'F')
-      if (r < 2) return '#'
-      if (dx === 2 && dz === 2) return 'Q'
-      if ((y === 5 || y === 6) && ((dx === 2 && dz <= 1) || (dz === 2 && dx <= 1))) return 'L'
-      return 'F'
-    }
-    if (y <= 11) {
-      if (r > 1) return ' '
-      if (r === 0) return '#'
-      if (dx === 1 && dz === 1) return 'Q'
-      if (y === 10) return 'G'
-      return 'F'
-    }
-    return r <= 1 ? 'G' : ' '
+  // A vertical dipping furnace (13 x 21 x 13): a plinth hall with the controller booth, a round shaft over it with three heater zones
+  // (HfTaCN lining, four 3-wide coil patches each), a Pt crucible at the foot of the shaft and the dip rod hung from a gearbox head on the
+  // cap, all inside a four-post cage with two service decks and a laminated-glass sight window on every face of the plinth.
+  function lpeFurnace() {
+    var s = G.uevShapes.scene(13, 21, 13)
+    s.box(0, 0, 0, 12, 0, 12, 'F')
+    s.room(0, 1, 0, 12, 3, 12, 'F', 'bt')
+    s.room(1, 1, 1, 11, 3, 11, 'H', 'bt')
+    s.room(0, 4, 0, 12, 4, 12, 'A', 'bt')
+    ;[2, 10].forEach(function (p) {
+      s.box(p, 2, 0, p + 2, 2, 0, 'L').box(p, 2, 12, p + 2, 2, 12, 'L')
+      s.box(0, 2, p, 0, 2, p + 2, 'L').box(12, 2, p, 12, 2, p + 2, 'L')
+    })
+    s.cyl('y', 6, 6, 4, 4, 4, 'F')
+    s.cyl('y', 6, 6, 4, 5, 17, 'F', true)
+    ;[6, 10, 14].forEach(function (yz) {
+      s.replace('F', 'H', function (x, y) { return y === yz || y === yz + 1 })
+      ;[-1, 0, 1].forEach(function (k) {
+        s.set(2, yz, 6 + k, 'C').set(10, yz, 6 + k, 'C').set(6 + k, yz, 2, 'C').set(6 + k, yz, 10, 'C')
+      })
+    })
+    s.cyl('y', 6, 6, 2, 5, 8, 'A', true)
+    s.cyl('y', 6, 6, 4, 18, 18, 'F')
+    s.cyl('y', 6, 6, 2, 19, 20, 'H', true)
+    s.box(6, 9, 6, 6, 18, 6, 'P').box(5, 19, 5, 7, 20, 7, 'G')
+    ;[[0, 0], [12, 0], [0, 12], [12, 12]].forEach(function (p) { s.box(p[0], 4, p[1], p[0], 17, p[1], 'Q') })
+    s.room(0, 17, 0, 12, 17, 12, 'Q', 'bt')
+    ;[8, 12].forEach(function (y) {
+      s.room(0, y, 0, 12, y, 12, 'A', 'bt')
+      s.box(10, y, 6, 12, y, 6, 'Q').box(0, y, 6, 2, y, 6, 'Q').box(6, y, 10, 6, y, 12, 'Q').box(6, y, 0, 6, y, 2, 'Q')
+    })
+    return s.booth('F', 3).fn()
   }
 
-  var CELLS = { vdw_stacking_cell: stackingCell, racetrack_fab: racetrackBay, yig_lpe_furnace: lpeTower }
+  var CELLS = { vdw_stacking_cell: stackingCell, racetrack_fab: racetrackBay }
 
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
   function spec(m) {
+    if (m.name === 'yig_lpe_furnace') {
+      return G.uevShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: lpeFurnace() })
+    }
     return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
   }
 

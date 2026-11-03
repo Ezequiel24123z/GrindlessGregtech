@@ -4,7 +4,7 @@
 // recipe types and the package's own items. The recipes come from data/grindless/tables/shequid_mnt.json
 // (server_scripts/grindless/uxv/shequid_mnt.js).
 //
-//   gtceu:shequid_works   9 x 11 x 9 octagonal cryostat tower, UXV (two UIV energy hatches). Recipe type gtceu:shequid_assembly
+//   gtceu:shequid_works   15 x 19 x 15 He-II cryostat in a nested room, UXV (two UIV energy hatches). Recipe type gtceu:shequid_assembly
 //                         (circuit 1 weak-link cell, 2 SHeQUID gyro).
 //   gtceu:mnt_collider    9 x 7 x 23 beamline, UXV. Recipe type gtceu:multinucleon_transfer (circuit 1 collision, 2 gas catcher, 3 MR-TOF,
 //                         4 island chart); the gas stopping cell is not consumed.
@@ -35,8 +35,11 @@
     {
       name: 'shequid_works', machine: 'gtceu:shequid_works', type: 'shequid_assembly', dataKey: 'grindless_shequid_assembly',
       lang: 'SHeQUID Works', maxIO: { itemsIn: 5, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }, casing: CRYO, texture: CRYO_TEXTURE,
-      width: 9, height: 11, depth: 9,
-      pal: { F: CRYO, C: 'gtceu:superconducting_coil', P: 'gtceu:titanium_pipe_casing', G: 'gtceu:tungstensteel_gearbox', R: 'gtceu:computer_casing' },
+      // BOOTSTRAP MACHINE (D4-SHAPE-UXV-A): it makes the SHeQUID gyro, which is an ancestor of the UXV sensor that the mu-metal shield casing takes, so
+      // its body stays the ZPM cryostat casing with the UEV SiC composite for the inner shield room; no UXV family casing.
+      width: 15, height: 19, depth: 15,
+      pal: { F: CRYO, R: 'grindless:sic_composite_casing', A: 'gtceu:stable_machine_casing', C: 'gtceu:superconducting_coil', L: 'gtceu:laminated_glass',
+        P: 'gtceu:titanium_pipe_casing', G: 'gtceu:tungstensteel_gearbox' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -66,32 +69,28 @@
     }
   ]
 
-  function abs(n) { return n < 0 ? -n : n }
-  // an octagon: inside the square of half-width r and the diamond of radius s
-  function oct(dx, dz, r, s) { return abs(dx) <= r && abs(dz) <= r && abs(dx) + abs(dz) <= s }
-
-  // x left to right, y bottom to top, z back to front. A cryostat tower on a turntable: shield rings every second course, the fill line up
-  // the back, the readout rack beside the controller and a necked roof.
-  function towerCell(x, y, z) {
-    var dx = x - 4
-    var dz = z - 4
-    if (!oct(dx, dz, 4, 6)) return ' '
-    var wall = !oct(dx, dz, 3, 5)
-    if (y === 0) {
-      if (!wall) return oct(dx, dz, 1, 2) ? 'G' : 'F'
-      return dz === 4 || dz === -4 ? (abs(dx) <= 2 ? 'X' : 'F') : 'F'
-    }
-    if (y === 10) {
-      if (oct(dx, dz, 1, 1)) return 'P'
-      return oct(dx, dz, 2, 3) ? 'F' : ' '
-    }
-    if (y === 9 && !wall && !oct(dx, dz, 2, 3)) return 'F'
-    if (!wall) return '#'
-    if (dz === -4 && dx === 0) return 'P'
-    if (dz === 4 && abs(dx) <= 2 && y <= 3) return 'R'
-    if (y === 3 || y === 5 || y === 7) return 'C'
-    if (y === 2 || y === 4 || y === 8) return 'R'
-    return 'F'
+  // A He-II cryostat in a nested room on an isolation pier (15 x 19 x 15): four-legged pier slab, a cryostat-casing outer room with sight
+  // windows, an inner shield room of SiC composite, the vessel at the centre with its fill column up through the roof to a gearbox turntable
+  // and a capped neck, eight superconducting coils round the vessel and two transfer lines out through the walls.
+  function cryostatRoom() {
+    var s = G.uevShapes.scene(15, 19, 15)
+    s.room(0, 0, 0, 14, 0, 14, 'A', 'bt').box(7, 0, 0, 7, 0, 14, 'A').box(0, 0, 7, 14, 0, 7, 'A')
+    ;[[3, 3], [11, 3], [3, 11], [11, 11], [7, 7]].forEach(function (p) { s.box(p[0] - 1, 1, p[1] - 1, p[0] + 1, 2, p[1] + 1, 'A') })
+    s.room(0, 3, 0, 14, 3, 14, 'F', 'bt')
+    s.room(0, 4, 0, 14, 11, 14, 'F', 'bt')
+    ;[4, 10].forEach(function (p) {
+      s.box(p, 7, 0, p + 0, 8, 0, 'L').box(p + 1, 7, 0, p + 1, 8, 0, 'L')
+      s.box(p, 7, 14, p + 1, 8, 14, 'L').box(0, 7, p, 0, 8, p + 1, 'L').box(14, 7, p, 14, 8, p + 1, 'L')
+    })
+    s.room(0, 12, 0, 14, 12, 14, 'A', 'bt').box(7, 12, 0, 7, 12, 14, 'A').box(0, 12, 7, 14, 12, 7, 'A')
+    s.room(3, 5, 3, 11, 10, 11, 'R', 'bt').box(3, 4, 3, 11, 4, 11, 'R').room(3, 11, 3, 11, 11, 11, 'R', 'bt')
+    s.cyl('y', 7, 7, 2, 5, 10, 'F', true)
+    s.cyl('y', 7, 7, 2, 11, 17, 'F', true)
+    s.cyl('y', 7, 7, 2, 18, 18, 'F')
+    s.box(7, 5, 7, 7, 17, 7, 'P').box(6, 12, 6, 8, 12, 8, 'G')
+    s.box(0, 8, 7, 4, 8, 7, 'P').box(10, 8, 7, 14, 8, 7, 'P')
+    ;[[3, 0], [-3, 0], [0, 3], [0, -3], [2, 2], [-2, 2], [2, -2], [-2, -2]].forEach(function (d) { s.set(7 + d[0], 8, 7 + d[1], 'C') })
+    return s.booth('F', 3).fn()
   }
 
   // a beamline from the injector (z 0) to the MR-TOF readout at the front: the beam pipe runs through the bore, quadrupole rings every four
@@ -113,11 +112,14 @@
     return 'F'
   }
 
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
   function spec(m) {
+    if (m.name === 'shequid_works') {
+      return G.uevShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: cryostatRoom() })
+    }
     return G.uivShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
-      fn: m.name === 'shequid_works' ? towerCell : beamCell
+      fn: beamCell
     })
   }
 

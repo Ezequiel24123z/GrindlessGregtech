@@ -4,8 +4,8 @@
 // the BZ dynamo, their recipe types and one item (the strand coil). The recipes come from data/grindless/tables/cygnus_disk.json
 // (server_scripts/grindless/uxv/cygnus_disk.js). Every other id is F1's (uxv/foundation.js).
 //
-//   gtceu:accretion_disk_skimmer   15 x 7 x 15 scoop dish, UXV. Recipe type gtceu:disk_skimming (circuit 1 skim); locked to the Cygnus X-1 orbit.
-//   gtceu:frc_former               7 x 7 x 21 linear theta-pinch, UXV. Recipe type gtceu:frc_forming (circuit 1 cartridge, runs anywhere;
+//   gtceu:accretion_disk_skimmer   19 x 9 x 19 magnetic scoop ring, UXV. Recipe type gtceu:disk_skimming (circuit 1 skim); locked to the Cygnus X-1 orbit.
+//   gtceu:frc_former               13 x 13 x 41 linear theta-pinch, UXV. Recipe type gtceu:frc_forming (circuit 1 cartridge, runs anywhere;
 //                                  2 flux loading).
 //   gtceu:bz_dynamo                19 x 7 x 19 torus round a jet column, UXV. Recipe type gtceu:blandford_znajek, a GENERATOR written at its
 //                                  final figure (2^30 EU/t through two UIV 16 A dynamo hatches), one run at a time, locked to the orbit (the skimmer's hot-flow row too). It is
@@ -26,6 +26,12 @@
   const UXV_TEXTURE = 'gtceu:block/casings/voltage/uxv/side'
   const HPC = 'gtceu:high_power_casing'
   const HPC_TEXTURE = 'gtceu:block/casings/hpca/high_power_casing'
+  // the UXV family (uxv/casings.js): gum metal is the body of the skimmer and the former, pulsed field their magnets. The pasta containment casing
+  // is NOT used: it takes frc_cartridge, which this file's former makes. Neither machine's output is an ancestor of the gum-metal or
+  // pulsed-field recipes (the former makes cartridges and strand coils for the field generators; the skimmer scoops disk plasma).
+  const GUM = 'grindless:gum_metal_casing'
+  const GUM_TEXTURE = 'grindless:block/uxv/gum_metal_casing'
+  const PULSED = 'grindless:pulsed_field_casing'
 
   CD.table = 'kubejs/data/grindless/tables/cygnus_disk.json'
   CD.site = 'grindless:cygnus_x1_orbit'
@@ -35,9 +41,9 @@
   CD.machines = [
     {
       name: 'accretion_disk_skimmer', machine: 'gtceu:accretion_disk_skimmer', type: 'disk_skimming', dataKey: 'grindless_disk_skimming',
-      lang: 'Accretion Disk Skimmer', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: UXV_CASING, texture: UXV_TEXTURE,
-      generator: false, width: 15, height: 7, depth: 15,
-      pal: { F: UXV_CASING, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing', Q: 'naquadah_alloy' },
+      lang: 'Accretion Disk Skimmer', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: GUM, texture: GUM_TEXTURE,
+      generator: false, width: 19, height: 9, depth: 19,
+      pal: { F: GUM, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -49,9 +55,9 @@
     },
     {
       name: 'frc_former', machine: 'gtceu:frc_former', type: 'frc_forming', dataKey: 'grindless_frc_forming',
-      lang: 'FRC Former', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 2 }, casing: HPC, texture: HPC_TEXTURE,
-      generator: false, width: 7, height: 7, depth: 21,
-      pal: { F: HPC, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', K: 'grindless:cryostat_casing', U: 'gtceu:uiv_machine_casing', Q: 'naquadah_alloy' },
+      lang: 'FRC Former', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 2 }, casing: GUM, texture: GUM_TEXTURE,
+      generator: false, width: 13, height: 13, depth: 41,
+      pal: { F: GUM, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', K: 'grindless:cryostat_casing', A: 'gtceu:stable_machine_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -89,46 +95,49 @@
     return dx * dx * b * b + dy * dy * a * a <= a * a * b * b
   }
 
-  // x left to right, y bottom to top, z back (0) to front (14). The bowl faces the disk at the back: a coil rim of two rings round the open
-  // mouth, the dish narrowing in x to a glass throat (z 11), a plasma chamber behind it and the front wall with the controller. Spokes of pipe
-  // run on the four axes from the rim to the throat and frame rings brace the bowl. Winding bus and energy on the mouth's floor row, the
-  // plasma output behind the throat.
-  function skimmerCell(x, y, z) {
-    var dx = x - 7
-    var dy = y - 3
-    var rx = z <= 11 ? 7 - Math.floor(z * 5 / 11) : 3
-    if (!ell(dx, dy, rx, 3)) return ' '
-    var inner = ell(dx, dy, rx - 1, 2)
-    if (z === 14) return y === 0 && abs(dx) <= 2 ? 'X' : (abs(dx) === 3 || abs(dy) === 3 ? 'F' : (abs(dx) + abs(dy) === 4 ? 'Q' : 'F'))
-    if (z === 11) return abs(dx) <= 1 && abs(dy) <= 1 ? 'L' : (inner ? 'L' : 'F')
-    if (inner) return '#'
-    if (z <= 1) return z === 0 && y === 0 && abs(dx) <= 2 ? 'X' : 'C'
-    if (z >= 12) return y === 0 && abs(dx) <= 1 ? 'X' : 'F'
-    if (z % 3 === 0) return 'Q'
-    if (dx === 0 || dy === 0) return 'P'
-    return 'F'
+  // A magnetic scoop ring (19 x 9 x 19), a horizontal torus (major radius 6.5, minor about 2.5) with a hollow tube: a gum-metal skin striped with
+  // pulsed-field winding bands, superconducting coils at the four axis spokes, pipe spokes into a fusion-glass collector hub, frame struts under
+  // the ring and the control booth on its front arc.
+  function scoopRing() {
+    var s = G.uevShapes.scene(19, 9, 19)
+    for (var z = 0; z < 19; z++) for (var y = 0; y < 9; y++) for (var x = 0; x < 19; x++) {
+      var dx = x - 9
+      var dz = z - 9
+      var rr = Math.sqrt(dx * dx + dz * dz)
+      var d2 = (rr - 6.5) * (rr - 6.5) + (y - 4) * (y - 4)
+      if (d2 > 6.5) continue
+      if (d2 <= 3.2) {
+        if (d2 <= 1.01 && (dx === 0 || dz === 0 || dx === dz || dx === -dz)) s.set(x, y, z, 'C')
+        else s.set(x, y, z, '#')
+        continue
+      }
+      s.set(x, y, z, (x + z) % 5 < 2 ? 'M' : 'F')
+    }
+    s.cyl('y', 9, 9, 1, 2, 6, 'L', true)
+    ;[[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (d) {
+      for (var k = 2; k <= 4; k++) s.set(9 + d[0] * k, 4, 9 + d[1] * k, 'P')
+    })
+    ;[[4, 4], [14, 4], [4, 14], [14, 14]].forEach(function (p) { s.box(p[0], 0, p[1], p[0], 1, p[1], 'Q') })
+    return s.booth('F', 3).fn()
   }
 
-  // a linear theta-pinch on its side: the back cap with the plasma input on the axis, the formation tube (r 1 air, r 2 glass, r 3 casing with a
-  // coil ring every second layer), the capacitor bank (uiv casing, energy ports) and the capture chamber (cryostat casing) at the front
-  function oct(dx, dy, r) { return abs(dx) <= r && abs(dy) <= r && abs(dx) + abs(dy) <= r + 1 }
-  function formerCell(x, y, z) {
-    var dx = x - 3
-    var dy = y - 3
-    if (!oct(dx, dy, 3)) return ' '
-    if (z === 0) return dx === 0 && dy === 0 ? 'X' : 'F'
-    if (z === 20) return y === 0 && abs(dx) <= 1 ? 'X' : (abs(dx) === 3 || abs(dy) === 3 ? 'K' : 'F')
-    var ring = !oct(dx, dy, 2)
-    if (z <= 11) {
-      if (!ring) return oct(dx, dy, 1) ? '#' : 'L'
-      return z % 2 === 0 ? 'C' : 'F'
-    }
-    if (z <= 14) {
-      if (!ring) return oct(dx, dy, 1) ? '#' : 'L'
-      return abs(dy) === 0 && abs(dx) === 3 && z === 13 ? 'X' : (z === 13 ? 'U' : 'Q')
-    }
-    if (!ring) return '#'
-    return y === 0 && abs(dx) <= 1 && z >= 17 ? 'X' : 'K'
+  // A linear theta-pinch (13 x 13 x 41) lying along z: the formation tube (fusion-glass and gum-metal courses) wound by pulsed-field coil rings
+  // with three superconducting compression rings, the translation section (a narrow gum-metal tube with pulsed-field belts), the capture
+  // chamber (a wider gum-metal vessel with cryostat rings) at the front under the controller booth, a stable-casing bed and a capacitor bank along each flank.
+  function pinchTube() {
+    var s = G.uevShapes.scene(13, 13, 41)
+    s.box(5, 0, 0, 7, 0, 40, 'A')
+    for (var z = 1; z <= 22; z++) s.cyl('z', 6, 6, 3, z, z, z % 2 === 0 ? 'L' : 'F', true)
+    for (var w = 2; w <= 22; w += 3) s.cyl('z', 6, 6, 5, w, w, 'M', true, null)
+    ;[12, 16].forEach(function (zz) { s.cyl('z', 6, 6, 4, zz, zz, 'C', true, null) })
+    for (var t = 23; t <= 32; t++) s.cyl('z', 6, 6, 3, t, t, 'F', true)
+    ;[25, 28, 31].forEach(function (zz) { s.cyl('z', 6, 6, 4, zz, zz, 'M', true, null) })
+    for (var c = 33; c <= 39; c++) s.cyl('z', 6, 6, 5, c, c, 'F', true)
+    ;[34, 38].forEach(function (zz) { s.cyl('z', 6, 6, 5, zz, zz, 'K', true) })
+    s.cyl('z', 6, 6, 5, 40, 40, 'F')
+    s.cyl('z', 6, 6, 5, 0, 0, 'F').set(6, 6, 0, 'L')
+    s.room(0, 0, 3, 2, 2, 20, 'M', 'rt').room(10, 0, 3, 12, 2, 20, 'M', 'lt')
+    return s.booth('F', 3).fn()
   }
 
   // a torus on its side round a jet column of glass: the tube (major radius 6, minor 3) is a casing skin round a flux loop of coils, with
@@ -156,11 +165,14 @@
     return 'F'
   }
 
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, {
+    if (m.name === 'bz_dynamo') {
+      return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: bzCell })
+    }
+    return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
-      fn: m.name === 'accretion_disk_skimmer' ? skimmerCell : m.name === 'frc_former' ? formerCell : bzCell
+      fn: m.name === 'accretion_disk_skimmer' ? scoopRing() : pinchTube()
     })
   }
 

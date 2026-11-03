@@ -6,9 +6,9 @@
 //
 //   gtceu:stellar_elevator             11 x 11 x 25 funnel and boom, UXV (two UIV energy hatches). Recipe type gtceu:star_lifting
 //                                      (circuit 1 lift, 2 elevator log); the lift is locked to the Cygnus X-1 orbit.
-//   gtceu:plasma_mass_filter           9 x 9 x 15 octagonal solenoid, UXV. Recipe type gtceu:plasma_mass_filtering (circuit 1 stellar cuts,
+//   gtceu:plasma_mass_filter           15 x 15 x 37 Archimedes solenoid, UXV. Recipe type gtceu:plasma_mass_filtering (circuit 1 stellar cuts,
 //                                      2 disk plasma); both run anywhere.
-//   gtceu:stellar_condensation_tower   7 x 7 x 23 seven-stage column, UXV. Recipe type gtceu:stellar_condensation (circuit 1 condense);
+//   gtceu:stellar_condensation_tower   13 x 31 x 13 seven-stage column, UXV. Recipe type gtceu:stellar_condensation (circuit 1 condense);
 //                                      locked to the Cygnus X-1 orbit.
 //
 // Geometry (lib/patterns.js: a slice has at most 16 rows): the elevator and the tower are 25 and 23 long, so they lie on their side with the
@@ -25,6 +25,11 @@
   const UXV_TEXTURE = 'gtceu:block/casings/voltage/uxv/side'
   const HPC = 'gtceu:high_power_casing'
   const HPC_TEXTURE = 'gtceu:block/casings/hpca/high_power_casing'
+  // the UXV family (uxv/casings.js): gum metal is the body of the filter and the tower, pulsed field their magnets. Neither product is an ancestor
+  // of those casings' inputs (they sort and condense Cygnus plasma; the casing chains take foils, billets and UIV parts).
+  const GUM = 'grindless:gum_metal_casing'
+  const GUM_TEXTURE = 'grindless:block/uxv/gum_metal_casing'
+  const PULSED = 'grindless:pulsed_field_casing'
 
   CL.table = 'kubejs/data/grindless/tables/cygnus_lift.json'
   CL.site = 'grindless:cygnus_x1_orbit'
@@ -49,9 +54,9 @@
     },
     {
       name: 'plasma_mass_filter', machine: 'gtceu:plasma_mass_filter', type: 'plasma_mass_filtering', dataKey: 'grindless_plasma_mass_filtering',
-      lang: 'Plasma Mass Filter', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 4 }, casing: HPC, texture: HPC_TEXTURE,
-      width: 9, height: 9, depth: 15,
-      pal: { F: HPC, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing' },
+      lang: 'Plasma Mass Filter', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 4 }, casing: GUM, texture: GUM_TEXTURE,
+      width: 15, height: 15, depth: 37,
+      pal: { F: GUM, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing', A: 'gtceu:stable_machine_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -65,9 +70,9 @@
     {
       name: 'stellar_condensation_tower', machine: 'gtceu:stellar_condensation_tower', type: 'stellar_condensation',
       dataKey: 'grindless_stellar_condensation', lang: 'Stellar Condensation Tower',
-      maxIO: { itemsIn: 1, itemsOut: 3, fluidsIn: 2, fluidsOut: 1 }, casing: UXV_CASING, texture: UXV_TEXTURE,
-      width: 7, height: 7, depth: 23,
-      pal: { F: UXV_CASING, L: 'gtceu:laminated_glass', P: 'gtceu:titanium_pipe_casing', Q: 'naquadah_alloy', V: 'gtceu:computer_heat_vent' },
+      maxIO: { itemsIn: 1, itemsOut: 3, fluidsIn: 2, fluidsOut: 1 }, casing: GUM, texture: GUM_TEXTURE,
+      width: 13, height: 31, depth: 13,
+      pal: { F: GUM, M: PULSED, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:titanium_pipe_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -110,62 +115,59 @@
     return 'F'
   }
 
-  // a solenoid along the beam: coil rings on the odd slices round a fusion-glass midplane band, radial ports on the axes (the heavy cut
-  // leaves at the two side ports), plasma in at the front floor and the light cuts out through the far cap
-  function filterCell(x, y, z) {
-    var dx = x - 4
-    var dy = y - 4
-    if (!oct(dx, dy, 4)) return ' '
-    var inner = oct(dx, dy, 3)
-    if (z === 14) {
-      if (y === 0) return abs(dx) <= 2 ? 'X' : 'F'
-      if (y === 1 && (abs(dx) === 2 || abs(dx) === 3)) return 'X'
-      return abs(dx) <= 1 && y >= 3 && y <= 5 ? 'L' : 'F'
-    }
-    if (z === 0) {
-      if (!inner) return 'F'
-      if (dx === 0 && dy === 0) return 'L'
-      return abs(dx) + abs(dy) === 2 ? 'X' : 'F'
-    }
-    if (inner) return '#'
-    if (z % 2 === 1) return z === 7 ? 'L' : 'C'
-    if (abs(dx) === 4 && dy === 0 && (z === 4 || z === 8 || z === 12)) return 'X'
-    if (dx === 0 && abs(dy) === 4 && z % 4 === 0) return 'P'
-    return 'F'
+  // An Archimedes-type filter (15 x 15 x 37): a long gum-metal solenoid tube along the beam (z), pulsed-field winding rings round it every
+  // fourth slice, one superconducting coil ring at the midplane over a fusion-glass viewing band, an end electrode plate at each end, radial
+  // pipe ports on the axes where the cuts leave, a stable-casing bed on saddles and the control booth under the plasma input at the front.
+  function filterSolenoid() {
+    var s = G.uevShapes.scene(15, 15, 37)
+    s.cyl('z', 7, 7, 4, 1, 35, 'F', true)
+    for (var z = 3; z <= 33; z += 4) s.cyl('z', 7, 7, 6, z, z, 'M', true, null)
+    s.cyl('z', 7, 7, 4, 18, 18, 'C', true)
+    s.cyl('z', 7, 7, 4, 16, 16, 'L', true).cyl('z', 7, 7, 4, 20, 20, 'L', true)
+    s.cyl('z', 7, 7, 3, 0, 0, 'A').cyl('z', 7, 7, 3, 36, 36, 'A')
+    s.set(7, 7, 0, 'L').set(7, 7, 36, 'L')
+    ;[10, 18, 26].forEach(function (z) {
+      s.box(7, 11, z, 7, 13, z, 'P').box(7, 1, z, 7, 3, z, 'P').box(1, 7, z, 3, 7, z, 'P').box(11, 7, z, 13, 7, z, 'P')
+    })
+    s.box(5, 0, 0, 9, 0, 36, 'A')
+    ;[5, 17, 29].forEach(function (z) { s.box(3, 0, z, 11, 0, z, 'A').box(3, 1, z, 3, 2, z, 'Q').box(11, 1, z, 11, 2, z, 'Q') })
+    return s.booth('F', 3).fn()
   }
 
-  // seven stages of three slices, the hot base at the front: tray rings of frame, sight windows and draw-off pipes at the middle of each stage,
-  // item buses on the two lowest draw-offs, a vent jacket on the cold stages at the back and the volatile off the top
-  function towerCell(x, y, z) {
-    var dx = x - 3
-    var dy = y - 3
-    if (!oct(dx, dy, 3)) return ' '
-    var inner = oct(dx, dy, 2)
-    if (z === 22) {
-      if (y === 0) return abs(dx) <= 1 ? 'X' : 'F'
-      if (y === 1 && abs(dx) >= 1 && abs(dx) <= 2) return 'X'
-      return 'F'
-    }
-    if (z === 0) {
-      if (dx === 0 && dy === 0) return 'V'
-      return abs(dx) + abs(dy) === 1 ? 'X' : 'F'
-    }
-    if (inner) return '#'
-    if (z % 3 === 0) return 'Q'
-    if (z % 3 === 2) {
-      if (abs(dx) === 3 && dy === 0) return z >= 17 ? 'X' : 'L'
-      if (dx === 0 && abs(dy) === 3) return 'P'
-    }
-    return z <= 9 ? 'V' : 'F'
+  // A condensation column (13 x 31 x 13), the hot base at the bottom: a plinth hall with the booth, a gum-metal column with stage trays
+  // (stable-casing discs with a downcomer hole) every fourth course, pulsed-field belts at the column's thirds, sight windows and draw-off
+  // pipes at each tray, a four-post frame cage with ring beams, and the volatile off the top through a pipe stack.
+  function condensationColumn() {
+    var s = G.uevShapes.scene(13, 31, 13)
+    s.box(0, 0, 0, 12, 0, 12, 'F')
+    s.room(0, 1, 0, 12, 2, 12, 'F', 'bt')
+    s.cyl('y', 6, 6, 4, 3, 28, 'F', true)
+    ;[5, 9, 13, 17, 21, 25].forEach(function (y) {
+      s.cyl('y', 6, 6, 3, y, y, 'A').set(6, y, 6, '#')
+      s.box(6, y + 1, 1, 6, y + 1, 1, 'P')
+      s.set(2, y + 1, 6, 'L').set(10, y + 1, 6, 'L').set(6, y + 1, 10, 'L').set(6, y + 1, 2, 'L')
+      s.box(6, y + 1, 0, 6, y + 1, 1, 'P').box(0, y + 1, 6, 1, y + 1, 6, 'P').box(11, y + 1, 6, 12, y + 1, 6, 'P')
+    })
+    ;[7, 12, 17, 22, 27].forEach(function (y) { s.cyl('y', 6, 6, 5, y, y, 'M', true, null) })
+    s.room(0, 2, 0, 12, 2, 12, 'M', 'bt')
+    s.cyl('y', 6, 6, 4, 29, 29, 'A')
+    s.cyl('y', 6, 6, 2, 30, 30, 'F', true)
+    s.box(6, 29, 6, 6, 30, 6, 'P')
+    ;[[0, 0], [12, 0], [0, 12], [12, 12]].forEach(function (p) { s.box(p[0], 3, p[1], p[0], 27, p[1], 'Q') })
+    return s.booth('F', 3).fn()
   }
 
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, {
+    if (m.name === 'stellar_elevator') {
+      return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: liftCell })
+    }
+    return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
-      fn: m.name === 'stellar_elevator' ? liftCell : m.name === 'plasma_mass_filter' ? filterCell : towerCell
+      fn: m.name === 'plasma_mass_filter' ? filterSolenoid() : condensationColumn()
     })
   }
+
 
   // one EMI line per recipe, read from its data
   function infoOf(dataKey) {
