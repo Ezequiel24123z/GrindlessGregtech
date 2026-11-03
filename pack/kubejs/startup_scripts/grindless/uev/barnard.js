@@ -105,13 +105,13 @@
   var M = BA.machines
   var SIC = 'grindless:sic_composite_casing'
   var SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
-  M.drill.casing = SIC
-  M.drill.texture = SIC_TEXTURE
+  M.drill.casing = 'grindless:superhydride_magnet_casing'
+  M.drill.texture = 'grindless:block/uev/superhydride_magnet_casing'
   M.refinery.casing = SIC
   M.refinery.texture = SIC_TEXTURE
 
-  function bodyPal() {
-    var pal = G.uevShapes.palette(SIC)
+  function bodyPal(primary) {
+    var pal = G.uevShapes.palette(primary)
     pal.C = TUNGSTEN_PIPE
     pal.P = PIPE
     return pal
@@ -138,8 +138,8 @@
         var s = G.uevShapes.scene(11, 19, 13)
         s.box(0, 0, 0, 10, 0, 12, 'X')
         s.room(0, 1, 0, 10, 4, 12, 'F', 't')
-        s.room(0, 3, 0, 10, 4, 12, 'H', 't')
-        s.cyl('y', 3, 4, 2, 5, 17, 'H', true, '#')
+        s.room(0, 3, 0, 10, 4, 12, 'O', 't')
+        s.cyl('y', 3, 4, 2, 5, 17, 'O', true, '#')
         ;[7, 11, 15].forEach(function (y) { s.cyl('y', 3, 4, 2, y, y, 'P', true, null) })
         s.box(3, 5, 4, 3, 17, 4, 'C')
         s.cyl('y', 8, 4, 1, 5, 18, 'F', true, '#')
@@ -150,7 +150,7 @@
         ;[3, 7].forEach(function (x) { s.set(x, 3, 0, 'L').set(x, 3, 12, 'L') })
         return s.booth('F', 3).fn()
       })(),
-      pal: bodyPal()
+      pal: bodyPal(SIC)
     })
   }
   // The drill: a derrick. Four lattice legs with ring braces carry a gearbox top drive over the drill string; a PTFE-free pipe rack of
@@ -172,14 +172,14 @@
         var s = G.uevShapes.scene(9, 15, 9)
         s.box(0, 0, 0, 8, 0, 8, 'X')
         ;[0, 8].forEach(function (x) { [0, 8].forEach(function (z) { s.box(x, 1, z, x, 12, z, 'Q') }) })
-        ;[4, 8].forEach(function (y) { s.edges(0, y, 0, 8, y, 8, y === 4 ? 'H' : 'R') })
+        ;[4, 8].forEach(function (y) { s.edges(0, y, 0, 8, y, 8, y === 4 ? 'M' : 'O') })
         s.box(4, 1, 4, 4, 13, 4, 'C')
         s.box(3, 13, 3, 5, 14, 5, 'B')
-        s.box(6, 1, 1, 7, 6, 2, 'H').box(7, 3, 3, 7, 6, 3, 'C')
+        s.box(6, 1, 1, 7, 6, 2, 'M').box(7, 3, 3, 7, 6, 3, 'C')
         s.box(1, 1, 1, 2, 2, 3, 'B')
         return s.booth('F', 3).fn()
       })(),
-      pal: bodyPal()
+      pal: bodyPal(M.drill.casing)
     })
   }
   BA.order = ['drill', 'refinery']

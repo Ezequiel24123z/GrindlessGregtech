@@ -132,7 +132,7 @@
     var s = G.uevShapes.scene(15, 9, 17)
     s.room(0, 0, 0, 14, 4, 16, 'R', 't')
     s.box(0, 0, 0, 14, 0, 16, 'X')
-    ;[0, 8, 16].forEach(function (z) { s.box(0, 5, z, 14, 5, z, 'H') })
+    ;[0, 8, 16].forEach(function (z) { s.box(0, 5, z, 14, 5, z, 'O') })
     s.box(5, 6, 2, 9, 6, 14, 'H').box(6, 7, 3, 8, 7, 13, 'H')
     ;[2, 6, 10].forEach(function (z) {
       s.box(9, 1, z, 13, 3, z + 3, 'H').box(10, 2, z + 1, 12, 2, z + 2, '#')

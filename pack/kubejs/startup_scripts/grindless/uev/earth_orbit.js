@@ -52,7 +52,7 @@
       type: 'entanglement_distribution',
       dataKey: 'grindless_entanglement_distribution',
       lang: 'Entanglement Station',
-      casing: PHOTONIC, texture: PHOTONIC_TEXTURE,
+      casing: 'grindless:sic_composite_casing', texture: 'grindless:block/uev/sic_composite_casing',
       // items in: source, memory, QD source, detectors, fibre and the circuit; out: the repeater node; fluids in: superfluid helium for the memory
       maxIO: { itemsIn: 7, itemsOut: 1, fluidsIn: 2, fluidsOut: 0 },
       width: 15, height: 10, depth: 7
@@ -63,7 +63,7 @@
   // tables down both sides. The entanglement station is twin telescopes (SiC towers with photonic dishes) on a truss over a central
   // SPDC bench hall. Built in the registry callback (shapes.js may load after this file).
   function dish(s, cx, cz, y0) {
-    ;[[3, 0], [4, 1], [5, 2]].forEach(function (p) { s.cyl('y', cx, cz, p[0], y0 + p[1], y0 + p[1], p[1] === 2 ? 'F' : 'R', true, '#') })
+    ;[[3, 0], [4, 1], [5, 2]].forEach(function (p) { s.cyl('y', cx, cz, p[0], y0 + p[1], y0 + p[1], p[1] === 2 ? 'O' : 'R', true, '#') })
     s.set(cx, y0 + 1, cz, 'C')
   }
   var SHAPES = {
@@ -91,13 +91,13 @@
       w: 25, h: 13, d: 11,
       fn: function () {
         var s = G.uevShapes.scene(25, 13, 11)
-        s.box(0, 0, 0, 24, 0, 10, 'X')
-        s.room(7, 1, 0, 17, 3, 10, 'F')
+        s.box(0, 0, 0, 24, 0, 10, 'H')
+        s.room(7, 1, 0, 17, 3, 10, 'H')
         s.box(7, 3, 0, 17, 3, 10, 'R')
         s.box(9, 1, 3, 15, 1, 7, 'B').box(9, 2, 3, 15, 2, 3, 'L').box(9, 2, 7, 15, 2, 7, 'L')
         ;[3, 21].forEach(function (cx) {
           s.cyl('y', cx, 5, 2, 1, 7, 'R', true, '#')
-          ;[3, 5].forEach(function (y) { s.cyl('y', cx, 5, 2, y, y, 'M', true, null) })
+          ;[3, 5].forEach(function (y) { s.cyl('y', cx, 5, 2, y, y, 'O', true, null) })
           s.cyl('y', cx, 5, 3, 1, 1, 'H', true, null)
           dish(s, cx, 5, 8)
           s.set(cx, 4, 3, 'L').set(cx, 6, 3, 'L')

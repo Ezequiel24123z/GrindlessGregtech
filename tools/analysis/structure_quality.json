@@ -116,7 +116,7 @@
  "gtceu:barnard_core_drill": {
   "v": [],
   "bt": 6,
-  "ds": 0.509,
+  "ds": 0.59,
   "c": 294
  },
  "gtceu:baseline_astrometer": {
@@ -379,8 +379,8 @@
  },
  "gtceu:entanglement_station": {
   "v": [],
-  "bt": 8,
-  "ds": 0.426,
+  "bt": 7,
+  "ds": 0.401,
   "c": 994
  },
  "gtceu:entry_probe_bay": {
@@ -560,7 +560,7 @@
  "gtceu:helium3_polariser": {
   "v": [],
   "bt": 8,
-  "ds": 0.538,
+  "ds": 0.439,
   "c": 746
  },
  "gtceu:helium_refrigerator": {
@@ -967,7 +967,7 @@
  },
  "gtceu:nebula_collector": {
   "v": [],
-  "bt": 5,
+  "bt": 6,
   "ds": 0.589,
   "c": 490
  },
@@ -1399,8 +1399,8 @@
  },
  "gtceu:single_crystal_foundry": {
   "v": [],
-  "bt": 8,
-  "ds": 0.498,
+  "bt": 9,
+  "ds": 0.373,
   "c": 770
  },
  "gtceu:slurry_separator": {
@@ -1591,7 +1591,7 @@
  },
  "gtceu:superheavy_chemistry_lab": {
   "v": [],
-  "bt": 5,
+  "bt": 6,
   "ds": 0.581,
   "c": 889
  },
@@ -1801,9 +1801,9 @@
  },
  "gtceu:white_dwarf_spectrograph": {
   "v": [],
-  "bt": 6,
-  "ds": 0.506,
-  "c": 335
+  "bt": 7,
+  "ds": 0.509,
+  "c": 374
  },
  "gtceu:wire_works": {
   "v": [],

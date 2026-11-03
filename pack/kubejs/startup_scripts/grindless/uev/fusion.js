@@ -70,7 +70,7 @@
     var s = G.uevShapes.scene(13, 9, 17)
     s.box(0, 0, 0, 12, 0, 16, 'X')
     s.cyl('z', 6, 4, 3, 2, 13, 'M', true, '#')
-    ;[2, 13].forEach(function (z) { s.cyl('z', 6, 4, 3, z, z, 'M') })
+    ;[2, 13].forEach(function (z) { s.cyl('z', 6, 4, 3, z, z, 'R') })
     ;[4, 7, 10].forEach(function (z) { s.cyl('z', 6, 4, 3, z, z, 'H', true, null) })
     s.set(3, 4, 7, 'C').set(9, 4, 7, 'C').set(6, 1, 7, 'C').set(6, 7, 7, 'C')
     s.cyl('z', 6, 4, 1, 4, 11, 'O', true, null)
