@@ -232,9 +232,9 @@
     var notes = []
     var va = Number(GTValues.VA[OPV])
     var want = {}
-    want[LINK] = { items: ['gtceu:chain_strand_single_wire x2', 'grindless:pasta_strand_repeater x1', 'grindless:tetron_die x1'].sort().join(','),
-      fluids: ['gtceu:soldering_alloy x144', 'gtceu:lubricant x100'].sort().join(',') }
-    want[CELL_ID] = { items: ['gtceu:chain_strand_single_wire x16', 'grindless:chain_lamina_stack x4', 'gtceu:opv_field_generator x2'].sort().join(','), fluids: '' }
+    want[LINK] = { items: ['gtceu:chain_strand_single_wire x2', 'grindless:pasta_strand_repeater x1', 'grindless:tetron_die x1', 'gtceu:soldering_alloy_ingot x1'].sort().join(','),
+      fluids: ['gtceu:lubricant x100'].sort().join(',') }
+    want[CELL_ID] = { items: ['gtceu:chain_strand_single_wire x16', 'grindless:chain_lamina_stack x4', 'grindless:uxv_smes_cell x4'].sort().join(','), fluids: '' }
     OWN.forEach(function (o) {
       var live = liveRecipe(o.id)
       if (live === null) { bad.push(o.id + ' not in the recipe manager'); return }
