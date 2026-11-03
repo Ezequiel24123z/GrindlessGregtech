@@ -18,7 +18,7 @@ export const CHAPTER = {
   role: 'capstone',
   order: 8,
   icon: 'gtceu:hyperstargate',
-  autofocus: 'TR_BLEND',
+  autofocus: 'TR_FURN',
   section: SECTIONS.hyperstargate,
   title: 'MAX+: Building the Gate',
   subtitle: ['Six machines, eight kinds of part, one dial and a ring that opens once for a whole team.'],
@@ -31,26 +31,13 @@ export const LINKS = [
 export const QUESTS = [
   // ------------------------------------------------------------------ the tree's machines
   {
-    key: 'TR_BLEND', kind: 'machine', title: 'Multi-Plasma Blender', icon: 'gtceu:multi_plasma_blender',
-    deps: ['S3_TREE'], x: 0, y: -4,
-    teach: {
-      for: 'The &6Multi-Plasma Blender&r mixes one plasma from each place the pack has worked into the slurry that grows the gate\'s crystals. It is the only source of that slurry.',
-      needs: 'Plasmas from the forge, elevator, filter, very massive star, p-process and jet lines, plus hot flow and condensate.',
-      unlocks: 'The horizon crystal furnace.',
-      automate: 'Give each plasma its own pipe. A starved line stops the whole mix.',
-    },
-    desc: [],
-    tasks: [it('gtceu:multi_plasma_blender')],
-    rewards: [xp(300)],
-  },
-  {
     key: 'TR_FURN', kind: 'machine', title: 'Horizon Crystal Furnace', icon: 'gtceu:horizon_crystal_furnace',
     deps: ['S3_TREE'], x: -1.5, y: -0.5,
     teach: {
-      for: 'The &6Horizon Crystal Furnace&r grows core and controller crystals from slurry. Other packs wait weeks for this; here the cost is slurry and many parallel runs.',
-      needs: 'Slurry by the hundred million millibuckets, and condensate for heat.',
+      for: 'The &6Horizon Crystal Furnace&r blends one plasma from each place the pack has worked into slurry, then grows core and controller crystals from it. Other packs wait weeks for this; here the cost is slurry and many parallel runs.',
+      needs: 'Plasmas from the forge, elevator, filter, very massive star, p-process and jet lines, plus hot flow and condensate for the slurry; then slurry by the hundred million millibuckets.',
       unlocks: 'Core crystals and the controller crystal.',
-      automate: 'Slurry is the bottleneck. Size the blender line before you add furnaces.',
+      automate: 'Slurry is the bottleneck. Give each plasma its own pipe, and size the slurry line before you add furnaces.',
     },
     desc: [],
     tasks: [it('gtceu:horizon_crystal_furnace')],

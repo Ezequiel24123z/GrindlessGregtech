@@ -261,7 +261,7 @@ test('static run: no MAX recipe above 2^31 EU/t except gate c14 and c15 (2^33) a
   const bad = [];
   for (const r of pack().recs) {
     for (const e of eu(r, 'tickInputs')) {
-      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && !/^grindless:warp_gate\/hold_(tarantula|magellanic_stream|m31_nucleus|local_group_filament)$/.test(r.i) && r.i !== 'grindless:black_hole_bomb/horizon_lock' && !/^grindless:(black_hole_bomb\/condensate_tap|condensate_refinery\/|bound_matter_press\/|meta_material_loom\/|condensate_assembler\/|hills_slingshot\/|tarantula_stellar_lift\/|pair_instability_crucible\/|blueshift_forge\/|pristine_gas_works\/|multi_plasma_blender\/|horizon_crystal_furnace\/|hyper_assembly_array\/|hyperstargate_dial\/)/.test(r.i)) bad.push(`${r.i}: ${e}`);
+      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && !/^grindless:warp_gate\/hold_(tarantula|magellanic_stream|m31_nucleus|local_group_filament)$/.test(r.i) && r.i !== 'grindless:black_hole_bomb/horizon_lock' && !/^grindless:(black_hole_bomb\/condensate_tap|condensate_refinery\/|bound_matter_press\/|meta_material_loom\/|condensate_assembler\/|hills_slingshot\/|tarantula_stellar_lift\/|pair_instability_crucible\/|blueshift_forge\/|pristine_gas_works\/|horizon_crystal_furnace\/|hyper_assembly_array\/|hyperstargate_dial\/)/.test(r.i)) bad.push(`${r.i}: ${e}`);
     }
     for (const e of eu(r, 'tickOutputs')) if (e > 2 ** 30 && !/^grindless:(nickel_56_burner|primordial_fusion_torus|polarized_fusion)\//.test(r.i)) bad.push(`${r.i}: generator ${e} above 2^30`);
   }

@@ -44,6 +44,7 @@ export default {
     },
     silicon: {
       name: 'Sand to chips',
+      line: 'silicon',
       nodes: [
         n('sand', 0, -0.75, I('minecraft:sand'), 'Sand', { kind: 'raw' }),
         n('sio2', 2, -0.75, I('gtceu:silicon_dioxide_dust'), 'Silicon Dioxide', { from: ['sand'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer' }),

@@ -151,9 +151,9 @@
  },
  "gtceu:blueshift_forge": {
   "v": [],
-  "bt": 5,
-  "ds": 0.603,
-  "c": 1759
+  "bt": 6,
+  "ds": 0.446,
+  "c": 4155
  },
  "gtceu:boron_nitride_reactor": {
   "v": [],
@@ -253,9 +253,9 @@
  },
  "gtceu:condensate_assembler": {
   "v": [],
-  "bt": 5,
-  "ds": 0.468,
-  "c": 1523
+  "bt": 8,
+  "ds": 0.52,
+  "c": 3822
  },
  "gtceu:condensate_refinery": {
   "v": [],
@@ -572,14 +572,14 @@
  "gtceu:horizon_capacitor_bank": {
   "v": [],
   "bt": 6,
-  "ds": 0.524,
-  "c": 480
+  "ds": 0.406,
+  "c": 4104
  },
  "gtceu:horizon_crystal_furnace": {
   "v": [],
-  "bt": 5,
-  "ds": 0.455,
-  "c": 1365
+  "bt": 7,
+  "ds": 0.592,
+  "c": 3635
  },
  "gtceu:horizon_flux_clamp": {
   "v": [],
@@ -631,15 +631,15 @@
  },
  "gtceu:hyper_assembly_array": {
   "v": [],
-  "bt": 4,
-  "ds": 0.61,
-  "c": 2401
+  "bt": 7,
+  "ds": 0.496,
+  "c": 4545
  },
  "gtceu:hyperfactory": {
   "v": [],
-  "bt": 4,
-  "ds": 0.622,
-  "c": 1125
+  "bt": 7,
+  "ds": 0.54,
+  "c": 3839
  },
  "gtceu:hyperstargate": {
   "v": [],
@@ -859,9 +859,9 @@
  },
  "gtceu:meta_material_loom": {
   "v": [],
-  "bt": 5,
-  "ds": 0.475,
-  "c": 787
+  "bt": 7,
+  "ds": 0.361,
+  "c": 4020
  },
  "gtceu:methane_pyrolyser": {
   "v": [],
@@ -904,12 +904,6 @@
   "bt": 5,
   "ds": 0.545,
   "c": 315
- },
- "gtceu:multi_plasma_blender": {
-  "v": [],
-  "bt": 5,
-  "ds": 0.456,
-  "c": 611
  },
  "gtceu:muon_fusion_cell": {
   "v": [],
@@ -1723,9 +1717,9 @@
  },
  "gtceu:void_crystal_fab": {
   "v": [],
-  "bt": 5,
-  "ds": 0.511,
-  "c": 1219
+  "bt": 6,
+  "ds": 0.543,
+  "c": 2512
  },
  "gtceu:volatile_ice_fractionator": {
   "v": [],

@@ -1,14 +1,14 @@
 // priority: 7018
-// Gregtech Grindless - names and tooltips of MAX+'s multi-plasma blender and horizon crystal furnace (startup_scripts/grindless/maxplus/crystals.js;
+// Gregtech Grindless - names and tooltips of MAX+'s horizon crystal furnace (startup_scripts/grindless/maxplus/crystals.js;
 // package XP-H2):
 //
-//   gtceu.recipe.grindless_<type>.<recipe>   the EMI line of each keyed row of the package: the blender's and the furnace's rows and the T8, T9
+//   gtceu.recipe.grindless_<type>.<recipe>   the EMI line of each keyed row of the package: the furnace's rows and the T8, T9
 //                                            and T10 steps on machines whose type carries a data key
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. English only.
 (function () {
     var T = {
-        blender: 'Eight plasmas, 1,000 mB each (stellar, lifted, filtered, very-massive-star, p-process, jet, hot flow) and kerr condensate, blended into 1,000 mB of horizon crystal slurry at V[MAX] x 64 A.',
+        blender: 'Circuit 3: seven plasmas and kerr condensate, 1,000 mB each, blended into 1,000 mB of slurry at V[MAX] x 64 A.',
         core: 'Circuit 1: a sapphire seed plate and condensate-doped dust grown in 4,000,000 mB of slurry, lined with kerr strange plate, at V[MAX] x 256 A (line T9). Kerr condensate carries the heat.',
         controller: 'Circuit 2: a controller seed and condensate-doped dust grown in 1,000,000 mB of slurry, lined with kerr strange plate, at V[MAX] x 256 A (line T10).',
         lifted: 'Circuit 5: stellar plasma lifted out of the star at Cygnus X-1 (line T8).',
@@ -23,13 +23,10 @@
     }
     // [key, en]
     var ENTRIES = [
-        ['gtceu.multi_plasma_blender', 'Multi-Plasma Blender'],
-        ['block.gtceu.multi_plasma_blender', 'Multi-Plasma Blender'],
-        ['grindless.machine.multi_plasma_blender.tooltip.0', '\u00a77Blends eight plasmas into horizon crystal slurry.'],
         ['gtceu.horizon_crystal_furnace', 'Horizon Crystal Furnace'],
         ['block.gtceu.horizon_crystal_furnace', 'Horizon Crystal Furnace'],
-        ['grindless.machine.horizon_crystal_furnace.tooltip.0', '\u00a77Grows core and controller crystals in slurry.'],
-        ['gtceu.recipe.grindless_multi_plasma_blender.horizon_crystal_slurry', T.blender],
+        ['grindless.machine.horizon_crystal_furnace.tooltip.0', '\u00a77Blends eight plasmas into slurry, then grows core and controller crystals in it.'],
+        ['gtceu.recipe.grindless_horizon_crystal_furnace.horizon_crystal_slurry', T.blender],
         ['gtceu.recipe.grindless_horizon_crystal_furnace.core_crystal_boule', T.core],
         ['gtceu.recipe.grindless_horizon_crystal_furnace.controller_crystal_boule', T.controller],
         ['gtceu.recipe.grindless_star_lifting.lifted_stellar_plasma', T.lifted],

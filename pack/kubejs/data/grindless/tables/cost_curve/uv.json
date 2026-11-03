@@ -75,7 +75,7 @@
     "gtceu:uv_machine_casing": 2.917,
     "gtceu:uv_machine_hull": 2.917,
     "gtceu:uv_sensor": 1.382,
-    "gtnn:optical_processor": 2.318
+    "gtnn:optical_processor": 3.477
   },
   "pin": {
     "gtceu:*_machine_hull": {

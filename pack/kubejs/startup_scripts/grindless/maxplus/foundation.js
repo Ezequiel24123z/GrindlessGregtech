@@ -69,7 +69,7 @@
   // controllers of machines 1-17, named here and registered by the machine packages
   MXP.controllers = ['gtceu:condensate_refinery', 'gtceu:bound_matter_press', 'gtceu:hills_slingshot', 'gtceu:tarantula_stellar_lift',
     'gtceu:pair_instability_crucible', 'gtceu:nickel_56_burner', 'gtceu:pristine_gas_works', 'gtceu:primordial_fusion_torus', 'gtceu:blueshift_forge',
-    'gtceu:void_crystal_fab', 'gtceu:meta_material_loom', 'gtceu:multi_plasma_blender', 'gtceu:horizon_crystal_furnace', 'gtceu:condensate_assembler',
+    'gtceu:void_crystal_fab', 'gtceu:meta_material_loom', 'gtceu:horizon_crystal_furnace', 'gtceu:condensate_assembler',
     'gtceu:horizon_capacitor_bank', 'gtceu:hyper_assembly_array', 'gtceu:hyperstargate', 'gtceu:polarized_fusion_stellarator']
 
   var GAS = 'gas'
