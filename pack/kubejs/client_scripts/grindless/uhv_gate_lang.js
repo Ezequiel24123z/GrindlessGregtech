@@ -27,7 +27,7 @@
         ['gtceu.recipe.grindless_baseline_astrometry.stellar_neighbourhood_chart', 'Chart the stellar neighbourhood from the baseline'],
 
         ['emi.grindless.info.warp_gate_casing.0',
-            'A structure block: neutronium ring segments around a qualified MgB2 coil that holds the exotic matter field, made in the Assembler (circuit 6, two per coil). It builds the Warp Gate\'s 15x15x3 ring, once in Earth orbit and once in Proxima b\'s orbit.'],
+            'A structure block: neutronium ring segments around a qualified MgB2 coil that holds the exotic matter field, made in the Assembler (circuit 6, two per coil). It builds the Warp Gate\'s 25x9x20 ring and berm, once in Earth orbit and once in Proxima b\'s orbit.'],
 
         // AF-1: relay coordinates (a data stick a completed jump gives; lib/relay_platforms.js) and the transit's messages
         ['grindless.relay_coordinates.name', 'Relay Coordinates: %s'],

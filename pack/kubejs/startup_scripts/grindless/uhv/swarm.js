@@ -5,11 +5,11 @@
 // Mercury's orbit (gcyr:mercury_orbit, UHV-B1's eighth station slot) on LuV's station truss casing; every recipe carries
 // .dimension('gcyr:mercury_orbit') (server script).
 //
-//   gtceu:swarm_segment_foundry  9 wide x 7 high x 9 deep: a truss deck (the parts sit in its rim) under an assembly gantry: tungsten
-//                                steel frame posts and rails, an assembly line grating bridge and the assembly head (assembly line unit)
+//   gtceu:swarm_segment_foundry  15 x 8 x 23: a hangar, a truss floor with a jig rail (the parts sit in its rim), hangar casing walls,
+//                                a frame roof with an assembly line grating bridge and the assembly head (assembly line unit)
 //   gtceu:swarm_segment          its recipe type (EU in). Circuit 1 builds a segment, circuit 2 refurbishes a worn one.
-//   gtceu:swarm_control_station  11 x 5 x 11: a truss deck, four frame posts, the formation computer (computer casing) in the middle and
-//                                a laser receiver array on top (sapphire windows in a truss grid, one in two). A GENERATOR through
+//   gtceu:swarm_control_station  41 x 7 x 41: a hull hub with the formation computer (computer casing) under a sapphire receiver roof, a
+//                                sunshade, four booms with laser-module heads and two propellant-depot rings. A GENERATOR through
 //                                lib/generators.js, written at its final figure: one run at a time (maxParallels 1), no parallel hatch,
 //                                not in power/generators.js's list, never doubled. Its dynamo hatches carry the EU out; the 4 A UHV
 //                                dynamo (gtceu:uhv_energy_output_hatch_4a) holds c2's 8,388,608 EU/t on its own (dynamoCapacity).
@@ -72,7 +72,7 @@
       // items in: c1's seven parts and the circuit; out: the segment and the stripped film's aluminium (c2)
       maxIO: { itemsIn: 8, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },
       parts: { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 4 }, output_bus: { min: 1, max: 2 } },
-      width: 9, height: 7, depth: 9, minTruss: 20
+      width: 15, height: 8, depth: 23, minTruss: 40
     },
     station: {
       name: 'swarm_control_station',
@@ -85,7 +85,7 @@
       // segments and the empty propellant tanks; fluid in: krypton (the poorer fuel)
       maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 },
       parts: { energy_output: { min: 1, max: 4 }, input_bus: { min: 1, max: 4 }, input_hatch: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 } },
-      width: 11, height: 5, depth: 11, minTruss: 28
+      width: 41, height: 7, depth: 41, minTruss: 28
     },
     bay: {
       name: 'solar_probe_bay',
@@ -135,23 +135,56 @@
 
   function corner(m, si, c) { return (si === 0 || si === m.depth - 1) && (c === 0 || c === m.width - 1) }
 
-  //   F gantry posts and rails (tungsten steel frames)   G the gantry bridge (assembly line grating)   A the assembly head
+  // A free-form layout: f(r, si, c) gives each cell's symbol; the controller (S) is forced to the front slice, row 1, middle column.
+  function lay(m, f) {
+    var slices = []
+    var last = m.depth - 1
+    var mid = (m.width - 1) / 2
+    for (var si = 0; si < m.depth; si++) {
+      var rows = []
+      for (var r = 0; r < m.height; r++) {
+        var line = ''
+        for (var c = 0; c < m.width; c++) line += si === last && r === 1 && c === mid ? 'S' : f(r, si, c)
+        rows.push(line)
+      }
+      slices.push(rows)
+    }
+    return slices
+  }
+
+  // The foundry, 15 wide x 8 high x 23 deep (D3-SIZE-UHV1): a hangar. A truss floor with a pipe jig rail down its middle (the rim holds the
+  // parts), hangar-casing walls with laminated-glass windows, a ridge-and-rafter roof of tungsten steel frames carrying the gantry bridge
+  // (assembly line grating) and the assembly head, and two film-roll stands at the back.
+  //   H hangar casing   F frames (posts, rafters, ridge, stands)   G the gantry bridge   A the assembly head   P the jig rail   W windows
   var foundry = SW.machines.foundry
+  var FD_BENTS = [2, 6, 10, 14, 18]
   foundry.spec = {
-    slices: deck(foundry, function (r, si, c) {
-      var side = c === 0 || c === foundry.width - 1
-      var midSlice = si === (foundry.depth - 1) / 2
-      if (r === foundry.height - 1) return side ? 'F' : (midSlice ? 'G' : ' ')
-      if (corner(foundry, si, c) || (midSlice && side)) return 'F'
-      if (r === foundry.height - 2 && midSlice && c === (foundry.width - 1) / 2) return 'A'
-      if (side && (r === 1 || r === 2) && si >= 2 && si <= foundry.depth - 3) return 'W'
-      if (side && r === 3 && si >= 1 && si <= foundry.depth - 2) return 'P'
+    slices: lay(foundry, function (r, si, c) {
+      var last = foundry.depth - 1
+      var mid = (foundry.width - 1) / 2
+      var wallX = c === 0 || c === foundry.width - 1
+      var wallZ = si === 0 || si === last
+      var bent = FD_BENTS.indexOf(si) >= 0
+      if (r === 0) return wallX || wallZ ? 'X' : (c === mid ? 'P' : 'T')
+      if (r <= 3 && (wallX || wallZ)) {
+        if (r === 2 && wallX && si % 2 === 1 && si >= 2 && si <= last - 2) return 'W'
+        if (r === 2 && wallZ && c % 2 === 0 && c >= 2 && c <= foundry.width - 3) return 'W'
+        return 'H'
+      }
+      if (r >= 4 && r <= 6 && wallX && bent) return 'F'
+      if (r === 7 && bent) return 'F'
+      if (r === 7 && (c === mid || c === 3 || c === foundry.width - 4) && si >= 1 && si <= last - 1) return 'F'
+      if (r === 1 && c === mid && si >= 4 && si <= last - 3) return 'P'
+      if (r === 6 && si === 12 && c >= 1 && c <= foundry.width - 2) return 'G'
+      if (r === 5 && si === 12 && c === mid) return 'A'
+      if (r >= 1 && r <= 3 && si >= 2 && si <= 3 && (c === 3 || c === foundry.width - 4)) return 'F'
       return ' '
     }),
     symbols: {
       S: Pat.controller(),
       X: body(foundry),
       T: Pat.block(TRUSS),
+      H: Pat.block('grindless:hangar_casing'),
       F: Pat.frame([FRAME]),
       G: Pat.block(GRATING),
       A: Pat.block(HEAD),
@@ -160,22 +193,53 @@
     }
   }
 
-  //   F posts (tungsten steel frames)   C the formation computer (computer casings, rows 1 to 3)   R laser receivers (sapphire blocks)
-  //   T the receiver array's truss grid
+  // The station, 41 wide x 7 high x 41 deep: a hub and four booms. The hub (11 x 11, a pressure-hull wall with windows) holds the formation
+  // computer (C, the middle column) under a roof of sapphire receivers (R) in a truss grid, and wears a Hermean-brick sunshade on four posts.
+  // Four booms 3 wide run out 15 cells on the axes (truss floor, a pipe run, frame rails, windows); each ends in a laser-module head, the
+  // front one carrying the controller. Two propellant-depot rings (hull and pipes) circle the hub between the booms.
+  //   H pressure hull   N Hermean brick sunshade   Q laser module   L windows   P pipes   D depot pipes   F frames   K receivers' coils
   var station = SW.machines.station
   station.spec = {
-    slices: deck(station, function (r, si, c) {
-      var top = r === station.height - 1
-      var rim = si === 0 || si === station.depth - 1 || c === 0 || c === station.width - 1
-      if (top) return rim || (si + c) % 2 === 1 ? 'T' : 'R'
-      if (corner(station, si, c)) return 'F'
-      if (si === (station.depth - 1) / 2 && c === (station.width - 1) / 2) return 'C'
+    slices: lay(station, function (r, si, c) {
+      var mid = (station.width - 1) / 2
+      var dx = c - mid
+      var dz = si - mid
+      var ax = Math.abs(dx)
+      var az = Math.abs(dz)
+      var dm = Math.max(ax, az)
+      var armZ = ax <= 2 && az >= 6
+      var armX = az <= 2 && ax >= 6
+      if (dm <= 5) {
+        if (r === 0) return dm === 5 ? 'X' : (ax === 0 || az === 0 ? 'P' : 'T')
+        if (r <= 3) {
+          if (dm === 5) return r === 2 && (ax + az) % 2 === 0 && ax > 1 && az > 1 ? 'L' : 'H'
+          return dm === 0 ? 'C' : '#'
+        }
+        if (r === 4) return dm === 5 ? 'H' : ((ax + az) % 2 === 0 ? 'R' : 'T')
+      }
+      if (dm === 8 && ax === 8 && az === 8 && r >= 1 && r <= 5) return 'F'
+      if (r === 6 && dm >= 6 && dm <= 8 && (dm === 8 || (ax + az) % 2 === 0)) return 'N'
+      if (armZ || armX) {
+        var along = Math.max(ax, az)
+        var off = Math.min(ax, az)
+        if (along >= 18) {
+          if (r === 0) return off <= 1 ? 'X' : 'T'
+          if (r === 4) return 'Q'
+          if (r >= 1 && r <= 3) return along === 20 || off === 2 ? (r === 2 ? 'Q' : 'H') : '#'
+          return ' '
+        }
+        if (r === 0) return 'T'
+        if (r === 1) return off === 0 ? 'P' : (off === 1 ? 'T' : ' ')
+        if (r === 2) return off === 1 ? (along % 3 === 0 ? 'L' : 'F') : ' '
+        if (r === 3) return off === 1 && along % 2 === 0 ? 'F' : ' '
+        return ' '
+      }
+      if ((dm === 10 || dm === 12) && ax > 2 && az > 2) {
+        if (r === 0) return 'H'
+        if (r === 1) return 'D'
+        if (r === 2) return dm === 10 && (ax + az) % 4 === 0 ? 'D' : ' '
+      }
       return ' '
-    }, function (si, c) {
-      var dz = Math.abs(si - (station.depth - 1) / 2)
-      var dx = Math.abs(c - (station.width - 1) / 2)
-      if (dz === 0 || dx === 0) return 'P'
-      return Math.max(dz, dx) === 2 ? 'K' : 'T'
     }),
     symbols: {
       S: Pat.controller(),
@@ -185,10 +249,14 @@
       C: Pat.block(COMPUTER),
       R: Pat.block(RECEIVER),
       P: Pat.block(RAIL),
-      K: Pat.block('gtceu:superconducting_coil')
+      D: Pat.block(RAIL),
+      H: Pat.block('grindless:pressure_hull_casing'),
+      N: Pat.block('grindless:hermean_heat_shield_brick'),
+      Q: Pat.block('grindless:laser_module_block'),
+      L: Pat.block('gtceu:laminated_glass'),
+      '#': Pat.air()
     }
   }
-
   //   F posts (tungsten steel frames)   R the launch rail (tungsten steel pipe casings, row 1, ending behind the controller)
   //   T the top ring (truss)
   var bay = SW.machines.bay
