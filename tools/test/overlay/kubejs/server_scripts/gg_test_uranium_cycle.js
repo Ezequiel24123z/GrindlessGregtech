@@ -99,6 +99,7 @@
     leu_fuel_assembly: { circuit: 3, items: [[PELLET, 10], [TUBE, 4]], fluids: [[HELIUM, 100]], kept: [], out: [ASSEMBLY, 1] }
   }
   var LEACH_RUNS = 5
+  var OWN = { pitchblende_end: true, leu_pellets: true, zircaloy_cladding_tube: true, leu_fuel_assembly: true }
   // IV-A2's assumption for one LEU assembly (docs/eras/iv.md, "Balance (as built, IV-A2)") and iv.md's enrichment figure (hot cell)
   var A2_ASSUMED = '2-4 M EU, 30 uraninite, 2 Zircaloy ingots and 100 mB helium'
   var ENRICHMENT_EU = 1020000
@@ -411,6 +412,7 @@
     var lines = []
     ;(UC().recipes || []).forEach(function (r) {
       r.stages.forEach(function (s) {
+        if (!OWN[r.name]) return
         var got = stageFromGame(s.from)
         if (got.error) {
           problems.push(r.name + ': ' + got.error)
