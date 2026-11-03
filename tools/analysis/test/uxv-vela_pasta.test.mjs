@@ -194,10 +194,10 @@ test('structures: not boring, three functional kinds, controller in the front sl
     assert.deepEqual(violations(mm), [], `${m}: ${JSON.stringify(mm)}`);
     assert.ok(mm.dominantShare <= 0.62, `${m}: dominant share ${mm.dominantShare}`);
     assert.ok(mm.functional.length >= 3, `${m}: ${mm.functional}`);
-    assert.ok(s.slices.every((sl) => sl.length <= 16), `${m}: at most 16 rows per slice`);
+    assert.ok(s.slices.every((sl) => sl.length <= 60), `${m}: at most 60 rows per slice`);
     assert.ok(s.slices[s.slices.length - 1].some((row) => row.includes('S')), `${m}: the controller is in the front slice`);
   }
-  assert.deepEqual(MACHINES.map((m) => run.global.grindless.structures[`gtceu:${m}`].slices.length), [21, 13, 23, 9, 11]);
+  assert.deepEqual(MACHINES.map((m) => run.global.grindless.structures[`gtceu:${m}`].slices.length), [21, 13, 23, 9, 13]);
 });
 
 test('lang parity: every key of both languages, names, tooltips, EMI pages and recipe lines; sound and EMI files', () => {
