@@ -82,7 +82,9 @@
         { "quest": "36A6F7A9AB5D024C", "why": "Mond Process (pl_luv): rate card: figures checked by pl-check against the dump." },
         { "quest": "370A40969E2539B9", "why": "Distillation Tower (pl_luv): rate card: figures checked by pl-check against the dump." },
         { "quest": "1BB0F30B56CA828D", "why": "Carbonyl Decomposition (pl_luv): rate card: figures checked by pl-check against the dump." },
-        { "quest": "7A9A30E48F8CE513", "why": "Horizon Crystal Furnace (pl_maxplus): rate card: figures checked by pl-check against the dump." }
+        { "quest": "7A9A30E48F8CE513", "why": "Horizon Crystal Furnace (pl_maxplus): rate card: figures checked by pl-check against the dump." },
+    { "quest": "3AB9CBE52532A455", "why": "Horizon Crystal Furnace (pl_maxplus): rate card: figures checked by pl-check against the dump." },
+    { "quest": "5CAD369EF7847C22", "why": "Horizon Crystal Furnace (pl_maxplus): rate card: figures checked by pl-check against the dump." }
       ],
   "bannedPhrases": [
     "this tab",
