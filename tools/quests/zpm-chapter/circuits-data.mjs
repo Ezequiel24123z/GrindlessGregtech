@@ -57,7 +57,7 @@ export const QUESTS = [
     deps: ['START'], x: 2, y: -1.5,
     teach: {
       for: 'A &6Qubit CPU Wafer&r is a wafer treated with radon so that its structure can hold a quantum state.',
-      needs: 'Nano CPU wafers and radon from the waste retrieval plant, which is why home comes first in this era.',
+      needs: 'A nano CPU wafer and indium gallium phosphide dust, with a little radon, in a chemical reactor. A quantum eye with gallium arsenide is the other route.',
       unlocks: 'The qubit CPU chip, and through it the quantum processors the mainframe is built from.',
       automate: 'Every wafer uses its radon up. Pipe it from the plant continuously and keep a spare tank.',
     },
@@ -111,7 +111,7 @@ export const QUESTS = [
     deps: ['SI28'], x: 4, y: 1.5,
     teach: {
       for: 'A single phosphorus atom in spin-free silicon holds a quantum state. The &6Donor Qubit Wafer&r is a silicon-28 wafer with them placed one at a time.',
-      needs: 'The ion implanter, silicon-28 wafers and phosphorus.',
+      needs: 'The ion implanter, a silicon-28 wafer and phosphorus dust.',
       unlocks: 'The qubit array, by the donor route.',
       automate: 'Implantation is slow, so run several implanters and let ME collect the wafers.',
     },
@@ -150,7 +150,7 @@ export const QUESTS = [
     deps: ['MILLI'], x: 8, y: 1.5,
     teach: {
       for: 'A &6Qubit Array&r stands in for a stack of circuits in the computation parts our alternative recipes build.',
-      needs: 'Donor wafers or NV chips, and the cold charge the qubit fab runs on.',
+      needs: 'A donor wafer or an NV chip in the qubit fab, which draws liquid helium and a little Saturn helium for every array.',
       unlocks: 'The computation components for the research station, at a fraction of the circuits.',
       automate: 'Keep a stock by ME; the fab is slow and the components draw them by the handful.',
     },

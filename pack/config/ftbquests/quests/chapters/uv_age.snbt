@@ -166,7 +166,7 @@
 		}
 		{
 			dependencies: ["309F1CA9C2FE71C9"]
-			description: ["Sputnik Planitia is a plain of nitrogen ice that flows like a slow glacier. It's the softest place to land a probe, and the first sample comes from there."]
+			description: ["Sputnik Planitia is a plain of nitrogen ice that flows like a slow glacier. It's the softest place to land a probe, and the first sample comes from there. The Penetrator Probe Bay drops the probe, and the Volatile Ice Fractionator then splits each core into its gases (both in the Machines chapter)."]
 			icon: "grindless:sputnik_ice_core"
 			id: "5D374D87F5C412C1"
 			rewards: [{ id: "73267F9463075B4C", type: "xp", xp: 20 }]
@@ -312,7 +312,7 @@
 		}
 		{
 			dependencies: ["54D323DCC3423433"]
-			description: ["On the Moon, a whole array of fibre lasers points at one sail and pushes. The heliopause data sets the course, and every launch wears the modules: keep the refurbishing going."]
+			description: ["On the Moon, a whole array of fibre lasers points at one sail and pushes. The Laser Sail Launcher fires the sailcraft from the Starchip Fab (Machines chapter). The heliopause data sets the course and is kept, and every launch wears the modules: keep the refurbishing going."]
 			icon: "grindless:starshot_probe"
 			id: "393D800CED26F9C1"
 			rewards: [{ id: "34F6D61189838896", type: "xp", xp: 200 }]
@@ -382,7 +382,7 @@
 		}
 		{
 			dependencies: ["135F36C81C412CD0"]
-			description: ["The &6Wetware Processor Computer&r is the first UV circuit, and the assembly line is the only machine that builds it. It is made from wetware processor assemblies, which come from the ZPM assembler. Several wetware processor assemblies, wetware boards, RAM and NOR chips, and an assembly line with ZPM hatches. The wetware mainframe, and through it the UV assembler. Assemblies come from the ZPM line by ME; the assembly line draws them on demand."]
+			description: ["The &6Wetware Processor Computer&r is the first UV circuit, and the assembly line is the only machine that builds it. The living part comes from Pluto: its ices and the ark and the vat grow organoids, which become stem cells and neuro processing units. The chain runs wetware processor, assembly, computer. Several wetware processor assemblies, wetware boards, RAM and NOR chips, and an assembly line with ZPM hatches. The stem cells and neuro processing units come from the organoid line, not from a recipe of their own. The wetware mainframe, and through it the UV assembler. Assemblies come from the ZPM line by ME; the assembly line draws them on demand."]
 			icon: "gtceu:wetware_processor_computer"
 			id: "37FC04290594CC34"
 			rewards: [{ id: "55D88910E2A426ED", type: "xp", xp: 120 }]
@@ -647,8 +647,77 @@
 			y: 17.0d
 		}
 		{
-			dependencies: ["7A0170CCCE44944D"]
-			description: ["Thorium assemblies feed the accelerator-driven reactor: about six an hour, four and a half on nitride. IV's stored thorium and its live output decide how many reactors run. The reactor from further up, and assemblies from the fuel fabrication plant. The biggest steady power of the era, with fission products as the only waste. Spent assemblies go to the pyroprocessing cell and come back as fuel: close the loop before you scale."]
+			dependencies: ["7D5E30D919EC171F"]
+			description: ["Reactor thorium cannot be used as mined: the rare earths that travel with it are neutron poisons, and they would stall the core. The cure is a solvent, &6TBP&r (tributyl phosphate) in kerosene, that carries thorium and nothing else. Propene, hydrogen and carbon monoxide in the oxo process (butyraldehyde, hydrogenated over a nickel catalyst that is kept, to n-butanol), phosphoryl chloride to esterify it, and kerosene to dilute it to 30% TBP. The THOREX extraction. The hydrochloric acid from the esterification goes to your chlorine chemistry. The solvent is never used up: it goes round the extraction, so make one batch and top it up by pipe."]
+			icon: "gtceu:tbp_solvent_bucket"
+			id: "17EEA897E91DE2B5"
+			rewards: [{ id: "3BD3291FD8CC7455", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1ED29C8314ACC9A9", item: "gtceu:n_butanol_bucket", type: "item" }
+				{ id: "5B63D3E19163256F", item: "gtceu:tributyl_phosphate_bucket", type: "item" }
+				{ id: "72D344F73FD1BB36", item: "gtceu:tbp_solvent_bucket", type: "item" }
+			]
+			title: "Purify First"
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["17EEA897E91DE2B5"]
+			description: ["Thorium dissolved in nitric acid is crude thorium nitrate. The solvent takes the thorium out and the poisons stay behind in the raffinate as lanthanide nitrate; distilled water strips it back as nuclear-grade &6Thorium Nitrate&r. Oxalate precipitates it, and the EBF calcines the oxalate to &6Thoria&r. Thorium dust, nitric acid, the TBP solvent, distilled water and oxalate. Thoria, the oxide fuel route that needs no nitrogen-15. The lanthanide nitrate is not waste: it feeds the EV rare-earth cascade, and the nitric acid goes back to the dissolution. Two tanks and a loop: solvent in a circle, acid in a circle, thoria out by ME."]
+			icon: "gtceu:thoria_dust"
+			id: "14CC12E0578EF12D"
+			rewards: [{ id: "1042FA7F8A95B54F", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7444BF414A5B6057", item: "gtceu:crude_thorium_nitrate_bucket", type: "item" }
+				{ id: "54EACD6F8B98FC6D", item: "gtceu:thorium_nitrate_bucket", type: "item" }
+				{ id: "7BB68399219CD781", item: "gtceu:thorium_oxalate_dust", type: "item" }
+				{ id: "7DFDB601112C9BC2", item: "gtceu:thoria_dust", type: "item" }
+			]
+			title: "THOREX to Thoria"
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["14CC12E0578EF12D"]
+			description: ["A thorium nitride core breeds better than oxide, but ordinary nitrogen-14 eats neutrons: the nitride has to be made with nitrogen-15. Triton's geysers are rich in it. Burn the Triton nitrogen to nitric oxide, distil the nitrogen-15 oxide out in the EV cryogenic plant and reduce it with hydrogen; the tholin comes out as a by-product for its own reformer. The Triton geyser sampler from Neptune orbit, thoria, carbon and the nitrogen-15 itself: carbothermic nitridation runs under it, and the carbon monoxide goes to the syngas plant. Thorium nitride dust and, with the next quest, the nitride assembly. The spent nitride gives its nitrogen-15 back at the pyroprocessing cell, so after the first fill you only top it up."]
+			icon: "gtceu:thorium_mononitride_dust"
+			id: "1B1F0B3332F15721"
+			rewards: [{ id: "3418DDE37BD4A5D0", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "37269070398A3128", item: "gtceu:nitrogen_15_bucket", type: "item" }
+				{ id: "5DD9CC6F4B1866EF", item: "gtceu:thorium_mononitride_dust", type: "item" }
+			]
+			title: "Nitrogen-15 and the Nitride"
+			x: 8.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1B1F0B3332F15721"]
+			description: ["Thoria is sintered with a niobia aid into pellets and the nitride is pressed and sintered under a nitrogen-15 flush. Pellets go into &6cladding tubes&r of 15-15Ti steel, helium-bonded and welded into pins, and the pins and their grids into assemblies. Either powder, cladding tube (stainless steel and titanium), and the fuel fabrication plant. The oxide assembly breeds less and burns shorter; the nitride assembly breeds better. Fuel for the accelerator-driven reactor. Oxide works the moment you have thoria, so you can start before Triton. Pellets, pins and assemblies are three steps of the same plant; leave the output on ME and let the reactor draw from it."]
+			icon: "grindless:thorium_nitride_fuel_pin"
+			id: "3BA6639AC4EB9283"
+			rewards: [{ id: "3F2428D68674421F", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7784513D45FD008A", item: "grindless:thoria_pellet", type: "item" }
+				{ id: "7000E8B0B5C30240", item: "grindless:thorium_nitride_pellet", type: "item" }
+				{ id: "3AE741527779CBD8", item: "grindless:thorium_oxide_fuel_assembly", type: "item" }
+				{ id: "75F7A26F9837D71B", item: "grindless:thorium_nitride_fuel_assembly", type: "item" }
+			]
+			title: "Pellets, Pins, Assemblies"
+			x: 10.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["3BA6639AC4EB9283"]
+			description: ["Thorium is fertile, not fissile: a core of it cannot sustain itself. The accelerator-driven reactor supplies the missing neutrons with a proton beam on a lead-bismuth pool (never used up), so the core stays subcritical and stops when the beam stops. About six assemblies an hour, four and a half on nitride; IV's stored thorium decides how many reactors run. Contain the polonium-210 until it decays. The reactor, and assemblies from the pin line. The biggest steady power of the era, with fission products as the only waste, and spent fuel for the pyroprocessing cell. Spent assemblies go to the pyroprocessing cell and come back as fuel: close the loop before you scale."]
 			icon: "grindless:thorium_oxide_fuel_assembly"
 			id: "325BE1C42B45620C"
 			rewards: [{ id: "3645ADD2CF1C4971", type: "xp", xp: 100 }]
@@ -659,12 +728,46 @@
 				{ id: "70A6F1EB0185CF93", type: "checkmark" }
 			]
 			title: "The Thorium Burn"
-			x: 13.5d
-			y: 4.0d
+			x: 12.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["325BE1C42B45620C"]
-			description: ["The IV &6Fuel Fabrication Plant&r learns three thorium rows, and a uranium rod for IV's fission reactor. Thorium dust, oxygen, carbon and nitrogen-15, and the uranium-233 the pyroprocessing cell hands back. Thorium oxide and nitride assemblies, and a fission reactor that burns what the thorium bred. Send the bred metal straight to the plant and the spent rods back to the cell."]
+			description: ["The pyroprocessing cell works spent fuel in three hot cells behind lead glass. It chops the assemblies into fragments (the hulls are waste), reduces oxide fragments to thorium-uranium metal with lithium, and electrorefines the metal in molten lithium chloride, and the bred uranium collects on the cathode. The pyroprocessing cell, an argon supply and lithium. The nitride fragments skip the reduction and go straight to the refiner, giving back their thorium and nitrogen-15 on the way. The cathode deposit, which is distilled free of salt into the uranium ingots. Keep some for UHV. Fragments, salt and metal never leave the cell: feed spent fuel in by ME and take thorium and nitrogen-15 back to their dissolution and cryogenic plant."]
+			icon: "grindless:u233_cathode_deposit"
+			id: "7E6528C2D66A2DD3"
+			rewards: [{ id: "30C9BF0CB8EBEC75", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "504FFE8617584272", item: "grindless:spent_oxide_fragments", type: "item" }
+				{ id: "71A19410CFC3A01F", item: "grindless:spent_nitride_fragments", type: "item" }
+				{ id: "346B7BB3D121ADA4", item: "gtceu:thorium_uranium_metal_dust", type: "item" }
+				{ id: "5ABB43D1C6FC9C7D", item: "grindless:u233_cathode_deposit", type: "item" }
+			]
+			title: "Chop and Electrorefine"
+			x: 14.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["7E6528C2D66A2DD3"]
+			description: ["A quarter of the uranium-233 is not in the cathode: it is still protactinium-233 in the loaded salt. Lithium pulls the protactinium into bismuth, and it has to sit for 27 days while it decays to uranium-233. Rush it and you lose that quarter. The loaded salt from the refiner, and a tank that can wait. The clean salt goes back into the cell, and the radioactive waste goes to the waste store. The last of the uranium, smelted together with the cathode ingots. It is also the seed that grows thorium-229 in UHV. Run several holding tanks in rotation so one is always ready; the output merges with the cathode line."]
+			icon: "gtceu:protactinium_bismuth_bucket"
+			id: "572C075E6EBF0B00"
+			rewards: [{ id: "383F5B4508D0EB81", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "126B023199E37F0B", item: "gtceu:protactinium_bismuth_bucket", type: "item" }
+				{ id: "34B3B38CBCC8FD96", item: "gtceu:uranium_233_dust", type: "item" }
+			]
+			title: "The 27-Day Hold"
+			x: 14.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["7E6528C2D66A2DD3", "572C075E6EBF0B00"]
+			description: ["The IV &6Fuel Fabrication Plant&r learns three thorium rows, and a uranium rod for IV's fission reactor: the end of the thorium cycle. The uranium ingots from the cathode and the hold, and the fuel fabrication plant. A fission reactor that burns what the thorium bred. Send the bred metal straight to the plant and the spent rods back to the cell."]
 			icon: "gtceu:fuel_fabrication_plant"
 			id: "1FEBAAE91287085C"
 			rewards: [{ id: "53F98BFAD5289ADE", type: "xp", xp: 100 }]
@@ -673,10 +776,11 @@
 			tasks: [
 				{ id: "1E9985A62FA45B79", item: "gtceu:fuel_fabrication_plant", type: "item" }
 				{ id: "3F46B97EEA41BC9F", item: "gtceu:uranium_233_ingot", type: "item" }
+				{ id: "72DB79F7D3B43E83", item: "grindless:u233_fuel_rod", type: "item" }
 			]
 			title: "Back to Uranium-233"
-			x: 15.5d
-			y: 4.0d
+			x: 16.0d
+			y: 5.5d
 		}
 		{
 			dependencies: ["7A0170CCCE44944D"]
@@ -953,7 +1057,7 @@
 		}
 		{
 			dependencies: ["50932D647CEF0A54"]
-			description: ["The &6SRF Cavity Works&r forms, polishes and anneals niobium into cavities that carry a beam with almost no loss. Its controller and clean room casing; niobium sheet and helium II run through it. Cavities for the cryomodule, the accelerators and the synchrotron. Niobium and acid are loops. Take cavities out by ME and keep the scrap going back."]
+			description: ["The &6SRF Cavity Works&r melts niobium very pure (RRR sheet), deep-draws it into half-cells (two from each sheet), welds eighteen half-cells into a nine-cell bare cavity, polishes it in acid, and welds on a titanium helium vessel to dress it. Its controller and clean room casing; niobium ingots and helium II run through it. Dressed cavities (eight make a string) for the cryomodule, the accelerators and the synchrotron. The spent acid is electrolysed back to niobium and both acids: keep that loop closed. Take cavities out by ME."]
 			icon: "gtceu:srf_cavity_works"
 			id: "375D70399F1951D2"
 			rewards: [{ id: "7F016E2F2D84DADE", type: "xp", xp: 120 }]
@@ -962,6 +1066,9 @@
 			tasks: [
 				{ id: "705A82674604C042", item: "gtceu:srf_cavity_works", type: "item" }
 				{ id: "5ABC99C2B00854CD", item: "gtceu:clean_machine_casing", type: "item" }
+				{ id: "722F33F9F01E4BF7", item: "grindless:rrr_niobium_sheet", type: "item" }
+				{ id: "1DEA13935578C7D3", item: "grindless:niobium_half_cell", type: "item" }
+				{ id: "79D0D69538817D03", item: "grindless:bare_srf_cavity", type: "item" }
 			]
 			title: "Cavity Works"
 			x: 6.5d
@@ -969,13 +1076,14 @@
 		}
 		{
 			dependencies: ["375D70399F1951D2"]
-			description: ["A finished &6SRF Cavity&r is niobium cut to a few microns of surface roughness. Every beam machine of this era sits on a pair of them."]
+			description: ["A finished &6SRF Cavity&r is niobium cut to a few microns of surface roughness; welded into its helium vessel it becomes a &6Dressed SRF Cavity&r, and eight dressed cavities in superfluid helium make the cryomodule. Every beam machine of this era sits on them."]
 			icon: "grindless:srf_cavity"
 			id: "598B196C669CA9B5"
 			rewards: [{ id: "151F080E9C6C1576", type: "xp", xp: 80 }]
 			tasks: [
 				{ id: "1AF7B2BAD7D93E37", item: "grindless:srf_cavity", type: "item" }
-				{ id: "3A67FB2AF2177469", item: "grindless:mu_metal_shield", type: "item" }
+				{ id: "3FFAB186AC1D7411", item: "grindless:dressed_srf_cavity", type: "item" }
+				{ id: "16F576273B504DE0", item: "grindless:mu_metal_shield", type: "item" }
 			]
 			title: "Niobium Cavity"
 			x: 8.5d
@@ -1027,7 +1135,7 @@
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
-			description: ["The &6Fibre Draw Tower&r pulls a preform of ytterbium-doped glass into optical fibre, and winds it into a fibre laser module. Its controller, clean room casing, PTFE pipe and a heatproof draw furnace. The laser modules for the fusion chamber and the sail launcher. A chlorine loop cleans the preform; keep it sealed and stock the fibre by ME."]
+			description: ["The &6Fibre Draw Tower&r pulls a preform of ytterbium-doped glass into optical fibre, and writes the grating that makes it a laser. MCVD makes the preform in three operations: soot deposited inside a fused silica tube, solution doping with ytterbium, then drying, sintering and collapse. Ultraviolet light writes the Bragg grating. Its controller, clean room casing, PTFE pipe and a heatproof draw furnace; fused silica tubes, silicon tetrachloride and ytterbium chloride solution. The fibre laser modules for the fusion chamber and the sail launcher. Chlorine from the soot goes to the network and the glass dust goes back in; keep both sealed and stock the fibre by ME."]
 			icon: "gtceu:fibre_draw_tower"
 			id: "33CBE187D3DF4EA8"
 			rewards: [{ id: "340D8B303B909940", type: "xp", xp: 120 }]
@@ -1036,6 +1144,10 @@
 			tasks: [
 				{ id: "7052083D5408A302", item: "gtceu:fibre_draw_tower", type: "item" }
 				{ id: "31651AA9F4CA8612", item: "gtceu:clean_machine_casing", type: "item" }
+				{ id: "14AC5C80C47EDC4F", item: "grindless:fused_silica_tube", type: "item" }
+				{ id: "54746962ECF70862", item: "grindless:mcvd_soot_tube", type: "item" }
+				{ id: "1C9A67AF121FE5AE", item: "grindless:doped_soot_tube", type: "item" }
+				{ id: "7BA69F1A79F4E451", item: "grindless:yb_doped_preform", type: "item" }
 			]
 			title: "Fibre Draw Tower"
 			x: 5.0d
@@ -1054,7 +1166,7 @@
 		}
 		{
 			dependencies: ["51F3CB52EBEB3BCB"]
-			description: ["The &6MOCVD Reactor&r grows compound semiconductors one atomic layer at a time: pump diodes for the fibre, and a niobium nitride film. Its controller, clean room casing, an inert casing for the gas cabinet and a filter hood. InGaAs pump diodes and the SNSPD film. Arsenic is contained; keep the scrubber supplied and the diodes going out by ME."]
+			description: ["The &6MOCVD Reactor&r grows compound semiconductors one atomic layer at a time. It makes the organometallics, grows indium gallium arsenide, cleaves diode bars (eight per wafer), coats the facets with alumina and titania mirrors, and mounts four bars on copper as a pump module. A niobium nitride film is its other job. Its controller, clean room casing, an inert casing for the gas cabinet and a filter hood; gallium, gallium arsenide wafers and arsine. InGaAs pump modules, which light the fibre, and the SNSPD film. Arsenic is contained: the arsine by-product goes to the scrubber as arsenic and hydrogen. Keep the scrubber supplied and the modules going out by ME."]
 			icon: "gtceu:mocvd_reactor"
 			id: "3D71CDF674EF3302"
 			rewards: [{ id: "71C9A097B98E6CC3", type: "xp", xp: 120 }]
@@ -1064,6 +1176,8 @@
 				{ id: "33CC90ED047DEB79", item: "gtceu:mocvd_reactor", type: "item" }
 				{ id: "323B70DCDE4C50F9", item: "gtceu:clean_machine_casing", type: "item" }
 				{ id: "364A7A6804C28042", item: "gtceu:inert_machine_casing", type: "item" }
+				{ id: "308996C0B3D139EB", item: "grindless:ingaas_diode_bar", type: "item" }
+				{ id: "3CDDC9D4118318EC", item: "grindless:coated_diode_bar", type: "item" }
 			]
 			title: "MOCVD Reactor"
 			x: 10.5d
@@ -1309,7 +1423,7 @@
 		}
 		{
 			dependencies: ["3AB434D5A69FAF2B"]
-			description: ["The &6Starchip Fab&r bonds and dices a photonic chip, a qubit and a source into a probe that weighs a gram. Its controller, clean room casing and a filter hood; kerf is voidable. The starchip, further along. Parts by ME; dicing waste goes to a void."]
+			description: ["The &6Starchip Fab&r bonds a photonic chip, an NV diamond chip and an americium micro source onto a neutronium wafer and dices out a one-gram starchip. The circuit picks the step: 1 the starchip, 2 the sailcraft (a starchip on a light sail). Its controller in a clean room hall: clean machine casing, stainless steel frames, plascrete, laminated glass, a filter casing ceiling and a gearbox bonding line. One Terminal pass. The starchip and the sailcraft that the launcher fires. Parts by ME; the wafer kerf is silicon dust, so loop it back to the silicon line."]
 			icon: "gtceu:starchip_fab"
 			id: "3D0F0BDA824B2E7B"
 			rewards: [{ id: "1ED124D179A7777A", type: "xp", xp: 120 }]
@@ -1325,7 +1439,7 @@
 		}
 		{
 			dependencies: ["3D0F0BDA824B2E7B"]
-			description: ["The &6Laser Sail Launcher&r on the Moon pushes the sail with a beam of light until it leaves the Solar System. Its controller, UV casing and a ring of &6Laser Module Blocks&r. The probe in flight, and the data it sends home. One launch at a time; power it from the network and keep the probes stocked."]
+			description: ["The &6Laser Sail Launcher&r works on the Moon only, where no air scatters the beam. Circuit 1 pushes a sailcraft out of the Solar System as a Starshot probe; the heliopause data sets the course and is kept. Its controller in an open-sky array: UV casing, tungsten steel frames and pipe casings, fusion glass, a computer casing as beam director and a checkerboard of 228 &6Laser Module Blocks&r. One Terminal pass; it draws 16 A of UV. The probe in flight, and the data it sends home. Each launch spends a fibre laser module at 64 % and returns a spent one for the draw tower: keep sailcraft and modules stocked by ME."]
 			icon: "gtceu:laser_sail_launcher"
 			id: "1AC40B9509A5D9E4"
 			rewards: [{ id: "5BF163ACB042919C", type: "xp", xp: 150 }]
@@ -1428,8 +1542,8 @@
 			y: 7.0d
 		}
 		{
-			dependencies: ["5D202249DE11C108"]
-			description: ["The &6Volatile Ice Fractionator&r warms a core a few kelvin at a time and collects each ice as it turns to gas. Its controller, the station truss casing and a frostproof column. Nitrogen, methane and carbon monoxide at their sources. Cores in by ME; each gas has its own hatch and tank."]
+			dependencies: ["5D202249DE11C108", "3D26AB0B36F9CEB1"]
+			description: ["The &6Volatile Ice Fractionator&r warms a core and collects each ice as it turns to gas. Circuit 1 splits a Sputnik core into nitrogen, carbon monoxide, methane and tholin; 2 a Charon core into water, ammonia and silica; 3 anneals a Kuiper sample at about 140 K, so its noble gases escape. Its controller in a cold tower: station truss casings, titanium frames, laminated glass, frostproof bands, a steel pipe cold finger and a ring of cryostat casings. One Terminal pass. The gases at their sources, and the Kuiper noble gas that the cryogenic plant splits into argon, krypton and xenon. Cores and samples in by ME, each fluid to its own hatch. Annealing dust is voided inside the machine."]
 			icon: "gtceu:volatile_ice_fractionator"
 			id: "11689C4D9A9ABF77"
 			rewards: [{ id: "5DF7243CAAE3C87A", type: "xp", xp: 120 }]
@@ -1439,6 +1553,7 @@
 				{ id: "343B21497302CF70", item: "gtceu:volatile_ice_fractionator", type: "item" }
 				{ id: "16ED74AA2D96D858", item: "grindless:station_truss_casing", type: "item" }
 				{ id: "7F327C9338A63D79", item: "gtceu:frostproof_machine_casing", type: "item" }
+				{ id: "57095DA9F0896029", item: "grindless:cryostat_casing", type: "item" }
 			]
 			title: "Ices Apart"
 			x: 29.0d
@@ -1462,30 +1577,13 @@
 		}
 		{
 			dependencies: ["1F125850043BA593"]
-			description: ["A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed, so it is the one thing that shows what the young system was made of. A probe brings it back from the Kuiper Belt in a canister, so you need the probe line and a launch. It unlocks the annealer that keeps the ice as it was. Probes go out by ME and the canister comes back the same way."]
+			description: ["A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed, so it is the one thing that shows what the young system was made of. A probe brings it back from the Kuiper Belt in a canister, so you need the probe line and a launch. It unlocks the annealing carousel of the fractionator, which keeps the ice as it was. Probes go out by ME and the canister comes back the same way."]
 			icon: "grindless:planetesimal_sample"
 			id: "3D26AB0B36F9CEB1"
 			rewards: [{ id: "3568332CA756123D", type: "xp", xp: 80 }]
 			tasks: [{ id: "5FC9F0CFF93FC518", item: "grindless:planetesimal_sample", type: "item" }]
 			title: "Planetesimal Sample"
 			x: 25.5d
-			y: 4.5d
-		}
-		{
-			dependencies: ["3D26AB0B36F9CEB1"]
-			description: ["The &6Amorphous Ice Annealer&r warms a sample through its crystallisation at about 140 K, and the trapped noble gases escape. Its controller, the station truss casing, a cryostat and a gas manifold. Argon, krypton and xenon for the thrusters. Samples by ME; the dust is voidable."]
-			icon: "gtceu:amorphous_ice_annealer"
-			id: "3B735C4FE7902BB1"
-			rewards: [{ id: "39FF6A173566C47C", type: "xp", xp: 120 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "1366BA23D31B5DDA", item: "gtceu:amorphous_ice_annealer", type: "item" }
-				{ id: "3EBCC9B912178762", item: "grindless:station_truss_casing", type: "item" }
-				{ id: "5EE052F8F5E38909", item: "grindless:cryostat_casing", type: "item" }
-			]
-			title: "Trapped Since the Beginning"
-			x: 27.0d
 			y: 4.5d
 		}
 		{

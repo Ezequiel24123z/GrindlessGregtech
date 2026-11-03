@@ -251,6 +251,97 @@
 			y: -4.5d
 		}
 		{
+			dependencies: ["3F1C487831920064"]
+			description: ["The six casings of Sagittarius A*: tensegrity truss, clamp coil, optical table, membrane vacuum, droplet radiator and shell window coil. They wall every large MAX structure, and each needs a part that only this era makes."]
+			icon: "grindless:tensegrity_truss_casing"
+			id: "1AD3DB23754CDAD8"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "5E12E5B2CC815B45", type: "checkmark" }]
+			title: "Sagittarius casings"
+			x: 76.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["1AD3DB23754CDAD8"]
+			description: ["A casing of struts held apart by tension, so that a structure the size of a hall keeps its shape in free fall. It is the frame of every MAX machine and the base of the five casings that follow. An assembler: two &6Exotic Composite Rods&r (the composite line), four &6Horizon Strand Single Wires&r (the strand line), two Chain Lamina Casings, tungsten steel, a UXV sensor and superfluid helium-3, for four casings. Every MAX plant and the Mirror Shell, and the clamp coil, optical table, membrane vacuum, droplet radiator and window coil casings. Rods and wires by ME, the lamina casings from their line; the helium-3 by pipe. Make them in bulk: a plant takes up to 1,800."]
+			icon: "grindless:tensegrity_truss_casing"
+			id: "7722FB93135ED9DA"
+			rewards: [{ id: "32048881B5353C35", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "112CA6B1E88C3A61", item: "grindless:tensegrity_truss_casing", type: "item" }]
+			title: "Tensegrity Truss Casing"
+			x: 78.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["7722FB93135ED9DA"]
+			description: ["A casing wound with superconducting coil that holds a field against a plasma or a moving mass. The flux clamp, the synchroniser, the injector and the winch use it. An assembler, 400 ticks: a &6MAX Field Coil&r (the coil line), two strand wires, a truss casing, a UXV fluid regulator and a UXV conveyor module, with 250 mB of superfluid helium-3, for two casings. The Horizon Flux Clamp, the Ergoregion Synchroniser, the Mass Stream Injector, the Geroch Winch and the Atom Interferometer Works. Field coils by ME from the coil line; they are the slow part, so keep a stock."]
+			icon: "grindless:clamp_coil_casing"
+			id: "336DB6C749EFC3DB"
+			rewards: [{ id: "1B318378BABD473C", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 2L, id: "3A99CCBE472462C8", item: "grindless:clamp_coil_casing", type: "item" }]
+			title: "Clamp Coil Casing"
+			x: 81.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["336DB6C749EFC3DB"]
+			description: ["A casing of a stiff, zero-expansion baseplate with a magnetostrictive layer that damps every vibration. Optics set on it stay aligned to a fraction of a wavelength. An assembler, 400 ticks: a &6Zero-Expansion Baseplate&r (the bench line), a &6Laminated Terfenol Stack&r (the Terfenol line), a truss casing and 250 mB of superfluid helium-3, for two casings. The Photon Ring Imager, the Rydberg Array Works, the Cluster Light Furnace, the Horizon Interferometer and the Atom Interferometer Works. Baseplates and Terfenol stacks by ME; the stack is the slow part."]
+			icon: "grindless:max_optical_table_casing"
+			id: "16C654CDB2FD76BD"
+			rewards: [{ id: "52FF0139790A25E0", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 2L, id: "347F27CDB384ACDD", item: "grindless:max_optical_table_casing", type: "item" }]
+			title: "MAX Optical Table Casing"
+			x: 83.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["16C654CDB2FD76BD"]
+			description: ["A casing walled with the superconducting membrane over an extreme-high vacuum liner, with sealed pumps behind it. Whatever must stay clean and cold is built from it. An assembler, 400 ticks: a &6Superconducting Membrane&r (the membrane line), two NEG XHV Casings, a truss casing, a MAX electric pump, two FFKM seals and 250 mB of superfluid helium-3, for two casings. The Gene Ark, the Atom Interferometer Works, the Rydberg Array Works, the Segment Reclamation Works, the Condensate Refinery and the Flux Clamp. Membranes by ME; the NEG casings and the seals from their lines."]
+			icon: "grindless:membrane_vacuum_casing"
+			id: "16702944B10310E6"
+			rewards: [{ id: "74AA2B15F4E6B001", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 2L, id: "7DE54FFF15B29761", item: "grindless:membrane_vacuum_casing", type: "item" }]
+			title: "Membrane Vacuum Casing"
+			x: 86.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["16702944B10310E6"]
+			description: ["A casing that sheds heat by a curtain of liquid tin-lithium droplets falling in vacuum. It is made at Sagittarius A*, because the radiator panel is. An assembler, 400 ticks: two &6Shell Droplet Radiators&r (made at the hole in the droplet radiator works, from a nozzle plate and a collector shell), a truss casing, a UXV fluid regulator and electric pump, tungsten steel plates, two FFKM seals and 250 mB of superfluid helium-3, for two casings. The Accretion Feeder, the Cluster Light Furnace, the Photon Ring Imager, the Geroch Winch, the Flux Clamp and the Nickel-56 Burner. Radiators by ME from the works, which stands at the hole; the rest of the inputs are shipped."]
+			icon: "grindless:droplet_radiator_casing"
+			id: "1D835DC1BFCFC03A"
+			rewards: [{ id: "3BA204229042DB9B", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 2L, id: "15146CA09E40F27D", item: "grindless:droplet_radiator_casing", type: "item" }]
+			title: "Droplet Radiator Casing"
+			x: 88.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["1D835DC1BFCFC03A"]
+			description: ["A ring of coil and membrane set round a cleanroom glass port. The Mirror Shell has 26 ports, each ringed by these casings, and nothing else uses them. An assembler, 400 ticks: a &6MAX Field Coil&r, a &6Superconducting Membrane&r, two strand wires, a truss casing, two UXV sensors and two FFKM seals, with 250 mB of superfluid helium-3, for two casings. The Mirror Shell takes 398 of them. The Mirror Shell, which closes the age. Make them on a dedicated line fed by the coil and membrane lines; the shell needs about two hundred batches."]
+			icon: "grindless:shell_window_coil_casing"
+			id: "78B5470262AB3C38"
+			rewards: [{ id: "5AEB118ABB9AA129", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 2L, id: "176D7AC48ACD4751", item: "grindless:shell_window_coil_casing", type: "item" }]
+			title: "Shell Window Coil Casing"
+			x: 91.0d
+			y: 8.0d
+		}
+		{
 			dependencies: ["39410922EEDADAC9"]
 			description: ["The wafers, chips and circuits of the era, from the first wafer to the mainframe, and the parts built from them."]
 			icon: "minecraft:writable_book"
@@ -304,7 +395,7 @@
 		}
 		{
 			dependencies: ["5910FF92CEC15A2E", "17CBBAAEADB21164", "18F41DE9388D684D"]
-			description: ["The only circuit of MAX, and the last one the pack has. The &6Supracausal Mainframe&r joins the chip, the die and the interposer with OpV-tier circuits and a tetron array. The photonic integration hall from UEV, superfluid helium-3 and a stock of the three parts. Every MAX component, hatch and controller. Three part lines into one hall: give each its own chest so one slow line never starves the others."]
+			description: ["The only circuit of MAX, and the last one the pack has.     The &6Supracausal Mainframe&r is the end of the staged line: the Photonic Integration Hall takes a shielded quantum module (built from the interposer, tetron dies and squeezed-light chips), 3 tweezer array dies, 7 OpV circuits, programmed circuit 9 and 3,142 mB of superfluid helium-3, and runs 4,800 ticks. The Photonic Integration Hall (see the M1 line in the lines section), superfluid helium-3 and a stock of the parts. Every MAX component, hatch and controller. Three part lines into one hall: give each its own chest so one slow line never starves the others."]
 			icon: "gtnn:supracausal_mainframe"
 			id: "3BEE68D81D2C0817"
 			rewards: [{ id: "3F96CF74225A6C7E", type: "xp", xp: 250 }]
@@ -472,7 +563,7 @@
 		}
 		{
 			dependencies: ["327C37975E5EFBA1"]
-			description: ["The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack. A hollow box of mirror shell segments thirty-three blocks a side at Sgr A* orbit, ringed twice with stream bundle blocks and set with glass windows ringed by feeder coil casings, with two MAX 16 A input hatches and a dynamo hatch round the controller. Every segment is a swarm-segment craft with a cooler of its own. The segments, the four horizon machines and the last recipe. Segments leave the line on a belt; plan the bus before you place the controller."]
+			description: ["The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack. A two-layer sphere in a 35-block box at Sgr A* orbit, about 7,060 blocks: segments inside, a truss outside with two stream bundle belts, and 26 glass ports ringed by shell window coil casings. Hatches sit round the controller, at the equator of the front. The Terminal needs 4 passes of up to 2,300 blocks. The segments, the four horizon machines and the last recipe. Segments leave the line on a belt; plan the bus before you place the controller."]
 			icon: "gtceu:mirror_shell"
 			id: "3AD1F00AD8DB5003"
 			rewards: [{ id: "16DE76451B228310", type: "xp", xp: 150 }]
@@ -520,7 +611,33 @@
 			y: 18.5d
 		}
 		{
-			dependencies: ["38EC1422CD925532"]
+			dependencies: ["3AD1F00AD8DB5003"]
+			description: ["The shell has 26 ports where light goes in and out and where the hatches sit. Each port is a cleanroom glass pane ringed by a loop of coil and membrane, which keeps the opening shielded and tuned. The ports stand on the faces, the edges and the corners of the box, in the same pattern as the Terminal's ghost. The 398 &6Shell Window Coil Casings&r of the shell, from the Sagittarius casings: two per batch. Place them first with the Terminal, then the glass. The glass ports and the closed shell. Run a dedicated line for the casing; its coil and membrane inputs come from the cold-metrology and membrane lines."]
+			icon: "grindless:shell_window_coil_casing"
+			id: "37ED184778035F51"
+			rewards: [{ id: "13BD8B1027C6CF18", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 398L, id: "52F95ED06A894AEB", item: "grindless:shell_window_coil_casing", type: "item" }]
+			title: "Shell Window Coils"
+			x: 57.5d
+			y: 20.5d
+		}
+		{
+			dependencies: ["37ED184778035F51"]
+			description: ["The panes of the 26 ports are &6Cleanroom Glass&r, the same glass as a cleanroom wall. They let the controller and the hatches see through the shell while the rest of it stays closed. The controller itself sits in the middle of the front port. 459 cleanroom glass blocks, set inside the rings of window coil casings: the Terminal places them in the same four passes as the segments. Hatches go in the two rows beside the controller. A shell that can form: the last segments close it. Glass is a common GTM block; keep a stack in ME and let the Terminal draw it."]
+			icon: "gtceu:cleanroom_glass"
+			id: "3DAAE5D7745BF778"
+			rewards: [{ id: "1579F2E4E3E7AEC0", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "123727EE3192F3FB", item: "gtceu:cleanroom_glass", type: "item" }]
+			title: "Cleanroom Glass Ports"
+			x: 60.0d
+			y: 20.5d
+		}
+		{
+			dependencies: ["38EC1422CD925532", "3DAAE5D7745BF778"]
 			description: ["Every segment is set and the last gap in the frame is closed. Check it off once the controller says the shell has formed."]
 			icon: "grindless:mirror_shell_segment"
 			id: "764F18E0B5749AFE"
@@ -532,7 +649,7 @@
 		}
 		{
 			dependencies: ["764F18E0B5749AFE"]
-			description: ["The &6Horizon Interferometer&r reads the light that the closed shell returns and maps the cloud of phases around the hole. Its second mode calibrates oscillators against that map. A closed shell that has run its first recipe, and the casings and parts new to this machine. The cloud phase map and the calibrated oscillator bank of the last recipe. Maps and banks leave by bus; keep the oscillators on their own line."]
+			description: ["The &6Horizon Interferometer&r reads the light that the closed shell returns and maps the cloud of phases around the hole. Its second mode calibrates oscillators against that map. A closed shell that has run its first recipe. The body is 2,837 blocks: 753 truss and 266 optical table casings among others, so the Terminal needs 2 passes. The cloud phase map and the calibrated oscillator bank of the last recipe. Maps and banks leave by bus; keep the oscillators on their own line."]
 			icon: "gtceu:horizon_interferometer"
 			id: "75EEF916B1DD0828"
 			rewards: [{ id: "383CF33D745FFAEF", type: "xp", xp: 150 }]
@@ -559,7 +676,7 @@
 		}
 		{
 			dependencies: ["764F18E0B5749AFE"]
-			description: ["The &6Ergoregion Synchroniser&r locks a clock to the spin of the hole. &oFiction:&r the hole is held still long enough to be measured. The second mode relocks a spent lock so it can be used again. The oscillator bank, a closed shell and the casings and parts new to this machine. The horizon phase lock of the last recipe. Send each spent lock back in by bus; it never leaves the line."]
+			description: ["The &6Ergoregion Synchroniser&r locks a clock to the spin of the hole. &oFiction:&r the hole is held still long enough to be measured. The second mode relocks a spent lock so it can be used again. The oscillator bank and a closed shell. The body is 3,185 blocks: 1,386 truss, 660 clamp coil and 206 membrane vacuum casings among others, so the Terminal needs 2 passes. The horizon phase lock of the last recipe. Send each spent lock back in by bus; it never leaves the line."]
 			icon: "gtceu:ergoregion_synchroniser"
 			id: "5D21090FD9E824F1"
 			rewards: [{ id: "73241DDB5BBF2ECB", type: "xp", xp: 150 }]
@@ -594,7 +711,7 @@
 		}
 		{
 			dependencies: ["764F18E0B5749AFE"]
-			description: ["The &6Horizon Flux Clamp&r winds the field of the shell into a winding and, in its second mode, catches a plasmoid thrown by a reconnecting field line. A closed shell and the casings and parts new to this machine. The winding that the last recipe needs, and a plasmoid for the lines that use one. Windings leave by bus. A plasmoid is a hot output, so contain it and route it."]
+			description: ["The &6Horizon Flux Clamp&r winds the field of the shell into a winding and, in its second mode, catches a plasmoid thrown by a reconnecting field line. A closed shell. The body is 3,378 blocks: 1,819 truss, 744 clamp coil, 446 membrane vacuum and 224 droplet radiator casings among others, so the Terminal needs 2 passes. The winding that the last recipe needs, and a plasmoid for the lines that use one. Windings leave by bus. A plasmoid is a hot output, so contain it and route it."]
 			icon: "gtceu:horizon_flux_clamp"
 			id: "5BBEA47C3F10AEA4"
 			rewards: [{ id: "76F6A06DFA435DB4", type: "xp", xp: 150 }]
@@ -621,7 +738,7 @@
 		}
 		{
 			dependencies: ["764F18E0B5749AFE"]
-			description: ["The &6Segment Reclamation Works&r strips an ablated shell segment into scrap streams. Nothing the shell wears out is thrown away. Ablated segments from the shell, and the casings and parts new to this machine. Scrap that goes back into the segment, cooler and coupler lines. Each scrap stream goes to its own line by bus."]
+			description: ["The &6Segment Reclamation Works&r strips an ablated shell segment into scrap streams. Nothing the shell wears out is thrown away. Ablated segments from the shell. The body is 2,379 blocks: 1,258 truss and 312 membrane vacuum casings among others, so the Terminal needs 2 passes. Scrap that goes back into the segment, cooler and coupler lines. Each scrap stream goes to its own line by bus."]
 			icon: "gtceu:segment_reclamation_works"
 			id: "334E895BAA59F8B7"
 			rewards: [{ id: "3DDD080B7BD7743C", type: "xp", xp: 150 }]
@@ -878,6 +995,786 @@
 			y: -10.0d
 		}
 		{
+			dependencies: ["3F1C487831920064"]
+			description: ["The processing lines of the era: strands and tethers, cold metrology, the supracausal stage, Rydberg atoms, the genome archive, the ring imager, the shell segment and the horizon lock, then the shorter lines. Each is taught once; the chart shows every step."]
+			icon: "gtnn:supracausal_mainframe"
+			id: "1F6C5F7F2EA6FE33"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "350561F28B1C9772", type: "checkmark" }]
+			title: "MAX lines"
+			x: 76.0d
+			y: 28.0d
+		}
+		{
+			dependencies: ["1F6C5F7F2EA6FE33"]
+			description: ["The horizon strand is the wire of the era: stable exotic matter is clad in foil, drawn into a single-crystal strand and sleeved in PBO braid. A second row turns a ribbon into the horizon tether. The &6Strangelet Vault&r for the foil, the &6Pasta Mill&r for preform and wire, the &6PBO Plant&r for the sleeve, the &6Tether Ribbon Works&r and &6Stellar Elevator&r for the tether. Every MAX cable and casing is built from the strand; the tether is what the Geroch winch hangs from. One belt per row: the clad stages feed the Pasta Mill by pipe and ME, and the cable only needs a steady PBO supply."]
+			icon: "gtceu:horizon_strand_single_wire"
+			id: "3050646667F96AEE"
+			rewards: [{ id: "1102E65340B5D5D8", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "30205099F0D9C464", item: "gtceu:horizon_strand_single_cable", type: "item" }]
+			title: "M2: Strand and Tether"
+			x: 76.0d
+			y: 30.5d
+		}
+		{
+			dependencies: ["3050646667F96AEE"]
+			description: ["Stable exotic matter is too violent to draw bare. The foil that clads it is made in a Strangelet Vault, a multiblock new to this line. In a &6Strangelet Growth&r: a Stable Exotic Matter, a Boron Dust, programmed circuit 4, water. The clad chain strand. Give the vault its own feed of stable exotic matter and stock the foil by ME."]
+			icon: "grindless:exotic_cladding_foil"
+			id: "53A4914E9B5D332B"
+			rewards: [{ id: "3CA6142B7011F963", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5BEEA6925C223F88", item: "grindless:exotic_cladding_foil", type: "item" }]
+			title: "Exotic Cladding Foil"
+			x: 78.5d
+			y: 30.5d
+		}
+		{
+			dependencies: ["53A4914E9B5D332B"]
+			description: ["The Pasta Mill extrudes the clad strand into a preform, then draws the preform into the wire: one machine, two recipes. In a &6Pasta Drawing&r: a Clad Chain Strand, programmed circuit 5. The single wire, and with it every strand cable and casing. Let ME choose the recipe by pattern; one mill serves both."]
+			icon: "grindless:horizon_strand_preform"
+			id: "38325EE011F437FB"
+			rewards: [{ id: "3A3054F4F04C8ADD", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "17864A5390CB1229", item: "grindless:horizon_strand_preform", type: "item" }]
+			title: "Horizon Strand Preform"
+			x: 81.0d
+			y: 30.5d
+		}
+		{
+			dependencies: ["38325EE011F437FB"]
+			description: ["The tether row begins by loading each ribbon in the Stellar Elevator, a lift that works only in orbit. In a &6Star Lifting&r: a Strand Ribbon, programmed circuit 3, stellar plasma. The coated and cured ribbon, then the horizon tether. Feed ribbons by ME; the elevator takes one run at a time."]
+			icon: "grindless:proof_loaded_ribbon"
+			id: "17DE80CB7AC8EE72"
+			rewards: [{ id: "1B41B0B7AAF3FB6C", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "54AC7BAAD7CE8D96", item: "grindless:proof_loaded_ribbon", type: "item" }]
+			title: "Proof Loaded Ribbon"
+			x: 83.5d
+			y: 30.5d
+		}
+		{
+			dependencies: ["3050646667F96AEE"]
+			description: ["The cold parts every MAX machine is built from: superfluid valve, gradiometer, field coil, composite rod, membrane belt, optical isolator, magnetic bearing and Terfenol stack. The valve row is the longest line of the era. The &6Aerogel Works&r, &6SHeQUID Works&r and &6Millikelvin Cryostat Works&r for the valve, the &6Atom Interferometer Works&r for the gradiometer, the &6Rare Earth Extraction Cascade&r for YBCO and Tb-Dy. The tensegrity truss (composite rods), the clamp coil casings (field coils) and every MAX machine that wants a cold part. Each row ends in a part that waits in ME. The cold stages share one helium refrigerator loop, and the reclamation row feeds YBCO back so it never runs dry."]
+			icon: "grindless:matter_wave_gradiometer"
+			id: "190860EE07AF5EA6"
+			rewards: [{ id: "75967F11526CE8FF", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "52D0490BA85A6904", item: "grindless:superfluid_valve", type: "item" }]
+			title: "M5: Cold Metrology"
+			x: 76.0d
+			y: 33.0d
+		}
+		{
+			dependencies: ["190860EE07AF5EA6"]
+			description: ["A silica aerogel is the plug through which only superfluid passes. The Aerogel Works makes it, starting a seven-step row. In a &6Supercritical Drying&r: 2 Silylated Alcogel, ethanol, carbon dioxide. The potted and calibrated superleak, then the valve. The first stages are slow: run several works side by side."]
+			icon: "grindless:aerogel_superleak_plug"
+			id: "3115DB854BCEC7FF"
+			rewards: [{ id: "736078FFFDD1EFC6", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7F1BE5BA4782A9FE", item: "grindless:aerogel_superleak_plug", type: "item" }]
+			title: "Aerogel Superleak Plug"
+			x: 78.5d
+			y: 33.0d
+		}
+		{
+			dependencies: ["3115DB854BCEC7FF"]
+			description: ["Each superleak is cold-tested in the Millikelvin Cryostat Works before it becomes a valve; a bad one never leaves. In a &6Nuclear Demagnetisation&r: a Calibrated Superleak, a Mk Cryostat Module, programmed circuit 11, he3 he4 mixture. The superfluid valve. Send only calibrated superleaks in; the cryostat holds the run."]
+			icon: "grindless:cold_tested_superleak"
+			id: "54870062EC077330"
+			rewards: [{ id: "12CE866A77E53E83", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5C2D02D38EC874ED", item: "grindless:cold_tested_superleak", type: "item" }]
+			title: "Cold Tested Superleak"
+			x: 81.0d
+			y: 33.0d
+		}
+		{
+			dependencies: ["54870062EC077330"]
+			description: ["The field coil starts as a REBCO tape on an ITBTC coated conductor. The Coated Conductor Line makes it. In a &6Coated Conductor&r: 4 Itbtc Coated Conductor, 2 Horizon Strand Single Wire, programmed circuit 5, epoxy. The stabilised tape, the CMC coil former, the winding and the field coil. The line is continuous: feed it by ME and cap the tape."]
+			icon: "grindless:rebco_tape_max"
+			id: "5782583C2489AE07"
+			rewards: [{ id: "5F1C96FA5566F2E6", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5E36755EAB212229", item: "grindless:rebco_tape_max", type: "item" }]
+			title: "REBCO Tape"
+			x: 83.5d
+			y: 33.0d
+		}
+		{
+			dependencies: ["5782583C2489AE07"]
+			description: ["A SiC preform is infiltrated with exotic matter and sintered in the Spark Plasma Sinterer, then balanced. In a &6Spark Plasma Sintering&r: a Exotic Infiltrated Preform, 2 Graphite Dust, programmed circuit 21. The balanced billet and the exotic composite rod of the truss. The sinterer is slow: buffer preforms in front of it."]
+			icon: "grindless:exotic_composite_billet"
+			id: "549A961A70CB3A42"
+			rewards: [{ id: "150A8C3EA1395736", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "133F432114344EF6", item: "grindless:exotic_composite_billet", type: "item" }]
+			title: "Exotic Composite Billet"
+			x: 86.0d
+			y: 33.0d
+		}
+		{
+			dependencies: ["549A961A70CB3A42"]
+			description: ["A bismuth-doped YIG film is grown by liquid-phase epitaxy, then bonded to lithium niobate for the optical isolator. In a &6Liquid Phase Epitaxy&r: a Yig Film Wafer, 2 Bismuth Dust, a Pt Lpe Crucible, programmed circuit 4, lpe flux. The isolator waveguide die and the MAX optical isolator. The furnace takes a batch at a time; stock the film."]
+			icon: "grindless:bi_yig_film"
+			id: "1BF1576EBF436BA5"
+			rewards: [{ id: "3AA69545D9574D9F", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "192D7481EA84BBB9", item: "grindless:bi_yig_film", type: "item" }]
+			title: "Bi:YIG Film"
+			x: 88.5d
+			y: 33.0d
+		}
+		{
+			dependencies: ["1BF1576EBF436BA5"]
+			description: ["A single-crystal YBCO bulk is irradiated in the High Flux Reactor to pin its flux, so it can float a rotor. In a &6High Flux Irradiation&r: a Tsmg Ybco Bulk, a Californium 252 Source, programmed circuit 5, helium. The bearing rotor ring and the magnetic bearing. The reactor is shared with other lines: give this row its own slot."]
+			icon: "grindless:irradiated_ybco_bulk"
+			id: "7690AA593CC7CD25"
+			rewards: [{ id: "3DBE640F4C802675", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5D21CBB4F45E14D2", item: "grindless:irradiated_ybco_bulk", type: "item" }]
+			title: "Irradiated YBCO Bulk"
+			x: 91.0d
+			y: 33.0d
+		}
+		{
+			dependencies: ["7690AA593CC7CD25"]
+			description: ["The reclamation loop: ablated shell segments are stripped, bioleached and extracted back to YBCO precursor, so nothing is lost. In a &6Solvent Extraction&r: 4 Yttrium Oxide Dust, programmed circuit 30, nitric acid, water. The YBCO bulk of the bearing, without fresh rare earths. Return every ablated segment to the reclamation works."]
+			icon: "grindless:ybco_precursor_powder"
+			id: "375B3566D60F7F1D"
+			rewards: [{ id: "1603135443106DFD", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "12BE336684790368", item: "grindless:ybco_precursor_powder", type: "item" }]
+			title: "YBCO Precursor Powder"
+			x: 93.5d
+			y: 33.0d
+		}
+		{
+			dependencies: ["190860EE07AF5EA6"]
+			description: ["The line that grows from the Si-28 qubit line: four tested tetron dies are bonded to a cryo photonic interposer, joined with squeezed light, cooled and shielded into the shielded quantum module. Three branches (squeezed-light chip, tweezer die, interposer) feed it. The &6TFLN Fab&r, &6Photonic Foundry&r, &6Millikelvin Cryostat Works&r, &6Membrane Line&r and &6Photonic Integration Hall&r in turn, with the tetron dies of the Si-28 line. The supracausal mainframe, the only circuit of MAX: 3 tweezer dies, 7 OpV circuits and the shielded module go into it. Every module step is slow and holds its machine, so give each its own. Stock the three branch parts by ME."]
+			icon: "gtnn:supracausal_mainframe"
+			id: "7BDFDAE56D37A306"
+			rewards: [{ id: "537E0217AE99EF55", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "75125CB56EFFBF0F", item: "gtnn:supracausal_mainframe", type: "item" }]
+			title: "M1: The Supracausal Stage"
+			x: 76.0d
+			y: 35.5d
+		}
+		{
+			dependencies: ["7BDFDAE56D37A306"]
+			description: ["Four tested tetron dies are bonded to a cryo photonic interposer. The tetron dies come from the Si-28 line and ten percent come back as failed dies. In a &6Ion Slicing&r: 4 Tested Tetron Die, a Cryo Photonic Interposer, programmed circuit 14. The photonic tetron module. Return failed dies to the Si-28 line."]
+			icon: "grindless:transducer_bonded_stack"
+			id: "172E6E6F263912CF"
+			rewards: [{ id: "70D497CA564A81D3", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "75DA7D24C747FFB6", item: "grindless:transducer_bonded_stack", type: "item" }]
+			title: "Transducer Bonded Stack"
+			x: 78.5d
+			y: 35.5d
+		}
+		{
+			dependencies: ["172E6E6F263912CF"]
+			description: ["Light is added: two squeezed-light chips and ultrapure water in the Photonic Foundry, which returns the water. In a &6Photonic Foundry&r: a Transducer Bonded Stack, 2 Squeezed Light Chip, programmed circuit 17, ultrapure water. The calibrated photonic module. The water returns by pipe, so a loop covers it."]
+			icon: "grindless:photonic_tetron_module"
+			id: "7FE4061C2A0C630B"
+			rewards: [{ id: "5A2761E09943DA1F", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "39B5571EEE2AB30E", item: "grindless:photonic_tetron_module", type: "item" }]
+			title: "Photonic Tetron Module"
+			x: 81.0d
+			y: 35.5d
+		}
+		{
+			dependencies: ["7FE4061C2A0C630B"]
+			description: ["The module is cooled in the nuclear demagnetisation stage of the Millikelvin Cryostat Works, with a He-3/He-4 mixture that comes back. In a &6Nuclear Demagnetisation&r: a Photonic Tetron Module, a Mk Cryostat Module, programmed circuit 12, he3 he4 mixture. The shielded quantum module. The mixture is recovered: keep it in its own tank."]
+			icon: "grindless:calibrated_photonic_module"
+			id: "3EFF5EFBF9CE73CD"
+			rewards: [{ id: "5AD1B078D0368F8D", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "37037CE8B08A06CF", item: "grindless:calibrated_photonic_module", type: "item" }]
+			title: "Calibrated Photonic Module"
+			x: 83.5d
+			y: 35.5d
+		}
+		{
+			dependencies: ["3EFF5EFBF9CE73CD"]
+			description: ["The Membrane Line wraps the module in a superconducting membrane, so the last step can hold it. In a &6Membrane Rolling&r: a Calibrated Photonic Module, a Superconducting Membrane, programmed circuit 4, liquid helium. The supracausal mainframe. Make it just before the hall needs it."]
+			icon: "grindless:shielded_quantum_module"
+			id: "3E8CB09CC3AF8BCE"
+			rewards: [{ id: "765A0F269F96DD57", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1279E29179DFC51E", item: "grindless:shielded_quantum_module", type: "item" }]
+			title: "Shielded Quantum Module"
+			x: 86.0d
+			y: 35.5d
+		}
+		{
+			dependencies: ["7BDFDAE56D37A306"]
+			description: ["The Rydberg array is the logic of the genome archive and the horizon lock: a gallium arsenide laser die, a rubidium-87 atom cartridge, a UV fibre harness and a crossed acousto-optic pair, set in a tweezer array. The &6MOCVD Reactor&r, &6Calutron&r and &6Quantum Gas Lab&r for die and atoms, the &6Fibre Draw Tower&r and &6Femtosecond Writer&r for the harness, the &6Spintronic Cluster Tool&r for the AOD. The Rydberg Array Works, then the Gene Ark, the photon ring imager and the horizon lock. A spent array is refilled with a new atom cartridge in a short recipe: loop it home by conveyor."]
+			icon: "grindless:rydberg_logic_array"
+			id: "3BF4D5302515D048"
+			rewards: [{ id: "170ED21257C272F1", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F12EF44DB95AEB5", item: "grindless:rydberg_logic_array", type: "item" }]
+			title: "M8: Rydberg Atoms"
+			x: 76.0d
+			y: 38.0d
+		}
+		{
+			dependencies: ["3BF4D5302515D048"]
+			description: ["The laser die is grown on a gallium arsenide wafer in the MOCVD Reactor. In a &6Mocvd&r: a Gallium Arsenide Wafer, a Indium Dust, a Aluminium Dust, programmed circuit 26, trimethylgallium, arsine. The Rydberg logic array. Stock by ME: the array takes one."]
+			icon: "grindless:rydberg_laser_die"
+			id: "7EE3AB904CB79C50"
+			rewards: [{ id: "77FDDCDFB1906AF4", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "15AD694C1343F73D", item: "grindless:rydberg_laser_die", type: "item" }]
+			title: "Rydberg Laser Die"
+			x: 78.5d
+			y: 38.0d
+		}
+		{
+			dependencies: ["7EE3AB904CB79C50"]
+			description: ["Rubidium-87 is separated in the Calutron and loaded into a cartridge in the Quantum Gas Lab. A spent array is refilled with a fresh cartridge. In a &6Quantum Degenerate Gas&r: a Rb87 Isotope, a Li Cooling Laser, a Ule Cavity, programmed circuit 6, helium. The Rydberg logic array and its refill. Keep a cartridge per array."]
+			icon: "grindless:atom_cartridge_rb87"
+			id: "736309345EB90546"
+			rewards: [{ id: "5D3A9C34234C3A2A", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "30DC9067965FDED9", item: "grindless:atom_cartridge_rb87", type: "item" }]
+			title: "Rb-87 Atom Cartridge"
+			x: 81.0d
+			y: 38.0d
+		}
+		{
+			dependencies: ["736309345EB90546"]
+			description: ["A hollow-core fibre is drawn from ultrapure silica and end-capped by femtosecond writing; it guides UV to the atoms. In a &6Assembler&r: a Endcapped Hc Fibre, 2 Hollow Core Fibre, a MAX circuit, 2 Tritanium Plate, 4 Tritanium Foil, 2 Horizon Strand Single Wire and more. The Rydberg logic array. The tower draws long: cut and stock."]
+			icon: "grindless:uv_fibre_harness"
+			id: "5B675240F250EA89"
+			rewards: [{ id: "15E61D38FB0CCA76", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3E6262F24F0B5436", item: "grindless:uv_fibre_harness", type: "item" }]
+			title: "UV Fibre Harness"
+			x: 83.5d
+			y: 38.0d
+		}
+		{
+			dependencies: ["5B675240F250EA89"]
+			description: ["Two tellurium dioxide crystals, bonded and electroded, steer the tweezers in two directions. In a &6Assembler&r: 2 Electroded Aod, a Teo2 Aod Blank, a MAX circuit, 2 Tritanium Plate, 4 Tritanium Foil, 2 Horizon Strand Single Wire and more. The Rydberg logic array. Make two per array."]
+			icon: "grindless:crossed_aod_pair"
+			id: "3AEB3AD64CD5390D"
+			rewards: [{ id: "7F753291B3DFCB75", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "783994AF1FE17A58", item: "grindless:crossed_aod_pair", type: "item" }]
+			title: "Crossed Aod Pair"
+			x: 86.0d
+			y: 38.0d
+		}
+		{
+			dependencies: ["3BF4D5302515D048"]
+			description: ["Two rows meet in the archive. One writes the genomes the pack has met, from synthetic oligos to a xeno library; the other builds a minimal cell, hardens it and vitrifies it as the Ark capsule. The &6Biofoundry&r, &6Organoid Lab&r, &6Ark Biosphere&r and &6Xenobotany Greenhouse&r for the genomes; the &6Vent Bioreactor&r, &6Radiotrophic Vat&r and &6Aerogel Works&r for the capsule. The Gene Ark. Both rows feed one Gene Ark; a refill recipe re-uses it, so one archive is enough."]
+			icon: "grindless:genome_archive"
+			id: "5EE3599B681E1869"
+			rewards: [{ id: "764C3EE1BE4331EB", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1677FFB91F6FB847", item: "grindless:genome_archive", type: "item" }]
+			title: "M6: Genome Archive"
+			x: 76.0d
+			y: 40.5d
+		}
+		{
+			dependencies: ["5EE3599B681E1869"]
+			description: ["The Biofoundry writes the oligos that both rows start from; they are the cheapest input of the archive. In a &6Sterile Culture&r: 2 Phosphorus Dust, programmed circuit 17, sterilized growth medium, ammonia. The genome set row and the minimal cell row. Pipe it to both rows."]
+			icon: "grindless:synthetic_oligo_pool"
+			id: "7372AB2A250B83C5"
+			rewards: [{ id: "5440DB952DF6183F", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3B41A17547651648", item: "grindless:synthetic_oligo_pool", type: "item" }]
+			title: "Synthetic Oligo Pool"
+			x: 78.5d
+			y: 40.5d
+		}
+		{
+			dependencies: ["7372AB2A250B83C5"]
+			description: ["The Ark Biosphere grows the genomes of the pack's own organisms from their extracts. In a &6Closed Ecosystem&r: a Organoid Genome Extract, a Algae Culture, programmed circuit 4, raw growth medium, water. The xeno genome set and the genome library. The extracts come by ME: keep the biosphere fed."]
+			icon: "grindless:ark_genome_set"
+			id: "553213C3B1F12E18"
+			rewards: [{ id: "7CA07D7679BA3072", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "52D0B4B310CD8C4B", item: "grindless:ark_genome_set", type: "item" }]
+			title: "Ark Genome Set"
+			x: 81.0d
+			y: 40.5d
+		}
+		{
+			dependencies: ["553213C3B1F12E18"]
+			description: ["A synthetic genome is transplanted into a bare mycoplasma cell in the Xenobiochemistry Plant. In a &6Xenobiochemistry&r: a Recipient Mycoplasma Culture, programmed circuit 5, sterilized growth medium, ultrapure water. The hardened cell and the vitrified capsule. The culture grows in the vent bioreactor: keep a spare."]
+			icon: "grindless:transplanted_minimal_cell"
+			id: "74AD149E2593C571"
+			rewards: [{ id: "38CA37FFA0AA8389", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "50A85A602071CC48", item: "grindless:transplanted_minimal_cell", type: "item" }]
+			title: "Transplanted Minimal Cell"
+			x: 83.5d
+			y: 40.5d
+		}
+		{
+			dependencies: ["74AD149E2593C571"]
+			description: ["The hardened cell is vitrified in aerogel: the capsule that the Ark carries. In a &6Supercritical Drying&r: a Hardened Minimal Cell, 2 Silica Aerogel, programmed circuit 6, ethanol, carbon dioxide. The genome archive. One capsule per archive."]
+			icon: "grindless:vitrified_cell_capsule"
+			id: "7247455E94AAD498"
+			rewards: [{ id: "3EBF3479BC918F73", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "37AB0890BF12176B", item: "grindless:vitrified_cell_capsule", type: "item" }]
+			title: "Vitrified Cell Capsule"
+			x: 86.0d
+			y: 40.5d
+		}
+		{
+			dependencies: ["5EE3599B681E1869"]
+			description: ["The spin of Sagittarius A* is read from its ring of light: a gold-coated SiC dish, a niobium SIS mixer, a photonic local oscillator and a cryogenic low-noise amplifier feed the photon ring imager. The &6SiC Fibre Plant&r and &6CVI Furnace&r for the dish, the &6BEUV Scanner&r for the diodes and junctions, the &6Millikelvin Cryostat Works&r and &6Helium Refrigerator&r for the cold stages. The Sgr A* spin map and the cluster charts. Four rows feed one imager: give each its own buffer chest and let the imager take what it needs."]
+			icon: "grindless:sgr_a_spin_map"
+			id: "38589D7BEFCC0FB6"
+			rewards: [{ id: "729A793BEF2F7E40", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "373C2CCB3656D94B", item: "grindless:sgr_a_spin_map", type: "item" }]
+			title: "M7: Ring Imager"
+			x: 76.0d
+			y: 43.0d
+		}
+		{
+			dependencies: ["38589D7BEFCC0FB6"]
+			description: ["A figured, gold-coated SiC dish: the panels of the imager ring. In a &6Assembler&r: 2 Gold Coated Dish, a MAX circuit, 2 Tritanium Plate, 4 Tritanium Foil, 2 Horizon Strand Single Wire, 2 Tritanium Round and more. The photon ring imager. A ring needs many panels: batch the CVI Furnace."]
+			icon: "grindless:imager_dish_panel"
+			id: "77C6BBFCD61A97E6"
+			rewards: [{ id: "3E6D1F67D65DA136", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "36F102B59439CBB6", item: "grindless:imager_dish_panel", type: "item" }]
+			title: "Imager Dish Panel"
+			x: 78.5d
+			y: 43.0d
+		}
+		{
+			dependencies: ["77C6BBFCD61A97E6"]
+			description: ["A niobium trilayer is patterned into SIS junctions, tested cold and packaged as the mixer that beats the signal down. In a &6Assembler&r: 2 Tested Sis Die, a MAX circuit, 2 Tritanium Plate, 4 Tritanium Foil, 2 Horizon Strand Single Wire, 2 Tritanium Round and more. The imager receivers. The test stage is the bottleneck; buffer in front of it."]
+			icon: "grindless:sis_mixer"
+			id: "5501188234966912"
+			rewards: [{ id: "119D6F68F68FEB02", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1BA20F691776E282", item: "grindless:sis_mixer", type: "item" }]
+			title: "SIS Mixer"
+			x: 81.0d
+			y: 43.0d
+		}
+		{
+			dependencies: ["5501188234966912"]
+			description: ["An indium phosphide photodiode that makes the local oscillator by light in the Photonic Foundry. In a &6Photonic Foundry&r: 2 Utc Die, a Glass Interposer, programmed circuit 24, ultrapure water, soldering alloy. The imager receivers. Make a few; they are not consumed."]
+			icon: "grindless:photonic_lo_module"
+			id: "366AB3BCDD6D9BE7"
+			rewards: [{ id: "57B1577E910DCC2B", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "72E83E7855FAD5B3", item: "grindless:photonic_lo_module", type: "item" }]
+			title: "Photonic LO Module"
+			x: 83.5d
+			y: 43.0d
+		}
+		{
+			dependencies: ["366AB3BCDD6D9BE7"]
+			description: ["An InP HEMT amplifier die, tested cold in the Helium Refrigerator. In a &6Assembler&r: 2 Cryo Tested Lna, a MAX circuit, 2 Tritanium Plate, 4 Tritanium Foil, 2 Horizon Strand Single Wire, 2 Tritanium Round and more. The imager receivers. The refrigerator is shared: queue the tests."]
+			icon: "grindless:cryo_lna_module"
+			id: "1715F062FDC8AD1A"
+			rewards: [{ id: "1C6116862FB241D9", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7AB09FB766249CCA", item: "grindless:cryo_lna_module", type: "item" }]
+			title: "Cryo LNA Module"
+			x: 86.0d
+			y: 43.0d
+		}
+		{
+			dependencies: ["38589D7BEFCC0FB6"]
+			description: ["A mirror shell segment is a truss, a membrane, an albedo panel, a droplet radiator, a cryocooler, a controller, a Halbach coupler and a tunable impedance sheet. Most are made from the rock of the nuclear star cluster. The &6Cluster-Light Furnace&r, &6Carbonyl Refinery&r and &6Levitation Melter&r for the truss, the &6Nitride Magnet Works&r for the coupler, the &6Droplet Radiator Works&r, and the swarm-segment craft. The Mirror Shell, which is built from segments. Eight parts feed one craft: buffer each by ME. Spent segments come back through the reclamation works for their rare earths."]
+			icon: "grindless:mirror_shell_segment"
+			id: "7154D53F880CEAA8"
+			rewards: [{ id: "7E0E77BB7FE10615", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5F65276BC20706D9", item: "grindless:mirror_shell_segment", type: "item" }]
+			title: "M4: Shell Segment"
+			x: 76.0d
+			y: 45.5d
+		}
+		{
+			dependencies: ["7154D53F880CEAA8"]
+			description: ["The truss is cast from belt rock: bloom, carbonyl powder, alloy ingot and billet, ending in the Cluster-Light Furnace. In a &6Extruder&r: 2 Segment Truss Billet, a Rod Extruder Mold. The mirror shell segment. The furnace casts in bulk: buffer the truss."]
+			icon: "grindless:segment_truss"
+			id: "3A479DB0787E5C18"
+			rewards: [{ id: "1724BF7256ED1053", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7BD032C4733BC7A2", item: "grindless:segment_truss", type: "item" }]
+			title: "Segment Truss"
+			x: 78.5d
+			y: 45.5d
+		}
+		{
+			dependencies: ["3A479DB0787E5C18"]
+			description: ["Cryo-milled iron cores are pressed into tetrataenite and made into a Halbach magnet array. In a &6Nitride Magnet Synthesis&r: 2 Cold Pressed Tetrataenite, a Fe16n2 Ring Magnet, programmed circuit 20, nitrogen. The mirror shell segment. Stock one per segment."]
+			icon: "grindless:halbach_segment_coupler"
+			id: "5868D58C915A51AE"
+			rewards: [{ id: "10B245EDBF056B59", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "782BE6A189B5E538", item: "grindless:halbach_segment_coupler", type: "item" }]
+			title: "Halbach Segment Coupler"
+			x: 81.0d
+			y: 45.5d
+		}
+		{
+			dependencies: ["5868D58C915A51AE"]
+			description: ["A pulse tube charged with Er3Ni spheres. Spent coolers are not binned: their erbium goes back through the reclamation works. In a &6Assembler&r: 2 Charged Pulse Tube, 2 Opv Electric Pump, a Opv Sensor, 2 Tungsten Steel Plate, 2 Gold Foil, 4 Niobium Titanium Foil and more. The segment and the shell's controller. Return scrap to the Segment Reclamation Works."]
+			icon: "grindless:shell_cryocooler"
+			id: "13C5CED2BA45C999"
+			rewards: [{ id: "3EC0FDF1589D1AF4", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5334A804C35389A6", item: "grindless:shell_cryocooler", type: "item" }]
+			title: "Shell Cryocooler"
+			x: 83.5d
+			y: 45.5d
+		}
+		{
+			dependencies: ["13C5CED2BA45C999"]
+			description: ["SiC electronics with MRAM and racetrack memory run each segment. In a &6Assembler&r: 4 Racetrack Memory Die, 2 Opv Sensor, a Opv Robot Arm, 2 Tungsten Steel Plate, 4 Copper Foil, 2 Gold Foil and more. The mirror shell segment. Stock one per segment."]
+			icon: "grindless:segment_controller"
+			id: "5B5EFB6533ACCA23"
+			rewards: [{ id: "59A790C394C56333", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "77523D4F6966F1A9", item: "grindless:segment_controller", type: "item" }]
+			title: "Segment Controller"
+			x: 86.0d
+			y: 45.5d
+		}
+		{
+			dependencies: ["5B5EFB6533ACCA23"]
+			description: ["A nozzle plate and a collector shell are joined in the Droplet Radiator Works with a tin-lithium eutectic that sprays heat into space. In a &6Droplet Radiator Assembly&r: a Droplet Nozzle Plate, a Radiator Collector Shell, programmed circuit 5, sn li eutectic. The mirror shell segment. The eutectic is reused: keep it in its own loop."]
+			icon: "grindless:shell_droplet_radiator"
+			id: "79EED97851FABCE3"
+			rewards: [{ id: "51EAC81407C0BE7D", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "19256250B84F8ABD", item: "grindless:shell_droplet_radiator", type: "item" }]
+			title: "Shell Droplet Radiator"
+			x: 88.5d
+			y: 45.5d
+		}
+		{
+			dependencies: ["79EED97851FABCE3"]
+			description: ["A tantalum-hafnium carbide liner is sealed by CVI; it lines the Cluster-Light Furnace and wears out. In a &6Chemical Vapour Infiltration&r: a Ta Hf C Billet, programmed circuit 15, methane. The furnace. Keep spares: the hearth wears."]
+			icon: "grindless:sealed_hearth_liner"
+			id: "555BF9154BD47D91"
+			rewards: [{ id: "16D73E89B009831A", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "707D0E989D7F4ED6", item: "grindless:sealed_hearth_liner", type: "item" }]
+			title: "Sealed Hearth Liner"
+			x: 91.0d
+			y: 45.5d
+		}
+		{
+			dependencies: ["555BF9154BD47D91"]
+			description: ["Grazing-incidence mirrors of iridium-coated SiC that focus X-rays. They are made from platinum-group residue. In a &6Assembler&r: 4 Iridium Coated Shell, 2 Tritanium Plate, 4 Tritanium Foil, 2 Tritanium Round, a MAX circuit, a Fine Gold Wire and more. The Accretion Feeder. Keep a stock."]
+			icon: "grindless:wolter_mirror_module"
+			id: "11E5921B9205E44D"
+			rewards: [{ id: "7F8113D7BB847A49", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7774BF5EB8F95D49", item: "grindless:wolter_mirror_module", type: "item" }]
+			title: "Wolter Mirror Module"
+			x: 93.5d
+			y: 45.5d
+		}
+		{
+			dependencies: ["7154D53F880CEAA8"]
+			description: ["The last recipe of the age takes seed wave packets, stream bundles, phase locks, flux clamps and a Rydberg array, with the maps of the horizon interferometer. This chart is every input of it, row by row. The &6Ergoregion Synchroniser&r for the phase locks, the &6Horizon Flux Clamp&r, the &6Horizon Interferometer&r, the &6Kugelblitz Forge&r for the wave packets and the &6Mirror Shell&r. The horizon lock, the end of MAX and the opening of MAX+. Build the horizon machines once and queue the rows through them; the lock itself is one run."]
+			icon: "grindless:horizon_lock"
+			id: "7D04DB71D6DA59DC"
+			rewards: [{ id: "589C618EA496C685", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1C1AD1A5D086DD07", item: "grindless:horizon_lock", type: "item" }]
+			title: "M3: Horizon Lock"
+			x: 76.0d
+			y: 48.0d
+		}
+		{
+			dependencies: ["7D04DB71D6DA59DC"]
+			description: ["A VO2 metasurface on sapphire that changes its impedance on command: a segment input and the first step of the phase lock. In a &6Assembler&r: 2 Metallised Metasurface, 4 Gold Foil, 2 Niobium Titanium Foil, a Uxv Sensor, a OPV circuit, soldering alloy. The horizon phase lock. Needed per segment and per lock: keep a stock."]
+			icon: "grindless:tunable_impedance_sheet"
+			id: "10EC59B617C0F47A"
+			rewards: [{ id: "1E2EA3F4A82A5D4F", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "598E37F34CE3915B", item: "grindless:tunable_impedance_sheet", type: "item" }]
+			title: "Tunable Impedance Sheet"
+			x: 78.5d
+			y: 48.0d
+		}
+		{
+			dependencies: ["10EC59B617C0F47A"]
+			description: ["A niobium driver cell, polished, coated with Nb3Sn and conduction-cooled. In a &6Assembler&r: 4 Conduction Cooled Cell, 2 Opv Electric Motor, a Opv Sensor, 2 Tungsten Steel Plate, 4 Niobium Titanium Foil, a OPV circuit and more. The horizon phase lock. The refrigerator is shared: queue the cells."]
+			icon: "grindless:srf_driver_module"
+			id: "1BAF76BF257AD477"
+			rewards: [{ id: "564DE2F4BD55F0D4", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "70F22FA94C07F2E2", item: "grindless:srf_driver_module", type: "item" }]
+			title: "SRF Driver Module"
+			x: 81.0d
+			y: 48.0d
+		}
+		{
+			dependencies: ["1BAF76BF257AD477"]
+			description: ["A thorium-229 nuclear clock steers an SRF cavity; its mode is cooled and fed to the Kugelblitz Forge. In a &6Kugelblitz Forming&r: a Cooled Cavity Mode, a Kugelblitz Seed, 2 Positron Cartridge, 2 Gamma Absorber Tile, programmed circuit 6. The horizon lock. Four are needed: queue them by pattern."]
+			icon: "grindless:seed_wave_packet"
+			id: "304BBB67F0919BE4"
+			rewards: [{ id: "337F734D5675B6E9", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5886D9F6D072FCFC", item: "grindless:seed_wave_packet", type: "item" }]
+			title: "Seed Wave Packet"
+			x: 83.5d
+			y: 48.0d
+		}
+		{
+			dependencies: ["304BBB67F0919BE4"]
+			description: ["A cooled flux pump is set in a frame with two chain field coils and two MAX circuits: the pump that charges the flux clamp. In a &6Assembler&r: programmed circuit 17, a Cold Flux Pump, 2 Tungsten Steel Plate, 4 Tungsten Steel Rod, 2 Tungsten Steel Ring, a Tungsten Steel Gear and more. The Horizon Flux Clamp. Its slow part is the cold flux pump: stock it by ME."]
+			icon: "grindless:hts_flux_pump"
+			id: "566472E6E2247BB3"
+			rewards: [{ id: "7854B055384586FB", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5B4E97A13E16FDF4", item: "grindless:hts_flux_pump", type: "item" }]
+			title: "HTS Flux Pump"
+			x: 86.0d
+			y: 48.0d
+		}
+		{
+			dependencies: ["566472E6E2247BB3"]
+			description: ["Eight scandium-jacketed pellets are canned in liquid helium. Spent pellets are also reclaimed in the Mass Stream Injector at a small yield. In a &6Mass Stream Injection&r: programmed circuit 2, a Spent Stream Pellet. The stream bundles of the horizon lock. Return spent pellets to the injector."]
+			icon: "grindless:stream_pellet"
+			id: "75D33A11AE23A262"
+			rewards: [{ id: "1902CCAE2467ECC1", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "373D9A4FA86643EC", item: "grindless:stream_pellet", type: "item" }]
+			title: "Stream Pellet"
+			x: 88.5d
+			y: 48.0d
+		}
+		{
+			dependencies: ["7D04DB71D6DA59DC"]
+			description: ["A copper foil is electropolished to a single crystal, covered with graphene and hBN, and a REBCO layer is grown on a PBO web. It is the skin of the conveyor, field generator and hatches. The &6Single-Crystal Foundry&r, &6Van der Waals Stacker&r, &6Coated Conductor Line&r, &6HTS Magnet Works&r and &6Membrane Line&r. The shielded quantum module and the membrane vacuum and shell window casings. Make the foil and the web in bulk; the membrane waits in ME for the ark, the hall and the casings."]
+			icon: "grindless:superconducting_membrane"
+			id: "149A72757DA59C30"
+			rewards: [{ id: "3BB3EA6CF8A2B851", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3AC32D05738062D8", item: "grindless:superconducting_membrane", type: "item" }]
+			title: "Superconducting Membrane"
+			x: 76.0d
+			y: 50.5d
+		}
+		{
+			dependencies: ["149A72757DA59C30"]
+			description: ["A stack of hafnia and silica layers that reflects the light of the cluster back; it faces the sun side of every shell segment and lines the furnace bowl. The &6Zone Refining Tower&r, &6Electron Beam Furnace&r, &6Spintronic Cluster Tool&r and &6Membrane Line&r. The mirror shell segment, the Cluster Light Furnace and the Geroch Winch. Make a stock: every segment takes one."]
+			icon: "grindless:albedo_multilayer_panel"
+			id: "1AADEAC4897A9C44"
+			rewards: [{ id: "5F83344222A1E27B", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "78FCE0E165E7E21D", item: "grindless:albedo_multilayer_panel", type: "item" }]
+			title: "Albedo Multilayer Panel"
+			x: 76.0d
+			y: 53.0d
+		}
+		{
+			dependencies: ["1AADEAC4897A9C44"]
+			description: ["A diamond power die switches current that silicon cannot: a plate is boron-doped by ion implant, metallised and cut into dies. The &6Diamond Lattice Fab&r, &6Ion Implanter&r, &6Spintronic Cluster Tool&r and &6SiC Device Fab&r. The MAX Battery, the Horizon Flux Clamp, the Cluster Light Furnace and the Mass Stream Injector. A few dies per hatch: keep a small stock by ME."]
+			icon: "grindless:diamond_power_die"
+			id: "34BD327FE06C9C6B"
+			rewards: [{ id: "1A3180C03F9EB10F", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "78C6B6BEF229E3DE", item: "grindless:diamond_power_die", type: "item" }]
+			title: "Diamond Power Die"
+			x: 76.0d
+			y: 55.5d
+		}
+		{
+			dependencies: ["34BD327FE06C9C6B"]
+			description: ["A closed fluid loop: hot flow plasma from the accretion disk is filtered, shaped into a flux-loaded plasmoid and run through a dynamo that leaves a cooled exhaust. The winding for its magnets is the first step. The &6Accretion Disk Skimmer&r, &6Plasma Mass Filter&r, &6FRC Former&r and &6BZ Dynamo&r. The Penrose payload, the Mh field casing and the Mh coil formers. Pipe the exhaust back to the skimmer: nothing is voided."]
+			icon: "grindless:mh_winding"
+			id: "1F9D5BC4001C3041"
+			rewards: [{ id: "544EF9F3D29DB28B", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "39E0CDB0FA707B7D", item: "grindless:mh_winding", type: "item" }]
+			title: "Sgr A* Power Loop"
+			x: 76.0d
+			y: 58.0d
+		}
+		{
+			dependencies: ["1F9D5BC4001C3041"]
+			description: ["Radioactive waste is retrieved, cooled in a decay-heat vault, vitrified in a hot cell and sealed: a destination for the era's hottest byproduct. The &6Waste Retrieval Plant&r, &6Decay Heat Vault&r and &6Hot Cell&r. The Geroch power recipe, which returns a spent tether segment. Pipe waste in from every plant that makes it; the canister leaves by ME."]
+			icon: "grindless:geroch_canister"
+			id: "14884E6E5042EC63"
+			rewards: [{ id: "7DBE32DBE97B8DD3", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3999F3A4622D409D", item: "grindless:geroch_canister", type: "item" }]
+			title: "Geroch Canister"
+			x: 76.0d
+			y: 60.5d
+		}
+		{
+			dependencies: ["14884E6E5042EC63"]
+			description: ["A europium-doped crystal is burned with a spectral hole pattern and pigtailed with fibre: a memory that holds a photon. The &6Crystal Growth Furnace&r, &6Spectral Hole Burner&r and &6Fibre Draw Tower&r. The Photon Ring Imager. A short line; make a few and keep them in a chest."]
+			icon: "grindless:quantum_memory_node"
+			id: "577223EE824085B3"
+			rewards: [{ id: "74FA8B15FF446FE8", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7D5D93D7647E3046", item: "grindless:quantum_memory_node", type: "item" }]
+			title: "Quantum Memory Node"
+			x: 76.0d
+			y: 63.0d
+		}
+		{
+			dependencies: ["577223EE824085B3"]
+			description: ["A core of degenerate matter, compressed under a megabar and cased in SiC: the payload of the Penrose process. The &6Degenerate Works&r, &6Megabar Press&r and &6Spark Plasma Sinterer&r. The Penrose extraction recipe. One payload per run: queue them by pattern."]
+			icon: "grindless:max_penrose_payload"
+			id: "128160668A25AF7B"
+			rewards: [{ id: "74D6A8A14C13011B", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "53D5F49FDBC453FA", item: "grindless:max_penrose_payload", type: "item" }]
+			title: "MAX Penrose Payload"
+			x: 76.0d
+			y: 65.5d
+		}
+		{
+			dependencies: ["128160668A25AF7B"]
+			description: ["A diamond photocell for extreme ultraviolet: pin-doped, metallised and built into a panel. The &6Diamond Lattice Fab&r, &6Betavoltaic Fab&r and &6Solar Array Fab&r. The Accretion Feeder. Keep a spare stock."]
+			icon: "grindless:xuv_collector_panel"
+			id: "1A591384C2EAD2DD"
+			rewards: [{ id: "1F3BBF932AF4F1D1", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "552DADECD7C1D18A", item: "grindless:xuv_collector_panel", type: "item" }]
+			title: "XUV Collector Panel"
+			x: 76.0d
+			y: 68.0d
+		}
+		{
+			dependencies: ["1A591384C2EAD2DD"]
+			description: ["A superconducting toroid that stores energy as current: a REBCO winding braced and cooled. The &6Coated Conductor Line&r, &6HTS Magnet Works&r, &6Naquadria Magnet Works&r and &6Helium Refrigerator&r. The MAX Battery and the MAX SMES cell. One per buffer: a short run, no stock needed."]
+			icon: "grindless:cold_smes_toroid"
+			id: "5A78426AB64BE300"
+			rewards: [{ id: "3C060ADCA3E5A5F9", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "59C4AD935AD5C31A", item: "grindless:cold_smes_toroid", type: "item" }]
+			title: "Cold SMES Toroid"
+			x: 76.0d
+			y: 70.5d
+		}
+		{
+			dependencies: ["5A78426AB64BE300"]
+			description: ["A microring on a nitride film, trimmed and packaged, then locked to a nuclear clock. The &6MOCVD Reactor&r, &6BEUV Scanner&r, &6Femtosecond Writer&r, &6Photonic Foundry&r and &6Nuclear Clock Lab&r. The Rydberg logic array and the photon ring imaging recipe. Make a few; they are not consumed."]
+			icon: "grindless:clock_locked_microcomb"
+			id: "75B7B53E2E0F4E0A"
+			rewards: [{ id: "528149BC64975393", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3662BFA8F2F565B0", item: "grindless:clock_locked_microcomb", type: "item" }]
+			title: "Clock Locked Microcomb"
+			x: 76.0d
+			y: 73.0d
+		}
+		{
+			dependencies: ["75B7B53E2E0F4E0A"]
+			description: ["A silicon cavity with crystalline mirrors, held cold: the reference that a laser is stabilised against. The &6Crystal Growth Furnace&r, &6MBE Reactor&r and &6Helium Refrigerator&r. The matter wave gradiometer. Make a few, and keep the cooling loop running."]
+			icon: "grindless:cryo_reference_cavity"
+			id: "376A71FE67DE3634"
+			rewards: [{ id: "7476D7027503B81A", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1D4DE186C1C81741", item: "grindless:cryo_reference_cavity", type: "item" }]
+			title: "Cryo Reference Cavity"
+			x: 76.0d
+			y: 75.5d
+		}
+		{
+			dependencies: ["376A71FE67DE3634"]
+			description: ["A fault-current limiter on a coated tape, wound into a coil and cooled: it protects the grid from a short. The &6Coated Conductor Line&r, &6HTS Magnet Works&r and &6Helium Refrigerator&r. The Horizon Flux Clamp, the MAX substation hatches and the MAX 1A energy converter. One per network: a short run."]
+			icon: "grindless:cold_fcl_module"
+			id: "1AD66AF318FC2D2F"
+			rewards: [{ id: "120F5E728FC04BA8", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "73B9CF8853A4EE10", item: "grindless:cold_fcl_module", type: "item" }]
+			title: "Cold FCL Module"
+			x: 76.0d
+			y: 78.0d
+		}
+		{
+			dependencies: ["1AD66AF318FC2D2F"]
+			description: ["A laser-welded glass cell, annealed, coated and cold tested: the vessel a cold-atom experiment sits in. The &6Zone Refining Tower&r, &6Femtosecond Writer&r and &6Helium Refrigerator&r. The Rydberg Array Works. A few cells cover the era."]
+			icon: "grindless:cold_qualified_cell"
+			id: "7854FA2FC1D41ACE"
+			rewards: [{ id: "5698C1C9EA6AB5C9", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7603CA63C3093E2B", item: "grindless:cold_qualified_cell", type: "item" }]
+			title: "Cold Glass Cell"
+			x: 76.0d
+			y: 80.5d
+		}
+		{
 			dependencies: ["39410922EEDADAC9"]
 			description: ["The machines of the era and the first steps that put each one to work."]
 			icon: "minecraft:writable_book"
@@ -892,7 +1789,7 @@
 		}
 		{
 			dependencies: ["796D2CDBFAF7CCFF"]
-			description: ["Hundreds of atoms held in light, swollen to a thousand times their size and made to compute together. The &6Rydberg Array Works&r makes the logic that the imager, the ark and the shell run on. The MAX hull, the optical table casing on atomic casing, a vacuum chamber of strand coils and a tweezer die as research. The Rydberg logic array, which the ark, the imager and the mirror shell all consume. A spent array comes back to be refurbished, so loop it home instead of binning it."]
+			description: ["Hundreds of atoms held in light, swollen to a thousand times their size and made to compute together. The &6Rydberg Array Works&r makes the logic that the imager, the ark and the shell run on. The MAX hull, the optical table casing on atomic casing, a vacuum chamber of strand coils and a tweezer die as research. The body is 1,980 blocks (853 optical table, 733 truss, 354 membrane vacuum casings): 1 Terminal pass. The Rydberg logic array, which the ark, the imager and the mirror shell all consume. A spent array comes back to be refurbished, so loop it home instead of binning it."]
 			icon: "gtceu:rydberg_array_works"
 			id: "15D5206E38FE152C"
 			rewards: [{ id: "71F3B23D6378C3D4", type: "xp", xp: 120 }]
@@ -919,7 +1816,7 @@
 		}
 		{
 			dependencies: ["796D2CDBFAF7CCFF"]
-			description: ["Matter waves on an optical table, split and joined again to weigh gravity itself. The &6Atom Interferometer Works&r makes the gradiometer behind the MAX sensor. The MAX hull and the optical table casing, a tall drop tower with a magnetic shield, and a space of its own, because every footstep shows up as noise. The matter-wave gradiometer, so the MAX sensor, and with it the controllers that want one. Run it from a pattern provider; the gradiometer is the only thing it makes, so a single chest does it."]
+			description: ["Matter waves on an optical table, split and joined again to weigh gravity itself. The &6Atom Interferometer Works&r makes the gradiometer behind the MAX sensor. The MAX hull and the optical table casing, a tall drop tower with a magnetic shield, and a space of its own, because every footstep shows up as noise. The body is 1,916 blocks (817 truss, 613 membrane vacuum, 325 optical table, 144 clamp coil casings): 1 Terminal pass. The matter-wave gradiometer, so the MAX sensor, and with it the controllers that want one. Run it from a pattern provider; the gradiometer is the only thing it makes, so a single chest does it."]
 			icon: "gtceu:atom_interferometer_works"
 			id: "18197070E4168342"
 			rewards: [{ id: "1FD4916E59DC8DE4", type: "xp", xp: 120 }]
@@ -946,7 +1843,7 @@
 		}
 		{
 			dependencies: ["796D2CDBFAF7CCFF"]
-			description: ["A film one atom thick, rolled, grown and chilled along a long line. The &6Membrane Line&r makes the superconducting membrane that no older machine can. The MAX hull and a long run of roller casings through a CVD zone and a cold zone, with room for the length. The superconducting membrane, the conveyor module, the field generator and the hatches that move fluids. The line is long but quiet: feed it by ME and send the membrane to the ark and the hall."]
+			description: ["A film one atom thick, rolled, grown and chilled along a long line. The &6Membrane Line&r makes the superconducting membrane that no older machine can. The MAX hull and a long run of roller casings through a CVD zone and a cold zone, with room for the length. The body is 2,114 blocks (939 truss casings among them): 1 Terminal pass. The superconducting membrane, the conveyor module, the field generator and the hatches that move fluids. The line is long but quiet: feed it by ME and send the membrane to the ark and the hall."]
 			icon: "gtceu:membrane_line"
 			id: "3FC8F0795380E0E2"
 			rewards: [{ id: "7EA2EE0810C94BD3", type: "xp", xp: 120 }]
@@ -973,7 +1870,7 @@
 		}
 		{
 			dependencies: ["187F0BA64323CC4D", "373D406AA533F310"]
-			description: ["A library of every genome the pack has met, written to crystal in a sealed cold vault. The &6Gene Ark&r makes the genome archive that goes into the last seed. The MAX hull, a sterilising filter casing vault with a cryogenic core, a Rydberg logic array and a superconducting membrane. The genome archive, which the later gates and MAX+ count on. Genomes arrive by ME; one archive is enough, so cap it."]
+			description: ["A library of every genome the pack has met, written to crystal in a sealed cold vault. The &6Gene Ark&r makes the genome archive that goes into the last seed. The MAX hull, a sterilising filter casing vault with a cryogenic core, a Rydberg logic array and a superconducting membrane. The body is 1,915 blocks (884 membrane vacuum, 818 truss casings): 1 Terminal pass. The genome archive, which the later gates and MAX+ count on. Genomes arrive by ME; one archive is enough, so cap it."]
 			icon: "gtceu:gene_ark"
 			id: "77428218C6DD16A7"
 			rewards: [{ id: "3C665EF9B591A0A2", type: "xp", xp: 120 }]
@@ -1000,7 +1897,7 @@
 		}
 		{
 			dependencies: ["33DDC08F5E410B5F"]
-			description: ["It looks at the light that has gone round the hole, and from the ring it reads the spin and charts the cluster. The &6Photon Ring Imager&r is the eye of the whole era. The MAX hull, a ring of dish panels on a truss and a cold core of receivers, built in orbit around Sagittarius A*, with a Rydberg logic array. The spin map and the cluster ephemeris, both on the journey. It works one image at a time, so give it its own array supply and leave it."]
+			description: ["It looks at the light that has gone round the hole, and from the ring it reads the spin and charts the cluster. The &6Photon Ring Imager&r is the eye of the whole era. The MAX hull, a ring of dish panels on a truss and a cold core of receivers, built in orbit around Sagittarius A*, with a Rydberg logic array. The body is 2,144 blocks (1,228 truss, 690 optical table, 220 droplet radiator casings): 1 Terminal pass. The spin map and the cluster ephemeris, both on the journey. It works one image at a time, so give it its own array supply and leave it."]
 			icon: "gtceu:photon_ring_imager"
 			id: "38957F897FD4B1D2"
 			rewards: [{ id: "16F3D4B7760A17A4", type: "xp", xp: 120 }]
@@ -1016,7 +1913,7 @@
 		}
 		{
 			dependencies: ["33DDC08F5E410B5F"]
-			description: ["A tether dropped over the horizon and wound on a drum. The &6Geroch Winch&r takes power from the hole's spin; each run uses up a canister and wears the tether. The MAX hull, a tall tower of drum casing over a tether well, and a canister and a tether for each run. The first power the galactic centre gives back. Canisters and tethers run out, so keep a pattern provider on them."]
+			description: ["A tether dropped over the horizon and wound on a drum. The &6Geroch Winch&r takes power from the hole's spin; each run uses up a canister and wears the tether. The MAX hull, a tall tower of drum casing over a tether well, and a canister and a tether for each run. The body is 3,107 blocks (1,554 truss, 420 droplet radiator, 380 clamp coil casings): 2 Terminal passes. The first power the galactic centre gives back. Canisters and tethers run out, so keep a pattern provider on them."]
 			icon: "gtceu:geroch_winch"
 			id: "110860BEED613414"
 			rewards: [{ id: "54C2F1DBAE7BC73C", type: "xp", xp: 150 }]
@@ -1032,7 +1929,7 @@
 		}
 		{
 			dependencies: ["33DDC08F5E410B5F"]
-			description: ["It shapes hot flow into streams, and the streams into bundles. The &6Mass Stream Injector&r holds a shell up with moving mass. The MAX hull, a ring of stream-turn casing round a pellet accelerator, and a matter-wave gradiometer from the atom works at home. The stream bundle, which the mirror shell is built round. Pellets by ME; bundles come out in a chest and go straight to the shell."]
+			description: ["It shapes hot flow into streams, and the streams into bundles. The &6Mass Stream Injector&r holds a shell up with moving mass. The MAX hull, a ring of stream-turn casing round a pellet accelerator, and a matter-wave gradiometer from the atom works at home. The body is 2,125 blocks (1,177 truss, 519 clamp coil casings): 1 Terminal pass. The stream bundle, which the mirror shell is built round. Pellets by ME; bundles come out in a chest and go straight to the shell."]
 			icon: "gtceu:mass_stream_injector"
 			id: "53636F954A3A7FC5"
 			rewards: [{ id: "3ED9716592A6BDB8", type: "xp", xp: 120 }]
@@ -1059,7 +1956,7 @@
 		}
 		{
 			dependencies: ["71D59C41930835BE"]
-			description: ["It melts belt rock with the concentrated light of the cluster, and heats, separates and casts in one structure. The &6Cluster-Light Furnace&r is the only source of segment truss and stream pellets in quantity. The MAX hull, a bowl of albedo panels over a sinter hearth, and sealed hearth liners. It works only in the NSC belt. The silicate slag the feeder burns, and the truss and pellets for the shell. The hearth lining wears, so keep spares; its slag and its volatiles each have somewhere to go."]
+			description: ["It melts belt rock with the concentrated light of the cluster, and heats, separates and casts in one structure. The &6Cluster-Light Furnace&r is the only source of segment truss and stream pellets in quantity. The MAX hull, a bowl of albedo panels over a sinter hearth, and sealed hearth liners. It works only in the NSC belt. The body is 3,041 blocks (1,577 truss, 1,027 optical table, 420 droplet radiator casings): 2 Terminal passes. The silicate slag the feeder burns, and the truss and pellets for the shell. The hearth lining wears, so keep spares; its slag and its volatiles each have somewhere to go."]
 			icon: "gtceu:cluster_light_furnace"
 			id: "1BF40431DAEF20FB"
 			rewards: [{ id: "1EC1B6C316569CDB", type: "xp", xp: 120 }]
@@ -1086,7 +1983,7 @@
 		}
 		{
 			dependencies: ["5D95EF63D1BEB59B"]
-			description: ["Slag spiralling into a hole gives back more of its mass as light than anything else in the pack. The &6Accretion Feeder&r catches that light and turns it into power. The MAX hull, a ring of feeder coil casing with collector panels and Wolter mirror modules, and slag pellets. The burn itself runs in the black hole orbit, not in the belt. The biggest generator of the era, and a use for the slag. It wears its panels and modules as it works: rework them in the solar array fab and the assembler."]
+			description: ["Slag spiralling into a hole gives back more of its mass as light than anything else in the pack. The &6Accretion Feeder&r catches that light and turns it into power. The MAX hull, a ring of feeder coil casing with collector panels and Wolter mirror modules, and slag pellets. The burn itself runs in the black hole orbit, not in the belt. The body is 3,415 blocks (1,726 truss, 216 droplet radiator casings): 2 Terminal passes. The biggest generator of the era, and a use for the slag. It wears its panels and modules as it works: rework them in the solar array fab and the assembler."]
 			icon: "gtceu:accretion_feeder"
 			id: "700822AA57C7AE85"
 			rewards: [{ id: "139AD29C3DE765CC", type: "xp", xp: 150 }]

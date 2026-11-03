@@ -101,7 +101,7 @@
 		}
 		{
 			dependencies: ["345D3A6AE9F52B89"]
-			description: ["Titanium-50 on einsteinium in the heavy ion cyclotron. The recoil separator catches the few atoms, and the superheavy lab seals them as an &6Element 121 Recoil&r."]
+			description: ["Titanium-50 on einsteinium in the heavy ion cyclotron. The recoil is caught in the same Superheavy Factory and the superheavy lab seals them as an &6Element 121 Recoil&r."]
 			icon: "grindless:element_121_recoil"
 			id: "75CFD23128DE819C"
 			rewards: [{ id: "5172D8694C05FADB", type: "xp", xp: 200 }]
@@ -255,7 +255,7 @@
 		}
 		{
 			dependencies: ["1367407C3410944C"]
-			description: ["The draw bench pulls spaghetti into wire and the laminator presses lasagna into plate: the UXV cable and the UXV hull. Outside a neutron star both would fly apart at once. That is fiction; the crust is real."]
+			description: ["The Pasta Mill draws spaghetti into wire and presses lasagna into plate: the UXV cable and the UXV hull. Outside a neutron star both would fly apart at once. That is fiction; the crust is real."]
 			icon: "gtceu:pasta_strand_single_wire"
 			id: "3E5A5DB9F7B862E9"
 			rewards: [{ id: "133CD5D55ADB2612", type: "xp", xp: 25 }]
@@ -354,6 +354,72 @@
 			y: -3.0d
 		}
 		{
+			dependencies: ["3BB0A93D15E3A2D3"]
+			description: ["A shell of gum metal, a titanium alloy that bends without breaking, backed by a tungsten-184 preform. It is the plain wall of the age. An assembler (400 ticks): 8 gum metal billets, 4 tungsten-184 CVI preforms, 4 annealed mu-metal foils and 8 tungsten-184 single wires, with epoxy, for two casings. Most UXV structures: the Mk6 Fusion Reactor (about 2,000), the MNT Collider (about 2,000), the Stellar Fractionation Hall (about 1,800), the Pasta Mill (about 1,700), the BZ Dynamo (about 1,400), the Spintronic Cluster Tool (about 1,400), the Stellar Condensation Tower (about 860) and the FRC Former (about 690). Billets, preforms and foils by ME: a structure takes thousands, so build the casing a dedicated line."]
+			hide_dependency_lines: true
+			icon: "grindless:gum_metal_casing"
+			id: "3AE94BE58677BDB5"
+			rewards: [{ id: "5A27314B3FBA5B59", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "3532DA0C75BA4109", item: "grindless:gum_metal_casing", type: "item" }]
+			title: "Gum Metal Casing"
+			x: 22.5d
+			y: 12.5d
+		}
+		{
+			dependencies: ["3AE94BE58677BDB5"]
+			description: ["A casing wound with metallic hydrogen cable and finemet cores that holds a field pulsed fast enough to steer a plasma, a beam or a stream of dense matter. The naquadria magnet works, circuit 15: 12 metallic hydrogen windings, 6 Ga2O3 power dies, 3 finemet cores, 6 gum metal billets and 4 UIV emitters, for twelve casings. The Mk6 Fusion Reactor (about 1,300), the Pasta Mill (about 810), the MNT Collider (about 800), the BZ Dynamo (about 790), the Stellar Elevator (about 740), the FRC Former (about 460) and the Plasma Mass Filter (about 260). The windings are the bottleneck; send them and the dies to the works by ME and keep the power dies stocked."]
+			icon: "grindless:pulsed_field_casing"
+			id: "5EE4709C70DD7071"
+			rewards: [{ id: "717CA54CEF3317C2", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "702ED9439810BD34", item: "grindless:pulsed_field_casing", type: "item" }]
+			title: "Pulsed Field Casing"
+			x: 26.0d
+			y: 13.75d
+		}
+		{
+			dependencies: ["3AE94BE58677BDB5"]
+			description: ["A casing of annealed mu-metal that bends a magnetic field around what it covers. The magnetic layers of the spintronic fab would be erased by a stray field, so the Spintronic Cluster Tool is shielded with it. An assembler (500 ticks): 16 annealed mu-metal foils, 4 gum metal billets, 4 tungsten-184 CVI preforms and 2 UIV sensors, with epoxy, for eight casings. It takes UIV sensors, not UXV ones: the Cluster Tool makes the dies a UXV sensor is built from. The Spintronic Cluster Tool, which takes about 870 of them. Foils and billets by ME; the sensors are the costly part, so make them ahead of the batch."]
+			icon: "grindless:mu_metal_shield_casing"
+			id: "7D2B0B47005ABB49"
+			rewards: [{ id: "7DB089483384F510", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "59E972733C1B9700", item: "grindless:mu_metal_shield_casing", type: "item" }]
+			title: "Mu-Metal Shield Casing"
+			x: 29.5d
+			y: 12.5d
+		}
+		{
+			dependencies: ["5EE4709C70DD7071"]
+			description: ["A violet-black casing with magenta striations, built to hold nuclear pasta, the matter in a neutron star's crust. Each is a cage of field-reversed rings around a gum metal wall. An assembler (600 ticks): 32 FRC cartridges, 32 cage parts, 32 gum metal billets and a UIV field generator, with epoxy, for sixty-four casings. The pasta structures of Vela: the Pasta Extractor (about 260) and the Pasta Mill (about 1,670) are walled with it. Its FRC cartridges and cage parts are all made before Vela, so you can stock it before the jump. FRC cartridges by ME from the field-reversed line; the cage parts and billets by ME."]
+			icon: "grindless:pasta_containment_casing"
+			id: "7D76D64E0BDA52D9"
+			rewards: [{ id: "140F8191648A1DE4", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "135EF589587E2369", item: "grindless:pasta_containment_casing", type: "item" }]
+			title: "Pasta Containment Casing"
+			x: 26.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["3AE94BE58677BDB5"]
+			description: ["The first wall of the Mk6 ring: a refractory high-entropy tile on a tungsten-184 preform, wound with metallic hydrogen cable and framed in tritanium. It faces the plasma. An assembler (600 ticks): 12 tungsten-fibre RHEA billets, 12 tungsten-184 CVI preforms, 12 metallic hydrogen windings, 12 tritanium frames and a UXV field generator, with 6N helium, for twenty-four casings. The Mk6 Fusion Reactor, which takes about 250 of them. The ring is about 4,100 blocks, too large for one pass of GTM's Terminal, which places about 2,300 per pass, so it takes two. Billets, preforms and windings by ME; make the casings in a batch before you start the ring."]
+			icon: "grindless:uxv_fusion_casing"
+			id: "1A089D167C86B673"
+			rewards: [{ id: "397814951D9611D4", type: "xp", xp: 160 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "70DF65D19A128483", item: "grindless:uxv_fusion_casing", type: "item" }]
+			title: "UXV Fusion Casing"
+			x: 22.5d
+			y: 15.0d
+		}
+		{
 			dependencies: ["78B28FCF40BA6381"]
 			description: ["The wafers, chips and circuits of the era, from the first wafer to the mainframe, and the parts built from them."]
 			icon: "minecraft:writable_book"
@@ -395,7 +461,7 @@
 		}
 		{
 			dependencies: ["7A0AB21F31B7820B"]
-			description: ["The same junctions in a grid make memory that keeps its bits with the power off. The &6MRAM Wafer&r is sputtered, annealed and etched. The MTJ sputter cluster, the photonic foundry and a Heusler target. The spintronic mainframe, which takes the wafer whole as its fast memory. Dies and targets by ME; keep a few wafers waiting for the racetrack fab."]
+			description: ["The same junctions in a grid make memory that keeps its bits with the power off. The &6MRAM Wafer&r is sputtered, annealed and etched. The MTJ sputter cluster, the photonic foundry and a Heusler target. The spintronic mainframe, which takes the wafer whole as its fast memory. Dies and targets by ME; keep a few wafers waiting for the Spintronic Cluster Tool."]
 			icon: "grindless:mram_wafer"
 			id: "3B4ABEFD993C5FE7"
 			rewards: [{ id: "56D11ACBBADAA1EC", type: "xp", xp: 120 }]
@@ -420,8 +486,8 @@
 			y: 13.5d
 		}
 		{
-			dependencies: ["3B4ABEFD993C5FE7", "780482A9BF2D46A1"]
-			description: ["Push magnetic domains along a nanowire with current pulses and read them as they pass a head. The &6Racetrack Chip&r is the memory of the mainframe. The racetrack fab, an MTJ die and a patterned SAF track wafer. The spintronic mainframe, as its storage. Wafers by ME; the fab returns chips in a chest, so stock a few."]
+			dependencies: ["3B4ABEFD993C5FE7"]
+			description: ["Push magnetic domains along a nanowire with current pulses and read them as they pass a head. The &6Racetrack Chip&r is the memory of the mainframe. The Spintronic Cluster Tool, an MTJ die and a patterned SAF track wafer. The spintronic mainframe, as its storage. Wafers by ME; the fab returns chips in a chest, so stock a few."]
 			icon: "grindless:racetrack_chip"
 			id: "33E470E07FDCB9C9"
 			rewards: [{ id: "7F25BC2DB3F1FB4E", type: "xp", xp: 150 }]
@@ -433,20 +499,20 @@
 			y: 12.0d
 		}
 		{
-			dependencies: ["3044F5740EC5319D", "17F1BEE08FE87731"]
-			description: ["A multiferroic film flips a magnet with voltage instead of current, and a spin-orbit stack reads it back. Joined in the photonic foundry they make the &6MESO Logic Die&r. The oxide PLD chamber, the vdW stacking cell, a scandate substrate and the photonic foundry. The spintronic mainframe, as its logic. Substrates by ME; send the dies on as soon as they come out of the foundry."]
-			icon: "grindless:meso_logic_die"
+			dependencies: ["3044F5740EC5319D"]
+			description: ["One 28Si wafer carries the CMOS layer, the memory, the racetrack, the spin-wave bus and a multiferroic switch read by a spin-orbit stack. Cut in four, it makes the &6Spintronic Die&r. The MOCVD reactor, the photonic foundry, the vdW stacker, the MRAM wafer, the racetrack chip and the magnonic bus. The spintronic mainframe, as its logic, memory and bus in one. Run the wafer line as one chain by ME; the cutter returns four dies per wafer."]
+			icon: "grindless:spintronic_die"
 			id: "528E7523EDB83CC3"
 			rewards: [{ id: "19F673989FBFE430", type: "xp", xp: 150 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "5F8DE2F1358366D2", item: "grindless:meso_logic_die", type: "item" }]
-			title: "MESO Logic Die"
+			tasks: [{ id: "57198121A626161C", item: "grindless:spintronic_die", type: "item" }]
+			title: "Spintronic Die"
 			x: 17.5d
 			y: 14.5d
 		}
 		{
-			dependencies: ["33E470E07FDCB9C9", "528E7523EDB83CC3", "7486DF37973BED77"]
+			dependencies: ["33E470E07FDCB9C9", "528E7523EDB83CC3", "7E9BF22B379A4CEB"]
 			description: ["Spin waves in a garnet film carry signals between the chips with almost no heat. Logic, memory and that bus together are the &6Spintronic Mainframe&r, the UXV circuit. The photonic integration hall, a racetrack chip, a MESO logic die, an MRAM wafer, an MTJ die, a shielded interposer and a magnonic bus from the YIG furnace. The UXV hull, emitter and hatches, the OpV casing and the controller of every UXV machine. They take any UXV circuit. One of each part per mainframe: keep a dedicated chest, never a big stock."]
 			icon: "gtnn:spintronic_mainframe"
 			id: "72D835B7C533F4A5"
@@ -700,7 +766,7 @@
 		}
 		{
 			dependencies: ["5B064A6634A46338"]
-			description: ["The &6Stellar Fractionation Hall&r runs distillation tower and distillery recipes, one mode at a time, and is the UXV member of the mega family. A parallel hatch behind it and the power for its width. Pick the mode in the controller. Every distillation line of the pack on a single machine. One input bus per fluid, one output hatch per cut."]
+			description: ["The &6Stellar Fractionation Hall&r runs distillation tower and distillery recipes, one mode at a time, and is the UXV member of the mega family. About 1,820 gum metal and 200 pulsed field casings, a parallel hatch behind it and the power for its width. Pick the mode in the controller. The shape is about 61 by 21 by 21 and about 3,270 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. Every distillation line of the pack on a single machine. One input bus per fluid, one output hatch per cut."]
 			icon: "gtceu:stellar_fractionation_hall"
 			id: "3CDE309DC5358AFF"
 			rewards: [{ id: "717A052ED52E0FEC", type: "xp", xp: 250 }]
@@ -834,7 +900,7 @@
 		}
 		{
 			dependencies: ["71359F03B137FB0B"]
-			description: ["The &6Calutron&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r, &6Superheavy Chemistry Lab&r, &6Electron Beam Furnace&r, &6Megabar Press&r, &6CVI Furnace&r and &6Photonic Integration Hall&r each take a UXV row: targets, elements 121 and 122, pure metals, boron nitride, a tungsten preform and the spintronic mainframe. The UEV controllers you already own. Census III, the Mk6 casing and the mainframe. Recoils and targets by bus. The spent beam is an output, so route it."]
+			description: ["The &6Calutron&r, &6Heavy Ion Cyclotron&r (the Superheavy Factory), &6Superheavy Chemistry Lab&r, &6Electron Beam Furnace&r, &6Megabar Press&r, &6CVI Furnace&r and &6Photonic Integration Hall&r each take a UXV row: targets, elements 121 and 122, pure metals, boron nitride, a tungsten preform and the spintronic mainframe. The UEV controllers you already own. Census III, the Mk6 casing and the mainframe. Recoils and targets by bus. The spent beam is an output, so route it."]
 			icon: "gtceu:calutron"
 			id: "589836F061B0E3A8"
 			rewards: [{ id: "55C4F93B8B098243", type: "xp", xp: 150 }]
@@ -843,12 +909,11 @@
 			tasks: [
 				{ id: "11EDB0279C1A3C99", item: "gtceu:calutron", type: "item" }
 				{ id: "3936416CC9903A55", item: "gtceu:heavy_ion_cyclotron", type: "item" }
-				{ id: "5492AED8B1EB3EF5", item: "gtceu:recoil_separator", type: "item" }
-				{ id: "3325C919EADB7CFD", item: "gtceu:superheavy_chemistry_lab", type: "item" }
-				{ id: "7CCA7D2AFC3C4CCC", item: "gtceu:electron_beam_furnace", type: "item" }
-				{ id: "1538DEC832C9689D", item: "gtceu:megabar_press", type: "item" }
-				{ id: "378FE9023A33E8BB", item: "gtceu:cvi_furnace", type: "item" }
-				{ id: "58D882A9249E6C5D", item: "gtceu:photonic_integration_hall", type: "item" }
+				{ id: "761CDDB0638DD081", item: "gtceu:superheavy_chemistry_lab", type: "item" }
+				{ id: "76449C074FD53871", item: "gtceu:electron_beam_furnace", type: "item" }
+				{ id: "5FEFD3E00DDD3EDA", item: "gtceu:megabar_press", type: "item" }
+				{ id: "3E69E17C829B01C4", item: "gtceu:cvi_furnace", type: "item" }
+				{ id: "371E8DC01384D221", item: "gtceu:photonic_integration_hall", type: "item" }
 			]
 			title: "Heavy Ions and Beams"
 			x: 10.0d
@@ -896,6 +961,41 @@
 			y: 0.5d
 		}
 		{
+			dependencies: ["7F876A1037924C13"]
+			description: ["Both runs of this age fire the same bullet: titanium-50, the rare isotope of titanium. The ion source burns one oven charge per run. The pyroprocessing cell turns enriched titanium-50 chloride and magnesium into sponge (circuit 6). The levitation melter melts the sponge under helium into titanium-50 dust (circuit 3). An assembler (200 ticks, circuit 29) presses the dust with a titanium foil into the oven charge. The Element 121 and Element 122 runs in the Superheavy Factory. Chloride and magnesium by ME; the charge is small, so make a stack at a time and stock it beside the factory."]
+			hide_dependency_lines: true
+			icon: "grindless:ti50_oven_charge"
+			id: "5AF879F7A50C63BE"
+			rewards: [{ id: "7BA9959E35BD40D2", type: "xp", xp: 180 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5AF3A9E69E9CEC74", item: "gtceu:titanium_50_dust", type: "item" }
+				{ id: "7D62A5B9F85A82A3", item: "grindless:ti50_oven_charge", type: "item" }
+			]
+			title: "Titanium-50 Beam Charge"
+			x: 15.0d
+			y: -7.0d
+		}
+		{
+			dependencies: ["5AF879F7A50C63BE", "75CFD23128DE819C"]
+			description: ["An einsteinium-254 target struck by the titanium beam gives element 121; a fermium-257 target gives element 122. In the &6Superheavy Factory&r, a target, an oven charge, an Nb3Sn SRF cavity and helium (circuit 9 for 121, circuit 10 for 122) make the recoil gas; each run takes 48,000 ticks. It then separates the atoms with an etched membrane (2,400 ticks, circuits 8 and 9). The lab seals each batch in a capsule (circuit 8 and 9), and Census III joins both, with Census II (circuit 10). The Superheavy Census III, and with it the island chart. Run both targets in one factory on a schedule; the atoms last seconds: pipe the gas to the lab by ME, never store it."]
+			hide_dependency_lines: true
+			icon: "grindless:element_122_recoil"
+			id: "7C6AF6956C2E7314"
+			rewards: [{ id: "3B21C4E41BA7B703", type: "xp", xp: 260 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "51A514580283C463", item: "grindless:element_121_recoil", type: "item" }
+				{ id: "705D094F1B41CD16", item: "grindless:element_122_recoil", type: "item" }
+				{ id: "1D7767E021DE480A", item: "grindless:superheavy_census_iii", type: "item" }
+			]
+			title: "Elements 121 and 122"
+			x: 18.5d
+			y: -5.0d
+		}
+		{
 			dependencies: ["78B28FCF40BA6381"]
 			description: ["The machines of the era and the first steps that put each one to work."]
 			icon: "minecraft:writable_book"
@@ -910,7 +1010,7 @@
 		}
 		{
 			dependencies: ["77ECA9A3DDFB480D"]
-			description: ["The &6MTJ Sputter Cluster&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit. A UIV hull, the plascrete shell and the magnetron parts, with sputter targets from the melter. The magnetic tunnel junction die, and through it the MRAM wafer and the racetrack chip. Targets and silicon-28 by ME; the dies come out in a chest."]
+			description: ["The &6Spintronic Cluster Tool&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit. A UIV hull, about 1,350 gum metal and 870 mu-metal shield casings, the magnetron parts, and sputter targets from the melter. The shape is about 31 by 11 by 31 and about 2,350 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. The magnetic tunnel junction die, and through it the MRAM wafer, the racetrack chip and the multiferroic films of the MESO logic die. It also replaces the old racetrack fab and oxide laser chamber. Targets and silicon-28 by ME; the dies come out in a chest."]
 			icon: "gtceu:mtj_sputter_cluster"
 			id: "1595ABB6AB097B3E"
 			rewards: [{ id: "1835656A2A02BB85", type: "xp", xp: 120 }]
@@ -918,60 +1018,12 @@
 			size: 1.25d
 			tasks: [
 				{ id: "7F3A5AD491D6BAC7", item: "gtceu:mtj_sputter_cluster", type: "item" }
-				{ id: "7153D7373D23E2BD", item: "gtceu:plascrete", type: "item" }
+				{ id: "1875D9D0EB3D2220", item: "grindless:gum_metal_casing", type: "item" }
+				{ id: "716CAADB05679496", item: "grindless:mu_metal_shield_casing", type: "item" }
 			]
-			title: "MTJ Sputter Cluster"
+			title: "Spintronic Cluster Tool"
 			x: 10.0d
 			y: 10.5d
-		}
-		{
-			dependencies: ["1595ABB6AB097B3E"]
-			description: ["The &6Racetrack Fab&r patterns nanowires where magnetic domains slide, in a cleanroom with an electron beam over it. A UIV hull, the plascrete shell and the cleanroom parts, plus MRAM wafers to cut. The racetrack chip, which is the mainframe's storage. Wafers by ME; send chips on to the photonic hall."]
-			icon: "gtceu:racetrack_fab"
-			id: "780482A9BF2D46A1"
-			rewards: [{ id: "7645678A25BE453A", type: "xp", xp: 120 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "379CB9B017C1ADE8", item: "gtceu:racetrack_fab", type: "item" }
-				{ id: "78C8443DD1932DF1", item: "gtceu:plascrete", type: "item" }
-			]
-			title: "Racetrack Fab"
-			x: 15.0d
-			y: 10.5d
-		}
-		{
-			dependencies: ["77ECA9A3DDFB480D"]
-			description: ["The &6Oxide PLD Chamber&r fires a laser at a ceramic target and grows the plume as a crystal film, one oxide layer after another. A UIV hull, the plascrete shell, a heater under the chamber and a scandate substrate to grow on. The multiferroic films of the MESO logic die. Targets by ME and oxygen by pipe; films are fragile, so keep them in the chamber until the foundry needs them."]
-			icon: "gtceu:oxide_pld_chamber"
-			id: "17F1BEE08FE87731"
-			rewards: [{ id: "74B3E11427024DEE", type: "xp", xp: 150 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "7FC1AB20A2F86299", item: "gtceu:oxide_pld_chamber", type: "item" }
-				{ id: "5C75BA5455C94CB6", item: "gtceu:plascrete", type: "item" }
-				{ id: "76B59BF64EA9BED2", item: "gtceu:tritanium_coil_block", type: "item" }
-			]
-			title: "Oxide PLD Chamber"
-			x: 10.0d
-			y: 13.5d
-		}
-		{
-			dependencies: ["77ECA9A3DDFB480D"]
-			description: ["The &6vdW Stacking Cell&r picks single atomic layers with a stamp and presses them into a stack, in a glovebox that is flushed with argon. A UIV hull, the clean casing and a filter column for the argon. The spin-orbit readout of the MESO logic die. Layers by ME; stacks come out one at a time, so run two cells."]
-			icon: "gtceu:vdw_stacking_cell"
-			id: "7E9BF22B379A4CEB"
-			rewards: [{ id: "3785B23E8D650F68", type: "xp", xp: 120 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "3E2596FFAC228929", item: "gtceu:vdw_stacking_cell", type: "item" }
-				{ id: "303ABC678F712DA7", item: "gtceu:clean_machine_casing", type: "item" }
-			]
-			title: "vdW Stacking Cell"
-			x: 7.5d
-			y: 8.5d
 		}
 		{
 			dependencies: ["77ECA9A3DDFB480D"]
@@ -987,6 +1039,19 @@
 			]
 			title: "YIG LPE Furnace"
 			x: 10.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["7486DF37973BED77"]
+			description: ["The &6Van der Waals Stacker&r from UEV also takes the UXV work: it peels flakes of tungsten ditelluride, Fe3GeTe2 and boron nitride and presses them into a heterostack, and its assembly mode builds the magnetoelectric and MESO layers of the spintronic wafer. The UEV stacker: about 290 silicon carbide composite and 280 photonic casings, with stable casings and trinium coils. The shape is about 1,000 blocks. Nothing new is built for UXV; the stacking mode is selected by recipe. The SOT heterostack, the ME-on-spin layer and the MESO die. Flakes by ME; the stack is delicate, so output into a dedicated chest."]
+			icon: "gtceu:vdw_stacker"
+			id: "7E9BF22B379A4CEB"
+			rewards: [{ id: "3785B23E8D650F68", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "70F5A440F4C275E2", item: "gtceu:vdw_stacker", type: "item" }]
+			title: "Van der Waals Stacker"
+			x: 12.5d
 			y: 15.0d
 		}
 		{
@@ -1007,7 +1072,7 @@
 		}
 		{
 			dependencies: ["77ECA9A3DDFB480D"]
-			description: ["Collide uranium on curium and the two swap nucleons, leaving neutron-rich nuclei near the island of stability. The &6MNT Collider&r stops them in gas and weighs them by flight time. A UIV hull, the high power casing, a long beamline and a gas catcher. Island nuclides, and with them the island chart the OpV research asks for. Targets and ion sources by ME; the yield is a trickle, so send it straight to the chart."]
+			description: ["Collide uranium on curium and the two swap nucleons, leaving neutron-rich nuclei near the island of stability. The &6MNT Collider&r stops them in gas and weighs them by flight time. A UIV hull, about 2,000 gum metal and 800 pulsed field casings, a long beamline and a gas catcher. The shape is about 91 by 13 by 15 and about 3,550 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. Island nuclides, and with them the island chart the OpV research asks for. Targets and ion sources by ME; the yield is a trickle, so send it straight to the chart."]
 			icon: "gtceu:mnt_collider"
 			id: "112452274F3E9096"
 			rewards: [{ id: "73062A763AF5AE20", type: "xp", xp: 120 }]
@@ -1015,7 +1080,8 @@
 			size: 1.25d
 			tasks: [
 				{ id: "328576CEF538773F", item: "gtceu:mnt_collider", type: "item" }
-				{ id: "7FCA4799590A84A5", item: "gtceu:high_power_casing", type: "item" }
+				{ id: "739D607C0B0D226D", item: "grindless:gum_metal_casing", type: "item" }
+				{ id: "34088A941F775F3A", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "MNT Collider"
 			x: 10.0d
@@ -1023,7 +1089,7 @@
 		}
 		{
 			dependencies: ["77ECA9A3DDFB480D"]
-			description: ["The black hole already pulls its companion apart. The &6Stellar Elevator&r heats the star's surface where the pull is strongest and catches the stream as plasma. It works at Cygnus X-1 only. A UIV hull, the UXV machine casing and a stack of coil rings, with power for the heating. Stellar plasma, which the mass filter cuts and the condensation tower cools. The plasma goes by pipe to the filter; a tank in between keeps the lift steady."]
+			description: ["The black hole already pulls its companion apart. The &6Stellar Elevator&r heats the star's surface where the pull is strongest and catches the stream as plasma. It works at Cygnus X-1 only. A UIV hull, about 740 pulsed field casings, silicon carbide composite for the shaft and a stack of coil rings, with power for the heating. The shape is about 23 by 57 by 23 and about 4,070 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. Stellar plasma, which the mass filter cuts and the condensation tower cools. The plasma goes by pipe to the filter; a tank in between keeps the lift steady."]
 			icon: "gtceu:stellar_elevator"
 			id: "1F198C897B7C73D8"
 			rewards: [{ id: "132D17CCC398E465", type: "xp", xp: 150 }]
@@ -1031,7 +1097,7 @@
 			size: 1.25d
 			tasks: [
 				{ id: "30E9DF75D366723A", item: "gtceu:stellar_elevator", type: "item" }
-				{ id: "1772800E567F1E1D", item: "gtceu:uxv_machine_casing", type: "item" }
+				{ id: "780BD11D151D3619", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "Stellar Elevator"
 			x: 12.5d
@@ -1039,7 +1105,7 @@
 		}
 		{
 			dependencies: ["1F198C897B7C73D8"]
-			description: ["A spinning plasma flings its heavy ions outward. The &6Plasma Mass Filter&r cuts the star into hydrogen, helium, carbon-nitrogen-oxygen and heavy cuts, and cleans disk plasma the same way. A UIV hull, the high power casing and the radial ports. The cuts that feed the Mk6 ring and the condensation tower. One tank per cut, each on its own pipe; the filter does not forgive a mixed line."]
+			description: ["A spinning plasma flings its heavy ions outward. The &6Plasma Mass Filter&r cuts the star into hydrogen, helium, carbon-nitrogen-oxygen and heavy cuts, and cleans disk plasma the same way. A UIV hull, about 260 pulsed field casings, silicon carbide composite for the drum and the radial ports. The shape is about 37 by 15 by 15 and about 1,440 blocks. The cuts that feed the Mk6 ring and the condensation tower. One tank per cut, each on its own pipe; the filter does not forgive a mixed line."]
 			icon: "gtceu:plasma_mass_filter"
 			id: "344ECF8428D0E972"
 			rewards: [{ id: "33A27B0F41FAB8AF", type: "xp", xp: 150 }]
@@ -1047,7 +1113,7 @@
 			size: 1.25d
 			tasks: [
 				{ id: "1D91DE28ABFA9088", item: "gtceu:plasma_mass_filter", type: "item" }
-				{ id: "351C9F4D367448E1", item: "gtceu:high_power_casing", type: "item" }
+				{ id: "3464B7DE3E9551E5", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "Plasma Mass Filter"
 			x: 17.5d
@@ -1055,7 +1121,7 @@
 		}
 		{
 			dependencies: ["344ECF8428D0E972"]
-			description: ["The gas falling into the hole spins in a disk hot enough to glow in X-rays. The &6Accretion Disk Skimmer&r skims its edge and sends the catch to the mass filter. A UIV hull, the UXV machine casing and a rim of coils round the bowl. Filtered disk plasma, the fuel of the FRC former and the BZ dynamo. Route the catch by pipe to the filter and keep the surplus in a tank."]
+			description: ["The gas falling into the hole spins in a disk hot enough to glow in X-rays. The &6Accretion Disk Skimmer&r skims its edge and sends the catch to the mass filter. A UIV hull, about 190 pulsed field casings, silicon carbide composite for the bowl and a rim of coils round it. The shape is about 19 by 9 by 19 and about 580 blocks. Filtered disk plasma, the fuel of the FRC former and the BZ dynamo. Route the catch by pipe to the filter and keep the surplus in a tank."]
 			icon: "gtceu:accretion_disk_skimmer"
 			id: "1887C02641FE7714"
 			rewards: [{ id: "5F1B3C559EA8C45A", type: "xp", xp: 150 }]
@@ -1063,7 +1129,7 @@
 			size: 1.25d
 			tasks: [
 				{ id: "7E9952DE7FF64984", item: "gtceu:accretion_disk_skimmer", type: "item" }
-				{ id: "733253DDA8C281CA", item: "gtceu:uxv_machine_casing", type: "item" }
+				{ id: "151A07DE12463F31", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "Accretion Disk Skimmer"
 			x: 20.0d
@@ -1071,7 +1137,7 @@
 		}
 		{
 			dependencies: ["344ECF8428D0E972"]
-			description: ["Cool a star slowly and its metals come out in the order a young solar system makes them. The &6Stellar Condensation Tower&r draws off refractory, metal and silicate condensates, and lets the volatiles out as gas. A UIV hull, the UXV machine casing and a draw-off pipe for every stage. The condensates that go to the heavy cut, and syngas for the plants at home. A chest or tank per draw-off; the volatile gas needs somewhere to go."]
+			description: ["Cool a star slowly and its metals come out in the order a young solar system makes them. The &6Stellar Condensation Tower&r draws off refractory, metal and silicate condensates, and lets the volatiles out as gas. A UIV hull, about 860 gum metal and 180 pulsed field casings, and a draw-off pipe for every stage. The shape is about 13 by 31 by 13 and about 1,480 blocks. The condensates that go to the heavy cut, and syngas for the plants at home. A chest or tank per draw-off; the volatile gas needs somewhere to go."]
 			icon: "gtceu:stellar_condensation_tower"
 			id: "110D7283172BA400"
 			rewards: [{ id: "778CC442DB2C58E4", type: "xp", xp: 150 }]
@@ -1079,7 +1145,8 @@
 			size: 1.25d
 			tasks: [
 				{ id: "7845A4775B5A634D", item: "gtceu:stellar_condensation_tower", type: "item" }
-				{ id: "3896B93FD6DFDD95", item: "gtceu:uxv_machine_casing", type: "item" }
+				{ id: "3CF53EBC3B6E3497", item: "grindless:gum_metal_casing", type: "item" }
+				{ id: "1A0F6E339CBE19F5", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "Stellar Condensation Tower"
 			x: 20.0d
@@ -1098,7 +1165,7 @@
 		}
 		{
 			dependencies: ["1887C02641FE7714"]
-			description: ["A field-reversed configuration is a smoke ring of plasma that holds its own field. The &6FRC Former&r shoots one into a cartridge and keeps it there. A UIV hull, the high power casing, a formation tube and a capacitor bank. The FRC cartridge: travel to Vela, the field generator and the gate all use one. Disk plasma by pipe; cartridges are consumed, so stock a generous chest."]
+			description: ["A field-reversed configuration is a smoke ring of plasma that holds its own field. The &6FRC Former&r shoots one into a cartridge and keeps it there. A UIV hull, about 690 gum metal and 460 pulsed field casings, a formation tube and a capacitor bank. The shape is about 41 by 13 by 13 and about 1,540 blocks. The FRC cartridge: travel to Vela, the field generator and the gate all use one. Disk plasma by pipe; cartridges are consumed, so stock a generous chest."]
 			icon: "gtceu:frc_former"
 			id: "518B1C106BB5136F"
 			rewards: [{ id: "11396B852BA09281", type: "xp", xp: 150 }]
@@ -1106,8 +1173,8 @@
 			size: 1.25d
 			tasks: [
 				{ id: "133660D591D495A2", item: "gtceu:frc_former", type: "item" }
-				{ id: "1EBCDDE069DDDBC3", item: "gtceu:high_power_casing", type: "item" }
-				{ id: "5B782C13EA8BFF8F", item: "grindless:cryostat_casing", type: "item" }
+				{ id: "3A1ED241E0FE95EA", item: "grindless:gum_metal_casing", type: "item" }
+				{ id: "73A9AEEC984D1D27", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "FRC Former"
 			x: 22.5d
@@ -1115,7 +1182,7 @@
 		}
 		{
 			dependencies: ["518B1C106BB5136F"]
-			description: ["A spinning black hole threaded by a magnetic field drives a current, and the hole slows down to pay for it. The &6BZ Dynamo&r burns flux-loaded plasma that way. A UIV hull, the UXV machine casing and a flux loop inside the torus. Power at Cygnus X-1, with no fuel but the plasma. Feed flux-loaded plasma by pipe and ship the power home over the wireless link."]
+			description: ["A spinning black hole threaded by a magnetic field drives a current, and the hole slows down to pay for it. The &6BZ Dynamo&r burns flux-loaded plasma that way. A UIV hull, about 1,400 gum metal and 790 pulsed field casings, and a flux loop inside the torus. The shape is about 41 by 9 by 41 and about 2,470 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. Power at Cygnus X-1, with no fuel but the plasma. Feed flux-loaded plasma by pipe and ship the power home over the wireless link."]
 			icon: "gtceu:bz_dynamo"
 			id: "3611A4EAC7D055C3"
 			rewards: [{ id: "1615166934B28465", type: "xp", xp: 200 }]
@@ -1123,7 +1190,8 @@
 			size: 1.25d
 			tasks: [
 				{ id: "17889A5DB785D254", item: "gtceu:bz_dynamo", type: "item" }
-				{ id: "5BBFE15D6E67C4C8", item: "gtceu:uxv_machine_casing", type: "item" }
+				{ id: "12F62BBA9D7270FC", item: "grindless:gum_metal_casing", type: "item" }
+				{ id: "319F8F48AA17BB95", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "BZ Dynamo"
 			x: 25.0d
@@ -1131,7 +1199,7 @@
 		}
 		{
 			dependencies: ["795E541822A26BC7", "344ECF8428D0E972"]
-			description: ["The &6Mk6 Fusion Reactor&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn's ash is quenched into the next one's fuel. A UXV hull, UXV components, the UXV fusion casing, the Mk5 coil and fusion glass. The plasma and burn quests that follow. Fuel and coolant by pipe; a ring that runs a star's burning stages on demand is fiction, so plan the ash chain first."]
+			description: ["The &6Mk6 Fusion Reactor&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn's ash is quenched into the next one's fuel. A UXV hull, UXV components, about 250 UXV fusion casings, 2,000 gum metal and 1,300 pulsed field casings, the Mk5 coil and fusion glass. The shape is about 45 by 11 by 45 and about 4,100 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. The plasma and burn quests that follow. Fuel and coolant by pipe; a ring that runs a star's burning stages on demand is fiction, so plan the ash chain first."]
 			icon: "gtceu:uxv_fusion_reactor"
 			id: "5CE1C18D40A0B8E2"
 			rewards: [{ id: "13D1BD31FCFD288E", type: "xp", xp: 250 }]
@@ -1140,7 +1208,9 @@
 			tasks: [
 				{ id: "5C330717261B2CB1", item: "gtceu:uxv_fusion_reactor", type: "item" }
 				{ id: "504F99CB405FBA6C", item: "grindless:uxv_fusion_casing", type: "item" }
-				{ id: "5255BED4DDC68445", item: "gtceu:fusion_glass", type: "item" }
+				{ id: "7E92A81B66B7CB58", item: "grindless:gum_metal_casing", type: "item" }
+				{ id: "765DC107E4785A6F", item: "grindless:pulsed_field_casing", type: "item" }
+				{ id: "1502DF9352D1546C", item: "gtceu:fusion_glass", type: "item" }
 			]
 			title: "Mk6 Fusion Reactor"
 			x: 27.5d
@@ -1148,7 +1218,7 @@
 		}
 		{
 			dependencies: ["586BAF51DA2477E3"]
-			description: ["Deep in a neutron star's crust the nuclei melt into rods, sheets and holes that physicists call pasta. A glitch shakes the crust loose, and the &6Pasta Extractor&r times it. A UIV hull, the neutron star site casing and a receiver cage. Raw pasta, the start of every pasta item. Neutronium pellets by ME; wait for a glitch and collect the haul."]
+			description: ["Deep in a neutron star's crust the nuclei melt into rods, sheets and holes that physicists call pasta. A glitch shakes the crust loose, and the &6Pasta Extractor&r times it. A UIV hull, about 260 pasta containment and 80 pulsed field casings, and a receiver cage. The shape is about 21 by 11 by 11 and about 490 blocks. Raw pasta, the start of every pasta item. Neutronium pellets by ME; wait for a glitch and collect the haul."]
 			icon: "gtceu:pasta_extractor"
 			id: "1C34EDB89AD1F5C9"
 			rewards: [{ id: "1121096DA82C1238", type: "xp", xp: 120 }]
@@ -1156,7 +1226,7 @@
 			size: 1.25d
 			tasks: [
 				{ id: "184DA14CA333EC3E", item: "gtceu:pasta_extractor", type: "item" }
-				{ id: "138DF982719F160B", item: "grindless:neutron_star_site_casing", type: "item" }
+				{ id: "5CD0B6F5A063C89A", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "Pasta Extractor"
 			x: 20.0d
@@ -1164,7 +1234,7 @@
 		}
 		{
 			dependencies: ["1C34EDB89AD1F5C9"]
-			description: ["The &6Pasta Phase Sorter&r separates the rods from the sheets inside a cage that keeps each one squeezed. The anti-phase residue goes to the core sample the gate keeps. A UIV hull, the neutron star site casing and five cryostat cage bays. Spaghetti phase for wire and lasagna phase for plate. Raw pasta by ME; send each phase to its own line."]
+			description: ["The &6Pasta Mill&r separates rods from sheets in a squeezing cage, pulls spaghetti phase through aerogel into strand wire and presses lasagna phase onto a tungsten-fibre billet as plate. The residue goes to the core sample. Outside a neutron star, pasta would fly apart. A UIV hull, about 1,670 pasta containment and 810 pulsed field casings. It replaces the draw bench and laminator. About 55 by 13 by 19 and 2,850 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. Pasta strand wire, which the motor, the field generator and the SMES cell are wound with, and lasagna plate for the UXV hull. Raw pasta by ME; each phase to its own line."]
 			icon: "gtceu:pasta_phase_sorter"
 			id: "353D67B60E559EE1"
 			rewards: [{ id: "75883048E114CE67", type: "xp", xp: 120 }]
@@ -1172,51 +1242,18 @@
 			size: 1.25d
 			tasks: [
 				{ id: "58C6F95474C92833", item: "gtceu:pasta_phase_sorter", type: "item" }
-				{ id: "345D9E94876CC187", item: "grindless:neutron_star_site_casing", type: "item" }
-				{ id: "1BD7837B7573FCFE", item: "grindless:cryostat_casing", type: "item" }
+				{ id: "519A95E90CAF45FF", item: "grindless:gum_metal_casing", type: "item" }
+				{ id: "1122F772807F4279", item: "grindless:pulsed_field_casing", type: "item" }
 			]
-			title: "Pasta Phase Sorter"
+			title: "Pasta Mill"
 			x: 22.5d
 			y: 5.0d
 		}
 		{
 			dependencies: ["353D67B60E559EE1"]
-			description: ["The &6Pasta Draw Bench&r pulls spaghetti phase through aerogel into strand wire, the UXV wire. Pasta as wire is fiction: outside a neutron star it would fly apart at once. A UIV hull, the neutron star site casing and a long, straight bed. Pasta strand wire, which the motor, the field generator and the SMES cell are wound with. Spaghetti phase by ME; wire leaves on a spool, so stock a few."]
-			icon: "gtceu:pasta_draw_bench"
-			id: "7A933F3FF611A461"
-			rewards: [{ id: "56230F56D11FD48C", type: "xp", xp: 120 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "530F7D2774C484EF", item: "gtceu:pasta_draw_bench", type: "item" }
-				{ id: "5FC390036EB5BEB2", item: "grindless:neutron_star_site_casing", type: "item" }
-			]
-			title: "Pasta Draw Bench"
-			x: 25.0d
-			y: 5.0d
-		}
-		{
-			dependencies: ["353D67B60E559EE1"]
-			description: ["The &6Pasta Laminator&r presses lasagna phase onto a tungsten-fibre billet as a plate, the plate of the UXV hull and parts. Pasta as plate is fiction, for the same reason as the wire. A UIV hull, the neutron star site casing and a robust platen. Lasagna plate, then the UXV hull. Phase and billets by ME; plates stack up, so send them on."]
-			icon: "gtceu:pasta_laminator"
-			id: "3CCB6C8A5332CADD"
-			rewards: [{ id: "193A8B97013D719C", type: "xp", xp: 120 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "33DF6F56B9115400", item: "gtceu:pasta_laminator", type: "item" }
-				{ id: "564E04C38B269476", item: "grindless:neutron_star_site_casing", type: "item" }
-				{ id: "7E54036D6B84BDB0", item: "gtceu:robust_machine_casing", type: "item" }
-			]
-			title: "Pasta Laminator"
-			x: 25.0d
-			y: 6.5d
-		}
-		{
-			dependencies: ["3CCB6C8A5332CADD"]
 			description: [
 				"The &6Lasagna Plate&r is the structural plate of the UXV hull and of every UXV part: a tungsten-fibre billet with a lasagna phase pressed onto it."
-				"The Pasta Laminator makes it from the phase and a billet, which the sorting row supplies. It unlocks the UXV hull and, through it, every UXV machine. Plates stack quickly, so feed phase and billets by ME and send the plates on to the hull line."
+				"The Pasta Mill makes it from the phase and a billet, which the sorting row supplies. It unlocks the UXV hull and, through it, every UXV machine. Plates stack quickly, so feed phase and billets by ME and send the plates on to the hull line."
 			]
 			icon: "grindless:lasagna_plate"
 			id: "34D1D9ED3F6FBC67"
@@ -1227,8 +1264,8 @@
 			y: 6.5d
 		}
 		{
-			dependencies: ["7A933F3FF611A461"]
-			description: ["Above a pulsar's magnetic poles the field tears charges off the surface. The &6Polar Cap Tap&r lowers an electrode into that current and burns through it, at Vela only. A UIV hull, the neutron star site casing and a mast of insulator rings. Power at Vela, for the gate hold and the machines out there. Electrodes by ME; the voltage is real, a way to collect it is not."]
+			dependencies: ["353D67B60E559EE1"]
+			description: ["Above a pulsar's magnetic poles the field tears charges off the surface. The &6Polar Cap Tap&r lowers an electrode into that current and burns through it, at Vela only. A UIV hull, about 270 gum metal and 65 pulsed field casings, and a mast of insulator rings. The shape is about 13 by 17 by 13 and about 485 blocks. Power at Vela, for the gate hold and the machines out there. Electrodes by ME; the voltage is real, a way to collect it is not."]
 			icon: "gtceu:polar_cap_tap"
 			id: "50C6BE5A52F4F9A0"
 			rewards: [{ id: "71D74C5B44B540E7", type: "xp", xp: 120 }]
@@ -1236,7 +1273,8 @@
 			size: 1.25d
 			tasks: [
 				{ id: "30987312A1343006", item: "gtceu:polar_cap_tap", type: "item" }
-				{ id: "536FA95DF771C4F8", item: "grindless:neutron_star_site_casing", type: "item" }
+				{ id: "7A9AC387C2CC27DE", item: "grindless:gum_metal_casing", type: "item" }
+				{ id: "745EB7346D03FE88", item: "grindless:pulsed_field_casing", type: "item" }
 			]
 			title: "Polar Cap Tap"
 			x: 27.5d
@@ -1288,378 +1326,165 @@
 		{
 			dependencies: ["103E024FEAF25DDC"]
 			description: [
-				"Every wafer of this age, and the machines that were left out of the story."
-				"Each wafer hangs from the one it is made from."
+				"The spintronic wafer, X1 of the UXV Lines chart: a silicon-28 wafer carrying memory, racetrack, oscillators, spin-wave bus, magnetoelectric switch and spin-orbit readout."
+				"Nine modules, one after another. The Spintronic Cluster Tool, the vdW stacker and the Photonic Foundry do most of the work."
 			]
-			icon: "grindless:srruo3_electrode_wafer"
-			id: "1E64EBF2DE00DEF8"
+			icon: "grindless:spintronic_wafer"
+			id: "3463B33FE3C32710"
 			rewards: [ ]
 			shape: "circle"
 			size: 0.75d
-			tasks: [{ id: "38BBA70AF0BCA4B0", type: "checkmark" }]
-			title: "UXV Wafers"
+			tasks: [{ id: "3D1457E10AF400E7", type: "checkmark" }]
+			title: "UXV Spintronic Wafer"
 			x: 27.0d
 			y: 19.5d
 		}
 		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6SrRuO3 Electrode Wafer&r is a wafer stage on the way to the BFO Film Wafer. Made in the &6Pulsed Laser Deposition&r from the Srruo3 Target and Dysco3 Substrate, with oxygen, in the cleanroom. The BFO Film Wafer and BFO Fume in the Pulsed Laser Deposition. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			icon: "grindless:srruo3_electrode_wafer"
-			id: "17DE5B5FC0CF0760"
-			rewards: [{ id: "3CEB229E73191C82", type: "xp", xp: 50 }]
+			dependencies: ["3463B33FE3C32710"]
+			description: ["Lasting spins need silicon with no nuclear spin, so the line starts with silicon-28 and a CMOS wafer, the floor of every layer. The hot cell enriches silicon dust with hydrogen fluoride into silicon-28 dust (circuit 5). Zone refining melts it under argon into an ingot (circuit 6, 800 ticks); the cutter slices a wafer with water (400 ticks). The ion implanter loads hydrogen (circuit 6); the MOCVD reactor grows hafnia and titanium nitride gates (circuit 10, 700 ticks), and the Photonic Foundry lays tungsten vias and a copper layer (circuit 17). The 28Si M1 Wafer, the base of every later module. Silicon, acid and argon by ME and by pipe; wafers move between machines by pattern provider."]
+			icon: "grindless:si28_cmos_wafer"
+			id: "794B4368FD9DDBD0"
+			rewards: [{ id: "77EA927AAB1E81EA", type: "xp", xp: 120 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "3F69A46B697D9442", item: "grindless:srruo3_electrode_wafer", type: "item" }]
-			title: "SrRuO3 Electrode Wafer"
-			x: 29.0d
+			tasks: [
+				{ id: "3FAC50AC9E54EDAE", item: "grindless:si28_fz_wafer", type: "item" }
+				{ id: "161E319476CD2C17", item: "grindless:si28_cmos_wafer", type: "item" }
+				{ id: "3484740DC0476851", item: "grindless:si28_m1_wafer", type: "item" }
+			]
+			title: "Silicon-28 and the CMOS Wafer"
+			x: 29.5d
 			y: 19.5d
 		}
 		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6Si-28 FZ Wafer&r is a stage of the wafer lines of this era. Made in the &6Cutter&r from the Si28 FZ, with water, in the cleanroom. The next stage of its line, or the chip that is built from it. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:si28_fz_wafer"
-			id: "7D65C040C8F34F77"
-			rewards: [{ id: "1568863EC2ECE379", type: "xp", xp: 50 }]
+			dependencies: ["794B4368FD9DDBD0"]
+			description: ["The magnetic tunnel junctions that store a bit as the direction of a magnet. They are laid on the M1 wafer by the &6Spintronic Cluster Tool&r. The Cluster Tool sputters a heusler target, a magnesia barrier and a tantalum seed onto the wafer under argon (circuit 2, 800 ticks); the heusler powder comes back. The nitride magnet works anneals it (circuit 9), the ion implanter etches it (circuit 9), and the Photonic Foundry caps it with copper (circuit 18). The racetrack module, which writes tracks over the MRAM wafer. Targets by ME from the melter; return the heusler powder to the target line so nothing is lost."]
+			icon: "grindless:mram_wafer"
+			id: "37CEE1000998A174"
+			rewards: [{ id: "17754FD16A58A576", type: "xp", xp: 140 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "14FBD90CF19D1615", item: "grindless:si28_fz_wafer", type: "item" }]
-			title: "Si-28 FZ Wafer"
-			x: 29.0d
+			tasks: [
+				{ id: "160428A29CEC8607", item: "grindless:mram_stack_wafer", type: "item" }
+				{ id: "1799A133D0E9E923", item: "grindless:mram_wafer", type: "item" }
+			]
+			title: "MRAM Stack"
+			x: 33.0d
+			y: 19.5d
+		}
+		{
+			dependencies: ["37CEE1000998A174"]
+			description: ["A racetrack is a nanowire along which magnetic domains move like cars on a track. It stores more bits per area than any plain memory. The Cluster Tool lays a synthetic antiferromagnet over the MRAM wafer (circuit 3, 600 ticks). The nitride magnet works anneals it (circuit 10) and electron beam refining writes the track (circuit 16). It patterns the nanowires (circuit 1; a quarter of the platinum comes off as sludge) and joins the MTJ die for the racetrack chip (circuit 2, 900 ticks). The oscillator module, which is grown on the racetrack chip. Keep the platinum sludge in a chest or send it to the platinum line; it is the byproduct that pays for the sputter targets."]
+			icon: "grindless:racetrack_chip"
+			id: "399C5261E9B68BA2"
+			rewards: [{ id: "1C2C5CAD23A227CD", type: "xp", xp: 160 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1E11BB949B48A4F5", item: "grindless:saf_track_wafer", type: "item" }
+				{ id: "59D4A8A4758AD0E6", item: "grindless:patterned_track_wafer", type: "item" }
+				{ id: "7190BE84051757FC", item: "grindless:racetrack_chip", type: "item" }
+			]
+			title: "Racetrack"
+			x: 36.5d
 			y: 21.0d
 		}
 		{
-			dependencies: ["7D65C040C8F34F77"]
-			description: ["The &6H Si-28 Wafer&r is a wafer stage on the way to the MTJ Stack Wafer. Made from the Si-28 FZ Wafer in the next machine of its line, in the cleanroom. The MTJ Stack Wafer and Spent Cofeb Target in the MTJ Sputtering. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:h_si28_wafer"
-			id: "39D6D026586DFCDE"
-			rewards: [{ id: "3A45DD46D9D1968F", type: "xp", xp: 50 }]
+			dependencies: ["794B4368FD9DDBD0"]
+			description: ["A spin-torque oscillator turns a direct current into a microwave signal through the spin of its electrons. An array of them drives the spin-wave bus. The Cluster Tool sputters the oscillator stack on the racetrack chip (circuit 4, 700 ticks). Electron beam refining defines the pillars (circuit 27), the ion implanter mills them (circuit 10), a chemical bath with hydrochloric acid cleans the redeposit, and the MOCVD reactor planarises with silane and ammonia (circuit 15). The Photonic Foundry caps the array with gold (circuit 20). The magnonic bus. Acid and silane by pipe; the bath returns its redeposit as dust."]
+			icon: "grindless:stno_array"
+			id: "76FB3CD0A40C8C78"
+			rewards: [{ id: "3501A375BDBB9CB3", type: "xp", xp: 160 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "39F073FAE187498A", item: "grindless:h_si28_wafer", type: "item" }]
-			title: "H Si-28 Wafer"
-			x: 31.0d
-			y: 21.0d
+			tasks: [
+				{ id: "14414E2ECC92B98C", item: "grindless:stno_stack_wafer", type: "item" }
+				{ id: "32AFE95DB963AB52", item: "grindless:stno_array", type: "item" }
+			]
+			title: "Spin-Torque Oscillators"
+			x: 29.5d
+			y: 22.0d
 		}
 		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6MTJ Stack Wafer&r is a wafer stage on the way to the Annealed MTJ Wafer. Made in the &6MTJ Sputtering&r from the Cofeb Target and Mgo Target, with argon, in the cleanroom. The Annealed MTJ Wafer in the Nitride Magnet Synthesis. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			icon: "grindless:mtj_stack_wafer"
-			id: "1B22593F79C6B741"
-			rewards: [{ id: "535239D024FBB0C5", type: "xp", xp: 50 }]
+			dependencies: ["76FB3CD0A40C8C78"]
+			description: ["A yttrium iron garnet film carries spin waves with almost no loss, and the oscillator array drives them: together they make the bus that moves data inside the chip. The &6YIG LPE Furnace&r grows the film on a GGG wafer in a platinum crucible (circuit 2, 1,200 ticks), and electron beam refining cuts the waveguides (circuit 17). An assembler (800 ticks) joins the waveguide wafer, the oscillator array, a 5N platinum part, a platinum sheet and soldering alloy. The ME-on-spin wafer. The flux comes back from the skim recipe (circuit 3); keep a spare platinum crucible."]
+			icon: "grindless:magnonic_bus"
+			id: "5A380D3D56FF29FD"
+			rewards: [{ id: "512246B62B456BE7", type: "xp", xp: 180 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "7DBA0734C8B9A5C2", item: "grindless:mtj_stack_wafer", type: "item" }]
-			title: "MTJ Stack Wafer"
-			x: 29.0d
-			y: 22.5d
-		}
-		{
-			dependencies: ["1B22593F79C6B741"]
-			description: ["The &6Annealed MTJ Wafer&r is a stage of the wafer lines of this era. Made in the &6Nitride Magnet Synthesis&r from the MTJ Stack Wafer, with argon, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
-			icon: "grindless:annealed_mtj_wafer"
-			id: "1AEE8EB00A5B742C"
-			rewards: [{ id: "1066B1849F8C46B6", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "3317BF6EED7AD7AF", item: "grindless:annealed_mtj_wafer", type: "item" }]
-			title: "Annealed MTJ Wafer"
-			x: 31.0d
-			y: 22.5d
-		}
-		{
-			dependencies: ["1AEE8EB00A5B742C"]
-			description: ["The &6Etched MTJ Wafer&r is a stage of the wafer lines of this era. Made from the Annealed MTJ Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:etched_mtj_wafer"
-			id: "70BA0C5D0A924050"
-			rewards: [{ id: "1128636B1C9AB9DF", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "19885A29B766C683", item: "grindless:etched_mtj_wafer", type: "item" }]
-			title: "Etched MTJ Wafer"
+			tasks: [
+				{ id: "1254C5FBC01B63E5", item: "grindless:yig_film_wafer", type: "item" }
+				{ id: "705BDE472474A258", item: "grindless:yig_waveguide_wafer", type: "item" }
+				{ id: "11CE0DA11E4B1C62", item: "grindless:magnonic_bus", type: "item" }
+			]
+			title: "Magnonic Bus"
 			x: 33.0d
-			y: 22.5d
+			y: 22.0d
 		}
 		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6Mram Stack Wafer&r is a wafer stage on the way to the Annealed MRAM Wafer. Made in the &6MTJ Sputtering&r from the Heusler Target and Mgo Target, with argon, in the cleanroom. The Annealed MRAM Wafer and Racetrack Memory Die in the Nitride Magnet Synthesis. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
-			hide_dependency_lines: true
-			icon: "grindless:mram_stack_wafer"
-			id: "53966E247F4C702B"
-			rewards: [{ id: "5093FE4A959FC4B2", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "397DBEAA232F4879", item: "grindless:mram_stack_wafer", type: "item" }]
-			title: "Mram Stack Wafer"
-			x: 29.0d
-			y: 24.0d
-		}
-		{
-			dependencies: ["53966E247F4C702B"]
-			description: ["The &6Annealed MRAM Wafer&r is a stage of the wafer lines of this era. Made in the &6Nitride Magnet Synthesis&r from the MRAM Stack Wafer, with argon, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
-			icon: "grindless:annealed_mram_wafer"
-			id: "7C019C36CD185D3E"
-			rewards: [{ id: "5B73345E38A0AEC6", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "5F8F4AB1F463BF07", item: "grindless:annealed_mram_wafer", type: "item" }]
-			title: "Annealed MRAM Wafer"
-			x: 31.0d
-			y: 24.0d
-		}
-		{
-			dependencies: ["7C019C36CD185D3E"]
-			description: ["The &6Etched MRAM Wafer&r is a wafer stage on the way to the MRAM Wafer. Made from the Annealed MRAM Wafer in the next machine of its line, in the cleanroom. The MRAM Wafer in the Photonic Foundry. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
-			icon: "grindless:etched_mram_wafer"
-			id: "1C5B3004870CE5B4"
-			rewards: [{ id: "5011FB543AC802F7", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "1F26BDAC4B1AF729", item: "grindless:etched_mram_wafer", type: "item" }]
-			title: "Etched MRAM Wafer"
-			x: 33.0d
-			y: 24.0d
-		}
-		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6SAF Track Wafer&r is a wafer stage on the way to the Annealed SAF Wafer. Made in the &6MTJ Sputtering&r from the SAF Target Set and H Si-28 Wafer, with argon, in the cleanroom. The Annealed SAF Wafer in the Nitride Magnet Synthesis. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			hide_dependency_lines: true
-			icon: "grindless:saf_track_wafer"
-			id: "71BAB411C53692E4"
-			rewards: [{ id: "163C1100FE678C51", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "301FCF813B613C37", item: "grindless:saf_track_wafer", type: "item" }]
-			title: "SAF Track Wafer"
-			x: 29.0d
-			y: 25.5d
-		}
-		{
-			dependencies: ["71BAB411C53692E4"]
-			description: ["The &6Annealed SAF Wafer&r is a wafer stage on the way to the Written Track Wafer. Made in the &6Nitride Magnet Synthesis&r from the SAF Track Wafer, with argon, in the cleanroom. The Written Track Wafer in the Electron Beam Refining. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:annealed_saf_wafer"
-			id: "169E74C97325FA19"
-			rewards: [{ id: "72519DBFAA9BB8A1", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "51E0D0BF82A33A64", item: "grindless:annealed_saf_wafer", type: "item" }]
-			title: "Annealed SAF Wafer"
-			x: 31.0d
-			y: 25.5d
-		}
-		{
-			dependencies: ["169E74C97325FA19"]
-			description: ["The &6Written Track Wafer&r is a wafer stage on the way to the Patterned Track Wafer. Made in the &6Electron Beam Refining&r from the Annealed SAF Wafer, with argon, in the cleanroom. The Patterned Track Wafer and Platinum Group Sludge in the Racetrack Patterning. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:written_track_wafer"
-			id: "1D8E62A8101D4257"
-			rewards: [{ id: "3F7AAD558241EA1E", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "788BC0DE5FD4EB96", item: "grindless:written_track_wafer", type: "item" }]
-			title: "Written Track Wafer"
-			x: 33.0d
-			y: 25.5d
-		}
-		{
-			dependencies: ["1D8E62A8101D4257"]
-			description: ["The &6Patterned Track Wafer&r is a wafer stage on the way to the Racetrack Chip. Made in the &6Racetrack Patterning&r from the Written Track Wafer, with argon, in the cleanroom. The Racetrack Chip and Racetrack Memory Die in the Racetrack Patterning. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:patterned_track_wafer"
-			id: "12C0421B403BC4AD"
-			rewards: [{ id: "791341F2A12135BE", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "7B48C893700BD786", item: "grindless:patterned_track_wafer", type: "item" }]
-			title: "Patterned Track Wafer"
-			x: 35.0d
-			y: 25.5d
-		}
-		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6STNO Stack Wafer&r is a wafer stage on the way to the STNO Defined Wafer. Made in the &6MTJ Sputtering&r from the Heusler Target and Mgo Target, with argon, in the cleanroom. The STNO Defined Wafer in the Electron Beam Refining. A pattern provider on the machine of the step before keeps it supplied."]
-			hide_dependency_lines: true
-			icon: "grindless:stno_stack_wafer"
-			id: "76E12603C84755BF"
-			rewards: [{ id: "1AB762435EF34EF3", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "543DCD0AB1BF34E8", item: "grindless:stno_stack_wafer", type: "item" }]
-			title: "STNO Stack Wafer"
-			x: 29.0d
-			y: 27.0d
-		}
-		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6STNO Defined Wafer&r is a stage of the wafer lines of this era. Made in the &6Electron Beam Refining&r from the STNO Stack Wafer, with argon, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			hide_dependency_lines: true
-			icon: "grindless:stno_defined_wafer"
-			id: "76E5B47ACCB12374"
-			rewards: [{ id: "58AC07110905D078", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "15989F9FDA9863BA", item: "grindless:stno_defined_wafer", type: "item" }]
-			title: "STNO Defined Wafer"
-			x: 29.0d
-			y: 28.5d
-		}
-		{
-			dependencies: ["76E5B47ACCB12374"]
-			description: ["The &6STNO Milled Wafer&r is a stage of the wafer lines of this era. Made from the STNO Defined Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			icon: "grindless:stno_milled_wafer"
-			id: "596E5845BBBD6A66"
-			rewards: [{ id: "3AAAB8D5DACA04EE", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "1AD9B38FE62992D3", item: "grindless:stno_milled_wafer", type: "item" }]
-			title: "STNO Milled Wafer"
-			x: 31.0d
-			y: 28.5d
-		}
-		{
-			dependencies: ["596E5845BBBD6A66"]
-			description: ["The &6STNO Clean Wafer&r is a stage of the wafer lines of this era. Made from the STNO Milled Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			icon: "grindless:stno_clean_wafer"
-			id: "5C2B1B602EEFF577"
-			rewards: [{ id: "1D5248FB8BB16691", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "5AE67197F34EDF7C", item: "grindless:stno_clean_wafer", type: "item" }]
-			title: "STNO Clean Wafer"
-			x: 33.0d
-			y: 28.5d
-		}
-		{
-			dependencies: ["5C2B1B602EEFF577"]
-			description: ["The &6STNO Planarised Wafer&r is a wafer stage on the way to the STNO Array. Made from the STNO Clean Wafer in the next machine of its line, in the cleanroom. The STNO Array in the Photonic Foundry. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			icon: "grindless:stno_planarised_wafer"
-			id: "3E05B7CE2CFC9B79"
-			rewards: [{ id: "1706B614FA8EDE30", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "5727B78457F8AB29", item: "grindless:stno_planarised_wafer", type: "item" }]
-			title: "STNO Planarised Wafer"
-			x: 35.0d
-			y: 28.5d
-		}
-		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6BFO Film Wafer&r is a wafer stage on the way to the Cofe Me Wafer. Made in the &6Pulsed Laser Deposition&r from the SrRuO3 Electrode Wafer and La BFO Target, with oxygen, in the cleanroom. The Cofe Me Wafer and Small Cobalt in the Pulsed Laser Deposition. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			hide_dependency_lines: true
-			icon: "grindless:bfo_film_wafer"
-			id: "3963AFF103AE55B6"
-			rewards: [{ id: "7292C86CE72D8529", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "3D1B60939A319173", item: "grindless:bfo_film_wafer", type: "item" }]
-			title: "BFO Film Wafer"
-			x: 29.0d
-			y: 30.0d
-		}
-		{
-			dependencies: ["3963AFF103AE55B6"]
-			description: ["The &6CoFe ME Wafer&r is a wafer stage on the way to the Me Switch Wafer. Made in the &6Pulsed Laser Deposition&r from the BFO Film Wafer and Cofe Target, with oxygen, in the cleanroom. The Me Switch Wafer in the Electron Beam Refining. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			icon: "grindless:cofe_me_wafer"
-			id: "1263F5D6CC3DF095"
-			rewards: [{ id: "3777B87851E1A667", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "14738F84A1F898D6", item: "grindless:cofe_me_wafer", type: "item" }]
-			title: "CoFe ME Wafer"
-			x: 31.0d
-			y: 30.0d
-		}
-		{
-			dependencies: ["1263F5D6CC3DF095"]
-			description: ["The &6ME Switch Wafer&r is a wafer stage on the way to the Meso Logic Die. Made in the &6Electron Beam Refining&r from the CoFe ME Wafer, with argon, in the cleanroom. The Meso Logic Die in the Photonic Foundry. A pattern provider on the machine of the step before keeps it supplied."]
+			dependencies: ["5A380D3D56FF29FD"]
+			description: ["A magnetoelectric membrane flips a magnet with a voltage instead of a current, so it switches with far less heat. It is made of oxides that only grow in a pulsed laser plume. The Cluster Tool, with a KrF laser and oxygen: a strontium ruthenate electrode on a dysprosium scandate substrate (circuit 1, 400 ticks), a bismuth ferrite film (circuit 2) and a cobalt-iron layer (circuit 3). Electron beam refining then patterns the switch (circuit 19). The ME-on-spin wafer. Oxygen by pipe; the bismuth fume is a byproduct and goes to the fume scrubber."]
 			icon: "grindless:me_switch_wafer"
-			id: "51C0CF64E01F4F9A"
-			rewards: [{ id: "319D80E61CEAA769", type: "xp", xp: 50 }]
+			id: "7AC8ABCAA1CCFF90"
+			rewards: [{ id: "5E6E7B61E544053E", type: "xp", xp: 160 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "13368939691F6684", item: "grindless:me_switch_wafer", type: "item" }]
-			title: "ME Switch Wafer"
+			tasks: [
+				{ id: "3F0DCE9A9D1F29C1", item: "grindless:srruo3_electrode_wafer", type: "item" }
+				{ id: "51FFB04CF2FEAA13", item: "grindless:bfo_film_wafer", type: "item" }
+				{ id: "1DE508AE9C59DB60", item: "grindless:me_switch_wafer", type: "item" }
+			]
+			title: "Oxide Membranes"
+			x: 35.0d
+			y: 22.0d
+		}
+		{
+			dependencies: ["76FB3CD0A40C8C78"]
+			description: ["Spin-orbit torque reads the bit out through a stack of two-dimensional crystals: a heavy metal, a magnet and a barrier a few atoms thick, each laid on the last by the vdW stacker. The vdW stacker in its UXV mode cleaves WTe2 and FGT flakes (circuits 1 and 2), then stacks them with hBN into a heterostack under argon (circuit 4, 900 ticks). Electron beam refining adds gold edge contacts (circuit 18) and the nitride magnet works anneals the stack (circuit 12). The MESO spin wafer, where the readout is laid over the magnetoelectric layer. Crystals by ME; broken flakes come out as dust, send it back to the crystal line."]
+			icon: "grindless:sot_readout_stack"
+			id: "762148FD60F92F5F"
+			rewards: [{ id: "39AF3F6B5F981A25", type: "xp", xp: 160 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "56D2419ABBA7A630", item: "grindless:sot_heterostack", type: "item" }
+				{ id: "579FAA843EA17E17", item: "grindless:sot_readout_stack", type: "item" }
+			]
+			title: "Van der Waals Readouts"
+			x: 29.5d
+			y: 24.5d
+		}
+		{
+			dependencies: ["762148FD60F92F5F"]
+			description: ["The two membranes are joined to the bus, the wafer is closed with its top copper and gold layers, and a cutter dices it. Each die holds the logic, the memory and the bus of one mainframe. The vdW stacker joins the bus and the switch (ME-on-spin wafer, circuit 7, 700 ticks) and lays the readout over it (MESO spin wafer, circuit 8). The Photonic Foundry caps it with copper and gold (circuit 30). The cutter dices it with lubricant. The spintronic mainframe. Lubricant by pipe; dice a stack at a time and send the dies straight to the integration hall."]
+			icon: "grindless:spintronic_die"
+			id: "70A10FA0091DD583"
+			rewards: [{ id: "78A40CB83296529A", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7FB62D598E3C2FD4", item: "grindless:me_on_spin_wafer", type: "item" }
+				{ id: "7FCAAAB2748521DE", item: "grindless:meso_spin_wafer", type: "item" }
+				{ id: "7626E841F9CA63F0", item: "grindless:spintronic_wafer", type: "item" }
+				{ id: "770872C6AD5E9794", item: "grindless:spintronic_die", type: "item" }
+			]
+			title: "Interconnect and Dicing"
 			x: 33.0d
-			y: 30.0d
+			y: 24.5d
 		}
 		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6GGG Wafer&r is a wafer stage on the way to the YIG Film Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The YIG Film Wafer in the Liquid Phase Epitaxy. A pattern provider on the machine of the step before keeps it supplied."]
-			hide_dependency_lines: true
-			icon: "grindless:ggg_wafer"
-			id: "5EEFAD72179B7CDE"
-			rewards: [{ id: "5595E0F290A127D5", type: "xp", xp: 50 }]
+			dependencies: ["70A10FA0091DD583", "399C5261E9B68BA2", "7AC8ABCAA1CCFF90"]
+			description: ["The end of the line: a mainframe that computes in spin waves. It is the circuit every UXV machine asks for. The Photonic Integration Hall (3,000 ticks, circuit 7): a spintronic die, an MTJ die, a shielded interposer and UIV circuits. The interposer is a mu-metal shield can on a glass interposer, soldered in the Photonic Foundry (circuit 22). The UXV circuit chain and every UXV machine that needs it. Dies and interposers by ME; the hall takes one of each per mainframe."]
+			icon: "gtnn:spintronic_mainframe"
+			id: "59A227F7DC1BA057"
+			rewards: [{ id: "3A9A4C0A33A07F1E", type: "xp", xp: 300 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "707F410045011110", item: "grindless:ggg_wafer", type: "item" }]
-			title: "GGG Wafer"
-			x: 29.0d
-			y: 31.5d
-		}
-		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6YIG Film Wafer&r is a wafer stage on the way to the YIG Waveguide Wafer. Made in the &6Liquid Phase Epitaxy&r from the Yttrium Oxide and Hematite, with lpe flux, in the cleanroom. The YIG Waveguide Wafer in the Electron Beam Refining. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			hide_dependency_lines: true
-			icon: "grindless:yig_film_wafer"
-			id: "530E09D3F517FECF"
-			rewards: [{ id: "52DEC98CAE0F82DA", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "3F74DA96F6389B6E", item: "grindless:yig_film_wafer", type: "item" }]
-			title: "YIG Film Wafer"
-			x: 29.0d
-			y: 33.0d
-		}
-		{
-			dependencies: ["530E09D3F517FECF"]
-			description: ["The &6YIG Waveguide Wafer&r is a wafer stage on the way to the Magnonic Bus. Made in the &6Electron Beam Refining&r from the YIG Film Wafer, with argon, in the cleanroom. The Magnonic Bus in the Assembler. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:yig_waveguide_wafer"
-			id: "3C5BFA425A291C3A"
-			rewards: [{ id: "1E2562505B463612", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "37CD92708BAC5E8D", item: "grindless:yig_waveguide_wafer", type: "item" }]
-			title: "YIG Waveguide Wafer"
-			x: 31.0d
-			y: 33.0d
-		}
-		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6Ga2O3 Wafer&r is a stage of the wafer lines of this era. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
-			hide_dependency_lines: true
-			icon: "grindless:ga2o3_wafer"
-			id: "33C5D424F67E319B"
-			rewards: [{ id: "50D92D20E2054005", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "5E8543EF68E09A14", item: "grindless:ga2o3_wafer", type: "item" }]
-			title: "Ga2O3 Wafer"
-			x: 29.0d
-			y: 34.5d
-		}
-		{
-			dependencies: ["1E64EBF2DE00DEF8"]
-			description: ["The &6Ga2O3 Epi Wafer&r is a wafer stage on the way to the Ga2O3 Gated Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The Ga2O3 Gated Wafer in the Electron Beam Refining. A pattern provider on the machine of the step before keeps it supplied."]
-			hide_dependency_lines: true
-			icon: "grindless:ga2o3_epi_wafer"
-			id: "5FF9A2C99602A4F9"
-			rewards: [{ id: "7324E80D5340EEF5", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "58549276F767171B", item: "grindless:ga2o3_epi_wafer", type: "item" }]
-			title: "Ga2O3 Epi Wafer"
-			x: 29.0d
-			y: 36.0d
-		}
-		{
-			dependencies: ["5FF9A2C99602A4F9"]
-			description: ["The &6Ga2O3 Gated Wafer&r is a wafer stage on the way to the Ga2O3 Power Die. Made in the &6Electron Beam Refining&r from the Ga2O3 Epi Wafer, with argon, in the cleanroom. The Ga2O3 Power Die and Gallium Oxide in the Photonic Foundry. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
-			icon: "grindless:ga2o3_gated_wafer"
-			id: "5C0418D90289A958"
-			rewards: [{ id: "13F8857F386F252C", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "5EC4ECD11B393E1E", item: "grindless:ga2o3_gated_wafer", type: "item" }]
-			title: "Ga2O3 Gated Wafer"
-			x: 31.0d
-			y: 36.0d
+			tasks: [{ id: "31F87802173CFD38", item: "gtnn:spintronic_mainframe", type: "item" }]
+			title: "Spintronic Mainframe"
+			x: 37.5d
+			y: 24.5d
 		}
 	]
 	subtitle: ["Logic that runs on spin, and three strange places: a black hole's companion star, a pulsar's crust and a supernova's ashes."]

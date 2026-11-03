@@ -265,8 +265,8 @@
 			y: -3.5d
 		}
 		{
-			dependencies: ["7F1047B6CDE89AFA"]
-			description: ["A sealed &6Degenerate Pellet&r is a fuel that never runs out in your lifetime. The Containment Works presses it from degenerate matter and an exotic matter cell, and the gate's hold is run on it."]
+			dependencies: ["3970BC63BB8C9A9F"]
+			description: ["A sealed &6Degenerate Pellet&r is a fuel that never runs out in your lifetime. The Degenerate Works presses it from degenerate matter and an exotic matter cell, and the gate's hold is run on it."]
 			icon: "grindless:degenerate_pellet"
 			id: "129CFFFDA25F22DC"
 			rewards: [{ id: "1A85DDA17FFA905E", type: "xp", xp: 250 }]
@@ -302,6 +302,90 @@
 			title: "Gate to UIV"
 			x: 51.5d
 			y: 0.0d
+		}
+		{
+			dependencies: ["7B6FD0C43D93BA99"]
+			description: ["The workhorse of the age: a silicon carbide composite shell light and hard enough to wall a structure the size of a hangar. Nearly every UEV controller uses it; the Superheavy Factory alone takes about 1,400. An assembler: 16 SiC/SiC plates from the CVI Furnace, 8 SiC fibre preforms, 8 six-nines tantalum and a little epoxy, for two casings. The body of every UEV structure, and the base the other five casings are built beside. Stock plates, preforms and tantalum by ME and let a pattern provider run the assembler: you need hundreds, so build it a dedicated line."]
+			hide_dependency_lines: true
+			icon: "grindless:sic_composite_casing"
+			id: "174EA7FB5DF07C5E"
+			rewards: [{ id: "1E31D67941944DEF", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "7817E043AF4EFF62", item: "grindless:sic_composite_casing", type: "item" }]
+			title: "SiC Composite Casing"
+			x: 44.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["174EA7FB5DF07C5E", "1128B01901C86B97", "5E8BE7618AF5F077"]
+			description: ["A casing wound with lanthanum superhydride cable, which carries current with no loss while pressed. It holds the field of a calutron, the Superheavy Factory and the Degenerate Works. The naquadria magnet works, circuit 11: 64 lanthanum superhydride single wires, 16 SiC/SiC plates and a UEV sensor, for sixteen casings. Structures that bend or hold a beam: the Calutron (about 330), the Superheavy Factory (about 580), the Degenerate Works (about 500) and the Mk4 reactor (about 260). The superhydride wire is the bottleneck; keep the Megabar Press busy and send wire to the works by ME."]
+			hide_dependency_lines: true
+			icon: "grindless:superhydride_magnet_casing"
+			id: "3A0B7D2A0307461B"
+			rewards: [{ id: "32CE01D3B6FDFC1E", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 32L, id: "5FBB50C33AC653BC", item: "grindless:superhydride_magnet_casing", type: "item" }]
+			title: "Superhydride Magnet Casing"
+			x: 47.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["174EA7FB5DF07C5E", "7B6FD0C43D93BA99"]
+			description: ["A casing of ultra-low-expansion glass and hollow-core fibre that keeps a structure optically still. The photonic machines are built from it. An assembler: 16 ULE boules, 8 hollow-core fibres, 8 SiC mirror blanks, two UHV emitters and a little epoxy, for sixteen casings. The Photonic Integration Hall (its largest user), the SNSPD Foundry, the Van der Waals Stacker and the quantum, nebula and pulsar machines. One assembler run makes sixteen, so a single line usually covers a whole structure."]
+			hide_dependency_lines: true
+			icon: "grindless:photonic_casing"
+			id: "14A81463D1669429"
+			rewards: [{ id: "32ADCD4EE0D950ED", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "7334377268E08B8F", item: "grindless:photonic_casing", type: "item" }]
+			title: "Photonic Casing"
+			x: 51.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["174EA7FB5DF07C5E", "76EFA041DAC4B333"]
+			description: ["A lining of hafnium tantalum carbonitride, the most heat-resistant ceramic known, for the hot structures. A spark plasma sinterer, circuit 20: 20 HfTaCN powders, 4 SiC/SiC plates and 2 YSZ ingots, for two casings. The Stellar Forge (about 750), the Mk4 reactor (about 460), the Electron Beam Furnace (about 435), the Megabar Press (about 410) and the Calutron (about 200). Powder and plates by ME; the sintering takes time, so run more than one sinterer."]
+			hide_dependency_lines: true
+			icon: "grindless:hftacn_lining_casing"
+			id: "561F192A5F2BDACC"
+			rewards: [{ id: "3CA0B008EE88CF47", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "528D90E5A9E5ADE4", item: "grindless:hftacn_lining_casing", type: "item" }]
+			title: "HfTaCN Lining Casing"
+			x: 54.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["174EA7FB5DF07C5E", "3970BC63BB8C9A9F"]
+			description: ["The casing that stops degenerate matter, which would otherwise expand, from reaching anything else. It lines the Degenerate Works. An assembler: 64 SiC/SiC plates, 32 hollow-core fibres, 8 UEV sensors and a little epoxy, for sixty-four casings. The Degenerate Works, whose recipes are the only ones that bottle degenerate matter into pellets. A single run makes sixty-four; the sensors are the costly input, so build it only when the works is ready to be placed."]
+			hide_dependency_lines: true
+			icon: "grindless:degenerate_containment_casing"
+			id: "5EFEF0A016A69EFB"
+			rewards: [{ id: "1A806EB737D33779", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "7BDC19A2D4C71591", item: "grindless:degenerate_containment_casing", type: "item" }]
+			title: "Degenerate Containment Casing"
+			x: 44.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["174EA7FB5DF07C5E", "76EFA041DAC4B333", "19174331BF47A9B1"]
+			description: ["The ring casing of the Mk4 Fusion Reactor. It is an upgraded Mk3 casing that can bear Mk4 plasma. An assembler: a Mk3 fusion casing, 2 Wf/W tiles, a SiC/SiC plate and tritanium, for one casing. The Mk4 Fusion Reactor, which takes about 400 of them in its ring. Make them one at a time from existing Mk3 casings; the reactor is the only machine that needs them."]
+			hide_dependency_lines: true
+			icon: "grindless:uev_fusion_casing"
+			id: "5D0263009B953620"
+			rewards: [{ id: "1EB8111F184DC6B8", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 32L, id: "721DAD4D249C4F7E", item: "grindless:uev_fusion_casing", type: "item" }]
+			title: "UEV Fusion Casing"
+			x: 47.5d
+			y: 9.0d
 		}
 		{
 			dependencies: ["74B8B99C87A3BABC"]
@@ -455,19 +539,6 @@
 		}
 		{
 			dependencies: ["3EEACFBDD09FDD21"]
-			description: ["A defect in a layer of hexagonal boron nitride gives off photons one by one: the &6hBN Emitter Chip&r. The van der Waals stacker, CVD boron nitride film and a cleanroom. The quantum photonic chip, as its second light source. Film by ME; the stacker returns chips in a chest, stock a few."]
-			icon: "grindless:hbn_emitter_chip"
-			id: "5E1E28A92397EEB5"
-			rewards: [{ id: "5FA6892CEA21E7EE", type: "xp", xp: 120 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "7E06FC544E6C9787", item: "grindless:hbn_emitter_chip", type: "item" }]
-			title: "Single-Photon Emitter"
-			x: 16.75d
-			y: 1.5d
-		}
-		{
-			dependencies: ["3EEACFBDD09FDD21"]
 			description: ["Graphene between two films of boron nitride changes how much light passes when a voltage is applied: the &6Graphene Modulator&r. The van der Waals stacker, graphene film and hBN film. The quantum photonic chip. Graphene and boron nitride arrive by ME; send modulators on by ME."]
 			icon: "grindless:graphene_modulator"
 			id: "5FBB5CC4F79C7D79"
@@ -481,7 +552,7 @@
 		}
 		{
 			dependencies: ["1EB339EC7EEE0427", "5FBB5CC4F79C7D79"]
-			description: ["A waveguide circuit with a quantum dot source, a detector, a modulator and an emitter on it is the &6Quantum Photonic Chip&r: a whole optical circuit on a few millimetres. The photonic integration hall, a circuit 2 program and one of each part above. The optical computer, which is a chip on an optical assembly. Parts by ME in matched counts; keep a few chips in stock, one per computer."]
+			description: ["A waveguide wafer carrying detectors, graphene modulators and quantum-dot sources, diced, pigtailed and cryopackaged, is the &6Quantum Photonic Chip&r: a whole optical circuit on a few millimetres. The photonic integration hall, a circuit 2 program, a pigtailed quantum die and superfluid helium (not used up). The optical computer, which is a chip on an optical assembly. Parts by ME in matched counts; keep a few chips in stock, one per computer."]
 			icon: "grindless:quantum_photonic_chip"
 			id: "5F27E2F032F8C5FD"
 			rewards: [{ id: "30DD83A335FE115E", type: "xp", xp: 180 }]
@@ -517,6 +588,134 @@
 			title: "Quantum Repeater Node"
 			x: 36.0d
 			y: 7.75d
+		}
+		{
+			dependencies: ["3C3FC8DE94FAC5EE"]
+			description: ["Light travels in silicon nitride with almost no loss, so the fab starts with a platform of it. Float-zone silicon wafers from the &6Cutter&r; the &6Electric Blast Furnace&r at 1800 K with oxygen; a reactor with silane and ammonia; the &6Synchrotron&r with an X-ray mask and PMMA (circuit 6); a reactor with water and hydrofluoric acid; the photonic foundry with ultrapure water and argon (circuit 7). The annealed SiN chip, bonded to lithium niobate as the waveguide circuit. Every stage is a plain machine fed by ME, one pattern provider each. The X-ray mask is the only part that is not used up; keep a spare."]
+			hide_dependency_lines: true
+			icon: "grindless:sin_etched_wafer"
+			id: "758176235F121A8E"
+			rewards: [{ id: "1C5303D2F5994A27", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "39D9E088882C7E62", item: "grindless:sin_lithographed_wafer", type: "item" }
+				{ id: "3B7A8832875A0A3B", item: "grindless:sin_etched_wafer", type: "item" }
+			]
+			title: "The Silicon Nitride Platform"
+			x: 22.0d
+			y: 40.0d
+		}
+		{
+			dependencies: ["758176235F121A8E", "1DCFFEC97F5A28AF", "1EB339EC7EEE0427"]
+			description: ["The waveguide circuit carries the light; the nanowire that counts single photons is grown on top of it. Two passes through the &6SNSPD Foundry&r make the detector wafer. The waveguide circuit (an annealed SiN chip and an LNOI wafer in the Photonic Integration Hall, circuit 1); then tungsten silicide dust with argon in the foundry (circuit 10) for the WSi waveguide wafer, and PMMA resist (circuit 11) to pattern the nanowire. The detector waveguide wafer: every later stage of the fab builds on it, and the stages after it. Keep tungsten silicide and PMMA stocked by ME. The foundry is a big machine, so queue both passes from one pattern provider."]
+			hide_dependency_lines: true
+			icon: "grindless:detector_waveguide_wafer"
+			id: "78FB2E9525C9BB52"
+			rewards: [{ id: "7543CCC0522F7DBC", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1B1194F70A80CD71", item: "grindless:wsi_waveguide_wafer", type: "item" }
+				{ id: "5F883E750933ABD4", item: "grindless:detector_waveguide_wafer", type: "item" }
+			]
+			title: "Waveguides and Detectors"
+			x: 25.0d
+			y: 40.0d
+		}
+		{
+			dependencies: ["78FB2E9525C9BB52", "3EEACFBDD09FDD21", "5FBB5CC4F79C7D79"]
+			description: ["A ring modulator needs a sheet of graphene held between two sheets of boron nitride. The &6Van der Waals Stacker&r lays them one on the other, with no glue. A graphene film (PMMA-coated graphene washed in acetone) and annealed hBN film (ammonia borane to borazine, grown on copper foil, then annealed in the electric blast furnace at 1800 K with argon). The stacker adds the graphene (circuit 4), then the boron nitride (circuit 5). The encapsulated ring wafer, and the graphene modulator that the quantum photonic chip and the UEV emitter take. Films are small and cheap; stock both by ME. The stacker returns one wafer per pass, so give it a dedicated output."]
+			hide_dependency_lines: true
+			icon: "grindless:encapsulated_ring_wafer"
+			id: "7ED63B7C5AC8E11F"
+			rewards: [{ id: "32FC378AE1E6827F", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "56BC43E9D05177A4", item: "grindless:graphene_film", type: "item" }
+				{ id: "1D1242DB8BC81839", item: "grindless:annealed_hbn_film", type: "item" }
+				{ id: "769001ED5FB0BF8C", item: "grindless:encapsulated_ring_wafer", type: "item" }
+			]
+			title: "Graphene on Boron Nitride"
+			x: 28.0d
+			y: 40.0d
+		}
+		{
+			dependencies: ["7ED63B7C5AC8E11F"]
+			description: ["Voltage has to reach the modulator and the detector. The photonic foundry deposits the gold and titanium electrodes. The encapsulated ring wafer, gold foil, titanium foil and nitrogen in the photonic foundry (circuit 29). The electroded photonic wafer, ready to receive its light sources. Foils by ME; this is a single machine step with a short buffer, so it rarely needs attention."]
+			icon: "grindless:electroded_photonic_wafer"
+			id: "55DB7E7EB6139170"
+			rewards: [{ id: "154A925C59AFDAF9", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "386B8B230C46F65D", item: "grindless:electroded_photonic_wafer", type: "item" }]
+			title: "Electrodes"
+			x: 31.0d
+			y: 40.0d
+		}
+		{
+			dependencies: ["55DB7E7EB6139170", "750B64193AFA4A16"]
+			description: ["A single-photon source is an indium arsenide dot a few nanometres wide. A micropillar wafer is bonded onto the electroded wafer in the stacker to make the hybrid. The InAs quantum dot wafer (MBE with arsine, gallium arsenide wafer and seven-nines indium), a chemical reactor with distilled water for the micropillar wafer, and the stacker (circuit 6) to join it to the electroded wafer. The same micropillar wafer, with gold and indium dust, makes the QD source of the UEV parts. The hybrid quantum wafer. Contain the arsine loop. One micropillar wafer is spent per hybrid wafer and one more per source, so size the MBE to both."]
+			hide_dependency_lines: true
+			icon: "grindless:hybrid_quantum_wafer"
+			id: "51DE7F51CAB0E9D6"
+			rewards: [{ id: "7E2B114B0CCE5937", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "503C0DD40472BD54", item: "grindless:micropillar_wafer", type: "item" }
+				{ id: "1EF8109D17AFC7EA", item: "grindless:hybrid_quantum_wafer", type: "item" }
+			]
+			title: "Quantum Dot Sources"
+			x: 34.0d
+			y: 40.0d
+		}
+		{
+			dependencies: ["51DE7F51CAB0E9D6", "1AC90115EC98790D"]
+			description: ["The finished wafer is sealed under a cladding layer and cut into dies. One wafer gives four. MOCVD with silane and oxygen (circuit 9) for the clad quantum wafer, which gives back water; then the &6Cutter&r with water. The quantum photonic die. Run the cutter on its own line and send the four dies on by ME; a cracked cut cannot be undone, so never feed it by hand."]
+			hide_dependency_lines: true
+			icon: "grindless:quantum_photonic_die"
+			id: "161B740F2625BB3A"
+			rewards: [{ id: "37DA692D00051FD2", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1D4DEA85100007D4", item: "grindless:clad_quantum_wafer", type: "item" }
+				{ id: "58F235A97E577F1C", item: "grindless:quantum_photonic_die", type: "item" }
+			]
+			title: "Cladding and Dicing"
+			x: 37.0d
+			y: 40.0d
+		}
+		{
+			dependencies: ["161B740F2625BB3A"]
+			description: ["A die is useless until fibre reaches it and it sits in cold helium. The Photonic Integration Hall pigtails and packages it. A quantum photonic die and a normal optical pipe in the hall (circuit 11) for the pigtailed die; then superfluid helium (circuit 2) for the quantum photonic chip. The quantum photonic chip, the core of the UEV circuit. Superfluid helium by pipe; keep the optical pipes by ME. A few chips in stock is enough: the next stage takes one each."]
+			icon: "grindless:quantum_photonic_chip"
+			id: "56BC7ACF8C126952"
+			rewards: [{ id: "5E8F4FA9A2FB8340", type: "xp", xp: 160 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5F8EED5E3AFFFA4C", item: "grindless:pigtailed_quantum_die", type: "item" }
+				{ id: "3461515E6685206C", item: "grindless:quantum_photonic_chip", type: "item" }
+			]
+			title: "Pigtail and Cryopackage"
+			x: 40.0d
+			y: 40.0d
+		}
+		{
+			dependencies: ["56BC7ACF8C126952"]
+			description: ["The last stage mounts the chip on two optical assemblies: the &6Optical Computer&r, the circuit of the whole age. A quantum photonic chip and two optical assemblies in the Photonic Integration Hall (circuit 3). Every UEV circuit slot. To automate the whole line, keep the fab in one connected block of machines with wafers moving by ME, the hall as the last stop, and one chest of computers at the end. Give each wafer stage its own pattern provider and a two-wafer buffer, route the byproducts (silicon dust, water, hydrogen) to storage or a void, and craft computers only as the hulls ask for them."]
+			icon: "gtnn:optical_computer"
+			id: "308108C0C3698D6D"
+			rewards: [{ id: "5C1C1720239C56C8", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "316BD37F9FB5CB8D", item: "gtnn:optical_computer", type: "item" }]
+			title: "The Optical Computer Line"
+			x: 43.0d
+			y: 40.0d
 		}
 		{
 			dependencies: ["7939EEE351E35C70"]
@@ -822,6 +1021,91 @@
 			y: 17.5d
 		}
 		{
+			dependencies: ["74EDD2F1292FA7D3"]
+			description: ["Calcium-48 is the bullet of every run. It is so rare that the &6Calutron&r needs two passes to enrich it. Calcium chloride through the Calutron twice (circuits 1 and 2); a mixer with tantalum foil for the crucible load; an assembler with platinum foil and argon for the oven charge; a reactor with helium for the plasma bunch (two per charge); and an assembler with a UV emitter and an SRF cryomodule for the beam charges. The Superheavy Factory runs: every irradiation recipe takes a beam charge (the heaviest runs use a titanium-50 charge or nickel-64 instead). The Calutron is slow, so run several and recycle the depleted chloride."]
+			hide_dependency_lines: true
+			icon: "grindless:ca48_beam"
+			id: "55A93A551874F57D"
+			rewards: [{ id: "339D6D657FA027CC", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1CD3FB976DD2589E", item: "grindless:ca48_oven_charge", type: "item" }
+				{ id: "7D4B5924F8BD5C49", item: "grindless:ca48_beam", type: "item" }
+			]
+			title: "The Calcium-48 Beam"
+			x: 31.0d
+			y: -24.0d
+		}
+		{
+			dependencies: ["72B06FB4F8A19AD6", "5BA764E947B7B979"]
+			description: ["The beam needs something to hit. Plutonium-244 is plated onto a target that the Superheavy Factory holds in the beam. Plutonium-244 oxide dissolved in nitric acid into a glass ampoule (chemical reactor), then argon, two aluminium foils and a duranium plate in an assembler (circuit 22). Flerovium: calcium-48 on plutonium-244 is the first irradiation recipe of the ladder. The Calutron separates the plutonium; keep ampoules and targets by ME. The target is used in the run, so plan one per irradiation."]
+			hide_dependency_lines: true
+			icon: "grindless:plutonium_244_target"
+			id: "1F3898DDD8F889D0"
+			rewards: [{ id: "39534B29F483751E", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5E09B0D8EDDE5F4F", item: "grindless:pu244_plating_ampoule", type: "item" }
+				{ id: "37DE16E1481E9050", item: "grindless:plutonium_244_target", type: "item" }
+			]
+			title: "The Plutonium-244 Target"
+			x: 34.5d
+			y: -22.0d
+		}
+		{
+			dependencies: ["79361740BE1544E3"]
+			description: ["A heavier target than plutonium makes a heavier element, and it does not hold still: a rotating wheel spreads the heat of the beam. This one carries berkelium. Berkelium nitrate and oxygen in a chemical reactor (circuit 22) for berkelium oxide and recovered nitric acid; a target wheel blank from titanium plates and foils in an assembler (circuit 21); both in an assembler for the wheel. Tennessine. The run gives back an activated wheel, and the hot cell returns the blank, so the wheel is a loop and not a cost per run. Return activated wheels to the hot cell by ME and refill them; keep two wheels so one cools while the other runs."]
+			hide_dependency_lines: true
+			icon: "grindless:target_wheel"
+			id: "123D8AA70C72EF13"
+			rewards: [{ id: "727651C6F1C0B19C", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1BB5B9CEAFE6A8E1", item: "grindless:target_wheel_blank", type: "item" }
+				{ id: "35C6A5CE376827FB", item: "grindless:target_wheel", type: "item" }
+			]
+			title: "The Berkelium Target Wheel"
+			x: 34.5d
+			y: -20.0d
+		}
+		{
+			dependencies: ["55A93A551874F57D", "1F3898DDD8F889D0"]
+			description: ["The beam hits the plutonium and a few flerovium atoms recoil out in a gas. The Superheavy Factory, which also runs the recoil separation, picks them out of it through a membrane. Helium, the plutonium-244 target, a calcium-48 beam charge and a Nb3Sn SRF cavity (circuit 1) for the recoil gas; then the gas and an etched membrane (circuit 1) for the atoms. The membrane is a polycarbonate foil ion-tracked with californium-252 and etched with hydrochloric acid and sodium hydroxide. Flerovium for the superheavy census, and the same two-step pattern (irradiate, then separate) for every heavier element. Membranes and foils by ME; the output is a handful of atoms per run, so send them directly to the chemistry lab."]
+			icon: "grindless:flerovium_atoms"
+			id: "1AE5961A36814910"
+			rewards: [{ id: "50F6C652F4456836", type: "xp", xp: 160 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7A5E89D633AEE81C", item: "grindless:ion_tracked_foil", type: "item" }
+				{ id: "77D30E10920F0DA5", item: "grindless:etched_membrane", type: "item" }
+				{ id: "3C33A6527B7A2868", item: "grindless:flerovium_atoms", type: "item" }
+			]
+			title: "Flerovium Atoms"
+			x: 38.0d
+			y: -23.0d
+		}
+		{
+			dependencies: ["1AE5961A36814910", "123D8AA70C72EF13", "7997AD3A03140BA9"]
+			description: ["Tennessine comes from the berkelium wheel, flerovium from the plutonium target. The chemistry lab seals the tennessine atoms in a capsule and records all of them in the census. Tennessine atoms, a sealed capsule and silica aerogel (circuit 1) for the sample; flerovium, livermorium, moscovium and oganesson atoms with gold foil (circuit 2) for the census. The tennessine sample that the Warp Gate hold keeps stored, and the census that later lines spend. Sort atoms by element, one chest each; keep capsules and aerogel stocked. The census is a one-off per use, so brew it when a line asks."]
+			hide_dependency_lines: true
+			icon: "grindless:superheavy_census"
+			id: "1891FDEB24254262"
+			rewards: [{ id: "196E5EDD005DB97A", type: "xp", xp: 180 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "189CD3E3BD503353", item: "grindless:tennessine_sample", type: "item" }
+				{ id: "5C61FC731819C5F3", item: "grindless:superheavy_census", type: "item" }
+			]
+			title: "Tennessine and the Census"
+			x: 41.5d
+			y: -21.5d
+		}
+		{
 			dependencies: ["74B8B99C87A3BABC"]
 			description: [
 				"Heavy isotopes, megabar presses and magnets."
@@ -877,7 +1161,7 @@
 		}
 		{
 			dependencies: ["79361740BE1544E3"]
-			description: ["The &6Heavy Ion Cyclotron&r accelerates calcium-48 until it can fuse with a plutonium target. Two UHV hulls, three UV sensors, three UV field generators, a Nb3Sn cavity, a target wheel, calcium-48 beam charges, any UHV circuit and the stable casing; the Calutron is its research. Atoms of flerovium and heavier, which the recoil separator catches. Beam and target arrive by ME; the output is a few atoms, so route it straight to the separator."]
+			description: ["The &6Superheavy Factory&r accelerates calcium-48 until it can fuse with a plutonium target, then picks the few new atoms out of the beam on the same line. Four UHV hulls, eight UV sensors, seven UV field generators, fifteen UHV circuits, seven calcium-48 beams, three target wheels, three Nb3Sn cavities, fifteen polycarbonate foils and the stable casing; the Calutron is its research. A very large structure (31x11x47), and GTM's Terminal places it in three passes. Irradiation and recoil separation in one machine: counted atoms of flerovium and heavier, ready for the chemistry lab. Beam, target, membranes and foils arrive by ME; sort the few atoms by element."]
 			icon: "gtceu:heavy_ion_cyclotron"
 			id: "5BA764E947B7B979"
 			rewards: [{ id: "53BCABF510A06DA8", type: "xp", xp: 120 }]
@@ -887,29 +1171,13 @@
 				{ id: "1F940BF3B344C423", item: "gtceu:heavy_ion_cyclotron", type: "item" }
 				{ id: "52A320958EBC388E", item: "gtceu:stable_machine_casing", type: "item" }
 			]
-			title: "Heavy Ion Cyclotron"
+			title: "Superheavy Factory"
 			x: 18.0d
 			y: -14.75d
 		}
 		{
 			dependencies: ["5BA764E947B7B979"]
-			description: ["The &6Recoil Separator&r picks the few new atoms out of the beam, in the milliseconds they live. Two UHV hulls, three UV sensors, three UV field generators, a Nb3Sn cavity, three etched membranes, two ion-tracked foils, any UHV circuit and the stable casing; the Heavy Ion Cyclotron is its research. Counted superheavy atoms, ready for the chemistry lab. Link it to the cyclotron by pipe and hatch; sort the atoms by element."]
-			icon: "gtceu:recoil_separator"
-			id: "77D53467B126D5EE"
-			rewards: [{ id: "121C1B76AC1BE722", type: "xp", xp: 120 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "3D96FDD271409FA1", item: "gtceu:recoil_separator", type: "item" }
-				{ id: "712DA0136A61369D", item: "gtceu:stable_machine_casing", type: "item" }
-			]
-			title: "Recoil Separator"
-			x: 24.5d
-			y: -15.0d
-		}
-		{
-			dependencies: ["77D53467B126D5EE"]
-			description: ["The &6Superheavy Chemistry Lab&r studies a handful of atoms before they decay. Two UHV hulls, three UV sensors, three UV field generators, three sealed capsules, a polycarbonate foil, an etched membrane, any UHV circuit and the stable casing; the Recoil Separator is its research. The tennessine sample and the superheavy census, which the Warp Gate hold and the later lines ask for. Atoms come by hatch from the separator; log the results, then discard the decayed rest."]
+			description: ["The &6Superheavy Chemistry Lab&r studies a handful of atoms before they decay. Four UHV hulls, eight UV sensors, eight UV field generators, sixteen UHV circuits, eight sealed capsules, four polycarbonate foils, four etched membranes and the stable casing; the Superheavy Factory is its research. The tennessine sample and the superheavy census, which the Warp Gate hold and the later lines ask for. Atoms come by hatch from the Superheavy Factory; log the results, then discard the decayed rest."]
 			icon: "gtceu:superheavy_chemistry_lab"
 			id: "7997AD3A03140BA9"
 			rewards: [{ id: "565E8472C7FE5E24", type: "xp", xp: 120 }]
@@ -936,7 +1204,7 @@
 		}
 		{
 			dependencies: ["1BE00654ED22DDB6"]
-			description: ["The &6Megabar Press&r squeezes a sample between diamond anvils to a million atmospheres. Two UHV hulls, two UV pistons, three LaY foils, three ammonia borane charges, a nanodiamond pellet, any UHV circuit and the robust casing. Superhydrides, which hold their superconducting state under pressure. Feed samples and nanotwinned diamond by ME; anvils wear, so keep spares."]
+			description: ["The &6Megabar Press&r squeezes a sample between diamond anvils to a million atmospheres. Seven UHV hulls, twenty-one UHV pistons, motors and pumps each, twenty-seven UHV circuits, thirteen LaY foils, thirteen ammonia borane charges, seven nanodiamond pellets and the robust casing. Superhydrides, which hold their superconducting state under pressure. Feed samples and nanotwinned diamond by ME; anvils wear, so keep spares."]
 			icon: "gtceu:megabar_press"
 			id: "108A7CEF368AEE45"
 			rewards: [{ id: "71F5485184FAA33B", type: "xp", xp: 120 }]
@@ -963,7 +1231,7 @@
 		}
 		{
 			dependencies: ["1BE00654ED22DDB6"]
-			description: ["The &6Electron Beam Furnace&r melts metal in a vacuum with a beam, so it comes out purer than a coil could make it. Two UHV hulls, three UV emitters, three SRF cryomodules, six SRF cavities, two near-net neutronium gears, any UHV circuit and the clean casing. Six-nines hafnium and tantalum for the single-crystal foundry. Feed bars by ME; the vacuum pump has a hatch of its own."]
+			description: ["The &6Electron Beam Furnace&r melts metal in a vacuum with a beam, so it comes out purer than a coil could make it. Two UHV hulls, four UV emitters, eight UHV circuits, four SRF cryomodules, eight SRF cavities, three near-net neutronium gears and the clean casing. Six-nines hafnium and tantalum for the single-crystal foundry. Feed bars by ME; the vacuum pump has a hatch of its own."]
 			icon: "gtceu:electron_beam_furnace"
 			id: "5BD47CE42EDF75A2"
 			rewards: [{ id: "30FFB5CB6AF66CBA", type: "xp", xp: 120 }]
@@ -979,7 +1247,7 @@
 		}
 		{
 			dependencies: ["5BD47CE42EDF75A2"]
-			description: ["The &6Single-Crystal Foundry&r pulls a metal blade as one grain, with no boundaries to fail. Two UHV hulls, three UV robot arms, an SRF cryomodule, three SRF cavities, six neutronium gears, any UHV circuit and the heatproof casing; the pure metal comes from the Electron Beam Furnace. The single-crystal blade: a turbine wheel of these survives a hot core. Pure metal by ME; keep a stock of blanks and send blades on by ME."]
+			description: ["The &6Single-Crystal Foundry&r pulls a metal blade as one grain, with no boundaries to fail. Five UHV hulls, eight UV robot arms, sixteen UHV circuits, four SRF cryomodules, eight SRF cavities, seventeen near-net neutronium gears and the heatproof casing; the pure metal comes from the Electron Beam Furnace. The single-crystal blade: a turbine wheel of these survives a hot core. Pure metal by ME; keep a stock of blanks and send blades on by ME."]
 			icon: "gtceu:single_crystal_foundry"
 			id: "7674F530D0218D45"
 			rewards: [{ id: "3E1C6FCD826E5E70", type: "xp", xp: 120 }]
@@ -1006,7 +1274,7 @@
 		}
 		{
 			dependencies: ["1BE00654ED22DDB6"]
-			description: ["The &6Nitride Magnet Works&r makes a magnet of iron and nitrogen, stronger than any rare earth. Two UHV hulls, three UV motors, three HfTaC-N dusts, an FFKM seal, a Ta2O5 dust, any UHV circuit and the heatproof casing. Bonded magnets for the UEV motor and the Mk2 drive. Iron and nitrogen come by ME and pipe; bonding runs on a timer."]
+			description: ["The &6Nitride Magnet Works&r makes a magnet of iron and nitrogen, stronger than any rare earth. Four UHV hulls, ten UHV motors, pumps and robot arms each, thirteen UHV circuits, seven HfTaC dusts, three FFKM seals, three Ta2O5 dusts and the heatproof casing. Bonded magnets for the UEV motor and the Mk2 drive. Iron and nitrogen come by ME and pipe; bonding runs on a timer."]
 			icon: "gtceu:nitride_magnet_works"
 			id: "1128B01901C86B97"
 			rewards: [{ id: "56255DB55EF43917", type: "xp", xp: 120 }]
@@ -1033,7 +1301,7 @@
 		}
 		{
 			dependencies: ["7939EEE351E35C70"]
-			description: ["The &6SiC Fibre Plant&r spins silicon carbide into a fibre as strong as steel and a quarter of the weight. Two UHV hulls, two UV pumps, a UV robot arm, three polycarbosilane dusts, a HfTaC dust, an FFKM seal, any UHV circuit and the clean casing; the Nitride Magnet Works is its research. Fibre for the SiC composite plates that the CVI furnace infiltrates. Feed the precursor by pipe; fibre rolls out by ME."]
+			description: ["The &6SiC Fibre Plant&r spins silicon carbide into a fibre as strong as steel and a quarter of the weight. Three UHV hulls, nine UHV pumps, eight robot arms, eight conveyor modules, eleven UHV circuits, six polycarbosilane dusts, three HfTaC dusts, three FFKM seals and the clean casing; the Nitride Magnet Works is its research. Fibre for the SiC composite plates that the CVI furnace infiltrates. Feed the precursor by pipe; fibre rolls out by ME."]
 			icon: "gtceu:sic_fibre_plant"
 			id: "34F0084064B3AF4F"
 			rewards: [{ id: "398CDAE86141C295", type: "xp", xp: 120 }]
@@ -1060,7 +1328,7 @@
 		}
 		{
 			dependencies: ["34F0084064B3AF4F"]
-			description: ["The &6CVI Furnace&r fills a woven preform with gas that deposits carbide in the gaps. Two UHV hulls, two UV pumps, a UV emitter, two SiC preforms, two tungsten preforms, an FFKM seal, any UHV circuit and the heatproof casing; the SiC Fibre Plant is its research. SiC composite plates, and the HfTaCN coil that the stellar forge uses. Preforms arrive by ME; the cycle is long, so run several furnaces."]
+			description: ["The &6CVI Furnace&r fills a woven preform with gas that deposits carbide in the gaps. Four UHV hulls, eleven UHV pumps, ten UHV emitters and sensors each, fourteen UHV circuits, four SiC preforms, four tungsten preforms, three FFKM seals and the heatproof casing; the SiC Fibre Plant is its research. SiC composite plates, and the HfTaCN coil that the stellar forge uses. Preforms arrive by ME; the cycle is long, so run several furnaces."]
 			icon: "gtceu:cvi_furnace"
 			id: "7B6FD0C43D93BA99"
 			rewards: [{ id: "5570EFE8ECF17B72", type: "xp", xp: 120 }]
@@ -1087,7 +1355,7 @@
 		}
 		{
 			dependencies: ["76EFA041DAC4B333", "19174331BF47A9B1"]
-			description: ["The &6Stellar Forge&r is a furnace that holds a fragment of a star. A UEV hull, eleven electric blast furnaces, twenty-three HfTaCN coil blocks, four UEV field generators, five UEV pumps, three UEV sensors, three ULE cavities, three HfTaCN heating elements and any UEV circuit. The hottest recipes in the pack, which the Mk4 plasma line runs on. Fuel and heat sinks by ME; plan for the byproducts before you start."]
+			description: ["The &6Stellar Forge&r is a furnace that holds a fragment of a star. A UEV hull, eleven electric blast furnaces, twenty-three HfTaCN coil blocks, four UEV field generators, five UEV pumps, three UEV sensors, three ULE cavities, three HfTaCN heating elements and six UEV circuits. It is a large structure (15x23x15): GTM's Terminal places about 2,300 per pass and this one takes two. The hottest recipes in the pack, which the Mk4 plasma line runs on. Fuel and heat sinks by ME; plan for the byproducts before you start."]
 			icon: "gtceu:stellar_forge"
 			id: "3875C96B236BA596"
 			rewards: [{ id: "5D071458EA723917", type: "xp", xp: 150 }]
@@ -1100,7 +1368,7 @@
 		}
 		{
 			dependencies: ["3C3FC8DE94FAC5EE"]
-			description: ["The &6SNSPD Foundry&r grows a nanowire detector that counts single photons. Two UHV hulls, three UV sensors, a float-zone silicon wafer, two SiN Waveguide Chips, a silicon drift detector, any UHV circuit and the photonic casing. The single-photon detector, which the UEV sensor, the quantum photonic chip and the repeater node take. Wafers and chips by ME and superfluid helium by pipe for the cold stage; send finished detectors on by ME."]
+			description: ["The &6SNSPD Foundry&r grows a nanowire detector that counts single photons. Four UHV hulls, ten UHV sensors, ten UHV emitters, eleven UHV pumps, fourteen UHV circuits, three float-zone silicon wafers, four SiN Waveguide Chips, three silicon drift detectors and the photonic casing. It takes the detector stages of the Photonic Fab. The single-photon detector, which the UEV sensor, the quantum photonic chip and the repeater node take. Wafers and chips by ME and superfluid helium by pipe for the cold stage; send finished detectors on by ME."]
 			icon: "gtceu:snspd_foundry"
 			id: "1DCFFEC97F5A28AF"
 			rewards: [{ id: "3EABC6E55043A77A", type: "xp", xp: 120 }]
@@ -1116,7 +1384,7 @@
 		}
 		{
 			dependencies: ["1DCFFEC97F5A28AF"]
-			description: ["The &6Van der Waals Stacker&r lays one atomic film on another, in the order the design asks for. Two UHV hulls, three UV robot arms, hBN films, a graphene film, any UHV circuit and the photonic casing. The graphene modulator and the hBN emitter chip. Films by ME; the stacker returns finished chips in a chest."]
+			description: ["The &6Van der Waals Stacker&r lays one atomic film on another, in the order the design asks for. Three UHV hulls, nine UHV robot arms, nine conveyor modules, nine pistons, eleven UHV circuits, three hBN films, five annealed hBN films, two graphene films and the photonic casing. It lays the films of the Photonic Fab. The graphene modulator and the hBN emitter chip. Films by ME; the stacker returns finished chips in a chest."]
 			icon: "gtceu:vdw_stacker"
 			id: "3EEACFBDD09FDD21"
 			rewards: [{ id: "162C0A1ADE83DA1A", type: "xp", xp: 120 }]
@@ -1132,7 +1400,7 @@
 		}
 		{
 			dependencies: ["1DCFFEC97F5A28AF", "3EEACFBDD09FDD21", "5FBB5CC4F79C7D79", "750B64193AFA4A16", "3C3FC8DE94FAC5EE"]
-			description: ["The &6Photonic Integration Hall&r bonds waveguides, sources and detectors into one optical chip. Two UHV hulls, three UV emitters, a quantum dot source, a graphene modulator, two SiN Waveguide Chips, any UHV circuit and the photonic casing; the Van der Waals Stacker is its research. The waveguide circuit, the quantum photonic chip and the optical computer. Parts in matched counts by ME; keep a stock of finished chips and send them to the assembler."]
+			description: ["The &6Photonic Integration Hall&r bonds waveguides, sources and detectors into one optical chip. Five UHV hulls, thirteen UHV emitters, thirteen sensors, thirteen motors, seventeen UHV circuits, four quantum dot sources, four graphene modulators, five SiN Waveguide Chips and the photonic casing; the Van der Waals Stacker is its research. It is a large structure (23x11x23): GTM's Terminal places about 2,300 per pass and this one takes two. The waveguide circuit, the quantum photonic chip and the optical computer. Parts in matched counts by ME; keep a stock of finished chips and send them to the assembler."]
 			icon: "gtceu:photonic_integration_hall"
 			id: "1AC90115EC98790D"
 			rewards: [{ id: "75B303C7904D000F", type: "xp", xp: 150 }]
@@ -1149,7 +1417,7 @@
 		}
 		{
 			dependencies: ["7939EEE351E35C70"]
-			description: ["The &6Helium-3 Polariser&r aligns the spin of each nucleus, so more of them fuse. Two UHV hulls, three UV emitters, two 1083 nm lasers, three Wf/W tiles, a SiC/SiC plate, any UHV circuit and the clean casing. Polarised helium-3, the fuel of the Mk4 ring. Helium-3 by pipe; keep the polarised stock sealed and ready."]
+			description: ["The &6Helium-3 Polariser&r aligns the spin of each nucleus, so more of them fuse. Four UHV hulls, ten UHV emitters and sensors each, eleven UHV pumps, fourteen UHV circuits, four 1083 nm lasers, seven Wf/W tiles, three SiC/SiC plates and the clean casing. Polarised helium-3, the fuel of the Mk4 ring. Helium-3 by pipe; keep the polarised stock sealed and ready."]
 			icon: "gtceu:helium3_polariser"
 			id: "15578A4882F50B8B"
 			rewards: [{ id: "31D04D6B046A8987", type: "xp", xp: 120 }]
@@ -1176,7 +1444,7 @@
 		}
 		{
 			dependencies: ["15578A4882F50B8B", "76EFA041DAC4B333", "19174331BF47A9B1"]
-			description: ["The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes. A UEV hull, five UEV emitters, four UEV sensors, four UEV field generators, any UEV circuit, two UEV fusion casings, two HfTaCN coil blocks and a Wf/W tile; the Helium-3 Polariser is its research. The plasma and burn quests that follow it. Fuel and coolant by pipe; build the plant before you light it."]
+			description: ["The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes. A UEV hull, five UEV emitters, four UEV sensors, four UEV field generators, nine UEV circuits, two UEV fusion casings, two HfTaCN coil blocks and a Wf/W tile; the Helium-3 Polariser is its research. It is a large structure (33x9x33) and GTM's Terminal places about 2,300 per pass, so plan two. The plasma and burn quests that follow it. Fuel and coolant by pipe; build the plant before you light it."]
 			icon: "gtceu:uev_fusion_reactor"
 			id: "3C4381FD6FA32403"
 			rewards: [{ id: "1EB7C44FBD8DC722", type: "xp", xp: 180 }]
@@ -1192,7 +1460,7 @@
 		}
 		{
 			dependencies: ["147A35DB262693FF"]
-			description: ["The &6Quantum Gas Lab&r holds a cloud of atoms a millionth of a degree above zero. Two UHV hulls, three UV sensors, a lithium and a potassium cooling laser, an ULE cavity, any UHV circuit and the photonic casing; the atom interferometer is its research. The degenerate EOS model, and cold atoms for the entanglement station. Atoms by hatch and lasers by ME; the lab is slow and small, so run two."]
+			description: ["The &6Quantum Gas Lab&r holds a cloud of atoms a millionth of a degree above zero. Eight UHV hulls, sixteen UV sensors, thirty-two UHV circuits, eight lithium and seven potassium cooling lasers, eight ULE cavities and the photonic casing; the atom interferometer is its research. The degenerate EOS model, and cold atoms for the entanglement station. Atoms by hatch and lasers by ME; the lab is slow and small, so run two."]
 			icon: "gtceu:quantum_gas_lab"
 			id: "336F09E29287CDEA"
 			rewards: [{ id: "54AF3D2F84B0FEB8", type: "xp", xp: 120 }]
@@ -1230,7 +1498,7 @@
 		}
 		{
 			dependencies: ["336F09E29287CDEA", "1DCFFEC97F5A28AF"]
-			description: ["The &6Entanglement Station&r ties two photons together across a distance. Two UHV hulls, three UV emitters, two SPDC sources, two hollow-core fibres, an SNSPD, any UHV circuit and the photonic casing; the Quantum Gas Lab is its research. The quantum repeater node, which the wireless hatches take. Parts by ME; send the nodes on by ME."]
+			description: ["The &6Entanglement Station&r ties two photons together across a distance. Eight UHV hulls, sixteen UV emitters, thirty-two UHV circuits, eight SPDC sources, eight hollow-core fibres, eight SNSPDs and the photonic casing; the Quantum Gas Lab is its research. The quantum repeater node, which the wireless hatches take. Parts by ME; send the nodes on by ME."]
 			hide_dependency_lines: true
 			icon: "gtceu:entanglement_station"
 			id: "5D8B9A9839432298"
@@ -1296,7 +1564,7 @@
 		}
 		{
 			dependencies: ["32730EE4F1B2A321", "19174331BF47A9B1"]
-			description: ["The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal. A UEV hull, five UEV pumps, four fluid regulators, three UEV pistons, three FFKM seals, a Ta2O5 dust, any UEV circuit and the inert casing; the Barnard core drill is its research. Iron pentacarbonyl and pure iron, for the nitride magnets. Contain the carbon monoxide; keep the loop sealed and vented to a scrubber."]
+			description: ["The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal. Two UEV hulls, fourteen UEV circuits, seven UEV pumps and fluid regulators each, five UEV pistons, five FFKM seals, two Ta2O5 dusts and the inert casing; the Barnard core drill is its research. Iron pentacarbonyl and pure iron, for the nitride magnets. Contain the carbon monoxide; keep the loop sealed and vented to a scrubber."]
 			icon: "gtceu:carbonyl_refinery"
 			id: "3664E92DBC4A97AB"
 			rewards: [{ id: "1F78323E49E5E7A6", type: "xp", xp: 150 }]
@@ -1323,7 +1591,7 @@
 		}
 		{
 			dependencies: ["120B4D6B667EAF26", "19174331BF47A9B1", "1DCFFEC97F5A28AF"]
-			description: ["The &6White Dwarf Spectrograph&r reads a dead star's light and from it the mass and radius. A UEV hull, four UEV sensors, five UEV emitters, three UEV pumps, an ULE cavity, three SNSPDs, two nuclear clocks, any UEV circuit and the photonic casing. The mass-radius chart, made in Sirius B orbit, and the Degenerate Harvester. The station asks for little by ME; keep a stock of charts."]
+			description: ["The &6White Dwarf Spectrograph&r reads a dead star's light and from it the mass and radius. A UEV hull, four UEV sensors, five UEV emitters, three UEV pumps, an ULE cavity, three SNSPDs, two nuclear clocks, any UEV circuit and the photonic casing. The mass-radius chart, made in Sirius B orbit, and the Degenerate Works. The station asks for little by ME; keep a stock of charts."]
 			hide_dependency_lines: true
 			icon: "gtceu:white_dwarf_spectrograph"
 			id: "565457BFBC2B7232"
@@ -1340,7 +1608,7 @@
 		}
 		{
 			dependencies: ["565457BFBC2B7232", "7AD63131D4FD4BBF"]
-			description: ["The &6Degenerate Harvester&r takes matter from a white dwarf, in which atoms are crushed together. A UEV hull, five UEV robot arms, five UEV pumps, three UEV sensors, a degenerate EOS model, a mass-radius chart, two hollow-core fibres, any UEV circuit and the degenerate containment casing; the spectrograph is its research. Degenerate matter, made in Sirius B orbit, which the Containment Works bottles. Put the plant behind a safe containment loop; never route this matter by plain pipe."]
+			description: ["The &6Degenerate Works&r takes matter from a white dwarf and bottles it into a pellet that can be carried safely. A UEV hull, five UEV arms, five pumps, three sensors, five emitters, three regulators, nine UEV circuits, an EOS model, a mass-radius chart, two hollow-core fibres, two Faraday isolators, two SPDC sources and the degenerate containment casing; the spectrograph is its research. It is a large structure (21x15x29), so GTM's Terminal places it in two passes. Degenerate matter, made in Sirius B orbit, which the same works bottles at once: it runs the degenerate containment recipes itself. Keep the plant behind a containment loop; never pipe this matter. Cells and pellets move by ME."]
 			icon: "gtceu:degenerate_harvester"
 			id: "3970BC63BB8C9A9F"
 			rewards: [{ id: "745528F2ED9D2076", type: "xp", xp: 150 }]
@@ -1350,26 +1618,13 @@
 				{ id: "51698E7020312155", item: "gtceu:degenerate_harvester", type: "item" }
 				{ id: "580B7DC1EC7E017A", item: "grindless:degenerate_containment_casing", type: "item" }
 			]
-			title: "Degenerate Harvester"
+			title: "Degenerate Works"
 			x: 37.25d
 			y: 0.5d
 		}
 		{
 			dependencies: ["3970BC63BB8C9A9F"]
-			description: ["The &6Containment Works&r bottles degenerate matter into a pellet that can be carried safely. A UEV hull, five UEV emitters, five UEV pumps, three fluid regulators, two Faraday isolators, two SPDC sources, any UEV circuit and the degenerate containment casing; the Degenerate Harvester is its research. The degenerate pellet, which the UEV field generator and the Warp Gate hold take. Feed the matter from the harvester by hatch and an exotic matter cell by ME; ship pellets by ME."]
-			icon: "gtceu:containment_works"
-			id: "7F1047B6CDE89AFA"
-			rewards: [{ id: "33801BB8BE900B1E", type: "xp", xp: 150 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [{ id: "1499500AF70755CE", item: "gtceu:containment_works", type: "item" }]
-			title: "Containment Works"
-			x: 39.25d
-			y: -0.75d
-		}
-		{
-			dependencies: ["7F1047B6CDE89AFA"]
-			description: ["The pellet is taught in &6A White Dwarf in a Bottle&r; tick this once the Containment Works runs."]
+			description: ["The pellet is taught in &6A White Dwarf in a Bottle&r; tick this once the Degenerate Works runs."]
 			icon: "grindless:degenerate_pellet"
 			id: "3D4A477227A97A0D"
 			rewards: [{ id: "5D228A727C3D2C7A", type: "xp", xp: 20 }]
@@ -1481,32 +1736,6 @@
 		}
 		{
 			dependencies: ["1306598B19053CB3"]
-			description: ["The &6WSi Wafer&r is a wafer stage on the way to the WSi Nanowire Wafer. Made in the &6SNSPD Fabrication&r from the FZ Silicon Wafer and Tungsten Silicide, with argon, in the cleanroom. The WSi Nanowire Wafer in the SNSPD Fabrication. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
-			icon: "grindless:wsi_wafer"
-			id: "32D97A2A6D5A5055"
-			rewards: [{ id: "12C8059C47D2D8E4", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "3040864870F0CBC4", item: "grindless:wsi_wafer", type: "item" }]
-			title: "WSi Wafer"
-			x: 20.25d
-			y: 23.75d
-		}
-		{
-			dependencies: ["32D97A2A6D5A5055"]
-			description: ["The &6Nanowire Wafer&r is a wafer stage on the way to the SNSPD Die. Made in the &6SNSPD Fabrication&r from the WSi Wafer, with PMMA resist, in the cleanroom. The SNSPD Die in the SNSPD Fabrication. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:wsi_nanowire_wafer"
-			id: "7859F523EEA67557"
-			rewards: [{ id: "740067C24EA71CCA", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "50D8967F18E6F55B", item: "grindless:wsi_nanowire_wafer", type: "item" }]
-			title: "Nanowire Wafer"
-			x: 22.25d
-			y: 23.75d
-		}
-		{
-			dependencies: ["1306598B19053CB3"]
 			description: ["The &6Oxidised Wafer&r is a wafer stage on the way to the Trenched Oxide Wafer. Made in the &6Electric Blast Furnace&r from the FZ Silicon Wafer, with oxygen, in the cleanroom. The Trenched Oxide Wafer and SDD Implanted Wafer in the Synchrotron. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
 			icon: "grindless:oxidised_wafer"
 			id: "32C9059DBD06A4D8"
@@ -1517,59 +1746,6 @@
 			title: "Oxidised Wafer"
 			x: 20.25d
 			y: 25.25d
-		}
-		{
-			dependencies: ["32C9059DBD06A4D8"]
-			description: ["The &6SiN-Coated Wafer&r is a wafer stage on the way to the Sin Lithographed Wafer. Made in the &6Chemical Reactor&r from the Oxidised Wafer, with silane, in the cleanroom. The Sin Lithographed Wafer and LN On Sin Wafer in the Synchrotron. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
-			icon: "grindless:sin_coated_wafer"
-			id: "1DF169CA139FB281"
-			rewards: [{ id: "3CD1CDBD9FB42C9C", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "15BB4EC89938FEE5", item: "grindless:sin_coated_wafer", type: "item" }]
-			title: "SiN-Coated Wafer"
-			x: 22.25d
-			y: 25.25d
-		}
-		{
-			dependencies: ["1DF169CA139FB281"]
-			description: ["The &6Lithographed Wafer&r is a wafer stage on the way to the Sin Etched Wafer. Made in the &6Synchrotron&r from the SiN-Coated Wafer, with PMMA resist, in the cleanroom. The Sin Etched Wafer and Silicon in the Chemical Reactor. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
-			icon: "grindless:sin_lithographed_wafer"
-			id: "701D504FE8EBCFE6"
-			rewards: [{ id: "75DCDF5EA79AA041", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "158AFF033B2E334B", item: "grindless:sin_lithographed_wafer", type: "item" }]
-			title: "Lithographed Wafer"
-			x: 24.25d
-			y: 25.25d
-		}
-		{
-			dependencies: ["701D504FE8EBCFE6"]
-			description: ["The &6Etched Wafer&r is a wafer stage on the way to the Annealed Sin Chip. Made in the &6Chemical Reactor&r from the Lithographed Wafer, with distilled water, in the cleanroom. The Annealed Sin Chip in the Photonic Foundry. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
-			icon: "grindless:sin_etched_wafer"
-			id: "527B02603949D70D"
-			rewards: [{ id: "7FC83C237C22DED2", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "19FB239AD15985BE", item: "grindless:sin_etched_wafer", type: "item" }]
-			title: "Etched Wafer"
-			x: 26.25d
-			y: 25.25d
-		}
-		{
-			dependencies: ["7797EC240C637C57"]
-			description: ["The &6Micropillar Wafer&r is a wafer stage on the way to the QD Source. Made in the &6Chemical Reactor&r from the InAs QD Wafer, with distilled water, in the cleanroom. The QD Source in the Assembler. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
-			hide_dependency_lines: true
-			icon: "grindless:micropillar_wafer"
-			id: "33CC4AE3620B47B7"
-			rewards: [{ id: "3FC80B59AC219440", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "582737FBBA170E7A", item: "grindless:micropillar_wafer", type: "item" }]
-			title: "Micropillar Wafer"
-			x: 18.25d
-			y: 28.25d
 		}
 		{
 			dependencies: ["32C9059DBD06A4D8"]
@@ -1613,7 +1789,7 @@
 		}
 		{
 			dependencies: ["7E4468D1E89FEE66"]
-			description: ["The &6Electroded Wafer&r is a wafer stage on the way to the Ppktp. Made in the &6Assembler&r from the KTP Wafer and Gold Foil, with argon, in the cleanroom. The Ppktp in the Polarizer. A pattern provider on the machine of the step before keeps it supplied."]
+			description: ["The &6Electroded Wafer&r is a wafer stage the poled crystal of the SPDC source. Made in the &6Assembler&r from the KTP Wafer and Gold Foil, with argon, in the cleanroom. The SPDC source. A pattern provider on the machine of the step before keeps it supplied."]
 			icon: "grindless:ktp_electroded_wafer"
 			id: "1BFEE060CEDA0D2C"
 			rewards: [{ id: "514762AC580B6912", type: "xp", xp: 50 }]

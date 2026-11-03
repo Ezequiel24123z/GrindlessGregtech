@@ -6,6 +6,7 @@
 //     p <key> [<type>]          producers only (optionally of one recipe type); c <key> [<type>]: consumers only
 //     r <recipe id>             one recipe, normalized
 //     t <recipe type> [<text>]  recipes of a type (id contains text)
+//     k <recipe id> [oc=N par=N] [key:::unit...]  one machine's flow per minute and the cost per unit of a product (rate cards)
 //     s <text>                  item and fluid ids containing text
 //
 // Keys: item ids as they are ("gtceu:sulfur_dust") and "fluid:<id>" for fluids ("fluid:gtceu:sulfuric_acid").
@@ -16,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 import { loadDump } from '../../analysis/lib/dump.mjs';
 import { normalizeRecipe } from '../../analysis/lib/normalize.mjs';
 import { prepareConfig } from '../../analysis/lib/model.mjs';
+import { rateOf, perUnit } from './pl-lib.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 // the checkout this folder lives in (tools/quests/processing-lines)
@@ -104,6 +106,18 @@ function run(idx, cmd, args) {
     let k = 0;
     for (const n of idx.recipes.values()) if (n.type === type && (!filter || n.id.includes(filter))) { if (k++ < 200) console.log(describe(n)); }
     console.log(`== ${type} ${filter || ''}: ${k} recipes`);
+  } else if (cmd === 'k') {
+    // k <recipe id> [oc=N] [par=N] [key[:unit]...]: the flow of one machine per minute (the numbers of a rate card), and the
+    // cost per unit of each named product (unit 1000 for a fluid bucket, 1 for an item)
+    const [id, ...rest] = args;
+    const n = idx.recipes.get(id);
+    if (!n) { console.log('no recipe ' + id); return; }
+    const prof = {};
+    const keys = [];
+    for (const a of rest) { const m = /^(oc|par)=(\d+)$/.exec(a); if (m) prof[m[1]] = Number(m[2]); else keys.push(a); }
+    console.log(describe(n));
+    console.log(JSON.stringify(rateOf(n, prof)));
+    for (const k of keys) { const [key, unit] = k.split(':::'); console.log(key, JSON.stringify(perUnit(n, key, Number(unit || (key.startsWith('fluid:') ? 1000 : 1)), prof))); }
   } else if (cmd === 'p' || cmd === 'c') {
     // p <key> [type]: producers only; c <key> [type]: consumers only (optionally of one type)
     const [k, type] = args;

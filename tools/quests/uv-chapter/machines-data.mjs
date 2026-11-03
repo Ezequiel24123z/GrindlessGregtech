@@ -244,16 +244,16 @@ export const QUESTS = [
     'A &6Light Sail&r weighs almost nothing and reflects almost everything, so light alone can push a probe to another star. It is made at the sail line from thin reflective film, in an orbital build with a truss casing. It unlocks the Starchip Fab and the launch. Sails go out by ME, one for each run.',
     [it('grindless:light_sail')]),
   gear('SCFAB', 'starchip_fab', 'Starchip Fab', ['P_SAIL'], 6, 16.5, {
-    for: 'The &6Starchip Fab&r bonds and dices a photonic chip, a qubit and a source into a probe that weighs a gram.',
-    needs: 'Its controller, clean room casing and a filter hood; kerf is voidable.',
-    unlocks: 'The starchip, further along.',
-    automate: 'Parts by ME; dicing waste goes to a void.',
+    for: 'The &6Starchip Fab&r bonds a photonic chip, an NV diamond chip and an americium micro source onto a neutronium wafer and dices out a one-gram starchip. The circuit picks the step: 1 the starchip, 2 the sailcraft (a starchip on a light sail).',
+    needs: 'Its controller in a clean room hall: clean machine casing, stainless steel frames, plascrete, laminated glass, a filter casing ceiling and a gearbox bonding line. One Terminal pass.',
+    unlocks: 'The starchip and the sailcraft that the launcher fires.',
+    automate: 'Parts by ME; the wafer kerf is silicon dust, so loop it back to the silicon line.',
   }, [it(CLEAN)]),
   gear('LAUNCH', 'laser_sail_launcher', 'Laser Sail Launcher', ['SCFAB'], 8, 16.5, {
-    for: 'The &6Laser Sail Launcher&r on the Moon pushes the sail with a beam of light until it leaves the Solar System.',
-    needs: 'Its controller, UV casing and a ring of &6Laser Module Blocks&r.',
+    for: 'The &6Laser Sail Launcher&r works on the Moon only, where no air scatters the beam. Circuit 1 pushes a sailcraft out of the Solar System as a Starshot probe; the heliopause data sets the course and is kept.',
+    needs: 'Its controller in an open-sky array: UV casing, tungsten steel frames and pipe casings, fusion glass, a computer casing as beam director and a checkerboard of 228 &6Laser Module Blocks&r. One Terminal pass; it draws 16 A of UV.',
     unlocks: 'The probe in flight, and the data it sends home.',
-    automate: 'One launch at a time; power it from the network and keep the probes stocked.',
+    automate: 'Each launch spends a fibre laser module at 64 % and returns a spent one for the draw tower: keep sailcraft and modules stocked by ME.',
   }, [it(UVC), it(LASER)], 150),
 
   gear('MFAC', 'mega_factory', 'Mega Factory', ['M_L_FAC'], 2, 18, {
@@ -291,10 +291,10 @@ export const QUESTS = [
     'The &6Sputnik Ice Core&r is a column of nitrogen ice from the glacier, still layered the way it formed.',
     [it('grindless:sputnik_ice_core')]),
   gear('ICES', 'volatile_ice_fractionator', 'Ices Apart', ['P_SPUT', 'P_SAMPLE'], 6, 24, {
-    for: 'The &6Volatile Ice Fractionator&r warms a core a few kelvin at a time and collects each ice as it turns to gas. Its annealing carousel warms a Kuiper sample through its crystallisation at about 140 K, and the trapped noble gases escape.',
-    needs: 'Its controller, the station truss casing, a frostproof column and a cryostat ring for the carousel.',
-    unlocks: 'Nitrogen, methane and carbon monoxide at their sources, and argon, krypton and xenon for the thrusters.',
-    automate: 'Cores and samples in by ME; each gas has its own hatch and tank, and the annealing dust is voidable.',
+    for: 'The &6Volatile Ice Fractionator&r warms a core and collects each ice as it turns to gas. Circuit 1 splits a Sputnik core into nitrogen, carbon monoxide, methane and tholin; 2 a Charon core into water, ammonia and silica; 3 anneals a Kuiper sample at about 140 K, so its noble gases escape.',
+    needs: 'Its controller in a cold tower: station truss casings, titanium frames, laminated glass, frostproof bands, a steel pipe cold finger and a ring of cryostat casings. One Terminal pass.',
+    unlocks: 'The gases at their sources, and the Kuiper noble gas that the cryogenic plant splits into argon, krypton and xenon.',
+    automate: 'Cores and samples in by ME, each fluid to its own hatch. Annealing dust is voided inside the machine.',
   }, [it(TRUSS), it('gtceu:frostproof_machine_casing'), it(CRYOSTAT)]),
 
   gear('KUIPER', 'kuiper_interceptor_bay', 'Arrokoth\'s Kin', ['M_L_KBO'], 2, 25.5, {

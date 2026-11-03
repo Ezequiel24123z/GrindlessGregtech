@@ -79,6 +79,7 @@ const LAYOUT = {
   QUBIT: [18, 10.5, null],
   VENT: [7, 10.5, ['H_ZPM_MACHINES']],
   ARCH: [10, 10.5, null],
+  MEDIUM: [13.5, 14.5, ['AERO']],
   AERO: [13, 12, null],
   NEUT: [15, 11.5, null],
   SURVEY: [17, 12, null],
@@ -112,6 +113,7 @@ const LAYOUT = {
   NANO: [20.5, 31.5, ['W_RADIUM']],
   Q_DOPED: [20.5, 33, ['NANO']],
   PAN_FIB: [20.5, 34.5, ['Q_DOPED']],
+  PAN_CF: [22.5, 34.5, null],
   UV_SMES: [22.5, 27, null],
   NEP_SAMPLE: [20.5, 36, ['PAN_FIB']],
 };

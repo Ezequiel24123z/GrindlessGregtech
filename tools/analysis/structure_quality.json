@@ -175,9 +175,9 @@
  },
  "gtceu:bz_dynamo": {
   "v": [],
-  "bt": 5,
-  "ds": 0.606,
-  "c": 696
+  "bt": 6,
+  "ds": 0.583,
+  "c": 2470
  },
  "gtceu:calutron": {
   "v": [],
@@ -889,9 +889,9 @@
  },
  "gtceu:mnt_collider": {
   "v": [],
-  "bt": 6,
-  "ds": 0.564,
-  "c": 730
+  "bt": 7,
+  "ds": 0.565,
+  "c": 3554
  },
  "gtceu:mocvd_reactor": {
   "v": [],
@@ -902,8 +902,8 @@
  "gtceu:mtj_sputter_cluster": {
   "v": [],
   "bt": 5,
-  "ds": 0.545,
-  "c": 315
+  "ds": 0.583,
+  "c": 2349
  },
  "gtceu:muon_fusion_cell": {
   "v": [],
@@ -1049,23 +1049,11 @@
   "ds": 0.453,
   "c": 118
  },
- "gtceu:oxide_pld_chamber": {
-  "v": [],
-  "bt": 5,
-  "ds": 0.599,
-  "c": 295
- },
  "gtceu:pair_instability_crucible": {
   "v": [],
   "bt": 6,
   "ds": 0.373,
   "c": 3850
- },
- "gtceu:pasta_draw_bench": {
-  "v": [],
-  "bt": 7,
-  "ds": 0.356,
-  "c": 428
  },
  "gtceu:pasta_extractor": {
   "v": [],
@@ -1073,17 +1061,11 @@
   "ds": 0.566,
   "c": 490
  },
- "gtceu:pasta_laminator": {
-  "v": [],
-  "bt": 6,
-  "ds": 0.605,
-  "c": 229
- },
  "gtceu:pasta_phase_sorter": {
   "v": [],
-  "bt": 6,
-  "ds": 0.483,
-  "c": 488
+  "bt": 8,
+  "ds": 0.591,
+  "c": 2846
  },
  "gtceu:pbo_plant": {
   "v": [],
@@ -1258,12 +1240,6 @@
   "bt": 7,
   "ds": 0.318,
   "c": 943
- },
- "gtceu:racetrack_fab": {
-  "v": [],
-  "bt": 5,
-  "ds": 0.594,
-  "c": 454
  },
  "gtceu:radio_telescope": {
   "v": [],
@@ -1501,9 +1477,9 @@
  },
  "gtceu:stellar_elevator": {
   "v": [],
-  "bt": 5,
-  "ds": 0.354,
-  "c": 634
+  "bt": 7,
+  "ds": 0.555,
+  "c": 4073
  },
  "gtceu:stellar_forge": {
   "v": [],
@@ -1513,9 +1489,9 @@
  },
  "gtceu:stellar_fractionation_hall": {
   "v": [],
-  "bt": 6,
-  "ds": 0.522,
-  "c": 1114
+  "bt": 7,
+  "ds": 0.557,
+  "c": 3268
  },
  "gtceu:stm_lithography_cell": {
   "v": [],
@@ -1682,20 +1658,14 @@
  "gtceu:uxv_fusion_reactor": {
   "v": [],
   "bt": 6,
-  "ds": 0.42,
-  "c": 924
+  "ds": 0.498,
+  "c": 4091
  },
  "gtceu:vdw_stacker": {
   "v": [],
   "bt": 6,
   "ds": 0.564,
   "c": 1004
- },
- "gtceu:vdw_stacking_cell": {
-  "v": [],
-  "bt": 6,
-  "ds": 0.468,
-  "c": 302
  },
  "gtceu:vent_bioreactor": {
   "v": [],

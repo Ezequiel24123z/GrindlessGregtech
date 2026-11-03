@@ -47,7 +47,7 @@
 			y: 0.0d
 		}
 		{
-			description: ["Runs chemical bath recipes on steam, up to 64 in parallel. Runs Chemical Bath recipes. Build it mostly from Solid Machine Casing. The controller is crafted from Steel frames, Solid Machine Casing and Steel Drill Bit. Unlocks Paper, Reinforced Epoxy Resin Plate and Black Concrete. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Runs chemical bath recipes on steam, up to 64 in parallel. Runs Chemical Bath recipes. Build it mostly from Solid Machine Casing. The controller is crafted from Steel frames, Solid Machine Casing and Steel Drill Bit. Unlocks Paper, Reinforced Epoxy Resin Plate and Tungstic Acid Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:large_steam_chemical_bath"
 			id: "5DB15F9E64C74E29"
 			rewards: [{ id: "60B2AEB4553F991D", type: "xp", xp: 10 }]
@@ -119,7 +119,7 @@
 			y: 0.0d
 		}
 		{
-			description: ["Runs chemical bath recipes on steam, eight at a time. Runs Chemical Bath recipes. Build it mostly from Steam Machine Casing. The controller is crafted from Glass, Bronze Normal Fluid Pipe and Steam Machine Casing. Unlocks Paper, Reinforced Epoxy Resin Plate and Black Concrete. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Runs chemical bath recipes on steam, eight at a time. Runs Chemical Bath recipes. Build it mostly from Steam Machine Casing. The controller is crafted from Glass, Bronze Normal Fluid Pipe and Steam Machine Casing. Unlocks Paper, Reinforced Epoxy Resin Plate and Tungstic Acid Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:steam_chemical_bath"
 			id: "2B05A0B9BBE9F03D"
 			rewards: [{ id: "7BFDDD4439AEDA59", type: "xp", xp: 10 }]
@@ -549,7 +549,7 @@
 			y: 10.0d
 		}
 		{
-			description: ["The whole ore chain in one pass: macerate, wash, centrifuge, macerate. Runs Ore Processing recipes. Build it mostly from Solid Machine Casing. The controller is crafted from MV circuits, Vanadium Steel Drill Bit and MV Macerator. Unlocks Aluminium Dust, Gold Dust and Nickel Dust. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["The whole ore chain in one pass: macerate, wash, centrifuge, macerate. Runs Ore Processing recipes. Build it mostly from Solid Machine Casing. The controller is crafted from MV circuits, Vanadium Steel Drill Bit and MV Macerator. Unlocks Aluminium Dust, Nickel Dust and Gold Dust. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:ore_plant"
 			id: "15116F28398E726A"
 			rewards: [{ id: "2A643740B4C1829D", type: "xp", xp: 10 }]
@@ -824,7 +824,7 @@
 			y: 15.0d
 		}
 		{
-			description: ["A GregTech multiblock for Distillation Tower recipes. The controller is crafted from EV circuits, Stainless Steel Large Fluid Pipe and HV Electric Pump. Unlocks Light Fuel, Propene and Lubricant. Also needed to craft Heavy-Water Plant and Large Distillery. Automate it through input fluid hatches and output item buses and fluid hatches."]
+			description: ["A GregTech multiblock for Distillation Tower recipes. The controller is crafted from EV circuits, Stainless Steel Large Fluid Pipe and HV Electric Pump. Unlocks Light Fuel, Propene and Butane. Also needed to craft Heavy-Water Plant and Large Distillery. Automate it through input fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:distillation_tower"
 			id: "19F5EEFC03733E38"
 			rewards: [{ id: "112333D968950491", type: "xp", xp: 10 }]
@@ -1015,7 +1015,7 @@
 			y: 20.0d
 		}
 		{
-			description: ["Takes raw ore through the whole ore line in one pass. Runs Ore Refinery recipes. Build it mostly from Stable Machine Casing. The controller is crafted from EV Macerator, EV Ore Washer and EV Thermal Centrifuge. Unlocks Redstone, Aluminium Dust and Gold Dust. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Takes raw ore through the whole ore line in one pass. Runs Ore Refinery recipes. Build it mostly from Stable Machine Casing. The controller is crafted from EV Macerator, EV Ore Washer and EV Thermal Centrifuge. Unlocks Redstone, Aluminium Dust and Nickel Dust. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:ore_refinery"
 			id: "607B8B472BC526F9"
 			rewards: [{ id: "50008DB8B88F5230", type: "xp", xp: 10 }]
@@ -1158,7 +1158,7 @@
 			y: 25.0d
 		}
 		{
-			description: ["Boils water with designed fission cores for a turbine hall. Runs Fission Core recipes. Build it mostly from Radiation Proof Machine Casing. The controller is crafted from IV Machine Hull, IV Field Generator and IV Electric Pump. Unlocks Tritiated Heavy Water. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Boils water with designed fission cores for a turbine hall. Runs Fission Core recipes. Build it mostly from Robust Machine Casing. The controller is crafted from IV Machine Hull, IV Field Generator and IV Electric Pump. Unlocks Tritiated Heavy Water. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:fission_reactor"
 			id: "5943E6A0F9897BF0"
 			rewards: [{ id: "6A64FED2B4CC53F2", type: "xp", xp: 10 }]
@@ -1206,7 +1206,7 @@
 			y: 25.0d
 		}
 		{
-			description: ["Handles radioactive material behind shielding. Runs Hot Cell recipes. Build it mostly from Radiation Proof Machine Casing. The controller is crafted from IV Machine Hull, IV Centrifuge and IV Chemical Reactor. Unlocks Uranium Dust and Iron Ingot. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Handles radioactive material behind shielding. Runs Hot Cell recipes. Build it mostly from Radiation Proof Machine Casing. The controller is crafted from IV Machine Hull, IV Centrifuge and IV Chemical Reactor. Unlocks Uranium Dust and Tungsten Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:hot_cell"
 			id: "43C2E982FD9F8368"
 			rewards: [{ id: "2856FA7257E865D4", type: "xp", xp: 10 }]
@@ -1230,7 +1230,7 @@
 			y: 25.0d
 		}
 		{
-			description: ["Dissolves the End's uranium in place with injection wells. Runs In Situ Leaching recipes. Build it mostly from Inert Machine Casing. The controller is crafted from IV Machine Hull, HV Fluid Drilling Rig and IV Electric Pump. Unlocks Uraninite Dust. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Dissolves the End's uranium in place with injection wells. Runs In Situ Leaching recipes. Build it mostly from Inert Machine Casing. The controller is crafted from IV Machine Hull, HV Fluid Drilling Rig and IV Electric Pump. Unlocks Uranyl Sulfate Liquor. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:isr_wellfield"
 			id: "3B9AF79A2FCFDAA4"
 			rewards: [{ id: "67D648EA29FD1768", type: "xp", xp: 10 }]
@@ -1721,7 +1721,7 @@
 			y: 34.0d
 		}
 		{
-			description: ["A Grindless multiblock for Asteroid Processing recipes. Build it mostly from Solid Machine Casing. The controller is crafted from LuV Machine Hull, LuV Robot Arm and LuV Electric Pump. Unlocks Iron Dust, Iron Core Fragment and Tetrataenite Dust. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["A Grindless multiblock for Asteroid Processing recipes. Build it mostly from Solid Machine Casing. The controller is crafted from LuV Machine Hull, LuV Robot Arm and LuV Electric Pump. Unlocks Iron Core Fragment and Tetrataenite Dust. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:asteroid_processor"
 			id: "1B210CCD722F3E1D"
 			rewards: [{ id: "63579A9ADF4CFD28", type: "xp", xp: 10 }]
@@ -1793,7 +1793,7 @@
 			y: 34.0d
 		}
 		{
-			description: ["Condenses Io's volcanic gases into germanium and indium. Runs Fumarole Condensing recipes. Build it mostly from Radiation Vault Casing. The controller is crafted from LuV Machine Hull, LuV Electric Pump and LUV circuits. Unlocks Sulfur Concrete Casing, Sulfur Dust and Germanium Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Condenses Io's volcanic gases into germanium and indium. Runs Fumarole Condensing recipes. Build it mostly from Radiation Vault Casing. The controller is crafted from LuV Machine Hull, LuV Electric Pump and LUV circuits. Unlocks Sulfur Concrete Casing, Sulfur Dust and Indium Chloride Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:fumarole_condenser"
 			id: "2E575C2F1D56ED77"
 			rewards: [{ id: "7E59A047133DD686", type: "xp", xp: 10 }]
@@ -2200,7 +2200,7 @@
 			y: 41.0d
 		}
 		{
-			description: ["Reduces europium to its divalent form. Runs Valence Reduction recipes. Build it mostly from Inert Machine Casing, with Naquadah coils. The controller is crafted from ZPM Machine Hull, ZPM Electric Pump and ZPM circuits. Unlocks Lanthanum Dust, Europium Oxide Dust and Gadolinium Oxide Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Reduces europium to its divalent form. Runs Valence Reduction recipes. Build it mostly from Inert Machine Casing, with Naquadah coils. The controller is crafted from ZPM Machine Hull, ZPM Electric Pump and ZPM circuits. Unlocks Lanthanum Dust, Zinc Dust and Europium Oxide Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:europium_reductor"
 			id: "45B4F4AAAA42FDCF"
 			rewards: [{ id: "38BE8E7D3A86A0A0", type: "xp", xp: 10 }]
@@ -2212,7 +2212,7 @@
 			y: 41.0d
 		}
 		{
-			description: ["Launches a probe on Voyager 2's route to Neptune. Runs Outer Flyby recipes. Build it mostly from Probe Bay Casing. The controller is crafted from ZPM Machine Hull, ZPM Robot Arm and ZPM Emitter. Unlocks Triton Probe Recording and Neptune Probe Recording. Automate it through input item buses and output item buses and fluid hatches."]
+			description: ["Launches a probe on Voyager 2's route to Neptune. Runs Outer Flyby recipes. Build it mostly from Probe Bay Casing. The controller is crafted from ZPM Machine Hull, ZPM Robot Arm and ZPM Emitter. Unlocks Triton Probe Recording, Neptune Sample and Neptune Probe Recording. Automate it through input item buses and output item buses and fluid hatches."]
 			icon: "gtceu:flyby_probe_bay"
 			id: "345AA6FA725D354C"
 			rewards: [{ id: "3045933143011906", type: "xp", xp: 10 }]
@@ -2416,7 +2416,7 @@
 			y: 45.0d
 		}
 		{
-			description: ["Breaks Titan's tholins back into chemistry. Runs Tholin Reforming recipes. Build it mostly from Inert Machine Casing, with Nichrome coils. The controller is crafted from ZPM Machine Hull, ZPM Electric Pump and ZPM circuits. Unlocks Titan Nitrile Mix, Carbon Fibers and Diaminobenzidine. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Breaks Titan's tholins back into chemistry. Runs Tholin Reforming recipes. Build it mostly from Inert Machine Casing, with Nichrome coils. The controller is crafted from ZPM Machine Hull, ZPM Electric Pump and ZPM circuits. Unlocks Titan Nitrile Mix and Diaminobenzidine. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:tholin_reformer"
 			id: "1E7C157CC1365AE2"
 			rewards: [{ id: "6C63633D8BCD75C8", type: "xp", xp: 10 }]
@@ -2535,18 +2535,6 @@
 			y: 48.0d
 		}
 		{
-			description: ["A Grindless multiblock for Ice Annealing recipes. Build it mostly from Station Truss Casing. The controller is crafted from UV Machine Hull, UV Electric Pump and UV circuits. Unlocks Water. Automate it through input item buses and output fluid hatches."]
-			icon: "gtceu:amorphous_ice_annealer"
-			id: "2F8136A0CAEE1FA9"
-			rewards: [{ id: "19EBAAF99C9AB183", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UV, Grindless"
-			tasks: [{ id: "281968C69CC3D842", item: "gtceu:amorphous_ice_annealer", type: "item" }]
-			x: 4.0d
-			y: 48.0d
-		}
-		{
 			description: ["A Penning trap that stores antiprotons. Runs Antimatter Storage recipes. Build it mostly from Station Truss Casing, with Superconducting Coil. The controller is crafted from UV Machine Hull, UV Field Generator and UV Sensor. Unlocks ICAN Pellet, Antihydrogen Cartridge and OpV Antiproton Stack. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:antimatter_trap"
 			id: "20B31C7E2804E62C"
@@ -2555,7 +2543,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "1C2CAF613EBBD56E", item: "gtceu:antimatter_trap", type: "item" }]
-			x: 6.0d
+			x: 4.0d
 			y: 48.0d
 		}
 		{
@@ -2567,7 +2555,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "6F928595E159DEE5", item: "gtceu:ark_biosphere", type: "item" }]
-			x: 8.0d
+			x: 6.0d
 			y: 48.0d
 		}
 		{
@@ -2579,7 +2567,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "43549896BC7BEEDF", item: "gtceu:boron_nitride_reactor", type: "item" }]
-			x: 10.0d
+			x: 8.0d
 			y: 48.0d
 		}
 		{
@@ -2591,7 +2579,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "71DD01DBFB60AA35", item: "gtceu:cryotank_winder", type: "item" }]
-			x: 12.0d
+			x: 10.0d
 			y: 48.0d
 		}
 		{
@@ -2603,7 +2591,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "20C92FD83C8A3F75", item: "gtceu:event_horizon_interferometer", type: "item" }]
-			x: 14.0d
+			x: 12.0d
 			y: 48.0d
 		}
 		{
@@ -2615,11 +2603,11 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "243A83F1F7DB04D9", item: "gtceu:fibre_draw_tower", type: "item" }]
-			x: 16.0d
+			x: 14.0d
 			y: 48.0d
 		}
 		{
-			description: ["Makes curium-244 heat sources behind hot cell walls. Runs Heat Source recipes. Build it mostly from Radiation Proof Machine Casing. The controller is crafted from ZPM Machine Hull, UV Robot Arm and UV circuits. Unlocks Probe RTG, GPHS Module and Americium Micro Source. Automate it through input item buses and output item buses."]
+			description: ["Makes curium-244 heat sources behind hot cell walls. Runs Heat Source recipes. Build it mostly from Radiation Vault Casing. The controller is crafted from ZPM Machine Hull, UV Robot Arm and UV circuits. Unlocks GPHS Module, Probe RTG and Americium Micro Source. Automate it through input item buses and output item buses."]
 			icon: "gtceu:heat_source_works"
 			id: "1B36D46C505EE2F0"
 			rewards: [{ id: "55DB8EEE5FF731FE", type: "xp", xp: 10 }]
@@ -2627,7 +2615,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "6008FF497B3A4742", item: "gtceu:heat_source_works", type: "item" }]
-			x: 18.0d
+			x: 16.0d
 			y: 48.0d
 		}
 		{
@@ -2639,7 +2627,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "764559B29F82A083", item: "gtceu:kuiper_interceptor_bay", type: "item" }]
-			x: 20.0d
+			x: 18.0d
 			y: 48.0d
 		}
 		{
@@ -2651,7 +2639,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2F3EBECF74802900", item: "gtceu:laser_fusion_chamber", type: "item" }]
-			x: 22.0d
+			x: 20.0d
 			y: 48.0d
 		}
 		{
@@ -2663,7 +2651,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2DC0BDCA35D69157", item: "gtceu:laser_sail_launcher", type: "item" }]
-			x: 24.0d
+			x: 22.0d
 			y: 48.0d
 		}
 		{
@@ -2675,8 +2663,8 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3E3D3E9DD210A148", item: "gtceu:light_sail_fab", type: "item" }]
-			x: 2.0d
-			y: 50.0d
+			x: 24.0d
+			y: 48.0d
 		}
 		{
 			description: ["A UV frame that runs 15 machine types in module sockets. Runs Centrifuge, Electrolyzer, Sifter and others recipes. Build it mostly from UV Machine Casing, with Naquadah coils. The controller is crafted from UV Centrifuge, UV Electrolyzer and UV Bender. Unlocks Steel Ingot, Red Alloy Ingot and Tungsten Steel Ingot. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
@@ -2687,11 +2675,11 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "6BA6ABDCF3CCED44", item: "gtceu:mega_factory", type: "item" }]
-			x: 4.0d
+			x: 2.0d
 			y: 50.0d
 		}
 		{
-			description: ["A Grindless multiblock for MOCVD recipes. Build it mostly from Clean Machine Casing. The controller is crafted from UV Machine Hull, UV Electric Pump and UV Sensor. Unlocks MTJ Die, NbN-Coated SiC Plate and Salt Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A Grindless multiblock for MOCVD recipes. Build it mostly from Clean Machine Casing. The controller is crafted from UV Machine Hull, UV Electric Pump and UV Sensor. Unlocks NbN-Coated SiC Plate, MTJ Die and Salt Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:mocvd_reactor"
 			id: "18B302AF1B81CB7C"
 			rewards: [{ id: "1E814B3A55CDD99F", type: "xp", xp: 10 }]
@@ -2699,7 +2687,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "4BBE0E10A7044B05", item: "gtceu:mocvd_reactor", type: "item" }]
-			x: 6.0d
+			x: 4.0d
 			y: 50.0d
 		}
 		{
@@ -2711,7 +2699,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3915D157116D9532", item: "gtceu:muon_fusion_cell", type: "item" }]
-			x: 8.0d
+			x: 6.0d
 			y: 50.0d
 		}
 		{
@@ -2723,7 +2711,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "220851F230203B28", item: "gtceu:neptune_deep_siphon", type: "item" }]
-			x: 10.0d
+			x: 8.0d
 			y: 50.0d
 		}
 		{
@@ -2735,7 +2723,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "4B63522B030EEF01", item: "gtceu:neural_culture_vat", type: "item" }]
-			x: 12.0d
+			x: 10.0d
 			y: 50.0d
 		}
 		{
@@ -2747,7 +2735,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "7FB4F74AFD902AFC", item: "gtceu:optical_ground_station", type: "item" }]
-			x: 14.0d
+			x: 12.0d
 			y: 50.0d
 		}
 		{
@@ -2759,7 +2747,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "38289EAECA2F2F72", item: "gtceu:penetrator_probe_bay", type: "item" }]
-			x: 16.0d
+			x: 14.0d
 			y: 50.0d
 		}
 		{
@@ -2771,11 +2759,11 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2FE5AA5B1243F776", item: "gtceu:powder_bed_printer", type: "item" }]
-			x: 18.0d
+			x: 16.0d
 			y: 50.0d
 		}
 		{
-			description: ["A Grindless multiblock for Powder In Tube recipes. Build it mostly from UV Machine Casing, with Trinium coils. The controller is crafted from UV Machine Hull, UV Electric Motor and UV Conveyor Module. Unlocks Enriched Naquadah Trinium Europium Duranide Single Wire, Lay Superhydride Single Wire and Magnesium Diboride Single Wire. Automate it through input item buses and output item buses."]
+			description: ["A Grindless multiblock for Powder In Tube recipes. Build it mostly from UV Machine Casing, with Trinium coils. The controller is crafted from UV Machine Hull, UV Electric Motor and UV Conveyor Module. Unlocks Lay Superhydride Single Wire, Enriched Naquadah Trinium Europium Duranide Single Wire and Magnesium Diboride Single Wire. Automate it through input item buses and output item buses."]
 			icon: "gtceu:powder_in_tube_line"
 			id: "78F529F70089340F"
 			rewards: [{ id: "4450A3C61F8B3983", type: "xp", xp: 10 }]
@@ -2783,7 +2771,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3698CE238355F9AB", item: "gtceu:powder_in_tube_line", type: "item" }]
-			x: 20.0d
+			x: 18.0d
 			y: 50.0d
 		}
 		{
@@ -2795,11 +2783,11 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "4F91DCB78D1DB71B", item: "gtceu:precursor_probe_bay", type: "item" }]
-			x: 22.0d
+			x: 20.0d
 			y: 50.0d
 		}
 		{
-			description: ["Reprocesses spent thorium fuel in a molten LiCl bath. Runs Pyroprocessing recipes. Build it mostly from Radiation Proof Machine Casing, with Superconducting Coil. The controller is crafted from UV Machine Hull, UV Robot Arm and UV Sensor. Unlocks Lithium-Tin Alloy and Radioactive Waste. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Reprocesses spent thorium fuel in a molten LiCl bath. Runs Pyroprocessing recipes. Build it mostly from Radiation Proof Machine Casing, with Cupronickel coils. The controller is crafted from UV Machine Hull, UV Robot Arm and UV Sensor. Unlocks Uranium-233 Cathode Deposit and Lithium-Tin Alloy. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:pyroprocessing_cell"
 			id: "606C26D9A44E1DF4"
 			rewards: [{ id: "193E66B417274AD9", type: "xp", xp: 10 }]
@@ -2807,7 +2795,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "10E949763B316188", item: "gtceu:pyroprocessing_cell", type: "item" }]
-			x: 24.0d
+			x: 22.0d
 			y: 50.0d
 		}
 		{
@@ -2819,8 +2807,8 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "3143F410FECD4485", item: "gtceu:srf_cavity_works", type: "item" }]
-			x: 2.0d
-			y: 52.0d
+			x: 24.0d
+			y: 50.0d
 		}
 		{
 			description: ["Builds the Starshot's starchip in a clean room. Runs Starchip recipes. Build it mostly from Clean Machine Casing. The controller is crafted from UV Machine Hull, UV Robot Arm and UV Sensor. Unlocks Relay Seed, Starchip and Ergosphere Probe. Automate it through input item buses and output item buses."]
@@ -2831,7 +2819,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "2D1AA1B3B72BAE09", item: "gtceu:starchip_fab", type: "item" }]
-			x: 4.0d
+			x: 2.0d
 			y: 52.0d
 		}
 		{
@@ -2843,7 +2831,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "1143A5A5F1AA7864", item: "gtceu:superfluid_helium_plant", type: "item" }]
-			x: 6.0d
+			x: 4.0d
 			y: 52.0d
 		}
 		{
@@ -2855,7 +2843,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "328EA0564D02DF2D", item: "gtceu:synchrotron", type: "item" }]
-			x: 8.0d
+			x: 6.0d
 			y: 52.0d
 		}
 		{
@@ -2867,7 +2855,7 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "7805A32BE3317343", item: "gtceu:thruster_works", type: "item" }]
-			x: 10.0d
+			x: 8.0d
 			y: 52.0d
 		}
 		{
@@ -2879,11 +2867,11 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "235C99AA886EAFE9", item: "gtceu:triton_geyser_sampler", type: "item" }]
-			x: 12.0d
+			x: 10.0d
 			y: 52.0d
 		}
 		{
-			description: ["Sublimes a core's ices one by one on a cold finger. Runs Ice Fractionation recipes. Build it mostly from Station Truss Casing. The controller is crafted from UV Machine Hull, UV Electric Pump and UV circuits. Unlocks Silicon Dioxide Dust and Tholin. Automate it through input item buses and output item buses and fluid hatches."]
+			description: ["Sublimes a core's ices and anneals Kuiper samples. Runs Ice Fractionation recipes. Build it mostly from Station Truss Casing. The controller is crafted from UV Machine Hull, UV Electric Pump and UV circuits. Unlocks Water, Silicon Dioxide Dust and Tholin. Automate it through input item buses and output item buses and fluid hatches."]
 			icon: "gtceu:volatile_ice_fractionator"
 			id: "69CD5117212408E1"
 			rewards: [{ id: "55E5032E66EF2343", type: "xp", xp: 10 }]
@@ -2891,11 +2879,11 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "473292A8313BDFFB", item: "gtceu:volatile_ice_fractionator", type: "item" }]
-			x: 14.0d
+			x: 12.0d
 			y: 52.0d
 		}
 		{
-			description: ["A Grindless multiblock for Zone Refining recipes. Build it mostly from Clean Machine Casing, with Naquadah coils. The controller is crafted from UV Machine Hull, UV Emitter and UV Electric Motor. Unlocks Si-28 Float-Zone Ingot, HPGe Crystal and 7N Indium. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A Grindless multiblock for Zone Refining recipes. Build it mostly from Clean Machine Casing, with Cupronickel coils. The controller is crafted from UV Machine Hull, UV Emitter and UV Electric Motor. Unlocks Si-28 Float-Zone Ingot, HPGe Crystal and 7N Indium. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:zone_refining_tower"
 			id: "7CC3235FDD8D9119"
 			rewards: [{ id: "27EB7DA54E600C62", type: "xp", xp: 10 }]
@@ -2903,11 +2891,11 @@
 			size: 1.5d
 			subtitle: "UV, Grindless"
 			tasks: [{ id: "481D5618F44FABEA", item: "gtceu:zone_refining_tower", type: "item" }]
-			x: 16.0d
+			x: 14.0d
 			y: 52.0d
 		}
 		{
-			description: ["A GT-- multiblock for Large Naquadah Reactor recipes. The controller is crafted from Duranium Frame, Plate Radiation Protection and ZPM Field Generator. Unlocks Naquadah Based Liquid Fuel Depleted, Thorium Based Liquid Fuel Depleted and Uranium Based Liquid Fuel Depleted. Automate it through input fluid hatches and output fluid hatches."]
+			description: ["A GT-- multiblock for Large Naquadah Reactor recipes. The controller is crafted from Duranium Frame, Plate Radiation Protection and ZPM Field Generator. Unlocks Naquadah Based Liquid Fuel Depleted. Automate it through input fluid hatches and output fluid hatches."]
 			icon: "gtnn:large_naquadah_reactor"
 			id: "1406F1FC8573E849"
 			rewards: [{ id: "1900BA869EAB57B9", type: "xp", xp: 10 }]
@@ -2915,7 +2903,7 @@
 			size: 1.25d
 			subtitle: "UV, GT--"
 			tasks: [{ id: "58693D53827378A2", item: "gtnn:large_naquadah_reactor", type: "item" }]
-			x: 18.0d
+			x: 16.0d
 			y: 52.0d
 		}
 		{
@@ -2927,7 +2915,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "324CF1E04E576544", item: "gtceu:mega_blast_furnace", type: "item" }]
-			x: 20.0d
+			x: 18.0d
 			y: 52.0d
 		}
 		{
@@ -2939,7 +2927,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "7C696D29179FE07E", item: "gtceu:mega_vacuum_freezer", type: "item" }]
-			x: 22.0d
+			x: 20.0d
 			y: 52.0d
 		}
 		{
@@ -2951,7 +2939,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "2A102870D900A19D", item: "gtceu:network_switch", type: "item" }]
-			x: 24.0d
+			x: 22.0d
 			y: 52.0d
 		}
 		{
@@ -2963,8 +2951,8 @@
 			size: 1.25d
 			subtitle: "UV, GT Community Additions"
 			tasks: [{ id: "7A0E8E34DB802F48", item: "gtca:tegmark_forge", type: "item" }]
-			x: 2.0d
-			y: 54.0d
+			x: 24.0d
+			y: 52.0d
 		}
 		{
 			description: ["A GregTech Modern Utilities multiblock for Dummy recipes. The controller is crafted from Active Transformer, Naquadah Alloy plates and UV Sensor. Also needed to craft Web Hub."]
@@ -2975,7 +2963,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech Modern Utilities"
 			tasks: [{ id: "3602CC0E03FE404F", item: "gtmutils:web_receiver", type: "item" }]
-			x: 4.0d
+			x: 2.0d
 			y: 54.0d
 		}
 		{
@@ -2987,7 +2975,7 @@
 			size: 1.25d
 			subtitle: "UV, GregTech"
 			tasks: [{ id: "29C9F1B842CB6D8E", item: "gtceu:zpm_fusion_reactor", type: "item" }]
-			x: 6.0d
+			x: 4.0d
 			y: 54.0d
 		}
 		{
@@ -3086,7 +3074,7 @@
 			y: 57.0d
 		}
 		{
-			description: ["Grows atom-thin InGaAs/AlInAs layers for quantum cascade lasers. Runs Molecular Beam Epitaxy recipes. Build it mostly from UV Machine Casing. The controller is crafted from UHV Machine Hull, UHV Sensor and UHV Emitter. Unlocks Quantum Cascade Laser, AlGaAs Bragg Stack and InAs Quantum Dot Wafer. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Grows atom-thin InGaAs/AlInAs layers for quantum cascade lasers. Runs Molecular Beam Epitaxy recipes. Build it mostly from UV Machine Casing. The controller is crafted from UHV Machine Hull, UHV Sensor and UHV Emitter. Unlocks La/B4C Multilayer, Quantum Cascade Laser and AlGaAs Bragg Stack. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:mbe_reactor"
 			id: "4244397A77EA51BE"
 			rewards: [{ id: "796D8FD90EADE816", type: "xp", xp: 10 }]
@@ -3206,7 +3194,7 @@
 			y: 59.0d
 		}
 		{
-			description: ["Makes silicon carbide power modules and mirror blanks. Runs Silicon Carbide recipes. Build it mostly from Heatproof Machine Casing. The controller is crafted from UHV Machine Hull, UHV Robot Arm and UHV Conveyor Module. Unlocks SiC Power Module, AlN Power Die and SiC Mirror Blank. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Makes silicon carbide power modules and mirror blanks. Runs Silicon Carbide recipes. Build it mostly from Heatproof Machine Casing, with Tritanium coils. The controller is crafted from UHV Machine Hull, UHV Robot Arm and UHV Conveyor Module. Unlocks SiC Power Module, AlN Power Die and SiC Mirror Blank. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:sic_device_fab"
 			id: "60BB37937A137607"
 			rewards: [{ id: "4F9509D04E6602E1", type: "xp", xp: 10 }]
@@ -3218,7 +3206,7 @@
 			y: 59.0d
 		}
 		{
-			description: ["Makes space-grade IMM multijunction solar arrays. Runs Space Photovoltaics recipes. Build it mostly from Clean Machine Casing. The controller is crafted from UHV Machine Hull, UHV Robot Arm and UHV Conveyor Module. Unlocks XUV Collector Panel, IMM Film and IMM Solar Array. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Makes space-grade IMM multijunction solar arrays. Runs Space Photovoltaics recipes. Build it mostly from Clean Machine Casing, with Tritanium coils. The controller is crafted from UHV Machine Hull, UHV Robot Arm and UHV Conveyor Module. Unlocks XUV Collector Panel, IMM Film and IMM Solar Array. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:solar_array_fab"
 			id: "6D506019470CEFD6"
 			rewards: [{ id: "1FA6431D04173F9F", type: "xp", xp: 10 }]
@@ -3266,7 +3254,7 @@
 			y: 59.0d
 		}
 		{
-			description: ["A Grindless multiblock for Dyson Swarm recipes. Build it mostly from Station Truss Casing, with Superconducting Coil. The controller is crafted from UHV Machine Hull, UHV Field Generator and UHV Emitter. Unlocks Worn Swarm Segment. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["A Grindless multiblock for Dyson Swarm recipes. Build it mostly from Station Truss Casing. The controller is crafted from UHV Machine Hull, UHV Field Generator and UHV Emitter. Unlocks Worn Swarm Segment. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:swarm_control_station"
 			id: "1101E80BD75D3235"
 			rewards: [{ id: "2B6E7C92278BFDC2", type: "xp", xp: 10 }]
@@ -3302,7 +3290,7 @@
 			y: 61.0d
 		}
 		{
-			description: ["A shielded cave that makes berkelium-249 and californium-252. Runs Transuranium Processing recipes. Build it mostly from Radiation Proof Machine Casing. The controller is crafted from UHV Machine Hull, UHV Robot Arm and UHV Sensor. Unlocks Phosphoric Acid, Thorium-229 and Radioactive Waste. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A shielded cave that makes berkelium-249 and californium-252. Runs Transuranium Processing recipes. Build it mostly from Radiation Vault Casing. The controller is crafted from UHV Machine Hull, UHV Robot Arm and UHV Sensor. Unlocks Phosphoric Acid, Thorium-229 and Radioactive Waste. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:transuranium_facility"
 			id: "7B97773B2C230340"
 			rewards: [{ id: "657D2748CA75CFF6", type: "xp", xp: 10 }]
@@ -3314,7 +3302,7 @@
 			y: 61.0d
 		}
 		{
-			description: ["Turns plain water into ultrapure water for UHV processes. Runs Ultrapure Water recipes. Build it mostly from Clean Machine Casing. The controller is crafted from UHV Machine Hull, UHV Electric Pump and UHV Fluid Regulator. Unlocks Ultrapure Water. Automate it through input item buses and fluid hatches and output fluid hatches."]
+			description: ["Purifies water through grades 1 to 5 into ultrapure water for UHV processes. Runs Ultrapure Water recipes. Build it mostly from Clean Machine Casing. The controller is crafted from UHV Machine Hull, UHV Electric Pump and UHV Fluid Regulator. Unlocks Purified Water Grade 1, Purified Water Grade 2 and Purified Water Grade 3. Automate it through input item buses and fluid hatches and output fluid hatches."]
 			icon: "gtceu:ultrapure_water_plant"
 			id: "67AB3D4E89CBE4A9"
 			rewards: [{ id: "1564A79A39CD37CB", type: "xp", xp: 10 }]
@@ -3445,7 +3433,7 @@
 			y: 64.0d
 		}
 		{
-			description: ["Cores Barnard b's crust for Barnard core rock. Runs Barnard Core Drilling recipes. Build it mostly from Robust Machine Casing. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Electric Piston. Unlocks Barnard Core Rock. Automate it through input item buses and output item buses."]
+			description: ["Cores Barnard b's crust for Barnard core rock. Runs Barnard Core Drilling recipes. Build it mostly from Superhydride Magnet Casing. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Electric Piston. Unlocks Barnard Core Rock. Automate it through input item buses and output item buses."]
 			icon: "gtceu:barnard_core_drill"
 			id: "6D9658F1E5FE154F"
 			rewards: [{ id: "2C734518E5B112C4", type: "xp", xp: 10 }]
@@ -3457,7 +3445,7 @@
 			y: 64.0d
 		}
 		{
-			description: ["Separates isotopes by mass in an electromagnetic racetrack. Runs Calutron Separation recipes. Build it mostly from Stable Machine Casing, with Superconducting Coil. The controller is crafted from UHV Machine Hull, UV Sensor and UV Field Generator. Unlocks Rb-87 Isotope and Sr-88 Isotope. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Separates isotopes by mass in an electromagnetic racetrack. Runs Calutron Separation recipes. Build it mostly from SiC Composite Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UV Sensor and UV Field Generator. Unlocks Rb-87 Isotope and Sr-88 Isotope. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:calutron"
 			id: "4F644391CF72D06D"
 			rewards: [{ id: "7E5C9534213D47C2", type: "xp", xp: 10 }]
@@ -3469,7 +3457,7 @@
 			y: 64.0d
 		}
 		{
-			description: ["Mond process: carbon monoxide carries iron out of Barnard rock. Runs Carbonyl Refining recipes. Build it mostly from Inert Machine Casing. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Electric Pump. Unlocks Nickel Dust and Carbonyl Fe Ni Powder. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Mond process: carbon monoxide carries iron out of Barnard rock. Runs Carbonyl Refining recipes. Build it mostly from SiC Composite Casing. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Electric Pump. Unlocks Nickel Dust and Carbonyl Fe Ni Powder. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:carbonyl_refinery"
 			id: "27216FBD48652A7E"
 			rewards: [{ id: "6215ACF038A7B866", type: "xp", xp: 10 }]
@@ -3481,18 +3469,6 @@
 			y: 64.0d
 		}
 		{
-			description: ["Seals degenerate matter into a carryable pellet. Runs Degenerate Containment recipes. Build it mostly from Degenerate Containment Casing, with Trinium coils. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Emitter. Unlocks Degenerate Pellet. Automate it through input item buses and output item buses."]
-			icon: "gtceu:containment_works"
-			id: "14FAD5BF28AFE7E0"
-			rewards: [{ id: "323714DD274968DC", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UEV, Grindless"
-			tasks: [{ id: "5DAE23ED9F3ED648", item: "gtceu:containment_works", type: "item" }]
-			x: 8.0d
-			y: 64.0d
-		}
-		{
 			description: ["Infiltrates woven preforms with gas to deposit SiC/SiC and W/W parts. Runs Chemical Vapour Infiltration recipes. Build it mostly from Heatproof Machine Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Electric Pump and UHV Emitter. Unlocks Superpolished SiC Blank, SiC/SiC Plate and W-184 CVI Preform. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:cvi_furnace"
 			id: "62FBED569E821682"
@@ -3501,11 +3477,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "71CA47AD905E3A7B", item: "gtceu:cvi_furnace", type: "item" }]
-			x: 10.0d
+			x: 8.0d
 			y: 64.0d
 		}
 		{
-			description: ["Takes degenerate matter from Sirius B using an equation-of-state model. Runs Degenerate Harvesting recipes. Build it mostly from Degenerate Containment Casing, with Trinium coils. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Robot Arm. Unlocks Degenerate Matter Slug and Degenerate Matter. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Takes degenerate matter from Sirius B using an equation-of-state model. Runs Degenerate Harvesting and Degenerate Containment recipes. Build it mostly from SiC Composite Casing, with Trinium coils. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Robot Arm. Unlocks Degenerate Pellet, Degenerate Matter Slug and Degenerate Matter. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:degenerate_harvester"
 			id: "65DCBA9D9F1A359C"
 			rewards: [{ id: "3F3C01801512B240", type: "xp", xp: 10 }]
@@ -3513,7 +3489,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "7732AE3E85D5CB9C", item: "gtceu:degenerate_harvester", type: "item" }]
-			x: 12.0d
+			x: 10.0d
 			y: 64.0d
 		}
 		{
@@ -3525,11 +3501,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "53CB0D8A357CC797", item: "gtceu:electron_beam_furnace", type: "item" }]
-			x: 14.0d
+			x: 12.0d
 			y: 64.0d
 		}
 		{
-			description: ["Entangles photons with a memory to make quantum repeater nodes. Runs Entanglement Distribution recipes. Build it mostly from Photonic Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UV Emitter and UHV circuits. Unlocks Quantum Repeater Node. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Entangles photons with a memory to make quantum repeater nodes. Runs Entanglement Distribution recipes. Build it mostly from HfTaCN Lining Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UV Emitter and UHV circuits. Unlocks Quantum Repeater Node. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:entanglement_station"
 			id: "5EE4535CEB958DE1"
 			rewards: [{ id: "239054D82E9C3FAE", type: "xp", xp: 10 }]
@@ -3537,11 +3513,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "505A1347A7BD011A", item: "gtceu:entanglement_station", type: "item" }]
-			x: 16.0d
+			x: 14.0d
 			y: 64.0d
 		}
 		{
-			description: ["A Grindless multiblock for Heavy Ion Irradiation recipes. Build it mostly from Stable Machine Casing, with Superconducting Coil. The controller is crafted from UHV Machine Hull, UV Sensor and UV Field Generator. Unlocks Activated Target Wheel, Spent Actinide Target and Ion-Tracked Foil. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A Grindless multiblock for Heavy Ion Irradiation and Recoil Separation recipes. Build it mostly from SiC Composite Casing, with Superconducting Coil. The controller is crafted from UHV Machine Hull, UV Sensor and UV Field Generator. Unlocks Activated Target Wheel, Spent Actinide Target and Element 119 Recoil Record. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:heavy_ion_cyclotron"
 			id: "7C394D07A69355D7"
 			rewards: [{ id: "2E222966B520463B", type: "xp", xp: 10 }]
@@ -3549,11 +3525,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "5631459FDCA9DA54", item: "gtceu:heavy_ion_cyclotron", type: "item" }]
-			x: 18.0d
+			x: 16.0d
 			y: 64.0d
 		}
 		{
-			description: ["Aligns helium-3 nuclear spins by optical pumping. Runs Spin Polarisation recipes. Build it mostly from Clean Machine Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Emitter and UHV Sensor. Unlocks Polarised Helium-3 and Polarised D-He3 Fuel. Automate it through input item buses and fluid hatches and output fluid hatches."]
+			description: ["Aligns helium-3 nuclear spins by optical pumping. Runs Spin Polarisation recipes. Build it mostly from Superhydride Magnet Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Emitter and UHV Sensor. Unlocks Polarised Helium-3 and Polarised D-He3 Fuel. Automate it through input item buses and fluid hatches and output fluid hatches."]
 			icon: "gtceu:helium3_polariser"
 			id: "40160D8AF2BD266D"
 			rewards: [{ id: "10851114F6A2D492", type: "xp", xp: 10 }]
@@ -3561,7 +3537,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "4F48C84D4368B599", item: "gtceu:helium3_polariser", type: "item" }]
-			x: 20.0d
+			x: 18.0d
 			y: 64.0d
 		}
 		{
@@ -3573,11 +3549,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "2351747AFC9AA376", item: "gtceu:interstellar_dust_lab", type: "item" }]
-			x: 22.0d
+			x: 20.0d
 			y: 64.0d
 		}
 		{
-			description: ["Squeezes matter past a million atmospheres: superhydride and diamond. Runs Megabar Synthesis recipes. Build it mostly from Robust Machine Casing, with Naquadah coils. The controller is crafted from UHV Machine Hull, UHV Electric Piston and UHV Electric Motor. Unlocks Bent Ge Tile, Compacted Waste Canister and Dense Counterweight Core. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Squeezes matter past a million atmospheres: superhydride and diamond. Runs Megabar Synthesis recipes. Build it mostly from SiC Composite Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Electric Piston and UHV Electric Motor. Unlocks Bent Ge Tile, Compacted Waste Canister and Dense Counterweight Core. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:megabar_press"
 			id: "1EFB53DC4687D63A"
 			rewards: [{ id: "61E06A2867E23293", type: "xp", xp: 10 }]
@@ -3585,7 +3561,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6136643781C0A739", item: "gtceu:megabar_press", type: "item" }]
-			x: 24.0d
+			x: 22.0d
 			y: 64.0d
 		}
 		{
@@ -3597,11 +3573,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "170FA2B0CCAE369B", item: "gtceu:nebula_collector", type: "item" }]
-			x: 2.0d
-			y: 66.0d
+			x: 24.0d
+			y: 64.0d
 		}
 		{
-			description: ["Nitrides iron to Fe16N2 and bonds rare-earth-free magnets. Runs Nitride Magnet Synthesis recipes. Build it mostly from Heatproof Machine Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Electric Motor and UHV Electric Pump. Unlocks AlN Powder, Fe16N2 Ring Magnet and Bonded Fe16N2 Magnet. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Nitrides iron to Fe16N2 and bonds rare-earth-free magnets. Runs Nitride Magnet Synthesis recipes. Build it mostly from SiC Composite Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Electric Motor and UHV Electric Pump. Unlocks AlN Powder, Fe16N2 Ring Magnet and Annealed Mu-Metal Foil. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:nitride_magnet_works"
 			id: "2FA86CA55F2E6FD8"
 			rewards: [{ id: "26DE0085F32C870C", type: "xp", xp: 10 }]
@@ -3609,11 +3585,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "156EE7475AEE23C6", item: "gtceu:nitride_magnet_works", type: "item" }]
-			x: 4.0d
+			x: 2.0d
 			y: 66.0d
 		}
 		{
-			description: ["Bonds waveguides, sources and detectors into an optical computer. Runs Photonic Integration recipes. Build it mostly from Photonic Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Emitter and UHV Sensor. Unlocks Pulsar-Timed Repeater, Quantum Photonic Chip and Photonic Coprocessor. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Bonds waveguides, sources and detectors into an optical computer. Runs Photonic Integration recipes. Build it mostly from Photonic Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Emitter and UHV Sensor. Unlocks Pulsar-Timed Repeater, Quantum Photonic Chip and Comb-Fed Tensor Core. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:photonic_integration_hall"
 			id: "7D3B1A6F4FF811C5"
 			rewards: [{ id: "13718070427E06D8", type: "xp", xp: 10 }]
@@ -3621,7 +3597,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "61DDBD3D847F2C16", item: "gtceu:photonic_integration_hall", type: "item" }]
-			x: 6.0d
+			x: 4.0d
 			y: 66.0d
 		}
 		{
@@ -3633,7 +3609,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "49841830FD453667", item: "gtceu:pulsar_timing_station", type: "item" }]
-			x: 8.0d
+			x: 6.0d
 			y: 66.0d
 		}
 		{
@@ -3645,19 +3621,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "2C6D9F7424BADAA4", item: "gtceu:quantum_gas_lab", type: "item" }]
-			x: 10.0d
-			y: 66.0d
-		}
-		{
-			description: ["A Grindless multiblock for Recoil Separation recipes. Build it mostly from Radiation Proof Machine Casing, with Superconducting Coil. The controller is crafted from UHV Machine Hull, UV Sensor and UV Field Generator. Unlocks Element 119 Recoil Record, Element 120 Recoil Record and Element 121 Atoms. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
-			icon: "gtceu:recoil_separator"
-			id: "265D36D48546CA24"
-			rewards: [{ id: "4C10632EF451F609", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UEV, Grindless"
-			tasks: [{ id: "7E17012800BE7EAD", item: "gtceu:recoil_separator", type: "item" }]
-			x: 12.0d
+			x: 8.0d
 			y: 66.0d
 		}
 		{
@@ -3669,11 +3633,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "25620CEB48039CDD", item: "gtceu:sic_fibre_plant", type: "item" }]
-			x: 14.0d
+			x: 10.0d
 			y: 66.0d
 		}
 		{
-			description: ["Casts single-crystal blades and wheels in a withdrawal furnace. Runs Single Crystal Casting recipes. Build it mostly from Heatproof Machine Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UV Robot Arm and UHV circuits. Unlocks Brayton Turbine Wheel, Cu(111) Foil and Large Grain Nb Disc. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Casts single-crystal blades and wheels in a withdrawal furnace. Runs Single Crystal Casting recipes. Build it mostly from HfTaCN Lining Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UV Robot Arm and UHV circuits. Unlocks Brayton Turbine Wheel, Cu(111) Foil and Large Grain Nb Disc. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:single_crystal_foundry"
 			id: "6F954D3328586F36"
 			rewards: [{ id: "1BB0D92761722F85", type: "xp", xp: 10 }]
@@ -3681,7 +3645,7 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "130E42987299B812", item: "gtceu:single_crystal_foundry", type: "item" }]
-			x: 16.0d
+			x: 12.0d
 			y: 66.0d
 		}
 		{
@@ -3693,11 +3657,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "455545D50D2C2EB5", item: "gtceu:snspd_foundry", type: "item" }]
-			x: 18.0d
+			x: 14.0d
 			y: 66.0d
 		}
 		{
-			description: ["A massive blast furnace: many copies of any blast furnace recipe. Runs Electric Blast Furnace recipes. Build it mostly from Heatproof Machine Casing, with Cupronickel coils. The controller is crafted from Electric Blast Furnace, HfTaCN Coil Block and UEV Field Generator. Unlocks Neodymium Ingot and Steel Ingot. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A massive blast furnace: many copies of any blast furnace recipe. Runs Electric Blast Furnace recipes. Build it mostly from HfTaCN Lining Casing, with Cupronickel coils. The controller is crafted from Electric Blast Furnace, HfTaCN Coil Block and UEV Field Generator. Unlocks Neodymium Ingot and Steel Ingot. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:stellar_forge"
 			id: "2C589CF6E760192A"
 			rewards: [{ id: "192302C7FE71E38F", type: "xp", xp: 10 }]
@@ -3705,11 +3669,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "1B44BF85591305E0", item: "gtceu:stellar_forge", type: "item" }]
-			x: 20.0d
+			x: 16.0d
 			y: 66.0d
 		}
 		{
-			description: ["A Grindless multiblock for Superheavy Chemistry recipes. Build it mostly from Radiation Proof Machine Casing, with Superconducting Coil. The controller is crafted from UHV Machine Hull, UV Sensor and UV Field Generator. Unlocks Element 121 Recoil, Element 122 Recoil and Superheavy Census II. Automate it through input item buses and output item buses."]
+			description: ["A Grindless multiblock for Superheavy Chemistry recipes. Build it mostly from SiC Composite Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UV Sensor and UV Field Generator. Unlocks Superheavy Census II, Element 121 Recoil and Element 122 Recoil. Automate it through input item buses and output item buses."]
 			icon: "gtceu:superheavy_chemistry_lab"
 			id: "12009A097F889AB9"
 			rewards: [{ id: "12AFB6B86F084B7B", type: "xp", xp: 10 }]
@@ -3717,11 +3681,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "183F537BCC5DF383", item: "gtceu:superheavy_chemistry_lab", type: "item" }]
-			x: 22.0d
+			x: 18.0d
 			y: 66.0d
 		}
 		{
-			description: ["A tier 10 fusion ring running D-He-3, p-11B and polarised fuel. Runs Fusion Reactor recipes. Build it mostly from UEV Fusion Casing, with HfTaCN coils. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Emitter. Unlocks Helium Plasma, Tritanium and Neutronium. Automate it through input fluid hatches and output fluid hatches."]
+			description: ["A tier 10 fusion ring running D-He-3, p-11B and polarised fuel. Runs Fusion Reactor recipes. Build it mostly from SiC Composite Casing, with HfTaCN coils. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Emitter. Unlocks Helium Plasma, Tritanium and Neutronium. Automate it through input fluid hatches and output fluid hatches."]
 			icon: "gtceu:uev_fusion_reactor"
 			id: "6D65EE3A62D28EEF"
 			rewards: [{ id: "7A7D2780817ECC6D", type: "xp", xp: 10 }]
@@ -3729,11 +3693,11 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "37C3574666B137F4", item: "gtceu:uev_fusion_reactor", type: "item" }]
-			x: 24.0d
+			x: 20.0d
 			y: 66.0d
 		}
 		{
-			description: ["A Grindless multiblock for Vdw Assembly recipes. Build it mostly from Photonic Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Robot Arm and UHV Conveyor Module. Unlocks Graphene Modulator, hBN-Encapsulated Graphene and hBN Emitter Chip. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["A Grindless multiblock for Vdw Assembly and Vdw Stacking recipes. Build it mostly from Photonic Casing, with Trinium coils. The controller is crafted from UHV Machine Hull, UHV Robot Arm and UHV Conveyor Module. Unlocks Graphene Modulator, hBN Flake and hBN-Encapsulated Graphene. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:vdw_stacker"
 			id: "27AC4FB57750AE84"
 			rewards: [{ id: "66073BEE70ACA983", type: "xp", xp: 10 }]
@@ -3741,8 +3705,8 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6296AFE4825844EB", item: "gtceu:vdw_stacker", type: "item" }]
-			x: 2.0d
-			y: 68.0d
+			x: 22.0d
+			y: 66.0d
 		}
 		{
 			description: ["Reads Sirius B's redshift to weigh the star. Runs Gravitational Redshift recipes. Build it mostly from Photonic Casing, with Trinium coils. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Sensor. Unlocks Mass-Radius Chart. Automate it through input item buses and output item buses."]
@@ -3753,8 +3717,8 @@
 			size: 1.5d
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "4D30A547C6E82998", item: "gtceu:white_dwarf_spectrograph", type: "item" }]
-			x: 4.0d
-			y: 68.0d
+			x: 24.0d
+			y: 66.0d
 		}
 		{
 			description: ["A Gregicality Rocketry multiblock for Space Elevator recipes. The controller is crafted from Robust Machine Casing, Trinaquadalloy dense plates and UEV Machine Hull. Unlocks Dyson Solar Cell, Dyson Sphere Casing and Dyson Sphere Maintenance Port. Automate it through input item buses and fluid hatches and output item buses."]
@@ -3765,7 +3729,7 @@
 			size: 1.25d
 			subtitle: "UEV, Gregicality Rocketry"
 			tasks: [{ id: "5E3C65EDFCDC7AF1", item: "gcyr:space_elevator", type: "item" }]
-			x: 6.0d
+			x: 2.0d
 			y: 68.0d
 		}
 		{
@@ -3780,7 +3744,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Exposes resist at 6.7 nm: the only maker of BEUV driver ASICs. Runs BEUV Lithography recipes. Build it mostly from Photonic Casing, with Trinium coils. The controller is crafted from UEV circuits, UIV Machine Hull and UEV Emitter. Unlocks BEUV Mirror, Zone Plate Wafer and Horizon Logic Wafer. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Exposes resist at 6.7 nm: the only maker of BEUV driver ASICs. Runs BEUV Lithography recipes. Build it mostly from Multilayer Optics Casing, with Trinium coils. The controller is crafted from UEV circuits, UIV Machine Hull and UEV Emitter. Unlocks BEUV Mirror, Zone Plate Wafer and Horizon Logic Wafer. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:beuv_scanner"
 			id: "3B9EA9080872DA81"
 			rewards: [{ id: "3BBE530150A5AE32", type: "xp", xp: 10 }]
@@ -3792,7 +3756,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Lifts neutron-star crust up a tether and a polar-cap electrode. Runs Crust Lifting recipes. Build it mostly from UIV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Piston. Unlocks Neutron-Star Crust. Automate it through input item buses and output item buses."]
+			description: ["Lifts neutron-star crust up a tether and a polar-cap electrode. Runs Crust Lifting recipes. Build it mostly from Neutron-Star Site Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Piston. Unlocks Neutron-Star Crust. Automate it through input item buses and output item buses."]
 			icon: "gtceu:crust_lift"
 			id: "52E67DA6FA6C21CA"
 			rewards: [{ id: "585E5886CDA6F674", type: "xp", xp: 10 }]
@@ -3804,7 +3768,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Holds a kilonova capsule while its heat decays into electricity. Runs Decay Heat recipes. Build it mostly from UIV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Motor. Unlocks Iron Dust, R-Process Ash and Aged Kilonova Capsule. Automate it through input item buses and output item buses and fluid hatches."]
+			description: ["Holds a kilonova capsule while its heat decays into electricity. Runs Decay Heat recipes. Build it mostly from Neutron-Star Site Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Motor. Unlocks Iron Dust, R-Process Ash and Aged Kilonova Capsule. Automate it through input item buses and output item buses and fluid hatches."]
 			icon: "gtceu:decay_heat_vault"
 			id: "74263932D8E53893"
 			rewards: [{ id: "475597ECD2A4F295", type: "xp", xp: 10 }]
@@ -3816,7 +3780,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Makes TPV tiles in open vacuum. Runs Droplet Radiator Assembly recipes. Build it mostly from UIV Machine Casing, with Trinium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Pump. Unlocks Shell Droplet Radiator and TPV Tile. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Makes TPV tiles in open vacuum. Runs Droplet Radiator Assembly recipes. Build it mostly from RHEA Casing, with Trinium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Pump. Unlocks Shell Droplet Radiator and TPV Tile. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:droplet_radiator_works"
 			id: "2F2835A39B64F014"
 			rewards: [{ id: "1F8E933F18A9C603", type: "xp", xp: 10 }]
@@ -3828,7 +3792,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Drops probes through the ergosphere and loads the Penrose sleds. Runs Ergosphere Probing recipes. Build it mostly from UIV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Emitter. Unlocks Split-Charge Sled, Launched Relay Seed and Sled Hull. Automate it through input item buses and output item buses."]
+			description: ["Drops probes through the ergosphere and loads the Penrose sleds. Runs Ergosphere Probing recipes. Build it mostly from RHEA Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Emitter. Unlocks Split-Charge Sled, Launched Relay Seed and Sled Hull. Automate it through input item buses and output item buses."]
 			icon: "gtceu:ergosphere_probe_bay"
 			id: "12554A7B4104DDAD"
 			rewards: [{ id: "508D53C049092210", type: "xp", xp: 10 }]
@@ -3840,7 +3804,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Writes structures inside glass and metal with a femtosecond laser. Runs Femtosecond Writing recipes. Build it mostly from UEV Machine Casing, with Trinium coils. The controller is crafted from UEV circuits, UIV Machine Hull and UEV Emitter. Unlocks Void Crystal Lattice, Addressed Holo Block and Addressed Holo Slab. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Writes structures inside glass and metal with a femtosecond laser. Runs Femtosecond Writing recipes. Build it mostly from Photonic Casing, with Trinium coils. The controller is crafted from UEV circuits, UIV Machine Hull and UEV Emitter. Unlocks Void Crystal Lattice, Addressed Holo Block and Addressed Holo Slab. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:femtosecond_writer"
 			id: "59FADD0217D5CC80"
 			rewards: [{ id: "618911E69DE34141", type: "xp", xp: 10 }]
@@ -3864,7 +3828,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Writes UIV research and makes the neutron-star and Kerr charts. Runs Matrioshka Computing recipes. Build it mostly from UIV Machine Casing, with Trinium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Piston. Unlocks Data Module, Kerr Chart and Neutron-Star EOS Chart. Automate it through input item buses and output item buses."]
+			description: ["Writes UIV research and makes the neutron-star and Kerr charts. Runs Matrioshka Computing recipes. Build it mostly from RHEA Casing, with Trinium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Piston. Unlocks Data Module, Kerr Chart and Neutron-Star EOS Chart. Automate it through input item buses and output item buses."]
 			icon: "gtceu:matrioshka_computer"
 			id: "287D485514E73276"
 			rewards: [{ id: "79CFB9BD58F8D57A", type: "xp", xp: 10 }]
@@ -3876,7 +3840,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Cools nuclei to millikelvin: mK cryostat modules and P:Si processors. Runs Nuclear Demagnetisation recipes. Build it mostly from UEV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UEV circuits, UIV Machine Hull and UEV Electric Pump. Unlocks Superfluid Helium 3, mK Cryostat Module and Cryo Photonic Interposer. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Cools nuclei to millikelvin: mK cryostat modules and P:Si processors. Runs Nuclear Demagnetisation recipes. Build it mostly from Cryostat Casing, with Trinium coils. The controller is crafted from UEV circuits, UIV Machine Hull and UEV Electric Pump. Unlocks Superfluid Helium 3, mK Cryostat Module and Cryo Photonic Interposer. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:millikelvin_cryostat_works"
 			id: "545BC95B868B0261"
 			rewards: [{ id: "113BB3E27BD2D615", type: "xp", xp: 10 }]
@@ -3888,19 +3852,7 @@
 			y: 71.0d
 		}
 		{
-			description: ["Splits the crust at the neutron drip line behind a nickel-58 guide. Runs Neutron Drip Separation recipes. Build it mostly from UIV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Pump. Unlocks Crust Nuclei and Inner-Crust Matter. Automate it through input item buses and output item buses and fluid hatches."]
-			icon: "gtceu:neutron_drip_separator"
-			id: "5D11E30183005226"
-			rewards: [{ id: "71F4BEE42AB86649", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UIV, Grindless"
-			tasks: [{ id: "137D6D06AFA8AA25", item: "gtceu:neutron_drip_separator", type: "item" }]
-			x: 20.0d
-			y: 71.0d
-		}
-		{
-			description: ["Cools drip neutrons in superfluid helium and cages them. Runs Neutronium Caging recipes. Build it mostly from UIV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Robot Arm. Unlocks Neutronium Pellet, Cage Part and Neutron Superfluid. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Splits the crust at the drip line, then cages the neutrons. Runs Neutronium Caging and Neutron Drip Separation recipes. Build it mostly from Neutron-Star Site Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Robot Arm. Unlocks Neutronium Pellet, Cage Part and Crust Nuclei."]
 			icon: "gtceu:neutronium_cage"
 			id: "1A6C8D9C581E6464"
 			rewards: [{ id: "6B41AF82AA760064", type: "xp", xp: 10 }]
@@ -3908,7 +3860,7 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "6CDFFA81301B3D71", item: "gtceu:neutronium_cage", type: "item" }]
-			x: 22.0d
+			x: 20.0d
 			y: 71.0d
 		}
 		{
@@ -3920,11 +3872,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "7E0C89EF21B2BD4C", item: "gtceu:neutronium_compression_hall", type: "item" }]
-			x: 24.0d
+			x: 22.0d
 			y: 71.0d
 		}
 		{
-			description: ["Drops a split-charge sled into the ergosphere to harvest energy. Runs Penrose Extraction recipes. Build it mostly from UIV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Field Generator. Unlocks Recovered Half-Sled and Payload Casing. Automate it through input item buses and output item buses."]
+			description: ["Drops a split-charge sled into the ergosphere to harvest energy. Runs Penrose Extraction recipes. Build it mostly from MH Field Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Field Generator. Unlocks Recovered Half-Sled and Payload Casing. Automate it through input item buses and output item buses."]
 			icon: "gtceu:penrose_engine"
 			id: "353F4D555EE89D3A"
 			rewards: [{ id: "3D26DA706495B497", type: "xp", xp: 10 }]
@@ -3932,11 +3884,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "20DA3CC8D6BE40F6", item: "gtceu:penrose_engine", type: "item" }]
-			x: 2.0d
-			y: 73.0d
+			x: 24.0d
+			y: 71.0d
 		}
 		{
-			description: ["Polarises hydrogen, Li-6 hydride and 15NH3 for the Mk5 fuels. Runs Proton Polarisation recipes. Build it mostly from Stable Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Pump. Unlocks Polarised 15NH3 Ice, Polarised Li-6H and Polarised Hydrogen Gas. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Polarises hydrogen, Li-6 hydride and 15NH3 for the Mk5 fuels. Runs Proton Polarisation recipes. Build it mostly from MH Field Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Pump. Unlocks Polarised 15NH3 Ice, Polarised Li-6H and Polarised Hydrogen Gas. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:polarised_proton_source"
 			id: "79B5E5BABC023F25"
 			rewards: [{ id: "2CE444529B54954A", type: "xp", xp: 10 }]
@@ -3944,11 +3896,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "56807A64AE20012C", item: "gtceu:polarised_proton_source", type: "item" }]
-			x: 4.0d
+			x: 2.0d
 			y: 73.0d
 		}
 		{
-			description: ["Condenses positronium and makes it annihilate in step: a gamma laser core. Runs Positronium Condensation recipes. Build it mostly from Cryostat Casing, with Trinium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Pump. Unlocks Gamma Laser Cavity, Laser-Cooled Positronium and Positronium in Aerogel. Automate it through input item buses and output item buses."]
+			description: ["Condenses positronium and makes it annihilate in step: a gamma laser core. Runs Positronium Condensation recipes. Build it mostly from Dilution Cryostat Casing, with Trinium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Pump. Unlocks Gamma Laser Cavity, Laser-Cooled Positronium and Positronium in Aerogel. Automate it through input item buses and output item buses."]
 			icon: "gtceu:positronium_condensate_lab"
 			id: "4F030A74FE5A3902"
 			rewards: [{ id: "2D084FDF00E0E1E4", type: "xp", xp: 10 }]
@@ -3956,11 +3908,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "4F57978989D532DD", item: "gtceu:positronium_condensate_lab", type: "item" }]
-			x: 6.0d
+			x: 4.0d
 			y: 73.0d
 		}
 		{
-			description: ["Catches the electron-positron wind of a pulsar as pair plasma. Runs Pulsar Wind Trapping recipes. Build it mostly from UIV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Motor. Unlocks Pair Plasma. Automate it through input item buses and output fluid hatches."]
+			description: ["Catches the electron-positron wind of a pulsar as pair plasma. Runs Pulsar Wind Trapping recipes. Build it mostly from MH Field Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Motor. Unlocks Pair Plasma. Automate it through input item buses and output fluid hatches."]
 			icon: "gtceu:pulsar_wind_trap"
 			id: "701AAF9C24D8F7AC"
 			rewards: [{ id: "76C0426E51C91A83", type: "xp", xp: 10 }]
@@ -3968,11 +3920,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "36F10CF651963F45", item: "gtceu:pulsar_wind_trap", type: "item" }]
-			x: 8.0d
+			x: 6.0d
 			y: 73.0d
 		}
 		{
-			description: ["Lets crust nuclei swell in a flood of neutrons: the r-process. Runs R Process Decompression recipes. Build it mostly from UIV Machine Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Conveyor Module. Unlocks R-Process Ash, Fission Fragments and Flashed Uranium Target. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Lets crust nuclei swell in a flood of neutrons: the r-process. Runs R Process Decompression recipes. Build it mostly from Neutron-Star Site Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Conveyor Module. Unlocks R-Process Ash, Fission Fragments and Flashed Uranium Target. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:r_process_decompressor"
 			id: "5A55489EBE6F0B79"
 			rewards: [{ id: "33B0C027C5A99B83", type: "xp", xp: 10 }]
@@ -3980,11 +3932,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "6E80318EE3750225", item: "gtceu:r_process_decompressor", type: "item" }]
-			x: 10.0d
+			x: 8.0d
 			y: 73.0d
 		}
 		{
-			description: ["A pulsed-power ring that makes metallic hydrogen and lonsdaleite. Runs Ramp Compression recipes. Build it mostly from UEV Machine Casing, with Coilgun Coil Casing. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Electric Piston. Unlocks Metallic Hydrogen Ingot, Cubic Gauche Nitrogen Dust and Lonsdaleite Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A pulsed-power ring that makes metallic hydrogen and lonsdaleite. Runs Ramp Compression recipes. Build it mostly from RHEA Casing, with Coilgun Coil Casing. The controller is crafted from UEV circuits, UEV Machine Hull and UEV Electric Piston. Unlocks Metallic Hydrogen Ingot, Cubic Gauche Nitrogen Dust and Lonsdaleite Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:ramp_compression_pulser"
 			id: "76E4AF66980635DD"
 			rewards: [{ id: "42C4A63C10561A7E", type: "xp", xp: 10 }]
@@ -3992,7 +3944,7 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "28372C68C837902F", item: "gtceu:ramp_compression_pulser", type: "item" }]
-			x: 12.0d
+			x: 10.0d
 			y: 73.0d
 		}
 		{
@@ -4004,11 +3956,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "45BB596332FFD584", item: "gtceu:spectral_hole_burner", type: "item" }]
-			x: 14.0d
+			x: 12.0d
 			y: 73.0d
 		}
 		{
-			description: ["Moves single hydrogen atoms: patterns and doses Si-28 wafers. Runs Stm Lithography recipes. Build it mostly from UEV Machine Casing, with Trinium coils. The controller is crafted from UEV circuits, UIV Machine Hull and UEV Sensor. Unlocks Gated 2DEG Wafer, H-Terminated Wafer and PH3-Dosed Wafer. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Moves single hydrogen atoms: patterns and doses Si-28 wafers. Runs Stm Lithography recipes. Build it mostly from Multilayer Optics Casing, with Trinium coils. The controller is crafted from UEV circuits, UIV Machine Hull and UEV Sensor. Unlocks Gated 2DEG Wafer, H-Terminated Wafer and PH3-Dosed Wafer. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:stm_lithography_cell"
 			id: "73421B5583CFCA60"
 			rewards: [{ id: "573B1357EC4CA4FF", type: "xp", xp: 10 }]
@@ -4016,7 +3968,7 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "55EBE92D39F835C2", item: "gtceu:stm_lithography_cell", type: "item" }]
-			x: 16.0d
+			x: 14.0d
 			y: 73.0d
 		}
 		{
@@ -4028,11 +3980,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "12A8D25073787598", item: "gtceu:tfln_fab", type: "item" }]
-			x: 18.0d
+			x: 16.0d
 			y: 73.0d
 		}
 		{
-			description: ["A second fusion ring that burns three polarised fuels. Runs Fusion Reactor recipes. Build it mostly from UIV Fusion Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Piston. Unlocks Helium Plasma, Tritanium and Neutronium. Automate it through input fluid hatches and output fluid hatches."]
+			description: ["A second fusion ring that burns three polarised fuels. Runs Fusion Reactor recipes. Build it mostly from RHEA Casing, with Metallic Hydrogen coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Piston. Unlocks Helium Plasma, Tritanium and Neutronium. Automate it through input fluid hatches and output fluid hatches."]
 			icon: "gtceu:uiv_fusion_reactor"
 			id: "1694C4059E64A148"
 			rewards: [{ id: "51C956B4A606EC58", type: "xp", xp: 10 }]
@@ -4040,11 +3992,11 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "45DB41EDFA6BFFBF", item: "gtceu:uiv_fusion_reactor", type: "item" }]
-			x: 20.0d
+			x: 18.0d
 			y: 73.0d
 		}
 		{
-			description: ["Folds pulsar X-ray pulses into a timing solution for seed navigation. Runs Xray Pulse Profiling recipes. Build it mostly from Stable Machine Casing, with Trinium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Sensor. Unlocks XNAV Unit, Raw J0437 Pulse Profile and Pulsar Navigation Solution. Automate it through input item buses and output item buses."]
+			description: ["Folds pulsar X-ray pulses into a timing solution for seed navigation. Runs Xray Pulse Profiling recipes. Build it mostly from Multilayer Optics Casing, with Trinium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Sensor. Unlocks XNAV Unit, Raw J0437 Pulse Profile and Pulsar Navigation Solution. Automate it through input item buses and output item buses."]
 			icon: "gtceu:xray_pulse_profiler"
 			id: "575E79057A445BB3"
 			rewards: [{ id: "7A4E1172A563A987", type: "xp", xp: 10 }]
@@ -4052,7 +4004,7 @@
 			size: 1.5d
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "7AE78A4AFB501923", item: "gtceu:xray_pulse_profiler", type: "item" }]
-			x: 22.0d
+			x: 20.0d
 			y: 73.0d
 		}
 		{
@@ -4064,7 +4016,7 @@
 			size: 1.25d
 			subtitle: "UIV, GT--"
 			tasks: [{ id: "7E933A4932485653", item: "gtnn:neutron_activator", type: "item" }]
-			x: 24.0d
+			x: 22.0d
 			y: 73.0d
 		}
 		{
@@ -4079,7 +4031,7 @@
 			y: 76.0d
 		}
 		{
-			description: ["A magnetic scoop that takes plasma from the accretion disk. Runs Disk Skimming recipes. Build it mostly from UXV Machine Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Electric Motor and UIV Emitter. Unlocks Disk Plasma and Hot Flow Plasma. Automate it through input item buses and output fluid hatches."]
+			description: ["A magnetic scoop that takes plasma from the accretion disk. Runs Disk Skimming recipes. Build it mostly from SiC Composite Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Electric Motor and UIV Emitter. Unlocks Disk Plasma and Hot Flow Plasma. Automate it through input item buses and output fluid hatches."]
 			icon: "gtceu:accretion_disk_skimmer"
 			id: "51850CAC4FC9CA44"
 			rewards: [{ id: "38E45F12D7563527", type: "xp", xp: 10 }]
@@ -4091,7 +4043,7 @@
 			y: 76.0d
 		}
 		{
-			description: ["Binds positrons into positronium and fires a 511 keV gamma pulse. Runs Annihilation Lasing recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Emitter. Unlocks Gamma Laser Module and Moderated Ps Cell. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Binds positrons into positronium and fires a 511 keV gamma pulse. Runs Annihilation Lasing recipes. Build it mostly from SiC Composite Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Emitter. Unlocks Gamma Laser Module and Moderated Ps Cell. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:annihilation_laser_works"
 			id: "45660FE53DF209BF"
 			rewards: [{ id: "6FD43BD7E7746FEA", type: "xp", xp: 10 }]
@@ -4103,7 +4055,7 @@
 			y: 76.0d
 		}
 		{
-			description: ["Power from a black hole's spin: the Blandford-Znajek process. Runs Blandford Znajek recipes. Build it mostly from UXV Machine Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Electric Piston. Unlocks Cooled Exhaust. Automate it through input item buses and fluid hatches and output fluid hatches."]
+			description: ["Power from a black hole's spin: the Blandford-Znajek process. Runs Blandford Znajek recipes. Build it mostly from Gum Metal Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Electric Piston. Unlocks Cooled Exhaust. Automate it through input item buses and fluid hatches and output fluid hatches."]
 			icon: "gtceu:bz_dynamo"
 			id: "4B5D93E40E45A0DC"
 			rewards: [{ id: "220DFE7EDFBE082B", type: "xp", xp: 10 }]
@@ -4115,7 +4067,7 @@
 			y: 76.0d
 		}
 		{
-			description: ["Sweeps the titanium-rich knots of Cassiopeia A into dust. Runs Ejecta Sweeping recipes. Build it mostly from Whipple Shield Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Electric Pump and UIV Conveyor Module. Unlocks Ejecta Knot Dust. Automate it through input item buses and output item buses."]
+			description: ["Sweeps the titanium-rich knots of Cassiopeia A into dust. Runs Ejecta Sweeping recipes. Build it mostly from SiC Composite Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Electric Pump and UIV Conveyor Module. Unlocks Ejecta Knot Dust. Automate it through input item buses and output item buses."]
 			icon: "gtceu:ejecta_knot_sweeper"
 			id: "2E9DD3F0857B13B5"
 			rewards: [{ id: "2B24D89833920498", type: "xp", xp: 10 }]
@@ -4127,7 +4079,7 @@
 			y: 76.0d
 		}
 		{
-			description: ["Forms field-reversed plasmoids and flux-loaded plasma. Runs Frc Forming recipes. Build it mostly from High Power Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Electric Pump. Unlocks FRC Cartridge, Flux Loaded Frc and Confined Vms Plasma. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Forms field-reversed plasmoids and flux-loaded plasma. Runs Frc Forming recipes. Build it mostly from Gum Metal Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Electric Pump. Unlocks FRC Cartridge, Flux Loaded Frc and Confined Vms Plasma. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:frc_former"
 			id: "6DB41708051D480A"
 			rewards: [{ id: "1E783C7F2040E929", type: "xp", xp: 10 }]
@@ -4139,7 +4091,7 @@
 			y: 76.0d
 		}
 		{
-			description: ["A beamline that makes island nuclides by multinucleon transfer. Runs Multinucleon Transfer recipes. Build it mostly from High Power Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UXV Sensor and UIV Field Generator. Unlocks Island Nuclide, Island Chart and MNT Thermal Ions. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A beamline that makes island nuclides by multinucleon transfer. Runs Multinucleon Transfer recipes. Build it mostly from Gum Metal Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UXV Sensor and UIV Field Generator. Unlocks Island Nuclide, Island Chart and MNT Thermal Ions. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:mnt_collider"
 			id: "491F5078D65464AB"
 			rewards: [{ id: "76D543C3C3D28CFF", type: "xp", xp: 10 }]
@@ -4151,7 +4103,7 @@
 			y: 76.0d
 		}
 		{
-			description: ["Sputters the MTJ, MRAM, SAF and STNO spintronic stacks. Runs MTJ Sputtering recipes. Build it mostly from Plascrete, with Superconducting Coil. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Sensor. Unlocks MRAM Stack Wafer, Insulated Kerr Wire and Coated Be Window. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Sputters MTJ and SAF stacks, deposits oxide films, patterns racetracks. Runs MTJ Sputtering, Pulsed Laser Deposition and Racetrack Patterning recipes. Build it mostly from Gum Metal Casing, with Superconducting Coil. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Sensor. Unlocks MRAM Stack Wafer, Insulated Kerr Wire and Patterned Track Wafer."]
 			icon: "gtceu:mtj_sputter_cluster"
 			id: "7D82566C8E2B298F"
 			rewards: [{ id: "5735CBC962DBE327", type: "xp", xp: 10 }]
@@ -4163,31 +4115,7 @@
 			y: 76.0d
 		}
 		{
-			description: ["Pulsed laser deposition of oxide electrode, BiFeO3 and ME switch films. Runs Pulsed Laser Deposition recipes. Build it mostly from Computer Casing, with Tritanium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Emitter. Unlocks Kerr Coated Tape, BiFeO3 Film Wafer and CoFe Magnetoelectric Wafer. Automate it through input item buses and fluid hatches and output item buses."]
-			icon: "gtceu:oxide_pld_chamber"
-			id: "5E3D7E3265445DAB"
-			rewards: [{ id: "18C4B2450DE2954A", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UXV, Grindless"
-			tasks: [{ id: "3258710F436B8916", item: "gtceu:oxide_pld_chamber", type: "item" }]
-			x: 16.0d
-			y: 76.0d
-		}
-		{
-			description: ["Draws the spaghetti phase into strands of pasta wire. Runs Pasta Drawing recipes. Build it mostly from Neutron-Star Site Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Electric Motor and UIV Robot Arm. Unlocks Horizon Strand Single Wire, Pasta Strand Single Wire and Chain Strand Single Wire. Automate it through input item buses and output item buses."]
-			icon: "gtceu:pasta_draw_bench"
-			id: "7CA73F47EADF20A0"
-			rewards: [{ id: "4A3A815033B2749A", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UXV, Grindless"
-			tasks: [{ id: "534D16B8EA508B39", item: "gtceu:pasta_draw_bench", type: "item" }]
-			x: 18.0d
-			y: 76.0d
-		}
-		{
-			description: ["Catches the nuclear pasta a glitching Vela pulsar sheds. Runs Pasta Extraction recipes. Build it mostly from Cryostat Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Emitter. Unlocks Chain Crust Slab, Chain Lattice Slab and Nickel Chain Slab. Automate it through input item buses and output item buses."]
+			description: ["Catches the nuclear pasta a glitching Vela pulsar sheds. Runs Pasta Extraction recipes. Build it mostly from Pasta Containment Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Emitter. Unlocks Chain Crust Slab, Chain Lattice Slab and Nickel Chain Slab. Automate it through input item buses and output item buses."]
 			icon: "gtceu:pasta_extractor"
 			id: "65657F05D269AAE9"
 			rewards: [{ id: "43BADCD2662F1FD3", type: "xp", xp: 10 }]
@@ -4195,23 +4123,11 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "795133DBE57C1C1C", item: "gtceu:pasta_extractor", type: "item" }]
-			x: 20.0d
+			x: 16.0d
 			y: 76.0d
 		}
 		{
-			description: ["Presses the lasagna phase into plates and electrodes. Runs Pasta Lamination recipes. Build it mostly from Neutron-Star Site Casing. The controller is crafted from UIV Machine Hull, UIV Electric Piston and UIV Robot Arm. Unlocks Chain Lamina Stack, Lasagna Plate and Chain Lamina. Automate it through input item buses and output item buses."]
-			icon: "gtceu:pasta_laminator"
-			id: "5D5C9EC314DD774D"
-			rewards: [{ id: "37579C82E575E2E0", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UXV, Grindless"
-			tasks: [{ id: "6F8C12C3E293A080", item: "gtceu:pasta_laminator", type: "item" }]
-			x: 22.0d
-			y: 76.0d
-		}
-		{
-			description: ["Sorts raw pasta into spaghetti, lasagna and gnocchi phases. Runs Pasta Sorting recipes. Build it mostly from Neutron-Star Site Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Conveyor Module and UIV Electric Pump. Unlocks Caged Nickel Chain, Pasta Core Sample and Caged Chain Lattice. Automate it through input item buses and output item buses."]
+			description: ["Sorts raw pasta into phases, draws strand wire, presses lasagna plates. Runs Pasta Sorting, Pasta Drawing and Pasta Lamination recipes. Build it mostly from Pasta Containment Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Conveyor Module and UIV Electric Pump. Unlocks Chain Lamina Stack, Horizon Strand Single Wire and Lasagna Plate. Automate it through input item buses and output item buses."]
 			icon: "gtceu:pasta_phase_sorter"
 			id: "4E99ABC4AAC8112E"
 			rewards: [{ id: "29D479D70E999FC6", type: "xp", xp: 10 }]
@@ -4219,11 +4135,11 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "1730CB25C516C731", item: "gtceu:pasta_phase_sorter", type: "item" }]
-			x: 24.0d
+			x: 18.0d
 			y: 76.0d
 		}
 		{
-			description: ["A solenoid that sorts stellar and disk plasma by mass. Runs Plasma Mass Filtering recipes. Build it mostly from High Power Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Emitter. Unlocks Filtered Hot Flow, Hydrogen and Filtered Disk Plasma. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A solenoid that sorts stellar and disk plasma by mass. Runs Plasma Mass Filtering recipes. Build it mostly from SiC Composite Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Emitter. Unlocks Filtered Hot Flow, Hydrogen and Filtered Disk Plasma. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:plasma_mass_filter"
 			id: "295DAA159CAFC56B"
 			rewards: [{ id: "4F48D2F0B6F01CBE", type: "xp", xp: 10 }]
@@ -4231,11 +4147,11 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "36C722F20B5C2821", item: "gtceu:plasma_mass_filter", type: "item" }]
-			x: 2.0d
-			y: 78.0d
+			x: 20.0d
+			y: 76.0d
 		}
 		{
-			description: ["Generator: taps the pulsar's polar cap through lasagna electrodes. Runs Polar Cap Tapping recipes. Build it mostly from Neutron-Star Site Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Electric Motor and UIV Electric Pump. Automate it through input item buses."]
+			description: ["Generator: taps the pulsar's polar cap through lasagna electrodes. Runs Polar Cap Tapping recipes. Build it mostly from Gum Metal Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Electric Motor and UIV Electric Pump. Automate it through input item buses."]
 			icon: "gtceu:polar_cap_tap"
 			id: "3F46A54C5F1F465B"
 			rewards: [{ id: "266B95F98C0E59CF", type: "xp", xp: 10 }]
@@ -4243,20 +4159,8 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "14B163814BBD85B3", item: "gtceu:polar_cap_tap", type: "item" }]
-			x: 4.0d
-			y: 78.0d
-		}
-		{
-			description: ["Patterns SAF tracks and bonds MTJ dies into racetrack chips. Runs Racetrack Patterning recipes. Build it mostly from Filter Casing, with Superconducting Coil. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Motor. Unlocks Patterned Track Wafer, Racetrack Chip and Racetrack 3D Stack. Automate it through input item buses and fluid hatches and output item buses."]
-			icon: "gtceu:racetrack_fab"
-			id: "38AEFBDE6F23EC73"
-			rewards: [{ id: "1780FEBC4F33519A", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UXV, Grindless"
-			tasks: [{ id: "7F644D7931297BB0", item: "gtceu:racetrack_fab", type: "item" }]
-			x: 6.0d
-			y: 78.0d
+			x: 22.0d
+			y: 76.0d
 		}
 		{
 			description: ["Makes the weak-link cell and the SHeQUID gyro in a He-II bath. Runs Shequid Assembly recipes. Build it mostly from Cryostat Casing, with Superconducting Coil. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Field Generator. Unlocks Horizon Valve, Weak-Link Cell and SHeQUID Rotation Ref. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
@@ -4267,11 +4171,11 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "55CC1FC720B655C2", item: "gtceu:shequid_works", type: "item" }]
-			x: 8.0d
-			y: 78.0d
+			x: 24.0d
+			y: 76.0d
 		}
 		{
-			description: ["Condenses the heavy plasma cut stage by stage in a seven-stage column. Runs Stellar Condensation recipes. Build it mostly from UXV Machine Casing. The controller is crafted from UIV Machine Hull, UIV Electric Pump and UIV Conveyor Module. Unlocks Refractory Condensate. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Condenses the heavy plasma cut stage by stage in a seven-stage column. Runs Stellar Condensation recipes. Build it mostly from Gum Metal Casing. The controller is crafted from UIV Machine Hull, UIV Electric Pump and UIV Conveyor Module. Unlocks Refractory Condensate. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:stellar_condensation_tower"
 			id: "762CE69408C36228"
 			rewards: [{ id: "231BF6CE5BF340D7", type: "xp", xp: 10 }]
@@ -4279,11 +4183,11 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "3943803C7E3875FB", item: "gtceu:stellar_condensation_tower", type: "item" }]
-			x: 10.0d
+			x: 2.0d
 			y: 78.0d
 		}
 		{
-			description: ["A magnetic funnel that lifts plasma out of the Cygnus X-1 donor star. Runs Star Lifting recipes. Build it mostly from UXV Machine Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Electric Pump. Unlocks Stellar Plasma, Lifted Stellar Plasma and Elevator Log."]
+			description: ["A magnetic funnel that lifts plasma out of the Cygnus X-1 donor star. Runs Star Lifting recipes. Build it mostly from SiC Composite Casing, with Superconducting Coil. The controller is crafted from UIV Machine Hull, UIV Field Generator and UIV Electric Pump. Unlocks Stellar Plasma, Lifted Stellar Plasma and Elevator Log."]
 			icon: "gtceu:stellar_elevator"
 			id: "19140D1EDC915704"
 			rewards: [{ id: "74EA9C4E87B8D433", type: "xp", xp: 10 }]
@@ -4291,11 +4195,11 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "347A7AEDF2194C3F", item: "gtceu:stellar_elevator", type: "item" }]
-			x: 12.0d
+			x: 4.0d
 			y: 78.0d
 		}
 		{
-			description: ["Runs distillation tower and distillery recipes in bulk, one mode at a time. Runs Distillation Tower and Distillery recipes. Build it mostly from UXV Machine Casing, with Superconducting Coil. The controller is crafted from UXV Machine Hull, UXV Conveyor Module and UXV Robot Arm. Unlocks Carbon Dust, Methane and Propane. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Runs distillation tower and distillery recipes in bulk, one mode at a time. Runs Distillation Tower and Distillery recipes. Build it mostly from Gum Metal Casing, with Superconducting Coil. The controller is crafted from UXV Machine Hull, UXV Conveyor Module and UXV Robot Arm. Unlocks Carbon Dust, Methane and Propane. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:stellar_fractionation_hall"
 			id: "3F90C96F6C4A40F5"
 			rewards: [{ id: "4866F98D9F91F6AA", type: "xp", xp: 10 }]
@@ -4303,11 +4207,11 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "416709EC8DEE3F5A", item: "gtceu:stellar_fractionation_hall", type: "item" }]
-			x: 14.0d
+			x: 6.0d
 			y: 78.0d
 		}
 		{
-			description: ["The stellar burning ring: a third fusion ring for a massive star's fuels. Runs Fusion Reactor recipes. Build it mostly from UXV Fusion Casing, with Metallic Hydrogen coils. The controller is crafted from UXV Machine Hull, UXV Electric Motor and UXV Electric Pump. Unlocks Helium Plasma, Tritanium and Neutronium. Automate it through input fluid hatches and output fluid hatches."]
+			description: ["The stellar burning ring: a third fusion ring for a massive star's fuels. Runs Fusion Reactor recipes. Build it mostly from Gum Metal Casing, with Metallic Hydrogen coils. The controller is crafted from UXV Machine Hull, UXV Electric Motor and UXV Electric Pump. Unlocks Helium Plasma, Tritanium and Neutronium. Automate it through input fluid hatches and output fluid hatches."]
 			icon: "gtceu:uxv_fusion_reactor"
 			id: "48DC59F9B505F946"
 			rewards: [{ id: "3BE0BEDE3C6AE5D9", type: "xp", xp: 10 }]
@@ -4315,23 +4219,11 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "3B43AC505C6BB573", item: "gtceu:uxv_fusion_reactor", type: "item" }]
-			x: 16.0d
+			x: 8.0d
 			y: 78.0d
 		}
 		{
-			description: ["Cleaves van der Waals crystals and stacks them into SOT heterostacks. Runs Vdw Stacking recipes. Build it mostly from Clean Machine Casing. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Robot Arm. Unlocks hBN Flake, FGT Flake and Graphene hBN Film. Automate it through input item buses and fluid hatches and output item buses."]
-			icon: "gtceu:vdw_stacking_cell"
-			id: "1CDB652444015860"
-			rewards: [{ id: "6A3922EEB6DE2794", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "UXV, Grindless"
-			tasks: [{ id: "2DD3EE0E5DDB3169", item: "gtceu:vdw_stacking_cell", type: "item" }]
-			x: 18.0d
-			y: 78.0d
-		}
-		{
-			description: ["Grows YIG films on GGG wafers from a lead-borate flux. Runs Liquid Phase Epitaxy recipes. Build it mostly from Robust Machine Casing, with Tritanium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Piston. Unlocks LPE Flux, YIG Film Wafer and Bi YIG Film. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Grows YIG films on GGG wafers from a lead-borate flux. Runs Liquid Phase Epitaxy recipes. Build it mostly from SiC Composite Casing, with Tritanium coils. The controller is crafted from UIV circuits, UIV Machine Hull and UIV Electric Piston. Unlocks LPE Flux, YIG Film Wafer and Bi YIG Film. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:yig_lpe_furnace"
 			id: "7B2D96714599E94A"
 			rewards: [{ id: "386CD00E21C71710", type: "xp", xp: 10 }]
@@ -4339,7 +4231,7 @@
 			size: 1.5d
 			subtitle: "UXV, Grindless"
 			tasks: [{ id: "247F210CEC3F06F3", item: "gtceu:yig_lpe_furnace", type: "item" }]
-			x: 20.0d
+			x: 10.0d
 			y: 78.0d
 		}
 		{
@@ -4354,7 +4246,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Matter and antimatter power. Runs Annihilation Power recipes. Build it mostly from Annihilation Shield Casing, with Fusion Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Electric Pump. Unlocks Spent ACMF Hohlraum. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Matter and antimatter power. Runs Annihilation Power recipes. Build it mostly from TPV Wall Casing, with Fusion Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Electric Pump. Unlocks Spent ACMF Hohlraum. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:annihilation_engine"
 			id: "43C7BD359430929D"
 			rewards: [{ id: "5315BBEBB4CFAEB2", type: "xp", xp: 10 }]
@@ -4366,7 +4258,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Traps, cools and freezes antihydrogen. Runs Antihydrogen Synthesis recipes. Build it mostly from NEG XHV Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Emitter. Automate it through input item buses and output item buses."]
+			description: ["Traps, cools and freezes antihydrogen. Runs Antihydrogen Synthesis recipes. Build it mostly from Annihilation Shield Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Emitter. Automate it through input item buses and output item buses."]
 			icon: "gtceu:antihydrogen_foundry"
 			id: "326658CAA08B5811"
 			rewards: [{ id: "2E2C8C84A8BB6C95", type: "xp", xp: 10 }]
@@ -4378,7 +4270,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["A Grindless multiblock for Beam Cooling recipes. Build it mostly from High Power Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Sensor. Unlocks Cold Antiproton Cell and Stochastically Cooled Beam. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A Grindless multiblock for Antiproton Production and Beam Cooling recipes. Build it mostly from Chain Lamina Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Sensor. Unlocks Cold Antiproton Cell, Decelerated Antiproton Beam and Hot Antiproton Beam. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:antiproton_decelerator"
 			id: "6B4CBA2EBFBECA5C"
 			rewards: [{ id: "59C40C9F7E6DAE46", type: "xp", xp: 10 }]
@@ -4390,7 +4282,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Four assembly tracks under one gantry: runs assembly line recipes in bulk. Runs Assembly Line recipes. Build it mostly from OpV Machine Casing. The controller is crafted from OpV Machine Hull, OpV Robot Arm and OpV Conveyor Module. Unlocks Orbital Solar Panel, MAX Battery and UIV Machine Hull. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Gantry hall over four tracks: bulk assembly lines. Data hatch: marked head cell. Runs Assembly Line recipes. Build it mostly from Chain Lamina Casing. The controller is crafted from OpV Machine Hull, OpV Robot Arm and OpV Conveyor Module. Unlocks Orbital Solar Panel, MAX Battery and UIV Machine Hull. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:assembly_line_array"
 			id: "38C70C2FE52EBDA0"
 			rewards: [{ id: "6BDF1DC4F2CCE6A0", type: "xp", xp: 10 }]
@@ -4402,7 +4294,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Turns deployed node packs into power; the packs are used up. Runs Bulge Light Collection recipes. Build it mostly from High Power Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Sensor and OpV Field Generator. Unlocks Spent Collector Node. Automate it through input item buses and output item buses."]
+			description: ["Turns deployed node packs into power; the packs are used up. Runs Bulge Light Collection recipes. Build it mostly from TPV Wall Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Sensor and OpV Field Generator. Unlocks Spent Collector Node. Automate it through input item buses and output item buses."]
 			icon: "gtceu:bulge_collector"
 			id: "70E8EDC8F7657BD2"
 			rewards: [{ id: "797EAC92CBEA0B65", type: "xp", xp: 10 }]
@@ -4414,7 +4306,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Makes collector nodes and packs them with a probe seed. Runs Collector Node Assembly recipes. Build it mostly from Filter Casing. The controller is crafted from OpV Machine Hull, OpV Robot Arm and OpV Emitter. Unlocks Deployed Node Pack, Collector Node and PV Collector Film. Automate it through input item buses and output item buses."]
+			description: ["Makes collector nodes and packs them with a probe seed. Runs Collector Node Assembly recipes. Build it mostly from Chain Lamina Casing. The controller is crafted from OpV Machine Hull, OpV Robot Arm and OpV Emitter. Unlocks Deployed Node Pack, Collector Node and PV Collector Film. Automate it through input item buses and output item buses."]
 			icon: "gtceu:collector_node_works"
 			id: "2B6EF5312469B78F"
 			rewards: [{ id: "21BE0B73E1C17EFE", type: "xp", xp: 10 }]
@@ -4426,7 +4318,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Gathers bulge debris around Terzan 5 and sorts it into fractions. Runs Debris Harvesting recipes. Build it mostly from Robust Machine Casing. The controller is crafted from OpV Machine Hull, OpV Conveyor Module and OpV Robot Arm. Unlocks NSC Planetesimal, Bulge Debris and Metal Debris Fraction. Automate it through input item buses and output item buses."]
+			description: ["Gathers bulge debris around Terzan 5 and sorts it into fractions. Runs Debris Harvesting recipes. Build it mostly from Chain Lamina Casing. The controller is crafted from OpV Machine Hull, OpV Conveyor Module and OpV Robot Arm. Unlocks NSC Planetesimal, Bulge Debris and Metal Debris Fraction. Automate it through input item buses and output item buses."]
 			icon: "gtceu:debris_harvester"
 			id: "162AF4E0B45AFEC3"
 			rewards: [{ id: "7FE5C3F030B18E1D", type: "xp", xp: 10 }]
@@ -4438,7 +4330,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Presses canned chain laminae while a magnetar field freezes into them. Runs Field Freezing recipes. Build it mostly from High Power Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Electric Piston and OpV Electric Motor. Unlocks Field-Frozen Plate, Field-Frozen Billet and Field Frozen Hoop. Automate it through input item buses and output item buses."]
+			description: ["Presses canned chain laminae while a magnetar field freezes into them. Runs Field Freezing recipes. Build it mostly from Chain Lamina Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Electric Piston and OpV Electric Motor. Unlocks Field-Frozen Plate, Field-Frozen Billet and Field Frozen Hoop. Automate it through input item buses and output item buses."]
 			icon: "gtceu:field_frozen_press"
 			id: "74E7A35BEFEA370D"
 			rewards: [{ id: "7B497B049275332F", type: "xp", xp: 10 }]
@@ -4450,7 +4342,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Builds Laue lenses and multilayer mirrors that focus MeV gamma rays. Runs Gamma Optics recipes. Build it mostly from High Power Casing. The controller is crafted from OpV Machine Hull, OpV Emitter and OpV Sensor. Unlocks Gamma Multilayer Mirror, Gamma Focus Element and Laue Lens. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Builds Laue lenses and multilayer mirrors that focus MeV gamma rays. Runs Gamma Optics recipes. Build it mostly from Chain Lamina Casing. The controller is crafted from OpV Machine Hull, OpV Emitter and OpV Sensor. Unlocks Gamma Multilayer Mirror, Gamma Focus Element and Laue Lens. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:gamma_optics_works"
 			id: "298B167D56AAD99D"
 			rewards: [{ id: "49FDA47AC7157433", type: "xp", xp: 10 }]
@@ -4474,7 +4366,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["A Grindless multiblock for Jet Beam Extraction recipes. Build it mostly from High Power Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Emitter. Unlocks Jet Proton Beam and Beam Neutraliser. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["A Grindless multiblock for Jet Beam Extraction recipes. Build it mostly from Chain Lamina Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Emitter. Unlocks Jet Proton Beam and Beam Neutraliser. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:jet_beam_line"
 			id: "1EC28119A12A47A8"
 			rewards: [{ id: "422B1466B837B583", type: "xp", xp: 10 }]
@@ -4498,7 +4390,7 @@
 			y: 81.0d
 		}
 		{
-			description: ["Converts gamma photons into dense positron plasma in a magnetar's field. Runs Magnetic Pair Production recipes. Build it mostly from Field-Frozen Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Emitter. Unlocks Hot Pair Plasma, Pair Confined Cage and Unsealed Positron Cell. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Converts gamma photons into dense positron plasma in a magnetar's field. Runs Magnetic Pair Production recipes. Build it mostly from Chain Lamina Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Emitter. Unlocks Hot Pair Plasma, Pair Confined Cage and Unsealed Positron Cell."]
 			icon: "gtceu:magnetic_pair_converter"
 			id: "78DFD86F36660196"
 			rewards: [{ id: "563B447B0EE001B2", type: "xp", xp: 10 }]
@@ -4510,7 +4402,7 @@
 			y: 83.0d
 		}
 		{
-			description: ["Turns debris fractions into feedstock and casings: Mond carbonyl and FFC salt. Runs Replication Refining recipes. Build it mostly from Clean Machine Casing. The controller is crafted from OpV Machine Hull, OpV Electric Pump and OpV Fluid Regulator. Unlocks Silicon Alloy Powder, Cluster Sinter Casing and Metal Feedstock. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Turns debris fractions into feedstock and casings: Mond carbonyl and FFC salt. Runs Replication Refining recipes. Build it mostly from Chain Lamina Casing. The controller is crafted from OpV Machine Hull, OpV Electric Pump and OpV Fluid Regulator. Unlocks Silicon Alloy Powder, Cluster Sinter Casing and Metal Feedstock. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:replication_refinery"
 			id: "67C6C117430E95E4"
 			rewards: [{ id: "2EC85C261F6E7F0C", type: "xp", xp: 10 }]
@@ -4522,19 +4414,7 @@
 			y: 83.0d
 		}
 		{
-			description: ["A Grindless multiblock for Antiproton Production recipes. Build it mostly from Annihilation Shield Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Sensor. Unlocks Hot Antiproton Beam. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
-			icon: "gtceu:spallation_target_station"
-			id: "2BCED42201F2E2AB"
-			rewards: [{ id: "158FB99FD4D4FC1E", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "OpV, Grindless"
-			tasks: [{ id: "63E2B999A251F4B6", item: "gtceu:spallation_target_station", type: "item" }]
-			x: 6.0d
-			y: 83.0d
-		}
-		{
-			description: ["Distils strangelet seeds from a baryon-rich fireball. Runs Strangelet Distillation recipes. Build it mostly from Field-Frozen Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Electric Pump. Unlocks Strangelet Seed. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Distils strangelet seeds from a baryon-rich fireball. Runs Strangelet Distillation recipes. Build it mostly from Chain Lamina Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Electric Pump. Unlocks Strangelet Seed. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:strangelet_distiller"
 			id: "128DFD84D084221E"
 			rewards: [{ id: "66B34077EC1BCDE8", type: "xp", xp: 10 }]
@@ -4542,11 +4422,11 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "705FF24EF928D6F9", item: "gtceu:strangelet_distiller", type: "item" }]
-			x: 8.0d
+			x: 6.0d
 			y: 83.0d
 		}
 		{
-			description: ["Grows and stabilises positive strangelets in a shielded trap. Runs Strangelet Growth recipes. Build it mostly from Field-Frozen Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Electric Pump. Unlocks Stable Exotic Matter, Neutron-fed Strangelet and Exotic Cladding Foil. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Grows and stabilises positive strangelets in a shielded trap. Runs Strangelet Growth recipes. Build it mostly from Annihilation Shield Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Field Generator and OpV Electric Pump. Unlocks Stable Exotic Matter, Neutron-fed Strangelet and Exotic Cladding Foil. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:strangelet_vault"
 			id: "111EFB1A7C32CDC6"
 			rewards: [{ id: "1E0F3FA971337254", type: "xp", xp: 10 }]
@@ -4554,11 +4434,11 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "749B40E26D9E1802", item: "gtceu:strangelet_vault", type: "item" }]
-			x: 10.0d
+			x: 8.0d
 			y: 83.0d
 		}
 		{
-			description: ["Makes tetron dies and ties tested tetrons into a qubit array. Runs Tetron Assembly recipes. Build it mostly from Plascrete, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Robot Arm and OpV Sensor. Unlocks Tetron Array and Tetron Die. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Makes tetron dies and ties tested tetrons into a qubit array. Runs Tetron Assembly recipes. Build it mostly from Chain Lamina Casing, with Superconducting Coil. The controller is crafted from OpV Machine Hull, OpV Robot Arm and OpV Sensor. Unlocks Tetron Array and Tetron Die. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:tetron_fab"
 			id: "573F6610891A54AD"
 			rewards: [{ id: "182D19E58A003041", type: "xp", xp: 10 }]
@@ -4566,11 +4446,11 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "4FEB2A0E932FC6CD", item: "gtceu:tetron_fab", type: "item" }]
-			x: 12.0d
+			x: 10.0d
 			y: 83.0d
 		}
 		{
-			description: ["Builds probe seeds from Terzan 5 feedstock; the seed itself is never used up. Runs Self Replication recipes. Build it mostly from Robust Machine Casing. The controller is crafted from OpV Machine Hull, OpV Robot Arm and OpV Conveyor Module. Unlocks Probe Seed. Automate it through input item buses and output item buses."]
+			description: ["Builds probe seeds from Terzan 5 feedstock; the seed itself is never used up. Runs Self Replication recipes. Build it mostly from Chain Lamina Casing. The controller is crafted from OpV Machine Hull, OpV Robot Arm and OpV Conveyor Module. Unlocks Probe Seed. Automate it through input item buses and output item buses."]
 			icon: "gtceu:von_neumann_foundry"
 			id: "187E08A52965DE38"
 			rewards: [{ id: "5B1AC5E05AA80303", type: "xp", xp: 10 }]
@@ -4578,7 +4458,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "1A6280F946C8A78B", item: "gtceu:von_neumann_foundry", type: "item" }]
-			x: 14.0d
+			x: 12.0d
 			y: 83.0d
 		}
 		{
@@ -4593,7 +4473,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Burns slag pellets at the black hole for power. Runs Accretion Power recipes. Build it mostly from Atomic Casing, with Feeder Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Field Generator. Automate it through input item buses and output item buses."]
+			description: ["Burns slag pellets at the black hole for power. Runs Accretion Power recipes. Build it mostly from Tensegrity Truss Casing, with Feeder Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Field Generator. Automate it through input item buses and output item buses."]
 			icon: "gtceu:accretion_feeder"
 			id: "1CA1462A7318FD56"
 			rewards: [{ id: "763F3AE0DA367322", type: "xp", xp: 10 }]
@@ -4605,7 +4485,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Drops a Sr cloud down a shielded shaft: gradiometers and gradient maps. Runs Atom Interferometry recipes. Build it mostly from Field-Frozen Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Emitter. Unlocks Matter Wave Gradiometer and Shell Gradient Map. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Drops a Sr cloud down a shielded shaft: gradiometers and gradient maps. Runs Atom Interferometry recipes. Build it mostly from Tensegrity Truss Casing, with Clamp Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Emitter. Unlocks Matter Wave Gradiometer and Shell Gradient Map. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:atom_interferometer_works"
 			id: "26911012C533475E"
 			rewards: [{ id: "59118B56DAC371A9", type: "xp", xp: 10 }]
@@ -4617,7 +4497,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Smelts planetesimals in starlight. Only at the NSC belt. Runs Cluster Light Smelting recipes. Build it mostly from Field-Frozen Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Electric Pump. Unlocks Segment Truss Billet, Metal Rich Bloom and Tantalum Dust. Automate it through input item buses and output item buses."]
+			description: ["Smelts planetesimals in starlight. Only at the NSC belt. Runs Cluster Light Smelting recipes. Build it mostly from Tensegrity Truss Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Electric Pump. Unlocks Segment Truss Billet, Metal Rich Bloom and Tantalum Dust. Automate it through input item buses and output item buses."]
 			icon: "gtceu:cluster_light_furnace"
 			id: "1D704CC1E3E59FD1"
 			rewards: [{ id: "3592846A88F2DC89", type: "xp", xp: 10 }]
@@ -4629,7 +4509,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Locks a shell to the spin of Sgr A*: phase locks. Runs only in its orbit. Runs Ergoregion Synchronisation recipes. Build it mostly from Driver Ring Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Field Generator. Unlocks Horizon Phase Lock. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Locks a shell to the spin of Sgr A*: phase locks. Runs only in its orbit. Runs Ergoregion Synchronisation recipes. Build it mostly from Tensegrity Truss Casing, with Clamp Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Field Generator. Unlocks Horizon Phase Lock. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:ergoregion_synchroniser"
 			id: "37E64634830FBF7D"
 			rewards: [{ id: "4119EC8B0A378A87", type: "xp", xp: 10 }]
@@ -4641,7 +4521,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Seals genomes and living cells into a cold archive that can reboot life. Runs Genome Archiving recipes. Build it mostly from Atomic Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Robot Arm. Unlocks Genome Archive. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Seals genomes and living cells into a cold archive that can reboot life. Runs Genome Archiving recipes. Build it mostly from Membrane Vacuum Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Robot Arm. Unlocks Genome Archive. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:gene_ark"
 			id: "4AF21F3607E72610"
 			rewards: [{ id: "258AECB839D14181", type: "xp", xp: 10 }]
@@ -4653,7 +4533,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Lowers a waste canister on a tether to the horizon. Runs Geroch Power recipes. Build it mostly from Geroch Drum Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Electric Motor. Automate it through input item buses and output item buses."]
+			description: ["Lowers a waste canister on a tether to the horizon. Runs Geroch Power recipes. Build it mostly from Tensegrity Truss Casing, with Clamp Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Electric Motor. Automate it through input item buses and output item buses."]
 			icon: "gtceu:geroch_winch"
 			id: "66302A368FB8ACE5"
 			rewards: [{ id: "1BC0AC0BB58C23EF", type: "xp", xp: 10 }]
@@ -4665,7 +4545,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Winds HTS flux pumps, field coils and stream bundles into a clamp winding. Runs Horizon Flux Clamp recipes. Build it mostly from Robust Machine Casing, with Clamp Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Field Generator. Unlocks Horizon Flux-Clamp Winding. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Winds HTS flux pumps, field coils and stream bundles into a clamp winding. Runs Horizon Flux Clamp recipes. Build it mostly from Tensegrity Truss Casing, with Clamp Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Field Generator. Unlocks Horizon Flux-Clamp Winding. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:horizon_flux_clamp"
 			id: "5B7514C3BBFA27DC"
 			rewards: [{ id: "56854477DD2C80B2", type: "xp", xp: 10 }]
@@ -4689,7 +4569,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Packs stream pellets into stream bundles and re-casts the spent ones. Runs Mass Stream Injection recipes. Build it mostly from Stream Turn Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Sensor. Unlocks Stream Bundle. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Packs stream pellets into stream bundles and re-casts the spent ones. Runs Mass Stream Injection recipes. Build it mostly from Tensegrity Truss Casing, with Clamp Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Sensor. Unlocks Stream Bundle. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:mass_stream_injector"
 			id: "2D765E766517F580"
 			rewards: [{ id: "2BAF98662FFFF13F", type: "xp", xp: 10 }]
@@ -4701,7 +4581,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Rolls membrane, albedo panel and belt in one line. Runs Membrane Rolling recipes. Build it mostly from Membrane Roller Casing, with Cupronickel coils. The controller is crafted from MAX Machine Hull, MAX Electric Motor and MAX Electric Piston. Unlocks Superconducting Membrane, Albedo Multilayer Panel and Horizon Belt. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Rolls membrane, albedo panel and belt in one line. Runs Membrane Rolling recipes. Build it mostly from Tensegrity Truss Casing, with Cupronickel coils. The controller is crafted from MAX Machine Hull, MAX Electric Motor and MAX Electric Piston. Unlocks Superconducting Membrane, Albedo Multilayer Panel and Shielded Quantum Module. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:membrane_line"
 			id: "30A9B8EE28522FAB"
 			rewards: [{ id: "5E86D99E157519CC", type: "xp", xp: 10 }]
@@ -4713,7 +4593,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["A mirror shell round Sgr A*: its last recipe stabilises the horizon. Runs Black Hole Bomb recipes. Build it mostly from Mirror Shell Segment, with Feeder Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Emitter. Unlocks Kerr Condensate, Horizon Shard and Final Spin Map. Automate it through input item buses and output item buses and fluid hatches."]
+			description: ["A mirror shell round Sgr A*: its last recipe stabilises the horizon. Runs Black Hole Bomb recipes. Build it mostly from Tensegrity Truss Casing, with Shell Window Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Emitter. Unlocks Kerr Condensate, Horizon Shard and Final Spin Map. Automate it through input item buses and output item buses and fluid hatches."]
 			icon: "gtceu:mirror_shell"
 			id: "26DC408DB5FE6C5A"
 			rewards: [{ id: "2377431A222854BD", type: "xp", xp: 10 }]
@@ -4725,7 +4605,7 @@
 			y: 86.0d
 		}
 		{
-			description: ["Images Sgr A* with a ring of dishes and mK receivers. Runs Photon Ring Imaging recipes. Build it mostly from MAX Optical Table Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Sensor. Unlocks Sgr A* Spin Map and NSC Ephemeris. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Images Sgr A* with a ring of dishes and mK receivers. Runs Photon Ring Imaging recipes. Build it mostly from Tensegrity Truss Casing, with Clamp Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Sensor. Unlocks Sgr A* Spin Map and NSC Ephemeris. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:photon_ring_imager"
 			id: "75668DE739F5B189"
 			rewards: [{ id: "52CBAB3CFE124E47", type: "xp", xp: 10 }]
@@ -4749,7 +4629,7 @@
 			y: 88.0d
 		}
 		{
-			description: ["Opens a worn mirror-shell segment into seven part streams. Runs Segment Reclamation recipes. Build it mostly from Reclamation Bay Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Emitter. Unlocks Mirror Shell Scrap. Automate it through input item buses and output item buses."]
+			description: ["Opens a worn mirror-shell segment into seven part streams. Runs Segment Reclamation recipes. Build it mostly from Tensegrity Truss Casing, with Clamp Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and MAX Emitter. Unlocks Mirror Shell Scrap. Automate it through input item buses and output item buses."]
 			icon: "gtceu:segment_reclamation_works"
 			id: "6AF57E4EC01E946C"
 			rewards: [{ id: "611CC5D7B9AA69A3", type: "xp", xp: 10 }]
@@ -4772,7 +4652,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Hangs a target in a blueshifted photonuclear beam at the M31 nucleus. Runs Blueshift Forge recipes. Build it mostly from Horizon Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Molybdenum Dust. Automate it through input item buses and output item buses and fluid hatches."]
+			description: ["Hangs a target in a blueshifted photonuclear beam at the M31 nucleus. Runs Blueshift Forge recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Molybdenum Dust. Automate it through input item buses and output item buses and fluid hatches."]
 			icon: "gtceu:blueshift_forge"
 			id: "548BC9491FF27FE9"
 			rewards: [{ id: "3731FE67EBEAC67D", type: "xp", xp: 10 }]
@@ -4784,7 +4664,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Presses condensate-bound ingots into plates. Runs Bound Matter Press recipes. Build it mostly from Bound Press Casing. The controller is crafted from MAX Machine Hull, MAX circuits and Bound Press Casing. Unlocks Horizon Compressed Plate, Kerr Strange Plate and Graded Horizon Laminate. Automate it through input item buses and output item buses and fluid hatches."]
+			description: ["Presses condensate-bound ingots into plates. Runs Bound Matter Press recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, MAX circuits and Bound Press Casing. Unlocks Horizon Compressed Plate, Kerr Strange Plate and Graded Horizon Laminate. Automate it through input item buses and output item buses and fluid hatches."]
 			icon: "gtceu:bound_matter_press"
 			id: "174E22FC37CBD20F"
 			rewards: [{ id: "4CFC296F72BAE36A", type: "xp", xp: 10 }]
@@ -4796,7 +4676,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Assembles plates and mesh under a Kerr condensate bath. Runs Condensate Assembler recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Horizon Containment Plate, Chevron Core and Horizon Frame Part. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Assembles plates and mesh under a Kerr condensate bath. Runs Condensate Assembler recipes. Build it mostly from Cryostat Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Horizon Containment Plate, Chevron Core and Horizon Frame Part. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:condensate_assembler"
 			id: "1DF4CDE39BBFEE46"
 			rewards: [{ id: "1F64286766F95039", type: "xp", xp: 10 }]
@@ -4808,7 +4688,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Settles Kerr condensate and binds exotic matter into it. Runs Condensate Refinery recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and Condensate Vessel Casing. Unlocks Kerr Condensate, Kerr Strange Ingot and Condensate Doped Dust. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Settles Kerr condensate and binds exotic matter into it. Runs Condensate Refinery recipes. Build it mostly from Tensegrity Truss Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, MAX circuits and Condensate Vessel Casing. Unlocks Kerr Condensate, Condensate Doped Dust and Kerr Clad Strand. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:condensate_refinery"
 			id: "195DBA7A76DE3894"
 			rewards: [{ id: "4BB04961B17414F7", type: "xp", xp: 10 }]
@@ -4820,7 +4700,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Slings a probe and counterweight out of the Galaxy past Sgr A*. Runs Hills Slingshot recipes. Build it mostly from Robust Machine Casing, with Slingshot Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Bound Probe Pair and Launched IG Probe. Automate it through input item buses and output item buses."]
+			description: ["Slings a probe and counterweight out of the Galaxy past Sgr A*. Runs Hills Slingshot recipes. Build it mostly from Bound Lattice Casing, with Slingshot Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Bound Probe Pair and Launched IG Probe. Automate it through input item buses and output item buses."]
 			icon: "gtceu:hills_slingshot"
 			id: "4D401FE132B2652B"
 			rewards: [{ id: "6EA778CBDE0FA765", type: "xp", xp: 10 }]
@@ -4832,7 +4712,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["A network store for the Hyperstargate's dial charge. Runs Dummy recipes. Build it mostly from Horizon Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits."]
+			description: ["A network store for the Hyperstargate's dial charge. Runs Dummy recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits."]
 			icon: "gtceu:horizon_capacitor_bank"
 			id: "25206AA063CF35DB"
 			rewards: [{ id: "497F99D64F678F36", type: "xp", xp: 10 }]
@@ -4844,7 +4724,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Grows core and controller crystals in slurry. Runs Horizon Crystal Furnace recipes. Build it mostly from Horizon Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Controller Crystal Boule and Core Crystal Boule. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Blends eight plasmas into slurry, then grows core and controller crystals in it. Runs Horizon Crystal Furnace recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Horizon Crystal Slurry, Controller Crystal Boule and Core Crystal Boule."]
 			icon: "gtceu:horizon_crystal_furnace"
 			id: "3AB57932B5D5B605"
 			rewards: [{ id: "1B52A92EB412EF26", type: "xp", xp: 10 }]
@@ -4856,7 +4736,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Builds the Hyperstargate's parts and creative items from many inputs. Runs Hyper Assembly Array recipes. Build it mostly from Horizon Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Hyperstargate Ring Block, Hyperstargate Chevron Upgrade and Horizon Alignment Matrix. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Builds the Hyperstargate's parts and creative items from many inputs. Runs Hyper Assembly Array recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Hyperstargate Ring Block, Hyperstargate Chevron Upgrade and Horizon Alignment Matrix. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:hyper_assembly_array"
 			id: "297C3F2A52117DEB"
 			rewards: [{ id: "53092E7FF03DEC9E", type: "xp", xp: 10 }]
@@ -4868,7 +4748,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Five assembly machines in one, 4,096x the hatch. Runs Assembler, Circuit Assembler, Assembly Line and others recipes. Build it mostly from Horizon Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Black Borderless Lamp, Black Lamp and Blue Borderless Lamp. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Five machines in one, 4,096x the hatch. Data hatch: marked head cell. Runs Assembler, Circuit Assembler, Assembly Line and others recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Black Borderless Lamp, Black Lamp and Blue Borderless Lamp."]
 			icon: "gtceu:hyperfactory"
 			id: "13557E2F6C5D8C8C"
 			rewards: [{ id: "7B504951457C7452", type: "xp", xp: 10 }]
@@ -4880,7 +4760,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["The way across: one dial opens the ring for the whole team, 1,200 ticks. Runs Hyperstargate Dial recipes. Build it mostly from Horizon Machine Casing, with Superconducting Coil. The controller is crafted from Hyperstargate Ring Block, Horizon Controller Crystal and Creative Computation Provider (Ingredient). Unlocks Spent Dial Charge. Automate it through input item buses and output item buses."]
+			description: ["The way across: one dial opens the ring for the whole team, 1,200 ticks. Runs Hyperstargate Dial recipes. Build it mostly from Horizon Gate Casing. The controller is crafted from Hyperstargate Ring Block, Horizon Controller Crystal and Creative Computation Provider (Ingredient). Unlocks Spent Dial Charge. Automate it through input item buses and output item buses."]
 			icon: "gtceu:hyperstargate"
 			id: "2F36685111CA9CB0"
 			rewards: [{ id: "526F439F557E6E02", type: "xp", xp: 10 }]
@@ -4892,7 +4772,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Weaves bound plates and Kerr strand into horizon meta-materials. Runs Meta Material Loom recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Horizon Conduit, Horizon Waveguide and Horizon Shielding. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Weaves bound plates and Kerr strand into horizon meta-materials. Runs Meta Material Loom recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Horizon Conduit, Horizon Waveguide and Horizon Shielding. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:meta_material_loom"
 			id: "4FB122DAAC9F635D"
 			rewards: [{ id: "2BB59CE68ADEF6D1", type: "xp", xp: 10 }]
@@ -4904,19 +4784,7 @@
 			y: 91.0d
 		}
 		{
-			description: ["Blends eight plasmas into horizon crystal slurry. Runs Multi Plasma Blender recipes. Build it mostly from Horizon Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Horizon Crystal Slurry. Automate it through input fluid hatches and output fluid hatches."]
-			icon: "gtceu:multi_plasma_blender"
-			id: "21DF79D01B3AECAE"
-			rewards: [{ id: "37AC7486E8CFFCEC", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "MAX+, Grindless"
-			tasks: [{ id: "134419FD8BD69524", item: "gtceu:multi_plasma_blender", type: "item" }]
-			x: 24.0d
-			y: 91.0d
-		}
-		{
-			description: ["A generator: a shielded nickel-56 cask decays into a MAX 16 A dynamo hatch. Runs Nickel 56 Burner recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Co-56 Cask and Spent Fe-56 Cask. Automate it through input item buses and output item buses."]
+			description: ["A generator: a shielded nickel-56 cask decays into a MAX 16 A dynamo hatch. Runs Nickel 56 Burner recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Co-56 Cask and Spent Fe-56 Cask. Automate it through input item buses and output item buses."]
 			icon: "gtceu:nickel_56_burner"
 			id: "7531588FDFF466D9"
 			rewards: [{ id: "2674626667BBBE46", type: "xp", xp: 10 }]
@@ -4924,11 +4792,11 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "4E9ACDAB87ECC882", item: "gtceu:nickel_56_burner", type: "item" }]
-			x: 2.0d
-			y: 93.0d
+			x: 24.0d
+			y: 91.0d
 		}
 		{
-			description: ["Burns confined VMS plasma into a nickel-56 slug. Wears a crucible liner. Runs Pair Instability Crucible recipes. Build it mostly from Crucible Liner Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Ni-56 Slug. Automate it through input item buses and fluid hatches and output item buses."]
+			description: ["Burns confined VMS plasma into a nickel-56 slug. Wears a crucible liner. Runs Pair Instability Crucible recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Ni-56 Slug. Automate it through input item buses and fluid hatches and output item buses."]
 			icon: "gtceu:pair_instability_crucible"
 			id: "567DDF49DB76F99F"
 			rewards: [{ id: "28234BB7CB103CE7", type: "xp", xp: 10 }]
@@ -4936,11 +4804,11 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "48421AB4AE96D548", item: "gtceu:pair_instability_crucible", type: "item" }]
-			x: 4.0d
+			x: 2.0d
 			y: 93.0d
 		}
 		{
-			description: ["A generator: fuses polarized fuel, up to 64 runs at once. Runs Polarized Fusion recipes. Build it mostly from Horizon Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Helium-4 Ash. Automate it through input item buses and fluid hatches and output fluid hatches."]
+			description: ["A generator: fuses polarized fuel, up to 64 runs at once. Runs Polarized Fusion recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Helium-4 Ash. Automate it through input item buses and fluid hatches and output fluid hatches."]
 			icon: "gtceu:polarized_fusion_stellarator"
 			id: "6BC79FD06866A612"
 			rewards: [{ id: "2D5C59E432386E61", type: "xp", xp: 10 }]
@@ -4948,11 +4816,11 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "5DBC4FD9E85F4F06", item: "gtceu:polarized_fusion_stellarator", type: "item" }]
-			x: 6.0d
+			x: 4.0d
 			y: 93.0d
 		}
 		{
-			description: ["A generator: deuterium and helium-3 fuse into a MAX 16 A dynamo hatch. Runs Primordial Fusion Torus recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Helium-4 Ash. Also needed to craft Polarized Fusion Stellarator. Automate it through input item buses and fluid hatches and output fluid hatches."]
+			description: ["A generator: deuterium and helium-3 fuse into a MAX 16 A dynamo hatch. Runs Primordial Fusion Torus recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Helium-4 Ash. Also needed to craft Polarized Fusion Stellarator. Automate it through input item buses and fluid hatches and output fluid hatches."]
 			icon: "gtceu:primordial_fusion_torus"
 			id: "1D386ECAB8E03B5D"
 			rewards: [{ id: "3BE3AC1D229566C7", type: "xp", xp: 10 }]
@@ -4960,11 +4828,11 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "6F3A9890DB8AB138", item: "gtceu:primordial_fusion_torus", type: "item" }]
-			x: 8.0d
+			x: 6.0d
 			y: 93.0d
 		}
 		{
-			description: ["Scoops pristine gas out of the Magellanic Stream. Runs Pristine Gas Works recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Pristine Gas. Automate it through input item buses and output fluid hatches."]
+			description: ["Scoops pristine gas out of the Magellanic Stream. Runs Pristine Gas Works recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Pristine Gas. Automate it through input item buses and output fluid hatches."]
 			icon: "gtceu:pristine_gas_works"
 			id: "42EB9B85FDDDD3C4"
 			rewards: [{ id: "24A3BC37C5BC2C95", type: "xp", xp: 10 }]
@@ -4972,11 +4840,11 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "49CDDB10D3086282", item: "gtceu:pristine_gas_works", type: "item" }]
-			x: 10.0d
+			x: 8.0d
 			y: 93.0d
 		}
 		{
-			description: ["Lifts raw VMS plasma off an R136 star at 30 Doradus. Wears a lift nozzle. Runs Tarantula Stellar Lift recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Raw Vms Plasma. Automate it through input item buses and output fluid hatches."]
+			description: ["Lifts raw VMS plasma off an R136 star at 30 Doradus. Wears a lift nozzle. Runs Tarantula Stellar Lift recipes. Build it mostly from Bound Lattice Casing, with Kerr Coil Casing. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Raw Vms Plasma. Automate it through input item buses and output fluid hatches."]
 			icon: "gtceu:tarantula_stellar_lift"
 			id: "2DA6CE839AD16199"
 			rewards: [{ id: "5E913354EC60A9E7", type: "xp", xp: 10 }]
@@ -4984,11 +4852,11 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "7FAD1E7064DF88C1", item: "gtceu:tarantula_stellar_lift", type: "item" }]
-			x: 12.0d
+			x: 10.0d
 			y: 93.0d
 		}
 		{
-			description: ["Grows crystal in the emptiness of the Local Group filament. Runs Void Crystal Fab recipes. Build it mostly from Robust Machine Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Void Grown Diamond and Void Holographic Block. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
+			description: ["Grows crystal in the emptiness of the Local Group filament. Runs Void Crystal Fab recipes. Build it mostly from Bound Lattice Casing, with Superconducting Coil. The controller is crafted from MAX Machine Hull, Horizon Machine Casing and MAXPLUS circuits. Unlocks Void Grown Diamond and Void Holographic Block. Automate it through input item buses and fluid hatches and output item buses and fluid hatches."]
 			icon: "gtceu:void_crystal_fab"
 			id: "52D50E987E4816B7"
 			rewards: [{ id: "10ED6CB51F552723", type: "xp", xp: 10 }]
@@ -4996,7 +4864,7 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "39D28D4CC856C404", item: "gtceu:void_crystal_fab", type: "item" }]
-			x: 14.0d
+			x: 12.0d
 			y: 93.0d
 		}
 	]

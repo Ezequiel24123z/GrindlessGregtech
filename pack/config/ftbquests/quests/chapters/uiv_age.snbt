@@ -379,6 +379,99 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["54AF39C42293C4E7"]
+			description: ["A shell of printed refractory high-entropy alloy that keeps its strength through heat and a field. It is the plain wall of the age: the Matrioshka Computer alone takes about 1,600, and the Mk5 ring about 1,350. The powder bed printer (400 ticks): 16 RHEA powders, 6 RHEA plates and 3 tungsten-fibre RHEA billets, for two casings. The body of nearly every UIV structure: the Pulser (about 1,050), the Penrose Engine (about 620), the BEUV Scanner (about 460), the Droplet Radiator Works (about 630) and the Pulsar Wind Trap (about 480). Powder, plates and billets by ME: you need thousands, so build it a dedicated line with several printers."]
+			hide_dependency_lines: true
+			icon: "grindless:rhea_casing"
+			id: "3071243DA1A3540D"
+			rewards: [{ id: "1E0DEF931CEEBE33", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "14466CF158E7E9EC", item: "grindless:rhea_casing", type: "item" }]
+			title: "RHEA Casing"
+			x: 26.5d
+			y: 21.0d
+		}
+		{
+			dependencies: ["3071243DA1A3540D"]
+			description: ["A casing wound with metallic hydrogen cable that holds a field strong enough to confine a plasma or a star's matter. The reactor, the engine and the neutron machines are lined with it. The naquadria magnet works, circuit 12: 16 metallic hydrogen windings, 8 RHEA plates and 4 radiation-hardened controllers, for sixteen casings. The Penrose Engine (about 1,200), the Mk5 Fusion Reactor (about 1,000), the Pulsar Wind Trap (about 550), the Neutronium Compression Hall (about 540) and the Neutron Drip Works (about 420). The windings are the bottleneck; keep the Ramp Compression Pulser running and send them to the works by ME."]
+			icon: "grindless:mh_field_casing"
+			id: "5013B409A8F87BDE"
+			rewards: [{ id: "5368D167D9264419", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "7EC9A5DAE5E32599", item: "grindless:mh_field_casing", type: "item" }]
+			title: "Metallic Hydrogen Field Casing"
+			x: 30.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["5013B409A8F87BDE"]
+			description: ["A casing faced with lanthanum and boron carbide multilayers, which reflect extreme ultraviolet that every plain mirror absorbs. Machines that work with X-rays and 6.7 nm light are built from it. An assembler (400 ticks): 8 La/B4C multilayers, 8 RHEA plates, 4 glass interposers and a UIV sensor, with liquid nitrogen, for eight casings. The BEUV Scanner (about 740), the X-ray Pulse Profiler (about 515), the STM Lithography Cell (about 350) and the Positronium Condensate Lab (about 250). Multilayers and interposers by ME; liquid nitrogen by pipe."]
+			icon: "grindless:multilayer_optics_casing"
+			id: "1C8C0DC789C7FCD3"
+			rewards: [{ id: "753F650FB1BB1186", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "33AA91DE42BE2343", item: "grindless:multilayer_optics_casing", type: "item" }]
+			title: "Multilayer Optics Casing"
+			x: 33.5d
+			y: 21.0d
+		}
+		{
+			dependencies: ["1C8C0DC789C7FCD3"]
+			description: ["A casing with a dilution refrigerator built in, cold enough that the spins of the matter inside stop moving. The labs that hold a condensate or a polarised source are cased in it. The nuclear demagnetisation stage, circuit 8: 8 mK cryostat modules, 8 RHEA plates and a UIV electric pump, with helium-3, for eight casings. The Positronium Condensate Lab (about 500), the Polarised Proton Source (about 215) and the Neutron Drip Works (about 130). Cryostat modules and helium-3 by ME and by pipe; the helium returns to the works."]
+			icon: "grindless:dilution_cryostat_casing"
+			id: "32A1DE0CD5EB4C17"
+			rewards: [{ id: "171D29044494411E", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 32L, id: "5880C566129AF61B", item: "grindless:dilution_cryostat_casing", type: "item" }]
+			title: "Dilution Cryostat Casing"
+			x: 37.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["32A1DE0CD5EB4C17"]
+			description: ["The casing of the machines at the neutron star: osmiridium and reflector plate over radiation-hardened controllers, lined with polybenzimidazole. It is the one that does not leave the star. An assembler (600 ticks): 2 radiation-hardened controllers, 6 osmiridium plates, 2 neutron reflectors and polybenzimidazole, for eight casings. The Neutronium Compression Hall (about 840), the Neutron Drip Works (about 720), the Decay Heat Vault (about 490), the R-Process Decompressor (about 300) and the Crust Lift (about 250). Controllers and plates by ME; polybenzimidazole by pipe."]
+			icon: "grindless:neutron_star_site_casing"
+			id: "32DD9E9438EC0F6D"
+			rewards: [{ id: "58AB7EDB38441560", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "5BB386880E6BDCD0", item: "grindless:neutron_star_site_casing", type: "item" }]
+			title: "Neutron Star Site Casing"
+			x: 40.5d
+			y: 21.0d
+		}
+		{
+			dependencies: ["3071243DA1A3540D", "72D797E3DDE7ED0E"]
+			description: ["The first wall of the Mk5 ring: lithium-tin armoured tiles over a tungsten-fibre backing. It faces the plasma, and the divertor casing takes what is left of it. An assembler (300 ticks) makes four casings from 4 Li-Sn armoured tiles, 4 W fibre preforms and a UIV electric pump, with liquid Li-Sn. For two divertor casings, take one divertor and 2 Mk3 fusion casings. The Mk5 Fusion Reactor, which takes about 520 of them. The ring is too large for one pass of GTM's Terminal, which places about 2,300 per pass, so it takes two. Tiles and preforms by ME; the first-wall line is long, so make casings in a batch before you start the ring."]
+			hide_dependency_lines: true
+			icon: "grindless:uiv_fusion_casing"
+			id: "324F2FC31E9322CA"
+			rewards: [{ id: "7A8C7F6CB965CEEB", type: "xp", xp: 160 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 64L, id: "377ABB5970B60753", item: "grindless:uiv_fusion_casing", type: "item" }]
+			title: "UIV Fusion Casing"
+			x: 30.0d
+			y: 23.5d
+		}
+		{
+			dependencies: ["3071243DA1A3540D"]
+			description: ["The part of the Matrioshka shell that sheds heat. Each module drops a curtain of tin droplets through free fall, and each one needs a pump to lift the tin back up. The assembly line (1,200 ticks, researched from the droplet collector): an orifice plate, 3 electron-beam distilled tin, a droplet collector, 2 UIV electric pumps and a UIV circuit. The Matrioshka Computer, which takes 22 of them. The shell is too large for one pass of GTM's Terminal, which places about 2,300 per pass, so it takes two. Pumps by ME, tin by pipe; ship modules down by ME from the orbit."]
+			icon: "grindless:droplet_radiator_module"
+			id: "57160B58FA826EA1"
+			rewards: [{ id: "3DCAB0D52AEE6170", type: "xp", xp: 160 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 22L, id: "5ABCA4ADE9671001", item: "grindless:droplet_radiator_module", type: "item" }]
+			title: "Droplet Radiator Module"
+			x: 33.5d
+			y: 23.5d
+		}
+		{
 			dependencies: ["5DFADD2C1B09AF2E"]
 			description: [
 				"The photonic chips of this age, then the parts, the circuit assembler and the hatches built from them."
@@ -509,13 +602,16 @@
 		}
 		{
 			dependencies: ["1667D9ECE9C63D16", "1D71A54AB9C8A2EB"]
-			description: ["Matrix products done in light: the &6Photonic Tensor Core&r is the arithmetic of the optical mainframe. In the photonic integration hall (a circuit 4 program): a BEUV driver ASIC, a Quantum Photonic Chip and four thin-film LN modulators from the photonic foundry. The optical mainframe. Modulators and ASICs by ME; the tensor core is made one at a time and goes straight to the mainframe line."]
+			description: ["Matrix products done in light: the &6Photonic Tensor Core&r is the arithmetic of the optical mainframe. It takes the compute module of the first pass of the hall. In the photonic integration hall (a circuit 4 program): a BEUV driver ASIC, a Photonic Compute Module and four thin-film LN modulators. The modulators come from the photonic foundry: an etched LNOI wafer and gold foil (circuit 6) make sixteen. The comb-fed tensor core, one pass later in the same hall. Modulators and ASICs by ME; the tensor core is made one at a time and goes straight to the next pass."]
 			icon: "grindless:photonic_tensor_core"
 			id: "3F6512C5FF0EBF55"
 			rewards: [{ id: "56D249260071D23F", type: "xp", xp: 160 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "74CD0791FB6F00A6", item: "grindless:photonic_tensor_core", type: "item" }]
+			tasks: [
+				{ id: "78ED46412EFC5732", item: "grindless:thin_film_ln_modulator", type: "item" }
+				{ id: "7E682C6EF6E9D6BF", item: "grindless:photonic_tensor_core", type: "item" }
+			]
 			title: "Photonic Tensor Core"
 			x: 15.0d
 			y: 13.5d
@@ -600,13 +696,16 @@
 		}
 		{
 			dependencies: ["5F5A39AD463A9E68", "53A536B775F9CA25", "3F6512C5FF0EBF55"]
-			description: ["A processor, a memory, a tensor core, a crossbar on a glass interposer and two optical assemblies make the &6Optical Mainframe&r, the UIV circuit. The photonic integration hall: a Characterised P:Si Processor, a Six-Hour Quantum Memory, a Photonic Tensor Core, a Crossbar on Interposer and two optical assemblies. The assemblies come from the photonic foundry (optical processors from LNOI wafers, plus quantum memory chips). The UIV parts, the controllers of Mk5 and Matrioshka and the stored proof of the gate. Keep a dedicated chest and never a big stock; every part goes into each."]
+			description: ["A processor, a memory, a comb-fed tensor core and two optical assemblies make the &6Optical Mainframe&r, the UIV circuit. The photonic integration hall (a circuit 5 program): a Characterised P:Si Processor, a Six-Hour Quantum Memory, a Comb-Fed Tensor Core, two optical assemblies and three UEV circuits. The assemblies come from the photonic foundry (optical processors and quantum memory chips, with ultrapure water). The UIV parts, the controllers of Mk5 and Matrioshka and the stored proof of the gate. Keep a dedicated chest and never a big stock; every part goes into each."]
 			icon: "gtnn:optical_mainframe"
 			id: "58A76179A3648724"
 			rewards: [{ id: "18518FAE64E1C23C", type: "xp", xp: 250 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "35FB3D880CCE335E", item: "gtnn:optical_mainframe", type: "item" }]
+			tasks: [
+				{ count: 2L, id: "30911288DB7E38BA", item: "gtnn:optical_assembly", type: "item" }
+				{ id: "341D16531EED5E5F", item: "gtnn:optical_mainframe", type: "item" }
+			]
 			title: "Optical Mainframe"
 			x: 17.5d
 			y: 16.0d
@@ -824,7 +923,7 @@
 		}
 		{
 			dependencies: ["16C6567C657A75F5"]
-			description: ["The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Transuranium Facility&r, &6Waste Retrieval Plant&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r and &6Superheavy Chemistry Lab&r take new rows: zirconium and flash targets, canisters, einsteinium cuts, synroc and the elements 119 and 120. The UEV superheavy chain and the hot-cell feeds. The californium wheel, census II and the sled canisters. Targets and cuts move by bus; the waste canisters go to the sled line."]
+			description: ["The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Transuranium Facility&r, &6Waste Retrieval Plant&r, &6Superheavy Factory&r (the heavy ion cyclotron, which irradiates the target and separates the recoil on the same line) and &6Superheavy Chemistry Lab&r take new rows: zirconium and flash targets, canisters, einsteinium cuts, synroc and the elements 119 and 120. The UEV superheavy chain and the hot-cell feeds. The californium wheel, census II and the sled canisters. Targets and cuts move by bus; the waste canisters go to the sled line."]
 			icon: "gtceu:hot_cell"
 			id: "35F4DCD71E516B24"
 			rewards: [{ id: "5E66188B74BDAF05", type: "xp", xp: 150 }]
@@ -837,8 +936,7 @@
 				{ id: "7A7CDA2F40D88BE8", item: "gtceu:transuranium_facility", type: "item" }
 				{ id: "72A981B7A98DE34A", item: "gtceu:waste_retrieval_plant", type: "item" }
 				{ id: "35407C3DBEF2061A", item: "gtceu:heavy_ion_cyclotron", type: "item" }
-				{ id: "1B4991BEA2A25BE2", item: "gtceu:recoil_separator", type: "item" }
-				{ id: "78FAE662C2248C3E", item: "gtceu:superheavy_chemistry_lab", type: "item" }
+				{ id: "1A00CE31AC46444A", item: "gtceu:superheavy_chemistry_lab", type: "item" }
 			]
 			title: "Heavier Cuts"
 			x: 9.0d
@@ -994,6 +1092,40 @@
 			title: "The Polarised Ring"
 			x: 7.0d
 			y: 54.0d
+		}
+		{
+			dependencies: ["1A781FD07AF49721"]
+			description: ["Element 120 needs a heavier target and bullet: californium on a wheel, hit by a titanium-50 beam. The &6Superheavy Factory&r irradiates the wheel, then picks the atoms out of the gas. A wheel blank (titanium plates and foils, circuit 21) and californium dust in the hot cell (circuit 12) for the wheel; titanium dust in an assembler (circuit 29) for the oven charge. The factory takes both, an Nb3Sn SRF cavity and helium (circuit 7) for the recoil gas, then an etched membrane (circuit 6) for the atoms. The Element 120 Recoil Record; the wheel is a loop, not a cost per run. Return activated wheels to the hot cell (circuit 11) by ME; keep two wheels."]
+			hide_dependency_lines: true
+			icon: "grindless:activated_target_wheel"
+			id: "74344BCAC847556C"
+			rewards: [{ id: "58CA045D3329DFA3", type: "xp", xp: 220 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7FF67811DC61EFB9", item: "grindless:cf249_target_wheel", type: "item" }
+				{ id: "319E1CE83A6DD224", item: "grindless:ti50_oven_charge", type: "item" }
+				{ id: "53974ECD2276BB18", item: "grindless:activated_target_wheel", type: "item" }
+			]
+			title: "Californium Wheel and Titanium Beam"
+			x: 17.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["74344BCAC847556C"]
+			description: ["Element 119 takes einsteinium on a wheel blank, struck by a calcium-48 beam. It is the other half of Census II. Einsteinium dust and a wheel blank in an assembler for the target; in the factory, the target, a calcium-48 beam charge, an SRF cavity and helium (circuit 8) make the gas, and a membrane (circuit 7) separates the atoms. The chemistry lab then seals them in a capsule for Census II (circuit 3). The Element 119 Recoil Record and Census II, which the journey chapter asks for. Einsteinium by ME from the decompressor; send the atoms straight to the chemistry lab."]
+			icon: "grindless:element_119_recoil"
+			id: "1392BE9A8EB66BAC"
+			rewards: [{ id: "3150E00B1DC9BA33", type: "xp", xp: 240 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7261D59114267B08", item: "grindless:es254_target", type: "item" }
+				{ id: "10AC710B2A5136A2", item: "grindless:element_119_recoil", type: "item" }
+			]
+			title: "Einsteinium Target and Element 119"
+			x: 21.0d
+			y: 4.0d
 		}
 		{
 			dependencies: ["3B27271078AAEDC7"]
@@ -1208,7 +1340,7 @@
 		}
 		{
 			dependencies: ["57862F697D22D7F2", "54AF39C42293C4E7"]
-			description: ["The &6Mk5 Fusion Reactor&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches. Two UIV hulls, UIV components, UIV circuits, the UIV fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches. The three polarised burns, and the direct energy converter that turns plasma into power. Build the fuel plant before you light the ring; helium-3 and protons return to their lines."]
+			description: ["The &6Mk5 Fusion Reactor&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches. Two UIV hulls, UIV components, UIV circuits, about 520 UIV fusion casings, 1,350 RHEA casings, 1,000 metallic hydrogen field casings, 80 metallic hydrogen coil blocks and sixteen UIV energy hatches. The ring is too large for one pass of GTM's Terminal, which places about 2,300 per pass, so it takes two. The three polarised burns, and the direct energy converter that turns plasma into power. Build the fuel plant before you light the ring; helium-3 and protons return to their lines."]
 			icon: "gtceu:uiv_fusion_reactor"
 			id: "72D797E3DDE7ED0E"
 			rewards: [{ id: "1FC1422722F775DB", type: "xp", xp: 250 }]
@@ -1225,7 +1357,7 @@
 		}
 		{
 			dependencies: ["50ED516A490F0DF7"]
-			description: ["A computer built in shells, in nine times Earth's sunlight, running logic that makes barely any heat. The &6Matrioshka Computer&r is where UIV research is written. Two UIV hulls, UIV components, UIV circuits and the UIV casing. Its chart and research rows run in Mercury orbit. Verified writes, the Kerr and equation of state charts, and the radiators that carry its heat. Logic tiles are among the longest builds here: stock them by ME and send the waste heat to the radiators."]
+			description: ["A computer built in shells, in nine times Earth's sunlight, running logic that makes barely any heat. The &6Matrioshka Computer&r is where UIV research is written. Two UIV hulls, UIV components, UIV circuits, the UIV casing, about 1,600 RHEA casings, 22 droplet radiator modules and 200 logic tiles. It is too large for one pass of GTM's Terminal, which places about 2,300 per pass, so it takes two. Its chart and research rows run in Mercury orbit. Verified writes, the Kerr and equation of state charts, and the radiators that carry its heat. Logic tiles are among the longest builds here: stock them by ME and send the waste heat to the radiators."]
 			icon: "gtceu:matrioshka_computer"
 			id: "7E2EF99503F9DB02"
 			rewards: [{ id: "79DC492E9F485905", type: "xp", xp: 250 }]
@@ -1268,7 +1400,7 @@
 		}
 		{
 			dependencies: ["5A78AB35CB8C52AA"]
-			description: ["A tether down to the poles and the star's own electric field carry a little of the crust up. The &6Crust Lift&r is fiction: no tether survives that gravity, and the yield is a game number. A UIV hull, the UIV casing and the neutron star site casing, with a winch. Crust matter, which the drip separator takes apart. Nothing here is voided: crust ions and nuclei go to their own tanks."]
+			description: ["A tether down to the poles and the star's own electric field carry a little of the crust up. The &6Crust Lift&r is fiction: no tether survives that gravity, and the yield is a game number. A UIV hull, the UIV casing and the neutron star site casing, with a winch. Crust matter, which the Neutron Drip Works takes apart. Nothing here is voided: crust ions and nuclei go to their own tanks."]
 			icon: "gtceu:crust_lift"
 			id: "3DF069B74A45CB2C"
 			rewards: [{ id: "5504CF031F7F42F0", type: "xp", xp: 250 }]
@@ -1296,18 +1428,20 @@
 		}
 		{
 			dependencies: ["3DF069B74A45CB2C"]
-			description: ["Deep in the crust the nuclei are so crowded that neutrons leak out between them. The &6Neutron Drip Separator&r takes them away before the matter relaxes. A UIV hull, the UIV casing and the neutron star site casing. Drip neutrons, for the cage and for the r-process. Drip neutrons decay if you wait, so pipe them straight to the next machine."]
-			icon: "gtceu:neutron_drip_separator"
+			description: ["Deep in the crust neutrons leak out between the nuclei. The &6Neutron Drip Works&r takes them away, then cools them into a superfluid and shuts it in a cage: the neutronium pellet, which is fiction, a spoonful of neutron matter held by a field. Pick the separation or cage recipe type. A UIV hull, the UIV casing, the neutron star site casing (about 720), the metallic hydrogen field casing (about 420) and the dilution cryostat casing (about 130), with 24 coil blocks. It measures 21 by 13 by 29. Drip neutrons for the r-process, and the neutronium pellet that the stored proof asks for. Drip neutrons decay if you wait: use them at once. Keep pellets by ME."]
+			icon: "gtceu:neutronium_cage"
 			id: "3B397C1EFE90548C"
-			rewards: [{ id: "7155E482279A087A", type: "xp", xp: 250 }]
+			rewards: [{ id: "7155E482279A087A", type: "xp", xp: 300 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
-				{ id: "5C23A1C234D96D2D", item: "gtceu:neutron_drip_separator", type: "item" }
+				{ id: "532BF671E0144206", item: "gtceu:neutronium_cage", type: "item" }
 				{ id: "70C3DDD8049E55E8", item: "gtceu:uiv_machine_casing", type: "item" }
 				{ id: "37C5FAF6AC405C0C", item: "grindless:neutron_star_site_casing", type: "item" }
+				{ id: "328BB76964BE6C8C", item: "grindless:mh_field_casing", type: "item" }
+				{ id: "5FB0EBBB1B0C6A2A", item: "grindless:dilution_cryostat_casing", type: "item" }
 			]
-			title: "Neutron Drip Separator"
+			title: "Neutron Drip Works"
 			x: 21.5d
 			y: -9.0d
 		}
@@ -1324,23 +1458,6 @@
 		}
 		{
 			dependencies: ["3B397C1EFE90548C"]
-			description: ["Cool the drip neutrons into a superfluid and shut it in a cage. The &6Neutronium Cage&r makes the pellet, which is fiction: a spoonful of neutron matter held at ordinary pressure by a field. A UIV hull, the UIV casing, the neutron star site casing and a coil cage. The neutronium pellet, which the stored proof asks for and the compression hall reads. Drip neutrons by pipe; keep pellets by ME, as the hall never uses them up."]
-			icon: "gtceu:neutronium_cage"
-			id: "7B6BAE4236338966"
-			rewards: [{ id: "5116545605605FDD", type: "xp", xp: 300 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "76533E1207F2D473", item: "gtceu:neutronium_cage", type: "item" }
-				{ id: "50AED0A2DD0E93D5", item: "gtceu:uiv_machine_casing", type: "item" }
-				{ id: "76FD2A4573C38B5B", item: "grindless:neutron_star_site_casing", type: "item" }
-			]
-			title: "Neutronium Cage"
-			x: 24.0d
-			y: -9.0d
-		}
-		{
-			dependencies: ["7B6BAE4236338966"]
 			description: ["It is not the neutronium of the other mods: it is a pellet of neutron matter. The journey asks for it once; keep one for the hall and one for the stored proof."]
 			icon: "grindless:neutronium_pellet"
 			id: "39FBA237010D5C97"
@@ -1353,7 +1470,7 @@
 			y: -10.75d
 		}
 		{
-			dependencies: ["7B6BAE4236338966"]
+			dependencies: ["3B397C1EFE90548C"]
 			description: ["The &6Neutronium Compression Hall&r reads the pellets in its bus as parallels, and never uses them up. The mega family adds it at UIV. A UIV hull, the neutron star site casing and a pellet in its bus. Parallel runs of older recipes; its implosion mode keeps the explosive, so switch the mode in its own window first. Pellets stay in the hall; feed the batches by ME."]
 			icon: "gtceu:neutronium_compression_hall"
 			id: "569C4366D8C6AE1E"
@@ -1491,7 +1608,7 @@
 		}
 		{
 			dependencies: ["5F1E7272AA2A4023"]
-			description: ["The &6Penrose Engine&r drops a sled into the ergosphere. The sled splits, one half falls in and the other comes out with more energy than it took in. The hole spins a little slower. It is fiction. A UIV hull and the UIV casing, with a sled loaded at the probe bay. Power for the gate load, and the recovered half-sled for the gate store. Sleds by ME; send each recovered half back to the bay for a refit."]
+			description: ["The &6Penrose Engine&r drops a sled into the ergosphere. The sled splits, one half falls in and the other comes out with more energy than it took in. The hole spins a little slower. It is fiction. A UIV hull and the UIV casing, with a drop rail; about 1,200 metallic hydrogen field casings, 620 RHEA casings and 64 coil blocks. It fills about one whole pass of GTM's Terminal. Power for the gate load, and the recovered half-sled for the gate store. Sleds by ME; send each recovered half back to the bay for a refit."]
 			icon: "gtceu:penrose_engine"
 			id: "773D4D794D1EA7A1"
 			rewards: [{ id: "5E099A93A33BE6B5", type: "xp", xp: 300 }]
@@ -1578,6 +1695,73 @@
 			title: "Light on Niobate"
 			x: 5.5d
 			y: 33.0d
+		}
+		{
+			dependencies: ["1667D9ECE9C63D16"]
+			description: ["The &6Photonic Integration Hall&r joins chips by light. The first pass puts a Quantum Photonic Chip on a crossbar and makes the &6Photonic Compute Module&r, the part every later pass builds on. In the photonic integration hall (a circuit 12 program): a Quantum Photonic Chip and a Crossbar on Interposer. The crossbar is a phase-change memory array (four PCM photonic dies and a GST target, in the photonic foundry with ultrapure water and argon) set on an etched glass interposer in an assembler. The photonic tensor core, the next pass of the same hall. Chips and crossbars by ME; the hall makes one module per run, so give it its own pattern provider."]
+			hide_dependency_lines: true
+			icon: "grindless:photonic_compute_module"
+			id: "72559994607D2562"
+			rewards: [{ id: "558D4246727E73D3", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "18029EEF22F1FEAB", item: "grindless:quantum_photonic_chip", type: "item" }
+				{ id: "799E6A83C3D4A13A", item: "grindless:crossbar_on_interposer", type: "item" }
+				{ id: "548EBDBE468ADBEB", item: "grindless:photonic_compute_module", type: "item" }
+			]
+			title: "Photonic Compute Module"
+			x: 22.0d
+			y: 13.0d
+		}
+		{
+			dependencies: ["5F3FD5DD9FD7DBAA"]
+			description: ["A ring of silicon nitride turns one laser into hundreds of evenly spaced colours, and a lithium niobate layer on it lets a voltage steer them. The &6EO Microcomb&r is the clock of the tensor core. In the TFLN Fab (a circuit 4 program): an annealed damascene ring and an LNOI wafer. The ring is the damascene silicon nitride wafer annealed in the photonic foundry (circuit 10) with ultrapure water and argon. The comb-fed tensor core. Rings and wafers by ME; one comb goes into each tensor core, so keep a small stock."]
+			hide_dependency_lines: true
+			icon: "grindless:eo_microcomb"
+			id: "317DB9E16E50D2F8"
+			rewards: [{ id: "5D438DE9F76780E2", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1AECEE2F50A951E8", item: "grindless:annealed_damascene_ring", type: "item" }
+				{ id: "73A9D4F31E0E47AB", item: "grindless:eo_microcomb", type: "item" }
+			]
+			title: "Electro-Optic Microcomb"
+			x: 22.0d
+			y: 15.5d
+		}
+		{
+			dependencies: ["3F6512C5FF0EBF55", "72559994607D2562", "317DB9E16E50D2F8"]
+			description: ["The third pass of the hall sets the comb on the tensor core, so every multiplication is timed by the same colours. The &6Comb-Fed Tensor Core&r is the arithmetic of the mainframe. In the photonic integration hall (a circuit 13 program): a Photonic Tensor Core and an EO Microcomb. The optical mainframe. Feed the hall by ME from the two stocks; one core per mainframe."]
+			hide_dependency_lines: true
+			icon: "grindless:comb_fed_tensor_core"
+			id: "153F2450D023186E"
+			rewards: [{ id: "1C0DE9E8D76A50E6", type: "xp", xp: 180 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "31E45C147D8E4A13", item: "grindless:comb_fed_tensor_core", type: "item" }]
+			title: "Comb-Fed Tensor Core"
+			x: 25.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["153F2450D023186E"]
+			description: [
+				"The mainframe is the fourth pass of the hall, and four lines feed it."
+				"The &6Crossbar on Interposer&r goes in at the first pass. The &6BEUV Driver ASIC&r, with its scanner, mirrors and comb, goes in at the second. The &6EO Microcomb&r, from the TFLN Fab, joins at the third."
+				"At the last pass come the &6Six-Hour Memory&r, the &6P:Si Processor&r and two &6Optical Assemblies&r, each made from three optical processors and three quantum memory chips in the photonic foundry (circuit 5). Three more feeders (an EO transceiver, a telecom memory and a pumped EDFA) are the optical processors' own parts."
+				"The UIV Lines chart draws the whole of it, and every feeder can be automated apart from the others."
+			]
+			icon: "gtceu:photonic_integration_hall"
+			id: "7349229CF2C0D2C9"
+			rewards: [{ id: "53371F1F18F4EF89", type: "xp", xp: 25 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "733763B2509E3CB7", type: "checkmark" }]
+			title: "The Feeders of the Mainframe"
+			x: 29.0d
+			y: 16.75d
 		}
 		{
 			dependencies: ["7BA44754AA7803E8"]

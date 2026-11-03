@@ -83,7 +83,8 @@ export function applyToRecipes(recipes, tables) {
     selected.push({ id, era: s.era, via: s.via, enabled: s.enabled });
     if (!s.enabled) continue;
     e.selected++;
-    const r = rule.scaleRecipe(json, s.item, s.fluid, s.pin);
+    const type = rec.type !== undefined ? rec.type : rec.t !== undefined ? rec.t : json.type;
+    const r = rule.scaleRecipe(json, s.item, s.fluid, s.pin, rule.isOrdered(type));
     if (!r.changed) continue;
     e.changed++;
     e.items += r.items;

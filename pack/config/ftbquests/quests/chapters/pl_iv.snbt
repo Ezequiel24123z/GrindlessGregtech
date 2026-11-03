@@ -14,7 +14,7 @@
 			id: "50C76F28322E7DB5"
 			linked_quest: "5DB10211B3E10692"
 			shape: "rsquare"
-			x: 0.5d
+			x: 3.0d
 			y: 3.25d
 		}
 		{
@@ -22,63 +22,77 @@
 			linked_quest: "7D9B7EAC07F4A088"
 			shape: "rsquare"
 			x: 0.5d
-			y: 14.5d
+			y: 22.75d
 		}
 		{
 			id: "187FF6B00A947BFC"
 			linked_quest: "1DD00667E82E75AE"
 			shape: "rsquare"
 			x: 14.75d
-			y: 9.75d
+			y: 18.0d
 		}
 		{
 			id: "3667B8599BFF61BC"
 			linked_quest: "182D9BB9E4FD1F15"
 			shape: "rsquare"
 			x: 4.5d
-			y: 22.25d
+			y: 30.5d
+		}
+		{
+			id: "7B43C9F14D114007"
+			linked_quest: "777ABA05F5A09A7C"
+			shape: "rsquare"
+			x: 10.75d
+			y: 28.25d
+		}
+		{
+			id: "12EC37560F288336"
+			linked_quest: "32E335E61AB3C876"
+			shape: "rsquare"
+			x: 18.75d
+			y: 28.25d
 		}
 		{
 			id: "5D16B54AB39CF100"
 			linked_quest: "5642C3DCC05983B2"
 			shape: "rsquare"
 			x: 0.5d
-			y: 38.5d
+			y: 56.25d
 		}
 		{
 			id: "5CA302BB9944C119"
 			linked_quest: "162641406869CF74"
 			shape: "rsquare"
-			x: 16.75d
-			y: 36.0d
+			x: 24.75d
+			y: 52.75d
 		}
 		{
 			id: "594058A638287774"
 			linked_quest: "305F916B3530ABAD"
 			shape: "rsquare"
-			x: 16.75d
-			y: 37.5d
+			x: 24.75d
+			y: 54.25d
 		}
 		{
 			id: "5D8B4CC9CF776EE8"
 			linked_quest: "5928A959696AF7B5"
 			shape: "rsquare"
 			x: 0.5d
-			y: 45.75d
+			y: 67.25d
 		}
 		{
 			id: "17C49FE78BE98DA2"
 			linked_quest: "56280033A496EDB1"
 			shape: "rsquare"
 			x: 0.5d
-			y: 50.0d
+			y: 71.5d
 		}
 		{
 			id: "3103852D563A4D13"
 			linked_quest: "5DC3250C7363995F"
 			shape: "rsquare"
 			x: 0.5d
-			y: 51.5d
+			y: 73.0d
 		}
 	]
 	quests: [
@@ -107,7 +121,7 @@
 				{ id: "537A13695C3B2202", type: "checkmark" }
 			]
 			title: "Fluorite Dust"
-			x: 2.5d
+			x: 4.0d
 			y: 1.75d
 		}
 		{
@@ -122,7 +136,7 @@
 				{ id: "349A64C820492BD5", type: "checkmark" }
 			]
 			title: "Fluorspar Kiln"
-			x: 4.5d
+			x: 7.0d
 			y: 1.75d
 		}
 		{
@@ -135,8 +149,8 @@
 				{ id: "7FB4F5FBF44ADF93", type: "checkmark" }
 			]
 			title: "Hydrofluoric Acid"
-			x: 6.5d
-			y: 1.75d
+			x: 11.5d
+			y: 2.5d
 		}
 		{
 			dependencies: ["15A1985623FACDFE"]
@@ -149,7 +163,7 @@
 				{ id: "12BD6482944F57A3", type: "checkmark" }
 			]
 			title: "Gypsum"
-			x: 6.5d
+			x: 11.5d
 			y: 0.5d
 		}
 		{
@@ -167,23 +181,9 @@
 			y: 4.75d
 		}
 		{
-			icon: "grindless:ion_exchange_resin"
-			id: "707D943A88C25E26"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Styrene and sulfuric acid"
-			tasks: [
-				{ id: "5D5E863A063F6340", item: "grindless:ion_exchange_resin", optional_task: true, type: "item" }
-				{ id: "31DF9C86D1B40EC9", type: "checkmark" }
-			]
-			title: "Ion-Exchange Resin"
-			x: 0.5d
-			y: 6.25d
-		}
-		{
-			dependencies: ["5DB10211B3E10692", "5A66BA69651D5E13", "707D943A88C25E26"]
+			dependencies: ["5DB10211B3E10692", "5A66BA69651D5E13"]
 			description: [
-				"Five wells in the End push acid and oxygen through the ore and bring the uranium up dissolved."
+				"Five wells in the End push acid and oxygen through the ore and bring the uranium up as a liquor."
 				"The drill bits stay at home, and the thorium never leaves the ground."
 			]
 			icon: "gtceu:isr_wellfield"
@@ -196,19 +196,6 @@
 			]
 			title: "In-Situ Leach Field"
 			x: 3.0d
-			y: 5.0d
-		}
-		{
-			dependencies: ["31844FDD8D769D73"]
-			icon: "gtceu:uraninite_dust"
-			id: "546858F1939C5646"
-			size: 1.0d
-			tasks: [
-				{ id: "1FB0477FAF2F7542", item: "gtceu:uraninite_dust", optional_task: true, type: "item" }
-				{ id: "3CEA43C06E8BDDB3", type: "checkmark" }
-			]
-			title: "Uraninite"
-			x: 5.0d
 			y: 5.0d
 		}
 		{
@@ -226,37 +213,214 @@
 			y: 6.5d
 		}
 		{
-			dependencies: ["35271B45FE09310E", "546858F1939C5646"]
-			description: ["Radioactive stuff goes in through a bus and out to the network. Your hands never touch it, which is rather the point."]
-			icon: "gtceu:hot_cell"
-			id: "75EBDEC264519CD5"
-			shape: "gear"
-			size: 1.5d
-			subtitle: "Circuit 1: enrichment"
+			dependencies: ["31844FDD8D769D73"]
+			icon: "gtceu:uranyl_sulfate_liquor_bucket"
+			id: "3A788C130BC0515A"
+			size: 1.0d
 			tasks: [
-				{ id: "7EBC2FE205110B07", item: "gtceu:hot_cell", optional_task: true, type: "item" }
-				{ id: "1186F037E6D597B5", type: "checkmark" }
+				{ id: "3EBC0A4BAB529783", item: "gtceu:uranyl_sulfate_liquor_bucket", optional_task: true, type: "item" }
+				{ id: "1094FFAB8471C681", type: "checkmark" }
 			]
-			title: "Hot Cell"
-			x: 8.5d
+			title: "Uranyl Sulfate Liquor"
+			x: 5.0d
+			y: 5.0d
+		}
+		{
+			icon: "grindless:ion_exchange_resin"
+			id: "707D943A88C25E26"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Styrene and sulfuric acid"
+			tasks: [
+				{ id: "5D5E863A063F6340", item: "grindless:ion_exchange_resin", optional_task: true, type: "item" }
+				{ id: "31DF9C86D1B40EC9", type: "checkmark" }
+			]
+			title: "Ion-Exchange Resin"
+			x: 7.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["3A788C130BC0515A", "707D943A88C25E26"]
+			icon: "gtceu:uranium_eluate_bucket"
+			id: "3A2B8CB85BAEAAC1"
+			size: 1.0d
+			subtitle: "Ion exchange: the resin takes the uranium up and gives it back"
+			tasks: [
+				{ id: "3D726255415A52D4", item: "gtceu:uranium_eluate_bucket", optional_task: true, type: "item" }
+				{ id: "1EF3026C661FB862", type: "checkmark" }
+			]
+			title: "Uranium Eluate"
+			x: 7.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["3A788C130BC0515A"]
+			icon: "gtceu:diluted_sulfuric_acid_bucket"
+			id: "7505218972A6318C"
+			size: 0.75d
+			subtitle: "Back down the wells"
+			tasks: [
+				{ id: "5B35E63F8AB6C09C", item: "gtceu:diluted_sulfuric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "1730D244E698AD79", type: "checkmark" }
+			]
+			title: "Diluted Sulfuric Acid"
+			x: 7.0d
+			y: 3.5d
+		}
+		{
+			icon: "gtceu:hydrogen_peroxide_bucket"
+			id: "79F26A17B08ED908"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3030E484E7D609E6", item: "gtceu:hydrogen_peroxide_bucket", optional_task: true, type: "item" }
+				{ id: "3B2A41FB29015011", type: "checkmark" }
+			]
+			title: "Hydrogen Peroxide"
+			x: 9.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["3A2B8CB85BAEAAC1", "79F26A17B08ED908"]
+			icon: "gtceu:yellowcake_dust"
+			id: "5237358B67622391"
+			size: 1.0d
+			subtitle: "Precipitated with peroxide"
+			tasks: [
+				{ id: "31E968391970FB0A", item: "gtceu:yellowcake_dust", optional_task: true, type: "item" }
+				{ id: "377E64596CC0A7A7", type: "checkmark" }
+			]
+			title: "Yellowcake"
+			x: 9.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["5237358B67622391"]
+			icon: "gtceu:triuranium_octoxide_dust"
+			id: "5DE1B470DB1E449B"
+			size: 1.0d
+			subtitle: "Calcined in the EBF at 700 K"
+			tasks: [
+				{ id: "149457D1F6669DA3", item: "gtceu:triuranium_octoxide_dust", optional_task: true, type: "item" }
+				{ id: "5D3A9AB52F69DB7B", type: "checkmark" }
+			]
+			title: "Triuranium Octoxide"
+			x: 11.0d
+			y: 5.0d
+		}
+		{
+			icon: "gtceu:hydrogen_bucket"
+			id: "7163E4557EFBC503"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "11D96544F465A204", item: "gtceu:hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "33A7FE9CC9AA8177", type: "checkmark" }
+			]
+			title: "Hydrogen"
+			x: 13.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["5DE1B470DB1E449B", "7163E4557EFBC503"]
+			icon: "gtceu:uraninite_dust"
+			id: "546858F1939C5646"
+			size: 1.0d
+			subtitle: "Reduced with hydrogen at 900 K"
+			tasks: [
+				{ id: "1FB0477FAF2F7542", item: "gtceu:uraninite_dust", optional_task: true, type: "item" }
+				{ id: "3CEA43C06E8BDDB3", type: "checkmark" }
+			]
+			title: "Uraninite"
+			x: 13.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["546858F1939C5646", "35271B45FE09310E"]
+			icon: "gtceu:uranium_tetrafluoride_dust"
+			id: "78B4CEC444F04C6E"
+			size: 1.0d
+			subtitle: "Uraninite and hydrofluoric acid"
+			tasks: [
+				{ id: "71D57E58E2F1D5DA", item: "gtceu:uranium_tetrafluoride_dust", optional_task: true, type: "item" }
+				{ id: "73AB47472A956BA7", type: "checkmark" }
+			]
+			title: "Uranium Tetrafluoride"
+			x: 15.0d
+			y: 5.0d
+		}
+		{
+			icon: "gtceu:fluorine_bucket"
+			id: "1509ACFE7AC65746"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the acid, by electrolysis"
+			tasks: [
+				{ id: "1E243D1FA89CA6F2", item: "gtceu:fluorine_bucket", optional_task: true, type: "item" }
+				{ id: "50125BB559620D91", type: "checkmark" }
+			]
+			title: "Fluorine"
+			x: 17.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["78B4CEC444F04C6E", "1509ACFE7AC65746"]
+			icon: "gtceu:uranium_hexafluoride_bucket"
+			id: "77A692C8739BF255"
+			size: 1.0d
+			subtitle: "A gas that boils at 56 C"
+			tasks: [
+				{ id: "5E110B1979513A7E", item: "gtceu:uranium_hexafluoride_bucket", optional_task: true, type: "item" }
+				{ id: "560DDCB79F2A1C4E", type: "checkmark" }
+			]
+			title: "Uranium Hexafluoride"
+			x: 17.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["77A692C8739BF255"]
+			icon: "gtceu:enriched_uranium_hexafluoride_bucket"
+			id: "192B1F981E3C6CA1"
+			size: 1.0d
+			subtitle: "Gas centrifuge cascade"
+			tasks: [
+				{ id: "31A9BDC6E912EF4D", item: "gtceu:enriched_uranium_hexafluoride_bucket", optional_task: true, type: "item" }
+				{ id: "38BC9966CF8E7EF1", type: "checkmark" }
+			]
+			title: "Enriched Hexafluoride"
+			x: 19.0d
 			y: 4.0d
 		}
 		{
-			dependencies: ["75EBDEC264519CD5"]
+			dependencies: ["77A692C8739BF255"]
+			icon: "gtceu:depleted_uranium_hexafluoride_bucket"
+			id: "3DB2C8E134A55D31"
+			size: 1.0d
+			subtitle: "The tails"
+			tasks: [
+				{ id: "5AF0AFF175896FE5", item: "gtceu:depleted_uranium_hexafluoride_bucket", optional_task: true, type: "item" }
+				{ id: "78F8E1FD0729BB76", type: "checkmark" }
+			]
+			title: "Depleted Hexafluoride"
+			x: 19.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["192B1F981E3C6CA1"]
 			icon: "gtceu:uranium_235_dust"
 			id: "11CBF06B464C189F"
 			size: 1.0d
-			subtitle: "Fuel fabrication"
+			subtitle: "Deconverted with steam and hydrogen"
 			tasks: [
 				{ id: "7303E804F25271BC", item: "gtceu:uranium_235_dust", optional_task: true, type: "item" }
 				{ id: "5C39D35D4F39EAB0", type: "checkmark" }
 			]
 			title: "Uranium-235"
-			x: 10.5d
-			y: 2.75d
+			x: 21.0d
+			y: 4.0d
 		}
 		{
-			dependencies: ["75EBDEC264519CD5"]
+			dependencies: ["3DB2C8E134A55D31"]
 			icon: "gtceu:uranium_dust"
 			id: "1D6068D1A886F09F"
 			size: 1.0d
@@ -266,50 +430,22 @@
 				{ id: "324C79E1C12CC9AD", type: "checkmark" }
 			]
 			title: "Uranium-238"
-			x: 10.5d
-			y: 4.0d
+			x: 21.0d
+			y: 6.0d
 		}
 		{
-			dependencies: ["75EBDEC264519CD5"]
-			icon: "gtceu:fluorine_bucket"
-			id: "1509ACFE7AC65746"
-			size: 1.0d
-			subtitle: "The acid's fluorine, all of it"
-			tasks: [
-				{ id: "1E243D1FA89CA6F2", item: "gtceu:fluorine_bucket", optional_task: true, type: "item" }
-				{ id: "50125BB559620D91", type: "checkmark" }
-			]
-			title: "Fluorine"
-			x: 10.5d
-			y: 5.25d
-		}
-		{
-			dependencies: ["75EBDEC264519CD5"]
-			icon: "minecraft:water_bucket"
-			id: "5C043B1CF22DC28B"
-			size: 0.75d
-			subtitle: "Inert: to the network"
-			tasks: [
-				{ id: "5C72556A194C26FD", item: "minecraft:water_bucket", optional_task: true, type: "item" }
-				{ id: "1972FC674CF50FFC", type: "checkmark" }
-			]
-			title: "Water"
-			x: 10.5d
-			y: 6.5d
-		}
-		{
-			dependencies: ["1509ACFE7AC65746"]
+			dependencies: ["192B1F981E3C6CA1"]
 			icon: "gtceu:hydrofluoric_acid_bucket"
 			id: "32A09D1F39AB831D"
-			size: 1.0d
-			subtitle: "With hydrogen, for the naquadah plant"
+			size: 0.75d
+			subtitle: "The fluorine comes back as acid"
 			tasks: [
 				{ id: "31B539311BA8D0D4", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
 				{ id: "19D28EE3585A4B26", type: "checkmark" }
 			]
 			title: "Hydrofluoric Acid"
-			x: 12.5d
-			y: 5.25d
+			x: 21.0d
+			y: 2.5d
 		}
 		{
 			icon: "gtceu:uranium_235_dust"
@@ -322,8 +458,8 @@
 				{ id: "551DB0C39AC5DCBC", type: "checkmark" }
 			]
 			title: "Uranium-235"
-			x: 16.5d
-			y: 0.5d
+			x: 10.5d
+			y: 10.0d
 		}
 		{
 			icon: "gtceu:uranium_dust"
@@ -335,22 +471,144 @@
 				{ id: "7B416DA0381D570B", type: "checkmark" }
 			]
 			title: "Uranium-238"
-			x: 16.5d
-			y: 2.0d
+			x: 10.5d
+			y: 11.5d
 		}
 		{
-			icon: "gtceu:zircaloy_ingot"
-			id: "56A6ACC501C16406"
+			icon: "gtca:red_zircon_dust"
+			id: "7CFB993EE37B653E"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "End zirconium with a little tin"
+			subtitle: "End zircon, from the ore plant"
+			tasks: [
+				{ id: "105B76AFE5676379", item: "gtca:red_zircon_dust", optional_task: true, type: "item" }
+				{ id: "1DC4C962D3A0D62F", type: "checkmark" }
+			]
+			title: "Red Zircon Dust"
+			x: 0.5d
+			y: 13.0d
+		}
+		{
+			icon: "gtceu:chlorine_bucket"
+			id: "57B10300C908DF68"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "312D40CA8530587B", item: "gtceu:chlorine_bucket", optional_task: true, type: "item" }
+				{ id: "30FB70591DF54F53", type: "checkmark" }
+			]
+			title: "Chlorine"
+			x: 2.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["7CFB993EE37B653E", "57B10300C908DF68"]
+			icon: "grindless:zr_hf_chloride_dust"
+			id: "38C4F04F1268331D"
+			size: 1.0d
+			subtitle: "Chlorinated with carbon"
+			tasks: [
+				{ id: "3CB5B72D7794C0B0", item: "grindless:zr_hf_chloride_dust", optional_task: true, type: "item" }
+				{ id: "735CFAE24B475F8A", type: "checkmark" }
+			]
+			title: "Zirconium-Hafnium Chloride"
+			x: 2.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["38C4F04F1268331D"]
+			icon: "grindless:zirconium_chloride_dust"
+			id: "516112E1790C9061"
+			size: 1.0d
+			subtitle: "Hafnium eats neutrons: the cascade takes it out"
+			tasks: [
+				{ id: "144EB8EEF769B0DF", item: "grindless:zirconium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "371CDF76B7B0B20D", type: "checkmark" }
+			]
+			title: "Zirconium Chloride"
+			x: 4.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["38C4F04F1268331D"]
+			icon: "grindless:hafnium_chloride_dust"
+			id: "38B65B41D8DEA240"
+			size: 0.75d
+			subtitle: "Stored for the 6N hafnium"
+			tasks: [
+				{ id: "1AF1A32466E4BC5D", item: "grindless:hafnium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "115304C49FDEF0B8", type: "checkmark" }
+			]
+			title: "Hafnium Chloride"
+			x: 4.5d
+			y: 14.5d
+		}
+		{
+			icon: "gtceu:magnesium_dust"
+			id: "7AEDE80A40AC9891"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5B817F9210437567", item: "gtceu:magnesium_dust", optional_task: true, type: "item" }
+				{ id: "323E78F4C5BD5D9A", type: "checkmark" }
+			]
+			title: "Magnesium"
+			x: 6.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["516112E1790C9061", "7AEDE80A40AC9891"]
+			icon: "grindless:zirconium_sponge"
+			id: "3671AF3DE45632B3"
+			size: 1.0d
+			subtitle: "Kroll reduction under argon"
+			tasks: [
+				{ id: "38E8A2F81E2E0427", item: "grindless:zirconium_sponge", optional_task: true, type: "item" }
+				{ id: "77C7504B16B8AF09", type: "checkmark" }
+			]
+			title: "Zirconium Sponge"
+			x: 6.5d
+			y: 13.0d
+		}
+		{
+			icon: "gtceu:tin_dust"
+			id: "1F98C32C36E76784"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1A3B58936DD0574F", item: "gtceu:tin_dust", optional_task: true, type: "item" }
+				{ id: "77C82934A5ECFE7D", type: "checkmark" }
+			]
+			title: "Tin"
+			x: 8.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["3671AF3DE45632B3", "1F98C32C36E76784"]
+			icon: "gtceu:zircaloy_dust"
+			id: "11E6A95675BF36C1"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "317EE8C95ED94E9C", item: "gtceu:zircaloy_dust", optional_task: true, type: "item" }
+				{ id: "7BFCCC00CB19F253", type: "checkmark" }
+			]
+			title: "Zircaloy Dust"
+			x: 8.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["11E6A95675BF36C1"]
+			icon: "gtceu:zircaloy_ingot"
+			id: "56A6ACC501C16406"
+			size: 1.0d
 			tasks: [
 				{ id: "787DBDD20FA7B2FF", item: "gtceu:zircaloy_ingot", optional_task: true, type: "item" }
 				{ id: "353234C527B626DF", type: "checkmark" }
 			]
 			title: "Zircaloy"
-			x: 16.5d
-			y: 3.5d
+			x: 10.5d
+			y: 13.0d
 		}
 		{
 			dependencies: ["73AC4F7E693824C7", "373A4AAD597E87A4", "56A6ACC501C16406"]
@@ -364,8 +622,8 @@
 				{ id: "340713F9D14D5557", type: "checkmark" }
 			]
 			title: "Fuel Fabrication Plant"
-			x: 18.5d
-			y: 2.0d
+			x: 12.5d
+			y: 11.5d
 		}
 		{
 			dependencies: ["19B1770E002D6EAD"]
@@ -377,8 +635,8 @@
 				{ id: "157125A884D40F82", type: "checkmark" }
 			]
 			title: "LEU Pellets"
-			x: 20.5d
-			y: 1.25d
+			x: 14.5d
+			y: 10.75d
 		}
 		{
 			dependencies: ["19B1770E002D6EAD"]
@@ -390,8 +648,8 @@
 				{ id: "5A5961C3A6122666", type: "checkmark" }
 			]
 			title: "Cladding Tubes"
-			x: 20.5d
-			y: 2.75d
+			x: 14.5d
+			y: 12.25d
 		}
 		{
 			dependencies: ["1124210D71BF19AC", "3387D55EECA24EB1"]
@@ -404,8 +662,8 @@
 				{ id: "3718E9AF98157573", type: "checkmark" }
 			]
 			title: "LEU Fuel Assembly"
-			x: 22.5d
-			y: 2.0d
+			x: 16.5d
+			y: 11.5d
 		}
 		{
 			icon: "gtceu:heavy_water_bucket"
@@ -418,8 +676,8 @@
 				{ id: "7FABF23A9AB1673B", type: "checkmark" }
 			]
 			title: "Heavy Water"
-			x: 22.5d
-			y: 3.5d
+			x: 16.5d
+			y: 13.0d
 		}
 		{
 			dependencies: ["3D424D897DEB2D37", "71E46A4F0AE3D6F1"]
@@ -436,8 +694,8 @@
 				{ id: "7B2293C94C7FA24D", type: "checkmark" }
 			]
 			title: "Fission Reactor"
-			x: 24.5d
-			y: 2.0d
+			x: 18.5d
+			y: 11.5d
 		}
 		{
 			dependencies: ["131557F06455327C"]
@@ -450,8 +708,8 @@
 				{ id: "17AC4EC7CC847F01", type: "checkmark" }
 			]
 			title: "Spent Fuel"
-			x: 26.5d
-			y: 1.25d
+			x: 20.5d
+			y: 10.75d
 		}
 		{
 			dependencies: ["131557F06455327C"]
@@ -464,8 +722,8 @@
 				{ id: "7A871ACA0FC771CC", type: "checkmark" }
 			]
 			title: "Tritiated Heavy Water"
-			x: 26.5d
-			y: 2.75d
+			x: 20.5d
+			y: 12.25d
 		}
 		{
 			icon: "grindless:spent_fuel_assembly"
@@ -479,26 +737,26 @@
 			]
 			title: "Spent Fuel"
 			x: 0.5d
-			y: 13.0d
+			y: 21.25d
 		}
 		{
 			dependencies: ["1473B9F6D79968E0", "7D9B7EAC07F4A088"]
 			description: ["Nitric acid takes the spent fuel apart. The uranium and plutonium come back, the odd noble gas or rare metal turns up, and what's left becomes glassy waste that never leaves your storage."]
 			icon: "gtceu:hot_cell"
-			id: "591F60B659065137"
+			id: "75EBDEC264519CD5"
 			shape: "gear"
 			size: 1.5d
 			subtitle: "Circuit 3"
 			tasks: [
-				{ id: "7FC8680D5A4AC061", item: "gtceu:hot_cell", optional_task: true, type: "item" }
-				{ id: "3766D9C2E86EA576", type: "checkmark" }
+				{ id: "7EBC2FE205110B07", item: "gtceu:hot_cell", optional_task: true, type: "item" }
+				{ id: "1186F037E6D597B5", type: "checkmark" }
 			]
 			title: "Hot Cell, Reprocessing"
 			x: 2.5d
-			y: 13.75d
+			y: 22.0d
 		}
 		{
-			dependencies: ["591F60B659065137"]
+			dependencies: ["75EBDEC264519CD5"]
 			icon: "gtceu:plutonium_dust"
 			id: "314BC927EA058B1F"
 			size: 1.0d
@@ -508,10 +766,10 @@
 			]
 			title: "Plutonium"
 			x: 4.5d
-			y: 12.25d
+			y: 20.5d
 		}
 		{
-			dependencies: ["591F60B659065137"]
+			dependencies: ["75EBDEC264519CD5"]
 			icon: "gtceu:uranium_dust"
 			id: "5B050911A3185646"
 			size: 1.0d
@@ -522,10 +780,10 @@
 			]
 			title: "Uranium-238"
 			x: 4.5d
-			y: 13.5d
+			y: 21.75d
 		}
 		{
-			dependencies: ["591F60B659065137"]
+			dependencies: ["75EBDEC264519CD5"]
 			icon: "gtceu:xenon_bucket"
 			id: "32CCA814F0D16669"
 			size: 0.75d
@@ -536,10 +794,10 @@
 			]
 			title: "Xenon"
 			x: 4.5d
-			y: 14.75d
+			y: 23.0d
 		}
 		{
-			dependencies: ["591F60B659065137"]
+			dependencies: ["75EBDEC264519CD5"]
 			icon: "gtnn:radioactive_waste"
 			id: "78B77ED90CDECD33"
 			size: 0.75d
@@ -550,10 +808,10 @@
 			]
 			title: "Radioactive Waste"
 			x: 4.5d
-			y: 15.75d
+			y: 24.0d
 		}
 		{
-			dependencies: ["591F60B659065137"]
+			dependencies: ["75EBDEC264519CD5"]
 			icon: "gtceu:nitrogen_dioxide_bucket"
 			id: "52D533E75984BA01"
 			size: 0.75d
@@ -564,7 +822,7 @@
 			]
 			title: "Nitrogen Dioxide"
 			x: 4.5d
-			y: 16.75d
+			y: 25.0d
 		}
 		{
 			dependencies: ["314BC927EA058B1F"]
@@ -578,7 +836,7 @@
 			]
 			title: "RTG Pellet"
 			x: 6.5d
-			y: 10.0d
+			y: 18.25d
 		}
 		{
 			dependencies: ["314BC927EA058B1F"]
@@ -592,7 +850,7 @@
 			]
 			title: "MOX Assembly"
 			x: 6.5d
-			y: 11.5d
+			y: 19.75d
 		}
 		{
 			dependencies: ["314BC927EA058B1F", "5B050911A3185646"]
@@ -607,7 +865,7 @@
 			]
 			title: "Breeder Assembly"
 			x: 6.5d
-			y: 13.0d
+			y: 21.25d
 		}
 		{
 			dependencies: ["7B7B0F4AD0D3C01A"]
@@ -622,7 +880,7 @@
 			]
 			title: "RTG Cell"
 			x: 8.5d
-			y: 10.0d
+			y: 18.25d
 		}
 		{
 			dependencies: ["17A3FCFC32F409FD", "773EBEBBC58010FD"]
@@ -637,7 +895,7 @@
 			]
 			title: "Back into the Reactor"
 			x: 8.5d
-			y: 12.25d
+			y: 20.5d
 		}
 		{
 			icon: "gtceu:raw_deuterium_rich_ice"
@@ -651,7 +909,7 @@
 			]
 			title: "Deuterium-Rich Ice"
 			x: 12.75d
-			y: 11.25d
+			y: 19.5d
 		}
 		{
 			dependencies: ["1E3605DB3F933D07"]
@@ -665,7 +923,7 @@
 			]
 			title: "Ice Dust"
 			x: 14.75d
-			y: 11.25d
+			y: 19.5d
 		}
 		{
 			icon: "gtceu:steam_bucket"
@@ -679,7 +937,7 @@
 			]
 			title: "Steam"
 			x: 14.75d
-			y: 12.75d
+			y: 21.0d
 		}
 		{
 			dependencies: ["7F6D2C9A8D30ED56", "1DD00667E82E75AE", "730B996F7B48CB00"]
@@ -694,7 +952,7 @@
 			]
 			title: "Heavy-Water Plant"
 			x: 16.75d
-			y: 11.25d
+			y: 19.5d
 		}
 		{
 			dependencies: ["532F2807022004BB"]
@@ -707,7 +965,7 @@
 			]
 			title: "Heavy Water Concentrate"
 			x: 18.75d
-			y: 10.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["532F2807022004BB"]
@@ -721,7 +979,7 @@
 			]
 			title: "Distilled Water"
 			x: 18.75d
-			y: 12.0d
+			y: 20.25d
 		}
 		{
 			dependencies: ["3B13D87FD4856DC1"]
@@ -735,7 +993,7 @@
 			]
 			title: "Heavy Water"
 			x: 20.75d
-			y: 10.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["17260FE287B08ADA"]
@@ -749,7 +1007,7 @@
 			]
 			title: "Fission Reactor"
 			x: 22.75d
-			y: 10.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["17260FE287B08ADA"]
@@ -763,7 +1021,7 @@
 			]
 			title: "Deuterium"
 			x: 22.75d
-			y: 12.0d
+			y: 20.25d
 		}
 		{
 			dependencies: ["713E4A5901BFCE5A"]
@@ -776,7 +1034,7 @@
 			]
 			title: "Tritiated Heavy Water"
 			x: 24.75d
-			y: 10.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["31F84F07B7F4E74A", "33B9948FCA396811"]
@@ -791,7 +1049,7 @@
 			]
 			title: "Tritium Removal Facility"
 			x: 26.75d
-			y: 10.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["15C4B97AD249E37A"]
@@ -806,7 +1064,7 @@
 			]
 			title: "Heavy Water, Back"
 			x: 28.75d
-			y: 9.75d
+			y: 18.0d
 		}
 		{
 			dependencies: ["15C4B97AD249E37A"]
@@ -820,7 +1078,7 @@
 			]
 			title: "Tritium"
 			x: 28.75d
-			y: 11.25d
+			y: 19.5d
 		}
 		{
 			icon: "gtceu:uranium_dust"
@@ -833,7 +1091,7 @@
 			]
 			title: "Uranium-238"
 			x: 0.5d
-			y: 20.0d
+			y: 28.25d
 		}
 		{
 			icon: "gtceu:air_bucket"
@@ -846,7 +1104,7 @@
 			]
 			title: "Air"
 			x: 0.5d
-			y: 21.5d
+			y: 29.75d
 		}
 		{
 			dependencies: ["3AEF09CFBEC416E0", "580B28DFDEEA7528"]
@@ -861,7 +1119,7 @@
 			]
 			title: "Hot Cell, Radon"
 			x: 2.5d
-			y: 20.75d
+			y: 29.0d
 		}
 		{
 			dependencies: ["1BF911F955A3A3C5"]
@@ -874,7 +1132,7 @@
 			]
 			title: "Radon"
 			x: 4.5d
-			y: 20.75d
+			y: 29.0d
 		}
 		{
 			dependencies: ["13A716AD46F66C22", "182D9BB9E4FD1F15"]
@@ -889,7 +1147,246 @@
 			]
 			title: "Quantum Star"
 			x: 6.5d
-			y: 21.5d
+			y: 29.75d
+		}
+		{
+			icon: "gtceu:chlorine_bucket"
+			id: "5FC69B2305F5914C"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "528BCCE26B37066D", item: "gtceu:chlorine_bucket", optional_task: true, type: "item" }
+				{ id: "38874EDFE617B1AF", type: "checkmark" }
+			]
+			title: "Chlorine"
+			x: 10.75d
+			y: 29.75d
+		}
+		{
+			dependencies: ["777ABA05F5A09A7C", "5FC69B2305F5914C"]
+			icon: "gtceu:chlorobenzene_bucket"
+			id: "30E32B72CE7ADE33"
+			size: 1.0d
+			tasks: [
+				{ id: "39B8B31C13017D18", item: "gtceu:chlorobenzene_bucket", optional_task: true, type: "item" }
+				{ id: "7A9F2469278F450C", type: "checkmark" }
+			]
+			title: "Chlorobenzene"
+			x: 12.75d
+			y: 29.0d
+		}
+		{
+			icon: "gtceu:nitric_acid_bucket"
+			id: "53D4BB14A8CEC875"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5576ED594EC3CA5F", item: "gtceu:nitric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "16B754BEAF37E8C1", type: "checkmark" }
+			]
+			title: "Nitric Acid"
+			x: 12.75d
+			y: 30.5d
+		}
+		{
+			dependencies: ["30E32B72CE7ADE33", "53D4BB14A8CEC875"]
+			icon: "gtceu:nitrochlorobenzene_bucket"
+			id: "74A7B26276CF43D3"
+			size: 1.0d
+			subtitle: "Nitrated"
+			tasks: [
+				{ id: "35E34D93B0FE5CF9", item: "gtceu:nitrochlorobenzene_bucket", optional_task: true, type: "item" }
+				{ id: "76CCA3BC73B5CA72", type: "checkmark" }
+			]
+			title: "Nitrochlorobenzene"
+			x: 14.75d
+			y: 29.75d
+		}
+		{
+			icon: "gtceu:hydrogen_bucket"
+			id: "59CFCB91C9B37781"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1C27BF3EF9BE19EB", item: "gtceu:hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "7255C4C24B0D0C16", type: "checkmark" }
+			]
+			title: "Hydrogen"
+			x: 14.75d
+			y: 31.25d
+		}
+		{
+			dependencies: ["74A7B26276CF43D3", "59CFCB91C9B37781"]
+			icon: "gtceu:dichlorobenzidine_bucket"
+			id: "30F8D92441442132"
+			size: 1.0d
+			subtitle: "Copper catalyst"
+			tasks: [
+				{ id: "7B5ACCA83441D9FA", item: "gtceu:dichlorobenzidine_bucket", optional_task: true, type: "item" }
+				{ id: "515BCA23927A88FC", type: "checkmark" }
+			]
+			title: "Dichlorobenzidine"
+			x: 16.75d
+			y: 30.5d
+		}
+		{
+			icon: "gtceu:ammonia_bucket"
+			id: "75F7AA656FA46EF0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7C79402219935109", item: "gtceu:ammonia_bucket", optional_task: true, type: "item" }
+				{ id: "794F9ADF8507D876", type: "checkmark" }
+			]
+			title: "Ammonia"
+			x: 16.75d
+			y: 32.0d
+		}
+		{
+			icon: "gtceu:zinc_dust"
+			id: "5AC89F1CFEBAE57A"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3CB2BB58BD5470C5", item: "gtceu:zinc_dust", optional_task: true, type: "item" }
+				{ id: "37CBA3C850BAB2D6", type: "checkmark" }
+			]
+			title: "Zinc"
+			x: 16.75d
+			y: 33.25d
+		}
+		{
+			dependencies: ["30F8D92441442132", "75F7AA656FA46EF0", "5AC89F1CFEBAE57A"]
+			icon: "gtceu:diaminobenzidine_bucket"
+			id: "558D766EDA32E369"
+			size: 1.0d
+			tasks: [
+				{ id: "52C1EB6A6E2A4946", item: "gtceu:diaminobenzidine_bucket", optional_task: true, type: "item" }
+				{ id: "180A05EA50CF4ED1", type: "checkmark" }
+			]
+			title: "Diaminobenzidine"
+			x: 18.75d
+			y: 31.25d
+		}
+		{
+			icon: "gtceu:phthalic_acid_bucket"
+			id: "37F34446DC9E04EB"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1718B921C5C86591", item: "gtceu:phthalic_acid_bucket", optional_task: true, type: "item" }
+				{ id: "501FAC1958505B53", type: "checkmark" }
+			]
+			title: "Phthalic Acid"
+			x: 18.75d
+			y: 29.5d
+		}
+		{
+			dependencies: ["32E335E61AB3C876", "37F34446DC9E04EB"]
+			icon: "gtceu:diphenyl_isophthalate_bucket"
+			id: "7F539AD6CB1A6B95"
+			size: 1.0d
+			tasks: [
+				{ id: "3516ABE5CB09BFD5", item: "gtceu:diphenyl_isophthalate_bucket", optional_task: true, type: "item" }
+				{ id: "361D94ABBB10815C", type: "checkmark" }
+			]
+			title: "Diphenyl Isophthalate"
+			x: 20.75d
+			y: 28.75d
+		}
+		{
+			dependencies: ["558D766EDA32E369", "7F539AD6CB1A6B95"]
+			icon: "gtceu:polybenzimidazole_bucket"
+			id: "5C7D32FBB6E8182B"
+			size: 1.0d
+			subtitle: "The phenol comes back"
+			tasks: [
+				{ id: "53892C51A379D2A0", item: "gtceu:polybenzimidazole_bucket", optional_task: true, type: "item" }
+				{ id: "12FC709A38BA4092", type: "checkmark" }
+			]
+			title: "Polybenzimidazole"
+			x: 22.75d
+			y: 30.0d
+		}
+		{
+			dependencies: ["5C7D32FBB6E8182B"]
+			icon: "gtceu:polybenzimidazole_ingot"
+			id: "5236BFAE94DC02D0"
+			size: 1.0d
+			tasks: [
+				{ id: "38CEF04B810A269D", item: "gtceu:polybenzimidazole_ingot", optional_task: true, type: "item" }
+				{ id: "3C6C4FB6455CFDA8", type: "checkmark" }
+			]
+			title: "PBI Ingot"
+			x: 24.75d
+			y: 30.0d
+		}
+		{
+			dependencies: ["5236BFAE94DC02D0"]
+			icon: "gtceu:polybenzimidazole_foil"
+			id: "5BE3F6E757751F6B"
+			size: 1.0d
+			tasks: [
+				{ id: "1E0557CB9785E054", item: "gtceu:polybenzimidazole_foil", optional_task: true, type: "item" }
+				{ id: "70A964F82F0762F1", type: "checkmark" }
+			]
+			title: "PBI Foil"
+			x: 26.75d
+			y: 30.0d
+		}
+		{
+			icon: "gcyr:para_aramid_foil"
+			id: "192005B4D8FF384D"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "363E41665F6EB5B1", item: "gcyr:para_aramid_foil", optional_task: true, type: "item" }
+				{ id: "7151AF663951D198", type: "checkmark" }
+			]
+			title: "Para-Aramid Foil"
+			x: 26.75d
+			y: 31.5d
+		}
+		{
+			icon: "gtceu:polytetrafluoroethylene_foil"
+			id: "1AFE296762033B7D"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3818FA307CC6FE57", item: "gtceu:polytetrafluoroethylene_foil", optional_task: true, type: "item" }
+				{ id: "10B9CA5B21F56816", type: "checkmark" }
+			]
+			title: "PTFE Foil"
+			x: 26.75d
+			y: 28.5d
+		}
+		{
+			dependencies: ["5BE3F6E757751F6B", "192005B4D8FF384D", "1AFE296762033B7D"]
+			icon: "gcyr:insulating_fabric"
+			id: "34570296657D3C4E"
+			size: 1.0d
+			subtitle: "Three foils, one layered cloth"
+			tasks: [
+				{ id: "146A39C84489D0DA", item: "gcyr:insulating_fabric", optional_task: true, type: "item" }
+				{ id: "7AE33CC30D4E452E", type: "checkmark" }
+			]
+			title: "Insulating Fabric"
+			x: 28.75d
+			y: 30.0d
+		}
+		{
+			dependencies: ["34570296657D3C4E"]
+			icon: "gcyr:space_suit_thermal_upgrade_smithing_template"
+			id: "52E434EEC4015FD2"
+			size: 1.25d
+			subtitle: "What lets the suit land on Venus and Mercury"
+			tasks: [
+				{ id: "52A8EE14EC90A39B", item: "gcyr:space_suit_thermal_upgrade_smithing_template", optional_task: true, type: "item" }
+				{ id: "39A33FE229A0F971", type: "checkmark" }
+			]
+			title: "Thermal Upgrade Template"
+			x: 30.75d
+			y: 30.0d
 		}
 		{
 			icon: "gtceu:iv_gas_collector"
@@ -902,8 +1399,8 @@
 				{ id: "5B73A5A4BB6A150C", type: "checkmark" }
 			]
 			title: "Gas Collector"
-			x: 10.75d
-			y: 20.25d
+			x: 0.75d
+			y: 37.0d
 		}
 		{
 			dependencies: ["5380A442F4908643"]
@@ -916,8 +1413,8 @@
 				{ id: "54CA89B7A4C9977E", type: "checkmark" }
 			]
 			title: "Sulfuric Acid"
-			x: 12.75d
-			y: 20.25d
+			x: 2.75d
+			y: 37.0d
 		}
 		{
 			icon: "grindless:platinum_gauze"
@@ -930,8 +1427,8 @@
 				{ id: "11A8DD5713E71255", type: "checkmark" }
 			]
 			title: "Platinum Gauze"
-			x: 12.75d
-			y: 21.75d
+			x: 2.75d
+			y: 38.5d
 		}
 		{
 			dependencies: ["3A31F0A5C1658FBF", "5813F61614F094E5"]
@@ -945,8 +1442,8 @@
 				{ id: "1B125CC3E928CFC7", type: "checkmark" }
 			]
 			title: "Venus Acid Works"
-			x: 14.75d
-			y: 21.0d
+			x: 4.75d
+			y: 37.75d
 		}
 		{
 			dependencies: ["111D26C8A0B0ACB5"]
@@ -959,8 +1456,8 @@
 				{ id: "7FF4925A9194A376", type: "checkmark" }
 			]
 			title: "Distilled Water"
-			x: 16.75d
-			y: 20.25d
+			x: 6.75d
+			y: 37.0d
 		}
 		{
 			dependencies: ["111D26C8A0B0ACB5"]
@@ -973,8 +1470,8 @@
 				{ id: "13179DB924B1427C", type: "checkmark" }
 			]
 			title: "Oxygen"
-			x: 16.75d
-			y: 21.75d
+			x: 6.75d
+			y: 38.5d
 		}
 		{
 			dependencies: ["111D26C8A0B0ACB5"]
@@ -987,8 +1484,8 @@
 				{ id: "717296BDFEEB4100", type: "checkmark" }
 			]
 			title: "Sulfur Dioxide"
-			x: 16.75d
-			y: 22.75d
+			x: 6.75d
+			y: 39.5d
 		}
 		{
 			dependencies: ["50C4A414ED95DC2D"]
@@ -1002,8 +1499,8 @@
 				{ id: "71A810A024C79E34", type: "checkmark" }
 			]
 			title: "Venus Heat Engine"
-			x: 18.75d
-			y: 20.25d
+			x: 8.75d
+			y: 37.0d
 		}
 		{
 			dependencies: ["30691FD8A9664E85"]
@@ -1016,8 +1513,8 @@
 				{ id: "1EFA50534D6860CD", type: "checkmark" }
 			]
 			title: "Steam"
-			x: 20.75d
-			y: 20.25d
+			x: 10.75d
+			y: 37.0d
 		}
 		{
 			icon: "grindless:vein_sample_naquadah_venus"
@@ -1031,7 +1528,7 @@
 			]
 			title: "Venus Naquadah Sample"
 			x: 0.5d
-			y: 27.0d
+			y: 43.75d
 		}
 		{
 			icon: "grindless:tungsten_steel_drill_bit"
@@ -1044,7 +1541,7 @@
 			]
 			title: "Tungsten Steel Drill Bit"
 			x: 0.5d
-			y: 28.5d
+			y: 45.25d
 		}
 		{
 			icon: "gtceu:distilled_water_bucket"
@@ -1058,7 +1555,7 @@
 			]
 			title: "Distilled Water"
 			x: 0.5d
-			y: 30.0d
+			y: 46.75d
 		}
 		{
 			dependencies: ["37922EE92434EB1D", "1A31C86EF2F352F9", "7208D5D5C68366CD"]
@@ -1073,7 +1570,7 @@
 			]
 			title: "Pressurized Vein Drill"
 			x: 2.5d
-			y: 28.5d
+			y: 45.25d
 		}
 		{
 			dependencies: ["5CC66985D64422EE"]
@@ -1087,7 +1584,7 @@
 			]
 			title: "Raw Naquadah"
 			x: 4.5d
-			y: 27.75d
+			y: 44.5d
 		}
 		{
 			dependencies: ["5CC66985D64422EE"]
@@ -1101,7 +1598,7 @@
 			]
 			title: "Raw Plutonium"
 			x: 4.5d
-			y: 29.0d
+			y: 45.75d
 		}
 		{
 			dependencies: ["5CC66985D64422EE"]
@@ -1115,7 +1612,7 @@
 			]
 			title: "Steam"
 			x: 4.5d
-			y: 30.0d
+			y: 46.75d
 		}
 		{
 			dependencies: ["5CC66985D64422EE"]
@@ -1129,7 +1626,7 @@
 			]
 			title: "Venus Cobblestone"
 			x: 4.5d
-			y: 31.0d
+			y: 47.75d
 		}
 		{
 			dependencies: ["78C55A0C6115070F"]
@@ -1143,7 +1640,7 @@
 			]
 			title: "Naquadah Oxide Mixture"
 			x: 6.5d
-			y: 27.75d
+			y: 44.5d
 		}
 		{
 			icon: "gtceu:hydrofluoric_acid_bucket"
@@ -1157,7 +1654,7 @@
 			]
 			title: "Hydrofluoric Acid"
 			x: 6.5d
-			y: 26.25d
+			y: 43.0d
 		}
 		{
 			icon: "gtceu:antimony_trioxide_dust"
@@ -1171,7 +1668,7 @@
 			]
 			title: "Antimony Trioxide"
 			x: 6.5d
-			y: 29.25d
+			y: 46.0d
 		}
 		{
 			icon: "grindless:pube_neutron_source"
@@ -1185,7 +1682,7 @@
 			]
 			title: "Pu-Be Neutron Source"
 			x: 6.5d
-			y: 30.75d
+			y: 47.5d
 		}
 		{
 			dependencies: ["51FDDBF809C1732E", "74E626D64C4EC111", "3DD6E2521B49B155", "1C44BB891BE81D16"]
@@ -1203,7 +1700,7 @@
 			]
 			title: "Naquadah Plant"
 			x: 8.5d
-			y: 28.5d
+			y: 45.25d
 		}
 		{
 			dependencies: ["1D3B1399264057F4"]
@@ -1216,7 +1713,7 @@
 			]
 			title: "Naquadah Dust"
 			x: 10.5d
-			y: 27.25d
+			y: 44.0d
 		}
 		{
 			dependencies: ["1D3B1399264057F4"]
@@ -1230,7 +1727,7 @@
 			]
 			title: "Hydrogen"
 			x: 10.5d
-			y: 28.5d
+			y: 45.25d
 		}
 		{
 			dependencies: ["1D3B1399264057F4"]
@@ -1244,7 +1741,7 @@
 			]
 			title: "Gallium"
 			x: 10.5d
-			y: 29.5d
+			y: 46.25d
 		}
 		{
 			dependencies: ["1D3B1399264057F4"]
@@ -1258,7 +1755,7 @@
 			]
 			title: "Titanium"
 			x: 10.5d
-			y: 30.5d
+			y: 47.25d
 		}
 		{
 			dependencies: ["1C089C47DF30A347"]
@@ -1272,7 +1769,7 @@
 			]
 			title: "Hot Naquadah Ingot"
 			x: 12.5d
-			y: 27.25d
+			y: 44.0d
 		}
 		{
 			dependencies: ["74FD9811AB65EAD9"]
@@ -1286,7 +1783,7 @@
 			]
 			title: "Naquadah"
 			x: 14.5d
-			y: 27.25d
+			y: 44.0d
 		}
 		{
 			dependencies: ["1482AB495FE4772F"]
@@ -1300,7 +1797,7 @@
 			]
 			title: "Naquadah Boule"
 			x: 16.5d
-			y: 27.25d
+			y: 44.0d
 		}
 		{
 			dependencies: ["345280E4109B40A0"]
@@ -1314,7 +1811,7 @@
 			]
 			title: "Naquadah Wafer"
 			x: 18.5d
-			y: 27.25d
+			y: 44.0d
 		}
 		{
 			icon: "grindless:vein_sample_iridosmine_mercury"
@@ -1327,7 +1824,7 @@
 			]
 			title: "Mercury Iridosmine Sample"
 			x: 0.5d
-			y: 35.5d
+			y: 53.25d
 		}
 		{
 			icon: "grindless:tungsten_steel_drill_bit"
@@ -1340,7 +1837,7 @@
 			]
 			title: "Tungsten Steel Drill Bit"
 			x: 0.5d
-			y: 37.0d
+			y: 54.75d
 		}
 		{
 			dependencies: ["1D6EA9A53811980A", "701AB3758DD632E7", "5642C3DCC05983B2"]
@@ -1355,7 +1852,7 @@
 			]
 			title: "Mercury Vein Drill"
 			x: 2.5d
-			y: 37.0d
+			y: 54.75d
 		}
 		{
 			dependencies: ["14ED3AAAE02F0FED"]
@@ -1369,7 +1866,7 @@
 			]
 			title: "Raw Iridosmine"
 			x: 4.5d
-			y: 36.25d
+			y: 54.0d
 		}
 		{
 			dependencies: ["14ED3AAAE02F0FED"]
@@ -1383,7 +1880,7 @@
 			]
 			title: "Raw Graphite"
 			x: 4.5d
-			y: 37.5d
+			y: 55.25d
 		}
 		{
 			dependencies: ["14ED3AAAE02F0FED"]
@@ -1397,7 +1894,7 @@
 			]
 			title: "Raw Sulfur"
 			x: 4.5d
-			y: 38.5d
+			y: 56.25d
 		}
 		{
 			dependencies: ["7C7AB2473F552308"]
@@ -1411,51 +1908,148 @@
 			]
 			title: "Iridosmine Dust"
 			x: 6.5d
-			y: 36.25d
+			y: 54.0d
+		}
+		{
+			icon: "gtceu:saltpeter_dust"
+			id: "311F18A6B2E2D94D"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7E91D2D991F470D7", item: "gtceu:saltpeter_dust", optional_task: true, type: "item" }
+				{ id: "1E5C21C44BD50E72", type: "checkmark" }
+			]
+			title: "Saltpeter"
+			x: 6.5d
+			y: 52.5d
+		}
+		{
+			icon: "gtceu:salt_water_bucket"
+			id: "1D9FF07CF1A38953"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5C5BBA4DCABBACB9", item: "gtceu:salt_water_bucket", optional_task: true, type: "item" }
+				{ id: "5F15D48AAD6659B7", type: "checkmark" }
+			]
+			title: "Salt Water"
+			x: 6.5d
+			y: 51.25d
+		}
+		{
+			dependencies: ["18282AFCC9E82DD7", "311F18A6B2E2D94D", "1D9FF07CF1A38953"]
+			icon: "gtceu:rarest_metal_mixture_dust"
+			id: "5ED025CE543BAF89"
+			size: 1.0d
+			subtitle: "Fused in the solar furnace"
+			tasks: [
+				{ id: "7284F823D065FA30", item: "gtceu:rarest_metal_mixture_dust", optional_task: true, type: "item" }
+				{ id: "52A95C188ACE316B", type: "checkmark" }
+			]
+			title: "Rarest Metal Mixture"
+			x: 8.5d
+			y: 54.0d
 		}
 		{
 			dependencies: ["18282AFCC9E82DD7"]
-			description: ["The EV plant learns one more trick. The osmium tetroxide and the chlorine never leave it."]
-			icon: "gtceu:platinum_plant"
-			id: "5B04640EEFA209BC"
-			shape: "gear"
-			size: 1.5d
+			icon: "gtceu:osmium_tetroxide_bucket"
+			id: "1E67388A7884C858"
+			size: 1.0d
+			subtitle: "The fumes, caught"
 			tasks: [
-				{ id: "356258C9E0C9767B", item: "gtceu:platinum_plant", optional_task: true, type: "item" }
-				{ id: "1A5FC2BE6C283B14", type: "checkmark" }
+				{ id: "1300957EF99B0CAA", item: "gtceu:osmium_tetroxide_bucket", optional_task: true, type: "item" }
+				{ id: "326D62D53A7BD06F", type: "checkmark" }
 			]
-			title: "Platinum Plant, Mode 3"
+			title: "Osmium Tetroxide"
 			x: 8.5d
-			y: 36.25d
+			y: 55.5d
 		}
 		{
-			dependencies: ["5B04640EEFA209BC"]
+			dependencies: ["5ED025CE543BAF89"]
+			icon: "gtceu:iridium_metal_residue_dust"
+			id: "3E582B7C3B2A667D"
+			size: 1.0d
+			subtitle: "EBF"
+			tasks: [
+				{ id: "13D49A9085801E13", item: "gtceu:iridium_metal_residue_dust", optional_task: true, type: "item" }
+				{ id: "50E3150103965B7B", type: "checkmark" }
+			]
+			title: "Iridium Metal Residue"
+			x: 10.5d
+			y: 52.5d
+		}
+		{
+			dependencies: ["3E582B7C3B2A667D"]
+			icon: "gtceu:iridium_dioxide_dust"
+			id: "5F8A9C12E3510ACB"
+			size: 1.0d
+			subtitle: "EBF again"
+			tasks: [
+				{ id: "17A1B2BE7490368B", item: "gtceu:iridium_dioxide_dust", optional_task: true, type: "item" }
+				{ id: "3D7D3FE455FAEF3B", type: "checkmark" }
+			]
+			title: "Iridium Dioxide"
+			x: 12.5d
+			y: 52.5d
+		}
+		{
+			dependencies: ["5F8A9C12E3510ACB"]
+			icon: "gtceu:acidic_iridium_bucket"
+			id: "3311FF39239400DE"
+			size: 1.0d
+			subtitle: "Dissolved"
+			tasks: [
+				{ id: "1443B8BD11A89E30", item: "gtceu:acidic_iridium_bucket", optional_task: true, type: "item" }
+				{ id: "1A858F0FC470B02F", type: "checkmark" }
+			]
+			title: "Acidic Iridium"
+			x: 14.5d
+			y: 52.5d
+		}
+		{
+			dependencies: ["3311FF39239400DE"]
+			icon: "gtceu:iridium_chloride_dust"
+			id: "5976F3891EBC1C84"
+			size: 1.0d
+			subtitle: "With ammonia"
+			tasks: [
+				{ id: "52A21877FB5DC103", item: "gtceu:iridium_chloride_dust", optional_task: true, type: "item" }
+				{ id: "3D21A130B3D51690", type: "checkmark" }
+			]
+			title: "Iridium Chloride"
+			x: 16.5d
+			y: 52.5d
+		}
+		{
+			dependencies: ["5976F3891EBC1C84"]
 			icon: "gtceu:iridium_dust"
 			id: "757494C91EDAAF2F"
 			size: 1.0d
+			subtitle: "Calcium takes the chlorine"
 			tasks: [
 				{ id: "325DC718FDB55DB3", item: "gtceu:iridium_dust", optional_task: true, type: "item" }
 				{ id: "7FBAC1F61975BA9B", type: "checkmark" }
 			]
 			title: "Iridium"
-			x: 10.5d
-			y: 34.75d
+			x: 18.5d
+			y: 52.5d
 		}
 		{
-			dependencies: ["5B04640EEFA209BC"]
+			dependencies: ["1E67388A7884C858"]
 			icon: "gtceu:osmium_dust"
 			id: "18F851C124EE8714"
 			size: 1.0d
+			subtitle: "Hydrogen takes the oxygen"
 			tasks: [
 				{ id: "53C26F262CBB3E05", item: "gtceu:osmium_dust", optional_task: true, type: "item" }
 				{ id: "775B69B5D3F1B536", type: "checkmark" }
 			]
 			title: "Osmium"
 			x: 10.5d
-			y: 36.25d
+			y: 55.5d
 		}
 		{
-			dependencies: ["5B04640EEFA209BC"]
+			dependencies: ["3E582B7C3B2A667D"]
 			icon: "gtceu:platinum_sludge_residue_dust"
 			id: "59AE4725ABD7497C"
 			size: 0.75d
@@ -1465,11 +2059,11 @@
 				{ id: "3EE718818BAFBE4F", type: "checkmark" }
 			]
 			title: "Platinum Sludge Residue"
-			x: 10.5d
-			y: 37.5d
+			x: 14.5d
+			y: 54.0d
 		}
 		{
-			dependencies: ["5B04640EEFA209BC"]
+			dependencies: ["5976F3891EBC1C84"]
 			icon: "gtceu:calcium_chloride_dust"
 			id: "5AAD5B70F915AF47"
 			size: 0.75d
@@ -1479,8 +2073,8 @@
 				{ id: "5468600456FEC7A2", type: "checkmark" }
 			]
 			title: "Calcium Chloride"
-			x: 10.5d
-			y: 38.5d
+			x: 20.5d
+			y: 53.75d
 		}
 		{
 			dependencies: ["757494C91EDAAF2F"]
@@ -1493,8 +2087,8 @@
 				{ id: "3542E66CCBB2F5B8", type: "checkmark" }
 			]
 			title: "Iridium Ingot"
-			x: 12.5d
-			y: 34.75d
+			x: 20.5d
+			y: 52.5d
 		}
 		{
 			dependencies: ["18F851C124EE8714"]
@@ -1508,7 +2102,7 @@
 			]
 			title: "Osmium Ingot"
 			x: 12.5d
-			y: 36.25d
+			y: 55.5d
 		}
 		{
 			icon: "gcyr:mercury_cobblestone"
@@ -1521,8 +2115,8 @@
 				{ id: "571CD092B1626AF5", type: "checkmark" }
 			]
 			title: "Mercury Cobblestone"
-			x: 16.75d
-			y: 34.5d
+			x: 24.75d
+			y: 51.25d
 		}
 		{
 			dependencies: ["133791A9E6760B8D"]
@@ -1535,8 +2129,8 @@
 				{ id: "73FF76A7314964D4", type: "checkmark" }
 			]
 			title: "Hermean Regolith Dust"
-			x: 18.75d
-			y: 34.5d
+			x: 26.75d
+			y: 51.25d
 		}
 		{
 			dependencies: ["504E07CA238DFB00", "162641406869CF74", "305F916B3530ABAD"]
@@ -1550,8 +2144,8 @@
 				{ id: "15FFF1EFD1A91ACF", type: "checkmark" }
 			]
 			title: "Mercury Solar Works"
-			x: 20.75d
-			y: 36.0d
+			x: 28.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["1DA2C8E10F5FB26C"]
@@ -1564,8 +2158,8 @@
 				{ id: "1B0F4FE8BBFFD913", type: "checkmark" }
 			]
 			title: "Heat-Shield Brick"
-			x: 22.75d
-			y: 35.25d
+			x: 30.75d
+			y: 52.0d
 		}
 		{
 			dependencies: ["34C7729330FA93D3"]
@@ -1578,8 +2172,8 @@
 				{ id: "72D867A2A18C385F", type: "checkmark" }
 			]
 			title: "Jupiter Entry Probe"
-			x: 24.75d
-			y: 35.25d
+			x: 32.75d
+			y: 52.0d
 		}
 		{
 			dependencies: ["1DA2C8E10F5FB26C"]
@@ -1592,8 +2186,8 @@
 				{ id: "1F74AA6BE7EDA38D", type: "checkmark" }
 			]
 			title: "Thin-Film Panel"
-			x: 22.75d
-			y: 36.75d
+			x: 30.75d
+			y: 53.5d
 		}
 		{
 			icon: "grindless:inner_planets_chart"
@@ -1606,8 +2200,8 @@
 				{ id: "1F578D4A0A86C78A", type: "checkmark" }
 			]
 			title: "Inner Planets Chart"
-			x: 29.0d
-			y: 34.5d
+			x: 37.0d
+			y: 51.25d
 		}
 		{
 			icon: "grindless:lunar_vlbi_recording"
@@ -1620,8 +2214,8 @@
 				{ id: "54314FABC12DADEE", type: "checkmark" }
 			]
 			title: "Lunar VLBI Recording"
-			x: 29.0d
-			y: 36.0d
+			x: 37.0d
+			y: 52.75d
 		}
 		{
 			dependencies: ["55861BEACFC8759D", "55EE951801145204"]
@@ -1635,8 +2229,8 @@
 				{ id: "7E8D67676DEB213E", type: "checkmark" }
 			]
 			title: "Interferometer"
-			x: 31.0d
-			y: 35.25d
+			x: 39.0d
+			y: 52.0d
 		}
 		{
 			dependencies: ["1B6875EDD727B2E0"]
@@ -1649,8 +2243,8 @@
 				{ id: "7E657BEF9D4F7654", type: "checkmark" }
 			]
 			title: "Outer System Chart"
-			x: 33.0d
-			y: 34.5d
+			x: 41.0d
+			y: 51.25d
 		}
 		{
 			dependencies: ["31E30AA80CDF91D7"]
@@ -1663,8 +2257,8 @@
 				{ id: "7A1BF7604E6492BE", type: "checkmark" }
 			]
 			title: "Sagittarius A* Signal"
-			x: 35.0d
-			y: 35.25d
+			x: 43.0d
+			y: 52.0d
 		}
 		{
 			icon: "gtceu:raw_pyrochlore"
@@ -1678,7 +2272,7 @@
 			]
 			title: "Raw Pyrochlore"
 			x: 0.5d
-			y: 42.0d
+			y: 61.25d
 		}
 		{
 			dependencies: ["39A493528AB14953"]
@@ -1692,21 +2286,104 @@
 			]
 			title: "Pyrochlore Dust"
 			x: 2.5d
-			y: 42.0d
+			y: 61.25d
+		}
+		{
+			icon: "gtceu:hydrofluoric_acid_bucket"
+			id: "3F9B55746E5D1218"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the fluorspar kiln"
+			tasks: [
+				{ id: "31FEA03FDEFCD337", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "73D5DC72CF75E2B9", type: "checkmark" }
+			]
+			title: "Hydrofluoric Acid"
+			x: 2.5d
+			y: 59.75d
+		}
+		{
+			dependencies: ["3CC373991C3E79CD", "3F9B55746E5D1218"]
+			icon: "grindless:niobium_oxyfluoride_dust"
+			id: "543FBB35A5D17BC7"
+			size: 1.0d
+			subtitle: "Digested in the kiln"
+			tasks: [
+				{ id: "76A877D8176BA66A", item: "grindless:niobium_oxyfluoride_dust", optional_task: true, type: "item" }
+				{ id: "3EFC7ED98178343D", type: "checkmark" }
+			]
+			title: "Niobium Oxyfluoride"
+			x: 4.5d
+			y: 61.25d
 		}
 		{
 			dependencies: ["3CC373991C3E79CD"]
+			icon: "gcyr:fluorite_dust"
+			id: "18C3C1279B907315"
+			size: 0.75d
+			subtitle: "Back into the kiln"
+			tasks: [
+				{ id: "1333D460B7B41D66", item: "gcyr:fluorite_dust", optional_task: true, type: "item" }
+				{ id: "507E1024305B240E", type: "checkmark" }
+			]
+			title: "Fluorite Dust"
+			x: 2.5d
+			y: 62.5d
+		}
+		{
+			dependencies: ["543FBB35A5D17BC7"]
+			icon: "gtceu:niobium_pentoxide_dust"
+			id: "58A75C2B4EBD3E9E"
+			size: 1.0d
+			subtitle: "Solvent extraction: the cascade's niobium cut"
+			tasks: [
+				{ id: "7044679B26E60FF3", item: "gtceu:niobium_pentoxide_dust", optional_task: true, type: "item" }
+				{ id: "5FB84421CA6FEA64", type: "checkmark" }
+			]
+			title: "Niobium Pentoxide"
+			x: 6.5d
+			y: 61.25d
+		}
+		{
+			icon: "gtceu:aluminium_dust"
+			id: "7791FA472B37284D"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7BCDFAFDDCBCF477", item: "gtceu:aluminium_dust", optional_task: true, type: "item" }
+				{ id: "38178C5ECF0B1FF0", type: "checkmark" }
+			]
+			title: "Aluminium"
+			x: 8.5d
+			y: 59.75d
+		}
+		{
+			dependencies: ["58A75C2B4EBD3E9E", "7791FA472B37284D"]
 			icon: "gtceu:niobium_dust"
 			id: "1EB1F061061828AC"
 			size: 1.0d
-			subtitle: "Electrolyzer: 2 niobium per 11 pyrochlore"
+			subtitle: "EBF at 2,200 K: aluminothermic reduction"
 			tasks: [
 				{ id: "1FD9BA799F1B8D8E", item: "gtceu:niobium_dust", optional_task: true, type: "item" }
 				{ id: "5BB17D8B6261D6A4", type: "checkmark" }
 			]
 			title: "Niobium"
-			x: 4.5d
-			y: 42.0d
+			x: 8.5d
+			y: 61.25d
+		}
+		{
+			dependencies: ["58A75C2B4EBD3E9E"]
+			icon: "gtceu:sapphire_dust"
+			id: "59A41CD95835F1EF"
+			size: 0.75d
+			subtitle: "The alumina: aluminium again, or crystals"
+			tasks: [
+				{ id: "1D3D0ADDA56A4803", item: "gtceu:sapphire_dust", optional_task: true, type: "item" }
+				{ id: "3B4A14158ED23DAE", type: "checkmark" }
+			]
+			title: "Sapphire"
+			x: 6.5d
+			y: 62.5d
 		}
 		{
 			icon: "gtceu:titanium_dust"
@@ -1718,8 +2395,8 @@
 				{ id: "784A66987B60365B", type: "checkmark" }
 			]
 			title: "Titanium Dust"
-			x: 4.5d
-			y: 43.5d
+			x: 8.5d
+			y: 62.75d
 		}
 		{
 			dependencies: ["1EB1F061061828AC", "52BC9E5CD20F3F92"]
@@ -1732,8 +2409,8 @@
 				{ id: "3D7E56F726FDC82B", type: "checkmark" }
 			]
 			title: "Niobium-Titanium Dust"
-			x: 6.5d
-			y: 42.75d
+			x: 10.5d
+			y: 62.0d
 		}
 		{
 			dependencies: ["5452481858308F76"]
@@ -1747,22 +2424,119 @@
 				{ id: "11A7195CE6B14748", type: "checkmark" }
 			]
 			title: "Smelting Complex"
-			x: 8.5d
-			y: 42.75d
+			x: 12.5d
+			y: 62.0d
 		}
 		{
 			dependencies: ["129A33075018D67F"]
 			icon: "gtceu:niobium_titanium_ingot"
 			id: "78C2DF858F89AF90"
-			size: 1.25d
+			size: 1.0d
 			subtitle: "The first superconductor"
 			tasks: [
 				{ id: "1A60BE1048C8D091", item: "gtceu:niobium_titanium_ingot", optional_task: true, type: "item" }
 				{ id: "377B58863DA7B8B4", type: "checkmark" }
 			]
 			title: "Niobium-Titanium"
-			x: 10.5d
-			y: 42.75d
+			x: 14.5d
+			y: 62.0d
+		}
+		{
+			icon: "gtceu:raw_tantalite"
+			id: "72201ED5E9F07664"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The Nether manganese vein"
+			tasks: [
+				{ id: "3E5F384FF0C97DA5", item: "gtceu:raw_tantalite", optional_task: true, type: "item" }
+				{ id: "5F09A574EE08FE9F", type: "checkmark" }
+			]
+			title: "Raw Tantalite"
+			x: 0.5d
+			y: 64.25d
+		}
+		{
+			dependencies: ["72201ED5E9F07664"]
+			icon: "gtceu:tantalite_dust"
+			id: "75B730A3CB729FF1"
+			size: 1.0d
+			subtitle: "Ore plant"
+			tasks: [
+				{ id: "59E556ED1C68F540", item: "gtceu:tantalite_dust", optional_task: true, type: "item" }
+				{ id: "3E53298169CB65EE", type: "checkmark" }
+			]
+			title: "Tantalite Dust"
+			x: 2.5d
+			y: 64.25d
+		}
+		{
+			dependencies: ["75B730A3CB729FF1"]
+			icon: "grindless:tantalite_fluoride_cake"
+			id: "35F3F9FE042D0783"
+			size: 1.0d
+			subtitle: "The same digestion"
+			tasks: [
+				{ id: "55BB207560E51D57", item: "grindless:tantalite_fluoride_cake", optional_task: true, type: "item" }
+				{ id: "52CDA05CAEFD118A", type: "checkmark" }
+			]
+			title: "Tantalite Fluoride Cake"
+			x: 4.5d
+			y: 64.25d
+		}
+		{
+			dependencies: ["35F3F9FE042D0783"]
+			icon: "grindless:k2taf7_dust"
+			id: "390A78BA345C5B0B"
+			size: 1.0d
+			subtitle: "The cascade's tantalum cut; the niobium goes round again"
+			tasks: [
+				{ id: "776C14DBB4117BFE", item: "grindless:k2taf7_dust", optional_task: true, type: "item" }
+				{ id: "3800ADCD95ECCB44", type: "checkmark" }
+			]
+			title: "Potassium Heptafluorotantalate"
+			x: 6.5d
+			y: 64.25d
+		}
+		{
+			icon: "gtceu:sodium_dust"
+			id: "1BCB59C4961FCFA8"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "73626EC79A98EB1D", item: "gtceu:sodium_dust", optional_task: true, type: "item" }
+				{ id: "7A68975B03FD83A4", type: "checkmark" }
+			]
+			title: "Sodium"
+			x: 8.5d
+			y: 65.75d
+		}
+		{
+			dependencies: ["390A78BA345C5B0B", "1BCB59C4961FCFA8"]
+			icon: "gtceu:tantalum_dust"
+			id: "111BD8091325645C"
+			size: 1.25d
+			subtitle: "EBF at 1,800 K: sodium reduction"
+			tasks: [
+				{ id: "330FDB1B5C0761E6", item: "gtceu:tantalum_dust", optional_task: true, type: "item" }
+				{ id: "500D2C414C094DE3", type: "checkmark" }
+			]
+			title: "Tantalum"
+			x: 8.5d
+			y: 64.25d
+		}
+		{
+			dependencies: ["390A78BA345C5B0B"]
+			icon: "grindless:alkali_fluoride_dust"
+			id: "30AE3BA83893EBE9"
+			size: 0.75d
+			subtitle: "Back into the kiln"
+			tasks: [
+				{ id: "56BE1CDC0CDD9F43", item: "grindless:alkali_fluoride_dust", optional_task: true, type: "item" }
+				{ id: "304C2B3E337CB42D", type: "checkmark" }
+			]
+			title: "Alkali Fluoride"
+			x: 6.5d
+			y: 65.75d
 		}
 		{
 			icon: "gtceu:iron_dust"
@@ -1775,7 +2549,7 @@
 			]
 			title: "Iron Dust"
 			x: 0.5d
-			y: 47.0d
+			y: 68.5d
 		}
 		{
 			icon: "gtceu:arsenic_dust"
@@ -1788,7 +2562,7 @@
 			]
 			title: "Arsenic"
 			x: 0.5d
-			y: 48.25d
+			y: 69.75d
 		}
 		{
 			dependencies: ["5928A959696AF7B5", "73A636CA02272DBA", "7F658608F589C5C6"]
@@ -1802,7 +2576,7 @@
 			]
 			title: "Samarium Iron Arsenic Oxide"
 			x: 3.0d
-			y: 47.0d
+			y: 68.5d
 		}
 		{
 			dependencies: ["56280033A496EDB1", "5DC3250C7363995F"]
@@ -1816,9 +2590,9 @@
 			]
 			title: "Rhodium-Plated Palladium"
 			x: 3.0d
-			y: 50.75d
+			y: 72.25d
 		}
 	]
-	subtitle: ["Uranium goes round the fuel cycle, heavy water goes to the Moon and back, and Venus and Mercury give naquadah, iridium and osmium."]
+	subtitle: ["Uranium goes round the fuel cycle from the leach field to the MOX core, PBI makes the suit, Venus gives naquadah, Mercury iridium and osmium, and pyrochlore gives niobium."]
 	title: "IV Lines"
 }

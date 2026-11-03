@@ -419,7 +419,7 @@
 		}
 		{
 			dependencies: ["7A980F3B74DBF079"]
-			description: ["A &6Qubit CPU Wafer&r is a wafer treated with radon so that its structure can hold a quantum state. Nano CPU wafers and radon from the waste retrieval plant, which is why home comes first in this era. The qubit CPU chip, and through it the quantum processors the mainframe is built from. Every wafer uses its radon up. Pipe it from the plant continuously and keep a spare tank."]
+			description: ["A &6Qubit CPU Wafer&r is a wafer treated with radon so that its structure can hold a quantum state. A nano CPU wafer and indium gallium phosphide dust, with a little radon, in a chemical reactor. A quantum eye with gallium arsenide is the other route. The qubit CPU chip, and through it the quantum processors the mainframe is built from. Every wafer uses its radon up. Pipe it from the plant continuously and keep a spare tank."]
 			icon: "gtceu:qbit_cpu_wafer"
 			id: "1000B35476B6FAC2"
 			rewards: [{ id: "1B15AB89BB048686", type: "xp", xp: 80 }]
@@ -474,7 +474,7 @@
 		}
 		{
 			dependencies: ["5D07EB0A82EEE479"]
-			description: ["A single phosphorus atom in spin-free silicon holds a quantum state. The &6Donor Qubit Wafer&r is a silicon-28 wafer with them placed one at a time. The ion implanter, silicon-28 wafers and phosphorus. The qubit array, by the donor route. Implantation is slow, so run several implanters and let ME collect the wafers."]
+			description: ["A single phosphorus atom in spin-free silicon holds a quantum state. The &6Donor Qubit Wafer&r is a silicon-28 wafer with them placed one at a time. The ion implanter, a silicon-28 wafer and phosphorus dust. The qubit array, by the donor route. Implantation is slow, so run several implanters and let ME collect the wafers."]
 			icon: "grindless:donor_qubit_wafer"
 			id: "1D7FE3922B3DBF22"
 			rewards: [{ id: "16561E6518BA9165", type: "xp", xp: 100 }]
@@ -516,7 +516,7 @@
 		}
 		{
 			dependencies: ["119B62380F5F76FC"]
-			description: ["A &6Qubit Array&r stands in for a stack of circuits in the computation parts our alternative recipes build. Donor wafers or NV chips, and the cold charge the qubit fab runs on. The computation components for the research station, at a fraction of the circuits. Keep a stock by ME; the fab is slow and the components draw them by the handful."]
+			description: ["A &6Qubit Array&r stands in for a stack of circuits in the computation parts our alternative recipes build. A donor wafer or an NV chip in the qubit fab, which draws liquid helium and a little Saturn helium for every array. The computation components for the research station, at a fraction of the circuits. Keep a stock by ME; the fab is slow and the components draw them by the handful."]
 			icon: "grindless:qubit_array"
 			id: "5E3D46F05A5DC030"
 			rewards: [{ id: "75301C117C95228C", type: "xp", xp: 150 }]
@@ -605,7 +605,7 @@
 		}
 		{
 			dependencies: ["38199670D4113E48"]
-			description: ["GT--'s &6Large Naquadah Reactor&r burns excited fuel and is the era's main plant. Duranium frames are part of its price. Excited fuel from the Mk2, and a fuel works ready to take the spent fuel back. Power on a scale ZPM's machines expect, with a fuel loop that never leaves the base. Pipe spent fuel straight back to the fuel works and let ME top up the radon."]
+			description: ["The &6Large Naquadah Reactor&r burns excited fuel and is the era's main plant. It tops the naquadah ladder: three small reactors from an enriched ingot (0.8, 0.9 and 1.0 G EU), then two more and the large one from a naquadria ingot (1.5, 1.75 and 2.0 G EU). Excited fuel from the Mk2, and a fuel works ready to take the spent fuel back. Power on a scale ZPM's machines expect, with a fuel loop that never leaves the base. Pipe spent fuel straight back to the fuel works and let ME top up the radon."]
 			icon: "gtnn:large_naquadah_reactor"
 			id: "54B43A225E11111F"
 			rewards: [{ id: "36B2389775956097", type: "xp", xp: 150 }]
@@ -985,7 +985,7 @@
 		}
 		{
 			dependencies: ["5018E9B05AD69E21"]
-			description: ["&6Archaea&r are a culture that thrives where nothing else survives, and the biology behind the aerogel recipes. The vent bioreactor grows them from a seed batch, with heat and nutrients. They feed the aerogel works. A seed batch survives small runs, so keep one alive in ME and draw from it."]
+			description: ["&6Archaea&r are a culture that thrives where nothing else survives, and the biology behind the aerogel recipes. The vent bioreactor makes four from Europa bacteria, Enceladus brine, hydrogen and carbon dioxide, and gives back a little methane for the pyrolyser. Make them once: the growth-medium run only borrows the culture."]
 			icon: "grindless:archaeal_culture"
 			id: "37F864D2D349BD17"
 			rewards: [{ id: "1180ECF4D8FB7160", type: "xp", xp: 80 }]
@@ -993,6 +993,20 @@
 			title: "Archaea"
 			x: 10.0d
 			y: 10.5d
+		}
+		{
+			dependencies: ["50A2AC5A9FDD98C5"]
+			description: ["The same bioreactor feeds a culture tholin, Enceladus brine and mutagen and brews &6raw growth medium&r, with a little salt water left over. The culture is not used up. The medium is the base of the stem cells that the organoid lines need, so tank it and send the salt water to the electrolyser."]
+			icon: "gtceu:raw_growth_medium_bucket"
+			id: "3105DFD503C8EAFA"
+			rewards: [{ id: "5E781A4B8EAD93CF", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "3BEF0D74D1846FFF", item: "gtceu:raw_growth_medium_bucket", type: "item" }
+				{ id: "72F9FBFD49216AA1", item: "gtceu:enceladus_brine_bucket", type: "item" }
+			]
+			title: "The Living Medium"
+			x: 13.5d
+			y: 14.5d
 		}
 		{
 			dependencies: ["37F864D2D349BD17"]
@@ -1303,6 +1317,206 @@
 			title: "Assembly Hall"
 			x: 11.0d
 			y: 12.0d
+		}
+		{
+			dependencies: ["1FBBE9E843BE90C3"]
+			description: ["Europium chloride solution comes from the monazite froth and the SEG split. In the &6Europium Reductor&r, zinc, sulfuric acid and a little mercury reduce it to &6europium sulfate&r; the zinc sulfate and the leftover rare-earth solution go back to the extraction line. Pipe the solution in and stock the dust by ME."]
+			icon: "gtceu:europium_sulfate_dust"
+			id: "71B90D2208631C14"
+			rewards: [{ id: "399B836B6CF3F78D", type: "xp", xp: 40 }]
+			tasks: [{ id: "524245778E984D08", item: "gtceu:europium_sulfate_dust", type: "item" }]
+			title: "Europium Sulfate"
+			x: 20.5d
+			y: 28.5d
+		}
+		{
+			dependencies: ["71B90D2208631C14"]
+			description: ["Roast the sulfate with oxygen and you get &6europium oxide&r and sulfur trioxide, which belongs in your sulfuric acid line. A final metallothermic reduction with lanthanum turns the oxide into metal. Nothing here is gathered by hand: every feed comes from a line you already run."]
+			icon: "gtceu:europium_oxide_dust"
+			id: "37A0E614C82EFFB9"
+			rewards: [{ id: "5910E5D193C5E6A6", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "189339CE96641695", item: "gtceu:europium_oxide_dust", type: "item" }
+				{ id: "3378EA1200584BCA", item: "gtceu:lanthanum_oxide_dust", type: "item" }
+			]
+			title: "Europium Oxide"
+			x: 22.5d
+			y: 28.5d
+		}
+		{
+			dependencies: ["3691190A2A0269EB"]
+			description: ["Naquadria is no longer a single step. The impure solution from the refinery is fluorinated into &6hexafluoride naquadria solution&r, then reacts with radon difluoride into &6radon naquadria octafluoride&r. Keep fluorine and radon on tanks; the residue solution is a byproduct, not waste."]
+			icon: "gtceu:hexafluoride_naquadria_solution_bucket"
+			id: "35A6C4E9C3CFB355"
+			rewards: [{ id: "599A845D6CD45172", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "3285C236A843B4B5", item: "gtceu:impure_naquadria_solution_bucket", type: "item" }
+				{ id: "5E8C80CD97F1DA7C", item: "gtceu:hexafluoride_naquadria_solution_bucket", type: "item" }
+				{ id: "36FBCC76558B49C4", item: "gtceu:radon_naquadria_octafluoride_bucket", type: "item" }
+			]
+			title: "Naquadria, Stage One"
+			x: 20.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["35A6C4E9C3CFB355"]
+			description: ["The octafluoride becomes &6naquadria caesium xenonnonfluoride&r, and a second reaction frees nitryl fluoride and leaves &6naquadria caesium fluoride&r. Caesium and xenon cycle through this line, so build it as a loop and never as a one-way chain."]
+			icon: "gtceu:naquadria_caesiumfluoride_bucket"
+			id: "35005A1D26C980E3"
+			rewards: [{ id: "54D1797FFA5272EB", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "3AD0308075576EE9", item: "gtceu:naquadria_caesium_xenonnonfluoride_bucket", type: "item" }
+				{ id: "3780F4BF71B2A447", item: "gtceu:naquadria_caesiumfluoride_bucket", type: "item" }
+			]
+			title: "Naquadria, Stage Two"
+			x: 22.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["35005A1D26C980E3"]
+			description: ["Mix the caesium fluoride with sulfuric acid, then irradiate the &6acidic naquadria caesium fluoride&r in a neutron activator. Out come &6naquadria sulfate&r, caesium and fluorine: the caesium and fluorine return to the line."]
+			icon: "gtceu:naquadria_sulfate_dust"
+			id: "1FB1EF38D2A7B01B"
+			rewards: [{ id: "169A851F862E0BB5", type: "xp", xp: 70 }]
+			tasks: [
+				{ id: "5F2AE8C305228E17", item: "gtceu:acidic_naquadria_caesiumfluoride_bucket", type: "item" }
+				{ id: "32FEDF57AF21C08F", item: "gtceu:naquadria_sulfate_dust", type: "item" }
+			]
+			title: "Naquadria Sulfate"
+			x: 24.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["1FB1EF38D2A7B01B"]
+			description: ["The smelting complex reduces naquadria sulfate with hydrogen under liquid helium into a &6naquadria ingot&r, and returns the sulfuric acid. This is the slow, expensive route to the best fuel the era has: automate it once and let it run."]
+			icon: "gtceu:naquadria_ingot"
+			id: "1EEA7DBBF9379A7E"
+			rewards: [{ id: "753CFC63EA24B919", type: "xp", xp: 80 }]
+			tasks: [{ id: "5B0B26026E705D9E", item: "gtceu:naquadria_ingot", type: "item" }]
+			title: "Naquadria Ingot"
+			x: 26.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["35A6C4E9C3CFB355"]
+			description: ["The residue solution from stage one is not thrown away: an electric blast furnace turns it into &6naquadria solution&r again and hands back indium phosphide as a byproduct. Pipe the solution back to the head of the line."]
+			icon: "gtceu:naquadria_residue_solution_bucket"
+			id: "551F1781195249BC"
+			rewards: [{ id: "7FF99BC77F3D0D82", type: "xp", xp: 40 }]
+			tasks: [
+				{ id: "13FA422907DBA3DE", item: "gtceu:naquadria_residue_solution_bucket", type: "item" }
+				{ id: "1F85086027366DAD", item: "gtceu:naquadria_solution_bucket", type: "item" }
+			]
+			title: "Residue Loop"
+			x: 20.5d
+			y: 25.5d
+		}
+		{
+			dependencies: ["551F1781195249BC"]
+			description: ["The plants burn &6excited&r naquadah fuel. When it is spent it returns as &6depleted fuel&r, which the Fuel Works processes into xenon, naquadah and europium dust. Close the loop with pipes so that nothing is ever dumped."]
+			icon: "gtceu:naquadah_based_liquid_fuel_excited_bucket"
+			id: "1FBBE9E843BE90C3"
+			rewards: [{ id: "544A33F4DFB66D67", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "1A56265544515F12", item: "gtceu:naquadah_based_liquid_fuel_excited_bucket", type: "item" }
+				{ id: "7B221A84F21398FA", item: "gtceu:naquadah_based_liquid_fuel_depleted_bucket", type: "item" }
+			]
+			title: "Excited Fuel"
+			x: 20.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["71B90D2208631C14"]
+			description: ["The Waste Retrieval Plant takes radioactive waste with nitric acid and yields &6radium&r, synroc, actinide raffinate and nitrogen dioxide. Send the raffinate to the partitioning plant, which splits the minor actinide strip into americium and curium oxide."]
+			icon: "gtceu:radium_dust"
+			id: "5649518F6FC2B6AC"
+			rewards: [{ id: "7EFD187D496DED11", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "3B6BD97A46460354", item: "gtceu:radium_dust", type: "item" }
+				{ id: "5BC78B9140767F89", item: "gtceu:actinide_raffinate_bucket", type: "item" }
+				{ id: "1E5FADC71EA08547", item: "gtceu:minor_actinide_strip_bucket", type: "item" }
+			]
+			title: "Radium and Raffinate"
+			x: 20.5d
+			y: 30.0d
+		}
+		{
+			dependencies: ["5649518F6FC2B6AC"]
+			description: ["The Diamond Lattice and CVD line leave &6nanodiamond dust&r. Nothing mines diamonds any more: react four nanodiamond with hydrogen in a chemical reactor to get three diamond dust and methane, and send the methane back to the pyrolyser."]
+			icon: "grindless:nanodiamond_dust"
+			id: "51368383BE378464"
+			rewards: [{ id: "329B3DFB40086300", type: "xp", xp: 40 }]
+			tasks: [
+				{ id: "1367861D5A8169B0", item: "grindless:nanodiamond_dust", type: "item" }
+				{ id: "3698A5AA013B19A3", item: "gtceu:diamond_dust", type: "item" }
+			]
+			title: "Nanodiamond Cleaning"
+			x: 20.5d
+			y: 31.5d
+		}
+		{
+			dependencies: ["51368383BE378464"]
+			description: ["A diamond plate doped with nitrogen is the base of the &6NV diamond chip&r. Grow it beside the lattice and automate it the same way."]
+			icon: "grindless:nitrogen_doped_cvd_plate"
+			id: "53A85CC495DDEE42"
+			rewards: [{ id: "5175BDC7BE834126", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "1796C64DF6EF0BD6", item: "grindless:nitrogen_doped_cvd_plate", type: "item" }
+				{ id: "3DF8F6A749E6D674", item: "grindless:nv_diamond_chip", type: "item" }
+			]
+			title: "Nitrogen-Doped Plate"
+			x: 20.5d
+			y: 33.0d
+		}
+		{
+			dependencies: ["53A85CC495DDEE42"]
+			description: ["Titan nitriles are distilled into acrylonitrile, which a large chemical reactor polymerises into polyacrylonitrile; the polymer is wet-spun into &6precursor fibre&r and stabilised with oxygen at 550 K. Keep oxygen and nitrogen on separate pipes."]
+			icon: "grindless:pan_precursor_fibre"
+			id: "523A7475AE50620B"
+			rewards: [{ id: "746C5D7B53EA1D89", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "300F586F25168600", item: "grindless:pan_precursor_fibre", type: "item" }
+				{ id: "7BB05D5D1FA60D79", item: "grindless:stabilised_pan_fibre", type: "item" }
+			]
+			title: "PAN Fibre"
+			x: 20.5d
+			y: 34.5d
+		}
+		{
+			dependencies: ["523A7475AE50620B"]
+			description: ["Stabilised fibre is carbonised in a blast furnace at 1,600 K under nitrogen, which is not used up. Eight stabilised fibres give sixteen &6carbon fibres&r and hydrogen cyanide. Send the cyanide to the chemical lines and never vent it."]
+			icon: "gtceu:carbon_fibers"
+			id: "1775F096931F74C2"
+			rewards: [{ id: "1CF9BB767A378CB6", type: "xp", xp: 60 }]
+			tasks: [{ id: "10549E47D117292B", item: "gtceu:carbon_fibers", type: "item" }]
+			title: "Carbon Fibre"
+			x: 22.5d
+			y: 34.5d
+		}
+		{
+			dependencies: ["1FBBE9E843BE90C3"]
+			description: ["The &6UV SMES cell&r is wound from four ZPM cells, with sixteen wires and eight darmstadtium plates. It stores far more than a ZPM cell: build it only once the Big Reactor feeds the grid."]
+			icon: "grindless:uv_smes_cell"
+			id: "3AA19276029EE353"
+			rewards: [{ id: "3C652F2815E7FBDC", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "3A151BC9F3FD2664", item: "grindless:zpm_smes_cell", type: "item" }
+				{ id: "71CFFFC9FC00DBAB", item: "grindless:uv_smes_cell", type: "item" }
+			]
+			title: "UV SMES Cell"
+			x: 22.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["523A7475AE50620B"]
+			description: ["The flyby bay brings back a recording on the first pass, and the sampling pass brings the &6Neptune sample&r. It is a research item: it is consumed by research and cannot be crafted."]
+			icon: "grindless:neptune_sample"
+			id: "5871ACC4D648BB04"
+			rewards: [{ id: "58D97BEF0ED31F95", type: "xp", xp: 60 }]
+			tasks: [{ id: "1B676866422993F3", item: "grindless:neptune_sample", type: "item" }]
+			title: "Neptune Sample"
+			x: 20.5d
+			y: 36.0d
 		}
 		{
 			dependencies: ["7C205CBF99A79EFB"]

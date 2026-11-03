@@ -974,8 +974,9 @@
 		{
 			dependencies: ["3FA30314DAAC0EBF", "141C508103AC22D7", "5450FBA8871FE44F", "78BB9B4CA6962DEA"]
 			description: [
-				"Steam on hot carbon makes carbon monoxide and hydrogen; more steam over the catalyst turns the monoxide into more hydrogen."
-				"Each gas leaves through its own hatch."
+				"Steam on hot carbon makes carbon monoxide and hydrogen."
+				"Plant: HV, 480 EU/t, 100 t per run. Per minute: 24,000 mB steam, 0.01 shift catalyst in, 48,000 mB hydrogen, 12,000 mB carbon dioxide, 1.33 ash dust out."
+				"Routes (HV, per bucket of hydrogen): Full conversion: 48,000/min, 12,000 EU; Heavy fuel, converted: 72,000/min, 8,000 EU; Gasified coal: 40,000/min, 14,400 EU; Gasified heavy fuel: 80,000/min, 7,200 EU; Methanol syngas: 43,636.36/min, 13,200 EU."
 			]
 			icon: "gtceu:syngas_plant"
 			id: "19E1CF6EE30E5C44"

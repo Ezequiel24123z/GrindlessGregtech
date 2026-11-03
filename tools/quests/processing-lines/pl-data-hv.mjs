@@ -1,5 +1,23 @@
 // pl_hv: the HV lines. Positions are relative to each cluster (pl-model.mjs places the clusters).
-import { I, F, M, n, L, via } from './pl-lib.mjs';
+import { I, F, M, n, L, via, R, rateText } from './pl-lib.mjs';
+
+// The syngas plant's rate cards (AUD3-RATES): every figure is recomputed from the recipe dump by pl-check.mjs
+const SYN = 'grindless:syngas/hv/';
+const PLANT_CARD = R.rate(SYN + 'hydrogen_carbon', { tier: 'hv' }, {
+  title: 'Plant', eut: 480, ticks: 100,
+  ins: { 'fluid:gtceu:steam': 24000, 'grindless:shift_catalyst': 0.01 },
+  outs: { 'fluid:gtceu:hydrogen': 48000, 'fluid:gtceu:carbon_dioxide': 12000, 'gtceu:ash_dust': 1.33 },
+  hatch: { 'fluid:gtceu:steam': 2000, 'fluid:gtceu:hydrogen': 4000, 'fluid:gtceu:carbon_dioxide': 1000 },
+});
+const H2_CARD = R.cmp('fluid:gtceu:hydrogen', 1000, 'Routes', { tier: 'hv' }, [
+  { label: 'Full conversion', recipe: SYN + 'hydrogen_carbon', perMin: 48000, eu: 12000, ins: { 'fluid:gtceu:steam': 500 }, out: { 'fluid:gtceu:carbon_dioxide': 250, 'gtceu:ash_dust': 0.03 } },
+  { label: 'Heavy fuel, converted', recipe: SYN + 'hydrogen_heavy_fuel', perMin: 72000, eu: 8000, ins: { 'fluid:gtceu:heavy_fuel': 166.67, 'fluid:gtceu:steam': 333.33 }, out: { 'fluid:gtceu:carbon_dioxide': 166.67 } },
+  { label: 'Gasified coal', recipe: SYN + 'gasify_carbon', perMin: 40000, eu: 14400, ins: { 'fluid:gtceu:steam': 500 }, out: { 'fluid:gtceu:carbon_monoxide': 500, 'gtceu:ash_dust': 0.06 } },
+  { label: 'Gasified heavy fuel', recipe: SYN + 'gasify_heavy_fuel', perMin: 80000, eu: 7200, ins: { 'fluid:gtceu:heavy_fuel': 250, 'fluid:gtceu:steam': 250 }, out: { 'fluid:gtceu:carbon_monoxide': 250 } },
+  { label: 'Methanol syngas', recipe: SYN + 'methanol_syngas', perMin: 43636.36, eu: 13200, ins: { 'fluid:gtceu:steam': 500 }, out: { 'fluid:gtceu:carbon_monoxide': 250, 'fluid:gtceu:carbon_dioxide': 125, 'gtceu:ash_dust': 0.04 } },
+], {
+  dominates: [['Full conversion', 'Gasified coal'], ['Full conversion', 'Methanol syngas'], ['Methanol syngas', 'Gasified coal']],
+});
 
 export default {
   file: 'pl_hv',
@@ -123,8 +141,8 @@ export default {
         n('steam2', 0, 0.75, F('gtceu:steam'), 'Steam', { kind: 'raw' }),
         n('heavyfuel', 0, 2.25, F('gtceu:heavy_fuel'), 'Heavy Fuel', { kind: 'raw', sub: 'The refinery\'s bottoms' }),
         n('plant', 2.5, 0, M('gtceu:syngas_plant'), 'Syngas Plant', {
-          kind: 'ours', from: ['shiftcat', 'carbon', 'steam2', 'heavyfuel'],
-          desc: ['Steam on hot carbon makes carbon monoxide and hydrogen; more steam over the catalyst turns the monoxide into more hydrogen.', 'Each gas leaves through its own hatch.'],
+          kind: 'ours', from: ['shiftcat', 'carbon', 'steam2', 'heavyfuel'], figs: [PLANT_CARD, H2_CARD],
+          desc: ['Steam on hot carbon makes carbon monoxide and hydrogen.', rateText(PLANT_CARD), rateText(H2_CARD)],
         }),
         n('co', 5, -1.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { from: ['plant'], sub: 'Methanol, or shift it' }),
         n('hydrogen', 5, 0, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'product', from: ['plant'], sub: 'Refinery, ammonia, HF, the rocket' }),
