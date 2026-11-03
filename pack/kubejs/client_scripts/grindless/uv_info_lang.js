@@ -57,7 +57,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.fibre_draw_tower.2', 'Ytterbium-doped double-clad fibre and the fibre laser module, the light source of UV\'s lasers. Programmed circuit 1: silicon tetrachloride + germanium tetrachloride + ytterbium oxide + aluminium + oxygen -> 1 Yb-doped preform (MCVD).')
     add('emi.grindless.info.fibre_draw_tower.3', 'Circuit 2: 1 preform + 250 mB acrylate coating -> 16 ytterbium fibre spools. Circuit 3: 4 fibre spools + 4 InGaAs pump modules + 1 fibre Bragg grating -> 1 fibre laser module.')
     add('emi.grindless.info.fibre_draw_tower.4', 'Circuit 4: 1 spent laser module + 1 fibre spool -> 1 fibre laser module (refurbished). The chlorine goes back to silicon tetrachloride, the silica soot to glass.')
-    add('emi.grindless.info.fibre_draw_tower.5', 'Needs a 5 x 15 x 5 clean room casing tower (6 or more among the floor parts), 1 or 2 energy hatches (UV), input and output buses and hatches.')
+    add('emi.grindless.info.fibre_draw_tower.5', 'Needs a 19 x 15 x 7 clean room casing draw tower with its MCVD hall (6 or more among the floor parts), 1 or 2 energy hatches (UV), input and output buses and hatches.')
 
     add('emi.grindless.info.heat_source_works.0', "The Heat Source Works builds radioisotope heat sources. Circuit 1: curium pellet. 2: GPHS cladding. 3: probe RTG. 4: americium micro source. 5: curium RTG pellet.")
     add('emi.grindless.info.heat_source_works.1', "It never voids: heavy curium oxide is kept for the transuranium line.")
@@ -98,7 +98,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.mocvd_reactor.2', 'Compound semiconductors grown atom layer by atom layer. Circuit 1: gallium + indium + sodium + chloromethane -> trimethylgallium + trimethylindium + salt.')
     add('emi.grindless.info.mocvd_reactor.3', 'Circuit 2: 1 GaAs wafer + trimethylgallium + trimethylindium + arsine -> 1 InGaAs epi wafer + methane + unused arsine. Circuit 3: 1 epi wafer -> 8 diode bars. Circuit 5: 4 diode bars + 2 copper plates -> 1 InGaAs pump module.')
     add('emi.grindless.info.mocvd_reactor.4', 'Circuit 4: 1 sapphire wafer + niobium + nitrogen -> 1 NbN film wafer. Circuit 6, the arsine scrubber: 1,000 mB arsine -> 1 arsenic dust + 3,000 mB hydrogen. Arsine is never vented.')
-    add('emi.grindless.info.mocvd_reactor.5', 'Needs 7 x 7 x 7 clean room casing with an inert gas cabinet (8 or more among the parts), 1 or 2 energy hatches (UV), input and output buses and hatches.')
+    add('emi.grindless.info.mocvd_reactor.5', 'Needs a 13 x 6 x 9 clean room casing reactor hall with an inert gas cabinet (8 or more among the parts), 1 or 2 energy hatches (UV), input and output buses and hatches.')
 
     add('emi.grindless.info.muon_fusion_cell.0', "The Muon Fusion Cell is a generator with no circuit: a lithium breeder blanket and 500 mB of liquid deuterium-tritium give 500 mB of helium and 150 mB of tritium.")
     add('emi.grindless.info.muon_fusion_cell.1', "It runs without a circuit.")
@@ -144,7 +144,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.powder_in_tube_line.2', 'EnTED wire, GTM\'s UV superconductor, at four wires per ingot of powder. Circuit 1: 4 enriched naquadah + 3 trinium + 2 europium + 1 duranium dust -> 10 EnTED powder.')
     add('emi.grindless.info.powder_in_tube_line.3', 'Circuit 2: 4 EnTED powder + 1 silver tube -> 1 PIT billet. Circuit 3: 1 billet -> 16 EnTED single wires + 1 silver dust (the sheath, back into tubes).')
     add('emi.grindless.info.powder_in_tube_line.4', 'The only maker of EnTED wire: the wiremill, extruder and wire cutter routes are gone. Doubling, fine wire and cables still start from its single wire.')
-    add('emi.grindless.info.powder_in_tube_line.5', 'Needs a 3 x 5 x 15 line of UV casing (8 or more among the parts), steel pipe casing, tungsten steel gearboxes, assembly line units, trinium coils, 1 or 2 energy hatches (UV), input and output buses.')
+    add('emi.grindless.info.powder_in_tube_line.5', 'Needs a 17 x 5 x 5 line of UV casing (8 or more among the parts), steel pipe casing, tungsten steel gearboxes, assembly line units, trinium coils, 1 or 2 energy hatches (UV), input and output buses.')
 
     add('emi.grindless.info.precursor_probe_bay.0', "The Precursor Probe Bay flies a precursor probe with 4 ICAN pellets and returns the heliopause data. It only works in Pluto orbit.")
     add('emi.grindless.info.precursor_probe_bay.1', "The data is used by the Laser Sail Launcher and the Solar Probe Bay.")
@@ -209,7 +209,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.zone_refining_tower.1', "HPGe crystals go into detectors and interferometers.")
     add('emi.grindless.info.zone_refining_tower.2', 'High-purity germanium, thirteen nines, for the HPGe crystal. Programmed circuit 1: 1 germanium dust + 4,000 mB chlorine -> 1,000 mB germanium tetrachloride (also the fibre preform\'s dopant).')
     add('emi.grindless.info.zone_refining_tower.3', 'Circuit 2: 1,000 mB germanium tetrachloride + 2,000 mB water + 4,000 mB hydrogen -> 1 germanium ingot + 4,000 mB hydrochloric acid; the water comes back.')
-    add('emi.grindless.info.zone_refining_tower.4', 'Circuit 3: 4 germanium ingots -> 1 HPGe crystal + 1 germanium dust (the impure ends, back to circuit 1). Eight RF coils sweep the melt zone up the bar, the puller grows the crystal.')
-    add('emi.grindless.info.zone_refining_tower.5', 'Needs a 3 x 13 x 3 clean room casing tower: 8 naquadah coil blocks in the core and a stainless steel gearbox on top; parts in the floor and the back wall (6 or more casings), 1 or 2 energy hatches (UV).')
+    add('emi.grindless.info.zone_refining_tower.4', 'Circuit 3: 4 germanium ingots -> 1 HPGe crystal + 1 germanium dust (the impure ends, back to circuit 1). Three RF coil rings sweep the melt zone up the bar, the puller grows the crystal.')
+    add('emi.grindless.info.zone_refining_tower.5', 'Needs an 11 x 12 x 5 clean room casing tower with a glovebox bench: 24 cupronickel coil blocks in three rings round the bar and a stainless steel gearbox on top; parts in the floor (6 or more casings), 1 or 2 energy hatches (UV).')
 })
 

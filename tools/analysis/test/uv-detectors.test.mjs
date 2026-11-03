@@ -45,8 +45,8 @@ test('registration: two recipe types, two machines; F1 and A6 ids are reused, no
   assert.ok(run.registry.fluids.has('gtceu:germanium_tetrachloride'), 'GeCl4 (UV-A6)');
 });
 
-test('patterns: tower 3 wide x 13 high x 3 deep with 8 coils and the puller, station 9 x 9 x 9 with mirror and bench', () => {
-  const dims = { 'gtceu:zone_refining_tower': [3, 13, 3], 'gtceu:optical_ground_station': [9, 9, 9] };
+test('patterns: tower 11 wide x 12 high x 5 deep with 24 coils and the puller, station 9 x 9 x 9 with mirror and bench', () => {
+  const dims = { 'gtceu:zone_refining_tower': [11, 12, 5], 'gtceu:optical_ground_station': [9, 9, 9] };
   for (const [id, [width, height, depth]] of Object.entries(dims)) {
     const s = run.docs.structures.structures[id];
     assert.ok(s, id + ' described');
@@ -63,7 +63,7 @@ test('patterns: tower 3 wide x 13 high x 3 deep with 8 coils and the puller, sta
     return s.slices.flat().join('').split('').filter((c) => syms.includes(c)).length;
   };
   const tower = run.docs.structures.structures['gtceu:zone_refining_tower'];
-  assert.equal(count(tower, 'gtceu:naquadah_coil_block'), 8, 'eight RF coils');
+  assert.equal(count(tower, 'gtceu:cupronickel_coil_block'), 24, 'three RF coil rings');
   assert.equal(count(tower, 'gtceu:stainless_steel_gearbox'), 1, 'the Czochralski puller');
   assert.ok(tower.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes('gtceu:clean_machine_casing')), 'clean room casing');
   const station = run.docs.structures.structures['gtceu:optical_ground_station'];
