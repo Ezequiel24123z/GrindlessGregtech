@@ -267,7 +267,7 @@
     }
     return {
       w: N, h: 11, d: N,
-      pal: pal({ A: MH, C: 'gtceu:coilgun_coil_casing', L: 'gtceu:laminated_glass', Q: 'tungsten_steel', P: 'gtceu:tungstensteel_pipe_casing' }),
+      pal: pal({ A: MH, C: 'grindless:coilgun_coil_casing', L: 'gtceu:laminated_glass', Q: 'tungsten_steel', P: 'gtceu:tungstensteel_pipe_casing' }),
       fn: function (x, y, z) {
         var dx = x - c, dz = z - c
         var r = rad(dx, dz)
