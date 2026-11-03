@@ -290,12 +290,12 @@ export const QUESTS = [
   prod('P_SPUT', 'Sputnik Ice Core', 'grindless:sputnik_ice_core', ['HEART'], 4, 24,
     'The &6Sputnik Ice Core&r is a column of nitrogen ice from the glacier, still layered the way it formed.',
     [it('grindless:sputnik_ice_core')]),
-  gear('ICES', 'volatile_ice_fractionator', 'Ices Apart', ['P_SPUT'], 6, 24, {
-    for: 'The &6Volatile Ice Fractionator&r warms a core a few kelvin at a time and collects each ice as it turns to gas.',
-    needs: 'Its controller, the station truss casing and a frostproof column.',
-    unlocks: 'Nitrogen, methane and carbon monoxide at their sources.',
-    automate: 'Cores in by ME; each gas has its own hatch and tank.',
-  }, [it(TRUSS), it('gtceu:frostproof_machine_casing')]),
+  gear('ICES', 'volatile_ice_fractionator', 'Ices Apart', ['P_SPUT', 'P_SAMPLE'], 6, 24, {
+    for: 'The &6Volatile Ice Fractionator&r warms a core a few kelvin at a time and collects each ice as it turns to gas. Its annealing carousel warms a Kuiper sample through its crystallisation at about 140 K, and the trapped noble gases escape.',
+    needs: 'Its controller, the station truss casing, a frostproof column and a cryostat ring for the carousel.',
+    unlocks: 'Nitrogen, methane and carbon monoxide at their sources, and argon, krypton and xenon for the thrusters.',
+    automate: 'Cores and samples in by ME; each gas has its own hatch and tank, and the annealing dust is voidable.',
+  }, [it(TRUSS), it('gtceu:frostproof_machine_casing'), it(CRYOSTAT)]),
 
   gear('KUIPER', 'kuiper_interceptor_bay', 'Arrokoth\'s Kin', ['M_L_KBO'], 2, 25.5, {
     for: 'The &6Kuiper Interceptor Bay&r launches a probe at a Kuiper belt object and brings a sample back.',
@@ -304,15 +304,8 @@ export const QUESTS = [
     automate: 'Probes by ME; the sample comes out in a canister.',
   }, [it(TRUSS)]),
   prod('P_SAMPLE', 'Planetesimal Sample', 'grindless:planetesimal_sample', ['KUIPER'], 4, 25.5,
-    'A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed, so it is the one thing that shows what the young system was made of. A probe brings it back from the Kuiper Belt in a canister, so you need the probe line and a launch. It unlocks the annealer that keeps the ice as it was. Probes go out by ME and the canister comes back the same way.',
+    'A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed, so it is the one thing that shows what the young system was made of. A probe brings it back from the Kuiper Belt in a canister, so you need the probe line and a launch. It unlocks the fractionator's annealing carousel, which keeps the ice as it was. Probes go out by ME and the canister comes back the same way.',
     [it('grindless:planetesimal_sample')]),
-  gear('ANNEAL', 'amorphous_ice_annealer', 'Trapped Since the Beginning', ['P_SAMPLE'], 6, 25.5, {
-    for: 'The &6Amorphous Ice Annealer&r warms a sample through its crystallisation at about 140 K, and the trapped noble gases escape.',
-    needs: 'Its controller, the station truss casing, a cryostat and a gas manifold.',
-    unlocks: 'Argon, krypton and xenon for the thrusters.',
-    automate: 'Samples by ME; the dust is voidable.',
-  }, [it(TRUSS), it(CRYOSTAT)]),
-
   gear('HELIO', 'precursor_probe_bay', 'Heliopause', ['M_L_EDGE'], 2, 27, {
     for: 'The &6Precursor Probe Bay&r sends a probe ahead along a rail to the edge of the Sun\'s wind, and listens to what it finds.',
     needs: 'Its controller, the station truss casing, a pressure hull casing and a computer casing relay.',

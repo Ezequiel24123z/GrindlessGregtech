@@ -7,14 +7,12 @@
 //   kuiper_intercept (Kuiper interceptor bay; the interceptor is spent, its canister comes back)
 //     circuit 1  1 Kuiper interceptor + the Pluto-Kuiper chart (the target list, not consumed) -> 1 planetesimal sample
 //                + 1 empty sample canister; VA[UV] x 4,000 t
-//   ice_annealing (amorphous ice annealer)
-//     circuit 1  1 planetesimal sample -> 4,000 mB water + 1,000 mB carbon monoxide + 500 mB nitrogen + 250 mB Kuiper noble gas;
-//                VA[ZPM] x 800 t. The refractory dust (inert silicates and carbon) is voided inside the machine.
+//   The annealing row (planetesimal sample -> water, CO, nitrogen, Kuiper noble gas) moved to the volatile ice fractionator, circuit 3 (D3-11; uv/pluto_ices.js).
 // Support (ASSEMBLER): the sample canister (titanium shell, PTFE seals, a ZPM sensor that logs the cold chain) and the interceptor
-// (a thruster pod, a probe RTG and a canister: the consumer of A11's pod and A2's RTG). Crafting: both controllers.
+// (a thruster pod, a probe RTG and a canister: the consumer of A11's pod and A2's RTG). Crafting: the bay's controller.
 // Destinations: the noble gas -> EV's cryogenic plant (server_scripts/grindless/ev/cryogenic_plant.js, the Kuiper row) -> argon (the
 // printer), krypton (the thruster works' Hall thruster), xenon (its ion thruster); carbon monoxide -> the syngas plant; water and
-// nitrogen -> the existing chemistry. These rows are the only maker of the planetesimal sample and of the Kuiper noble gas.
+// nitrogen -> the existing chemistry. The bay is the only maker of the planetesimal sample (the fractionator's annealing row the only maker of the Kuiper noble gas).
 // Published: global.grindless.uvKuiper.recipes [{ name, type, recipeId, circuit, ... }], .support, .crafting, .skipped, .clashes.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
@@ -33,7 +31,6 @@
   var INTERCEPTOR = ids.interceptor || 'grindless:kuiper_interceptor'
   var CANISTER = ids.canister || 'grindless:sample_canister'
   var SAMPLE = UV.planetesimalSample || 'grindless:planetesimal_sample'
-  var NOBLE = UV.kuiperNobleGas || 'gtceu:kuiper_noble_gas'
   var POD = PROP.thrusterPod || 'grindless:thruster_pod'
   var RTG = HEAT.probeRtg || 'grindless:probe_rtg'
 
@@ -42,10 +39,7 @@
 
   var TABLE = [
     { name: 'planetesimal_intercept', type: 'kuiper_intercept', circuit: 1, itemsIn: [item(INTERCEPTOR, 1)], notConsumed: [CHART],
-      fluidsIn: [], itemsOut: [item(SAMPLE, 1), item(CANISTER, 1)], fluidsOut: [], eut: VA_UV, duration: 4000 },
-    { name: 'planetesimal_annealing', type: 'ice_annealing', circuit: 1, itemsIn: [item(SAMPLE, 1)], notConsumed: [],
-      fluidsIn: [], itemsOut: [], fluidsOut: [fluid('minecraft:water', 4000), fluid('gtceu:carbon_monoxide', 1000),
-        fluid('gtceu:nitrogen', 500), fluid(NOBLE, 250)], eut: VA_ZPM, duration: 800 }
+      fluidsIn: [], itemsOut: [item(SAMPLE, 1), item(CANISTER, 1)], fluidsOut: [], eut: VA_UV, duration: 4000 }
   ]
 
   var SUPPORT = [
@@ -69,8 +63,7 @@
   K.recipes = TABLE.map(publish)
   K.support = SUPPORT.map(publish)
   K.crafting = {
-    bay: 'grindless:assembly_line/kuiper_interceptor_bay',
-    annealer: 'grindless:assembly_line/amorphous_ice_annealer'
+    bay: 'grindless:assembly_line/kuiper_interceptor_bay'
   }
   K.craftingParts = ['gtceu:uv_machine_hull', 'gtceu:uv_robot_arm', 'gtceu:uv_electric_pump']
   K.skipped = []
@@ -125,9 +118,7 @@
     var HULL = 'gtceu:uv_machine_hull'
     var list = [
       { id: 'gtceu:kuiper_interceptor_bay', recipe: 'kuiper_interceptor_bay', research: POD,
-        parts: [HULL, '4x gtceu:uv_robot_arm'], domain: ['4x ' + POD, '2x ' + RTG, '4x ' + CANISTER] },
-      { id: 'gtceu:amorphous_ice_annealer', recipe: 'amorphous_ice_annealer', research: RTG,
-        parts: [HULL, '4x gtceu:uv_electric_pump'], domain: ['4x ' + RTG, '2x ' + POD, '4x ' + CANISTER] }
+        parts: [HULL, '4x gtceu:uv_robot_arm'], domain: ['4x ' + POD, '2x ' + RTG, '4x ' + CANISTER] }
     ]
     list.forEach(function (m) {
       var ids = [m.id, m.research].concat(m.parts, m.domain).map(function (s) { return s.replace(/^\d+x /, '') })

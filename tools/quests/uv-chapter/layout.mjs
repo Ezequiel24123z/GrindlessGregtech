@@ -110,7 +110,6 @@ const LAYOUT = {
   ICES: [29, 8.5, null],
   KUIPER: [23.5, 4, null],
   P_SAMPLE: [25.5, 4.5, null],
-  ANNEAL: [27, 4.5, null],
   NANO: [0.75, 19, ['H_UV_MACHINES']],
   PCBF: [2, 24, ['H_UV_MACHINES']],
   HELIO: [24, 9, null],

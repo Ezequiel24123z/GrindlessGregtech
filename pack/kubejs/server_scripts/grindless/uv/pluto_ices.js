@@ -9,9 +9,13 @@
 //   ice_fractionation (each ice sublimes at its own temperature on the stepped cold finger)
 //     circuit 1  1 Sputnik ice core -> 16,000 mB nitrogen + 2,000 mB carbon monoxide + 1,000 mB methane + 1 tholin
 //     circuit 2  1 Charon core      -> 8,000 mB water + 2,000 mB ammonia + 1 silicon dioxide dust (the silicate grit under the ice)
+//     circuit 3  1 planetesimal sample (the Kuiper bay's; D3-11, it was the amorphous ice annealer's) -> 4,000 mB water + 1,000 mB carbon
+//                monoxide + 500 mB nitrogen + 250 mB Kuiper noble gas; VA[ZPM] x 800 t, anywhere. Amorphous ice that never warmed above 40 K
+//                holds the noble gases; the carousel warms it through its crystallisation at about 140 K and they come out. The refractory
+//                dust (inert silicates and carbon) is voided inside the machine. The noble gas goes to EV's cryogenic plant.
 // Destinations: the Sputnik ice core the Plutonian seed's catalyst (uv/travel.js); nitrogen the nitrogen network; carbon monoxide the syngas
 // plant's Pluto shift (hv/syngas_plant.js, circuit 5, with Charon's water); methane the pyrolyser; tholin the tholin reformer
-// (zpm/titan_probes.js); ammonia the nitric acid line; water the shift and the network; silicate the glass works. Nothing is voided.
+// (zpm/titan_probes.js); ammonia the nitric acid line; water the shift and the network; silicate the glass works. Nothing is voided but the annealing's inert dust.
 // Support: the penetrator probe (assembler: the printed probe frame, a GPHS module, the HPGe spectrometer, a LuV melt head) and the two
 // controllers' crafting recipes.
 // Published: global.grindless.uvPlutoIces.recipes [{ name, type, recipeId, circuit, ... }], .skipped, .clashes.
@@ -35,7 +39,8 @@
   var MELT_HEAD = 'grindless:melt_head'
   var THOLIN = 'grindless:tholin'
   var SILICATE = 'gtceu:silicon_dioxide_dust'
-
+  var SAMPLE = String(UV.planetesimalSample || 'grindless:planetesimal_sample')
+  var NOBLE = String(UV.kuiperNobleGas || 'gtceu:kuiper_noble_gas')
   P.items = { penetrator: PENETRATOR, tritonCore: TRITON_CORE, sputnikCore: SPUTNIK_CORE, charonCore: CHARON_CORE, tholin: THOLIN,
     silicate: SILICATE }
 
@@ -53,7 +58,12 @@
     { name: 'charon_ice_fractionation', type: 'ice_fractionation', circuit: 2,
       itemsIn: [{ id: CHARON_CORE, count: 1 }], notConsumed: [],
       fluidsOut: [{ id: 'minecraft:water', amount: 8000 }, { id: 'gtceu:ammonia', amount: 2000 }],
-      itemsOut: [{ id: SILICATE, count: 1 }], eut: ZPM_VA, duration: 600 }
+      itemsOut: [{ id: SILICATE, count: 1 }], eut: ZPM_VA, duration: 600 },
+    { name: 'planetesimal_annealing', type: 'ice_fractionation', circuit: 3,
+      itemsIn: [{ id: SAMPLE, count: 1 }], notConsumed: [],
+      fluidsOut: [{ id: 'minecraft:water', amount: 4000 }, { id: 'gtceu:carbon_monoxide', amount: 1000 }, { id: 'gtceu:nitrogen', amount: 500 },
+        { id: NOBLE, amount: 250 }],
+      itemsOut: [], eut: ZPM_VA, duration: 800 }
   ]
 
   P.recipes = TABLE.map(function (t) {

@@ -16,7 +16,7 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.penetrator_probe_bay.tooltip.0', '§7Drops a penetrator on Pluto or Charon and recovers its core.')
     add('grindless.machine.penetrator_probe_bay.no_voiding', 'The bay keeps its cores. Disable voiding.')
 
-    add('grindless.machine.volatile_ice_fractionator.tooltip.0', '§7Sublimes a core\'s ices one by one on a cold finger.')
+    add('grindless.machine.volatile_ice_fractionator.tooltip.0', '§7Sublimes a core\'s ices and anneals Kuiper samples.')
     add('grindless.machine.volatile_ice_fractionator.no_voiding', 'The fractionator keeps its ices. Disable voiding.')
 })
 

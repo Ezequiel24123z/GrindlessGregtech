@@ -1,8 +1,8 @@
 // UV's Kuiper belt (package UV-B4), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
-//   - startup_scripts/grindless/uv/kuiper.js: two recipe types, two machines with valid patterns, two items, F1's ids untouched;
-//   - server_scripts/grindless/uv/kuiper.js: the bay's intercept, the annealer's release, the canister and the interceptor, the crafting;
+//   - startup_scripts/grindless/uv/kuiper.js: one recipe type, one machine with a valid pattern, two items, F1's ids untouched;
+//   - server_scripts/grindless/uv/kuiper.js: the bay's intercept, the canister and the interceptor, the crafting;
 //   - server_scripts/grindless/ev/cryogenic_plant.js: the Kuiper row after A1's Triton row, the older rows unchanged;
-//   - Kuiper noble gas only from the annealer, and its krypton reaches the thruster works' Hall thruster;
+//   - Kuiper noble gas only from the fractionator's annealing row (D3-ICEWORKS), and its krypton reaches the thruster works' Hall thruster;
 //   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -25,7 +25,7 @@ const inputs = (r) => JSON.stringify(r.j.inputs || r.j.ingredients || {});
 const fluidsOut = (r) => (r.j.outputs?.fluid || []).map((f) => [f.content.value[0].fluid, f.content.amount]);
 const read = (rel) => fs.readFileSync(path.join(pack, 'kubejs', rel), 'utf8');
 const NEW_ITEMS = ['kuiper_interceptor', 'sample_canister'];
-const MACHINES = [['gtceu:kuiper_interceptor_bay', 'gtceu:kuiper_intercept', 9, 7, 7], ['gtceu:amorphous_ice_annealer', 'gtceu:ice_annealing', 5, 7, 5]];
+const MACHINES = [['gtceu:kuiper_interceptor_bay', 'gtceu:kuiper_intercept', 9, 7, 7]];
 const ORBIT = 'grindless:pluto_orbit';
 const SAMPLE = 'grindless:planetesimal_sample';
 const NOBLE = 'gtceu:kuiper_noble_gas';
@@ -38,7 +38,7 @@ test('the stand-in runs the Kuiper scripts and the cryogenic plant without error
   assert.deepEqual(K.skipped, []);
 });
 
-test('registration: two recipe types, two machines, two items; the sample and the gas stay F1\'s', () => {
+test('registration: one recipe type, one machine, two items; the sample and the gas stay F1\'s', () => {
   for (const [machine, type] of MACHINES) {
     assert.ok(run.registry.recipeTypes.has(type), type);
     assert.deepEqual(run.registry.machines.get(machine).recipeTypes, [type]);
@@ -52,7 +52,7 @@ test('registration: two recipe types, two machines, two items; the sample and th
   assert.equal(K.orbit, ORBIT);
 });
 
-test('patterns: the bay 7 x 7 x 9 and the annealer 5 x 5 x 7, one controller in the front slice, station truss, GTM part limits', () => {
+test('patterns: the bay 7 x 7 x 9, one controller in the front slice, station truss, GTM part limits', () => {
   for (const [id, , depth, height, width] of MACHINES) {
     const s = run.docs.structures.structures[id];
     assert.ok(s, id + ' described');
@@ -72,12 +72,6 @@ test('patterns: the bay 7 x 7 x 9 and the annealer 5 x 5 x 7, one controller in 
   assert.ok(bayLim.output_bus, 'the bay returns the sample and the canister');
   const blocks = Object.values(bay.symbols).flatMap((v) => v.blocks || []);
   assert.ok(blocks.includes('gtceu:laminated_glass'), 'the sample airlock');
-  const ann = run.docs.structures.structures['gtceu:amorphous_ice_annealer'];
-  const annLim = Object.fromEntries(ann.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
-  assert.deepEqual(annLim.output_hatch, { min: 1, max: 4 }, 'four gases out');
-  assert.ok(!annLim.output_bus, 'no item leaves the annealer: the refractory dust is voided');
-  const annBlocks = Object.values(ann.symbols).flatMap((v) => v.blocks || []);
-  assert.ok(annBlocks.includes('grindless:cryostat_casing') && annBlocks.includes('gtceu:tungstensteel_pipe_casing'), 'cryostat and manifold');
 });
 
 test('the bay: interceptor + chart kept, circuit 1, Pluto orbit -> sample + canister back, VA[UV] x 4,000 t', () => {
@@ -95,26 +89,11 @@ test('the bay: interceptor + chart kept, circuit 1, Pluto orbit -> sample + cani
   assert.ok(JSON.stringify(rec.j.recipeConditions || []).includes(ORBIT), 'dimension condition');
 });
 
-test('the annealer: sample, circuit 1, anywhere -> water, CO, nitrogen and the Kuiper noble gas, VA[ZPM] x 800 t', () => {
-  const r = row('planetesimal_annealing');
-  assert.equal(r.type, 'ice_annealing');
-  assert.deepEqual(r.itemsIn, [{ id: SAMPLE, count: 1 }]);
-  assert.deepEqual(r.itemsOut, []);
-  assert.deepEqual(r.fluidsOut, [{ id: 'minecraft:water', amount: 4000 }, { id: 'gtceu:carbon_monoxide', amount: 1000 },
-    { id: 'gtceu:nitrogen', amount: 500 }, { id: NOBLE, amount: 250 }]);
-  assert.equal(r.eut, 122880);
-  assert.equal(r.duration, 800);
-  const rec = byId(r.recipeId);
-  assert.ok(rec, r.recipeId);
-  assert.deepEqual(circuitOf(rec), [1]);
-  assert.ok(JSON.stringify(rec.j.recipeConditions || []).includes(ORBIT) === false, 'the annealer works anywhere');
-});
-
-test('the planetesimal sample comes only from the bay, the Kuiper noble gas only from the annealer', () => {
+test('the planetesimal sample comes only from the bay, the Kuiper noble gas only from the fractionator\'s annealing row', () => {
   const sampleMakers = recipes.filter((r) => outputs(r).includes(`"${SAMPLE}"`));
   assert.deepEqual(sampleMakers.map((r) => r.i), [row('planetesimal_intercept').recipeId]);
   const gasMakers = recipes.filter((r) => outputs(r).includes(`"${NOBLE}"`));
-  assert.deepEqual(gasMakers.map((r) => r.i), [row('planetesimal_annealing').recipeId]);
+  assert.deepEqual(gasMakers.map((r) => r.i), ['grindless:ice_fractionation/planetesimal_annealing']);
 });
 
 test('support: the canister and the interceptor (A11\'s pod, A2\'s RTG), each with one maker; the controllers are craftable', () => {
@@ -173,10 +152,10 @@ test('names: en_us for the machines, the types and the items', () => {
   const lang = read('client_scripts/grindless/uv_kuiper_lang.js');
   const en = lang;
   for (const part of [en]) {
-    for (const key of ['bay:', 'annealer:', 'bayType:', 'annealerType:', 'bayTips:', 'annealerTips:']) assert.ok(part.includes(key), key);
+    for (const key of ['bay:', 'bayType:', 'bayTips:']) assert.ok(part.includes(key), key);
     for (const n of NEW_ITEMS) assert.ok(part.includes(`${n}:`), n);
   }
-  for (const k of ['block.gtceu.kuiper_interceptor_bay', 'block.gtceu.amorphous_ice_annealer', 'gtceu.kuiper_intercept', 'gtceu.ice_annealing']) {
+  for (const k of ['block.gtceu.kuiper_interceptor_bay', 'gtceu.kuiper_intercept']) {
     assert.ok(lang.includes(`'${k}`), k);
   }
   assert.match(lang, /i < 1/);

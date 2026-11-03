@@ -227,12 +227,12 @@ const chapter = {
           kind: 'ours', from: ['craft'], desc: 'Sends a craft to a small world on the chart and brings a sample home.',
         }),
         n('sample', 25, 3, I('grindless:planetesimal_sample'), 'Planetesimal Sample', { kind: 'product', from: ['ibay'] }),
-        n('anneal', 27.5, 3, M('gtceu:amorphous_ice_annealer'), 'Amorphous Ice Annealer', {
-          kind: 'ours', from: ['sample'], desc: 'Warms the old ice slowly until it lets go of its gas. The inert dust is voided.',
+        n('ifrac', 27.5, 3, M('gtceu:volatile_ice_fractionator'), 'Volatile Ice Fractionator', {
+          kind: 'ours', from: ['sample'], desc: 'Its annealing carousel warms the old ice slowly until it lets go of its gas. The inert dust is voided.',
         }),
-        n('kwater', 30, 1.5, F('minecraft:water'), 'Water', { kind: 'by', from: ['anneal'], end: 'the network' }),
-        n('noble', 30, 3, F('gtceu:kuiper_noble_gas'), 'Kuiper Noble Gas', { kind: 'product', from: ['anneal'], end: 'split in the cryogenic plant: krypton for the Hall thruster, xenon for the ion thruster' }),
-        n('kco', 30, 4.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'by', from: ['anneal'], end: 'the syngas plant' }),
+        n('kwater', 30, 1.5, F('minecraft:water'), 'Water', { kind: 'by', from: ['ifrac'], end: 'the network' }),
+        n('noble', 30, 3, F('gtceu:kuiper_noble_gas'), 'Kuiper Noble Gas', { kind: 'product', from: ['ifrac'], end: 'split in the cryogenic plant: krypton for the Hall thruster, xenon for the ion thruster' }),
+        n('kco', 30, 4.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'by', from: ['ifrac'], end: 'the syngas plant' }),
         // high-purity germanium
         L('lgedust', 0, 9, 'pl_luv:gedust'),
         n('zrt', 2.5, 9, M('gtceu:zone_refining_tower'), 'Zone Refining Tower', {
@@ -341,7 +341,7 @@ const TOGETHER = {
   lsailC: [14, 5.25],
 };
 const PARTS = new Set(['cmox', 'am', 'hs', 'pellet', 'gphs', 'rtg', 'micro', 'ti', 'pbp', 'tipow', 'near', 'pchamber', 'tw', 'ion', 'pod',
-  'craft', 'ibay', 'sample', 'anneal', 'kwater', 'noble', 'kco', 'lgedust', 'zrt', 'gecl4', 'gein', 'hpge',
+  'craft', 'ibay', 'sample', 'ifrac', 'kwater', 'noble', 'kco', 'lgedust', 'zrt', 'gecl4', 'gein', 'hpge',
   'b2o3', 'bnr', 'hbn', 'bnntd', 'yarn', 'winder', 'laer', 'lct', 'agt', 'tank', 'lsw', 'wsf', 'sepi', 'lsf', 'film', 'pat', 'lsail']);
 const fusion = chapter.clusters.cold.nodes;
 const parts = chapter.clusters.starshot.nodes.filter((nd) => PARTS.has(nd.key));

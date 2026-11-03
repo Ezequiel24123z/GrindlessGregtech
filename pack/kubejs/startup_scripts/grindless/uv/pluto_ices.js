@@ -7,14 +7,16 @@
 //                                     catcher) on top of it. A penetrator falls into Sputnik Planitia or onto Charon, melts in on its
 //                                     GPHS module (the probe stays in the ice) and sends a core up. The Triton ice core is kept: it
 //                                     calibrates the probe for Kuiper ices.
-//   gtceu:volatile_ice_fractionator   type gtceu:ice_fractionation (new). 7 x 7 x 7 station truss casing around a stepped cold finger:
-//                                     a 3 x 3 steel pipe casing foot, then a column of titanium frames and pipe casings. Each ice sublimes
-//                                     at its own temperature (N2 63 K, CO 68 K, CH4 91 K, the ammonia hydrate far above).
+//   gtceu:volatile_ice_fractionator   type gtceu:ice_fractionation (new). 11 x 11 x 11 station truss casing around a stepped cold finger:
+//                                     a 3 x 3 steel pipe casing foot inside an annealing carousel (a ring of cryostat casing), then a
+//                                     column of titanium frames and pipe casings. Each ice sublimes at its own temperature (N2 63 K,
+//                                     CO 68 K, CH4 91 K, the ammonia hydrate far above); the carousel anneals a Kuiper planetesimal
+//                                     sample through its crystallisation (D3-11: it absorbed the amorphous ice annealer).
 //
 // Both keep every output (G.noVoiding in the modifier and in beforeWorking): the cores are the Plutonian seed's catalyst and the
 // fractionator's only feed, and the ices feed the syngas shift, the pyrolyser and the tholin reformer.
 // Parts: bay 1-2 energy hatches, 1-2 input buses, 1-2 output buses; fractionator 1-2 energy hatches, 1-2 input buses, 1-2 output buses,
-// 1-3 output hatches (ME parts fit); at least 14 truss casings among the floor cells.
+// 1-4 output hatches (ME parts fit); at least 14 truss casings among the floor cells.
 // Item: grindless:penetrator_probe (the printed frame, a GPHS module, the HPGe spectrometer and a LuV melt head; spent in each run).
 // Textures: the station truss casing with ZPM's entry probe bay and EV's cryogenic plant overlays; item/penetrator_probe from
 // tools/assets/Build-UVPlutoIcesTextures.ps1.
@@ -111,31 +113,39 @@
     }
   }
 
-  // ---------------------------------------------------------------- the fractionator: 7 wide, 7 deep, 7 high
-  // rows bottom -> top: 0 floor, 1 the cold finger's 3 x 3 pipe foot, 2-5 its column (frame, pipe, frame, pipe), 6 the roof
+  // ---------------------------------------------------------------- the fractionator: 11 wide, 11 deep, 11 high (D3-11: absorbs the annealer)
+  // rows bottom -> top: 0 floor, 1 the cold finger's 3 x 3 pipe foot inside the annealing carousel (a ring of cryostat casing), 2 the
+  // foot's second course, 3-9 its column (frame, pipe, frame, ...), 10 the roof
   const FRACTION_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 },
-    output_hatch: { min: 1, max: 3 } }
-  // dressed as a cold tower: frame posts and roof ring, a frostproof condenser band round the middle, glass sight windows above and below
-  // it on the middle three cells of each side, a pipe manifold under the roof and a skylight vent over the cold finger
+    output_hatch: { min: 1, max: 4 } }
+  // dressed as a cold tower: frame posts and roof ring, a frostproof condenser band and a pipe manifold band round the walls, glass sight
+  // windows between them on the middle five cells of each side, a skylight vent over the cold finger
   function fractionRule(x, y, z, W, H, D) {
     var cx = x === 0 || x === W - 1
     var cz = z === 0 || z === D - 1
     var along = cx ? z : x
+    var mid = (W - 1) / 2
     if (y === H - 1) {
       if (cx || cz) return 'F'
-      return x === 3 && z === 3 ? 'P' : null
+      return x === mid && z === mid ? 'P' : null
     }
     if (cx && cz) return 'F'
-    if (y === 3) return 'Z'
-    if (y === 5) return 'P'
-    if ((y === 2 || y === 4) && along >= 2 && along <= 4) return 'G'
+    if (y === 4 || y === 5) return 'Z'
+    if (y === 8) return 'P'
+    if ((y === 2 || y === 3 || y === 6 || y === 7) && Math.abs(along - mid) <= 2) return 'G'
     return null
   }
   const FRACTIONATOR = {
-    slices: dress([0, 1, 2, 3, 4, 5, 6].map(function (z) {
-      return shellSlice(7, 7, 7, z, function (x, zz, y) {
-        if (y === 1) return x >= 2 && x <= 4 && zz >= 2 && zz <= 4 ? 'P' : ' '
-        if (x !== 3 || zz !== 3) return ' '
+    slices: dress([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (z) {
+      return shellSlice(11, 11, 11, z, function (x, zz, y) {
+        var dx = Math.abs(x - 5)
+        var dz = Math.abs(zz - 5)
+        if (y === 1) {
+          if (dx <= 1 && dz <= 1) return 'P'
+          return Math.max(dx, dz) === 3 ? 'K' : ' '
+        }
+        if (y === 2 && dx <= 1 && dz <= 1) return 'P'
+        if (dx !== 0 || dz !== 0) return ' '
         return y % 2 === 0 ? 'F' : 'P'
       })
     }), 'C', fractionRule),
@@ -146,7 +156,8 @@
       F: Pat.frame(['titanium']),
       P: Pat.block(PIPE),
       Z: Pat.block('gtceu:frostproof_machine_casing'),
-      G: Pat.block('gtceu:laminated_glass')
+      G: Pat.block('gtceu:laminated_glass'),
+      K: Pat.block('grindless:cryostat_casing')
     }
   }
 
@@ -177,11 +188,11 @@
       .setMaxIOSize(3, 1, 0, 0)
       .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.UP_TO_DOWN)
       .setSound(GTSoundEntries.MINER)
-    // the fractionator: 2 items in (the core, the circuit), 1 item out (tholin or silicate), 3 fluids out
+    // the fractionator: 2 items in (the core or sample, the circuit), 1 item out (tholin or silicate), 4 fluids out (the annealing row's)
     event.create('ice_fractionation')
       .category('multiblock')
       .setEUIO('in')
-      .setMaxIOSize(2, 1, 0, 3)
+      .setMaxIOSize(2, 1, 0, 4)
       .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.DOWN_TO_UP)
       .setSound(GTSoundEntries.COOLING)
   })

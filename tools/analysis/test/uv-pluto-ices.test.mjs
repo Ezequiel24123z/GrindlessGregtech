@@ -59,11 +59,12 @@ test('the patterns: one controller in the front slice, uniform size, a symbol fo
   }
   const fr = run.docs.structures.structures['gtceu:volatile_ice_fractionator'];
   assert.ok(fr.symbols.X.options.some((o) => o.ability === 'output_hatch'), 'the fractionator has output hatches');
+  assert.equal(fr.symbols.X.options.find((o) => o.ability === 'output_hatch').limits.max, 4, 'four gases out for the annealing row');
 });
 
 test('the Pluto rows: the penetrator in Pluto orbit, the fractionation anywhere, one circuit per type slot, the Triton ice core kept in the bay', () => {
   assert.deepEqual(PI.recipes.map((p) => `${p.type}:${p.circuit}`).sort(),
-    ['ice_fractionation:1', 'ice_fractionation:2', 'penetrator_probe:1', 'penetrator_probe:2']);
+    ['ice_fractionation:1', 'ice_fractionation:2', 'ice_fractionation:3', 'penetrator_probe:1', 'penetrator_probe:2']);
   for (const p of PI.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');

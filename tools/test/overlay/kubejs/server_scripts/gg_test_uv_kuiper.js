@@ -1,12 +1,12 @@
 // priority: -9024
-// TEST ONLY, UV-B4 (the Kuiper interceptor bay, the amorphous ice annealer, the cryogenic plant's Kuiper row).
+// TEST ONLY, UV-B4 (the Kuiper interceptor bay, the cryogenic plant's Kuiper row).
 // Command: kubejs custom_command gg_test_uv_kuiper   Reserved band: X 27136-27199 (no block is placed: live recipe lookups only).
 //
 //   powershell -File tools\test\Invoke-GGTest.ps1 -Suite server -PackDir <copy of pack> `
 //     -Commands 'kubejs custom_command gg_test_uv_kuiper' -WaitForLog 'GGTEST\|uv_kuiper\|DONE'
 //
 // Open question it answers: the live rows keep their Pluto orbit condition, and the cryogenic row keeps its three outputs
-// (argon, krypton, xenon) although the cryogenic type declares one fluid output; only the annealer makes the Kuiper noble gas.
+// (argon, krypton, xenon) although the cryogenic type declares one fluid output; only the fractionator's annealing row makes the Kuiper noble gas.
 // Markers: GGTEST|uv_kuiper|<check>|PASS|FAIL|NOTE|<detail>
 (function () {
   var NAME = 'uv_kuiper'
@@ -71,7 +71,7 @@
     if (!K) return
     check('skipped', (K.skipped || []).length === 0, JSON.stringify(K.skipped || []))
     check('clashes', (K.clashes || []).length === 0, JSON.stringify(K.clashes || []))
-    ;['gtceu:kuiper_interceptor_bay', 'gtceu:amorphous_ice_annealer', 'grindless:kuiper_interceptor', 'grindless:sample_canister'].forEach(function (id) {
+    ;['gtceu:kuiper_interceptor_bay', 'grindless:kuiper_interceptor', 'grindless:sample_canister'].forEach(function (id) {
       check('registered', Item.exists(id), id)
     })
 
@@ -90,10 +90,10 @@
       check('live_' + rec.name, sameList(dims, [ORBIT]) && sameList(circuits, ['1']) && Number(eu) === Number(rec.eut),
         rec.recipeId + '; dims=' + dims.join(',') + '; circuits=' + circuits.join(',') + '; EU/t=' + eu)
     })
-    var anneal = byId(server, 'grindless:ice_annealing/planetesimal_annealing')
+    var anneal = byId(server, 'grindless:ice_fractionation/planetesimal_annealing')
     if (anneal !== null) {
       var outs = fluidIds(classes().Helper.getOutputFluids(anneal))
-      check('annealer_outputs', outs.length === 4 && outs.indexOf(NOBLE + ':250') >= 0, outs.join(', '))
+      check('annealing_outputs', outs.length === 4 && outs.indexOf(NOBLE + ':250') >= 0, outs.join(', '))
     }
     ;(K.support || []).forEach(function (rec) { check('support_' + rec.name, byId(server, rec.recipeId) !== null, rec.recipeId) })
     Object.keys(K.crafting || {}).forEach(function (k) { check('crafting_' + k, byId(server, K.crafting[k]) !== null, K.crafting[k]) })
@@ -127,7 +127,7 @@
         if (outs.some(function (s) { return s.indexOf(NOBLE + ':') === 0 })) makers.push(String(r.getId()))
       } catch (e) { /* a recipe without fluid outputs */ }
     })
-    check('noble_gas_only_annealer', makers.length === 1 && /planetesimal_annealing$/.test(makers[0]),
+    check('noble_gas_only_annealing_row', makers.length === 1 && /planetesimal_annealing$/.test(makers[0]),
       scanned + ' GT recipes scanned; makers=' + makers.join(','))
     note('orbit_level', server.getLevel(ORBIT) === null ? 'missing' : 'present')
   }
