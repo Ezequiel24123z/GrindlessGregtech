@@ -67,6 +67,11 @@
         }
       })
       console.info(LOG + 'casings: ' + MC.recipes.length + ' recipes; skipped ' + MC.skipped.length)
+      // iron-56 forms: the hot cell returns the dust; compressor to ingot, bender to plate
+      event.recipes.gtceu.compressor('grindless:iron_56_ingot')
+        .itemInputs('gtceu:iron_56_dust').itemOutputs('gtceu:iron_56_ingot').EUt(7680).duration(200)
+      event.recipes.gtceu.bender('grindless:iron_56_plate')
+        .itemInputs('gtceu:iron_56_ingot').circuit(1).itemOutputs(PLATE).EUt(7680).duration(100)
     } catch (e) {
       console.error('[grindless/maxplus/casings] recipes failed: ' + e)
     }
