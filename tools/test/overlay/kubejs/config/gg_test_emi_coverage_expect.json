@@ -2057,7 +2057,7 @@
     {"id":"grindless:uv_wireless_dynamo_cover","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},
     {"id":"grindless:uv_wireless_energy_cover","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},
     {"id":"grindless:uxv_fusion_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"]},
-    {"id":"grindless:uxv_smes_cell","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:nitride_magnet_synthesis"],"used":["emi:info"]},
+    {"id":"grindless:uxv_smes_cell","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:nitride_magnet_synthesis"],"used":["emi:info","gtceu:assembler"]},
     {"id":"grindless:uxv_strain_wave_gear","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembly_line"]},
     {"id":"grindless:uxv_voltage_coil","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembly_line"]},
     {"id":"grindless:uxv_wireless_dynamo_cover","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},

@@ -115,8 +115,8 @@
  },
  "gtceu:barnard_core_drill": {
   "v": [],
-  "bt": 6,
-  "ds": 0.59,
+  "bt": 7,
+  "ds": 0.399,
   "c": 294
  },
  "gtceu:baseline_astrometer": {
@@ -307,8 +307,8 @@
  },
  "gtceu:cvi_furnace": {
   "v": [],
-  "bt": 8,
-  "ds": 0.326,
+  "bt": 7,
+  "ds": 0.462,
   "c": 776
  },
  "gtceu:debris_harvester": {
@@ -367,8 +367,8 @@
  },
  "gtceu:electron_beam_furnace": {
   "v": [],
-  "bt": 8,
-  "ds": 0.433,
+  "bt": 7,
+  "ds": 0.479,
   "c": 1005
  },
  "gtceu:engine_test_stand": {
@@ -841,7 +841,7 @@
  },
  "gtceu:megabar_press": {
   "v": [],
-  "bt": 7,
+  "bt": 6,
   "ds": 0.52,
   "c": 934
  },
@@ -1393,8 +1393,8 @@
  },
  "gtceu:sic_fibre_plant": {
   "v": [],
-  "bt": 8,
-  "ds": 0.332,
+  "bt": 7,
+  "ds": 0.518,
   "c": 772
  },
  "gtceu:single_crystal_foundry": {
