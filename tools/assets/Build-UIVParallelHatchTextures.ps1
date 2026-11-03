@@ -9,8 +9,6 @@
 
   Writes (under pack/kubejs/assets/grindless/textures/block/machines/uiv_parallel_hatch/):
     overlay_front.png                 a dark panel with four parallel bars of the UIV colour, split by a centre rib
-    overlay_front_emissive.png        only the bars (the part that glows)
-    overlay_front_active.png (+ .mcmeta)           two frames: the bars brighten from the outside in
     overlay_front_active_emissive.png (+ .mcmeta)  the same glow, two frames
 
   Run from the repo root:
@@ -93,10 +91,7 @@ function Out-Tex {
 }
 
 Out-Tex (New-Face) 'overlay_front.png'
-Out-Tex (New-Face -GlowOnly) 'overlay_front_emissive.png'
-$act = Join-Frames @((New-Face -Lit @(2, 8)), (New-Face -Lit @(4, 6)))
 $actGlow = Join-Frames @((New-Face -Lit @(2, 8) -GlowOnly), (New-Face -Lit @(4, 6) -GlowOnly))
-Out-Tex $act 'overlay_front_active.png' 10
 Out-Tex $actGlow 'overlay_front_active_emissive.png' 10
 
 # verify: 16x16 (strips 16 x 32), binary alpha, no pure black, the UIV magenta present, not fully transparent

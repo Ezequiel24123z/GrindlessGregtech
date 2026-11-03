@@ -10,8 +10,6 @@
   Writes (under pack/kubejs/assets/grindless/textures/block/machines/uhv_parallel_hatch/), the file names GTM's overlayTieredHullModel
   looks for in the folder:
     overlay_front.png                 a dark panel with four parallel bars of the UHV colour (one more than the UV hatch's idea of "stack")
-    overlay_front_emissive.png        only the bars (the part that glows)
-    overlay_front_active.png (+ .mcmeta)           two frames: the bars brighten from the top down
     overlay_front_active_emissive.png (+ .mcmeta)  the same glow, two frames
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
@@ -94,10 +92,7 @@ function Out-Tex {
 }
 
 Out-Tex (New-Face) 'overlay_front.png'
-Out-Tex (New-Face -GlowOnly) 'overlay_front_emissive.png'
-$act = Join-Frames @((New-Face -Lit @(2, 4)), (New-Face -Lit @(6, 8)))
 $actGlow = Join-Frames @((New-Face -Lit @(2, 4) -GlowOnly), (New-Face -Lit @(6, 8) -GlowOnly))
-Out-Tex $act 'overlay_front_active.png' 10
 Out-Tex $actGlow 'overlay_front_active_emissive.png' 10
 
 # verify: 16x16 (strips 16 x 32), binary alpha, no pure black, the UHV red present, not fully transparent
