@@ -16,7 +16,7 @@
   var X0 = 39576
   var X1 = 39639
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 143
   var NAME = 'max_interferometer'
   var CX = 39608
   var CY = 100
@@ -184,7 +184,7 @@
       u.bus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
       u.hatch = partsLike(m, /^gtceu:[a-z0-9]+_input_hatch$/)[0]
-      var ok = !!u.bus && !!u.outBus && !!u.hatch && u.energy.length === 2 && u.height === 15
+      var ok = !!u.bus && !!u.outBus && !!u.hatch && u.energy.length === 2 && u.height === 45
       check('formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', OpV 4 A hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       topUp(u.energy)

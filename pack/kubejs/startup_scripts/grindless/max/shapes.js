@@ -26,7 +26,7 @@
     L: 'grindless:laser_link_casing',
     W: 'gtceu:laminated_glass',
     H: 'gtceu:cupronickel_coil_block',
-    Q: 'tritanium'
+    Q: 'naquadah_alloy'
   }
   T.PAL = PAL
 

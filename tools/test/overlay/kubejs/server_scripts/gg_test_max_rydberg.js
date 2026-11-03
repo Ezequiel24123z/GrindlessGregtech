@@ -185,7 +185,7 @@
       u.bus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
       u.hatch = partsLike(m, /^gtceu:[a-z0-9]+_input_hatch$/)[0]
-      var ok = !!u.bus && !!u.outBus && !!u.hatch && u.energy.length === 2 && u.height === 7
+      var ok = !!u.bus && !!u.outBus && !!u.hatch && u.energy.length === 2 && u.height === 11
       check('formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', OpV 4 A hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       topUp(u.energy)

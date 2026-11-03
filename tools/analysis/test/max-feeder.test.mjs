@@ -103,7 +103,7 @@ test('the shape, textures and EMI pages exist', () => {
   assert.match(s, /accretion_power/);
   assert.match(s, /generators\.configure/);
   assert.match(s, /energy_output/);
-  assert.equal(MF.machines[0].spec.slices.length, 15);
+  assert.equal(MF.machines[0].spec.slices.length, 27);
   const dir = path.join(kube, 'assets', 'grindless', 'textures', 'block', 'multiblock', 'accretion_feeder');
   for (const f of ['overlay_front.png', 'overlay_front_active.png', 'overlay_front_active_emissive.png']) assert.ok(fs.existsSync(path.join(dir, f)), f);
   const emi = path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless');
