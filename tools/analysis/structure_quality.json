@@ -897,9 +897,9 @@
  },
  "gtceu:mirror_shell": {
   "v": [],
-  "bt": 4,
-  "ds": 0.569,
-  "c": 6146
+  "bt": 5,
+  "ds": 0.435,
+  "c": 7060
  },
  "gtceu:mnt_collider": {
   "v": [],
