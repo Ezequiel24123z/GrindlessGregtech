@@ -153,10 +153,10 @@
       var RC = Java.loadClass('com.gregtechceu.gtceu.common.recipe.condition.ResearchCondition')
       var DH = Java.loadClass('com.gregtechceu.gtceu.api.capability.IDataAccessHatch')
       var research = false
-      recipe.conditions.forEach(function (c) { if (RC.class.isInstance(c)) research = true })
+      recipe.conditions.forEach(function (c) { if (c instanceof RC) research = true })
       if (!research) return false
       var hatch = false
-      machine.getParts().forEach(function (p) { if (DH.class.isInstance(p)) hatch = true })
+      machine.getParts().forEach(function (p) { if (p instanceof DH) hatch = true })
       return !hatch
     }
     var dataVeto = function (machine, recipe) {
