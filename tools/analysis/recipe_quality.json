@@ -190,7 +190,6 @@
   "grindless:assembly_line/quantum_gas_lab|gtceu:quantum_gas_lab": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/racetrack_fab|gtceu:racetrack_fab": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/ramp_compression_pulser|gtceu:ramp_compression_pulser": ["T-CIRC","T-COMP","T-COUNT","T-HULL"],
-  "grindless:assembly_line/recoil_separator|gtceu:recoil_separator": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/shequid_works|gtceu:shequid_works": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/sic_fibre_plant|gtceu:sic_fibre_plant": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/single_crystal_foundry|gtceu:single_crystal_foundry": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
