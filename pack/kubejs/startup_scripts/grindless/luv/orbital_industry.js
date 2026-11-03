@@ -16,14 +16,37 @@
   }
 
   var smelter = []
-  for (var z = 0; z < 7; z++) {
-    // A titanium truss frames the 3x3x7 hall; the station panels sit between the posts and the ports are on the end caps and the sides.
-    var middle = z === 0 ? 'XXX' : z === 6 ? 'MSX' :
-      z === 2 || z === 4 ? 'KKK' : z === 3 ? 'KAK' : 'XAX'
-    var cap = z === 0 || z === 6 ? 'FXF' : 'FCF'
-    var rows = [cap, middle, z === 3 ? 'FGF' : cap]
-    // A six-block, one-cell drawing column rises from the levitation core's glass port.
-    for (var y = 0; y < 6; y++) rows.push(z === 3 ? (y % 2 === 0 ? ' F ' : ' G ') : '   ')
+  // A 5x5x9 titanium-truss hall (about 180 cells): station panels between four frame posts, two heating-coil bands round the
+  // levitation chamber, glass viewing bands at its middle, and a drawing tower that rises from the chamber roof's glass port.
+  for (var z = 0; z < 9; z++) {
+    var rows = []
+    for (var y = 0; y < 5; y++) {
+      var row = ''
+      for (var x = 0; x < 5; x++) {
+        var edgeX = x === 0 || x === 4
+        var edgeY = y === 0 || y === 4
+        var ch = ' '
+        if (z === 0 || z === 8) {
+          ch = edgeX && edgeY ? 'F' : 'X'
+          if (z === 0 && x === 2 && y === 2) ch = 'G'
+          if (z === 8 && x === 2 && y === 2) ch = 'S'
+          if (z === 8 && x === 3 && y === 2) ch = 'M'
+        } else if (edgeX || edgeY) {
+          if (edgeX && edgeY) ch = 'F'
+          else if (z === 3 || z === 5) ch = 'K'
+          else if (z === 4 && edgeX) ch = 'G'
+          else if (z === 4 && y === 4 && x === 2) ch = 'G'
+          else ch = 'X'
+        } else {
+          ch = 'A'
+        }
+        row += ch
+      }
+      rows.push(row)
+    }
+    // The tower base: a station-panel collar round the roof port, then the drawing column of alternating frame and glass.
+    rows.push(z === 4 ? ' CGC ' : z === 3 || z === 5 ? ' CCC ' : '     ')
+    for (var t = 0; t < 6; t++) rows.push(z === 4 ? '  ' + (t % 2 === 0 ? 'F' : 'G') + '  ' : '     ')
     smelter.push(rows)
   }
   var smelterSpec = {
