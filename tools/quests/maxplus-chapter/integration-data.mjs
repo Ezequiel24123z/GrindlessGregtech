@@ -106,12 +106,12 @@ export const QUESTS = [
     deps: ['OM_UXV'], x: 1, y: 3,
     teach: {
       for: 'The UIV controllers at home, and the MAX+ row each one takes: the millikelvin cryostat chills the waveguide, resonance chamber, field cell and core crystal; the femtosecond writer inscribes crystals and interposer waveguides; the BEUV scanner patterns wafers for the chevron cores and the controller crystal; the TFLN fab makes the modulator chips; the levitation melter melts the strange alloy; the spectral hole burner burns the store block.',
-      needs: 'All seven controllers: drip separator, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and spectral hole burner.',
+      needs: 'All seven controllers: Neutron Drip Works, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and spectral hole burner.',
       unlocks: 'Lattices, waveguides, and the stage\'s precise parts.',
       automate: 'The cryostat wants the cold plant next to it.',
     },
     desc: [],
-    tasks: [it('gtceu:neutron_drip_separator'), it('gtceu:levitation_melter'), it('gtceu:tfln_fab'), it('gtceu:femtosecond_writer'), it('gtceu:beuv_scanner'), it('gtceu:millikelvin_cryostat_works'), it('gtceu:spectral_hole_burner')],
+    tasks: [it('gtceu:neutronium_cage'), it('gtceu:levitation_melter'), it('gtceu:tfln_fab'), it('gtceu:femtosecond_writer'), it('gtceu:beuv_scanner'), it('gtceu:millikelvin_cryostat_works'), it('gtceu:spectral_hole_burner')],
     rewards: [xp(100)],
   },
   {

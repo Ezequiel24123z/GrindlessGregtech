@@ -134,30 +134,24 @@ export const QUESTS = [
   gear('CRUST', 'crust_lift', 'Crust Lift', ['H_CRUST'], 14, -35.25, {
     for: 'A tether down to the poles and the star\'s own electric field carry a little of the crust up. The &6Crust Lift&r is fiction: no tether survives that gravity, and the yield is a game number.',
     needs: 'A UIV hull, the UIV casing and the neutron star site casing, with a winch.',
-    unlocks: 'Crust matter, which the drip separator takes apart.',
+    unlocks: 'Crust matter, which the Neutron Drip Works takes apart.',
     automate: 'Nothing here is voided: crust ions and nuclei go to their own tanks.',
   }, [UIV, SITE], 250),
   prod('P_CRUST', 'Neutron Star Crust', 'grindless:neutron_star_crust', ['CRUST'], 14, -37, ['A slab of crust, lifted from a star that has no ground. Everything taken from it is contained.']),
-  gear('DRIP', 'neutron_drip_separator', 'Neutron Drip Separator', ['CRUST'], 16.5, -35.25, {
-    for: 'Deep in the crust the nuclei are so crowded that neutrons leak out between them. The &6Neutron Drip Separator&r takes them away before the matter relaxes.',
-    needs: 'A UIV hull, the UIV casing and the neutron star site casing.',
-    unlocks: 'Drip neutrons, for the cage and for the r-process.',
-    automate: 'Drip neutrons decay if you wait, so pipe them straight to the next machine.',
-  }, [UIV, SITE], 250),
-  prod('P_DRIP', 'Drip Neutrons', 'gtceu:drip_neutrons_bucket', ['DRIP'], 16.5, -37, ['A bucket of free neutrons that will not wait. Use it the moment it arrives.']),
-  gear('NEUT', 'neutronium_cage', 'Neutronium Cage', ['DRIP'], 19, -35.25, {
-    for: 'Cool the drip neutrons into a superfluid and shut it in a cage. The &6Neutronium Cage&r makes the pellet, which is fiction: a spoonful of neutron matter held at ordinary pressure by a field.',
+  gear('DRIP', 'neutronium_cage', 'Neutron Drip Works', ['CRUST'], 16.5, -35.25, {
+    for: 'Deep in the crust the nuclei are so crowded that neutrons leak out between them. The &6Neutron Drip Works&r takes them away before the matter relaxes, then cools them into a superfluid and shuts it in a cage: the neutronium pellet, which is fiction, a spoonful of neutron matter held at ordinary pressure by a field. Choose the separation or the cage recipe type in the controller.',
     needs: 'A UIV hull, the UIV casing, the neutron star site casing and a coil cage.',
-    unlocks: 'The neutronium pellet, which the stored proof asks for and the compression hall reads.',
-    automate: 'Drip neutrons by pipe; keep pellets by ME, as the hall never uses them up.',
+    unlocks: 'Drip neutrons for the r-process, and the neutronium pellet, which the stored proof asks for and the compression hall reads.',
+    automate: 'Drip neutrons decay if you wait: run them through the cage type at once, or pipe them straight to the next machine. Keep pellets by ME, as the hall never uses them up.',
   }, [UIV, SITE], 300),
+  prod('P_DRIP', 'Drip Neutrons', 'gtceu:drip_neutrons_bucket', ['DRIP'], 16.5, -37, ['A bucket of free neutrons that will not wait. Use it the moment it arrives.']),
   {
     key: 'P_PELLET_N', kind: 'reading', title: 'What the Pellet Is', icon: 'grindless:neutronium_pellet',
-    deps: ['NEUT'], x: 19, y: -37,
+    deps: ['DRIP'], x: 19, y: -37,
     desc: ['It is not the neutronium of the other mods: it is a pellet of neutron matter. The journey asks for it once; keep one for the hall and one for the stored proof.'],
     tasks: [{ type: 'checkmark' }], rewards: [xp(25)],
   },
-  gear('HALL', 'neutronium_compression_hall', 'Neutronium Compression Hall', ['NEUT'], 21.5, -35.25, {
+  gear('HALL', 'neutronium_compression_hall', 'Neutronium Compression Hall', ['DRIP'], 21.5, -35.25, {
     for: 'The &6Neutronium Compression Hall&r reads the pellets in its bus as parallels, and never uses them up. The mega family adds it at UIV.',
     needs: 'A UIV hull, the neutron star site casing and a pellet in its bus.',
     unlocks: 'Parallel runs of older recipes; its implosion mode keeps the explosive, so switch the mode in its own window first.',
