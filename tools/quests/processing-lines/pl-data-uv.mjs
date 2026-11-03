@@ -94,16 +94,19 @@ const chapter = {
       nodes: [
         n('nb', 0, -1.5, I('gtceu:niobium_ingot'), 'Niobium', { kind: 'raw' }),
         n('sheet', 2.5, -1.5, I('grindless:rrr_niobium_sheet'), 'RRR Niobium Sheet', { kind: 'product', from: ['nb'], sub: 'Melted very pure in the cavity works' }),
-        n('bare', 5, -1.5, I('grindless:bare_srf_cavity'), 'Bare Cavity', { kind: 'product', from: ['sheet'], sub: 'Nine cells, formed in the same works' }),
+        n('bare', 5, -1.5, I('grindless:bare_srf_cavity'), 'Bare Cavity', { kind: 'product', from: ['half'], sub: 'Eighteen half-cells welded into nine cells, in the same works' }),
+        n('half', 3.75, -1.5, I('grindless:niobium_half_cell'), 'Niobium Half-Cell', { kind: 'product', from: ['sheet'], sub: 'Two from each sheet, deep-drawn' }),
         n('works', 7.5, -1.5, M('gtceu:srf_cavity_works'), 'SRF Cavity Works', {
           kind: 'ours', from: ['bare'], desc: 'Melts the niobium very pure, forms nine-cell cavities and polishes them in acid.',
         }),
         n('acid', 10, -3, F('gtceu:spent_electropolish_acid'), 'Spent Acid', { kind: 'by', from: ['works'], end: 'electrolysed back to niobium and both acids' }),
         n('cav', 10, -1.5, I('grindless:srf_cavity'), 'SRF Cavity', { kind: 'product', from: ['works'] }),
+        n('dress', 11.25, -1.5, I('grindless:dressed_srf_cavity'), 'Dressed SRF Cavity', { kind: 'product', from: ['cav'], sub: 'Titanium helium vessel welded on; eight make a string' }),
         L('lhe', 0, 0, 'pl_ev:lhe'),
         n('nh', 0, 1.5, F('gtceu:neptune_helium'), 'Neptune Helium', { kind: 'product', from: ['siphon'] }),
+        n('nsamp', 0, 3.25, I('grindless:neptune_sample'), 'Neptune Sample', { kind: 'raw', sub: 'Kept in the siphon; only the scoop head wears' }),
         n('siphon', 0, 3.25, M('gtceu:neptune_deep_siphon'), 'Neptune Deep Siphon', {
-          kind: 'ours', desc: 'Drops a scoop through Neptune\'s methane deck.',
+          kind: 'ours', from: ['nsamp'], desc: 'Drops a scoop through Neptune\'s methane deck.',
         }),
         n('nhyd', 2.5, 3.25, F('gtceu:neptune_hydrogen'), 'Neptune Hydrogen', { kind: 'product', from: ['siphon'], sub: 'The isotope column takes its deuterium' }),
         n('d2', 5, 3.25, F('gtceu:deuterium'), 'Deuterium', { kind: 'product', from: ['nhyd'], sub: 'Into the D-He3 capsules and the D-T freezer' }),
@@ -114,12 +117,15 @@ const chapter = {
         n('conc', 5, 1.5, F('gtceu:helium_3_concentrate'), 'Helium-3 Concentrate', { kind: 'product', from: ['plant'], sub: 'What the superleak holds back' }),
         n('he3', 7.5, 1.5, F('gtceu:helium_3'), 'Helium-3', { kind: 'product', from: ['conc'], sub: 'Into the D-He3 capsules' }),
         n('cmod', 12.5, -1.5, I('grindless:srf_cryomodule'), 'SRF Cryomodule', {
-          kind: 'product', from: ['cav', 'sf'], sub: 'Eight cavities in superfluid helium', end: 'placed as blocks in the reactor, the synchrotron and the muon cell',
+          kind: 'product', from: ['dress', 'sf'], sub: 'Eight dressed cavities in superfluid helium', end: 'placed as blocks in the reactor, the synchrotron and the muon cell',
         }),
         // laser fusion fuel
-        n('boron', 16, 0, I('gtceu:boron_dust'), 'Boron', { kind: 'raw' }),
-        n('b11', 18.5, -0.75, F('gtceu:boron_11_trifluoride'), 'Boron-11 Trifluoride', { kind: 'product', from: ['boron'], sub: 'Split from boron-10 with fluorine in the IV hot cell' }),
-        n('b10', 18.5, 0.75, F('gtceu:boron_10_trifluoride'), 'Boron-10 Trifluoride', { kind: 'by', from: ['boron'], end: 'the boron nitride reactor' }),
+        n('bx', 16, 0, I('gtceu:borax_dust'), 'Borax', { kind: 'raw' }),
+        n('bac', 18.5, 0, I('gtceu:boric_acid_dust'), 'Boric Acid', { kind: 'product', from: ['bx'], sub: 'Borax in hydrochloric acid; the salt goes to the network' }),
+        n('b2', 21, 0, I('gtceu:boron_trioxide_dust'), 'Boron Trioxide', { kind: 'product', from: ['bac'], sub: 'Roasted in the blast furnace' }),
+        n('bf3', 23.5, 0, F('gtceu:boron_trifluoride'), 'Boron Trifluoride', { kind: 'product', from: ['b2'], sub: 'Hydrofluoric acid in a chemical reactor' }),
+        n('b11', 26, -0.75, F('gtceu:boron_11_trifluoride'), 'Boron-11 Trifluoride', { kind: 'product', from: ['bf3'], sub: 'Split from boron-10 in the isotope column' }),
+        n('b10', 26, 0.75, F('gtceu:boron_10_trifluoride'), 'Boron-10 Trifluoride', { kind: 'by', from: ['bf3'], end: 'the boron nitride reactor' }),
         n('deca', 21, -0.75, F('gtceu:decaborane'), 'Decaborane', { kind: 'product', from: ['b11'], sub: 'With hydrogen in a chemical reactor' }),
         n('hf', 21, 0.75, F('gtceu:hydrofluoric_acid'), 'Hydrofluoric Acid', { kind: 'by', from: ['b11'], end: 'back to your fluorine chemistry' }),
         L('dplate', 21, -2.25, 'pl_zpm:plate'),
@@ -127,25 +133,38 @@ const chapter = {
         n('pb11', 23.5, -0.75, I('grindless:pb11_capsule'), 'Boron Capsule', { kind: 'product', from: ['deca', 'dplate'] }),
         n('dhe3', 23.5, -2.25, I('grindless:d_he3_capsule'), 'D-He3 Capsule', { kind: 'product', from: ['dplate', 'zhe3', 'he3', 'd2'] }),
         n('chamber', 26, -1.5, M('gtceu:laser_fusion_chamber'), 'Laser Fusion Chamber', {
-          kind: 'ours', from: ['pb11', 'dhe3', 'laser'], desc: 'Fires a ring of fibre lasers at one capsule a shot. The lasers wear.',
+          kind: 'ours', from: ['pb11', 'laser'], desc: 'Fires a ring of fibre lasers at one capsule a shot. The lasers wear.',
         }),
+        n('chamber2', 28.5, 3, M('gtceu:laser_fusion_chamber'), 'Laser Fusion Chamber', {
+          kind: 'ours', from: ['dhe3'], desc: 'The same chamber fires the helium-3 capsules; its lasers are the ones above.',
+        }),
+        n('alpha2', 31, 3, F('gtceu:helium'), 'Helium', { kind: 'product', from: ['chamber2'], end: 'the network: nothing is vented' }),
         n('alpha', 28.5, -2.25, F('gtceu:helium'), 'Helium', { kind: 'by', from: ['chamber'], end: 'the network: nothing is vented' }),
         n('spentL', 28.5, -0.75, I('grindless:spent_laser_module'), 'Spent Laser Module', { kind: 'product', from: ['chamber'], end: 'refurbished in the fibre draw tower' }),
         // fibre lasers
-        n('preform', 16, 6, I('grindless:yb_doped_preform'), 'Doped Preform', { kind: 'raw', sub: 'Ytterbium glass laid inside a tube' }),
-        n('tower', 18.5, 6, M('gtceu:fibre_draw_tower'), 'Fibre Draw Tower', {
-          kind: 'ours', from: ['preform'], desc: 'Draws the preform into fibre and builds the laser modules.',
+        // the fibre: MCVD in three operations, the draw and the grating (V2 steps 1-5)
+        n('tube', 16, 6, I('grindless:fused_silica_tube'), 'Fused Silica Tube', { kind: 'raw', sub: 'The substrate the glass is laid inside' }),
+        n('sicl4', 16, 7.5, I('gtca:silicon_tetrachloride_dust'), 'Silicon Tetrachloride', { kind: 'raw', sub: 'With germanium tetrachloride and oxygen' }),
+        n('ybsol', 18.5, 7.5, F('gtceu:ytterbium_chloride_solution'), 'Ytterbium Chloride Solution', { kind: 'raw', sub: 'Chemical reactor: ytterbium oxide and hydrochloric acid' }),
+        n('soot', 18.5, 6, I('grindless:mcvd_soot_tube'), 'Soot Tube', { kind: 'product', from: ['tube', 'sicl4'], sub: 'Porous glass deposited inside the tube; the chlorine goes to the network' }),
+        n('dope', 21, 6, I('grindless:doped_soot_tube'), 'Doped Soot Tube', { kind: 'product', from: ['soot', 'ybsol'], sub: 'Soaked in the solution with aluminium' }),
+        n('preform', 23.5, 6, I('grindless:yb_doped_preform'), 'Doped Preform', { kind: 'product', from: ['dope'], sub: 'Dried, sintered and collapsed; the glass dust goes back' }),
+        n('fibre', 26, 6, I('grindless:ytterbium_fibre'), 'Ytterbium Fibre', { kind: 'product', from: ['preform'], sub: 'Drawn in the fibre draw tower' }),
+        n('grating', 28.5, 6, I('grindless:fibre_bragg_grating'), 'Fibre Bragg Grating', { kind: 'product', from: ['fibre'], sub: 'Written with ultraviolet light in hydrogen-loaded fibre' }),
+        // the pump diodes (V2: six steps, as long as the fibre)
+        n('ga', 16, 9, I('gtceu:gallium_dust'), 'Gallium', { kind: 'raw', sub: 'With indium, sodium and chloromethane' }),
+        n('mocvd', 18.5, 9, M('gtceu:mocvd_reactor'), 'MOCVD Reactor', {
+          kind: 'ours', from: ['ga'], desc: 'Makes the organometallics, grows indium gallium arsenide a layer at a time, cleaves and mounts the bars.',
         }),
-        n('fibre', 21, 6, I('grindless:ytterbium_fibre'), 'Ytterbium Fibre', { kind: 'product', from: ['tower'] }),
-        n('epi', 16, 8, I('grindless:gallium_arsenide_wafer'), 'GaAs Wafer', { kind: 'raw', sub: 'With the organometallics and arsine' }),
-        n('mocvd', 18.5, 8, M('gtceu:mocvd_reactor'), 'MOCVD Reactor', {
-          kind: 'ours', from: ['epi'], desc: 'Grows indium gallium arsenide one layer at a time, then cleaves and mounts the bars.',
-        }),
-        n('arsine', 18.5, 9.75, F('gtceu:arsine'), 'Arsine', { kind: 'by', from: ['mocvd'], end: 'the scrubber: arsenic and hydrogen' }),
-        n('epiw', 21, 8, I('grindless:ingaas_epi_wafer'), 'InGaAs Epi Wafer', { kind: 'product', from: ['mocvd'] }),
-        n('pump', 23.5, 8, I('grindless:ingaas_pump_module'), 'Pump Module', { kind: 'product', from: [via('epiw', 'grindless:ingaas_diode_bar')], sub: 'Cleaved into bars and mounted on copper' }),
-        n('laser', 25.75, 7, I('grindless:fibre_laser_module'), 'Fibre Laser Module', {
-          kind: 'product', from: ['fibre', 'pump'], sub: 'The laser chamber, the printer, the comb and the launcher take it',
+        n('arsine', 18.5, 10.75, F('gtceu:arsine'), 'Arsine', { kind: 'by', from: ['mocvd'], end: 'the scrubber: arsenic and hydrogen' }),
+        n('tmga', 21, 9, F('gtceu:trimethylgallium'), 'Trimethylgallium', { kind: 'product', from: ['mocvd'], sub: 'And trimethylindium; the salt goes to the network' }),
+        n('epi', 21, 10.5, I('grindless:gallium_arsenide_wafer'), 'GaAs Wafer', { kind: 'raw', sub: 'With the organometallics and arsine' }),
+        n('epiw', 23.5, 9, I('grindless:ingaas_epi_wafer'), 'InGaAs Epi Wafer', { kind: 'product', from: ['tmga', 'epi'] }),
+        n('bar', 26, 9, I('grindless:ingaas_diode_bar'), 'Diode Bars', { kind: 'product', from: ['epiw'], sub: 'Cleaved: eight from one wafer' }),
+        n('coated', 28.5, 9, I('grindless:coated_diode_bar'), 'Coated Diode Bars', { kind: 'product', from: ['bar'], sub: 'Alumina and titania mirrors on the facets' }),
+        n('pump', 31, 9, I('grindless:ingaas_pump_module'), 'Pump Module', { kind: 'product', from: ['coated'], sub: 'Four bars mounted on copper' }),
+        n('laser', 33.5, 7.5, I('grindless:fibre_laser_module'), 'Fibre Laser Module', {
+          kind: 'product', from: ['grating', 'pump'], sub: 'The laser chamber, the printer, the comb and the launcher take it',
         }),
       ],
     },
@@ -183,7 +202,10 @@ const chapter = {
           kind: 'ours', from: ['medium', 'lorg'], desc: 'Grows neural organoids into stem cells by the batch, and stem cells into processing units.',
         }),
         n('stem', 17.5, 3, I('gtceu:stem_cells'), 'Stem Cells', { kind: 'product', from: ['vat'], sub: 'Sixty-four from one organoid' }),
-        n('npu', 20, 3, I('gtceu:neuro_processing_unit'), 'Neuro Processing Unit', { kind: 'product', from: ['stem'], end: 'the wetware circuit line' }),
+        n('npu', 20, 3, I('gtceu:neuro_processing_unit'), 'Neuro Processing Unit', { kind: 'product', from: ['stem'], sub: 'Eight go into four units; the circuit assembler takes it from here' }),
+        n('wp', 22.5, 3, I('gtceu:wetware_processor'), 'Wetware Processor', { kind: 'product', from: ['npu'], sub: 'The LuV circuit' }),
+        n('wpa', 25, 3, I('gtceu:wetware_processor_assembly'), 'Wetware Processor Assembly', { kind: 'product', from: ['wp'], sub: 'The ZPM circuit' }),
+        n('wpc', 27.5, 3, I('gtceu:wetware_processor_computer'), 'Wetware Processor Computer', { kind: 'product', from: ['wpa'], end: 'the UV circuit: every UV machine takes it' }),
       ],
     },
     americium: {
@@ -223,7 +245,7 @@ const chapter = {
         }),
         n('entedp', 7.5, 1.5, I('grindless:ented_powder'), 'EnTED Powder', { kind: 'product', from: ['pit'] }),
         n('billet', 10, 1.5, I('grindless:pit_billet'), 'Powder Billet', { kind: 'product', from: ['entedp'], sub: 'Four loads in a silver tube' }),
-        n('entedw', 12.5, 1.5, I('gtceu:enriched_naquadah_trinium_europium_duranide_single_wire'), 'EnTED Wire', { kind: 'product', from: ['billet'], end: 'stored: no recipe uses it yet' }),
+        n('entedw', 12.5, 1.5, I('gtceu:enriched_naquadah_trinium_europium_duranide_single_wire'), 'EnTED Wire', { kind: 'product', from: ['billet'], end: 'the UV SMES cell: it takes sixteen wires' }),
       ],
     },
     starshot: {
@@ -242,7 +264,7 @@ const chapter = {
         // printed parts and the thruster pod
         n('ti', 0, 5.5, I('gtceu:tritanium_ingot'), 'Tritanium', { kind: 'raw' }),
         n('pbp', 2.5, 5.5, M('gtceu:powder_bed_printer'), 'Powder Bed Printer', {
-          kind: 'ours', from: ['ti', 'laser'], desc: 'Atomises tritanium in argon and prints it a layer at a time with a fibre laser. The lasers wear.',
+          kind: 'ours', from: ['ti'], desc: 'Atomises tritanium in argon (no laser needed), then prints it a layer at a time with a fibre laser. The lasers wear.',
         }),
         n('tipow', 5, 5.5, I('grindless:tritanium_am_powder'), 'Tritanium Powder', { kind: 'product', from: ['pbp'] }),
         n('near', 7.5, 5.5, I('grindless:near_net_thruster_chamber'), 'Near-Net Chamber', { kind: 'product', from: ['tipow', 'laser'], sub: 'Most of the powder is left over' }),
@@ -343,12 +365,14 @@ const chapter = {
 // cells, relative to the cluster each node ends up in below), within the 5-cell line limit and reading left to right. The
 // per-cluster coordinates above are only the order they were first written in.
 const TOGETHER = {
-  nb: [0, 16], sheet: [0.5, 17.75], bare: [2, 17.75], works: [4, 17.75], acid: [4.5, 16.25], cav: [5.75, 17], lhe: [4.75, 20.5],
-  nh: [5.75, 22], siphon: [5.25, 23.75], nhyd: [7.25, 22.75], d2: [9.5, 21.5], plant: [6.25, 20.25], sf: [6.75, 18.5],
-  conc: [8.25, 19.5], he3: [9.75, 19], cmod: [7.25, 17], boron: [7.25, 15.25], b11: [8.75, 16], b10: [8.75, 14.75],
+  nb: [-4.5, 17.75], sheet: [-3, 17.75], half: [-1.25, 17.75], bare: [0.75, 17.75], works: [2.5, 17.75], acid: [4.5, 16.25], cav: [4.25, 17.75], dress: [5.75, 17], lhe: [4.75, 20.5],
+  nsamp: [2.5, 23.75], nh: [5.75, 22], siphon: [5.25, 23.75], nhyd: [7.25, 22.75], d2: [9.5, 21.5], plant: [6.25, 20.25], sf: [6.75, 18.5],
+  conc: [8.25, 19.5], he3: [9.75, 19], cmod: [7.25, 17],   bx: [0.5, 15], bac: [2.25, 15], b2: [4, 15], bf3: [5.75, 15], b11: [8.75, 16], b10: [8.75, 14.75],
   deca: [11, 15.25], hf: [9.5, 17.25], dplate: [11.5, 17.25], zhe3: [11.5, 20.25], pb11: [12.5, 15.75], dhe3: [12, 18.75],
-  chamber: [14.25, 15.25], alpha: [17, 18.5], spentL: [17.25, 16.25], preform: [9.5, 13], tower: [11, 13.25],
-  fibre: [11.5, 11.5], epi: [7.75, 4.75], mocvd: [9.25, 4.75], arsine: [9.75, 3.25], epiw: [11, 5], pump: [12.25, 6.75],
+  chamber: [14.25, 15.25],   alpha: [17, 18.5], spentL: [17.25, 16.25], chamber2: [14.5, 19], alpha2: [16.5, 20.5],   tube: [-1.5, 11], sicl4: [-1.5, 12.5], ybsol: [2.5, 13.5], soot: [0.5, 11.75], dope: [2.5, 11.75], preform: [4.5, 11.75],
+  fibre: [6.5, 11.75], grating: [9, 11.75],
+  ga: [3.5, 4.75], mocvd: [5.5, 4.75], arsine: [6, 3.25], tmga: [7.75, 4.75], epi: [7.75, 6.25], epiw: [9.5, 5.5],
+  bar: [11, 6.25], coated: [12.5, 7], pump: [13, 8.75],
   laser: [13.75, 10.5], cmox: [7, 7.5], am: [7.25, 10.25], hs: [9, 10.75],
   pellet: [12.75, 10.25], gphs: [15.75, 11], rtg: [18.25, 14.75], micro: [11.25, 9],
   ti: [11, 6.25], pbp: [12.75, 5.75], tipow: [15, 4.75], near: [15.5, 3.25],
@@ -388,7 +412,6 @@ const feed = (list, key, was, now) => {
   nd.from = nd.from.map((f) => (f === was ? now : f));
 };
 parts.push(copy('laser', 'laserB', 'Made in the fibre laser line'));
-feed(parts, 'pbp', 'laser', 'laserB');
 feed(parts, 'near', 'laser', 'laserB');
 probe.push(copy('laser', 'laserC', 'Made in the fibre laser line'), copy('micro', 'microC', 'Sealed in the heat source works'),
   copy('rtg', 'rtgC', 'Built in the heat source works'), copy('pod', 'podC', 'Fitted in the thruster works'),
