@@ -42,7 +42,7 @@ hash = "8e02c120de96f5c25055ce850bfd26cc648e75eafe4651291144da94222fc292"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
-hash = "72cd85d25c8bdd0d4be82d45ba35629ab0f00038881ab3c0c4a5f63929f94e1f"
+hash = "e58c9ff77f37bd04ebe6ae42488886ce1b210765a8a771ca566dfc96b3777521"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
@@ -18018,7 +18018,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "1ffa7c94152905277f36c42b94e45645428311369346a762a204168cd9347bea"
+hash = "e395591f4a9f313204ac2fbda82a6a1d1d11276d2f2c89832eda6ce082a8041d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_city.json"

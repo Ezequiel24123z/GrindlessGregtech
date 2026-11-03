@@ -59,7 +59,7 @@
 			y: 0.0d
 		}
 		{
-			description: ["Runs macerator recipes on steam, up to 64 in parallel. Runs Macerator recipes. Build it mostly from Solid Machine Casing. The controller is crafted from Steel frames, Solid Machine Casing and Steel Drill Bit. Unlocks Tungsten Steel Dust, Aluminium Dust and Wood Dust. Automate it through input item buses and output item buses."]
+			description: ["Runs macerator recipes on steam, up to 64 in parallel. Runs Macerator recipes. Build it mostly from Solid Machine Casing. The controller is crafted from Steel frames, Solid Machine Casing and Steel Drill Bit. Unlocks Tungsten Steel Dust, Titanium Dust and Wood Dust. Automate it through input item buses and output item buses."]
 			icon: "gtceu:large_steam_macerator"
 			id: "15A610045A9D9B00"
 			rewards: [{ id: "334ABFDD31BE1555", type: "xp", xp: 10 }]
@@ -275,7 +275,7 @@
 			y: 2.0d
 		}
 		{
-			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from Steam Machine Casing, Potin gears and Hp Steam Macerator. Unlocks Tungsten Steel Dust, Aluminium Dust and Wood Dust. Also needed to craft Large Steam Macerator. Automate it through input item buses and output item buses."]
+			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from Steam Machine Casing, Potin gears and Hp Steam Macerator. Unlocks Tungsten Steel Dust, Titanium Dust and Wood Dust. Also needed to craft Large Steam Macerator. Automate it through input item buses and output item buses."]
 			icon: "gtceu:steam_grinder"
 			id: "6A335E9106183CB3"
 			rewards: [{ id: "4EED7F0924EBC4A7", type: "xp", xp: 10 }]
@@ -1063,7 +1063,7 @@
 			y: 20.0d
 		}
 		{
-			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from EV Machine Hull, Titanium frames and IV circuits. Unlocks Tungsten Steel Dust, Aluminium Dust and Wood Dust. Automate it through input item buses and output item buses."]
+			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from EV Machine Hull, Titanium frames and IV circuits. Unlocks Tungsten Steel Dust, Titanium Dust and Wood Dust. Automate it through input item buses and output item buses."]
 			icon: "gtceu:ev_large_miner"
 			id: "42E0C1978B84C3C2"
 			rewards: [{ id: "739A1C4245F0CF86", type: "xp", xp: 10 }]
@@ -1386,7 +1386,7 @@
 			y: 27.0d
 		}
 		{
-			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from IV Machine Hull, Tungsten Steel frames and IV circuits. Unlocks Tungsten Steel Dust, Aluminium Dust and Wood Dust. Automate it through input item buses and output item buses."]
+			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from IV Machine Hull, Tungsten Steel frames and IV circuits. Unlocks Tungsten Steel Dust, Titanium Dust and Wood Dust. Automate it through input item buses and output item buses."]
 			icon: "gtceu:iv_large_miner"
 			id: "7EA15F4F514288CB"
 			rewards: [{ id: "23313DF9723D5B12", type: "xp", xp: 10 }]
@@ -1578,7 +1578,7 @@
 			y: 29.0d
 		}
 		{
-			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from Tungsten Carbide plates, IV Electric Piston and IV Electric Motor. Unlocks Tungsten Steel Dust, Aluminium Dust and Wood Dust. Automate it through input item buses and output item buses."]
+			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from Tungsten Carbide plates, IV Electric Piston and IV Electric Motor. Unlocks Tungsten Steel Dust, Titanium Dust and Wood Dust. Automate it through input item buses and output item buses."]
 			icon: "gtceu:large_maceration_tower"
 			id: "3836B708CBE47507"
 			rewards: [{ id: "3E3897DD8253AF55", type: "xp", xp: 10 }]
@@ -1650,7 +1650,7 @@
 			y: 31.0d
 		}
 		{
-			description: ["A GT-- multiblock for Macerator recipes. The controller is crafted from Sintered Regolith Bricks, Tungsten Steel plates and IV Macerator. Unlocks Tungsten Steel Dust, Aluminium Dust and Wood Dust. Automate it through input item buses and output item buses."]
+			description: ["A GT-- multiblock for Macerator recipes. The controller is crafted from Sintered Regolith Bricks, Tungsten Steel plates and IV Macerator. Unlocks Tungsten Steel Dust, Titanium Dust and Wood Dust. Automate it through input item buses and output item buses."]
 			icon: "gtnn:maceration_stack_controller"
 			id: "4F5F3DC9A060CFEB"
 			rewards: [{ id: "76DD352FF0E62959", type: "xp", xp: 10 }]
@@ -2057,7 +2057,7 @@
 			y: 38.0d
 		}
 		{
-			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from LuV Machine Hull, Hsss frames and LUV circuits. Unlocks Tungsten Steel Dust, Aluminium Dust and Wood Dust. Automate it through input item buses and output item buses."]
+			description: ["A GregTech multiblock for Macerator recipes. The controller is crafted from LuV Machine Hull, Hsss frames and LUV circuits. Unlocks Tungsten Steel Dust, Titanium Dust and Wood Dust. Automate it through input item buses and output item buses."]
 			icon: "gtceu:luv_large_miner"
 			id: "52825733CCFD254B"
 			rewards: [{ id: "5ACD10B308349DAE", type: "xp", xp: 10 }]

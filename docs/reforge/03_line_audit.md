@@ -18,7 +18,42 @@ No pack content changed. MAX rows (8 lines, 5 to 7 steps) are data only: RF-7A d
 
 Limits: the chart covers chart lines, not every multiblock; the cost matrix lists key items only; skippability ignores recipe cost. Verdicts are leads for the packages below, to be confirmed against `docs/eras/<era>.md`.
 
-## Current state (batch 3 close, 2026-11-01)
+## Current state (batch 16 close, 2026-11-03)
+
+Regenerated against the batch 16 dump `84c44332278e` (`data/03_lines.csv`, 285 rows: a cluster gives one row per end product, and `line` joins clusters into one line). 258 keep, 26 fix, 1 merge, 0 remove; batch 3 had 190 keep and 157 fix of 395.
+
+| Era | Rows | Lines | Real (4+) | Longest | Keep | Fix | Merge |
+|---|---|---|---|---|---|---|---|
+| steam | 4 | 4 | 3 | 6 | 4 | 0 | 0 |
+| lv | 10 | 9 | 4 | 10 | 9 | 1 | 0 |
+| mv | 11 | 7 | 6 | 10 | 10 | 1 | 0 |
+| hv | 14 | 7 | 8 | 20 | 14 | 0 | 0 |
+| ev | 20 | 8 | 16 | 24 | 18 | 2 | 0 |
+| iv | 15 | 9 | 9 | 12 | 15 | 0 | 0 |
+| luv | 32 | 13 | 12 | 13 | 30 | 2 | 0 |
+| zpm | 25 | 11 | 8 | 24 | 25 | 0 | 0 |
+| uv | 12 | 6 | 11 | 18 | 10 | 2 | 0 |
+| uhv | 14 | 10 | 12 | 23 | 13 | 1 | 0 |
+| uev | 13 | 11 | 10 | 19 | 13 | 0 | 0 |
+| uiv | 29 | 10 | 27 | 11 | 25 | 4 | 0 |
+| uxv | 22 | 10 | 19 | 27 | 18 | 3 | 1 |
+| opv | 21 | 9 | 21 | 23 | 21 | 0 | 0 |
+| max | 32 | 21 | 22 | 33 | 22 | 10 | 0 |
+| maxplus | 11 | 11 | 11 | 39 | 11 | 0 | 0 |
+
+The 27 rows left are tracked in #284:
+- Feeder ends that the D4 and D5 charts close as `dest` rows, which the per-end-product split counts as lines of 1 to 3 steps (UIV I2 L32 and I9 L23; UXV X5 L31, X6 L39, X7 L49; MAX M3, M4, M5 and M8). Their clusters' longest rows run 4 to 9 steps.
+- Bypasses: LV fertilizer, MV silicon and UV superfluid helium; a shorter stock recipe makes the same end product (LV and MV costs are only reviewed, AGENTS.md principle 2).
+- Short or isolated:
+  - EV lunar titanium: 3 steps, a resource route with no declared role.
+  - EV nano circuits: 15 steps, no crossing.
+  - LuV Mond ends iridium and osmium: 2 steps, the platinum plant's asteroid mode.
+  - MAX Penrose payload: 3 steps.
+  - UIV I2 L9 and I9 L39: isolated.
+- Reach-back: UV spent fuel and UHV betavoltaics cross only the previous era.
+- Merge: UXV X2 (the sensor) shares 7 intermediates with X1.
+
+## Batch 3 close (2026-11-01, history)
 
 After the chart passes (RF-3K UEV/UIV, RF-3M LuV/ZPM, RF-3N UXV/OpV, RF-3O EV/IV; RF-3L UV/UHV and RF-3D Steam to HV still open), regenerated against the band A dump. Lines are design lines (RF-3G) where the era doc numbers them, chart lines otherwise. Missing = design lines no chart shows (count; then the name heuristic and how many of those the dump has; per-era checks in `03_charts_*.md` found most named ones to be false positives). The tables further down are history.
 
