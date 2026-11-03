@@ -110,8 +110,8 @@
       "recipes": [
         {
           "name": "neutron_star_site_casing", "circuit": 0, "eut": 31457280, "duration": 600,
-          "_why": "UIV-B2 (integrator, at merge) line 43, last step: the rad-hard controller sealed in osmiridium with neutron reflectors makes the field-hardened casing of the four RX J1856 structures that use it (128 per site).",
-          "itemsIn": [ { "id": "grindless:rad_hard_controller", "count": 1 }, { "id": "gtceu:osmiridium_plate", "count": 6 }, { "id": "gtceu:neutron_reflector", "count": 2 } ],
+          "_why": "UIV-B2 (integrator, at merge) line 43, last step: two rad-hard controllers sealed in osmiridium with neutron reflectors make eight field-hardened casings (D4-CASE-UIV: the family doubles the controller so the casing scores in its 1,500-3,000 band); the four RX J1856 structures that use it take 128 per site.",
+          "itemsIn": [ { "id": "grindless:rad_hard_controller", "count": 2 }, { "id": "gtceu:osmiridium_plate", "count": 6 }, { "id": "gtceu:neutron_reflector", "count": 2 } ],
           "fluidsIn": [ { "id": "gtceu:polybenzimidazole", "amount": 288 } ],
           "itemsOut": [ { "id": "grindless:neutron_star_site_casing", "count": 8 } ]
         },
