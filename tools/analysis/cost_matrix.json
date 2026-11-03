@@ -37,7 +37,7 @@
     "drillOutputsOfTypes": ["gtceu:vein_drilling"],
     "items": ["*:raw_*"],
     "notBase": ["*rubber*"],
-    "unproducedItems": ["minecraft:*", "*:*_ore", "*:*_leaves", "gcyr:*moon*", "gcyr:*regolith*", "gcyr:prb_*", "grindless:lv_horizon_collector"],
+    "unproducedItems": ["minecraft:*", "*:*_leaves", "gcyr:moon_stone*", "gcyr:moon_cobblestone*", "gcyr:moon_sand", "gcyr:*regolith*", "gcyr:prb_*", "grindless:lv_horizon_collector"],
     "unproducedFluids": ["*"],
     "free": ["fluid:minecraft:water", "fluid:gtceu:steam", "fluid:gtceu:air", "fluid:gtceu:nether_air", "fluid:gtceu:ender_air", "fluid:*sea_water"],
     "weights": [],
