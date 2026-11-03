@@ -116,9 +116,9 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.zero_g_crystal_grower.3', "5x5x5 station module; inert 3x3x3 growth core and laminated ports. Requires a cleanroom or cleaning maintenance hatch in its maintenance cell. 1-2 energy hatches, input/output buses and input hatches.")
 
     add('emi.grindless.info.microgravity_smelter.0', "The Microgravity Smelter works in any orbit. Circuit 1: ZBLAN optical pipes. Circuit 2: Whipple shield foam. Circuit 3: cold naquadah alloy with no helium.")
-    add('emi.grindless.info.microgravity_smelter.1', "Blend the ZBLAN in the Large Mixing Vessel. Optical pipes cannot be recycled and need a cleaning maintenance hatch. It takes an optional parallel hatch.")
+    add('emi.grindless.info.microgravity_smelter.1', "Batch the ZBLAN in a large chemical reactor from zirconium and barium fluoride and the lanthanum, aluminium and sodium fluoride blend (the fluorspar kiln makes them from HF). Optical pipes cannot be recycled and need a cleaning maintenance hatch. It takes an optional parallel hatch.")
     add('emi.grindless.info.microgravity_smelter.2', "Any orbit. A 3x3x7 station module, eight HSS-G coils around an empty levitation centre, and a six-block fibre drawing tower.")
-    add('emi.grindless.info.microgravity_smelter.3', "Circuits 1/2/3: ZBLAN optical pipes / Whipple shield foam / cold naquadah alloy without helium. Blend ZBLAN in the Large Mixing Vessel (73,250 mB fluorine per 25 dust). Optical pipes cannot be recycled.")
+    add('emi.grindless.info.microgravity_smelter.3', "Circuits 1/2/3: ZBLAN optical pipes / Whipple shield foam / cold naquadah alloy without helium. ZBLAN is batched in a large chemical reactor: 50 ZrF4 + 12 BaF2 + 16 dopant blend give 20 dust. Optical pipes cannot be recycled.")
     add('emi.grindless.info.microgravity_smelter.4', "1-2 energy hatches, 1-2 input buses, 1-2 output buses, 1-2 fluid inputs; optional parallel hatch. One maintenance cell: use a cleaning maintenance hatch for optical pipes.")
 
     add('emi.grindless.info.wake_shield_facility.0', "The Wake Shield Facility works in any orbit and always needs a cleanroom or a cleaning maintenance hatch. Circuit 1: UHPIC wafer. Circuit 2: HPIC wafer. Circuit 3: triple-junction wafer.")
