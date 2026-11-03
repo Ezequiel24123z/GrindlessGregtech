@@ -145,13 +145,17 @@
   const CASING = 'grindless:horizon_machine_casing'
   const LOG = '[grindless/maxplus_grid] '
 
-  // 27 x 11 x 27 of horizon machine casing: four glass-banded walls round a vertical bar of atomic casing and coils. The front face (z = 26)
-  // carries a block of part cells, five rows by 25 columns less the controller: up to 81 input buses and one 1,024 A hatch, buses and hatches.
+  // 33 x 13 x 33, a grid hall (docs/eras/lines-opv-maxplus.md 6.3): bound-lattice walls and floor, a void-diamond window band and cryostat
+  // piers, and in the middle an assembly core, a cryostat vault ringed with Kerr coils. The front face (z = 32) carries a 9 x 9 bus field
+  // of part cells (less the controller): up to 81 input buses and one 1,024 A hatch, buses and hatches.
   GRID.machine = {
     name: 'hyper_assembly_array', machine: 'gtceu:hyper_assembly_array', type: 'hyper_assembly_array', dataKey: 'grindless_hyper_assembly_array',
     lang: 'Hyper Assembly Array', casing: CASING, texture: 'grindless:block/maxplus/horizon_machine_casing', overlay: 'grindless:block/multiblock/hyper_assembly_array',
-    width: 27, height: 11, depth: 27,
-    pal: { F: CASING, L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
+    width: 33, height: 13, depth: 33,
+    pal: {
+      F: CASING, L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil',
+      B: 'grindless:bound_lattice_casing', K: 'grindless:kerr_coil_casing', R: 'grindless:primordial_cryostat_casing', W: 'grindless:void_diamond_window'
+    },
     parts: function () {
       return [
         Pat.part('input_bus', { min: 1, max: 81 }),
@@ -164,16 +168,31 @@
 
   // x left to right, y bottom to top, z back to front
   function arrayCell(x, y, z) {
-    if (y === 0 || y === 10) {
-      var m5 = (x + z) % 5
-      return m5 < 2 ? 'A' : m5 === 3 && z % 2 === 0 ? 'C' : 'F'
+    var top = 12
+    var last = 32
+    if (y === 0 || y === top) {
+      var m4 = (x + z) % 4
+      return m4 === 0 ? 'A' : (x % 8 === 4 && z % 8 === 4 && y === top) ? 'C' : (x + z) % 6 === 1 ? 'R' : 'B'
     }
-    if (z === 26) return y >= 1 && y <= 5 && x >= 1 && x <= 25 ? 'X' : 'F'
-    if (x === 0 || x === 26 || z === 0) {
-      var along = x === 0 || x === 26 ? z : x
-      return y >= 4 && y <= 7 && along >= 3 && along <= 23 && along % 4 !== 1 ? 'L' : 'F'
+    if (z === last && y >= 1 && y <= 9 && x >= 12 && x <= 20) return 'X'
+    if (x === 0 || x === last || z === 0 || z === last) {
+      var along = x === 0 || x === last ? z : x
+      if (along % 4 === 0) return 'R'
+      if (y >= 4 && y <= 8 && along >= 3 && along <= 29) return y === 6 ? 'W' : 'L'
+      return 'B'
     }
-    if (x === 13 && z === 13 && y >= 2 && y <= 8) return y % 4 === 2 ? 'C' : 'A'
+    // the assembly core: a cryostat vault with Kerr coil rings and a coil spine
+    var dx = x - 16
+    var dz = z - 16
+    var m = Math.max(Math.abs(dx), Math.abs(dz))
+    if (m === 5 && y >= 1 && y <= 11) return y % 3 === 0 ? 'K' : 'R'
+    if (m < 5 && y === 1) return (dx + dz) % 2 === 0 ? 'A' : 'B'
+    if (m < 5 && y === 11) return m % 2 === 0 ? 'K' : 'B'
+    if (m === 0 && y >= 2 && y <= 10) return y % 3 === 2 ? 'C' : 'A'
+    // lattice pylons and a mezzanine rim ring the hall
+    if (Math.abs(dx) >= 14 && Math.abs(dx) <= 15 && Math.abs(dz) >= 14 && Math.abs(dz) <= 15) return 'B'
+    if (y === 6 && (Math.abs(dx) === 15 || Math.abs(dz) === 15) && m <= 15) return 'B'
+    if (y === 2 && (Math.abs(dx) === 8 || Math.abs(dz) === 8) && m <= 8) return 'K'
     return '#'
   }
 

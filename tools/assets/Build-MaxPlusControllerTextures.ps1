@@ -96,7 +96,6 @@ $Faces = [ordered]@{
     blueshift_forge = @('i.i.......', '.i.i......', 'i.i..wwww.', '.....wwww.', '..######..', '...####...', '..######..', '.########.')
     void_crystal_fab = @('....ii....', '...iiii...', '..iiwwii..', '..iiwwii..', '...iiii...', '....ii....', '..a....a..', '.aaa..aaa.')
     meta_material_loom = @('a.a.a.a.a.', 'iiiiiiiiii', '.a.a.a.a.a', 'iiiiiiiiii', 'a.a.a.a.a.', 'iiiiiiiiii', '.a.a.a.a.a', 'iiiiiiiiii')
-    multi_plasma_blender = @('a...i...a.', '.a..i..a..', '..a.i.a...', '...aia....', '....ww....', '....ww....', '...####...', '..######..')
     horizon_crystal_furnace = @('.########.', '.#......#.', '.#..ii..#.', '.#.iwwi.#.', '.#.iwwi.#.', '.#..ii..#.', '.#aaaaaa#.', '.########.')
     condensate_assembler = @('..#.......', '..#.......', '..##aaa...', '....#.a...', '....#.ww..', '...###ww..', '..########', '..........')
     horizon_capacitor_bank = @('.########.', '#a#a#a#a##', '#i#i#i#i##', '#i#i#i#i##', '#i#i#i#i##', '#a#a#a#a##', '.########.', '..........')

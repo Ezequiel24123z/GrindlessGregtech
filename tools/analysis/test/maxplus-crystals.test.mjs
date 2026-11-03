@@ -1,4 +1,4 @@
-// XP-H2 (MAX+ multi-plasma blender and horizon crystal furnace, lines T8, T9 and T10): the stand-in run of maxplus/crystals.js, row shape, sites,
+// XP-H2 (MAX+ horizon crystal furnace, which absorbed the multi-plasma blender, lines T8, T9 and T10): the stand-in run of maxplus/crystals.js, row shape, sites,
 // circuits, the 2.56e8 mB slurry bill (one MAX fluid hatch per core run) and the English names.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -22,13 +22,12 @@ test('the stand-in runs the scripts without errors and skips nothing', () => {
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(MC.skipped), []);
   assert.equal(MC.rows.length, 9);
-  assert.equal(MC.blender.length, 1);
-  assert.equal(MC.furnace.length, 2);
-  assert.deepEqual(plain(MC.controllers).map((c) => c.name), ['multi_plasma_blender', 'horizon_crystal_furnace']);
+  assert.equal(MC.furnace.length, 3);
+  assert.deepEqual(plain(MC.controllers).map((c) => c.name), ['horizon_crystal_furnace']);
 });
 
-test('blender row: eight fluids of 1,000 mB make 1,000 mB of slurry at V[MAX] x 64 A for 100 t, with no site', () => {
-  const [b] = plain(MC.blender);
+test('furnace c0: eight fluids of 1,000 mB make 1,000 mB of slurry at V[MAX] x 64 A for 100 t, with no site', () => {
+  const [b] = plain(MC.furnace);
   assert.equal(b.fluids.length, 8);
   assert.equal(new Set(b.fluids.map((f) => f[0])).size, 8);
   for (const f of b.fluids) assert.equal(f[1], 1000);
@@ -37,10 +36,11 @@ test('blender row: eight fluids of 1,000 mB make 1,000 mB of slurry at V[MAX] x 
   assert.equal(b.duration, 100);
   assert.equal(b.dimension, undefined);
   assert.equal(b.items, undefined);
+  assert.equal(b.circuit, 3);
 });
 
 test('furnace rows: c1 core and c2 controller boule at V[MAX] x 256 A for 2,400 t; the core bill is 4,000,000 mB x 64 = 2.56e8 mB, each slurry input fits one MAX fluid hatch', () => {
-  const [core, ctrl] = plain(MC.furnace);
+  const [, core, ctrl] = plain(MC.furnace);
   assert.deepEqual([core.circuit, ctrl.circuit], [1, 2]);
   assert.deepEqual([core.outs[0][0], ctrl.outs[0][0]], ['grindless:core_crystal_boule', 'grindless:controller_crystal_boule']);
   for (const r of [core, ctrl]) {
@@ -63,8 +63,8 @@ test('older rows keep a site only where they use the place: the elevator is boun
   }
 });
 
-test('lines: T8, T9 and T10 chain to the blender and the furnace; circuits are unique per type unless the item inputs differ', () => {
-  const rows = [...plain(MC.rows), ...plain(MC.blender), ...plain(MC.furnace)];
+test('lines: T8, T9 and T10 chain to the furnace; circuits are unique per type unless the item inputs differ', () => {
+  const rows = [...plain(MC.rows), ...plain(MC.furnace)];
   const outs = new Set(rows.flatMap((r) => [...(r.outs || []), ...(r.fluidOuts || [])].map((o) => o[0])));
   for (const id of ['grindless:sapphire_seed_plate', 'grindless:condensate_doped_dust', 'grindless:core_crystal_boule', 'grindless:inscribed_core_crystal',
     'grindless:horizon_core_crystal', 'gtceu:molten_kerr_strange', 'grindless:controller_seed', 'grindless:controller_crystal_boule',
@@ -81,9 +81,9 @@ test('lines: T8, T9 and T10 chain to the blender and the furnace; circuits are u
 });
 
 test('lang: machines, types, tooltips and every keyed row have an en_us entry (English only, EN-1)', () => {
-  for (const r of [...plain(MC.blender), ...plain(MC.furnace), ...plain(MC.rows)].filter((x) => x.key))
+  for (const r of [...plain(MC.furnace), ...plain(MC.rows)].filter((x) => x.key))
     assert.ok(lang.includes(`${r.key}.${r.name}'`), `no lang key for ${r.name}`);
-  for (const m of ['multi_plasma_blender', 'horizon_crystal_furnace']) {
+  for (const m of ['horizon_crystal_furnace']) {
     assert.ok(lang.includes(`'block.gtceu.${m}'`), m);
     assert.ok(lang.includes(`'gtceu.${m}'`), m);
     assert.ok(lang.includes(`'grindless.machine.${m}.tooltip.0'`), m);

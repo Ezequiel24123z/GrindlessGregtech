@@ -38,27 +38,60 @@
     name: 'condensate_assembler', machine: 'gtceu:condensate_assembler', type: 'condensate_assembler', dataKey: 'grindless_condensate_assembler',
     lang: 'Condensate Assembler', maxIO: { itemsIn: 9, itemsOut: 2, fluidsIn: 2, fluidsOut: 1 }, casing: CASING, texture: 'grindless:block/max/mirror_shell_segment',
     overlay: 'grindless:block/multiblock/condensate_assembler',
-    width: 19, height: 13, depth: 19,
-    pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
+    width: 25, height: 15, depth: 25,
+    pal: {
+      F: CASING, B: 'grindless:bound_lattice_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil',
+      R: 'grindless:primordial_cryostat_casing', K: 'grindless:kerr_coil_casing', V: 'grindless:condensate_vessel_casing'
+    },
     parts: parts
   }
 
-  // x left to right, y bottom to top, z back to front. Row 0 the floor (the part cells at the front), the last row the roof; the four walls carry
-  // a glass band. A vertical bar of atomic casing stands on the axis, a coil every fourth cell.
-  function assemblerCell(x, y, z) {
-    if (y === 0) return z === 0 && x >= 5 && x <= 13 ? 'X' : 'B'
-    if (y === 12) return 'B'
-    if (x === 0 || x === 18 || z === 0 || z === 18) {
-      var along = x === 0 || x === 18 ? z : x
-      return y >= 4 && y <= 8 && along >= 3 && along <= 15 && along % 4 !== 1 ? 'L' : 'F'
+  // x left to right, y bottom to top, z back to front (docs/eras/lines-opv-maxplus.md 6.3): a condensate bath hall. Cryostat and lattice make
+  // the hall; in its middle a sunken condensate vessel (the bath) is ringed by Kerr coils, with a coil spine over it and cryostat pillars
+  // round the walls. The front booth holds the controller and the hatches.
+  function assemblerShape() {
+    var m = MA.machine
+    var s = G.uevShapes.scene(m.width, m.height, m.depth)
+    s.room(0, 0, 0, 24, 14, 24, 'R')
+    for (var z = 0; z < 25; z++) for (var x = 0; x < 25; x++) {
+      if ((x + z) % 3 === 0) s.set(x, 0, z, 'B')
+      if (x % 4 === 0 && z % 4 === 0) s.set(x, 14, z, 'B')
     }
-    if (x === 9 && z === 9 && y >= 2 && y <= 10) return y % 4 === 2 ? 'C' : 'A'
-    return '#'
+    for (var y = 1; y <= 13; y++) {
+      for (var e = 0; e <= 24; e++) {
+        var band = y >= 4 && y <= 9 && e >= 3 && e <= 21
+        var cell = band ? (e % 4 === 0 ? 'B' : (y === 6 ? 'K' : 'L')) : (y % 4 === 0 ? 'B' : 'R')
+        s.set(0, y, e, cell).set(24, y, e, cell).set(e, y, 0, cell)
+        if (e > 0) s.set(e, y, 24, cell)
+      }
+    }
+    // the bath: a vessel pit sunk in the floor of the hall, a lattice rim, and Kerr coil rings over it
+    s.room(6, 1, 6, 18, 7, 18, 'V', 't')
+    s.edges(5, 1, 5, 19, 8, 19, 'B')
+    s.room(7, 8, 7, 17, 8, 17, 'K', 't')
+    s.box(8, 8, 8, 16, 8, 16, '#')
+    s.box(9, 9, 9, 15, 9, 15, '#')
+    for (var k = 2; k <= 11; k++) s.set(12, k, 12, k % 4 === 3 ? 'C' : 'A')
+    // cryostat pillars and a lattice gallery
+    for (var p = 0; p < 4; p++) {
+      var px = p % 2 === 0 ? 2 : 22
+      var pz = p < 2 ? 2 : 22
+      s.box(px - 1, 1, pz - 1, px + 1, 12, pz + 1, 'R')
+      s.box(px, 1, pz, px, 12, pz, '#')
+    }
+    for (var g = 1; g <= 23; g++) {
+      s.set(g, 10, 1, 'B').set(g, 10, 23, 'B').set(1, 10, g, 'B').set(23, 10, g, 'B')
+    }
+    for (var rz = 1; rz <= 23; rz++) for (var rx = 1; rx <= 23; rx++) {
+      if (rx % 4 === 0 || rz % 4 === 0) s.set(rx, 13, rz, 'B')
+    }
+    s.booth('F', 3)
+    return s.fn()
   }
 
   // built in the machine registry callback: uiv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: assemblerCell })
+    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: assemblerShape() })
   }
 
   function infoOf(dataKey) {

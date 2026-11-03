@@ -5,7 +5,7 @@
 //
 //   grindless:horizon_capacitor    a cell block (a pickaxe block that drops itself). It is not a tiers[] cell of tables/wireless_energy.json:
 //                                  no wireless energy tower takes it and no tower cell fits the bank
-//   gtceu:horizon_capacitor_bank   a store, not a machine with hatches: a 25 x 5 x 25 ring of 40 slots, each a capacitor or the bank's casing
+//   gtceu:horizon_capacitor_bank   a store, not a machine with hatches: a 41 x 9 x 41 torus with 40 slots, each a capacitor or the bank's casing
 //                                  (an empty slot). Built like the wireless energy tower (recipe type dummy); the network reads it in
 //                                  server_scripts/grindless/lv/wireless_energy.js and counts it only at Sgr A* orbit
 //
@@ -22,32 +22,38 @@
     return W
   }
 
-  // slices back -> front, rows bottom -> top. A square ring 25 x 25 on its outline, five rows high: a robust-casing floor, a casing row, the
-  // slot row, a casing row with a glass band and the roof, with atomic-casing pillars at the corners. The slot row has a slot at every second
-  // cell from the 3rd to the 21st of each side (10 a side, 40 in all) and a superconducting coil in every other cell: the storage ring's
-  // winding; the controller sits in the middle of the front side, in the second row (uiv/shapes.js convention).
-  const SIZE = 25
-  const MID = 12
+  // slices back -> front, rows bottom -> top. A square storage torus 41 x 41 on its outline, nine rows high and three cells thick (docs/eras/
+  // lines-opv-maxplus.md 6.3): d is a cell's distance from the outer face (0 outer wall, 1 the centreline, 2 inner wall). The layers alternate
+  // lattice, Kerr and cryostat casing round the slot row (row 4); on the centreline of that row a capacitor slot sits every fourth cell (10 a
+  // side, 40 in all, each a capacitor or the bank's casing) with a superconducting coil between them, the storage ring's winding. Atomic-casing
+  // pillars stand at the outer corners; the controller sits in the middle of the front side, in the second row (uiv/shapes.js convention).
+  const SIZE = 41
+  const HIGH = 9
+  const MID = 20
+  const LAYERS = [
+    ['B', 'B', 'B'], ['R', 'M', 'B'], ['B', 'M', 'R'], ['M', 'B', 'M'], ['R', 'R', 'R'],
+    ['M', 'B', 'M'], ['B', 'M', 'R'], ['R', 'M', 'B'], ['B', 'R', 'B']
+  ]
   function ringChar(x, y, z) {
-    var edge = x === 0 || x === SIZE - 1 || z === 0 || z === SIZE - 1
-    if (!edge) return ' '
+    var d = Math.min(x, z, SIZE - 1 - x, SIZE - 1 - z)
+    if (d > 2) return ' '
     if (y === 1 && z === SIZE - 1 && x === MID) return 'S'
-    var corner = (x === 0 || x === SIZE - 1) && (z === 0 || z === SIZE - 1)
-    if (corner) return 'A'
-    var along = x === 0 || x === SIZE - 1 ? z : x
-    if (y === 0) return 'B'
-    if (y === 2) return along >= 2 && along <= 20 && along % 2 === 0 ? 'C' : 'K'
-    if (y === 3) return along % 4 === 1 ? 'L' : 'F'
-    return 'F'
+    if (d === 0 && y >= 1 && y <= HIGH - 2 && (x === 0 || x === SIZE - 1) && (z === 0 || z === SIZE - 1)) return 'A'
+    if (y === 4 && d === 1) {
+      var along = x === 1 || x === SIZE - 2 ? z : x
+      if (along % 4 === 2 && along >= 2 && along <= SIZE - 3) return 'C'
+      if (along % 4 === 0 && along >= 4 && along <= SIZE - 5) return 'K'
+      return 'M'
+    }
+    return LAYERS[y][d]
   }
-
   function bankSpec(W) {
     var b = W.table.maxplusBank
     var cell = W.table.maxplusCells[0].cell
     var slices = []
     for (var z = 0; z < SIZE; z++) {
       var rows = []
-      for (var y = 0; y < 5; y++) {
+      for (var y = 0; y < HIGH; y++) {
         var row = ''
         for (var x = 0; x < SIZE; x++) row += ringChar(x, y, z)
         rows.push(row)
@@ -59,8 +65,8 @@
       slices: slices,
       symbols: {
         S: Pat.controller(), F: casing, C: Pat.oneOf(Pat.block(cell), casing),
-        B: Pat.block('gtceu:robust_machine_casing'), A: Pat.block('gtceu:atomic_casing'), K: Pat.block('gtceu:superconducting_coil'),
-        L: Pat.block('gtceu:cleanroom_glass')
+        A: Pat.block('gtceu:atomic_casing'), K: Pat.block('gtceu:superconducting_coil'),
+        B: Pat.block('grindless:bound_lattice_casing'), M: Pat.block('grindless:kerr_coil_casing'), R: Pat.block('grindless:primordial_cryostat_casing')
       }
     }
   }

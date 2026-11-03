@@ -1,9 +1,9 @@
 // priority: -20200
-// MAX+ machines 12 and 13, the multi-plasma blender and the horizon crystal furnace, and lines T8, T9 and T10 (docs/eras/maxplus.md, machines 12
-// and 13 and 'Lines'; package XP-H2).
+// MAX+ machine 13, the horizon crystal furnace (which absorbed the multi-plasma blender, Decision S-3), and lines T8, T9 and T10 (docs/eras/maxplus.md,
+// machine 13 and 'Lines'; package XP-H2).
 //
 //   T8  horizon crystal slurry   stellar forge (an existing row of the star-lifting line) -> stellar_plasma; stellar elevator c5 (Cygnus X-1) ->
-//                                lifted_stellar_plasma; plasma mass filter c8 (Cygnus X-1) -> filtered_stellar_plasma; blender c1 (eight plasmas,
+//                                lifted_stellar_plasma; plasma mass filter c8 (Cygnus X-1) -> filtered_stellar_plasma; furnace c0 (eight plasmas,
 //                                1,000 mB each, at Sgr A*) -> 1,000 mB horizon_crystal_slurry
 //   T9  horizon core crystal     crystal growth c32 -> sapphire_seed_plate; refinery c6 -> condensate_doped_dust; furnace c1 (+ slurry, P3) ->
 //                                core_crystal_boule; femto writer c22 (on P14's lattice) -> inscribed_core_crystal; mK cryostat c12 ->
@@ -15,8 +15,8 @@
 // capacity lint's rule), many runs in parallel, 2,400 t each; heat comes
 // from kerr condensate, not coils. Older-machine rows live here. Circuits are the first free ones of each older machine type (crystal growth is full
 // at 32, which rows share by item inputs). Every older machine keeps its site: the stellar elevator and the plasma mass filter run only at Cygnus X-1
-// (the site rule of tiers/uxv.json), the others are home rows; the refinery, the blender and the furnace sit at Sgr A* orbit.
-// Published for the tests: global.grindless.maxPlusCrystals { rows, blender, furnace, controllers, skipped }.
+// (the site rule of tiers/uxv.json), the others are home rows; the refinery and the furnace sit at Sgr A* orbit.
+// Published for the tests: global.grindless.maxPlusCrystals { rows, furnace, controllers, skipped }.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   var LOG = '[grindless/maxplus_crystals] '
@@ -68,19 +68,15 @@
   ]
   MC.rows = ROWS
 
-  // the blender: one plasma from each place the pack has worked, plus hot flow and kerr condensate (V[MAX] x 64 A, 100 t)
-  var BLEND = [
-    { type: 'multi_plasma_blender', name: 'horizon_crystal_slurry', eut: V_MAX * 64, duration: 100, key: 'grindless_multi_plasma_blender',
+  // the furnace (V[MAX] x 256 A, 2,400 t): c0 blends one plasma from each place the pack has worked, plus hot flow and kerr condensate, into the
+  // slurry (V[MAX] x 64 A, 100 t); then 4,000,000 mB of slurry per core crystal, 1,000,000 mB per controller crystal (each fits one MAX
+  // fluid hatch, 4,096,000 mB); P3's plate lines the crucible
+  var FURNACE = [
+    { type: 'horizon_crystal_furnace', name: 'horizon_crystal_slurry', circuit: 3, eut: V_MAX * 64, duration: 100, key: 'grindless_horizon_crystal_furnace',
       fluids: [['gtceu:stellar_plasma', 1000], ['gtceu:lifted_stellar_plasma', 1000], ['gtceu:filtered_stellar_plasma', 1000],
         ['gtceu:confined_vms_plasma', 1000], ['gtceu:p_process_plasma', 1000], ['gtceu:jet_proton_beam', 1000],
         ['gtceu:hot_flow_plasma', 1000], [KERR, 1000]],
-      fluidOuts: [[SLURRY, 1000]] }
-  ]
-  MC.blender = BLEND
-
-  // the furnace (V[MAX] x 256 A, 2,400 t): 4,000,000 mB of slurry per core crystal, 1,000,000 mB per controller crystal (each fits one MAX
-  // fluid hatch, 4,096,000 mB); P3's plate lines the crucible
-  var FURNACE = [
+      fluidOuts: [[SLURRY, 1000]] },
     { type: 'horizon_crystal_furnace', name: 'core_crystal_boule', circuit: 1, eut: V_MAX * 256, duration: 2400, key: 'grindless_horizon_crystal_furnace',
       items: [['grindless:sapphire_seed_plate', 1], ['grindless:condensate_doped_dust', 64], ['grindless:kerr_strange_plate', 4]],
       fluids: [[SLURRY, 4000000], [KERR, 100000]],
@@ -93,11 +89,7 @@
   MC.furnace = FURNACE
 
   var COMPS = ['2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor']
-  // the blender meters plasma streams: its conveyor modules give way to fluid regulators (T7)
-  var BLENDER_COMPS = ['2x grindless:maxplus_fluid_regulator', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor']
   var CONTROLLERS = [
-    { name: 'multi_plasma_blender', machine: 'gtceu:multi_plasma_blender', research: 'grindless:condensate_doped_dust', casing: 'grindless:horizon_machine_casing',
-      comps: BLENDER_COMPS, plates: ['4x grindless:horizon_compressed_plate', '4x grindless:kerr_strange_ingot'] },
     { name: 'horizon_crystal_furnace', machine: 'gtceu:horizon_crystal_furnace', research: 'grindless:sapphire_seed_plate', casing: 'grindless:horizon_machine_casing',
       comps: COMPS, plates: ['4x gtceu:sapphire_plate', '4x grindless:kerr_strange_plate'] }
   ]
@@ -149,13 +141,12 @@
     try {
       MC.skipped = []
       ROWS.forEach(function (r) { addRow(event, r) })
-      BLEND.forEach(function (r) { addRow(event, r) })
       FURNACE.forEach(function (r) { addRow(event, r) })
       CONTROLLERS.forEach(function (c) {
         var items = ['1x ' + HULL, '2x ' + c.casing, '8x #gtceu:circuits/maxplus', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
         addAssemblyLine(event, c, items, [[KERR, 2000]])
       })
-      console.info(LOG + (ROWS.length + BLEND.length + FURNACE.length + CONTROLLERS.length) + ' rows; skipped ' + MC.skipped.length)
+      console.info(LOG + (ROWS.length + FURNACE.length + CONTROLLERS.length) + ' rows; skipped ' + MC.skipped.length)
     } catch (e) {
       console.error(LOG + 'failed: ' + e)
     }
