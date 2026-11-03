@@ -49,9 +49,9 @@
  },
  "gtceu:annihilation_engine": {
   "v": [],
-  "bt": 4,
-  "ds": 0.547,
-  "c": 806
+  "bt": 7,
+  "ds": 0.3,
+  "c": 2438
  },
  "gtceu:annihilation_laser_works": {
   "v": [],
@@ -62,8 +62,8 @@
  "gtceu:antihydrogen_foundry": {
   "v": [],
   "bt": 5,
-  "ds": 0.522,
-  "c": 798
+  "ds": 0.391,
+  "c": 2191
  },
  "gtceu:antimatter_trap": {
   "v": [],
@@ -73,9 +73,9 @@
  },
  "gtceu:antiproton_decelerator": {
   "v": [],
-  "bt": 4,
-  "ds": 0.567,
-  "c": 564
+  "bt": 6,
+  "ds": 0.534,
+  "c": 2887
  },
  "gtceu:ark_biosphere": {
   "v": [],
@@ -307,8 +307,8 @@
  },
  "gtceu:cvi_furnace": {
   "v": [],
-  "bt": 7,
-  "ds": 0.462,
+  "bt": 8,
+  "ds": 0.326,
   "c": 776
  },
  "gtceu:debris_harvester": {
@@ -367,8 +367,8 @@
  },
  "gtceu:electron_beam_furnace": {
   "v": [],
-  "bt": 7,
-  "ds": 0.479,
+  "bt": 8,
+  "ds": 0.433,
   "c": 1005
  },
  "gtceu:engine_test_stand": {
@@ -487,9 +487,9 @@
  },
  "gtceu:gamma_optics_works": {
   "v": [],
-  "bt": 4,
-  "ds": 0.541,
-  "c": 435
+  "bt": 6,
+  "ds": 0.548,
+  "c": 1384
  },
  "gtceu:gas_giant_siphon": {
   "v": [],
@@ -529,9 +529,9 @@
  },
  "gtceu:hawking_collector": {
   "v": [],
-  "bt": 5,
-  "ds": 0.513,
-  "c": 598
+  "bt": 6,
+  "ds": 0.393,
+  "c": 2164
  },
  "gtceu:heat_source_works": {
   "v": [],
@@ -697,15 +697,15 @@
  },
  "gtceu:jet_beam_line": {
   "v": [],
-  "bt": 4,
-  "ds": 0.606,
-  "c": 430
+  "bt": 5,
+  "ds": 0.646,
+  "c": 1542
  },
  "gtceu:kugelblitz_forge": {
   "v": [],
-  "bt": 5,
-  "ds": 0.44,
-  "c": 1068
+  "bt": 7,
+  "ds": 0.346,
+  "c": 3146
  },
  "gtceu:kuiper_interceptor_bay": {
   "v": [],
@@ -1393,8 +1393,8 @@
  },
  "gtceu:sic_fibre_plant": {
   "v": [],
-  "bt": 7,
-  "ds": 0.518,
+  "bt": 8,
+  "ds": 0.332,
   "c": 772
  },
  "gtceu:single_crystal_foundry": {
@@ -1438,12 +1438,6 @@
   "bt": 6,
   "ds": 0.592,
   "c": 143
- },
- "gtceu:spallation_target_station": {
-  "v": [],
-  "bt": 4,
-  "ds": 0.592,
-  "c": 567
  },
  "gtceu:spark_plasma_sinterer": {
   "v": [],
@@ -1561,15 +1555,15 @@
  },
  "gtceu:strangelet_distiller": {
   "v": [],
-  "bt": 4,
-  "ds": 0.449,
-  "c": 400
+  "bt": 5,
+  "ds": 0.489,
+  "c": 1270
  },
  "gtceu:strangelet_vault": {
   "v": [],
-  "bt": 6,
-  "ds": 0.274,
-  "c": 624
+  "bt": 7,
+  "ds": 0.324,
+  "c": 1528
  },
  "gtceu:submerged_arc_furnace": {
   "v": [],
@@ -1633,9 +1627,9 @@
  },
  "gtceu:tetron_fab": {
   "v": [],
-  "bt": 5,
-  "ds": 0.581,
-  "c": 423
+  "bt": 7,
+  "ds": 0.39,
+  "c": 1415
  },
  "gtceu:tfln_fab": {
   "v": [],
