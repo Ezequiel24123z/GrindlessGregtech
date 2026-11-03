@@ -197,15 +197,9 @@
         parts: ['2x gtceu:uiv_field_generator', '2x gtceu:uiv_emitter', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:cage_part', '2x grindless:frc_cartridge', '2x grindless:neutronium_pellet'] },
       { name: 'pasta_phase_sorter', research: 'grindless:cage_part', fluid: 'gtceu:filtered_disk_plasma',
-        parts: ['2x gtceu:uiv_conveyor_module', '2x gtceu:uiv_electric_pump', 'gtceu:uxv_sensor'],
-        domain: ['2x grindless:frc_cartridge', '2x grindless:neutronium_pellet', '2x grindless:ga2o3_power_die'] },
-      { name: 'pasta_draw_bench', research: 'gtceu:pasta_phase_sorter', fluid: 'gtceu:stellar_helium_cut',
-        parts: ['2x gtceu:uiv_electric_motor', '2x gtceu:uiv_robot_arm', 'gtceu:uxv_sensor'],
-        domain: ['2x grindless:cage_part', '2x grindless:frc_cartridge', '2x grindless:uxv_strain_wave_gear'] },
-      { name: 'pasta_laminator', research: 'grindless:wf_rhea_billet', fluid: 'gtceu:filtered_disk_plasma',
-        parts: ['2x gtceu:uiv_electric_piston', '2x gtceu:uiv_robot_arm', 'gtceu:uxv_sensor'],
-        domain: ['2x grindless:cage_part', '2x grindless:frc_cartridge', '2x grindless:w184_cvi_preform'] },
-      { name: 'polar_cap_tap', research: 'gtceu:pasta_laminator', fluid: 'gtceu:filtered_disk_plasma',
+        parts: ['2x gtceu:uiv_conveyor_module', '2x gtceu:uiv_electric_pump', '2x gtceu:uiv_electric_motor', '2x gtceu:uiv_robot_arm', '2x gtceu:uiv_electric_piston', 'gtceu:uxv_sensor'],
+        domain: ['2x grindless:frc_cartridge', '2x grindless:neutronium_pellet', '2x grindless:ga2o3_power_die', '2x grindless:uxv_strain_wave_gear', '2x grindless:w184_cvi_preform'] },
+      { name: 'polar_cap_tap', research: 'gtceu:pasta_phase_sorter', fluid: 'gtceu:filtered_disk_plasma',
         parts: ['2x gtceu:uiv_electric_motor', '2x gtceu:uiv_electric_pump', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:frc_cartridge', '2x grindless:ga2o3_power_die', '2x grindless:mh_winding'] }
     ]

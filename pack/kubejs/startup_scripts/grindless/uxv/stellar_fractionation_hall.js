@@ -13,11 +13,11 @@
 // - Outputs: a plain workable multiblock, not GTM's layered tower class, so every distinct output fluid needs its own output hatch: up to 12
 //   fluid output hatches on the columns' outer faces (a distillation tower recipe has at most 12 outputs).
 //
-// Structure (13 wide x 13 high x 25 deep, lib/patterns.js: a slice has at most 16 rows, so the 13 x 25 x 13 hall of the design lies on its side,
-// as the Vela machines do: the long axis is the depth). A 13 x 13 x 3 reboiler plinth at the front (frame rim, glazed vent grille, a coil ring
-// round the reboiler) carries two 5 x 5 fractionating columns that run 22 layers to the back: casing walls with a laminated glass sight band every
-// fourth layer, a titanium pipe core, naquadah frame corner posts, a bridge between the columns every six layers (frame rails round a pipe) and a
-// computer heat vent condenser crown. The controller sits in the middle of the front face, one row up; the parts go in the two rows beside it.
+// Structure (21 wide x 21 high x 61 deep, D4-SHAPE-UXV-B: the hall lies on its side, the long axis is the depth), bodied in gum metal with pulsed-field
+// bands. A 21 x 21 x 5 reboiler plinth at the front (frame rim, a coil ring round the reboiler) carries two 5 x 5 fractionating columns that run
+// 56 layers to the back: gum walls with a laminated glass sight band every fourth layer and a pulsed-field band every sixth, a titanium pipe core,
+// naquadah frame corner posts, a bridge between the columns every six layers and a heat vent condenser crown. A crane gantry spans the hall: two rails
+// along the top, a cross beam and gum pylons every 14 layers. The controller sits in the middle of the front face, one row up; the parts go in the row beside it.
 //
 // Textures: overlay dir grindless:block/multiblock/stellar_fractionation_hall (tools/assets/Build-UXVStellarFractionationHallTextures.ps1).
 // Names / tooltips / info page: client_scripts/grindless/uxv_stellar_fractionation_hall_lang.js. Controller recipe: server_scripts/grindless/uxv/stellar_fractionation_hall.js.
@@ -26,8 +26,9 @@
   const Pat = G.patterns
 
   const ID = 'stellar_fractionation_hall'
-  const CASING = 'gtceu:uxv_machine_casing'
-  const CASING_TEXTURE = 'gtceu:block/casings/voltage/uxv/side'
+  const CASING = 'grindless:gum_metal_casing'
+  const CASING_TEXTURE = 'grindless:block/uxv/gum_metal_casing'
+  const PULSED = 'grindless:pulsed_field_casing'
   const GLASS = 'gtceu:laminated_glass'
   const PIPE = 'gtceu:titanium_pipe_casing'
   const COIL = 'gtceu:superconducting_coil'
@@ -36,16 +37,18 @@
   const TYPES = ['distillation_tower', 'distillery']
   const CAP = 4096
   const MAX_OUTPUTS = 12
-  const W = 13
-  const H = 13
-  const D = 25
-  const PLINTH = 3
+  const W = 21
+  const H = 21
+  const D = 61
+  const PLINTH = 5
   const LAYERS = D - PLINTH
   const BRIDGE_EVERY = 6
   const GLASS_EVERY = 4
-  const COLUMN_X = [3, 9]
-  const COLUMN_Y = 6
-  const CTRL = { x: 6, y: 1 }
+  const PULSED_EVERY = 6
+  const PYLON_EVERY = 14
+  const COLUMN_X = [5, 15]
+  const COLUMN_Y = 8
+  const CTRL = { x: 10, y: 1 }
   // 1 maintenance + 2 energy + 2 input buses + 2 output buses + 4 input hatches + 1 parallel hatch
   const PART_CELLS = 12
 
@@ -60,7 +63,7 @@
     return -1
   }
 
-  // x left to right, y bottom to top, z back (0) to front (24); one char per cell, ' ' outside the silhouette
+  // x left to right, y bottom to top, z back (0) to front (60); one char per cell, ' ' outside the silhouette
   function cell(x, y, z) {
     var edge = x === 0 || x === W - 1 || y === 0 || y === H - 1
     var corner = (x === 0 || x === W - 1) && (y === 0 || y === H - 1)
@@ -70,14 +73,13 @@
       if (p === 0) {
         if (x === CTRL.x && y === CTRL.y) return 'S'
         if (edge) return 'Q'
-        if (y <= 2 && x >= 2 && x <= W - 3) return 'X'
-        if (y >= 5 && y <= 9 && x >= 5 && x <= 7) return 'V'
-        if (y >= 5 && y <= 9 && (x === 2 || x === 3 || x === 9 || x === 10)) return 'L'
+        if (y <= 2 && x >= 3 && x <= W - 4) return 'X'
+        if (col >= 0 && cheb(x - COLUMN_X[col], y - COLUMN_Y) <= 1) return 'L'
         return 'F'
       }
       if (edge) return corner ? 'Q' : 'F'
       if (p === 1) {
-        if (cheb(x - 6, y - 6) === 5) return 'K'
+        if (cheb(x - 10, y - 10) === 6) return 'K'
         return col >= 0 && x === COLUMN_X[col] && y === COLUMN_Y ? 'P' : '#'
       }
       if (col >= 0) {
@@ -90,8 +92,13 @@
     }
     var k = LAYERS - 1 - z
     if (col < 0) {
-      // the bridge between the columns: frame rails above and below a pipe
-      if (x === 6 && abs(y - COLUMN_Y) <= 2 && k % BRIDGE_EVERY === BRIDGE_EVERY - 1) {
+      // the crane gantry: two rails along the hall at the top, a cross beam and a pylon every PYLON_EVERY layers, and the bridges between the columns
+      var pylon = k % PYLON_EVERY === 0
+      if (y === H - 1 && (x === 1 || x === W - 2)) return 'Q'
+      if (y === H - 1 && pylon && x >= 1 && x <= W - 2) return x % 4 === 1 ? 'Q' : 'M'
+      if (pylon && (x === 1 || x === W - 2) && y <= H - 1) return 'F'
+      if (pylon && y === 0 && x >= 1 && x <= W - 2) return 'F'
+      if (x === 10 && abs(y - COLUMN_Y) <= 2 && k % BRIDGE_EVERY === BRIDGE_EVERY - 1) {
         if (abs(y - COLUMN_Y) === 2) return 'Q'
         return y === COLUMN_Y ? 'P' : '#'
       }
@@ -100,13 +107,14 @@
     var cx = x - COLUMN_X[col]
     var cy = y - COLUMN_Y
     var ring = cheb(cx, cy)
-    if (k === LAYERS - 1) return cx === 0 && cy === 0 ? 'P' : 'V'
+    if (k === LAYERS - 1) return cx === 0 && cy === 0 ? 'P' : (abs(cx) + abs(cy) === 1 ? 'V' : 'M')
     if (ring < 2) return ring === 0 ? 'P' : '#'
     if (abs(cx) === 2 && abs(cy) === 2) return 'Q'
     if (k % GLASS_EVERY === GLASS_EVERY - 2) return 'L'
     // the hatch cells: the outer face's middle row on the layers between the glass bands
     var outer = col === 0 ? cx === -2 : cx === 2
     if (outer && cy === 0 && k % GLASS_EVERY === 0) return 'O'
+    if (k % PULSED_EVERY === 0) return 'M'
     return 'F'
   }
 
@@ -138,6 +146,7 @@
       symbols: {
         S: Pat.controller(),
         F: Pat.block(CASING),
+        M: Pat.block(PULSED),
         L: Pat.block(GLASS),
         P: Pat.block(PIPE),
         K: Pat.block(COIL),

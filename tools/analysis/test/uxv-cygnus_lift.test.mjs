@@ -152,7 +152,7 @@ test('structures: not boring, at least two functional kinds, controller in the f
     assert.ok(s.slices.every((sl) => sl.length <= 60), `${m}: at most 60 rows per slice`);
     assert.ok(s.slices[s.slices.length - 1].some((row) => row.includes('S')), `${m}: the controller is in the front slice`);
   }
-  assert.deepEqual(plain(run.global.grindless.structures['gtceu:stellar_elevator'].slices.length), 25);
+  assert.deepEqual(plain(run.global.grindless.structures['gtceu:stellar_elevator'].slices.length), 23);
   assert.deepEqual(plain(run.global.grindless.structures['gtceu:stellar_condensation_tower'].slices.length), 13);
 });
 

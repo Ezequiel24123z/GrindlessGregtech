@@ -76,9 +76,9 @@ test('real tiers (uxv): the Validator\'s leak checks are unreachable checks gate
   un('element-121-122-only-chain', ['operate:gtceu:heavy_ion_cyclotron*', 'operate:gtceu:superheavy_chemistry_lab*'], []);
   un('island-only-mnt', ['operate:gtceu:mnt_collider*'], ['grindless:island_nuclide', 'grindless:island_chart']);
   un('mtj-stacks-only-sputter', ['operate:gtceu:mtj_sputter_cluster*'], ['grindless:mtj_stack_wafer', 'grindless:mram_stack_wafer', 'grindless:saf_track_wafer']);
-  un('oxide-films-only-pld', ['operate:gtceu:oxide_pld_chamber*'], []);
-  un('vdw-stacks-only-cell', ['operate:gtceu:vdw_stacking_cell*'], []);
-  un('tracks-only-racetrack', ['operate:gtceu:racetrack_fab*'], ['grindless:racetrack_chip']);
+  un('oxide-films-only-pld', ['operate:gtceu:mtj_sputter_cluster*'], []);
+  un('vdw-stacks-only-cell', ['operate:gtceu:vdw_stacker*'], []);
+  un('tracks-only-racetrack', ['operate:gtceu:mtj_sputter_cluster*'], ['grindless:racetrack_chip']);
   un('yig-only-lpe', ['operate:gtceu:yig_lpe_furnace*'], ['grindless:yig_film_wafer']);
   un('gyro-only-shequid', ['operate:gtceu:shequid_works*'], ['grindless:shequid_gyro']);
   un('spintronic-mainframe-only-hall', [`operate:${HALL}*`], [MAINFRAME]);
@@ -90,8 +90,8 @@ test('real tiers (uxv): the Validator\'s leak checks are unreachable checks gate
   un('disk-plasma-only-skimmer', ['operate:gtceu:accretion_disk_skimmer*'], ['fluid:gtceu:disk_plasma']);
   un('frc-only-former', ['operate:gtceu:frc_former*'], ['grindless:frc_cartridge', 'fluid:gtceu:flux_loaded_plasma']);
   un('pasta-only-vela', ['operate:gtceu:pasta_extractor*'], ['grindless:raw_pasta', 'grindless:lasagna_plate', 'grindless:lasagna_electrode', 'grindless:pasta_core_sample', 'gtceu:pasta_strand_single_wire']);
-  un('strand-wire-only-draw-bench', ['operate:gtceu:pasta_draw_bench*'], ['gtceu:pasta_strand_single_wire']);
-  un('lasagna-only-laminator', ['operate:gtceu:pasta_laminator*'], ['grindless:lasagna_plate']);
+  un('strand-wire-only-draw-bench', ['operate:gtceu:pasta_phase_sorter*'], ['gtceu:pasta_strand_single_wire']);
+  un('lasagna-only-laminator', ['operate:gtceu:pasta_phase_sorter*'], ['grindless:lasagna_plate']);
   for (const [id, dim] of [['site-vela', 'grindless:vela_pulsar_orbit'], ['site-cas-a', 'grindless:cas_a_remnant']]) {
     assert.equal(t[id].kind, 'site', id);
     assert.deepEqual(t[id].dimensions, [dim], id);

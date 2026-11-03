@@ -23,8 +23,6 @@ export const CHAPTER = {
 
 export const LINKS = [
   { key: 'M_L_MTJ', ref: 'START', x: 0, y: 0 },
-  { key: 'M_L_PLD', ref: 'START', x: 0, y: 1.5 },
-  { key: 'M_L_VDW', ref: 'START', x: 0, y: 3 },
   { key: 'M_L_YIG', ref: 'START', x: 0, y: 4.5 },
   { key: 'M_L_SHQ', ref: 'START', x: 0, y: 6 },
   { key: 'M_L_MNT', ref: 'START', x: 0, y: 7.5 },
@@ -57,30 +55,12 @@ const SITE = it('grindless:neutron_star_site_casing');
 
 export const QUESTS = [
   // ------------------------------------------------------------------ home: spintronics
-  gear('MTJ', 'mtj_sputter_cluster', 'MTJ Sputter Cluster', ['M_L_MTJ'], 2, 0, {
-    for: 'The &6MTJ Sputter Cluster&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit.',
+  gear('MTJ', 'mtj_sputter_cluster', 'Spintronic Cluster Tool', ['M_L_MTJ'], 2, 0, {
+    for: 'The &6Spintronic Cluster Tool&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit. It also patterns racetrack nanowires and grows oxide films by pulsed laser.',
     needs: 'A UIV hull, the plascrete shell and the magnetron parts, with sputter targets from the melter.',
-    unlocks: 'The magnetic tunnel junction die, and through it the MRAM wafer and the racetrack chip.',
+    unlocks: 'The magnetic tunnel junction die, and through it the MRAM wafer, the racetrack chip and the multiferroic films of the MESO logic die.',
     automate: 'Targets and silicon-28 by ME; the dies come out in a chest.',
   }, [PLASCRETE]),
-  gear('RACE', 'racetrack_fab', 'Racetrack Fab', ['MTJ'], 4.5, 0, {
-    for: 'The &6Racetrack Fab&r patterns nanowires where magnetic domains slide, in a cleanroom with an electron beam over it.',
-    needs: 'A UIV hull, the plascrete shell and the cleanroom parts, plus MRAM wafers to cut.',
-    unlocks: 'The racetrack chip, which is the mainframe\'s storage.',
-    automate: 'Wafers by ME; send chips on to the photonic hall.',
-  }, [PLASCRETE]),
-  gear('MESO', 'oxide_pld_chamber', 'Oxide PLD Chamber', ['M_L_PLD'], 2, 1.5, {
-    for: 'The &6Oxide PLD Chamber&r fires a laser at a ceramic target and grows the plume as a crystal film, one oxide layer after another.',
-    needs: 'A UIV hull, the plascrete shell, a heater under the chamber and a scandate substrate to grow on.',
-    unlocks: 'The multiferroic films of the MESO logic die.',
-    automate: 'Targets by ME and oxygen by pipe; films are fragile, so keep them in the chamber until the foundry needs them.',
-  }, [PLASCRETE, it('gtceu:tritanium_coil_block')], 150),
-  gear('VDWC', 'vdw_stacking_cell', 'vdW Stacking Cell', ['M_L_VDW'], 2, 3, {
-    for: 'The &6vdW Stacking Cell&r picks single atomic layers with a stamp and presses them into a stack, in a glovebox that is flushed with argon.',
-    needs: 'A UIV hull, the clean casing and a filter column for the argon.',
-    unlocks: 'The spin-orbit readout of the MESO logic die.',
-    automate: 'Layers by ME; stacks come out one at a time, so run two cells.',
-  }, [CLEAN]),
   gear('YIG', 'yig_lpe_furnace', 'YIG LPE Furnace', ['M_L_YIG'], 2, 4.5, {
     for: 'The &6YIG LPE Furnace&r dips a wafer into a molten bath and draws it out coated in a garnet film that carries spin waves almost without loss.',
     needs: 'A UIV hull, the robust casing, three heater bands and a platinum crucible.',
@@ -152,28 +132,16 @@ export const QUESTS = [
     unlocks: 'Raw pasta, the start of every pasta item.',
     automate: 'Neutronium pellets by ME; wait for a glitch and collect the haul.',
   }, [SITE]),
-  gear('SORT', 'pasta_phase_sorter', 'Pasta Phase Sorter', ['PEX'], 4.5, 15, {
-    for: 'The &6Pasta Phase Sorter&r separates the rods from the sheets inside a cage that keeps each one squeezed. The anti-phase residue goes to the core sample the gate keeps.',
+  gear('SORT', 'pasta_phase_sorter', 'Pasta Mill', ['PEX'], 4.5, 15, {
+    for: 'The &6Pasta Mill&r separates the rods from the sheets inside a cage that keeps each one squeezed, pulls spaghetti phase through aerogel into strand wire, and presses lasagna phase onto a tungsten-fibre billet as plate. The anti-phase residue goes to the core sample the gate keeps. Pasta as wire or plate is fiction: outside a neutron star it would fly apart at once.',
     needs: 'A UIV hull, the neutron star site casing and five cryostat cage bays.',
-    unlocks: 'Spaghetti phase for wire and lasagna phase for plate.',
-    automate: 'Raw pasta by ME; send each phase to its own line.',
+    unlocks: 'Pasta strand wire, which the motor, the field generator and the SMES cell are wound with, and lasagna plate for the UXV hull.',
+    automate: 'Raw pasta by ME; send each phase to its own line, and stock a few spools and plates.',
   }, [SITE, CRYO]),
-  gear('WIRE', 'pasta_draw_bench', 'Pasta Draw Bench', ['SORT'], 7, 15, {
-    for: 'The &6Pasta Draw Bench&r pulls spaghetti phase through aerogel into strand wire, the UXV wire. Pasta as wire is fiction: outside a neutron star it would fly apart at once.',
-    needs: 'A UIV hull, the neutron star site casing and a long, straight bed.',
-    unlocks: 'Pasta strand wire, which the motor, the field generator and the SMES cell are wound with.',
-    automate: 'Spaghetti phase by ME; wire leaves on a spool, so stock a few.',
-  }, [SITE]),
-  gear('PLATE', 'pasta_laminator', 'Pasta Laminator', ['SORT'], 7, 16.5, {
-    for: 'The &6Pasta Laminator&r presses lasagna phase onto a tungsten-fibre billet as a plate, the plate of the UXV hull and parts. Pasta as plate is fiction, for the same reason as the wire.',
-    needs: 'A UIV hull, the neutron star site casing and a robust platen.',
-    unlocks: 'Lasagna plate, then the UXV hull.',
-    automate: 'Phase and billets by ME; plates stack up, so send them on.',
-  }, [SITE, ROBUST]),
-  prod('LASP', 'Lasagna Plate', 'grindless:lasagna_plate', ['PLATE'], 9.5, 16.5, [
+  prod('LASP', 'Lasagna Plate', 'grindless:lasagna_plate', ['SORT'], 9.5, 16.5, [
   'The &6Lasagna Plate&r is the structural plate of the UXV hull and of every UXV part: a tungsten-fibre billet with a lasagna phase pressed onto it.',
-  'The Pasta Laminator makes it from the phase and a billet, which the sorting row supplies. It unlocks the UXV hull and, through it, every UXV machine. Plates stack quickly, so feed phase and billets by ME and send the plates on to the hull line.']),
-  gear('TAP', 'polar_cap_tap', 'Polar Cap Tap', ['WIRE'], 9.5, 15, {
+  'The Pasta Mill makes it from the phase and a billet, which the sorting row supplies. It unlocks the UXV hull and, through it, every UXV machine. Plates stack quickly, so feed phase and billets by ME and send the plates on to the hull line.']),
+  gear('TAP', 'polar_cap_tap', 'Polar Cap Tap', ['SORT'], 9.5, 15, {
     for: 'Above a pulsar\'s magnetic poles the field tears charges off the surface. The &6Polar Cap Tap&r lowers an electrode into that current and burns through it, at Vela only.',
     needs: 'A UIV hull, the neutron star site casing and a mast of insulator rings.',
     unlocks: 'Power at Vela, for the gate hold and the machines out there.',

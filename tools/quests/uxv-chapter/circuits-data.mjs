@@ -24,8 +24,8 @@ export const CHAPTER = {
 export const LINKS = [
   { key: 'C_L_SPIN', ref: 'START', x: 0, y: 3 },
   { key: 'C_L_MTJ', ref: 'MTJ', x: 2, y: 4.5 },
-  { key: 'C_L_RACE', ref: 'RACE', x: 7, y: 1.5 },
-  { key: 'C_L_MESO', ref: 'MESO', x: 7, y: 6 },
+  { key: 'C_L_RACE', ref: 'MTJ', x: 7, y: 1.5 },
+  { key: 'C_L_MESO', ref: 'MTJ', x: 7, y: 6 },
   { key: 'C_L_YIG', ref: 'YIG', x: 12, y: 5.5 },
   { key: 'C_L_APER', ref: 'START', x: 0, y: 8 },
   { key: 'C_L_WEAK', ref: 'WEAK', x: 2, y: 9.5 },

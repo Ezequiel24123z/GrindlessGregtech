@@ -7,7 +7,7 @@
 //   gtceu:accretion_disk_skimmer   19 x 9 x 19 magnetic scoop ring, UXV. Recipe type gtceu:disk_skimming (circuit 1 skim); locked to the Cygnus X-1 orbit.
 //   gtceu:frc_former               13 x 13 x 41 linear theta-pinch, UXV. Recipe type gtceu:frc_forming (circuit 1 cartridge, runs anywhere;
 //                                  2 flux loading).
-//   gtceu:bz_dynamo                19 x 7 x 19 torus round a jet column, UXV. Recipe type gtceu:blandford_znajek, a GENERATOR written at its
+//   gtceu:bz_dynamo                41 x 9 x 41 torus round a jet column, UXV gum metal. Recipe type gtceu:blandford_znajek, a GENERATOR written at its
 //                                  final figure (2^30 EU/t through two UIV 16 A dynamo hatches), one run at a time, locked to the orbit (the skimmer's hot-flow row too). It is
 //                                  not in power/generators.js.
 //   grindless:strand_coil          the cartridge held in strand tape (ZPM magnet works c9, B3's older row); only the field generator uses it.
@@ -75,9 +75,9 @@
     {
       // written final: two UIV 16 A dynamo hatches (2^29 each) hold the dynamo's 2^30 EU/t
       name: 'bz_dynamo', machine: 'gtceu:bz_dynamo', type: 'blandford_znajek', dataKey: 'grindless_blandford_znajek',
-      lang: 'BZ Dynamo', maxIO: { itemsIn: 1, itemsOut: 0, fluidsIn: 1, fluidsOut: 1 }, casing: UXV_CASING, texture: UXV_TEXTURE,
-      generator: true, width: 19, height: 7, depth: 19,
-      pal: { F: UXV_CASING, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:titanium_pipe_casing', Q: 'naquadah_alloy' },
+      lang: 'BZ Dynamo', maxIO: { itemsIn: 1, itemsOut: 0, fluidsIn: 1, fluidsOut: 1 }, casing: GUM, texture: GUM_TEXTURE,
+      generator: true, width: 41, height: 9, depth: 41,
+      pal: { F: GUM, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:titanium_pipe_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -143,39 +143,44 @@
     return s.booth('F', 3).fn()
   }
 
-  // a torus on its side round a jet column of glass: the tube (major radius 6, minor 3) is a casing skin round a flux loop of coils, with
-  // air between; four pipe spokes feed the jet from the torus; the plasma input sits on the front spoke and the dynamo hatches on the outer rim
-  // at the equator
-  function bzCell(x, y, z) {
-    var dx = x - 9
-    var dz = z - 9
-    var dy = y - 3
-    var rr = Math.sqrt(dx * dx + dz * dz)
-    if (rr <= 1.5) return 'L'
-    if (rr > 1.5 && rr < 2.5 && y === 3 && (dx === 0 || dz === 0)) return 'P'
-    var d2 = (rr - 6) * (rr - 6) + dy * dy
-    if (d2 > 9.5) return ' '
-    if (d2 <= 1.01) return 'C'
-    if (d2 < 5) return '#'
-    if (y === 3 && (dx === 0 || dz === 0)) {
-      if (rr < 4) return dz === -3 ? 'X' : 'P'
-      if (rr > 8) return 'X'
+  // The BZ dynamo (41 x 9 x 41), D4-SHAPE-UXV-B: a horizontal torus round the jet base. The tube (major radius 15, minor 3.5) is a gum-metal skin
+  // striped with pulsed-field winding bands round a flux loop of superconducting coils; a fusion-glass jet column stands at the hub, pipe spokes feed
+  // the jet, a pulsed-field ring electrode lies above and below the jet base with two field coil rings round it, frame struts carry the tube and the
+  // control booth stands on the front arc. The dynamo hatches sit on the outer rim at the equator.
+  function bzTorus() {
+    var s = G.uevShapes.scene(41, 9, 41)
+    for (var z = 0; z < 41; z++) for (var y = 0; y < 9; y++) for (var x = 0; x < 41; x++) {
+      var dx = x - 20
+      var dz = z - 20
+      var rr = Math.sqrt(dx * dx + dz * dz)
+      var d2 = (rr - 17) * (rr - 17) + (y - 4) * (y - 4)
+      if (d2 > 14.4) continue
+      if (d2 > 8.5) {
+        var adx = dx < 0 ? -dx : dx
+        var adz = dz < 0 ? -dz : dz
+        if (y === 4 && rr > 17 && (adx === 0 || adz === 0 || adx === adz)) s.set(x, y, z, 'X')
+        else s.set(x, y, z, (x + z) % 3 < 1 ? 'M' : 'F')
+      } else s.set(x, y, z, '#')
     }
-    // integer spoke test (8 axes and diagonals plus the 2:1 lines): the Rhino Math.atan2/Math.round angle test vanished in game (static model and dump disagreed)
-    var adx = Math.abs(dx)
-    var adz = Math.abs(dz)
-    if ((adx === 0 || adz === 0 || adx === adz || adx === 2 * adz || adz === 2 * adx) && Math.abs(y - 3) !== 3) return 'Q'
-    return 'F'
+    s.cyl('y', 20, 20, 2, 0, 8, 'L', true)
+    s.cyl('y', 20, 20, 7, 0, 0, 'M', true)
+    s.cyl('y', 20, 20, 7, 8, 8, 'M', true)
+    s.cyl('y', 20, 20, 5, 2, 2, 'C', true, null)
+    s.cyl('y', 20, 20, 5, 6, 6, 'C', true, null)
+    ;[[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (d) {
+      for (var k = 3; k <= 10; k++) s.set(20 + d[0] * k, 4, 20 + d[1] * k, 'P')
+    })
+    ;[[1, 1], [-1, 1], [1, -1], [-1, -1]].forEach(function (d) {
+      s.box(20 + d[0] * 10, 0, 20 + d[1] * 10, 20 + d[0] * 10, 8, 20 + d[1] * 10, 'Q')
+    })
+    return s.booth('F', 3).fn()
   }
 
-  // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
+  // built in the machine registry callback: uev/shapes.js may load after this file
   function spec(m) {
-    if (m.name === 'bz_dynamo') {
-      return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: bzCell })
-    }
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
-      fn: m.name === 'accretion_disk_skimmer' ? scoopRing() : pinchTube()
+      fn: m.name === 'bz_dynamo' ? bzTorus() : m.name === 'accretion_disk_skimmer' ? scoopRing() : pinchTube()
     })
   }
 

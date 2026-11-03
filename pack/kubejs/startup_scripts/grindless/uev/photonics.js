@@ -76,6 +76,8 @@
       name: 'vdw_stacker',
       machine: 'gtceu:vdw_stacker',
       type: 'vdw_assembly',
+      // D4-SHAPE-UXV-B: the UXV vdW stacking cell's recipe type runs here too
+      extraTypes: ['vdw_stacking'],
       dataKey: 'grindless_vdw_assembly',
       lang: 'Van der Waals Stacker',
       casing: PHOTONIC, texture: PHOTONIC_TEXTURE, sound: 'ARC',
@@ -236,16 +238,19 @@
       type.addDataInfo(infoOf(m.dataKey))
       m.spec = makeSpec(k)
       Pat.register(m.machine, m.spec)
-      event.create(m.name, 'multiblock')
+      var types = [m.type].concat(m.extraTypes || [])
+      var b = event.create(m.name, 'multiblock')
         .langValue(m.lang)
         .rotationState(RotationState.NON_Y_AXIS)
-        .recipeType(m.type)
-        .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
+      types.forEach(function (t) { b = b.recipeType(t) })
+      b.recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
         .appearanceBlock(function () { return Block.getBlock(m.casing) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
-          Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
+          types.length === 2
+            ? Text.translate('gtceu.machine.available_recipe_map_2.tooltip', Text.translate('gtceu.' + types[0]), Text.translate('gtceu.' + types[1]))
+            : Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
           Text.translate('gtceu.multiblock.parallelizable.tooltip')
         ])
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)

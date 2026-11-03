@@ -1,5 +1,5 @@
 // priority: -9964
-// TEST ONLY, UXV-A5 (gtceu:vdw_stacking_cell, gtceu:racetrack_fab, gtceu:yig_lpe_furnace). Command: kubejs custom_command gg_test_uxv_spin_logic
+// TEST ONLY, UXV-A5 (gtceu:vdw_stacker, gtceu:mtj_sputter_cluster, gtceu:yig_lpe_furnace). Command: kubejs custom_command gg_test_uxv_spin_logic
 // Band ONLY: X 36544-36607, Z 0-63, Overworld Y 98-112.
 //   T1 (named uncertainty: a plain gtnn:spintronic_mainframe satisfies #gtceu:circuits/uxv, and a 67,108,864 EU/t row is accepted by two UIV
 //   energy hatches on the three new multiblocks):
@@ -29,18 +29,18 @@
     'liquid_phase_epitaxy/lpe_flux', 'liquid_phase_epitaxy/yig_film', 'liquid_phase_epitaxy/flux_skim',
     'lathe/pt_crucible_shell', 'assembler/pt_lpe_crucible', 'assembler/magnonic_bus',
     'photonic_integration/spintronic_mainframe',
-    'assembly_line/vdw_stacking_cell', 'assembly_line/racetrack_fab', 'assembly_line/yig_lpe_furnace'
+    'assembly_line/yig_lpe_furnace'
   ]
 
   var UNITS = [
     {
-      name: 'stack', id: 'gtceu:vdw_stacking_cell', z: 14, circuit: 4, eut: 67108864, wafer: 'grindless:sot_heterostack',
+      name: 'stack', id: 'gtceu:vdw_stacker', z: 14, circuit: 4, eut: 67108864, wafer: 'grindless:sot_heterostack',
       inputs: [['grindless:hbn_flake', 2], ['grindless:wte2_flake', 1], ['grindless:fgt_flake', 1]],
       fluid: ['gtceu:argon', 4000],
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
     },
     {
-      name: 'track', id: 'gtceu:racetrack_fab', z: 34, circuit: 2, eut: 67108864, wafer: 'grindless:racetrack_chip',
+      name: 'track', id: 'gtceu:mtj_sputter_cluster', z: 34, circuit: 2, eut: 67108864, wafer: 'grindless:racetrack_chip',
       inputs: [['grindless:patterned_track_wafer', 1], ['grindless:mtj_die', 1]],
       fluid: ['gtceu:argon', 4000],
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']

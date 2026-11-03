@@ -11,28 +11,14 @@
 (function () {
     // [key, en]
     var ENTRIES = [
-        ['block.gtceu.vdw_stacking_cell', 'vdW Stacking Cell'],
-        ['block.gtceu.racetrack_fab', 'Racetrack Fab'],
         ['block.gtceu.yig_lpe_furnace', 'YIG LPE Furnace'],
         ['gtceu.vdw_stacking', 'vdW Stacking'],
         ['gtceu.racetrack_patterning', 'Racetrack Patterning'],
         ['gtceu.liquid_phase_epitaxy', 'Liquid Phase Epitaxy'],
 
-        ['grindless.machine.vdw_stacking_cell.tooltip.0',
-            '\u00a77Cleaves van der Waals crystals and stacks them into SOT heterostacks.'],
-        ['grindless.machine.racetrack_fab.tooltip.0',
-            '\u00a77Patterns SAF tracks and bonds MTJ dies into racetrack chips.'],
         ['grindless.machine.yig_lpe_furnace.tooltip.0',
             '\u00a77Grows YIG films on GGG wafers from a lead-borate flux.'],
 
-        ['emi.grindless.info.vdw_stacking_cell.0',
-            'Flakes are cleaved from WTe2, Fe3GeTe2 and hBN crystals in argon and stacked hBN / WTe2 / FGT / hBN by a robotic stamp. It needs two UIV energy hatches and a 6N helium-cooled controller.'],
-        ['emi.grindless.info.vdw_stacking_cell.1',
-            'Nothing is wasted: broken flakes return as WTe2 and Fe3GeTe2 dust, and the hBN dust goes back to the megabar press.'],
-        ['emi.grindless.info.racetrack_fab.0',
-            'An e-beam column writes the track pattern into the synthetic antiferromagnet stack, and an MTJ die is bonded on as the read head. It needs two UIV energy hatches and a 6N helium-cooled controller.'],
-        ['emi.grindless.info.racetrack_fab.1',
-            'The platinum-group sludge from the lift-off is collected, never vented: it goes to the platinum-group processing line.'],
         ['emi.grindless.info.yig_lpe_furnace.0',
             'A GGG wafer is dipped into a lead-borate flux holding yttrium and iron oxides in a platinum crucible, and a YIG film grows on it. It needs two UIV energy hatches and a 6N helium-cooled controller.'],
         ['emi.grindless.info.yig_lpe_furnace.1',

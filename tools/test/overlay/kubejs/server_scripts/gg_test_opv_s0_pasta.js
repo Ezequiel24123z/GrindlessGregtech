@@ -1,6 +1,6 @@
 // priority: -6890
 // TEST ONLY, OpV-S0 S0-12. Command: kubejs custom_command gg_test_opv_s0_pasta
-// UXV's four pasta machines (gtceu:pasta_extractor, pasta_phase_sorter, pasta_draw_bench, pasta_laminator) built in the throwaway place
+// UXV's two pasta machines (gtceu:pasta_extractor, pasta_phase_sorter) built in the throwaway place
 // grindless:s0_sgr1806_orbit, band X 37376-37439, Z 0-63, Y 70-100. Named uncertainty: do they form away from Vela's orbit, and does a recipe with a
 // STRING site (recipe.dimension('grindless:s0_sgr1806_orbit'), the way vela_pasta.js writes a string "site") run there while one locked to Vela's orbit is refused?
 //   formed     each machine forms with HV hatches and buses
@@ -34,9 +34,7 @@
 
   var UNITS = [
     { name: 'extractor', id: 'gtceu:pasta_extractor', cx: 37382, z: 8 },
-    { name: 'sorter', id: 'gtceu:pasta_phase_sorter', cx: 37394, z: 8 },
-    { name: 'draw_bench', id: 'gtceu:pasta_draw_bench', cx: 37404, z: 8 },
-    { name: 'laminator', id: 'gtceu:pasta_laminator', cx: 37414, z: 8 }
+    { name: 'sorter', id: 'gtceu:pasta_phase_sorter', cx: 37394, z: 8 }
   ]
 
   function classes() {

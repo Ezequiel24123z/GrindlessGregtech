@@ -20,7 +20,7 @@ const producers = (id) => recipes.filter((r) => JSON.stringify(r.j.outputs || {}
 const plain = (x) => JSON.parse(JSON.stringify(x));
 const rec = (type, name) => VP.recipes.find((r) => r.type === type && r.name === name);
 const SITE = 'grindless:vela_pulsar_orbit';
-const MACHINES = ['pasta_extractor', 'pasta_phase_sorter', 'pasta_draw_bench', 'pasta_laminator', 'polar_cap_tap'];
+const MACHINES = ['pasta_extractor', 'pasta_phase_sorter', 'polar_cap_tap'];
 const ids = (list) => plain(list.map((x) => [x.id, x.count]));
 const kube = (...p) => fs.readFileSync(path.join(pack, 'kubejs', ...p), 'utf8');
 
@@ -104,8 +104,7 @@ test('every row is Vela-locked (OpV-A0\'s, MAX-A0\'s and XP-A1\'s rows SGR-locke
 
 test('the controllers: UIV hull, uxv_sensor, 2 mainframes, UIV circuits, era fluid, soldering alloy, lubricant, research', () => {
   assert.deepEqual(plain(VP.controllerRecipes), MACHINES.map((m) => `grindless:assembly_line/${m}`));
-  const research = { pasta_extractor: 'vela_glitch_timing', pasta_phase_sorter: 'cage_part', pasta_draw_bench: 'gtceu:pasta_phase_sorter',
-    pasta_laminator: 'wf_rhea_billet', polar_cap_tap: 'gtceu:pasta_laminator' };
+  const research = { pasta_extractor: 'vela_glitch_timing', pasta_phase_sorter: 'cage_part', polar_cap_tap: 'gtceu:pasta_phase_sorter' };
   for (const m of MACHINES) {
     const r = find(`grindless:assembly_line/${m}`);
     assert.ok(r && r.t === 'gtceu:assembly_line', m);
@@ -172,8 +171,8 @@ test('"only from": nothing else in the pack makes these ids (cage part and elect
     'grindless:vela_glitch_record': 'vela_glitch_record', 'gtceu:uxv_machine_hull': 'assembly_line/uxv_machine_hull',
     'gtceu:uxv_energy_input_hatch': 'assembly_line/uxv_energy_input_hatch', 'gtceu:uxv_energy_output_hatch': 'assembly_line/uxv_energy_output_hatch',
     'gtceu:uxv_energy_input_hatch_16a': 'assembly_line/uxv_energy_input_hatch_16a', 'gtceu:uxv_energy_output_hatch_16a': 'assembly_line/uxv_energy_output_hatch_16a',
-    'gtceu:pasta_extractor': 'assembly_line/pasta_extractor', 'gtceu:pasta_phase_sorter': 'assembly_line/pasta_phase_sorter', 'gtceu:pasta_draw_bench': 'assembly_line/pasta_draw_bench',
-    'gtceu:pasta_laminator': 'assembly_line/pasta_laminator', 'gtceu:polar_cap_tap': 'assembly_line/polar_cap_tap'
+    'gtceu:pasta_extractor': 'assembly_line/pasta_extractor',     'gtceu:pasta_phase_sorter': 'assembly_line/pasta_phase_sorter',
+        'gtceu:polar_cap_tap': 'assembly_line/polar_cap_tap'
   };
   for (const [id, tail] of Object.entries(only)) {
     const ps = producers(id);
@@ -197,7 +196,7 @@ test('structures: not boring, three functional kinds, controller in the front sl
     assert.ok(s.slices.every((sl) => sl.length <= 60), `${m}: at most 60 rows per slice`);
     assert.ok(s.slices[s.slices.length - 1].some((row) => row.includes('S')), `${m}: the controller is in the front slice`);
   }
-  assert.deepEqual(MACHINES.map((m) => run.global.grindless.structures[`gtceu:${m}`].slices.length), [21, 13, 23, 9, 13]);
+  assert.deepEqual(MACHINES.map((m) => run.global.grindless.structures[`gtceu:${m}`].slices.length), [21, 55, 13]);
 });
 
 test('lang parity: every key of both languages, names, tooltips, EMI pages and recipe lines; sound and EMI files', () => {

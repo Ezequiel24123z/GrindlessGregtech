@@ -11,7 +11,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const pack = path.resolve(here, '..', '..', '..', 'pack');
 const PAGES = path.join(pack, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless');
 
-const NAMES = `accretion_disk_skimmer annihilation_laser_works beuv_scanner bz_dynamo crust_lift decay_heat_vault droplet_radiator_works ejecta_knot_sweeper ergosphere_probe_bay femtosecond_writer frc_former levitation_melter matrioshka_computer millikelvin_cryostat_works mnt_collider mtj_sputter_cluster neutronium_cage neutronium_compression_hall oxide_pld_chamber pasta_draw_bench pasta_extractor pasta_laminator pasta_phase_sorter penrose_engine plasma_mass_filter polar_cap_tap polarised_proton_source positronium_condensate_lab pulsar_wind_trap r_process_decompressor racetrack_fab ramp_compression_pulser shequid_works spectral_hole_burner stellar_condensation_tower stellar_elevator stellar_fractionation_hall stm_lithography_cell tfln_fab uiv_fusion_reactor uxv_fusion_reactor vdw_stacking_cell xray_pulse_profiler yig_lpe_furnace`.split(/\s+/);
+const NAMES = `accretion_disk_skimmer annihilation_laser_works beuv_scanner bz_dynamo crust_lift decay_heat_vault droplet_radiator_works ejecta_knot_sweeper ergosphere_probe_bay femtosecond_writer frc_former levitation_melter matrioshka_computer millikelvin_cryostat_works mnt_collider mtj_sputter_cluster neutronium_cage neutronium_compression_hall pasta_extractor pasta_phase_sorter penrose_engine plasma_mass_filter polar_cap_tap polarised_proton_source positronium_condensate_lab pulsar_wind_trap r_process_decompressor ramp_compression_pulser shequid_works spectral_hole_burner stellar_condensation_tower stellar_elevator stellar_fractionation_hall stm_lithography_cell tfln_fab uiv_fusion_reactor uxv_fusion_reactor xray_pulse_profiler yig_lpe_furnace`.split(/\s+/);
 
 const run = runPackScripts(pack);
 const byName = new Map(controllersOf(run.registry).map((c) => [c.name, c]));
@@ -25,7 +25,7 @@ for (const f of fs.readdirSync(PAGES)) {
   for (const s of page.stacks || []) pages.set(s, page);
 }
 
-test('44 controllers are covered', () => assert.equal(new Set(NAMES).size, 44));
+test('39 controllers are covered', () => assert.equal(new Set(NAMES).size, 39));
 
 test('site names used by the tooltips resolve', () => {
   for (const k of ['planet.grindless.rx_j1856', 'planet.grindless.psr_j0437', 'dimension.grindless.mercury_orbit', 'dimension.grindless.cygnus_x1_orbit', 'dimension.grindless.vela_pulsar_orbit', 'dimension.grindless.cas_a_remnant']) {

@@ -17,7 +17,7 @@
         ['emi.grindless.info.stellar_fractionation_hall.0',
             'It has no recipes of its own: it runs the recipes of the distillation tower and the distillery, in either mode, as many copies at once as its energy hatches carry, up to 4,096 times the parallel of its hatch (a UXV hatch gives 268,435,456 copies).'],
         ['emi.grindless.info.stellar_fractionation_hall.1',
-            'It is 13 blocks wide, 13 high and 25 deep, lying on its side: a reboiler plinth at the front and two columns running to the back, so the whole hall stands anywhere, in any dimension, with no site.'],
+            'It is 21 blocks wide, 21 high and 61 deep, lying on its side: a reboiler plinth at the front, two columns running to the back under a crane gantry, all in gum metal, so the whole hall stands anywhere, in any dimension, with no site.'],
         ['emi.grindless.info.stellar_fractionation_hall.2',
             'Use it to fractionate whole stellar cuts in one machine: each distinct output fluid needs its own output hatch, up to 12.'],
         ['emi.grindless.info.stellar_fractionation_hall.3',

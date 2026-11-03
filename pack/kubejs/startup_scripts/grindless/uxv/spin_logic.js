@@ -1,13 +1,10 @@
 // priority: -10925
 // -----------------------------------------------------------------------------------------------
-// UXV's logic machines (docs/eras/uxv.md, machines 3, 4 and 5, lines 8, 12, 15 and 42; package UXV-A5): the vdW stacking cell, the
-// racetrack fab and the YIG LPE furnace, their recipe types, and the package's own items. The recipes come from
+// UXV's logic machine (docs/eras/uxv.md, machines 3, 4 and 5, lines 8, 12, 15 and 42; package UXV-A5): the YIG LPE furnace, the recipe types of the
+// vdW stacking cell and the racetrack fab (both machines absorbed in D4-SHAPE-UXV-B: vdw_stacking runs in the UEV vdW stacker, racetrack_patterning in
+// the Spintronic Cluster Tool) and the package's own items. The recipes come from
 // data/grindless/tables/spin_logic.json (server_scripts/grindless/uxv/spin_logic.js).
 //
-//   gtceu:vdw_stacking_cell   11 x 6 x 9 L-shaped glovebox, UXV (two UIV energy hatches). Recipe type gtceu:vdw_stacking
-//                             (circuit 1 WTe2 flakes, 2 FGT flakes, 3 hBN flakes, 4 the SOT heterostack).
-//   gtceu:racetrack_fab       13 x 7 x 9 lithography bay with an e-beam column and a wafer track, UXV. Recipe type gtceu:racetrack_patterning
-//                             (circuit 1 patterned track wafer, 2 racetrack chip).
 //   gtceu:yig_lpe_furnace     13 x 21 x 13 vertical dipping furnace with three heater zones and a Pt crucible, UXV. Recipe type gtceu:liquid_phase_epitaxy
 //                             (circuit 1 lead-borate flux, 2 YIG film wafer with the platinum crucible kept, 3 flux skim).
 //
@@ -20,10 +17,6 @@
   const SL = G.spinLogic || (G.spinLogic = {})
   const LOG = '[grindless/uxv] '
 
-  const CLEAN = 'gtceu:clean_machine_casing'
-  const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
-  const PLASCRETE = 'gtceu:plascrete'
-  const PLASCRETE_TEXTURE = 'gtceu:block/casings/cleanroom/plascrete'
   const LPE_BODY = 'grindless:sic_composite_casing'
   const LPE_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
@@ -50,21 +43,16 @@
     }
   }
 
-  // items in include the programmed circuit and the kept crucible
+  // items in include the programmed circuit and the kept crucible. A typeOnly entry registers its recipe type and no controller: vdw_stacking runs in
+  // the UEV vdW stacker (uev/photonics.js) and racetrack_patterning in the Spintronic Cluster Tool (spin_deposition.js), D4-SHAPE-UXV-B.
   SL.machines = [
     {
-      name: 'vdw_stacking_cell', machine: 'gtceu:vdw_stacking_cell', type: 'vdw_stacking', dataKey: 'grindless_vdw_stacking',
-      lang: 'vdW Stacking Cell', maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 1, fluidsOut: 0 },
-      width: 11, height: 6, depth: 9, casing: CLEAN, texture: CLEAN_TEXTURE,
-      pal: { F: CLEAN, L: 'gtceu:cleanroom_glass', P: 'gtceu:titanium_pipe_casing', N: 'gtceu:filter_casing', R: 'gtceu:computer_casing', Q: 'stainless_steel' },
-      parts: basicParts(2, 1)
+      name: 'vdw_stacking_cell', type: 'vdw_stacking', dataKey: 'grindless_vdw_stacking', typeOnly: true,
+      maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 1, fluidsOut: 0 }
     },
     {
-      name: 'racetrack_fab', machine: 'gtceu:racetrack_fab', type: 'racetrack_patterning', dataKey: 'grindless_racetrack_patterning',
-      lang: 'Racetrack Fab', maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 },
-      width: 13, height: 7, depth: 9, casing: PLASCRETE, texture: PLASCRETE_TEXTURE,
-      pal: { F: PLASCRETE, L: 'gtceu:cleanroom_glass', N: 'gtceu:filter_casing', C: 'gtceu:superconducting_coil', Q: 'stainless_steel' },
-      parts: basicParts(2, 1)
+      name: 'racetrack_fab', type: 'racetrack_patterning', dataKey: 'grindless_racetrack_patterning', typeOnly: true,
+      maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }
     },
     {
       name: 'yig_lpe_furnace', machine: 'gtceu:yig_lpe_furnace', type: 'liquid_phase_epitaxy', dataKey: 'grindless_liquid_phase_epitaxy',
@@ -79,52 +67,6 @@
   ]
 
   function abs(n) { return n < 0 ? -n : n }
-
-  // x left to right, y bottom to top, z back to front. An L-shaped glovebox: the back right quarter (x >= 6, z <= 3) is cut away.
-  function stackingCell(x, y, z) {
-    if (x >= 6 && z <= 3) return ' '
-    var wall = x === 0 || z === 8 || x === 10 || (z === 0 && x <= 5) || (x === 5 && z <= 4) || (z === 4 && x >= 5)
-    var corner = (x === 0 && (z === 0 || z === 8)) || (x === 5 && (z === 0 || z === 4)) || (x === 10 && (z === 4 || z === 8))
-    if (y === 0) return wall && x !== 0 && x !== 10 && (z === 8 || z === 0) ? 'X' : 'F'
-    if (y === 5) {
-      if (wall) return 'F'
-      return x % 2 === 0 && z % 2 === 0 ? 'R' : 'N'
-    }
-    if (!wall) return '#'
-    if (corner) return 'Q'
-    if (z === 8) {
-      if (y === 1) return x % 2 === 0 ? 'P' : 'L'
-      if (y === 2) return 'L'
-      if (y === 3) return x % 2 === 0 ? 'P' : 'N'
-      return x % 2 === 0 ? 'F' : 'N'
-    }
-    if (x === 10 && z >= 5 && z <= 7 && y >= 1 && y <= 4) return y % 2 === 0 ? 'N' : 'L'
-    if (x === 0 && z >= 1 && z <= 7 && y >= 1 && y <= 4) return y % 2 === 0 ? 'L' : 'N'
-    if (z === 0 && x >= 1 && x <= 4 && y >= 2 && y <= 3) return 'L'
-    if ((x === 5 || z === 4) && y >= 2 && y <= 3) return 'N'
-    return 'F'
-  }
-
-  // a long bay: windows on every wall, a filter ceiling, an e-beam column at the back and a wafer track on a frame along the middle
-  function racetrackBay(x, y, z) {
-    var wall = x === 0 || x === 12 || z === 0 || z === 8
-    var corner = (x === 0 || x === 12) && (z === 0 || z === 8)
-    if (y === 0) return wall && !corner && (z === 8 || z === 0) && x !== 0 && x !== 12 ? 'X' : 'F'
-    if (y === 6) return wall ? 'F' : 'N'
-    if (wall) {
-      if (corner) return 'Q'
-      if (y >= 2 && y <= 4) {
-        if ((z === 0 || z === 8) && x % 4 === 2) return 'L'
-        if ((x === 0 || x === 12) && z >= 2 && z <= 6) return 'L'
-      }
-      if (y === 1 && !((z === 0 || z === 8) && x % 4 === 0)) return x % 2 === 0 ? 'N' : 'F'
-      return 'F'
-    }
-    if (x === 6 && z === 2 && y <= 5) return 'C'
-    if ((x === 3 || x === 9) && z === 2 && y >= 3 && y <= 5) return 'C'
-    if (z === 5 && y === 1 && x >= 2 && x <= 10) return 'Q'
-    return '#'
-  }
 
   // A vertical dipping furnace (13 x 21 x 13): a plinth hall with the controller booth, a round shaft over it with three heater zones
   // (HfTaCN lining, four 3-wide coil patches each), a Pt crucible at the foot of the shaft and the dip rod hung from a gearbox head on the
@@ -160,14 +102,9 @@
     return s.booth('F', 3).fn()
   }
 
-  var CELLS = { vdw_stacking_cell: stackingCell, racetrack_fab: racetrackBay }
-
-  // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
+  // built in the machine registry callback: uev/shapes.js may load after this file
   function spec(m) {
-    if (m.name === 'yig_lpe_furnace') {
-      return G.uevShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: lpeFurnace() })
-    }
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.uevShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: lpeFurnace() })
   }
 
   // one EMI line per recipe, read from its data
@@ -209,6 +146,7 @@
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      if (m.typeOnly) return
       m.spec = spec(m)
       Pat.register(m.machine, m.spec)
 

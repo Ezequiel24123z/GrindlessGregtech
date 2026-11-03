@@ -283,15 +283,14 @@ export const QUESTS = [
     key: 'I_OM_PASTA', kind: 'process', title: 'Pasta Gains a Magnetar', icon: 'gtceu:pasta_extractor',
     deps: ['J_SGR'], x: 2, y: 27,
     teach: {
-      for: 'The &6Pasta Extractor&r, &6Pasta Phase Sorter&r, &6Pasta Draw Bench&r and &6Pasta Laminator&r, built for the pulsar, take a magnetar site and rows for chain crust, caged phases, chain strand and lamina. The &6MTJ Sputter Cluster&r takes eight films.',
+      for: 'The &6Pasta Extractor&r and &6Pasta Mill&r, built for the pulsar, take a magnetar site and rows for chain crust, caged phases, chain strand and lamina. The &6Spintronic Cluster Tool&r takes eight films.',
       needs: 'The UXV controllers you already own, and a platform at the magnetar.',
       unlocks: 'Chain strand, the hull plates and every sputtered film of the circuit lines.',
       automate: 'Cages return from the sorter. Targets arrive by bus.',
     },
     desc: [],
     tasks: [
-      it('gtceu:pasta_extractor'), it('gtceu:pasta_phase_sorter'), it('gtceu:pasta_draw_bench'),
-      it('gtceu:pasta_laminator'), it('gtceu:mtj_sputter_cluster'),
+      it('gtceu:pasta_extractor'), it('gtceu:pasta_phase_sorter'), it('gtceu:mtj_sputter_cluster'),
     ],
     rewards: [xp(150)],
   },

@@ -9,8 +9,8 @@ const facts = factsFromPack();
 const cfg = loadConfig();
 // Controllers upstream of the component chain (spintronic mainframe, lasagna plate, strand coil, FRC cartridge, shequid gyro, MTJ die, gamma laser module, strand,
 // filtered disk, stellar cuts) keep their UIV hull and parts: re-tiering them made the obtain model cyclic (TP-R-uxv, three obtain runs).
-const UPSTREAM = ['accretion_disk_skimmer', 'annihilation_laser_works', 'ejecta_knot_sweeper', 'frc_former', 'mtj_sputter_cluster', 'pasta_draw_bench',
-  'pasta_extractor', 'pasta_laminator', 'pasta_phase_sorter', 'plasma_mass_filter', 'racetrack_fab', 'shequid_works', 'stellar_elevator', 'vdw_stacking_cell', 'yig_lpe_furnace'];
+const UPSTREAM = ['accretion_disk_skimmer', 'annihilation_laser_works', 'ejecta_knot_sweeper', 'frc_former', 'mtj_sputter_cluster',
+  'pasta_extractor', 'pasta_phase_sorter', 'plasma_mass_filter', 'shequid_works', 'stellar_elevator', 'yig_lpe_furnace'];
 const CONTROLLERS = ['stellar_fractionation_hall', 'uxv_fusion_reactor'];
 const byId = (id) => facts.recipes.find((r) => r.id === id);
 const comps = (r) => r.items.map((i) => ({ c: tierComponent(i.id), n: i.n || 1 })).filter((x) => x.c);

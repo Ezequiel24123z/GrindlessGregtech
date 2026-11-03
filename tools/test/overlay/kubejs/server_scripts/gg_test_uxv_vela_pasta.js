@@ -1,10 +1,10 @@
 // priority: -9986
-// TEST ONLY, UXV-B4 (gtceu:pasta_extractor, pasta_phase_sorter, pasta_draw_bench, pasta_laminator, polar_cap_tap). Command: kubejs custom_command gg_test_uxv_vela_pasta
+// TEST ONLY, UXV-B4 (gtceu:pasta_extractor, pasta_phase_sorter, polar_cap_tap). Command: kubejs custom_command gg_test_uxv_vela_pasta
 // Band ONLY: X 36928-36991, Z 0-63, Y 98-115, built in grindless:vela_pulsar_orbit (the dimension their recipes are locked to).
 //   T1 (named uncertainty: the tap's c1 row (one lasagna electrode -> 536,870,912 EU/t for 720 t, a generator written final through one UIV 16 A dynamo
 //   hatch) starts, and that power crosses a run of gtceu:pasta_strand_quadruple_cable (16 A = 4 A x V[UXV]) into a UXV energy hatch; and every machine forms with UXV hatches):
-//     lookup     every row, line 48, the hull, the hatches and the five controllers' assembly lines are in the recipe manager
-//     formed     the five machines form (UXV hatches; the tap with a UIV 16 A dynamo hatch)
+//     lookup     every row, line 48, the hull, the hatches and the three controllers' assembly lines are in the recipe manager
+//     formed     the three machines form (UXV hatches; the tap with a UIV 16 A dynamo hatch)
 //     tap        c1 starts at 536,870,912 EU/t (generator)
 //     wire       a run of pasta strand wire from the dynamo hatch fills a UXV energy hatch; the wire is still there after 100 ticks
 (function () {
@@ -30,15 +30,13 @@
     'telemetry_decoding/vela_glitch_timing', 'gravitational_wave_astronomy/luv/vela_glitch_record', 'assembler/finemet_toroid', 'assembler/uxv_voltage_coil',
     'assembler/pasta_strand_repeater', 'assembly_line/uxv_machine_hull', 'assembly_line/uxv_energy_input_hatch', 'assembly_line/uxv_energy_output_hatch',
     'assembly_line/uxv_energy_input_hatch_16a', 'assembly_line/uxv_energy_output_hatch_16a', 'assembly_line/pasta_extractor',
-    'assembly_line/pasta_phase_sorter', 'assembly_line/pasta_draw_bench', 'assembly_line/pasta_laminator', 'assembly_line/polar_cap_tap'
+    'assembly_line/pasta_phase_sorter', 'assembly_line/polar_cap_tap'
   ]
   var HV = ['gtceu:hv_input_bus', 'gtceu:hv_output_bus']
 
   var UNITS = [
     { name: 'extractor', id: 'gtceu:pasta_extractor', cx: 36934, z: 8, parts: [ENERGY].concat(HV) },
     { name: 'sorter', id: 'gtceu:pasta_phase_sorter', cx: 36946, z: 8, parts: [ENERGY].concat(HV) },
-    { name: 'draw_bench', id: 'gtceu:pasta_draw_bench', cx: 36956, z: 8, parts: [ENERGY].concat(HV) },
-    { name: 'laminator', id: 'gtceu:pasta_laminator', cx: 36966, z: 8, parts: [ENERGY].concat(HV) },
     { name: 'tap', id: 'gtceu:polar_cap_tap', cx: 36980, z: 8, parts: [DYNAMO, 'gtceu:hv_input_bus'], tap: true }
   ]
 
