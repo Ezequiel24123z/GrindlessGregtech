@@ -168,13 +168,13 @@
     var MAINFRAME = 'gtnn:optical_mainframe'
     var HE = 'gtceu:he_6n'
     var defs = [
-      { name: 'mtj_sputter_cluster', part: 'gtceu:uiv_sensor', research: 'grindless:cofeb_target', domain: ['2x grindless:ta_seed_target', '2x grindless:mgo_target', '2x grindless:mu_metal_foil'] },
-      { name: 'oxide_pld_chamber', part: 'gtceu:uiv_emitter', research: 'grindless:srruo3_target', domain: ['2x grindless:krf_excimer_laser', '2x grindless:vuv_caf2_optic', '2x grindless:pt_sheet'] }
+      { name: 'mtj_sputter_cluster', parts: ['2x gtceu:uiv_sensor', '2x gtceu:uiv_emitter', '2x gtceu:uiv_electric_motor'], research: 'grindless:cofeb_target',
+        domain: ['2x grindless:ta_seed_target', '2x grindless:mgo_target', '2x grindless:mu_metal_foil', '2x grindless:krf_excimer_laser', '2x grindless:vuv_caf2_optic', '2x grindless:pt_sheet'] }
     ]
     SD.controllerRecipes = []
     defs.forEach(function (d) {
       var machine = 'gtceu:' + d.name
-      var ids = [HULL, d.part, MAINFRAME, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var ids = [HULL, MAINFRAME, machine, d.research].concat(d.parts, d.domain).map(function (s) { return s.replace(/^\d+x /, '') })
       var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (!Fluid.exists(HE)) missing.push(HE)
       if (missing.length > 0) {
@@ -183,7 +183,7 @@
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       b.itemInputs(HULL)
-      b.itemInputs('2x ' + d.part)
+      d.parts.forEach(function (s) { b.itemInputs(s) })
       b.itemInputs('2x #gtceu:circuits/uiv')
       b.itemInputs('4x #gtceu:circuits/uiv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
