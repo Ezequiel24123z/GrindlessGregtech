@@ -196,16 +196,67 @@
 		}
 		{
 			dependencies: ["1051C4B8835DB4A3"]
-			description: [
-				"&6PTFE&r is the plastic nothing eats, which is why the large chemical reactor is lined with it. The road runs through chloroform and TFE."
-				"Methane comes from distilling refinery gas, and the fluorine from topaz, lepidolite or bastnasite."
-			]
+			description: ["Starts the PTFE line: &6methane&r split out of refinery gas. Refinery gas from the rig, and a distillery. Chloroform, the next step. Pipe the gas in and pipe the methane to the chlorination reactor."]
+			icon: "gtceu:methane_bucket"
+			id: "582DF5B1C59991CC"
+			rewards: [{ id: "3ACDD1A2E278D2BC", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "331B93FEF330E022", item: "gtceu:methane_bucket", type: "item" }]
+			title: "Methane"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["582DF5B1C59991CC"]
+			description: ["Chlorinates methane into &6chloroform&r, the carbon skeleton of the fluorinated gases. Methane, chlorine and a chemical reactor. R22, and the hydrochloric acid that comes with it. Chlorine and methane by pipe, chloroform out to the next reactor."]
+			icon: "gtceu:chloroform_bucket"
+			id: "1BF99B853FC2FAB6"
+			rewards: [{ id: "19E4EC97F5A38F2E", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7458CF06E2C0F3D5", item: "gtceu:chloroform_bucket", type: "item" }]
+			title: "Chloroform"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1BF99B853FC2FAB6"]
+			description: ["Swaps chlorine for fluorine: &6R22&r is chloroform with two fluorines. Chloroform and hydrofluoric acid, from topaz, lepidolite or bastnasite fluorine. TFE through pyrolysis. Chloroform alone no longer gets there. Acid and chloroform by pipe. The spent hydrochloric acid goes to vinyl chloride."]
+			icon: "gtceu:chlorodifluoromethane_bucket"
+			id: "1673B5255C135DB2"
+			rewards: [{ id: "1AD730EB05424D8E", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "10DCD6D1B460466D", item: "gtceu:chlorodifluoromethane_bucket", type: "item" }]
+			title: "R22"
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1673B5255C135DB2"]
+			description: ["Cracks R22 hot to join two carbons: &6tetrafluoroethylene&r, the monomer. R22 and a chemical reactor with a strong power feed. PTFE, and with it the large chemical reactor. R22 in by pipe, TFE straight on to the polymer reactor, acid to storage."]
+			icon: "gtceu:tetrafluoroethylene_bucket"
+			id: "33C25D2A6AB82F6B"
+			rewards: [{ id: "13E2E931A80B1F98", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "584D935239AC2F41", item: "gtceu:tetrafluoroethylene_bucket", type: "item" }]
+			title: "TFE Pyrolysis"
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["33C25D2A6AB82F6B"]
+			description: ["Polymerizes TFE into &6PTFE&r, the plastic nothing eats. TFE and the polymer reactor. The large chemical reactor is lined with the result. Inert casings, PTFE pipes and the large chemical reactor. TFE by pipe, PTFE out by bus to the casing assembler."]
 			icon: "gtceu:inert_machine_casing"
 			id: "720331A06D7F2344"
 			rewards: [{ id: "2BA86A8E9940CABD", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
 			tasks: [{ count: 8L, id: "2B26A5F014E45D2A", item: "gtceu:inert_machine_casing", type: "item" }]
 			title: "PTFE"
-			x: 10.0d
+			x: 18.0d
 			y: 0.0d
 		}
 		{
@@ -219,11 +270,63 @@
 			rewards: [{ id: "3EB45CE14A466656", type: "xp", xp: 55 }]
 			tasks: [{ id: "1E56A8818DE368EE", item: "gtceu:large_chemical_reactor", type: "item" }]
 			title: "Gasoline"
-			x: 12.0d
+			x: 20.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["1051C4B8835DB4A3"]
+			description: ["Starts the epoxy line: benzene and propene joined into &6cumene&r. Benzene from cracking or the reformer, propene, and phosphoric acid as catalyst. Phenol. The shortcuts to it are gone. Benzene and propene by pipe, with the acid recycled back into the reactor."]
+			icon: "gtceu:cumene_bucket"
+			id: "1443E68287DB00C2"
+			rewards: [{ id: "368D1B2B97701AF2", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "78D67D6D740B61AD", item: "gtceu:cumene_bucket", type: "item" }]
+			title: "Cumene"
+			x: 8.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["1443E68287DB00C2"]
+			description: ["Oxidizes cumene and splits it into &6phenol&r and acetone in one go. Cumene and oxygen in a chemical reactor. Bisphenol A. The acetone feeds gasoline as well. Oxygen from the air line, phenol to the next reactor, acetone to the tank."]
+			icon: "gtceu:phenol_bucket"
+			id: "72C998E20F696595"
+			rewards: [{ id: "5786616CDF7F4527", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5595FB73AA2AAC16", item: "gtceu:phenol_bucket", type: "item" }]
+			title: "Phenol and Acetone"
+			x: 10.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["72C998E20F696595"]
+			description: ["Condenses phenol with acetone under acid into &6bisphenol A&r, the epoxy backbone. Phenol, acetone and hydrochloric acid. Epoxy resin. Phenol and acetone share one pipe loop; the acid comes back from PTFE's chain."]
+			icon: "gtceu:bisphenol_a_bucket"
+			id: "78AD7D19F7D9606C"
+			rewards: [{ id: "5BDAA9D258F10623", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7EB44CC45BDB37B4", item: "gtceu:bisphenol_a_bucket", type: "item" }]
+			title: "Bisphenol A"
+			x: 12.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["78AD7D19F7D9606C"]
+			description: ["Closes the ring with epichlorohydrin and caustic soda: &6epoxy&r resin. Bisphenol A, epichlorohydrin and sodium hydroxide. The composite autoclave and everything cured in it. Resin by pipe straight into the autoclave's hatch."]
+			icon: "gtceu:epoxy_bucket"
+			id: "52FEF259028A446A"
+			rewards: [{ id: "54FE3099438475C8", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1EFABA8FD8A32B64", item: "gtceu:epoxy_bucket", type: "item" }]
+			title: "Epoxy"
+			x: 14.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["52FEF259028A446A"]
 			description: ["Cures fiber in epoxy under nitrogen pressure. Fiber, epoxy and nitrogen through the hatches. Heat-shield tiles and overwrapped tanks. Everything arrives by hatch; leave the inside empty."]
 			icon: "gtceu:composite_autoclave"
 			id: "3B7E2C9A41D06F85"
@@ -232,7 +335,7 @@
 			size: 1.25d
 			tasks: [{ id: "5A0C81E7D2B94F16", item: "gtceu:composite_autoclave", type: "item" }]
 			title: "Composite Autoclave"
-			x: 8.0d
+			x: 16.0d
 			y: -1.5d
 		}
 		{
@@ -243,7 +346,7 @@
 			rewards: [{ id: "2C6E9B0F4D17A853", type: "xp", xp: 45 }]
 			tasks: [{ count: 2L, id: "1C7E09A3F5D82B64", item: "grindless:ablative_heat_shield_tile", type: "item" }]
 			title: "Heat-Shield Tiles"
-			x: 10.0d
+			x: 18.0d
 			y: -1.5d
 		}
 		{
@@ -254,7 +357,7 @@
 			rewards: [{ id: "7F1A4D82B0E6C395", type: "xp", xp: 45 }]
 			tasks: [{ count: 4L, id: "4E2B9D06C1A7F358", item: "grindless:composite_overwrapped_tank", type: "item" }]
 			title: "Overwrapped Tanks"
-			x: 12.0d
+			x: 18.0d
 			y: -3.0d
 		}
 		{
@@ -267,7 +370,7 @@
 			size: 1.25d
 			tasks: [{ id: "3F90C2E8B1D5A746", item: "grindless:untested_rocket_motor", type: "item" }]
 			title: "Untested Rocket Motor"
-			x: 12.0d
+			x: 20.0d
 			y: -1.5d
 		}
 		{
@@ -283,7 +386,7 @@
 			size: 1.25d
 			tasks: [{ id: "6B1D3E7A90C24F5D", type: "checkmark" }]
 			title: "Static Fire"
-			x: 16.0d
+			x: 24.0d
 			y: 0.0d
 		}
 		{
@@ -297,7 +400,7 @@
 			rewards: [{ id: "71613751FE3583C9", type: "xp", xp: 40 }]
 			tasks: [{ count: 6L, id: "6C0A50CC41916AEE", item: "gcyr:basic_rocket_motor", type: "item" }]
 			title: "Rocket Motors"
-			x: 18.0d
+			x: 26.0d
 			y: 0.0d
 		}
 		{
@@ -308,7 +411,7 @@
 			rewards: [{ id: "240589002FC5DF78", type: "xp", xp: 40 }]
 			tasks: [{ count: 2L, id: "216EB77B2A3105FF", item: "gcyr:basic_fuel_tank", type: "item" }]
 			title: "Fuel Tanks"
-			x: 16.0d
+			x: 24.0d
 			y: -1.5d
 		}
 		{
@@ -322,7 +425,7 @@
 			rewards: [{ id: "3E3E25931D1CA960", type: "xp", xp: 40 }]
 			tasks: [{ id: "437D6750BF09654E", type: "checkmark" }]
 			title: "Rocket Fuel"
-			x: 14.0d
+			x: 22.0d
 			y: 0.0d
 		}
 		{
@@ -336,7 +439,7 @@
 				{ count: 2L, id: "3B8A9579E4CC32E1", item: "gtceu:stainless_steel_frame", type: "item" }
 			]
 			title: "Launch Pad"
-			x: 16.0d
+			x: 24.0d
 			y: 1.5d
 		}
 		{
@@ -355,7 +458,7 @@
 				{ id: "2734B9A769F33E71", item: "gcyr:space_boots", type: "item" }
 			]
 			title: "Space Suit"
-			x: 20.0d
+			x: 28.0d
 			y: -1.5d
 		}
 		{
@@ -371,7 +474,7 @@
 				{ id: "1DF6E14CDCEDEA6D", item: "gcyr:seat", type: "item" }
 			]
 			title: "First Rocket"
-			x: 20.0d
+			x: 28.0d
 			y: 0.0d
 		}
 		{
@@ -385,7 +488,7 @@
 			rewards: [{ id: "3E3DC37BC58FD75C", type: "xp", xp: 40 }]
 			tasks: [{ id: "4B08AC4FA0E80C99", item: "gcyr:id_chip", type: "item" }]
 			title: "Liftoff"
-			x: 22.0d
+			x: 30.0d
 			y: 0.0d
 		}
 		{
@@ -401,7 +504,7 @@
 			size: 1.75d
 			tasks: [{ dimension: "gcyr:luna", id: "2717156C3769D52D", type: "dimension" }]
 			title: "The Moon"
-			x: 24.0d
+			x: 32.0d
 			y: 0.0d
 		}
 		{
@@ -585,7 +688,7 @@
 			size: 1.25d
 			tasks: [{ id: "332A714483469ADA", item: "gtceu:coil_chemical_plant", type: "item" }]
 			title: "Coil Chemical Plant"
-			x: 12.0d
+			x: 20.0d
 			y: 1.5d
 		}
 		{
@@ -599,8 +702,242 @@
 			rewards: [{ id: "1F5A07C3B9E24D68", type: "xp", xp: 60 }]
 			tasks: [{ id: "6D2E8B4107A35C91", item: "gtceu:nanomuscle_chestplate", type: "item" }]
 			title: "NanoMuscle Suit"
-			x: 22.0d
+			x: 30.0d
 			y: -3.0d
+		}
+		{
+			dependencies: ["70F4075BAF69DA99", "4D9BFAC8F46827EE"]
+			description: ["Starts the rhodium line: the platinum slag from MV is fused in molten potassium pyrosulfate. Rhodium leaves as &6sulfate gas&r, and the &6inert metal mixture&r stays behind for ruthenium. Slag, pyrosulfate flux and a blast furnace with two energy hatches. Rhodium, ruthenium and the gauze. Slag in by bus. Gas and mixture leave on separate outputs."]
+			icon: "gtceu:rhodium_sulfate_gas_bucket"
+			id: "1E16B7CB2D9763D3"
+			rewards: [{ id: "1E16FBA33AA0E1E6", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7367738B98C67DC3", item: "gtceu:rhodium_sulfate_gas_bucket", type: "item" }]
+			title: "Pyrosulfate Fusion"
+			x: 16.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1E16B7CB2D9763D3"]
+			description: ["Dissolves the gas into water: &6rhodium sulfate&r solution. The gas, water and a large chemical reactor. Cementation. Gas and water by pipe, solution on to the zinc reactor."]
+			icon: "gtceu:rhodium_sulfate_bucket"
+			id: "189B2334EDD0003D"
+			rewards: [{ id: "770F3526C2713264", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F4D8F5F2ED642A7", item: "gtceu:rhodium_sulfate_bucket", type: "item" }]
+			title: "Rhodium Sulfate"
+			x: 18.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["189B2334EDD0003D"]
+			description: ["Zinc pushes rhodium out of solution as &6rough rhodium metal&r. Zinc dust and the sulfate solution. Chlorination. The zinc sulfate goes back to electrolysis. Zinc by bus, metal out by bus, zinc sulfate to the electrolyzer."]
+			icon: "gtceu:roughly_rhodium_metal_dust"
+			id: "5BA2B770AE87AEC3"
+			rewards: [{ id: "7D2657ADCAD08A91", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7A4F7E80660533D7", item: "gtceu:roughly_rhodium_metal_dust", type: "item" }]
+			title: "Cementation"
+			x: 20.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5BA2B770AE87AEC3"]
+			description: ["Chlorinates the rough metal with salt and chlorine: &6rhodium salt&r. Rough metal, salt, chlorine and the blast furnace. Nitrate complexation. Chlorine by pipe, salt and metal by bus."]
+			icon: "gtceu:rhodium_salt_dust"
+			id: "73AB3DD1718277DA"
+			rewards: [{ id: "3DCD178001599574", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "36D10E740C0418A6", item: "gtceu:rhodium_salt_dust", type: "item" }]
+			title: "Rhodium Salt"
+			x: 22.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["73AB3DD1718277DA"]
+			description: ["Dissolves the salt in a mixer, then reacts it with sodium nitrate: &6rhodium nitrate&r. Rhodium salt solution and sodium nitrate. The sifting step that separates the impurities. Mixer and reactor in a short pipe loop."]
+			icon: "gtceu:rhodium_nitrate_dust"
+			id: "3ABDD519B3167202"
+			rewards: [{ id: "51F0602B89C2C611", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7C6A8802D81ED417", item: "gtceu:rhodium_nitrate_dust", type: "item" }]
+			title: "Rhodium Nitrate"
+			x: 24.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3ABDD519B3167202"]
+			description: ["A sifter filters the nitrate into &6filter cake&r, leaving the dross out. Rhodium nitrate and a sifter. Reprecipitation. Dust in by bus, cake out by bus."]
+			icon: "gtceu:rhodium_filter_cake_dust"
+			id: "35A77B4D587DF5DB"
+			rewards: [{ id: "1AFE5EB1E28DC859", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7FFD018D6C6498BC", item: "gtceu:rhodium_filter_cake_dust", type: "item" }]
+			title: "Filter Cake"
+			x: 26.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["35A77B4D587DF5DB"]
+			description: ["The cake goes back into solution and drops out again, cleaner: &6reprecipitated rhodium&r. Filter cake, water and a chemical reactor. The last reduction. A mixer and a reactor on one pipe loop."]
+			icon: "gtceu:reprecipitated_rhodium_dust"
+			id: "10519AC2A0A8F0A1"
+			rewards: [{ id: "3287B0A42ABDAC64", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5F8975430CCAF6EA", item: "gtceu:reprecipitated_rhodium_dust", type: "item" }]
+			title: "Reprecipitation"
+			x: 28.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["10519AC2A0A8F0A1"]
+			description: ["Hydrochloric acid reduces the last salt to pure &6rhodium&r. Reprecipitated rhodium and hydrochloric acid. Rhodium foil for the gauze. Acid by pipe, dust by bus to the foil bender."]
+			icon: "gtceu:rhodium_dust"
+			id: "1CAEA65DE90ABF7B"
+			rewards: [{ id: "12D0DF1EEB2D8FD2", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "77E3CE5BCEF9B612", item: "gtceu:rhodium_dust", type: "item" }]
+			title: "Rhodium"
+			x: 30.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1CAEA65DE90ABF7B"]
+			description: ["A &6platinum-rhodium gauze&r is the catalyst for burning ammonia into nitric acid. Nitric acid no longer comes from the elements. Platinum and rhodium foil in an assembler, then the large chemical reactor with ammonia and oxygen. Nitric acid for explosives, nitrates and what follows. Ammonia and oxygen by pipe. Replace the gauze as it wears."]
+			icon: "grindless:platinum_rhodium_gauze"
+			id: "1A06195E28CEA0BC"
+			rewards: [{ id: "320C57995F261150", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3E17B304082BD80A", item: "grindless:platinum_rhodium_gauze", type: "item" }]
+			title: "Nitric Acid Gauze"
+			x: 32.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1E16B7CB2D9763D3"]
+			description: ["The inert metal mixture is fused with saltpeter into &6sodium rutheniate&r. The mixture, saltpeter, salt water and the blast furnace. Ruthenium tetroxide. Mixture by bus from the fusion step."]
+			icon: "gtceu:sodium_rutheniate_dust"
+			id: "76F9BB733BCCB559"
+			rewards: [{ id: "3FEC5D8A973F0751", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3E6E8C0AD5FBF9D2", item: "gtceu:sodium_rutheniate_dust", type: "item" }]
+			title: "Sodium Rutheniate"
+			x: 18.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["76F9BB733BCCB559"]
+			description: ["Chlorine turns the rutheniate into &6ruthenium tetroxide&r, a toxic gas. It stays inside the plant. Rutheniate, chlorine and a sealed reactor line. Distillation. Pipes only. Never leave it in an open tank."]
+			icon: "gtceu:ruthenium_tetroxide_bucket"
+			id: "5BE648047A511F2C"
+			rewards: [{ id: "3A13B6B597187573", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "75628AE4D9707787", item: "gtceu:ruthenium_tetroxide_bucket", type: "item" }]
+			title: "Ruthenium Tetroxide"
+			x: 20.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["5BE648047A511F2C"]
+			description: ["A cracker with steam, then the distillation tower, purifies the tetroxide. Tetroxide, steam, a cracker and a distillation tower. Solid tetroxide and ruthenium. One closed pipe run from reactor to tower."]
+			icon: "gtceu:ruthenium_tetroxide_lq_bucket"
+			id: "753BC3F2C2B1B4C0"
+			rewards: [{ id: "54734682E1A500A6", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "16822801AFB44ED2", item: "gtceu:ruthenium_tetroxide_lq_bucket", type: "item" }]
+			title: "Tetroxide Distillation"
+			x: 22.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["753BC3F2C2B1B4C0"]
+			description: ["A fluid solidifier sets the pure liquid, which is reduced to &6ruthenium&r. Purified tetroxide and a fluid solidifier. Ruthenium for the alloys that ask for it. Dust out by bus, no manual handling."]
+			icon: "gtceu:ruthenium_dust"
+			id: "7B062C3E079A80BE"
+			rewards: [{ id: "333B30728B6458B5", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "74D5532FD7775ABD", item: "gtceu:ruthenium_dust", type: "item" }]
+			title: "Ruthenium"
+			x: 24.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["2897E3EB8159710C"]
+			description: ["Starts the titanium line on the Moon: ilmenite is smelted to &6rutile&r, with wrought iron on the side. Lunar ilmenite and a blast furnace. Chlorination. Titanium has no source on Earth. Ilmenite by bus from the lunar drills."]
+			icon: "gtceu:rutile_dust"
+			id: "19FA06580720AC1E"
+			rewards: [{ id: "14A60A3B36EB95A9", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "310E834A46416921", item: "gtceu:rutile_dust", type: "item" }]
+			title: "Ilmenite to Rutile"
+			x: 34.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["19FA06580720AC1E"]
+			description: ["Rutile, carbon and chlorine give &6crude titanium tetrachloride&r and toxic carbon monoxide. Rutile, carbon, chlorine and a strong chemical reactor. Distillation. Carbon monoxide goes straight to a burner or a vent scrubber."]
+			icon: "gtceu:crude_titanium_tetrachloride_bucket"
+			id: "5E6098843179E728"
+			rewards: [{ id: "3DD0BC8F0DA7D587", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "776F68362C9A88C4", item: "gtceu:crude_titanium_tetrachloride_bucket", type: "item" }]
+			title: "Crude Tetrachloride"
+			x: 36.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E6098843179E728"]
+			description: ["The crude liquid is distilled into clean &6titanium tetrachloride&r. Silica settles out. Crude tetrachloride and a distillery. The Kroll reduction. Liquid in by pipe, silica out by bus."]
+			icon: "gtceu:titanium_tetrachloride_bucket"
+			id: "33A4C142F94B1B8D"
+			rewards: [{ id: "1BEBBB83C6A11859", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5CC380C5929919F3", item: "gtceu:titanium_tetrachloride_bucket", type: "item" }]
+			title: "Tetrachloride Distillation"
+			x: 38.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["33A4C142F94B1B8D"]
+			description: ["Magnesium takes the chlorine and leaves a &6hot titanium ingot&r. The vacuum freezer cools it. Tetrachloride, magnesium and the blast furnace. Titanium, and magnesium chloride to recycle. Magnesium by bus, hot ingots to the freezer by bus."]
+			icon: "gtceu:hot_titanium_ingot"
+			id: "5D99F65C83C94996"
+			rewards: [{ id: "3DCF3351B1945FE4", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "55702E8959F90B2E", item: "gtceu:hot_titanium_ingot", type: "item" }]
+			title: "Kroll Reduction"
+			x: 40.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5D99F65C83C94996"]
+			description: ["Electrolysis splits the magnesium chloride back into magnesium and chlorine. Magnesium chloride and an electrolyzer. A closed loop: no magnesium and no chlorine is lost. Magnesium back to the furnace, chlorine back to the reactor."]
+			icon: "gtceu:magnesium_chloride_dust"
+			id: "1AED7B25887BD7E0"
+			rewards: [{ id: "123E194FFBC939D2", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3AD387198634ED3A", item: "gtceu:magnesium_chloride_dust", type: "item" }]
+			title: "Magnesium Recycling"
+			x: 42.0d
+			y: 0.0d
 		}
 	]
 	subtitle: ["Crude oil becomes chemistry, and the chemistry becomes a rocket to the Moon."]

@@ -934,7 +934,10 @@
 		}
 		{
 			dependencies: ["314A27EF247A656B"]
-			description: ["The &6Nuclear Clock&r keeps every later machine honest."]
+			description: [
+				"The &6Nuclear Clock&r is a thorium-229 target locked to a laser: it keeps time to a part in a quintillion, and every later machine that must agree on the second is timed from it."
+				"It is made in the Nuclear Clock Lab from thorium-229 and a UHV circuit. It is a component of the gate and of the swarm control station, so build one early. Make them in the lab by ME and keep a small stock."
+			]
 			icon: "grindless:nuclear_clock"
 			id: "76A6024B2CCB4E3E"
 			rewards: [{ id: "514894D7663B30F8", type: "xp", xp: 80 }]
@@ -962,7 +965,10 @@
 		}
 		{
 			dependencies: ["3F50627705B1E295"]
-			description: ["A &6Betavoltaic Cell&r gives microwatts for fifty years."]
+			description: [
+				"A &6Betavoltaic Cell&r turns the beta decay of nickel-63 straight into current: microwatts for fifty years, with nothing to refuel."
+				"The fab makes it from a nickel-63 target and clean-room parts. It powers sensors and probes that cannot be recharged, and the solar probe carries one. Automate it with a nickel-63 target feed from the driver line and a chest of finished cells."
+			]
 			icon: "grindless:betavoltaic_cell"
 			id: "152AD703AFAF17C4"
 			rewards: [{ id: "5EC99DAFBE100A1E", type: "xp", xp: 80 }]
@@ -1106,7 +1112,10 @@
 		}
 		{
 			dependencies: ["152A53C77D72EB36"]
-			description: ["A &6Neural Organoid&r is grown, not assembled."]
+			description: [
+				"A &6Neural Organoid&r is grown, not assembled: neurons on a scaffold, fed and kept sterile until they work as a processor."
+				"The organoid array grows it from a scaffold and nutrient, and the cultures are discarded on a schedule. It is the core of the wetware circuit row and one of the gate's five ingredients. Automate it with scaffolds and nutrient by ME and pipe, and never leave a culture unwatched."
+			]
 			icon: "grindless:neural_organoid"
 			id: "3E1831CBB2AC4582"
 			rewards: [{ id: "392C738582076E6F", type: "xp", xp: 80 }]
@@ -1166,7 +1175,10 @@
 		}
 		{
 			dependencies: ["31E7259B9EAE8F28"]
-			description: ["A &6UHTC Tile&r survives a heat that melts steel."]
+			description: [
+				"A &6UHTC Tile&r is an ultra-high-temperature ceramic that survives a heat that melts steel. The &6UHTC Nozzle&r is the same ceramic cast as the throat of a rocket motor."
+				"Both come from the spark plasma sinterer, from ceramic powders pressed under pulsed current. The tile lines the reentry capsule and the nozzle goes into the ICAN rocket motor. Automate it with powders by ME and let the dies cool before the parts leave."
+			]
 			icon: "grindless:uhtc_tile"
 			id: "5EF22F1229258335"
 			rewards: [{ id: "3A9DCF3E7CD2C36E", type: "xp", xp: 80 }]
@@ -1261,7 +1273,10 @@
 		}
 		{
 			dependencies: ["36F23A4BE8B4232F"]
-			description: ["&6ZBLAN Fibre&r carries light for the whole circuit stack."]
+			description: [
+				"&6ZBLAN Fibre&r is a fluoride glass drawn in microgravity, where it cannot crystallise, so it is the lowest-loss optical fibre there is."
+				"The ZBLAN draw tower pulls it from a preform on the station. It is the light path of the photonic circuit stack and of the optical links of the ages after this. Automate it with preforms by ME and a chest on the spool."
+			]
 			icon: "grindless:zblan_fibre"
 			id: "3CE6A86EC0A14975"
 			rewards: [{ id: "1B7CBB8F5D974FC1", type: "xp", xp: 80 }]
@@ -1334,7 +1349,10 @@
 		}
 		{
 			dependencies: ["52044A97A7656F49"]
-			description: ["A &6Swarm Segment&r is one panel of thousands."]
+			description: [
+				"A &6Swarm Segment&r is one mirror-and-collector panel of the thousands that make a star-powered swarm."
+				"The foundry builds it from Mercury metals and a UHV hull. The control station needs a steady stream of them to steer the swarm and collect its power, which UEV asks for. Automate it with metals by ME and send segments straight to the station."
+			]
 			icon: "grindless:swarm_segment"
 			id: "132CE2D8220770F6"
 			rewards: [{ id: "31C375B066219311", type: "xp", xp: 80 }]
@@ -1379,7 +1397,10 @@
 		}
 		{
 			dependencies: ["1DD195A0792EB0C3"]
-			description: ["A &6Solar Probe&r survives where nothing else does."]
+			description: [
+				"A &6Solar Probe&r survives where nothing else does: it flies through the corona and measures the field of the Sun's outer atmosphere."
+				"The solar probe bay builds it from heat-shielded parts, and the swarm control station guides it. The returned &6Coronal Field Map&r is part of the Gate to UEV. Automate it with probes by ME, and let the maps leave by ME."
+			]
 			icon: "grindless:solar_probe"
 			id: "514BBB24C91C3EB1"
 			rewards: [{ id: "31F5A1E3E5966315", type: "xp", xp: 80 }]
@@ -1409,7 +1430,10 @@
 		}
 		{
 			dependencies: ["3B842B6DA3F17B57"]
-			description: ["A &6Sample Canister&r is the proof that the trip worked."]
+			description: [
+				"A &6Sample Canister&r holds rock and soil from another world and is the proof that the trip worked. It is opened only in a sealed lab."
+				"The sample receiving facility opens it behind BSL-4 walls and sorts what it holds. Those samples feed the surface machines on Proxima b and the life rows of UEV. Automate it with canisters by ME and keep nothing unsterilised outside the lab."
+			]
 			icon: "grindless:sample_canister"
 			id: "31C3A120B2D02968"
 			rewards: [{ id: "3E33096E7C7F12DF", type: "xp", xp: 80 }]

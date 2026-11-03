@@ -115,7 +115,7 @@
 				{ id: "12EAC45737D9063B", item: "grindless:ring_ice_sample", type: "item" }
 				{ id: "388F17E4CC698EE9", item: "grindless:saturnian_quantum_seed", type: "item" }
 			]
-			title: "Ring Ice"
+			title: "Ring Ice Sample"
 			x: 15.5d
 			y: 0.0d
 		}
@@ -132,12 +132,12 @@
 		}
 		{
 			dependencies: ["3F6D11BF4C2EAF0B"]
-			description: ["Titan's haze is organic: &6Tholin&r, a tarry mix of nitriles that the chemistry back home can use."]
+			description: ["Titan's haze is organic: &6Tholin&r, a tarry mix of nitriles that the chemistry back home can use. The tholin reformer makes it from the Titan recording, so you need that line running first. It unlocks carbon fibre, bacteria food and the organics ahead. Keep the reformer fed by ME and store the output in a tank."]
 			icon: "grindless:tholin"
 			id: "160D1EB11990217E"
 			rewards: [{ id: "114DEA61DA308FC4", type: "xp", xp: 100 }]
 			tasks: [{ id: "71735701E16A7CEE", item: "grindless:tholin", type: "item" }]
-			title: "Tholins"
+			title: "Tholin Sample"
 			x: 19.0d
 			y: -1.0d
 		}
@@ -186,13 +186,13 @@
 				{ id: "35B3131F8154E6D8", item: "grindless:saturn_interior_model", type: "item" }
 				{ id: "5A6E0172E53CC5D3", item: "grindless:uranus_transfer_chart", type: "item" }
 			]
-			title: "Ring Song"
+			title: "Saturn's Interior"
 			x: 17.5d
 			y: 2.0d
 		}
 		{
 			dependencies: ["5934DC53BB683C7F"]
-			description: ["The next tank is built round aerogel. Bring plenty of fuel: nothing out there refuels you."]
+			description: ["The next tank is built round aerogel, which is made from the archaeal culture at the aerogel works, so keep that line running. It unlocks Uranus and the ice-giant trips. Bring plenty of fuel: nothing out there refuels you. Build tanks in the assembler and let ME stock a few for every launch."]
 			icon: "grindless:aerogel_fuel_tank"
 			id: "3F7C9D7577EC9E61"
 			rewards: [{ id: "188FE67046DD0268", type: "xp", xp: 120 }]
@@ -237,7 +237,7 @@
 				{ id: "1A27932001992774", item: "grindless:ice_giant_atmosphere_sample", type: "item" }
 				{ id: "7D927CD0ADA2ACF5", item: "grindless:uranian_quantum_seed", type: "item" }
 			]
-			title: "Deep Gas"
+			title: "Deep Gas Sample"
 			x: 25.0d
 			y: 0.5d
 		}
@@ -248,7 +248,7 @@
 			id: "5ACE6AC220A748F1"
 			rewards: [{ id: "5D57EB71DF8D1859", type: "xp", xp: 120 }]
 			tasks: [{ id: "545CA38A055DB1AA", item: "grindless:ice_giant_diamond_seed", type: "item" }]
-			title: "Diamond Rain"
+			title: "The Diamond Rain Seed"
 			x: 24.5d
 			y: -1.5d
 		}
@@ -272,7 +272,7 @@
 			id: "73AF7DB38F9A4A8E"
 			rewards: [{ id: "1D6E7FE259D4A650", type: "xp", xp: 120 }]
 			tasks: [{ id: "193B2DB8A6C5A3D3", item: "grindless:neptune_flyby_probe", type: "item" }]
-			title: "Past Neptune"
+			title: "Neptune Flyby"
 			x: 27.0d
 			y: 1.5d
 		}
@@ -316,7 +316,7 @@
 			id: "14961D670920ACD5"
 			rewards: [{ id: "1840569730D5167C", type: "xp", xp: 120 }]
 			tasks: [{ id: "1CD73F11A1863AFF", item: "grindless:kuiper_target_list", type: "item" }]
-			title: "Kuiper Targets"
+			title: "The Kuiper List"
 			x: 33.5d
 			y: 0.5d
 		}
@@ -389,8 +389,8 @@
 			y: -7.0d
 		}
 		{
-			dependencies: ["7A980F3B74DBF079"]
-			description: ["The &6ZPM Circuit Assembler&r is the first assembler that can build the circuits ZPM machines are made of. ZPM components for its hull, a cleanroom you already run, and the UV-tier circuits that feed it: the Crystal Processor Mainframe from the LuV assembly line, or a UV universal circuit. The Wetware Processor Assembly, which only this assembler builds, and the circuits the controllers of this era ask for. Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns."]
+			dependencies: ["1D98852F1AB675C2"]
+			description: ["The &6ZPM Circuit Assembler&r is the first assembler that can build the circuits ZPM machines are made of. ZPM components for its hull, a cleanroom you already run, and the circuits that feed it: the Crystal Processor Computer from the quest before, the Crystal Processor Mainframe from the LuV assembly line, or a UV universal circuit. The Wetware Processor Assembly, which only this assembler builds, and the circuits the controllers of this era ask for. Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns."]
 			icon: "gtceu:zpm_circuit_assembler"
 			id: "77DE04F713EEBE61"
 			rewards: [{ id: "5FC15E60BB7CE99E", type: "xp", xp: 100 }]
@@ -401,11 +401,11 @@
 				{ id: "570680B6B5AC4E4F", item: "gtceu:zpm_circuit_assembler", type: "item" }
 			]
 			title: "ZPM Circuit Assembler"
-			x: 3.5d
+			x: 5.5d
 			y: -10.5d
 		}
 		{
-			dependencies: ["77DE04F713EEBE61"]
+			dependencies: ["7A980F3B74DBF079"]
 			description: ["Crystal processor assemblies on a larger board make       the &6Crystal Processor Computer&r, a ZPM-tier circuit that the LuV assembler builds. Several crystal assemblies for each and a LuV circuit assembler or assembly line. The ZPM assembler is not needed. ZPM hulls and the controllers of this era that ask for a circuit. Crystal assemblies come from the LuV line by ME; let the LuV assembler draw them on demand."]
 			icon: "gtceu:crystal_processor_computer"
 			id: "1D98852F1AB675C2"
@@ -414,7 +414,7 @@
 			size: 1.0d
 			tasks: [{ id: "556DBC5E786C7517", item: "gtceu:crystal_processor_computer", type: "item" }]
 			title: "Crystal Computer"
-			x: 5.5d
+			x: 3.5d
 			y: -10.5d
 		}
 		{
@@ -571,7 +571,7 @@
 		}
 		{
 			dependencies: ["5331DFDEAD7A36A2"]
-			description: ["A &6ZPM SMES cell&r and a wireless hatch put another tier on the network. Sunlight is a rumour at Saturn, so everything out there draws from it. The cold room that winds the wire, and enough cells to carry the Mk2 start. The Mk2 next, and stations at Saturn and Uranus that run on power made at home. Nothing to feed: size the cells for your busiest hour and add more when it dips."]
+			description: ["A &6ZPM SMES cell&r and a wireless hatch put another tier on the network. Sunlight is a rumour at Saturn, so everything out there draws from it. The cold room that winds the wire, a ZPM energy hatch for each cell bank, and enough cells to carry the Mk2 start. The Mk2 next, and stations at Saturn and Uranus that run on power made at home. Nothing to feed: size the cells for your busiest hour and add more when it dips."]
 			icon: "grindless:zpm_smes_cell"
 			id: "57720D544EAFA2F9"
 			rewards: [{ id: "3BD20C011F89364F", type: "xp", xp: 100 }]
@@ -579,7 +579,8 @@
 			size: 1.25d
 			tasks: [
 				{ id: "1B058F6328DC468F", item: "grindless:zpm_smes_cell", type: "item" }
-				{ id: "3CD3FF55887D41DB", item: "gtceu:zpm_wireless_energy_hatch", type: "item" }
+				{ id: "3CEC6759CB09EFCA", item: "gtceu:zpm_energy_input_hatch", type: "item" }
+				{ id: "1CA946A08F89DC08", item: "gtceu:zpm_wireless_energy_hatch", type: "item" }
 			]
 			title: "The Network Goes ZPM"
 			x: 7.0d
@@ -984,7 +985,7 @@
 		}
 		{
 			dependencies: ["5018E9B05AD69E21"]
-			description: ["A culture that thrives where nothing else survives. It is the biology behind the aerogel recipes."]
+			description: ["&6Archaea&r are a culture that thrives where nothing else survives, and the biology behind the aerogel recipes. The vent bioreactor grows them from a seed batch, with heat and nutrients. They feed the aerogel works. A seed batch survives small runs, so keep one alive in ME and draw from it."]
 			icon: "grindless:archaeal_culture"
 			id: "37F864D2D349BD17"
 			rewards: [{ id: "1180ECF4D8FB7160", type: "xp", xp: 80 }]
@@ -1027,7 +1028,7 @@
 		}
 		{
 			dependencies: ["54B3C436DF487119"]
-			description: ["The neutrino count, written up as a map of the sun's core. The gate to UV asks for it."]
+			description: ["The neutrino count, written up as a map of the sun's core, is what the &6Solar Core Survey&r is for: it is the proof of work the gate to UV asks for. It is made from the neutrino detector's readings in the survey line, so keep the detector fed and running. Nothing else uses it, so make one and hand it in. Detector output reaches the line by ME, so the whole run can be left unattended."]
 			icon: "grindless:solar_core_survey"
 			id: "5E45678B3B8A8A65"
 			rewards: [{ id: "3757A265E0E550EE", type: "xp", xp: 120 }]
@@ -1071,7 +1072,7 @@
 		}
 		{
 			dependencies: ["5330AC3948DAA01C"]
-			description: ["A sample sealed in aerogel so that it reaches home unchanged."]
+			description: ["The &6Aerogel Cartridge&r seals a sample in aerogel so that it reaches home unchanged. It is made in an assembler from aerogel and polyethylene, with the aerogel works supplying the first. Every Saturn and Uranus sample asks for one, so it unlocks the whole sample run. Keep a stock in ME and let the assembler refill it on demand."]
 			icon: "grindless:aerogel_cartridge"
 			id: "386669836DB882A5"
 			rewards: [{ id: "5C137F145CD5F90F", type: "xp", xp: 80 }]
@@ -1148,7 +1149,7 @@
 		}
 		{
 			dependencies: ["73BBBB6062106F00"]
-			description: ["What the probe saw as it fell, stored as a recording."]
+			description: ["The &6Titan Recording&r is what the entry probe saw as it fell, stored for the lab. It comes from a probe launched through the Titan line, so you need a probe, a launch and a working station. It unlocks the tholin reformer, which needs the recording to work. Probes are single use, so automate probe building and let ME collect each recording."]
 			icon: "grindless:titan_probe_recording"
 			id: "14A8433C85449724"
 			rewards: [{ id: "1182BDBFFD4628C0", type: "xp", xp: 80 }]
@@ -1270,7 +1271,7 @@
 		}
 		{
 			dependencies: ["1CDA67742969FBD5"]
-			description: ["Titanium and duranium fuse into &6Tritanium&r in the Mk2. It is a UV metal, made here first."]
+			description: ["&6Tritanium&r is the first UV metal, made here early. Titanium and duranium fuse into it in the Mk2 reactor, so the Second Ring must be running with plenty of hatches. It unlocks darmstadtium, the assembly hall and the UV machine hulls. Feed the reactor by tank and pipe and pull the ingots by ME."]
 			icon: "gtceu:tritanium_ingot"
 			id: "7431D3D54AC9A142"
 			rewards: [{ id: "53F5634B3871D39B", type: "xp", xp: 100 }]
@@ -1281,7 +1282,7 @@
 		}
 		{
 			dependencies: ["7431D3D54AC9A142"]
-			description: ["Arsenic and ruthenium make &6Darmstadtium&r in the same reactor. Another UV metal you will need early."]
+			description: ["&6Darmstadtium&r is another UV metal you will need early. Arsenic and ruthenium fuse into it in the same Mk2 reactor, after tritanium. It unlocks the assembly hall and the metal parts of UV machines. Keep both feeds on tanks and send the ingots on by ME."]
 			icon: "gtceu:darmstadtium_ingot"
 			id: "3D0152B3D0D3DF99"
 			rewards: [{ id: "7B5469AAD4B33388", type: "xp", xp: 100 }]

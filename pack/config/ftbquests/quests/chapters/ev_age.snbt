@@ -47,10 +47,7 @@
 			]
 			icon: "gtceu:lunar_drill"
 			id: "246C8ADBADA728E9"
-			rewards: [
-				{ id: "7451BE7DAFCDCDCC", type: "xp", xp: 80 }
-				{ count: 2, id: "731EAC7375E702A5", item: "grindless:stainless_steel_drill_bit", type: "item" }
-			]
+			rewards: [{ id: "7451BE7DAFCDCDCC", type: "xp", xp: 100 }]
 			shape: "gear"
 			size: 1.5d
 			tasks: [{ id: "5B07A5D98BA69B39", item: "gtceu:lunar_drill", type: "item" }]
@@ -242,10 +239,7 @@
 			]
 			icon: "grindless:ruthenium_catalyst"
 			id: "169F778007DE0484"
-			rewards: [
-				{ id: "5067394C445994B8", type: "xp", xp: 40 }
-				{ id: "7E2ADEECDA9F8A70", item: "grindless:ruthenium_catalyst", type: "item" }
-			]
+			rewards: [{ id: "5067394C445994B8", type: "xp", xp: 60 }]
 			tasks: [{ count: 4L, id: "7CD60D931DAFDC14", item: "grindless:ruthenium_catalyst", type: "item" }]
 			title: "Ruthenium Catalyst"
 			x: 18.0d
@@ -344,10 +338,7 @@
 			]
 			icon: "gtceu:raw_scheelite"
 			id: "56FFD4EF98A6C3B8"
-			rewards: [
-				{ id: "3977177DF1BB38B0", type: "xp", xp: 80 }
-				{ count: 8, id: "7DA8045ABC20D814", item: "grindless:titanium_drill_bit", type: "item" }
-			]
+			rewards: [{ id: "3977177DF1BB38B0", type: "xp", xp: 120 }]
 			tasks: [{ count: 16L, id: "7391930490146D70", item: "gtceu:raw_scheelite", type: "item" }]
 			title: "The Martian Tripod"
 			x: 20.0d
@@ -457,6 +448,7 @@
 		}
 		{
 			dependencies: ["164F0808EF9DF557"]
+			description: ["The nano ladder: wafers, chips and the circuits an EV circuit assembler builds from them, up to the supercomputer that gates IV."]
 			icon: "gtceu:nano_processor"
 			id: "31929D82D6220E91"
 			rewards: [ ]
@@ -492,8 +484,9 @@
 			shape: "hexagon"
 			size: 1.0d
 			tasks: [
-				{ id: "1C69DAC0AF87A3AD", item: "gtceu:nano_cpu_wafer", type: "item" }
-				{ id: "74379C90DCF6D334", item: "gtceu:nano_cpu_chip", type: "item" }
+				{ id: "5A773A9F78311909", item: "gtceu:carbon_fibers", type: "item" }
+				{ id: "190EFCF060448247", item: "gtceu:nano_cpu_wafer", type: "item" }
+				{ id: "34CBD6EAD60BF665", item: "gtceu:nano_cpu_chip", type: "item" }
 			]
 			title: "Nano CPU Wafer"
 			x: 22.0d
@@ -564,16 +557,13 @@
 		}
 		{
 			dependencies: ["3C5EB45848DA6797", "7ECBC918EE387EB6"]
-			description: ["The &6Nanoprocessor&r is the nano line's HV circuit, and only the EV circuit assembler can put one together. Nano CPU chips, carbon fibers and the usual SMD parts. The assembly, and every EV machine that wants circuits. Run it from the assembler's own pattern, with the chips delivered by ME."]
+			description: ["The &6Nanoprocessor&r is the nano line's HV circuit, and only the EV circuit assembler can put one together. Nano CPU chips, the carbon fibers from the wafer quest and the usual SMD parts. The assembly, and every EV machine that wants circuits. Run it from the assembler's own pattern, with the chips delivered by ME."]
 			icon: "gtceu:nano_processor"
 			id: "115A9664BF3CF352"
 			rewards: [{ id: "1D596DC95CD2B572", type: "xp", xp: 50 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [
-				{ id: "31FD831D914C3A7F", item: "gtceu:carbon_fibers", type: "item" }
-				{ id: "79EB1FDB34D5C610", item: "gtceu:nano_processor", type: "item" }
-			]
+			tasks: [{ id: "117EF754C79BC140", item: "gtceu:nano_processor", type: "item" }]
 			title: "Nanoprocessor"
 			x: 22.0d
 			y: 3.0d
@@ -619,6 +609,7 @@
 		}
 		{
 			dependencies: ["7E510A95C066D14C"]
+			description: ["The halls of the Moon base: oxygen, cold, power and the bridge home. Each machine here makes the next part of the journey work without you."]
 			icon: "gtceu:regolith_cell"
 			id: "31DCC90FAE7A31B4"
 			rewards: [ ]
@@ -840,10 +831,7 @@
 			description: ["The &6Sealed Dome&r is a greenhouse that brings its own soil and makes a sky out of lamps. Water and carbon dioxide. Circuit 5 runs on carbon dioxide you ship in, anywhere; Mars supplies its own from the air. On circuit 5 (any world) or 6 (Mars only) it grows crops and breathes out oxygen. Water and gas by hatch, harvest by output bus."]
 			icon: "gtceu:sealed_dome"
 			id: "56820468F118D3EA"
-			rewards: [
-				{ id: "320FD462BCBA4081", type: "xp", xp: 60 }
-				{ count: 9, id: "77DB74D40CF625D1", item: "minecraft:dirt", type: "item" }
-			]
+			rewards: [{ id: "320FD462BCBA4081", type: "xp", xp: 80 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [{ id: "7D87303BAEF28490", item: "gtceu:sealed_dome", type: "item" }]
@@ -893,6 +881,7 @@
 			description: [
 				"Two &6EU P2P Tunnels&r on one frequency, one on a cable at home and one on a hatch up here, and the power plant on Earth runs the Moon."
 				"The tunnels pass whatever voltage you feed them, so match it to the hatch at the far end. AE2 charges a small toll in AE energy for the delivery."
+				"There is no recipe for the tunnel: craft an ordinary ME P2P Tunnel and right-click it with a GregTech wire or cable. That attunes it to EU, and the cable you choose is the voltage it carries. Make a pair on one frequency: the home end next to the generators, the far end next to the Moon base's main hatch."
 			]
 			icon: "eup2p:eu_p2p_tunnel"
 			id: "42BF2F77456F8773"
@@ -910,10 +899,7 @@
 			]
 			icon: "grindless:lunar_quantum_seed"
 			id: "38AA0491A1AFD8C9"
-			rewards: [
-				{ id: "5D23F1FDA315072E", type: "xp", xp: 50 }
-				{ count: 4, id: "3CA3C104FB1DDB7B", item: "minecraft:ender_pearl", type: "item" }
-			]
+			rewards: [{ id: "5D23F1FDA315072E", type: "xp", xp: 70 }]
 			tasks: [
 				{ id: "11691B6B87A0E83E", item: "grindless:lunar_quantum_seed", type: "item" }
 				{ count: 2L, id: "1BCF50880C918E54", item: "ae2:quantum_link", type: "item" }

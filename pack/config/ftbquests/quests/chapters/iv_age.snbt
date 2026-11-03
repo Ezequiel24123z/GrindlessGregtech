@@ -89,7 +89,7 @@
 			y: 0.25d
 		}
 		{
-			dependencies: ["77A25AB4BB859C79", "004525B795119B1B"]
+			dependencies: ["774234968F1BEB95", "004525B795119B1B"]
 			description: ["An &6LEU Fuel Assembly&r is enriched uranium pressed into pellets and sealed in Zircaloy tubes with a breath of helium. The zirconium comes from the End's zircon, with a pinch of tin."]
 			icon: "grindless:leu_fuel_assembly"
 			id: "77E9A2979A7161D3"
@@ -204,10 +204,7 @@
 			]
 			icon: "gcyr:elite_rocket_motor"
 			id: "5A378E5CFD8DFF82"
-			rewards: [
-				{ id: "777A34209EC1E675", type: "xp", xp: 100 }
-				{ count: 4, id: "7531DD076C55835A", item: "gcyr:heat_shielding_fabric", type: "item" }
-			]
+			rewards: [{ id: "777A34209EC1E675", type: "xp", xp: 140 }]
 			tasks: [
 				{ count: 2L, id: "5DC0B9F1AA0B60A7", item: "gcyr:elite_fuel_tank", type: "item" }
 				{ count: 6L, id: "350AAB29A5FB3114", item: "gcyr:elite_rocket_motor", type: "item" }
@@ -263,10 +260,7 @@
 			description: ["Ender pearls and helium-3 from home, sealed under Venusian regolith in a chemical reactor, make a &6Venusian Quantum Seed&r. The reactor can stand anywhere once the regolith is shipped. Blow it up with a singularity back home for the Venus bridge's pair."]
 			icon: "grindless:venusian_quantum_seed"
 			id: "71E4B392A6D559D9"
-			rewards: [
-				{ id: "783C1886D86875E8", type: "xp", xp: 40 }
-				{ count: 2, id: "1FDB9B187C182C84", item: "minecraft:ender_pearl", type: "item" }
-			]
+			rewards: [{ id: "783C1886D86875E8", type: "xp", xp: 60 }]
 			tasks: [{ id: "35690738DF2186E5", item: "grindless:venusian_quantum_seed", type: "item" }]
 			title: "A Seed from Venus"
 			x: 48.5d
@@ -324,10 +318,7 @@
 			description: ["Hermean regolith dust, a chemical reactor and the same trick make the &6Hermean Quantum Seed&r in any world, once the dust is shipped. Its pair is the Mercury bridge."]
 			icon: "grindless:hermean_quantum_seed"
 			id: "19D2E454A31BDFC2"
-			rewards: [
-				{ id: "53CD0686FB658696", type: "xp", xp: 40 }
-				{ count: 2, id: "135DA6C5F91DBB9E", item: "minecraft:ender_pearl", type: "item" }
-			]
+			rewards: [{ id: "53CD0686FB658696", type: "xp", xp: 60 }]
 			tasks: [{ id: "77AF3D00C5E588DA", item: "grindless:hermean_quantum_seed", type: "item" }]
 			title: "A Seed from Mercury"
 			x: 44.5d
@@ -363,10 +354,7 @@
 			]
 			icon: "gtceu:iridium_dust"
 			id: "72E1760292CBF88F"
-			rewards: [
-				{ id: "56C76FC68F45A92A", type: "xp", xp: 80 }
-				{ id: "530FBA93104FE90A", item: "grindless:platinum_electrode", type: "item" }
-			]
+			rewards: [{ id: "56C76FC68F45A92A", type: "xp", xp: 110 }]
 			tasks: [
 				{ id: "74E62EC3EFC889AA", item: "gtceu:iridosmine_dust", type: "item" }
 				{ id: "738F3D30840F6EEA", item: "gtceu:iridium_dust", type: "item" }
@@ -462,6 +450,7 @@
 		}
 		{
 			dependencies: ["3CF7A4745035119A"]
+			description: ["The quantum ladder: the IV wafers, chips and circuits, and the parts built from them, once the assembly line is running."]
 			icon: "gtceu:quantum_processor"
 			id: "5BBE143E97647099"
 			rewards: [ ]
@@ -502,19 +491,6 @@
 			]
 			title: "IV Laser Engraver"
 			x: 69.5d
-			y: 0.75d
-		}
-		{
-			dependencies: ["331B6A580FDEF235"]
-			description: ["The &6Circuit Assembly Line&r builds quantum circuits in bulk, with several inputs at once. Its controller, plus the same boards and chips the single assembler uses. Quantum circuits at the rate the IV hulls and the next era demand. Every slot fed from the network. Stock first, then run."]
-			icon: "gtnn:circuit_assembly_line"
-			id: "32D0BFCCDAD998A3"
-			rewards: [{ id: "5A109EBA78FEBA29", type: "xp", xp: 80 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [{ id: "34CC912702F00278", item: "gtnn:circuit_assembly_line", type: "item" }]
-			title: "Circuit Assembly Line"
-			x: 71.0d
 			y: 0.75d
 		}
 		{
@@ -651,6 +627,7 @@
 		}
 		{
 			dependencies: ["3FB9EA4152DCD1D3"]
+			description: ["The IV halls: fuel, fission, enrichment and the heavy plants of Venus and Mercury, each with the first steps that put it to work."]
 			icon: "gtceu:hot_cell"
 			id: "13366823FB3362E0"
 			rewards: [ ]
@@ -662,8 +639,8 @@
 			y: -2.0d
 		}
 		{
-			dependencies: ["13366823FB3362E0"]
-			description: ["The &6Hot Cell&r is where uranium stops being something you carry around. Its controller and Radiation-Proof Machine Casing, lead-heavy blocks from the IV assembler, set in concrete. Enrichment, fuel, reprocessing and every radioactive step after it. It rides in and out on buses, and the programmed circuit picks the job."]
+			dependencies: ["77A25AB4BB859C79"]
+			description: ["The &6Hot Cell&r is where uranium stops being something you carry around. Its controller, which takes a Zircaloy cladding tube pressed at the Fuel Fabrication Plant, and Radiation-Proof Machine Casing, lead-heavy blocks from the IV assembler, set in concrete. Enrichment, fuel, reprocessing and every radioactive step after it. It rides in and out on buses, and the programmed circuit picks the job."]
 			icon: "gtceu:hot_cell"
 			id: "30D78F6EB49AF27B"
 			rewards: [{ id: "3C46C7FFD0C53F21", type: "xp", xp: 100 }]
@@ -697,7 +674,7 @@
 			y: -0.25d
 		}
 		{
-			dependencies: ["774234968F1BEB95"]
+			dependencies: ["13366823FB3362E0"]
 			description: ["Real fuel is pellets in metal tubes, pressed, sintered and sealed with helium, and the &6Fuel Fabrication Plant&r does the whole line. Its controller, built around an IV assembler. Maybe make two. LEU, MOX and breeder assemblies. The circuit picks the step. Feed it from the hot cell by ME."]
 			icon: "gtceu:fuel_fabrication_plant"
 			id: "77A25AB4BB859C79"
@@ -706,8 +683,8 @@
 			size: 1.25d
 			tasks: [{ id: "78E3104B5A5427BA", item: "gtceu:fuel_fabrication_plant", type: "item" }]
 			title: "Fuel Fabrication Plant"
-			x: 17.25d
-			y: 0.75d
+			x: 4.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["5C008907C9055459"]
@@ -733,10 +710,7 @@
 			description: ["Four wells push acid into the rock, one pulls the uranium back up, and resin in the header house catches it. The &6In-Situ Leach Field&r only works in the End. Its controller, ion-exchange resin, and the five wells, which you do dig yourself. Uraninite, and with it enrichment. The sample is never used up and the resin wears slowly. Waste goes into storage."]
 			icon: "gtceu:isr_wellfield"
 			id: "5FD0B9548159D199"
-			rewards: [
-				{ id: "149CFF6CA016D569", type: "xp", xp: 80 }
-				{ count: 2, id: "3E1DEACB8F0950E4", item: "grindless:ion_exchange_resin", type: "item" }
-			]
+			rewards: [{ id: "149CFF6CA016D569", type: "xp", xp: 120 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [

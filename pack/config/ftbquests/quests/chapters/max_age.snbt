@@ -86,7 +86,7 @@
 		}
 		{
 			dependencies: ["115B5942935339A3", "73F533AC440AACF3"]
-			description: ["A relay probe for the Galactic Centre. It is an assembly-line recipe researched at the Hawking drive, and it takes metal feedstock, so make that first. The ring at Cygnus X-1 throws it, with the Sagittarius A* chart kept in its store."]
+			description: ["A relay probe for the Galactic Centre. It is an assembly-line recipe researched at the Hawking drive, and it takes metal feedstock, so make that first. Its sinter casing comes from the Cluster-Light Furnace line. The ring at Cygnus X-1 throws it, with the Sagittarius A* chart kept in its store."]
 			icon: "grindless:gc_relay_probe"
 			id: "5DC7C7B13F7805BC"
 			rewards: [{ id: "7A6EB62D4EA7DF82", type: "xp", xp: 150 }]
@@ -167,7 +167,7 @@
 		}
 		{
 			dependencies: ["17C4E15C613E47BA"]
-			description: ["A seed for a belt of planetesimals at the centre. It is an assembly-line recipe researched with the cluster ephemeris, and it takes metal feedstock. The gate's hold here takes it with the launched probe."]
+			description: ["A seed for a belt of planetesimals at the centre. It is an assembly-line recipe researched with the cluster ephemeris, and it takes metal feedstock and sinter casing from the Cluster-Light Furnace line. The gate's hold here takes it with the launched probe."]
 			icon: "grindless:nsc_belt_seed"
 			id: "7C7742F4DAA892DC"
 			rewards: [{ id: "7C7F356F6F55002E", type: "xp", xp: 150 }]
@@ -496,7 +496,10 @@
 		}
 		{
 			dependencies: ["719DCF42891758DC"]
-			description: ["Half the segments are cut. Charge the cryocoolers."]
+			description: [
+				"Half the segments of the mirror shell are cut. The shell is the reflector around the black hole seed, and it is built a segment at a time, so each half way is a reason to check the line."
+				"Segments are cut in a long batch job. The cryocoolers hold the shell cold while it is cut, so charge them before each run and keep them charged. Send the segments into the frame by ME as they come; the count is large, so the check is the task below."
+			]
 			icon: "grindless:mirror_shell_segment"
 			id: "5B3098B8ADC224F9"
 			rewards: [{ id: "558CB855926E940D", type: "xp", xp: 100 }]
@@ -983,7 +986,10 @@
 		}
 		{
 			dependencies: ["77428218C6DD16A7"]
-			description: ["What is written there is what the new universe remembers."]
+			description: [
+				"The &6Genome Archive&r is every genome the pack has met, written to crystal: what is written there is what the new universe remembers."
+				"The Gene Ark makes it from the genomes you have collected on the way, in its sealed cold vault. The last seed needs it, and so do the gates and MAX+ after it. One archive is enough: bring the genomes in by ME and cap the output."
+			]
 			icon: "grindless:genome_archive"
 			id: "5A94EB5921E6E09A"
 			rewards: [{ id: "55812DFFDC074197", type: "xp", xp: 80 }]

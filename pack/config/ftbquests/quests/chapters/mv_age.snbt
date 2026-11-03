@@ -164,6 +164,73 @@
 			y: -4.5d
 		}
 		{
+			dependencies: ["30D3D68203F455F9"]
+			description: [
+				"Nickel and pentlandite veins carry the platinum group. Leaching and centrifuging leave a sludge of it. Pentlandite from the vein drill, sulfuric acid, the ore line and a centrifuge. Aqua regia dissolution. Drill, macerator, washer and leach in one line; sludge out by bus."
+				"This is where the platinum line starts."
+			]
+			icon: "gtceu:platinum_group_sludge_dust"
+			id: "3F5B7D9A1C2E4086"
+			rewards: [{ id: "5B7D9F1A3C2E4086", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "4A6C8E1B3D5F7092", item: "gtceu:platinum_group_sludge_dust", type: "item" }]
+			title: "Platinum Group Sludge"
+			x: 10.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["3F5B7D9A1C2E4086"]
+			description: [
+				"Nitric and hydrochloric acid together dissolve platinum, which neither does alone. Nitric acid from the LV line, hydrochloric acid and the sludge. Platinum and palladium salts. Both acids piped from tanks; leach liquor out by pipe."
+				"Store it only in acid-proof tanks."
+			]
+			icon: "gtceu:aqua_regia_bucket"
+			id: "6C8E1A3B5D7F2094"
+			rewards: [{ id: "7ED4D0785CE4164B", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7D9F2B4A6C8E1035", item: "gtceu:aqua_regia_bucket", type: "item" }]
+			title: "Aqua Regia"
+			x: 12.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["6C8E1A3B5D7F2094"]
+			description: [
+				"Ammonium chloride precipitates the platinum out of the solution as a salt. The dissolved platinum and ammonium chloride, in a reactor. Platinum metal, and the palladium left in the liquor. Liquor by pipe, ammonium chloride by bus, salt out by bus."
+				"The slag left over is kept for the HV platinum chapter."
+			]
+			icon: "gtceu:platinum_salt_dust"
+			id: "4D9BFAC8F46827EE"
+			rewards: [{ id: "2B4D6F8A1C3E5079", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1A3C5E7B9D2F4068", item: "gtceu:platinum_salt_dust", type: "item" }]
+			title: "Platinum Salt"
+			x: 14.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["4D9BFAC8F46827EE"]
+			description: [
+				"The salts are reduced to metal: platinum by heat, palladium from its ammine salt with formate. Platinum salt, the palladium liquor and formic acid or formate. Platinum catalysts for later chemistry. Salts by bus, reductant by pipe, metal dust out by bus."
+				"Nothing in this line skips a step."
+			]
+			icon: "gtceu:platinum_metal_dust"
+			id: "3C5E7A9B1D6F4082"
+			rewards: [{ id: "6F8B1D4A3C5E7029", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "4D6F8B2A1C3E5097", item: "gtceu:platinum_metal_dust", type: "item" }
+				{ id: "5E7A9C2B1D4F6038", item: "gtceu:palladium_metal_dust", type: "item" }
+			]
+			title: "Platinum and Palladium"
+			x: 16.0d
+			y: -4.5d
+		}
+		{
 			dependencies: ["5DC39DF3C1563B6B"]
 			description: [
 				"This is GregTech's own silicon. Silicon dioxide and carbon go into a blast furnace that only gets hot enough with Kanthal coils, and the ingot comes out hot and needs a dip in the chemical bath."
@@ -178,8 +245,8 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["7C7BAECAD00C19E7"]
-			description: ["Back into the furnace with silicon dust and a pinch of gallium arsenide, and out comes a &6Silicon Boule&r, one big single crystal. All your chips for a long while start as slices of one of these."]
+			dependencies: ["7C7BAECAD00C19E7", "3C5E7A9B1D4F2086"]
+			description: ["Polysilicon goes into the furnace with a pinch of gallium arsenide, and out comes a &6Silicon Boule&r, one big single crystal. All your chips for a long while start as slices of one of these."]
 			icon: "gtceu:silicon_boule"
 			id: "12A688D7F923740B"
 			rewards: [{ id: "723753988B299A39", type: "xp", xp: 35 }]
@@ -187,6 +254,22 @@
 			title: "Silicon Boule"
 			x: 10.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["7C7BAECAD00C19E7"]
+			description: [
+				"Boules need purer silicon than the ingot. Hydrochloric acid turns silicon into trichlorosilane, distillation cleans it, and the Siemens process deposits it back as polysilicon. Silicon, hydrochloric acid and hydrogen; the cupronickel blast furnace for the deposit. Silicon boules. Gas and distillation lines by pipe; polysilicon out by bus."
+				"Silicon dust no longer goes into a boule."
+			]
+			icon: "grindless:polysilicon"
+			id: "3C5E7A9B1D4F2086"
+			rewards: [{ id: "5E7A9C1B3D2F4068", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "55DF3631A3A38AF7", item: "grindless:polysilicon", type: "item" }]
+			title: "Siemens Polysilicon"
+			x: 10.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["12A688D7F923740B", "6213116B3B6723B8"]
@@ -334,7 +417,7 @@
 			dependencies: ["1A38798F23E8EA97"]
 			description: [
 				"Salt water comes from the rig if your base sits over an ocean; anywhere else, salt and water in the mixer do the job. The electrolyzer splits it into sodium hydroxide, chlorine and hydrogen."
-				"The chlorine goes into PVC and the hydrogen into methanol."
+				"The chlorine goes into 1,2-dichloroethane and the hydrogen into methanol."
 			]
 			icon: "gtceu:lv_electrolyzer"
 			id: "498077C9A58D9578"
@@ -343,6 +426,38 @@
 			title: "Brine and Chlorine"
 			x: 10.0d
 			y: 3.0d
+		}
+		{
+			dependencies: ["498077C9A58D9578"]
+			description: [
+				"Chlorine and ethylene combine into 1,2-dichloroethane, the first half of PVC. Chlorine from the brine line and ethylene from the biorefinery. Vinyl chloride, by cracking. Both gases by pipe into one reactor, liquid out by pipe."
+				"Chlorine no longer goes straight into vinyl chloride."
+			]
+			icon: "gtceu:dichloroethane_bucket"
+			id: "75D2882DC43B48B4"
+			rewards: [{ id: "2A91E82D8F25EB6C", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7A9C1E3B5D2F4086", item: "gtceu:dichloroethane_bucket", type: "item" }]
+			title: "Dichloroethane"
+			x: 12.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["75D2882DC43B48B4"]
+			description: [
+				"Heat cracks dichloroethane into vinyl chloride and hydrogen chloride. Dichloroethane and a heated reactor. PVC, and the hydrogen chloride goes back to the silicon line. Return the acid by pipe to the polysilicon plant."
+				"A gas, so keep it piped and tanked."
+			]
+			icon: "gtceu:lv_chemical_reactor"
+			id: "412605CA790945C0"
+			rewards: [{ id: "2E4A6C8B1D3F5097", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "78C3E2C622C30C78", type: "checkmark" }]
+			title: "Vinyl Chloride"
+			x: 12.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["62C555A8293900FA"]
@@ -356,8 +471,8 @@
 			y: 4.5d
 		}
 		{
-			dependencies: ["0D69D5BBC371A5B7", "498077C9A58D9578"]
-			description: ["Chlorine and ethylene make vinyl chloride, and that polymerizes into PVC. The hazmat suit is mostly PVC."]
+			dependencies: ["0D69D5BBC371A5B7", "412605CA790945C0"]
+			description: ["Vinyl chloride polymerizes into PVC. The hazmat suit is mostly PVC."]
 			icon: "gtceu:mv_mixer"
 			id: "0F6966AED46B5795"
 			rewards: [{ id: "5DE2D5B9164A186F", type: "xp", xp: 30 }]

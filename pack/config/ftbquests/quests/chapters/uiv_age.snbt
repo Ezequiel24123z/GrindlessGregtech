@@ -469,6 +469,19 @@
 			y: 10.5d
 		}
 		{
+			dependencies: ["5F3FD5DD9FD7DBAA"]
+			description: ["The TFLN Fab implants hydrogen into an isotopically pure silicon-28 wafer and slices off a thin film onto a handle wafer. The film is the &6Si-28 SOI Wafer&r that the quiet-qubit row needs; what remains is the &6Si-28 Donor Wafer&r. The TFLN Fab with a circuit of any UIV kind, and a silicon-28 wafer to slice. It draws UIV power. The silicon-28 SOI wafer of the later chapters. The donor wafer goes back to zone refining and is regrown, so no silicon-28 is lost. Feed handle wafers by ME and send the donors straight to the zone refiner; one loop keeps the isotope in circulation."]
+			icon: "grindless:si28_donor_wafer"
+			id: "11249E4704C3CD85"
+			rewards: [{ id: "5A5FCAA1C17F4921", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5C5ED279A8688B59", item: "grindless:si28_donor_wafer", type: "item" }]
+			title: "Ion-Sliced Silicon-28"
+			x: 12.0d
+			y: 10.5d
+		}
+		{
 			dependencies: ["3B27271078AAEDC7"]
 			description: ["A wafer exposed at 6.7 nanometres holds finer lines than any light before it: the &6BEUV-Exposed Wafer&r. The BEUV scanner (a UIV hull, UEV circuits), a tin-terbium droplet target, an HfO2 resist wafer and a BEUV mirror. The debris is caught and recycled. The BEUV driver ASIC next to it. Wafers by ME; send the fouled mirrors to the cleaning line, not to the bin."]
 			icon: "grindless:beuv_exposed_wafer"
@@ -1335,7 +1348,7 @@
 			shape: "circle"
 			size: 0.75d
 			tasks: [{ id: "105417D1EEAAC26F", type: "checkmark" }]
-			title: "Neutronium Pellet"
+			title: "What the Pellet Is"
 			x: 24.0d
 			y: -10.75d
 		}
