@@ -128,7 +128,7 @@
   function addCrafting(event) {
     var HULL = 'gtceu:uv_machine_hull'
     var list = [
-      { id: 'gtceu:neptune_deep_siphon', research: 'grindless:scoop_head',
+      { id: 'gtceu:neptune_deep_siphon', research: 'grindless:neptune_sample',
         parts: [HULL, '2x gtceu:uv_electric_pump', '2x gtceu:uv_electric_motor'],
         domain: ['4x grindless:scoop_head', '4x grindless:aerogel_cartridge', '2x grindless:probe_rtg'] },
       { id: 'gtceu:triton_geyser_sampler', research: 'grindless:aerogel_cartridge',
