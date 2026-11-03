@@ -57,7 +57,7 @@
         ['emi.grindless.info.antihydrogen_foundry.1',
             'About 5% of the antihydrogen annihilates in the trap each step; that is gamma heat in the shield casing walls, a stated loss with no item. The ice cell feeds the annihilation engine. The hatches sit on the back wall: 1-2 input buses, 1 output bus, 1-2 energy hatches.'],
         ['emi.grindless.info.annihilation_shield_casing.0',
-            'The structure block of the antimatter traps, foundries, engines and beam lines: tungsten and boron carbide plate that absorbs the gammas of annihilation. The assembler makes it at OpV (2 circuits). Its gamma heat is a stated loss with no item.'],
+            'The structure block of the antimatter traps, foundries, engines and beam lines: tungsten and boron carbide plate that absorbs the gammas of annihilation. The assembler makes four at a time at OpV from absorber tiles, a lithium-6 hydride shield, chain lamina stacks and tungsten plate, wetted with superfluid helium-3. Its gamma heat is a stated loss with no item.'],
         ['emi.grindless.info.annihilation_engine.0',
             'The engine burns antimatter, anywhere: either an antihydrogen ice cell with hydrogen, or an ACMF pellet with a stack of antiprotons. The pion gammas wear a gamma absorber tile, 1/16 a run; the activated tile goes to the hot cell and the emptied levitation cell comes back.'],
         ['emi.grindless.info.annihilation_engine.1',

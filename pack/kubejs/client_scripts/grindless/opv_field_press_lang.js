@@ -57,7 +57,7 @@
         ['gtceu.recipe.grindless_field_freezing.field_frozen_plate',
             'Circuit 2: the billet rolled into four field-frozen plates.'],
         ['gtceu.recipe.grindless_field_freezing.field_frozen_casing',
-            'Circuit 3: four plates on a tungsten steel frame make two field-frozen casings.'],
+            'Circuit 3: four field-frozen plates and two chain field coils make two field-frozen casings.'],
         ['gtceu.recipe.grindless_electron_beam.field_can',
             'Circuit 22: a chain lamina stack canned in 6N rhenium and molten tungsten, welded shut by the beam.'],
         ['gtceu.recipe.grindless_electron_beam.field_can_remelt',
