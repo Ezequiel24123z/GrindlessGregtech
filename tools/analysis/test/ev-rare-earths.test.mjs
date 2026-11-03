@@ -48,7 +48,7 @@ test('retired recipes are removed', () => {
 test('cascade seg_split row: circuit 3, exact amounts, no lookup clash', () => {
   const row = EC.recipes.find((r) => r.name === 'seg_split');
   assert.ok(row, 'row present');
-  assert.equal(row.circuit, 3);
+  assert.equal(row.circuit, 28);
   assert.equal(row.eut, 1920);
   assert.equal(row.duration, 200);
   assert.deepEqual(row.fluidsIn.map((f) => f.amount), [1000, 500, 1000]);

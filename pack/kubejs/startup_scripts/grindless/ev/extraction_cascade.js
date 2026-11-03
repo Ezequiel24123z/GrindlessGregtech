@@ -80,7 +80,7 @@
   }
   // items in: the merrillite and the programmed circuit; items out: the three chlorides (extraction) or the tricalcium phosphate
   // (leach); fluids in: the solution, the strip acid and the kerosene (extraction); fluids out: two in either mode
-  EC.maxIO = { itemsIn: 2, itemsOut: 3, fluidsIn: 3, fluidsOut: 2 }
+  EC.maxIO = { itemsIn: 2, itemsOut: 3, fluidsIn: 3, fluidsOut: 3 }
   EC.hatches = { energy: [1, 2], inputBus: 1, outputBus: 1, inputHatches: [1, 3], outputHatches: [1, 4], minCasings: 5 }
 
   // ---------------------------------------------------------------- pattern
