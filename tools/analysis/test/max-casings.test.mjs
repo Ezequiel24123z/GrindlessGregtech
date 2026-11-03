@@ -62,7 +62,7 @@ test('the truss is the only casing of the family without a truss input, and the 
   assert.ok(!JSON.stringify(find('grindless:assembler/tensegrity_truss_casing').j.inputs).includes('tensegrity_truss_casing'));
   const kube = path.join(pack, 'kubejs');
   const src = fs.readFileSync(path.join(kube, 'startup_scripts', 'grindless', 'max', 'foundation.js'), 'utf8');
-  assert.ok(src.includes('shell_window_coil_casing') && !/ActiveBlock/.test(src));
+  assert.ok(src.includes('shell_window_coil_casing') && !/\.create\([^)]*window_coil[^)]*\)\s*\.\s*activeBlock/.test(src));
 });
 
 test('the four new casings have texture, lang and EMI page', () => {
