@@ -60,7 +60,7 @@ const cap = (w) => w.charAt(0).toUpperCase() + w.slice(1);
 const words = (s) => s.split('_').filter(Boolean);
 // words that are acronyms or have a fixed spelling when a name has to be built from an id
 export const ACRONYMS = {
-  ebf: 'EBF', lcr: 'LCR', cvd: 'CVD', pvd: 'PVD', mtj: 'MTJ', mram: 'MRAM', me: 'ME', ae: 'AE', ae2: 'AE2', bfo: 'BFO', cofe: 'CoFe', cofeb: 'CoFeB',
+  ebf: 'EBF', lcr: 'LCR', cvd: 'CVD', pvd: 'PVD', mocvd: 'MOCVD', mbe: 'MBE', ald: 'ALD', mtj: 'MTJ', mram: 'MRAM', me: 'ME', ae: 'AE', ae2: 'AE2', bfo: 'BFO', cofe: 'CoFe', cofeb: 'CoFeB',
   aln: 'AlN', pcb: 'PCB', smd: 'SMD', cpu: 'CPU', ram: 'RAM', lpe: 'LPE', led: 'LED', hts: 'HTS', snspd: 'SNSPD', qpu: 'QPU', tbc: 'TBC',
   pmn: 'PMN', hd: 'HD', fcl: 'FCL', cmos: 'CMOS', sic: 'SiC', si: 'Si', nb: 'Nb', ito: 'ITO', uv: 'UV', ic: 'IC', soc: 'SoC', nand: 'NAND',
   hsla: 'HSLA', ptfe: 'PTFE', pvc: 'PVC', pbi: 'PBI', yig: 'YIG', zblan: 'ZBLAN', ndfeb: 'NdFeB', smco: 'SmCo', beuv: 'BEUV', euv: 'EUV',
@@ -240,7 +240,8 @@ export function describeController(c) {
     if (p.casing) {
       const cn = p.coil ? nameOf(p.coil) : '';
       const coil = cn && o.coil ? (/ coil block$/i.test(cn) ? `, with ${cn.replace(/ coil block$/i, '')} coils` : `, with ${cn}`) : '';
-      out.push(`Build it mostly from ${nameOf(p.casing)}${coil}.`);
+      const casingName = nameOf(p.casing);
+      out.push(`Build it mostly from ${SENTENCE_QTY.test(casingName) ? casingName.replace(/^(.*?)(\d+) (\w+)$/, '$3 type $1$2') : casingName}${coil}.`);
     }
     const ins = clean(c.inputs || []).slice(0, o.inputs);
     if (ins.length) out.push(`The controller is crafted from ${joinList(ins)}.`);
