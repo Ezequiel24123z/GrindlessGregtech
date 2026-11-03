@@ -428,14 +428,16 @@
     }
     check(SCOPE, 'methanol_ratio', ratioOk, ratioDetail)
 
-    // the rocket: rocket fuel from Aerozine 50 and N2O4 (methanol, ammonia and the peroxide cycle), and GCYR's own hydrogen fuel
+    // the rocket: rocket fuel from Aerozine 50 and N2O4 (methanol, ammonia and the peroxide cycle), and GCYR's own hydrogen fuel.
+    // N2O4 is L2's NO2 dimerised (FIX-LCR #279 removed GTM's one-step dinitrogen_tetroxide_from_ammonia): the same 2 NH3 per N2O4
     var chain = ['grindless:mixer/rocket_fuel', 'grindless:mixer/aerozine_50', 'gtceu:chemical_plant/hydrazine',
       'gtceu:chemical_plant/hydrogen_peroxide_air', 'gtceu:chemical_plant/ethyl_anthra_hydro_quinone',
       'gtceu:chemical_reactor/dimethylhydrazine_from_dimethylamine', 'gtceu:chemical_reactor/dimethylamine', 'gtceu:chemical_reactor/monochloramine',
-      'gtceu:chemical_reactor/hypochlorous_acid', 'gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia', 'gtceu:chemical_reactor/ammonia_from_elements',
+      'gtceu:chemical_reactor/hypochlorous_acid', 'gtceu:chemical_reactor/nitric_oxide_from_ammonia', 'gtceu:chemical_reactor/nitrogen_dioxide_from_oxide',
+      'gtceu:chemical_reactor/dinitrogen_tetroxide_from_dioxide', 'gtceu:chemical_reactor/ammonia_from_elements',
       'gtceu:chemical_reactor/methanol_from_monoxide', 'gcyr:rocket_fuel/hydrogen', 'gcyr:rocket_fuel/rocket_fuel']
     var missingChain = present(chain)
-    check(SCOPE, 'rocket_chain', missingChain.length === 0, 'rocket fuel = Aerozine 50 (hydrazine from the plant: ammonia + peroxide; UDMH from dimethylamine and monochloramine) + N2O4 (ammonia), and GCYR burns hydrogen as a tier 1 fuel' +
+    check(SCOPE, 'rocket_chain', missingChain.length === 0, 'rocket fuel = Aerozine 50 (hydrazine from the plant: ammonia + peroxide; UDMH from dimethylamine and monochloramine) + N2O4 (NO2 from the Ostwald oxidation of ammonia), and GCYR burns hydrogen as a tier 1 fuel' +
       (missingChain.length > 0 ? ' missing=' + missingChain.join(',') : ''))
     try {
       note(SCOPE, 'h2_bill', h2Bill())
@@ -475,7 +477,9 @@
     var dma = readRecipe('gtceu:chemical_reactor/dimethylamine')
     var mcl = readRecipe('gtceu:chemical_reactor/monochloramine')
     var udmh = readRecipe('gtceu:chemical_reactor/dimethylhydrazine_from_dimethylamine')
-    var n2o4 = readRecipe('gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia')
+    var n2o4 = readRecipe('gtceu:chemical_reactor/dinitrogen_tetroxide_from_dioxide')
+    var no2 = readRecipe('gtceu:chemical_reactor/nitrogen_dioxide_from_oxide')
+    var no = readRecipe('gtceu:chemical_reactor/nitric_oxide_from_ammonia')
     var nh3 = readRecipe('gtceu:chemical_reactor/ammonia_from_elements')
     var meoh = readRecipe('gtceu:chemical_reactor/methanol_from_monoxide')
     var fuel = 8000
@@ -493,8 +497,12 @@
     var runsUdmh = udmhNeed / fluidAmount(udmh, 'fluidsOut', 'dimethylhydrazine')
     var methanolNeed = runsUdmh * fluidAmount(dma, 'fluidsIn', 'methanol') * fluidAmount(udmh, 'fluidsIn', 'dimethylamine') / fluidAmount(dma, 'fluidsOut', 'dimethylamine')
     var runsN2o4 = n2o4Need / fluidAmount(n2o4, 'fluidsOut', 'dinitrogen_tetroxide')
+    // N2O4 <- NO2 <- NO <- ammonia (L2's Ostwald stages)
+    var no2Need = runsN2o4 * fluidAmount(n2o4, 'fluidsIn', 'nitrogen_dioxide')
+    var noNeed = no2Need / fluidAmount(no2, 'fluidsOut', 'nitrogen_dioxide') * fluidAmount(no2, 'fluidsIn', 'nitric_oxide')
+    var n2o4Ammonia = noNeed / fluidAmount(no, 'fluidsOut', 'nitric_oxide') * fluidAmount(no, 'fluidsIn', 'ammonia')
     // UDMH takes ammonia twice: once in its dimethylamine, once in its monochloramine
-    var ammoniaNeed = runsHz * fluidAmount(hz, 'fluidsIn', 'ammonia') + runsN2o4 * fluidAmount(n2o4, 'fluidsIn', 'ammonia') +
+    var ammoniaNeed = runsHz * fluidAmount(hz, 'fluidsIn', 'ammonia') + n2o4Ammonia +
       runsUdmh * (fluidAmount(udmh, 'fluidsIn', 'dimethylamine') / fluidAmount(dma, 'fluidsOut', 'dimethylamine') * fluidAmount(dma, 'fluidsIn', 'ammonia') +
         fluidAmount(udmh, 'fluidsIn', 'monochloramine') / fluidAmount(mcl, 'fluidsOut', 'monochloramine') * fluidAmount(mcl, 'fluidsIn', 'ammonia'))
     var runsMeoh = methanolNeed / fluidAmount(meoh, 'fluidsOut', 'methanol')
