@@ -67,6 +67,11 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UHVFoundationTextures.ps1` | Writes the shared UHV textures (UHV-F1): 52 items and three casings under `block/uhv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UEVFoundationTextures.ps1` | Writes the shared UEV textures (UEV-F1): 23 items and three casings under `block/uev/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UIVFoundationTextures.ps1` | Writes the shared UIV textures (UIV-F1): 26 items and two casings under `block/uiv/`. `-Only <output or group>`, `-Credits`. |
+| `Build-UEVCasingTextures.ps1` | Writes the UEV casing family (D4-CASE-UEV, batch 16): the SiC composite, superhydride magnet and HfTaCN lining casings under `block/uev/`. `-Only <output>`, `-Credits`. |
+| `Build-UIVCasingTextures.ps1` | Writes the UIV casing family (D4-CASE-UIV, batch 16): the rhea, MH field, multilayer optics and dilution cryostat casings under `block/uiv/`. `-Only <output>`, `-Credits`. |
+| `Build-UXVCasingTextures.ps1` | Writes the UXV casing family (D4-CASE-UXV, batch 16): the gum metal, mu-metal shield, pulsed field and pasta containment casings under `block/uxv/`. `-Only <output>`, `-Credits`. |
+| `Build-OpVCasingFamilyTextures.ps1` | Writes the OpV casing family (D5-CAS-OPV, batch 16): the chain lamina, TPV wall and kugelblitz cavity casings under `block/opv/`. `-Credits`. |
+| `Build-MaxCasingFamilyTextures.ps1` | Writes the MAX casing family (D5-CAS-MAX, batch 16): the tensegrity truss, membrane vacuum, droplet radiator and shell window coil casings under `block/max/`. `-Credits`. |
 | `Build-UIVIsotopesTextures.ps1` | Writes the four item icons of UIV's isotopes (UIV-A1): Cf-249 target wheel, Ni-58/Ti multilayer, neutron supermirror, neutron guide. `-Credits`. |
 | `Build-UIVMetallicHydrogenTextures.ps1` | Writes the ramp-compression pulser's controller face and the eight item icons of UIV's metallic hydrogen, lonsdaleite and cg-N lines (UIV-A2). `-Credits`. |
 | `Build-UIVLevitationMelterTextures.ps1` | Writes the levitation melter's controller face and the fourteen item icons of UIV's RHEA, metallic-glass and maglev parts (UIV-A3). `-Credits`. |
