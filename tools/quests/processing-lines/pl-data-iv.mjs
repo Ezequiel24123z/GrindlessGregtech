@@ -15,16 +15,16 @@ export default {
       line: 'fuelcycle',
       nodes: [
         n('fluorite', 0, -2.25, I('gcyr:raw_fluorite'), 'Raw Fluorite', { kind: 'raw', sub: 'The fluorite vein: any Earth drill, from steam on' }),
-        n('fdust', 3, -2.25, I('gcyr:fluorite_dust'), 'Fluorite Dust', {
+        n('fdust', 3.5, -2.25, I('gcyr:fluorite_dust'), 'Fluorite Dust', {
           from: [via('fluorite', 'gcyr:crushed_fluorite_ore', 'gcyr:impure_fluorite_dust')], sub: 'Macerator twice, then the ore washer',
         }),
-        L('acid', 0, -0.75, 'pl_lv:acid'),
-        n('kiln', 6, -2.25, M('gtceu:fluorspar_kiln'), 'Fluorspar Kiln', {
+        L('acid', 2.5, -0.75, 'pl_lv:acid'),
+        n('kiln', 6.5, -2.25, M('gtceu:fluorspar_kiln'), 'Fluorspar Kiln', {
           kind: 'ours', from: ['fdust', 'acid'],
           desc: 'Fluorite and sulfuric acid in a long rotary kiln. A handful of fluorite does the work of a mountain of mica.',
         }),
-        n('hf', 10, -2.25, F('gtceu:hydrofluoric_acid'), 'Hydrofluoric Acid', { from: ['kiln'] }),
-        n('gypsum', 10, -3.5, I('gtceu:gypsum_dust'), 'Gypsum', { kind: 'by', from: ['kiln'], end: 'concrete', sub: 'Concrete, then the reactor\'s casing' }),
+        n('hf', 11, -1.5, F('gtceu:hydrofluoric_acid'), 'Hydrofluoric Acid', { from: ['kiln'] }),
+        n('gypsum', 11, -3.5, I('gtceu:gypsum_dust'), 'Gypsum', { kind: 'by', from: ['kiln'], end: 'concrete', sub: 'Concrete, then the reactor\'s casing' }),
         n('psample', 0, 0.75, I('grindless:vein_sample_pitchblende_end'), 'Pitchblende Sample', { kind: 'raw', sub: 'Mined once, in the End' }),
         n('isr', 2.5, 1, M('gtceu:isr_wellfield'), 'In-Situ Leach Field', {
           kind: 'ours', from: ['acid', 'psample'],
