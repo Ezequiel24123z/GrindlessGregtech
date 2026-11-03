@@ -903,3 +903,15 @@ One line per decision. The most recent one is at the bottom.
 - 2026-11-03 · Validator (FIX-VALIDATOR2 #287): GT--'s chemical plant is modelled with its HV build and plantCasing capped at 3 at HV; the nine Steam to MV mega machines are checked in their era; filled water and lava buckets are world items; reachability sets process.exitCode, so a piped report keeps its verdict.
 - 2026-11-03 · Correction (#277 A2-05): FIX-COMPOSE's mega ore refinery skips 47 of 163 ore lines, not 31: 31 whose macerator recipe a script removed (30 ores no vein gives, and tetrataenite, which the belt's asteroid processor refines by the Mond process) and 16 with missing items (10 ores no vein gives, and 6 gem ores veins give that stay with the sifter: fayalite, fluorite, germanite, green and red fuchsite, red zircon).
 - 2026-11-03 · v1.4.1 released (batch 15): tag v1.4.1 on 5a9646188 (T0 41581861477 and 41582434754; strict T2 at 9a4d4cce1 and 48eb68a55, whose packs differ from the release only in the version line; T3 vm-20261103-050554-5a964618-2968576). Test-Promotion OK; main, releases and playable moved to it; the releases-channel zip refreshed. Worlds from v1.4.0 carry over.
+- 2026-11-03 · Owner delegation (owner, 2026-11-03: "make the decisions that best fit the pack", publishing on CurseForge excepted): the integrator decides every open item, and these decisions stand:
+  - STATUS's open owner questions take their written defaults.
+  - M2-15's trivial-step threshold stays.
+  - Every wafer is taught in its era chapter (M5b-25).
+  - The steel boiler's x7.111 stays, stated at principle 8 (M6-07).
+  - Art stays generated: the four MAX controllers and the interferometer get faces of their own, and the 58 loop seams are fixed in the sound generator.
+  - The Mirror Shell gets a dedicated, non-active shell coil casing (band D5).
+  - The eight upstream structures EMI cannot preview get EMI build pages (A6-03; no Java).
+  - Recipe ids lose the doubled type (A2-02).
+- 2026-11-03 · Multiblock scale (owner, 2026-11-03): AGENTS.md principle 4 now says multiblocks grow with their tier and their use. From UEV on, their body is the era's own family of casings: expensive, and each needing a product only that era makes. The guide and the casing rules are in docs/quality/structures.md, *Scale by tier and use*.
+  - The long-lines bands become D2 (EV to ZPM), D3 (UV and UHV), D4 (UEV to UXV) and D5 (OpV to MAX+).
+  - D4 and D5 apply the scale and the casing families; D2 and D3 resize only what contradicts its use.

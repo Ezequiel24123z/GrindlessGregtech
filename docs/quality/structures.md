@@ -31,6 +31,61 @@ an `appearanceBlock` plus `workableCasingModel` overlay (active and emissive) so
 Preview suppliers: never use `Java.to(...)` in a `Predicates.custom` candidate supplier (it aborts GTM's EMI plugin); reuse
 `Predicates['blocks(net.minecraft.world.level.block.Block[])'](blocks).common.get(0).candidates`.
 
+## Scale by tier and use (owner, 2026-11-03)
+
+The owner's rule (AGENTS.md principle 4): multiblocks grow with their tier and their use. From UEV on they are large, and
+building one is a project of its own, because its body is made of our own casings, which are expensive and each need something
+only that era makes. The design passes apply this as a guide, not a quota. Never pad a structure to reach a number, and a machine
+whose use is small may stay small.
+
+Use classes:
+
+- **Field unit:** a drill, probe bay, sampler or one-site tap. About a third of its era's workhorse band.
+- **Workhorse:** a machine of a process line.
+- **Plant or hall:** several steps in one, high throughput, or a recipe impossible at small scale.
+- **Flagship:** the era's signature (fusion reactors, colliders, gates, the shell). The largest structures of their era.
+
+Guide in filled cells (the `cells` metric), with each era's median at dump 5d57213f3b83:
+
+| Era | Median now | Workhorse | Plant or hall | Flagship |
+|---|---|---|---|---|
+| EV to ZPM | 99 to 199 | as now; resize only what contradicts its use | | |
+| UV | 273 | 300 to 600 | 600 to 1,200 | 1,000 to 1,500 |
+| UHV | 211 | 400 to 700 | 700 to 1,400 | 1,400 to 2,000 |
+| UEV | 349 | 700 to 1,100 | 1,100 to 1,800 | 1,800 to 2,800 |
+| UIV | 491 | 900 to 1,400 | 1,400 to 2,400 | 2,400 to 3,600 |
+| UXV | 454 | 1,100 to 1,800 | 1,800 to 3,000 | 3,000 to 4,500 |
+| OpV | 478 | 1,400 to 2,200 | 2,200 to 3,600 | 3,800 to 5,500 |
+| MAX | 855 | 1,800 to 2,800 | 2,800 to 4,500 | 5,000 to 8,000 |
+| MAX+ | 1,125 | 2,200 to 3,500 | 3,500 to 6,000 | 7,000 to 12,000; the Hyperstargate is the largest structure in the pack |
+
+Casings from UEV on:
+
+- **One family per era.** Each era from UEV to MAX+ has its own family of our casings, about 3 to 6 of them: structural,
+  containment, optical or field, thermal, and a signature casing for each flagship. Each wears the era's art style and has a
+  thematic name.
+- **The body is the era's own.** The body of every multiblock of the era (its dominant block and most of its cells) is made of
+  the family. GTM's generic casings and lower eras' casings may stay only as detail (frames, glass, pipes, gearboxes, coils), or
+  where a GTM machine itself requires them.
+- **A special input.** Every casing's recipe needs a product only its era makes: the era's signature material or a product of
+  one of its lines. The input is chosen because it makes physical sense for the casing's job (a containment casing takes the
+  era's containment material, an optical casing its optical product).
+- **Expensive, never by hand.** The design states each casing's cost against its era's hull (cost-tree), and a typical
+  multiblock's casings together cost more than its controller. Every casing is made in an automatable machine (an assembler, an
+  assembly line or one of our halls), never at a crafting table, in batches its line can sustain.
+- **A passive body.** Active blocks (coils and the other GTM ActiveBlocks) stay under the T0 ceiling of 264 per structure
+  (STATUS, *Active blocks*).
+- **Taught.** Each era chapter teaches its casings: what they are for and how they are made (principle 5).
+
+Constraints that still hold:
+
+- GTM's Terminal builds a structure from the player's inventory, so every structure stays buildable by it: no custom predicate
+  without candidates.
+- The rubric above applies at every size: no block above 70% of the cells, and a silhouette that says what the process does.
+  Parts stay on the surface.
+- Bigger and fewer beats more and smaller. A single-recipe bay may merge into the hall of its line where that makes sense
+  (principle 7: multiblock counts have no target).
+
 ## Finding: Rhino `const` in loops (fixed)
 
 Rhino initialises a `const` once per function call and keeps the first iteration's value. Pattern builders that computed
