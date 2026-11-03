@@ -59,46 +59,54 @@
     }
   }
 
-  // The gas lab is a vacuum chamber: a glass hall under a dome with a trap coil in the middle. The entanglement station is two banded
-  // towers joined by a glass bridge (the link). Built in the registry callback (shapes.js may load after this file).
-  function twinCell(w, d) {
-    var cz = (d - 1) / 2
-    var cx = (w - 1) / 2
-    return function (x, y, z) {
-      var lx = x < 5 ? x : (x > w - 6 ? x - (w - 5) : -1)
-      if (lx < 0) {
-        var ax = x - cx < 0 ? cx - x : x - cx
-        if (y === 0) return z >= 1 ? 'X' : ' '
-        if (y === 1) return 'A'
-        var bz = z - cz < 0 ? cz - z : z - cz
-        var ring = G.uevShapes.cheb(bz, y - 6)
-        if (ring === 1 && y >= 5 && y <= 7) return ax === 0 ? 'C' : (ax === 2 ? 'P' : 'L')
-        if (ring === 0) return '#'
-        return ' '
-      }
-      var ex = lx === 0 || lx === 4
-      var ez = z === 0 || z === d - 1
-      var ct = lx === 2 && z === cz
-      if (y === 0) return 'X'
-      if (y === 9) return ex || ez ? 'A' : (ct ? 'C' : 'A')
-      if (ex && ez) return 'Q'
-      if (!(ex || ez)) return ct ? (y % 3 === 1 ? 'C' : 'P') : '#'
-      if (y === 1) return 'A'
-      return y % 3 === 0 ? 'F' : 'L'
-    }
+  // The gas lab is a vacuum hall under a glass dome: a photonic vacuum chamber in three superhydride Feshbach coil rings, with laser
+  // tables down both sides. The entanglement station is twin telescopes (SiC towers with photonic dishes) on a truss over a central
+  // SPDC bench hall. Built in the registry callback (shapes.js may load after this file).
+  function dish(s, cx, cz, y0) {
+    ;[[3, 0], [4, 1], [5, 2]].forEach(function (p) { s.cyl('y', cx, cz, p[0], y0 + p[1], y0 + p[1], p[1] === 2 ? 'F' : 'R', true, '#') })
+    s.set(cx, y0 + 1, cz, 'C')
   }
-
   var SHAPES = {
     gas_lab: {
-      w: 9, h: 9, d: 9,
+      w: 15, h: 11, d: 15,
       fn: function () {
-        return G.uevShapes.hall({
-          w: 9, d: 9, hh: 6, crown: G.uevShapes.dome(9, 9, 3),
-          inner: function (x, y, z) { return x === 4 && z === 4 ? (y === 1 ? 'B' : (y <= 4 ? 'C' : null)) : null }
+        var s = G.uevShapes.scene(15, 11, 15)
+        s.room(0, 0, 0, 14, 4, 14, 'F', 't')
+        s.box(0, 3, 0, 14, 4, 0, 'R').box(0, 3, 14, 14, 4, 14, 'R').box(0, 3, 1, 0, 4, 13, 'R').box(14, 3, 1, 14, 4, 13, 'R')
+        s.box(0, 0, 0, 14, 0, 14, 'X')
+        ;[0, 7, 14].forEach(function (z) { s.box(0, 5, z, 14, 5, z, 'R') })
+        s.cone(7, 7, 5, 5, 9, 1, 'L', true)
+        s.cyl('y', 7, 7, 2, 1, 6, 'O', true, '#')
+        ;[2, 4, 6].forEach(function (y) { s.cyl('y', 7, 7, 3, y, y, 'M', true, null) })
+        s.set(7, 1, 5, 'C').set(7, 1, 9, 'C').set(5, 1, 7, 'C').set(9, 1, 7, 'C')
+        ;[1, 12].forEach(function (x) {
+          s.box(x, 1, 3, x + 1, 1, 11, 'R').box(x, 2, 3, x, 2, 11, 'A')
+          ;[4, 7, 10].forEach(function (z) { s.set(x, 3, z, 'L') })
         })
+        s.box(5, 1, 1, 9, 1, 2, 'H')
+        return s.booth('R', 3).fn()
       }
     },
-    station: { w: 15, h: 10, d: 7, fn: function () { return twinCell(15, 7) } }
+    station: {
+      w: 25, h: 13, d: 11,
+      fn: function () {
+        var s = G.uevShapes.scene(25, 13, 11)
+        s.box(0, 0, 0, 24, 0, 10, 'X')
+        s.room(7, 1, 0, 17, 3, 10, 'F')
+        s.box(7, 3, 0, 17, 3, 10, 'R')
+        s.box(9, 1, 3, 15, 1, 7, 'B').box(9, 2, 3, 15, 2, 3, 'L').box(9, 2, 7, 15, 2, 7, 'L')
+        ;[3, 21].forEach(function (cx) {
+          s.cyl('y', cx, 5, 2, 1, 7, 'R', true, '#')
+          ;[3, 5].forEach(function (y) { s.cyl('y', cx, 5, 2, y, y, 'M', true, null) })
+          s.cyl('y', cx, 5, 3, 1, 1, 'H', true, null)
+          dish(s, cx, 5, 8)
+          s.set(cx, 4, 3, 'L').set(cx, 6, 3, 'L')
+        })
+        ;[1, 9].forEach(function (z) { s.box(3, 11, z, 21, 11, z, 'Q') })
+        s.box(12, 5, 5, 12, 11, 5, 'Q')
+        return s.booth('R', 3).fn()
+      }
+    }
   }
   Object.keys(EO.machines).forEach(function (k) {
     var m = EO.machines[k]
@@ -111,10 +119,7 @@
     var m = EO.machines[k]
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(),
-      pal: {
-        F: m.casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
-        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
-      },
+      pal: G.uevShapes.palette(m.casing),
       parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('input_hatch', { min: 0, max: 1 }),
