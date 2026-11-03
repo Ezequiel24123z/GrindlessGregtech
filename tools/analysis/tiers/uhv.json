@@ -2534,6 +2534,8 @@
         "grindless:xenobotany/pigment",
         "grindless:xenobiochemistry/radioprotectant",
         "grindless:xenobiochemistry/infrared_pigment",
+        "grindless:xenobiochemistry/xeno_chitin",
+        "grindless:xenobiochemistry/xeno_chitosan",
         "grindless:xenobiochemistry/chitosan",
         "grindless:xenobiochemistry/lysate",
         "grindless:biomining/pgm_leach",
