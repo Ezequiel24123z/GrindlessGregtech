@@ -1,6 +1,6 @@
 // priority: -9772
 // TEST ONLY, UXV-B5 (gtceu:ejecta_knot_sweeper, gtceu:annihilation_laser_works). Command: kubejs custom_command gg_test_uxv_cas_a
-// Band ONLY: X 36992-37055, Z 0-63, Y 98-115. The sweeper is built in grindless:cas_a_remnant (its recipe is locked there), the laser works in the Overworld.
+// Band ONLY: X 36992-37055, Z 0-32, Y 98-120. The sweeper is built in grindless:cas_a_remnant (its recipe is locked there), the laser works in the Overworld.
 //   T1 (named uncertainty: the sweeper's sweep_ejecta_knots row, 67,108,864 EU/t and dimension-locked, starts at Cassiopeia A on two UIV energy hatches only):
 //     lookup      every row, the older rows and the controllers' assembly lines are in the recipe manager
 //     formed      both controllers form with their hatches
@@ -13,7 +13,8 @@
   var X0 = 36992
   var X1 = 37055
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 120
+  var Z1 = 32
   var NAME = 'uxv_cas_a'
   var REMNANT = 'grindless:cas_a_remnant'
   var EARTH = 'minecraft:overworld'
@@ -30,9 +31,9 @@
   ]
 
   var UNITS = [
-    { name: 'sweeper', id: 'gtceu:ejecta_knot_sweeper', dim: REMNANT, cx: 37010, z: 16, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus'],
+    { name: 'sweeper', id: 'gtceu:ejecta_knot_sweeper', dim: REMNANT, cx: 37024, z: 2, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus'],
       bus: [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:mh_winding', 1]] },
-    { name: 'laser', id: 'gtceu:annihilation_laser_works', dim: EARTH, cx: 37030, z: 18, parts: ['gtceu:hv_output_bus', ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch'],
+    { name: 'laser', id: 'gtceu:annihilation_laser_works', dim: EARTH, cx: 37024, z: 2, parts: ['gtceu:hv_output_bus', ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch'],
       bus: [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:neon_moderator_cartridge', 1], ['grindless:ti44_core', 1]] }
   ]
 
@@ -67,7 +68,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(dim, text) { return S.server.runCommandSilent('execute in ' + dim + ' run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(dim, x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command(dim, 'setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -203,19 +204,19 @@
 
   function clear() {
     ;[REMNANT, EARTH].forEach(function (dim) {
-      for (var z = 0; z < 64; z += 8) command(dim, 'fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+      for (var z = 0; z <= Z1; z += 4) command(dim, 'fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
     })
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    ;[REMNANT, EARTH].forEach(function (dim) { command(dim, 'forceload remove ' + X0 + ' 0 ' + X1 + ' 63') })
+    ;[REMNANT, EARTH].forEach(function (dim) { command(dim, 'forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1) })
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false }
-    ;[REMNANT, EARTH].forEach(function (dim) { command(dim, 'forceload add ' + X0 + ' 0 ' + X1 + ' 63') })
+    ;[REMNANT, EARTH].forEach(function (dim) { command(dim, 'forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1) })
     clear()
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []

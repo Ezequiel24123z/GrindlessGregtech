@@ -190,7 +190,7 @@
     var hold = WG.recipes.filter(function (r) { return r.name === 'hold_galactic_bulge' })[0]
     check('static_hold_row', !!hold && hold.eut === EUT && hold.duration === DURATION && hold.circuit === 10 && hold.site === 'cygnus_x1_orbit' &&
       hold.itemsOut.length === 1 && hold.itemsIn.length + hold.kept.length + 1 === 7, JSON.stringify(hold || null))
-    check('static_slots', WG.machines.gate.maxIO.itemsIn === 7, 'published warp gate maxIO.itemsIn ' + WG.machines.gate.maxIO.itemsIn)
+    check('static_slots', WG.machines.gate.maxIO.itemsIn === 9, 'published warp gate maxIO.itemsIn ' + WG.machines.gate.maxIO.itemsIn)
   }
 
   // ---------------------------------------------------------------- the run

@@ -1,8 +1,8 @@
 // priority: -9975
 // TEST ONLY, UXV-M2 (gtceu:stellar_fractionation_hall). Command: kubejs custom_command gg_test_uxv_stellar_fractionation_hall
-// Band ONLY: X 37056-37119, Z 0-63, Overworld Y 98-115 (the hall has no site: it is built in the Overworld; zones.json carries the same Y range).
+// Band ONLY: X 37056-37119, Z 0-64, Overworld Y 98-122 (the hall has no site: it is built in the Overworld; zones.json carries the same Y range).
 //   T1 (named uncertainty: a distillation tower recipe with 12 fluid outputs at the x65,536 UXV hatch keeps long amounts and lands exact in 12 output hatches):
-//     formed   the hall (13 x 13 x 25) with one UXV energy hatch, the UXV parallel hatch, a bus, an input hatch and 12 UHV output hatches forms and sees the hatch
+//     formed   the hall (21 x 21 x 61) with one UXV energy hatch, the UXV parallel hatch, a bus, an input hatch and 12 UHV output hatches forms and sees the hatch
 //     lookup   the 12-output probe (16 EU/t, non-consumed input) and the controller recipe are in the recipe manager
 //     copies   the probe runs min(4,096 x 65,536, energy cap floor(max voltage / 16), output room of the tightest hatch) copies
 //     outputs  after the run each of the 12 hatches holds exactly copies x its recipe amount, one fluid per hatch
@@ -13,12 +13,13 @@
   var X0 = 37056
   var X1 = 37119
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 122
+  var Z1 = 64
   var NAME = 'uxv_stellar_fractionation_hall'
   var ID = 'gtceu:stellar_fractionation_hall'
   var CX = 37088
   var CY = 100
-  var CZ = 20
+  var CZ = 2
   var CEILING = 4096 * 65536
   var PROBE_EUT = 16
   var INPUT = 'gtceu:sulfuric_acid'
@@ -28,7 +29,7 @@
     ['gtceu:nitrogen', 50], ['gtceu:helium', 60], ['gtceu:methane', 70], ['gtceu:ethylene', 80],
     ['gtceu:propene', 90], ['gtceu:benzene', 100], ['gtceu:toluene', 110], ['gtceu:ammonia', 120]
   ]
-  var PARTS = { 2: 'gtceu:maintenance_hatch', 3: 'gtceu:uxv_energy_input_hatch', 4: 'gtceu:hv_input_bus', 5: 'gtceu:hv_input_hatch', 8: 'gtceu:uxv_parallel_hatch' }
+  var PARTS = { 3: 'gtceu:maintenance_hatch', 4: 'gtceu:uxv_energy_input_hatch', 5: 'gtceu:hv_input_bus', 6: 'gtceu:hv_input_hatch', 12: 'gtceu:uxv_parallel_hatch' }
 
   ServerEvents.recipes(function (event) {
     try {
@@ -70,7 +71,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in minecraft:overworld run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -167,8 +168,8 @@
 
   function begin() {
     S.level = S.server.getLevel('minecraft:overworld')
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
-    command('fill ' + X0 + ' ' + Y0 + ' 0 ' + X1 + ' ' + Y1 + ' 63 minecraft:air')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
     var rm = S.server.getRecipeManager()
     var RL = classes().RL
     var probe = rm.byKey(new RL('gg_test_uxv:distillation_tower/sfh_probe')).isPresent()
@@ -240,13 +241,13 @@
   }
 
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   ServerEvents.customCommand('gg_test_uxv_stellar_fractionation_hall', function () {
