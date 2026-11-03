@@ -20782,7 +20782,7 @@ hash = "7ba34054d1bf307e507499a1086a75ae1085e99870cd0ac339fcfeb201562f11"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uxv/cygnus_lift.js"
-hash = "ce262d5d43492fc984dac050a26b6d963ceb5d35b0fee23d3efb3401de625d6d"
+hash = "c86fa073bcb593782cc988752ec6ca228d7e31371667fcc9b763af4f1b0040ce"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uxv/foundation.js"
