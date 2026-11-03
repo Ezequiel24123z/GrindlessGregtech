@@ -1,4 +1,4 @@
-﻿// D2-REE (samaric branch of EV's rare-earth trunk), no game needed.
+// D2-REE (samaric branch of EV's rare-earth trunk), no game needed.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';

@@ -1,4 +1,4 @@
-﻿// ZPM's europium reductor (package ZPM-A3), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
+// ZPM's europium reductor (package ZPM-A3), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
 //   - startup_scripts/grindless/zpm/europium.js: the valence_reduction type, the five GT materials, the machine and a pattern that is
 //     valid for lib/patterns.js (one controller, the casing-or-parts cells with GTM's limits, the Jones column and the furnace);
 //   - server_scripts/grindless/zpm/europium.js: the three reductions (one circuit each, the mercury bath not consumed, whole EU/t and
