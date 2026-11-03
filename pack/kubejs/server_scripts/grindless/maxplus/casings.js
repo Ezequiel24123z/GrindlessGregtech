@@ -1,4 +1,4 @@
-// priority: -20405
+// priority: -20146
 // -----------------------------------------------------------------------------------------------
 // MAX+ casing family (D5-CAS-MAXP, docs/eras/lines-opv-maxplus.md 7.3 and X5 step 8/9): the rows of the six horizon casings. The lattice is the
 // structure (it takes the MAX tensegrity truss), the Kerr coil casing wraps the lattice round the Kerr field coil, and the shield, cryostat,

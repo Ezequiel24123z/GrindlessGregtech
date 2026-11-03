@@ -1,4 +1,4 @@
-// priority: 6858
+// priority: 7053
 // Names, tooltips and EMI pages of the MAX+ casing family and the iron-56 material (D5-CAS-MAXP); the recipes are in server_scripts/grindless/maxplus/casings.js.
 (function () {
     // id, name, tooltip 0, tooltip 1, EMI text
