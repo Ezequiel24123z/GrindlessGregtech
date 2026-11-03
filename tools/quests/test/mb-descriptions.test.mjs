@@ -75,3 +75,9 @@ test('products: consumed outputs before nuggets', () => {
   assert.equal(out[0].id, 'gtceu:aluminium_ingot');
   assert.equal(out[out.length - 1].id, 'gtceu:aluminium_nugget');
 });
+
+test('products: recycling rows never name a product', () => {
+  const rec = (o, category) => ({ t: 'x', j: { category, outputs: { item: [{ content: { ingredient: { item: o } } }] } } });
+  const rows = [rec('gtceu:titanium_dust', 'gtceu:macerator_recycling'), rec('gtceu:titanium_dust', 'gtceu:macerator_recycling'), rec('gtceu:wood_dust', 'gtceu:macerator')];
+  assert.deepEqual(mainProducts(rows, ['x']).map((p) => p.id), ['gtceu:wood_dust']);
+});
