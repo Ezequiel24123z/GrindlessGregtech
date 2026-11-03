@@ -17194,7 +17194,7 @@ hash = "79b3bbc9784ee768c7b87b9c2cd174af072061195cd9cc81bfa444d4d6810e1c"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uhv_mercury_lang.js"
-hash = "b2b7e24101218495db745eb22580e27a86390179acd5d519f0b17d95912026e1"
+hash = "e15b8533f99df204f5bd90a5fd78e4ff15f56ddacd22660ef6f3eac1ec127408"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uhv_parallel_hatch_lang.js"
@@ -17214,7 +17214,7 @@ hash = "a9e70495ddd1cbfa26bf24da307078609e5721b21b9dbe0bb5dea1404056d029"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uhv_proxima_ground_lang.js"
-hash = "bf60a2fed2b3ca0c77b36cdcdb1c04e77f8e41fe4dd2b95d7ffd185ab5609fc8"
+hash = "b1c80ea3e34fe10213087092c255bcddcfc046a45ea2a5bedab73add34a657cd"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uhv_proxima_life_lang.js"
@@ -19470,7 +19470,7 @@ hash = "43cb7d76ae78139222a33abd733e5c7c8411c78a1ad3340732ba9811ed2dcc2c"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uev/superheavy.js"
-hash = "aca073dbb556381904de5a8507959eab2c333d28f1809ea173b55f72a891bbc7"
+hash = "2bb915f3d5511b2c80e2c2b6d24a235b8db08141a3116c70c83de0cd99b9ce4c"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uev/travel.js"
@@ -20562,7 +20562,7 @@ hash = "fed88d20b7377a4caee2862e08f1341fa5c8d0c64639f10693306a48f4558b06"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/betavoltaics.js"
-hash = "cf56d7e6a6ed7680d845bdfeea9dfb0151a06e70d85cb9420d8760455dbb85e1"
+hash = "93ff8c99891526be1eda109cdc23d20773ba47773128e17fa7d4808b3dcb3d78"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/crystals.js"
@@ -20590,7 +20590,7 @@ hash = "00a68331230237a2fc5b978569a6ab91ae63a3b4326be7c45d4cf4c6e5fab8fe"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/mercury.js"
-hash = "2898021106826733259d9b3a3c85e15a6a49b9ead1e9b2852b15b035bab5c261"
+hash = "d7d5e8ee9b0f6e8a718a28efd0f76396edc5de98dfc70fb04f56021a88a89dab"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/photonics.js"
@@ -20598,7 +20598,7 @@ hash = "2b5c80c747831c806b54a605a0097f94afa4ca55199c0d9a20ee8c6ebfa0f2b4"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/power_devices.js"
-hash = "f4549996b7c72af27f64fabca1987d98365478cc92c97708c024fd4986303a20"
+hash = "0306753d8b07bf8944bbb63838c8182b775756d39b3fb22c422f2a334d959207"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/propulsion.js"
@@ -20606,11 +20606,11 @@ hash = "21ed93c3f9eb766151c5515ef8b948e012ac84bb8357097f43004b9935f7d181"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/proxima_ground.js"
-hash = "1c80c6cddc8c0a6336763c0d2283ea39596d4e59d8266a813ed3cc0a4f5df5ec"
+hash = "f5a8c977365de7cf17365b588a4756986cb160bfe87b3bde699d42ca3f07343d"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/proxima_life.js"
-hash = "5c980a29c74e794f010103b3d2210388aa44f5628ec46640be18def404d20ffa"
+hash = "53310c8b9d2610ef530197e4340b15404e8f2daf252e3885afd8345797af669c"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/swarm.js"

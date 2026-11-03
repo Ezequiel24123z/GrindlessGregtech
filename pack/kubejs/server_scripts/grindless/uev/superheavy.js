@@ -158,10 +158,12 @@
     var SENSOR = 'gtceu:uv_sensor'
     var FIELD = 'gtceu:uv_field_generator'
     SH.controllerRecipes = []
-    // QR-R6: assembly line with station research (the previous machine, the calutron for the cyclotron), the era fluid and domain inputs
+    // QR-R6: assembly line with station research (the previous machine, the calutron for the cyclotron), the era fluid and domain inputs.
+    // The cyclotron (the Superheavy Factory since D4-SHAPE-UEV-B) takes the separator's foil windows as plain polycarbonate foil: the ion-tracked
+    // foil and the etched membrane are its own products (heavy_ion_irradiation), so asking for them would lock it out (bootstrap; dump 804cc913d48a)
     var ins = {
       heavy_ion_cyclotron: { research: 'gtceu:calutron', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:ca48_beam', 'grindless:target_wheel', 'grindless:nb3sn_srf_cavity', '2x grindless:etched_membrane', 'grindless:ion_tracked_foil'] },
+        ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:ca48_beam', 'grindless:target_wheel', 'grindless:nb3sn_srf_cavity', '4x grindless:polycarbonate_foil'] },
       superheavy_chemistry_lab: { research: 'gtceu:heavy_ion_cyclotron', era: 'gtceu:neutronium',
         ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:sealed_capsule', 'grindless:polycarbonate_foil', 'grindless:etched_membrane'] }
     }

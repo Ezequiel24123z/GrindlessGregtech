@@ -20,9 +20,9 @@
 // nickel_62_target, nickel_63_target, ultrapure_water):
 //   item      grindless:diamond_diode
 //   materials carbon_12_monoxide, carbon_12_methane (gases, line 22); nickel_63_plating_liquor, depleted_nickel_plating_liquor (line 4)
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the plant is 7 wide, 5 high, 11 deep (clean stainless casing:
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top; D3-SIZE-UHV3): the plant is 9 wide, 7 high, 19 deep (803 cells; clean stainless casing:
 // GTM has no water treatment casing; PTFE membrane racks, a laminated-glass UV-ozone chamber, filter casings for the ultrafiltration);
-// the fab 7 x 5 x 7 (inert PTFE casing, a PTFE plating bath on the floor, gearbox arms in the glovebox, laminated-glass windows all round).
+// the fab 11 x 6 x 9 (433 cells; inert PTFE casing with radiation vault casing, PTFE plating baths, gearbox arms in the glovebox, a sealing press, laminated-glass windows).
 // Textures: tools/assets/Build-UHVBetavoltaicsTextures.ps1. Names: client_scripts/grindless/uhv_betavoltaics_lang.js.
 // Published for the recipe script: global.grindless.betavoltaics.
 (function () {
@@ -35,6 +35,7 @@
   const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
   const INERT = 'gtceu:inert_machine_casing'
   const INERT_TEXTURE = 'gtceu:block/casings/solid/machine_casing_inert_ptfe'
+  const VAULT = 'grindless:radiation_vault_casing'
   const PIPE = 'gtceu:ptfe_pipe_casing'
   const FILTER = 'gtceu:filter_casing'
   const GLASS = 'gtceu:laminated_glass'
@@ -60,7 +61,7 @@
       casing: CLEAN, texture: CLEAN_TEXTURE, accent: INERT, frame: 'stainless_steel',
       // items in: the NaOH, the kept resin and the circuit; fluids in: water and HCl; out: the ultrapure water and the RO concentrate
       maxIO: { itemsIn: 3, itemsOut: 0, fluidsIn: 2, fluidsOut: 2 },
-      width: 7, depth: 11, height: 5
+      width: 9, depth: 19, height: 7
     },
     fab: {
       name: 'betavoltaic_fab',
@@ -68,10 +69,10 @@
       type: 'betavoltaic',
       dataKey: 'grindless_betavoltaic',
       lang: 'Betavoltaic Fab',
-      casing: INERT, texture: INERT_TEXTURE, accent: CLEAN, frame: 'tungsten_steel',
+      casing: INERT, texture: INERT_TEXTURE, accent: VAULT, frame: 'tungsten_steel',
       // items in: the targets or the diodes and the circuit; out: the cells or the nickel; fluids: one liquor or acid in, one out
       maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
-      width: 7, depth: 7, height: 5
+      width: 11, depth: 9, height: 6
     }
   }
 
@@ -112,22 +113,53 @@
     return slices
   }
 
-  // back to front, a centre aisle (c = 3) between the racks: reverse-osmosis and EDI membrane racks (P pipe, U filter between them) on
-  // both sides, the UV-ozone chamber (L, glass) across slice 5, the ultrafiltration (U) behind it
-  function waterInner(r, si, c) {
-    if (c === 3) return '#'
-    if (si <= 4) return r === 2 ? 'U' : 'P'
-    if (si === 5) return 'L'
-    return 'U'
+  // Interiors are painted on a grid [slice][row][column] (slices back -> front, rows bottom -> top; '#' is air), then read by shell().
+  function grid(m, paint) {
+    var g = []
+    for (var si = 0; si < m.depth; si++) {
+      g.push([])
+      for (var r = 0; r < m.height; r++) {
+        g[si].push([])
+        for (var c = 0; c < m.width; c++) g[si][r].push('#')
+      }
+    }
+    paint(g)
+    return function (r, si, c) { return g[si][r][c] }
   }
 
-  // the plating bath (P) fills the floor; a gearbox arm (G) on each side of the glovebox, a PTFE pipe feed at the back; air above
-  function fabInner(r, si, c) {
-    if (r === 1) return 'P'
-    if (r === 2 && (c === 1 || c === 5) && si >= 2 && si <= 4) return 'G'
-    return '#'
+  function box(g, c0, c1, r0, r1, s0, s1, ch) {
+    for (var s = s0; s <= s1; s++) for (var r = r0; r <= r1; r++) for (var c = c0; c <= c1; c++) g[s][r][c] = ch
   }
 
+  // the treatment train, back to front, either side of a three-wide aisle (c = 3 to 5): carbon beds (U), RO skids (P), EDI stacks
+  // (P and U in turn), UV reactors (L, glass), a degasser column (P) opposite a polishing skid (U), and a PTFE header (P) over the aisle
+  function waterPaint(g) {
+    var sides = [[1, 2], [6, 7]]
+    for (var i = 0; i < 2; i++) {
+      var c0 = sides[i][0]
+      var c1 = sides[i][1]
+      box(g, c0, c1, 1, 3, 1, 4, 'U')
+      box(g, c0, c1, 1, 2, 5, 8, 'P')
+      for (var r = 1; r <= 4; r++) box(g, c0, c1, r, r, 9, 11, r % 2 === 1 ? 'P' : 'U')
+      box(g, c0, c1, 1, 3, 12, 13, 'L')
+    }
+    box(g, 6, 7, 1, 5, 14, 15, 'P')
+    box(g, 1, 2, 1, 3, 14, 15, 'U')
+    box(g, 4, 4, 5, 5, 1, 17, 'P')
+  }
+
+  // the shielded plating line: PTFE plating baths (P) on the floor under glovebox arms (G), a vault partition with a lead-glass window
+  // (A, L), the cell sealing press (G under a vault cap) and a PTFE feed line along the back wall
+  function fabPaint(g) {
+    box(g, 1, 5, 1, 1, 2, 5, 'P')
+    for (var s = 2; s <= 5; s += 3) for (var c = 2; c <= 4; c += 2) box(g, c, c, 2, 3, s, s, 'G')
+    box(g, 1, 9, 1, 1, 6, 6, 'A')
+    box(g, 1, 9, 2, 2, 6, 6, 'L')
+    box(g, 1, 9, 3, 3, 6, 6, 'A')
+    box(g, 7, 9, 1, 2, 2, 4, 'G')
+    box(g, 7, 9, 3, 3, 2, 4, 'A')
+    box(g, 1, 9, 4, 4, 1, 1, 'P')
+  }
   function specOf(m, inner, parts) {
     return {
       slices: shell(m, inner),
@@ -145,14 +177,14 @@
       }
     }
   }
-  BV.machines.water.spec = specOf(BV.machines.water, waterInner, [
+  BV.machines.water.spec = specOf(BV.machines.water, grid(BV.machines.water, waterPaint), [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 2 }),
     Pat.part('output_hatch', { min: 1, max: 2 }),
     Pat.part('energy_input', { min: 1, max: 2 }),
     G.parallelHatch.part()
   ])
-  BV.machines.fab.spec = specOf(BV.machines.fab, fabInner, [
+  BV.machines.fab.spec = specOf(BV.machines.fab, grid(BV.machines.fab, fabPaint), [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 1 }),

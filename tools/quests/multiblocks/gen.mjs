@@ -6,7 +6,7 @@
 //
 // Without --write: prints the band counts, the exclusions, the folder-vs-reachability mismatches and a diff against the file on disk.
 // With --write: writes the chapter and its exceptions in tools/quests/lint-config.json (allowRoots, allowIsolated: it is a map,
-// nothing depends on anything). Run it after processing-lines/pl-gen.mjs, which rewrites the allowIsolated block.
+// nothing depends on anything). It and processing-lines/pl-gen.mjs each rewrite only their own allowIsolated entries, in either order.
 //
 // Which controllers: machines.json entries with mb = 1 whose item exists, minus every id hidden by tables/hidden_until.json
 // and every controller whose tier is after the dump's implemented era (a later era's startup folder is registered but locked).

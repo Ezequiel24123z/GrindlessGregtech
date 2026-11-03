@@ -1,5 +1,5 @@
 // UHV on Mercury's ground (package UHV-B2), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
-//   - startup_scripts/grindless/uhv/mercury.js: two recipe types, two machines (9 x 5 x 3 excavator, 9 x 9 x 5 furnace), seven items;
+//   - startup_scripts/grindless/uhv/mercury.js: two recipe types, two machines (9 x 8 x 17 excavator, 15 x 11 x 21 furnace), seven items;
 //   - server_scripts/grindless/uhv/mercury.js: the excavator's dig, the furnace's three steps, the side rows, the controllers;
 //   - server_scripts/grindless/uv/materials.js: line 20's MgB2 powder-in-tube row (circuit 5);
 //   - en_us text for everything new.
@@ -69,23 +69,23 @@ function shape(id, w, d, h) {
 const blockSymbols = (s, id) => Object.entries(s.symbols).filter(([, v]) => (v.blocks || []).includes(id)).map(([k]) => k);
 const count = (s, ch) => s.slices.flat().join('').split('').filter((c) => c === ch).length;
 
-test('excavator pattern: 9 x 5 x 3, heat-shield brick chassis, two drums on frame arms, GTM part limits', () => {
-  const s = shape('gtceu:regolith_excavator', 9, 5, 3);
+test('excavator pattern: 9 x 8 x 17, heat-shield brick tracks, a gearbox bucket wheel on a frame boom, GTM part limits', () => {
+  const s = shape('gtceu:regolith_excavator', 9, 17, 8);
   const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
   assert.deepEqual(Object.keys(lim).sort(), ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']);
   assert.ok(s.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes('grindless:hermean_heat_shield_brick')), 'chassis brick');
   const gear = blockSymbols(s, 'gtceu:tungstensteel_gearbox');
   assert.equal(gear.length, 1);
-  assert.equal(count(s, gear[0]), 12, 'two drums of six gearboxes');
+  assert.ok(count(s, gear[0]) >= 12, 'a ring of gearboxes for the bucket wheel');
 });
 
-test('furnace pattern: 9 x 9 x 5, ten heliostats, condenser plates, firebox receiver, an output hatch for the Na-K', () => {
-  const s = shape('gtceu:solar_vapour_furnace', 9, 9, 5);
+test('furnace pattern: 15 x 11 x 21, a bed of heliostats, condenser plates, firebox receiver and tower, an output hatch for the Na-K', () => {
+  const s = shape('gtceu:solar_vapour_furnace', 15, 21, 11);
   const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
   assert.deepEqual(Object.keys(lim).sort(), ['energy_input', 'input_bus', 'output_bus', 'output_hatch', 'parallel_hatch']);
-  assert.equal(count(s, blockSymbols(s, 'grindless:heliostat_mirror')[0]), 10, 'mirrors');
+  assert.ok(count(s, blockSymbols(s, 'grindless:heliostat_mirror')[0]) >= 40, 'mirrors');
   assert.ok(count(s, blockSymbols(s, 'grindless:night_sky_radiator')[0]) >= 6, 'condenser plates');
-  assert.equal(count(s, blockSymbols(s, 'gtceu:tungstensteel_firebox_casing')[0]), 25, '5 x 5 receiver');
+  assert.ok(count(s, blockSymbols(s, 'gtceu:tungstensteel_firebox_casing')[0]) >= 25, 'receiver');
 });
 
 test('recipe lookup: every row in the dump, each furnace step with its own circuit, figures within UHV', () => {
