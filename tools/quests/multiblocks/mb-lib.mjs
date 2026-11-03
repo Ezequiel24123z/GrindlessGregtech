@@ -179,7 +179,7 @@ export function structureParts(st) {
   return { casing: casing ? casing[0] : null, coil: coil ? coil[0] : null };
 }
 
-const part = (s) => s.replace(/§./g, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+/g, ' ').trim();
+const part = (s) => s.replace(/(?:§|\\u00a7)./gi, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+/g, ' ').trim();
 const endSentence = (s) => (/[.!?]$/.test(s) ? s : s + '.');
 
 // c: { name, ours, origin, tooltip, types: [id], io: [itemIn, itemOut, fluidIn, fluidOut], products: [id], parts: { casing, coil },
@@ -190,13 +190,14 @@ export function describeController(c) {
   const clean = (ids) => ids.map(niceName).filter((n) => !SENTENCE_QTY.test(n));
   const build = (o) => {
     const out = [];
-    const tip = c.tooltip ? endSentence(part(c.tooltip)) : '';
+    const tip = c.tooltip && !SENTENCE_QTY.test(c.tooltip) ? endSentence(part(c.tooltip)) : '';
     if (tip) out.push(tip);
     else out.push(shown.length ? `A ${c.origin} multiblock for ${joinList(shown)} recipes.` : `A ${c.origin} multiblock.`);
     if (tip && shown.length) out.push(`Runs ${joinList(shown)} recipes.`);
     const p = c.parts || {};
     if (p.casing) {
-      const coil = p.coil && o.coil ? `, with ${niceName(p.coil).replace(/ coil block$/i, '')} coils` : '';
+      const cn = p.coil ? niceName(p.coil) : '';
+      const coil = cn && o.coil ? (/ coil block$/i.test(cn) ? `, with ${cn.replace(/ coil block$/i, '')} coils` : `, with ${cn}`) : '';
       out.push(`Build it mostly from ${niceName(p.casing)}${coil}.`);
     }
     const ins = clean(c.inputs || []).slice(0, o.inputs);
@@ -208,9 +209,9 @@ export function describeController(c) {
       const [ii, io, fi, fo] = c.io;
       const feed = [ii > 0 ? 'item buses' : '', fi > 0 ? 'fluid hatches' : ''].filter(Boolean);
       const take = [io > 0 ? 'item buses' : '', fo > 0 ? 'fluid hatches' : ''].filter(Boolean);
-      if (feed.length && take.length) out.push(`Automate it by feeding ${joinList(feed)} and emptying ${joinList(take)}.`);
-      else if (feed.length) out.push(`Automate it by feeding ${joinList(feed)}.`);
-      else if (take.length) out.push(`Automate it by emptying ${joinList(take)}.`);
+      if (feed.length && take.length) out.push(`Automate it through input ${joinList(feed)} and output ${joinList(take)}.`);
+      else if (feed.length) out.push(`Automate it through input ${joinList(feed)}.`);
+      else if (take.length) out.push(`Automate it through output ${joinList(take)}.`);
     }
     return out.join(' ');
   };

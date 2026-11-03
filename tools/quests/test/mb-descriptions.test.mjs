@@ -18,7 +18,7 @@ test('a machine without a tooltip says what it is for, what it needs and what it
   assert.match(d, /Build it mostly from Heatproof Machine Casing, with Cupronickel coils\./);
   assert.match(d, /crafted from MV Machine Hull, Steel plates and MV circuits\./);
   assert.match(d, /Unlocks Hsla Steel Ingot and Steel Ingot\./);
-  assert.match(d, /Automate it by feeding item buses and fluid hatches and emptying item buses and fluid hatches\./);
+  assert.match(d, /Automate it through input item buses and fluid hatches and output item buses and fluid hatches\./);
 });
 
 test('our tooltip leads the text, dashes are removed and the length is capped', () => {
