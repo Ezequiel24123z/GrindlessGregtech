@@ -43,6 +43,8 @@ $Items = [ordered]@{
     rrr_niobium_sheet = @('sheet', '8C94A8', 'C4CCE0')
     niobium_scrap     = @('heap', '7A8298', 'B0B8CC')
     bare_srf_cavity   = @('capsule', 'A8AEBC', '6C7488')
+    niobium_half_cell = @('orb', '9AA2B8', 'D8DEEE')
+    dressed_srf_cavity = @('capsule', 'B4A8C8', 'E0B050')
     srf_cavity        = @('orb', 'B8D0E8', '5AA0FF')
     mu_metal_shield   = @('module', '8A9AA0', '4A5A64')
 }

@@ -87,7 +87,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-UHVZblanTextures.ps1` | Writes the ZBLAN preform (UHV-A10, `item/zblan_preform.png`). The ZBLAN draw tower reuses UV's draw tower casing. `-Credits`. |
 | `Build-UVHeatSourcesTextures.ps1` | Writes the four item icons of UV's heat source works (UV-A2): probe RTG, americium micro source, curium RTG pellet, heavy curium oxide. `-Credits`. |
 | `Build-UVAcceleratorsTextures.ps1` | Writes the faces of UV's synchrotron, muon fusion cell and antimatter trap (UV-A5: `multiblock/synchrotron/`, `multiblock/muon_fusion_cell/`, `multiblock/antimatter_trap/`) and the 13 item icons of the LIGA, antiproton and muon fusion lines. `-Credits`. |
-| `Build-UVColdTextures.ps1` | Writes the five item icons of UV's cold works (UV-A4): RRR niobium sheet, niobium scrap, bare SRF cavity, N-doped SRF cavity, mu-metal shield. `-Credits`. |
+| `Build-UVColdTextures.ps1` | Writes the seven item icons of UV's cold works (UV-A4, D3-SRF): RRR niobium sheet, niobium scrap, bare SRF cavity, niobium half-cell, dressed SRF cavity, N-doped SRF cavity, mu-metal shield. `-Credits`. |
 | `Build-UVFusionTextures.ps1` | Writes the spent laser module icon of UV's laser fusion chamber (UV-A3). `-Credits`. |
 | `Build-UVPhotonicsTextures.ps1` | Writes the nine item icons of UV's photonics (UV-A6): Yb-doped preform, fibre Bragg grating, GaAs and sapphire boules and wafers, InGaAs epi wafer, InGaAs diode bar, NbN film wafer. `-Credits`. |
 | `Build-UVMaterialsTextures.ps1` | Writes the twelve item icons of UV's materials (UV-A8): BNNT dust, silver tube, PIT billet, six porous near-net parts and three printed parts. `-Credits`. |

@@ -42,6 +42,8 @@
   // item name -> stack size; two tooltip lines each (tooltip.grindless.<name>.0 and .1)
   const ITEMS = {
     rrr_niobium_sheet: { stack: 64 },
+    niobium_half_cell: { stack: 64 },
+    dressed_srf_cavity: { stack: 16 },
     niobium_scrap: { stack: 64 },
     bare_srf_cavity: { stack: 16 },
     srf_cavity: { stack: 16 },
@@ -62,6 +64,8 @@
   C.materials = Object.keys(MATERIALS).map(function (name) { return 'gtceu:' + name })
   C.ids = {
     rrrNiobiumSheet: 'grindless:rrr_niobium_sheet',
+    niobiumHalfCell: 'grindless:niobium_half_cell',
+    dressedSrfCavity: 'grindless:dressed_srf_cavity',
     niobiumScrap: 'grindless:niobium_scrap',
     bareSrfCavity: 'grindless:bare_srf_cavity',
     srfCavity: 'grindless:srf_cavity',

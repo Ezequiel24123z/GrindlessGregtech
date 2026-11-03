@@ -19,7 +19,9 @@
             items: {
                 rrr_niobium_sheet: ['RRR Niobium Sheet', 'High residual resistance ratio niobium, electron-beam melted five times.', 'Made in the SRF Cavity Works (circuit 1).'],
                 niobium_scrap: ['Niobium Scrap', 'Offcuts of the sheet. Nothing is lost: an electric furnace melts it back into an ingot.', 'Made in the SRF Cavity Works (circuit 1).'],
-                bare_srf_cavity: ['Bare Nine-Cell Cavity', 'Nine deep-drawn cells, electron-beam welded. Not yet electropolished.', 'Made in the SRF Cavity Works (circuit 2).'],
+                bare_srf_cavity: ['Bare Nine-Cell Cavity', 'Eighteen half-cells, electron-beam welded. Not yet electropolished.', 'Made in the SRF Cavity Works (circuit 2).'],
+                niobium_half_cell: ['Niobium Half-Cell', 'A deep-drawn half-shell of RRR niobium; two make one cell of the cavity.', 'Made in the SRF Cavity Works (circuit 14).'],
+                dressed_srf_cavity: ['Dressed SRF Cavity', 'The finished cavity welded into its titanium helium vessel, ready for the cryomodule string.', 'Made in the SRF Cavity Works (circuit 15).'],
                 srf_cavity: ['N-Doped SRF Cavity', 'Electropolished and nitrogen-doped: it carries the field at a high quality factor.', 'Made in the SRF Cavity Works (circuit 3).'],
                 mu_metal_shield: ['Mu-Metal Shield', 'A nickel-iron shell that keeps stray magnetic fields out of the cryomodule.', 'Made in an assembler from nickel and iron plates and copper foil.']
             },
