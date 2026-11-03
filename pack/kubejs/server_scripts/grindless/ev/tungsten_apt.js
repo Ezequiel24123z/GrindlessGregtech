@@ -1,12 +1,12 @@
-// priority: -12875
+// priority: -13125
 // -----------------------------------------------------------------------------------------------
 // D2-APT (docs/eras/lines-ev-zpm.md, section 2 E3 and D2-2): Mars scheelite to tungsten through ammonium paratungstate, the real
 // route (tungstic acid cannot be electrolysed to the metal). GTM's bath (scheelite -> tungstic acid + CaCl2) is unchanged.
 //
 //   3  dissolution       chemical reactor  7 tungstic acid + 2,000 mB NH3 + 1,000 mB water -> 1,000 mB ammonium tungstate solution
 //   4  Mo removal        chemical reactor  1,000 mB solution + 1 sodium sulfide -> 1,000 mB solution + 1 molybdenite
-//   5  crystallisation   distillery        1,000 mB solution -> 1 APT + 800 mB water + 1,000 mB NH3 (back to 3)
-//   6  calcination       EBF 900 K         1 APT -> 4 tungsten trioxide + 1,000 mB NH3 (back to 3) + 1,200 mB water
+//   5  crystallisation   distillery        1,000 mB solution -> 1 APT + 1,000 mB NH3 (back to 3); 800 mB of water leaves as vapour
+//   6  calcination       EBF 900 K         1 APT -> 4 tungsten trioxide + 1,000 mB NH3 (back to 3); 1,200 mB of water leaves as vapour
 //   7  reduction         EBF 1,200 K       4 tungsten trioxide + 6,000 mB H2 -> 1 tungsten dust + 3,000 mB water
 //
 // Units follow GTM: items are counted by atoms (one mole of tungstic acid is 7 dusts, of WO3 4), 1,000 mB of a fluid is one mole.
@@ -44,12 +44,12 @@
     {
       name: 'apt_crystallisation', type: 'distillery', id: 'grindless:ev/apt_crystallisation',
       itemsIn: [], fluidsIn: [{ id: SOLUTION, amount: 1000 }],
-      itemsOut: [{ id: APT, count: 1 }], fluidsOut: [{ id: WATER, amount: 800 }, { id: NH3, amount: 1000 }], eut: 1920, duration: 100
+      itemsOut: [{ id: APT, count: 1 }], fluidsOut: [{ id: NH3, amount: 1000 }], eut: 1920, duration: 100
     },
     {
       name: 'apt_calcination', type: 'electric_blast_furnace', id: 'grindless:ev/apt_calcination', temp: 900,
       itemsIn: [{ id: APT, count: 1 }], fluidsIn: [],
-      itemsOut: [{ id: WO3, count: 4 }], fluidsOut: [{ id: NH3, amount: 1000 }, { id: WATER, amount: 1200 }], eut: 1920, duration: 150
+      itemsOut: [{ id: WO3, count: 4 }], fluidsOut: [{ id: NH3, amount: 1000 }], eut: 1920, duration: 150
     },
     {
       name: 'hydrogen_reduction', type: 'electric_blast_furnace', id: 'grindless:ev/tungsten_reduction', temp: 1200,

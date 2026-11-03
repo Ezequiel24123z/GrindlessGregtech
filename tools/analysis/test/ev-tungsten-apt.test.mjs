@@ -49,8 +49,7 @@ test('ammonia and water balance', () => {
   const nh3In = fl(row('ammoniacal_dissolution'), 'fluidsIn', 'gtceu:ammonia');
   const nh3Out = fl(row('apt_crystallisation'), 'fluidsOut', 'gtceu:ammonia') + fl(row('apt_calcination'), 'fluidsOut', 'gtceu:ammonia');
   assert.equal(nh3In, nh3Out);
-  const waterOut = fl(row('apt_crystallisation'), 'fluidsOut', 'gtceu:water') + fl(row('apt_calcination'), 'fluidsOut', 'gtceu:water');
-  assert.equal(waterOut, fl(row('ammoniacal_dissolution'), 'fluidsIn', 'gtceu:water') + 1000);
+  for (const n of ['apt_crystallisation', 'apt_calcination']) assert.equal(row(n).fluidsOut.length, 1, n);
   assert.equal(fl(row('hydrogen_reduction'), 'fluidsIn', 'gtceu:hydrogen'), 6000);
   assert.equal(fl(row('hydrogen_reduction'), 'fluidsOut', 'gtceu:water'), 3000);
 });

@@ -1,4 +1,4 @@
-// priority: 10250
+// priority: 9999
 // D2-APT: names and tooltips of the tungsten line materials (startup_scripts/grindless/ev/tungsten_apt.js).
 ClientEvents.lang('en_us', function (event) {
   event.add('grindless', 'material.gtceu.ammonium_tungstate', 'Ammonium Tungstate Solution')
