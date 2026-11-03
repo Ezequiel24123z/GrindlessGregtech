@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:pasta_containment_casing"],
+  "text": ["emi.grindless.info.pasta_containment_casing.0"]
+}

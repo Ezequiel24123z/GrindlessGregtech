@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:gum_metal_casing"],
+  "text": ["emi.grindless.info.gum_metal_casing.0"]
+}
