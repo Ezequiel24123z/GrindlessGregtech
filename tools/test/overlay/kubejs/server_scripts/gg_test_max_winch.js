@@ -1,7 +1,7 @@
 // priority: -5674
 // TEST ONLY, MAX-D3 (gtceu:geroch_winch). Command: kubejs custom_command gg_test_max_winch
 // Copied over the instance on the test bench, never shipped. NOT run by the package worker: the MAX integrator runs it.
-// Band ONLY: X 39960-40023, Z 0-63, Y 98-135, in gcyr:black_hole_orbit (the Sgr A* level; zones.json row max_winch).
+// Band ONLY: X 39960-40023, Z 0-63, Y 98-143, in gcyr:black_hole_orbit (the Sgr A* level; zones.json row max_winch).
 //   T1 (named uncertainty: the 33-high tower forms on two OpV 16 A dynamo hatches and c1, a generator row, runs at 2^30 EU/t):
 //     lookup   every recipe id of the package (c1, c2, the controller line, the GTM and older rows) is in the recipe manager
 //     static   nothing skipped; no pending route

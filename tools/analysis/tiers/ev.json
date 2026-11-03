@@ -353,7 +353,7 @@
 
     { "id": "nether-star", "label": "Nether Star (the wither in the EV creature simulator; saved for IV)", "kind": "recipe", "recipe": "grindless:creature_simulation/wither/*", "output": "minecraft:nether_star" },
 
-    { "id": "tungsten-ingot", "label": "Tungsten ingot (Martian scheelite -> tungstic acid -> electrolysis -> EBF 3,600 K -> freezer)", "item": "gtceu:tungsten_ingot" },
+    { "id": "tungsten-ingot", "label": "Tungsten ingot (Martian scheelite -> ammonium tungstate -> APT -> WO3 -> hydrogen reduction -> EBF 3,600 K -> freezer)", "item": "gtceu:tungsten_ingot" },
     { "id": "tungsten-steel-ingot", "label": "Tungsten steel ingot (tungsten + steel -> EBF -> freezer)", "item": "gtceu:tungsten_steel_ingot" },
     { "id": "rtm-alloy-ingot", "label": "RTM alloy ingot (ruthenium + tungsten + molybdenum)", "item": "gtceu:rtm_alloy_ingot" },
     { "id": "nano-cpu-wafer", "label": "Nano CPU wafer (EV reactor, clean room)", "item": "gtceu:nano_cpu_wafer" },
@@ -443,7 +443,7 @@
     { "id": "auto-nether-star", "label": "Nether Star (the wither, from biomass and skulls)", "item": "minecraft:nether_star" },
     { "id": "auto-mars-dimension", "label": "The trip to Mars can be repeated (rocket fuel and oxygen are sustained)", "item": "dim:gcyr:mars" },
     { "id": "auto-scheelite", "label": "Martian scheelite (tripod on Mars)", "item": "gtceu:raw_scheelite" },
-    { "id": "auto-tungsten", "label": "Tungsten ingot (scheelite -> tungstic acid -> electrolysis -> EBF -> freezer)", "item": "gtceu:tungsten_ingot" },
+    { "id": "auto-tungsten", "label": "Tungsten ingot (scheelite -> APT -> WO3 -> hydrogen reduction -> EBF -> freezer)", "item": "gtceu:tungsten_ingot" },
     { "id": "auto-tungsten-steel", "label": "Tungsten steel ingot", "item": "gtceu:tungsten_steel_ingot" },
     { "id": "auto-tungsten-without-tripod", "label": "Without the tripod, tungsten isn't automated (the first visit's ores are a one-off start)", "item": "gtceu:tungsten_ingot", "without": ["operate:gtceu:ev_vein_drill"], "expect": "not-automatic" },
     { "id": "auto-merrillite", "label": "Merrillite dust (tripod on Mars)", "item": "gtceu:merrillite_dust" },
