@@ -1250,7 +1250,9 @@ const cluster = (name, nums) => {
     const hi = Math.max(...probe.map((nd) => nd.y));
     const ns = make(cursor - lo);
     const used = new Set(ns.flatMap((nd) => nd.from));
-    for (const nd of ns) out.push(r > 0 && !used.has(nd.key) && !['by', 'link', 'raw', 'ours'].includes(nd.kind) ? { ...nd, kind: 'dest', end: nd.end || ENDS[num] } : nd);
+    const ends = ns.filter((nd) => !used.has(nd.key) && !['by', 'link', 'raw', 'ours'].includes(nd.kind));
+    const sink = r === 0 ? ends.reduce((a, b) => (b.x > a.x ? b : a), ends[0]) : null;
+    for (const nd of ns) out.push(ends.includes(nd) && nd !== sink ? { ...nd, kind: 'dest', end: nd.end || ENDS[num] } : nd);
     cursor += hi - lo + 2.5;
   });
   return { name, nodes: out };
