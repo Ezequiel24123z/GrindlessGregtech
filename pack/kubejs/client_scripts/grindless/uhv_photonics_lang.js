@@ -40,7 +40,7 @@
         ['gtceu.recipe.grindless_photonic_foundry.thin_film_modulators',
             'Circuit 6: one etched LNOI wafer given gold electrodes and diced into sixteen thin-film modulators'],
         ['gtceu.recipe.grindless_photonic_foundry.lnoi_etch',
-            'Circuit 28: ridge waveguides milled into the LNOI film by argon ions (never used up)'],
+            'Circuit 28: ridge waveguides milled into the LNOI film by argon ions (never used up); the rinse water comes back'],
 
         ['item.grindless.etched_lnoi_wafer', 'Etched LNOI Wafer'],
         ['tooltip.grindless.etched_lnoi_wafer.0',

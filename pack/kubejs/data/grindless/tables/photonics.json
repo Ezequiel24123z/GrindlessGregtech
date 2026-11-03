@@ -550,10 +550,10 @@
           "duration": 300,
           "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }],
           "kept": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
           "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:etched_lnoi_wafer", "count": 1 }],
-          "fluidsOut": []
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
         ]
     },
