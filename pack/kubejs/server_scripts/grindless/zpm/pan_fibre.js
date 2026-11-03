@@ -6,7 +6,7 @@
 //
 //   2  distillation_tower   2,000 mB nitrile mix -> 8,000 mB acrylonitrile + 2,000 mB hydrogen cyanide + 2,000 mB methane
 //   3  large_chemical_reactor   circuit 1  8,000 mB acrylonitrile + 1,000 mB sodium persulfate (initiator, not used up) -> 8 polyacrylonitrile
-//   4  chemical_bath        circuit 1  8 polyacrylonitrile + water coagulation bath (not used up) -> 8 PAN precursor fibre (wet spinning)
+//   4  chemical_bath        (one item slot: no circuit) 8 polyacrylonitrile + water coagulation bath (not used up) -> 8 PAN precursor fibre (wet spinning)
 //   5  electric_blast_furnace  550 K, circuit 1  8 precursor fibre + 8,000 mB oxygen -> 8 stabilised fibre + 8,000 mB water (C3H3N + O -> C3HN + H2O)
 //   6  electric_blast_furnace  1,600 K, circuit 2  8 stabilised fibre + nitrogen blanket (not used up) -> 16 carbon fibres + 8,000 mB hydrogen cyanide
 //                                                  (C3HN -> 2 C + HCN)
@@ -32,7 +32,7 @@
     { name: 'polyacrylonitrile', type: 'large_chemical_reactor', circuit: 1,
       itemsIn: [], notConsumed: [], fluidsIn: [{ id: ACN, amount: 8000 }], fluidsKept: [{ id: 'gtceu:sodium_persulfate', amount: 1000 }],
       itemsOut: [{ id: PAN, count: 8 }], fluidsOut: [], eut: ZPM_VA, duration: 300 },
-    { name: 'pan_wet_spinning', type: 'chemical_bath', circuit: 1,
+    { name: 'pan_wet_spinning', type: 'chemical_bath', circuit: 0,
       itemsIn: [{ id: PAN, count: 8 }], notConsumed: [], fluidsIn: [], fluidsKept: [{ id: 'minecraft:water', amount: 1000 }],
       itemsOut: [{ id: PRE, count: 8 }], fluidsOut: [], eut: ZPM_VA, duration: 200 },
     { name: 'pan_stabilisation', type: 'electric_blast_furnace', circuit: 1, temp: 550,
