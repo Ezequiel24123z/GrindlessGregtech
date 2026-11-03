@@ -1,0 +1,12 @@
+{
+  "warmupTicks": 60,
+  "windowTicks": 200,
+  "backpressureTicks": 120,
+  "cleanupTicks": 60,
+  "sampleEvery": 10,
+  "profiles": {
+    "control": { "tier": 0, "machines": 0, "factories": 0 },
+    "midgame": { "tier": 3, "machines": 24, "factories": 0 },
+    "endgame": { "tier": 8, "machines": 16, "factories": 4 }
+  }
+}
