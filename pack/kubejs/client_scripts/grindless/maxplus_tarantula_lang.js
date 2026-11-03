@@ -27,7 +27,7 @@
         ['gtceu.recipe.grindless_plasma_mass_filtering.vms_core_plasma', 'Circuit 6: raw VMS plasma filtered to its core fraction at 30 Doradus (line P6).'],
         ['gtceu.recipe.grindless_frc_forming.confined_vms_plasma', 'Circuit 4: core VMS plasma confined in a field-reversed configuration at 30 Doradus (line P6).'],
         ['gtceu.recipe.grindless_hot_cell.shielded_ni56_cask', 'Circuit 24: a canned nickel-56 slug sealed into a lead and boron carbide cask (line P7).'],
-        ['gtceu.recipe.grindless_hot_cell.spent_fe56_cask_iron', 'Circuit 26: a spent iron-56 cask opened for its iron and lead (line P7).'],
+        ['gtceu.recipe.grindless_hot_cell.spent_fe56_cask_iron', 'Circuit 26: a spent iron-56 cask opened for its iron-56 and lead (line P7).'],
         ['gtceu.recipe.grindless_single_crystal_casting.sx_turbine_blade', 'Circuit 4: a single-crystal turbine blade cast from nickel superalloy plates under argon (line P17).'],
         ['gtceu.recipe.grindless_electron_beam.tbc_coated_blade', 'A single-crystal blade given its thermal barrier coat under argon (line P17).'],
         ['gtceu.recipe.grindless_electron_beam.sealed_liner', 'An infiltrated liner sealed with a tungsten skin under argon (line P21).'],

@@ -23,6 +23,12 @@
 
   const SIC = 'grindless:sic_composite_casing'
   const SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
+  // Bootstrap (integrator, batch 16): every UEV family casing consumes grindless:sic_sic_plate, which only the CVI furnace makes
+  // from the SiC fibre plant's preform. Those two stay on GTM bodies so the family can be built at all.
+  const HEAT = 'gtceu:heatproof_machine_casing'
+  const HEAT_TEXTURE = 'gtceu:block/casings/solid/machine_casing_heatproof'
+  const CLEAN = 'gtceu:clean_machine_casing'
+  const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
 
   CO.table = 'kubejs/data/grindless/tables/composites.json'
   CO.noVoiding = 'grindless.machine.composites.no_voiding'
@@ -157,8 +163,8 @@
   }
   function makeSpec(k) {
     if (k === 'works') return specOf(k, SIC, parts(0, 0))
-    if (k === 'fibre') return specOf(k, SIC, parts(0, 1))
-    return specOf(k, SIC, parts(1, 1))
+    if (k === 'fibre') return specOf(k, CLEAN, parts(0, 1))
+    return specOf(k, HEAT, parts(1, 1))
   }
 
   // one EMI line per recipe, read from its data: what the circuit does
@@ -209,7 +215,7 @@
   })
 
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
-    var casings = { works: [SIC, SIC_TEXTURE], fibre: [SIC, SIC_TEXTURE], cvi: [SIC, SIC_TEXTURE] }
+    var casings = { works: [SIC, SIC_TEXTURE], fibre: [CLEAN, CLEAN_TEXTURE], cvi: [HEAT, HEAT_TEXTURE] }
     Object.keys(CO.machines).forEach(function (k) {
       var m = CO.machines[k]
       var type = GTRecipeTypes.get(m.type)
