@@ -306,25 +306,27 @@
         problems.push(plan.name + ' has ' + gen.itemsOut.length + ' item outputs (wanted none)')
       }
       if (gen.eut !== plan.eut || gen.duration !== plan.duration) problems.push(plan.name + ' ' + gen.eut + ' EU/t x ' + gen.duration + ' t (wanted ' + plan.eut + ' x ' + plan.duration + ')')
-      var stageEnergy = plan.stages.gasify * global.grindless.syngas.stageEnergy.gasify + plan.stages.shift * global.grindless.syngas.stageEnergy.shift
+      var SE = global.grindless.syngas.stageEnergy
+      var stageEnergy = plan.stages.gasify * SE.gasify + plan.stages.shift * SE.shift 
       if (gen.eut * gen.duration !== stageEnergy) problems.push(plan.name + ' energy ' + (gen.eut * gen.duration) + ' (stages ' + stageEnergy + ')')
     })
     return problems
   }
 
   // carbon, hydrogen and oxygen in = out, read from the recipes in the manager (feed dust = 1 C, steam = H2O, heavy fuel = CH2 per 1 000 mB)
-  var ATOMS = { steam: [0, 2, 1], carbon_monoxide: [1, 0, 1], carbon_dioxide: [1, 0, 2], hydrogen: [0, 1, 0], heavy_fuel: [1, 2, 0] }
+  var ATOMS = { steam: [0, 2, 1], carbon_monoxide: [1, 0, 1], carbon_dioxide: [1, 0, 2], hydrogen: [0, 1, 0], heavy_fuel: [1, 2, 0],
+    water: [0, 2, 1], carbon_12_methane: [1, 4, 0], volatile_condensate: [1, 9, 1], nitrogen: [0, 0, 0] }
 
   function balanceChecks() {
     var SYN = global.grindless.syngas
     var problems = []
     var lines = []
-    SYN.recipes.forEach(function (plan) {
+    SYN.recipes.concat(SYN.orbitRecipes, SYN.uevRecipes, SYN.uivRecipes, SYN.uxvRecipes).forEach(function (plan) {
       var gen = readRecipe(plan.id)
       if (gen === null) return
       var sum = [0, 0, 0]
       var feed = inputMap(gen)['#' + FEED_TAG] || 0
-      sum[0] += feed
+      sum[0] += feed + (inputMap(gen)['gtceu:carbon_12_dust'] || 0)
       function add(list, sign) {
         list.forEach(function (f) {
           var a = f === null ? null : ATOMS[fluidShort(f)]
@@ -346,7 +348,7 @@
   function catalystChecks() {
     var SYN = global.grindless.syngas
     var problems = []
-    SYN.recipes.forEach(function (plan) {
+    SYN.recipes.concat(SYN.orbitRecipes, SYN.uevRecipes, SYN.uivRecipes, SYN.uxvRecipes).forEach(function (plan) {
       var gen = readRecipe(plan.id)
       if (gen === null) return
       var wear = wearOf(gen, CATALYST)

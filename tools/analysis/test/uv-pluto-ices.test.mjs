@@ -99,14 +99,14 @@ test('acceptance: the Sputnik and Charon cores only from the penetrator bay; the
   assert.ok(consumers(/grindless:triton_ice_core/).includes('grindless:penetrator_probe/sputnik_penetrator'), 'the Triton core has a consumer');
 });
 
-test('acceptance: the fractionator\'s CO reaches the syngas plant\'s Pluto shift (circuit 5, Pluto orbit only)', () => {
+test('acceptance: the fractionator\'s CO reaches the syngas plant\'s Pluto shift (circuit 5, usable anywhere)', () => {
   const frac = PI.recipes.find((p) => p.name === 'sputnik_ice_fractionation');
   const co = frac.fluidsOut.find((f) => f.id === 'gtceu:carbon_monoxide');
   assert.ok(co && co.amount > 0);
   assert.equal(SYN.orbitRecipes.length, 1);
   const shift = SYN.orbitRecipes[0];
   assert.equal(shift.circuit, 5);
-  assert.equal(shift.dim, ORBIT);
+  assert.equal(shift.dim, undefined, 'no dimension lock: it only processes shippable inputs');
   assert.deepEqual(shift.atoms, { c: 0, h: 0, o: 0 }, 'C/H/O balance');
   const coIn = shift.fluidsIn.find((f) => f.id === 'gtceu:carbon_monoxide');
   assert.equal(coIn.amount, co.amount, 'one Sputnik core gives one shift run');
@@ -117,8 +117,8 @@ test('acceptance: the fractionator\'s CO reaches the syngas plant\'s Pluto shift
   assert.ok(r, shift.id + ' added');
   assert.equal(r.t, 'gtceu:syngas');
   assert.deepEqual(circuitOf(r), [5]);
-  assert.match(JSON.stringify(r.j), /grindless:pluto_orbit/);
-  assert.equal(shift.eut * shift.duration, 2 * SYN.stageEnergy.shift);
+  assert.ok(!/pluto_orbit/.test(JSON.stringify(r.j)), 'no dimension condition');
+  assert.equal(shift.eut * shift.duration, 2 * SYN.stageEnergy.shift + 2 * SYN.stageEnergy.vaporize);
 });
 
 test('the six older syngas rows are unchanged: circuits 1-4, no dimension, steam-fed', () => {
