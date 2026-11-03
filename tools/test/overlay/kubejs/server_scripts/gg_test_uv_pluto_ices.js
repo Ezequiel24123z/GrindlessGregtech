@@ -1,10 +1,10 @@
 // priority: -9224
 // TEST ONLY, UV-B3. Command: kubejs custom_command gg_test_uv_pluto_ices
 // Reserved band ONLY: X26880-26943, Z0-15; Pluto orbit Y198-214, Overworld Y98-114.
-// The doubt: two new dimension-locked types and a dimension-locked row added to an older HV type (the syngas plant's circuit 5).
+// The doubt: two new dimension-locked types and a shift row added to an older HV type (the syngas plant's circuit 5, not dimension-locked).
 //   Pluto orbit: the penetrator bay runs circuit 1 (penetrator + Triton ice core kept -> Sputnik ice core); the fractionator runs circuit 1
 //     (Sputnik ice core -> nitrogen + CO + methane + tholin); the HV syngas plant runs circuit 5 (CO + water + catalyst -> hydrogen + CO2).
-//   Overworld: the bay and the syngas plant's circuit 5 make nothing (dimension-locked).
+//   Overworld: the bay makes nothing (dimension-locked); the syngas plant's circuit 5 (the shift) runs on the same inputs.
 // Also checks the live recipes: one dimension condition, one circuit, real EU/t; the older shift row has no dimension condition.
 // No manual recipe execution, no changed clock.
 (function () {
@@ -91,7 +91,7 @@
   var FRACTIONATOR = { name: 'volatile_ice_fractionator', duration: 600,
     roles: [['energy', UV_ENERGY], ['input', 'gtceu:uv_input_bus'], ['output', 'gtceu:uv_output_bus'], ['out1', 'gtceu:uv_output_hatch'],
       ['out2', 'gtceu:uv_output_hatch'], ['out3', 'gtceu:uv_output_hatch']] }
-  var SYNGAS = { name: 'syngas_plant', duration: 80,
+  var SYNGAS = { name: 'syngas_plant', duration: 100,
     roles: [['energy', 'gtceu:hv_energy_input_hatch'], ['input', 'gtceu:hv_input_bus'], ['output', 'gtceu:hv_output_bus'],
       ['in1', 'gtceu:hv_input_hatch'], ['in2', 'gtceu:hv_input_hatch'], ['out1', 'gtceu:hv_output_hatch'], ['out2', 'gtceu:hv_output_hatch']] }
   var PENETRATOR_FEED = ['grindless:triton_ice_core', 'grindless:penetrator_probe']
@@ -108,8 +108,8 @@
     ] },
     { dimension: 'minecraft:overworld', tag: 'overworld', y0: 98, y1: 114, y: 99, cases: [
       { m: BAY, x: X0 + 10, circuit: 1, items: PENETRATOR_FEED, fluids: {}, expect: 'none', why: 'dimension_locked' },
-      { m: SYNGAS, x: X0 + 45, circuit: 5, items: ['grindless:shift_catalyst'], fluids: SHIFT_FLUIDS, expect: 'none',
-        why: 'pluto_shift_dimension_locked' }
+      { m: SYNGAS, x: X0 + 45, circuit: 5, items: ['grindless:shift_catalyst'], fluids: SHIFT_FLUIDS, expect: 'run',
+        outFluids: { 'gtceu:hydrogen': 4000, 'gtceu:carbon_dioxide': 2000 }, outItems: {} }
     ] }
   ]
   function place(m) {
@@ -190,16 +190,16 @@
     var dimIds = dims.map(function (c) { return String(c.getDimension().location()) })
     var circuit = array(classes().Helper.getInputItems(recipe)).filter(function (st) { return classes().Circuit.isIntegratedCircuit(st) })
     var real = Number(classes().Helper.getRealEUt(recipe).getTotalEU())
-    check('live', JSON.stringify(dimIds) === JSON.stringify([dim]) && dims.every(function (c) { return !c.isReverse() }) &&
+    check('live', JSON.stringify(dimIds) === JSON.stringify(dim === null ? [] : [dim]) && dims.every(function (c) { return !c.isReverse() }) &&
       circuit.length === 1 && Number(classes().Circuit.getCircuitConfiguration(circuit[0])) === circuitNo && real === eut,
     id + '; dims=' + dimIds.join(',') + '; circuits=' + circuit.length + '; eut=' + real)
   }
   function staticChecks() {
     live('grindless:penetrator_probe/sputnik_penetrator', PLUTO, 1, UV_VA)
     live('grindless:penetrator_probe/charon_penetrator', PLUTO, 2, UV_VA)
-    live('grindless:ice_fractionation/sputnik_ice_fractionation', PLUTO, 1, ZPM_VA)
-    live('grindless:ice_fractionation/charon_ice_fractionation', PLUTO, 2, ZPM_VA)
-    live('grindless:syngas/hv/pluto_shift', PLUTO, 5, 480)
+    live('grindless:ice_fractionation/sputnik_ice_fractionation', null, 1, ZPM_VA)
+    live('grindless:ice_fractionation/charon_ice_fractionation', null, 2, ZPM_VA)
+    live('grindless:syngas/hv/pluto_shift', null, 5, 480)
     var old = byId('grindless:syngas/hv/shift')
     check('old_shift_unlocked', old !== null && dimsOf(old).length === 0, 'grindless:syngas/hv/shift has no dimension condition')
     ;['grindless:assembly_line/penetrator_probe_bay', 'grindless:assembly_line/volatile_ice_fractionator', 'grindless:assembler/penetrator_probe']

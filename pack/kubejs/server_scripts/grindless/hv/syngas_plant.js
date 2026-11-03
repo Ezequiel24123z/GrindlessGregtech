@@ -12,9 +12,9 @@
 //                                    CH2 + 2 H2O -> CO2 + 3 H2          1 000 heavy fuel + 2 000 steam -> 6 000 hydrogen + 1 000 CO2
 //   circuit 4  shift                 CO + H2O -> CO2 + H2               1 000 CO + 1 000 steam -> 2 000 hydrogen + 1 000 CO2
 //   circuit 5  Pluto shift (UV-B3)   CO + H2O -> CO2 + H2               2 000 CO + 2 000 water -> 4 000 hydrogen + 2 000 CO2
-//              grindless:pluto_orbit only: one Sputnik ice core's CO (uv/pluto_ices.js) with Charon's water, fed liquid; in orbit the
-//              reaction heat and the radiators vaporise it, so it needs no boiler. Same stages and energy as circuit 4 per mole. It is
-//              published apart (.orbitRecipes) so the six rows above, and their checks, stay as they were.
+//              Runs anywhere (it only processes shippable inputs): one Sputnik ice core's CO (uv/pluto_ices.js) with Charon's water, fed
+//              liquid, so the plant itself vaporises it: the shift energy of circuit 4 per mole plus a vaporisation stage (VAPORIZE_EU) per mole
+//              of water. Published apart (.orbitRecipes) so the six rows above, and their checks, stay as they were.
 //   circuit 6  CO-rich (UEV-B3)      C + CO2 -> 2 CO                    1 dust + 1 000 CO2 -> 2 000 CO (+ ash); the Boudouard row, published
 //              apart (.uevRecipes): Barnard b's carbonyl refinery takes its CO through AE2 and gives it back in the iron route.
 //
@@ -43,7 +43,7 @@
 // Published in global.grindless.syngas for the smoke test:
 //   .recipes  [{ id, name, circuit, feed: { tag, count } | null, fluidsIn: [{ id, amount }], fluidsOut: [...], ash: chance | 0,
 //                catalyst: bool, stages: { gasify, shift }, eut, duration, energy, atoms: { c, h, o } (in - out, all 0) }]
-//   .orbitRecipes  the same fields + dim, for the rows locked to a dimension (circuit 5)
+//   .orbitRecipes  the same fields, for the liquid-water shift (circuit 5; the name is historical, it has no dimension)
 //   .feedTag, .feedItems, .craftingRecipes, .craftingParts
 (function () {
   const G = global.grindless || (global.grindless = {})
@@ -69,6 +69,7 @@
   const EUT = 480
   const GASIFY_EU = 28800
   const SHIFT_EU = 19200
+  const VAPORIZE_EU = 4800 // heating one mole of liquid water to steam, a quarter of a shift stage
 
   // atoms per 1 000 mB (or per dust) for the balance check
   const ATOMS = {}
@@ -89,9 +90,9 @@
     { name: 'gasify_heavy_fuel', circuit: 1, heavy: 1000, steam: 1000, out: { co: 1000, h2: 4000 }, gasify: 1, shift: 0 },
     { name: 'hydrogen_heavy_fuel', circuit: 3, heavy: 1000, steam: 2000, out: { h2: 6000, co2: 1000 }, gasify: 1, shift: 1 }
   ]
-  // rows locked to a dimension; water: mB of liquid water instead of steam
+  // water: mB of liquid water instead of steam (the plant vaporises it)
   const ORBIT_TABLE = [
-    { name: 'pluto_shift', circuit: 5, co: 2000, water: 2000, out: { h2: 4000, co2: 2000 }, gasify: 0, shift: 2, dim: 'grindless:pluto_orbit' }
+    { name: 'pluto_shift', circuit: 5, co: 2000, water: 2000, out: { h2: 4000, co2: 2000 }, gasify: 0, shift: 2 }
   ]
 
   // UEV-B3's CO-rich setting (circuit 6): the Boudouard reaction, C + CO2 -> 2 CO, feeds Barnard b's carbonyl refinery (through AE2)
@@ -99,14 +100,14 @@
     { name: 'co_rich', circuit: 6, feed: 1, co2: 1000, out: { co: 2000 }, gasify: 1, shift: 0 }
   ]
 
-  // UIV-A10 (docs/eras/uiv.md, line 21): C-12 methanation of the fusion ash, C + 2 H2 -> CH4 with the carbon-12 kept apart; the 12C dust is
+  // UIV-A10 (docs/eras/uiv.md, line 21): C-12 methanation of the fusion ash, C + 4 H -> CH4 with the carbon-12 kept apart (hydrogen convention: 1 000 mB = one H, so 4 000 mB); the 12C dust is
   // the ash centrifuge's (UIV-A9). c12: dust of C12; methanate: moles through a methanation stage
   const C12 = 'gtceu:carbon_12_dust'
   const C12_METHANE = 'gtceu:carbon_12_methane'
   const METHANATE_EU = 19200
   ATOMS[C12_METHANE] = { c: 1, h: 4, o: 0 }
   const UIV_TABLE = [
-    { name: 'c12_methanation', circuit: 7, c12: 1, h2: 2000, out: { ch4: 1000 }, gasify: 0, shift: 0, methanate: 1 }
+    { name: 'c12_methanation', circuit: 7, c12: 1, h2: 4000, out: { ch4: 1000 }, gasify: 0, shift: 0, methanate: 1 }
   ]
 
   // UXV-B2 (docs/eras/uxv.md, machine 12): the condensation tower's volatile condensate (1 000 mB = one mole each of CH4, NH3 and H2O) is
@@ -146,7 +147,7 @@
     if (t.c12) addAtoms(atoms, FEED_ATOMS, t.c12, 1)
     fluidsIn.forEach(function (f) { addAtoms(atoms, ATOMS[f.id], f.amount / 1000, 1) })
     fluidsOut.forEach(function (f) { addAtoms(atoms, ATOMS[f.id], f.amount / 1000, -1) })
-    var energy = t.gasify * GASIFY_EU + t.shift * SHIFT_EU + (t.methanate || 0) * METHANATE_EU
+    var energy = t.gasify * GASIFY_EU + t.shift * SHIFT_EU + (t.methanate || 0) * METHANATE_EU + (t.water ? t.water / 1000 * VAPORIZE_EU : 0)
     var plan = {
       id: 'grindless:syngas/hv/' + t.name,
       name: t.name,
@@ -172,7 +173,7 @@
   SYN.feedTag = FEED_TAG
   SYN.feedItems = FEED_ITEMS
   SYN.eut = EUT
-  SYN.stageEnergy = { gasify: GASIFY_EU, shift: SHIFT_EU }
+  SYN.stageEnergy = { gasify: GASIFY_EU, shift: SHIFT_EU, vaporize: VAPORIZE_EU, methanate: METHANATE_EU }
   SYN.recipes = TABLE.map(planOf)
   SYN.orbitRecipes = ORBIT_TABLE.map(planOf)
   SYN.uevRecipes = UEV_TABLE.map(planOf)

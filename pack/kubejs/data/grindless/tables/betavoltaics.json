@@ -128,7 +128,7 @@
           "itemsIn": [],
           "kept": [{ "id": "gtceu:nickel_dust", "count": 1 }],
           "charge": [],
-          "fluidsIn": [{ "id": "gtceu:carbon_12_monoxide", "amount": 1000 }, { "id": "gtceu:hydrogen", "amount": 3000 }],
+          "fluidsIn": [{ "id": "gtceu:carbon_12_monoxide", "amount": 1000 }, { "id": "gtceu:hydrogen", "amount": 6000 }],
           "itemsOut": [],
           "fluidsOut": [{ "id": "gtceu:carbon_12_methane", "amount": 1000 }, { "id": "minecraft:water", "amount": 1000 }]
         }
