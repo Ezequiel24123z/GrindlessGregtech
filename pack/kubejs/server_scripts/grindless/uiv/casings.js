@@ -21,6 +21,7 @@ global.grindless.recipes('uiv/casings', function (event) {
 
   event.recipes.gtceu.assembler('grindless:multilayer_optics_casing')
     .itemInputs('8x grindless:la_b4c_multilayer', '8x gtceu:rhea_plate', '4x grindless:glass_interposer', '1x gtceu:uiv_sensor')
+    .inputFluids(Fluid.of('gtceu:liquid_nitrogen', 1000))
     .itemOutputs('8x grindless:multilayer_optics_casing')
     .EUt(UIV_EUT)
     .duration(400)
