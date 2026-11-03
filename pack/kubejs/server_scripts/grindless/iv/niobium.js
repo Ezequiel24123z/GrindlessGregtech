@@ -1,14 +1,14 @@
 // -----------------------------------------------------------------------------------------------
 // IV's niobium and tantalum line (D2-NIOBIUM, docs/eras/lines-ev-zpm.md section 3 I4).
 //
-//   kiln (iv/fluorspar_kiln.js)   11 pyrochlore dust + 9,000 mB HF -> 2 niobium oxyfluoride dust + 4,500 mB water (Ca2Nb2O6F + 9 HF ->
-//                                 2 NbOF3 + 2 CaF2 + 4.5 H2O). The kiln has one item slot out, so the two CaF2 are the inert slag.
+//   kiln (iv/fluorspar_kiln.js)   11 pyrochlore dust + 9,000 mB HF -> 2 niobium oxyfluoride dust + 6 fluorite dust (the 2 CaF2, back to the
+//                                 kiln's charge) + 4,500 mB water (Ca2Nb2O6F + 9 HF -> 2 NbOF3 + 2 CaF2 + 4.5 H2O).
 //   cascade (ev/extraction_cascade.js, c12 columbite_niobium_split)  4 NbOF3 + water -> 2 Nb2O5 + HF; (c9 tantalum_cut) -> 2 K2TaF7.
 //   EBF 2,200 K   3 Nb2O5 + 10 Al -> 6 Nb + 5 Al2O3, the alumina as 25 GTM sapphire dust (GTM counts a compound's dust by atom).
 //   EBF 1,800 K   2 K2TaF7 + 10 Na -> 2 Ta + 4 KF + 10 NaF (14 alkali fluoride dust, the kiln's hf_from_alkali_fluoride feed).
 //
 // Retired: gtceu:electrolyzer/decomposition_electrolyzing_pyrochlore (11 pyrochlore -> 2 Ca, 2 Nb, 6 O, 1 F) skipped the whole line.
-// Destinations: sapphire -> aluminium (electrolyser) or the grower; alkali fluoride -> the kiln; HF loops in the cascade.
+// Destinations: sapphire -> aluminium (electrolyser) or the grower; alkali fluoride and fluorite -> the kiln; HF loops in the cascade.
 //
 // Published for the test: global.grindless.niobium = { removed, recipes: [ids] }.
 // Rhino: var + function inside every callback that runs more than once.

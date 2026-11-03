@@ -16,12 +16,14 @@ test('the pyrochlore electrolysis is removed', () => {
   assert.match(niobium, /event\.remove\(\{ id: N\.removed \}\)/);
 });
 
-test('kiln row: 11 pyrochlore hold 2 Nb, out 2 NbOF3, 9 HF in, water balances (Ca2Nb2O6F + 9 HF -> 2 NbOF3 + 2 CaF2 + 4.5 H2O)', () => {
-  const m = /name: 'niobium_oxyfluoride_from_pyrochlore',\s*itemIn: \{ id: 'gtceu:pyrochlore_dust', count: (\d+) \}, fluidIn: \{ id: 'gtceu:hydrofluoric_acid', amount: (\d+) \},\s*itemOut: \{ id: 'grindless:niobium_oxyfluoride_dust', count: (\d+) \}, fluidOut: \{ id: 'minecraft:water', amount: (\d+) \},\s*eut: (\d+)/.exec(kiln);
+test('kiln row: 11 pyrochlore hold 2 Nb, out 2 NbOF3 + 6 fluorite (2 CaF2), 9 HF in, water balances (Ca2Nb2O6F + 9 HF -> 2 NbOF3 + 2 CaF2 + 4.5 H2O)', () => {
+  const m = /name: 'niobium_oxyfluoride_from_pyrochlore',\s*itemIn: \{ id: 'gtceu:pyrochlore_dust', count: (\d+) \}, fluidIn: \{ id: 'gtceu:hydrofluoric_acid', amount: (\d+) \},\s*itemOut: \{ id: 'grindless:niobium_oxyfluoride_dust', count: (\d+) \}, itemOut2: \{ id: 'gcyr:fluorite_dust', count: (\d+) \},\s*fluidOut: \{ id: 'minecraft:water', amount: (\d+) \},\s*eut: (\d+)/.exec(kiln);
   assert.ok(m, 'row present');
-  assert.deepEqual(m.slice(1, 5).map(Number), [11, 9000, 2, 4500]);
-  assert.ok(Number(m[5]) <= 8192);
+  assert.deepEqual(m.slice(1, 6).map(Number), [11, 9000, 2, 6, 4500]);
+  assert.ok(Number(m[6]) <= 8192);
   assert.match(kiln, /addUevRows\(event, D2_ROWS\)/);
+  const startup = fs.readFileSync(path.join(iv, '..', '..', '..', 'startup_scripts', 'grindless', 'iv', 'fluorspar_kiln.js'), 'utf8');
+  assert.match(startup, /FK\.maxIO = \{ itemsIn: 1, itemsOut: 2, fluidsIn: 2, fluidsOut: 1 \}/);
 });
 
 test('EBF rows conserve Nb, Al, Ta, Na and run at IV voltage or below', () => {
