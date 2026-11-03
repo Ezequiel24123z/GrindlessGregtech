@@ -23,8 +23,8 @@ global.grindless.recipes('uxv/casings', function (event) {
 
   event.recipes.gtceu.naquadria_magnets('grindless:pulsed_field_casing')
     .circuit(15)
-    .itemInputs('48x grindless:mh_winding', '24x grindless:ga2o3_power_die', '12x grindless:finemet_core', '24x grindless:gum_metal_billet', '1x gtceu:uiv_emitter')
-    .itemOutputs('48x grindless:pulsed_field_casing')
+    .itemInputs('12x grindless:mh_winding', '6x grindless:ga2o3_power_die', '3x grindless:finemet_core', '6x grindless:gum_metal_billet', '4x gtceu:uiv_emitter')
+    .itemOutputs('12x grindless:pulsed_field_casing')
     .EUt(UEV_EUT)
     .duration(700)
 
