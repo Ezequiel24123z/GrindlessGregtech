@@ -97,7 +97,7 @@
     'gtceu:antihydrogen_synthesis': 'loop_antihydrogen_foundry',
     'gtceu:annihilation_power': 'loop_annihilation_engine',
     'gtceu:jet_beam_extraction': 'loop_jet_beam_line',
-    'gtceu:antiproton_production': 'loop_spallation_target_station',
+    'gtceu:antiproton_production': 'loop_antiproton_target_hall',
     'gtceu:beam_cooling': 'loop_antiproton_decelerator',
     'gtceu:strangelet_growth': 'loop_strangelet_vault',
     'gtceu:strangelet_distillation': 'loop_strangelet_distiller',
