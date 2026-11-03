@@ -142,7 +142,7 @@
     var controller = null
     var outCells = 0
     cells.forEach(function (c) {
-      c.x = CX - (c.ci - ctrl.ci)
+      c.x = CX + (c.ci - ctrl.ci)
       c.y = CY + (c.ri - ctrl.ri)
       c.z = CZ - (c.si - ctrl.si)
     })
