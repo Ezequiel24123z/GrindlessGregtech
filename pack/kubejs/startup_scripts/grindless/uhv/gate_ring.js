@@ -1,4 +1,4 @@
-// priority: -8090
+// priority: -8060
 // -----------------------------------------------------------------------------------------------
 // UHV W11, the gate ring's MgB2 coils (package D3-GATERING, docs/eras/lines-uv-uhv.md "W11"): the five items of the warp gate casing's
 // superconducting-coil chain. Recipes: server_scripts/grindless/uhv/gate_ring.js. Names: client_scripts/grindless/uhv_gate_ring_lang.js.

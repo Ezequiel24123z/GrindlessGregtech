@@ -1,4 +1,4 @@
-// priority: 4500
+// priority: 4545
 // Gregtech Grindless - names and tooltips of UHV W11, the gate ring's MgB2 coils (startup_scripts/grindless/uhv/gate_ring.js):
 //   grindless:<item>   name + two tooltip lines
 //   gtceu.recipe.grindless_naquadria_magnets.<name>   the EMI line of each magnet works recipe (circuits 13-15)

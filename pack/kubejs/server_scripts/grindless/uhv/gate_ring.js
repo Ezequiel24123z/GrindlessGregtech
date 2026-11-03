@@ -1,4 +1,4 @@
-// priority: -23470
+// priority: -23480
 // -----------------------------------------------------------------------------------------------
 // UHV W11, the gate ring's MgB2 coils (package D3-GATERING, docs/eras/lines-uv-uhv.md "W11" rows 5-9; row 10, the casing, is in uhv/gate.js).
 // Items: startup_scripts/grindless/uhv/gate_ring.js. All at VA[UHV] = 1,966,080 EU/t except the HV autoclave's row.
