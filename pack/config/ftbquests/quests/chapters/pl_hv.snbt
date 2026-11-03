@@ -976,6 +976,8 @@
 			description: [
 				"Steam on hot carbon makes carbon monoxide and hydrogen; more steam over the catalyst turns the monoxide into more hydrogen."
 				"Each gas leaves through its own hatch."
+				"One plant on the full conversion: HV, 480 EU/t, 100 t per run (syngas/hv/hydrogen_carbon). Per minute it takes 24,000 mB steam, 0.01 items shift catalyst and makes 48,000 mB hydrogen, 12,000 mB carbon dioxide, 1.33 items ash dust. Each run needs room for 2,000 mB steam, 4,000 mB hydrogen, 1,000 mB carbon dioxide. The catalyst is lost in 0.05% of runs (about one pellet in 2,000 runs); the coal dust is a tag, so coke, charcoal or carbon also feed it. Carbon dioxide and ash leave through their own hatch and bus."
+				"Hydrogen routes of the plant (HV, per bucket of hydrogen): Full conversion: 48,000/min, 12,000 EU, takes 500 mB steam, also ${flow(x.out).join()}; Heavy fuel, converted: 72,000/min, 8,000 EU, takes 166.67 mB heavy fuel + 333.33 mB steam, also ${flow(x.out).join()}; Gasified coal: 40,000/min, 14,400 EU, takes 500 mB steam, also ${flow(x.out).join()}; Gasified heavy fuel: 80,000/min, 7,200 EU, takes 250 mB heavy fuel + 250 mB steam, also ${flow(x.out).join()}; Methanol syngas: 43,636.36/min, 13,200 EU, takes 500 mB steam, also ${flow(x.out).join()}. All five run at 480 EU/t with no overclock and no parallels. On hydrogen alone the full conversion beats gasified coal and methanol syngas, and methanol syngas beats gasified coal; the latter two also make carbon monoxide, which is the only reason to build them. Proposed balance decision for the owner."
 			]
 			icon: "gtceu:syngas_plant"
 			id: "19E1CF6EE30E5C44"

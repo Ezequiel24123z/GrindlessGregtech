@@ -832,7 +832,7 @@
 		}
 		{
 			dependencies: ["75B0EF109062BCC1"]
-			description: ["The &6High Flux Reactor&r bombards curium in a dense neutron flux and is the start of every transcurium chain. Its controller, a UHV hull and the &6Radiation-Proof Casing&r that holds the flux in. Berkelium and californium targets, and the driver elements that feed them. Targets and driver elements travel by ME; send spent drivers back to the reactor."]
+			description: ["The &6High Flux Reactor&r bombards curium in a dense neutron flux and is the start of every transcurium chain. Its controller, radiation-proof casing, light concrete, beryllium blocks and tungstensteel and PTFE pipe casing. One Terminal pass builds it. Berkelium and californium targets, and the driver elements that feed them. Targets and driver elements travel by ME; send spent drivers back to the reactor."]
 			icon: "gtceu:high_flux_reactor"
 			id: "17FFD22B68F2339B"
 			rewards: [{ id: "559EF99482D99DA4", type: "xp", xp: 120 }]
@@ -850,7 +850,7 @@
 		}
 		{
 			dependencies: ["17FFD22B68F2339B"]
-			description: ["The &6Transuranium Facility&r separates the irradiated targets into berkelium and californium. Its controller, radiation-proof casing and tungstensteel pipe casing. Berkelium-249 and the californium-252 source that cold-trap drilling and YBCO irradiation use as a catalyst. Keep the targets in sealed buses; leftovers go to the partitioning plant."]
+			description: ["The &6Transuranium Facility&r separates the irradiated targets into berkelium and californium. Its controller, radiation vault casing, radiation-proof casing, light concrete and PTFE pipe casing. One Terminal pass builds it. Berkelium-249 and the californium-252 source that cold-trap drilling and YBCO irradiation use as a catalyst. Keep the targets in sealed buses; leftovers go to the partitioning plant."]
 			icon: "gtceu:transuranium_facility"
 			id: "36C7A1B9DB6512D7"
 			rewards: [{ id: "12243468CFF9573A", type: "xp", xp: 120 }]
@@ -881,13 +881,36 @@
 		}
 		{
 			dependencies: ["7365DAF24CBF4955"]
-			description: ["A trace of &6thorium-229&r comes out of the uranium-233 line. It is rare, and it has the lowest nuclear excited state known."]
+			description: [
+				"Uranium-233 decays slowly into &6thorium-229&r, and the Transuranium Facility keeps the uranium in a decay store while the thorium grows in. It is rare, and its nucleus has the lowest excited state known."
+				"The hot cell then dissolves it as a nitrate. Keep the store fed by ME and take the thorium out on a schedule."
+			]
 			icon: "grindless:thorium_229"
 			id: "1CD9068EF0888D7B"
 			rewards: [{ id: "3AE08C2CF2304B86", type: "xp", xp: 120 }]
-			tasks: [{ id: "564E113400619266", item: "grindless:thorium_229", type: "item" }]
+			tasks: [
+				{ id: "564E113400619266", item: "grindless:thorium_229", type: "item" }
+				{ id: "7A34A3F67E73E637", item: "grindless:thorium_229_nitrate", type: "item" }
+			]
 			title: "Thorium-229"
 			x: 14.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["1CD9068EF0888D7B"]
+			description: [
+				"The nitrate is fluorinated in the fluorspar kiln to &6laser-grade thorium tetrafluoride&r, pure enough to dope a crystal. Then the crystal growth furnace grows it into calcium fluoride."
+				"The Th:CaF2 crystal is what the Nuclear Clock Lab locks its laser onto. Automate it with the nitrate by ME and run the furnace on its own bus: a crystal takes hours."
+			]
+			icon: "grindless:thorium_caf2_crystal"
+			id: "58C041A42E75C02F"
+			rewards: [{ id: "5204151A403B25C1", type: "xp", xp: 120 }]
+			tasks: [
+				{ id: "74E5ED4A65F2B33A", item: "grindless:laser_grade_thf4", type: "item" }
+				{ id: "56C34E753C774BE4", item: "grindless:thorium_caf2_crystal", type: "item" }
+			]
+			title: "Laser-Grade Fluoride"
+			x: 16.5d
 			y: 14.5d
 		}
 		{
@@ -903,7 +926,7 @@
 		}
 		{
 			dependencies: ["18F323E6ABB96566"]
-			description: ["Irradiate a nickel-62 target and it turns into &6nickel-63&r, a pure beta emitter that is safe behind a thin shield and decays for a century."]
+			description: ["The same reactor that breeds californium breeds &6nickel-63&r: a nickel-62 target captures a neutron beside a driver element. It is a pure beta emitter, safe behind a thin shield, and the betavoltaic fab plates it from a liquor that is cleaned and reused."]
 			icon: "grindless:nickel_63_target"
 			id: "3E25FF12ADD0E625"
 			rewards: [{ id: "785FAD58234E5FEB", type: "xp", xp: 100 }]
@@ -917,7 +940,7 @@
 		}
 		{
 			dependencies: ["75B0EF109062BCC1"]
-			description: ["The &6Nuclear Clock Lab&r locks a laser onto a thorium-229 nucleus and keeps time to a part in a quintillion. Its controller, a UHV hull and clean machine casing. The nuclear clock, the timing reference for the Mercury swarm and the gate. Thorium-229 targets come by ME; the clock leaves by ME."]
+			description: ["The &6Nuclear Clock Lab&r locks a laser onto a thorium-229 nucleus and keeps time to a part in a quintillion. Its controller, clean and robust machine casing, computer casing, laminated glass and a few radiation-proof casings. One Terminal pass builds it. The nuclear clock, the timing reference for the Mercury swarm and the gate. Thorium-229 targets come by ME; the clock leaves by ME."]
 			icon: "gtceu:nuclear_clock_lab"
 			id: "314A27EF247A656B"
 			rewards: [{ id: "7089D6D6F0D37B4D", type: "xp", xp: 120 }]
@@ -948,7 +971,7 @@
 		}
 		{
 			dependencies: ["75B0EF109062BCC1"]
-			description: ["The &6Betavoltaic Fab&r builds cells that turn the decay of nickel-63 straight into current, for decades. Its controller, inert machine casing and clean machine casing. Betavoltaic cells for sensors and probes that cannot be recharged. Nickel-63 targets by ME; cells leave by ME."]
+			description: ["The &6Betavoltaic Fab&r builds cells that turn the decay of nickel-63 straight into current, for decades. Its controller, inert machine casing, radiation vault casing, laminated glass and PTFE pipe casing. One Terminal pass builds it. Betavoltaic cells for sensors and probes that cannot be recharged. Nickel-63 targets by ME; cells leave by ME."]
 			icon: "gtceu:betavoltaic_fab"
 			id: "3F50627705B1E295"
 			rewards: [{ id: "7F8B675C8968B0E0", type: "xp", xp: 120 }]
@@ -979,7 +1002,7 @@
 		}
 		{
 			dependencies: ["5A330FB83CE86A66"]
-			description: ["The &6Crystal Growth Furnace&r pulls lithium niobate and other boules out of a melt, slowly. Its controller, robust and heatproof casing, computer casing and tritanium coils. The lithium niobate wafer and the europium-doped boule behind optical memory. Feed seeds and melt by ME; a boule is hours of work, so run several furnaces."]
+			description: ["The &6Crystal Growth Furnace&r pulls lithium niobate and other boules out of a melt, slowly. Its controller, robust and heatproof casing, tritanium coils and tungstensteel pipe casing. One Terminal pass builds it. The lithium niobate wafer and the europium-doped boule behind optical memory. The wafer is etched into waveguides before any modulator is made. Feed seeds and melt by ME; a boule is hours of work, so run several furnaces."]
 			icon: "gtceu:crystal_growth_furnace"
 			id: "7A82260060D3ABC5"
 			rewards: [{ id: "3ACE86EC1DFFE9C5", type: "xp", xp: 120 }]
@@ -991,6 +1014,8 @@
 				{ id: "784D7309E613169C", item: "gtceu:heatproof_machine_casing", type: "item" }
 				{ id: "7F295D3C8E6AD4DC", item: "gtceu:computer_casing", type: "item" }
 				{ id: "5A08DD02CCD6880F", item: "gtceu:tritanium_coil_block", type: "item" }
+				{ id: "3032C0BB8C23274A", item: "grindless:etched_lnoi_wafer", type: "item" }
+				{ id: "1F773ED02F1216E1", item: "grindless:thin_film_ln_modulator", type: "item" }
 			]
 			title: "Lithium Niobate"
 			x: 9.0d
@@ -998,7 +1023,7 @@
 		}
 		{
 			dependencies: ["7A82260060D3ABC5"]
-			description: ["The &6MBE Reactor&r lays a crystal down one atomic layer at a time in ultra-high vacuum. Its controller, a UHV hull and clean machine casing. The indium phosphide wafer and the quantum cascade laser built on it. Substrates and dopants by ME; keep the vacuum pump line free of byproducts."]
+			description: ["The &6MBE Reactor&r lays a crystal down one atomic layer at a time in ultra-high vacuum. Its controller, UV machine casing, clean machine casing, frostproof casing and laminated glass. One Terminal pass builds it. The indium phosphide wafer and the quantum cascade laser built on it. Substrates and dopants by ME; keep the vacuum pump line free of byproducts."]
 			icon: "gtceu:mbe_reactor"
 			id: "169207A8F32A60C6"
 			rewards: [{ id: "7E95B52D842B52C0", type: "xp", xp: 120 }]
@@ -1015,7 +1040,7 @@
 		}
 		{
 			dependencies: ["169207A8F32A60C6"]
-			description: ["The &6Photonic Foundry&r writes light paths and phase-change memory into a wafer. Its controller, clean machine casing and a UHV hull. The phase-change die and the optical assembly for photonic circuits. Wafers by ME from the furnaces; dies leave by ME."]
+			description: ["The &6Photonic Foundry&r writes light paths and phase-change memory into a wafer. Its controller, clean and UV machine casing, filter casing and laminated glass. One Terminal pass builds it. The phase-change die and the optical assembly for photonic circuits. Wafers by ME from the furnaces; dies leave by ME."]
 			icon: "gtceu:photonic_foundry"
 			id: "77991055281FB831"
 			rewards: [{ id: "72F048F8E7F10EF3", type: "xp", xp: 120 }]
@@ -1032,7 +1057,7 @@
 		}
 		{
 			dependencies: ["5A330FB83CE86A66"]
-			description: ["The &6Ultrapure Water Plant&r polishes water until it carries almost no ions at all. Its controller, clean machine casing and filter casing. Water clean enough for the carbide fab and the solar array fab. Pipe it straight to the fabs; do not bucket it."]
+			description: ["The &6Ultrapure Water Plant&r polishes water until it carries almost no ions at all. Its controller, clean, inert and filter casing and PTFE pipe casing. It takes grade 5 water, which five purification stages make from plain water. Ultrapure water at eighteen megohms, which the carbide fab, the solar array fab and every foundry recipe drink. Any ion left ruins a wafer. Build the five grades in order, then pipe the result straight to the fabs; do not bucket it."]
 			icon: "gtceu:ultrapure_water_plant"
 			id: "55CA018935CD3D42"
 			rewards: [{ id: "53305DED12FFB6BB", type: "xp", xp: 120 }]
@@ -1042,6 +1067,8 @@
 				{ id: "125047294F1B5DE1", item: "gtceu:ultrapure_water_plant", type: "item" }
 				{ id: "7CED0FA9B24813E0", item: "gtceu:clean_machine_casing", type: "item" }
 				{ id: "18E9F8DC2B9AADE2", item: "gtceu:filter_casing", type: "item" }
+				{ id: "7D9424AE2D929EFB", item: "gtca:purified_water_grade_5_bucket", type: "item" }
+				{ id: "19F9C5844DAA8902", item: "gtceu:ultrapure_water_bucket", type: "item" }
 			]
 			title: "Eighteen Megohms"
 			x: 9.0d
@@ -1049,7 +1076,7 @@
 		}
 		{
 			dependencies: ["55CA018935CD3D42"]
-			description: ["The &6SiC Device Fab&r grows and etches silicon carbide into power devices that run hot. Its controller, heatproof and robust machine casing. SiC power modules for the UHV power stage. Wafers and ultrapure water by pipe and ME; modules leave by ME."]
+			description: ["The &6SiC Device Fab&r grows and etches silicon carbide into power devices that run hot. Its controller, heatproof and robust machine casing, tritanium coils and tungstensteel pipe casing. One Terminal pass builds it. SiC power modules for the UHV power stage. The boule grows from source powder made of polysilicon, graphite and argon, so the silicon line feeds it. Powder, wafers and ultrapure water by pipe and ME; modules leave by ME."]
 			icon: "gtceu:sic_device_fab"
 			id: "54D1DC02760C0324"
 			rewards: [{ id: "300161ADC7EA4735", type: "xp", xp: 120 }]
@@ -1059,6 +1086,7 @@
 				{ id: "3994ACA96D9F9EA2", item: "gtceu:sic_device_fab", type: "item" }
 				{ id: "5F7F19E7AF8D2D57", item: "gtceu:heatproof_machine_casing", type: "item" }
 				{ id: "3B50E3C718F683DC", item: "gtceu:robust_machine_casing", type: "item" }
+				{ id: "1162EB2EA165E2E0", item: "grindless:sic_source_powder", type: "item" }
 			]
 			title: "Silicon Carbide"
 			x: 11.0d
@@ -1066,7 +1094,7 @@
 		}
 		{
 			dependencies: ["54D1DC02760C0324"]
-			description: ["The &6Solar Array Fab&r builds inverted metamorphic cells and stacks them into an array. Its controller and clean machine casing. IMM solar arrays for the Mercury station and the swarm. Cells and frames by ME; arrays leave by ME."]
+			description: ["The &6Solar Array Fab&r builds inverted metamorphic cells and stacks them into an array. Its controller, clean and stable machine casing and filter casing. One Terminal pass builds it. IMM solar arrays for the Mercury station and the swarm. Cells and frames by ME; arrays leave by ME."]
 			icon: "gtceu:solar_array_fab"
 			id: "3107F3047B7810DD"
 			rewards: [{ id: "1B2B60B5514A9B2F", type: "xp", xp: 120 }]
@@ -1093,7 +1121,7 @@
 		}
 		{
 			dependencies: ["5A330FB83CE86A66"]
-			description: ["The &6Organoid Array&r grows neural tissue on a scaffold under sterile flow. Its controller, filter casing, PTFE pipe casing and computer casing. Neural organoids, the core of the wetware mainframe. Scaffolds and nutrient by ME and pipe; discard cultures on a schedule."]
+			description: ["The &6Organoid Array&r grows neural tissue on a scaffold under sterile flow. Its controller, plascrete, sterilizing filter casing, PTFE pipe casing, computer casing and cleanroom glass. One Terminal pass builds it. Neural organoids, the core of the wetware mainframe. The scaffold is chitosan, from the xenobiochemistry plant at Proxima b. Chitosan scaffolds and nutrient by ME and pipe; discard cultures on a schedule."]
 			icon: "gtceu:organoid_array"
 			id: "152A53C77D72EB36"
 			rewards: [{ id: "54DC6970C5A64BA4", type: "xp", xp: 120 }]
@@ -1126,7 +1154,7 @@
 		}
 		{
 			dependencies: ["554C7C99AD5FBAC0"]
-			description: ["The &6PBO Plant&r spins the strongest fibre we know how to make. Its controller and inert machine casing. PBO fibre for the tether ribbon. Keep the acid loop sealed and pipe the fibre out by ME."]
+			description: ["The &6PBO Plant&r spins the strongest fibre we know how to make. Its controller, inert and robust machine casing, tungsten steel frames and PTFE pipe casing. One Terminal pass builds it. PBO fibre for the tether ribbon. Keep the acid loop sealed and pipe the fibre out by ME."]
 			icon: "gtceu:pbo_plant"
 			id: "3B434AB6BB53478D"
 			rewards: [{ id: "18317DEE9D3D9B29", type: "xp", xp: 120 }]
@@ -1142,7 +1170,7 @@
 		}
 		{
 			dependencies: ["3B434AB6BB53478D"]
-			description: ["The &6Tether Ribbon Works&r weaves fibre into a ribbon long enough to reach orbit. Its controller and robust machine casing. Tether ribbon segments for the space elevator. Fibre by ME; segments stack in a chest for the climber."]
+			description: ["The &6Tether Ribbon Works&r weaves fibre into a ribbon long enough to reach orbit. Its controller, robust and inert machine casing and tungstensteel gearboxes. One Terminal pass builds it. Tether ribbon segments for the space elevator. Fibre by ME; segments stack in a chest for the climber."]
 			icon: "gtceu:tether_ribbon_works"
 			id: "1618459D29E8311B"
 			rewards: [{ id: "5F46812CE7AF0906", type: "xp", xp: 120 }]
@@ -1159,7 +1187,7 @@
 		}
 		{
 			dependencies: ["3B434AB6BB53478D"]
-			description: ["The &6Spark Plasma Sinterer&r fuses ultra-high-temperature ceramics in seconds under pulsed current. Its controller and robust machine casing. UHTC tiles and nozzles for the rocket motor. Powders by ME; the dies cool before the tiles leave."]
+			description: ["The &6Spark Plasma Sinterer&r fuses ultra-high-temperature ceramics in seconds under pulsed current. Its controller, robust and heatproof machine casing and tungstensteel pipe casing. One Terminal pass builds it. UHTC tiles and nozzles for the rocket motor. Powders by ME; the dies cool before the tiles leave."]
 			icon: "gtceu:spark_plasma_sinterer"
 			id: "31E7259B9EAE8F28"
 			rewards: [{ id: "3BBD2B50F7285913", type: "xp", xp: 120 }]
@@ -1225,8 +1253,8 @@
 			y: 36.0d
 		}
 		{
-			dependencies: ["3400C076975BABD5"]
-			description: ["The &6Warp Gate&r is the first door to another star. Its controller, warp gate casing and field ring casing. The gate seed and the trip to Proxima b. Power and cavity stacks by ME; only the seed leaves."]
+			dependencies: ["12CE5149C7CF9F1B"]
+			description: ["The &6Warp Gate&r is the first door to another star: a 15x15 ring of casings round open air, 25x9x20 in all, with a coil band and six UHV mounts for the modulators. Its controller, warp gate casing, field ring casing and the 48 superconducting coils of the wall band, with station truss, fusion glass and tungsten steel frames for the berm. It is built twice: once in Earth orbit and once in orbit of Proxima b. The gate seed and the trip to Proxima b. Power and cavity stacks by ME; only the seed leaves."]
 			icon: "gtceu:warp_gate"
 			id: "5BD78C42ED197713"
 			rewards: [{ id: "3653FD146C8BBDC8", type: "xp", xp: 160 }]
@@ -1238,8 +1266,103 @@
 				{ id: "5F19B47C7782A13A", item: "grindless:field_ring_casing", type: "item" }
 			]
 			title: "The Warp Gate"
+			x: 25.5d
+			y: 38.0d
+		}
+		{
+			dependencies: ["3400C076975BABD5"]
+			description: [
+				"The ring is a magnet, and its wire is &6magnesium diboride&r: Mercury's magnesium mixed with boron, packed in an iron tube and drawn by the powder-in-tube line."
+				"Braid it into cable in the Naquadria Magnet Works. Automate it with powder by ME and keep the draw line on its own bus."
+			]
+			icon: "gtceu:magnesium_diboride_single_wire"
+			id: "578E129AD9735B5E"
+			rewards: [{ id: "3AB935462299C81E", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "583BD6BCCC1F362E", item: "gtceu:magnesium_diboride_dust", type: "item" }
+				{ id: "3C99ED6270AFB6F4", item: "gtceu:powder_in_tube_line", type: "item" }
+				{ id: "5C856D86B3AF8969", item: "gtceu:magnesium_diboride_single_wire", type: "item" }
+				{ id: "76278291CC59E766", item: "grindless:mgb2_cable", type: "item" }
+			]
+			title: "Superconducting Wire"
+			x: 13.5d
+			y: 38.0d
+		}
+		{
+			dependencies: ["578E129AD9735B5E"]
+			description: [
+				"The &6Naquadria Magnet Works&r winds the cable into a gate coil. The winding is still not a superconductor."
+				"Keep the cable on a dedicated feed: a winding takes a lot of it."
+			]
+			icon: "grindless:gate_coil_winding"
+			id: "3BF2564F433347F8"
+			rewards: [{ id: "18FEC8362E07A18E", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "7A4052AE63371CBE", item: "gtceu:naquadria_magnet_works", type: "item" }
+				{ id: "593DB5346D35F0F8", item: "grindless:gate_coil_winding", type: "item" }
+			]
+			title: "Winding the Coil"
 			x: 15.5d
-			y: 36.0d
+			y: 38.0d
+		}
+		{
+			dependencies: ["3BF2564F433347F8"]
+			description: [
+				"Heated at about 973 K in the electric blast furnace under argon, the powder reacts and the coil turns &6superconducting&r. It is brittle now."
+				"Automate it with windings by ME and argon by pipe."
+			]
+			icon: "grindless:reacted_gate_coil"
+			id: "5D5E34AFDE4727FB"
+			rewards: [{ id: "5651CD4AC58AA4D5", type: "xp", xp: 100 }]
+			tasks: [{ id: "1658E6314F500D69", item: "grindless:reacted_gate_coil", type: "item" }]
+			title: "Reacting the Coil"
+			x: 17.5d
+			y: 38.0d
+		}
+		{
+			dependencies: ["5D5E34AFDE4727FB"]
+			description: [
+				"The composite autoclave soaks the brittle coil in epoxy and cures it, so it can bear the field without cracking."
+				"Epoxy comes by pipe and the cured coils leave by ME."
+			]
+			icon: "grindless:impregnated_gate_coil"
+			id: "3365C7A5C5B2F71F"
+			rewards: [{ id: "598CA15FF6307D3C", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "513E007AF90FD333", item: "gtceu:composite_autoclave", type: "item" }
+				{ id: "7AAE6CEA2CFCF9FF", item: "grindless:impregnated_gate_coil", type: "item" }
+			]
+			title: "Impregnated"
+			x: 19.5d
+			y: 38.0d
+		}
+		{
+			dependencies: ["3365C7A5C5B2F71F"]
+			description: [
+				"The Magnet Works cools the coil with helium and tests it at field. Only a &6qualified coil&r goes on; a failure goes back to be rewound."
+				"Keep helium on a pipe and route failures back to the winding step."
+			]
+			icon: "grindless:qualified_gate_coil"
+			id: "156745C6D89E0121"
+			rewards: [{ id: "72E648ED6263C5BE", type: "xp", xp: 100 }]
+			tasks: [{ id: "574DB18166591137", item: "grindless:qualified_gate_coil", type: "item" }]
+			title: "Quench Test"
+			x: 21.5d
+			y: 38.0d
+		}
+		{
+			dependencies: ["156745C6D89E0121"]
+			description: [
+				"The UHV assembler seats a qualified coil in a neutronium shell: one coil, four plates and a frame make two &6warp gate casings&r."
+				"The gate wall needs 48 coils, so build the whole chain as one automated line."
+			]
+			icon: "grindless:warp_gate_casing"
+			id: "12CE5149C7CF9F1B"
+			rewards: [{ id: "1E1389CC905645F2", type: "xp", xp: 120 }]
+			tasks: [{ id: "1E760C13F559202A", item: "grindless:warp_gate_casing", type: "item" }]
+			title: "Warp Gate Casing"
+			x: 23.5d
+			y: 38.0d
 		}
 		{
 			dependencies: ["1F9136892DB0B05E"]
@@ -1257,7 +1380,7 @@
 		}
 		{
 			dependencies: ["5A330FB83CE86A66"]
-			description: ["The &6ZBLAN Draw Tower&r pulls fluoride glass in microgravity, where it does not crystallise. Its controller and station truss casing. ZBLAN fibre, the lowest-loss optical fibre there is. Preforms by ME; the fibre spools out to a chest."]
+			description: ["The &6ZBLAN Draw Tower&r pulls fluoride glass in microgravity, where it does not crystallise. Its controller, clean and heatproof machine casing, station truss casing and tungstensteel pipe casing. One Terminal pass builds it. ZBLAN fibre, the lowest-loss optical fibre there is. Preforms by ME; the fibre spools out to a chest."]
 			icon: "gtceu:zblan_draw_tower"
 			id: "36F23A4BE8B4232F"
 			rewards: [{ id: "76A187086E9F4851", type: "xp", xp: 120 }]
@@ -1287,7 +1410,7 @@
 		}
 		{
 			dependencies: ["1338B882BFAB5DF8"]
-			description: ["The &6Regolith Excavator&r scrapes the surface of Mercury for dust and heat-baked rock. Its controller, heatproof machine casing and station truss casing. Mercury regolith for the vapour furnace. Dust leaves by ME; keep the bay cooled."]
+			description: ["The &6Regolith Excavator&r scrapes the surface of Mercury for dust and heat-baked rock. Its controller, Hermean heat shield bricks, heatproof casing and tungstensteel gearboxes. Mercury regolith for the vapour furnace. Dust leaves by ME; keep the bay cooled."]
 			icon: "gtceu:regolith_excavator"
 			id: "78BB7429DEB0337C"
 			rewards: [{ id: "33D8343B61FFD053", type: "xp", xp: 120 }]
@@ -1315,7 +1438,7 @@
 		}
 		{
 			dependencies: ["78BB7429DEB0337C"]
-			description: ["The &6Solar Vapour Furnace&r uses concentrated sunlight to boil regolith into its metals. Its controller, heatproof casing and station truss casing. Metals for swarm segments, free of fuel. Feed by ME; the heat is free but the mirrors need care."]
+			description: ["The &6Solar Vapour Furnace&r uses concentrated sunlight to boil regolith into its metals. Its controller, Hermean heat shield bricks, heliostat mirrors, night sky radiators and tungstensteel firebox casing. One Terminal pass builds it. Metals for swarm segments, free of fuel. Feed by ME; the heat is free but the mirrors need care."]
 			icon: "gtceu:solar_vapour_furnace"
 			id: "3613FBC056828C6E"
 			rewards: [{ id: "3546A9F177F18019", type: "xp", xp: 120 }]
@@ -1332,7 +1455,7 @@
 		}
 		{
 			dependencies: ["3613FBC056828C6E"]
-			description: ["The &6Swarm Segment Foundry&r builds the panels of a star-powered swarm. Its controller, station truss casing and a UHV hull. Swarm segments and the propellant they ride on. Metals by ME; segments go to the control station."]
+			description: ["The &6Swarm Segment Foundry&r builds the panels of a star-powered swarm. Its controller, station truss casing, hangar casing, an assembly line unit with its grating, tungsten steel frames and a UHV hull. One Terminal pass builds it. Swarm segments, built from films, arrays, a laser, a spreader, a power module and cells. The whole swarm is one line, from Mercury regolith to the segment. Films, arrays and cells by ME; segments go to the control station and worn ones come back."]
 			icon: "gtceu:swarm_segment_foundry"
 			id: "52044A97A7656F49"
 			rewards: [{ id: "5969243ACADEED26", type: "xp", xp: 120 }]
@@ -1363,7 +1486,7 @@
 		}
 		{
 			dependencies: ["52044A97A7656F49"]
-			description: ["The &6Swarm Control Station&r steers the segments and collects their power. Its controller, station truss casing and a UHV hull. Stellar power for UHV and the coronal map. Segments by ME; the station needs a steady stream."]
+			description: ["The &6Swarm Control Station&r steers the segments and collects their power. A very wide, low hall: its controller, a lot of station truss and pressure hull casing, laser module blocks, sapphire blocks, Hermean heat shield bricks and a UHV hull. One Terminal pass builds it. Stellar power for UHV and the coronal map. Segments by ME; the station needs a steady stream."]
 			icon: "gtceu:swarm_control_station"
 			id: "581801EBC014A606"
 			rewards: [{ id: "36FE58418FBEEA29", type: "xp", xp: 160 }]
@@ -1380,7 +1503,7 @@
 		}
 		{
 			dependencies: ["581801EBC014A606"]
-			description: ["The &6Solar Probe Bay&r launches probes into the corona to map its field. Its controller, heatproof casing and station truss casing. The coronal field map for the Kardashev goal. Probes by ME; maps leave by ME."]
+			description: ["The &6Solar Probe Bay&r launches probes into the corona to map its field. Its controller, station truss casing, superconducting coils and laminated glass. The coronal field map for the Kardashev goal. Probes by ME; maps leave by ME."]
 			icon: "gtceu:solar_probe_bay"
 			id: "1DD195A0792EB0C3"
 			rewards: [{ id: "1EFCD1352EB2C3D7", type: "xp", xp: 120 }]
@@ -1478,7 +1601,7 @@
 		}
 		{
 			dependencies: ["10D0028A6C33D2E1"]
-			description: ["The &6Xenobiochem Plant&r refines alien biomass into pigments and radioprotectants. Its controller, Proxima base casing and PTFE pipe casing. Infrared pigment and radioprotectant, and the far-red algae. Biomass by ME; pipe the pigments on."]
+			description: ["The &6Xenobiochem Plant&r refines alien biomass into pigments and radioprotectants. Its controller, sealed-lab walls, PTFE pipe casing and clean machine casing. One Terminal pass builds it. Chitin from the mushrooms, then chitosan and the freeze-cast scaffold that carries organoids, mixed with melanin into the flare shield. Also radioprotectant and the far-red algae. It is portable processing, so it works on any base. Biomass by ME; pipe the chitosan on and send scaffolds home."]
 			icon: "gtceu:xenobiochem_plant"
 			id: "14442867AE05F51D"
 			rewards: [{ id: "59C4BBAE3DA7A0A6", type: "xp", xp: 120 }]
@@ -1488,6 +1611,9 @@
 				{ id: "7F621EB1351A9972", item: "gtceu:xenobiochem_plant", type: "item" }
 				{ id: "350C96F29737E733", item: "grindless:proxima_base_casing", type: "item" }
 				{ id: "79AC11B2E43BFB41", item: "gtceu:ptfe_pipe_casing", type: "item" }
+				{ id: "1A9324D6A454A958", item: "grindless:xeno_chitin", type: "item" }
+				{ id: "7393EA6D8C8A109E", item: "grindless:xeno_chitosan", type: "item" }
+				{ id: "5501D9AE2B184D3E", item: "grindless:chitosan_scaffold", type: "item" }
 			]
 			title: "Xenobiochemistry"
 			x: 29.0d
@@ -1495,7 +1621,7 @@
 		}
 		{
 			dependencies: ["14442867AE05F51D"]
-			description: ["The &6Radiotrophic Vat&r feeds fungi on radiation instead of light. Its controller, Proxima base casing and radiation-proof casing. Melanised biomass for shielding. Fungus cultures by ME; keep the radiation source inside."]
+			description: ["The &6Radiotrophic Vat&r feeds fungi on radiation instead of light. Its controller, sealed-lab walls, PTFE pipe casing and tungstensteel pipe casing. Melanised biomass for shielding. Fungus cultures by ME; keep the radiation source inside."]
 			icon: "gtceu:radiotrophic_vat"
 			id: "73D1077CB3C28F46"
 			rewards: [{ id: "5F0BEB0EEF1EB905", type: "xp", xp: 120 }]
@@ -1512,7 +1638,7 @@
 		}
 		{
 			dependencies: ["53952D3743F151DD"]
-			description: ["The &6Baseline Astrometer&r measures the sky from two stars at once. Its controller, Proxima base casing and clean machine casing. The survey that points toward the next gate. Surveys leave by ME."]
+			description: ["The &6Baseline Astrometer&r measures the sky from two stars at once. A long, tall hall: its controller, station truss casing, clean machine casing, fusion glass and stainless steel frames. One Terminal pass builds it. The survey that points toward the next gate. Surveys leave by ME."]
 			icon: "gtceu:baseline_astrometer"
 			id: "53C838D157094877"
 			rewards: [{ id: "14CCEC3FB38A2FDB", type: "xp", xp: 120 }]
@@ -1540,7 +1666,7 @@
 		}
 		{
 			dependencies: ["53952D3743F151DD"]
-			description: ["The &6Cold Trap Drill&r cores ice from the night side of Proxima b. Its controller, Proxima base casing and cryostat casing. Ice cores for water and biomining. Cores leave by ME."]
+			description: ["The &6Cold Trap Drill&r cores ice from the night side of Proxima b. Its controller, Proxima base casing, naquadah alloy frames and tungstensteel pipe casing. Ice cores for water and biomining. Cores leave by ME."]
 			icon: "gtceu:cold_trap_drill"
 			id: "7818F21EC17B4AA7"
 			rewards: [{ id: "5CF9E249A253D8F7", type: "xp", xp: 120 }]

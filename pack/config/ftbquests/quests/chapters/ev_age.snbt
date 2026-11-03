@@ -376,33 +376,98 @@
 		}
 		{
 			dependencies: ["56FFD4EF98A6C3B8"]
-			description: ["Scheelite takes the familiar road to &6Tungsten&r: an acid bath, the electrolyzer, the blast furnace and the freezer. Nichrome coils are just hot enough to melt it."]
-			icon: "gtceu:tungsten_ingot"
-			id: "5B6B5BE89721691A"
-			rewards: [{ id: "3EDBCF351DEE2347", type: "xp", xp: 60 }]
-			tasks: [
-				{ id: "1666328E006A2DD6", item: "gtceu:tungstic_acid_dust", type: "item" }
-				{ id: "12F35AEF44226368", item: "gtceu:tungsten_dust", type: "item" }
-				{ id: "71A6759B1111A3DC", item: "gtceu:tungsten_ingot", type: "item" }
+			description: [
+				"Tungsten starts here with a bath. Ground scheelite sits in hydrochloric acid in a chemical bath and comes out as &6Tungstic Acid&r, with calcium chloride on the side."
+				"Tungstic acid is not tungsten, and no electrolyzer will turn it into metal. The rest of the road is the real one: a salt first, then an oxide, then the metal. Keep the calcium chloride: the Moon's molten salt charge is made from it."
 			]
-			title: "Tungsten"
+			icon: "gtceu:tungstic_acid_dust"
+			id: "1B1F34854FA33FC0"
+			rewards: [{ id: "576B2EBF48B0FA1C", type: "xp", xp: 40 }]
+			tasks: [
+				{ id: "58E97DBACA5323D9", item: "gtceu:scheelite_dust", type: "item" }
+				{ id: "68E995478B3EC62E", item: "gtceu:tungstic_acid_dust", type: "item" }
+			]
+			title: "Tungstic Acid"
 			x: 22.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["1B1F34854FA33FC0"]
+			description: [
+				"A chemical reactor dissolves tungstic acid in ammonia and water, and the result is &6Ammonium Tungstate&r solution. Tungsten is now a salt in a tank, which is what makes it easy to clean."
+				"A second pass with sodium sulfide drops the molybdenum out as molybdenite, and the solution stays. Keep the molybdenite: the line pays you back in molybdenum."
+				"Ammonia is used and given back further down the line, so pipe it in a loop."
+			]
+			icon: "gtceu:ammonium_tungstate_bucket"
+			id: "2990D44479185D0E"
+			rewards: [{ id: "33E0D63BC00445C0", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "5BD91E39B6F4F8A1", item: "gtceu:ammonium_tungstate_bucket", type: "item" }
+				{ id: "3661F777CB60AD88", item: "gtceu:molybdenite_dust", type: "item" }
+			]
+			title: "Ammonium Tungstate"
+			x: 24.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2990D44479185D0E"]
+			description: [
+				"A distillery boils the clean solution down, the ammonia leaves as gas and &6Ammonium Paratungstate&r crystallises. Industry calls it APT and trades tungsten in this form, because it is the purest way to carry it."
+				"The ammonia goes back to the reactor. Hold some APT back, as it is the clean stock the rest of the line starts from."
+			]
+			icon: "gtceu:ammonium_paratungstate_dust"
+			id: "5DAD033DFD7B7A35"
+			rewards: [{ id: "634EEEAA0AD281B4", type: "xp", xp: 50 }]
+			tasks: [{ id: "41FE9715ECF637EB", item: "gtceu:ammonium_paratungstate_dust", type: "item" }]
+			title: "Ammonium Paratungstate"
+			x: 26.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5DAD033DFD7B7A35"]
+			description: [
+				"An electric blast furnace at a modest coil heat bakes APT into &6Tungsten Trioxide&r, the yellow oxide. Ammonia and steam leave, and the ammonia is the second return to the reactor."
+				"This is the last step before the metal, and the next one needs hydrogen in volume."
+			]
+			icon: "gtceu:tungsten_trioxide_dust"
+			id: "357CD781C4C5D08E"
+			rewards: [{ id: "4AC10B3C7B17CD6A", type: "xp", xp: 50 }]
+			tasks: [{ id: "770A380E75312DF8", item: "gtceu:tungsten_trioxide_dust", type: "item" }]
+			title: "Yellow Oxide"
+			x: 28.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["357CD781C4C5D08E"]
+			description: [
+				"Hydrogen takes the oxygen off the oxide in a hotter blast furnace and leaves &6Tungsten&r dust and water. The vacuum freezer casts the dust into an ingot."
+				"Six scheelite still make one tungsten. The salt route costs more power than a shortcut would, so feed it scheelite from a belt and give hydrogen its own tank."
+			]
+			icon: "gtceu:tungsten_ingot"
+			id: "5B6B5BE89721691A"
+			rewards: [{ id: "3EDBCF351DEE2347", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "12F35AEF44226368", item: "gtceu:tungsten_dust", type: "item" }
+				{ id: "71A6759B1111A3DC", item: "gtceu:tungsten_ingot", type: "item" }
+			]
+			title: "Tungsten"
+			x: 30.0d
+			y: 0.0d
+		}
+		{
 			dependencies: ["5B6B5BE89721691A"]
-			description: ["&6RTM Alloy&r takes shopping on three worlds: ruthenium from the platinum plant, tungsten from Mars and molybdenum from the Nether. A blast furnace lined with its coils runs hotter than nichrome ever could."]
+			description: ["&6RTM Alloy&r takes shopping on three worlds: ruthenium from the platinum plant, tungsten from Mars and molybdenum from the Nether, with the molybdenite your tungsten line sets aside as a second source. A blast furnace lined with its coils runs hotter than nichrome ever could."]
 			icon: "gtceu:rtm_alloy_coil_block"
 			id: "3DB3729547372E91"
 			rewards: [{ id: "58D020FF415A194C", type: "xp", xp: 80 }]
 			tasks: [{ count: 4L, id: "56EE64CD3A69B9CA", item: "gtceu:rtm_alloy_coil_block", type: "item" }]
 			title: "RTM Coils"
-			x: 24.0d
+			x: 32.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["5B6B5BE89721691A"]
-			description: ["Tungsten and steel dust from the mixer take another trip through the blast furnace and the freezer. &6Tungsten Steel&r is what IV machines are made of, so you'll want plenty."]
+			description: ["&6Tungsten Steel&r is what IV machines are made of, so you'll want plenty. Tungsten and steel dust from the mixer take another trip through the blast furnace and the freezer."]
 			icon: "gtceu:tungsten_steel_ingot"
 			id: "11BD5A24AAF314BC"
 			rewards: [{ id: "18399F59E4F03505", type: "xp", xp: 60 }]
@@ -411,7 +476,7 @@
 				{ id: "106C109CA8C652F8", item: "gtceu:tungsten_steel_ingot", type: "item" }
 			]
 			title: "Tungsten Steel"
-			x: 24.0d
+			x: 32.0d
 			y: 0.0d
 		}
 		{
@@ -427,8 +492,8 @@
 			size: 0.75d
 			tasks: [{ id: "5BDA225F25F582FA", type: "checkmark" }]
 			title: "Before IV"
-			x: 26.0d
-			y: -1.5d
+			x: 34.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["11BD5A24AAF314BC", "1D65975B45CF7836"]
@@ -443,8 +508,142 @@
 			size: 1.75d
 			tasks: [{ id: "165460090EBCFE61", item: "gtceu:iv_machine_hull", type: "item" }]
 			title: "IV Machine Hull"
-			x: 28.0d
+			x: 36.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["1F70EF41E5F8ED95"]
+			description: [
+				"Rare earths are separated, not mined: no vein holds a clean lanthanide, and the platinum plant has shown you what a separation hall is for. The Nether's bastnasite vein holds all of them at once, in one mixed ore, and the next quests pull them apart."
+				"Drill the Nether vein, then crush the raw ore in a macerator."
+			]
+			icon: "gtceu:raw_bastnasite"
+			id: "3B09CD79B02F2EEB"
+			rewards: [{ id: "3C97ACE45C0C055A", type: "xp", xp: 40 }]
+			tasks: [
+				{ id: "5C1E7FD2BFA13D6C", item: "gtceu:raw_bastnasite", type: "item" }
+				{ id: "4134F04812BAE2B4", item: "gtceu:crushed_bastnasite_ore", type: "item" }
+			]
+			title: "Bastnasite"
+			x: 10.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["3B09CD79B02F2EEB"]
+			description: [
+				"The &6Thermal Reactor&r cracks the crushed ore in nitric acid. Steam strips the mud, sodium fluorosilicate conditions it and water dilutes it. A centrifuge filters the silica and red zircon out, and a blast furnace calcines what is left into &6Bastnasite Rare Earth Oxides&r."
+				"It is a long chain of small steps, each its own machine. Put every byproduct somewhere: silica goes to glass, red zircon waits for the zirconium line."
+			]
+			icon: "gtca:bastnasite_rare_earth_oxides_dust"
+			id: "4928BA90F3A31156"
+			rewards: [{ id: "71A03A89CF03DFFC", type: "xp", xp: 55 }]
+			tasks: [
+				{ id: "41E589CD151D8395", item: "gtca:thermal_reactor", type: "item" }
+				{ id: "3075F357FAC8969E", item: "gtca:bastnasite_rare_earth_oxides_dust", type: "item" }
+			]
+			title: "Cracking the Ore"
+			x: 12.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["4928BA90F3A31156"]
+			description: [
+				"A hydrochloric leach and a blast furnace roast with oxygen make &6Roasted Rare Earth Oxides&r. The roast is the trick: it oxidises cerium to the tetravalent state, which will not dissolve with the rest."
+				"Wet the oxides in a mixer, then a large chemical reactor with fluorine finishes the oxidation and gives &6Cerium-Oxidised Oxides&r. The fluorine comes back as hydrofluoric acid, which the fluorspar kiln and the naquadah plant take."
+			]
+			icon: "gtca:roasted_rare_earth_oxides_dust"
+			id: "23FAE54AF8624821"
+			rewards: [{ id: "2428C3492CB002FF", type: "xp", xp: 55 }]
+			tasks: [
+				{ id: "3D9D3C823F2FAD0D", item: "gtca:roasted_rare_earth_oxides_dust", type: "item" }
+				{ id: "7279872EAB11CFFE", item: "gtca:cerium_oxidised_rare_earth_oxides_dust", type: "item" }
+			]
+			title: "The Cerium Roast"
+			x: 14.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["23FAE54AF8624821"]
+			description: [
+				"A centrifuge splits the oxidised oxides in two: &6Cerium Dioxide&r stays behind, and the rarer earths carry on. Cerium is now apart from the rest."
+				"A long branch turns the dioxide into metal: chlorination with hydrogen, an oxalate made from sugar and nitric acid, a blast furnace with carbon, then the electrolyzer. Cerium has few uses yet; ZPM's naquadah fuel works takes it."
+			]
+			icon: "gtceu:cerium_dust"
+			id: "5AED6C97552BC57C"
+			rewards: [{ id: "71288C76F4AE5952", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "2D79BA20039E0DC8", item: "gtca:cerium_dioxide_dust", type: "item" }
+				{ id: "62386CCF5D008E0E", item: "gtceu:cerium_dust", type: "item" }
+			]
+			title: "Cerium"
+			x: 16.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["23FAE54AF8624821"]
+			description: [
+				"The rarer earths dissolve in nitric acid, an acetone solvent carries them as a suspension, and a centrifuge splits it into two concentrates: &6Samaric Concentrate&r, rich in the samarium-europium-gadolinium group, and a neodymium one."
+				"The acetone circulates back to the reactor."
+			]
+			icon: "gtca:samaric_rare_earth_concentrate_dust"
+			id: "1B5E2BD387897BA8"
+			rewards: [{ id: "351296B42EF94177", type: "xp", xp: 55 }]
+			tasks: [{ id: "2E8961B78931BEC8", item: "gtca:samaric_rare_earth_concentrate_dust", type: "item" }]
+			title: "Samaric Concentrate"
+			x: 16.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1B5E2BD387897BA8"]
+			description: [
+				"The neodymium concentrate meets hydrochloric acid in a large chemical reactor and splits into neodymium oxide and lanthanum chloride. Electrolyzers turn each into metal."
+				"Neodymium is the motors' magnet and lanthanum is stocked for later eras. Mars gives neodymium too, through the cascade."
+			]
+			icon: "gtceu:lanthanum_dust"
+			id: "619BDEEE4DDF0666"
+			rewards: [{ id: "528B166340BDEB5A", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "43CA39960093577B", item: "gtceu:neodymium_dust", type: "item" }
+				{ id: "282C8554B24EE92F", item: "gtceu:lanthanum_dust", type: "item" }
+			]
+			title: "Neodymium and Lanthanum"
+			x: 18.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["1B5E2BD387897BA8"]
+			description: [
+				"A large chemical reactor dissolves the samaric concentrate in hydrochloric acid, and the &6Extraction Cascade&r on circuit 28 splits the solution with kerosene. Europium is stripped off as chloride solution, and the heavy rare earths stay behind."
+				"Europium has no use at EV. Keep the solution in a tank: ZPM's reductor wants it."
+				"Hydrochloric acid and kerosene go round in loops, so give the cascade an output hatch for each fluid."
+			]
+			icon: "gtceu:europium_chloride_solution_bucket"
+			id: "411701B2F06638B0"
+			rewards: [{ id: "54F22FFEE93FF92C", type: "xp", xp: 70 }]
+			tasks: [
+				{ id: "65809AE51E988BE0", item: "gtceu:seg_chloride_solution_bucket", type: "item" }
+				{ id: "5C4A9723F372AF22", item: "gtceu:europium_chloride_solution_bucket", type: "item" }
+			]
+			title: "The SEG Cut"
+			x: 18.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["411701B2F06638B0"]
+			description: [
+				"Hydrofluoric acid precipitates the heavy rare earths as &6Fluorinated Samaric Concentrate&r, and the acid goes back to the dissolving step. Eight of them and calcium in a blast furnace at 1,200 K make one &6Holmium&r."
+				"Holmium only comes from this line, and later tiers' wetware boards and foils need it."
+			]
+			icon: "gtceu:holmium_dust"
+			id: "5309BC75ADAF248E"
+			rewards: [{ id: "38821665C132E523", type: "xp", xp: 70 }]
+			tasks: [
+				{ id: "2674A4A3E6AD1324", item: "gtca:fluorinated_samaric_concentrate_dust", type: "item" }
+				{ id: "2308431762A6F718", item: "gtceu:holmium_dust", type: "item" }
+			]
+			title: "Holmium"
+			x: 20.0d
+			y: 7.5d
 		}
 		{
 			dependencies: ["164F0808EF9DF557"]
@@ -723,7 +922,7 @@
 		}
 		{
 			dependencies: ["7637A9813DB73D6B", "004525B795119B1B"]
-			description: ["The platinum line is about forty recipes across a dozen machines; the &6Platinum Plant&r packs it into one hall, loops and all. Nitration mixture and ammonium chloride flowing first, and an electrode that wears out rarely: after the first one, made from End platinum, the plant pays for its own. Platinum, rhodium, ruthenium and palladium. Iridium and osmium from Earth's ore don't exist: those wait for Mercury. A battery buffer, plenty of output hatches and a place for every fluid."]
+			description: ["The platinum line is about forty recipes across a dozen machines; the &6Platinum Plant&r packs it into one hall, loops and all. A 7x7x9 hall of inert casing, tempered glass and titanium pipes around a glass tower. Nitration mixture and ammonium chloride flowing first, and an electrode that wears out rarely: after the first one, made from End platinum, the plant pays for its own. Platinum, rhodium, ruthenium and palladium. Iridium and osmium from Earth's ore don't exist: those wait for Mercury. A battery buffer, plenty of output hatches and a place for every fluid."]
 			icon: "gtceu:platinum_plant"
 			id: "1F70EF41E5F8ED95"
 			rewards: [{ id: "3EACE716001AFAEB", type: "xp", xp: 100 }]
@@ -958,7 +1157,7 @@
 		}
 		{
 			dependencies: ["56FFD4EF98A6C3B8"]
-			description: ["Merrillite is a phosphate, and no electrolyzer will split it. The &6Extraction Cascade&r leaches it in hydrochloric acid and then pulls the rare earths apart with kerosene, one stage at a time. Merrillite dust, hydrochloric acid and kerosene. Samarium, neodymium and mixed rare-earth chlorides. Circuit 1 leaches, circuit 2 extracts. Each fluid needs its own output hatch, or the whole cascade stops."]
+			description: ["Merrillite is a phosphate, and no electrolyzer will split it. The &6Extraction Cascade&r leaches it in hydrochloric acid and then pulls the rare earths apart with kerosene, one stage at a time. A 7x5x13 hall of mixer-settler stages in inert PTFE casing and tempered glass. Merrillite dust, hydrochloric acid and kerosene for the Martian feed. Samarium, neodymium and mixed rare-earth chlorides. Circuit 1 leaches, circuit 2 extracts, and circuit 28 makes the SEG cut that strips europium from the Nether line. Each fluid needs its own output hatch, or the whole cascade stops."]
 			icon: "gtceu:extraction_cascade"
 			id: "3FCCD81DE98DA9EF"
 			rewards: [{ id: "5F47032EACBE0A7F", type: "xp", xp: 80 }]

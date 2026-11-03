@@ -1456,7 +1456,7 @@
     {"id":"grindless:pair_confined_cage","kind":"item","needUse":true,"needMade":true,"made":["gtceu:magnetic_pair_production"],"used":["gtceu:condensate_refinery"]},
     {"id":"grindless:pan_precursor_fibre","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_bath"],"used":["gtceu:electric_blast_furnace"]},
     {"id":"grindless:passivated_utc_wafer","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:cutter"]},
-    {"id":"grindless:pasta_containment_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},
+    {"id":"grindless:pasta_containment_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:multiblock_info"]},
     {"id":"grindless:pasta_core_sample","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pasta_sorting"],"used":["gtceu:assembly_line","gtceu:strangelet_distillation","gtceu:warp_gate"]},
     {"id":"grindless:pasta_strand_repeater","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembler","gtceu:assembly_line"]},
     {"id":"grindless:pathfinder_probe","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembly_line"],"used":["emi:info","gtceu:warp_gate"]},

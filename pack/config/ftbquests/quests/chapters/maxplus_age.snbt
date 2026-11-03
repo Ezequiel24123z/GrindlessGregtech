@@ -569,7 +569,7 @@
 		}
 		{
 			dependencies: ["19F92230E8321753"]
-			description: ["The &6Multi-Plasma Blender&r takes one plasma from every place you have worked and blends them into a single bucket. It is the only slurry there is."]
+			description: ["The &6Horizon Crystal Furnace&r takes one plasma from every place you have worked and blends them into a single bucket. It is the only slurry there is."]
 			icon: "gtceu:horizon_crystal_slurry_bucket"
 			id: "1E4086C44CF9049C"
 			rewards: [{ id: "1602A904F4113A2D", type: "xp", xp: 300 }]
@@ -765,6 +765,149 @@
 			title: "Beyond the Horizon"
 			x: 70.5d
 			y: -0.5d
+		}
+		{
+			dependencies: ["3C1D7165C0C694E8"]
+			description: ["The six casings of the horizon age, and the body they give the Hyperstargate. The first two wall almost every MAX+ structure; the rest each need iron-56 or a part only this age makes."]
+			icon: "grindless:bound_lattice_casing"
+			id: "5876C6E6DB7E0074"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "541224ED40498194", type: "checkmark" }]
+			title: "Horizon casings"
+			x: 38.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5876C6E6DB7E0074"]
+			description: ["The plain wall of the horizon age: a bound degenerate billet braced by tensegrity trusses. Every large structure of the age, from the press to the array, is mostly this. An assembler, 200 ticks: a bound degenerate billet, two Kerr strand wires, two tensegrity truss casings, a MAX sensor,     two FFKM seals and a quarter bucket of superfluid helium-3, for four casings. Every horizon structure, and the Kerr coil casing. Billets and wire by ME; the helium-3 by pipe. Make it by the thousand: one structure takes thousands of blocks."]
+			icon: "grindless:bound_lattice_casing"
+			id: "5175DDABD9A78869"
+			rewards: [{ id: "5C424AFB8F22C1F6", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "3A5DE05E396282B2", item: "grindless:bound_lattice_casing", type: "item" }]
+			title: "Bound Lattice Casing"
+			x: 40.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5175DDABD9A78869"]
+			description: ["A casing wound with a Kerr field coil, which holds the field the bound matter is shaped in. It is the second wall of the age. An assembler, 400 ticks: a Kerr field coil, a bound lattice casing, a MAX emitter, a MAX electric pump,     two FFKM seals and a quarter bucket of superfluid helium-3, for two casings. The slingshot, the lift, the burner, the torus and the other Kerr-field structures. Coils by ME; the casing it is built on comes from the line before."]
+			icon: "grindless:kerr_coil_casing"
+			id: "306F166883A730AC"
+			rewards: [{ id: "12F38C3CC0C23A92", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "180FAD038B2A1201", item: "grindless:kerr_coil_casing", type: "item" }]
+			title: "Kerr Coil Casing"
+			x: 43.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["306F166883A730AC"]
+			description: ["A casing of plate made of iron-56 with lithium-6 and tungsten, the most stable iron there is. It shields the polarised fusion stellarator and the pedestal of the Hyperstargate. An assembler, 400 ticks: six plates of iron-56, two lots of lithium-6, a tungsten plate, a MAX conveyor module, a MAX sensor, two FFKM seals and a quarter bucket of superfluid helium-3, for four casings. The polarised fusion stellarator and the Hyperstargate. Plates of iron-56 from the hot cell by ME; lithium-6 from its own line."]
+			icon: "grindless:fe56_shield_casing"
+			id: "195176BE06BA25F1"
+			rewards: [{ id: "7AF95BC405C2C824", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "7C35C98489A0D3AE", item: "grindless:fe56_shield_casing", type: "item" }]
+			title: "Fe-56 Shield Casing"
+			x: 45.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["195176BE06BA25F1"]
+			description: ["A casing cooled by primordial helium-3, for the parts of a structure that must stay near absolute zero. An assembler, 400 ticks: two plates of iron-56, a helium-4 dewar, a NEG XHV casing, two MAX electric pumps, a MAX sensor, an OpV fluid regulator, two FFKM seals and a quarter bucket of pristine helium-3, for two casings. The polarised fusion stellarator and the cold channel of the Hyperstargate. Dewars and regulators by ME; pristine helium-3 by pipe from its line."]
+			icon: "grindless:primordial_cryostat_casing"
+			id: "339C81CA6D4F2053"
+			rewards: [{ id: "56DBFD46C5E0D98F", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "1BFD00C6C47F5499", item: "grindless:primordial_cryostat_casing", type: "item" }]
+			title: "Primordial Cryostat Casing"
+			x: 48.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["339C81CA6D4F2053"]
+			description: ["A window of diamond grown in the void, clear to every wavelength. It lets the ring of the Hyperstargate be seen and aimed. An assembler, 200 ticks: two void-grown diamonds, a plate of iron-56, a MAX sensor, an OpV emitter, two FFKM seals and a quarter bucket of superfluid helium-3, for two windows. The windows of the Hyperstargate. Diamonds from the void crystal fab by ME."]
+			icon: "grindless:void_diamond_window"
+			id: "50FBE76E93D9D6E3"
+			rewards: [{ id: "57377D4F7B6134C4", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "1D7F207271D0459F", item: "grindless:void_diamond_window", type: "item" }]
+			title: "Void Diamond Window"
+			x: 50.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["50FBE76E93D9D6E3"]
+			description: ["The hardest casing of the age and the jacket of the Hyperstargate: iron-56 and void diamond around a field generator. Almost half the gate is this block. The assembly line, 600 ticks, with the MAX field coil research: four plates of iron-56, a void-grown diamond, a MAX field coil, a MAX field generator, an OpV emitter, two FFKM seals and a quarter bucket of pristine helium-3, for two casings. The Hyperstargate. A dedicated line: the gate takes thousands of these, so every part must come from a line, never by hand."]
+			icon: "grindless:horizon_gate_casing"
+			id: "155A957677BE9BF5"
+			rewards: [{ id: "1029F8D982896C3E", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "1296719611D4B762", item: "grindless:horizon_gate_casing", type: "item" }]
+			title: "Horizon Gate Casing"
+			x: 53.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["155A957677BE9BF5"]
+			description: ["About half of the Hyperstargate is horizon gate casing. It forms the shell that the ring sits in, so the gate line has to run long before the Terminal is put to work."]
+			icon: "grindless:horizon_gate_casing"
+			id: "704881E27B0C909E"
+			rewards: [{ id: "7CCE9BD4D3E36088", type: "xp", xp: 100 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "137BB6886CBD60AE", type: "checkmark" }]
+			title: "The Gate Jacket"
+			x: 55.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["704881E27B0C909E"]
+			description: ["Some 1,600 primordial cryostat casings line the channel behind the ring, with helium-3 running through them to keep the dial cold."]
+			icon: "grindless:primordial_cryostat_casing"
+			id: "3D9BC54DF63F8E34"
+			rewards: [{ id: "3C41E802293656E5", type: "xp", xp: 100 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "3185BA2B20AAA760", type: "checkmark" }]
+			title: "The Cold Channel"
+			x: 58.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["3D9BC54DF63F8E34"]
+			description: ["Some 380 void diamond windows sit round the ring. They are few, but each needs two void-grown diamonds."]
+			icon: "grindless:void_diamond_window"
+			id: "5B457D26C07AA848"
+			rewards: [{ id: "554FB344BC4626E0", type: "xp", xp: 100 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "71F40943806CB05D", type: "checkmark" }]
+			title: "The Windows"
+			x: 60.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5B457D26C07AA848"]
+			description: ["Some 2,700 Fe-56 shield casings form the pedestal and the frame, and the controller and its hatches are set among them. Build the gate in six Terminal passes, shell first."]
+			icon: "grindless:fe56_shield_casing"
+			id: "3B13960A8E60998B"
+			rewards: [{ id: "7BDE5D3DC3497AAB", type: "xp", xp: 100 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "31A3B45B313DAABF", type: "checkmark" }]
+			title: "The Pedestal"
+			x: 63.0d
+			y: 12.0d
 		}
 		{
 			dependencies: ["1EBBE33BC966BE23"]
@@ -1122,20 +1265,7 @@
 		}
 		{
 			dependencies: ["19F92230E8321753"]
-			description: ["The &6Multi-Plasma Blender&r mixes one plasma from each place the pack has worked into the slurry that grows the gate's crystals. It is the only source of that slurry. Plasmas from the forge, elevator, filter, very massive star, p-process and jet lines, plus hot flow and condensate. The horizon crystal furnace. Give each plasma its own pipe. A starved line stops the whole mix."]
-			icon: "gtceu:multi_plasma_blender"
-			id: "356C983684E66DEB"
-			rewards: [{ id: "3F61C0588866F832", type: "xp", xp: 300 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [{ id: "32A6BB440BB5B252", item: "gtceu:multi_plasma_blender", type: "item" }]
-			title: "Multi-Plasma Blender"
-			x: 51.5d
-			y: -2.0d
-		}
-		{
-			dependencies: ["19F92230E8321753"]
-			description: ["The &6Horizon Crystal Furnace&r grows core and controller crystals from slurry. Other packs wait weeks for this; here the cost is slurry and many parallel runs. Slurry by the hundred million millibuckets, and condensate for heat. Core crystals and the controller crystal. Slurry is the bottleneck. Size the blender line before you add furnaces."]
+			description: ["The &6Horizon Crystal Furnace&r blends one plasma from each place the pack has worked into slurry, then grows core and controller crystals from it. Other packs wait weeks for this; here the cost is slurry and many parallel runs. Plasmas from the forge, elevator, filter, very massive star, p-process and jet lines, plus hot flow and condensate for the slurry; then slurry by the hundred million millibuckets. Its shape is 21 by 23 by 21, built by the Terminal in 3 passes. Core crystals and the controller crystal. Slurry is the bottleneck. Give each plasma its own pipe, and size the slurry line before you add furnaces."]
 			icon: "gtceu:horizon_crystal_furnace"
 			id: "74E81FE8A5CDCFA9"
 			rewards: [{ id: "7CD3C0979B40A0B7", type: "xp", xp: 300 }]
@@ -1148,7 +1278,7 @@
 		}
 		{
 			dependencies: ["19F92230E8321753"]
-			description: ["The &6Condensate Assembler&r bathes its parts in condensate. Containment plates, chevron cores, mesh and frame parts come from here and nowhere else. Dozens of inputs a recipe and an ocean of condensate. The meta-materials arrive from the loom at home. Frame parts, plates and cores for the whole grid. Run several. Condensate output sets the pace, not the clock."]
+			description: ["The &6Condensate Assembler&r bathes its parts in condensate. Containment plates, chevron cores, mesh and frame parts come from here and nowhere else. Dozens of inputs a recipe and an ocean of condensate. The meta-materials arrive from the loom at home. Its shape is 25 by 15 by 25, built by the Terminal in 5 passes. Frame parts, plates and cores for the whole grid. Run several. Condensate output sets the pace, not the clock."]
 			icon: "gtceu:condensate_assembler"
 			id: "7079333C124E4015"
 			rewards: [{ id: "587942F81DBC2FFF", type: "xp", xp: 300 }]
@@ -1161,7 +1291,7 @@
 		}
 		{
 			dependencies: ["19F92230E8321753"]
-			description: ["The &6Horizon Capacitor Bank&r is a ring of capacitors that adds its capacity to your network. It stores; it never makes energy. The dial only starts when the formed banks hold at least one dial of charge. Capacitors in a ring, at Sgr A* orbit only. The network's generators fill it, and some charge is lost on the way in. The dial. Charge it long before the dial. A big plant refills it in minutes, a small one in days."]
+			description: ["The &6Horizon Capacitor Bank&r is a ring of capacitors that adds its capacity to your network. It stores; it never makes energy. The dial only starts when the formed banks hold at least one dial of charge. Capacitors in a ring, at Sgr A* orbit only. The network's generators fill it, and some charge is lost on the way in. Its shape is 41 by 9 by 41, built by the Terminal in 2 passes. The dial. Charge it long before the dial. A big plant refills it in minutes, a small one in days."]
 			icon: "gtceu:horizon_capacitor_bank"
 			id: "3BFE22DD06FBAD6D"
 			rewards: [{ id: "362B9EC1F7DE9580", type: "xp", xp: 300 }]
@@ -1174,7 +1304,7 @@
 		}
 		{
 			dependencies: ["19F92230E8321753"]
-			description: ["The &6Hyper Assembly Array&r crafts what no single machine can take: dozens of different inputs in one recipe. Every part of the gate and every creative item is made here. A wide room and a great many input buses, all fed by AE2. The ring, the upgrades, the iris, the base and the interface. Let AE2 patterns do the counting. Never hand-feed this machine."]
+			description: ["The &6Hyper Assembly Array&r crafts what no single machine can take: dozens of different inputs in one recipe. Every part of the gate and every creative item is made here. A wide room and a great many input buses, all fed by AE2. Its shape is 33 by 13 by 33, built by the Terminal in 7 passes. The ring, the upgrades, the iris, the base and the interface. Let AE2 patterns do the counting. Never hand-feed this machine."]
 			icon: "gtceu:hyper_assembly_array"
 			id: "7179FF6F8D490EE1"
 			rewards: [{ id: "71B1288CB2C6928A", type: "xp", xp: 300 }]
@@ -1275,7 +1405,7 @@
 		}
 		{
 			dependencies: ["5A142F96920D1894", "748B55AD58F78BA7", "5B12B68A0DD8886C", "10BD27BC322C59ED"]
-			description: ["The ring stands 41 by 43 by 9 at Sgr A* orbit: 151 ring blocks and 9 locked chevrons on the ring. The base row holds the iris, the base, 4 power units and a 4,096 A wireless MAX+ hatch: the dial draws its power through that hatch from the network store, which only the capacitor banks make large enough."]
+			description: ["The ring stands in a 59 by 60 by 23 shell at Sgr A* orbit: 151 ring blocks and 9 locked chevrons on the ring, wrapped in a jacket of horizon gate casing, a cold channel of primordial cryostat casing, void diamond windows and an Fe-56 pedestal. The base row holds the iris, the base, 4 power units and a 4,096 A wireless MAX+ hatch: the dial draws its power through that hatch from the network store, which only the capacitor banks make large enough."]
 			icon: "grindless:hyperstargate_ring_block"
 			id: "3AB573B5BD8866CF"
 			rewards: [{ id: "7CAC028F9A1A1C59", type: "xp", xp: 100 }]
@@ -1288,7 +1418,7 @@
 		}
 		{
 			dependencies: ["3AB573B5BD8866CF"]
-			description: ["The &6Hyperstargate&r is the pack's last multiblock. It forms round a dial at Sgr A* orbit and opens a ring into the final dimension. The controller recipe is crafted at the black hole orbit, from ring blocks, a controller crystal, a creative computation provider, MAX+ circuits and the interface. The structure then needs the ring, the iris, the base, four power units and the 4,096 A wireless hatch, with a horizon lock kept in the controller. The dial. Nothing here is a production line. Build it once and keep the banks charged."]
+			description: ["The &6Hyperstargate&r is the pack's last multiblock. It forms round a dial at Sgr A* orbit and opens a ring into the final dimension. The controller recipe is crafted at the black hole orbit, from ring blocks, a controller crystal, a creative computation provider, MAX+ circuits and the interface. The structure then needs the ring, the iris, the base, four power units and the 4,096 A wireless hatch, with a horizon lock kept in the controller. Its shape is 59 by 60 by 23, built by the Terminal in 6 passes. The dial. Nothing here is a production line. Build it once and keep the banks charged."]
 			icon: "gtceu:hyperstargate"
 			id: "1F0228D86B5ACECC"
 			rewards: [{ id: "788D39DF58824535", type: "xp", xp: 1000 }]
@@ -1420,19 +1550,17 @@
 		}
 		{
 			dependencies: ["1009AE6C6D8D0887"]
-			description: ["The UXV controllers at home, and the MAX+ row each one takes: the MTJ cluster, oxide PLD chamber and racetrack fab make coated tapes, x-ray mirrors and the logic and storage dies; the stellar elevator loads the ribbon of the deep horizon tether. The draw bench and the shequid works join those lines. All six controllers: draw bench, sputter cluster, PLD chamber, shequid works, racetrack fab and stellar elevator. The ribbon, tether and conduit lines of stage II. They share one hub; lay it out once."]
-			icon: "gtceu:pasta_draw_bench"
+			description: ["The UXV controllers at home, and the MAX+ row each one takes:       the Spintronic Cluster Tool makes coated tapes, x-ray mirrors and the logic and storage dies; the stellar elevator loads the ribbon of the deep horizon tether. The Pasta Mill and the shequid works join those lines. All four controllers: Pasta Mill, Spintronic Cluster Tool, shequid works and stellar elevator. The ribbon, tether and conduit lines of stage II. They share one hub; lay it out once."]
+			icon: "gtceu:pasta_phase_sorter"
 			id: "5933EFF02E11707D"
 			rewards: [{ id: "710705C34DF566EB", type: "xp", xp: 100 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
-				{ id: "1FCCAEDE017DB984", item: "gtceu:pasta_draw_bench", type: "item" }
+				{ id: "19F6E5EAB3758B2F", item: "gtceu:pasta_phase_sorter", type: "item" }
 				{ id: "1E5218E9ED1E6F34", item: "gtceu:mtj_sputter_cluster", type: "item" }
-				{ id: "3F5E2E65ABCB3D95", item: "gtceu:oxide_pld_chamber", type: "item" }
-				{ id: "5A4054F6981DD71D", item: "gtceu:shequid_works", type: "item" }
-				{ id: "1835BE5AE3864078", item: "gtceu:racetrack_fab", type: "item" }
-				{ id: "71D981DAC5AEA1EB", item: "gtceu:stellar_elevator", type: "item" }
+				{ id: "51DCF1751A834EA6", item: "gtceu:shequid_works", type: "item" }
+				{ id: "76A332277D05D64B", item: "gtceu:stellar_elevator", type: "item" }
 			]
 			title: "Home Rows: UXV"
 			x: 1.0d
@@ -1440,14 +1568,14 @@
 		}
 		{
 			dependencies: ["5933EFF02E11707D"]
-			description: ["The UIV controllers at home, and the MAX+ row each one takes: the millikelvin cryostat chills the waveguide, resonance chamber, field cell and core crystal; the femtosecond writer inscribes crystals and interposer waveguides; the BEUV scanner patterns wafers for the chevron cores and the controller crystal; the TFLN fab makes the modulator chips; the levitation melter melts the strange alloy; the spectral hole burner burns the store block. All seven controllers: drip separator, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and spectral hole burner. Lattices, waveguides, and the stage's precise parts. The cryostat wants the cold plant next to it."]
+			description: ["The UIV controllers at home, and the MAX+ row each one takes: the millikelvin cryostat chills the waveguide, resonance chamber, field cell and core crystal; the femtosecond writer inscribes crystals and interposer waveguides; the BEUV scanner patterns wafers for the chevron cores and the controller crystal; the TFLN fab makes the modulator chips; the levitation melter melts the strange alloy; the spectral hole burner burns the store block. All seven controllers: Neutron Drip Works, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and spectral hole burner. Lattices, waveguides, and the stage's precise parts. The cryostat wants the cold plant next to it."]
 			icon: "gtceu:levitation_melter"
 			id: "197BA9E30B9592BF"
 			rewards: [{ id: "75017B9ED37F85A5", type: "xp", xp: 100 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
-				{ id: "3145675BB3F996B3", item: "gtceu:neutron_drip_separator", type: "item" }
+				{ id: "169DF6D728633848", item: "gtceu:neutronium_cage", type: "item" }
 				{ id: "3C2286020E3CB0AF", item: "gtceu:levitation_melter", type: "item" }
 				{ id: "71E0BC2495F4DD83", item: "gtceu:tfln_fab", type: "item" }
 				{ id: "3B3CEDD1A577FC62", item: "gtceu:femtosecond_writer", type: "item" }
@@ -1666,6 +1794,253 @@
 			title: "The Parallel Hatch"
 			x: 41.0d
 			y: 4.5d
+		}
+		{
+			dependencies: ["182B1EBF7BAC54DC"]
+			description: ["Six process lines the earlier chapters only name: the module stage of the horizon processor, the iris blade, the Kerr ribbon, iron-56, the HD and helium-3 polarisation, and the thorium clock. Each is a real chain; follow the ones you need."]
+			icon: "grindless:horizon_processor"
+			id: "5F699D8ACB0E6834"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "770B2B6B5AB3A844", type: "checkmark" }]
+			title: "Horizon lines"
+			x: 22.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["5F699D8ACB0E6834"]
+			description: ["Step 30 of the horizon processor line: a shielded quantum module with two horizon logic dies stacked on it by magnetic tunnel junction sputtering. The MTJ sputter cluster, 2,400 ticks: a shielded quantum module, two horizon logic dies and programmed circuit 28. 5% of the time it also leaves horizon module scrap. The linked module. The scrap is leached back into the extraction cascade, so no module is ever lost. Modules and dies by ME; send the scrap to the cascade by bus."]
+			icon: "grindless:stacked_horizon_module"
+			id: "10DE283ABAA2ACD8"
+			rewards: [{ id: "31D05EF4763C909D", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "31C0A265069EF7E4", item: "grindless:stacked_horizon_module", type: "item" }]
+			title: "Stacked Horizon Module"
+			x: 23.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["10DE283ABAA2ACD8"]
+			description: ["Step 31: the stack is wired to a horizon interposer by a femtosecond laser, so that the dies share one bus. The femtosecond writer, 2,400 ticks: a stacked horizon module, a horizon interposer and programmed circuit 21. The condensate-cooled module. One interposer per module by ME."]
+			icon: "grindless:linked_horizon_module"
+			id: "5E6ACFB03C49D7A6"
+			rewards: [{ id: "57C3259C5FA0195C", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "734F04C4B69AE778", item: "grindless:linked_horizon_module", type: "item" }]
+			title: "Linked Horizon Module"
+			x: 26.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5E6ACFB03C49D7A6"]
+			description: ["Step 32: the linked module is soaked in Kerr condensate, which holds it at a steady temperature before the final test. The condensate refinery, 1,800 ticks: a linked horizon module, a full tank of Kerr condensate and programmed circuit 12. The tested module. Condensate by pipe from the Kerr condensate line."]
+			icon: "grindless:condensate_cooled_module"
+			id: "3020123A8A75F420"
+			rewards: [{ id: "1FB45DC72FBC47BA", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "191E7207F45DD9F9", item: "grindless:condensate_cooled_module", type: "item" }]
+			title: "Condensate-Cooled Module"
+			x: 28.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["3020123A8A75F420"]
+			description: ["Step 33: the module is cooled to a few millikelvin and tested; only a module that passes continues. The millikelvin cryostat works, 2,400 ticks: a condensate-cooled module, a millikelvin cryostat module, programmed circuit 13 and a little helium-3/helium-4 mixture. The mixture is returned, so it only has to be topped up. The horizon processor. Keep the mixture in a loop; cryostat modules by ME."]
+			icon: "grindless:tested_horizon_module"
+			id: "15636E7291B46534"
+			rewards: [{ id: "7E4B930934AE9E11", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "57D9D6DE3DB69317", item: "grindless:tested_horizon_module", type: "item" }]
+			title: "Tested Horizon Module"
+			x: 31.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["15636E7291B46534"]
+			description: ["Step 34, the end of the qubit stage: the tested module is joined to a quantum memory node and a Rydberg logic array. It is the processor of the MAX+ circuits. The photonic integration hall, 6,000 ticks: a tested horizon module, a quantum memory node, a Rydberg logic array, two MAX circuits (any) and programmed circuit 14. The MAX+ processor circuits and the machines that need them. Memory nodes and arrays by ME; the five stages run one after another, so a buffer between them keeps the line full."]
+			icon: "grindless:horizon_processor"
+			id: "3C1D7165C0C694E8"
+			rewards: [{ id: "754C3039DFFB3F05", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "74DBF191C7BB9C0B", item: "grindless:horizon_processor", type: "item" }]
+			title: "Horizon Processor"
+			x: 33.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5F699D8ACB0E6834"]
+			description: ["Step 1 of the iris blade: strangelets melted into tungsten, so that the blade metal holds a strange phase. The levitation melter, 2,400 ticks: four fed strangelets, four tungsten dust, helium and programmed circuit 23. Half the time it leaves melter dross. The oriented blade blank. Fed strangelets by ME from the strangelet line; the dross goes to the voiding line."]
+			icon: "grindless:strange_alloy_charge"
+			id: "567C6F47D0AA4B49"
+			rewards: [{ id: "124066627F110E06", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "123DBA28CB940018", item: "grindless:strange_alloy_charge", type: "item" }]
+			title: "Strange Alloy Charge"
+			x: 23.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["567C6F47D0AA4B49"]
+			description: ["Step 2: a single crystal of tantalum carbide and rhenium, grown with one grain direction so the blade does not crack along it. The single crystal foundry, 1,200 ticks: four Kerr strange plates, 16 tantalum carbide dust, eight rhenium dust, programmed circuit 29 and a little argon, for two blanks. The densified blade. Plates and dust by ME; argon by pipe."]
+			icon: "grindless:oriented_blade_blank"
+			id: "59E266909B45D69D"
+			rewards: [{ id: "1010B4039D5B23EF", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "79273491D1291533", item: "grindless:oriented_blade_blank", type: "item" }]
+			title: "Oriented Blade Blank"
+			x: 26.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["59E266909B45D69D"]
+			description: ["Step 3: the blank is pressed at a megabar to close every pore. The megabar press, 900 ticks: two oriented blade blanks, four tantalum carbide plates and programmed circuit 18, for two blades. The edged blade. Blanks and plates by ME."]
+			icon: "grindless:densified_blade"
+			id: "1FF7F1460269C52F"
+			rewards: [{ id: "71865ACBD789BA63", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1E7B27FF9510315B", item: "grindless:densified_blade", type: "item" }]
+			title: "Densified Blade"
+			x: 28.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["1FF7F1460269C52F"]
+			description: ["Step 4: the blade is turned to its edge. The swarf is tantalum carbide dust, which goes back into the blank. A lathe, 600 ticks: one densified blade. It returns one tantalum carbide dust. The coated blade. Send the dust back to the foundry by bus."]
+			icon: "grindless:edged_blade"
+			id: "317ED3071F1266CE"
+			rewards: [{ id: "779A261B5EF0B1FA", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3AEAA7A1DD4EA633", item: "grindless:edged_blade", type: "item" }]
+			title: "Edged Blade"
+			x: 31.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["317ED3071F1266CE"]
+			description: ["Step 5: a niobium nitride coat, laid by electron beam, makes the edge hold against the horizon. The electron beam furnace, 900 ticks: two edged blades, two niobium nitride plates and argon, for two blades. Most of the argon is returned. The iris blade. Keep the argon in a loop."]
+			icon: "grindless:coated_iris_blade"
+			id: "11359CF497F99D60"
+			rewards: [{ id: "395CC3CDF349CF4B", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "76BF61F6747A4079", item: "grindless:coated_iris_blade", type: "item" }]
+			title: "Coated Iris Blade"
+			x: 33.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["11359CF497F99D60"]
+			description: ["Step 6 of the iris blade: the blade of the Horizon Iris, the part of the Hyperstargate that opens and closes the ring. The hyper assembly array, 1,200 ticks: a coated iris blade, 12 horizon compressed plates, eight Kerr strange plates, two MAX+ electric pistons, a MAX+ conveyor module, programmed circuit 5 and a large tank of Kerr condensate. The Horizon Iris. The six steps are one line; plates and pistons by ME, condensate by pipe."]
+			icon: "grindless:iris_blade"
+			id: "188EEDE1626F65BD"
+			rewards: [{ id: "54EB641CF0EDB560", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7093CF197E33BEF3", item: "grindless:iris_blade", type: "item" }]
+			title: "Iris Blade"
+			x: 36.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["5F699D8ACB0E6834"]
+			description: ["Step 1 of the helium-3 polarisation line: primordial deuterium and hydrogen are made to meet on platinum, so half of the molecules become HD. A chemical reactor, 400 ticks: one platinum dust, primordial deuterium and hydrogen in equal parts, for twice that of HD equilibrium mix. Pure HD. Hydrogen and deuterium by pipe; platinum by ME."]
+			icon: "gtceu:hd_equilibrium_mix_bucket"
+			id: "33F21654A7D76A69"
+			rewards: [{ id: "3B6C123F4B217CC7", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3906FD184F5A5440", type: "checkmark" }]
+			title: "HD Equilibrium Mix"
+			x: 23.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["33F21654A7D76A69"]
+			description: ["Step 2: the mix is distilled. The plain hydrogen and deuterium that come out go back into the reactor. A distillation tower, 400 ticks: the mix gives pure HD, and half as much again returns as hydrogen and primordial deuterium in equal parts. Frozen-spin HD. Pipe the two returned fluids back to step 1: the loop is closed."]
+			icon: "gtceu:pure_hd_bucket"
+			id: "3B0D3ED6742D947D"
+			rewards: [{ id: "1AAA3D1422B399D4", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "73F26BF9D6687CD2", type: "checkmark" }]
+			title: "Pure HD"
+			x: 26.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["3B0D3ED6742D947D"]
+			description: ["Step 3: HD cooled to a few millikelvin in a field keeps its spins in line. It is the spin-ordered target of the horizon fusion lines. The nuclear demagnetisation cooler, 2,400 ticks: pure HD, for one frozen-spin HD. Spin-ordered targets for the horizon fusion lines. Pure HD by pipe; the target out by bus."]
+			icon: "grindless:frozen_spin_hd"
+			id: "514C730C492510AA"
+			rewards: [{ id: "18F91ADDDB53A5C8", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "544A9648BD20EEFF", item: "grindless:frozen_spin_hd", type: "item" }]
+			title: "Frozen-Spin HD"
+			x: 28.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["514C730C492510AA"]
+			description: ["Step 4: pristine helium-3 is pumped with a MAX emitter so that its spins line up. It feeds the polarised fusion stellarator. The photonic foundry, 1,200 ticks: pristine helium-3 and a MAX emitter, which is only rarely used up. Polarised fusion. Pristine helium-3 by pipe from its line; replace emitters from ME."]
+			icon: "gtceu:polarized_helium_3_bucket"
+			id: "3F2040A000B7B950"
+			rewards: [{ id: "54E502645D8CC574", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "76FA6A88C2DD6F7B", type: "checkmark" }]
+			title: "Polarised Helium-3"
+			x: 31.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["5F699D8ACB0E6834"]
+			description: ["The iron of the shield casings, recovered from the spent Fe-56 cask of the nickel-56 line. The hot cell, 600 ticks: a spent Fe-56 cask and programmed circuit 26 give a stack of iron-56 in dust form and some lead plate. The dust is pressed to plate as any metal. The Fe-56 shield casing, the primordial cryostat casing, the void diamond window and the horizon gate casing. Casks by ME from the nickel-56 line; the lead returns to the lead stock."]
+			icon: "gtceu:iron_56_plate"
+			id: "7335D4747766C328"
+			rewards: [{ id: "70415B6EE66B9C3C", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "11F12EDA9BB184A0", item: "gtceu:iron_56_plate", type: "item" }]
+			title: "Iron-56"
+			x: 23.5d
+			y: 16.5d
+		}
+		{
+			dependencies: ["5F699D8ACB0E6834"]
+			description: ["The ribbon of the tether: sixteen Kerr strand wires laid on a ribbon segment. It carries the load that the proof test then confirms. The tether ribbon works, 800 ticks: 16 Kerr strand wires, a tether ribbon segment and programmed circuit 14. The proof test then loads two ribbons with liquid helium, which is returned as gas. The proof-loaded ribbon of the star-lift tether. Wire by ME; the helium goes through a cooler back to liquid."]
+			icon: "grindless:kerr_ribbon"
+			id: "1D3FAA1486FCF60D"
+			rewards: [{ id: "360DD9882C943AD5", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "39877165E0062B10", item: "grindless:kerr_ribbon", type: "item" }]
+			title: "Kerr Ribbon"
+			x: 23.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["1D3FAA1486FCF60D"]
+			description: ["The clock of the launch line: two nuclear clocks and thorium plate tuned together, so that a probe knows where it is by the beat of a nucleus. The nuclear clock lab, 1,200 ticks: two nuclear clocks, eight thorium plate, programmed circuit 9 and argon. The navigation core of the probe. Clocks from their own line by ME; argon by pipe."]
+			icon: "grindless:thorium_nav_clock"
+			id: "55854E480E3A83F7"
+			rewards: [{ id: "5F208686878293E3", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7D34AC404C2E00E9", item: "grindless:thorium_nav_clock", type: "item" }]
+			title: "Thorium Navigation Clock"
+			x: 26.0d
+			y: 18.0d
 		}
 		{
 			dependencies: ["1EBBE33BC966BE23"]

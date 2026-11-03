@@ -171,7 +171,7 @@
 		}
 		{
 			dependencies: ["32FA798856B28769"]
-			description: ["Back at Cygnus X-1, only the jet itself has to be tapped here: the jet beam line works at this orbit. The spallation station, the decelerator, the antihydrogen foundry and the Kugelblitz forge behind it can stand at home."]
+			description: ["Back at Cygnus X-1, only the jet itself has to be tapped here: the jet beam line works at this orbit. The antiproton complex, the antihydrogen foundry and the Kugelblitz forge behind it can stand at home."]
 			icon: "gtceu:annihilation_engine"
 			id: "7B1E66BC13548877"
 			rewards: [{ id: "3B807DAD020D12AD", type: "xp", xp: 100 }]
@@ -362,6 +362,97 @@
 			y: 19.0d
 		}
 		{
+			dependencies: ["32FA798856B28769"]
+			description: ["The six casings of the Galactic Bulge: lamina, field-frozen, annihilation shield, NEG XHV, TPV wall and Kugelblitz cavity. They wall every large OpV structure, and each needs a part that only this era makes."]
+			icon: "grindless:chain_lamina_casing"
+			id: "5A0C89EC5B1B7B1B"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "1D11453D4935B533", type: "checkmark" }]
+			title: "Bulge casings"
+			x: 10.0d
+			y: 31.0d
+		}
+		{
+			dependencies: ["5A0C89EC5B1B7B1B"]
+			description: ["A casing of laminated strand lattice over neutronium and tungsten plate, cooled by superfluid helium-3. It is the plain, strong wall of the era. An assembler, 200 ticks: chain lamina stacks, single-wire strands, neutronium plate and frame, tungsten and stainless plates, a UXV sensor and superfluid helium-3, for four casings. The hulls and walls of the OpV structures, and the base of the casings that follow. Stacks and strands by ME; the helium-3 by pipe."]
+			icon: "grindless:chain_lamina_casing"
+			id: "73161478033B0336"
+			rewards: [{ id: "3FC71057D470A17F", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "5491DD137EA438D2", item: "grindless:chain_lamina_casing", type: "item" }]
+			title: "Chain Lamina Casing"
+			x: 12.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["73161478033B0336"]
+			description: ["A casing of field-frozen plate, held still by a field so that nothing inside can touch it. The strangelet vault and the press are lined with it. The field freezing machine, 400 ticks: field-frozen plates, two UXV sensors and a programmed circuit, for three casings. The Strangelet Vault, the Field-Frozen Press and the Kugelblitz cavity casing. Plates from the press by ME; sensors by ME."]
+			icon: "grindless:field_frozen_casing"
+			id: "3303A9BEE12C8AF7"
+			rewards: [{ id: "733FE23576AF6186", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 3L, id: "50A258E630D47456", item: "grindless:field_frozen_casing", type: "item" }]
+			title: "Field-Frozen Casing"
+			x: 15.0d
+			y: 31.0d
+		}
+		{
+			dependencies: ["3303A9BEE12C8AF7"]
+			description: ["A casing of gamma absorber tiles over a lithium-6 hydride shield, which stops gammas, neutrons and debris. Whatever holds antimatter is lined with it. An assembler, 400 ticks: gamma absorber tiles, a lithium-6 hydride shield, chain lamina stacks, tungsten plate, UXV sensors and a UXV motor, with superfluid helium-3, for four casings. The Antihydrogen Foundry, the Antiproton Complex, the Strangelet Vault and the Kugelblitz cavity casing. Tiles and shields by ME; keep a stock, since every antimatter machine takes many."]
+			icon: "grindless:annihilation_shield_casing"
+			id: "7AA246E5F046BCCF"
+			rewards: [{ id: "5CA8626C66FFE748", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "75A26857C0B78FB7", item: "grindless:annihilation_shield_casing", type: "item" }]
+			title: "Annihilation Shield Casing"
+			x: 17.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["7AA246E5F046BCCF"]
+			description: ["A casing lined with a non-evaporable getter that soaks up the last stray gas and holds an extreme-high vacuum. The foundry and the decelerator need it. An assembler, 400 ticks: an activated NEG chamber, chain lamina stacks, a stainless frame and two UXV pumps, with nitrogen, for four casings. The Antihydrogen Foundry and the Antiproton Complex. Chambers by ME; nitrogen by pipe."]
+			icon: "grindless:neg_xhv_casing"
+			id: "31F433D89329FB0F"
+			rewards: [{ id: "1221D2A399A75628", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "356A99CB91696DFC", item: "grindless:neg_xhv_casing", type: "item" }]
+			title: "NEG XHV Casing"
+			x: 20.0d
+			y: 31.0d
+		}
+		{
+			dependencies: ["31F433D89329FB0F"]
+			description: ["A wall of thermophotovoltaic panels that turns the glow of a hot core back into current. It is what lets a Hawking collector or an annihilation engine feed itself. An assembler, 400 ticks: TPV panels, a gamma absorber tile, a chain lamina stack, copper, tungsten and stainless plate and two UXV sensors, with superfluid helium-3, for three casings. The Annihilation Engine and the Hawking Collector. Panels by ME; the helium-3 by pipe."]
+			icon: "grindless:tpv_wall_casing"
+			id: "75E5A2739F783CBE"
+			rewards: [{ id: "72FCBB639F2FCF42", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 3L, id: "7465294155CED11F", item: "grindless:tpv_wall_casing", type: "item" }]
+			title: "TPV Wall Casing"
+			x: 22.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["75E5A2739F783CBE"]
+			description: ["The cavity that holds a Kugelblitz: a gamma mirror and field-frozen plate around an annihilation shield casing. It is the hardest casing of the age. The assembly line, 600 ticks: a gamma multilayer mirror, field-frozen plates, an annihilation shield casing, strand wires and a UXV field generator, for three casings. The Kugelblitz Forge and, through it, the gate to MAX. Build it from a dedicated line: every part is a product of an earlier casing or line."]
+			icon: "grindless:kugelblitz_cavity_casing"
+			id: "596CD194B371E4BA"
+			rewards: [{ id: "3B08E75337D1B744", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 3L, id: "798372F6ED46A95A", item: "grindless:kugelblitz_cavity_casing", type: "item" }]
+			title: "Kugelblitz Cavity Casing"
+			x: 25.0d
+			y: 31.0d
+		}
+		{
 			dependencies: ["1A9EE7510BD6DBFC"]
 			description: ["The wafers, chips and circuits of the era, from the first wafer to the mainframe, and the parts built from them."]
 			icon: "minecraft:writable_book"
@@ -375,36 +466,7 @@
 			y: 7.0d
 		}
 		{
-			dependencies: ["5DE7C491611D14C0"]
-			description: ["Natural silicon carries a few percent of silicon-29, whose nuclear spin disturbs a cold qubit. Purified silicon-28 on an insulating layer gives the &6Si-28 SOI Wafer&r that every cold chip is cut from. Silicon-28 from the centrifuge cascade, an oxide layer and the wafer bonder you already run. The cryo-CMOS wafer and the tetron chain. Keep a chest of wafers behind the bonder, since every later chip row draws from it."]
-			icon: "grindless:si28_soi_wafer"
-			id: "7D95B836E06310DB"
-			rewards: [{ id: "3475373D8FC14F2C", type: "xp", xp: 120 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "3509AF9C7AA4FE39", item: "grindless:si28_soi_wafer", type: "item" }]
-			title: "Si-28 SOI Wafer"
-			x: 12.5d
-			y: 7.0d
-		}
-		{
-			dependencies: ["7D95B836E06310DB"]
-			description: ["Ordinary transistors stop working well near absolute zero, so the doping and the metal are tuned for the cold. The &6Metallised Cryo-CMOS Wafer&r is exposed, implanted and metallised in that order, and cut into dies. The lithography and implant lines of the age, and a silicon-28 wafer. The cryo-CMOS die, the logic of the cosmic mainframe. Stage by stage in one line, with the cut dies sent straight to the mainframe row."]
-			icon: "grindless:cryo_cmos_metal_wafer"
-			id: "3AD6042F25DCDFAE"
-			rewards: [{ id: "5AE9D7EA62440A09", type: "xp", xp: 150 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [
-				{ id: "3ACAF742691409BA", item: "grindless:cryo_cmos_metal_wafer", type: "item" }
-				{ id: "32946CDE111E80EB", item: "grindless:cryo_cmos_die", type: "item" }
-			]
-			title: "Metallised Cryo-CMOS Wafer"
-			x: 15.0d
-			y: 7.0d
-		}
-		{
-			dependencies: ["3AD6042F25DCDFAE"]
+			dependencies: ["3134E7DC3A7F7858"]
 			description: ["A niobium interposer carries the signals through the die, a HEMT amplifier lifts them out of the noise, and an optical link takes them out of the cold without carrying heat in. The &6Nb TSV Interposer&r is tested cold in the helium refrigerator, the &6HEMT Amplifier&r is cut from its wafer and the &6Cryo Optical Link&r is drawn on the fibre tower."]
 			icon: "grindless:cryo_optical_link"
 			id: "328CDB4584A0E113"
@@ -415,8 +477,8 @@
 				{ id: "712C8D7A0D318AB9", item: "grindless:cryo_optical_link", type: "item" }
 			]
 			title: "Cryogenic Links"
-			x: 17.5d
-			y: 7.0d
+			x: 52.5d
+			y: -4.0d
 		}
 		{
 			dependencies: ["328CDB4584A0E113"]
@@ -428,8 +490,8 @@
 			size: 1.0d
 			tasks: [{ id: "7611412123E87135", item: "gtnn:cosmic_mainframe", type: "item" }]
 			title: "Cosmic Mainframe"
-			x: 20.0d
-			y: 7.0d
+			x: 55.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["5DE7C491611D14C0"]
@@ -465,8 +527,8 @@
 			size: 1.0d
 			tasks: [{ id: "562FAE7CE1E2707A", item: "gtceu:opv_sensor", type: "item" }]
 			title: "OpV Sensor"
-			x: 22.5d
-			y: 7.0d
+			x: 57.5d
+			y: -4.0d
 		}
 		{
 			dependencies: ["59A06A2C9ADDA9E4", "7FD656811E00D002"]
@@ -763,7 +825,7 @@
 		}
 		{
 			dependencies: ["7B1E66BC13548877"]
-			description: ["The &6Calutron&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r, &6Superheavy Chemistry Lab&r, &6Synchrotron&r and &6Electron Beam Furnace&r take rows: nickel-64, lead-208 and boron-10, the new beams, elements 124 and 126, census IV, mirror metrology and brazes. The UEV and UV controllers you already own. Census IV, the beam cells and the sealed parts of the antiproton line. Recoils and targets by bus. The spent beam is an output, so route it."]
+			description: ["The &6Calutron&r, &6Superheavy Factory&r (the Heavy Ion Cyclotron, which runs both the irradiation and the recoil separation), &6Superheavy Chemistry Lab&r, &6Synchrotron&r and &6Electron Beam Furnace&r take rows: nickel-64, lead-208 and boron-10, the new beams, elements 124 and 126, census IV, mirror metrology and brazes. The UEV and UV controllers you already own. Census IV, the beam cells and the sealed parts of the antiproton line. Targets and etched membranes by bus. The recoil gas goes from the irradiation row to the separation row inside the factory, and the spent beam is an output, so route it."]
 			icon: "gtceu:calutron"
 			id: "15F83082ECE1AF32"
 			rewards: [{ id: "7F66B84776D41A15", type: "xp", xp: 120 }]
@@ -772,10 +834,9 @@
 			tasks: [
 				{ id: "384DE1BDD2FFCB5C", item: "gtceu:calutron", type: "item" }
 				{ id: "3F558FA9862B8847", item: "gtceu:heavy_ion_cyclotron", type: "item" }
-				{ id: "756D4338C5B4F7C3", item: "gtceu:recoil_separator", type: "item" }
-				{ id: "5877DA7BD89F6A74", item: "gtceu:superheavy_chemistry_lab", type: "item" }
-				{ id: "7EC4B8173CE419C0", item: "gtceu:synchrotron", type: "item" }
-				{ id: "381A814E9F9D9CA2", item: "gtceu:electron_beam_furnace", type: "item" }
+				{ id: "540C66D72908904D", item: "gtceu:superheavy_chemistry_lab", type: "item" }
+				{ id: "5FB7D48446DC7AB5", item: "gtceu:synchrotron", type: "item" }
+				{ id: "78A6D02DD0993A04", item: "gtceu:electron_beam_furnace", type: "item" }
 			]
 			title: "Heavy Ions and Beams"
 			x: 17.5d
@@ -826,7 +887,7 @@
 		}
 		{
 			dependencies: ["7F4169BDA6339C6F"]
-			description: ["The &6Pasta Extractor&r, &6Pasta Phase Sorter&r, &6Pasta Draw Bench&r and &6Pasta Laminator&r, built for the pulsar, take a magnetar site and rows for chain crust, caged phases, chain strand and lamina. The &6MTJ Sputter Cluster&r takes eight films. The UXV controllers you already own, and a platform at the magnetar. Chain strand, the hull plates and every sputtered film of the circuit lines. Cages return from the sorter. Targets arrive by bus."]
+			description: ["The &6Pasta Extractor&r and &6Pasta Mill&r, built for the pulsar, take a magnetar site and rows for chain crust, caged phases, chain strand and lamina. The &6Spintronic Cluster Tool&r takes eight films. The UXV controllers you already own, and a platform at the magnetar. Chain strand, the hull plates and every sputtered film of the circuit lines. Cages return from the sorter. Targets arrive by bus."]
 			icon: "gtceu:pasta_extractor"
 			id: "1C9D1307D1AFE6CC"
 			rewards: [{ id: "5BEF56DCFDD9C8C3", type: "xp", xp: 150 }]
@@ -835,9 +896,7 @@
 			tasks: [
 				{ id: "7FA6ED5313D767AA", item: "gtceu:pasta_extractor", type: "item" }
 				{ id: "1E6235FD7DE97066", item: "gtceu:pasta_phase_sorter", type: "item" }
-				{ id: "71DB251C6B1A32CB", item: "gtceu:pasta_draw_bench", type: "item" }
-				{ id: "7546575B7808E5E9", item: "gtceu:pasta_laminator", type: "item" }
-				{ id: "70CE2859D3A9D604", item: "gtceu:mtj_sputter_cluster", type: "item" }
+				{ id: "12C653BEA0B15D20", item: "gtceu:mtj_sputter_cluster", type: "item" }
 			]
 			title: "Pasta Gains a Magnetar"
 			x: 15.0d
@@ -858,7 +917,7 @@
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
-			description: ["The &6Tetron Fab&r grows two nanowires, bonds a superconducting backbone between them and tests the parity of the pair. Nothing older builds a qubit that is read that way. An OpV hull, the plascrete shell, cleanroom glass and a superconducting coil, with silicon-28 wafers to work on. The tetron die and the tetron array, which the chain parts need. Wafers and metals by ME; failed dies come out in their own output, so route them back to the start."]
+			description: ["The &6Tetron Fab&r grows two nanowires, bonds a superconducting backbone between them and tests the parity of the pair. Nothing older builds a qubit that is read that way. An OpV hull, the plascrete shell, cleanroom glass and a superconducting coil, with silicon-28 wafers to work on. Its shape is 17 by 11 by 15, built by the Terminal in 2 passes. The tetron die and the tetron array, which the chain parts need. Wafers and metals by ME; failed dies come out in their own output, so route them back to the start."]
 			icon: "gtceu:tetron_fab"
 			id: "11AA3FE52CF398DB"
 			rewards: [{ id: "7C5B16C1BEF5B4E4", type: "xp", xp: 150 }]
@@ -887,7 +946,7 @@
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
-			description: ["The &6Gamma Optics Works&r focuses gamma rays by Laue lensing, which nothing older can do. Gamma light of this energy only bends in a crystal. An OpV hull, the high power casing and laminated glass, and a Th-229 lasing crystal in the controller. The Laue lens, the gamma multilayer mirror and the gamma focus element. The lens and the mirror focus the Kugelblitz seed, and the mirror goes on into the Hawking drive and the MAX casing. Run each optic on its own circuit and keep a small stock of all three."]
+			description: ["The &6Gamma Optics Works&r focuses gamma rays by Laue lensing, which nothing older can do. Gamma light of this energy only bends in a crystal. An OpV hull, the high power casing and laminated glass, and a Th-229 lasing crystal in the controller. Its shape is 31 by 9 by 9, built by the Terminal in one pass. The Laue lens, the gamma multilayer mirror and the gamma focus element. The lens and the mirror focus the Kugelblitz seed, and the mirror goes on into the Hawking drive and the MAX casing. Run each optic on its own circuit and keep a small stock of all three."]
 			icon: "gtceu:gamma_optics_works"
 			id: "1F29C7B921EC10C4"
 			rewards: [{ id: "5F3873AE089D0581", type: "xp", xp: 150 }]
@@ -915,7 +974,7 @@
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
-			description: ["The &6Antihydrogen Foundry&r merges antiprotons and positrons in a trap, cools the atoms with a laser and freezes them into a cell. It is the first neutral antimatter in the pack. An OpV hull, the NEG XHV casing and the annihilation shield casing, a levitation trap cell and a Lyman-alpha laser, then antiprotons and positrons to work on. The antihydrogen ice cell, which the Kugelblitz core and the annihilation engine need. Antiprotons and positrons by the beam lines; cells are the product to chest."]
+			description: ["The &6Antihydrogen Foundry&r merges antiprotons and positrons in a trap, cools the atoms with a laser and freezes them into a cell. It is the first neutral antimatter in the pack. An OpV hull, the NEG XHV casing and the annihilation shield casing, a levitation trap cell and a Lyman-alpha laser, then antiprotons and positrons to work on. Its shape is 25 by 11 by 13, built by the Terminal in 2 passes. The antihydrogen ice cell, which the Kugelblitz core and the annihilation engine need. Antiprotons and positrons by the beam lines; cells are the product to chest."]
 			icon: "gtceu:antihydrogen_foundry"
 			id: "597A9984A1B74479"
 			rewards: [{ id: "1D0E3BF3B30AB3B6", type: "xp", xp: 200 }]
@@ -932,28 +991,6 @@
 		}
 		{
 			dependencies: ["597A9984A1B74479"]
-			description: ["The &6NEG XHV Casing&r is lined with a non-evaporable getter that soaks up the last stray gas and holds an extreme-high vacuum. The foundry and the decelerator are built of it."]
-			icon: "grindless:neg_xhv_casing"
-			id: "54B5FC10DC58127A"
-			rewards: [{ id: "39E02379AF6E2285", type: "xp", xp: 80 }]
-			tasks: [{ id: "14F2F27C828EC326", item: "grindless:neg_xhv_casing", type: "item" }]
-			title: "NEG XHV Casing"
-			x: 15.0d
-			y: 13.0d
-		}
-		{
-			dependencies: ["597A9984A1B74479"]
-			description: ["The &6Annihilation Shield Casing&r stops gammas, neutrons and charged debris. Every machine that holds antimatter or a black hole is lined with it."]
-			icon: "grindless:annihilation_shield_casing"
-			id: "73D6911F1FDA32DC"
-			rewards: [{ id: "56F11F445A91A568", type: "xp", xp: 80 }]
-			tasks: [{ id: "5CDD797492C45981", item: "grindless:annihilation_shield_casing", type: "item" }]
-			title: "Annihilation Shield Casing"
-			x: 15.0d
-			y: 11.5d
-		}
-		{
-			dependencies: ["54B5FC10DC58127A"]
 			description: ["The &6Th-229 Lasing Crystal&r is a thorium-doped crystal checked against the nuclear clock until it lases on the nucleus itself. The OpV emitter and the gamma optics works are built with one. The light that cools antihydrogen comes from a separate Lyman-alpha laser."]
 			icon: "grindless:th229_lasing_crystal"
 			id: "576E522130567846"
@@ -965,7 +1002,7 @@
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
-			description: ["The &6Strangelet Vault&r grows a strangelet seed inside a frozen field, where it cannot touch ordinary atoms, and feeds it until it is stable exotic matter. It also lines the cages and foils that strange matter needs. An OpV hull, the field-frozen casing and the annihilation shield casing, then seeds from the distiller and field-frozen plate. Stable exotic matter, which the Kugelblitz core and the gate to MAX need. Seeds go in by hatch and out by hatch; never keep them outside the vault."]
+			description: ["The &6Strangelet Vault&r grows a strangelet seed inside a frozen field, where it cannot touch ordinary atoms, and feeds it until it is stable exotic matter. It also lines the cages and foils that strange matter needs. An OpV hull, the field-frozen casing and the annihilation shield casing, then seeds from the distiller and field-frozen plate. Its shape is 13 by 13 by 13, built by the Terminal in one pass. Stable exotic matter, which the Kugelblitz core and the gate to MAX need. Seeds go in by hatch and out by hatch; never keep them outside the vault."]
 			icon: "gtceu:strangelet_vault"
 			id: "3DB8108B84BC8C3C"
 			rewards: [{ id: "75B37513AF5FDE52", type: "xp", xp: 150 }]
@@ -982,7 +1019,7 @@
 		}
 		{
 			dependencies: ["37DD95E0E3D6332E"]
-			description: ["The &6Jet Beam Line&r draws protons from the base of the Cygnus X-1 jet and bunches them on superconducting cavities into a beam no Earth injector can reach. An OpV hull, the high power casing and SRF cryomodule blocks, with a chain field coil, an FRC cartridge and a field-frozen plate in the controller. Only its jet extraction is tied to Cygnus X-1. The proton beam for the spallation station, and through it every antiproton. Power and coolant by pipe; the beam is continuous, so give it a dedicated supply."]
+			description: ["The &6Jet Beam Line&r draws protons from the base of the Cygnus X-1 jet and bunches them on superconducting cavities into a beam no Earth injector can reach. An OpV hull, the high power casing and SRF cryomodule blocks, with a chain field coil, an FRC cartridge and a field-frozen plate in the controller. Only its jet extraction is tied to Cygnus X-1. Its shape is 45 by 7 by 7, built by the Terminal in one pass. The proton beam for the antiproton complex, and through it every antiproton. Power and coolant by pipe; the beam is continuous, so give it a dedicated supply."]
 			icon: "gtceu:jet_beam_line"
 			id: "7B82C6325DA8F876"
 			rewards: [{ id: "572EB6DF544FE3F1", type: "xp", xp: 200 }]
@@ -1010,23 +1047,7 @@
 		}
 		{
 			dependencies: ["7B82C6325DA8F876"]
-			description: ["The &6Spallation Target Station&r hits an iridium target with the beam, collects the antiprotons with a magnetic horn and breeds tritium in the shield. An OpV hull and the annihilation shield casing, with the beam line in front of it. Raw antiprotons for the decelerator and tritium for the hydrogen lines. Targets by ME; the tritium is a byproduct, so pipe it away at once."]
-			icon: "gtceu:spallation_target_station"
-			id: "5CAB5711F456C75A"
-			rewards: [{ id: "5DA13D309350064C", type: "xp", xp: 200 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "5A842245120572AF", item: "gtceu:spallation_target_station", type: "item" }
-				{ id: "3358D7352451EDB9", item: "grindless:annihilation_shield_casing", type: "item" }
-			]
-			title: "Spallation Target Station"
-			x: 30.0d
-			y: 21.5d
-		}
-		{
-			dependencies: ["5CAB5711F456C75A"]
-			description: ["The &6Antiproton Decelerator&r cools antiprotons from gigaelectronvolts to kiloelectronvolts, first by stochastic cooling and then with electrons, and fills them into traps. An OpV hull, the high power and negative-potential casings and the cryomodule blocks. Trapped antiprotons for the antihydrogen foundry. The traps fill slowly, so run a second decelerator before adding a second target."]
+			description: ["The &6Antiproton Complex&r is four machines in one hall, one recipe row each. An iridium target and a lithium hydride shield make a hot antiproton beam; stochastic and electron cooling slow it, and ELENA, the last ring, bunches it into a Penning trap: the &6Cold Antiproton Cell&r. An OpV hull, the NEG XHV and annihilation shield casings and SRF cryomodule blocks, behind the jet beam line. Each row burns a part: target, pickup, electron cooler, or a trap. Its shape is 29 by 7 by 29, built by the Terminal in 2 passes. The cold antiproton cell for the antihydrogen foundry, and the antiproton stacks. Parts by ME; the empty traps come back from the foundry, so loop them."]
 			icon: "gtceu:antiproton_decelerator"
 			id: "1458D096423EA6D4"
 			rewards: [{ id: "3F362D833F72AD18", type: "xp", xp: 200 }]
@@ -1037,14 +1058,15 @@
 				{ id: "3B95E711A1BDA15A", item: "gtceu:high_power_casing", type: "item" }
 				{ id: "3FD09E0339166D35", item: "grindless:neg_xhv_casing", type: "item" }
 				{ id: "3B33786B56C4A343", item: "grindless:srf_cryomodule_block", type: "item" }
+				{ id: "7F4C0F3D76B21C88", item: "grindless:annihilation_shield_casing", type: "item" }
 			]
-			title: "Antiproton Decelerator"
-			x: 32.5d
+			title: "Antiproton Complex"
+			x: 30.0d
 			y: 21.5d
 		}
 		{
 			dependencies: ["1458D096423EA6D4"]
-			description: ["The &6Strangelet Distiller&r boils the strangeness out of a lead-208 fireball and catches it as a droplet seed, catalysed by a pasta core sample. An OpV hull, the field-frozen casing and fusion glass. The strangelet seed, and the exotic matter after it. Beam and sample by ME; seeds go straight to the vault."]
+			description: ["The &6Strangelet Distiller&r boils the strangeness out of a lead-208 fireball and catches it as a droplet seed, catalysed by a pasta core sample. An OpV hull, the field-frozen casing and fusion glass. Its shape is 19 by 11 by 11, built by the Terminal in one pass. The strangelet seed, and the exotic matter after it. Beam and sample by ME; seeds go straight to the vault."]
 			icon: "gtceu:strangelet_distiller"
 			id: "5ACC310114FACE71"
 			rewards: [{ id: "364CC46524130D2C", type: "xp", xp: 200 }]
@@ -1061,7 +1083,7 @@
 		}
 		{
 			dependencies: ["5ACC310114FACE71"]
-			description: ["The &6Kugelblitz Forge&r crowds so much light into one point that it collapses into a black hole made of light. It is the largest machine of the age. An OpV hull, field-frozen and annihilation shield casing, and fusion coils, with the gamma optics works and a huge power supply behind it. The kugelblitz core, and the Hawking radiation of the collector. Feed power and gammas by hatch; build the shield first and the coils last."]
+			description: ["The &6Kugelblitz Forge&r crowds so much light into one point that it collapses into a black hole made of light. It is the largest machine of the age. An OpV hull, field-frozen and annihilation shield casing, and fusion coils, with the gamma optics works and a huge power supply behind it. Its shape is 23 by 17 by 23, built by the Terminal in 3 passes. The kugelblitz core, and the Hawking radiation of the collector. Feed power and gammas by hatch; build the shield first and the coils last."]
 			icon: "gtceu:kugelblitz_forge"
 			id: "196E5592451BC661"
 			rewards: [{ id: "52BA5C6DB47D00E6", type: "xp", xp: 300 }]
@@ -1079,7 +1101,7 @@
 		}
 		{
 			dependencies: ["7F7487A3E9823C9A"]
-			description: ["The &6Magnetic Pair Converter&r turns gammas into electron and positron pairs inside the magnetar field, seeded by a positron plasma from home. Only a field this strong allows it. An OpV hull, the field-frozen casing and field-frozen plate from the press, a gamma laser and a chain field coil, then gamma light and a rotating-wall positron plasma. Unsealed positron cells, which the electron beam furnace seals into dense positron cells. Seed plasma by hatch; send the cells to the furnace and on to the antihydrogen foundry."]
+			description: ["The &6Magnetic Pair Converter&r turns gammas into electron and positron pairs inside the magnetar field, seeded by a positron plasma from home. Only a field this strong allows it. An OpV hull, the field-frozen casing and field-frozen plate from the press, a gamma laser and a chain field coil, then gamma light and a rotating-wall positron plasma. Its shape is 13 by 17 by 13, built by the Terminal in 2 passes. Unsealed positron cells, which the electron beam furnace seals into dense positron cells. Seed plasma by hatch; send the cells to the furnace and on to the antihydrogen foundry."]
 			icon: "gtceu:magnetic_pair_converter"
 			id: "3E86C36587CF8FBB"
 			rewards: [{ id: "1BE2DC7CCBC9F8E8", type: "xp", xp: 120 }]
@@ -1095,7 +1117,7 @@
 		}
 		{
 			dependencies: ["7F4169BDA6339C6F"]
-			description: ["The &6Field-Frozen Press&r presses chain-matter laminae in the magnetar field so that the field stays frozen in the billet. An OpV hull, the high power casing and a tungsten steel frame, with laminae from the chain-matter line. The field-frozen plate and, from it, the field-frozen casing that the pair converter, the vault, the distiller and the forge are built of. Laminae by ME; plates come out stacked, so chest them for the casing."]
+			description: ["The &6Field-Frozen Press&r presses chain-matter laminae in the magnetar field so that the field stays frozen in the billet. An OpV hull, the high power casing and a tungsten steel frame, with laminae from the chain-matter line. Its shape is 11 by 15 by 11, built by the Terminal in one pass. The field-frozen plate and, from it, the field-frozen casing that the pair converter, the vault, the distiller and the forge are built of. Laminae by ME; plates come out stacked, so chest them for the casing."]
 			icon: "gtceu:field_frozen_press"
 			id: "3EA9271449E0281E"
 			rewards: [{ id: "73870403D9A2274E", type: "xp", xp: 150 }]
@@ -1134,7 +1156,7 @@
 		}
 		{
 			dependencies: ["34EC6937B4EB1880"]
-			description: ["The &6Debris Harvester&r collects and sorts the debris of the core into metal and silicate, so the cluster feeds the probe with nothing from home. An OpV hull, the robust casing and a steel gearbox. The bulge debris, and the refinery behind it. Run it continuously and split the output by item filter into metal and silicate."]
+			description: ["The &6Debris Harvester&r collects and sorts the debris of the core into metal and silicate, so the cluster feeds the probe with nothing from home. An OpV hull, the robust casing and a steel gearbox. Its shape is 15 by 7 by 15, built by the Terminal in one pass. The bulge debris, and the refinery behind it. Run it continuously and split the output by item filter into metal and silicate."]
 			icon: "gtceu:debris_harvester"
 			id: "397BE2355436062F"
 			rewards: [{ id: "1A4D121357184494", type: "xp", xp: 150 }]
@@ -1151,7 +1173,7 @@
 		}
 		{
 			dependencies: ["397BE2355436062F"]
-			description: ["The &6Replication Refinery&r turns local silicon and metal into probe feedstock by two real routes, and sinters the rest into the casing of the next probe. An OpV hull, the clean casing, titanium pipe casing and a heat vent. The cluster sinter casing, and the probe parts for the foundry. Chain it to the harvester by pipe and belt; it never needs anything from home."]
+			description: ["The &6Replication Refinery&r turns local silicon and metal into probe feedstock by two real routes, and sinters the rest into the casing of the next probe. An OpV hull, the clean casing, titanium pipe casing and a heat vent. Its shape is 13 by 15 by 13, built by the Terminal in 2 passes. The cluster sinter casing, and the probe parts for the foundry. Chain it to the harvester by pipe and belt; it never needs anything from home."]
 			icon: "gtceu:replication_refinery"
 			id: "1521EF011A60705F"
 			rewards: [{ id: "72307B98139F0FDB", type: "xp", xp: 200 }]
@@ -1169,7 +1191,7 @@
 		}
 		{
 			dependencies: ["1521EF011A60705F"]
-			description: ["The &6Collector Node Works&r turns local silicon into thin photovoltaic nodes and packs them onto a seed, four at a time. An OpV hull, cleanroom glass, plascrete and assembly line grating. The deployed node pack, and the bulge collector. Silicon from the harvester line; one pack per seed, so send them straight out."]
+			description: ["The &6Collector Node Works&r turns local silicon into thin photovoltaic nodes and packs them onto a seed, four at a time. An OpV hull, cleanroom glass, plascrete and assembly line grating. Its shape is 21 by 9 by 13, built by the Terminal in 2 passes. The deployed node pack, and the bulge collector. Silicon from the harvester line; one pack per seed, so send them straight out."]
 			icon: "gtceu:collector_node_works"
 			id: "7A800CFF0E239E9B"
 			rewards: [{ id: "559E04873B2E19F4", type: "xp", xp: 120 }]
@@ -1187,7 +1209,7 @@
 		}
 		{
 			dependencies: ["5DB4AECF2C68DD7A"]
-			description: ["The &6Von Neumann Foundry&r builds a probe that builds a copy of itself, from feedstock and parts made on the spot. Once a seed is here, the cluster feeds its own growth. An OpV hull, the robust casing and assembly line grating, with cluster sinter casings, a tetron array and an XNAV unit in the controller, and feedstock from the refinery. The self-copying probe seed. Every input comes from the cluster by belt, so wire it to the refinery."]
+			description: ["The &6Von Neumann Foundry&r builds a probe that builds a copy of itself, from feedstock and parts made on the spot. Once a seed is here, the cluster feeds its own growth. An OpV hull, the robust casing and assembly line grating, with cluster sinter casings, a tetron array and an XNAV unit in the controller, and feedstock from the refinery. Its shape is 17 by 13 by 17, built by the Terminal in 2 passes. The self-copying probe seed. Every input comes from the cluster by belt, so wire it to the refinery."]
 			icon: "gtceu:von_neumann_foundry"
 			id: "10ABDF6F9EF0EBC0"
 			rewards: [{ id: "78C3F5A173F6F754", type: "xp", xp: 250 }]
@@ -1201,6 +1223,318 @@
 			title: "Von Neumann Foundry"
 			x: 41.0d
 			y: 17.5d
+		}
+		{
+			dependencies: ["1A9EE7510BD6DBFC"]
+			description: ["Twenty-three steps from silicon-28 ash to the tetron array: purify the silicon, build a cold CMOS chip on it, then grow the qubits. The cosmic mainframe and every OpV sensor and emitter draw from this line."]
+			icon: "grindless:tetron_array"
+			id: "743F8415C4AA94EE"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "50DE27163CDC7DB4", type: "checkmark" }]
+			title: "Si-28 qubit line"
+			x: 5.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["743F8415C4AA94EE"]
+			description: ["Silicon-28 enters the line as the ash of oxygen burning in a star, made by plasma quenching. Hydrochloric acid turns the ash into a liquid silicon compound that can be distilled. The &6Extraction Cascade&r: Si-28 ash and hydrochloric acid, 100 ticks, give &6Crude Si-28 Trichlorosilane&r and hydrogen. Place the machine to finish the quest. The distillation tower, which cleans the crude. Pipe the acid and the ash by ME; the hydrogen returns to the MOCVD steps."]
+			icon: "gtceu:extraction_cascade"
+			id: "1A873EBD84722AD5"
+			rewards: [{ id: "355CE127EB29F313", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3C0FDCD58B507F4B", item: "gtceu:extraction_cascade", type: "item" }]
+			title: "1. Extraction Cascade: Crude Trichlorosilane"
+			x: 7.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["1A873EBD84722AD5"]
+			description: ["The ash carries phosphorus and other impurities. Fractional distillation separates pure &6Si-28 Trichlorosilane&r from a tetrachloride fraction and a small purge. The &6Distillation Tower&r: the crude trichlorosilane, 200 ticks. The tetrachloride goes back to the crude in a chemical reactor (hydrogen in, crude and acid out); hydrolyse the purge, which carries the phosphorus out. The MOCVD reactor, which grows the polysilicon rods. Route the three outputs by fluid hatch; the tetrachloride loop keeps the silicon from being lost."]
+			icon: "gtceu:distillation_tower"
+			id: "3A28E8A22271FF31"
+			rewards: [{ id: "53DCC0C434DD8AFD", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "391D5F628FE45CEE", item: "gtceu:distillation_tower", type: "item" }]
+			title: "2. Distillation: Pure Trichlorosilane"
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3A28E8A22271FF31"]
+			description: ["Hot hydrogen strips the chlorine from the trichlorosilane and deposits solid silicon on a seed. The &6Si-28 Poly Rod&r is the pure feed for the crystal. The &6MOCVD Reactor&r: trichlorosilane and hydrogen, 1,200 ticks, give a rod and a large flow of hydrochloric acid, which feeds the first step again. The zone refining tower. One rod needs a large volume of fluid, so size the tanks and let the acid loop back by pipe."]
+			icon: "grindless:si28_poly_rod"
+			id: "1702969CB6975F46"
+			rewards: [{ id: "72ACB7EB5BF2B1A0", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "715BE496199CA7A9", item: "grindless:si28_poly_rod", type: "item" }]
+			title: "3. MOCVD: Si-28 Poly Rod"
+			x: 12.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["1702969CB6975F46"]
+			description: ["A molten zone swept along the rod pushes the last impurities to one end. The &6Si-28 FZ Ingot&r is single-crystal silicon-28. The &6Zone Refining Tower&r: poly rods and argon, 800 ticks, give an ingot. Spent donor wafers of the slicing step (step 7) are regrown into ingots the same way. The large cutter. Send the donor wafers back here by conveyor so no silicon-28 is wasted."]
+			icon: "grindless:si28_fz_ingot"
+			id: "75CA4947AC845EC8"
+			rewards: [{ id: "366A0D781744B471", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "77CA9373EAAB32B3", item: "grindless:si28_fz_ingot", type: "item" }]
+			title: "4. Zone Refining: Si-28 FZ Ingot"
+			x: 15.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["75CA4947AC845EC8"]
+			description: ["The ingot is sliced into thin discs. The &6Si-28 FZ Wafer&r is the blank for every chip of the line. The &6Large Cutter&r: an ingot and water, 400 ticks, give eight wafers. The ion implanter. A buffer chest after the cutter feeds both the SOI and the later wafers."]
+			icon: "grindless:si28_fz_wafer"
+			id: "3E9024A0E0052EF9"
+			rewards: [{ id: "1ABEABF39E390F22", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "39E4CFC3D66A13AB", item: "grindless:si28_fz_wafer", type: "item" }]
+			title: "5. Cutting the Si-28 Wafers"
+			x: 17.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3E9024A0E0052EF9"]
+			description: ["Hydrogen ions driven deep into the wafer weaken a thin layer, along which the top of the wafer can later be split off. The &6Ion Implanter&r: a Si-28 wafer and hydrogen, 600 ticks, give an &6H Si-28 Wafer&r. The TFLN fab, which splits the layer onto an oxide. Hydrogen comes back from the slicing step, so share one hydrogen line."]
+			icon: "grindless:h_si28_wafer"
+			id: "505D40BADDD91FEB"
+			rewards: [{ id: "5BFEC1ACFA1D91B0", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F6ECCF78515B2DC", item: "grindless:h_si28_wafer", type: "item" }]
+			title: "6. Ion Implanter: Hydrogen Layer"
+			x: 20.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["505D40BADDD91FEB"]
+			description: ["The weakened wafer is bonded to an oxidised wafer and split: a thin silicon-28 film on an insulator is the &6Si-28 SOI Wafer&r, the base of every cold chip. The &6TFLN Fab&r (ion slicing): an H Si-28 wafer and an oxidised wafer, 1,600 ticks, give the SOI wafer, a donor wafer (regrown in step 4) and hydrogen. The anneal that heals the bonded film. Keep a chest of oxidised wafers beside the fab."]
+			icon: "grindless:si28_soi_wafer"
+			id: "14D19766AADE574D"
+			rewards: [{ id: "13FAF9F700E14F89", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3B2C538FF7A3FCA5", item: "grindless:si28_soi_wafer", type: "item" }]
+			title: "7. TFLN Fab: Si-28 SOI Wafer"
+			x: 22.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["14D19766AADE574D"]
+			description: ["The bond and the implant leave defects in the silicon. A long hot anneal in nitrogen repairs them. The &6Electric Blast Furnace&r at 1,373 K: an SOI wafer and nitrogen, 400 ticks, give the &6Annealed SOI Wafer&r. The back-gate implant. Nitrogen by pipe, wafers by conveyor."]
+			icon: "grindless:annealed_soi_wafer"
+			id: "1AD2342368CAA476"
+			rewards: [{ id: "130B1C3649588598", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F1D9F61F3544C6E", item: "grindless:annealed_soi_wafer", type: "item" }]
+			title: "8. Annealing the SOI Wafer"
+			x: 25.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["1AD2342368CAA476"]
+			description: ["A doped layer under the insulator lets a voltage tune the transistors from behind, which cold devices need. The &6Ion Implanter&r: an annealed wafer and boron dust, 400 ticks, give the &6Back-Gated SOI Wafer&r. The gate stack. Boron dust from an input bus."]
+			icon: "grindless:back_gated_soi_wafer"
+			id: "30CE241102E209C0"
+			rewards: [{ id: "1282A0F2C62FB051", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1677713DC0A59D2B", item: "grindless:back_gated_soi_wafer", type: "item" }]
+			title: "9. Back-Gate Implant"
+			x: 27.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["30CE241102E209C0"]
+			description: ["A hafnium oxide gate insulator and a titanium nitride metal make a transistor gate that works at a few kelvin. The &6MOCVD Reactor&r: a back-gated wafer, six-nines hafnium, titanium dust, oxygen and ammonia, 1,200 ticks, give the &6Gate Stack SOI Wafer&r and hydrogen. The cryo-CMOS exposure. The hafnium is an ultra-pure product of the metal chain; stock a few."]
+			icon: "grindless:gate_stack_soi_wafer"
+			id: "197AF5328EEAAC07"
+			rewards: [{ id: "18040CB7A3C17E3A", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "35B4508E32DC44A8", item: "grindless:gate_stack_soi_wafer", type: "item" }]
+			title: "10. MOCVD: Gate Stack"
+			x: 30.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["197AF5328EEAAC07"]
+			description: ["The transistor pattern is printed with beyond-extreme ultraviolet light from a terbium plasma. The &6BEUV Scanner&r: a gate stack wafer, a terbium droplet target and a BEUV mirror, 2,000 ticks, give the &6Cryo-CMOS Litho Wafer&r and a fouled mirror to be cleaned and reused. The source and drain implant. Keep the mirror cleaning loop running; mirrors and targets are the limit."]
+			icon: "grindless:cryo_cmos_litho_wafer"
+			id: "502ED70BB89465D6"
+			rewards: [{ id: "5FA216F368837B32", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1390452BE3FB0DFC", item: "grindless:cryo_cmos_litho_wafer", type: "item" }]
+			title: "11. BEUV: Cryo-CMOS Exposure"
+			x: 32.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["502ED70BB89465D6"]
+			description: ["Arsenic ions dope the source and drain of every transistor through the exposed pattern. The &6Ion Implanter&r: a litho wafer and arsenic dust, 400 ticks, give the &6Cryo-CMOS Implanted Wafer&r. The flash anneal. Arsenic dust from an input bus."]
+			icon: "grindless:cryo_cmos_implanted_wafer"
+			id: "78C8292FA9F28911"
+			rewards: [{ id: "73DA4F2C16A27E37", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3EFE40ADD8A8CB51", item: "grindless:cryo_cmos_implanted_wafer", type: "item" }]
+			title: "12. Ion Implanter: Source and Drain"
+			x: 35.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["78C8292FA9F28911"]
+			description: ["A pulse of electrons activates the dopants without letting them diffuse. The &6Electron Beam Furnace&r: an implanted wafer and a lanthanum hexaboride cathode (worn slowly, 1% per run), 400 ticks, give the &6Activated CMOS Wafer&r. The tungsten contacts. Replace the cathode by ME when it wears out."]
+			icon: "grindless:activated_cmos_wafer"
+			id: "35553B4FCC2EADEF"
+			rewards: [{ id: "7F94EA55282F0016", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "54C89867E9D5E25F", item: "grindless:activated_cmos_wafer", type: "item" }]
+			title: "13. Flash Anneal: Activated CMOS Wafer"
+			x: 37.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["35553B4FCC2EADEF"]
+			description: ["Tungsten plugs connect the transistors to the metal above them. The &6MOCVD Reactor&r: an activated wafer, tungsten hexafluoride and hydrogen, 800 ticks, give the &6Contacted CMOS Wafer&r and hydrofluoric acid, which joins the fluorine chain. The metal layer. Pipe the hydrofluoric acid to the fluorine chain; it is a product, not waste."]
+			icon: "grindless:contacted_cmos_wafer"
+			id: "55F2EC2D94AD38D7"
+			rewards: [{ id: "7A5FA84CF72BB896", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "190F92543529ABC9", item: "grindless:contacted_cmos_wafer", type: "item" }]
+			title: "14. MOCVD: Tungsten Contacts"
+			x: 40.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["55F2EC2D94AD38D7"]
+			description: ["Gold wiring stays a good conductor in the cold. The &6Spintronic Cluster Tool&r: a contacted wafer, gold foil and argon, 600 ticks, give the &6Cryo-CMOS Metal Wafer&r and gold overspray, which is recycled. The via exposure. Recycle the overspray into gold so the foil stays cheap."]
+			icon: "grindless:cryo_cmos_metal_wafer"
+			id: "51A5BEF84CA3AEE5"
+			rewards: [{ id: "3C025E55FBA64106", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7FB9EBD64A938863", item: "grindless:cryo_cmos_metal_wafer", type: "item" }]
+			title: "15. Sputtering the Metal Layer"
+			x: 42.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["51A5BEF84CA3AEE5"]
+			description: ["A second exposure opens the vias that join the metal layers. The &6BEUV Scanner&r: a metal wafer, a terbium droplet target and a BEUV mirror, 2,000 ticks, give the &6Interconnected CMOS Wafer&r. Cutting into dies. Share the mirror loop with step 11."]
+			icon: "grindless:interconnected_cmos_wafer"
+			id: "7BBBD0859EA6A685"
+			rewards: [{ id: "716408A447EC7F54", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3467EE657DF9AA43", item: "grindless:interconnected_cmos_wafer", type: "item" }]
+			title: "16. BEUV: Via Exposure"
+			x: 45.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7BBBD0859EA6A685"]
+			description: ["The wafer is cut into four chips, none of which has been proved to work cold yet. The &6Large Cutter&r: an interconnected wafer and water, 400 ticks, give four &6Untested Cryo-CMOS Dies&r. The cold test. A chest of dies buffers the cold test."]
+			icon: "grindless:untested_cryo_cmos_die"
+			id: "1A2C71E2842CC522"
+			rewards: [{ id: "581A0807E1397A1D", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "15885E732A669F58", item: "grindless:untested_cryo_cmos_die", type: "item" }]
+			title: "17. Cutting the Cryo-CMOS Dies"
+			x: 47.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["1A2C71E2842CC522"]
+			description: ["Each die is cooled in liquid helium and only working ones pass. The &6Cryo-CMOS Die&r is the logic of the cosmic mainframe and of every tetron. The &6Helium Refrigerator&r (closed-loop cooling): an untested die, liquid helium and a little liquid nitrogen, 400 ticks, give the die and nitrogen. The cosmic mainframe is made from this die in the photonic integration hall, with the niobium interposer, the optical link and two HEMT amplifiers. The tetron fab and the cosmic mainframe. Liquid helium by pipe; the die goes to two lines, so split it by filter."]
+			icon: "grindless:cryo_cmos_die"
+			id: "3134E7DC3A7F7858"
+			rewards: [{ id: "30E1A623C1462875", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "365921531B644899", item: "grindless:cryo_cmos_die", type: "item" }]
+			title: "18. Cold Test: Cryo-CMOS Die"
+			x: 50.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3134E7DC3A7F7858"]
+			description: ["Qubits are written onto a gated two-dimensional electron gas and wired to the cryo-CMOS die that controls them. The &6Tetron Fab&r: a Gated 2DEG wafer (the InP wafer branch) and a cryo-CMOS die, 1,200 ticks, give four &6Tetron Dies&r. Bumping the dies. Keep the 2DEG branch running ahead; it is the slow side."]
+			icon: "grindless:tetron_die"
+			id: "72226ED2762C28A7"
+			rewards: [{ id: "545ED86BC13D386E", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5ECF77AE0AB34055", item: "grindless:tetron_die", type: "item" }]
+			title: "19. Tetron Fab: Tetron Die"
+			x: 52.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["72226ED2762C28A7"]
+			description: ["Indium bumps make the connections between a die and its interposer. The &6Spintronic Cluster Tool&r: four tetron dies, indium dust and argon, 600 ticks, give four &6Bumped Tetron Dies&r. The bonding. Indium dust from an input bus."]
+			icon: "grindless:bumped_tetron_die"
+			id: "77C5674534C89B44"
+			rewards: [{ id: "3BB700CCEC869CBD", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "33EDD3A57D29D6ED", item: "grindless:bumped_tetron_die", type: "item" }]
+			title: "20. Sputtering the Indium Bumps"
+			x: 55.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["77C5674534C89B44"]
+			description: ["The die is bonded face-down to a niobium TSV interposer that carries its signals out. The &6TFLN Fab&r: a bumped die and an &6Nb TSV Interposer&r (the interposer branch), 1,600 ticks, give the &6Bonded Tetron Die&r. The millikelvin test. The interposer branch must be automated ahead of this step."]
+			icon: "grindless:bonded_tetron_die"
+			id: "341E5713FC2FE9C1"
+			rewards: [{ id: "533209ADC21EF07A", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "53EFCA66E3434940", item: "grindless:bonded_tetron_die", type: "item" }]
+			title: "21. TFLN Fab: Bonded Tetron Die"
+			x: 57.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["341E5713FC2FE9C1"]
+			description: ["Qubits only prove themselves near absolute zero. The cryostat is not used up by the test. The &6Millikelvin Cryostat Works&r: a bonded die, an MK cryostat module (not consumed) and liquid helium, 1,600 ticks, give the &6Tested Tetron Die&r. The tetron array. The works is large; run one die at a time and keep the module in its slot."]
+			icon: "grindless:tested_tetron_die"
+			id: "3143989A0AEAA808"
+			rewards: [{ id: "5BFC6B07ACE39872", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "34E8608681D9C0EF", item: "grindless:tested_tetron_die", type: "item" }]
+			title: "22. Millikelvin Test"
+			x: 60.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3143989A0AEAA808"]
+			description: ["Four tested dies and a HEMT amplifier make an array: the qubit block that the MAX components and the relay probes are built on. The &6Tetron Fab&r (tetron assembly): four tested dies, a HEMT amplifier and superfluid helium-3, 1,600 ticks, give the &6Tetron Array&r and, one run in ten, a failed die, which the extraction cascade recovers into indium, aluminium and gold. MAX components, the probes and the mainframe of the supracausal era. Recycle the failed dies by ME and keep a stock of arrays."]
+			icon: "grindless:tetron_array"
+			id: "1DC4918611338BD8"
+			rewards: [{ id: "391F3AF1195C13AB", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3C99D4B329CF5E52", item: "grindless:tetron_array", type: "item" }]
+			title: "23. Tetron Array"
+			x: 62.5d
+			y: -2.0d
 		}
 		{
 			dependencies: ["15F83082ECE1AF32"]
@@ -1269,46 +1603,6 @@
 			title: "hBN Capped 2DEG Wafer"
 			x: 25.5d
 			y: 28.0d
-		}
-		{
-			dependencies: ["3728ACC857BB09FC"]
-			description: ["The &6Gate Stack SOI Wafer&r is a wafer stage on the way to the Cryo CMOS Litho Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The Cryo CMOS Litho Wafer and Fouled BEUV Mirror in the BEUV Lithography. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
-			icon: "grindless:gate_stack_soi_wafer"
-			id: "5DC14407C9D9491F"
-			rewards: [{ id: "13BD43A3C49EF700", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "1A8D350AFF7B171B", item: "grindless:gate_stack_soi_wafer", type: "item" }]
-			title: "Gate Stack SOI Wafer"
-			x: 21.5d
-			y: 29.5d
-		}
-		{
-			dependencies: ["3728ACC857BB09FC"]
-			description: ["The &6Cryo-CMOS Litho Wafer&r is a wafer stage on the way to the Cryo CMOS Implanted Wafer. Made in the &6BEUV Lithography&r from the Tb Droplet Target and Gate Stack SOI Wafer, in the cleanroom. The Cryo CMOS Implanted Wafer in the Ion Implantation. A pattern provider on the machine of the step before keeps it supplied."]
-			hide_dependency_lines: true
-			icon: "grindless:cryo_cmos_litho_wafer"
-			id: "35C9D9BA94B10802"
-			rewards: [{ id: "351F87C1091274E8", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "5377341D95659C47", item: "grindless:cryo_cmos_litho_wafer", type: "item" }]
-			title: "Cryo-CMOS Litho Wafer"
-			x: 21.5d
-			y: 31.0d
-		}
-		{
-			dependencies: ["35C9D9BA94B10802"]
-			description: ["The &6Cryo-CMOS Implanted Wafer&r is a wafer stage on the way to the Cryo CMOS Metal Wafer. Made in the &6Ion Implantation&r from the Cryo-CMOS Litho Wafer and Arsenic, in the cleanroom. The Cryo CMOS Metal Wafer and Gold Overspray in the MTJ Sputtering. A pattern provider on the machine of the step before keeps it supplied."]
-			icon: "grindless:cryo_cmos_implanted_wafer"
-			id: "1B4B8411B3A5C787"
-			rewards: [{ id: "3606ECD9E9A6893A", type: "xp", xp: 50 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "33CC1128A64248CB", item: "grindless:cryo_cmos_implanted_wafer", type: "item" }]
-			title: "Cryo-CMOS Implanted Wafer"
-			x: 23.5d
-			y: 31.0d
 		}
 		{
 			dependencies: ["3728ACC857BB09FC"]

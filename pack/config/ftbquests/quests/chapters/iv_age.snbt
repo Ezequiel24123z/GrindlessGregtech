@@ -61,7 +61,7 @@
 		}
 		{
 			dependencies: ["30D78F6EB49AF27B", "5EE3EB2547415591", "5FD0B9548159D199"]
-			description: ["Circuit 1 turns uraninite and hydrofluoric acid into &6Uranium 235&r and a pile of uranium 238. Keep the 238: pellets, radon and later MOX all want it."]
+			description: ["Circuit 1 is the hot cell's shortcut for the whole fluorine chain: uraninite and hydrofluoric acid in, &6Uranium 235&r out, with a pile of uranium 238. Keep the 238: pellets, radon and later MOX all want it. The row below unfolds the real steps."]
 			icon: "gtceu:uranium_235_dust"
 			id: "174353B4F6C61A79"
 			rewards: [{ id: "5D156FB3DAA8368D", type: "xp", xp: 60 }]
@@ -197,7 +197,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["539716A235672461"]
+			dependencies: ["539716A235672461", "3B013256ED81A3A9"]
 			description: [
 				"Venus and Mercury want a level 3 rocket, and GCYR averages the parts, so one leftover advanced motor keeps you at level 2. The IV assembler makes the &6elite parts&r with the chart."
 				"Each suit piece gets the thermal upgrade and a heat shielding fabric: do all four."
@@ -281,7 +281,7 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["14C75CDBACADEE5A"]
+			dependencies: ["14C75CDBACADEE5A", "35D0E940C0A997B4"]
 			description: [
 				"Naquadah only melts in a blast furnace with HSS-G coils, and the hot ingot wants liquid helium in the vacuum freezer. The &6Naquadah Ingot&r is where the quantum wafers start."
 				"The plant's titanium is the one exception to the Moon's monopoly."
@@ -447,6 +447,636 @@
 			title: "Gate to LuV"
 			x: 67.75d
 			y: 1.0d
+		}
+		{
+			dependencies: ["5FD0B9548159D199"]
+			description: [
+				"The leach field no longer hands you rock, only a pale &6Uranyl Sulfate Liquor&r pumped out of the pitchblende. It's the start of the long way round to enriched uranium, the one the hot cell folds into a single recipe."
+				"Pipe it out of the field and keep a tank of it ready for the next step."
+			]
+			icon: "gtceu:uranyl_sulfate_liquor_bucket"
+			id: "72950A35E94ED64F"
+			optional: true
+			rewards: [{ id: "53AD72011AAF2C00", type: "xp", xp: 30 }]
+			tasks: [{ id: "7CF10CBD338C0952", item: "gtceu:uranyl_sulfate_liquor_bucket", type: "item" }]
+			title: "Uranyl Liquor"
+			x: 6.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["72950A35E94ED64F"]
+			description: [
+				"A large chemical reactor passes the liquor over ion-exchange resin, which grabs the uranium and lets everything else go. What comes out is &6Uranium Eluate&r, plus diluted sulfuric acid you can recycle."
+				"Feed the resin and the liquor from buses, and send the acid back to the plant."
+			]
+			icon: "gtceu:uranium_eluate_bucket"
+			id: "30ED21805A9D7D52"
+			optional: true
+			rewards: [{ id: "546CAD39F5DD5978", type: "xp", xp: 30 }]
+			tasks: [{ id: "1254C12FE3E50048", item: "gtceu:uranium_eluate_bucket", type: "item" }]
+			title: "Uranium Eluate"
+			x: 8.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["30ED21805A9D7D52"]
+			description: [
+				"Hydrogen peroxide drops the uranium out of the eluate as &6Yellowcake&r, and the sulfuric acid comes back for another round. A chemical reactor does it, and a pump on the acid line closes the loop."
+				"Yellowcake is the form uranium ships in, which is why it sounds so ominous."
+			]
+			icon: "gtceu:yellowcake_dust"
+			id: "3EE025908022C81B"
+			optional: true
+			rewards: [{ id: "7E2B26299BD28578", type: "xp", xp: 30 }]
+			tasks: [{ id: "5D077F6129948F04", item: "gtceu:yellowcake_dust", type: "item" }]
+			title: "Yellowcake"
+			x: 10.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3EE025908022C81B"]
+			description: [
+				"An electric blast furnace at the lower coil tier roasts the yellowcake into &6Triuranium Octoxide&r, the stable oxide. It needs a steady heat and nothing else, so one furnace fed by a bus keeps it going."
+				"Next it gets reduced."
+			]
+			icon: "gtceu:triuranium_octoxide_dust"
+			id: "3D922EF8A7A71BA8"
+			optional: true
+			rewards: [{ id: "58016706B9019D4E", type: "xp", xp: 30 }]
+			tasks: [{ id: "346A16666806E5B9", item: "gtceu:triuranium_octoxide_dust", type: "item" }]
+			title: "Triuranium Octoxide"
+			x: 12.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3D922EF8A7A71BA8"]
+			description: [
+				"Hydrogen strips oxygen off the oxide in a hotter blast furnace, and out comes clean &6Uraninite&r, ready to take fluorine. Run the hydrogen from your electrolysers and the furnace needs no attention."
+				"Yes, you've now made uraninite from uraninite. The detour was the point."
+			]
+			icon: "gtceu:uraninite_dust"
+			id: "32C246F3F710DDCA"
+			optional: true
+			rewards: [{ id: "560C5C5B949CECE5", type: "xp", xp: 30 }]
+			tasks: [{ id: "3161F93387DCC0A6", item: "gtceu:uraninite_dust", type: "item" }]
+			title: "Uraninite Again"
+			x: 14.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["32C246F3F710DDCA"]
+			description: [
+				"Uraninite and hydrofluoric acid meet in a large chemical reactor and make &6Uranium Tetrafluoride&r, the green salt. The HF is the kiln's, so keep it flowing by pipe."
+				"From here the fluorine is the whole story."
+			]
+			icon: "gtceu:uranium_tetrafluoride_dust"
+			id: "3E95F7B29EEF175F"
+			optional: true
+			rewards: [{ id: "3DEE5A8F6996D6C1", type: "xp", xp: 40 }]
+			tasks: [{ id: "79769BB32ED273FC", item: "gtceu:uranium_tetrafluoride_dust", type: "item" }]
+			title: "Uranium Tetrafluoride"
+			x: 16.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3E95F7B29EEF175F"]
+			description: [
+				"Fluorine takes the tetrafluoride up to &6Uranium Hexafluoride&r, a gas at the temperatures that matter, and that's exactly what a centrifuge wants. Pipe the fluorine from your electrolysis line."
+				"It is also nasty stuff, so keep it in tanks."
+			]
+			icon: "gtceu:uranium_hexafluoride_bucket"
+			id: "1C25A2FDF954027C"
+			optional: true
+			rewards: [{ id: "1DE860E6DA70AF57", type: "xp", xp: 40 }]
+			tasks: [{ id: "504C872B38F45FB7", item: "gtceu:uranium_hexafluoride_bucket", type: "item" }]
+			title: "Uranium Hexafluoride"
+			x: 18.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1C25A2FDF954027C"]
+			description: [
+				"A centrifuge splits the gas into &6Enriched UF6&r and a depleted stream, and a last large chemical reactor with steam and hydrogen turns each into dust and gives the fluorine back as HF. That's the whole of circuit 1 in the hot cell, unfolded."
+				"Automate it and the hot cell becomes a luxury."
+			]
+			icon: "gtceu:enriched_uranium_hexafluoride_bucket"
+			id: "58CC8D75DBD62574"
+			optional: true
+			rewards: [{ id: "33FCC6F97ABFC00B", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "5CBFA0055053FECD", item: "gtceu:enriched_uranium_hexafluoride_bucket", type: "item" }
+				{ id: "7F5D5D67F24D7478", item: "gtceu:depleted_uranium_hexafluoride_bucket", type: "item" }
+			]
+			title: "Spun and Split"
+			x: 20.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["77A25AB4BB859C79"]
+			description: [
+				"Zircaloy tubes start as the End's red zircon. A chemical reactor chlorinates it with carbon and chlorine into &6Zr-Hf Chloride&r, with zirconium and hafnium still together."
+				"Feed it from a zircon drill line and the chlorine from your electrolysers."
+			]
+			icon: "grindless:zr_hf_chloride_dust"
+			id: "10FDDB217295CE41"
+			optional: true
+			rewards: [{ id: "563357267D127F75", type: "xp", xp: 30 }]
+			tasks: [
+				{ id: "5A918551CC691F3B", item: "gtca:red_zircon_dust", type: "item" }
+				{ id: "1D3300715D294061", item: "grindless:zr_hf_chloride_dust", type: "item" }
+			]
+			title: "Zircon Chloride"
+			x: 5.75d
+			y: -5.0d
+		}
+		{
+			dependencies: ["10FDDB217295CE41"]
+			description: [
+				"Hafnium eats neutrons, so a reactor wants zirconium without it. The extraction cascade splits the chloride into &6Zirconium Chloride&r and hafnium chloride, and you'll want to keep the hafnium for much later."
+				"Set circuit 8 and let it run from a bus."
+			]
+			icon: "grindless:zirconium_chloride_dust"
+			id: "7AB284E7415B1B48"
+			optional: true
+			rewards: [{ id: "3F2F11CA385F72E8", type: "xp", xp: 40 }]
+			tasks: [
+				{ id: "7072BA04371C4D82", item: "grindless:zirconium_chloride_dust", type: "item" }
+				{ id: "1A51AADFE520CD08", item: "grindless:hafnium_chloride_dust", type: "item" }
+			]
+			title: "Zirconium without Hafnium"
+			x: 7.75d
+			y: -5.0d
+		}
+		{
+			dependencies: ["7AB284E7415B1B48"]
+			description: [
+				"Magnesium reduces the chloride to &6Zirconium Sponge&r in the fuel fabrication plant, under argon. The sponge is what the mixer wants."
+				"Keep a bus of magnesium dust beside it."
+			]
+			icon: "grindless:zirconium_sponge"
+			id: "571BC6BEA49E80B4"
+			optional: true
+			rewards: [{ id: "7D0B959EB1E3769B", type: "xp", xp: 40 }]
+			tasks: [{ id: "7D5C051CEB3ECCAD", item: "grindless:zirconium_sponge", type: "item" }]
+			title: "Zirconium Sponge"
+			x: 9.75d
+			y: -5.0d
+		}
+		{
+			dependencies: ["571BC6BEA49E80B4"]
+			description: [
+				"A mixer folds the sponge together with a little tin into &6Zircaloy&r, tough enough to hold fuel and invisible to neutrons. Melt it into ingots and roll tubes for the LEU assembly."
+				"Automate it and the fuel line never starves for cladding."
+			]
+			icon: "gtceu:zircaloy_ingot"
+			id: "5BFA3C91B22A0A4C"
+			optional: true
+			rewards: [{ id: "1F6FF03EE50FED5C", type: "xp", xp: 50 }]
+			tasks: [{ id: "3407F97DF77121DA", item: "gtceu:zircaloy_ingot", type: "item" }]
+			title: "Zircaloy"
+			x: 11.75d
+			y: -5.0d
+		}
+		{
+			dependencies: ["7E266AE6DB3351F7"]
+			description: [
+				"The plutonium you reprocessed goes back to work. Circuit 2 in the hot cell blends it with uranium into a &6MOX Fuel Assembly&r, and the reactor burns it like any other fuel."
+				"Feed the spent assemblies back in by bus and the loop closes: fuel goes in, power comes out, waste becomes fuel."
+			]
+			icon: "grindless:mox_fuel_assembly"
+			id: "344E7865AFE4DE0D"
+			rewards: [{ id: "536D42575EA55EE7", type: "xp", xp: 80 }]
+			tasks: [{ id: "5F11A7F3569A06F3", item: "grindless:mox_fuel_assembly", type: "item" }]
+			title: "MOX Fuel"
+			x: 26.75d
+			y: 2.0d
+		}
+		{
+			dependencies: ["344E7865AFE4DE0D"]
+			description: [
+				"A &6Breeder Fuel Assembly&r from the hot cell, circuit 2 again, makes more plutonium than it uses. Run one beside the MOX loop and your reprocessor never runs dry."
+				"Not free energy, just patience."
+			]
+			icon: "grindless:breeder_fuel_assembly"
+			id: "3EAA3FBD8795A8DB"
+			rewards: [{ id: "170F0C133BAA11C8", type: "xp", xp: 80 }]
+			tasks: [{ id: "12F3151C699DB6CE", item: "grindless:breeder_fuel_assembly", type: "item" }]
+			title: "Breeder Assembly"
+			x: 28.75d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7E266AE6DB3351F7"]
+			description: [
+				"The thermal suit needs fabric that survives Mercury, and that means polybenzimidazole. It starts with &6Chlorobenzene&r from benzene and chlorine in a chemical reactor."
+				"Pipe the benzene from your oil line and the chlorine from the electrolysers."
+			]
+			icon: "gtceu:chlorobenzene_bucket"
+			id: "5A33EE3D00497E1E"
+			rewards: [{ id: "3C9815C6AC03C361", type: "xp", xp: 40 }]
+			tasks: [{ id: "362C244EB17AA942", item: "gtceu:chlorobenzene_bucket", type: "item" }]
+			title: "Chlorobenzene"
+			x: 26.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["5A33EE3D00497E1E"]
+			description: [
+				"Nitration mixture adds the nitro groups and gives &6Nitrochlorobenzene&r. Keep the acids in dedicated tanks."
+				"Automate it with a pump per acid."
+			]
+			icon: "gtceu:nitrochlorobenzene_bucket"
+			id: "1E9EC2AF5DED6169"
+			rewards: [{ id: "3150870169E58F0E", type: "xp", xp: 40 }]
+			tasks: [{ id: "5B61C95AA9B2FC7D", item: "gtceu:nitrochlorobenzene_bucket", type: "item" }]
+			title: "Nitrochlorobenzene"
+			x: 28.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["1E9EC2AF5DED6169"]
+			description: [
+				"Two rings join into &6Dichlorobenzidine&r, a step closer to the polymer."
+				"A single chemical reactor with the right circuit keeps up if you feed it by pipe."
+			]
+			icon: "gtceu:dichlorobenzidine_bucket"
+			id: "322B526A30805D80"
+			rewards: [{ id: "7E79914D6679D391", type: "xp", xp: 40 }]
+			tasks: [{ id: "5F6EF00423CCBA06", item: "gtceu:dichlorobenzidine_bucket", type: "item" }]
+			title: "Dichlorobenzidine"
+			x: 30.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["322B526A30805D80"]
+			description: [
+				"Ammonia swaps the chlorines for amines and leaves &6Diaminobenzidine&r, one of the two halves of PBI."
+				"The other half is the isophthalate branch just below."
+			]
+			icon: "gtceu:diaminobenzidine_bucket"
+			id: "34D40E52EC3B7994"
+			rewards: [{ id: "7AD477D4B135A35F", type: "xp", xp: 40 }]
+			tasks: [{ id: "1FEF03BB3E785357", item: "gtceu:diaminobenzidine_bucket", type: "item" }]
+			title: "Diaminobenzidine"
+			x: 32.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["1E9EC2AF5DED6169"]
+			description: [
+				"Phenol and phthalic acid combine into &6Diphenyl Isophthalate&r, the other half of the polymer. Make it beside the diaminobenzidine and let both pipes meet at the polymerizer."
+				"Phenol is easy once you have a coal tar line."
+			]
+			icon: "gtceu:diphenyl_isophthalate_bucket"
+			id: "5B32D9128788FA5F"
+			rewards: [{ id: "76CB638C829BB148", type: "xp", xp: 40 }]
+			tasks: [{ id: "5CB8C5DD9CA5AAA5", item: "gtceu:diphenyl_isophthalate_bucket", type: "item" }]
+			title: "Diphenyl Isophthalate"
+			x: 31.0d
+			y: 6.25d
+		}
+		{
+			dependencies: ["34D40E52EC3B7994", "5B32D9128788FA5F"]
+			description: [
+				"The two halves react into liquid &6Polybenzimidazole&r, the plastic that laughs at heat. Run both feeds from tanks and the reactor sets its own pace."
+				"Next it gets cast and rolled."
+			]
+			icon: "gtceu:polybenzimidazole_bucket"
+			id: "39442B3BEA24CCC3"
+			rewards: [{ id: "7FF192A9BB37BBC9", type: "xp", xp: 60 }]
+			tasks: [{ id: "18090CD222D8AA8D", item: "gtceu:polybenzimidazole_bucket", type: "item" }]
+			title: "Polybenzimidazole"
+			x: 34.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["39442B3BEA24CCC3"]
+			description: [
+				"Cast the fluid into ingots, then roll them into &6PBI Foil&r. A foil line off a bender keeps up with the fabric assembler."
+				"Para-aramid and PTFE foil are the other two layers."
+			]
+			icon: "gtceu:polybenzimidazole_foil"
+			id: "7AABD30EE6634C08"
+			rewards: [{ id: "364F191B0288B4A1", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "16CB976903F6C767", item: "gtceu:polybenzimidazole_ingot", type: "item" }
+				{ id: "30C9DA2562FB3069", item: "gtceu:polybenzimidazole_foil", type: "item" }
+			]
+			title: "PBI Foil"
+			x: 36.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["7AABD30EE6634C08"]
+			description: [
+				"An assembler layers PBI, para-aramid and PTFE foil into &6Insulating Fabric&r, which goes into the thermal suit's smithing template. Build a small foil bus so one assembler makes them all."
+				"Mercury will test it."
+			]
+			icon: "gcyr:insulating_fabric"
+			id: "3B013256ED81A3A9"
+			rewards: [{ id: "1132F5C590F8772A", type: "xp", xp: 80 }]
+			tasks: [{ id: "5C363C0AA0C43D0A", item: "gcyr:insulating_fabric", type: "item" }]
+			title: "Insulating Fabric"
+			x: 39.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["77FF1E1CF59D10BC"]
+			description: [
+				"Raw naquadah is ground and washed into an &6Oxide Mixture&r that the plant takes in circuit 1. It also needs a neutron source, and gallium and titanium come out as byproducts."
+				"Feed it by bus and the plant runs unattended."
+			]
+			icon: "gtceu:naquadah_oxide_mixture_dust"
+			id: "7ADD2278E31A240E"
+			rewards: [{ id: "30449165558F0834", type: "xp", xp: 50 }]
+			tasks: [{ id: "3E10ED15480F9239", item: "gtceu:naquadah_oxide_mixture_dust", type: "item" }]
+			title: "Oxide Mixture"
+			x: 55.0d
+			y: -2.75d
+		}
+		{
+			dependencies: ["7ADD2278E31A240E", "14C75CDBACADEE5A"]
+			description: [
+				"The plant turns the mixture into &6Naquadah Dust&r, which then goes to the blast furnace for the hot ingot. That's the very start of the quantum wafers."
+				"Keep the byproduct hatches emptied or the plant stalls."
+			]
+			icon: "gtceu:naquadah_dust"
+			id: "35D0E940C0A997B4"
+			rewards: [{ id: "7292F9DD810CA5DB", type: "xp", xp: 60 }]
+			tasks: [{ id: "542952CFC9171BE1", item: "gtceu:naquadah_dust", type: "item" }]
+			title: "Naquadah Dust"
+			x: 58.25d
+			y: -2.75d
+		}
+		{
+			dependencies: ["171D167E3CB497BB"]
+			description: [
+				"The platinum plant on circuit 3 hides a long chain. Unfolded, it starts in the solar works: iridosmine is fused into a &6Rarest Metal Mixture&r and osmium tetroxide."
+				"Build it if you want the real thing; the plant will do the rest."
+			]
+			icon: "gtceu:rarest_metal_mixture_dust"
+			id: "366A06483B5FCF08"
+			optional: true
+			rewards: [{ id: "10D6EE832011F725", type: "xp", xp: 40 }]
+			tasks: [{ id: "3556FB7F0F87B56F", item: "gtceu:rarest_metal_mixture_dust", type: "item" }]
+			title: "Rarest Metal Mixture"
+			x: 54.75d
+			y: 4.0d
+		}
+		{
+			dependencies: ["366A06483B5FCF08"]
+			description: [
+				"The fusion also gives &6Osmium Tetroxide&r, which is toxic and must stay in tanks. Reduce it to osmium and you have the other half of the line."
+				"Never vent it."
+			]
+			icon: "gtceu:osmium_tetroxide_bucket"
+			id: "10AD66A112A6CA9C"
+			optional: true
+			rewards: [{ id: "75DDF419EBF9DF63", type: "xp", xp: 40 }]
+			tasks: [{ id: "1EBA4C59AF8096D3", item: "gtceu:osmium_tetroxide_bucket", type: "item" }]
+			title: "Osmium Tetroxide"
+			x: 56.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["10AD66A112A6CA9C"]
+			description: [
+				"Reduce the tetroxide and cast the &6Osmium&r ingots. Osmium is among the densest metals and will make rotors and armour later."
+				"A tank-fed reactor handles it."
+			]
+			icon: "gtceu:osmium_ingot"
+			id: "7BC9481B61245FCE"
+			optional: true
+			rewards: [{ id: "1235BA7C169BB09A", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "58AF556899E47904", item: "gtceu:osmium_dust", type: "item" }
+				{ id: "5FDC2C568E3A9A89", item: "gtceu:osmium_ingot", type: "item" }
+			]
+			title: "Osmium"
+			x: 57.25d
+			y: 5.5d
+		}
+		{
+			dependencies: ["366A06483B5FCF08"]
+			description: [
+				"A blast furnace burns the mixture down to &6Iridium Metal Residue&r, the stubborn rest of the platinum group."
+				"One furnace on a bus covers it."
+			]
+			icon: "gtceu:iridium_metal_residue_dust"
+			id: "3CA5AE7AE68D8B1B"
+			optional: true
+			rewards: [{ id: "3CCBE9D8D9739536", type: "xp", xp: 40 }]
+			tasks: [{ id: "50CB51FF40315FD1", item: "gtceu:iridium_metal_residue_dust", type: "item" }]
+			title: "Iridium Residue"
+			x: 56.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3CA5AE7AE68D8B1B"]
+			description: [
+				"Processing the residue gives &6Iridium Dioxide&r."
+				"Feed it to the next reactor in line."
+			]
+			icon: "gtceu:iridium_dioxide_dust"
+			id: "1DD88D65C232A993"
+			optional: true
+			rewards: [{ id: "1558CA1100347968", type: "xp", xp: 40 }]
+			tasks: [{ id: "3A14B9A205E83360", item: "gtceu:iridium_dioxide_dust", type: "item" }]
+			title: "Iridium Dioxide"
+			x: 57.25d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1DD88D65C232A993"]
+			description: [
+				"Dissolve the dioxide in acid and you have &6Acidic Iridium&r, a liquid iridium can be coaxed out of."
+				"Acids belong in tanks."
+			]
+			icon: "gtceu:acidic_iridium_bucket"
+			id: "3AF926C8DD78295B"
+			optional: true
+			rewards: [{ id: "593DAF4F105F5B09", type: "xp", xp: 40 }]
+			tasks: [{ id: "1058AA1AA2F2B273", item: "gtceu:acidic_iridium_bucket", type: "item" }]
+			title: "Acidic Iridium"
+			x: 58.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3AF926C8DD78295B"]
+			description: [
+				"Precipitate it into &6Iridium Chloride&r, almost there."
+				"The chain is long, so automate it once."
+			]
+			icon: "gtceu:iridium_chloride_dust"
+			id: "1A379DBEE493AAEB"
+			optional: true
+			rewards: [{ id: "7629E02B29613891", type: "xp", xp: 40 }]
+			tasks: [{ id: "7EC8D071009E834F", item: "gtceu:iridium_chloride_dust", type: "item" }]
+			title: "Iridium Chloride"
+			x: 59.75d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1A379DBEE493AAEB"]
+			description: [
+				"Reduce the chloride and cast the &6Iridium&r ingot. This is the real chain behind the platinum plant's third mode, and the metal that finally frees you from the EV hatches."
+				"Take the shortcut next time."
+			]
+			icon: "gtceu:iridium_ingot"
+			id: "162CF4FCADFF1AC8"
+			optional: true
+			rewards: [{ id: "57CACAA0BC1E10AB", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "7D2EA220A63DD599", item: "gtceu:iridium_dust", type: "item" }
+				{ id: "703F00EE626E93CC", item: "gtceu:iridium_ingot", type: "item" }
+			]
+			title: "Iridium"
+			x: 60.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["5EE3EB2547415591"]
+			description: [
+				"Pyrochlore carries niobium, the metal LuV hulls and superconducting cables want. Crush it to &6Pyrochlore Dust&r and take it to the kiln."
+				"Feed the kiln from a bus and the HF from a pipe."
+			]
+			icon: "gtceu:pyrochlore_dust"
+			id: "5EB1428768BFC192"
+			optional: true
+			rewards: [{ id: "1B87BC1A5DFEA2C1", type: "xp", xp: 30 }]
+			tasks: [{ id: "35A18C13ED0D8977", item: "gtceu:pyrochlore_dust", type: "item" }]
+			title: "Pyrochlore"
+			x: 3.75d
+			y: 3.25d
+		}
+		{
+			dependencies: ["5EB1428768BFC192"]
+			description: [
+				"Hydrofluoric acid in the fluorspar kiln dissolves the pyrochlore into &6Niobium Oxyfluoride&r and gives fluorite back for the next batch."
+				"The kiln is the only place that makes it."
+			]
+			icon: "grindless:niobium_oxyfluoride_dust"
+			id: "328E661A0E6C270B"
+			optional: true
+			rewards: [{ id: "5048DCEE33C2E93F", type: "xp", xp: 40 }]
+			tasks: [{ id: "1559A416F9745D59", item: "grindless:niobium_oxyfluoride_dust", type: "item" }]
+			title: "Niobium Oxyfluoride"
+			x: 4.5d
+			y: 4.75d
+		}
+		{
+			dependencies: ["328E661A0E6C270B"]
+			description: [
+				"The extraction cascade cleans the oxyfluoride into &6Niobium Pentoxide&r."
+				"Keep the cascade fed by pipe."
+			]
+			icon: "gtceu:niobium_pentoxide_dust"
+			id: "37C265FE38F79F06"
+			optional: true
+			rewards: [{ id: "5EEAC40B9686807F", type: "xp", xp: 40 }]
+			tasks: [{ id: "1F0FDA84747BFC9A", item: "gtceu:niobium_pentoxide_dust", type: "item" }]
+			title: "Niobium Pentoxide"
+			x: 6.5d
+			y: 4.75d
+		}
+		{
+			dependencies: ["37C265FE38F79F06"]
+			description: [
+				"Aluminium reduces the oxide in a very hot blast furnace and leaves &6Niobium&r, with sapphire as a byproduct. Don't waste the sapphire."
+				"One furnace, one bus."
+			]
+			icon: "gtceu:niobium_dust"
+			id: "730B99265A452ADE"
+			optional: true
+			rewards: [{ id: "17F44D187CA430A4", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "762A11D62D95B699", item: "gtceu:niobium_dust", type: "item" }
+				{ id: "1A60E69326132FC7", item: "gtceu:sapphire_dust", type: "item" }
+			]
+			title: "Niobium"
+			x: 8.5d
+			y: 4.75d
+		}
+		{
+			dependencies: ["730B99265A452ADE"]
+			description: [
+				"A mixer alloys it with titanium and the smelting complex casts the &6Niobium Titanium&r ingot."
+				"Cable and hulls come next."
+			]
+			icon: "gtceu:niobium_titanium_ingot"
+			id: "1713F411CB42B4E4"
+			optional: true
+			rewards: [{ id: "719964423FE92D87", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "7A766AEDC657D2D8", item: "gtceu:niobium_titanium_dust", type: "item" }
+				{ id: "33C41D81635FC039", item: "gtceu:niobium_titanium_ingot", type: "item" }
+			]
+			title: "Niobium Titanium"
+			x: 10.5d
+			y: 4.75d
+		}
+		{
+			dependencies: ["1713F411CB42B4E4"]
+			description: [
+				"Wire it into &6Niobium Titanium Cable&r, which the LuV hull needs."
+				"Automate it and the hull line never waits."
+			]
+			icon: "gtceu:niobium_titanium_single_cable"
+			id: "59C312BC18D9843E"
+			optional: true
+			rewards: [{ id: "3D8DD138FB2602D4", type: "xp", xp: 60 }]
+			tasks: [{ id: "165593C80A49B301", item: "gtceu:niobium_titanium_single_cable", type: "item" }]
+			title: "NbTi Cable"
+			x: 12.5d
+			y: 4.75d
+		}
+		{
+			dependencies: ["328E661A0E6C270B"]
+			description: [
+				"Tantalite goes through the same kiln as pyrochlore and makes a &6Tantalite Fluoride Cake&r."
+				"Same kiln, same feed."
+			]
+			icon: "grindless:tantalite_fluoride_cake"
+			id: "5D9F1414557080DC"
+			optional: true
+			rewards: [{ id: "14B64F1BAD531B8E", type: "xp", xp: 40 }]
+			tasks: [{ id: "7FB3F8D6E803C9AA", item: "grindless:tantalite_fluoride_cake", type: "item" }]
+			title: "Tantalite Cake"
+			x: 6.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["5D9F1414557080DC"]
+			description: [
+				"The cascade splits the cake into &6K2TaF7&r, the salt tantalum comes from."
+				"A pipe feed keeps it going."
+			]
+			icon: "grindless:k2taf7_dust"
+			id: "7D114FEB29816B3D"
+			optional: true
+			rewards: [{ id: "73E570BB8FF44449", type: "xp", xp: 40 }]
+			tasks: [{ id: "7F109874E22B725C", item: "grindless:k2taf7_dust", type: "item" }]
+			title: "Potassium Fluorotantalate"
+			x: 8.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["7D114FEB29816B3D"]
+			description: [
+				"Sodium reduces the salt to &6Tantalum&r in a blast furnace and gives an alkali fluoride back. Capacitors have wanted this for a long time."
+				"Don't void the fluoride."
+			]
+			icon: "gtceu:tantalum_dust"
+			id: "3A65053CB32AA94E"
+			optional: true
+			rewards: [{ id: "755549F69C3C15DD", type: "xp", xp: 50 }]
+			tasks: [
+				{ id: "35181EB239938A6C", item: "gtceu:tantalum_dust", type: "item" }
+				{ id: "3FE4CE368FFD7432", item: "grindless:alkali_fluoride_dust", type: "item" }
+			]
+			title: "Tantalum"
+			x: 10.5d
+			y: 6.5d
 		}
 		{
 			dependencies: ["3CF7A4745035119A"]
