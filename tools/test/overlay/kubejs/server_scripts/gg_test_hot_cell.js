@@ -34,9 +34,10 @@
 //   resumes             voiding off: the run goes through, and its waste is in the bus
 //   hot_cell|DONE       last line
 //
-// Copies (controllers face north at z 2, the structures are behind them, z 2-5; parts on the service wall at z 5, facing south):
-//   chain (x 10246) and fuel (x 10262). Service wall, bottom row, left to right as seen from the front: energy hatch, input bus,
-//   output bus, two input hatches, two output hatches; the third output hatch at the left end of the row above.
+// Copies (controllers face north at z 2, the structures are behind them, z 2-6; parts on the service wall at z 6, facing south):
+//   chain (x 10246) and fuel (x 10262). Service wall, lower row (row 1), left to right as seen from the front: energy hatch, input bus,
+//   output bus, two input hatches (one each side of the partition), two output hatches; the third input and output hatches at the left
+//   end of the row above.
 // TEST AREA: this test builds, force-loads and clears ONLY its own band of the overworld, X 10240-10303, Y 98-112, Z 0-15 (AGENTS.md:
 // tests run at the same time in one server), with a roof at Y 111 so no hatch is rained on. The structures come from the description
 // lib/patterns.js records (global.grindless.structures). Uraninite, HF, plutonium, U-238, the Zircaloy tubes and the spent assembly are
@@ -73,8 +74,8 @@
     out2: 'gtceu:iv_output_hatch',
     out3: 'gtceu:iv_output_hatch'
   }
-  // 'slice,row,column' of the description (slice 0 = the service wall) -> role
-  var PARTS = { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,1,1': 'in3', '0,0,5': 'out1', '0,0,6': 'out2', '0,1,0': 'out3' }
+  // 'slice,row,column' of the description (slice 0 = the service wall, rows 1-2, columns 1-9 but 5) -> role
+  var PARTS = { '0,1,1': 'energy', '0,1,2': 'inBus', '0,1,3': 'outBus', '0,1,4': 'in1', '0,1,6': 'in2', '0,2,1': 'in3', '0,1,7': 'out1', '0,1,8': 'out2', '0,2,2': 'out3' }
   var OUTS = ['out1', 'out2', 'out3']
   var INS = ['in1', 'in2', 'in3']
   var COPIES = [
