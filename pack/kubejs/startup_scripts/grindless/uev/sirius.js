@@ -1,12 +1,12 @@
 // priority: -7622
 // -----------------------------------------------------------------------------------------------
-// UEV's Sirius B machines (docs/eras/uev.md, machines 23-25 and line 28; package UEV-B4): the white dwarf spectrograph, the degenerate harvester,
-// the containment works and their recipe types. The recipes come from data/grindless/tables/sirius.json (server_scripts/grindless/uev/sirius.js);
+// UEV's Sirius B machines (docs/eras/uev.md, machines 23-25 and line 28; package UEV-B4): the white dwarf spectrograph and the Degenerate Works
+// (the degenerate harvester, which also seals the pellet: the containment works is merged into it; package D4-SHAPE-UEV-B) and their recipe types. The recipes come from data/grindless/tables/sirius.json (server_scripts/grindless/uev/sirius.js);
 // all three types run in Sirius B orbit only (grindless:sirius_b_orbit, B1's dimension; the recipes carry it).
 //
 //   gtceu:white_dwarf_spectrograph   type gtceu:gravitational_redshift: ULE cavity + SNSPDs (nuclear clock kept) -> the mass-radius chart.
-//   gtceu:degenerate_harvester       type gtceu:degenerate_harvesting: the EOS model (consumed), the chart (kept), liquid helium (kept) -> degenerate matter.
-//   gtceu:containment_works          type gtceu:degenerate_containment: degenerate matter + the Casimir array's exotic matter cell (the stasis field)
+//   gtceu:degenerate_harvester       types gtceu:degenerate_harvesting: the EOS model (consumed), the chart (kept), liquid helium (kept) -> degenerate matter;
+//                                    and gtceu:degenerate_containment: degenerate matter + the Casimir array's exotic matter cell (the stasis field)
 //                                    -> the sealed degenerate pellet. Nothing is voided.
 //
 // Voltage: UEV. No item is registered here: degenerate_matter, degenerate_pellet, mass_radius_chart, degenerate_eos_model, sx_pump_impeller,
@@ -21,8 +21,8 @@
 
   const PHOTONIC = 'grindless:photonic_casing'
   const PHOTONIC_TEXTURE = 'grindless:block/uev/photonic_casing'
-  const CONTAIN = 'grindless:degenerate_containment_casing'
-  const CONTAIN_TEXTURE = 'grindless:block/uev/degenerate_containment_casing'
+  const ROBUST = 'grindless:sic_composite_casing'
+  const ROBUST_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   SI.table = 'kubejs/data/grindless/tables/sirius.json'
   SI.orbit = 'grindless:sirius_b_orbit'
@@ -44,64 +44,54 @@
       machine: 'gtceu:degenerate_harvester',
       type: 'degenerate_harvesting',
       dataKey: 'grindless_degenerate_harvesting',
-      lang: 'Degenerate Harvester',
-      casing: CONTAIN, texture: CONTAIN_TEXTURE,
+      lang: 'Degenerate Works',
+      // bootstrap: the works seals the pellet the degenerate containment casing needs, so its body is the SiC composite and magnet family
+      casing: ROBUST, texture: ROBUST_TEXTURE,
       // items in: the EOS model, the kept chart, the circuit; fluids in: the kept liquid helium; out: degenerate matter
       maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 },
       width: 5, height: 5, depth: 7
-    },
-    works: {
-      name: 'containment_works',
-      machine: 'gtceu:containment_works',
-      type: 'degenerate_containment',
-      dataKey: 'grindless_degenerate_containment',
-      lang: 'Containment Works',
-      casing: CONTAIN, texture: CONTAIN_TEXTURE,
-      // items in: degenerate matter, the stasis field cell, the circuit; out: the sealed pellet
-      maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
-      width: 5, height: 5, depth: 7
     }
   }
-  SI.order = ['spectrograph', 'harvester', 'works']
+  // The harvester is the Degenerate Works: it also runs the containment type (the old containment works is merged into it).
+  // items in: degenerate matter, the stasis field cell, the circuit; out: the sealed pellet
+  SI.typeOnly = [{ type: 'degenerate_containment', dataKey: 'grindless_degenerate_containment', maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 } }]
+  SI.machines.harvester.types = ['degenerate_harvesting', 'degenerate_containment']
+  SI.order = ['spectrograph', 'harvester']
 
-  // The spectrograph is a telescope: a glass hall under a dish on a mast. The harvester is a magnetic scoop: a funnel of rings narrowing from
-  // the mouth to a tank. The works is a vault: a heavy hall with a row of stasis cells (B/L/C) down each side and a pipe ridge.
-  function funnelCell(w, d) {
-    var cx = (w - 1) / 2
-    return function (x, y, z) {
-      var dx = x - cx
-      var ax = dx < 0 ? -dx : dx
-      var m = G.uevShapes.cheb(dx, y - 4)
-      if (y === 0) return ax <= 2 ? 'X' : ' '
-      if (z >= 5) {
-        var r = 1 + Math.floor((z - 5) / 3)
-        if (z === d - 1) r = 3
-        if (m < r) return '#'
-        if (m > r) return ' '
-        if (z === d - 1) return 'C'
-        if (z === d - 2) return 'A'
-        return z % 3 === 1 && (ax === r || y === 4 + r) ? 'L' : 'F'
-      }
-      if (z === 4) return m <= 1 ? '#' : (m <= 3 ? 'A' : ' ')
-      if (m === 3) return (z === 0 || ((ax === 3) && (y === 1 || y === 7))) ? (ax === 3 && (y === 1 || y === 7) ? 'Q' : 'F') : (z % 2 === 1 ? 'L' : 'F')
-      if (z === 0 && m < 3) return 'F'
-      if (m === 0 && z > 0) return 'P'
-      return m < 3 ? '#' : ' '
-    }
-  }
-
-  function vaultCell(w, d) {
-    var cx = (w - 1) / 2
-    return G.uevShapes.hall({
-      w: w, d: d, hh: 6, mull: 2,
-      crown: G.uevShapes.ridge(w, d),
-      inner: function (x, y, z) {
-        var dx = x - cx
-        var ax = dx < 0 ? -dx : dx
-        if (ax === 2 && z % 2 === 1 && z > 1 && z < d - 3) return y === 1 ? 'B' : (y === 2 ? 'L' : (y === 3 ? 'C' : null))
-        return null
-      }
+  // The spectrograph is a telescope: a glass hall under a dish on a mast. The Degenerate Works (21 x 15 x 29) is a harvester boom out of a
+  // stasis vault: at the front a SiC vault with six magnet-ringed stasis pods (coil caps) and the control booth; behind it a truss boom
+  // rising to a scoop, three magnet rings narrowing toward the mouth at the back, a pipe run down its axis.
+  function worksCell() {
+    var s = G.uevShapes.scene(21, 15, 29)
+    s.box(0, 0, 15, 20, 0, 28, 'X').box(7, 0, 0, 13, 0, 15, 'X')
+    s.room(0, 1, 16, 20, 7, 28, 'R', 'bt', '#')
+    s.edges(0, 1, 16, 20, 7, 28, 'Q')
+    ;[20, 26].forEach(function (z) { s.box(0, 7, z, 20, 7, z, 'M') })
+    ;[6, 14].forEach(function (x) {
+      ;[20, 25].forEach(function (z) {
+        s.cyl('y', x, z, 2, 2, 6, 'M', true, '#')
+        s.cyl('y', x, z, 1, 2, 2, 'B')
+        s.set(x, 7, z, 'C').set(x, 6, z, 'C')
+        s.set(x - 2, 4, z, 'L').set(x + 2, 4, z, 'L')
+      })
     })
+    s.box(8, 2, 16, 12, 5, 16, 'M')
+    // the boom: a spine of SiC from the vault roof back to the scoop, truss posts every four slices
+    s.box(9, 9, 0, 11, 9, 15, 'R')
+    s.box(10, 10, 0, 10, 10, 15, 'R')
+    for (var z = 1; z < 15; z += 5) {
+      s.edges(8, 1, z, 12, 8, z, 'R')
+      s.box(8, 1, z, 8, 9, z, 'Q').box(12, 1, z, 12, 9, z, 'Q')
+    }
+    s.box(10, 4, 0, 10, 4, 14, 'P')
+    // the scoop: three field rings, narrowing from the mouth
+    var rings = [[2, 5], [7, 4], [12, 3]]
+    rings.forEach(function (rr) {
+      s.cyl('z', 10, 8, rr[1], rr[0], rr[0] + 1, 'M', true, '#')
+      s.cyl('z', 10, 8, rr[1] - 1, rr[0] + 1, rr[0] + 1, 'H', true, '#')
+    })
+    s.box(10, 8, 0, 10, 8, 1, 'C').set(10, 12, 3, 'C')
+    return s.booth('R', 3).fn()
   }
 
   var SHAPES = {
@@ -121,8 +111,7 @@
         return s.booth('R', 3).fn()
       }
     },
-    harvester: { w: 9, h: 8, d: 13, fn: function () { return funnelCell(9, 13) } },
-    works: { w: 9, h: 7, d: 11, fn: function () { return vaultCell(9, 11) } }
+    harvester: { w: 21, h: 15, d: 29, fn: worksCell }
   }
   SI.order.forEach(function (k) {
     var m = SI.machines[k]
@@ -142,9 +131,7 @@
     if (m.maxIO.fluidsIn > 0) parts.push(Pat.part('input_hatch', { min: 0, max: 1 }))
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
-      pal: k === 'spectrograph' ? G.uevShapes.palette(m.casing) : { F: m.casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
-        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
-      }
+      pal: k === 'spectrograph' ? G.uevShapes.palette(m.casing) : G.uevShapes.palette(ROBUST, G.uevShapes.bootstrap(ROBUST, 'H'))
     })
   }
   // one EMI line per recipe, read from its data: what the circuit does
@@ -163,8 +150,7 @@
   // ---------------------------------------------------------------- recipe types
 
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
-    SI.order.forEach(function (k) {
-      var m = SI.machines[k]
+    SI.order.map(function (k) { return SI.machines[k] }).concat(SI.typeOnly).forEach(function (m) {
       event.create(m.type)
         .category('multiblock')
         .setEUIO('in')
@@ -177,24 +163,33 @@
   // ---------------------------------------------------------------- machines
 
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
+    SI.typeOnly.forEach(function (t) {
+      var type = GTRecipeTypes.get(t.type)
+      if (type == null) throw new Error(LOG + 'recipe type gtceu:' + t.type + ' is not registered')
+      type.addDataInfo(infoOf(t.dataKey))
+    })
     SI.order.forEach(function (k) {
       var m = SI.machines[k]
+      var types = m.types || [m.type]
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
       m.spec = makeSpec(k)
       Pat.register(m.machine, m.spec)
-      event.create(m.name, 'multiblock')
+      var builder = event.create(m.name, 'multiblock')
         .langValue(m.lang)
         .rotationState(RotationState.NON_Y_AXIS)
-        .recipeType(m.type)
+      builder = types.length > 1 ? builder.recipeTypes(types[0], types[1]) : builder.recipeType(m.type)
+      builder
         .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
         .appearanceBlock(function () { return Block.getBlock(m.casing) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('grindless.machine.' + m.name + '.tooltip.1'),
-          Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
+          types.length > 1
+            ? Text.translate('gtceu.machine.available_recipe_map_2.tooltip', Text.translate('gtceu.' + types[0]), Text.translate('gtceu.' + types[1]))
+            : Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
           Text.translate('gtceu.multiblock.parallelizable.tooltip')
         ])
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
