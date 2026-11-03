@@ -64,7 +64,7 @@ test('the stand-in runs the UEV foundation without errors', () => {
 test('the id list is pinned: count and every id', () => {
   assert.equal(ITEMS.length, 23);
   assert.equal(PLAIN_BLOCKS.length + 1, 4);
-  assert.equal(Object.keys(MATERIALS).length, 25);
+  assert.equal(Object.keys(MATERIALS).length, 24);
   const got = run.global.grindless.uevFoundation;
   assert.deepEqual([...got.items], ITEMS);
   assert.deepEqual([...got.blocks], [...PLAIN_BLOCKS, COIL]);
