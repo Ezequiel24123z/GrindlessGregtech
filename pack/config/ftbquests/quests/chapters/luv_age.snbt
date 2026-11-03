@@ -847,7 +847,7 @@
 				{ id: "5132B223B09F2DD4", item: "grindless:sapphire_test_mass", type: "item" }
 			]
 			title: "Perfect Crystal"
-			x: 14.5d
+			x: 15.5d
 			y: -3.0d
 		}
 		{
@@ -860,7 +860,7 @@
 			size: 1.25d
 			tasks: [{ id: "58ED6E6D577F6699", item: "gtceu:harpoon_anchor_drill", type: "item" }]
 			title: "Harpoon"
-			x: 12.0d
+			x: 13.0d
 			y: -2.0d
 		}
 		{
@@ -874,8 +874,8 @@
 				{ id: "5792BD7C26385D0D", item: "grindless:anchor_harpoon", type: "item" }
 			]
 			title: "Bits and Harpoons"
-			x: 14.0d
-			y: -1.0d
+			x: 14.5d
+			y: -0.5d
 		}
 		{
 			dependencies: ["5F2EEA315A9E5CB3"]
@@ -890,8 +890,8 @@
 			size: 1.25d
 			tasks: [{ id: "1C58AD65259FF192", item: "gtceu:asteroid_processor", type: "item" }]
 			title: "Mond"
-			x: 16.5d
-			y: -2.0d
+			x: 16.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["5556DFCD2B6DD947", "564E7FD4BAE63B55"]
@@ -957,7 +957,7 @@
 				{ id: "59B83BAC6052A234", item: "grindless:capture_bag", type: "item" }
 			]
 			title: "Sunlight on a Boulder"
-			x: 12.0d
+			x: 12.5d
 			y: -0.5d
 		}
 		{
