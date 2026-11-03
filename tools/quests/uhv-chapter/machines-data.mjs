@@ -198,7 +198,7 @@ export const QUESTS = [
   }, [it(TRUSS), it(CRYOSTAT)]),
   gear('M_GATE', 'warp_gate', 'The Warp Gate', ['G_CAS'], 20, 20.5, {
     for: 'The &6Warp Gate&r is the first door to another star: a 15x15 ring of casings round open air, 25x9x20 in all, with a coil band and six UHV mounts for the modulators.',
-    needs: 'Its controller, warp gate casing and field ring casing. The ring holds hundreds of casings and about 350 qualified coils, and the pair is built twice.',
+    needs: 'Its controller, warp gate casing, field ring casing and the 48 superconducting coils of the wall band, with station truss, fusion glass and tungsten steel frames for the berm. It is built twice: once in Earth orbit and once in orbit of Proxima b.',
     unlocks: 'The gate seed and the trip to Proxima b.',
     automate: 'Power and cavity stacks by ME; only the seed leaves.',
   }, [it(WARP), it(FIELD)], 160),
