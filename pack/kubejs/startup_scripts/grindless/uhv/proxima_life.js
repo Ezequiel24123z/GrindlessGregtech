@@ -18,7 +18,7 @@
 //                                    Type gtceu:radiotrophic.
 //
 // New ids (the F1 ones are in uhv/foundation.js and are not registered again):
-//   items     proxima_rover, xeno_biomass, xeno_mushroom, melanised_biomass, sterilised_flora_extract, sterilised_ice_organics,
+//   items     proxima_rover, xeno_biomass, xeno_mushroom, xeno_chitin, xeno_chitosan, melanised_biomass, sterilised_flora_extract, sterilised_ice_organics,
 //             melanin_extract, melanin_chitosan_composite, flare_shield_panel, far_red_gene_cassette, engineered_far_red_algae,
 //             cladosporium_culture, chromobacterium_culture, sphingomonas_culture, sporosarcina_culture
 //   materials far_red_pigment, clarified_xeno_lysate (liquids)
@@ -54,6 +54,8 @@
     proxima_rover: { stack: 16 },
     xeno_biomass: { stack: 64 },
     xeno_mushroom: { stack: 64 },
+    xeno_chitin: { stack: 64 },
+    xeno_chitosan: { stack: 64 },
     melanised_biomass: { stack: 64 },
     sterilised_flora_extract: { stack: 64 },
     sterilised_ice_organics: { stack: 64 },
@@ -75,6 +77,8 @@
     rover: 'grindless:proxima_rover',
     xenoBiomass: 'grindless:xeno_biomass',
     xenoMushroom: 'grindless:xeno_mushroom',
+    xenoChitin: 'grindless:xeno_chitin',
+    xenoChitosan: 'grindless:xeno_chitosan',
     melanisedBiomass: 'grindless:melanised_biomass',
     floraExtract: 'grindless:sterilised_flora_extract',
     iceOrganics: 'grindless:sterilised_ice_organics',

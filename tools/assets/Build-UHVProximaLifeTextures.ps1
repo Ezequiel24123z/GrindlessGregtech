@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Procedural 16x16 pixel art for the five UHV Proxima life controller faces and the fifteen items of the UHV-B4 package, of
+  Procedural 16x16 pixel art for the five UHV Proxima life controller faces and the seventeen items of the UHV-B4 package (and D3-XENO), of
   Gregtech Grindless.
 
 .DESCRIPTION
@@ -10,7 +10,7 @@
   Writes (under pack/kubejs/assets/grindless/textures/):
     block/multiblock/<machine>/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
       for xenoflora_rover_bay, sample_receiving_facility, xenobotany_greenhouse, xenobiochem_plant, radiotrophic_vat
-    item/<name>.png for the fifteen items of startup_scripts/grindless/uhv/proxima_life.js
+    item/<name>.png for the seventeen items of startup_scripts/grindless/uhv/proxima_life.js
 
   Rover bay: a rover on its pad; working (4 frames, frametime 4), its headlight is on and a beacon runs along the pad.
   Receiving facility: an airlock door between two walls; working, the violet sterilising light sweeps across the door.
@@ -407,6 +407,8 @@ $items = @(
     @{ Name = 'proxima_rover'; Map = $roverMap; Pal = (New-Palette 'K=2E3038 W=C8CCD4 H=9AA0AC D=5A606C P=3A4A8A L=FF5A3A T=26282E G=6A6E78') },
     @{ Name = 'xeno_biomass'; Map = $heapMap; Pal = (New-Palette 'K=2A0A10 L=8A1A2A H=5A0E1C D=3A0812') },
     @{ Name = 'xeno_mushroom'; Map = $mushroomMap; Pal = (New-Palette 'K=2A1418 C=7A2A5A P=E0B0D0 T=D8C8B0') },
+    @{ Name = 'xeno_chitin'; Map = $pileMap; Pal = (New-Palette 'K=3A2A2E H=B89A8A D=7A5A58') },
+    @{ Name = 'xeno_chitosan'; Map = $sheetMap; Pal = (New-Palette 'K=3A2E2A W=E8D8C0 H=B8A48A D=7A6A58 E=C8B89E') },
     @{ Name = 'melanised_biomass'; Map = $heapMap; Pal = (New-Palette 'K=161214 L=4A4048 H=2E282C D=221E20') },
     @{ Name = 'sterilised_flora_extract'; Map = $vialMap; Pal = (New-Palette 'K=3A3C44 C=8A6A4A W=F0F4F8 G=C8D8E0 L=9A3A3A D=6A2A2A') },
     @{ Name = 'sterilised_ice_organics'; Map = $vialMap; Pal = (New-Palette 'K=3A3C44 C=4A6A8A W=F0F4F8 G=C8D8E0 L=C89A5A D=8A6A3A') },

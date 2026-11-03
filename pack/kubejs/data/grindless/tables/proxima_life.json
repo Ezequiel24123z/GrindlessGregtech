@@ -146,15 +146,40 @@
           "fluidsOut": []
         },
         {
+          "_why": "D3-XENO (lines-uv-uhv.md W6, step 3): the mushrooms' walls demineralised and deproteinised in acid and lye; 2 NaOH + 1,000 mB HCl neutralise to 1,000 mB salt water",
+          "name": "xeno_chitin",
+          "circuit": 6,
+          "eut": 491520,
+          "duration": 300,
+          "itemsIn": [{ "id": "grindless:xeno_mushroom", "count": 8 }, { "id": "gtceu:sodium_hydroxide_dust", "count": 2 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:xeno_chitin", "count": 2 }],
+          "fluidsOut": [{ "id": "gtceu:salt_water", "amount": 1000 }]
+        },
+        {
+          "_why": "D3-XENO (W6, step 4): chitin deacetylated in hot concentrated caustic; the acetyl groups leave as acetic acid (500 mB), which the scaffold row takes back",
+          "name": "xeno_chitosan",
+          "circuit": 7,
+          "eut": 491520,
+          "duration": 300,
+          "itemsIn": [{ "id": "grindless:xeno_chitin", "count": 2 }, { "id": "gtceu:sodium_hydroxide_dust", "count": 4 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:xeno_chitosan", "count": 2 }],
+          "fluidsOut": [{ "id": "gtceu:acetic_acid", "amount": 500 }]
+        },
+        {
+          "_why": "D3-XENO (W6, step 5): chitosan dissolved in dilute acetic acid and freeze-cast into porous scaffolds; 2 scaffolds per 8 mushrooms as before",
           "name": "chitosan",
           "circuit": 3,
           "eut": 491520,
-          "duration": 600,
-          "itemsIn": [{ "id": "grindless:xeno_mushroom", "count": 8 }, { "id": "gtceu:sodium_hydroxide_dust", "count": 4 }],
+          "duration": 200,
+          "itemsIn": [{ "id": "grindless:xeno_chitosan", "count": 2 }],
           "kept": [],
-          "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 1000 }],
+          "fluidsIn": [{ "id": "gtceu:acetic_acid", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:chitosan_scaffold", "count": 2 }],
-          "fluidsOut": [{ "id": "gtceu:salt_water", "amount": 1000 }]
+          "fluidsOut": []
         },
         {
           "name": "lysate",
