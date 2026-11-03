@@ -21,12 +21,10 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(here, '..', '..');
 
 export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
-// AGENTS.md principle 7. GUIDE counts progression multiblocks per era, not lines; LINE_GUIDE and CROSSING_GUIDE are the guide
-// for new real production lines and for crossings two or more eras back (docs/research/complexity.md:97), the metric of this audit.
-export const GUIDE = { ev: 11, iv: 15, luv: 20, zpm: 27, uv: 36 };
-export const LINE_GUIDE = { zpm: 14, uv: 21 };
-export const CROSSING_GUIDE = { zpm: 13, uv: 20 };
+// AGENTS.md principle 7: depth first, no count targets. The report shows descriptive depth statistics per era (longest real line,
+// depth distribution, named long chains); nothing here is a quota and nothing asks for padding.
 export const REAL_STEPS = 4;
+export const LONG_CHAINS = 3;
 const NOISE_TYPE = /recycling|decomposition/;
 const NOISE_ID = /\/uncraft|_recycling|\/unpack|decompress|decomposition_|packer\/package_|_dust_assembling_|cool_hot_|\/compress|\/pack_|_to_dust_/;
 
@@ -623,7 +621,6 @@ export function judge(l, { used, dup, skipped, endInfo, kind = 'production', rol
   const short = !real && eraIdx(l.era) >= eraIdx('ev');
   let verdict = 'keep';
   let reason = `${l.steps} steps, ${l.crossings.length} chart + ${(l.content || []).length} content crossings (reach ${reach}), used by ${used.size} lines`;
-  if (l.era === 'max') return { verdict: 'data-only', reason: 'MAX: RF-7A decides', real, reach, kind };
   // Skippability is only a lower-bound depth heuristic, so it never removes a line on its own.
   if (dead.length && dead.length === l.products.length && kind !== 'role') {
     verdict = 'remove'; reason = `no end product feeds a recipe or another line (decorative)`;
@@ -747,16 +744,37 @@ export function toCsv(rows) {
   return out.join('\n') + '\n';
 }
 
+// Accepted blocks of the pack's structures (every block id of every symbol, oneOf alternatives included) plus the wireless table's
+// cells (what census.mjs counts as script-used): parts placed in the world need no recipe consumer.
+export function structureBlocks(structures, wirelessTable = null) {
+  const out = new Set();
+  const walk = (sym) => {
+    if (!sym || typeof sym !== 'object') return;
+    for (const b of sym.blocks || []) out.add(String(b));
+    for (const o of sym.options || []) walk(o);
+  };
+  for (const s of (structures instanceof Map ? [...structures.values()] : Object.values(structures || {}))) for (const sym of Object.values(s?.symbols || {})) walk(sym);
+  for (const r of wirelessTable?.tiers || []) if (r.cell && !/^grindless:horizon_/.test(r.cell)) out.add(r.cell);
+  return out;
+}
+
+// The infrastructure set of the role checker: controllers, plus the blocks they accept.
+export function infraSet(structures, wirelessTable = null) {
+  return new Set([...(structures instanceof Map ? structures.keys() : Object.keys(structures || {})), ...structureBlocks(structures, wirelessTable)]);
+}
+
 export function eraSummary(rows) {
-  const per = new Map(ERAS.map((e) => [e, { lines: 0, real: 0, crossings: 0, deep: 0, content: 0, keep: 0, fix: 0, merge: 0, remove: 0, prod: 0, role: 0, branch: 0, fold: 0 }]));
+  const per = new Map(ERAS.map((e) => [e, { lines: 0, real: 0, crossings: 0, deep: 0, content: 0, keep: 0, fix: 0, merge: 0, remove: 0, prod: 0, role: 0, branch: 0, fold: 0, longest: 0, depth: {}, long: [] }]));
   for (const r of rows) {
     const s = per.get(r.line.era);
     const kind = r.kind || 'production';
-    s.lines++; if (r.real && kind === 'production') s.real++; s.crossings += r.line.crossings.length; s.content += (r.line.content || []).length;
+    s.lines++; if (r.real && kind === 'production') { s.real++; s.longest = Math.max(s.longest, r.line.steps); s.depth[r.line.steps] = (s.depth[r.line.steps] || 0) + 1; s.long.push({ id: r.line.id, steps: r.line.steps }); }
+    s.crossings += r.line.crossings.length; s.content += (r.line.content || []).length;
     if (r.real && kind === 'production') s.deep += [...r.line.crossings, ...(r.line.content || [])].filter((c) => c.back >= 2).length;
     if (s[r.verdict] !== undefined) s[r.verdict]++;
     s[kind === 'production' ? 'prod' : kind]++;
   }
+  for (const s of per.values()) s.long = s.long.sort((a, b) => b.steps - a.steps || (a.id < b.id ? -1 : 1)).slice(0, LONG_CHAINS);
   return per;
 }
 
@@ -775,7 +793,8 @@ async function main(argv) {
   const hidden = path.join(REPO, 'pack', 'kubejs', 'data', 'grindless', 'tables', 'hidden_until.json');
   const neverGroups = fs.existsSync(hidden) ? (JSON.parse(fs.readFileSync(hidden, 'utf8')).groups || []).filter((g) => g.until === 'never') : [];
   const never = new Set(neverGroups.flatMap((g) => [...(g.items || []), ...(g.material ? [`material:${g.material}`] : [])]));
-  const infra = new Set([...(idx.dump?.structures?.keys?.() || [])]);
+  const wirelessFile = path.join(REPO, 'pack', 'kubejs', 'data', 'grindless', 'tables', 'wireless_energy.json');
+  const infra = infraSet(idx.dump?.structures, fs.existsSync(wirelessFile) ? JSON.parse(fs.readFileSync(wirelessFile, 'utf8')) : null);
   const rows = auditAll(model, facts, keyItems, { startup, machines: [...idx.machines.values()], never, infra });
   fs.mkdirSync(opt.out, { recursive: true });
   fs.writeFileSync(path.join(opt.out, '03_lines.csv'), toCsv(rows));
@@ -801,12 +820,18 @@ async function main(argv) {
   fs.writeFileSync(path.join(opt.out, '03_design_lines.csv'), cnt.join('\n') + '\n');
   fs.writeFileSync(path.join(opt.out, '03_missing_lines.csv'), miss.join('\n') + '\n');
   const rep = new Map(reports.map((r) => [r.era, r]));
-  console.log('era    design chart real | missing (count / named, in dump)  planned | cross content  keep fix merge remove  prod role branch fold   lines/guide deep/guide');
+  console.log('era    design chart real | missing (count / named, in dump)  planned | cross content  keep fix merge remove  prod role branch fold   longest deep');
   for (const [e, s] of per) {
     if (!s.lines) continue;
     const r = rep.get(e);
     const d = r ? `${String(r.design).padStart(6)} ${String(r.chart).padStart(5)} ${String(s.real).padStart(4)} | ${String(r.missingByCount).padStart(7)} / ${String(r.missing.length).padStart(2)}, ${String(r.missing.filter((m) => m.dump).length).padStart(2)}  ${String(r.planned || '').padStart(14)}` : `${''.padStart(6)} ${String(s.lines).padStart(5)} ${String(s.real).padStart(4)} | ${''.padStart(25)}`;
-    console.log(`${e.padEnd(6)} ${d} | ${String(s.crossings).padStart(5)} ${String(s.content).padStart(7)}  ${String(s.keep).padStart(4)} ${String(s.fix).padStart(3)} ${String(s.merge).padStart(5)}     ${String(s.remove).padStart(6)}  ${String(s.prod).padStart(4)} ${String(s.role).padStart(4)} ${String(s.branch).padStart(6)} ${String(s.fold).padStart(4)}   ${s.real}/${LINE_GUIDE[e] ?? '-'}  ${s.deep}/${CROSSING_GUIDE[e] ?? '-'}`);
+    console.log(`${e.padEnd(6)} ${d} | ${String(s.crossings).padStart(5)} ${String(s.content).padStart(7)}  ${String(s.keep).padStart(4)} ${String(s.fix).padStart(3)} ${String(s.merge).padStart(5)}     ${String(s.remove).padStart(6)}  ${String(s.prod).padStart(4)} ${String(s.role).padStart(4)} ${String(s.branch).padStart(6)} ${String(s.fold).padStart(4)}       ${String(s.longest || '-').padStart(7)} ${String(s.deep).padStart(4)}`);
+  }
+  console.log('depth (descriptive, not a quota): real production lines by step count, longest chains');
+  for (const [e, s] of per) {
+     if (!s.real) continue;
+     const dist = Object.keys(s.depth).map(Number).sort((a, b) => a - b).map((k) => `${k}:${s.depth[k]}`).join(' ');
+     console.log(`${e.padEnd(6)} steps ${dist} | longest ${s.long.map((x) => `${x.id} (${x.steps})`).join(', ')}`);
   }
       for (const r of rows) {
         if (r.line.keepShort && r.kind === 'production') console.log(`keepShort ${r.line.id}: ${r.line.keepShort}`);

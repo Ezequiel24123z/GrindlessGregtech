@@ -15,7 +15,7 @@
 // fits if a singleblock of its type at that tier (or the next one that exists) holds it, or a multiblock's hatches at tier+1 do.
 // A recipe that fits only a multiblock is a warning (printed, not failing); one that fits nothing is an error.
 // Ratchet: capacity_known.json lists today's errors (recipe id -> reason). T0 fails on a new error and on a fixed one still listed.
-// Exit code: 0 clean, 1 new or stale entries, 2 tool failure.
+// Exit code: 0 clean, 1 new or stale entries (dump mode: an error missing from the known list, or a cost-curve overflow), 2 tool failure.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -99,10 +99,20 @@ function dumpMain(argv, arg) {
   }
   const dump = loadDump(path.resolve(arg('--dump')), { log: null });
   const r = lintCurve(dump, use, readJson(SNAPSHOT_FILE), { top: Number(arg('--top')) || 10 });
-  console.log(`capacity (cost curve): ${r.total} recipes linted; errors ${Object.keys(r.before.errors).length} before, ${Object.keys(r.after.errors).length} after; warnings ${Object.keys(r.before.warns).length} before, ${Object.keys(r.after.warns).length} after`);
+  const nErr = Object.keys(r.after.errors).length;
+  const known = fs.existsSync(KNOWN_FILE) ? readJson(KNOWN_FILE) : { violations: {} };
+  const fresh = diffKnown(r.after.errors, known).fresh;
+  const overflows = Object.values(r.byEra).reduce((a, e) => a + e.overflows, 0);
+  console.log(`capacity (cost curve): ${r.total} recipes linted; errors ${Object.keys(r.before.errors).length} before, ${nErr} after; warnings ${Object.keys(r.before.warns).length} before, ${Object.keys(r.after.warns).length} after`);
   for (const [era, e] of Object.entries(r.byEra)) {
     console.log(`  ${era}: ${e.changed} scaled recipes, ${e.overflows} new overflows, ${e.newWarns} new multiblock-only`);
     for (const t of e.top) console.log(`    ${t.id} (largest input ${t.biggest}): ${t.reason}`);
+  }
+  // an error the known list does not carry, or any overflow the cost curve causes, fails the run (exit 1); warnings never do
+  if (fresh.length || overflows) {
+    console.log(`FAIL capacity: ${fresh.length} error(s) not in the known list, ${overflows} cost-curve overflow(s)`);
+    for (const id of fresh.slice(0, 15)) console.log(`  NEW ${id}: ${r.after.errors[id]}`);
+    return 1;
   }
   return 0;
 }
