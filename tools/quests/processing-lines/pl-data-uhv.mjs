@@ -210,7 +210,7 @@ const data = {
         n('sf', 20, 3.5, mach('gtceu:swarm_segment_foundry'), 'Swarm Segment Foundry', { kind: 'ours', from: ['film3', 'arr', 'flm2', 'c12', 'smod', 'bvc'], desc: 'Builds a segment from films, arrays, a laser, a spreader, a power module and cells.' }),
         n('seg', 22.5, 3.5, I('grindless:swarm_segment'), 'Swarm Segment', { kind: 'product', from: ['sf'] }),
         n('scs', 22.5, 6.5, mach('gtceu:swarm_control_station'), 'Swarm Control Station', { kind: 'ours', from: ['seg', 'pod'], desc: 'Steers the segments round the Sun and beams the power home.' }),
-        n('refit', 25, 6.5, I('grindless:swarm_segment'), 'Refurbished Segment', { kind: 'ret', from: ['scs'], sub: 'The worn segment: the film and array go round again' }),
+        n('worn', 25, 6.5, I('grindless:worn_swarm_segment'), 'Worn Segment', { kind: 'by', from: ['scs'], end: 'refurbished, then back into the foundry' }),
       ],
     },
     life: {
