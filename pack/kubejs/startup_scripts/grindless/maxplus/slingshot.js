@@ -4,8 +4,8 @@
 // item it uses are XP-F1's (maxplus/foundation.js). The recipes, with lines P15 and P16's older-machine rows, are in
 // server_scripts/grindless/maxplus/slingshot.js.
 //
-//   gtceu:hills_slingshot   17 x 9 x 17 of slingshot coil casing: glass-banded walls round a capture ring of superconducting coils with an atomic
-//                           casing post at the axis. Recipe type gtceu:hills_slingshot: c1 binds a relay probe to a canned counterweight, c2
+//   gtceu:hills_slingshot   37 x 11 x 37 (D5-SHAPE-MAXP-B1) of bound lattice, slingshot coil and Kerr coil casing: a long
+//                           accelerator ring of superconducting coils with glass-banded flanks. Recipe type gtceu:hills_slingshot: c1 binds a relay probe to a canned counterweight, c2
 //                           releases the pair as a launched probe (the counterweight falls into the hole).
 //
 // It runs only at Sgr A* (rows carry the site dimension) at V[MAX] x 16 (2^35 EU/t) on a 1,024 A MAX+ energy hatch (INPUT_ENERGY, like the other MAX+
@@ -17,6 +17,9 @@
   const LOG = '[grindless/maxplus] '
 
   const CASING = 'grindless:slingshot_coil_casing'
+  const LATTICE = 'grindless:bound_lattice_casing'
+  const LATTICE_TEXTURE = 'grindless:block/maxplus/bound_lattice_casing'
+  const KERR = 'grindless:kerr_coil_casing'
 
   function parts() {
     return [
@@ -26,36 +29,61 @@
     ]
   }
 
-  // Textures: a bridge until the MAX+ assets package draws the casing and face (see maxplus/assembler.js).
   MS.machine = {
     name: 'hills_slingshot', machine: 'gtceu:hills_slingshot', type: 'hills_slingshot', dataKey: 'grindless_hills_slingshot',
-    lang: 'Hills Slingshot', maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, casing: CASING, texture: 'grindless:block/max/mirror_shell_segment',
+    lang: 'Hills Slingshot', maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, casing: LATTICE, texture: LATTICE_TEXTURE,
     overlay: 'grindless:block/multiblock/hills_slingshot',
-    width: 17, height: 9, depth: 17,
-    pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
+    width: 37, height: 11, depth: 37,
+    pal: { F: LATTICE, W: CASING, K: KERR, L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil' },
     parts: parts
   }
 
-  // x left to right, y bottom to top, z back to front. The floor carries the part cells at the front edge; the walls a glass band; a ring of coils
-  // (radius 5 to 6 from the axis) circles the middle layer round an atomic casing post.
+  // A capture ring (radius 14.5 about the hall axis): a duct of slingshot coil casing, lined with Kerr rails and ringed by 24 superconducting
+  // accelerator coils, on a lattice plinth. A launch mast of lattice rises at the axis, tied to the ring by four lattice arms.
   function slingCell(x, y, z) {
-    if (y === 0) return z === 0 && x >= 5 && x <= 11 ? 'X' : 'B'
-    if (y === 8) return 'B'
-    if (x === 0 || x === 16 || z === 0 || z === 16) {
-      var along = x === 0 || x === 16 ? z : x
-      return y >= 3 && y <= 5 && along >= 3 && along <= 13 && along % 4 !== 1 ? 'L' : 'F'
+    var dx = x - 18
+    var dz = z - 18
+    var r = Math.sqrt(dx * dx + dz * dz)
+    var u = r - 14.5
+    var ang = Math.atan2(dz, dx)
+    if (y === 0) return (r <= 18.4 && (r >= 11.5 || r <= 3.5)) || (Math.abs(dx) <= 1 || Math.abs(dz) <= 1) && r <= 15 ? 'F' : ' '
+    var dv = y - 4
+    var s = Math.sqrt(u * u + dv * dv)
+    if (s < 2.0) return '#'
+    if (s < 2.7) {
+      var seg = Math.round(ang / 0.5235987755982988) * 0.5235987755982988
+      return Math.abs(ang - seg) * r <= 0.9 && Math.abs(dv) < 1.6 ? 'C' : 'K'
     }
-    var dx = x - 8
-    var dz = z - 8
-    var r2 = dx * dx + dz * dz
-    if (y === 4 && r2 >= 25 && r2 <= 42) return 'C'
-    if (dx === 0 && dz === 0 && y >= 2 && y <= 6) return 'A'
-    return '#'
+    if (s < 3.3) return y % 3 === 0 || Math.abs(dv) > 2.2 ? 'W' : 'L'
+    if (s < 3.8) return dv > 0 ? 'F' : 'W'
+    if (r <= 2.8 && y <= 10) return y % 3 === 0 ? 'K' : 'F'
+    if (r <= 4.2 && y <= 6 && y >= 1) return y % 2 === 0 ? 'K' : 'F'
+    if ((Math.abs(dx) <= 0.8 || Math.abs(dz) <= 0.8) && r > 4.2 && r < 10.6 && y >= 3 && y <= 4) return 'F'
+    return ' '
+  }
+
+  var TWO_PI = 6.283185307179586
+
+  function paint(w, h, d, cell) {
+    var s = G.uevShapes.scene(w, h, d)
+    for (var z = 0; z < d; z++) for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
+      var ch = cell(x, y, z)
+      if (ch !== ' ') s.set(x, y, z, ch)
+    }
+    s.booth('F', 3)
+    return s.fn()
+  }
+
+  MS.shapes = function () {
+    var m = MS.machine
+    var o = {}
+    o[m.name] = { w: m.width, h: m.height, d: m.depth, pal: m.pal, fn: paint(m.width, m.height, m.depth, slingCell) }
+    return o
   }
 
   // built in the machine registry callback: uiv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: slingCell })
+    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: paint(m.width, m.height, m.depth, slingCell) })
   }
 
   function infoOf(dataKey) {

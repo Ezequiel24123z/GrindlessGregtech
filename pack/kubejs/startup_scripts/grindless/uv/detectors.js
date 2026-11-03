@@ -5,10 +5,10 @@
 // (global.grindless.uvFoundation); germanium tetrachloride is UV-A6's (startup_scripts/grindless/uv/photonics.js); the SNSPD array is
 // made by the ZPM qubit fab's circuit 3 row (server_scripts/grindless/zpm/qubits.js).
 //
-//   gtceu:zone_refining_tower   high-purity germanium (machine 11). A 3 wide x 13 high x 3 deep tower of clean room casing: eight RF
-//                               coils (naquadah coil blocks) stacked in the core round the germanium bar, an open melt zone under and over
-//                               them, and the Czochralski puller (a stainless gearbox) at the top. Parts in the floor and the back wall's
-//                               two lowest rows.
+//   gtceu:zone_refining_tower   high-purity germanium (machine 11). An 11 x 12 x 5 quartz tower and glovebox bench of clean room casing: three RF
+//                               coil rings (cupronickel coil blocks) travel the germanium bar in the 5 x 5 tower, an open melt zone round
+//                               them, and the Czochralski puller (a stainless gearbox) in the roof; a low argon glovebox beside it holds the
+//                               chlorination column. Parts in the floor.
 //   gtceu:zone_refining         its recipe type (EU in); circuits: 1 chlorinate, 2 reduce, 3 refine.
 //   gtceu:optical_ground_station  the only reader of the Starshot (machine 12). A 9 x 9 x 9 dome of UV machine casing: a 5 x 5 primary
 //                               mirror (aluminium blocks) on the floor, the adaptive optics bench (three computer casings) behind it and
@@ -31,7 +31,7 @@
   const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
   const UV_CASING = 'gtceu:uv_machine_casing'
   const UV_TEXTURE = 'gtceu:block/casings/voltage/uv/side'
-  const COIL = 'gtceu:naquadah_coil_block'
+  const COIL = 'gtceu:cupronickel_coil_block'
   const GEARBOX = 'gtceu:stainless_steel_gearbox'
   const MIRROR = 'gtceu:aluminium_block'
   const BENCH = 'gtceu:computer_casing'
@@ -60,7 +60,7 @@
   }
   D.minCasings = { tower: 6, station: 50 }
   D.blocks = { clean: CLEAN, uvCasing: UV_CASING, coil: COIL, gearbox: GEARBOX, mirror: MIRROR, bench: BENCH }
-  D.coils = 8
+  D.coils = 24
 
   function cells(casing, min, parts) {
     var choices = [Pat.block(casing, { min: min })]
@@ -71,14 +71,121 @@
   // ---------------------------------------------------------------- patterns
   // slices back -> front, rows bottom -> top, columns left -> right seen from the front
 
-  // the tower: 13 rows; the core column: 1-2 melt zone (air), 3-10 the eight RF coils, 11 air, 12 the puller
-  function towerSlice(floor, row1, row2, core) {
-    var rows = [floor, row1, row2]
-    for (var y = 3; y < 13; y++) rows.push(core ? (y <= 10 ? 'RCR' : (y === 12 ? 'RGR' : 'R#R')) : 'RRR')
-    if (core) { rows[1] = 'R#R'; rows[2] = 'R#R' }
-    return rows
+  // The zone refining tower, 11 x 12 x 5 (about 350 cells): a 5 x 5 quartz tower, 12 high, with three RF coil rings (cupronickel coil
+  // blocks) that travel the germanium bar (a fusion glass column), a Czochralski puller (a stainless gearbox) in the roof and sight
+  // windows, joined by a transfer port to a low argon glovebox bench holding the chlorination column (tungstensteel pipe casing),
+  // the gas manifold and the loading gearboxes.
+  function towerGrid() {
+    var W = 11
+    var H = 12
+    var Dp = 5
+    var g = []
+    var x
+    var y
+    var z
+    for (z = 0; z < Dp; z++) {
+      var layer = []
+      for (y = 0; y < H; y++) {
+        var row = []
+        for (x = 0; x < W; x++) row.push(' ')
+        layer.push(row)
+      }
+      g.push(layer)
+    }
+    for (z = 0; z < Dp; z++) {
+      for (y = 0; y < H; y++) {
+        for (x = 0; x < W; x++) {
+          var inTower = x <= 4
+          var inBase = x >= 4 && y <= 4
+          if (!inTower && !inBase) continue
+          var x1 = inTower ? 4 : 10
+          var y1 = inTower ? H - 1 : 4
+          if (y === 0) g[z][y][x] = 'X'
+          else if (y === y1) g[z][y][x] = 'R'
+          else if (x === x1 || z === 0 || z === Dp - 1 || (inTower && x === 0) || (!inTower && x === 4)) g[z][y][x] = 'R'
+          else g[z][y][x] = '#'
+        }
+      }
+    }
+    var rowIdx
+    for (y = 1; y <= 10; y++) {
+      g[0][y][0] = 'F'
+      g[0][y][4] = 'F'
+      g[4][y][0] = 'F'
+      g[4][y][4] = 'F'
+    }
+    for (x = 0; x <= 4; x++) {
+      g[0][11][x] = 'F'
+      g[4][11][x] = 'F'
+    }
+    for (z = 0; z <= 4; z++) {
+      g[z][11][0] = 'F'
+      g[z][11][4] = 'F'
+    }
+    var winRows = [2, 4, 6, 8]
+    var pipeRows = [3, 7]
+    for (rowIdx = 0; rowIdx < winRows.length; rowIdx++) {
+      y = winRows[rowIdx]
+      for (x = 1; x <= 3; x++) {
+        g[0][y][x] = 'W'
+        g[4][y][x] = 'W'
+      }
+      for (z = 1; z <= 3; z++) g[z][y][0] = 'W'
+    }
+    for (rowIdx = 0; rowIdx < pipeRows.length; rowIdx++) {
+      y = pipeRows[rowIdx]
+      for (x = 1; x <= 3; x++) {
+        g[0][y][x] = 'P'
+        g[4][y][x] = 'P'
+      }
+      for (z = 1; z <= 3; z++) g[z][y][0] = 'P'
+    }
+    var coilRows = [3, 5, 7]
+    for (rowIdx = 0; rowIdx < coilRows.length; rowIdx++) {
+      y = coilRows[rowIdx]
+      for (z = 1; z <= 3; z++) for (x = 1; x <= 3; x++) if (x !== 2 || z !== 2) g[z][y][x] = 'C'
+    }
+    for (y = 1; y <= 9; y++) g[2][y][2] = 'W'
+    g[2][10][2] = 'G'
+    g[2][1][4] = '#'
+    g[2][2][4] = '#'
+    // glovebox bench
+    g[0][1][10] = 'F'
+    g[0][2][10] = 'F'
+    g[0][3][10] = 'F'
+    g[4][1][10] = 'F'
+    g[4][2][10] = 'F'
+    g[4][3][10] = 'F'
+    for (x = 5; x <= 9; x++) {
+      if (x !== 7) g[4][2][x] = 'W'
+      g[0][2][x] = 'W'
+    }
+    for (z = 1; z <= 3; z++) g[z][2][10] = 'W'
+    for (y = 1; y <= 3; y++) g[2][y][8] = 'P'
+    for (x = 5; x <= 9; x++) g[1][3][x] = 'P'
+    g[2][1][6] = 'T'
+    g[2][2][6] = 'T'
+    g[3][1][9] = 'T'
+    g[4][1][7] = 'S'
+    return g
   }
-  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
+  const TOWER_SPEC = {
+    slices: towerGrid().map(function (layer) { return layer.map(function (row) { return row.join('') }) }),
+    symbols: {
+      S: Pat.controller(),
+      X: cells(CLEAN, D.minCasings.tower, D.towerParts),
+      R: Pat.block(CLEAN),
+      F: Pat.frame(['tungsten_steel']),
+      W: Pat.block('gtceu:fusion_glass'),
+      P: Pat.block('gtceu:tungstensteel_pipe_casing'),
+      C: Pat.block(COIL),
+      G: Pat.block(GEARBOX),
+      T: Pat.block('gtceu:tungstensteel_gearbox'),
+      '#': Pat.air()
+    }
+  }
+  D.towerSpec = TOWER_SPEC
+
   function dress(slices, wall, rule) {
     var D = slices.length
     var H = slices[0].length
@@ -96,33 +203,6 @@
       })
     })
   }
-  // tower: frame posts on the four edges, then glass sight windows, tungstensteel pipe runs and clean casing in turn
-  function towerRule(x, y, z, W, H, D) {
-    if ((x === 0 || x === W - 1) && (z === 0 || z === D - 1)) return 'F'
-    var m = y % 3
-    if (m === 0) return 'W'
-    if (m === 1) return 'P'
-    return null
-  }
-  const TOWER_SPEC = {
-    slices: dress([
-      towerSlice('XXX', 'XXX', 'XXX', false),
-      towerSlice('XRX', null, null, true),
-      towerSlice('XXX', 'RSR', 'RRR', false)
-    ], 'R', towerRule),
-    symbols: {
-      S: Pat.controller(),
-      X: cells(CLEAN, D.minCasings.tower, D.towerParts),
-      R: Pat.block(CLEAN),
-      F: Pat.frame(['tungsten_steel']),
-      W: Pat.block('gtceu:fusion_glass'),
-      P: Pat.block('gtceu:tungstensteel_pipe_casing'),
-      C: Pat.block(COIL),
-      G: Pat.block(GEARBOX),
-      '#': Pat.air()
-    }
-  }
-  D.towerSpec = TOWER_SPEC
 
   // the station: a 9 x 9 x 9 dome; walls to row 5, the roof steps in to row 8, whose centre is the open aperture
   function stationSlice(z) {

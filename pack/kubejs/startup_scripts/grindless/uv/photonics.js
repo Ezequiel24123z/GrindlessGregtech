@@ -5,15 +5,16 @@
 // InGaAs pump module, arsine and ytterbium. Ytterbium oxide is the extraction cascade's (startup_scripts/grindless/ev/extraction_cascade.js),
 // made only by its Yb strip.
 //
-//   gtceu:fibre_draw_tower   ytterbium-doped double-clad fibre and the fibre laser module (machine 9). A 5 wide x 15 high x 5 deep tower
-//                            of clean room casing: the MCVD lathe at its base (stainless gearbox head and tail stocks, a tungsten steel
-//                            frame bed, a heatproof oxy-hydrogen burner), above it the capstan (gearbox), the coating cup (PTFE pipe
-//                            casing), the draw furnace (a heatproof ring with the preform's hole) and the preform feed in the roof.
+//   gtceu:fibre_draw_tower   ytterbium-doped double-clad fibre and the fibre laser module (machine 9). A 19 x 15 x 7 hall: a 5 x 5 draw tower
+//                            beside a long MCVD lathe hall (two lathes on tungsten steel frame beds with stainless gearbox head and tail
+//                            stocks and heatproof burners, a gas cabinet row, a scrubber box, a preform hoist), and in the tower the
+//                            capstan (gearbox), the coating cup (PTFE pipe casing), the draw furnace (heatproof) and the preform feed
+//                            in the roof, all in clean room casing.
 //   gtceu:fibre_draw         its recipe type (EU in); the programmed circuit picks the step: 1 preform, 2 draw, 3 module, 4 refurbish,
 //                            12 MCVD soot, 13 MCVD doping.
-//   gtceu:mocvd_reactor      compound semiconductors grown atom layer by atom layer (machine 10). 7 x 7 x 7 on clean room casing: the gas
-//                            cabinet (inert casing, back left), the arsine burn box beside it (heatproof casing: the exhaust scrubber),
-//                            the rotating susceptor (gearbox under a heatproof heater) under the PTFE showerhead.
+//   gtceu:mocvd_reactor      compound semiconductors grown atom layer by atom layer (machine 10). 13 x 6 x 9 cluster tool on clean room casing: four
+//                            growth chambers (gearbox susceptor under a heatproof heater, PTFE showerhead, filter hood) round a transfer
+//                            hub, the gas cabinets (inert casing) along the back and the arsine scrubber box (heatproof casing).
 //   gtceu:mocvd              its recipe type (EU in); circuits: 1 organometallics, 2 epi, 3 bars, 4 NbN, 5 pump module, 6 scrub.
 //
 // Items (grindless:, names in client_scripts/grindless/uv_photonics_lang.js): yb_doped_preform, fibre_bragg_grating,
@@ -108,53 +109,118 @@
     )
   }
 
-  // QR-S3: dress(slices, wall, rule) rewrites plain wall cells (char `wall`) through rule(x, y, z, W, H, D) -> char or null. Row 0 is never touched.
-  function dress(slices, wall, rule) {
-    var D = slices.length
-    var H = slices[0].length
-    var W = slices[0][0].length
-    return slices.map(function (rows, z) {
-      return rows.map(function (row, y) {
-        if (y === 0) return row
-        var out = ''
-        for (var x = 0; x < W; x++) {
-          var ch = row.charAt(x)
-          var r = ch === wall ? rule(x, y, z, W, H, D) : null
-          out += r || ch
+  // Both structures are voxel-built: grid[z][y][x] (z back -> front, y bottom -> top), ' ' outside the footprint, '#' enclosed air.
+  function vGrid(W, H, D) {
+    var g = []
+    for (var z = 0; z < D; z++) {
+      var layer = []
+      for (var y = 0; y < H; y++) {
+        var row = []
+        for (var x = 0; x < W; x++) row.push(' ')
+        layer.push(row)
+      }
+      g.push(layer)
+    }
+    return g
+  }
+  function vFill(g, x0, y0, z0, x1, y1, z1, ch) {
+    for (var z = z0; z <= z1; z++) for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) g[z][y][x] = ch
+  }
+  // a hollow room: X floor, `roof` on top, `wall` round, air inside
+  function vRoom(g, x0, y0, z0, x1, y1, z1, wall, roof) {
+    for (var z = z0; z <= z1; z++) {
+      for (var y = y0; y <= y1; y++) {
+        for (var x = x0; x <= x1; x++) {
+          if (y === y0) g[z][y][x] = 'X'
+          else if (y === y1) g[z][y][x] = roof
+          else if (x === x0 || x === x1 || z === z0 || z === z1) g[z][y][x] = wall
+          else g[z][y][x] = '#'
         }
-        return out
-      })
-    })
+      }
+    }
+  }
+  function vSlices(g) {
+    return g.map(function (layer) { return layer.map(function (row) { return row.join('') }) })
   }
 
-  // the draw tower: tungsten steel posts the whole height and a frame cap, a heatproof furnace section at the top, glass inspection
-  // windows between a PTFE cooling jacket and the coating stage, clean casing in between
-  function towerRule(x, y, z, W, H, D) {
-    var cx = x === 0 || x === W - 1
-    var cz = z === 0 || z === D - 1
-    if (y === H - 1) return cx || cz ? 'M' : null
-    if (cx && cz) return 'M'
-    if (y === 12 || y === 13) return 'H'
-    if (y === 10 || y === 6 || y === 2) return 'P'
-    if (y === 3 || y === 4 || y === 8 || y === 9) return 'W'
-    return null
+  // The fibre draw tower and its MCVD lathe hall, 19 x 15 x 7 (about 650 cells): a 5 x 5 draw tower, 15 high (preform column, coating
+  // cup, capstan, a heatproof draw furnace under the roof) opening on a long lathe hall: two MCVD lathes on frame beds (gearbox head
+  // and tail stocks, a burner carriage, a quartz tube), a gas cabinet and manifold row, a scrubber box and a preform hoist rail that
+  // runs through the passage into the tower. Clean room casing, no UEV photonic casing: the hall makes the hollow-core fibre that
+  // casing needs.
+  function towerGrid() {
+    var g = vGrid(19, 15, 7)
+    vRoom(g, 0, 0, 1, 4, 14, 5, 'R', 'R')
+    vRoom(g, 4, 0, 0, 18, 5, 6, 'R', 'R')
+    vFill(g, 4, 1, 2, 4, 4, 4, '#')
+    var y
+    var i
+    for (y = 1; y <= 13; y++) {
+      vFill(g, 0, y, 1, 0, y, 1, 'M')
+      vFill(g, 0, y, 5, 0, y, 5, 'M')
+      if (y > 5) {
+        vFill(g, 4, y, 1, 4, y, 1, 'M')
+        vFill(g, 4, y, 5, 4, y, 5, 'M')
+      }
+    }
+    vFill(g, 0, 14, 1, 4, 14, 1, 'M')
+    vFill(g, 0, 14, 5, 4, 14, 5, 'M')
+    vFill(g, 0, 14, 2, 0, 14, 4, 'M')
+    vFill(g, 4, 14, 2, 4, 14, 4, 'M')
+    vFill(g, 2, 14, 3, 2, 14, 3, '#')
+    var ringRows = [6, 10, 12, 13]
+    var ringBlock = ['P', 'P', 'H', 'H']
+    for (i = 0; i < ringRows.length; i++) {
+      y = ringRows[i]
+      vFill(g, 1, y, 1, 3, y, 1, ringBlock[i])
+      vFill(g, 1, y, 5, 3, y, 5, ringBlock[i])
+      vFill(g, 0, y, 2, 0, y, 4, ringBlock[i])
+      vFill(g, 4, y, 2, 4, y, 4, ringBlock[i])
+    }
+    var wins = [3, 4, 8, 9]
+    for (i = 0; i < wins.length; i++) {
+      vFill(g, 1, wins[i], 1, 3, wins[i], 1, 'W')
+      vFill(g, 1, wins[i], 5, 3, wins[i], 5, 'W')
+      vFill(g, 0, wins[i], 2, 0, wins[i], 4, 'W')
+      if (wins[i] > 5) vFill(g, 4, wins[i], 2, 4, wins[i], 4, 'W')
+    }
+    vFill(g, 2, 1, 3, 2, 11, 3, 'Q')
+    vFill(g, 1, 2, 3, 1, 2, 3, 'G')
+    vFill(g, 3, 2, 3, 3, 2, 3, 'G')
+    vFill(g, 1, 6, 2, 3, 6, 4, 'P')
+    vFill(g, 2, 6, 3, 2, 6, 3, 'Q')
+    vFill(g, 1, 12, 2, 3, 13, 4, 'H')
+    vFill(g, 2, 12, 3, 2, 13, 3, '#')
+    var posts = [4, 9, 14, 18]
+    for (i = 0; i < posts.length; i++) {
+      vFill(g, posts[i], 1, 0, posts[i], 5, 0, 'M')
+      vFill(g, posts[i], 1, 6, posts[i], 5, 6, 'M')
+    }
+    var spans = [[5, 8], [10, 13], [15, 17]]
+    for (i = 0; i < spans.length; i++) {
+      vFill(g, spans[i][0], 2, 0, spans[i][1], 3, 0, 'W')
+      vFill(g, spans[i][0], 2, 6, spans[i][1], 3, 6, 'W')
+    }
+    vFill(g, 18, 2, 2, 18, 3, 4, 'W')
+    vFill(g, 5, 5, 3, 17, 5, 3, 'P')
+    var lathes = [2, 4]
+    for (i = 0; i < lathes.length; i++) {
+      var lz = lathes[i]
+      vFill(g, 5, 1, lz, 17, 1, lz, 'M')
+      vFill(g, 5, 2, lz, 5, 2, lz, 'G')
+      vFill(g, 17, 2, lz, 17, 2, lz, 'G')
+      vFill(g, 6, 2, lz, 16, 2, lz, 'Q')
+      vFill(g, 9, 2, lz, 11, 2, lz, 'H')
+    }
+    vFill(g, 6, 1, 1, 16, 2, 1, 'C')
+    vFill(g, 6, 3, 1, 16, 3, 1, 'P')
+    vFill(g, 15, 1, 5, 17, 3, 5, 'H')
+    vFill(g, 5, 4, 3, 17, 4, 3, 'M')
+    g[6][1][11] = 'S'
+    return g
   }
-
-  // the tower: 15 rows; `over` replaces rows by index
-  function towerSlice(floor, fill, over) {
-    var rows = [floor]
-    for (var i = 1; i < 15; i++) rows.push(over[i] || fill)
-    return rows
-  }
-  const STOCK = towerSlice('XRRRX', 'R###R', { 1: 'R#G#R', 12: 'RHHHR', 14: 'RRRRR' })
   const TOWER_SPEC = {
-    slices: dress([
-      towerSlice('XXXXX', 'RRRRR', {}),
-      STOCK,
-      towerSlice('XRRRX', 'R###R', { 1: 'RHM#R', 3: 'R#G#R', 6: 'R#P#R', 12: 'RH#HR', 14: 'RRGRR' }),
-      STOCK,
-      towerSlice('XXXXX', 'RRRRR', { 1: 'RRSRR' })
-    ], 'R', towerRule),
+    slices: vSlices(towerGrid()),
     symbols: {
       S: Pat.controller(),
       X: cells(P.minCasings.tower),
@@ -162,47 +228,65 @@
       G: Pat.block(GEARBOX),
       H: Pat.block(HEAT),
       P: Pat.block(PIPE),
+      C: Pat.block(CABINET),
       M: Pat.frame([BED]),
       W: Pat.block('gtceu:laminated_glass'),
+      Q: Pat.block('gtceu:fusion_glass'),
       '#': Pat.air()
     }
   }
   P.towerSpec = TOWER_SPEC
 
-  // the reactor: 7 x 7 x 7, a wall slice with a floor row of parts, ring slices with five interior rows (bottom -> top)
-  function wall(floor) { return [floor, 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR'] }
-  function ring(interior) {
-    var rows = ['RRRRRRR']
-    interior.forEach(function (row) { rows.push('R' + row + 'R') })
-    rows.push('RRRRRRR')
-    return rows
-  }
-  // the reactor, a growth chamber: stainless steel posts and roof ring, a heatproof susceptor band at the foot, glass windows into the
-  // chamber, a PTFE gas manifold under the roof and a filter casing hood
-  function reactorRule(x, y, z, W, H, D) {
-    var cx = x === 0 || x === W - 1
-    var cz = z === 0 || z === D - 1
-    if (y === H - 1) {
-      if (cx || cz) return 'F'
-      return Math.abs(x - 3) <= 1 && Math.abs(z - 3) <= 1 ? 'Y' : null
+  // The MOCVD reactor, a cluster tool, 13 x 6 x 9 (about 450 cells): four growth chambers (a gearbox susceptor under a heatproof heater,
+  // a PTFE showerhead and a filter hood in the roof) round a central transfer hub joined by glass transfer tubes, a row of inert gas
+  // cabinets along the back with their manifold, and a heatproof arsine scrubber box in the corner. Clean room casing, stainless frame.
+  function reactorGrid() {
+    var g = vGrid(13, 6, 9)
+    vRoom(g, 0, 0, 0, 12, 5, 8, 'R', 'R')
+    var y
+    var i
+    var cxs = [3, 9]
+    var czs = [3, 6]
+    for (y = 1; y <= 4; y++) {
+      vFill(g, 0, y, 0, 0, y, 0, 'F')
+      vFill(g, 12, y, 0, 12, y, 0, 'F')
+      vFill(g, 0, y, 8, 0, y, 8, 'F')
+      vFill(g, 12, y, 8, 12, y, 8, 'F')
     }
-    if (cx && cz) return 'F'
-    if (y === 1) return 'H'
-    if (y === 5) return 'P'
-    if ((y === 2 || y === 3 || y === 4) && (cx ? z : x) >= 2 && (cx ? z : x) <= 4) return 'W'
-    return null
+    vFill(g, 0, 5, 0, 12, 5, 0, 'F')
+    vFill(g, 0, 5, 8, 12, 5, 8, 'F')
+    vFill(g, 0, 5, 0, 0, 5, 8, 'F')
+    vFill(g, 12, 5, 0, 12, 5, 8, 'F')
+    for (i = 0; i < 2; i++) {
+      for (var j = 0; j < 2; j++) {
+        var cx = cxs[i]
+        var cz = czs[j]
+        g[cz][1][cx] = 'G'
+        g[cz][2][cx] = 'H'
+        g[cz][3][cx] = 'P'
+        g[cz][4][cx] = 'P'
+        g[cz][5][cx] = 'Y'
+        g[cz][1][cx - 1] = 'H'
+        g[cz][1][cx + 1] = 'H'
+      }
+    }
+    vFill(g, 6, 1, 4, 6, 4, 5, 'F')
+    vFill(g, 4, 3, 4, 5, 3, 4, 'W')
+    vFill(g, 7, 3, 4, 8, 3, 4, 'W')
+    vFill(g, 4, 3, 5, 5, 3, 5, 'W')
+    vFill(g, 7, 3, 5, 8, 3, 5, 'W')
+    vFill(g, 2, 2, 8, 4, 3, 8, 'W')
+    vFill(g, 8, 2, 8, 10, 3, 8, 'W')
+    vFill(g, 2, 2, 0, 10, 3, 0, 'W')
+    vFill(g, 1, 1, 1, 11, 2, 1, 'C')
+    vFill(g, 1, 3, 1, 11, 3, 1, 'P')
+    vFill(g, 10, 1, 7, 11, 3, 7, 'H')
+    vFill(g, 1, 4, 3, 11, 4, 3, 'P')
+    g[8][1][6] = 'S'
+    return g
   }
-  const EMPTY = '#####'
   const REACTOR_SPEC = {
-    slices: dress([
-      wall('XXXXXXX'),
-      ring(['CC#HH', 'CC#HH', 'CC###', EMPTY, EMPTY]),
-      ring(['CC###', 'CC###', 'CC###', '#PPP#', EMPTY]),
-      ring(['##G##', '##H##', EMPTY, '#PPP#', EMPTY]),
-      ring([EMPTY, EMPTY, EMPTY, '#PPP#', EMPTY]),
-      ring([EMPTY, EMPTY, EMPTY, EMPTY, EMPTY]),
-      ['XXXXXXX', 'RRRSRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR']
-    ], 'R', reactorRule),
+    slices: vSlices(reactorGrid()),
     symbols: {
       S: Pat.controller(),
       X: cells(P.minCasings.reactor),
@@ -218,7 +302,6 @@
     }
   }
   P.reactorSpec = REACTOR_SPEC
-
   // ---------------------------------------------------------------- recipe types
 
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
