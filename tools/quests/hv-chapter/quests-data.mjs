@@ -453,7 +453,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 40 }],
   },
   {
-    key: "HV_AEROZINE_50", title: "Aerozine 50", icon: "gtceu:dimethylhydrazine_bucket", kind: "process", deps: ["HV_HYDRAZINE", "HV_UDMH"], x: 20, y: -9,
+    key: "HV_AEROZINE_50", title: "Aerozine 50", icon: "gtceu:aerozine_50_bucket", kind: "process", deps: ["HV_HYDRAZINE", "HV_UDMH"], x: 20, y: -9,
     teach: {
       for: "Half hydrazine, half UDMH: &6Aerozine 50&r, the storable fuel of the Titan II.",
       needs: "Equal parts hydrazine and UDMH in a mixer.",
@@ -461,7 +461,7 @@ export const QUESTS = [
       automate: "Both by pipe in one to one, the blend on to the rocket fuel mixer.",
     },
     desc: [],
-    tasks: [{ type: "checkmark" }],
+    tasks: [{ type: "item", item: "gtceu:aerozine_50_bucket" }],
     rewards: [{ type: "xp", xp: 45 }],
   },
   {

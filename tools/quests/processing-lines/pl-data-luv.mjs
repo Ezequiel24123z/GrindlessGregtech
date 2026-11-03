@@ -503,8 +503,10 @@ export default {
       nodes: [
         n('pearl', 0, -0.75, I('minecraft:ender_pearl'), 'Ender Pearl', { kind: 'raw' }),
         n('he3', 0, 0.75, F('gtceu:helium_3'), 'Helium-3', { kind: 'raw', sub: 'The Moon\'s' }),
+        // the belt's own rock: the seed waits for the landing (A1b); Io, Europa and Ganymede seeds take theirs the same way
+        n('metrock', 0, -2.25, I('gtceu:raw_meteoric_iron'), 'Raw Meteoric Iron', { kind: 'raw', sub: 'The belt\'s rock: the harpoon drill' }),
         n('seed', 2.5, 0, I('grindless:asteroid_quantum_seed'), 'Quantum Seeds', {
-          kind: 'product', from: ['pearl', 'he3'], by: ['gtceu:chemical_reactor'], sub: 'Made on site, from the local rock',
+          kind: 'product', from: ['metrock', 'pearl', 'he3'], by: ['gtceu:chemical_reactor'], sub: 'Made on site, from the local rock',
         }),
         n('tiframe', 0, 2.25, I('gtceu:titanium_frame'), 'Titanium Frame', { kind: 'raw' }),
         n('truss', 2.5, 2.25, I('grindless:station_truss_casing'), 'Station Truss Casing', {
