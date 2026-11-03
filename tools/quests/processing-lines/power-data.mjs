@@ -473,7 +473,7 @@ export default gate({
         L('nqwafer', 0, 0, 'pl_iv:wafer'),
         n('lvSolar', 2.25, 0, I('gtceu:lv_solar_panel'), 'LV Solar Panel', {
           kind: 'info', tier: 'iv', from: ['nqwafer'], figs: [P.cover(32)], sub: 'It wants a LuV circuit',
-          desc: 'The strongest cover panel on this tab. It feeds the machine under it in daylight, with no fuel.',
+          desc: 'The strongest solar cover panel. It feeds the machine under it in daylight, with no fuel.',
         }),
       ],
     },
