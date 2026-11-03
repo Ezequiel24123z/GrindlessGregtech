@@ -29,6 +29,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { buildModel, REPO } from './pl-model.mjs';
+import { checkRate } from './pl-lib.mjs';
 import { loadIndex, inputKeys, outputKeys } from './pl-index.mjs';
 import { STATIONS, MODE as STATIONS_MODE } from '../luv-stations.mjs';
 import { tagProblems } from '../../analysis/line-audit.mjs';
@@ -334,7 +335,7 @@ const isNewType = (t) => !idx.recipeTypes.has(t) && !byType.has(t) && registered
 // a node whose item or recipe type is newer than the dump: what the dump would prove about it is pending
 const pendingNode = (nd) => !!nd && !nd.link && !nd.era && (isNew(nd.item) || (nd.machine && nd.types.some(isNewType)));
 // the figures that only the dump proves (the others come from this checkout's scripts and tables, and always count)
-const DUMP_FIGS = new Set(['single', 'run', 'uses', 'fuel', 'steam', 'steamFuel', 'ccSteam', 'engine', 'turbine', 'battery', 'cable', 'toll', 'anywhere']);
+const DUMP_FIGS = new Set(['single', 'run', 'uses', 'fuel', 'steam', 'steamFuel', 'ccSteam', 'engine', 'turbine', 'battery', 'cable', 'toll', 'anywhere', 'rate', 'cmp', 'ratio']);
 
 // the solar family's EU/t for a lit panel: a machine script's constants (baseEuPerPanel, junctionMultiplier) times the sunlight
 // table's factor for Earth orbit (tables/orbits.json), as server_scripts/grindless/luv/orbital_solar.js prices its recipe
@@ -529,6 +530,13 @@ function checkFig(nd, f) {
       if (missing.length > later.length) return fail(`not registered in the dump: ${missing.filter((id) => !later.includes(id)).join(', ')}`);
       return { ok: true, how: `${wirelessSrc.from}: ${JSON.stringify(amps)} A, ${names.join(', ')}; ${later.length ? `${ids.length - later.length} of ${ids.length}` : 'all ' + ids.length} ${kind}s registered`,
         pending: later.length ? `newer than the dump: ${later.join(', ')}` : undefined };
+    }
+    case 'rate':
+    case 'cmp':
+    case 'ratio': {
+      // rate cards (pl-lib.mjs#checkRate): the figure's numbers against the dump's recipes and the scripts' parallel caps
+      const r = checkRate(f, (id) => idx.recipes.get(id), (src) => sourceValue(src));
+      return r.ok ? pass(r.how) : fail(r.why);
     }
     default:
       return fail('unknown figure ' + f.t);

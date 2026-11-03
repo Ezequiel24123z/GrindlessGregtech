@@ -156,7 +156,7 @@ export const QUESTS = [
     deps: ['PAR'], x: 4, y: 8,
     teach: {
       for: 'The &6Stellar Fractionation Hall&r runs distillation tower and distillery recipes, one mode at a time, and is the UXV member of the mega family.',
-      needs: 'A parallel hatch behind it and the power for its width. Pick the mode in the controller.',
+      needs: 'About 1,820 gum metal and 200 pulsed field casings, a parallel hatch behind it and the power for its width. Pick the mode in the controller. The shape is about 61 by 21 by 21 and about 3,270 blocks: GTM\'s Terminal places about 2,300 blocks per pass, so a structure this large takes two.',
       unlocks: 'Every distillation line of the pack on a single machine.',
       automate: 'One input bus per fluid, one output hatch per cut.',
     },
@@ -271,7 +271,7 @@ export const QUESTS = [
     key: 'I_OM_UEV', kind: 'process', title: 'Heavy Ions and Beams', icon: 'gtceu:calutron',
     deps: ['J_SUPER'], x: 2, y: 21,
     teach: {
-      for: 'The &6Calutron&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r, &6Superheavy Chemistry Lab&r, &6Electron Beam Furnace&r, &6Megabar Press&r, &6CVI Furnace&r and &6Photonic Integration Hall&r each take a UXV row: targets, elements 121 and 122, pure metals, boron nitride, a tungsten preform and the spintronic mainframe.',
+      for: 'The &6Calutron&r, &6Heavy Ion Cyclotron&r (the Superheavy Factory), &6Superheavy Chemistry Lab&r, &6Electron Beam Furnace&r, &6Megabar Press&r, &6CVI Furnace&r and &6Photonic Integration Hall&r each take a UXV row: targets, elements 121 and 122, pure metals, boron nitride, a tungsten preform and the spintronic mainframe.',
       needs: 'The UEV controllers you already own.',
       unlocks: 'Census III, the Mk6 casing and the mainframe.',
       automate: 'Recoils and targets by bus. The spent beam is an output, so route it.',
