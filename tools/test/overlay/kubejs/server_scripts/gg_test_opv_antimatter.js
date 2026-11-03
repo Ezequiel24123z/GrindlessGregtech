@@ -100,7 +100,7 @@
     var xs = []
     cells.forEach(function (c) {
       c.x = u.cx - (c.ci - ctrl.ci)
-      c.y = 104 + c.ri - ctrl.ri
+      c.y = 107 + c.ri - ctrl.ri
       c.z = 8 - (c.si - ctrl.si)
       if (c.sym.kind === 'oneOf') xs.push(c)
     })
@@ -120,8 +120,8 @@
       }
       if (block) put(u.dim, c.x, c.y, c.z, block + (c.part ? '[facing=north]' : ''))
     })
-    put(u.dim, u.cx, 104, 8, 'gtceu:annihilation_engine[facing=north]')
-    return new (classes().Pos)(u.cx, 104, 8)
+    put(u.dim, u.cx, 107, 8, 'gtceu:annihilation_engine[facing=north]')
+    return new (classes().Pos)(u.cx, 107, 8)
   }
   function nativeWear(recipe, input, id) {
     var c = classes()

@@ -285,7 +285,7 @@ test('"only from": the ids of this package come from these rows alone', () => {
 });
 
 test('structures: spheres, not boring, three functional kinds, controller in the front slice', () => {
-  const size = { kugelblitz_forge: 15, hawking_collector: 11 };
+  const size = { kugelblitz_forge: 23, hawking_collector: 17 };
   for (const m of MACHINES) {
     const s = run.global.grindless.structures[`gtceu:${m}`];
     assert.ok(s, `${m} has a description`);

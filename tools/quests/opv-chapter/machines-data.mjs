@@ -106,18 +106,12 @@ export const QUESTS = [
   }, [POWER, SRFB], 200),
   prod('SRF', 'SRF Cryomodule Block', 'grindless:srf_cryomodule_block', ['JET'], 4.5, 7.5,
     ['The &6SRF Cryomodule Block&r is a niobium cavity in its own cryostat, which accelerates a beam with very little loss. The jet beam line and the antiproton decelerator are built of them, so make them first.']),
-  gear('SPALL', 'spallation_target_station', 'Spallation Target Station', ['JET'], 2, 9, {
-    for: 'The &6Spallation Target Station&r hits an iridium target with the beam, collects the antiprotons with a magnetic horn and breeds tritium in the shield.',
-    needs: 'An OpV hull and the annihilation shield casing, with the beam line in front of it.',
-    unlocks: 'Raw antiprotons for the decelerator and tritium for the hydrogen lines.',
-    automate: 'Targets by ME; the tritium is a byproduct, so pipe it away at once.',
-  }, [SHIELD], 200),
-  gear('COOLER', 'antiproton_decelerator', 'Antiproton Decelerator', ['SPALL'], 2, 10.5, {
-    for: 'The &6Antiproton Decelerator&r cools antiprotons from gigaelectronvolts to kiloelectronvolts, first by stochastic cooling and then with electrons, and fills them into traps.',
-    needs: 'An OpV hull, the high power and negative-potential casings and the cryomodule blocks.',
-    unlocks: 'Trapped antiprotons for the antihydrogen foundry.',
-    automate: 'The traps fill slowly, so run a second decelerator before adding a second target.',
-  }, [POWER, NEG, SRFB], 200),
+  gear('COOLER', 'antiproton_decelerator', 'Antiproton Complex', ['JET'], 2, 10.5, {
+    for: 'The &6Antiproton Complex&r hits an iridium target with the beam, collects the antiprotons with a magnetic horn, then cools them from gigaelectronvolts to kiloelectronvolts, first by stochastic cooling and then with electrons, and fills them into traps. The target hall, the ring and the trap hall are one structure.',
+    needs: 'An OpV hull, the high power, negative-potential and annihilation shield casings and the cryomodule blocks, with the beam line in front of it.',
+    unlocks: 'Trapped antiprotons for the antihydrogen foundry, and tritium for the hydrogen lines from the shield.',
+    automate: 'Targets by ME; the tritium is a byproduct, so pipe it away at once. The traps fill slowly, so run a second complex before adding a second target.',
+  }, [POWER, NEG, SRFB, SHIELD], 200),
   gear('SDIST', 'strangelet_distiller', 'Strangelet Distiller', ['COOLER'], 2, 12, {
     for: 'The &6Strangelet Distiller&r boils the strangeness out of a lead-208 fireball and catches it as a droplet seed, catalysed by a pasta core sample.',
     needs: 'An OpV hull, the field-frozen casing and fusion glass.',

@@ -5,13 +5,13 @@
 // and fluids of the lines. The recipes come from data/grindless/tables/antimatter_opv.json (server_scripts/grindless/opv/antimatter.js). Every
 // other id is F1's (opv/foundation.js).
 //
-//   gtceu:antihydrogen_foundry     9 x 9 x 13 Penning trap hall, home. Recipe type gtceu:antihydrogen_synthesis (c1 trap, c2 laser cool, c3 ice).
-//   gtceu:annihilation_engine      11 x 11 x 11 reaction drum, home. Recipe type gtceu:annihilation_power, a GENERATOR written at its final
+//   gtceu:antihydrogen_foundry     13 x 11 x 25 trap hall, home. Recipe type gtceu:antihydrogen_synthesis (c1 trap, c2 laser cool, c3 ice).
+//   gtceu:annihilation_engine      17 x 17 x 17 sphere in a cage, home. Recipe type gtceu:annihilation_power, a GENERATOR written at its final
 //                                  figure (2^29 EU/t on one 1 A OpV dynamo hatch, 2^30 EU/t on a 4 A one), one run at a time. It is not in
 //                                  power/generators.js.
 //   grindless:trapped_antihydrogen, cooled_antihydrogen, activated_absorber_tile, spent_acmf_hohlraum   items of the foundry and the engine.
 //
-// Geometry (lib/patterns.js: a slice has at most 16 rows): both are cylinders along the depth axis; the hatches sit on the back wall.
+// Geometry (lib/patterns.js: at most 64 rows a slice): silhouettes in opv/shapes.js (D5-SHAPE-OPV-A); the hatches sit on the front wall.
 // Textures: tools/assets/Build-OpVAntimatterTextures.ps1. Names: client_scripts/grindless/opv_antimatter_lang.js.
 // Published for the recipe script: global.grindless.opvAntimatter.
 (function () {
@@ -24,6 +24,8 @@
   const SHIELD_TEXTURE = 'grindless:block/opv/annihilation_shield_casing'
   const NEG = 'grindless:neg_xhv_casing'
   const NEG_TEXTURE = 'grindless:block/opv/neg_xhv_casing'
+  const LAMINA = 'grindless:chain_lamina_casing'
+  const TPV_WALL = 'grindless:tpv_wall_casing'
 
   AM.table = 'kubejs/data/grindless/tables/antimatter_opv.json'
   AM.site = 'grindless:cygnus_x1_orbit'
@@ -62,8 +64,8 @@
     {
       name: 'antihydrogen_foundry', machine: 'gtceu:antihydrogen_foundry', type: 'antihydrogen_synthesis', dataKey: 'grindless_antihydrogen_synthesis',
       lang: 'Antihydrogen Foundry', maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }, casing: NEG, texture: NEG_TEXTURE,
-      generator: false, site: false, width: 9, height: 9, depth: 13, tips: ['tooltip.1'],
-      pal: { F: NEG, W: SHIELD, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing' },
+      generator: false, site: false, width: 13, height: 11, depth: 25, tips: ['tooltip.1'],
+      pal: { F: NEG, A: SHIELD, Y: LAMINA, C: 'gtceu:superconducting_coil', G: 'gtceu:fusion_glass' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -77,8 +79,8 @@
       // One 1 A OpV dynamo holds c1; c2 requires a 4 A OpV dynamo.
       name: 'annihilation_engine', machine: 'gtceu:annihilation_engine', type: 'annihilation_power', dataKey: 'grindless_annihilation_power',
       lang: 'Annihilation Engine', maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 1, fluidsOut: 0 }, casing: SHIELD, texture: SHIELD_TEXTURE,
-      generator: true, site: false, width: 11, height: 11, depth: 11, tips: ['tooltip.1', 'tooltip.2'],
-      pal: { F: SHIELD, C: 'gtceu:fusion_coil', V: 'gtceu:heat_vent', P: 'gtceu:tungstensteel_pipe_casing' },
+      generator: true, site: false, width: 17, height: 17, depth: 17, tips: ['tooltip.1', 'tooltip.2'],
+      pal: { F: SHIELD, N: NEG, T: TPV_WALL, Y: LAMINA, C: 'gtceu:fusion_coil', G: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -91,7 +93,6 @@
   ]
 
   function abs(n) { return n < 0 ? -n : n }
-
   // the engine runs anywhere, but only through OpV (2^29 EU/t) dynamo hatches: a lower tier would be a loss of the cell
   var OPV_VOLTAGE = 536870912
   var CAPS = null
@@ -149,49 +150,9 @@
     return false
   }
 
-  // x left to right, y bottom to top, z back (0) to front (12): a trap tube of five rings round an empty bore. The outer ring alternates the
-  // appearance casing with bands of shield, the coil ring sits inside it (pipe spokes on every fourth layer), then glass. The back wall carries
-  // the hatches.
-  function foundryCell(x, y, z) {
-    var dx = x - 4
-    var dy = y - 4
-    var r = Math.sqrt(dx * dx + dy * dy)
-    if (r > 4.5) return ' '
-    if (z === 0) return r >= 3.5 ? 'W' : (abs(dx) + abs(dy) <= 2 ? 'X' : 'F')
-    if (z === 12) return r >= 3.5 ? 'W' : (r <= 1.5 ? 'L' : 'F')
-    if (r > 3.5) return z % 3 === 0 ? 'W' : 'F'
-    if (r > 2.5) {
-      if (z % 4 === 2 && (dx === 0 || dy === 0)) return 'P'
-      return z % 2 === 0 ? 'C' : 'F'
-    }
-    if (r > 1.5) return 'L'
-    return '#'
-  }
-
-  // a drum on its axis: a casing skin, a ring of coils and vents (alternating by layer), a ring of pipe with axis spokes and the bore; the
-  // ends are narrower. The dynamo hatches and the buses are on the back wall.
-  function engineCell(x, y, z) {
-    var dx = x - 5
-    var dy = y - 5
-    var r = Math.sqrt(dx * dx + dy * dy)
-    var edge = z === 0 || z === 10
-    var big = z === 1 || z === 9
-    var rad = edge ? 4.5 : (big ? 5.2 : 5.5)
-    if (r > rad) return ' '
-    if (z === 0) return abs(dx) <= 1 && abs(dy) <= 1 ? 'X' : (r > 3.5 ? 'F' : 'P')
-    if (z === 10) return r > 3.5 ? 'F' : 'P'
-    if (r > rad - 1) return 'F'
-    if (r > rad - 2) return z % 2 === 0 ? 'C' : 'V'
-    if (r > 2.5) return dx === 0 || dy === 0 ? 'P' : 'F'
-    return '#'
-  }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: opv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, {
-      w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
-      fn: m.name === 'antihydrogen_foundry' ? foundryCell : engineCell
-    })
+    return G.opvShapes.build(Pat, m.name, m.pal, m.parts())
   }
 
   // one EMI line per recipe, read from its data

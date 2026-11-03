@@ -114,8 +114,8 @@ test('GTM material keys stay stable while D2 recipe fluids use their runtime gtc
     [{ id: 'gtceu:fireball_distillate', amount: 1000 }]);
 });
 
-test('shapes match 9x9x9 and 7x7x13, keep NEG liners and pass the structure rubric', () => {
-  for (const [m, bbox] of [['strangelet_vault', [9, 9, 9]], ['strangelet_distiller', [7, 7, 13]]]) {
+test('shapes match 13x13x13 and 11x11x19, keep NEG liners and pass the structure rubric', () => {
+  for (const [m, bbox] of [['strangelet_vault', [13, 13, 13]], ['strangelet_distiller', [11, 11, 19]]]) {
     const s = run.global.grindless.structures[`gtceu:${m}`];
     const metrics = measure(s);
     assert.deepEqual(metrics.bbox, bbox);

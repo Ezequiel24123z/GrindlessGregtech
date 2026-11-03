@@ -32,10 +32,10 @@ test('a structure above the ceiling fails and one at it passes', () => {
   assert.deepEqual(activeBlockViolations({ at, over }).map((r) => `${r.id}:${r.count}`), [`over:${MAX_ACTIVE_BLOCKS + 1}`]);
 });
 
-test('the pack passes today: the largest is the annihilation engine at the ceiling', () => {
+test('the pack passes today: the largest is the pulsar wind trap, under the ceiling', () => {
   const counts = activeBlockCounts(runPackScripts(path.join(here, '..', '..', '..', 'pack')).docs.structures.structures);
-  assert.equal(counts[0].id, 'gtceu:annihilation_engine');
-  assert.equal(counts[0].count, 264);
+  assert.equal(counts[0].id, 'gtceu:pulsar_wind_trap');
+  assert.equal(counts[0].count, 256);
   assert.deepEqual(counts.filter((r) => r.count > MAX_ACTIVE_BLOCKS), []);
-  assert.equal(counts.find((r) => r.id === 'gtceu:pulsar_wind_trap').count, 256, 'counted with our grindless coil blocks');
+  assert.ok(counts.find((r) => r.id === 'gtceu:annihilation_engine').count <= 264, 'the engine stays under the ceiling');
 });

@@ -23,7 +23,7 @@
       "label": "beam hardware",
       "landedWhen": [
         "gtceu:jet_beam_line",
-        "gtceu:spallation_target_station"
+        "gtceu:antiproton_decelerator"
       ]
     },
     "D2": {
@@ -147,23 +147,9 @@
     },
     {
       "partsFromStructure": true,
-      "machine": "gtceu:spallation_target_station",
-      "types": [
-        "gtceu:antiproton_production"
-      ],
-      "energy": {
-        "voltage": 134217728,
-        "hatches": 2
-      },
-      "needs": [
-        "eu:uxv"
-      ],
-      "package": "D1"
-    },
-    {
-      "partsFromStructure": true,
       "machine": "gtceu:antiproton_decelerator",
       "types": [
+        "gtceu:antiproton_production",
         "gtceu:beam_cooling"
       ],
       "energy": {
@@ -646,7 +632,6 @@
         "m:gtceu:strangelet_vault",
         "m:gtceu:annihilation_engine",
         "m:gtceu:jet_beam_line",
-        "m:gtceu:spallation_target_station",
         "m:gtceu:antiproton_decelerator",
         "m:gtceu:strangelet_distiller",
         "m:gtceu:kugelblitz_forge",
@@ -781,7 +766,6 @@
         "m:gtceu:strangelet_vault",
         "m:gtceu:annihilation_engine",
         "m:gtceu:jet_beam_line",
-        "m:gtceu:spallation_target_station",
         "m:gtceu:antiproton_decelerator",
         "m:gtceu:strangelet_distiller",
         "m:gtceu:kugelblitz_forge",
@@ -908,22 +892,11 @@
       "package": "D2"
     },
     {
-      "id": "spallation_target_station-products-only-spallation_target_station",
-      "label": "The spallation target station products only from the spallation target station",
-      "anyOf": [
-        "grindless:spent_ir_target"
-      ],
-      "without": [
-        "operate:gtceu:spallation_target_station*"
-      ],
-      "expect": "unreachable",
-      "package": "D1"
-    },
-    {
       "id": "antiproton_decelerator-products-only-antiproton_decelerator",
-      "label": "The antiproton decelerator products only from the antiproton decelerator",
+      "label": "The Antiproton Complex products only from the Antiproton Complex",
       "anyOf": [
-        "grindless:cold_antiproton_cell"
+        "grindless:cold_antiproton_cell",
+        "grindless:spent_ir_target"
       ],
       "without": [
         "operate:gtceu:antiproton_decelerator*"

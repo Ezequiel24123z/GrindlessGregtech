@@ -5,11 +5,11 @@
 // data/grindless/tables/kugelblitz.json (server_scripts/grindless/opv/kugelblitz.js). Every cross-package id (kugelblitz_core,
 // hawking_drive, the gamma optics, dense positron cells, absorber tiles) is F1's (opv/foundation.js) or older.
 //
-//   gtceu:kugelblitz_forge     15 x 15 x 15 sphere, OpV. Recipe type gtceu:kugelblitz_forming: gamma pulses pumped by positron annihilation are
+//   gtceu:kugelblitz_forge     23 x 23 x 23 two-shell sphere on a lamina cradle (D5-SHAPE-OPV-A), OpV. Recipe type gtceu:kugelblitz_forming: gamma pulses pumped by positron annihilation are
 //                              focused by Laue lenses and mirrors in an FRC cartridge into a Kugelblitz (Crane & Westmoreland 2009: named
 //                              fiction). The hole never spins (Schwarzschild); it is charged with positrons and held electrostatically in the
 //                              absorber shell. Runs anywhere.
-//   gtceu:hawking_collector    11 x 11 x 11 sphere, OpV, a GENERATOR (Gen.configure) on OpV dynamo hatches (two 1 A or one 4 A), one run at a
+//   gtceu:hawking_collector    17 x 17 x 17 sphere (core cage, absorber ring, TPV wall), OpV, a GENERATOR (Gen.configure) on OpV dynamo hatches (two 1 A or one 4 A), one run at a
 //                              time. Recipe type gtceu:hawking_power: a Kugelblitz core is fed and its Hawking radiation collected (Hawking 1974,
 //                              Page 1976; the feed rate is named fiction). Runs anywhere.
 //   grindless:gamma_pump_charge, kugelblitz_seed, evaporated_core_shell   the forge's intermediates and the collector's spent core.
@@ -26,6 +26,9 @@
 
   const FIELD_FROZEN = 'grindless:field_frozen_casing'
   const SHIELD = 'grindless:annihilation_shield_casing'
+  const CAVITY = 'grindless:kugelblitz_cavity_casing'
+  const LAMINA = 'grindless:chain_lamina_casing'
+  const TPV_WALL = 'grindless:tpv_wall_casing'
   const FIELD_TEXTURE = 'grindless:block/opv/field_frozen_casing'
   const SHIELD_TEXTURE = 'grindless:block/opv/annihilation_shield_casing'
 
@@ -38,8 +41,8 @@
     {
       name: 'kugelblitz_forge', machine: 'gtceu:kugelblitz_forge', type: 'kugelblitz_forming', dataKey: 'grindless_kugelblitz_forming',
       lang: 'Kugelblitz Forge', maxIO: { itemsIn: 6, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, casing: FIELD_FROZEN, texture: FIELD_TEXTURE,
-      generator: false, size: 15,
-      pal: { F: FIELD_FROZEN, A: SHIELD, G: 'gtceu:fusion_glass', C: 'gtceu:fusion_coil', M: 'gtceu:opv_machine_casing' },
+      generator: false, size: 23,
+      pal: { F: FIELD_FROZEN, K: CAVITY, A: SHIELD, Y: LAMINA, G: 'gtceu:fusion_glass', C: 'gtceu:fusion_coil', P: 'gtceu:tungstensteel_pipe_casing' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -53,8 +56,8 @@
       // written final: two OpV 1 A dynamo hatches (2^29 each) hold c1's 2^30 EU/t; one 4 A hatch holds it alone
       name: 'hawking_collector', machine: 'gtceu:hawking_collector', type: 'hawking_power', dataKey: 'grindless_hawking_power',
       lang: 'Hawking Collector', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: SHIELD, texture: SHIELD_TEXTURE,
-      generator: true, size: 11,
-      pal: { F: SHIELD, K: FIELD_FROZEN, V: 'gtceu:heat_vent', L: 'gtceu:fusion_glass', C: 'gtceu:superconducting_coil' },
+      generator: true, size: 17,
+      pal: { F: SHIELD, K: FIELD_FROZEN, Y: LAMINA, T: TPV_WALL, G: 'gtceu:fusion_glass', C: 'gtceu:superconducting_coil' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -66,78 +69,9 @@
     }
   ]
 
-  function abs(n) { return n < 0 ? -n : n }
-
-  // the forge: centre (7, 7, 7), outer radius 7.5. Cavity r <= 5.5 (air, eight glass Laue arms along the cube diagonals), inner shell r <= 6.5
-  // (coil rings at every third latitude, shield and field-frozen casing), outer shell (field-frozen casing, shield speckle, a machine-casing
-  // belt at the equator, glass windows where the arms end). The front and back plates are discs of radius 2.7.
-  function forgeCell(x, y, z) {
-    var dx = x - 7
-    var dy = y - 7
-    var dz = z - 7
-    var d2 = dx * dx + dy * dy + dz * dz
-    if (d2 > 56.25) return ' '
-    var r2 = dx * dx + dy * dy
-    if (z === 14) {
-      if (r2 === 0) return 'S'
-      return r2 >= 4 ? 'X' : 'A'
-    }
-    if (z === 0) return r2 >= 4 ? 'A' : 'F'
-    var diag = abs(dx) === abs(dy) && abs(dy) === abs(dz)
-    if (d2 <= 30.25) return diag && abs(dx) >= 2 ? 'G' : '#'
-    if (d2 <= 42.25) return dy % 3 === 0 ? 'C' : ((x + y * 2 + z) % 3 === 0 ? 'F' : 'A')
-    if (diag) return 'G'
-    if (dy === 0 && (x + z) % 2 === 0) return 'M'
-    return (x + y + z) % 3 === 0 ? 'A' : 'F'
-  }
-
-  // the collector: centre (5, 5, 5), outer radius 5.5. Core cage (a hollow 3-cube of field-frozen casing on six struts) at the centre, a ring
-  // of coils round the equator of the absorber layer, a TPV wall of shield casing with heat vents and six glass ports on the axes.
-  function collectorCell(x, y, z) {
-    var dx = x - 5
-    var dy = y - 5
-    var dz = z - 5
-    var d2 = dx * dx + dy * dy + dz * dz
-    if (d2 > 30.25) return ' '
-    var r2 = dx * dx + dy * dy
-    if (z === 10) {
-      if (r2 === 0) return 'S'
-      return r2 >= 4 ? 'X' : 'F'
-    }
-    if (d2 <= 12.25) {
-      if (abs(dx) <= 1 && abs(dy) <= 1 && abs(dz) <= 1) return d2 === 0 ? '#' : 'K'
-      var zeros = (dx === 0 ? 1 : 0) + (dy === 0 ? 1 : 0) + (dz === 0 ? 1 : 0)
-      return zeros === 2 ? 'K' : '#'
-    }
-    if (d2 <= 20.25) return dy === 0 ? 'C' : (abs(dy) === 2 ? 'F' : 'K')
-    var axis = (dx === 0 ? 1 : 0) + (dy === 0 ? 1 : 0) + (dz === 0 ? 1 : 0) === 2
-    if (axis) return 'L'
-    return (x + y + z) % 4 === 0 ? 'V' : 'F'
-  }
-
-  function slices(n, fn) {
-    var out = []
-    for (var z = 0; z < n; z++) {
-      var rows = []
-      for (var y = 0; y < n; y++) {
-        var row = ''
-        for (var x = 0; x < n; x++) {
-          var ch = fn(x, y, z)
-          row += ch === undefined || ch === null || ch === '' ? ' ' : ch
-        }
-        rows.push(row)
-      }
-      out.push(rows)
-    }
-    return out
-  }
-
-  // built in the machine registry callback
+  // built in the machine registry callback; the silhouettes are opv/shapes.js (G.opvShapes)
   function spec(m) {
-    var casing = Pat.block(m.pal.F)
-    var symbols = { S: Pat.controller(), X: Pat.oneOf.apply(null, [casing].concat(m.parts())), '#': Pat.air() }
-    Object.keys(m.pal).forEach(function (ch) { symbols[ch] = Pat.block(m.pal[ch]) })
-    return { slices: slices(m.size, m.name === 'kugelblitz_forge' ? forgeCell : collectorCell), symbols: symbols }
+    return G.opvShapes.build(Pat, m.name, m.pal, m.parts())
   }
 
   // one EMI line per recipe, read from its data

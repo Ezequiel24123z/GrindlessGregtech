@@ -352,7 +352,7 @@ test('the native fixture fits the assigned band and exposes the grouped-run comp
   assert.ok(controller);
   for (const cx of [38856, 38876, 38896]) {
     d.slices.forEach((rows, si) => rows.forEach((row, ri) => [...row].forEach((_ch, ci) => {
-      const xyz = [cx - ci + controller.ci, 104 + ri - controller.ri, 8 - si + controller.si];
+      const xyz = [cx - ci + controller.ci, 107 + ri - controller.ri, 8 - si + controller.si];
       for (const [axis, value] of [['x', xyz[0]], ['y', xyz[1]], ['z', xyz[2]]]) {
         assert.ok(value >= zone[axis][0] && value <= zone[axis][1], `${axis}=${value}`);
       }
