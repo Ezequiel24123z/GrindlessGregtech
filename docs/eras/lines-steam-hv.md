@@ -5,7 +5,7 @@ Design package D1-LINES (#242), 2026-11-02, for AGENTS.md principle 7 as the own
 ## 0. How the steps are counted
 
 - **Step:** one machine recipe that makes a new species, or a new part in a manufacturing line. Not steps: packaging, dust, ingot, plate and foil changes, melting, freezing, cooling hot ingots, recycling.
-- **Length:** the longest dependency chain from base resources (drill, collector, greenhouse, pump or gas collector output; the drill recipe is step 1 when a line starts at a vein). The end product of another line counts as a raw input (a crossing). A staged line counts its later stages from its own start: the platline's HV stage counts from the ore it began with at MV, because the HV player runs the whole chain.
+- **Length:** the longest dependency chain from base resources (drill, rig, collector, greenhouse, pump or gas collector output; a drill or rig produces the base resource and is not a step, as the line audit counts it, v1.4.1). The end product of another line counts as a raw input (a crossing). A staged line counts its later stages from its own start: the platline's HV stage counts from the ore it began with at MV, because the HV player runs the whole chain.
 - **Critical path:** given where a shorter route to the end product exists inside the same era; it is the honest minimum.
 - **Guide** (owner, 2026-11-02): longest line about Steam 6, LV 8, MV 10, HV 12-13 with several. A chain of 2 or 3 steps is not a line and leaves the Processing Lines charts.
 - The line audit (`tools/analysis/line-audit.mjs`) counts a chart cluster and stops at `link` nodes. Package D1-AUDIT (section 9) lets a staged line count through its own earlier stage and lists the accepted bootstrap routes (section 2, S1).
@@ -25,13 +25,14 @@ Design package D1-LINES (#242), 2026-11-02, for AGENTS.md principle 7 as the own
 | MV | M3 Biomass to PVC | 7 | 7 | merge of `mv.wood` and `mv.plastics`, one real step added (EDC) |
 | MV | M4 Crude to RP-1 and the static fire | 7 | 7 | merge of `mv.fuels` and `mv.fire` |
 | MV | M5 Eye of Ender; M6 Kanthal | 5; 4 | 5; 4 | exist |
-| HV | H1 Platline II: rhodium and ruthenium | 16 (Ru 12) | 16 | the live GT-- line staged at HV; Pt-Rh gauze as its HV consumer |
-| HV | H2 Hydrazine and Aerozine 50 | 12 | 12 | the live GT-- anthraquinone cycle made the only peroxide route; real Apollo-era propellant |
-| HV | H3 Composite rocket motor: epoxy and Kapton | 10 | 9 | merge of `hv.refinery`, `hv.aromatics`, `hv.rocket`; GTM LCR shortcuts removed |
+| HV | H1 Platline II: rhodium and ruthenium | 20 (9 staged from M1, 11 at HV) | 16 | the live GT-- line staged at HV; Pt-Rh gauze as its HV consumer |
+| HV | H2 Hydrazine and Aerozine 50 | 8 | 8 | the live GT-- anthraquinone cycle made the only peroxide route; real Apollo-era propellant |
+| HV | H3 Composite rocket motor: epoxy and Kapton | 9 (fuel-tank branch 8) | 9 | merge of `hv.refinery`, `hv.aromatics`, `hv.rocket`; GTM LCR shortcuts removed |
 | HV | H4 Kroll titanium from lunar ilmenite | 5 | 5 | moved from the EV chart; TiCl4 purification and MgCl2 electrolysis added (decision D-2, default) |
-| HV | H5 PTFE through R22; H6 SBR; H7 Gasoline; H8 Nichrome | 7; 6; 5; 4 | same | PTFE gains the real R22 pyrolysis step; the rest are merges |
+| HV | H5 PTFE through R22; H6 SBR; H8 Nichrome | 6; 5; 4 | same | PTFE gains the real chloroform, R22 and pyrolysis steps; SBR is a merge |
+| HV | H7 Gasoline | 3 | 3 | not a line (under 4); stays a short chart |
 
-Against the audit baseline (era: lines of 4+, longest): Steam 2, 5 becomes 3, 6; LV 3, 6 becomes 4, 10; MV 5, 8 becomes 6, 10; HV 2, 4 becomes 8, 16, with three lines of 10 or more and two of 12 or more.
+Against the audit baseline (era: lines of 4+, longest): Steam 2, 5 becomes 3, 6; LV 3, 6 becomes 4, 10; MV 5, 8 becomes 6, 10; HV 2, 4 becomes 8, 20, with one line of 10 or more and one of 12 or more (H1). The HV numbers are what `tools/analysis/line-audit.mjs` measures from `pl-data-hv.mjs` (H3, H5 and H6 share one chain group in the chart, `line: 'hvoil'`).
 
 ## 2. Steam
 
@@ -164,7 +165,7 @@ Today the boule (EBF, 1,784 K) melts 32 silicon dust from the Kanthal EBF's SiO2
 
 ## 5. HV
 
-### H1 Platline II: rhodium and ruthenium (16 from the ore; ruthenium 12)
+### H1 Platline II: rhodium and ruthenium (20 measured: 9 staged from M1, 11 at HV)
 
 The platinum slag M1 stores is the insoluble residue of real refining. GT--'s stages turn it into rhodium (pyrosulfate fusion, zinc cementation, chlorination, nitrite-style complexation, reprecipitation) and ruthenium (oxidative fusion to sodium ruthenate, volatile RuO4 distilled off).
 
@@ -188,7 +189,7 @@ The platinum slag M1 stores is the insoluble residue of real refining. GT--'s st
 - Honest note: every rhodium stage runs at 30 to 120 EU/t, so a MV player may run it; no gate is added. The cracker makes ruthenium HV.
 - Byproducts: ZnSO4 → electrolysis (zinc and acid back); salt → brine; Cl2 → HCl; NH3 → NH4Cl; potassium → K2S2O7; water. The rarest metal mixture stays stripped on Earth (`offworld_only.json`; decision D-1).
 
-### H2 Hydrazine and Aerozine 50 (12)
+### H2 Hydrazine and Aerozine 50 (8 measured; steps 1-3 are L2's end product, a crossing, and step 12 is drawn in H3's rocket cluster)
 
 Riedl-Pfleiderer hydrogen peroxide (2-ethylanthraquinone hydrogenated on palladium and autoxidised in air, the world's only industrial route), hydrazine by the peroxide process, and Aerozine 50 (half hydrazine, half UDMH) burned with N2O4: the hypergolic pair of the Titan II and the Apollo service module. GT-- already registers and runs the whole cycle in its `gtnn:exxonmobil_chemical_plant` (recipe type `gtceu:chemical_plant`); a direct H2 + O2 → H2O2 reactor recipe (240 EU/t) makes it optional today, and GTM's rocket fuel is UDMH alone.
 
@@ -212,7 +213,7 @@ Riedl-Pfleiderer hydrogen peroxide (2-ethylanthraquinone hydrogenated on palladi
 - Removed: `hydrogen_peroxide` (chemical and large reactor, H2 + O2 directly: not an industrial process), `dimethylhydrazine_from_methanol` (one step, not real), GTM's `rocket_fuel_from_oxygen` and `rocket_fuel_from_dinitrogen_tetroxide` (replaced by step 11).
 - Byproducts: H2S from coal tar → sulfuric acid; coke dust → S1 sinter; dilute HCl from Raschig → distillery → HCl; water. EAQ circulates; only anthracene (coal tar) is made up.
 
-### H3 Composite rocket motor: epoxy and Kapton (10; critical path 9)
+### H3 Composite rocket motor: epoxy and Kapton (9; fuel-tank branch 8; step 1 is the rig's base resource)
 
 The first rocket's motor already crosses MV and HV (`hv.md`, *The first rocket*). Today the charts split it into eleven chains of 1 to 3 (refinery, aromatics, rocket). Merged, with GTM's large-reactor shortcuts removed, it is the cumene, bisphenol A and epoxy chain into the composite autoclave.
 
@@ -246,11 +247,11 @@ It already runs at HV: the EV gate's titanium is made on Earth from the lunar il
 - Magnesium loop: 3 MgCl2 → electrolyzer → Mg + 2,000 mB Cl2 (`grindless:magnesium_chloride_electrolysis`; GTM has only `salt_from_magnesium_chloride`, MgCl2 reduced by sodium, which stays as the alternative). The reduction's 6 MgCl2 per titanium give back 2 Mg and the 4,000 mB Cl2 of step 3, as in real Kroll plants. The loop adds no length.
 - Byproducts: CO → methanol or M1's formate; wrought iron → steel; silica dust (bottoms) → glass or silicon.
 
-### H5 PTFE through R22 (7), H6 SBR (6), H7 Gasoline (5), H8 Nichrome (4)
+### H5 PTFE through R22 (6), H6 SBR (5), H7 Gasoline (3, not a line), H8 Nichrome (4)
 
-- **H5:** rig (1) → refinery gas (2) → distillery methane (3) → chloroform (4) → chloroform + 2 HF → chlorodifluoromethane (R22) + 2 HCl (5, new recipe; GTM registers R22 with no recipe) → 2 R22 → TFE + 2 HCl, pyrolysis (6, new; replaces `tetrafluoroethylene_from_chloroform`) → PTFE (7). HCl to vinyl chloride and acid.
-- **H6:** rig → refinery → cracking → styrene (benzene + ethylene) → SBR → vulcanised rubber.
-- **H7:** rig → refinery → reformer toluene / raw gasoline (large reactor) → gasoline.
+- **H5:** rig (base resource) → refinery gas (1) → steam-cracking methane (2; the refinery's `steamcrack` recipes, there is no distillery recipe) → chloroform (3, methane + Cl2) → chloroform + 2 HF → chlorodifluoromethane (R22) + 2 HCl (4, new recipe; GTM registers R22 with no recipe) → 2 R22 → TFE + 2 HCl, pyrolysis (5, new; replaces `tetrafluoroethylene_from_chloroform`) → PTFE (6). HCl to vinyl chloride and acid.
+- **H6:** rig (base resource) → refinery (1) → cracking (2) → styrene (benzene + ethylene) → SBR → vulcanised rubber: 5 in all.
+- **H7:** rig (base resource) → refinery → reformer toluene / raw gasoline (large reactor) → gasoline: 3 steps, so a short chart, not a line.
 - **H8:** unchanged.
 - Leaving or merging in the HV chart: refinery (4 x 1) and aromatics (5 x 1) become H3's, H6's and H7's front; syngas (2) becomes H2's hydrogen feeder; rocket (3 + 2) becomes H3.
 
