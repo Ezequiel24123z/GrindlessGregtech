@@ -20,8 +20,9 @@
 //           end, + biocemented regolith on a naquadah alloy frame; the drill's pad)
 // Bootstrap: the drill stands on Proxima base casing, which needs biocement, which needs the drill's regolith; so the heap is built
 // from GTM's inert casing and also cements lunar regolith (c4, half c3's yield) for the first pad.
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the drill is 5 x 6 x 5 (a base-casing pad with the parts,
-// four naquadah alloy frame legs, a tungstensteel pipe drill string, a frame crown round a gearbox top drive); the heap 9 x 3 x 9
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the drill is 7 x 12 x 7 (a base-casing pad with the parts,
+// four tapering naquadah alloy frame legs with bracing, a tungstensteel pipe drill string and rack, a frame crown round a gearbox top
+// drive); the heap 9 x 3 x 9
 // (an inert-casing liner with the parts, a two-high berm, PTFE pipe drip lines across the top, air inside).
 // Textures: tools/assets/Build-UHVProximaGroundTextures.ps1. Names: client_scripts/grindless/uhv_proxima_ground_lang.js.
 // Published: global.grindless.proximaGround (.machines, .ids, .table, .order).
@@ -69,7 +70,7 @@
       texture: BASE_TEXTURE,
       // items in: the coring head, the survey, the californium source and the circuit; out: the ice core and the regolith
       maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },
-      width: 5, depth: 5, height: 6
+      width: 7, depth: 7, height: 12
     },
     heap: {
       name: 'biomining_heap',
@@ -86,8 +87,10 @@
     }
   }
 
-  // The drill: row 0 is the pad (X: base casing or a part; T: the drill string through it; S: the controller, front middle); rows 1-4
-  // the four frame legs (F) and the drill string (T); row 5 the frame crown round the gearbox top drive (D). ' ' is anything.
+  // The drill, 7 x 12 x 7: row 0 is the pad (X: base casing or a part; T: the drill string through it; S: the controller, front middle);
+  // four naquadah alloy frame legs taper inward from the pad's corners (rows 1-10), braced by frame rings at rows 4, 8 and a cross at
+  // row 6; the drill string (T) rises on the axis to the tungstensteel gearbox top drive (D, rows 10-11) under a frame crown, with a
+  // pipe rack (T) lying beside the string on the pad's right. ' ' is anything.
   function drillSlices(m) {
     var slices = []
     var last = m.depth - 1
@@ -97,13 +100,21 @@
       for (var r = 0; r < m.height; r++) {
         var row = ''
         for (var c = 0; c < m.width; c++) {
-          var centre = si === mid && c === mid
-          var edge = si === 0 || si === last || c === 0 || c === m.width - 1
-          var corner = (si === 0 || si === last) && (c === 0 || c === m.width - 1)
-          var ch
-          if (r === 0) ch = centre ? 'T' : (si === last && c === mid ? 'S' : 'X')
-          else if (r === m.height - 1) ch = centre ? 'D' : (edge ? 'F' : ' ')
-          else ch = centre ? 'T' : (corner ? 'F' : ' ')
+          var dz = Math.abs(si - mid)
+          var dx = Math.abs(c - mid)
+          var ring = Math.max(dz, dx)
+          var corner = dz === dx
+          var ch = ' '
+          if (r === 0) ch = dz === 0 && dx === 0 ? 'T' : (si === last && c === mid ? 'S' : 'X')
+          else if (dz === 0 && dx === 0) ch = r >= m.height - 2 ? 'D' : 'T'
+          else if (r === m.height - 1) ch = ring <= 2 && (ring === 1 || ring === 2) ? 'F' : ' '
+          else if (r === 4) ch = ring === 3 ? 'F' : ' '
+          else if (r === 8) ch = ring === 2 ? 'F' : ' '
+          else if (r === 6) ch = (dz === 0 || dx === 0) && ring <= 2 ? 'F' : ' '
+          else if (r <= 3 && corner && ring === 3) ch = 'F'
+          else if ((r === 1 || r === 2) && c === mid + 2 && si >= 1 && si <= 5) ch = 'T'
+          else if (r >= 5 && r <= 7 && corner && ring === 2) ch = 'F'
+          else if (r >= 9 && corner && ring === 1) ch = 'F'
           row += ch
         }
         rows.push(row)

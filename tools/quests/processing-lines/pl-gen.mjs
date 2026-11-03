@@ -209,12 +209,18 @@ function writeRoots(file, model) {
   const otherLines = others.map(([k, v]) => `    "${k}": ${JSON.stringify(v)}`);
   const all = otherLines.concat(entries);
   text = text.replace(re, '"allowRoots": {\n' + all.join(',\n') + '\n  }');
-  // quests that stand alone on purpose (alone: true in the data): the block is written again from the data every time
+  // quests that stand alone on purpose (alone: true in the data): our entries are written again from the data every time; the entries other
+  // generators own (multiblocks/gen.mjs's "multiblocks" and "_why_multiblocks") are kept, so the two writers can run in either order
   const alone = model.chapters.map((m) => [m.file, m.nodes.filter((nd) => nd.alone && !nd.link).map((nd) => nd.id)]).filter(([, ids]) => ids.length);
+  const curIso = JSON.parse(text).allowIsolated || {};
+  const isoLines = Object.entries(curIso).filter(([k]) => !ours.has(k) && !k.startsWith('pl_') && k !== '_why')
+    .map(([k, v]) => `    "${k}": ${JSON.stringify(v)}`);
   text = text.replace(/\n {2}"allowIsolated": \{[\s\S]*?\n {2}\},/, '');
   if (alone.length) {
-    const isoLines = ['    "_why": "Quests that stand alone on purpose: alone: true in a processing-lines data file (docs/quests.md, section 17)."',
-      ...alone.map(([k, ids]) => `    "${k}": [${ids.map((id) => '"' + id + '"').join(', ')}]`)];
+    isoLines.push('    "_why": "Quests that stand alone on purpose: alone: true in a processing-lines data file (docs/quests.md, section 17)."',
+      ...alone.map(([k, ids]) => `    "${k}": [${ids.map((id) => '"' + id + '"').join(', ')}]`));
+  }
+  if (isoLines.length) {
     const block = '"allowIsolated": {\n' + isoLines.join(',\n') + '\n  }';
     text = text.replace(/\n {2}"allowLongEdges": /, `\n  ${block},\n  "allowLongEdges": `);
     if (!text.includes(block)) throw new Error('could not write allowIsolated in ' + file);

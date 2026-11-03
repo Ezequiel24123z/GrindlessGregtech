@@ -1074,7 +1074,7 @@
     {"id":"grindless:interposer_waveguides","kind":"item","needUse":true,"needMade":true,"made":["gtceu:femtosecond_writing"],"used":["gtceu:molecular_beam_epitaxy"]},
     {"id":"grindless:ion_exchange_resin","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:assembler","gtceu:assembly_line","gtceu:large_chemical_reactor","gtceu:ultrapure_water"]},
     {"id":"grindless:ion_thruster","kind":"item","needUse":true,"needMade":true,"made":["gtceu:thruster_assembly"],"used":["gtceu:thruster_assembly"]},
-    {"id":"grindless:ion_tracked_foil","kind":"item","needUse":true,"needMade":true,"made":["gtceu:heavy_ion_irradiation"],"used":["gtceu:assembly_line","gtceu:chemical_reactor","gtceu:large_chemical_reactor"]},
+    {"id":"grindless:ion_tracked_foil","kind":"item","needUse":true,"needMade":true,"made":["gtceu:heavy_ion_irradiation"],"used":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"]},
     {"id":"grindless:ionian_quantum_seed","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["ae2:item_transformation"]},
     {"id":"grindless:ionian_sublimate","kind":"item","needUse":true,"needMade":true,"made":["gtceu:fumarole_condensing"],"used":["gtceu:fumarole_condensing"]},
     {"id":"grindless:ir_spallation_residue","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pgm_refining"],"used":["gtceu:pgm_refining"]},
