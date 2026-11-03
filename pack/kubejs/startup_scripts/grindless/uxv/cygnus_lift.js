@@ -164,15 +164,6 @@
     return s.booth('F', 3).fn()
   }
 
-  // built in the machine registry callback: uev/shapes.js may load after this file
-  function spec(m) {
-    return G.uevShapes.spec(Pat, {
-      w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
-      fn: m.name === 'stellar_elevator' ? liftTower() : m.name === 'plasma_mass_filter' ? filterSolenoid() : condensationColumn()
-    })
-  }
-
-
   // one EMI line per recipe, read from its data
   function infoOf(dataKey) {
     return function (data) {
