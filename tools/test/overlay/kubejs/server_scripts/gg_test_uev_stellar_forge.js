@@ -158,6 +158,7 @@
       var part = false
       if (sym.kind === 'controller') { controller = { x: c.x, y: c.y, z: c.z }; return }
       if (sym.kind === 'blocks') block = sym.blocks.length > 1 ? COIL : sym.blocks[0]
+      else if (sym.kind === 'frames') block = 'gtceu:' + sym.materials[0] + '_frame'
       else if (sym.kind === 'oneOf') {
         if (c.si === last && c.ri === ctrl.ri && parts[c.ci]) { block = parts[c.ci]; part = true }
         else sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0] })

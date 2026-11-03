@@ -397,7 +397,7 @@
           var live = S.units.filter(function (u) { return u.phase === 'ready' && u.m && u.m.getRecipeLogic().isWorking() }).length
           note('sources_running', live + ' of ' + SOURCES.length + ' sources working at the start')
         } else if (elapsed > 1200) {
-          check('hold_start', false, 'the hold did not start: status ' + logic.getStatus() + ', reasons ' + logic.getFailureReasons() + ', bus ' + contents(S.gateBus.getInventory()))
+          check('hold_start', false, 'the hold did not start: status ' + logic.getStatus() + ', reasons ' + logic.getFailureReasons() + ', network stored ' + stored() + ', bus ' + contents(S.gateBus.getInventory()))
           finish()
         }
         return
