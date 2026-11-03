@@ -9,8 +9,8 @@
 //                                  circuit 2 the calibrated oscillator banks (the map is kept), circuit 3 the map again from the used instruments.
 //                                  All three run only at Sgr A* (gcyr:black_hole_orbit).
 //
-// Textures: the face is RF-6D's. Until then the overlay is GTM's own implosion compressor face (swap the path to grindless:block/multiblock/horizon_interferometer
-// when RF-6D ships it). Names: client_scripts/grindless/max_horizon_interferometer_lang.js.
+// Textures: the face is our own (ART-POLISH #298, Build-MaxHorizonInterferometerTextures.ps1), grindless:block/multiblock/horizon_interferometer.
+// Names: client_scripts/grindless/max_horizon_interferometer_lang.js.
 // Published for the recipe script: global.grindless.maxHorizonInterferometer.
 (function () {
   const G = global.grindless
@@ -136,7 +136,7 @@
           Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
           Text.translate('gtceu.multiblock.parallelizable.tooltip')
         ])
-        .workableCasingModel(m.texture, 'gtceu:block/multiblock/implosion_compressor')
+        .workableCasingModel(m.texture, 'grindless:block/multiblock/horizon_interferometer')
     })
   })
 })()
