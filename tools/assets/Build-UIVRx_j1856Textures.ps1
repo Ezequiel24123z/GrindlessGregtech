@@ -166,7 +166,7 @@ function New-Face {
     return @{ C = $c; E = $e }
 }
 
-$Dirs = @('block/multiblock/crust_lift', 'block/multiblock/neutron_drip_separator', 'block/multiblock/neutronium_cage', 'block/multiblock/r_process_decompressor', 'block/multiblock/decay_heat_vault')
+$Dirs = @('block/multiblock/crust_lift', 'block/multiblock/neutronium_cage', 'block/multiblock/r_process_decompressor', 'block/multiblock/decay_heat_vault')
 $Kinds = @('lift', 'drip', 'cage', 'swell', 'vault')
 for ($m = 0; $m -lt $Dirs.Count; $m++) {
     $idle = New-Face $Kinds[$m] 0 $false

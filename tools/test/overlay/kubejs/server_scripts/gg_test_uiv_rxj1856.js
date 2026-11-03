@@ -4,7 +4,7 @@
 // Overworld at the same X/Z/Y. The relay platform of B1 is at X 64, Z 64 and is not touched.
 // Doubt: the decay heat vault as a local generator written final (12,000 ticks at 33,554,432 EU/t into its own UIV dynamo hatch) at a tier 11 datapack
 // dimension, and the dimension lock of the five machines (they form anywhere, their recipes run only at the site).
-//   T1: the five machines form at the site; a crust lift runs there and is refused in the Overworld; the separator and the vault start; the pellet,
+//   T1: the five machines form at the site; a crust lift runs there and is refused in the Overworld; the cage separates crust and the vault starts; the pellet,
 //   the field generator, the element 119 recoil and census II resolve; the vault's figures and its dynamo hatch; the worn tether's scrap row.
 (function () {
   var NAME = 'uiv_rxj1856'
@@ -17,7 +17,7 @@
   var S = null
   var J = null
 
-  var MACHINES = ['crust_lift', 'neutron_drip_separator', 'neutronium_cage', 'r_process_decompressor', 'decay_heat_vault']
+  var MACHINES = ['crust_lift', 'neutronium_cage', 'r_process_decompressor', 'decay_heat_vault']
   var HATCH = {
     input_bus: { id: 'gtceu:uhv_input_bus', key: 'bus' }, output_bus: { id: 'gtceu:uhv_output_bus', key: 'out' },
     energy_input: { id: 'gtceu:uiv_energy_input_hatch_16a', key: 'e0' }, energy_output: { id: 'gtceu:uiv_energy_output_hatch', key: 'dyn' },
@@ -25,7 +25,6 @@
   }
   var WANT = {
     crust_lift: ['input_bus', 'output_bus', 'energy_input'],
-    neutron_drip_separator: ['input_bus', 'output_bus', 'output_hatch', 'energy_input'],
     neutronium_cage: ['input_bus', 'output_bus', 'input_hatch', 'output_hatch', 'energy_input'],
     r_process_decompressor: ['input_bus', 'output_bus', 'input_hatch', 'output_hatch', 'energy_input'],
     decay_heat_vault: ['input_bus', 'output_bus', 'output_hatch', 'energy_output']
@@ -175,13 +174,36 @@
     older.forEach(function (o) { check('older_' + o[0], !!S.recipe(o[0]), o[1]) })
   }
 
-  function farPos(k) { return { x: X0 + 6 + k * 13, y: BASE_Y, z: 40 } }
+  // shelf-packs the machines into the 64 x 64 band: the controller sits inside its structure, so each origin comes from the real extents
+  function extent(name) {
+    var desc = S.G.structures['gtceu:' + name]
+    var ctl = null
+    desc.slices.forEach(function (rows, si) { rows.forEach(function (row) { for (var ci = 0; ci < row.length; ci++) { var s = desc.symbols[row.charAt(ci)]; if (s && s.kind === 'controller') ctl = { si: si, ci: ci } } }) })
+    var w = 0
+    desc.slices.forEach(function (rows) { rows.forEach(function (row) { w = Math.max(w, row.length) }) })
+    return { minx: -(w - 1 - ctl.ci), w: w, minz: -(desc.slices.length - 1 - ctl.si), d: desc.slices.length }
+  }
+  function layout() {
+    var out = []
+    var cx = X0 + 1
+    var cz = 1
+    var rowD = 0
+    MACHINES.forEach(function (m) {
+      var e = extent(m)
+      if (cx + e.w > X1) { cx = X0 + 1; cz += rowD + 2; rowD = 0 }
+      out.push({ x: cx - e.minx, y: BASE_Y, z: cz - e.minz })
+      cx += e.w + 2
+      rowD = Math.max(rowD, e.d)
+    })
+    return out
+  }
 
   function step() {
     var k
     if (S.phase === 'build') {
       S.pos = {}
-      MACHINES.forEach(function (m, i) { S.pos[m] = { O: farPos(i), p: build(FAR, m, farPos(i)) } })
+      var LO = layout()
+      MACHINES.forEach(function (m, i) { S.pos[m] = { O: LO[i], p: build(FAR, m, LO[i]) } })
       var NO = { x: X0 + 24, y: BASE_Y, z: 40 }
       for (var cx = 0; cx < 3; cx++) for (var cz = 0; cz < 3; cz++) {
         ticket(NEAR, { x: X0 + cx * 16, z: cz * 16 })
@@ -202,14 +224,15 @@
         var diag = 'near crust lift formed=' + nearFormed
         try { if (nc && !nearFormed) diag += ' pattern=' + String(nc.getPattern().getError()) } catch (e) { diag += ' (no pattern error: ' + e + ')' }
         emit('forms_anywhere', 'NOTE', diag)
-        // the lift runs at the site, is refused in the Overworld; the separator and the vault start
+        // the lift runs at the site, is refused in the Overworld; the cage separates crust and the vault starts
         var L = S.pos.crust_lift
         stock(FAR, L.p, 1, [['grindless:crust_lift_tether', 1], ['grindless:polar_cap_electrode', 1]])
         at(FAR, L.O).getRecipeLogic().updateTickSubscription()
         var N = S.near
         if (nc) { stock(NEAR, N.p, 1, [['grindless:crust_lift_tether', 1], ['grindless:polar_cap_electrode', 1]])
         nc.getRecipeLogic().updateTickSubscription() }
-        var P = S.pos.neutron_drip_separator
+        var P = S.pos.neutronium_cage
+        try { at(FAR, P.O).setActiveRecipeType(1) } catch (e) { emit('cage_type_switch', 'NOTE', String(e)) }
         stock(FAR, P.p, 1, [['grindless:neutron_star_crust', 4], ['grindless:neutron_supermirror', 1]])
         at(FAR, P.O).getRecipeLogic().updateTickSubscription()
         var V = S.pos.decay_heat_vault
@@ -230,8 +253,9 @@
       check('lift_runs', lift.getRecipeLogic().isWorking(), 'crust lift at the site: status ' + lift.getRecipeLogic().getStatus())
       var near = at(NEAR, S.near.O)
       if (near) check('lift_refused_elsewhere', !near.getRecipeLogic().isWorking(), 'same recipe in the Overworld: working ' + near.getRecipeLogic().isWorking() + ', status ' + near.getRecipeLogic().getStatus())
-      var sep = at(FAR, S.pos.neutron_drip_separator.O)
-      check('separator_runs', sep.getRecipeLogic().isWorking(), 'inner_crust: status ' + sep.getRecipeLogic().getStatus())
+      var sep = at(FAR, S.pos.neutronium_cage.O)
+      var dt = ''; try { dt = String(sep.getDefinition().getRecipeTypes().map(function (t) { return String(t.registryName) })) } catch (e) { dt = 'types? ' + e }
+      check('drip_works_separates', sep.getRecipeLogic().isWorking(), 'inner_crust: status ' + sep.getRecipeLogic().getStatus() + ' types ' + dt + ' stored ' + sep.energyContainer.getEnergyStored())
       var vault = at(FAR, S.pos.decay_heat_vault.O)
       check('vault_runs', vault.getRecipeLogic().isWorking(), 'kilonova_decay: status ' + vault.getRecipeLogic().getStatus())
       try {

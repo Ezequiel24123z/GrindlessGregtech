@@ -110,7 +110,6 @@
   "loop_naquadria_magnet_works": { "sounds": [ { "name": "grindless:loop_naquadria_magnet_works", "volume": 0.65, "attenuation_distance": 28, "stream": false } ] },
   "loop_naquadria_refinery": { "sounds": [ { "name": "grindless:loop_naquadria_refinery", "volume": 0.65, "attenuation_distance": 28, "stream": false } ] },
   "loop_nebula_collector": { "sounds": [ { "name": "grindless:loop_nebula_collector", "volume": 0.65, "attenuation_distance": 28, "stream": false } ] },
-  "loop_neutron_drip_separator": { "sounds": [ { "name": "grindless:loop_neutron_drip_separator", "volume": 0.65, "attenuation_distance": 28, "stream": false } ] },
   "loop_neutronium_cage": { "sounds": [ { "name": "grindless:loop_neutronium_cage", "volume": 0.7, "attenuation_distance": 28, "stream": false } ] },
   "loop_nickel_56_burner": { "sounds": [ { "name": "grindless:loop_nickel_56_burner", "volume": 0.65, "attenuation_distance": 32, "stream": false } ] },
   "loop_nitride_magnet_works": { "sounds": [ { "name": "grindless:loop_nitride_magnet_works", "volume": 0.65, "attenuation_distance": 28, "stream": false } ] },

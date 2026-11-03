@@ -14,8 +14,9 @@
 // - No wear: the pellets are durable tooling and are never consumed. A chanced pellet input (1 run in 64) was tried and made GTM drop the run (bench
 //   20261029-144925-server: wear step, "default_fail"), so it was cut; the pellet is only ever read from the bus.
 //
-// Structure (13 wide x 10 high x 11 deep, G.uivShapes hall silhouette): a framed press hall with a plinth, window courses, four pillar frames, an
-// anvil bed with a coil-wrapped compression cell, a ram on pipe rods under a pipe lantern. Parts go in the floor: 1 maintenance, 1 or 2 energy hatches,
+// Structure (19 wide x 13 high x 25 deep, uiv/shapes_halls.js): a tall framed hall with four press stations in a line, each an RHEA bed under
+// metallic-hydrogen uprights, a ram on pipe rods and four metallic hydrogen coils, a gantry on rails over them and a melt line on the floor.
+// Parts go in the floor: 1 maintenance, 1 or 2 energy hatches,
 // 1 or 2 input and 2 output buses, 1 parallel hatch (optional). Textures: tools/assets/Build-UIVCompressionHallTextures.ps1. Names / tooltips:
 // client_scripts/grindless/uiv_compression_hall_lang.js. Controller recipe: server_scripts/grindless/uiv/compression_hall.js.
 (function () {
@@ -31,12 +32,9 @@
   const MAX_PELLETS = 4
   const BASE = 4
   const MAX_PARALLEL = 2147483647
-  const W = 13
-  const H = 10
-  const D = 11
-  const CX = 6
-  const CZ = 5
-  const HH = 8
+  const W = 19
+  const H = 13
+  const D = 25
 
   // ---------------------------------------------------------------- pure arithmetic (node-tested)
   // pellets that count: 0..4
@@ -55,54 +53,18 @@
   }
 
   // ---------------------------------------------------------------- the silhouette
-  // inner cells of the hall: pillar frames, an anvil bed under a coil cell, a ram on rods
-  function inner(x, y, z) {
-    var dx = Math.abs(x - CX)
-    var dz = Math.abs(z - CZ)
-    if (dx === 4 && dz === 3) return 'Q'
-    if (y === 1 && dx <= 2 && dz <= 1) return 'B'
-    if (y === 2 && dx <= 1 && dz === 0) return 'C'
-    if (y === HH - 2 && dx <= 2 && dz <= 1) return 'B'
-    if (y === HH - 3 && dx === 0 && dz === 0) return 'P'
-    return null
-  }
-  // two courses of pipe lantern over the roof
-  function crown(x, k, z) {
-    var dx = Math.abs(x - CX)
-    var dz = Math.abs(z - CZ)
-    if (k === 0) return dx <= 2 && dz <= 1 ? (dx === 0 && dz === 0 ? 'P' : 'A') : ' '
-    if (k === 1) return dx === 0 && dz === 0 ? 'P' : ' '
-    return ' '
-  }
-
-  var HALL_FN = null
-  function cellOf(x, y, z) {
-    if (HALL_FN === null) HALL_FN = G.uivShapes.hall({ w: W, d: D, hh: HH, mull: 4, crown: crown, inner: inner })
-    return HALL_FN(x, y, z)
-  }
-
+  // the hall's layout is uiv/shapes_halls.js: four press stations down a tall hall, RHEA beds and metallic-hydrogen uprights, a gantry over them
   var SPEC = null
   function makeSpec() {
-    return G.uivShapes.spec(Pat, {
-      w: W, h: H, d: D, fn: cellOf,
-      pal: {
-        F: CASING,
-        Q: 'tungsten_steel',
-        A: 'gtceu:stable_machine_casing',
-        L: 'gtceu:laminated_glass',
-        P: 'gtceu:tungstensteel_pipe_casing',
-        C: 'grindless:metallic_hydrogen_coil_block',
-        B: 'gtceu:tungstensteel_gearbox'
-      },
-      parts: [
-        Pat.part('maintenance', { exact: 1 }),
-        Pat.part('energy_input', { min: 1, max: 2 }),
-        Pat.part('input_bus', { min: 1, max: 2 }),
-        Pat.part('output_bus', { min: 1, max: 2 }),
-        G.parallelHatch.part()
-      ]
-    })
+    return G.uivShapes.build(Pat, ID, CASING, [
+      Pat.part('maintenance', { exact: 1 }),
+      Pat.part('energy_input', { min: 1, max: 2 }),
+      Pat.part('input_bus', { min: 1, max: 2 }),
+      Pat.part('output_bus', { min: 1, max: 2 }),
+      G.parallelHatch.part()
+    ])
   }
+
 
   // ---------------------------------------------------------------- GTM glue
   var LC = null

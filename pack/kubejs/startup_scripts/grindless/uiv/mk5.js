@@ -86,8 +86,8 @@
     ])
   }
 
-  // the Mk5 ring: an octagonal annulus of fusion casing lined with the metallic hydrogen coil; at most 16 energy hatches:
-  // 16 x 2^5 x 10,000,000 = 5,120,000,000 EU
+  // the Mk5 ring: a 39 x 11 x 39 torus (uiv/shapes_halls.js) round a lit metallic-hydrogen solenoid: Li-Sn fusion casing on the outer wall with
+  // the hatch ports, RHEA inside, metallic-hydrogen field magnets over the top; at most 16 energy hatches: 16 x 2^5 x 10,000,000 = 5,120,000,000 EU
   function ringSpec() {
     var lay = G.uivShapes.layouts.uiv_fusion_reactor()
     return {
@@ -96,6 +96,8 @@
         S: Pat.controller(),
         C: Pat.block(CASING),
         K: Pat.block(COIL),
+        R: Pat.block('grindless:rhea_casing'),
+        M: Pat.block('grindless:mh_field_casing'),
         A: Pat.block('gtceu:stable_machine_casing'),
         L: Pat.block('gtceu:laminated_glass'),
         P: Pat.block('gtceu:tungstensteel_pipe_casing'),

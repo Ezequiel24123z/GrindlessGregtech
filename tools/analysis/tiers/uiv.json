@@ -166,7 +166,6 @@
       "label": "RX J1856.5-3754",
       "landedWhen": [
         "gtceu:crust_lift",
-        "gtceu:neutron_drip_separator",
         "gtceu:neutronium_cage",
         "gtceu:r_process_decompressor",
         "gtceu:decay_heat_vault"
@@ -635,32 +634,10 @@
       "note": "Machine 13 (RX J1856.5-3754 orbit)."
     },
     {
-      "machine": "gtceu:neutron_drip_separator",
-      "types": [
-        "gtceu:neutron_drip_separation"
-      ],
-      "maxEUt": 33554432,
-      "needs": [
-        "eu:uiv"
-      ],
-      "partsFromStructure": true,
-      "partAbilities": {
-        "energy_input": [
-          "gtceu:uiv_energy_input_hatch",
-          "gtceu:uiv_energy_input_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch",
-          "gtceu:uiv_wireless_energy_hatch_4a",
-          "gtceu:uiv_wireless_energy_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch_64a"
-        ]
-      },
-      "package": "B2",
-      "note": "Machine 14."
-    },
-    {
       "machine": "gtceu:neutronium_cage",
       "types": [
-        "gtceu:neutronium_caging"
+        "gtceu:neutronium_caging",
+        "gtceu:neutron_drip_separation"
       ],
       "maxEUt": 33554432,
       "needs": [
@@ -1463,7 +1440,7 @@
         "grindless:crust_nuclei"
       ],
       "without": [
-        "operate:gtceu:neutron_drip_separator*"
+        "operate:gtceu:neutronium_cage*"
       ],
       "expect": "unreachable",
       "package": "B2"
@@ -1892,7 +1869,6 @@
       "label": "RX J1856.5-3754 and what comes home from it",
       "items": [
         "m:gtceu:crust_lift",
-        "m:gtceu:neutron_drip_separator",
         "m:gtceu:neutronium_cage",
         "m:gtceu:r_process_decompressor",
         "m:gtceu:decay_heat_vault",

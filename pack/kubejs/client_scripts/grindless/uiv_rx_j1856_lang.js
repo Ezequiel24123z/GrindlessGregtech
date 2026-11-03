@@ -13,8 +13,7 @@
     // [key, en]
     var ENTRIES = [
         ['block.gtceu.crust_lift', 'Crust Lift'],
-        ['block.gtceu.neutron_drip_separator', 'Neutron Drip Separator'],
-        ['block.gtceu.neutronium_cage', 'Neutronium Cage'],
+        ['block.gtceu.neutronium_cage', 'Neutron Drip Works'],
         ['block.gtceu.r_process_decompressor', 'R-Process Decompressor'],
         ['block.gtceu.decay_heat_vault', 'Decay Heat Vault'],
         ['gtceu.crust_lifting', 'Crust Lifting'],
@@ -24,8 +23,7 @@
         ['gtceu.decay_heat', 'Decay Heat'],
 
         ['grindless.machine.crust_lift.tooltip.0', '\u00a77Lifts neutron-star crust up a tether and a polar-cap electrode.'],
-        ['grindless.machine.neutron_drip_separator.tooltip.0', '\u00a77Splits the crust at the neutron drip line behind a nickel-58 guide.'],
-        ['grindless.machine.neutronium_cage.tooltip.0', '\u00a77Cools drip neutrons in superfluid helium and cages them.'],
+        ['grindless.machine.neutronium_cage.tooltip.0', '\u00a77Splits the crust at the drip line, then cages the neutrons.'],
         ['grindless.machine.r_process_decompressor.tooltip.0', '\u00a77Lets crust nuclei swell in a flood of neutrons: the r-process.'],
         ['grindless.machine.decay_heat_vault.tooltip.0', '\u00a77Holds a kilonova capsule while its heat decays into electricity.'],
         ['grindless.machine.decay_heat_vault.tooltip.1', 'One run at a time, through its own UIV dynamo hatch.'],

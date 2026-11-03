@@ -6,8 +6,9 @@
 // grindless:rx_j1856_orbit (UIV-B1's far place; the recipes carry recipe.dimension(...) like uev/sirius.js).
 //
 //   gtceu:crust_lift               9 x 9 x 15, UIV (31,457,280 EU/t). Type gtceu:crust_lifting (circuit 1 crust lift).
-//   gtceu:neutron_drip_separator   7 x 7 x 9.  Type gtceu:neutron_drip_separation (circuit 1 inner crust, 2 drip neutrons).
-//   gtceu:neutronium_cage          7 x 7 x 7 in metallic-hydrogen coil blocks. Type gtceu:neutronium_caging (circuit 1 neutron superfluid, 2 pellet).
+//   gtceu:neutron_drip_separator   gone: its recipe type gtceu:neutron_drip_separation (circuit 1 inner crust, 2 drip neutrons) runs in the cage below.
+//   gtceu:neutronium_cage          the Neutron Drip Works, 21 x 13 x 29 in neutron-star site casing (uiv/shapes_halls.js). Types gtceu:neutronium_caging
+//                                  (circuit 1 neutron superfluid, 2 pellet) and gtceu:neutron_drip_separation.
 //   gtceu:r_process_decompressor   9 x 7 x 9.  Type gtceu:r_process_decompression (circuit 1 hot r-process mix, 2 flashed target).
 //   gtceu:decay_heat_vault         7 x 7 x 7, a generator written at its final figure (lib/generators.js; NOT in power/generators.js) that sends
 //                                  its EU out through its own UIV dynamo hatch only. Type gtceu:decay_heat (circuit 1 sealed capsule, 2 opened ash).
@@ -68,17 +69,18 @@ const SITE_TEXTURE = 'grindless:block/uiv/neutron_star_site_casing'
       width: 9, height: 13, depth: 9, casing: SITE_CASING, texture: SITE_TEXTURE, vacuum: true, rings: [SITE_CASING, SITE_CASING], generator: false
     },
     {
-      name: 'neutron_drip_separator', machine: 'gtceu:neutron_drip_separator', type: 'neutron_drip_separation',
-      dataKey: 'grindless_neutron_drip_separation', lang: 'Neutron Drip Separator',
+      // recipe type only: the Neutron Drip Works (neutronium_cage) runs it; the separator machine was merged into it (D4-SHAPE-UIV-B)
+      name: 'neutron_drip_separator', typeOnly: true, type: 'neutron_drip_separation',
+      dataKey: 'grindless_neutron_drip_separation',
       maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 1 },
-      parts: [['input_bus', 1, 2], ['output_bus', 1, 2], ['output_hatch', 1, 2], ['energy_input', 1, 2]],
-      width: 7, height: 7, depth: 9, casing: CASING, texture: CASING_TEXTURE, vacuum: false, rings: [SITE_CASING, SITE_CASING], generator: false
+      generator: false
     },
     {
-      name: 'neutronium_cage', machine: 'gtceu:neutronium_cage', type: 'neutronium_caging', dataKey: 'grindless_neutronium_caging', lang: 'Neutronium Cage',
+      name: 'neutronium_cage', machine: 'gtceu:neutronium_cage', type: 'neutronium_caging', types: ['neutronium_caging', 'neutron_drip_separation'],
+      dataKey: 'grindless_neutronium_caging', lang: 'Neutron Drip Works',
       maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 2, fluidsOut: 2 },
       parts: [['input_bus', 1, 2], ['output_bus', 1, 2], ['input_hatch', 1, 2], ['output_hatch', 1, 2], ['energy_input', 1, 2]],
-      width: 7, height: 7, depth: 7, casing: CASING, texture: CASING_TEXTURE, vacuum: false, rings: [COIL, COIL, COIL, COIL], generator: false
+      width: 21, height: 13, depth: 29, casing: SITE_CASING, texture: SITE_TEXTURE, vacuum: false, rings: [], generator: false
           },
           {
             name: 'r_process_decompressor', machine: 'gtceu:r_process_decompressor', type: 'r_process_decompression',
@@ -155,6 +157,7 @@ const SITE_TEXTURE = 'grindless:block/uiv/neutron_star_site_casing'
       var type = GTRecipeTypes.get(m.type)
       if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
       type.addDataInfo(infoOf(m.dataKey))
+      if (m.typeOnly) return
       m.spec = spec(m)
       Pat.register(m.machine, m.spec)
 
@@ -162,15 +165,19 @@ const SITE_TEXTURE = 'grindless:block/uiv/neutron_star_site_casing'
       // the vault: written at its final figure, one run at a time, through its dynamo hatch only (lib/generators.js)
       if (m.generator) builder = G.generators.configure(builder, { maxParallels: 1, name: m.name })
       else builder = builder.recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
+      builder = m.types
+        ? builder.recipeTypes(m.types[0], m.types[1])
+        : builder.recipeType(m.type)
       builder
         .langValue(m.lang)
         .rotationState(RotationState.NON_Y_AXIS)
-        .recipeType(m.type)
         .appearanceBlock(function () { return Block.getBlock(m.casing) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
-          Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
+          m.types
+            ? Text.translate('gtceu.machine.available_recipe_map_2.tooltip', Text.translate('gtceu.' + m.types[0]), Text.translate('gtceu.' + m.types[1]))
+            : Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
           Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.rx_j1856')),
           m.generator ? Text.translate('grindless.machine.' + m.name + '.tooltip.1') : Text.translate('gtceu.multiblock.parallelizable.tooltip')
         ])

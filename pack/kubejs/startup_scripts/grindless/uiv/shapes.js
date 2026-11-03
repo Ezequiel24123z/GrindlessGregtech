@@ -3,7 +3,8 @@
 // UIV structure shapes (QR-S6): the silhouettes of the UIV multiblocks that were boxes (docs/quality/structures.md). A shape is a function
 // fn(x, y, z) -> one char: x runs left to right, y bottom to top, z back (0) to front (depth - 1); the controller is forced to
 // (middle, 1, front). The era files call G.uivShapes.build(...) from inside their machine registry callback, never at load time
-// (this file may load after them).
+// (this file may load after them). The UIV halls and flagships (Mk5, Matrioshka, Penrose, pulser, BEUV scanner, compression hall,
+// Neutron Drip Works) are in shapes_halls.js, which loads after this file (D4-SHAPE-UIV-B). T.BOOT swaps casings in the machines that feed them.
 //
 // Chars: S controller, X floor cell (casing or a part), F casing, A accent casing, Q frame post, L glass, P pipe casing, C coil block,
 // B machine block (gearbox...), '#' air, ' ' anything (outside the silhouette); machine-specific chars (M, N, E, V, R, T, W) are blocks
@@ -280,28 +281,7 @@
   var CRY = 'grindless:dilution_cryostat_casing'
   var L = {}
   T.layouts = L
-
-  // BEUV scanner: a lithography hall, the mirror train staggered down its axis (alternate stands left and right of the beam rail)
-  L.beuv_scanner = function () {
-    var w = 15, d = 13, hh = 7, cx = 7
-    return {
-      w: w, h: hh + 3, d: d, pal: pal({ A: 'gtceu:uev_machine_casing' }),
-      fn: T.hall({
-        w: w, d: d, hh: hh, mull: 4, crown: T.lantern(w, d, 3, 3),
-        inner: function (x, y, z) {
-          var dx = x - cx
-          if (dx === 0 && y === 1) return z % 3 === 1 ? 'B' : 'P'
-          var k = (z - 1) / 3
-          if (z % 3 === 1 && z > 1 && z < d - 3) {
-            var off = k % 2 === 0 ? 3 : -3
-            if (dx === off) return y === 1 ? 'B' : (y === 2 ? 'Q' : (y <= 4 ? 'A' : null))
-            if (dx === off / 3 * 2 && y === 3) return 'L'
-          }
-          return null
-        }
-      })
-    }
-  }
+  T.pal = pal
 
   // STM lithography cell: the domed scan chamber at the back on its vibration-isolation pads (scan tower and probe on the axis), a low
   // load-lock hall across the front with its lock chambers and the transfer tube to the chamber
@@ -598,57 +578,6 @@
     }
   }
 
-  // neutron-drip separator: a glazed hall with three centrifuge drums in a line and heat-sink pipes on the roof
-  L.neutron_drip_separator = function () {
-    var w = 9, d = 11, hh = 6, cx = 4
-    return {
-      w: w, h: hh + 2, d: d, pal: pal({ A: SITE, C: COIL_MH, Q: 'tungsten_steel' }),
-      fn: T.hall({
-        w: w, d: d, hh: hh, mull: 4, crown: T.sink(w, d),
-        inner: function (x, y, z) {
-          var dx = x - cx
-          if (z % 4 === 2 && abs(dx) <= 1 && z > 1) {
-            if (y === 1) return 'B'
-            if (y === 2 || y === 3) return abs(dx) === 0 ? 'P' : 'L'
-            if (y === 4) return 'C'
-          }
-          if (dx === 0 && y === 1) return 'P'
-          return null
-        }
-      })
-    }
-  }
-
-  // neutronium cage: a truncated cube (corners cut to site-casing plates) with glazed faces, a coil cage inside and a core held on pipe struts
-  L.neutronium_cage = function () {
-    var n = 9, c = 4
-    return {
-      w: n, h: n, d: n, pal: pal({ A: SITE, C: COIL_MH, Q: 'tungsten_steel' }),
-      fn: function (x, y, z) {
-        var dx = abs(x - c)
-        var dy = abs(y - c)
-        var dz = abs(z - c)
-        var s = dx + dy + dz
-        var m = cheb(cheb(dx, dy), dz)
-        if (s >= 10) return ' '
-        if (y === 0) return 'X'
-        if (s === 9) return 'A'
-        if (m === 4) {
-          var inner = dx <= 2 && dy <= 2 && dz <= 2
-          var edge = (dx === 4 ? 1 : 0) + (dy === 4 ? 1 : 0) + (dz === 4 ? 1 : 0) >= 2
-          return edge ? 'Q' : (inner ? 'L' : 'F')
-        }
-        if (m === 2) {
-          var corner = (dx === 2 ? 1 : 0) + (dy === 2 ? 1 : 0) + (dz === 2 ? 1 : 0) >= 2
-          return corner ? 'C' : (s === 4 && m === 2 && dx + dz === 0 ? 'A' : null) || '#'
-        }
-        if (m === 3 && ((dx === 0 && dz === 0) || (dy === 0 && dz === 0) || (dx === 0 && dy === 0))) return 'P'
-        if (m === 0) return 'A'
-        return '#'
-      }
-    }
-  }
-
   // r-process decompressor: a ziggurat - stepped terraces ringed with coil collars, a central pressure shaft, floor rim and cross for the parts
   L.r_process_decompressor = function () {
     var w = 15, d = 19, h = 13, cx = 7, cz = 6, dz0 = 13
@@ -768,93 +697,6 @@
     }
   }
 
-  // ramp-compression pulser: a pressure vessel - a ribbed drum with coil rings, four rams ending in anvils at mid height, a stepped lid
-  L.ramp_compression_pulser = function () {
-    var w = 13, hh = 9, cx = 6, cz = 6
-    return {
-      w: w, h: hh + 3, d: w, pal: pal({ A: 'gtceu:uev_machine_casing', C: 'grindless:coilgun_coil_casing', Q: 'tungsten_steel' }),
-      fn: T.drum({
-        w: w, d: w, R: 6, hh: hh,
-        band: function (y) { return y === 3 || y === 5 || y === 7 ? 'C' : null },
-        inner: function (x, y, z, r) {
-          var dx = x - cx
-          var dz = z - cz
-          var axis = (dx === 0 && abs(dz) >= 1) || (dz === 0 && abs(dx) >= 1)
-          if (axis && y >= 4 && y <= 5) {
-            var a = abs(dx) + abs(dz)
-            if (a >= 5) return 'P'
-            if (a >= 3) return 'B'
-            return null
-          }
-          if (axis && y === 3 && abs(dx) + abs(dz) >= 5) return 'Q'
-          if (axis && y === 6 && abs(dx) + abs(dz) >= 5) return 'Q'
-          return null
-        },
-        crown: function (x, k, z, r) {
-          if (k === 0) return r >= 3.5 && r < 6 ? 'F' : ' '
-          if (k === 1) return r >= 1.5 && r < 4.5 ? 'A' : ' '
-          if (k === 2) return r < 2.5 ? 'L' : ' '
-          return ' '
-        }
-      })
-    }
-  }
-
-  // matrioshka computer: three nested lattice shells (radiators outside, emitter / TPV shells, logic tiles) round a node core, held by
-  // frame spokes; the outer cube's edges are frame
-  L.matrioshka_computer = function () {
-    var n = 11, c = 5
-    return {
-      w: n, h: n, d: n,
-      pal: pal({
-        A: 'grindless:matrioshka_logic_tile', N: 'grindless:matrioshka_node', E: 'grindless:matrioshka_emitter_shell',
-        V: 'grindless:matrioshka_tpv_shell', R: 'grindless:droplet_radiator_module', Q: 'tungsten_steel'
-      }),
-      fn: function (x, y, z) {
-        var dx = abs(x - c)
-        var dy = abs(y - c)
-        var dz = abs(z - c)
-        var m = cheb(cheb(dx, dy), dz)
-        var lattice = (x + y + z) % 2 === 0
-        if (y === 0) return lattice || (dx <= 1 && dz <= 1) ? 'X' : ' '
-        if (m === 5) {
-          var edge = (dx === 5 ? 1 : 0) + (dy === 5 ? 1 : 0) + (dz === 5 ? 1 : 0) >= 2
-          return edge ? 'Q' : (lattice ? 'R' : ' ')
-        }
-        if (m === 4 && ((dx === 0 && dz === 0) || (dy === 0 && dz === 0) || (dy === 0 && dx === 0))) return 'Q'
-        if (m === 3) return lattice ? 'E' : 'V'
-        if (m === 1) return dx === 0 && dy === 0 && dz === 0 ? 'N' : 'A'
-        if (m === 0) return 'N'
-        return '#'
-      }
-    }
-  }
-
-  // Mk5 fusion ring: an octagonal annulus 13 x 7 x 15 round an open plasma channel; coils line the channel, energy cells and glass ports
-  // on the outer wall, a pipe course between, frame pylons on the cut corners
-  L.uiv_fusion_reactor = function () {
-    var W = 13, D = 15, H = 7
-    return {
-      w: W, h: H, d: D, ring: true,
-      fn: function (x, y, z) {
-        var ex = x < W - 1 - x ? x : W - 1 - x
-        var ez = z < D - 1 - z ? z : D - 1 - z
-        if (ex + ez < 3) return ' '
-        var e = ex < ez ? ex : ez
-        if (e > 2) return y >= 1 && y <= H - 2 ? '#' : ' '
-        if (ex + ez === 3) return 'Q'
-        if (x === 0 && z === 7 && y === 2) return 'I'
-        if (x === W - 1 && z === 7 && y === 2) return 'O'
-        if (y === 0) return e === 0 ? 'E' : 'C'
-        if (y === H - 1) return e === 1 ? 'A' : 'C'
-        if (e === 2) return 'K'
-        if (e === 1) return y % 2 === 0 ? 'P' : 'C'
-        if (y === 3) return (x + z) % 3 === 0 ? 'C' : 'L'
-        return y === 1 || y === 5 ? 'E' : 'L'
-      }
-    }
-  }
-
   // Bootstrap swaps (docs/quality/structures.md, "Bootstrap bodies"): a machine whose product a UIV casing's chain needs holds the
   // previous era's casing of the same job in its place (field: superhydride magnet; optics: photonic; cryo: the ZPM cryostat). Found
   // with reachability on the batch 16 dump, the casings swapped: the droplet radiator works (M), the femtosecond writer and TFLN fab
@@ -875,7 +717,8 @@
     tfln_fab: BOOT_OPTICS,
     millikelvin_cryostat_works: both(BOOT_FIELD, BOOT_CRYO),
     spectral_hole_burner: both(BOOT_FIELD, BOOT_CRYO),
-    stm_lithography_cell: BOOT_CRYO
+    stm_lithography_cell: BOOT_CRYO,
+    ramp_compression_pulser: BOOT_FIELD
   }
 
   // build(Pat, name, casing, parts) -> the structure spec of a layout

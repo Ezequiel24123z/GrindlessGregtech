@@ -179,7 +179,6 @@
     // es254_target is not a controller input here: einsteinium only comes from the separator and the decompressor
     var defs = [
       { name: 'crust_lift', parts: ['gtceu:uiv_electric_piston', 'gtceu:uiv_electric_motor', 'gtceu:uiv_conveyor_module'], research: 'grindless:crust_lift_tether', domain: ['2x grindless:polar_cap_electrode', '2x grindless:braided_mh_tether', '2x grindless:mh_laminated_yarn'] },
-      { name: 'neutron_drip_separator', parts: ['gtceu:uiv_electric_pump', 'gtceu:uiv_fluid_regulator', 'gtceu:uiv_conveyor_module'], research: 'grindless:neutron_supermirror', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
       { name: 'neutronium_cage', parts: ['gtceu:uiv_robot_arm', 'gtceu:uiv_electric_motor', 'gtceu:uiv_electric_piston'], research: 'grindless:cage_part', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
       { name: 'r_process_decompressor', parts: ['gtceu:uiv_conveyor_module', 'gtceu:uiv_electric_piston', 'gtceu:uiv_electric_pump'], research: 'grindless:sealed_capsule', domain: ['2x grindless:sealed_capsule', '2x grindless:neutron_guide', '2x grindless:target_wheel_blank'] },
       { name: 'decay_heat_vault', parts: ['gtceu:uiv_electric_motor', 'gtceu:uiv_electric_pump', 'gtceu:uiv_fluid_regulator'], research: 'grindless:mh_laminated_yarn', domain: ['2x grindless:braided_mh_tether', '2x grindless:polar_cap_electrode', '2x grindless:crust_lift_tether'] }

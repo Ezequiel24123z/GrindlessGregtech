@@ -35,7 +35,7 @@ function harness() {
     Java: { loadClass: () => ({}) },
   });
   G.readJsonTable = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, 'pack', p), 'utf8'));
-  for (const f of ['lib/patterns.js', 'lib/coils.js', 'lib/parallel_hatch.js', 'lib/mega.js', 'uiv/shapes.js', 'uiv/compression_hall.js']) {
+  for (const f of ['lib/patterns.js', 'lib/coils.js', 'lib/parallel_hatch.js', 'lib/mega.js', 'uiv/shapes.js', 'uiv/shapes_halls.js', 'uiv/compression_hall.js']) {
     vm.runInContext(read('startup_scripts', f), context);
   }
   return { G, registry, calls, b, errors, context };
@@ -74,8 +74,8 @@ test('implosion keeps its explosive: no strip in the modifiers (GTM matches the 
   assert.ok(src.includes('PL.getParallelAmount(machine, recipe, want)'));
 });
 
-test('the pattern: 13 x 10 x 11, at most 16 tall, a press hall silhouette', () => {
-  assert.deepEqual(plain(CH.size), { width: 13, height: 10, depth: 11 });
+test('the pattern: 19 x 13 x 25, at most 16 tall, a press hall silhouette', () => {
+  assert.deepEqual(plain(CH.size), { width: 19, height: 13, depth: 25 });
   assert.ok(CH.size.height <= 16);
   assert.equal(CH.pellet, 'grindless:neutronium_pellet');
 });
