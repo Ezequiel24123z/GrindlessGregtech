@@ -12,6 +12,7 @@
     "max"
   ],
   "packages": {
+    "A1b-06": { "label": "A1b-06: the assembly line array", "landedWhen": ["gtceu:assembly_line_array"] },
     "G1": {
       "label": "gate to MAX",
       "landedWhen": [

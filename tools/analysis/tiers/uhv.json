@@ -69,6 +69,8 @@
     ]
   ],
   "packages": {
+    "A1b-04": { "label": "A1b-04: the machine #266 found missing, modelled", "landedWhen": ["gtceu:quantum_fabricator"] },
+    "A1b-05": { "label": "A1b-05: the AE2 pair trips before UHV", "landedWhen": ["recipe:grindless:transform/hermean_entangled_singularity"] },
     "A1": {
       "label": "transcurium",
       "landedWhen": [

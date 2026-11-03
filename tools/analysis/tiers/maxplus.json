@@ -6,6 +6,7 @@
   "note": "MAX+ validator (XP-C1), modelled on max.json. Rows run at 2^31 (V[MAX]) to 2^39 EU/t; only the Hyperstargate dial goes to V[MAX] x 4096 A. Exemptions: horizon_capacitor_bank has no recipe type (storage only); ig_relay_probe is a travel item; casings and structure blocks are not products; the creative items are made only by hyper_assembly_array. Places: tarantula_orbit, magellanic_stream, m31_nucleus_orbit, local_group_filament (gates c16 to c19).",
   "eraOrder": ["max", "maxplus", "maxplus-tarantula", "maxplus-stream", "maxplus-m31", "maxplus-void"],
   "packages": {
+    "A1b-08": { "label": "A1b-08: the Horizon Shard is made", "landedWhen": ["grindless:horizon_shard"] },
     "condensate_assembler": { "label": "condensate_assembler", "landedWhen": ["gtceu:condensate_assembler"] },
     "blueshift_forge": { "label": "blueshift_forge", "landedWhen": ["gtceu:blueshift_forge"] },
     "condensate_refinery": { "label": "condensate_refinery", "landedWhen": ["gtceu:condensate_refinery"] },

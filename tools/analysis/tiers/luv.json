@@ -12,6 +12,8 @@
     ["luv-europa","luv-ganymede"]
   ],
   "packages": {
+    "A1b-04": { "label": "A1b-04: the machine #266 found missing, modelled", "landedWhen": ["gtceu:mega_chemical_complex"] },
+    "A1b-05": { "label": "A1b-05: the AE2 pair trips before UHV", "landedWhen": ["recipe:grindless:transform/asteroid_entangled_singularity"] },
     "A1": {"label":"registrations (materials, items, shared blocks, sunlight table)","landedWhen":["grindless:station_truss_casing","gtceu:meteoric_iron_dust","fluid:gtceu:europan_brine"]},
     "A3": {"label":"helium refrigerator and coated conductor line","landedWhen":["gtceu:helium_refrigerator","gtceu:coated_conductor_line"]},
     "A4": {"label":"HTS magnet works and the wireless LuV tier","landedWhen":["gtceu:hts_magnet_works","grindless:luv_smes_cell","gtceu:luv_wireless_energy_hatch_16a"]},

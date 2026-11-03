@@ -8,6 +8,8 @@
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
   "packages": {
+    "A1b-04": { "label": "A1b-04: the machine #266 found missing, modelled", "landedWhen": ["gtceu:smelting_complex"] },
+    "A1b-05": { "label": "A1b-05: the AE2 pair trips before UHV", "landedWhen": ["recipe:grindless:transform/venusian_entangled_singularity"] },
     "A2": { "label": "LuV-A2: the naquadah plant's mode 2 (circuits 2 and 3), the platinum plant's mode 4 and the LuV parallel hatch", "landedWhen": ["recipe:grindless:naquadah_refining/enriched_naquadah", "recipe:grindless:naquadah_refining/spent_naquadah"], "note": "lib/packages.mjs: an older dump (before A2) lists these targets as pending (WARN) instead of failing them." }
   },
   "conditions": {

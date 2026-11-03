@@ -7,6 +7,8 @@
   "note": "UV era per docs/eras/uv.md (\"Validator (-Tier uv)\", \"Gate to UHV\"), in three substages: uv (home, Earth orbit and the Moon), uv-neptune (Neptune orbit) and uv-pluto (Pluto orbit, after Neptune: the penetrator's catalyst is the Triton ice core). Dimension ids come from tables/orbits.json and tables/places.json through the orbit and place tokens (gcyr:luna is GCYR's). ZPM's \"nothing UV\" checks are dropped; the Mk2 cuts become exceptRecipes plus mk3-recipes-only-mk3. The three generators are EU sources at their final figures (euPerTick). Each package's targets WARN until a dump carries it (packages).",
   "eraOrder": ["steam","lv","mv","hv","ev","ev-mars","iv","iv-venus","iv-mercury","luv","luv-orbit","luv-belt","luv-io","luv-europa","luv-ganymede","luv-io-orbit","zpm","zpm-saturn","zpm-uranus","uv","uv-neptune","uv-pluto","uhv","uev","uiv","uxv","opv","max"],
   "packages": {
+    "A1b-04": { "label": "A1b-04: the machine #266 found missing, modelled", "landedWhen": ["gtceu:mega_factory"] },
+    "A1b-05": { "label": "A1b-05: the AE2 pair trips before UHV", "landedWhen": ["recipe:grindless:transform/neptunian_entangled_singularity"] },
     "A1": {"label":"pyroprocessing cell and accelerator-driven reactor (line 2, thorium)","landedWhen":["gtceu:pyroprocessing_cell","gtceu:accelerator_driven_reactor"]},
     "A2": {"label":"heat source works (line 4, curium heat sources)","landedWhen":["gtceu:heat_source_works"]},
     "A3": {"label":"laser fusion chamber and the Mk3 audit (lines 5, 6)","landedWhen":["gtceu:laser_fusion_chamber"]},
