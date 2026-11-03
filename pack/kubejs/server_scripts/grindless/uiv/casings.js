@@ -1,4 +1,4 @@
-// priority: -23000
+// priority: -24478
 // UIV casing family recipes (package D4-CASE-UIV, docs/eras/lines-uev-uxv.md section 9). Ids: startup_scripts/grindless/uiv/casings.js.
 // The rhea casing is printed on the UV powder bed printer, so it runs at VA[UV]; the other three at VA[UIV] = 31,457,280 EU/t.
 // neutron_star_site_casing (tables/rx_j1856.json) and uiv_fusion_casing (tables/mk5.json) are rows of their own tables.

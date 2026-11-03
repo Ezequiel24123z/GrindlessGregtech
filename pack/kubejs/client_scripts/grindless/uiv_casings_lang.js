@@ -1,4 +1,4 @@
-// priority: 5124
+// priority: 3290
 // Gregtech Grindless - names and tooltips of the UIV casing family (startup_scripts/grindless/uiv/casings.js):
 //   block.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1). Names go in en_us.
 (function () {

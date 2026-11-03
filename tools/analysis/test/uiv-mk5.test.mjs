@@ -98,7 +98,7 @@ test('Mk5 ring: three fuels, three plasmas, starts above 2^31, within the tier-1
 test('casing: resolves from the W fibre preform and Li-Sn; line 7 and 29 steps', () => {
   assert.deepEqual(inputs(by('assembler', 'first_wall_tile')), ['grindless:plasma_sprayed_tile',   'gtceu:tungsten_steel_plate']);
     assert.deepEqual(inputs(by('assembler', 'li_sn_armoured_tile')), ['grindless:first_wall_tile', 'gtceu:li_sn']);
-    assert.deepEqual(inputs(by('assembler', 'uiv_fusion_casing_wall')), ['grindless:li_sn_armoured_tile', 'grindless:w_fibre_preform', 'gtceu:li_sn']);
+    assert.deepEqual(inputs(by('assembler', 'uiv_fusion_casing_wall')), ['grindless:li_sn_armoured_tile', 'grindless:w_fibre_preform', 'gtceu:uiv_electric_pump', 'gtceu:li_sn']);
     assert.deepEqual(inputs(by('assembler', 'cps_wetted_mesh')), ['grindless:w_mesh', 'gtceu:li_sn']);
     assert.deepEqual(inputs(by('assembler', 'divertor_cassette')), ['grindless:cps_wetted_mesh', 'gtceu:tungsten_steel_plate']);
     assert.deepEqual(inputs(by('assembler', 'divertor')), ['grindless:divertor_cassette', 'grindless:w_fibre_preform']);
