@@ -359,8 +359,8 @@ export const QUESTS = [
   {
     key: "HV_EAQ", title: "2-Ethylanthraquinone", icon: "gtnn:exxonmobil_chemical_plant", kind: "process", deps: ["HV_PHTHALIC_ANHYDRIDE"], x: 14, y: -7.5,
     teach: {
-      for: "Joins phthalic anhydride and ethylbenzene into &62-ethylanthraquinone&r in GT--'s chemical plant. Build the plant with HV machine casings: it runs a recipe only up to its casings' tier and sits idle above it, with no error.",
-      needs: "The chemical plant on HV casings, phthalic anhydride and ethylbenzene from the coal gas distillery.",
+      for: "Joins phthalic anhydride and ethylbenzene into &62-ethylanthraquinone&r in GT--'s chemical plant.       At HV build it from aluminium frostproof plant casings, HV machine casings, steel pipe casings and cupronickel coils. Only the machine casings set the recipe tier: a lower tier sits idle with no error, while pipes and coils can stay low tier. The preview draws titanium pipes and nichrome coils, which are EV and not needed here.",
+            needs: "The chemical plant as above, phthalic anhydride and ethylbenzene from the coal gas distillery.",
       unlocks: "The hydrogenation step. The EAQ then circulates and is never used up.",
       automate: "Anhydride by bus, ethylbenzene by pipe, the EAQ on to the hydrogenation hatch.",
     },

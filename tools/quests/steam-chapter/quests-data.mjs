@@ -1,4 +1,4 @@
-// Quest data for steam_age; tools/quests/gen-chapters.mjs writes the chapter. Imported from the hand-written chapter by tools/quests/lib/import-snbt.mjs (RF-5L2): every id is spelled out.
+﻿// Quest data for steam_age; tools/quests/gen-chapters.mjs writes the chapter. Imported from the hand-written chapter by tools/quests/lib/import-snbt.mjs (RF-5L2): every id is spelled out.
 
 export const CHAPTER = {
   id: "47DE4F5800320CB8",
@@ -112,7 +112,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "1D0789B0F2987E54", xp: 25 }],
   },
   {
-    key: "STEAM_STEAM_ALLOY_SMELTER", id: "0B3A5E0D83643882", title: "Steam Alloy Smelter", icon: "gtceu:lp_steam_alloy_smelter", deps: ["STEAM_STEAM_MACHINES"], x: 8, y: 1.5,
+    key: "STEAM_STEAM_ALLOY_SMELTER", id: "0B3A5E0D83643882", title: "Steam Alloy Smelter", icon: "gtceu:lp_steam_alloy_smelter", deps: ["STEAM_STEAM_MACERATOR"], x: 10, y: -1.5,
     desc: [
       "Copper and tin go in and bronze comes out, with less waste than mixing dust by hand. Red alloy comes from here too, and once you have molds it casts glass, glass tubes and rubber sheets.",
       "The steam furnace is its plainer cousin, if you want one.",
@@ -172,19 +172,19 @@ export const QUESTS = [
   {
     key: "STEAM_STEAM_BLAST_FURNACE", id: "4B8E2D6A1F9C3057", title: "Steam Blast Furnace",     icon: "gtceu:steam_blast_furnace", kind: "machine", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 12, y: 1.5,
         teach: {
-          for: "The furnace that runs the whole iron line: what you feed it picks the mode, sinter into pig iron, pig iron into steel.",
+          for: "The fast, scalable steel route: what you feed it picks the mode, sinter into pig iron, pig iron into steel.",
           needs: "Bricks, steel, coke, and calcite from the lapis vein.",
           unlocks: "Pig iron and Bessemer steel, at a pace the primitive furnaces cannot match.",
           automate: "Sinter, pig iron, coke and calcite by conveyor, steam from the boiler hall.",
         },
         desc: [
-          "Raw ore no longer goes in. The next four quests follow the iron from the washer to the steel.",
+          "The primitive furnace keeps its slow route from ingots, but this one is the line you scale up. The next four quests follow the iron from the washer to the steel.",
         ],
     tasks: [{ type: "item", id: "7C1A4E9D2B6F3081", item: "gtceu:steam_blast_furnace" }],
     rewards: [{ type: "xp", id: "5D9B3F7A1C2E6048", xp: 40 }],
   },
   {
-    key: "STEAM_IRON_WASHING", id: "3A5C7E1B9D204F68", title: "Washed Iron Ore", icon: "gtceu:purified_hematite_ore", kind: "process", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 14, y: -1.5,
+    key: "STEAM_IRON_WASHING", id: "3A5C7E1B9D204F68", title: "Washed Iron Ore", icon: "gtceu:purified_hematite_ore", kind: "process", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE","STEAM_STEAM_ALLOY_SMELTER"], x: 14, y: -1.5,
     teach: {
       for: "Iron ore is ground and washed first, so the sinter plant gets clean feed.",
       needs: "Iron ore from the drill, the steam macerator and an ore washer.",
@@ -192,7 +192,7 @@ export const QUESTS = [
       automate: "Drill, macerator and washer in a row on one conveyor.",
     },
     desc: [
-      "Hematite, goethite or magnetite all work.",
+      "Hematite, goethite or magnetite all work. The steam alloy smelter, one quest back, takes the washed ore on to sinter.",
     ],
     tasks: [{ type: "item", id: "4B6D8F2C0E315A79", item: "gtceu:purified_hematite_ore" }],
     rewards: [{ type: "xp", id: "5C7E9A3D1F4B2068", xp: 20 }],
@@ -201,12 +201,12 @@ export const QUESTS = [
     key: "STEAM_IRON_SINTER", id: "2C4E6A8B1D3F5079", title: "Iron Sinter", icon: "grindless:iron_sinter", kind: "process", deps: ["STEAM_IRON_WASHING"], x: 15.25, y: -1.5,
     teach: {
       for: "Fine ore won't survive a blast furnace, so it is baked into hard lumps first.",
-      needs: "Purified iron ore, coke dust and calcite, in the steam blast furnace.",
+      needs: "Purified iron ore and coke dust, in the steam alloy smelter.",
       unlocks: "Feed for the pig iron run.",
-      automate: "Ore, coke and calcite by bus; sinter leaves by bus.",
+      automate: "Ore and coke dust by bus; sinter leaves by bus.",
     },
     desc: [
-      "Sinter is the furnace's first mode.",
+      "The steam alloy smelter presses four purified ore and one coke dust into four sinter. The blast furnace takes it from there.",
     ],
     tasks: [{ type: "item", id: "6D8F1B3A5C7E2094", item: "grindless:iron_sinter" }],
     rewards: [{ type: "xp", id: "7A9C1E3B5D2F4068", xp: 25 }],
@@ -234,13 +234,13 @@ export const QUESTS = [
       automate: "Pig iron in by bus, ingots out by bus, steam from the boiler hall.",
     },
     desc: [
-      "Ore can't skip the pig iron stage any more.",
+      "Pig iron is the fast route to steel; the primitive blast furnace still makes it slowly from ingots.",
     ],
     tasks: [{ type: "item", id: "5A7C9E1B3D2F4086", item: "gtceu:steel_ingot" }],
     rewards: [{ type: "xp", id: "1B3D5F7A9C2E4068", xp: 30 }],
   },
   {
-    key: "STEAM_CLOCKWORK_OBSERVATORY", id: "1253203E620BE055", title: "Clockwork Observatory",     icon: "gtceu:steam_observatory", kind: "machine", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 12, y: -3,
+    key: "STEAM_CLOCKWORK_OBSERVATORY", id: "1253203E620BE055", title: "Clockwork Observatory",     icon: "gtceu:steam_observatory", kind: "machine", deps: ["STEAM_STEAM_MULTIS"], x: 12, y: -3,
         teach: {
           for: "It charts the Moon, one night at a time.",
           needs: "Bronze, glass and a clear sky, the controller at Y 100 or higher.",
