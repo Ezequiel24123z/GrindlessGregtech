@@ -1,9 +1,9 @@
-// priority: -5449
+// priority: -5438
 // -----------------------------------------------------------------------------------------------
 // MAX's atom interferometer works (docs/eras/max.md, machine 2, lines L4 and L33; package MAX-B2): the multiblock and its recipe type. No
 // item of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/interferometer.js.
 //
-//   gtceu:atom_interferometer_works   5 x 15 x 5 drop tower on two OpV 4 A hatches. Recipe type gtceu:atom_interferometry: circuit 1 the
+//   gtceu:atom_interferometer_works   9 x 45 x 9 atom fountain tower: membrane-vacuum tube in clamp rings and a truss shell on an optical base, on two OpV 4 A hatches. Recipe type gtceu:atom_interferometry: circuit 1 the
 //                                     matter-wave gradiometer (L4 last step; the degenerate Sr cartridge is spent, a fluid bath of
 //                                     superfluid He-3 is used up), circuit 2 the shell gradient map (the gradiometer calibrated on the
 //                                     Sgr A* spin map).
@@ -25,8 +25,7 @@
     {
       name: 'atom_interferometer_works', machine: 'gtceu:atom_interferometer_works', type: 'atom_interferometry', dataKey: 'grindless_atom_interferometry',
       lang: 'Atom Interferometer Works', maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: TABLE_CASING, texture: TABLE_TEXTURE,
-      width: 5, height: 15, depth: 5,
-      pal: { F: TABLE_CASING, M: 'grindless:field_frozen_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil', Q: 'stainless_steel' },
+      width: 9, height: 45, depth: 9,
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -39,26 +38,9 @@
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. Rows 0-2 the optical table (floor with the hatches at front and back, a casing
-  // plinth), rows 3-11 the shielded drop shaft (a glass window at row 7), row 12 a casing collar, row 13 the open top of the shaft, row 14
-  // the roof with the cooling-laser coil over the middle of the shaft.
-  function towerCell(x, y, z) {
-    var edgeX = x === 0 || x === 4
-    var edgeZ = z === 0 || z === 4
-    if (y === 0) return (z === 4 || z === 0) && x >= 1 && x <= 3 ? 'X' : 'F'
-    if (y === 14) return x === 2 && z === 2 ? 'C' : 'F'
-    if (!edgeX && !edgeZ) return y === 1 && x === 2 && z === 2 ? 'C' : '#'
-    if (edgeX && edgeZ) return 'Q'
-    if (y <= 2 || y === 12 || y === 13) return 'F'
-    if (y === 7) return x === 2 || z === 2 ? 'L' : 'M'
-    return 'M'
-  }
-
-  var CELLS = { atom_interferometer_works: towerCell }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   // one EMI line per recipe, read from its data

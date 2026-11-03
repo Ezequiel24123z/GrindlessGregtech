@@ -13,9 +13,9 @@
  },
  "gtceu:accretion_feeder": {
   "v": [],
-  "bt": 4,
-  "ds": 0.461,
-  "c": 936
+  "bt": 5,
+  "ds": 0.506,
+  "c": 3415
  },
  "gtceu:actinide_partitioning_plant": {
   "v": [],
@@ -110,8 +110,8 @@
  "gtceu:atom_interferometer_works": {
   "v": [],
   "bt": 5,
-  "ds": 0.403,
-  "c": 259
+  "ds": 0.427,
+  "c": 1916
  },
  "gtceu:barnard_core_drill": {
   "v": [],
@@ -205,9 +205,9 @@
  },
  "gtceu:cluster_light_furnace": {
   "v": [],
-  "bt": 5,
-  "ds": 0.595,
-  "c": 855
+  "bt": 4,
+  "ds": 0.519,
+  "c": 3041
  },
  "gtceu:coated_conductor_line": {
   "v": [],
@@ -392,8 +392,8 @@
  "gtceu:ergoregion_synchroniser": {
   "v": [],
   "bt": 5,
-  "ds": 0.587,
-  "c": 1191
+  "ds": 0.435,
+  "c": 3185
  },
  "gtceu:ergosphere_probe_bay": {
   "v": [],
@@ -499,9 +499,9 @@
  },
  "gtceu:gene_ark": {
   "v": [],
-  "bt": 4,
-  "ds": 0.57,
-  "c": 554
+  "bt": 5,
+  "ds": 0.462,
+  "c": 1915
  },
  "gtceu:generator_array": {
   "v": [],
@@ -511,9 +511,9 @@
  },
  "gtceu:geroch_winch": {
   "v": [],
-  "bt": 4,
-  "ds": 0.414,
-  "c": 1203
+  "bt": 5,
+  "ds": 0.5,
+  "c": 3107
  },
  "gtceu:gravitational_wave_detector": {
   "v": [],
@@ -596,14 +596,14 @@
  "gtceu:horizon_flux_clamp": {
   "v": [],
   "bt": 6,
-  "ds": 0.55,
-  "c": 1583
+  "ds": 0.562,
+  "c": 3378
  },
  "gtceu:horizon_interferometer": {
   "v": [],
-  "bt": 4,
-  "ds": 0.525,
-  "c": 201
+  "bt": 5,
+  "ds": 0.352,
+  "c": 2837
  },
  "gtceu:hot_cell": {
   "v": [],
@@ -812,8 +812,8 @@
  "gtceu:mass_stream_injector": {
   "v": [],
   "bt": 5,
-  "ds": 0.556,
-  "c": 767
+  "ds": 0.554,
+  "c": 2125
  },
  "gtceu:matrioshka_computer": {
   "v": [],
@@ -847,9 +847,9 @@
  },
  "gtceu:membrane_line": {
   "v": [],
-  "bt": 5,
-  "ds": 0.638,
-  "c": 396
+  "bt": 4,
+  "ds": 0.444,
+  "c": 2114
  },
  "gtceu:mercury_solar_field": {
   "v": [],
@@ -1129,9 +1129,9 @@
  },
  "gtceu:photon_ring_imager": {
   "v": [],
-  "bt": 4,
-  "ds": 0.587,
-  "c": 1050
+  "bt": 5,
+  "ds": 0.573,
+  "c": 2144
  },
  "gtceu:photonic_foundry": {
   "v": [],
@@ -1357,9 +1357,9 @@
  },
  "gtceu:rydberg_array_works": {
   "v": [],
-  "bt": 4,
-  "ds": 0.687,
-  "c": 346
+  "bt": 5,
+  "ds": 0.431,
+  "c": 1980
  },
  "gtceu:sample_receiving_facility": {
   "v": [],
@@ -1375,9 +1375,9 @@
  },
  "gtceu:segment_reclamation_works": {
   "v": [],
-  "bt": 5,
-  "ds": 0.619,
-  "c": 886
+  "bt": 6,
+  "ds": 0.529,
+  "c": 2379
  },
  "gtceu:shequid_works": {
   "v": [],

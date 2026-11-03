@@ -4,7 +4,7 @@
 // recipe type. No item of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in
 // server_scripts/grindless/max/horizon_interferometer.js.
 //
-//   gtceu:horizon_interferometer   21 x 5 x 21 triangle: three test mass enclosure stations joined by laser link arms, on two OpV 4 A hatches.
+//   gtceu:horizon_interferometer   45 x 7 x 41 triangle of three test mass stations joined by laser link arms on truss trestles, on two OpV 4 A hatches.
 //                                  Recipe type gtceu:horizon_interferometry: circuit 1 the cloud phase map (shell c2's final spin map is kept),
 //                                  circuit 2 the calibrated oscillator banks (the map is kept), circuit 3 the map again from the used instruments.
 //                                  All three run only at Sgr A* (gcyr:black_hole_orbit).
@@ -27,8 +27,7 @@
       name: 'horizon_interferometer', machine: 'gtceu:horizon_interferometer', type: 'horizon_interferometry', dataKey: 'grindless_horizon_interferometry',
       lang: 'Horizon Interferometer', maxIO: { itemsIn: 9, itemsOut: 4, fluidsIn: 0, fluidsOut: 0 }, casing: ENCLOSURE,
       texture: 'grindless:block/max/test_mass_enclosure_casing',
-      width: 21, height: 5, depth: 21,
-      pal: { F: ENCLOSURE, A: LINK, C: 'gtceu:superconducting_coil', G: 'gtceu:cleanroom_glass' },
+      width: 45, height: 7, depth: 41,
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -68,28 +67,9 @@
       distToSegment(x, z, CORNERS[1], CORNERS[2]) <= 0.6
   }
 
-  function horizonCell(x, y, z) {
-    var s = stationAt(x, z)
-    if (s !== null) {
-      if (y === 0 || y === 4) return 'F'
-      var dx = x - s.x
-      var dz = z - s.z
-      if (dx === 1 && dz === 1) return '#'
-      var corner = dx !== 1 && dz !== 1
-      // optical windows in the middle of each wall at row 2, drag-compensation coils in the corners of rows 1 and 3
-      if (y === 2) return corner ? 'F' : 'G'
-      return corner ? 'C' : 'F'
-    }
-    if (y === 0) return z === 20 && x >= 3 && x <= 17 ? 'X' : ' '
-    if (y === 2 && onArm(x, z)) return 'A'
-    return ' '
-  }
-
-  var CELLS = { horizon_interferometer: horizonCell }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   // one EMI line per recipe, read from its data

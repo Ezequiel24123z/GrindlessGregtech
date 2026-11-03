@@ -3,7 +3,7 @@
 // MAX's gene ark (docs/eras/max.md, machine 4, lines L12 and L28; package MAX-B4): the multiblock and its recipe type. No item of its own:
 // every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/gene_ark.js.
 //
-//   gtceu:gene_ark   11 x 9 x 11 sealed cold vault on two OpV 4 A hatches. Recipe type gtceu:genome_archiving: circuit 1 the genome archive
+//   gtceu:gene_ark   17 x 13 x 17 octagonal membrane-vacuum vault in a truss frame with cryo racks, on two OpV 4 A hatches. Recipe type gtceu:genome_archiving: circuit 1 the genome archive
 //                    (four encapsulated genome libraries, a Rydberg logic array as its index and a vitrified cell capsule that can boot it,
 //                    in a superfluid He-3 bath), circuit 2 copies an archive with four synthetic oligo pools.
 //
@@ -24,8 +24,7 @@
     {
       name: 'gene_ark', machine: 'gtceu:gene_ark', type: 'genome_archiving', dataKey: 'grindless_genome_archiving',
       lang: 'Gene Ark', maxIO: { itemsIn: 7, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: VAULT, texture: VAULT_TEXTURE,
-      width: 11, height: 9, depth: 11,
-      pal: { F: VAULT, A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass' },
+      width: 17, height: 13, depth: 17,
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -38,30 +37,9 @@
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. Row 0 the floor (hatches front and back), row 1 a plinth, rows 2-6 the walls with
-  // a glass window in the middle of each, a superconducting coil ring inside at row 4, row 7 a collar, row 8 the roof (plinth, collar, roof and floor of atomic casing so no block type dominates).
-  function arkCell(x, y, z) {
-    var edgeX = x === 0 || x === 10
-    var edgeZ = z === 0 || z === 10
-    if (y === 0) return (z === 10 || z === 0) && x >= 4 && x <= 6 ? 'X' : 'A'
-    if (y === 8) return 'A'
-    if (!edgeX && !edgeZ) {
-      var ring = x === 1 || x === 9 || z === 1 || z === 9
-      if (y === 4 && ring) return 'C'
-      return '#'
-    }
-    if (y === 1 || y === 7) return 'A'
-    if (edgeX && edgeZ) return 'F'
-    var mid = (edgeX && z === 5) || (edgeZ && x === 5)
-    if (y === 4 && mid) return 'L'
-    return 'F'
-  }
-
-  var CELLS = { gene_ark: arkCell }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   // one EMI line per recipe, read from its data
