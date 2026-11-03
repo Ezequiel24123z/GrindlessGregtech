@@ -19062,7 +19062,7 @@ hash = "e3b16365d951a42743574851437fc92ffd9dc05ff30520a8ff17a9e60ed8b99b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/ending.js"
-hash = "59d9c3df04b3ffe404e5d2ba69fbbf16b68278cb29c4b25afa2f77d6b76bc42b"
+hash = "cc48fb628b64ae4d79c77a27b444a9317306e21b322fd08741779d7959593a68"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/grid.js"
@@ -20174,7 +20174,7 @@ hash = "82bb9878abed6b01f0f95a93c6ef9bd92f8738e7edf97d59d106f2f4cb58be8e"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/hyperstargate.js"
-hash = "ca28ccc4e7a946ba6c112aeeb071d22b49d5d0b6b38d9e3922377a35e744e0c3"
+hash = "bd7afc4d9587e4a8abb267240e74b3098e3d6208138044277af17cd4754dd20b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/loom.js"
