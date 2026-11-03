@@ -1,5 +1,7 @@
 # MAX+ (T14, beyond the last tier): the Local Group and the Hyperstargate
 
+> Band D5 (2026-11-03): this era's long lines, multiblock sizes and casing family are designed in `docs/eras/lines-opv-maxplus.md`; where they differ from this file, that file wins.
+
 MAX+ is the last era of the pack. The player leaves the Milky Way with the horizon MAX stabilised, works the Magellanic Clouds, the Magellanic Stream, Andromeda's nucleus and the intergalactic medium, comes back to Sagittarius A\* and builds the **Hyperstargate**, the only feasible way through the stabilised horizon (DECISIONS.md:702). Crossing it leads to a final dimension of ruined futuristic cities; arriving rolls the credits and ends the pack. The era makes four things the pack has never had:
 
 - **intergalactic travel**: a probe flung out of the Galaxy by Sgr A\*'s own tides (the Hills mechanism; Hills 1988, Nature 331:687; S5-HVS1 left the Galactic Centre at 1,755 km/s, Koposov 2020, MNRAS 491:2465), caught by a warp gate in another galaxy;

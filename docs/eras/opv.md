@@ -1,5 +1,7 @@
 # OpV (T13): the galactic bulge
 
+> Band D5 (2026-11-03): this era's long lines, multiblock sizes and casing family are designed in `docs/eras/lines-opv-maxplus.md`; where they differ from this file, that file wins.
+
 OpV is the era of the galactic bulge: the old, crowded, metal-rich core of the Milky Way (Barbuy, Chiappini & Gerhard 2018, ARA&A 56:223). The player reaches two places in it, revisits one place on the arm, and makes three things the pack has never had:
 
 - **industrial antimatter**: antiprotons by the beam and antihydrogen by the cell, contained and annihilated with every loss given a destination;

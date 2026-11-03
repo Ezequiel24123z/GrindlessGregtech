@@ -1,5 +1,7 @@
 # MAX (T14): Sagittarius A*
 
+> Band D5 (2026-11-03): this era's long lines, multiblock sizes and casing family are designed in `docs/eras/lines-opv-maxplus.md`; where they differ from this file, that file wins.
+
 MAX is the last GTM tier and the last era before MAX+. The player reaches the supermassive black hole at the centre of the Milky Way, builds a mirror round it and makes the hole's spin amplify a wave: the "black hole bomb" (Press and Teukolsky 1972, Nature 238:211). Since 2026-10-31 the mirror no longer bursts and MAX no longer ends the pack: the last recipe stabilises the hole's horizon and makes the key output MAX+ needs (*State*). The era makes three things the pack has never had:
 
 - **horizon work**: mass lowered on a tether almost to the horizon, the final destination of every waste canister (Geroch's engine; Bekenstein 1973, PRD 7:2333; Unruh and Wald 1982, PRD 25:942);
