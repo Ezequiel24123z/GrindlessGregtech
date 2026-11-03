@@ -107,6 +107,10 @@
     })
     check('mirror', cr > 0 && missing.length === 0 && differ.length === 0, cr + ' chemical reactor recipes; without a copy ' + missing.length + ' [' + missing.slice(0, 8).join(', ') + ']; different ' +
       differ.length + ' [' + differ.slice(0, 5).join('; ') + ']')
+    ;['gtceu:chemical_reactor/vinyl_chloride_from_hydrochloric', 'gtceu:large_chemical_reactor/vinyl_chloride_from_hydrochloric'].forEach(function (id) {
+      var r = all[id]
+      note('row', id + ': ' + (r ? 'in ' + String(r.inputs.get(classes().FluidCap)) + ' out ' + String(r.outputs.get(classes().FluidCap)) : 'absent'))
+    })
     var L = global.grindless.lcrMirror
     check('published', !!L && L.done === true && L.failed.length === 0, L ? 'added ' + L.added.length + ', replaced ' + L.replaced.length + ', removed ' + L.removed.length + ', kept ' + L.kept.length +
       ', explicit ' + L.explicit.length + ', failed ' + L.failed.length : 'global.grindless.lcrMirror missing')
