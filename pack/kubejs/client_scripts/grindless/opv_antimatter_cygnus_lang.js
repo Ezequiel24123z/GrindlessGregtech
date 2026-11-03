@@ -16,7 +16,7 @@
   }
   var tips = {
     jet_beam_line: 'Extracts and bunches jet protons with SRF cavities.',
-    antiproton_decelerator: 'Makes antiprotons in an iridium target, then cools and traps them: target hall, decelerator ring and trap hall in one.'
+    antiproton_decelerator: 'Targets, decelerates and traps antiprotons in one hall.'
   }
   var pages = {
     jet_beam_line: [
