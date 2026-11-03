@@ -160,8 +160,8 @@
       },
       // the back wall (rows 0-2) and the hall's outer side (column 0 of slices 1 and 2)
       parts: {
-        '0,0,0': 'energy', '0,0,1': 'energy2', '0,0,2': 'inBus', '0,0,3': 'outBus', '0,1,0': 'in1', '0,1,1': 'in2', '0,1,2': 'in3', '0,1,3': 'in4',
-        '0,2,0': 'in5', '0,2,3': 'parallel', '1,1,0': 'out1', '2,1,0': 'out2'
+        '0,1,1': 'energy', '0,1,2': 'energy2', '0,1,3': 'inBus', '0,1,4': 'outBus', '0,2,1': 'in1', '0,2,2': 'in2', '0,2,3': 'in3', '0,2,4': 'in4',
+        '0,3,1': 'in5', '0,3,4': 'parallel', '1,1,0': 'out1', '2,1,0': 'out2'
       },
       facing: { out1: 'east', out2: 'east' },
       energies: ['energy', 'energy2'], ins: ['in1', 'in2', 'in3', 'in4', 'in5'], outs: ['out1', 'out2'],
@@ -175,9 +175,9 @@
         out4: 'gtceu:ev_output_hatch'
       },
       // gg_test_naquadah_plant's platinum plant layout (IV-B3)
-      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,1,1': 'in3', '0,1,2': 'out1', '0,1,3': 'out2',
-        '1,1,0': 'out3', '1,1,4': 'out4' },
-      facing: { out3: 'east', out4: 'west' },
+      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,0,5': 'in3', '0,0,6': 'out1', '0,1,0': 'out2',
+        '0,1,6': 'out3', '1,1,0': 'out4' },
+      facing: { out4: 'east' },
       energies: ['energy'], ins: ['in1', 'in2', 'in3'], outs: ['out1', 'out2', 'out3', 'out4'],
       ids: [CONCENTRATE, ELECTRODE, IR, OS, PGS], fluids: []
     }
@@ -640,7 +640,7 @@
 
     safely('live_contents', function () {
       var np = NP()
-      var recs = np.recipes || []
+      var recs = (np.recipes || []).concat(np.directRecipes || [])
       var problems = []
       recs.forEach(function (rec) {
         problems = problems.concat(liveProblems(rec, { dataKey: np.dataKey || 'grindless_naquadah_plant', keepKey: np.keepKey || 'grindless_naquadah_keep' }))
@@ -649,11 +649,11 @@
       var live = allOfType(NAQ_TYPE)
       var ids = live.map(function (r) { return String(r.getId()) }).sort()
       var want = recs.map(function (r) { return r.recipeId }).sort()
-      if (ids.join(',') !== want.join(',') || recs.length !== 3) problems.push('the type holds [' + ids.join(', ') + '], published [' + want.join(', ') + ']')
+      if (ids.join(',') !== want.join(',') || recs.length !== 4) problems.push('the type holds [' + ids.join(', ') + '], published [' + want.join(', ') + ']')
       var circuits = live.map(circuitOf).sort()
-      if (circuits.join(',') !== '1,2,3') problems.push('circuits ' + circuits.join(','))
+      if (circuits.join(',') !== '1,2,3,4') problems.push('circuits ' + circuits.join(','))
       var keeping = live.filter(function (r) { return keeps(r, np.keepKey || 'grindless_naquadah_keep') }).map(circuitOf).sort()
-      if (keeping.join(',') !== '2,3') problems.push('the keep boolean on circuits ' + keeping.join(','))
+      if (keeping.join(',') !== '2,3,4') problems.push('the keep boolean on circuits ' + keeping.join(','))
       check('live_contents', problems.length === 0, withProblems(live.length + ' live ' + NAQ_TYPE + ' recipes [' + ids.join(', ') + '], circuits ' +
         circuits.join(',') + ', keep on ' + keeping.join(','), problems))
     })
@@ -795,9 +795,12 @@
       if (!y || (y.differ || []).length > 0) problems.push('yields ' + JSON.stringify(y))
       problems = problems.concat(liveProblems(rec, { keepKey: keepKey }))
     }
-    var live = allOfType(PGM_TYPE)
+    // later eras add their own rows (and keep booleans) to the same recipe type: the check covers the era dirs of the published rows
+    var dirs = {}
+    ;(pp.recipes || []).forEach(function (r) { dirs[String(r.recipeId).replace(/[^\/]*$/, '')] = true })
+    var live = allOfType(PGM_TYPE).filter(function (r) { return dirs[String(r.getId()).replace(/[^\/]*$/, '')] === true })
     var rest = live.filter(function (r) { return String(r.getId()) !== ASTEROID_ID })
-    var c4 = rest.filter(function (r) { return circuitOf(r) === 4 }).map(function (r) { return String(r.getId()) })
+        var rest = live.filter(function (r) { return String(r.getId()) !== ASTEROID_ID })    var c4 = rest.filter(function (r) { return circuitOf(r) === 4 }).map(function (r) { return String(r.getId()) })
     var keepers = rest.filter(function (r) { return keeps(r, keepKey) }).map(function (r) { return String(r.getId()) })
     if (c4.length > 0) problems.push('circuit 4 also in ' + c4.join(', '))
     if (keepers.length > 0) problems.push('the keep boolean also on ' + keepers.join(', '))

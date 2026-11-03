@@ -67,7 +67,7 @@
   var HATCH = 'gtceu:iv_parallel_hatch'
   // the shapes of the plants that take the hatch, before IV-B6 (their startup scripts): size, part cells, cells that are not "any"
   var PLANTS = {
-    'gtceu:hot_cell': { w: 7, h: 5, d: 4, cells: 20, total: 116 },
+    'gtceu:hot_cell': { w: 11, h: 6, d: 5, cells: 22, total: 291 },
     'gtceu:fuel_fabrication_plant': { w: 3, h: 4, d: 13, cells: 18, total: 156 },
     'gtceu:heavy_water_plant': { w: 9, h: 14, d: 3, cells: 14, total: 228 }
   }
@@ -104,9 +104,9 @@
   var RESEARCH_ID = '1x_gtceu_iv_electric_motor'
   var MOTOR = 'gtceu:luv_electric_motor'
   // the motor's item inputs in recipe order (one ULV input bus each, slice 0 first) and its fluids in order (one 1x hatch each)
-  var AL_ITEMS = [['gtceu:long_magnetic_samarium_rod', 1], ['gtceu:long_hsss_rod', 2], ['gtceu:hsss_ring', 2], ['gtceu:hsss_round', 4],
-    ['gtceu:fine_ruridit_wire', 64], ['gtceu:niobium_titanium_single_cable', 2]]
-  var AL_FLUIDS = [['gtceu:soldering_alloy', 144], ['gtceu:lubricant', 250]]
+  var AL_ITEMS = [['gtceu:long_magnetic_samarium_rod', 2], ['gtceu:long_hsss_rod', 4], ['gtceu:hsss_ring', 4], ['gtceu:hsss_round', 8],
+    ['gtceu:fine_ruridit_wire', 128], ['gtceu:niobium_titanium_single_cable', 4]]
+  var AL_FLUIDS = [['gtceu:soldering_alloy', 288], ['gtceu:lubricant', 499]]
   var AL_BLOCKS = {
     casing: 'gtceu:solid_machine_casing',
     glass: 'gtceu:laminated_glass',
