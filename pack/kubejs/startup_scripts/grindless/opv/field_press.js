@@ -5,12 +5,12 @@
 // stack, the billet and the spent can of line 3, and the AlN to AlGaN wafers of line 45; field_frozen_plate, field_frozen_casing and
 // aln_power_die are F1's (opv/foundation.js).
 //
-//   gtceu:field_frozen_press  7 x 9 x 7 hydraulic press, OpV. Recipe type gtceu:field_freezing (circuit 1 billet, 2 plate, 3 casing);
-//                             locked to SGR 1806-20's orbit. It runs on two UXV 4 A energy hatches (bootstrap: OpV hatches need its plate).
+//   gtceu:field_frozen_press  11 x 15 x 11 hydraulic press along the field (opv/shapes.js), OpV. Recipe type gtceu:field_freezing (circuit 1 billet,
+//                             2 plate, 3 casing); locked to SGR 1806-20's orbit. It runs on two UXV 4 A energy hatches (bootstrap: OpV hatches need its plate).
 //
-// Geometry (lib/patterns.js: a slice has at most 16 rows): the controller sits in the front slice (z = 6), the floor takes the parts.
-// Four frame posts carry a crosshead; a three-high superconducting coil ring holds the field around the press gap, the ram hangs over it.
-// The front is the open can bay. Textures: tools/assets/Build-OpVFieldPressTextures.ps1. Names: client_scripts/grindless/opv_field_press_lang.js.
+// Geometry (lib/patterns.js: a slice has at most 64 rows): the controller sits in the front slice (z = 10), the front of the bed takes the
+// parts. Bootstrap machine: it is built of lamina casing, GTM high-power casing, frames, pipe and coils only, never field-frozen casing,
+// because it makes the plate that casing needs. Textures: tools/assets/Build-OpVFieldPressTextures.ps1. Names: client_scripts/grindless/opv_field_press_lang.js.
 // Published for the recipe script: global.grindless.fieldPress.
 (function () {
   const G = global.grindless
@@ -18,8 +18,9 @@
   const FP = G.fieldPress || (G.fieldPress = {})
   const LOG = '[grindless/opv] '
 
+  const LAMINA = 'grindless:chain_lamina_casing'
+  const LAMINA_TEXTURE = 'grindless:block/opv/chain_lamina_casing'
   const HPC = 'gtceu:high_power_casing'
-  const HPC_TEXTURE = 'gtceu:block/casings/hpca/high_power_casing'
   const COIL = 'gtceu:superconducting_coil'
 
   FP.table = 'kubejs/data/grindless/tables/field_press.json'
@@ -29,8 +30,8 @@
   FP.machines = [
     {
       name: 'field_frozen_press', machine: 'gtceu:field_frozen_press', type: 'field_freezing', dataKey: 'grindless_field_freezing', lang: 'Field-Frozen Press',
-      maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }, width: 7, height: 9, depth: 7, casing: HPC, texture: HPC_TEXTURE,
-      pal: { F: HPC, C: COIL, Q: 'tungsten_steel' },
+      maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }, width: 11, height: 15, depth: 11, casing: LAMINA, texture: LAMINA_TEXTURE,
+      pal: { F: LAMINA, H: HPC, C: COIL, Q: 'tungsten_steel', P: 'gtceu:tungstensteel_pipe_casing', G: 'gtceu:laminated_glass' },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
       }
@@ -41,37 +42,9 @@
   FP.items = ['field_canned_stack', 'field_frozen_billet', 'spent_field_can', 'aln_powder', 'aln_kerf', 'aln_boule', 'aln_wafer', 'algan_epi_wafer',
     'algan_patterned_wafer']
 
-  function abs(n) { return n < 0 ? -n : n }
-  function max(a, b) { return a > b ? a : b }
-
-  // x left to right, y bottom to top, z back (0) to front (6). Floor of parts; r = 3 is the frame (corner posts, a girdle at y 4, a low
-  // skirt), open above the skirt and at the front bay; r = 2 is the field ring (coil y 3-5); r <= 1 is the platen (y 1), the press gap and
-  // the ram (y 7) on its rod; the crosshead beam runs across the top.
-  function pressCell(x, y, z) {
-    var dx = x - 3
-    var dz = z - 3
-    var r = max(abs(dx), abs(dz))
-    var corner = abs(dx) === 3 && abs(dz) === 3
-    if (y === 0) return 'X'
-    if (y === 8) {
-      if (corner) return 'Q'
-      return abs(dz) <= 1 ? 'F' : ' '
-    }
-    if (r === 3) {
-      if (corner) return 'Q'
-      if (y <= 2) return 'F'
-      if (z === 6) return ' '
-      return y === 4 ? 'Q' : ' '
-    }
-    if (r === 2) return y >= 3 && y <= 5 ? 'C' : 'F'
-    if (y === 1 || y === 7) return 'F'
-    if (y === 6 && r === 0) return 'Q'
-    return '#'
-  }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: opv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: pressCell })
+    return G.opvShapes.build(Pat, m.name, m.pal, m.parts())
   }
 
   // one EMI line per recipe, read from its data

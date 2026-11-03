@@ -95,14 +95,14 @@ test('"only from": nothing else in the pack makes these ids', () => {
   }
 });
 
-test('structure: not boring, three functional kinds, controller in the front slice, 9 rows at most, dominant share <= 0.62', () => {
+test('structure: not boring, three functional kinds, controller in the front slice, 64 rows at most, dominant share <= 0.62', () => {
   const s = run.global.grindless.structures[`gtceu:${MACHINE}`];
   assert.ok(s, `${MACHINE} has a description`);
   const mm = measure(s);
   assert.deepEqual(violations(mm), [], `${MACHINE}: ${JSON.stringify(mm)}`);
   assert.ok(mm.dominantShare <= 0.62, `${MACHINE}: dominant share ${mm.dominantShare}`);
   assert.ok(mm.functional.length >= 3, `${MACHINE}: ${mm.functional}`);
-  assert.ok(s.slices.every((sl) => sl.length <= 16), `${MACHINE}: at most 16 rows per slice`);
+  assert.ok(s.slices.every((sl) => sl.length <= 64), `${MACHINE}: at most 64 rows per slice`);
   assert.ok(s.slices[s.slices.length - 1].some((row) => row.includes('S')), `${MACHINE}: the controller is in the front slice`);
 });
 
