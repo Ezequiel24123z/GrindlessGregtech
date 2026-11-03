@@ -18546,7 +18546,7 @@ hash = "90b8af53f918e0f04a454c92a2072f45c539c86f965f0002d30079f26003a661"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/cost_curve.js"
-hash = "92ff9183d9456ea4a28b6ef20a43d3dd5d5ab35deb967f857b33b07eda4d80cc"
+hash = "01fef8580ea1c9711dc821089e26c5ce36e0cc87f6538637437f2db6ff9d1db2"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/enderchests.js"
