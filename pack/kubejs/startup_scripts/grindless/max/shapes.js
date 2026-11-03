@@ -101,7 +101,7 @@
 
   // ---------------------------------------------------------------- 2. Horizon flux clamp, 31 x 11 x 31
   // Sixteen flux pump coil stacks (clamp coil with truss flanks) stand round a central membrane-vacuum bore, fed by stream bundle spokes;
-  // radiator fins on their outer faces, a truss girder ring and spokes top and bottom.
+  // radiator fins on their outer faces, a truss girder ring, a naquadah alloy frame ring and spokes top and bottom.
   L.horizon_flux_clamp = function () {
     var cv = new Cv(31, 11, 31)
     var c = 15
@@ -125,7 +125,7 @@
     var ys = [0, 10]
     for (var i = 0; i < ys.length; i++) {
       cv.ring(c, c, 13.5, 15.2, ys[i], ys[i], 'T')
-      cv.ring(c, c, 8, 9, ys[i], ys[i], 'T')
+      cv.ring(c, c, 8, 9, ys[i], ys[i], 'Q')
       cv.spokes(c, c, 16, 0, 0.5, 5.6, 15, ys[i], ys[i], 'T')
     }
     // the sixteen superconducting cores
@@ -318,7 +318,8 @@
 
   // ---------------------------------------------------------------- 9. Mass stream injector, 21 x 9 x 21
   // An injector ring of truss girders and clamp-coil staging with eight turning magnets (stream turn casing), and the beam line entering
-  // from the front.
+  // from the front behind a glass viewport. Bootstrap: no stream bundle block (it is made of the bundles this machine injects); the spokes
+  // are naquadah alloy frames.
   L.mass_stream_injector = function () {
     var cv = new Cv(21, 9, 21)
     var c = 10
@@ -339,10 +340,10 @@
     }
     cv.box(8, 3, 17, 12, 5, 20, 'C')
     cv.box(9, 4, 12, 11, 4, 20, '#')
-    cv.box(9, 4, 12, 11, 4, 16, 'V')
+    cv.box(9, 4, 12, 11, 4, 16, 'G')
     cv.box(9, 4, 17, 11, 4, 20, '#')
     cv.ring(c, c, 0, 5.5, 0, 8, 'T', function (x, y, z, r) { return y === 8 && r > 4.5 || y === 0 && r < 4 ? 'T' : undefined })
-    cv.spokes(c, c, 8, Math.PI / 8, 0.6, 4, 7, 4, 4, 'V')
+    cv.spokes(c, c, 8, Math.PI / 8, 0.6, 4, 7, 4, 4, 'Q')
     for (k = 0; k < 16; k++) {
       var b = k * Math.PI / 8
       cv.put(c + Math.round(5 * Math.cos(b)), 4, c + Math.round(5 * Math.sin(b)), 'K')

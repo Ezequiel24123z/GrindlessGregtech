@@ -422,10 +422,14 @@ const TIERS_LE_OPV = '(lv|mv|hv|ev|iv|luv|zpm|uv|uhv|uev|uiv|uxv|opv)';
 const OLD_COMPONENT = new RegExp(`^gtceu:${TIERS_LE_OPV}_(electric_motor|electric_pump|conveyor_module|electric_piston|robot_arm|emitter|sensor|field_generator)$`);
 const OLD_CIRCUIT = new RegExp(`^#gtceu:circuits/${TIERS_LE_OPV}$`);
 
-test('no MAX controller or hatch recipe takes an OpV-or-lower component or circuit, and a MAX component only its own OpV counterpart (gc_relay_probe excepted)', (t) => {
+// The membrane line is the MAX bootstrap producer: it rolls the first MAX circuit's shield (lines-opv-maxplus.md M1 row 29), so its
+// controller takes OpV circuits and OpV robot arms (docs/quality/structures.md, bootstrap rule).
+const BOOTSTRAP_CONTROLLER = 'grindless:assembly_line/membrane_line';
+
+test('no MAX controller or hatch recipe takes an OpV-or-lower component or circuit, and a MAX component only its own OpV counterpart (gc_relay_probe and the membrane line excepted)', (t) => {
   const { recs } = pack();
   const isMax = (r) => outs(r).some((o) => /^(gtceu|grindless):max_/.test(o) || Object.keys(MULTIBLOCKS).some((m) => o === `gtceu:${m}`));
-  const rows = recs.filter((r) => isMax(r) && r.i !== 'grindless:assembly_line/gc_relay_probe' && r.i !== 'grindless:assembly_line/max_machine_casing');
+  const rows = recs.filter((r) => isMax(r) && r.i !== 'grindless:assembly_line/gc_relay_probe' && r.i !== 'grindless:assembly_line/max_machine_casing' && r.i !== BOOTSTRAP_CONTROLLER);
   assert.ok(rows.length >= 30, `${rows.length} MAX rows`);
   // band E (P2-E): the MAX component of a kind takes the OpV component of the same kind, so the MAX cores price through the OpV chain
   const COMPONENT_KIND = /^grindless:max_(electric_motor|electric_pump|conveyor_module|electric_piston|robot_arm|emitter|sensor|field_generator)$/;
@@ -443,16 +447,20 @@ test('no MAX controller or hatch recipe takes an OpV-or-lower component or circu
   }
   const probe = rec('grindless:assembly_line/gc_relay_probe');
   assert.ok(ins(probe).includes('gtceu:opv_sensor'), 'the probe is the exempt OpV-stage travel item');
+  const boot = rec(BOOTSTRAP_CONTROLLER);
+  assert.ok(boot && ins(boot).includes('#gtceu:circuits/opv') && ins(boot).includes('gtceu:opv_robot_arm') && !ins(boot).includes('#gtceu:circuits/max'),
+    'the membrane line is built from OpV circuits and robot arms, not MAX circuits');
 });
 
-test('component thresholds: each of the 14 controllers has at least 4 MAX circuits and 4 MAX components', (t) => {
+test('component thresholds: each of the 14 controllers has at least 4 MAX circuits (the bootstrap membrane line: 4 OpV) and 4 MAX components', (t) => {
   const COMP = /^grindless:max_(electric_motor|electric_pump|electric_piston|robot_arm|emitter|fluid_regulator|conveyor_module|sensor|field_generator)$/;
   const report = [];
   for (const m of Object.keys(MULTIBLOCKS)) {
     const r = rec(`grindless:assembly_line/${m}`);
     assert.ok(r, `${m} has an assembly line recipe`);
     const items = r.j.inputs.item;
-    const circuits = items.filter((x) => itemId(x) === '#gtceu:circuits/max').reduce((s, x) => s + cnt(x), 0);
+    const circuitTag = r.i === BOOTSTRAP_CONTROLLER ? '#gtceu:circuits/opv' : '#gtceu:circuits/max';
+    const circuits = items.filter((x) => itemId(x) === circuitTag).reduce((s, x) => s + cnt(x), 0);
     const comps = items.filter((x) => COMP.test(itemId(x)));
     const total = comps.reduce((s, x) => s + cnt(x), 0);
     report.push(`${m}: ${circuits} circuits, ${total} components of ${new Set(comps.map(itemId)).size} kinds`);

@@ -619,7 +619,7 @@
         "m:gtceu:composite_autoclave", "m:gtceu:engine_test_stand@hv", "grindless:ablative_heat_shield_tile", "grindless:composite_overwrapped_tank",
         "grindless:untested_rocket_motor", "gcyr:id_chip"
       ],
-      "inputsOf": ["grindless:composite_curing/*", "grindless:static_fire/gcyr/*"]
+      "inputsOf": ["grindless:composite_curing/ablative_heat_shield_tile", "grindless:composite_curing/composite_overwrapped_tank", "grindless:composite_curing/carbon_carbon_aeroshell", "grindless:composite_curing/pica_heat_shield", "grindless:static_fire/gcyr/*"]
     },
     {
       "id": "hv-suit",
