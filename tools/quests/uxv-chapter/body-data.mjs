@@ -25,13 +25,13 @@ const b = (key, title, icon, deps, x, y, teach, count, xpN) => ({
 
 export const QUESTS = [
   b('B_GUM', 'Gum Metal Casing', 'grindless:gum_metal_casing', ['HULL'], 0, 0, {
-    for: 'A shell of gum metal, a titanium alloy that bends without breaking, backed by a tungsten-184 preform. It is the plain wall of the age: the Spintronic Cluster Tool, the Mk6 ring and the polar cap tap are mostly made of it.',
+    for: 'A shell of gum metal, a titanium alloy that bends without breaking, backed by a tungsten-184 preform. It is the plain wall of the age.',
     needs: 'An assembler (400 ticks): 8 gum metal billets, 4 tungsten-184 CVI preforms, 4 annealed mu-metal foils and 8 tungsten-184 single wires, with epoxy, for two casings.',
     unlocks: 'Most UXV structures: the Mk6 Fusion Reactor (about 2,000), the MNT Collider (about 2,000), the Stellar Fractionation Hall (about 1,800), the Pasta Mill (about 1,700), the BZ Dynamo (about 1,400), the Spintronic Cluster Tool (about 1,400), the Stellar Condensation Tower (about 860) and the FRC Former (about 690).',
     automate: 'Billets, preforms and foils by ME: a structure takes thousands, so build the casing a dedicated line.',
   }, 64, 100),
-  b('B_PULSE', 'Pulsed Field Casing', 'grindless:pulsed_field_casing', ['B_GUM'], 3.5, 0, {
-    for: 'A casing wound with metallic hydrogen cable and finemet cores that holds a field pulsed fast enough to steer a plasma, a beam or a stream of dense matter. The reactor, the collider and the elevator ring are lined with it.',
+  b('B_PULSE', 'Pulsed Field Casing', 'grindless:pulsed_field_casing', ['B_GUM'], 3.5, 1.25, {
+    for: 'A casing wound with metallic hydrogen cable and finemet cores that holds a field pulsed fast enough to steer a plasma, a beam or a stream of dense matter.',
     needs: 'The naquadria magnet works, circuit 15: 12 metallic hydrogen windings, 6 Ga2O3 power dies, 3 finemet cores, 6 gum metal billets and 4 UIV emitters, for twelve casings.',
     unlocks: 'The Mk6 Fusion Reactor (about 1,300), the Pasta Mill (about 810), the MNT Collider (about 800), the BZ Dynamo (about 790), the Stellar Elevator (about 740), the FRC Former (about 460) and the Plasma Mass Filter (about 260).',
     automate: 'The windings are the bottleneck; send them and the dies to the works by ME and keep the power dies stocked.',

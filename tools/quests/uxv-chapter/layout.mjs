@@ -1,4 +1,4 @@
-﻿// QB-4: the UXV chapter layout. One era chapter, one section per data file; every quest's place and dependencies are decided here
+// QB-4: the UXV chapter layout. One era chapter, one section per data file; every quest's place and dependencies are decided here
 // (docs/quests.md, section 4b), so a dependency never points backwards and no line crosses another. A data file keeps its texts and
 // kinds and passes its quests through place(); the x, y and deps written in the file are the old, per-chapter layout.
 
@@ -61,9 +61,9 @@ const LAYOUT = {
   MTJD: [12.5, 12, ['TARGET', 'MTJ']],
   MRAM: [15, 12, ['MTJD']],
   DSO: [15, 13.5, ['MTJD']],
-  RACED: [17.5, 12, ['MRAM', 'MTJ']],
-  MESOD: [17.5, 14.5, ['DSO', 'MTJ']],
-  MAINF: [20, 15, ['RACED', 'MESOD', 'YIG']],
+  RACED: [17.5, 12, ['MRAM']],
+  MESOD: [17.5, 14.5, ['DSO']],
+  MAINF: [20, 15, ['RACED', 'MESOD', 'VDWC']],
   APER: [7.5, 15.5, ['H_UXV_CIRCUITS']],
   WEAKC: [10, 16.5, ['APER', 'WEAK']],
   GYRO: [12.5, 16.5, ['WEAKC']],

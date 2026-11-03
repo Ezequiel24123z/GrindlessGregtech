@@ -31,9 +31,9 @@ export const QUESTS = [
     automate: 'Chloride and magnesium by ME; the charge is small, so make a stack at a time and stock it beside the factory.',
   }, [it('gtceu:titanium_50_dust'), it('grindless:ti50_oven_charge')], 180),
   l('L3_RUNS', 'Elements 121 and 122', 'grindless:element_122_recoil', ['L3_TI50', 'E121'], 3.5, 2, {
-    for: 'One factory, two targets. An einsteinium-254 target struck by the titanium beam gives element 121; a fermium-257 target gives element 122. The census III asks for both.',
-    needs: 'In the &6Superheavy Factory&r, a target, an oven charge, an Nb3Sn SRF cavity and helium (circuit 9 for 121, circuit 10 for 122) make the recoil gas; each run takes 48,000 ticks. The same factory then separates the atoms with an etched membrane (2,400 ticks, circuits 8 and 9). The chemistry lab seals each batch in a capsule (circuit 8 and 9), and Census III joins both, with Census II (circuit 10).',
+    for: 'An einsteinium-254 target struck by the titanium beam gives element 121; a fermium-257 target gives element 122.',
+    needs: 'In the &6Superheavy Factory&r, a target, an oven charge, an Nb3Sn SRF cavity and helium (circuit 9 for 121, circuit 10 for 122) make the recoil gas; each run takes 48,000 ticks. It then separates the atoms with an etched membrane (2,400 ticks, circuits 8 and 9). The lab seals each batch in a capsule (circuit 8 and 9), and Census III joins both, with Census II (circuit 10).',
     unlocks: 'The Superheavy Census III, and with it the island chart.',
-    automate: 'Run both targets in one factory on a schedule; the atoms live a few seconds, so pipe the gas to the lab by ME and never store it.',
+    automate: 'Run both targets in one factory on a schedule; the atoms last seconds: pipe the gas to the lab by ME, never store it.',
   }, [it('grindless:element_121_recoil'), it('grindless:element_122_recoil'), it('grindless:superheavy_census_iii')], 260),
 ];
