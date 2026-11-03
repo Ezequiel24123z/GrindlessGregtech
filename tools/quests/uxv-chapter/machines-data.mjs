@@ -138,13 +138,13 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Vela
   gear('PEX', 'pasta_extractor', 'Pasta Extractor', ['M_L_PASTA'], 2, 15, {
     for: 'Deep in a neutron star\'s crust the nuclei melt into rods, sheets and holes that physicists call pasta. A glitch shakes the crust loose, and the &6Pasta Extractor&r times it.',
-    needs: 'A UIV hull, about 80 pulsed field casings, silicon carbide composite and a receiver cage. The shape is about 21 by 11 by 11 and about 490 blocks.',
+    needs: 'A UIV hull, about 260 pasta containment and 80 pulsed field casings, and a receiver cage. The shape is about 21 by 11 by 11 and about 490 blocks.',
     unlocks: 'Raw pasta, the start of every pasta item.',
     automate: 'Neutronium pellets by ME; wait for a glitch and collect the haul.',
   }, [PULSE]),
   gear('SORT', 'pasta_phase_sorter', 'Pasta Mill', ['PEX'], 4.5, 15, {
     for: 'The &6Pasta Mill&r separates the rods from the sheets inside a cage that keeps each one squeezed, pulls spaghetti phase through aerogel into strand wire, and presses lasagna phase onto a tungsten-fibre billet as plate. The anti-phase residue goes to the core sample the gate keeps. Pasta as wire or plate is fiction: outside a neutron star it would fly apart at once.',
-    needs: 'A UIV hull, about 1,700 gum metal and 810 pulsed field casings and the pasta hatches. The mill also takes over the old draw bench and laminator: the draw line and the press line are modes of this one machine. The shape is about 55 by 13 by 19 and about 2,850 blocks: ' + TWO_PASS,
+    needs: 'A UIV hull, about 1,670 pasta containment and 810 pulsed field casings and the pasta hatches. The mill also takes over the old draw bench and laminator: the draw line and the press line are modes of this one machine. The shape is about 55 by 13 by 19 and about 2,850 blocks: ' + TWO_PASS,
     unlocks: 'Pasta strand wire, which the motor, the field generator and the SMES cell are wound with, and lasagna plate for the UXV hull.',
     automate: 'Raw pasta by ME; send each phase to its own line, and stock a few spools and plates.',
   }, [GUM, PULSE]),

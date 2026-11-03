@@ -29,14 +29,14 @@
   const GEARBOX = 'gtceu:tungstensteel_gearbox'
   const ROBUST = 'gtceu:robust_machine_casing'
   const VENT = 'gtceu:computer_heat_vent'
-  // pasta_extractor and polar_cap_tap wear the UXV gum-metal body with pulsed-field magnets (uxv/casings.js); the pasta containment casing is
-  // NOT used (its inputs frc_cartridge and cage_part come from the former and the extractor chain)
+  // The Vela bodies (lines-uev-uxv.md section 9): the pasta extractor and the Pasta Mill are walled with the pasta containment casing, whose
+  // FRC cartridges (Cygnus X-1) and cage parts (UIV) are all made before Vela; the polar cap tap wears the gum metal body. Pulsed-field magnets
+  // throughout (uxv/casings.js). Checked by reachability from UXV to MAX+ (dump 9f6c318722c0 with the swap, 2026-11-03).
+  const PASTA = 'grindless:pasta_containment_casing'
+  const PASTA_TEXTURE = 'grindless:block/uxv/pasta_containment_casing'
   const GUM = 'grindless:gum_metal_casing'
   const GUM_TEXTURE = 'grindless:block/uxv/gum_metal_casing'
   const PULSED = 'grindless:pulsed_field_casing'
-  // The extractor is on the lasagna chain feeding uxv_machine_hull, so it cannot wear gum.
-  const SIC = 'grindless:sic_composite_casing'
-  const SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   VP.table = 'kubejs/data/grindless/tables/vela_pasta.json'
   VP.site = 'grindless:vela_pulsar_orbit'
@@ -47,8 +47,8 @@
     {
       name: 'pasta_extractor', machine: 'gtceu:pasta_extractor', type: 'pasta_extraction', dataKey: 'grindless_pasta_extraction', lang: 'Pasta Extractor',
       maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, generator: false, width: 11, height: 11, depth: 21,
-      casing: SIC, texture: SIC_TEXTURE,
-      pal: { F: SIC, M: PULSED, A: 'gtceu:stable_machine_casing', C: COIL, L: GLASS, Q: 'naquadah_alloy' },
+      casing: PASTA, texture: PASTA_TEXTURE,
+      pal: { F: PASTA, M: PULSED, A: 'gtceu:stable_machine_casing', C: COIL, L: GLASS, Q: 'naquadah_alloy' },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 1 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
       }
@@ -58,8 +58,8 @@
       name: 'pasta_phase_sorter', machine: 'gtceu:pasta_phase_sorter', type: 'pasta_sorting', extraTypes: ['pasta_drawing', 'pasta_lamination'],
       dataKey: 'grindless_pasta_sorting', lang: 'Pasta Mill',
       maxIO: { itemsIn: 4, itemsOut: 5, fluidsIn: 0, fluidsOut: 0 }, generator: false, width: 19, height: 13, depth: 55,
-      casing: GUM, texture: GUM_TEXTURE,
-      pal: { F: GUM, M: PULSED, C: COIL, K: CRYO, B: GEARBOX, L: GLASS, R: ROBUST, Q: 'naquadah_alloy' },
+      casing: PASTA, texture: PASTA_TEXTURE,
+      pal: { F: PASTA, M: PULSED, C: COIL, K: CRYO, B: GEARBOX, L: GLASS, R: ROBUST, Q: 'naquadah_alloy' },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 5 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
       }

@@ -25,7 +25,7 @@ const b = (key, title, icon, deps, x, y, teach, count, xpN) => ({
 
 export const QUESTS = [
   b('B_GUM', 'Gum Metal Casing', 'grindless:gum_metal_casing', ['HULL'], 0, 0, {
-    for: 'A shell of gum metal, a titanium alloy that bends without breaking, backed by a tungsten-184 preform. It is the plain wall of the age: the Spintronic Cluster Tool, the Pasta Mill and the Mk6 ring are mostly made of it.',
+    for: 'A shell of gum metal, a titanium alloy that bends without breaking, backed by a tungsten-184 preform. It is the plain wall of the age: the Spintronic Cluster Tool, the Mk6 ring and the polar cap tap are mostly made of it.',
     needs: 'An assembler (400 ticks): 8 gum metal billets, 4 tungsten-184 CVI preforms, 4 annealed mu-metal foils and 8 tungsten-184 single wires, with epoxy, for two casings.',
     unlocks: 'Most UXV structures: the Mk6 Fusion Reactor (about 2,000), the MNT Collider (about 2,000), the Stellar Fractionation Hall (about 1,800), the Pasta Mill (about 1,700), the BZ Dynamo (about 1,400), the Spintronic Cluster Tool (about 1,400), the Stellar Condensation Tower (about 860) and the FRC Former (about 690).',
     automate: 'Billets, preforms and foils by ME: a structure takes thousands, so build the casing a dedicated line.',
@@ -45,7 +45,7 @@ export const QUESTS = [
   b('B_PASTA', 'Pasta Containment Casing', 'grindless:pasta_containment_casing', ['B_PULSE'], 3.5, 2.5, {
     for: 'A violet-black casing with magenta striations, built to hold nuclear pasta, the matter in a neutron star\'s crust. Each is a cage of field-reversed rings around a gum metal wall.',
     needs: 'An assembler (600 ticks): 32 FRC cartridges, 32 cage parts, 32 gum metal billets and a UIV field generator, with epoxy, for sixty-four casings.',
-    unlocks: 'The pasta structures of Vela. Today the Pasta Extractor and the Pasta Mill are built of gum metal and pulsed field casings, so no shape asks for it yet; it waits for the structures that work in the crust itself.',
+    unlocks: 'The pasta structures of Vela: the Pasta Extractor (about 260) and the Pasta Mill (about 1,670) are walled with it. Its FRC cartridges and cage parts are all made before Vela, so you can stock it before the jump.',
     automate: 'FRC cartridges by ME from the field-reversed line; the cage parts and billets by ME.',
   }, 64, 120),
   b('B_MK6', 'UXV Fusion Casing', 'grindless:uxv_fusion_casing', ['B_GUM'], 0, 2.5, {
