@@ -1211,8 +1211,8 @@
    "io": [
     5,
     1,
-    2,
-    0
+    8,
+    1
    ]
   },
   "gtceu:horizon_flux_clamp": {
@@ -1620,14 +1620,6 @@
     6,
     2,
     1,
-    1
-   ]
-  },
-  "gtceu:multi_plasma_blender": {
-   "io": [
-    0,
-    0,
-    8,
     1
    ]
   },
@@ -10006,7 +9998,6 @@
   "gtceu:mocvd",
   "gtceu:molecular_beam_epitaxy",
   "gtceu:mtj_sputtering",
-  "gtceu:multi_plasma_blender",
   "gtceu:multinucleon_transfer",
   "gtceu:muon_catalysed_fusion",
   "gtceu:nano_forge",

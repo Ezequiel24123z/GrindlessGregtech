@@ -22,7 +22,7 @@ export default {
   clusters: {
     naquadria: {
       name: 'Naquadria and its fuel',
-      line: 'naquadria',
+      line: 'naquadah',
       nodes: [
         L('nqplant', 2.5, -1.5, 'pl_iv:nplant'),
         L('ga', 5, -1.5, 'pl_lv:gallium'),
@@ -44,6 +44,15 @@ export default {
         n('spent', 17.5, 0, F('gtceu:naquadah_based_liquid_fuel_depleted'), 'Depleted Fuel', {
           kind: 'ret', from: ['reactor'], sub: 'The depleted fuel returns to the fuel works',
         }),
+        n('hex', 2.5, 2.25, F('gtceu:hexafluoride_naquadria_solution'), 'Hexafluoride Solution', { kind: 'product', from: ['impure'], by: ['gtceu:chemical_reactor'], sub: 'The solution, fluorinated' }),
+        n('oct', 5, 2.25, F('gtceu:radon_naquadria_octafluoride'), 'Radon Naquadria Octafluoride', { kind: 'product', from: ['hex'], by: ['gtceu:large_chemical_reactor'], sub: 'With radon difluoride; the residue goes to the loop below' }),
+        n('nonf', 7.5, 2.25, F('gtceu:naquadria_caesium_xenonnonfluoride'), 'Caesium Xenonnonfluoride', { kind: 'product', from: ['oct'], by: ['gtceu:chemical_reactor'], sub: 'With caesium xenon trioxide fluoride' }),
+        n('csf', 10, 2.25, F('gtceu:naquadria_caesiumfluoride'), 'Naquadria Caesium Fluoride', { kind: 'product', from: ['nonf'], by: ['gtceu:chemical_reactor'], sub: 'With nitryl fluoride' }),
+        n('acs', 12.5, 2.25, F('gtceu:acidic_naquadria_caesiumfluoride'), 'Acidic Caesium Fluoride', { kind: 'product', from: ['csf'], by: ['gtceu:mixer'], sub: 'Sulfuric acid in' }),
+        n('sulf', 15, 2.25, I('gtceu:naquadria_sulfate_dust'), 'Naquadria Sulfate', { kind: 'product', from: ['acs'], by: ['gtceu:neutron_activator'], sub: 'Caesium and fluorine come back out' }),
+        n('ning', 17.5, 2.25, I('gtceu:naquadria_ingot'), 'Naquadria Ingot', { kind: 'product', from: ['sulf'], by: ['gtceu:smelting_complex'], end: 'ZPM power and the naquadria reactors', sub: 'Hydrogen and liquid helium at 9000 K' }),
+        n('resid', 5, 3.75, F('gtceu:naquadria_residue_solution'), 'Residue Solution', { kind: 'ret', from: ['hex'], sub: 'Not wasted: it is blasted back to solution' }),
+        n('nsol', 7.5, 3.75, F('gtceu:naquadria_solution'), 'Naquadria Solution', { kind: 'ret', from: ['resid'], by: ['gtceu:electric_blast_furnace'], sub: 'Indium phosphide comes out as a byproduct', end: 'the acid separation and back to the plant' }),
       ],
     },
     actinides: {
@@ -80,7 +89,7 @@ export default {
     },
     europium: {
       name: 'Europium without fusion',
-      line: 'europium',
+      line: 'rareearth',
       nodes: [
         n('mon', 0, 0, I('gtca:milled_monazite'), 'Milled Monazite', { kind: 'raw', sub: 'Mars rare earths' }),
         n('xan', 0, 1.5, I('gtca:potassium_ethyl_xanthate_dust'), 'Potassium Ethyl Xanthate', { kind: 'raw', sub: 'The collector' }),
@@ -93,9 +102,10 @@ export default {
           kind: 'machine', from: ['froth'], sub: 'EV\'s cascade, its ZPM mode',
         }),
         n('ecl', 10, 0.75, F('gtceu:europium_chloride_solution'), 'Europium Chloride', { kind: 'product', from: ['casc'], sub: 'The phosphoric acid goes to the EV acid loop' }),
+        L('evec', 10, -0.75, 'pl_ev:eu'),
         n('zn', 10, 2.25, I('gtceu:zinc_dust'), 'Zinc', { kind: 'raw', sub: 'Reduces the solution, then comes back (recovered with hydrogen, never spent)' }),
         n('red', 12.5, 0.75, M('gtceu:europium_reductor'), 'Europium Reductor', {
-          kind: 'ours', from: ['ecl', 'zn'], desc: 'Pulls europium out of the solution with zinc, then roasts and reduces it.',
+          kind: 'ours', from: ['ecl', 'evec', 'zn'], desc: 'Pulls europium out of the solution with zinc, then roasts and reduces it.',
         }),
         n('esul', 15, -0.75, I('gtceu:europium_sulfate_dust'), 'Europium Sulfate', { kind: 'product', from: ['red'], sub: 'Roasted to the oxide' }),
         n('eox', 17.5, -0.75, I('gtceu:europium_oxide_dust'), 'Europium Oxide', { kind: 'product', from: ['esul'], by: ['gtceu:valence_reduction'], sub: 'Reduced with lanthanum' }),
@@ -200,7 +210,7 @@ export default {
         n('bay', 7.5, 0, M('gtceu:entry_probe_bay'), 'Entry Probe Bay', { kind: 'ours', from: ['probe', 'n2'], desc: 'Drops the probe through Titan\'s haze, or into a lake.' }),
         n('tholin', 10, 0, I('grindless:tholin'), 'Tholin', { kind: 'product', from: ['bay'], sub: 'Eight a descent' }),
         n('meth', 10, 1.5, F('gtceu:methane'), 'Methane', { kind: 'product', from: ['bay'], extends: 'pl_zpm:qubits', end: 'the carbon and qubit line', sub: 'From a lake sample' }),
-        n('ref', 12.5, 0, M('gtceu:tholin_reformer'), 'Tholin Reformer', { kind: 'ours', from: ['tholin'], desc: 'Hydrolyses tholin into nitriles, then builds fibres and diamines from them.' }),
+        n('ref', 12.5, 0, M('gtceu:tholin_reformer'), 'Tholin Reformer', { kind: 'ours', from: ['tholin'], desc: 'Hydrolyses tholin into nitriles, then builds diamines from them; the fibre line has its own plant.' }),
         n('nit', 15, 0, F('gtceu:titan_nitriles'), 'Titan Nitriles', { kind: 'product', from: ['ref'] }),
         n('zn2', 17.5, -3, I('gtceu:zinc_dust'), 'Zinc', { kind: 'raw', sub: 'A catalyst: it stays' }),
         n('rice2', 10, -3, F('gtceu:ring_ice'), 'Ring Ice', { kind: 'raw', sub: 'From the Saturn ring harvester' }),
@@ -208,7 +218,11 @@ export default {
         n('amm', 15, -1.5, F('gtceu:ammonia'), 'Ammonia', { kind: 'product', from: ['rdist'], sub: 'From the rings: the LV plant is the other source' }),
         L('nh3', 15, -3, 'pl_lv:ammonia'),
         n('dab', 17.5, 0, F('gtceu:diaminobenzidine'), 'Diaminobenzidine', { kind: 'product', from: ['nit', 'zn2', 'nh3', 'amm'], by: ['gtceu:tholin_reforming'] }),
-        n('cf', 17.5, 2.25, I('gtceu:carbon_fibers'), 'Carbon Fibres', { kind: 'product', from: ['nit'], by: ['gtceu:tholin_reforming'], end: 'EV nano CPU wafers' }),
+        n('acn', 17.5, 2.25, F('gtceu:acrylonitrile'), 'Acrylonitrile', { kind: 'product', from: ['nit'], by: ['gtceu:distillation_tower'], sub: 'The nitrile cut; hydrogen cyanide and methane come off with it' }),
+        n('pan', 20, 2.25, I('gtceu:polyacrylonitrile_dust'), 'Polyacrylonitrile', { kind: 'product', from: ['acn'], by: ['gtceu:large_chemical_reactor'], sub: 'Circuit 1, sodium persulfate as the initiator' }),
+        n('wet', 22.5, 2.25, I('grindless:pan_precursor_fibre'), 'Wet-Spun Precursor', { kind: 'product', from: ['pan'], by: ['gtceu:chemical_bath'], sub: 'Spun into a water bath' }),
+        n('stab', 25, 2.25, I('grindless:stabilised_pan_fibre'), 'Stabilised Fibre', { kind: 'product', from: ['wet'], by: ['gtceu:electric_blast_furnace'], sub: 'Oxidised in air at 550 K' }),
+        n('cf', 27.5, 2.25, I('gtceu:carbon_fibers'), 'Carbon Fibres', { kind: 'product', from: ['stab'], by: ['gtceu:electric_blast_furnace'], end: 'EV nano CPU wafers', sub: 'Carbonised at 1600 K under nitrogen' }),
         n('dph', 20, -1.5, F('gtceu:diphenyl_isophthalate'), 'Diphenyl Isophthalate', { kind: 'raw' }),
         n('pbi', 20, 0, F('gtceu:polybenzimidazole'), 'Polybenzimidazole', { kind: 'product', from: ['dab', 'dph'], by: ['gtceu:large_chemical_reactor'], end: 'UV electromagnets and the UHV conveyor' }),
       ],
@@ -268,7 +282,7 @@ export default {
         n('npr', 0, 3.75, I('grindless:neptune_flyby_probe'), 'Neptune Flyby Probe', { kind: 'raw' }),
         n('fly', 2.5, 3.75, M('gtceu:flyby_probe_bay'), 'Flyby Probe Bay', { kind: 'ours', from: ['npr'], desc: 'Flies the probe past Neptune and Triton.' }),
         n('nrec', 5, 3, I('grindless:neptune_probe_recording'), 'Neptune Probe Recording', { kind: 'product', from: ['fly'], role: 'research', end: 'the deep space network' }),
-        n('nsam', 5, 4.5, I('grindless:neptune_sample'), 'Neptune Sample', { kind: 'product', from: ['fly'], keepShort: 'a sample the flyby probe bay returns in one step; the centrifuge flask and the Neptune siphon take it as it is, and a purification stage would be padding', end: 'the outer-planet parts' }),
+        n('nsam', 5, 4.5, I('grindless:neptune_sample'), 'Neptune Sample', { kind: 'product', from: ['fly'], role: 'research', keepShort: 'a sample the flyby probe bay returns in one step; the centrifuge flask and the Neptune siphon take it as it is, and a purification stage would be padding', end: 'the outer-planet parts' }),
         n('dsn', 2.5, 7, M('gtceu:deep_space_network'), 'Deep Space Network', { kind: 'ours', desc: 'Decodes the recordings into charts.' }),
         n('pch', 5, 7, I('grindless:pluto_kuiper_chart'), 'Pluto-Kuiper Chart', { kind: 'product', from: ['dsn'], role: 'research', end: 'the Kuiper interceptor' }),
         n('plate2', 0, 9.5, I('grindless:cvd_diamond_plate'), 'CVD Diamond Plate', { kind: 'raw' }),

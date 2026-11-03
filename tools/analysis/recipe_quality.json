@@ -85,7 +85,10 @@
  "familyCasings": [
   "^grindless:(sic_composite|hftacn_lining|superhydride_magnet|photonic|degenerate_containment)_casing$",
   "^grindless:(rhea|mh_field|multilayer_optics|dilution_cryostat)_casing$",
-  "^grindless:(gum_metal|mu_metal_shield|pulsed_field|pasta_containment)_casing$"
+  "^grindless:(gum_metal|mu_metal_shield|pulsed_field|pasta_containment)_casing$",
+  "^grindless:(chain_lamina|tpv_wall|kugelblitz_cavity)_casing$",
+  "^grindless:(tensegrity_truss|droplet_radiator|shell_window_coil|clamp_coil|primordial_cryostat)_casing$",
+  "^grindless:(void_diamond_window|horizon_gate_casing)$"
  ],
  "_circuitTier": "Concrete circuit items our recipes use and the tier of the #gtceu:circuits/<tier> tag that lists each (native dump dump-uxv-b5m2 tags.json, targeted search); tag inputs (#gtceu:circuits/<tier>) need no entry. voltBootstrap: the multi-amp energy hatches only run at tier N once the tier-N 2 A hatch exists, so like the 2 A hatches they are built at VA[N-1]. ownedPatterns: ids that count as ours without a GTM recipe (gtceu tier components of UHV and above).",
  "circuitTier": {
