@@ -9,6 +9,10 @@
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
   "conditions": {
+    "plant_casing_condition": {
+      "field": "plantCasing", "max": 3,
+      "note": "GT--'s chemical plant runs a row only up to its plant casing tier: the HV build (HV machine casing) reaches 3, so the plantCasing 4 and 5 rows are not ready at HV (A1a-04). ev.json and iv.json raise the cap with the casings; luv.json goes back to steam's ignore rule."
+    },
     "cleanroom": {
       "needsByField": { "field": "cleanroom", "map": { "cleanroom": ["run:gtceu:cleanroom"] } }
     },
@@ -33,8 +37,8 @@
   ],
 
   "machines": [
-    {"machine":"gtceu:coil_chemical_plant","types":["gtceu:large_chemical_reactor"],"energy":{"voltage":512},"needs":["eu:hv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a","gtceu:ev_energy_input_hatch","gtceu:ev_energy_input_hatch_4a","gtceu:ev_energy_input_hatch_16a"]},"package":"A1b-04","note":"Our HV Coil Chemical Plant (mega machine), modelled by A1b-04."},
-    {"id":"gtnn:exxonmobil_chemical_plant@hv","machine":"gtnn:exxonmobil_chemical_plant","types":["gtceu:chemical_plant"],"energy":{"voltage":512},"needs":["eu:hv"],"parts":["gtceu:hv_energy_input_hatch","gtceu:lv_input_bus","gtceu:lv_input_hatch","gtceu:lv_output_bus","gtceu:lv_output_hatch"],"note":"GT--'s chemical plant built with HV machine casings (D1-HV-PROP, #250): GT-- 1.3.10 runs a recipe only up to its casings' tier, so on one HV hatch it runs the HV rows, among them the anthraquinone peroxide cycle and hydrazine that rocket fuel needs. zpm.json models the same plant on two IV hatches."},
+    {"machine":"gtceu:coil_chemical_plant","types":["gtceu:large_chemical_reactor"],"energy":{"voltage":512},"needs":["eu:hv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a","gtceu:ev_energy_input_hatch","gtceu:ev_energy_input_hatch_4a","gtceu:ev_energy_input_hatch_16a"]},"note":"Our HV Coil Chemical Plant (mega machine)."},
+    {"id":"gtnn:exxonmobil_chemical_plant@hv","machine":"gtnn:exxonmobil_chemical_plant","types":["gtceu:chemical_plant"],"energy":{"voltage":512},"needs":["eu:hv"],"parts":["gtceu:frostproof_machine_casing","gtceu:hv_machine_casing","gtceu:steel_pipe_casing","gtceu:cupronickel_coil_block","gtnn:catalyst_hatch","gtnn:orange_metal_catalyst","gtceu:hv_energy_input_hatch","gtceu:lv_input_bus","gtceu:lv_input_hatch","gtceu:lv_output_bus","gtceu:lv_output_hatch"],"note":"GT--'s chemical plant built with HV machine casings (D1-HV-PROP, #250; FIX-VALIDATOR2 A1a-04 adds the build: aluminium frostproof casing, HV machine casing, steel pipe casing, cupronickel coil, catalyst hatch and the Pd-V catalyst): GT-- 1.3.10 runs a recipe only up to its casings' tier (plant_casing_condition, capped below at plantCasing 3), so on one HV hatch it runs the HV rows, among them the anthraquinone peroxide cycle and hydrazine that rocket fuel needs. zpm.json models the same plant on two IV hatches."},
     { "machine": "gtceu:hv_transformer_1a", "types": [], "note": "GTM's HV <-> EV transformer (1 A)." },
     { "machine": "gtceu:hv_transformer_2a", "types": [] },
     { "machine": "gtceu:hv_transformer_4a", "types": [], "note": "HV -> EV transformer (4 A -> 1 A): the gate to EV." },
@@ -284,7 +288,7 @@
   ],
 
   "targets": [
-    { "id": "pair-lunar", "label": "A1b-05: the lunar entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/lunar_entangled_singularity"], "package": "A1b-05" },
+    { "id": "pair-lunar", "label": "A1b-05: the lunar entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/lunar_entangled_singularity"] },
     { "id": "hatch-energy-hv", "label": "HV energy hatch (HV assembler at 480 EU/t + the clean room's LPIC chip)", "item": "gtceu:hv_energy_input_hatch" },
     { "id": "chip-lpic", "label": "LPIC chip (HV cutter inside the clean room)", "item": "gtceu:lpic_chip" },
     { "id": "coil-voltage-hv", "label": "HV-voltage coil (HV assembler)", "item": "gtceu:hv_voltage_coil" },
@@ -375,6 +379,9 @@
     { "id": "reformer", "label": "Catalytic reformer (ours, trimmable)", "item": "gtceu:reformer", "optional": true },
     { "id": "bit-stainless", "label": "Stainless steel drill bit (the HV drill's bit)", "item": "grindless:stainless_steel_drill_bit" },
     { "id": "bit-titanium-not-made", "label": "The titanium drill bit is no longer made: it stays registered, hidden, and converts 1:1 into the stainless one (HV has no titanium)", "item": "grindless:titanium_drill_bit", "expect": "unreachable" },
+    { "id": "cerium-not-before-ev", "label": "Cerium dust comes first at EV (D-3): not at HV (A1a-02; FIX-BYPROD retiers the bastnasite electrolysis, the last MV route)", "item": "gtceu:cerium_dust", "expect": "unreachable" },
+    { "id": "lanthanum-not-before-ev", "label": "Lanthanum dust comes first at EV (D-3): not at HV (A1a-02)", "item": "gtceu:lanthanum_dust", "expect": "unreachable" },
+    { "id": "yttrium-not-before-ev", "label": "Yttrium dust comes first at EV (D-3): not at HV (A1a-02)", "item": "gtceu:yttrium_dust", "expect": "unreachable" },
     { "id": "catalyst-hydrotreatment", "label": "Hydrotreating catalyst (cobalt + molybdenum + silica)", "item": "grindless:hydrotreating_catalyst" },
     { "id": "catalyst-reforming", "label": "Reforming catalyst (End platinum + silica)", "item": "grindless:reforming_catalyst", "optional": true },
     { "id": "recipe-drilling-bit-stainless", "label": "HV drill (only it, without the steam, LV and MV ones) with a stainless steel drill bit", "kind": "recipe", "type": "gtceu:vein_drilling", "input": "grindless:stainless_steel_drill_bit", "without": ["operate:gtceu:steam_vein_drill", "operate:gtceu:lv_vein_drill", "operate:gtceu:mv_vein_drill"] },
@@ -582,7 +589,8 @@
       "label": "HV multiblocks formed: ours and GTM's that the tier models",
       "items": [
         "m:gtceu:hv_vein_drill", "m:gtceu:hv_greenhouse", "m:gtceu:refinery", "m:gtceu:reformer", "m:gtceu:syngas_plant", "m:gtceu:cleanroom", "m:gtceu:vacuum_freezer@mv2",
-        "m:gtceu:cracker@mv2", "m:gtceu:distillation_tower@mv2", "m:gtceu:large_chemical_reactor@mv2", "m:gtceu:electric_blast_furnace@hv-kanthal"
+        "m:gtceu:cracker@mv2", "m:gtceu:distillation_tower@mv2", "m:gtceu:large_chemical_reactor@mv2", "m:gtceu:electric_blast_furnace@hv-kanthal",
+        "m:gtnn:exxonmobil_chemical_plant@hv", "m:gtceu:coil_chemical_plant"
       ]
     },
     {

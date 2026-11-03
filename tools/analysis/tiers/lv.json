@@ -44,7 +44,9 @@
   ],
 
   "machines": [
-    {"machine":"gtceu:wire_works","types":["gtceu:wiremill","gtceu:bender"],"energy":{"voltage":32},"needs":["eu:lv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:lv_energy_input_hatch","gtceu:lv_energy_input_hatch_4a","gtceu:lv_energy_input_hatch_16a","gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a"]},"package":"A1b-04","note":"Our LV Wire Works (mega machine): on the validator since A1b-04, which found no mega machine modelled."},
+    {"machine":"gtceu:wireless_energy_tower","types":[],"energy":{"voltage":32},"needs":["eu:lv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:lv_energy_input_hatch","gtceu:lv_energy_input_hatch_4a","gtceu:lv_energy_input_hatch_16a","gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a"]},"note":"Our LV Wireless Energy Tower (A1a-09): energy network, no recipes."},
+    {"machine":"gtceu:generator_array","types":["gtceu:steam_turbine","gtceu:combustion_generator","gtceu:gas_turbine"],"energy":{"voltage":32},"needs":["eu:lv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:lv_energy_input_hatch","gtceu:lv_energy_input_hatch_4a","gtceu:lv_energy_input_hatch_16a","gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a"]},"note":"Our LV Generator Array (A1a-09)."},
+    {"machine":"gtceu:wire_works","types":["gtceu:wiremill","gtceu:bender"],"energy":{"voltage":32},"needs":["eu:lv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:lv_energy_input_hatch","gtceu:lv_energy_input_hatch_4a","gtceu:lv_energy_input_hatch_16a","gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a"]},"note":"Our LV Wire Works (mega machine): on the validator since A1b-04, which found no mega machine modelled."},
     {
       "machine": "gtceu:lv_vein_drill",
       "types": ["gtceu:vein_drilling"],
@@ -367,7 +369,7 @@
     {
       "id": "lv-multiblocks",
       "label": "LV multiblocks formed: our drill, greenhouse and arc furnace, and the EBF with 2 LV hatches",
-      "items": ["m:gtceu:lv_vein_drill", "m:gtceu:lv_greenhouse", "m:gtceu:submerged_arc_furnace", "m:gtceu:electric_blast_furnace"]
+      "items": ["m:gtceu:lv_vein_drill", "m:gtceu:lv_greenhouse", "m:gtceu:submerged_arc_furnace", "m:gtceu:electric_blast_furnace", "m:gtceu:wireless_energy_tower", "m:gtceu:generator_array"]
     },
     {
       "id": "lv-items",

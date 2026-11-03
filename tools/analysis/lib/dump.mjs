@@ -75,6 +75,30 @@ function dropUnreachable(recipes, lookupDoc) {
   return out;
 }
 
+const CR_TYPE = 'gtceu:chemical_reactor';
+const LCR_TYPE = 'gtceu:large_chemical_reactor';
+
+/**
+ * GTM 7.5.3 adds the large chemical reactor copy of every script-added chemical reactor recipe at runtime (GregTechKubeJSPlugin.
+ * injectRuntimeRecipes -> handleGTRecipe -> builder.save -> onRecipeBuild), after ServerEvents.recipes, so gg_dump never sees it.
+ * Adds it here (same content, type gtceu:large_chemical_reactor, id <ns>:large_chemical_reactor/<path>) for every added
+ * chemical reactor recipe that has none. Returns the number of copies added.
+ */
+function addRuntimeLargeChemicalReactor(recipes) {
+  const copies = [];
+  for (const r of recipes.values()) {
+    if (r.type !== CR_TYPE || !r.added) continue;
+    const ix = r.id.indexOf(':');
+    const ns = ix < 0 ? 'minecraft' : r.id.slice(0, ix);
+    const p = ix < 0 ? r.id : r.id.slice(ix + 1);
+    const id = `${ns}:large_chemical_reactor/${p.startsWith('chemical_reactor/') ? p.slice('chemical_reactor/'.length) : p}`;
+    if (recipes.has(id)) continue;
+    copies.push({ id, type: LCR_TYPE, added: true, json: r.json && typeof r.json === 'object' ? { ...r.json, type: LCR_TYPE } : r.json });
+  }
+  for (const c of copies) recipes.set(c.id, c);
+  return copies.length;
+}
+
 /** The one line the CLI prints about GTM's recipe lookup (dump.lookup). */
 export function lookupLine(dump) {
   const l = dump.lookup;
@@ -136,6 +160,7 @@ export function makeDump(dir, docs) {
   }
   // the recipes GTM's lookup never finds (lookup_unreachable.json) leave the model before anything reads it
   const lookup = dropUnreachable(recipes, docs.lookup || null);
+  const runtimeLcr = addRuntimeLargeChemicalReactor(recipes);
 
   const machines = new Map();
   const recipeTypes = new Map();
@@ -151,6 +176,8 @@ export function makeDump(dir, docs) {
     parseErrors,
     // GTM's recipe lookup (lookup_unreachable.json): {file, listed, dropped, notInDump, otherType}; file false when there was none
     lookup,
+    // large chemical reactor copies GTM adds at runtime (addRuntimeLargeChemicalReactor): how many this dump gained
+    runtimeLcr,
     items: new Set(itemsDoc.items || []),
     fluids: new Set(itemsDoc.fluids || []),
     tags: new TagIndex(docs.tags),

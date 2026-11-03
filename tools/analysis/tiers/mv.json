@@ -41,7 +41,14 @@
   ],
 
   "machines": [
-    {"machine":"gtceu:polymer_works","types":["gtceu:polymer_works"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"package":"A1b-04","note":"Our MV Polymer Works (mega machine), modelled by A1b-04."},
+    {"machine":"gtceu:advanced_multi_smelter","types":["gtceu:electric_furnace"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"note":"Our MV Advanced Multi Smelter (A1a-09)."},
+    {"machine":"gtceu:lava_furnace","types":["gtceu:electric_furnace"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"note":"Our MV Lava Furnace (A1a-09): heated by lava, no energy hatch needed."},
+    {"machine":"gtceu:weather_controller","types":["gtceu:weather_control"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"note":"Our MV Weather Controller (A1a-09)."},
+    {"machine":"gtceu:universal_processing_factory","types":["gtceu:bender","gtceu:wiremill","gtceu:lathe","gtceu:cutter","gtceu:extruder","gtceu:compressor","gtceu:forge_hammer","gtceu:forming_press","gtceu:polarizer","gtceu:laser_engraver","gtceu:fluid_solidifier"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"note":"Our MV Universal Processing Factory (A1a-09)."},
+    {"machine":"gtceu:universal_assembly_factory","types":["gtceu:assembler","gtceu:circuit_assembler"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"note":"Our MV Universal Assembly Factory (A1a-09)."},
+    {"machine":"gtceu:universal_separation_factory","types":["gtceu:centrifuge","gtceu:electrolyzer","gtceu:thermal_centrifuge","gtceu:macerator","gtceu:sifter","gtceu:extractor","gtceu:electromagnetic_separator"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"note":"Our MV Universal Separation Factory (A1a-09)."},
+    {"machine":"gtceu:universal_mixing_factory","types":["gtceu:mixer","gtceu:chemical_reactor","gtceu:chemical_bath","gtceu:ore_washer"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"note":"Our MV Universal Mixing Factory (A1a-09)."},
+    {"machine":"gtceu:polymer_works","types":["gtceu:polymer_works"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"note":"Our MV Polymer Works (mega machine), modelled by A1b-04."},
     { "machine": "gtceu:lv_transformer_1a", "types": [], "note": "GTM's LV <-> MV transformer (1 A)." },
     { "machine": "gtceu:lv_transformer_2a", "types": [] },
     { "machine": "gtceu:lv_transformer_4a", "types": [], "note": "LV -> MV transformer (4 A -> 1 A): LV's gate." },
@@ -519,7 +526,9 @@
       "items": [
         "m:gtceu:mv_vein_drill", "m:gtceu:mv_greenhouse", "m:gtceu:ore_plant", "m:gtceu:biorefinery", "m:gtceu:pyrolyse_oven",
         "m:gtceu:mv_fluid_drilling_rig", "m:gtceu:electric_blast_furnace@mv-cupronickel", "m:gtceu:electric_blast_furnace@lv-kanthal",
-        "m:gtceu:electric_blast_furnace@mv-kanthal"
+        "m:gtceu:electric_blast_furnace@mv-kanthal",
+        "m:gtceu:advanced_multi_smelter", "m:gtceu:lava_furnace", "m:gtceu:weather_controller", "m:gtceu:universal_processing_factory",
+        "m:gtceu:universal_assembly_factory", "m:gtceu:universal_separation_factory", "m:gtceu:universal_mixing_factory"
       ]
     },
     {

@@ -3,11 +3,15 @@
   "title": "EV era",
   "extends": "hv",
   "inheritTargets": true,
-  "dropTargets": ["bit-titanium-not-made", "auto-titanium-without-lunar-drill", "scheelite-not-comes-from-end"],
+  "dropTargets": ["bit-titanium-not-made", "auto-titanium-without-lunar-drill", "scheelite-not-comes-from-end", "cerium-not-before-ev", "lanthanum-not-before-ev", "yttrium-not-before-ev"],
   "note": "EV era per docs/eras/ev.md and its \"Decisions taken\" (which rule), in two substages (its \"Validator\" section): ev, the automated Moon base and Earth's fine chemistry, and ev-mars, Mars reached at the end of the era with the tier 2 rocket (steam.json's eraOrder puts ev-mars between ev and iv, so nothing on the way to Mars may need tungsten, samarium or deuterium). The Moon is the HV trip's dim:gcyr:luna key; Mars is the dim:gcyr:mars key of the synthetic mars-trip (the advanced tank and motor, which need the antenna's Mars chart). Every recipe that uses the Moon itself (cryogenic plant, antenna, the tripod's lunar veins) carries .dimension('gcyr:luna') and the Mars ones (atmosphere processor, Martian veins) .dimension('gcyr:mars'); recipes of shippable inputs (the regolith cell, the sintered brick, the seeds, the dome's lunar mode) carry none: static `site` checks, and conditions.dimension.asKeysFor turns them into the trips' keys. Machines: every EV single block (gtceu:ev_*), our EV multiblocks with their real patterns (B7's combined-cycle plant and hot strip mill included), GTM's EBF with nichrome, freezer, large chemical reactor and tower on EV hatches, and the family tier veto (vetoAbove/onlyTier: the tripod only runs vein_drilling/ev/, the lower drills and greenhouses skip it, and the steam drill and greenhouse only run unfiled steam recipes). Decisions of 2026-10-25 (C1): radioactives, radon and the quantum eye wait for IV (the Nether thorium gives no uraninite and red granite no uranium;  the pack's EV circuit assembler and EV creature simulator take HV emitters and sensors).",
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
   "conditions": {
+    "plant_casing_condition": {
+      "ignore": true,
+      "reason": "From EV the plant is built with better casings; only HV caps the plant casing tier (hv.json, A1a-04)."
+    },
     "dimension": {
       "asKeysFor": ["gcyr:luna", "gcyr:mars"],
       "note": "The bases outside the factory: a recipe only valid on the Moon needs the dim:gcyr:luna key (HV's synthetic moon-trip) and one only valid on Mars the dim:gcyr:mars key (synthetic mars-trip), instead of being compared against the factory's dimension. GTM ORs a recipe's dimension conditions: a recipe for the Moon or Mars (the solar array's, the tripod's) needs either key."
@@ -33,8 +37,8 @@
   ],
 
   "machines": [
-    {"machine":"gtceu:ore_refinery","types":["gtceu:ore_refinery"],"energy":{"voltage":2048},"needs":["eu:ev"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:ev_energy_input_hatch","gtceu:ev_energy_input_hatch_4a","gtceu:ev_energy_input_hatch_16a","gtceu:iv_energy_input_hatch","gtceu:iv_energy_input_hatch_4a","gtceu:iv_energy_input_hatch_16a","gtceu:iv_wireless_energy_hatch","gtceu:iv_wireless_energy_hatch_4a","gtceu:iv_wireless_energy_hatch_16a","gtceu:iv_wireless_energy_hatch_64a"]},"package":"A1b-04","note":"Our EV Ore Refinery (mega machine, MEGA-4), modelled by A1b-04."},
-    {"id":"gtca:thermal_reactor@ev-rtm","machine":"gtca:thermal_reactor","types":["gtceu:thermal_reactor"],"energy":{"voltage":2048,"hatches":2},"coilTemp":4500,"needs":["eu:ev"],"parts":["gtceu:heatproof_machine_casing","gtceu:rtm_alloy_coil_block","gtceu:ev_energy_input_hatch","gtceu:lv_input_bus","gtceu:lv_output_bus","gtceu:lv_input_hatch","gtceu:lv_output_hatch","gtceu:lv_muffler_hatch"],"package":"A1b-04","note":"GTCA's thermal reactor (froth lines) on two EV hatches (IV voltage) with an RTM coil (4,500 K); its casing is not in the dump, so the heatproof casing stands in (steam's * rule). Rows above 8,192 EU/t or 4,500 K need the hotter variants."},
+    {"machine":"gtceu:ore_refinery","types":["gtceu:ore_refinery"],"energy":{"voltage":2048},"needs":["eu:ev"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:ev_energy_input_hatch","gtceu:ev_energy_input_hatch_4a","gtceu:ev_energy_input_hatch_16a","gtceu:iv_energy_input_hatch","gtceu:iv_energy_input_hatch_4a","gtceu:iv_energy_input_hatch_16a","gtceu:iv_wireless_energy_hatch","gtceu:iv_wireless_energy_hatch_4a","gtceu:iv_wireless_energy_hatch_16a","gtceu:iv_wireless_energy_hatch_64a"]},"note":"Our EV Ore Refinery (mega machine, MEGA-4), modelled by A1b-04."},
+    {"id":"gtca:thermal_reactor@ev-rtm","machine":"gtca:thermal_reactor","types":["gtceu:thermal_reactor"],"energy":{"voltage":2048,"hatches":2},"coilTemp":4500,"needs":["eu:ev"],"parts":["gtceu:heatproof_machine_casing","gtceu:rtm_alloy_coil_block","gtceu:ev_energy_input_hatch","gtceu:lv_input_bus","gtceu:lv_output_bus","gtceu:lv_input_hatch","gtceu:lv_output_hatch","gtceu:lv_muffler_hatch"],"note":"GTCA's thermal reactor (froth lines) on two EV hatches (IV voltage) with an RTM coil (4,500 K); its casing is not in the dump, so the heatproof casing stands in (steam's * rule). Rows above 8,192 EU/t or 4,500 K need the hotter variants."},
     { "machine": "gtceu:ev_transformer_1a", "types": [], "note": "EV -> IV transformer (1 A)." },
     { "machine": "gtceu:ev_transformer_2a", "types": [], "note": "EV -> IV transformer (2 A)." },
     { "machine": "gtceu:ev_transformer_4a", "types": [], "note": "EV -> IV transformer (4 A -> 1 A): the gate to IV." },
@@ -234,7 +238,7 @@
   ],
 
   "targets": [
-    { "id": "pair-martian", "label": "A1b-05: the martian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/martian_entangled_singularity"], "package": "A1b-05" },
+    { "id": "pair-martian", "label": "A1b-05: the martian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/martian_entangled_singularity"] },
     { "id": "energy-iv", "label": "IV energy available (EV -> IV transformer on the EV grid)", "item": "eu:iv" },
     { "id": "transformer-ev-iv", "label": "EV -> IV transformer (4 A -> 1 A)", "item": "gtceu:ev_transformer_4a" },
     { "id": "buffer-battery-ev", "label": "EV battery buffer", "item": "gtceu:ev_battery_buffer_4x" },
