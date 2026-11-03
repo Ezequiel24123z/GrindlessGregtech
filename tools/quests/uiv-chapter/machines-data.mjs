@@ -110,7 +110,7 @@ export const QUESTS = [
   prod('P_PELLET', 'Polarised Pellet', 'grindless:polarised_h_pellet', ['POLSRC'], 3, 1, ['Frozen hydrogen that remembers its spin. Mk5 burns three fuels, and each one starts at this source.']),
   gear('RING', 'uiv_fusion_reactor', 'Mk5 Fusion Reactor', ['POLSRC', 'HULL'], 10.5, -0.75, {
       for: 'The &6Mk5 Fusion Reactor&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches.',
-      needs: 'Two UIV hulls, UIV components, UIV circuits, the UIV fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches.',
+      needs: 'Two UIV hulls, UIV components, UIV circuits, about 520 UIV fusion casings, 1,350 RHEA casings, 1,000 metallic hydrogen field casings, 80 metallic hydrogen coil blocks and sixteen UIV energy hatches. The ring is too large for one pass of GTM\'s Terminal, which places about 2,300 per pass, so it takes two.',
     unlocks: 'The three polarised burns, and the direct energy converter that turns plasma into power.',
     automate: 'Build the fuel plant before you light the ring; helium-3 and protons return to their lines.',
   }, [it('grindless:uiv_fusion_casing'), MHCOIL], 250),
@@ -118,7 +118,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Mercury
   gear('MATR', 'matrioshka_computer', 'Matrioshka Computer', ['H_MACH1'], 3, 3, {
     for: 'A computer built in shells, in nine times Earth\'s sunlight, running logic that makes barely any heat. The &6Matrioshka Computer&r is where UIV research is written.',
-    needs: 'Two UIV hulls, UIV components, UIV circuits and the UIV casing. Its chart and research rows run in Mercury orbit.',
+    needs: 'Two UIV hulls, UIV components, UIV circuits, the UIV casing, about 1,600 RHEA casings, 22 droplet radiator modules and 200 logic tiles. It is too large for one pass of GTM\'s Terminal, which places about 2,300 per pass, so it takes two. Its chart and research rows run in Mercury orbit.',
     unlocks: 'Verified writes, the Kerr and equation of state charts, and the radiators that carry its heat.',
     automate: 'Logic tiles are among the longest builds here: stock them by ME and send the waste heat to the radiators.',
   }, [UIV], 250),
@@ -139,11 +139,11 @@ export const QUESTS = [
   }, [UIV, SITE], 250),
   prod('P_CRUST', 'Neutron Star Crust', 'grindless:neutron_star_crust', ['CRUST'], 14, -37, ['A slab of crust, lifted from a star that has no ground. Everything taken from it is contained.']),
   gear('DRIP', 'neutronium_cage', 'Neutron Drip Works', ['CRUST'], 16.5, -35.25, {
-    for: 'Deep in the crust the nuclei are so crowded that neutrons leak out between them. The &6Neutron Drip Works&r takes them away before the matter relaxes, then cools them into a superfluid and shuts it in a cage: the neutronium pellet, which is fiction, a spoonful of neutron matter held at ordinary pressure by a field. Choose the separation or the cage recipe type in the controller.',
-    needs: 'A UIV hull, the UIV casing, the neutron star site casing and a coil cage.',
-    unlocks: 'Drip neutrons for the r-process, and the neutronium pellet, which the stored proof asks for and the compression hall reads.',
-    automate: 'Drip neutrons decay if you wait: run them through the cage type at once, or pipe them straight to the next machine. Keep pellets by ME, as the hall never uses them up.',
-  }, [UIV, SITE], 300),
+    for: 'Deep in the crust neutrons leak out between the nuclei. The &6Neutron Drip Works&r takes them away, then cools them into a superfluid and shuts it in a cage: the neutronium pellet, which is fiction, a spoonful of neutron matter held by a field. Pick the separation or cage recipe type.',
+    needs: 'A UIV hull, the UIV casing, the neutron star site casing (about 720), the metallic hydrogen field casing (about 420) and the dilution cryostat casing (about 130), with 24 coil blocks. It measures 21 by 13 by 29.',
+    unlocks: 'Drip neutrons for the r-process, and the neutronium pellet that the stored proof asks for.',
+    automate: 'Drip neutrons decay if you wait: use them at once. Keep pellets by ME.',
+  }, [UIV, SITE, it('grindless:mh_field_casing'), it('grindless:dilution_cryostat_casing')], 300),
   prod('P_DRIP', 'Drip Neutrons', 'gtceu:drip_neutrons_bucket', ['DRIP'], 16.5, -37, ['A bucket of free neutrons that will not wait. Use it the moment it arrives.']),
   {
     key: 'P_PELLET_N', kind: 'reading', title: 'What the Pellet Is', icon: 'grindless:neutronium_pellet',
@@ -201,7 +201,7 @@ export const QUESTS = [
   prod('P_PROBED', 'Kerr Probe Data', 'grindless:kerr_probe_data', ['PROBE'], 31.5, -36.75, ['A record of how the hole spins. The Matrioshka turns it into the Kerr chart that the gate asks for.']),
   gear('PENROSE', 'penrose_engine', 'Penrose Engine', ['PROBE'], 29, -34.75, {
     for: 'The &6Penrose Engine&r drops a sled into the ergosphere. The sled splits, one half falls in and the other comes out with more energy than it took in. The hole spins a little slower. It is fiction.',
-    needs: 'A UIV hull and the UIV casing, with a sled loaded at the probe bay.',
+    needs: 'A UIV hull and the UIV casing, with a drop rail; about 1,200 metallic hydrogen field casings, 620 RHEA casings and 64 coil blocks. It fills about one whole pass of GTM\'s Terminal.',
     unlocks: 'Power for the gate load, and the recovered half-sled for the gate store.',
     automate: 'Sleds by ME; send each recovered half back to the bay for a refit.',
   }, [UIV], 300),
