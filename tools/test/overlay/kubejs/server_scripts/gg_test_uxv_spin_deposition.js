@@ -267,7 +267,7 @@
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []
     UNITS.forEach(function (def) {
-      var u = { name: def.name, id: def.id, z: def.z, circuit: def.circuit, wafer: def.wafer, inputs: def.inputs, fluid: def.fluid, extra: def.extra, laser: def.laser, parts: def.parts, phase: 'forming', started: S.tick }
+      var u = { mode: def.mode || 0, name: def.name, id: def.id, z: def.z, circuit: def.circuit, wafer: def.wafer, inputs: def.inputs, fluid: def.fluid, extra: def.extra, laser: def.laser, parts: def.parts, phase: 'forming', started: S.tick }
       try {
         var r = place(u)
         u.pos = r.pos

@@ -324,6 +324,7 @@
     return function (c, nextSocket) {
       var sym = c.sym
       if (c.ch === 'M') return SOCKETS[nextSocket()] || null
+      if (sym.kind === 'frames') return 'gtceu:' + sym.materials[0] + '_frame'
       if (sym.kind === 'blocks') return sym.blocks[0]
       if (sym.kind === 'oneOf') {
         if (c.si === lay.last && c.ry === 0 && PARTS[c.ci]) return PARTS[c.ci] + '[facing=north]'
