@@ -76,7 +76,7 @@ ServerEvents.recipes(function (event) {
 
     event.recipes.gtceu.large_chemical_reactor('grindless:depleted_uranium_deconversion')
       .inputFluids(Fluid.of('gtceu:depleted_uranium_hexafluoride', 1000), Fluid.of('gtceu:steam', 2000), Fluid.of('gtceu:hydrogen', 1000))
-      .itemOutputs('1x gtceu:uranium_238_dust')
+      .itemOutputs('1x gtceu:uranium_dust')
       .outputFluids(Fluid.of('gtceu:hydrofluoric_acid', 6000), Fluid.of('minecraft:water', 2000))
       .EUt(1920).duration(200)
 
