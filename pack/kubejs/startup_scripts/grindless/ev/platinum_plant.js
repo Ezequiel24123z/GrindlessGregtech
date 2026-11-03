@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------------------------
 // The Platinum Plant, the flagship multiblock of the EV era (docs/eras/ev.md), the recipe type it runs and its electrode.
 //
-//   gtceu:platinum_plant           5x5x7 hall (5 wide, 5 high, 7 deep) of inert casing, tempered glass and titanium pipes, runs the new
+//   gtceu:platinum_plant           7x7x9 hall (7 wide, 7 high, 9 deep) with a glass tower, of inert casing, tempered glass and titanium pipes, runs the new
 //                                  gtceu:pgm_refining
 //   grindless:platinum_electrode   platinum on titanium, the plant's condition. Goes in the input bus; every recipe needs one and uses it up
 //                                  by chance (0.1 % of the runs). Assembled from a titanium rod and platinum foil: the first platinum is the
@@ -43,17 +43,18 @@
 // included, so 4 copies want 4 electrodes in the bus; they are still used up only by chance). The modifier is registered with
 // alwaysTryModifyRecipe, so GTM re-applies it when each run ends (AGENTS.md, "A modifier alone doesn't stop a run").
 //
-// Geometry (slices back -> front, rows bottom -> top; the controller is in the front slice, middle column, row 1):
-//   row 0   floor: the 20 cells of its edge are `X` (inert casing or a part), the 15 of the middle are inert casing
-//   row 1   ground ring: 15 `X` cells and the controller; a titanium pipe column at each corner, rising to row 3
-//   row 2   ring of tempered glass
-//   row 3   ring of tempered glass
-//   row 4   roof of tempered glass
-// The 35 `X` cells are casing or parts: 1-2 EV energy hatches, 1 input bus, 1 output bus, 3 input hatches and 4 output hatches (the most
+// Geometry (slices back -> front, rows bottom -> top; the controller is in the front slice, middle column, row 1). A hall 7 wide, 7 high
+// and 9 deep with a glass tower (the stack of the loops) over its middle, 244 cells (docs/eras/lines-ev-zpm.md section 10):
+//   row 0   floor: inert casing; the edge columns and both end rows are `X` (inert casing or a part)
+//   row 1   ground row: `X` along both sides, a titanium pipe rack beside each, the controller in the front
+//   row 2   glass walls (the end walls have inert piers between their windows)
+//   row 3   glass roof of the hall, open under the tower
+//   rows 4-6 the tower: 5 deep, 5 wide, glass with a titanium pipe post at each corner and a glass lid
+// The 46 `X` cells are casing or parts: 1-2 EV energy hatches, 1 input bus, 1 output bus, 3 input hatches and 4 output hatches (the most
 // fluids one recipe takes in or gives out: three input hatches serve every recipe, and the rhodium-ruthenium one fills the four output
-// hatches), and at most one parallel hatch. That is 10 to 12 parts, so at least 23 cells are inert casing. The parts' limits set that
-// floor, so the casing has no minimum of its own (it had 24, the floor of 11 parts, until IV-B3 added the parallel hatch; every build
-// that formed still forms). ME buses and hatches have the same abilities as the plain ones and fit the same cells.
+// hatches), and at most one parallel hatch. That is 10 to 12 parts, so most of the `X` cells are inert casing. The parts' limits set that
+// floor, so the casing has no minimum of its own. ME buses and hatches have the same abilities as the plain ones and fit the same cells.
+// No casing here is made from the plant's own products (docs/quality/structures.md).
 //
 // Textures: overlay dir grindless:block/multiblock/platinum_plant, base casing GTM's inert (PTFE) machine casing; item/platinum_electrode.
 // Names / tooltips: client_scripts/grindless/ev_platinum_plant_lang.js.
@@ -90,13 +91,15 @@
 
   // ---------------------------------------------------------------- pattern
 
-  // 5 wide (columns, left to right as seen from the front), 5 high, 7 deep. 35 cells are `X`: the 20 of the edge of the floor and the
-  // 15 of the ground ring (corners and controller excluded)
-  const BACK = ['XXXXX', 'PXXXP', 'PGGGP', 'PGGGP', 'GGGGG']
-  const HALL = ['XIIIX', 'X###X', 'G###G', 'G###G', 'GGGGG']
-  const FRONT = ['XXXXX', 'PXSXP', 'PGGGP', 'PGGGP', 'GGGGG']
+  // 7 wide (columns, left to right as seen from the front), 7 high, 9 deep: a hall with a glass tower over its middle, 244 cells. 46 cells
+  // are `X`: the edge columns of the floor and of the ground row, and the two end rows of the floor
+  const BACK = ['XXXXXXX', 'XIIIIIX', 'GIGIGIG', 'GGGGGGG', '       ', '       ', '       ']
+  const LOW = ['XIIIIIX', 'XP###PX', 'G#####G', 'GGGGGGG', '       ', '       ', '       ']
+  const TOWER_END = ['XIIIIIX', 'XP###PX', 'G#####G', 'GGGGGGG', ' PGGGP ', ' PGGGP ', ' GGGGG ']
+  const TOWER = ['XIIIIIX', 'XP###PX', 'G#####G', 'GG###GG', ' G###G ', ' G###G ', ' GGGGG ']
+  const FRONT = ['XXXXXXX', 'XIISIIX', 'GIGIGIG', 'GGGGGGG', '       ', '       ', '       ']
   const SPEC = {
-    slices: [BACK, HALL, HALL, HALL, HALL, HALL, FRONT],
+    slices: [BACK, LOW, TOWER_END, TOWER, TOWER, TOWER, TOWER_END, LOW, FRONT],
     symbols: {
       S: Pat.controller(),
       // the casing fills the cells the parts leave; a minimum on it would make tools/analysis model the optional parallel hatch as
