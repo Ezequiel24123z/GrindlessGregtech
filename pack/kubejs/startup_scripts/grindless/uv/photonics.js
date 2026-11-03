@@ -9,7 +9,8 @@
 //                            of clean room casing: the MCVD lathe at its base (stainless gearbox head and tail stocks, a tungsten steel
 //                            frame bed, a heatproof oxy-hydrogen burner), above it the capstan (gearbox), the coating cup (PTFE pipe
 //                            casing), the draw furnace (a heatproof ring with the preform's hole) and the preform feed in the roof.
-//   gtceu:fibre_draw         its recipe type (EU in); the programmed circuit picks the step: 1 preform, 2 draw, 3 module, 4 refurbish.
+//   gtceu:fibre_draw         its recipe type (EU in); the programmed circuit picks the step: 1 preform, 2 draw, 3 module, 4 refurbish,
+//                            12 MCVD soot, 13 MCVD doping.
 //   gtceu:mocvd_reactor      compound semiconductors grown atom layer by atom layer (machine 10). 7 x 7 x 7 on clean room casing: the gas
 //                            cabinet (inert casing, back left), the arsine burn box beside it (heatproof casing: the exhaust scrubber),
 //                            the rotating susceptor (gearbox under a heatproof heater) under the PTFE showerhead.
@@ -18,7 +19,8 @@
 // Items (grindless:, names in client_scripts/grindless/uv_photonics_lang.js): yb_doped_preform, fibre_bragg_grating,
 // gallium_arsenide_boule, gallium_arsenide_wafer, sapphire_boule, sapphire_wafer, ingaas_epi_wafer, ingaas_diode_bar, nbn_film_wafer
 // (the NbN-coated wafer; UV-A7's SNSPD takes it). Fluids (GT materials, liquids): germanium_tetrachloride (GeCl4: UV-A7's germanium
-// refinery makes it and must reuse this id), trimethylgallium, trimethylindium, acrylate_coating.
+// refinery makes it and must reuse this id), trimethylgallium, trimethylindium, acrylate_coating, ytterbium_chloride_solution. D3-STARSHOT
+// adds the items mcvd_soot_tube, doped_soot_tube and coated_diode_bar (mocvd circuit 31).
 //
 // Parts (both): 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output buses, 1-2 output hatches in the floor cells, at least
 // 6 (tower) or 8 (reactor) casings among them. Textures: the qubit fab's overlay dir on the clean casing; item icons from
@@ -52,6 +54,9 @@
     sapphire_wafer: { stack: 64 },
     ingaas_epi_wafer: { stack: 64 },
     ingaas_diode_bar: { stack: 64 },
+    coated_diode_bar: { stack: 64 },
+    mcvd_soot_tube: { stack: 16 },
+    doped_soot_tube: { stack: 16 },
     nbn_film_wafer: { stack: 64 }
   }
 
@@ -60,7 +65,8 @@
     germanium_tetrachloride: { colour: 0xD8DCE0, formula: 'GeCl4' },
     trimethylgallium: { colour: 0xC8D0B8, formula: 'Ga(CH3)3' },
     trimethylindium: { colour: 0xB8C0D8, formula: 'In(CH3)3' },
-    acrylate_coating: { colour: 0xE8E2C8, formula: 'C3H4O2' }
+    acrylate_coating: { colour: 0xE8E2C8, formula: 'C3H4O2' },
+    ytterbium_chloride_solution: { colour: 0xC8E8D0, formula: 'YbCl3(aq)' }
   }
 
   P.tower = TOWER

@@ -105,7 +105,7 @@ test('germanium line: circuit 1 makes UV-A6\'s GeCl4 with balanced chlorine; cir
   // GeCl4 now has a maker: our circuit 1; A6's preform consumes it
   const makers = recipes.filter((r) => outputsOf(r).includes('gtceu:germanium_tetrachloride')).map((r) => r.i);
   assert.deepEqual(makers, ['grindless:zone_refining/germanium_tetrachloride']);
-  assert.ok(recipes.some((r) => /^grindless:fibre_draw\/(fibre_draw\/)?preform$/.test(r.i) && inputsOf(r).includes('gtceu:germanium_tetrachloride')));
+  assert.ok(recipes.some((r) => /^grindless:fibre_draw\/(fibre_draw\/)?mcvd_soot$/.test(r.i) && inputsOf(r).includes('gtceu:germanium_tetrachloride')));
 });
 
 test('HPGe comes only from the zone tower\'s circuit 3; the impure ends go back to circuit 1', () => {
