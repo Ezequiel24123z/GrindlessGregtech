@@ -897,6 +897,19 @@
 			x: 0.0d
 			y: 2.0d
 		}
+		{
+			dependencies: ["39A5A5CC76591697"]
+			description: ["The &6Wireless Energy Tower&r stores power for one network shared by every world, and makes none. An LV hull, an emitter and a sensor for the controller, solid casings, and capacitor cells for its slots. One EU network for the whole server, with no cable between bases. Keep the cells charged from your plants. The tower only holds what you give it."]
+			icon: "gtceu:wireless_energy_tower"
+			id: "356F6A17A0407640"
+			rewards: [{ id: "54AE543627A23B4D", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "79132F566D3EF029", item: "gtceu:wireless_energy_tower", type: "item" }]
+			title: "Wireless Energy Tower"
+			x: 16.0d
+			y: 0.0d
+		}
 	]
 	subtitle: ["Electricity at last: ore lines, a little chemistry, AE2, and the Moon on film."]
 	title: "LV: The First Spark"

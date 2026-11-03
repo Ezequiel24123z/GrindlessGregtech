@@ -1683,6 +1683,142 @@
 			x: 6.5d
 			y: 35.0d
 		}
+		{
+			dependencies: ["727596C723BF878B"]
+			description: [
+				"Every wafer of this age, and the machines that were left out of the story."
+				"Each wafer hangs from the one it is made from."
+			]
+			icon: "grindless:implanted_ln_wafer"
+			id: "196AF7B23C8B0529"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "1F68548A138C2F80", type: "checkmark" }]
+			title: "UHV Wafers"
+			x: 13.0d
+			y: 60.0d
+		}
+		{
+			dependencies: ["196AF7B23C8B0529"]
+			description: ["The &6Implanted LN Wafer&r: Lithium niobate with a buried layer of helium bubbles, ready to split. Made in the &6Ion Implantation&r from the Lithium Niobate Wafer, with helium, in the cleanroom. Made by the ion implanter (circuit 3); bonded and split in the photonic foundry (circuit 1). The LNOI Wafer and Lithium Niobate Wafer in the Photonic Foundry. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:implanted_ln_wafer"
+			id: "1D881E22B1700D17"
+			rewards: [{ id: "18D96DCE58498C8B", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5ACF62F6075F3463", item: "grindless:implanted_ln_wafer", type: "item" }]
+			title: "Implanted LN Wafer"
+			x: 15.0d
+			y: 60.0d
+		}
+		{
+			dependencies: ["196AF7B23C8B0529"]
+			description: ["The &6Superlattice Wafer&r: Hundreds of InGaAs/AlInAs layers, each a few atoms thick, on an indium phosphide wafer. Made in the &6Molecular Beam Epitaxy&r from the InP Wafer and Indium, with liquid nitrogen, in the cleanroom. Grown in the MBE reactor (circuit 1); cleaved into eight quantum cascade lasers (circuit 2). The Quantum Cascade Laser in the Molecular Beam Epitaxy. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:qcl_superlattice_wafer"
+			id: "1BD96E121F1108E0"
+			rewards: [{ id: "5DC51A456EC16650", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5A16A5404896FCA5", item: "grindless:qcl_superlattice_wafer", type: "item" }]
+			title: "Superlattice Wafer"
+			x: 15.0d
+			y: 61.5d
+		}
+		{
+			dependencies: ["196AF7B23C8B0529"]
+			description: ["The &6SiC Wafer&r: A polished silicon carbide wafer, hard enough to need a diamond wire. Made in the &6Cutter&r from the SiC Boule, with lubricant, in the cleanroom. Cut from a SiC boule; the SiC device fab grows its epi layer (circuit 2). The Hpsi SiC Wafer and SiC Epi Wafer in the Chemical Vapour Infiltration. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:sic_wafer"
+			id: "742D9701FE0409BB"
+			rewards: [{ id: "136D57FF6C6C1D4F", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5A53E6A9135789FC", item: "grindless:sic_wafer", type: "item" }]
+			title: "SiC Wafer"
+			x: 15.0d
+			y: 63.0d
+		}
+		{
+			dependencies: ["742D9701FE0409BB"]
+			description: ["The &6Epi Wafer&r: A silicon carbide wafer with a grown drift layer. Made in the &6Silicon Carbide Devices&r from the SiC Wafer, with silane, in the cleanroom. Made by the SiC device fab; implanted with aluminium in the ion implanter (circuit 4). The Implanted SiC Wafer in the Ion Implantation. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:sic_epi_wafer"
+			id: "7CB7C602E755D85A"
+			rewards: [{ id: "511175C8B539B2F0", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "52DC7889DE56DE7B", item: "grindless:sic_epi_wafer", type: "item" }]
+			title: "Epi Wafer"
+			x: 17.0d
+			y: 63.0d
+		}
+		{
+			dependencies: ["7CB7C602E755D85A"]
+			description: ["The &6Implanted Wafer&r: Aluminium ions in a silicon carbide epi layer, waiting for the 1,700 °C anneal. Made in the &6Ion Implantation&r from the Epi Wafer and Aluminium, in the cleanroom. Made by the ion implanter (circuit 4); annealed into device wafers in the SiC device fab. The SiC Device Wafer in the Silicon Carbide Devices. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:implanted_sic_wafer"
+			id: "3FB3004B9B41D001"
+			rewards: [{ id: "7FBA8462C63D7EC6", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5ADE56F303BFED83", item: "grindless:implanted_sic_wafer", type: "item" }]
+			title: "Implanted Wafer"
+			x: 19.0d
+			y: 63.0d
+		}
+		{
+			dependencies: ["3FB3004B9B41D001"]
+			description: ["The &6Device Wafer&r: Annealed silicon carbide transistors, still on the wafer. Made in the &6Silicon Carbide Devices&r from the Implanted Wafer and Graphite, in the cleanroom. Made by the SiC device fab (circuit 3); diced into four power modules (circuit 4). The SiC Power Module in the Silicon Carbide Devices. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:sic_device_wafer"
+			id: "50D2D9E488DDFD61"
+			rewards: [{ id: "127A231E027E9542", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1C25EE9B2ED89B3A", item: "grindless:sic_device_wafer", type: "item" }]
+			title: "Device Wafer"
+			x: 21.0d
+			y: 63.0d
+		}
+		{
+			dependencies: ["196AF7B23C8B0529"]
+			description: ["The &6IMM Epi Wafer&r: GaInP, GaAs and InGaAs junctions grown upside down on a gallium arsenide wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. Made by the MOCVD reactor (circuit 7); lifted off in the solar array fab (circuit 1). The Gallium Arsenide Wafer and Gallium Arsenide in the Space Photovoltaics. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:imm_epi_wafer"
+			id: "7B08CCCDF170035E"
+			rewards: [{ id: "79F940E41ADFCA26", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3DA8F0EC66E0D4D4", item: "grindless:imm_epi_wafer", type: "item" }]
+			title: "IMM Epi Wafer"
+			x: 15.0d
+			y: 64.5d
+		}
+		{
+			dependencies: ["196AF7B23C8B0529"]
+			description: ["The &6Dyson System Controller&r runs the Dyson swarm that collects a star's light into power. The controller takes darmstadtium plates, UHV circuits and an atomic casing. Dyson swarm recipes and the power they return. Item buses in feed the swarm; the power leaves through its own hatch."]
+			hide_dependency_lines: true
+			icon: "gcyr:dyson_system_controller"
+			id: "54F7A1E10F0604B5"
+			rewards: [{ id: "113ABE950988AE70", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "13A3B5985FD73708", item: "gcyr:dyson_system_controller", type: "item" }]
+			title: "Dyson System Controller"
+			x: 15.0d
+			y: 67.5d
+		}
+		{
+			dependencies: ["196AF7B23C8B0529"]
+			description: ["The &6Web Hub&r is the centre of a wireless energy web: every receiver of the web draws from it. The controller takes a Web Receiver, neutronium plates and a UV sensor. Wireless energy to every receiver in the web. It takes no items: link it to the power source and its receivers."]
+			hide_dependency_lines: true
+			icon: "gtmutils:web_hub"
+			id: "363DC2F23C3842D6"
+			rewards: [{ id: "1BBFB64781458715", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7B7A70A5531A4524", item: "gtmutils:web_hub", type: "item" }]
+			title: "Web Hub"
+			x: 17.0d
+			y: 67.5d
+		}
 	]
 	subtitle: ["Up the elevator, a gate to the star next door, a swarm of mirrors round Mercury and the first base on Proxima b."]
 	title: "UHV: Proxima and the Swarm"

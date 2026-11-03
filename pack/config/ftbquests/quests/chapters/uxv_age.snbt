@@ -1285,6 +1285,382 @@
 			x: 32.5d
 			y: 7.5d
 		}
+		{
+			dependencies: ["103E024FEAF25DDC"]
+			description: [
+				"Every wafer of this age, and the machines that were left out of the story."
+				"Each wafer hangs from the one it is made from."
+			]
+			icon: "grindless:srruo3_electrode_wafer"
+			id: "1E64EBF2DE00DEF8"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "38BBA70AF0BCA4B0", type: "checkmark" }]
+			title: "UXV Wafers"
+			x: 27.0d
+			y: 19.5d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6SrRuO3 Electrode Wafer&r is a wafer stage on the way to the BFO Film Wafer. Made in the &6Pulsed Laser Deposition&r from the Srruo3 Target and Dysco3 Substrate, with oxygen, in the cleanroom. The BFO Film Wafer and BFO Fume in the Pulsed Laser Deposition. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:srruo3_electrode_wafer"
+			id: "17DE5B5FC0CF0760"
+			rewards: [{ id: "3CEB229E73191C82", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F69A46B697D9442", item: "grindless:srruo3_electrode_wafer", type: "item" }]
+			title: "SrRuO3 Electrode Wafer"
+			x: 29.0d
+			y: 19.5d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6Si-28 FZ Wafer&r is a stage of the wafer lines of this era. Made in the &6Cutter&r from the Si28 FZ, with water, in the cleanroom. The next stage of its line, or the chip that is built from it. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:si28_fz_wafer"
+			id: "7D65C040C8F34F77"
+			rewards: [{ id: "1568863EC2ECE379", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "14FBD90CF19D1615", item: "grindless:si28_fz_wafer", type: "item" }]
+			title: "Si-28 FZ Wafer"
+			x: 29.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["7D65C040C8F34F77"]
+			description: ["The &6H Si-28 Wafer&r is a wafer stage on the way to the MTJ Stack Wafer. Made from the Si-28 FZ Wafer in the next machine of its line, in the cleanroom. The MTJ Stack Wafer and Spent Cofeb Target in the MTJ Sputtering. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:h_si28_wafer"
+			id: "39D6D026586DFCDE"
+			rewards: [{ id: "3A45DD46D9D1968F", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "39F073FAE187498A", item: "grindless:h_si28_wafer", type: "item" }]
+			title: "H Si-28 Wafer"
+			x: 31.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6MTJ Stack Wafer&r is a wafer stage on the way to the Annealed MTJ Wafer. Made in the &6MTJ Sputtering&r from the Cofeb Target and Mgo Target, with argon, in the cleanroom. The Annealed MTJ Wafer in the Nitride Magnet Synthesis. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:mtj_stack_wafer"
+			id: "1B22593F79C6B741"
+			rewards: [{ id: "535239D024FBB0C5", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7DBA0734C8B9A5C2", item: "grindless:mtj_stack_wafer", type: "item" }]
+			title: "MTJ Stack Wafer"
+			x: 29.0d
+			y: 22.5d
+		}
+		{
+			dependencies: ["1B22593F79C6B741"]
+			description: ["The &6Annealed MTJ Wafer&r is a stage of the wafer lines of this era. Made in the &6Nitride Magnet Synthesis&r from the MTJ Stack Wafer, with argon, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:annealed_mtj_wafer"
+			id: "1AEE8EB00A5B742C"
+			rewards: [{ id: "1066B1849F8C46B6", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3317BF6EED7AD7AF", item: "grindless:annealed_mtj_wafer", type: "item" }]
+			title: "Annealed MTJ Wafer"
+			x: 31.0d
+			y: 22.5d
+		}
+		{
+			dependencies: ["1AEE8EB00A5B742C"]
+			description: ["The &6Etched MTJ Wafer&r is a stage of the wafer lines of this era. Made from the Annealed MTJ Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:etched_mtj_wafer"
+			id: "70BA0C5D0A924050"
+			rewards: [{ id: "1128636B1C9AB9DF", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "19885A29B766C683", item: "grindless:etched_mtj_wafer", type: "item" }]
+			title: "Etched MTJ Wafer"
+			x: 33.0d
+			y: 22.5d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6Mram Stack Wafer&r is a wafer stage on the way to the Annealed MRAM Wafer. Made in the &6MTJ Sputtering&r from the Heusler Target and Mgo Target, with argon, in the cleanroom. The Annealed MRAM Wafer and Racetrack Memory Die in the Nitride Magnet Synthesis. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:mram_stack_wafer"
+			id: "53966E247F4C702B"
+			rewards: [{ id: "5093FE4A959FC4B2", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "397DBEAA232F4879", item: "grindless:mram_stack_wafer", type: "item" }]
+			title: "Mram Stack Wafer"
+			x: 29.0d
+			y: 24.0d
+		}
+		{
+			dependencies: ["53966E247F4C702B"]
+			description: ["The &6Annealed MRAM Wafer&r is a stage of the wafer lines of this era. Made in the &6Nitride Magnet Synthesis&r from the MRAM Stack Wafer, with argon, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:annealed_mram_wafer"
+			id: "7C019C36CD185D3E"
+			rewards: [{ id: "5B73345E38A0AEC6", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5F8F4AB1F463BF07", item: "grindless:annealed_mram_wafer", type: "item" }]
+			title: "Annealed MRAM Wafer"
+			x: 31.0d
+			y: 24.0d
+		}
+		{
+			dependencies: ["7C019C36CD185D3E"]
+			description: ["The &6Etched MRAM Wafer&r is a wafer stage on the way to the MRAM Wafer. Made from the Annealed MRAM Wafer in the next machine of its line, in the cleanroom. The MRAM Wafer in the Photonic Foundry. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:etched_mram_wafer"
+			id: "1C5B3004870CE5B4"
+			rewards: [{ id: "5011FB543AC802F7", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1F26BDAC4B1AF729", item: "grindless:etched_mram_wafer", type: "item" }]
+			title: "Etched MRAM Wafer"
+			x: 33.0d
+			y: 24.0d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6SAF Track Wafer&r is a wafer stage on the way to the Annealed SAF Wafer. Made in the &6MTJ Sputtering&r from the SAF Target Set and H Si-28 Wafer, with argon, in the cleanroom. The Annealed SAF Wafer in the Nitride Magnet Synthesis. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:saf_track_wafer"
+			id: "71BAB411C53692E4"
+			rewards: [{ id: "163C1100FE678C51", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "301FCF813B613C37", item: "grindless:saf_track_wafer", type: "item" }]
+			title: "SAF Track Wafer"
+			x: 29.0d
+			y: 25.5d
+		}
+		{
+			dependencies: ["71BAB411C53692E4"]
+			description: ["The &6Annealed SAF Wafer&r is a wafer stage on the way to the Written Track Wafer. Made in the &6Nitride Magnet Synthesis&r from the SAF Track Wafer, with argon, in the cleanroom. The Written Track Wafer in the Electron Beam Refining. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:annealed_saf_wafer"
+			id: "169E74C97325FA19"
+			rewards: [{ id: "72519DBFAA9BB8A1", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "51E0D0BF82A33A64", item: "grindless:annealed_saf_wafer", type: "item" }]
+			title: "Annealed SAF Wafer"
+			x: 31.0d
+			y: 25.5d
+		}
+		{
+			dependencies: ["169E74C97325FA19"]
+			description: ["The &6Written Track Wafer&r is a wafer stage on the way to the Patterned Track Wafer. Made in the &6Electron Beam Refining&r from the Annealed SAF Wafer, with argon, in the cleanroom. The Patterned Track Wafer and Platinum Group Sludge in the Racetrack Patterning. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:written_track_wafer"
+			id: "1D8E62A8101D4257"
+			rewards: [{ id: "3F7AAD558241EA1E", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "788BC0DE5FD4EB96", item: "grindless:written_track_wafer", type: "item" }]
+			title: "Written Track Wafer"
+			x: 33.0d
+			y: 25.5d
+		}
+		{
+			dependencies: ["1D8E62A8101D4257"]
+			description: ["The &6Patterned Track Wafer&r is a wafer stage on the way to the Racetrack Chip. Made in the &6Racetrack Patterning&r from the Written Track Wafer, with argon, in the cleanroom. The Racetrack Chip and Racetrack Memory Die in the Racetrack Patterning. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:patterned_track_wafer"
+			id: "12C0421B403BC4AD"
+			rewards: [{ id: "791341F2A12135BE", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7B48C893700BD786", item: "grindless:patterned_track_wafer", type: "item" }]
+			title: "Patterned Track Wafer"
+			x: 35.0d
+			y: 25.5d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6STNO Stack Wafer&r is a wafer stage on the way to the STNO Defined Wafer. Made in the &6MTJ Sputtering&r from the Heusler Target and Mgo Target, with argon, in the cleanroom. The STNO Defined Wafer in the Electron Beam Refining. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:stno_stack_wafer"
+			id: "76E12603C84755BF"
+			rewards: [{ id: "1AB762435EF34EF3", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "543DCD0AB1BF34E8", item: "grindless:stno_stack_wafer", type: "item" }]
+			title: "STNO Stack Wafer"
+			x: 29.0d
+			y: 27.0d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6STNO Defined Wafer&r is a stage of the wafer lines of this era. Made in the &6Electron Beam Refining&r from the STNO Stack Wafer, with argon, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:stno_defined_wafer"
+			id: "76E5B47ACCB12374"
+			rewards: [{ id: "58AC07110905D078", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "15989F9FDA9863BA", item: "grindless:stno_defined_wafer", type: "item" }]
+			title: "STNO Defined Wafer"
+			x: 29.0d
+			y: 28.5d
+		}
+		{
+			dependencies: ["76E5B47ACCB12374"]
+			description: ["The &6STNO Milled Wafer&r is a stage of the wafer lines of this era. Made from the STNO Defined Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:stno_milled_wafer"
+			id: "596E5845BBBD6A66"
+			rewards: [{ id: "3AAAB8D5DACA04EE", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1AD9B38FE62992D3", item: "grindless:stno_milled_wafer", type: "item" }]
+			title: "STNO Milled Wafer"
+			x: 31.0d
+			y: 28.5d
+		}
+		{
+			dependencies: ["596E5845BBBD6A66"]
+			description: ["The &6STNO Clean Wafer&r is a stage of the wafer lines of this era. Made from the STNO Milled Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:stno_clean_wafer"
+			id: "5C2B1B602EEFF577"
+			rewards: [{ id: "1D5248FB8BB16691", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5AE67197F34EDF7C", item: "grindless:stno_clean_wafer", type: "item" }]
+			title: "STNO Clean Wafer"
+			x: 33.0d
+			y: 28.5d
+		}
+		{
+			dependencies: ["5C2B1B602EEFF577"]
+			description: ["The &6STNO Planarised Wafer&r is a wafer stage on the way to the STNO Array. Made from the STNO Clean Wafer in the next machine of its line, in the cleanroom. The STNO Array in the Photonic Foundry. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:stno_planarised_wafer"
+			id: "3E05B7CE2CFC9B79"
+			rewards: [{ id: "1706B614FA8EDE30", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5727B78457F8AB29", item: "grindless:stno_planarised_wafer", type: "item" }]
+			title: "STNO Planarised Wafer"
+			x: 35.0d
+			y: 28.5d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6BFO Film Wafer&r is a wafer stage on the way to the Cofe Me Wafer. Made in the &6Pulsed Laser Deposition&r from the SrRuO3 Electrode Wafer and La BFO Target, with oxygen, in the cleanroom. The Cofe Me Wafer and Small Cobalt in the Pulsed Laser Deposition. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:bfo_film_wafer"
+			id: "3963AFF103AE55B6"
+			rewards: [{ id: "7292C86CE72D8529", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3D1B60939A319173", item: "grindless:bfo_film_wafer", type: "item" }]
+			title: "BFO Film Wafer"
+			x: 29.0d
+			y: 30.0d
+		}
+		{
+			dependencies: ["3963AFF103AE55B6"]
+			description: ["The &6CoFe ME Wafer&r is a wafer stage on the way to the Me Switch Wafer. Made in the &6Pulsed Laser Deposition&r from the BFO Film Wafer and Cofe Target, with oxygen, in the cleanroom. The Me Switch Wafer in the Electron Beam Refining. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:cofe_me_wafer"
+			id: "1263F5D6CC3DF095"
+			rewards: [{ id: "3777B87851E1A667", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "14738F84A1F898D6", item: "grindless:cofe_me_wafer", type: "item" }]
+			title: "CoFe ME Wafer"
+			x: 31.0d
+			y: 30.0d
+		}
+		{
+			dependencies: ["1263F5D6CC3DF095"]
+			description: ["The &6ME Switch Wafer&r is a wafer stage on the way to the Meso Logic Die. Made in the &6Electron Beam Refining&r from the CoFe ME Wafer, with argon, in the cleanroom. The Meso Logic Die in the Photonic Foundry. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:me_switch_wafer"
+			id: "51C0CF64E01F4F9A"
+			rewards: [{ id: "319D80E61CEAA769", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "13368939691F6684", item: "grindless:me_switch_wafer", type: "item" }]
+			title: "ME Switch Wafer"
+			x: 33.0d
+			y: 30.0d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6GGG Wafer&r is a wafer stage on the way to the YIG Film Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The YIG Film Wafer in the Liquid Phase Epitaxy. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:ggg_wafer"
+			id: "5EEFAD72179B7CDE"
+			rewards: [{ id: "5595E0F290A127D5", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "707F410045011110", item: "grindless:ggg_wafer", type: "item" }]
+			title: "GGG Wafer"
+			x: 29.0d
+			y: 31.5d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6YIG Film Wafer&r is a wafer stage on the way to the YIG Waveguide Wafer. Made in the &6Liquid Phase Epitaxy&r from the Yttrium Oxide and Hematite, with lpe flux, in the cleanroom. The YIG Waveguide Wafer in the Electron Beam Refining. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:yig_film_wafer"
+			id: "530E09D3F517FECF"
+			rewards: [{ id: "52DEC98CAE0F82DA", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F74DA96F6389B6E", item: "grindless:yig_film_wafer", type: "item" }]
+			title: "YIG Film Wafer"
+			x: 29.0d
+			y: 33.0d
+		}
+		{
+			dependencies: ["530E09D3F517FECF"]
+			description: ["The &6YIG Waveguide Wafer&r is a wafer stage on the way to the Magnonic Bus. Made in the &6Electron Beam Refining&r from the YIG Film Wafer, with argon, in the cleanroom. The Magnonic Bus in the Assembler. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:yig_waveguide_wafer"
+			id: "3C5BFA425A291C3A"
+			rewards: [{ id: "1E2562505B463612", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "37CD92708BAC5E8D", item: "grindless:yig_waveguide_wafer", type: "item" }]
+			title: "YIG Waveguide Wafer"
+			x: 31.0d
+			y: 33.0d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6Ga2O3 Wafer&r is a stage of the wafer lines of this era. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:ga2o3_wafer"
+			id: "33C5D424F67E319B"
+			rewards: [{ id: "50D92D20E2054005", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5E8543EF68E09A14", item: "grindless:ga2o3_wafer", type: "item" }]
+			title: "Ga2O3 Wafer"
+			x: 29.0d
+			y: 34.5d
+		}
+		{
+			dependencies: ["1E64EBF2DE00DEF8"]
+			description: ["The &6Ga2O3 Epi Wafer&r is a wafer stage on the way to the Ga2O3 Gated Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The Ga2O3 Gated Wafer in the Electron Beam Refining. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:ga2o3_epi_wafer"
+			id: "5FF9A2C99602A4F9"
+			rewards: [{ id: "7324E80D5340EEF5", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "58549276F767171B", item: "grindless:ga2o3_epi_wafer", type: "item" }]
+			title: "Ga2O3 Epi Wafer"
+			x: 29.0d
+			y: 36.0d
+		}
+		{
+			dependencies: ["5FF9A2C99602A4F9"]
+			description: ["The &6Ga2O3 Gated Wafer&r is a wafer stage on the way to the Ga2O3 Power Die. Made in the &6Electron Beam Refining&r from the Ga2O3 Epi Wafer, with argon, in the cleanroom. The Ga2O3 Power Die and Gallium Oxide in the Photonic Foundry. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:ga2o3_gated_wafer"
+			id: "5C0418D90289A958"
+			rewards: [{ id: "13F8857F386F252C", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5EC4ECD11B393E1E", item: "grindless:ga2o3_gated_wafer", type: "item" }]
+			title: "Ga2O3 Gated Wafer"
+			x: 31.0d
+			y: 36.0d
+		}
 	]
 	subtitle: ["Logic that runs on spin, and three strange places: a black hole's companion star, a pulsar's crust and a supernova's ashes."]
 	title: "UXV: Spin and Strange Stars"

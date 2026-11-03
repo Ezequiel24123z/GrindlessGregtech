@@ -1095,6 +1095,84 @@
 			x: 42.0d
 			y: 0.0d
 		}
+		{
+			dependencies: ["54C7896425B58FA8"]
+			description: ["The HV halls that are not part of a line: smelting, blasting, cracking, distilling and the first big boiler."]
+			icon: "gtceu:cracker"
+			id: "5B0BC2B3A7F3AF29"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "3375DAA23D1D9B58", type: "checkmark" }]
+			title: "Machines"
+			x: 4.0d
+			y: 8.5d
+		}
+		{
+			dependencies: ["5B0BC2B3A7F3AF29"]
+			description: ["The &6Multi Smelter&r cooks a whole stack of ingots at once, and alloys them too. Its controller, which takes a furnace, HV circuits and copper cable, and cupronickel coils. Bronze, brass and cupronickel by the stack, with no row of furnaces. Ingots in by bus, alloys out by bus."]
+			icon: "gtceu:multi_smelter"
+			id: "7D927987A382CC50"
+			rewards: [{ id: "71699E19EAB09B48", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "118C5FF312AE4585", item: "gtceu:multi_smelter", type: "item" }]
+			title: "Multi Smelter"
+			x: 6.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["7D927987A382CC50"]
+			description: ["Some gems only form under a blast. The &6Implosion Compressor&r does it behind steel walls, and you stand clear. Its controller, with obsidian, HV circuits and gold cable, and explosives to feed it. Ender pearls and gems, made on purpose. Gems in and explosives in by bus, results out by bus."]
+			icon: "gtceu:implosion_compressor"
+			id: "35FED9571A6D4E05"
+			rewards: [{ id: "39CAE5619B71C135", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "32641B984E8658AF", item: "gtceu:implosion_compressor", type: "item" }]
+			title: "Implosion Compressor"
+			x: 8.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["7D927987A382CC50"]
+			description: ["Long hydrocarbons break into short ones inside the &6Cracker&r, with hydrogen or steam to help. Its controller, with cupronickel coils, an HV pump and HV circuits. Lighter oil products for plastics and fuels, and a base for the big cracking hall later. Oil and hydrogen in by hatch, cracked fluids out by hatch."]
+			icon: "gtceu:cracker"
+			id: "7C935662035B9FC6"
+			rewards: [{ id: "73CC836FD1A3A72C", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7C9B2FFC193DE944", item: "gtceu:cracker", type: "item" }]
+			title: "Cracker"
+			x: 6.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["7C935662035B9FC6"]
+			description: ["The &6Distillation Tower&r splits oil into its fractions, one output hatch per layer. Its controller, with EV circuits, a stainless fluid pipe and an HV pump. Light fuel, propene, lubricant and the parts of the large distillery and the heavy-water plant. Fluid in by hatch, each fraction out by its own hatch."]
+			icon: "gtceu:distillation_tower"
+			id: "7AF92B13FDC63A82"
+			rewards: [{ id: "335FE3A4089ADE11", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5A2DED05D7825E29", item: "gtceu:distillation_tower", type: "item" }]
+			title: "Distillation Tower"
+			x: 8.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["7C935662035B9FC6"]
+			description: ["The &6Steel Large Boiler&r burns solid fuel into steam for every turbine that follows. Its controller, with a steel firebox casing, HV circuits and copper cable. Steam at the scale a turbine hall wants, before the titanium boiler. Fuel in by bus, water in by hatch, steam out by hatch."]
+			icon: "gtceu:steel_large_boiler"
+			id: "7AF34C93D33AD3EF"
+			rewards: [{ id: "756DE9724E7C7288", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "35F31007A50D6112", item: "gtceu:steel_large_boiler", type: "item" }]
+			title: "Steel Large Boiler"
+			x: 6.0d
+			y: 14.5d
+		}
 	]
 	subtitle: ["Crude oil becomes chemistry, and the chemistry becomes a rocket to the Moon."]
 	title: "HV: Moonshot"

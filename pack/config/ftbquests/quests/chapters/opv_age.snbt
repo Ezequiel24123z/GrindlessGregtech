@@ -1202,6 +1202,376 @@
 			x: 41.0d
 			y: 17.5d
 		}
+		{
+			dependencies: ["15F83082ECE1AF32"]
+			description: [
+				"Every wafer of this age, and the machines that were left out of the story."
+				"Each wafer hangs from the one it is made from."
+			]
+			icon: "grindless:si_inp_wafer"
+			id: "3728ACC857BB09FC"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "7195927C9C0735F9", type: "checkmark" }]
+			title: "OpV Wafers"
+			x: 19.5d
+			y: 26.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6Si-InP Wafer&r is a wafer stage on the way to the InAs Qw Wafer. Made in the &6Cutter&r from the Si InP Boule, with water, in the cleanroom. The InAs Qw Wafer and Arsenic in the Molecular Beam Epitaxy. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:si_inp_wafer"
+			id: "3DAC7EDED316005A"
+			rewards: [{ id: "328281EE38054E7B", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7D561C4EBFD5C631", item: "grindless:si_inp_wafer", type: "item" }]
+			title: "Si-InP Wafer"
+			x: 21.5d
+			y: 26.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6InAs QW Wafer&r is a stage of the wafer lines of this era. Made in the &6Molecular Beam Epitaxy&r from the Si-InP Wafer and Seven N Indium, with liquid nitrogen, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:inas_qw_wafer"
+			id: "5BE3BB3082DB6C81"
+			rewards: [{ id: "1B75828057F36B72", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "33F0AD23613DC3B2", item: "grindless:inas_qw_wafer", type: "item" }]
+			title: "InAs QW Wafer"
+			x: 21.5d
+			y: 28.0d
+		}
+		{
+			dependencies: ["5BE3BB3082DB6C81"]
+			description: ["The &6InAs-Al Wafer&r is a wafer stage on the way to the hBN Capped 2deg Wafer. Made from the InAs QW Wafer in the next machine of its line, in the cleanroom. The hBN Capped 2deg Wafer in the Assembler. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:inas_al_wafer"
+			id: "161CD52A0EF6E9EA"
+			rewards: [{ id: "7B24130977C0DD77", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "57DBCAD1D2732507", item: "grindless:inas_al_wafer", type: "item" }]
+			title: "InAs-Al Wafer"
+			x: 23.5d
+			y: 28.0d
+		}
+		{
+			dependencies: ["161CD52A0EF6E9EA"]
+			description: ["The &6hBN Capped 2DEG Wafer&r is a wafer stage on the way to the Gated 2deg Wafer. Made in the &6Assembler&r from the InAs-Al Wafer and Annealed hBN Film, with chloroform, in the cleanroom. The Gated 2deg Wafer in the STM Lithography. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:hbn_capped_2deg_wafer"
+			id: "76D13412F1B3EC2E"
+			rewards: [{ id: "1E77BCD96292B6DA", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "75E17D05C1C1D590", item: "grindless:hbn_capped_2deg_wafer", type: "item" }]
+			title: "hBN Capped 2DEG Wafer"
+			x: 25.5d
+			y: 28.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6Gate Stack SOI Wafer&r is a wafer stage on the way to the Cryo CMOS Litho Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The Cryo CMOS Litho Wafer and Fouled BEUV Mirror in the BEUV Lithography. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:gate_stack_soi_wafer"
+			id: "5DC14407C9D9491F"
+			rewards: [{ id: "13BD43A3C49EF700", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1A8D350AFF7B171B", item: "grindless:gate_stack_soi_wafer", type: "item" }]
+			title: "Gate Stack SOI Wafer"
+			x: 21.5d
+			y: 29.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6Cryo-CMOS Litho Wafer&r is a wafer stage on the way to the Cryo CMOS Implanted Wafer. Made in the &6BEUV Lithography&r from the Tb Droplet Target and Gate Stack SOI Wafer, in the cleanroom. The Cryo CMOS Implanted Wafer in the Ion Implantation. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:cryo_cmos_litho_wafer"
+			id: "35C9D9BA94B10802"
+			rewards: [{ id: "351F87C1091274E8", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5377341D95659C47", item: "grindless:cryo_cmos_litho_wafer", type: "item" }]
+			title: "Cryo-CMOS Litho Wafer"
+			x: 21.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["35C9D9BA94B10802"]
+			description: ["The &6Cryo-CMOS Implanted Wafer&r is a wafer stage on the way to the Cryo CMOS Metal Wafer. Made in the &6Ion Implantation&r from the Cryo-CMOS Litho Wafer and Arsenic, in the cleanroom. The Cryo CMOS Metal Wafer and Gold Overspray in the MTJ Sputtering. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:cryo_cmos_implanted_wafer"
+			id: "1B4B8411B3A5C787"
+			rewards: [{ id: "3606ECD9E9A6893A", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "33CC1128A64248CB", item: "grindless:cryo_cmos_implanted_wafer", type: "item" }]
+			title: "Cryo-CMOS Implanted Wafer"
+			x: 23.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6TSV Via Wafer&r is a wafer stage on the way to the Nb Filled TSV Wafer. Made in the &6BEUV Lithography&r from the Tb Droplet Target and FZ Silicon Wafer, in the cleanroom. The Nb Filled TSV Wafer in the MTJ Sputtering. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:tsv_via_wafer"
+			id: "76CB5BBDE890BCF9"
+			rewards: [{ id: "718AA2860FE9123E", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "71921A152B0C7877", item: "grindless:tsv_via_wafer", type: "item" }]
+			title: "TSV Via Wafer"
+			x: 21.5d
+			y: 32.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6Nb Filled TSV Wafer&r is a wafer stage on the way to the Bonded TSV Interposer. Made in the &6MTJ Sputtering&r from the TSV Via Wafer and Rrr Nb Target, with argon, in the cleanroom. The Bonded TSV Interposer and Silicon in the Ion Slicing. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			hide_dependency_lines: true
+			icon: "grindless:nb_filled_tsv_wafer"
+			id: "127FF2EA7FC18D11"
+			rewards: [{ id: "35A2E32066205FE9", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "31A91FFE47262B0E", item: "grindless:nb_filled_tsv_wafer", type: "item" }]
+			title: "Nb Filled TSV Wafer"
+			x: 21.5d
+			y: 34.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6LN on SOI Wafer&r is a wafer stage on the way to the LN SOI Waveguide Wafer. Made in the &6Ion Slicing&r from the Implanted LN Wafer and Si28 SOI Wafer, in the cleanroom. The LN SOI Waveguide Wafer in the Femtosecond Writing. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:ln_on_soi_wafer"
+			id: "114CD1AF811CC04D"
+			rewards: [{ id: "3F849201B49F4F40", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "35F7603B040209EF", item: "grindless:ln_on_soi_wafer", type: "item" }]
+			title: "LN on SOI Wafer"
+			x: 21.5d
+			y: 35.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6LN Waveguide Wafer&r is a wafer stage on the way to the SNSPD Link Wafer. Made in the &6Femtosecond Writing&r from the LN on SOI Wafer and Glass, in the cleanroom. The SNSPD Link Wafer in the SNSPD Fabrication. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:ln_soi_waveguide_wafer"
+			id: "11BF1CC53C088DDF"
+			rewards: [{ id: "1362ACDCEE73CB23", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "79DC1B8E5F21A380", item: "grindless:ln_soi_waveguide_wafer", type: "item" }]
+			title: "LN Waveguide Wafer"
+			x: 21.5d
+			y: 37.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6SNSPD Link Wafer&r is a stage of the wafer lines of this era. Made in the &6SNSPD Fabrication&r from the LN Waveguide Wafer and Niobium, with nitrogen, in the cleanroom. The next stage of its line, or the chip that is built from it. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			hide_dependency_lines: true
+			icon: "grindless:snspd_link_wafer"
+			id: "35BACD5CE151EE14"
+			rewards: [{ id: "7DE1AAF12FA3D265", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1213CDCE1ABD6C2E", item: "grindless:snspd_link_wafer", type: "item" }]
+			title: "SNSPD Link Wafer"
+			x: 21.5d
+			y: 38.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6InP HEMT Epi Wafer&r is a wafer stage on the way to the HEMT Gated Wafer. Made in the &6Molecular Beam Epitaxy&r from the Si-InP Wafer and Seven N Indium, with liquid nitrogen, in the cleanroom. The HEMT Gated Wafer and Fouled BEUV Mirror in the BEUV Lithography. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:inp_hemt_epi_wafer"
+			id: "178CE8CDAA3D79FA"
+			rewards: [{ id: "34A708D85AA42BF4", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1FAE686A9FC55626", item: "grindless:inp_hemt_epi_wafer", type: "item" }]
+			title: "InP HEMT Epi Wafer"
+			x: 21.5d
+			y: 40.0d
+		}
+		{
+			dependencies: ["178CE8CDAA3D79FA"]
+			description: ["The &6HEMT Gated Wafer&r is a wafer stage on the way to the Isolated HEMT Wafer. Made in the &6BEUV Lithography&r from the Tb Droplet Target and InP HEMT Epi Wafer, in the cleanroom. The Isolated HEMT Wafer in the Ion Implantation. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:hemt_gated_wafer"
+			id: "3CC17B56DF922B0A"
+			rewards: [{ id: "3DC6CA181C1FA7FD", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3039AAA7C3495443", item: "grindless:hemt_gated_wafer", type: "item" }]
+			title: "HEMT Gated Wafer"
+			x: 23.5d
+			y: 40.0d
+		}
+		{
+			dependencies: ["3CC17B56DF922B0A"]
+			description: ["The &6Isolated HEMT Wafer&r is a wafer stage on the way to the HEMT Amplifier. Made in the &6Ion Implantation&r from the HEMT Gated Wafer, with helium, in the cleanroom. The HEMT Amplifier in the Cutter. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:isolated_hemt_wafer"
+			id: "5328DECABB56CD73"
+			rewards: [{ id: "3A615E2499794420", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7398E7D18530AE84", item: "grindless:isolated_hemt_wafer", type: "item" }]
+			title: "Isolated HEMT Wafer"
+			x: 25.5d
+			y: 40.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6Hpsi SiC Wafer&r is a stage of the wafer lines of this era. Made in the &6Chemical Vapour Infiltration&r from the SiC Wafer, with methyltrichlorosilane, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:hpsi_sic_wafer"
+			id: "13657BD7BF2D5AC7"
+			rewards: [{ id: "517337617C56A98C", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3282AFEE9FBD51B0", item: "grindless:hpsi_sic_wafer", type: "item" }]
+			title: "Hpsi SIC Wafer"
+			x: 21.5d
+			y: 41.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6GaN-on-SiC Epi Wafer&r is a wafer stage on the way to the GaN Gated Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The GaN Gated Wafer and Fouled BEUV Mirror in the BEUV Lithography. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			hide_dependency_lines: true
+			icon: "grindless:gan_sic_epi_wafer"
+			id: "58BC9D8AE26A7362"
+			rewards: [{ id: "125629EBF7D12A64", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "187CE5119BB76355", item: "grindless:gan_sic_epi_wafer", type: "item" }]
+			title: "GaN-on-SiC Epi Wafer"
+			x: 21.5d
+			y: 43.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6GaN Gated Wafer&r is a wafer stage on the way to the GaN Mmic. Made in the &6BEUV Lithography&r from the Tb Droplet Target and GaN-on-SiC Epi Wafer, in the cleanroom. The GaN Mmic in the Silicon Carbide Devices. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:gan_gated_wafer"
+			id: "5A18E3D3493401B3"
+			rewards: [{ id: "1BC4F169789A1498", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "745BA557FA6F3C76", item: "grindless:gan_gated_wafer", type: "item" }]
+			title: "GaN Gated Wafer"
+			x: 21.5d
+			y: 44.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6SDD Ring Wafer&r is a wafer stage on the way to the SDD Anode Wafer. Made in the &6Ion Implantation&r from the FZ Silicon Wafer and Boron, in the cleanroom. The SDD Anode Wafer and Fouled BEUV Mirror in the BEUV Lithography. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:sdd_ring_wafer"
+			id: "3A21D9D3A5E45154"
+			rewards: [{ id: "1FCAC5099CE38EEC", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "329F1F01153AD784", item: "grindless:sdd_ring_wafer", type: "item" }]
+			title: "SDD Ring Wafer"
+			x: 21.5d
+			y: 46.0d
+		}
+		{
+			dependencies: ["3A21D9D3A5E45154"]
+			description: ["The &6SDD Anode Wafer&r is a wafer stage on the way to the SDD Die. Made in the &6BEUV Lithography&r from the Tb Droplet Target and SDD Ring Wafer, in the cleanroom. The SDD Die and Silicon in the MTJ Sputtering. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:sdd_anode_wafer"
+			id: "79038D9BE6BAC0B4"
+			rewards: [{ id: "3E447A8EE19C1825", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "18A413B47A0E4CD6", item: "grindless:sdd_anode_wafer", type: "item" }]
+			title: "SDD Anode Wafer"
+			x: 23.5d
+			y: 46.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6NbTiN Film Wafer&r is a wafer stage on the way to the Pickup Array. Made in the &6MTJ Sputtering&r from the Rrr Nb Target and Titanium, with nitrogen, in the cleanroom. The Pickup Array and Niobium Powder in the Electron Beam Refining. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:nbtin_film_wafer"
+			id: "5C5CF5A8567EA967"
+			rewards: [{ id: "7A740E5A0EBE0540", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1EECF32FE2AE3732", item: "grindless:nbtin_film_wafer", type: "item" }]
+			title: "NbTiN Film Wafer"
+			x: 21.5d
+			y: 47.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6GaSb Wafer&r: A polished gallium antimonide wafer. Made in the &6Cutter&r from the GaSb Boule, with lubricant, in the cleanroom. The MBE reactor grows the InGaAsSb absorber on it. The InGaAsSb TPV Epi Wafer in the Molecular Beam Epitaxy. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			hide_dependency_lines: true
+			icon: "grindless:gasb_wafer"
+			id: "579BBE765F181FA3"
+			rewards: [{ id: "3E8F38A6C7C4321B", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "307AD826310B18E7", item: "grindless:gasb_wafer", type: "item" }]
+			title: "GaSb Wafer"
+			x: 21.5d
+			y: 49.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6InGaAsSb Epi Wafer&r: A narrow-bandgap absorber grown lattice-matched on GaSb. Made in the &6Molecular Beam Epitaxy&r from the GaSb Wafer and Indium, with liquid nitrogen, in the cleanroom. The electron beam brazes it to a copper spreader into the TPV panel. The Tpv Panel in the Electron Beam Refining. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:ingaassb_epi_wafer"
+			id: "7BA2EEFB465E0331"
+			rewards: [{ id: "1E7FA3E32D7E8A44", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "57FD9A080EAE3CEE", item: "grindless:ingaassb_epi_wafer", type: "item" }]
+			title: "InGaAsSb Epi Wafer"
+			x: 21.5d
+			y: 50.5d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6Aln Wafer&r: A polished aluminium nitride substrate. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The MOCVD reactor grows AlGaN on it. The next stage of its line, or the chip that is built from it. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:aln_wafer"
+			id: "3A0E25DEF038F3C5"
+			rewards: [{ id: "587FDA84AE48B02D", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5A023525C30D70A3", item: "grindless:aln_wafer", type: "item" }]
+			title: "Aln Wafer"
+			x: 21.5d
+			y: 52.0d
+		}
+		{
+			dependencies: ["3728ACC857BB09FC"]
+			description: ["The &6AlGaN Epi Wafer&r: An AlGaN channel layer grown on aluminium nitride. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. Its gates are drawn by the BEUV lithography cell. The Gated AlGaN Wafer and Fouled BEUV Mirror in the BEUV Lithography. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:algan_epi_wafer"
+			id: "5472336A94567FEA"
+			rewards: [{ id: "15C1FAE25EBC80A5", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7CAA21E643CCE088", item: "grindless:algan_epi_wafer", type: "item" }]
+			title: "AlGaN Epi Wafer"
+			x: 21.5d
+			y: 53.5d
+		}
+		{
+			dependencies: ["5472336A94567FEA"]
+			description: ["The &6AlGaN Patterned Wafer&r: AlGaN transistors with their gates written at 6.7 nm. Made in the &6BEUV Lithography&r from the Tb Droplet Target and AlGaN Epi Wafer, in the cleanroom. Diced into power dies by the SiC device fab. The AlN Power Die in the Silicon Carbide Devices. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:algan_patterned_wafer"
+			id: "3E6CCAEF0A586475"
+			rewards: [{ id: "77E58F738CD2DFB8", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "321BD4D647B9984F", item: "grindless:algan_patterned_wafer", type: "item" }]
+			title: "AlGaN Patterned Wafer"
+			x: 23.5d
+			y: 53.5d
+		}
 	]
 	subtitle: ["Chain strand cables, a beam of antiprotons, a Kugelblitz and a fleet of probes: the way to the heart of the Milky Way."]
 	title: "OpV: The Galactic Bulge"

@@ -757,6 +757,45 @@
 			x: 16.0d
 			y: 4.5d
 		}
+		{
+			dependencies: ["3041A191AB566E3E"]
+			description: ["Logs buried under dirt and lit by the &6Charcoal Pile Igniter&r burn slowly into charcoal, with no coal anywhere in sight. The controller, bronze plates, flint and steel and iron rotors, and a heap of logs under earth. Fuel before the first coke oven, and charcoal for steel later. It needs a person to stack the logs, so let a steam miner or a tree farm feed the pile."]
+			icon: "gtceu:charcoal_pile_igniter"
+			id: "1ED83915B18B9B3E"
+			rewards: [{ id: "7CAA0C313512C9E9", type: "xp", xp: 20 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "145DEECF5286C7A3", item: "gtceu:charcoal_pile_igniter", type: "item" }]
+			title: "Charcoal Pile"
+			x: 2.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["6D923ADC90127182"]
+			description: ["A box of wooden walls around a &6Wooden Tank&r controller holds more water than any bucket chain will. The controller, copper rings, wood walls and a crafting mallet. A buffer that keeps the first boilers drinking. Pump into the tank and draw from it with a pipe."]
+			icon: "gtceu:wooden_multiblock_tank"
+			id: "1212F8EE37058E25"
+			rewards: [{ id: "70C22BA63F86E45C", type: "xp", xp: 20 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "36D9489B846DEC6A", item: "gtceu:wooden_multiblock_tank", type: "item" }]
+			title: "Wooden Tank"
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1212F8EE37058E25"]
+			description: ["The &6Bronze Tank&r is the same idea in metal. It holds steam and hot fluids the wooden one would burn. The controller, bronze rings, steam machine casing and a crafting hammer. Storage for steam and for fluids that are too hot for wood. Pipe it in and out like any tank."]
+			icon: "gtceu:bronze_multiblock_tank"
+			id: "318DCA44100F9BE2"
+			rewards: [{ id: "799349C8AEF00529", type: "xp", xp: 20 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5EA66734645F407F", item: "gtceu:bronze_multiblock_tank", type: "item" }]
+			title: "Bronze Tank"
+			x: 6.0d
+			y: 3.0d
+		}
 	]
 	subtitle: ["Still no electricity: coal, steam and bronze, until ore and wood start turning up on their own."]
 	title: "Steam Age: Escape Velocity"

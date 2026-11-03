@@ -1100,6 +1100,325 @@
 			x: 45.0d
 			y: -12.0d
 		}
+		{
+			dependencies: ["334E895BAA59F8B7"]
+			description: [
+				"Every wafer of this age, and the machines that were left out of the story."
+				"Each wafer hangs from the one it is made from."
+			]
+			icon: "grindless:ppln_thin_film_wafer"
+			id: "399C787B6258CD5A"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "7BDCDD646A973800", type: "checkmark" }]
+			title: "MAX Wafers"
+			x: 69.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Ppln Thin Film Wafer&r is a wafer stage on the way to the Squeezer Waveguide Die. Made in the &6Ion Slicing&r from the PPLN Boule and FZ Silicon Wafer, in the cleanroom. The Squeezer Waveguide Die in the Femtosecond Writing. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:ppln_thin_film_wafer"
+			id: "76560E219C8977AD"
+			rewards: [{ id: "1AEA51AE98757B45", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "52A28AF9D53D98C5", item: "grindless:ppln_thin_film_wafer", type: "item" }]
+			title: "Ppln Thin Film Wafer"
+			x: 71.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Quartz Crystal Wafer&r is a wafer stage on the way to the Metalens Wafer. Made in the &6Crystal Growth&r from the Silicon Dioxide and Sodium Hydroxide, with distilled water, in the cleanroom. The Metalens Wafer and Fouled BEUV Mirror in the BEUV Lithography. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:quartz_crystal_wafer"
+			id: "18C10395B5192EFE"
+			rewards: [{ id: "1E347F22F7274491", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "75052C32C97AB663", item: "grindless:quartz_crystal_wafer", type: "item" }]
+			title: "Quartz Crystal Wafer"
+			x: 71.5d
+			y: 25.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Metalens Wafer&r is a wafer stage on the way to the Coated Metalens. Made in the &6BEUV Lithography&r from the Tb Droplet Target and Quartz Crystal Wafer, in the cleanroom. The Coated Metalens and Gold Overspray in the MTJ Sputtering. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:metalens_wafer"
+			id: "59D32484975B2324"
+			rewards: [{ id: "14ED8809A8A02F25", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1DE711DFAED5966A", item: "grindless:metalens_wafer", type: "item" }]
+			title: "Metalens Wafer"
+			x: 71.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Aln On Si Wafer&r is a stage of the wafer lines of this era. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:aln_on_si_wafer"
+			id: "36D4DEE81F2C02EF"
+			rewards: [{ id: "1A2AF3E1D1E8B592", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7D8D1D594F5C6072", item: "grindless:aln_on_si_wafer", type: "item" }]
+			title: "Aln On Si Wafer"
+			x: 71.5d
+			y: 28.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Transducer Wafer&r is a wafer stage on the way to the Cryo Photonic Interposer. Made in the &6Ion Slicing&r from the Piezo Optomech Layer and Lithium Niobate Wafer, in the cleanroom. The Cryo Photonic Interposer in the Nuclear Demagnetisation. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:transducer_wafer"
+			id: "13FCB5E885DFB38D"
+			rewards: [{ id: "12AA3255D9F9083B", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5103B5788EAD6C35", item: "grindless:transducer_wafer", type: "item" }]
+			title: "Transducer Wafer"
+			x: 71.5d
+			y: 30.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Nitride Film Wafer&r is a wafer stage on the way to the Microring Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The Microring Wafer and Fouled BEUV Mirror in the BEUV Lithography. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:nitride_film_wafer"
+			id: "5AC66C16574E70EA"
+			rewards: [{ id: "1713AAEB1A24702F", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7C42F387B8768786", item: "grindless:nitride_film_wafer", type: "item" }]
+			title: "Nitride Film Wafer"
+			x: 71.5d
+			y: 31.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Microring Wafer&r is a wafer stage on the way to the Trimmed Microring. Made in the &6BEUV Lithography&r from the Tb Droplet Target and Nitride Film Wafer, in the cleanroom. The Trimmed Microring in the Femtosecond Writing. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:microring_wafer"
+			id: "368991E52C804960"
+			rewards: [{ id: "33A30F62DD6BDE97", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "11CEE4CDA30B2576", item: "grindless:microring_wafer", type: "item" }]
+			title: "Microring Wafer"
+			x: 71.5d
+			y: 33.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6YIG On LN Wafer&r is a wafer stage on the way to the Isolator Waveguide Die. Made in the &6Ion Slicing&r from the Bi YIG Film and LNOI Wafer, in the cleanroom. The Isolator Waveguide Die in the Femtosecond Writing. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:yig_on_ln_wafer"
+			id: "7ACA4DDE45B5FEDA"
+			rewards: [{ id: "7548AE55C7A1E774", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "71CC06584F8822B1", item: "grindless:yig_on_ln_wafer", type: "item" }]
+			title: "YIG On Ln Wafer"
+			x: 71.5d
+			y: 34.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Diamond Power Wafer&r is a stage of the wafer lines of this era. Made in the &6Silicon Carbide Devices&r from the Metallised Diamond and SiC Substrate Wafer, with silane, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:diamond_power_wafer"
+			id: "5A5596DE840445A8"
+			rewards: [{ id: "7B6542D8890AFB8B", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "79F3A2749323623A", item: "grindless:diamond_power_wafer", type: "item" }]
+			title: "Diamond Power Wafer"
+			x: 71.5d
+			y: 36.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6SIC Substrate Wafer&r is a wafer stage on the way to the SiC CMOS Wafer. Made in the &6Crystal Growth&r from the Silicon Carbide, in the cleanroom. The SiC CMOS Wafer and Diamond Power Wafer in the Silicon Carbide Devices. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:sic_substrate_wafer"
+			id: "11A03A20D9810C95"
+			rewards: [{ id: "7623E0621977572E", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7434F1FD168FFDB6", item: "grindless:sic_substrate_wafer", type: "item" }]
+			title: "SIC Substrate Wafer"
+			x: 71.5d
+			y: 37.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6SIC CMOS Wafer&r is a wafer stage on the way to the MRAM Stack Wafer. Made in the &6Silicon Carbide Devices&r from the SiC Substrate Wafer and Aluminium, with silane, in the cleanroom. The MRAM Stack Wafer and Heusler Am Powder in the MTJ Sputtering. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:sic_cmos_wafer"
+			id: "35DD2EE24D5119EA"
+			rewards: [{ id: "19F7EA1F9290BB15", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7B57593325254260", item: "grindless:sic_cmos_wafer", type: "item" }]
+			title: "SIC Cmos Wafer"
+			x: 71.5d
+			y: 39.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Semi Insulating InP Wafer&r is a wafer stage on the way to the InP HEMT Epi. Made in the &6Crystal Growth&r from the Indium and Phosphorus, in the cleanroom. The InP HEMT Epi in the Molecular Beam Epitaxy. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:semi_insulating_inp_wafer"
+			id: "7779F7E1AE5A2D04"
+			rewards: [{ id: "18F00C9311E5827E", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "71548688C4BC3171", item: "grindless:semi_insulating_inp_wafer", type: "item" }]
+			title: "Semi Insulating INP Wafer"
+			x: 71.5d
+			y: 40.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6INP UTC Epi Wafer&r is a wafer stage on the way to the UTC Photodiode Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The UTC Photodiode Wafer and Fouled BEUV Mirror in the BEUV Lithography. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:inp_utc_epi_wafer"
+			id: "5A2CF0205FD84D84"
+			rewards: [{ id: "1E171A7EA419C190", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "78D1582551013154", item: "grindless:inp_utc_epi_wafer", type: "item" }]
+			title: "INP UTC Epi Wafer"
+			x: 71.5d
+			y: 42.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6UTC Photodiode Wafer&r is a stage of the wafer lines of this era. Made in the &6BEUV Lithography&r from the Tb Droplet Target and InP UTC Epi Wafer, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:utc_photodiode_wafer"
+			id: "7A996C7A217F89A4"
+			rewards: [{ id: "5D77CC13345E216A", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7990387F2B58F138", item: "grindless:utc_photodiode_wafer", type: "item" }]
+			title: "UTC Photodiode Wafer"
+			x: 71.5d
+			y: 43.5d
+		}
+		{
+			dependencies: ["7A996C7A217F89A4"]
+			description: ["The &6Passivated UTC Wafer&r is a stage of the wafer lines of this era. Made from the UTC Photodiode Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:passivated_utc_wafer"
+			id: "1EF73313A9E2E1C5"
+			rewards: [{ id: "185C6BAC7C4CA5A9", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1E4760A67E70897A", item: "grindless:passivated_utc_wafer", type: "item" }]
+			title: "Passivated UTC Wafer"
+			x: 73.5d
+			y: 43.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Hemt Gate Wafer&r is a stage of the wafer lines of this era. Made in the &6BEUV Lithography&r from the Tb Droplet Target and InP HEMT Epi, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:hemt_gate_wafer"
+			id: "5AE9F0064EFBE5EF"
+			rewards: [{ id: "11F624A60979804F", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5AD9C452A49F8884", item: "grindless:hemt_gate_wafer", type: "item" }]
+			title: "Hemt Gate Wafer"
+			x: 71.5d
+			y: 45.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6SIS Junction Wafer&r is a stage of the wafer lines of this era. Made in the &6BEUV Lithography&r from the Tb Droplet Target and Nb Alox Nb Trilayer, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:sis_junction_wafer"
+			id: "1F7EBD7CD83BD1F3"
+			rewards: [{ id: "3A41FC1E955DFF50", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "11DE68ED6DAD6F73", item: "grindless:sis_junction_wafer", type: "item" }]
+			title: "SIS Junction Wafer"
+			x: 71.5d
+			y: 46.5d
+		}
+		{
+			dependencies: ["1F7EBD7CD83BD1F3"]
+			description: ["The &6Anodised Junction Wafer&r is a stage of the wafer lines of this era. Made from the SIS Junction Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:anodised_junction_wafer"
+			id: "1130FB051EE71821"
+			rewards: [{ id: "5FF9A52C708B044F", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3265C10FB91F9614", item: "grindless:anodised_junction_wafer", type: "item" }]
+			title: "Anodised Junction Wafer"
+			x: 73.5d
+			y: 46.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Fz Wafer&r is a wafer stage on the way to the Simox SOI Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The Simox SOI Wafer in the Ion Implantation. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:fz_wafer"
+			id: "78AF912DC3A551E5"
+			rewards: [{ id: "1257984135C200A9", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "705D482BD6601C98", item: "grindless:fz_wafer", type: "item" }]
+			title: "Fz Wafer"
+			x: 71.5d
+			y: 48.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Simox SOI Wafer&r is a wafer stage on the way to the Rad Hard FPGA Wafer. Made in the &6Ion Implantation&r from the FZ Wafer, with oxygen, in the cleanroom. The Rad Hard FPGA Wafer and Fouled BEUV Mirror in the BEUV Lithography. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:simox_soi_wafer"
+			id: "1E1E0D7ED76BCE04"
+			rewards: [{ id: "52697D1777AD95BA", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "79E24B968215584B", item: "grindless:simox_soi_wafer", type: "item" }]
+			title: "Simox SOI Wafer"
+			x: 71.5d
+			y: 49.5d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Rad Hard FPGA Wafer&r is a stage of the wafer lines of this era. Made in the &6BEUV Lithography&r from the Tb Droplet Target and Simox SOI Wafer, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:rad_hard_fpga_wafer"
+			id: "1537049B9102CC2D"
+			rewards: [{ id: "1681B4B9A78BF906", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "708B537E1ED035CB", item: "grindless:rad_hard_fpga_wafer", type: "item" }]
+			title: "Rad Hard Fpga Wafer"
+			x: 71.5d
+			y: 51.0d
+		}
+		{
+			dependencies: ["399C787B6258CD5A"]
+			description: ["The &6Sapphire Web Wafer&r is a wafer stage on the way to the Vo2 On Sapphire. Made in the &6Crystal Growth&r from the Sapphire and Iridium Crucible, in the cleanroom. The Vo2 On Sapphire in the Pulsed Laser Deposition. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:sapphire_web_wafer"
+			id: "733C93656A94EAFD"
+			rewards: [{ id: "341451C5459324F0", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7ED7AA998FA4F2A0", item: "grindless:sapphire_web_wafer", type: "item" }]
+			title: "Sapphire Web Wafer"
+			x: 71.5d
+			y: 52.5d
+		}
 	]
 	subtitle: ["A probe to Sagittarius A*, a platform on the black hole's orbit and a belt of planetesimals: the way to the last recipe."]
 	title: "MAX: The Galactic Centre"

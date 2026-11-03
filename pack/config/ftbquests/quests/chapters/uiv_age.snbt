@@ -1579,6 +1579,186 @@
 			x: 5.5d
 			y: 33.0d
 		}
+		{
+			dependencies: ["7BA44754AA7803E8"]
+			description: [
+				"Every wafer of this age, and the machines that were left out of the story."
+				"Each wafer hangs from the one it is made from."
+			]
+			icon: "grindless:trenched_oxide_wafer"
+			id: "7D0E32E5DCAD55A7"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "58D90D9BF97B7EB8", type: "checkmark" }]
+			title: "UIV Wafers"
+			x: 9.0d
+			y: 57.0d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Trenched Oxide Wafer&r is a wafer stage on the way to the Damascene Sin Wafer. Made in the &6Synchrotron&r from the Oxidised Wafer, with PMMA resist, in the cleanroom. The Damascene Sin Wafer in the Chemical Reactor. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:trenched_oxide_wafer"
+			id: "3784E698A1F76F61"
+			rewards: [{ id: "34E857F111546771", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1F1EC4C8C4698E43", item: "grindless:trenched_oxide_wafer", type: "item" }]
+			title: "Trenched Oxide Wafer"
+			x: 11.0d
+			y: 57.0d
+		}
+		{
+			dependencies: ["3784E698A1F76F61"]
+			description: ["The &6Damascene Sin Wafer&r is a wafer stage on the way to the Annealed Damascene Ring. Made in the &6Chemical Reactor&r from the Trenched Oxide Wafer, with silane, in the cleanroom. The Annealed Damascene Ring and Quartz Sand in the Photonic Foundry. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:damascene_sin_wafer"
+			id: "5AEB7376054AFF49"
+			rewards: [{ id: "58708F5E8E96B7A1", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7D9CA3DF5357D3CF", item: "grindless:damascene_sin_wafer", type: "item" }]
+			title: "Damascene Sin Wafer"
+			x: 13.0d
+			y: 57.0d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Poled LNOI Wafer&r is a wafer stage on the way to the PPLN Waveguide. Made in the &6Ion Slicing&r from the LNOI Wafer and Gold Foil, in the cleanroom. The PPLN Waveguide and LN On Insulator Plus in the Photonic Foundry. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:poled_lnoi_wafer"
+			id: "7317F49E37088917"
+			rewards: [{ id: "79B863A2ADFA6535", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7FCD3EEC9F54FDC4", item: "grindless:poled_lnoi_wafer", type: "item" }]
+			title: "Poled LNOI Wafer"
+			x: 11.0d
+			y: 58.5d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6H Terminated Wafer&r is a wafer stage on the way to the Stm Patterned Wafer. Made in the &6STM Lithography&r from the Si28 SOI Wafer, with hydrogen, in the cleanroom. The Stm Patterned Wafer in the STM Lithography. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:h_terminated_wafer"
+			id: "1F92486E05D4A6C9"
+			rewards: [{ id: "561A261AAFB1E5D8", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "77AD4737DAE32C50", item: "grindless:h_terminated_wafer", type: "item" }]
+			title: "H Terminated Wafer"
+			x: 11.0d
+			y: 60.0d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Ph3 Dosed Wafer&r is a wafer stage on the way to the P Si Die. Made in the &6STM Lithography&r from the Stm Patterned Wafer, with phosphine, in the cleanroom. The P Si Die in the Molecular Beam Epitaxy. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:ph3_dosed_wafer"
+			id: "73CECC944CF6206F"
+			rewards: [{ id: "5002A371B255C9EB", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "77EC2123CAD193EA", item: "grindless:ph3_dosed_wafer", type: "item" }]
+			title: "Ph3 Dosed Wafer"
+			x: 11.0d
+			y: 61.5d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6NB Jj Wafer&r is a wafer stage on the way to the Aqfp Die. Made in the &6SNSPD Fabrication&r from the Nb Trilayer, with PMMA resist, in the cleanroom. The Aqfp Die in the Laser Engraver. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:nb_jj_wafer"
+			id: "3A83B4FFB723FBDC"
+			rewards: [{ id: "33DC62004BC7F17E", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "32176CED2E532E40", item: "grindless:nb_jj_wafer", type: "item" }]
+			title: "NB Jj Wafer"
+			x: 11.0d
+			y: 63.0d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Ingaasb Epi Wafer&r is a wafer stage on the way to the Air Bridge Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The Air Bridge Wafer in the Photonic Foundry. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:ingaasb_epi_wafer"
+			id: "72AD9DE557ADC09A"
+			rewards: [{ id: "1E7545C66178C391", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "10D1A7C2DFFEAA9B", item: "grindless:ingaasb_epi_wafer", type: "item" }]
+			title: "Ingaasb Epi Wafer"
+			x: 11.0d
+			y: 64.5d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Air Bridge Wafer&r is a wafer stage on the way to the InGaAsB Tpv Cell. Made in the &6Photonic Foundry&r from the InGaAsB Epi Wafer and Gold, with ultrapure water, in the cleanroom. The InGaAsB Tpv Cell in the Cutter. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:air_bridge_wafer"
+			id: "7F83574A6DE813BA"
+			rewards: [{ id: "3393B4882E7F71A2", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7571DFFF13227E6A", item: "grindless:air_bridge_wafer", type: "item" }]
+			title: "Air Bridge Wafer"
+			x: 11.0d
+			y: 66.0d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Diamond Contact Wafer&r is a wafer stage on the way to the Diamond Schottky Die. Made in the &6Photonic Foundry&r from the C12 Boron Diamond and Tipt Au Stack, with ultrapure water, in the cleanroom. The Diamond Schottky Die in the Assembler. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			hide_dependency_lines: true
+			icon: "grindless:diamond_contact_wafer"
+			id: "5A21A2F99F91B641"
+			rewards: [{ id: "171635F365A11D91", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7E8837F33C1C75EB", item: "grindless:diamond_contact_wafer", type: "item" }]
+			title: "Diamond Contact Wafer"
+			x: 11.0d
+			y: 67.5d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Sputtered W Wafer&r is a wafer stage on the way to the W Photonic Crystal. Made in the &6Chemical Reactor&r from the W Target and Silicon Wafer, with argon, in the cleanroom. The W Photonic Crystal in the Photonic Foundry. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:sputtered_w_wafer"
+			id: "32285ADD031C7D43"
+			rewards: [{ id: "391557B245FA1098", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "38A9E1316A22ABA4", item: "grindless:sputtered_w_wafer", type: "item" }]
+			title: "Sputtered W Wafer"
+			x: 11.0d
+			y: 69.0d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Hfo2 Resist Wafer&r is a wafer stage on the way to the BEUV Exposed Wafer. Made in the &6Photonic Foundry&r from the Silicon Wafer and Hafnia, with ultrapure water, in the cleanroom. The BEUV Exposed Wafer and Fouled BEUV Mirror in the BEUV Lithography. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:hfo2_resist_wafer"
+			id: "3A4D6F4169D2CE53"
+			rewards: [{ id: "544CA30D62DB01D3", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1E2AC17E2B048A42", item: "grindless:hfo2_resist_wafer", type: "item" }]
+			title: "Hfo2 Resist Wafer"
+			x: 11.0d
+			y: 70.5d
+		}
+		{
+			dependencies: ["7D0E32E5DCAD55A7"]
+			description: ["The &6Neutron Activator&r bombards matter with neutrons from a source and activates it into new compounds. The controller takes a quark core, an EV sensor and a neutron source. Enriched Naquadah Sulfate, Naquadria Sulfate and Titanium Trifluoride dusts. Item buses and fluid hatches in, item buses and fluid hatches out."]
+			hide_dependency_lines: true
+			icon: "gtnn:neutron_activator"
+			id: "5AE3AE4396ED03EC"
+			rewards: [{ id: "7776DE43ABF26EDC", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "183960691F082017", item: "gtnn:neutron_activator", type: "item" }]
+			title: "Neutron Activator"
+			x: 11.0d
+			y: 73.5d
+		}
 	]
 	subtitle: ["Metallic hydrogen, light and a fusion ring at home, then Mercury, a neutron star, a pulsar and a black hole, and a gate held open."]
 	title: "UIV: Dead Stars"

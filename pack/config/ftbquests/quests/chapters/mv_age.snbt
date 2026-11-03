@@ -811,6 +811,19 @@
 			x: 16.0d
 			y: 4.5d
 		}
+		{
+			dependencies: ["53336232501835EE"]
+			description: ["The &6Central Monitor&r is a wall of screens that shows what your machines are doing, and the controls to match. Frostproof casing, MV circuits and a computer monitor cover for the controller, then monitor screens for the wall. One place to read the whole factory, instead of walking to each machine. It watches and does not move items, so keep its screens bound to the machines you care about."]
+			icon: "gtceu:central_monitor"
+			id: "52B54E4A760DE38F"
+			rewards: [{ id: "799FC9BB70EACEF2", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3FD516C0742FE109", item: "gtceu:central_monitor", type: "item" }]
+			title: "Central Monitor"
+			x: 24.0d
+			y: 0.0d
+		}
 	]
 	subtitle: ["The End for ore, silicon and plastics at home, and a landing site picked by radar."]
 	title: "MV: The Far End"

@@ -1304,6 +1304,45 @@
 			x: 11.0d
 			y: 12.0d
 		}
+		{
+			dependencies: ["7C205CBF99A79EFB"]
+			description: ["Two ZPM halls that treat ore before it reaches a line: milling and flotation."]
+			icon: "gtca:isamill"
+			id: "59FA24D314B295D3"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "52A92CBE406B687D", type: "checkmark" }]
+			title: "Ore Halls"
+			x: 8.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["59FA24D314B295D3"]
+			description: ["The &6Isamill&r grinds ore into a fine mud that a plain macerator cannot reach. Its controller, with a niobium titanium wire, an Isa Mill gearbox and a ZPM hull. Milled almandine, chalcopyrite and grossular, ready for flotation. Ore in by bus, milled ore out by bus."]
+			icon: "gtca:isamill"
+			id: "5676BB659B5F764E"
+			rewards: [{ id: "763F7C953333C5C0", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5C47C4C8793471F3", item: "gtca:isamill", type: "item" }]
+			title: "Isamill"
+			x: 10.5d
+			y: 26.0d
+		}
+		{
+			dependencies: ["5676BB659B5F764E"]
+			description: ["The &6Flotation Cell Regulator&r floats the valuable minerals off the milled ore and leaves the rock behind. Its controller, with a hastelloy plate, yttrium barium cuprate wire and platinum foil. Monazite, almandine and chalcopyrite froth, and the metals they hold. Milled ore and reagents in, froth out by hatch."]
+			icon: "gtca:flotation_cell_regulator"
+			id: "56C2D2548736F0A5"
+			rewards: [{ id: "3B623187EDE6DF71", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5C8A48BAAEE4C85D", item: "gtca:flotation_cell_regulator", type: "item" }]
+			title: "Flotation Cell Regulator"
+			x: 12.5d
+			y: 26.0d
+		}
 	]
 	subtitle: ["A third and fourth station in orbit, then Saturn, its rings and the ice giants, and a chart to the Kuiper Belt."]
 	title: "ZPM: The Ringed and Ice Giants"

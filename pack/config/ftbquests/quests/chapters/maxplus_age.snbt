@@ -2007,6 +2007,131 @@
 			x: 41.5d
 			y: 3.0d
 		}
+		{
+			dependencies: ["566C9BAE45239FBD"]
+			description: [
+				"Every wafer of this age, and the machines that were left out of the story."
+				"Each wafer hangs from the one it is made from."
+			]
+			icon: "grindless:zone_plate_wafer"
+			id: "3FC489DCB431B69A"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "599CE23660A9A245", type: "checkmark" }]
+			title: "MAX+ Wafers"
+			x: 12.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["3FC489DCB431B69A"]
+			description: ["The &6Zone Plate Wafer&r is a stage of the wafer lines of this era. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The next stage of its line, or the chip that is built from it. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:zone_plate_wafer"
+			id: "7F4E4C0A10985229"
+			rewards: [{ id: "5A1A44E78262B074", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3EA7C66B6DCC4B3C", item: "grindless:zone_plate_wafer", type: "item" }]
+			title: "Zone Plate Wafer"
+			x: 14.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["3FC489DCB431B69A"]
+			description: ["The &6Patterned Engine Wafer&r is a stage of the wafer lines of this era. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:patterned_engine_wafer"
+			id: "38539A56E6DC2B95"
+			rewards: [{ id: "1FE0C74B52201FED", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "58425A5BACAC633B", item: "grindless:patterned_engine_wafer", type: "item" }]
+			title: "Patterned Engine Wafer"
+			x: 14.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["3FC489DCB431B69A"]
+			description: ["The &6Readout Wafer&r is a stage of the wafer lines of this era. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:readout_wafer"
+			id: "7A9DC6266806BBFB"
+			rewards: [{ id: "3EAAFEA4BBB7D318", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5D81BE8C5C8D164B", item: "grindless:readout_wafer", type: "item" }]
+			title: "Readout Wafer"
+			x: 14.0d
+			y: 15.5d
+		}
+		{
+			dependencies: ["3FC489DCB431B69A"]
+			description: ["The &6Horizon Logic Wafer&r is a wafer stage on the way to the Spin Interconnect Wafer. Made in the &6BEUV Lithography&r from the Tb Droplet Target and Si28 Boule, in the cleanroom. The Spin Interconnect Wafer in the MTJ Sputtering. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:horizon_logic_wafer"
+			id: "74859C38BBF1284D"
+			rewards: [{ id: "5820DF8EC571AF82", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1783D739501A74BF", item: "grindless:horizon_logic_wafer", type: "item" }]
+			title: "Horizon Logic Wafer"
+			x: 14.0d
+			y: 17.0d
+		}
+		{
+			dependencies: ["3FC489DCB431B69A"]
+			description: ["The &6Spin Interconnect Wafer&r is a wafer stage on the way to the Stacked Logic Wafer. Made in the &6MTJ Sputtering&r from the Horizon Logic Wafer and Rrr Nb Target, with argon, in the cleanroom. The Stacked Logic Wafer and Platinum Group Sludge in the Racetrack Patterning. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:spin_interconnect_wafer"
+			id: "37B5B733A2B057C7"
+			rewards: [{ id: "77CDEB8B0CC8E879", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5EF09F41391826BA", item: "grindless:spin_interconnect_wafer", type: "item" }]
+			title: "Spin Interconnect Wafer"
+			x: 14.0d
+			y: 18.5d
+		}
+		{
+			dependencies: ["3FC489DCB431B69A"]
+			description: ["The &6Stacked Logic Wafer&r is a stage of the wafer lines of this era. Made in the &6Racetrack Patterning&r from the Spin Interconnect Wafer and Patterned Track Wafer, with argon, in the cleanroom. The next stage of its line, or the chip that is built from it. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:stacked_logic_wafer"
+			id: "727610BCBC1C2BE7"
+			rewards: [{ id: "7968DE70BB05AAE8", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "37B3141813562269", item: "grindless:stacked_logic_wafer", type: "item" }]
+			title: "Stacked Logic Wafer"
+			x: 14.0d
+			y: 20.0d
+		}
+		{
+			dependencies: ["3FC489DCB431B69A"]
+			description: ["The &6Photonic QPU Wafer&r is a stage of the wafer lines of this era. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The next stage of its line, or the chip that is built from it. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			hide_dependency_lines: true
+			icon: "grindless:photonic_qpu_wafer"
+			id: "3C4E653E2D69B480"
+			rewards: [{ id: "525C7F1C1B0BFBBB", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5136F07B72CDF713", item: "grindless:photonic_qpu_wafer", type: "item" }]
+			title: "Photonic Qpu Wafer"
+			x: 14.0d
+			y: 21.5d
+		}
+		{
+			dependencies: ["3FC489DCB431B69A"]
+			description: ["The &6Detector Layer Wafer&r is a stage of the wafer lines of this era. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The next stage of its line, or the chip that is built from it. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:detector_layer_wafer"
+			id: "5F9DE131909E3A3D"
+			rewards: [{ id: "5D24ED8EA4F17ECE", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "58064EBA5F300F91", item: "grindless:detector_layer_wafer", type: "item" }]
+			title: "Detector Layer Wafer"
+			x: 14.0d
+			y: 23.0d
+		}
 	]
 	subtitle: ["A kept lock that taps the stilled horizon, a slingshot past the Galaxy's rim, the Tarantula Nebula and the Magellanic Stream."]
 	title: "MAX+: Beyond the Galaxy"

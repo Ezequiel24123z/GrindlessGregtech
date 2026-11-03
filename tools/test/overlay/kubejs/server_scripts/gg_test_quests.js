@@ -65,22 +65,22 @@ var GG_QUESTS_EXPECTED = {
   travel_and_teams: [16, 15],
   workshop: [17, 16],
   welcome: [16, 15],
-  steam_age: [49, 56],
-  lv_age: [62, 63],
-  mv_age: [59, 71],
-  hv_age: [80, 93],
-  ev_age: [65, 76],
-  iv_age: [63, 81],
-  luv_age: [82, 90],
-  zpm_age: [93, 95],
-  uv_age: [108, 114],
-  uhv_age: [114, 119],
-  uev_age: [104, 128],
-  uiv_age: [108, 118],
-  uxv_age: [89, 98],
-  opv_age: [85, 95],
-  max_age: [84, 94],
-  maxplus_age: [148, 174]
+  steam_age: [52, 59],
+  lv_age: [63, 64],
+  mv_age: [60, 72],
+  hv_age: [86, 99],
+  ev_age: [72, 83],
+  iv_age: [92, 110],
+  luv_age: [92, 100],
+  zpm_age: [96, 98],
+  uv_age: [121, 127],
+  uhv_age: [124, 129],
+  uev_age: [118, 147],
+  uiv_age: [121, 131],
+  uxv_age: [117, 126],
+  opv_age: [112, 122],
+  max_age: [107, 117],
+  maxplus_age: [157, 183]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
 var GG_UNGROUPED = { welcome: true }
@@ -109,9 +109,9 @@ GG_QUESTS_EXPECTED.multiblocks = [417, 0]
 // LuV is one chapter (luv_age); the stations-off modes' merged count is not recorded yet: regenerate in that mode and record it here.
 var GG_QUESTS_LUV_MODES = {
   pending: { pl_luv: [199, 198], power: [113, 124] },
-  tether: { luv_age: [82, 90], pl_luv: [202, 200], power: [116, 127] },
+  tether: { luv_age: [92, 100], pl_luv: [202, 200], power: [116, 127] },
   sulfur_iodine_stations_off: { pl_luv: [205, 203], power: [116, 126] },
-  sulfur_iodine_stations_on: { luv_age: [82, 90], pl_luv: [205, 203], power: [116, 126] }
+  sulfur_iodine_stations_on: { luv_age: [92, 100], pl_luv: [205, 203], power: [116, 126] }
 }
 ;(function () {
   var st = global.grindless && global.grindless.stations

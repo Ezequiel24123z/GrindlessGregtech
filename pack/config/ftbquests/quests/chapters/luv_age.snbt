@@ -832,6 +832,19 @@
 			y: -5.5d
 		}
 		{
+			dependencies: ["58EFB73E6DD24BDB"]
+			description: ["Gallium indium phosphide over gallium arsenide over germanium, grown layer by layer in the wake, make a &6Triple-Junction Wafer&r. The Wake Shield Facility and germanium from Io, in a cleanroom. Four triple-junction cells from one wafer, cut by an ordinary cutter. Let ME carry the germanium in and the wafers to the cutter."]
+			icon: "grindless:triple_junction_wafer"
+			id: "567F7046411B8142"
+			rewards: [{ id: "3D03A0C974921AFA", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3FDD82AF1A0CAB94", item: "grindless:triple_junction_wafer", type: "item" }]
+			title: "Triple-Junction Wafer"
+			x: 21.0d
+			y: -3.5d
+		}
+		{
 			dependencies: ["75745AD963ECB5C8"]
 			description: ["With nothing stirring the melt, a crystal grows without flaws. The &6Zero-G Crystal Grower&r makes raw crystal chips every time instead of now and then. The same dopant GregTech asks for, and sapphire test masses cut from its own boules. The crystal circuit chain, much faster. The test masses are for later; EMI says what for. One grower, one ME bus for dopant, and the chips arrive on their own."]
 			icon: "gtceu:zero_g_crystal_grower"
@@ -1171,6 +1184,123 @@
 			title: "The Bridge Reaches Out"
 			x: 10.5d
 			y: 2.0d
+		}
+		{
+			dependencies: ["31355CAB056CC9DC"]
+			description: ["The &6Power Substation&r is a battery hall. It takes energy in from your plants and gives it back when the base asks. Its controller, with a lapotron crystal, a MPIC chip and LuV circuits, and battery blocks inside. A buffer that evens out every plant on the grid. Wire it between the generators and the factory, and read its charge from the monitor."]
+			icon: "gtceu:power_substation"
+			id: "5C289CFC788806E2"
+			rewards: [{ id: "5D13FD3B30796B8A", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1DCD6623C6CCC46C", item: "gtceu:power_substation", type: "item" }]
+			title: "Power Substation"
+			x: 20.0d
+			y: 14.5d
+		}
+		{
+			dependencies: ["5C289CFC788806E2"]
+			description: ["The &6Active Transformer&r carries power from one place to another without a cable, through laser hatches. Its controller, with a LuV transformer, LuV circuits and superconducting wire. Power to a far hall, and the base of the wireless receivers. Link source and target hatches, and the energy flows on its own."]
+			icon: "gtceu:active_transformer"
+			id: "5103875366F06F86"
+			rewards: [{ id: "5A870E56FB86208A", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "787A01084163A28E", item: "gtceu:active_transformer", type: "item" }]
+			title: "Active Transformer"
+			x: 22.0d
+			y: 14.5d
+		}
+		{
+			dependencies: ["5103875366F06F86"]
+			description: ["The &6Plasma Turbine&r burns plasma through its rotor and sends back the plasma as hot fluid for the next turbine. Its controller, with tungsten steel gears, LuV circuits and a tungsten steel fluid pipe, and a rotor holder. Plasma power, with a fluid left to chain into steam. Plasma in by hatch, fluid out by hatch."]
+			icon: "gtceu:plasma_large_turbine"
+			id: "3B94EE34DEE5A121"
+			rewards: [{ id: "75F170046F7E9E36", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "16A942C44BAD1CFF", item: "gtceu:plasma_large_turbine", type: "item" }]
+			title: "Plasma Turbine"
+			x: 24.0d
+			y: 14.5d
+		}
+		{
+			dependencies: ["5C289CFC788806E2"]
+			description: ["The &6LuV Large Miner&r takes a wider square than the IV one, and faster. Its controller, with a LuV hull, HSS-S frames and LuV circuits. Ore on a scale that feeds the biggest halls. Ore out by bus, with drilling fluid from a tank."]
+			icon: "gtceu:luv_large_miner"
+			id: "51C5C1664ADDD090"
+			rewards: [{ id: "3597B4AD972A4C4C", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "52F0F09D6375AF9B", item: "gtceu:luv_large_miner", type: "item" }]
+			title: "LuV Large Miner"
+			x: 20.0d
+			y: 16.5d
+		}
+		{
+			dependencies: ["51C5C1664ADDD090"]
+			description: ["The second &6Fluid Drilling Rig&r pumps a vein faster and drains it more slowly. Its controller, with a LuV hull, tungsten steel frames and LuV circuits. Fluid from deep veins, for the heavy chemistry. Fluid out by hatch, straight into a pipe."]
+			icon: "gtceu:ev_fluid_drilling_rig"
+			id: "1CB4F32B3A694817"
+			rewards: [{ id: "721CD4DCA53748E6", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "183F18C4F4BE9F2B", item: "gtceu:ev_fluid_drilling_rig", type: "item" }]
+			title: "Fluid Drilling Rig II"
+			x: 22.0d
+			y: 16.5d
+		}
+		{
+			dependencies: ["1CB4F32B3A694817"]
+			description: ["The &6Large Dehydrator&r dries fluids down to the salts and solids they carry. Its controller, with high-temperature smelting casing, superconducting hex wire and a LuV battery. Sulfur, iodine and salt from brines and water. Fluid in by hatch, dust out by bus."]
+			icon: "gtnn:large_dehydrator"
+			id: "1CFF379DA99B1FF8"
+			rewards: [{ id: "5CD83F7770F065F3", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "13F05A6311F0F376", item: "gtnn:large_dehydrator", type: "item" }]
+			title: "Large Dehydrator"
+			x: 24.0d
+			y: 16.5d
+		}
+		{
+			dependencies: ["1CFF379DA99B1FF8"]
+			description: ["The &6Large Mixer&r blends dust and fluid in volume. Its controller, with a polybenzimidazole fluid pipe, an osmiridium rotor and an IV motor. Glass dust, concrete and gunpowder in bulk. Items and fluid in, items and fluid out."]
+			icon: "gtceu:large_mixer"
+			id: "116914D0A4B70AD4"
+			rewards: [{ id: "7A03A46474A2C540", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "719230AFBD929212", item: "gtceu:large_mixer", type: "item" }]
+			title: "Large Mixer"
+			x: 26.0d
+			y: 16.5d
+		}
+		{
+			dependencies: ["51C5C1664ADDD090"]
+			description: ["The &6Advanced EBF&r is a blast furnace that runs hotter and handles more at once. Its controller, with LuV circuits, an electric blast furnace and a LuV field generator. Neodymium, steel and the high-temperature alloys of later eras. Items and gas in by bus and hatch, ingots out by bus."]
+			icon: "gtca:advanced_ebf"
+			id: "31E7E6DA27D295F2"
+			rewards: [{ id: "1D20866055364532", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "38F0CBE2F19C49F3", item: "gtca:advanced_ebf", type: "item" }]
+			title: "Advanced EBF"
+			x: 20.0d
+			y: 18.5d
+		}
+		{
+			dependencies: ["31E7E6DA27D295F2"]
+			description: ["The &6Comet&r heats plasma by impact. It runs on the energy of a cyclotron. Its controller, with IV circuits, an IV hull and a cyclotron coil. Hydrogen plasma, for turbines and chemistry. Items and fluid in, plasma out by hatch."]
+			icon: "gtca:comet"
+			id: "3F6856EDFD08E09D"
+			rewards: [{ id: "708EAFC13DB40CA1", type: "xp", xp: 70 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "368753C909310558", item: "gtca:comet", type: "item" }]
+			title: "Comet"
+			x: 22.0d
+			y: 18.5d
 		}
 	]
 	subtitle: ["Superconductors at home, a station in orbit, then out past Mars to the belt and Jupiter's moons."]

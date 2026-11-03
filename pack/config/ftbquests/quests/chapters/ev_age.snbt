@@ -1006,6 +1006,97 @@
 			x: 8.0d
 			y: -1.5d
 		}
+		{
+			dependencies: ["37E7797A38CEA743"]
+			description: ["The EV halls that sit outside the lines: boilers, engines, turbines, miners, drilling rigs and a reactor."]
+			icon: "gtceu:large_combustion_engine"
+			id: "5FF951B710CB1296"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "3322211B12A80D6A", type: "checkmark" }]
+			title: "Machines"
+			x: 30.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5FF951B710CB1296"]
+			description: ["The &6Titanium Large Boiler&r makes more steam than the steel one, from the same fuel. Its controller, with a titanium firebox casing, EV circuits and gold cable. Steam for the big turbine halls without a boiler farm. Fuel in by bus, water in by hatch, steam out by hatch."]
+			icon: "gtceu:titanium_large_boiler"
+			id: "5769033B186E75D4"
+			rewards: [{ id: "5EEEF2948B2AAC19", type: "xp", xp: 50 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3B6E67B2158D2F35", item: "gtceu:titanium_large_boiler", type: "item" }]
+			title: "Titanium Large Boiler"
+			x: 32.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5769033B186E75D4"]
+			description: ["Fuel burns in the &6Large Combustion Engine&r and turns into power at a fair rate. Oxygen makes it run harder. Its controller, with an EV piston, an EV motor and titanium gears. Power from diesel and other fuels, and the way up to the extreme engine. Fuel in by hatch. A pipe from the oxygen tank is all it needs."]
+			icon: "gtceu:large_combustion_engine"
+			id: "1BC02BDB52B93415"
+			rewards: [{ id: "300C69C6AA5CA8E7", type: "xp", xp: 50 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7935F01E7F352345", item: "gtceu:large_combustion_engine", type: "item" }]
+			title: "Large Combustion Engine"
+			x: 34.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["1BC02BDB52B93415"]
+			description: ["Gas goes through the &6Large Gas Turbine&r and comes out as power. Rotors do the work, so keep spares. Its controller, with stainless gears, EV circuits and a stainless fluid pipe, and a rotor holder. Power from natural gas and fuels, and a part of the combined-cycle plant. Gas in by hatch. Swap a worn rotor before it breaks."]
+			icon: "gtceu:gas_large_turbine"
+			id: "5C0CAE35F4AFCAEE"
+			rewards: [{ id: "56E5AD9F359AFABC", type: "xp", xp: 50 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1137487F7C6D5236", item: "gtceu:gas_large_turbine", type: "item" }]
+			title: "Gas Turbine"
+			x: 36.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5769033B186E75D4"]
+			description: ["The &6EV Large Miner&r digs a wide square of ore and pulls it all up in one go. Its controller, with an EV hull, titanium frames and IV circuits, and drill fluid. Ore at a rate no single drill reaches. Ore out by bus. Feed the drilling fluid from a tank."]
+			icon: "gtceu:ev_large_miner"
+			id: "3E4D48FD7AF86AC4"
+			rewards: [{ id: "55EAC6D936BF3F21", type: "xp", xp: 50 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "53DF0DC2585EB22F", item: "gtceu:ev_large_miner", type: "item" }]
+			title: "EV Large Miner"
+			x: 32.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["3E4D48FD7AF86AC4"]
+			description: ["The &6Fluid Drilling Rig&r pulls oil and other fluids from the vein under it and costs no ore. Its controller, with an EV hull, titanium frames and EV circuits. Fluids from a vein, and a step toward the in-situ leach field. Fluid out by hatch, straight into a pipe."]
+			icon: "gtceu:hv_fluid_drilling_rig"
+			id: "3DD36A466FE2A8FA"
+			rewards: [{ id: "586D4D8218B9565E", type: "xp", xp: 50 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "788BC0E883FB9031", item: "gtceu:hv_fluid_drilling_rig", type: "item" }]
+			title: "Fluid Drilling Rig"
+			x: 34.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["3E4D48FD7AF86AC4"]
+			description: ["Heat does the chemistry inside the &6Thermal Reactor&r. Several jobs that took chains now take one machine. Its controller, with EV circuits, tungsten steel rotors and an EV pump. Redstone, aluminium dust and silica dust from heat alone. Items and fluid in by bus and hatch, results out the same way."]
+			icon: "gtca:thermal_reactor"
+			id: "30E917256670156E"
+			rewards: [{ id: "77F19211D41353C6", type: "xp", xp: 50 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "345B9179B8CB17BE", item: "gtca:thermal_reactor", type: "item" }]
+			title: "Thermal Reactor"
+			x: 32.0d
+			y: 16.0d
+		}
 	]
 	subtitle: ["The Moon learns to run without you, and then a rocket points at Mars."]
 	title: "EV: Lunar Base"

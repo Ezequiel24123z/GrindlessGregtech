@@ -950,6 +950,383 @@
 			x: 48.5d
 			y: -2.5d
 		}
+		{
+			dependencies: ["14E966D3D6D326FE"]
+			description: ["The large halls of the IV era: boilers, smelters, chemistry, forming and assembly, one theme to a row."]
+			icon: "gtceu:large_assembler"
+			id: "554415D1C549C18E"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "1362B6A7A6768BA3", type: "checkmark" }]
+			title: "Machines"
+			x: 61.25d
+			y: 5.25d
+		}
+		{
+			dependencies: ["554415D1C549C18E"]
+			description: ["The &6Tungstensteel Large Boiler&r is the biggest solid-fuel boiler there is. Its controller, with a tungstensteel firebox casing, IV circuits and aluminium cable. Steam for the largest turbine halls. Fuel in by bus, water in by hatch, steam out by hatch."]
+			icon: "gtceu:tungstensteel_large_boiler"
+			id: "7FCFF04F0E79419B"
+			rewards: [{ id: "322FDA7E0581A486", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3B63499FD57FA3D9", item: "gtceu:tungstensteel_large_boiler", type: "item" }]
+			title: "Tungstensteel Large Boiler"
+			x: 63.25d
+			y: 7.25d
+		}
+		{
+			dependencies: ["7FCFF04F0E79419B"]
+			description: ["The &6Extreme Combustion Engine&r burns fuel harder than the large one and pays back in power. Its controller, with an IV piston, an IV motor and tungsten steel gears. High-density fuels turned into power at scale. Fuel in by hatch, with oxygen from a tank."]
+			icon: "gtceu:extreme_combustion_engine"
+			id: "122C790383346A0B"
+			rewards: [{ id: "3EA0282ED60190D1", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "359EEF91147B8307", item: "gtceu:extreme_combustion_engine", type: "item" }]
+			title: "Extreme Combustion Engine"
+			x: 65.25d
+			y: 7.25d
+		}
+		{
+			dependencies: ["122C790383346A0B"]
+			description: ["The &6IV Large Miner&r clears a wider square than the EV one, and faster. Its controller, with an IV hull, tungsten steel frames and IV circuits. A deeper ore supply for the heavy halls. Ore out by bus, with drilling fluid from a tank."]
+			icon: "gtceu:iv_large_miner"
+			id: "7FC246DC5AD04520"
+			rewards: [{ id: "36B12FB2C676C998", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5342BE87E6794553", item: "gtceu:iv_large_miner", type: "item" }]
+			title: "IV Large Miner"
+			x: 67.25d
+			y: 7.25d
+		}
+		{
+			dependencies: ["7FC246DC5AD04520"]
+			description: ["The &6Large Gas Collector&r pulls air, ender air and nether air at the pace of a plant. Its controller, with cobalt brass plates, an IV motor and an IV pump. Gas for every chemistry line that wants a lot of it. Gas out by hatch, straight into a pipe."]
+			icon: "extendedfeatures:large_gas_collector"
+			id: "369FB2296D8A96F0"
+			rewards: [{ id: "31FA497816359070", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "747C1102E6789DB4", item: "extendedfeatures:large_gas_collector", type: "item" }]
+			title: "Large Gas Collector"
+			x: 69.25d
+			y: 7.25d
+		}
+		{
+			dependencies: ["7FCFF04F0E79419B"]
+			description: ["The &6Large Arc Smelter&r runs arc furnace recipes in bulk. Its controller, with tantalum carbide plates, IV circuits and platinum cable. Steel, tungsten steel and other alloys by the stack. Items and oxygen in by bus and hatch, ingots out by bus."]
+			icon: "gtceu:large_arc_smelter"
+			id: "10B7996CF9A6DE13"
+			rewards: [{ id: "31FFDB7DD72CD4A3", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1FC39617E1D3F670", item: "gtceu:large_arc_smelter", type: "item" }]
+			title: "Large Arc Smelter"
+			x: 63.25d
+			y: 9.25d
+		}
+		{
+			dependencies: ["10B7996CF9A6DE13"]
+			description: ["Alloys made hot and melted at once: the &6Alloy Blast Smelter&r turns dust straight into molten metal. Its controller, with IV circuits, tantalum carbide plates and platinum cable, and heat coils. Molten alloys for casting, and metals that no furnace can alloy. Dust in by bus, molten metal out by hatch."]
+			icon: "gtceu:alloy_blast_smelter"
+			id: "347C9AAA7EBA18CD"
+			rewards: [{ id: "7BFF940A2FE55713", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "322A6B85E8545483", item: "gtceu:alloy_blast_smelter", type: "item" }]
+			title: "Alloy Blast Smelter"
+			x: 65.25d
+			y: 9.25d
+		}
+		{
+			dependencies: ["347C9AAA7EBA18CD"]
+			description: ["The &6Large Electromagnet&r separates and polarizes in batches. Its controller, with blue steel plates, IV circuits and osmium wire. Cleaner ore streams and charged crystals at scale. Items in and out by bus."]
+			icon: "gtceu:large_electromagnet"
+			id: "77F174440D5846B3"
+			rewards: [{ id: "5B573327F24A89B9", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3F629C3DCEFF23C8", item: "gtceu:large_electromagnet", type: "item" }]
+			title: "Large Electromagnet"
+			x: 67.25d
+			y: 9.25d
+		}
+		{
+			dependencies: ["77F174440D5846B3"]
+			description: ["The &6Large Centrifuge&r does the work of a rack of centrifuges, thermal ones too. Its controller, with IV circuits, a molybdenum disilicide spring and an IV motor. Dust and fluid separation in one hall. Items and fluid in, results out by bus and hatch."]
+			icon: "gtceu:large_centrifuge"
+			id: "3641F51980830DF7"
+			rewards: [{ id: "3A305BA468A9EB3B", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1BF3B4C6726D77B6", item: "gtceu:large_centrifuge", type: "item" }]
+			title: "Large Centrifuge"
+			x: 69.25d
+			y: 9.25d
+		}
+		{
+			dependencies: ["3641F51980830DF7"]
+			description: ["The &6Large Electrolyzer&r splits compounds in bulk. Its controller, with black steel plates, platinum cable and IV circuits. Carbon, aluminium, calcium and gases from the bigger lines. Items and fluid in by bus and hatch, results out the same way."]
+			icon: "gtceu:large_electrolyzer"
+			id: "5F0C1087A84E685C"
+			rewards: [{ id: "1E574908D425FA21", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1054FC4C22E040E2", item: "gtceu:large_electrolyzer", type: "item" }]
+			title: "Large Electrolyzer"
+			x: 71.25d
+			y: 9.25d
+		}
+		{
+			dependencies: ["5F0C1087A84E685C"]
+			description: ["The &6Large Chemical Bath&r soaks and washes ore in batches. Its controller, with IV circuits, an IV pump and an IV conveyor. Purified ore and paper at the rate a line wants. Ore and fluid in, purified ore out."]
+			icon: "gtceu:large_chemical_bath"
+			id: "12A43896D9092D7E"
+			rewards: [{ id: "5A9DE7EEC407C6BA", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "788BDEA5EA7856D9", item: "gtceu:large_chemical_bath", type: "item" }]
+			title: "Large Chemical Bath"
+			x: 73.25d
+			y: 9.25d
+		}
+		{
+			dependencies: ["10B7996CF9A6DE13"]
+			description: ["The &6Large Brewer&r brews, ferments and heats fluids in one hall. Its controller, with molybdenum disilicide springs, an IV pump and IV circuits. Biomass and other organic fluids by the tank. Items and fluid in, fluid out."]
+			icon: "gtceu:large_brewer"
+			id: "5083F6A8F1676689"
+			rewards: [{ id: "7FAC51DE0B6B1C65", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "56AF19F91E115313", item: "gtceu:large_brewer", type: "item" }]
+			title: "Large Brewer"
+			x: 63.25d
+			y: 11.25d
+		}
+		{
+			dependencies: ["5083F6A8F1676689"]
+			description: ["The &6Large Distillery&r is a distillation tower that also does the small distillery jobs. Its controller, with an iridium fluid pipe, IV circuits and an IV pump. Methane, propane and carbon, from the bigger fluids. Fluid in by hatch, fractions out by hatch."]
+			icon: "gtceu:large_distillery"
+			id: "34B4A39FEC841681"
+			rewards: [{ id: "3CBC2F57D5E952D6", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "51CD6131E1B9DC3C", item: "gtceu:large_distillery", type: "item" }]
+			title: "Large Distillery"
+			x: 65.25d
+			y: 11.25d
+		}
+		{
+			dependencies: ["34B4A39FEC841681"]
+			description: ["The &6Large Extractor&r squeezes and cans in bulk. Its controller, with an IV piston, an IV pump and IV circuits. Rubber and fluids from items, at scale. Items in by bus, fluid out by hatch."]
+			icon: "gtceu:large_extractor"
+			id: "3A5ED2126C8D61B8"
+			rewards: [{ id: "31E116DE5D6F2D51", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5577CEA469C76DA3", item: "gtceu:large_extractor", type: "item" }]
+			title: "Large Extractor"
+			x: 67.25d
+			y: 11.25d
+		}
+		{
+			dependencies: ["3A5ED2126C8D61B8"]
+			description: ["The &6Large Autoclave&r grows crystals and fibres under pressure. Its controller, with HSLA steel plates, an IV pump and IV circuits. Crystals, carbon fibres and clay in bulk. Items and fluid in, items out by bus."]
+			icon: "gtceu:large_autoclave"
+			id: "746F9CCBD5B62A48"
+			rewards: [{ id: "79F6F44D45961DDE", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "744182FBA3893873", item: "gtceu:large_autoclave", type: "item" }]
+			title: "Large Autoclave"
+			x: 69.25d
+			y: 11.25d
+		}
+		{
+			dependencies: ["746F9CCBD5B62A48"]
+			description: ["The &6Large Solidifier&r sets fluids into shapes, many at once. Its controller, with a polyethylene fluid pipe, an IV pump and IV circuits. Plates, cells and blocks straight from a tank. Fluid in by hatch, items out by bus."]
+			icon: "gtceu:large_solidifier"
+			id: "353BFB6EEACD989E"
+			rewards: [{ id: "375F4D3D07B631B1", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "30EDE765BF933162", item: "gtceu:large_solidifier", type: "item" }]
+			title: "Large Solidifier"
+			x: 71.25d
+			y: 11.25d
+		}
+		{
+			dependencies: ["353BFB6EEACD989E"]
+			description: ["The &6Mega LCR&r is a large chemical reactor built up to take far more at once. Its controller, from a large chemical reactor, an IV hull and IV circuits. Fertilizer, carbon monoxide and the other chemicals of the bigger lines. Items and fluid in, items and fluid out."]
+			icon: "gtca:mega_lcr"
+			id: "1BB1AE53D07C3B8D"
+			rewards: [{ id: "3316AE63F1A9A9CB", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "752260F04A98E475", item: "gtca:mega_lcr", type: "item" }]
+			title: "Mega LCR"
+			x: 73.25d
+			y: 11.25d
+		}
+		{
+			dependencies: ["1BB1AE53D07C3B8D"]
+			description: ["The &6Mega Oil Cracking Unit&r is a cracker made for refinery volumes. Its controller, from a cracker, an IV hull and IV circuits. Cracked fluids at the rate a refinery sends them. Oil and hydrogen in by hatch, cracked fluids out by hatch."]
+			icon: "gtca:mega_oil_cracking_unit"
+			id: "1020F583A27F9D7B"
+			rewards: [{ id: "741E1C7ED41EE964", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "164F5E11F8C98672", item: "gtca:mega_oil_cracking_unit", type: "item" }]
+			title: "Mega Oil Cracking Unit"
+			x: 75.25d
+			y: 11.25d
+		}
+		{
+			dependencies: ["5083F6A8F1676689"]
+			description: ["The &6Large Material Press&r bends, compresses and hammers in one hall. Its controller, with an IV piston, platinum cable and IV circuits. Plates, gems and ingots in bulk. Items in and out by bus."]
+			icon: "gtceu:large_material_press"
+			id: "5347B3A809471CA0"
+			rewards: [{ id: "19AC27C8C1102ADF", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1C1B76EBFB5BB17E", item: "gtceu:large_material_press", type: "item" }]
+			title: "Large Material Press"
+			x: 63.25d
+			y: 13.25d
+		}
+		{
+			dependencies: ["5347B3A809471CA0"]
+			description: ["The &6Large Extruder&r pushes metal and plastic through dies, many at once. Its controller, with an IV piston, molybdenum disilicide springs and IV circuits. Rods, plates, cells and pipes at scale. Items in and out by bus."]
+			icon: "gtceu:large_extruder"
+			id: "54CEE259642EC033"
+			rewards: [{ id: "36D8CE70523901CD", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "17FE63EB9CF0B40E", item: "gtceu:large_extruder", type: "item" }]
+			title: "Large Extruder"
+			x: 65.25d
+			y: 13.25d
+		}
+		{
+			dependencies: ["54CEE259642EC033"]
+			description: ["The &6Large Wiremill&r draws wire for every cable line that follows. Its controller, with HSLA steel plates and springs and an IV motor. Fine wire for circuits, and cable stock for every tier. Ingots in by bus, wire out by bus."]
+			icon: "gtceu:large_wiremill"
+			id: "78BB875148D9E6C7"
+			rewards: [{ id: "39264A512905387B", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5B98878301D03A14", item: "gtceu:large_wiremill", type: "item" }]
+			title: "Large Wiremill"
+			x: 67.25d
+			y: 13.25d
+		}
+		{
+			dependencies: ["78BB875148D9E6C7"]
+			description: ["The &6Large Cutter&r saws and turns in bulk, with a lathe inside. Its controller, with an IV motor, a tungsten carbide blade and IV circuits. Rods, bolts and wafers cut at scale. Items in and out by bus, with lubricant if the recipe wants it."]
+			icon: "gtceu:large_cutter"
+			id: "1820EA143F45D6EF"
+			rewards: [{ id: "79BD26E6EA60AA35", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3C2E85CF73E867CD", item: "gtceu:large_cutter", type: "item" }]
+			title: "Large Cutter"
+			x: 69.25d
+			y: 13.25d
+		}
+		{
+			dependencies: ["1820EA143F45D6EF"]
+			description: ["The &6Large Packer&r packs and unpacks for the whole base. Its controller, with IV circuits, HSLA steel plates and an IV robot arm. Wire coils, cells and parcels, without a row of packers. Items in and out by bus."]
+			icon: "gtceu:large_packer"
+			id: "137659C751782A77"
+			rewards: [{ id: "3B1080C7697BA222", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1D46C0494DB42A91", item: "gtceu:large_packer", type: "item" }]
+			title: "Large Packer"
+			x: 71.25d
+			y: 13.25d
+		}
+		{
+			dependencies: ["137659C751782A77"]
+			description: ["The &6Large Sifting Funnel&r sifts gems from crushed material, many at a time. Its controller, with HSLA steel plates, an IV piston and IV circuits. Gems and flint from the bigger ore lines. Items in and out by bus."]
+			icon: "gtceu:large_sifting_funnel"
+			id: "76BE7556723B995E"
+			rewards: [{ id: "397400CCE5760E66", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "11B9E6E0E244AD0E", item: "gtceu:large_sifting_funnel", type: "item" }]
+			title: "Large Sifting Funnel"
+			x: 73.25d
+			y: 13.25d
+		}
+		{
+			dependencies: ["5347B3A809471CA0"]
+			description: ["The &6Large Assembler&r builds and does precision assembly in one hall. Its controller, with IV circuits, an IV robot arm and an IV conveyor. Lamps, components and machines in bulk. Items and fluid in by bus and hatch, items out by bus."]
+			icon: "gtceu:large_assembler"
+			id: "1F65275E9113717C"
+			rewards: [{ id: "55F841117730553F", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "79E30FE051D968BE", item: "gtceu:large_assembler", type: "item" }]
+			title: "Large Assembler"
+			x: 63.25d
+			y: 15.25d
+		}
+		{
+			dependencies: ["1F65275E9113717C"]
+			description: ["The &6Large Circuit Assembler&r makes circuits at the pace a factory eats them. Its controller, with IV circuits, an IV robot arm and an IV conveyor. Processors and assemblies without a wall of small assemblers. Items and fluid in, circuits out by bus."]
+			icon: "gtceu:large_circuit_assembler"
+			id: "75C08F761E112F1B"
+			rewards: [{ id: "3A9FBB9E868C58C1", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1CB72B9AA7FEB369", item: "gtceu:large_circuit_assembler", type: "item" }]
+			title: "Large Circuit Assembler"
+			x: 65.25d
+			y: 15.25d
+		}
+		{
+			dependencies: ["75C08F761E112F1B"]
+			description: ["The &6Large Engraving Laser&r cuts wafers and chips in bulk. Its controller, with tantalum carbide double plates, an IV emitter and an IV piston. CPU, ILC and LPIC wafers at a factory pace. Items in and out by bus, inside a cleanroom."]
+			icon: "gtceu:large_engraving_laser"
+			id: "5F82CD36FFB153F1"
+			rewards: [{ id: "124EDF80BE8879A9", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7144D30BE6CC7052", item: "gtceu:large_engraving_laser", type: "item" }]
+			title: "Large Engraving Laser"
+			x: 67.25d
+			y: 15.25d
+		}
+		{
+			dependencies: ["5F82CD36FFB153F1"]
+			description: ["The &6Large Maceration Tower&r grinds whole stacks of ore. Its controller, with tungsten carbide plates, an IV piston and an IV motor. Crushed ore for the big lines, with several outputs per batch. Ore in by bus, dust out by bus."]
+			icon: "gtceu:large_maceration_tower"
+			id: "771F5E5FCB33AD06"
+			rewards: [{ id: "5B6BF1FBCED87CA1", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "50621F92A994740B", item: "gtceu:large_maceration_tower", type: "item" }]
+			title: "Large Maceration Tower"
+			x: 69.25d
+			y: 15.25d
+		}
+		{
+			dependencies: ["771F5E5FCB33AD06"]
+			description: ["The &6Maceration Stack&r is a tower of macerators that grinds without rest. Its controller, with sintered regolith bricks, tungsten steel plates and an IV macerator. The fastest grinding hall of the era. Ore in by bus, dust out by bus."]
+			icon: "gtnn:maceration_stack_controller"
+			id: "1D83BFF4373D4478"
+			rewards: [{ id: "1909510067BFB815", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "357228144076FAEA", item: "gtnn:maceration_stack_controller", type: "item" }]
+			title: "Maceration Stack"
+			x: 71.25d
+			y: 15.25d
+		}
 	]
 	subtitle: ["Split the atom at home, then go where it's hot: Venus for naquadah, Mercury for iridium and osmium."]
 	title: "IV: Inner Planets"

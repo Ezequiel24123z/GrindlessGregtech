@@ -40,6 +40,10 @@ const NATIVE = new Set([
   'gtceu:mega_chemical_complex',
   // this pack's own, registered before LuV (same dump; gtceu:ev_rtg is IV's RTG Cell, startup_scripts/grindless/iv/travel_network.js)
   'grindless:outer_system_chart', 'grindless:sagittarius_a_star_signal', 'gtceu:ev_rtg',
+  // QUEST-LOW (#294): GTM's and the addons' multiblocks the chapter now teaches (ids from the Multiblocks chapter, which takes them
+  // from the batch dump 5d57213f3b83)
+  'gtceu:power_substation', 'gtceu:active_transformer', 'gtceu:plasma_large_turbine', 'gtceu:luv_large_miner',
+  'gtceu:ev_fluid_drilling_rig', 'gtnn:large_dehydrator', 'gtceu:large_mixer', 'gtca:advanced_ebf', 'gtca:comet',
 ]);
 // dimensions that exist without LuV-B1 (GCYR's own)
 const NATIVE_DIMENSIONS = new Set(['gcyr:overworld_orbit']);

@@ -1555,6 +1555,186 @@
 			x: 2.0d
 			y: 24.0d
 		}
+		{
+			dependencies: ["721E38F5552E4D0B"]
+			description: [
+				"Every wafer of this age, and the machines that were left out of the story."
+				"Each wafer hangs from the one it is made from."
+			]
+			icon: "grindless:gallium_arsenide_wafer"
+			id: "7F5A9C113BBA2A9D"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "3626C7302BA15964", type: "checkmark" }]
+			title: "UV Wafers"
+			x: 4.0d
+			y: 27.0d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Gallium Arsenide Wafer&r is a wafer stage on the way to the InAs QD Wafer. Made in the &6Space Photovoltaics&r from the IMM Epi Wafer, with hydrofluoric acid, in the cleanroom. The InAs QD Wafer and AlGaAs Bragg Stack in the Molecular Beam Epitaxy. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:gallium_arsenide_wafer"
+			id: "13B75B45C0C9611D"
+			rewards: [{ id: "56EE3F11D70914B9", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "531E5B6895FE688D", item: "grindless:gallium_arsenide_wafer", type: "item" }]
+			title: "Gallium Arsenide Wafer"
+			x: 6.0d
+			y: 27.0d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6InGaAs Epi Wafer&r is a wafer stage on the way to the Red Tuned Solar Array. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The Red Tuned Solar Array in the Space Photovoltaics. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:ingaas_epi_wafer"
+			id: "5E61D81CF8144D25"
+			rewards: [{ id: "3241C7718CBB5F2B", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3E980997F87BCB4C", item: "grindless:ingaas_epi_wafer", type: "item" }]
+			title: "InGaAs Epi Wafer"
+			x: 6.0d
+			y: 28.5d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Epitaxial Silicon Wafer&r: Silicon grown from silane in the wake shield's hard vacuum. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The light sail's carrier. The next stage of its line, or the chip that is built from it. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:epitaxial_silicon_wafer"
+			id: "3F344FE65BE2FD68"
+			rewards: [{ id: "724D9BC07B98B8DC", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "50231F823B2A06D7", item: "grindless:epitaxial_silicon_wafer", type: "item" }]
+			title: "Epitaxial Silicon Wafer"
+			x: 6.0d
+			y: 30.0d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Sapphire Wafer&r is a wafer stage on the way to the NbTiN Film Wafer. Made by the first machine of its line; the cleanroom and EMI show the exact recipe. The NbTiN Film Wafer in the MTJ Sputtering. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:sapphire_wafer"
+			id: "32232F1A7BC5FBA2"
+			rewards: [{ id: "5107DA9F1CB08FEB", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5759CE8E70C09392", item: "grindless:sapphire_wafer", type: "item" }]
+			title: "Sapphire Wafer"
+			x: 6.0d
+			y: 31.5d
+		}
+		{
+			dependencies: ["32232F1A7BC5FBA2"]
+			description: ["The &6Niobium Nitride Film Wafer&r is a stage of the wafer lines of this era. Made from the Sapphire Wafer in the next machine of its line, in the cleanroom. The next stage of its line, or the chip that is built from it. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:nbn_film_wafer"
+			id: "36CF77E4CABDC548"
+			rewards: [{ id: "1DE8788C3D312EC3", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7F23E7587F32A440", item: "grindless:nbn_film_wafer", type: "item" }]
+			title: "Niobium Nitride Film Wafer"
+			x: 8.0d
+			y: 31.5d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6PMMA Wafer&r: A high-power wafer under a thick PMMA resist. Made in the &6Chemical Bath&r from the HPIC Wafer, with PMMA resist, in the cleanroom. Exposed by the synchrotron (circuit 1). The Exposed Wafer in the Synchrotron. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:pmma_coated_wafer"
+			id: "1E59B32B1A43DD99"
+			rewards: [{ id: "159D508DC0EFB7E1", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7139913409C62438", item: "grindless:pmma_coated_wafer", type: "item" }]
+			title: "PMMA Wafer"
+			x: 6.0d
+			y: 33.0d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Exposed Wafer&r: The X-rays have cut the pattern deep into the PMMA. Made in the &6Synchrotron&r from the PMMA Wafer, with liquid helium, in the cleanroom. Developed by the synchrotron (circuit 2). The LIGA-Patterned Wafer in the Synchrotron. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			hide_dependency_lines: true
+			icon: "grindless:exposed_wafer"
+			id: "50439A1D2A4E861D"
+			rewards: [{ id: "5A58EE9694667881", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "127797F3EE8A04A9", item: "grindless:exposed_wafer", type: "item" }]
+			title: "Exposed Wafer"
+			x: 6.0d
+			y: 34.5d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Mega Blast Furnace&r runs Electric Blast Furnace recipes at scale. It is the blast furnace of the UV age. The controller takes a ZPM field generator, Naquadah springs and Naquadah alloy dense plates; the body follows the structure preview. Big batches of every blast furnace metal, steel and neodymium among them. Item buses and fluid hatches in, item buses and fluid hatches out."]
+			hide_dependency_lines: true
+			icon: "gtceu:mega_blast_furnace"
+			id: "561676ED55225B08"
+			rewards: [{ id: "712C833665B5F226", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3915C82B214057A4", item: "gtceu:mega_blast_furnace", type: "item" }]
+			title: "Mega Blast Furnace"
+			x: 6.0d
+			y: 37.5d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Mega Vacuum Freezer&r runs Vacuum Freezer recipes at scale, cooling hot ingots and cryogenic fluids in bulk. The controller takes a ZPM field generator, a niobium titanium fluid pipe and rhodium plated palladium dense plates; the body follows the structure preview. Trinaquadalloy and cold-chain recipes in volume. Item buses and fluid hatches in, item buses and fluid hatches out."]
+			hide_dependency_lines: true
+			icon: "gtceu:mega_vacuum_freezer"
+			id: "5B6CEBAE35F1A7DB"
+			rewards: [{ id: "57A948C03BE5298E", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "75DAF3E69E363E98", item: "gtceu:mega_vacuum_freezer", type: "item" }]
+			title: "Mega Vacuum Freezer"
+			x: 8.0d
+			y: 37.5d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Network Switch&r is the multiblock that routes data between computers. It is the hub of a data network. The controller takes tritanium foils, a computer casing and a ZPM emitter. Bigger data networks, with more computers talking at once. It has no inputs to feed: place it and link the data hatches of the computers it serves."]
+			hide_dependency_lines: true
+			icon: "gtceu:network_switch"
+			id: "7B889427723DB48D"
+			rewards: [{ id: "77881E207D8D9F0A", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3ABFFEB954C7C2E4", item: "gtceu:network_switch", type: "item" }]
+			title: "Network Switch"
+			x: 10.0d
+			y: 37.5d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Tegmark Forge&r is a Community Additions multiblock that forges the exotic alloys of the late game from a single seed of matter. The controller takes a neutronex frame, a double neutronex plate and a duranium X frame. Adamantium, ohriharukon and orundum ingots. Item buses and fluid hatches in, item buses out."]
+			hide_dependency_lines: true
+			icon: "gtca:tegmark_forge"
+			id: "33AD6B9DD6C271FD"
+			rewards: [{ id: "54EE67FC14469B40", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "378E09B64BA3A306", item: "gtca:tegmark_forge", type: "item" }]
+			title: "Tegmark Forge"
+			x: 12.0d
+			y: 37.5d
+		}
+		{
+			dependencies: ["7F5A9C113BBA2A9D"]
+			description: ["The &6Web Receiver&r is the first piece of a wireless energy web: it catches power from the web and hands it to a machine. The controller takes an active transformer, Naquadah alloy plates and a UV sensor. The Web Hub, which needs one to be built. It takes no items: place it next to the machines it should feed."]
+			hide_dependency_lines: true
+			icon: "gtmutils:web_receiver"
+			id: "183507A491A7EE6A"
+			rewards: [{ id: "103D0951E9D88D41", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "315A4D22081161D3", item: "gtmutils:web_receiver", type: "item" }]
+			title: "Web Receiver"
+			x: 14.0d
+			y: 37.5d
+		}
 	]
 	subtitle: ["Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are here too."]
 	title: "UV: Pluto and the Edge"

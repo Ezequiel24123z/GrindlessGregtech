@@ -287,11 +287,12 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["7A1656F88B1FC86E", "5E61CE1D2B9B4F60"]
+			dependencies: ["7A1656F88B1FC86E", "5E61CE1D2B9B4F60", "7AD63131D4FD4BBF"]
 			description: [
 				"Hold the Warp Gate open at the UEV load in Sirius B orbit. Its input takes a tennessine sample, a degenerate pellet, a degenerate EOS model, four UEV circuits of any kind and circuit 3. The hold makes nothing: you tick this box when it has run."
 				"The next casing is built apart: the UIV Machine Casing line is researched with the Pulsar Navigation Chart and takes UEV casings, field generators and emitters."
 			]
+			hide_dependency_lines: true
 			icon: "gtceu:warp_gate"
 			id: "5316E435F8496672"
 			rewards: [{ id: "1AD75918C40B7B8D", type: "xp", xp: 100 }]
@@ -351,8 +352,9 @@
 			y: 0.75d
 		}
 		{
-			dependencies: ["129CFFFDA25F22DC"]
+			dependencies: ["129CFFFDA25F22DC", "7674F530D0218D45"]
 			description: ["The &6UEV Field Generator&r holds the plasma and the gate's fields. It is the first part that needs a degenerate pellet. A UHV field generator, two degenerate pellets, two single-crystal pump impellers, three UEV emitters and three UEV sensors. The UEV Energy Hatch, the Stellar Forge and the Mk4 fusion reactor. Pellets and impellers by ME; stock a few, since the hatch takes three."]
+			hide_dependency_lines: true
 			icon: "gtceu:uev_field_generator"
 			id: "5F644828F712C60C"
 			rewards: [{ id: "16297E127277B204", type: "xp", xp: 120 }]
@@ -1227,8 +1229,9 @@
 			y: 7.5d
 		}
 		{
-			dependencies: ["336F09E29287CDEA"]
+			dependencies: ["336F09E29287CDEA", "1DCFFEC97F5A28AF"]
 			description: ["The &6Entanglement Station&r ties two photons together across a distance. Two UHV hulls, three UV emitters, two SPDC sources, two hollow-core fibres, an SNSPD, any UHV circuit and the photonic casing; the Quantum Gas Lab is its research. The quantum repeater node, which the wireless hatches take. Parts by ME; send the nodes on by ME."]
+			hide_dependency_lines: true
 			icon: "gtceu:entanglement_station"
 			id: "5D8B9A9839432298"
 			rewards: [{ id: "5B16504A2B469DC1", type: "xp", xp: 150 }]
@@ -1243,8 +1246,9 @@
 			y: 11.25d
 		}
 		{
-			dependencies: ["1299B0A10283C57E"]
+			dependencies: ["1299B0A10283C57E", "19174331BF47A9B1"]
 			description: ["The &6Nebula Collector&r gathers gas from a nebula and sorts it by element. A UEV hull, five UEV pumps, four UEV sensors, three UEV emitters, three scoop coils, three aerogel tiles, any UEV circuit and the photonic casing. Gas streams that the Alpha Centauri lines consume, and the Interstellar Dust Lab. Run it on a pipe loop to the plant and send the surplus to a tank."]
+			hide_dependency_lines: true
 			icon: "gtceu:nebula_collector"
 			id: "35EB2F3BC6F8AEB8"
 			rewards: [{ id: "17921AAF6FF4A96E", type: "xp", xp: 150 }]
@@ -1318,8 +1322,9 @@
 			y: 2.75d
 		}
 		{
-			dependencies: ["120B4D6B667EAF26", "19174331BF47A9B1"]
+			dependencies: ["120B4D6B667EAF26", "19174331BF47A9B1", "1DCFFEC97F5A28AF"]
 			description: ["The &6White Dwarf Spectrograph&r reads a dead star's light and from it the mass and radius. A UEV hull, four UEV sensors, five UEV emitters, three UEV pumps, an ULE cavity, three SNSPDs, two nuclear clocks, any UEV circuit and the photonic casing. The mass-radius chart, made in Sirius B orbit, and the Degenerate Harvester. The station asks for little by ME; keep a stock of charts."]
+			hide_dependency_lines: true
 			icon: "gtceu:white_dwarf_spectrograph"
 			id: "565457BFBC2B7232"
 			rewards: [{ id: "147D8ECF0980A518", type: "xp", xp: 150 }]
@@ -1444,6 +1449,194 @@
 			title: "Fibre and Quantum Lines"
 			x: 6.75d
 			y: 9.25d
+		}
+		{
+			dependencies: ["531661D4F43C18E5"]
+			description: [
+				"Every wafer of this age, and the machines that were left out of the story."
+				"Each wafer hangs from the one it is made from."
+			]
+			icon: "grindless:fz_silicon_wafer"
+			id: "7797EC240C637C57"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "7F14B5B08C79C216", type: "checkmark" }]
+			title: "UEV Wafers"
+			x: 16.25d
+			y: 23.75d
+		}
+		{
+			dependencies: ["7797EC240C637C57"]
+			description: ["The &6FZ Silicon Wafer&r is a wafer stage on the way to the TSV Via Wafer. Made in the &6Cutter&r from the FZ Silicon Boule, with water, in the cleanroom. The TSV Via Wafer and Fouled BEUV Mirror in the BEUV Lithography. Stock it by ME and let the next step pull it; nothing here needs a hand."]
+			icon: "grindless:fz_silicon_wafer"
+			id: "1306598B19053CB3"
+			rewards: [{ id: "7BEBF5E83CA68D1B", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "728E2FE57EB44B18", item: "grindless:fz_silicon_wafer", type: "item" }]
+			title: "FZ Silicon Wafer"
+			x: 18.25d
+			y: 23.75d
+		}
+		{
+			dependencies: ["1306598B19053CB3"]
+			description: ["The &6WSi Wafer&r is a wafer stage on the way to the WSi Nanowire Wafer. Made in the &6SNSPD Fabrication&r from the FZ Silicon Wafer and Tungsten Silicide, with argon, in the cleanroom. The WSi Nanowire Wafer in the SNSPD Fabrication. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:wsi_wafer"
+			id: "32D97A2A6D5A5055"
+			rewards: [{ id: "12C8059C47D2D8E4", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3040864870F0CBC4", item: "grindless:wsi_wafer", type: "item" }]
+			title: "WSi Wafer"
+			x: 20.25d
+			y: 23.75d
+		}
+		{
+			dependencies: ["32D97A2A6D5A5055"]
+			description: ["The &6Nanowire Wafer&r is a wafer stage on the way to the SNSPD Die. Made in the &6SNSPD Fabrication&r from the WSi Wafer, with PMMA resist, in the cleanroom. The SNSPD Die in the SNSPD Fabrication. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:wsi_nanowire_wafer"
+			id: "7859F523EEA67557"
+			rewards: [{ id: "740067C24EA71CCA", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "50D8967F18E6F55B", item: "grindless:wsi_nanowire_wafer", type: "item" }]
+			title: "Nanowire Wafer"
+			x: 22.25d
+			y: 23.75d
+		}
+		{
+			dependencies: ["1306598B19053CB3"]
+			description: ["The &6Oxidised Wafer&r is a wafer stage on the way to the Trenched Oxide Wafer. Made in the &6Electric Blast Furnace&r from the FZ Silicon Wafer, with oxygen, in the cleanroom. The Trenched Oxide Wafer and SDD Implanted Wafer in the Synchrotron. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:oxidised_wafer"
+			id: "32C9059DBD06A4D8"
+			rewards: [{ id: "58BEF4EA33125E58", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "70C507C71DF336BF", item: "grindless:oxidised_wafer", type: "item" }]
+			title: "Oxidised Wafer"
+			x: 20.25d
+			y: 25.25d
+		}
+		{
+			dependencies: ["32C9059DBD06A4D8"]
+			description: ["The &6SiN-Coated Wafer&r is a wafer stage on the way to the Sin Lithographed Wafer. Made in the &6Chemical Reactor&r from the Oxidised Wafer, with silane, in the cleanroom. The Sin Lithographed Wafer and LN On Sin Wafer in the Synchrotron. Chain the machines by ME, and keep a small buffer of this wafer between steps."]
+			icon: "grindless:sin_coated_wafer"
+			id: "1DF169CA139FB281"
+			rewards: [{ id: "3CD1CDBD9FB42C9C", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "15BB4EC89938FEE5", item: "grindless:sin_coated_wafer", type: "item" }]
+			title: "SiN-Coated Wafer"
+			x: 22.25d
+			y: 25.25d
+		}
+		{
+			dependencies: ["1DF169CA139FB281"]
+			description: ["The &6Lithographed Wafer&r is a wafer stage on the way to the Sin Etched Wafer. Made in the &6Synchrotron&r from the SiN-Coated Wafer, with PMMA resist, in the cleanroom. The Sin Etched Wafer and Silicon in the Chemical Reactor. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:sin_lithographed_wafer"
+			id: "701D504FE8EBCFE6"
+			rewards: [{ id: "75DCDF5EA79AA041", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "158AFF033B2E334B", item: "grindless:sin_lithographed_wafer", type: "item" }]
+			title: "Lithographed Wafer"
+			x: 24.25d
+			y: 25.25d
+		}
+		{
+			dependencies: ["701D504FE8EBCFE6"]
+			description: ["The &6Etched Wafer&r is a wafer stage on the way to the Annealed Sin Chip. Made in the &6Chemical Reactor&r from the Lithographed Wafer, with distilled water, in the cleanroom. The Annealed Sin Chip in the Photonic Foundry. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:sin_etched_wafer"
+			id: "527B02603949D70D"
+			rewards: [{ id: "7FC83C237C22DED2", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "19FB239AD15985BE", item: "grindless:sin_etched_wafer", type: "item" }]
+			title: "Etched Wafer"
+			x: 26.25d
+			y: 25.25d
+		}
+		{
+			dependencies: ["7797EC240C637C57"]
+			description: ["The &6Micropillar Wafer&r is a wafer stage on the way to the QD Source. Made in the &6Chemical Reactor&r from the InAs QD Wafer, with distilled water, in the cleanroom. The QD Source in the Assembler. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			hide_dependency_lines: true
+			icon: "grindless:micropillar_wafer"
+			id: "33CC4AE3620B47B7"
+			rewards: [{ id: "3FC80B59AC219440", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "582737FBBA170E7A", item: "grindless:micropillar_wafer", type: "item" }]
+			title: "Micropillar Wafer"
+			x: 18.25d
+			y: 28.25d
+		}
+		{
+			dependencies: ["32C9059DBD06A4D8"]
+			description: ["The &6Implanted Wafer&r is a wafer stage on the way to the SDD Annealed Wafer. Made in the &6Ion Implantation&r from the Oxidised Wafer and Boron, in the cleanroom. The SDD Annealed Wafer in the Electric Blast Furnace. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:sdd_implanted_wafer"
+			id: "70F3FADE2E1C44AF"
+			rewards: [{ id: "5768A00F3B623D45", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "773FD570E0368A8F", item: "grindless:sdd_implanted_wafer", type: "item" }]
+			title: "Implanted Wafer"
+			x: 22.25d
+			y: 26.75d
+		}
+		{
+			dependencies: ["70F3FADE2E1C44AF"]
+			description: ["The &6Annealed Wafer&r is a wafer stage on the way to the SDD. Made in the &6Electric Blast Furnace&r from the Implanted Wafer, with argon, in the cleanroom. The SDD in the Assembler. Feed it by ME from the machine before it; keep a few spare wafers in stock."]
+			icon: "grindless:sdd_annealed_wafer"
+			id: "58D75295E40BA399"
+			rewards: [{ id: "15276314AEA47AD6", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "57C51FD0B5A35343", item: "grindless:sdd_annealed_wafer", type: "item" }]
+			title: "Annealed Wafer"
+			x: 24.25d
+			y: 26.75d
+		}
+		{
+			dependencies: ["7797EC240C637C57"]
+			description: ["The &6KTP Wafer&r is a wafer stage on the way to the KTP Electroded Wafer. Made in the &6Cutter&r from the KTP Boule, in the cleanroom. The KTP Electroded Wafer in the Assembler. A pattern provider on the machine of the step before keeps it supplied."]
+			hide_dependency_lines: true
+			icon: "grindless:ktp_wafer"
+			id: "7E4468D1E89FEE66"
+			rewards: [{ id: "11E6228EF2B25F0C", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7C1D8B7028A042EC", item: "grindless:ktp_wafer", type: "item" }]
+			title: "KTP Wafer"
+			x: 18.25d
+			y: 29.75d
+		}
+		{
+			dependencies: ["7E4468D1E89FEE66"]
+			description: ["The &6Electroded Wafer&r is a wafer stage on the way to the Ppktp. Made in the &6Assembler&r from the KTP Wafer and Gold Foil, with argon, in the cleanroom. The Ppktp in the Polarizer. A pattern provider on the machine of the step before keeps it supplied."]
+			icon: "grindless:ktp_electroded_wafer"
+			id: "1BFEE060CEDA0D2C"
+			rewards: [{ id: "514762AC580B6912", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1457C4CDA1F902CE", item: "grindless:ktp_electroded_wafer", type: "item" }]
+			title: "Electroded Wafer"
+			x: 20.25d
+			y: 29.75d
+		}
+		{
+			dependencies: ["7797EC240C637C57"]
+			description: ["The &6Space Elevator&r is the cable that lifts payloads to orbit, and the base that the Dyson Sphere parts are built from. The controller takes a robust machine casing, trinaquadalloy dense plates and a UEV machine hull. The Dyson Solar Cell, the Dyson Sphere Casing and the Dyson Sphere Maintenance Port. Item buses and fluid hatches in, item buses out."]
+			hide_dependency_lines: true
+			icon: "gcyr:space_elevator"
+			id: "7B999741746557E5"
+			rewards: [{ id: "539DA798D0774FE0", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1C7ACA2C7F3C13BE", item: "gcyr:space_elevator", type: "item" }]
+			title: "Space Elevator"
+			x: 18.25d
+			y: 32.75d
 		}
 	]
 	subtitle: ["A first light at home, then Alpha Centauri, Barnard b and a white dwarf, and a gate held open."]
