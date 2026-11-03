@@ -21,10 +21,8 @@
   const CO = G.composites || (G.composites = {})
   const LOG = '[grindless/uev] '
 
-  const CLEAN = 'gtceu:clean_machine_casing'
-  const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
-  const HEAT = 'gtceu:heatproof_machine_casing'
-  const HEAT_TEXTURE = 'gtceu:block/casings/solid/machine_casing_heatproof'
+  const SIC = 'grindless:sic_composite_casing'
+  const SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   CO.table = 'kubejs/data/grindless/tables/composites.json'
   CO.noVoiding = 'grindless.machine.composites.no_voiding'
@@ -77,37 +75,60 @@
     }
   }
 
-  // The works is a coil-banded furnace tower, the fibre plant a tall spinning tower with a draw column, the CVI furnace a squat bell
-  // over a wide base. Built in the registry callback (shapes.js may load after this file).
+  // The works is a nitriding retort in a field-anneal solenoid with a bonding press and a magnet beside it, the fibre plant a spinning
+  // tower over a pyrolysis furnace with an e-beam curing tunnel, the CVI furnace a bell-jar retort on a gas manifold with an HCl
+  // scrubber. Bodies are the UEV casing families (SiC R, HfTaCN H, superhydride M). Built in the registry callback (shapes.js may load
+  // after this file).
   var SHAPES = {
     works: {
-      w: 7, h: 11, d: 7,
+      w: 13, h: 13, d: 15,
       fn: function () {
-        return G.uevShapes.tower({
-          w: 7, d: 7, baseH: 3, th: 9, inset: 1, band: 3, bandChar: 'C',
-          core: function (x, y, z) { return x === 3 && z === 3 && y <= 5 ? 'B' : null },
-          crown: G.uevShapes.mast(7, 7, 2)
-        })
+        var s = G.uevShapes.scene(13, 13, 15)
+        s.box(0, 0, 0, 12, 0, 14, 'X')
+        s.cyl('y', 6, 6, 3, 1, 11, 'R', true)
+        s.cyl('y', 6, 6, 3, 11, 11, 'H')
+        ;[3, 6, 9].forEach(function (y) { s.cyl('y', 6, 6, 4, y, y, 'M', true, null) })
+        s.cyl('y', 6, 6, 1, 12, 12, 'C')
+        s.room(0, 1, 3, 2, 6, 11, 'H')
+        s.box(1, 2, 5, 1, 4, 9, 'B').box(0, 3, 5, 0, 4, 9, 'L')
+        s.room(10, 1, 3, 12, 6, 11, 'M')
+        s.box(11, 2, 5, 11, 4, 9, 'C')
+        s.box(1, 1, 1, 11, 1, 1, 'P').box(6, 2, 1, 6, 9, 1, 'P').box(6, 5, 2, 6, 5, 2, 'P')
+        return s.booth('R', 3).fn()
       }
     },
     fibre: {
-      w: 7, h: 16, d: 7,
+      w: 11, h: 23, d: 13,
       fn: function () {
-        return G.uevShapes.tower({
-          w: 7, d: 7, baseH: 3, th: 14, inset: 1, band: 4, bandChar: 'P',
-          core: function (x, y, z) { return x === 3 && z === 3 ? 'P' : null },
-          crown: G.uevShapes.mast(7, 7, 2)
-        })
+        var s = G.uevShapes.scene(11, 23, 13)
+        s.box(0, 0, 0, 10, 0, 12, 'X')
+        s.room(0, 1, 0, 10, 4, 2, 'M')
+        ;[2, 4, 6, 8].forEach(function (x) { s.set(x, 5, 1, 'C') })
+        s.cyl('y', 5, 5, 2, 1, 21, 'R', true)
+        ;[3, 7, 11, 15, 19].forEach(function (y) { s.cyl('y', 5, 5, 2, y, y, 'H', true, null) })
+        ;[5, 9, 13, 17].forEach(function (y) { s.set(5, y, 8, 'L') })
+        s.cyl('y', 5, 5, 3, 22, 22, 'B', true, null).cyl('y', 5, 5, 1, 22, 22, 'P')
+        s.room(2, 1, 5, 8, 5, 10, 'H')
+        s.box(3, 2, 7, 7, 3, 7, 'B')
+        s.box(0, 1, 6, 1, 3, 6, 'P').box(9, 1, 6, 10, 3, 6, 'P')
+        return s.booth('R', 3).fn()
       }
     },
     cvi: {
-      w: 9, h: 9, d: 9,
+      w: 13, h: 15, d: 15,
       fn: function () {
-        return G.uevShapes.tower({
-          w: 9, d: 9, baseH: 3, th: 8, inset: 2, band: 3, bandChar: 'C',
-          core: function (x, y, z) { return x === 4 && z === 4 && y <= 4 ? 'B' : null },
-          crown: G.uevShapes.mast(9, 9, 1)
-        })
+        var s = G.uevShapes.scene(13, 15, 15)
+        s.box(0, 0, 0, 12, 0, 14, 'X')
+        s.cyl('y', 6, 6, 4, 1, 3, 'R', true)
+        s.cyl('y', 6, 6, 4, 4, 11, 'H', true)
+        s.cyl('y', 6, 6, 5, 5, 5, 'M', true, null).cyl('y', 6, 6, 5, 8, 8, 'C', true, null)
+        s.cone(6, 6, 4, 12, 14, 1, 'R', true)
+        s.cyl('y', 6, 6, 1, 14, 14, 'P')
+        ;[3, 6, 9].forEach(function (y) { s.set(6, y, 2, 'L') })
+        s.box(1, 1, 1, 11, 2, 1, 'P').box(6, 3, 1, 6, 6, 1, 'P').box(6, 4, 2, 6, 4, 2, 'P')
+        s.room(10, 1, 11, 12, 6, 14, 'H').cyl('y', 11, 12, 1, 7, 9, 'P')
+        s.room(0, 1, 11, 2, 5, 14, 'M').box(1, 2, 12, 1, 4, 12, 'B')
+        return s.booth('R', 3).fn()
       }
     }
   }
@@ -122,10 +143,7 @@
     var m = CO.machines[k]
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
-      pal: {
-        F: casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
-        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
-      }
+      pal: G.uevShapes.palette(casing)
     })
   }
   function parts(fluidIn, fluidOut) {
@@ -138,9 +156,9 @@
     ]
   }
   function makeSpec(k) {
-    if (k === 'works') return specOf(k, HEAT, parts(0, 0))
-    if (k === 'fibre') return specOf(k, CLEAN, parts(0, 1))
-    return specOf(k, HEAT, parts(1, 1))
+    if (k === 'works') return specOf(k, SIC, parts(0, 0))
+    if (k === 'fibre') return specOf(k, SIC, parts(0, 1))
+    return specOf(k, SIC, parts(1, 1))
   }
 
   // one EMI line per recipe, read from its data: what the circuit does
@@ -191,7 +209,7 @@
   })
 
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
-    var casings = { works: [HEAT, HEAT_TEXTURE], fibre: [CLEAN, CLEAN_TEXTURE], cvi: [HEAT, HEAT_TEXTURE] }
+    var casings = { works: [SIC, SIC_TEXTURE], fibre: [SIC, SIC_TEXTURE], cvi: [SIC, SIC_TEXTURE] }
     Object.keys(CO.machines).forEach(function (k) {
       var m = CO.machines[k]
       var type = GTRecipeTypes.get(m.type)

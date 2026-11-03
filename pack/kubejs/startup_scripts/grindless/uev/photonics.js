@@ -96,30 +96,49 @@
     }
   }
 
-  // The foundry is a long cleanroom hall with a cryostat row under a pipe ridge, the stacker a banded tower round a feed column, the
-  // integration hall a wide dome hall with pillars. Built in the registry callback (shapes.js may load after this file).
+  // The foundry is a long photonic-casing cleanroom bay with a row of four process stations down its aisle (sputter chamber, e-beam
+  // writer, etcher, cryoprober) under SiC rafters and a ridge. The stacker is a glovebox train with transfer stages and microscope
+  // turrets. Built in the registry callback (shapes.js may load after this file).
   var SHAPES = {
     snspd: {
-      w: 7, h: 7, d: 15,
+      w: 11, h: 9, d: 23,
       fn: function () {
-        return G.uevShapes.hall({
-          w: 7, d: 15, hh: 5, crown: G.uevShapes.ridge(7, 15),
-          inner: function (x, y, z) {
-            var ax = x < 3 ? 3 - x : x - 3
-            if (ax === 2 && z % 3 === 1 && z > 1 && z < 11) return y === 1 ? 'B' : (y === 2 ? 'C' : (y === 3 ? 'L' : null))
-            return null
-          }
+        var s = G.uevShapes.scene(11, 9, 23)
+        s.room(0, 0, 0, 10, 5, 22, 'F', 't')
+        s.box(0, 4, 0, 10, 5, 0, 'R').box(0, 4, 22, 10, 5, 22, 'R').box(0, 4, 1, 0, 5, 21, 'R').box(10, 4, 1, 10, 5, 21, 'R')
+        s.box(0, 0, 0, 10, 0, 22, 'X')
+        ;[0, 8, 16, 20].forEach(function (z) { s.box(0, 6, z, 10, 6, z, 'R') })
+        s.box(4, 7, 1, 6, 7, 21, 'R').box(5, 8, 3, 5, 8, 19, 'R')
+        ;[2, 7, 12, 17].forEach(function (z) {
+          s.box(2, 1, z, 4, 1, z + 2, 'R')
+          s.box(6, 1, z, 8, 3, z + 2, 'R').box(7, 2, z + 1, 7, 2, z + 1, '#')
         })
+        s.cyl('y', 3, 3, 1, 2, 4, 'R', true, null)
+        s.box(2, 2, 7, 4, 4, 9, 'B').set(3, 3, 8, 'P')
+        s.box(2, 2, 12, 4, 3, 14, 'A').box(2, 3, 12, 2, 3, 14, 'L')
+        s.box(2, 2, 17, 4, 4, 19, 'B').set(3, 5, 18, 'C').set(3, 4, 18, 'C').set(3, 3, 18, 'C')
+        ;[2, 7, 12, 17].forEach(function (z) { s.set(1, 3, z + 1, 'L').set(9, 3, z + 1, 'L') })
+        return s.booth('F', 3).fn()
       }
     },
     stacker: {
-      w: 7, h: 11, d: 7,
+      w: 15, h: 11, d: 19,
       fn: function () {
-        return G.uevShapes.tower({
-          w: 7, d: 7, baseH: 3, th: 10, inset: 1, band: 3, bandChar: 'C',
-          core: function (x, y, z) { return x === 3 && z === 3 ? 'P' : null },
-          crown: G.uevShapes.mast(7, 7, 1)
+        var s = G.uevShapes.scene(15, 11, 19)
+        s.box(0, 0, 0, 14, 0, 18, 'X')
+        s.room(1, 1, 2, 13, 4, 16, 'F')
+        s.box(1, 4, 2, 13, 4, 16, 'R')
+        ;[3, 7, 11].forEach(function (x) { s.box(x, 5, 3, x + 1, 5, 15, 'R') })
+        ;[3, 7, 11].forEach(function (x) {
+          s.cyl('y', x, 5, 1, 5, 9, 'R', true, null)
+          s.cyl('y', x, 5, 1, 7, 7, 'C', true, null)
+          s.set(x, 10, 5, 'L')
         })
+        ;[4, 8, 12].forEach(function (z) {
+          s.box(2, 5, z, 12, 6, z, 'A').box(3, 7, z, 11, 7, z, 'L')
+        })
+        s.box(1, 1, 8, 13, 1, 10, 'B')
+        return s.booth('F', 3).fn()
       }
     },
     hall: {
@@ -148,10 +167,7 @@
     var m = UP.machines[k]
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(),
-      pal: {
-        F: m.casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
-        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
-      },
+      pal: G.uevShapes.palette(m.casing),
       parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('input_hatch', { min: 0, max: 1 }),

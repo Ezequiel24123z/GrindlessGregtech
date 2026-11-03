@@ -26,8 +26,8 @@
   const LOG = '[grindless/uev] '
 
   const UEV = 10
-  const CLEAN = 'gtceu:clean_machine_casing'
-  const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
+  const POLARISER = 'grindless:superhydride_magnet_casing'
+  const POLARISER_TEXTURE = 'grindless:block/uev/superhydride_magnet_casing'
   const CASING = 'grindless:uev_fusion_casing'
   const CASING_TEXTURE = 'grindless:block/uev/uev_fusion_casing'
 
@@ -60,31 +60,37 @@
 
   // ---------------------------------------------------------------- geometry
 
-  // The polariser is a pumping hall: a glass-walled bay with the helium cell (a pipe run banded by solenoids) down its axis and the
-  // 1,083 nm laser on a mast. Built in the registry callback (shapes.js may load after this file).
-  UF.polariser.width = 7
-  UF.polariser.height = 7
-  UF.polariser.depth = 9
+  // The polariser is a holding-field solenoid: a long superhydride coil barrel (M) over a gallery of photonic optical-pumping cells
+  // (O) with glass windows, a 1,083 nm laser bench (O) on the left and a SiC compressor room on the right. Built in the registry
+  // callback (shapes.js may load after this file).
+  UF.polariser.width = 13
+  UF.polariser.height = 9
+  UF.polariser.depth = 17
+  function polariserShape() {
+    var s = G.uevShapes.scene(13, 9, 17)
+    s.box(0, 0, 0, 12, 0, 16, 'X')
+    s.cyl('z', 6, 4, 3, 2, 13, 'M', true, '#')
+    ;[2, 13].forEach(function (z) { s.cyl('z', 6, 4, 3, z, z, 'R') })
+    ;[4, 7, 10].forEach(function (z) { s.cyl('z', 6, 4, 3, z, z, 'H', true, null) })
+    s.set(3, 4, 7, 'C').set(9, 4, 7, 'C').set(6, 1, 7, 'C').set(6, 7, 7, 'C')
+    s.cyl('z', 6, 4, 1, 4, 11, 'O', true, null)
+    s.box(6, 4, 3, 6, 4, 12, 'P')
+    ;[5, 8, 11].forEach(function (z) { s.set(6, 6, z, 'L').set(6, 2, z, 'L') })
+    s.room(0, 1, 3, 2, 4, 10, 'O').box(1, 2, 4, 1, 3, 9, 'L')
+    s.room(10, 1, 3, 12, 4, 10, 'R').box(11, 1, 5, 11, 2, 8, 'B')
+    s.box(0, 1, 11, 12, 1, 12, 'H')
+    return s.booth('R', 3).fn()
+  }
   function polariserSpec() {
     return G.uevShapes.spec(Pat, {
-      w: 7, h: 7, d: 9, parts: [
+      w: 13, h: 9, d: 17, parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('input_hatch', { min: 1, max: 2 }),
         Pat.part('output_hatch', { min: 1, max: 2 }),
         Pat.part('energy_input', { min: 1, max: 2 })
       ],
-      fn: G.uevShapes.hall({
-        w: 7, d: 9, hh: 4, mull: 3, crown: G.uevShapes.mast(7, 9, 2),
-        inner: function (x, y, z) {
-          if (x === 3 && y === 2) return z % 3 === 1 ? 'C' : 'P'
-          if (y === 1 && (x === 2 || x === 4) && z % 3 === 1) return 'B'
-          return null
-        }
-      }),
-      pal: {
-        F: CLEAN, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
-        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
-      }
+      fn: polariserShape(),
+      pal: G.uevShapes.palette(POLARISER)
     })
   }
 
@@ -177,13 +183,13 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(p.type)
       .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
-      .appearanceBlock(function () { return Block.getBlock(CLEAN) })
+      .appearanceBlock(function () { return Block.getBlock(POLARISER) })
       .pattern(function (def) { return Pat.build(def, p.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.helium3_polariser.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.spin_polarisation'))
       ])
-      .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/helium3_polariser')
+      .workableCasingModel(POLARISER_TEXTURE, 'grindless:block/multiblock/helium3_polariser')
 
     if (FRM == null) {
       console.error(LOG + 'the Mk4 fusion ring is not registered: the tier registration failed')
