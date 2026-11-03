@@ -16,7 +16,7 @@
   var X0 = 37824
   var X1 = 37887
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 128
   var NAME = 'opv_chain_matter'
   var DIM = 'grindless:sgr1806_orbit'
   var CY = 102
@@ -35,16 +35,16 @@
 
   // feed: the input bus; recipe: the row expected to run; out: [id, at least] in the output bus; stays/gone: input bus after the run
   var UNITS = [
-    { name: 'extractor', id: 'gtceu:pasta_extractor', cx: 37830, z: 8,
+    { name: 'extractor', id: 'gtceu:pasta_extractor', cx: 37825, z: 4,
       feed: [[CIRCUIT, 1, C3], ['grindless:bulge_chart', 1], ['grindless:neutronium_pellet', 4]],
       recipe: 'grindless:pasta_extraction/chain_crust', out: [['grindless:chain_crust_slab', 1]], stays: 'grindless:bulge_chart' },
-    { name: 'sorter', id: 'gtceu:pasta_phase_sorter', cx: 37842, z: 8,
+    { name: 'sorter', id: 'gtceu:pasta_phase_sorter', cx: 37838, z: 4,
       feed: [[CIRCUIT, 1, C3], ['grindless:chain_crust_slab', 1], ['grindless:cage_part', 1]],
       recipe: 'grindless:pasta_sorting/chain_caging', out: [['grindless:caged_chain_phase', 1], ['gtceu:iron_dust', 2]], gone: 'grindless:cage_part' },
-    { name: 'draw_bench', id: 'gtceu:pasta_phase_sorter', cx: 37852, z: 8,
+    { name: 'draw_bench', id: 'gtceu:pasta_phase_sorter', cx: 37858, z: 4, y: 98,
       feed: [[CIRCUIT, 1, C3], ['grindless:caged_chain_phase', 1]],
       recipe: 'grindless:pasta_drawing/chain_strand_drawing', out: [['gtceu:chain_strand_ingot', 4]], gone: 'grindless:caged_chain_phase' },
-    { name: 'laminator', id: 'gtceu:pasta_phase_sorter', cx: 37862, z: 8,
+    { name: 'laminator', id: 'gtceu:pasta_phase_sorter', cx: 37838, z: 4, y: 114,
       feed: [[CIRCUIT, 1, C3], ['grindless:caged_chain_lattice', 1]],
       recipe: 'grindless:pasta_lamination/chain_lamina', out: [['grindless:chain_lamina', 4]], gone: 'grindless:caged_chain_lattice' }
   ]
@@ -143,6 +143,12 @@
       c.z = u.z - (c.si - ctrl.si)
       if (c.sym.kind === 'oneOf') xs.push(c)
     })
+    // the shapes outgrew fixed anchors: cx and z are the low X and Z corner of the unit's box; its low Y is u.y or Y0
+    var mnX = 1e9
+    var mnY = 1e9
+    var mnZ = 1e9
+    cells.forEach(function (c) { mnX = Math.min(mnX, c.x); mnY = Math.min(mnY, c.y); mnZ = Math.min(mnZ, c.z) })
+    cells.forEach(function (c) { c.x += u.cx - mnX; c.y += (u.y || Y0) - mnY; c.z += u.z - mnZ })
     xs.sort(function (a, b) { return a.z - b.z || a.x - b.x })
     var chosen = {}
     var n = xs.length
@@ -254,7 +260,7 @@
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []
     UNITS.forEach(function (def) {
-      var u = { name: def.name, id: def.id, cx: def.cx, z: def.z, parts: [ENERGY].concat(HV), feed: def.feed, recipe: def.recipe, out: def.out,
+      var u = { name: def.name, id: def.id, cx: def.cx, z: def.z, y: def.y, parts: [ENERGY].concat(HV), feed: def.feed, recipe: def.recipe, out: def.out,
         stays: def.stays || null, gone: def.gone || null, phase: 'forming', started: S.tick }
       try {
         u.pos = place(u)

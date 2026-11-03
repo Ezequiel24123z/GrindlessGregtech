@@ -28,10 +28,10 @@
   var HV = ['gtceu:hv_input_bus', 'gtceu:hv_output_bus']
 
   var UNITS = [
-    { name: 'draw_c5', id: 'gtceu:pasta_phase_sorter', cx: 39262, z: 8,
+    { name: 'draw_c5', id: 'gtceu:pasta_phase_sorter', cx: 39258, z: 4,
       feed: [[CIRCUIT, 1, '{Configuration:5}'], ['grindless:clad_chain_strand', 1]],
       recipe: 'grindless:pasta_drawing/horizon_strand_preform', out: [['grindless:horizon_strand_preform', 1]], gone: 'grindless:clad_chain_strand' },
-    { name: 'draw_c6', id: 'gtceu:pasta_phase_sorter', cx: 39274, z: 8,
+    { name: 'draw_c6', id: 'gtceu:pasta_phase_sorter', cx: 39280, z: 4,
       feed: [[CIRCUIT, 1, '{Configuration:6}'], ['grindless:horizon_strand_preform', 1]],
       recipe: 'grindless:pasta_drawing/horizon_wire_drawing', out: [['gtceu:horizon_strand_single_wire', 4]], gone: 'grindless:horizon_strand_preform' }
   ]
@@ -129,6 +129,12 @@
       c.z = u.z - (c.si - ctrl.si)
       if (c.sym.kind === 'oneOf') xs.push(c)
     })
+    // the shapes outgrew fixed anchors: cx and z are the low X and Z corner of the unit's box; its low Y is u.y or Y0
+    var mnX = 1e9
+    var mnY = 1e9
+    var mnZ = 1e9
+    cells.forEach(function (c) { mnX = Math.min(mnX, c.x); mnY = Math.min(mnY, c.y); mnZ = Math.min(mnZ, c.z) })
+    cells.forEach(function (c) { c.x += u.cx - mnX; c.y += (u.y || Y0) - mnY; c.z += u.z - mnZ })
     xs.sort(function (a, b) { return a.z - b.z || a.x - b.x })
     var chosen = {}
     var n = xs.length
