@@ -27,7 +27,7 @@ function harness() {
     GTBlocks: names,
     GTRecipeModifiers: names,
     PartAbility: names,
-    Predicates: { abilities: () => ({ setExactLimit: () => ({}) }) },
+    Predicates: { abilities: () => ({ setExactLimit: () => ({}), setMaxGlobalLimited: () => ({}) }) },
     Block: { getBlock: (id) => id },
     Text: { translate: (s) => s },
     Item: { exists: () => true },
@@ -43,30 +43,35 @@ function harness() {
 const { G, registry } = harness();
 const A = G.assemblyLineArray;
 
-test('the structure: 9 x 7 x 35 (<= 16 tall), one controller, four tracks, a rectangular silhouette', () => {
-  assert.deepEqual({ ...A.size }, { width: 9, height: 7, depth: 35 });
+test('the structure: 13 x 9 x 41 (<= 16 tall), one controller, four tracks, a rectangular silhouette', () => {
+  assert.deepEqual({ ...A.size }, { width: 13, height: 9, depth: 41 });
   assert.ok(A.size.height <= 16);
-  assert.equal(A.slices.length, 35);
+  assert.equal(A.slices.length, 41);
   const flat = A.slices.flat();
-  assert.equal(flat.length, 35 * 7);
-  assert.ok(flat.every((row) => row.length === 9));
+  assert.equal(flat.length, 41 * 9);
+  assert.ok(flat.every((row) => row.length === 13));
   assert.equal(flat.join('').split('S').length - 1, 1);
-  assert.equal(A.counts.U, 4 * 33);
-  assert.equal(A.counts.G, 3 * 33);
+  assert.equal(A.counts.U, 4 * 39);
+  assert.equal(A.counts.G, 7 * 39);
+  assert.equal(A.counts.D, 1);
 });
 
 test('the controller is in the front slice, one row above the floor, in the middle', () => {
   const front = A.slices[A.slices.length - 1];
-  assert.equal(front[1][4], 'S');
+  assert.equal(front[1][6], 'S');
+  assert.equal(front[1][5], 'D');
 });
 
-test('OpV machine casing is at most half of the structure', () => {
+test('scale and rubric: 2,400-2,800 filled cells, lamina about a third or more, no block above 70%, at least 3 types', () => {
   const c = A.counts;
-  const solid = c.C + c.W + c.U + c.G + c.L + c.X + c.O + c.I + c.H + 1;
-  assert.ok(c.C * 2 <= solid, `casing ${c.C} of ${solid}`);
+  const solid = c.C + c.L + c.W + c.U + c.G + c.T + c.X + c.D + c.O + c.I + c.H + 1;
+  assert.ok(solid >= 2400 && solid <= 2800, `filled ${solid}`);
+  assert.ok(c.L * 100 >= solid * 30, `lamina ${c.L} of ${solid}`);
+  for (const k of ['C', 'L', 'W', 'U', 'G', 'T']) assert.ok(c[k] * 100 <= solid * 70, k);
+  assert.ok(['C', 'L', 'W', 'U', 'G', 'T'].every((k) => c[k] > 0));
 });
 
-test('part cells: the head holds the maintenance, energy, data and parallel hatches; the tail the output bus; one input bus cell per slice 2..17', () => {
+test('part cells: the head holds the maintenance, energy and parallel hatches and the data cell D; the tail the output bus; one input bus cell per slice 4..19', () => {
   assert.ok(A.counts.X >= 5);
   assert.ok(A.counts.O >= 1);
   assert.equal(A.counts.I, 16);

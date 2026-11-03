@@ -11441,6 +11441,14 @@ file = "kubejs/assets/grindless/textures/item/geo_assembled_stage.png"
 hash = "a073134abfb263b5ebb6f6ce145778251a1d5a5dc2da8a74bbbf99d63ac054fd"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/item/germanium_boule.png"
+hash = "812cb27426b5e0267f0a41b29525f78c646b6c7f340d90fac36e680551201314"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/item/germanium_wafer.png"
+hash = "8418f549e4ba65766dca2b3306bdd57b81e31524a4987e749a031f65614815e1"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/item/geroch_canister.png"
 hash = "60f9113b8e76545d1be8b4d04a2ee325e812f783410a21e80ab66083b9a2fbac"
 
@@ -16569,6 +16577,10 @@ file = "kubejs/client_scripts/grindless/luv_ganymede_lang.js"
 hash = "c02b93e8cb26d49e7f9391109129c1af2dcd4e22e41aea7f303d7593caa3fb9e"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/luv_germanium_lang.js"
+hash = "d37b1b32ee67f2ddc17c220138ab7c8924af36cf91e36323dc5c81b93527b12e"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/luv_hts_magnet_works_lang.js"
 hash = "24d8012d1f02281e88e0151fc35d6d7dcf33b16b3975f0de354dd9babe34c352"
 
@@ -16798,7 +16810,7 @@ hash = "68d9df2718038f000d3c1ef72197e60fc338128d187cb0d6ac1c6d6e76f2c2a8"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_hyperfactory_lang.js"
-hash = "d4300566d40de30f8aaf3d8ac45049ae8db376041312fea3df9c864b5274f377"
+hash = "98523ca4f549141d1b6ed4797e256fda6b52b5ed2491598e32b5dca734f891c0"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_hyperstargate_lang.js"
@@ -16890,7 +16902,7 @@ hash = "b221650426e375b659c116541a9107b9ea9cd2837644cc48f0217b552a10367b"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/opv_assembly_line_array_lang.js"
-hash = "1fbc56ea0ca871c93970fc435f8319cdf91efc19ad10117654345ebd892becd2"
+hash = "84978fd25afd4287a07424d1d3f49061e2fc78134c3d48f92ac7b9eb0231c34e"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/opv_beam_hardware_lang.js"
@@ -17030,15 +17042,15 @@ hash = "affeacf1da8d0b451fbc69bff4e3a93df17ce960cc2322f0372580babb12b831"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uev_earth_orbit_lang.js"
-hash = "f0d1cbd630a80b6b70db4d44a30afdbc8c076722aa16e83a259db687f97fad06"
+hash = "abbb642252d629ed5241a54d53948d6c4a8a486db66a3aae06c27bc1bc645e07"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uev_electron_beam_lang.js"
-hash = "a4d1b5c813ff8d084547e99dc2b5ed257b68ef7bcd172b7088f27ebde6445160"
+hash = "058d925e4289a255540440b580b1ac41d0b6936b5df50dd508333fb2151f21db"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uev_foundation_lang.js"
-hash = "3f10ad5cb809d0137efcd3d0f3f9ada6ae27e20264b63aa2bafc4a8b9f052b6d"
+hash = "3a132086b6a01b8ae01ae722b6d52b88ce82dfd0dd5df27f78185a477bb21b61"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uev_fusion_lang.js"
@@ -17050,7 +17062,7 @@ hash = "e3311cbe31860e8ef22545a7936288cc37be2a5cbdad27ac73c993d13681acbc"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uev_info_lang.js"
-hash = "0d242a45caba79a359d4bed5ea96111ade3303dbde54a48c4cbe0964d6dd544b"
+hash = "39cc9818533eebbf85504f2a4def3ae3f790883d4f6b02b303016b26b1b3fe1b"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uev_isotopes_lang.js"
@@ -17246,7 +17258,7 @@ hash = "c713b06688cb2c5f3017d7d17761b8a06cffe251d9cca02749515bd6cb3cf6b1"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uiv_rx_j1856_lang.js"
-hash = "e17f6ecc2371fb056d4e499650b785d36019dac2e43628a48ece48227782943b"
+hash = "0906acc4101fc1901f8ab1a50b6ef3f3405ecef452758b26888eb91d39d5e43c"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uiv_tfln_femtosecond_lang.js"
@@ -17418,7 +17430,7 @@ hash = "3fc2dc47e444f1db8ca15ddf0a53dc682955aaa586b57671fbcab3fbc2886a77"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uxv_superheavy_lang.js"
-hash = "93819258ce4b52b5cc22b379fe535a0fbe2e27e8dac9789f56ad827909a7f906"
+hash = "060bcb8fba093618cfa403a76ba5669e86efd645c0056c02b84232418685d04d"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uxv_uxv_parts_lang.js"
@@ -18010,11 +18022,11 @@ hash = "25cfab55ca7194fce4a3f0b9259a49a55f71b59306090b01714c32dd26888369"
 
 [[files]]
 file = "kubejs/data/grindless/tables/earth_orbit.json"
-hash = "0abd38a964717e03b15b7ac121c700923af81bebd8e9bf9d36a86f94c1046812"
+hash = "74f4f9db7c782df1260140bbb829c1c5f1a82db5c9f0d652b37840ecfffacfc9"
 
 [[files]]
 file = "kubejs/data/grindless/tables/electron_beam.json"
-hash = "dbdc4336110e8228ff784d6a7f8147a1764c89182b3e36e0ca2805b1e05cba52"
+hash = "24b7c8ed04b55141ae0c18c1294a82b13e933964c1cabb4f32aaf4f6e6fd512c"
 
 [[files]]
 file = "kubejs/data/grindless/tables/exotic_matter.json"
@@ -18282,7 +18294,7 @@ hash = "9e72961984aac839207d9492e30fe6a694fab465a408744eed97f9fef830dfda"
 
 [[files]]
 file = "kubejs/data/grindless/tables/superheavy.json"
-hash = "cce6ea68cb97694c61e8fada4984215957af66e9262178a3ff4a155a33092a01"
+hash = "efdf47b23907795bd2c8469ac04f51ebb86777005c1100ae2cc8d4d46068e68c"
 
 [[files]]
 file = "kubejs/data/grindless/tables/tetron_optics.json"
@@ -18690,7 +18702,7 @@ hash = "a63b7f740ac64ed76f3a80af12f5b1c012b003d443018e328f632c0474192b40"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/fluorspar_kiln.js"
-hash = "55b4b3b9355797fe3f21a381bba5e9055e0f3b4c25ba50fedec51dc636b5354d"
+hash = "1aed7be01577a8f896a6a7f30aa3a72499ad0e4ca77b7ca2e04de9e8a4f85a85"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/foundation.js"
@@ -18719,6 +18731,10 @@ hash = "4ae6dc3741c2d33882c637f3f2309c29aa592dfc0c7fb78255785d08d41f853f"
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/naquadah_plant.js"
 hash = "52555af06d4911a1abbfda83e407a6b567e5e4f6468ce861a2d34bf2ebb2990a"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/iv/niobium.js"
+hash = "945485f01766ec446a1bcd7e6d93c52a2cd5e9f935af1c8302927c93a766fa58"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/travel_network.js"
@@ -18793,6 +18809,10 @@ file = "kubejs/server_scripts/grindless/luv/ganymede.js"
 hash = "d0dee6be8945ec794211f5fb86fe854fa7f3647fe84d8f8b63af945ee283a457"
 
 [[files]]
+file = "kubejs/server_scripts/grindless/luv/germanium.js"
+hash = "c4841b0b4e8a15aa2b95fb0d6833711680591d18fa3d8ecdeccfbae5f15d2428"
+
+[[files]]
 file = "kubejs/server_scripts/grindless/luv/helium_refrigerator.js"
 hash = "c1446e9f1395556a53c213753f69464b3467c0297e822462704dccc97c84c4e5"
 
@@ -18806,7 +18826,7 @@ hash = "12ed8d587820a4de66c59399a4ad694354006f16c85d4f196cea2baff4e54eb1"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/io_surface.js"
-hash = "8741f50c9c9a266123728bfe061a66dca3a8373d6bfcc9aa4877f8b8b2ac2cf6"
+hash = "789d6a19a6eaeb4f77c0560b7cb62b7c1686bf903872efb32e5b5fec80b6cac1"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/mega_chemical_complex.js"
@@ -18822,7 +18842,7 @@ hash = "ee2413d8bb0172219fca60b4c3db5236f68c30cdaef67746e7d1965852d08d87"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/orbital_industry.js"
-hash = "730e2bf81d3f09221b86da32658e9a8efe8b5ef80d2ee3840e0207be63696d9b"
+hash = "7582e3cb02c2d3ceb0ccc68df42bbc29b44b65a0095d70b20ce5489f2c60b3af"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/orbital_solar.js"
@@ -19034,7 +19054,7 @@ hash = "e3b16365d951a42743574851437fc92ffd9dc05ff30520a8ff17a9e60ed8b99b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/ending.js"
-hash = "dbe86220cd435f7133157eb751991fbf07893b6fc2e6a29c162762e14a5d2324"
+hash = "cc48fb628b64ae4d79c77a27b444a9317306e21b322fd08741779d7959593a68"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/grid.js"
@@ -19250,7 +19270,7 @@ hash = "c2ce7fcae0db4cce31ea9e5bc943b169c6352c158f2e1fa0af3173f039ef0c10"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/opv/wireless.js"
-hash = "4fb0c2577f4404bde543560c948f2ffdbe792681e65ca0c8c95c2705c3918120"
+hash = "075a0b7bc911bdef8af7a6baf5b084ed207e4cacfa011d7841fb0f27ae920c41"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/power/generator_array.js"
@@ -19462,7 +19482,7 @@ hash = "48d638132db1a1e4d845a8492e5d14e67c207da825a481f9f2cae3f52fe6dcc1"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uiv/casings.js"
-hash = "b8d9b26ac521f347047a6969d44b02a09b477f60cdfe97d18c9a2a250cd951cb"
+hash = "abb3f0132ebbba20f063d48aee4d14340c9ff18c2d10615666f266f2af12639e"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uiv/compression_hall.js"
@@ -19846,7 +19866,7 @@ hash = "1a91eb22caf6c96393e14d92cb44a7740dc9c3c388827b693a28a8da49b866ce"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/fluorspar_kiln.js"
-hash = "b14ed946fe367c8058e63360f4fff515732702b5f4e7518d118d4e1fe5bdd096"
+hash = "737d4a8e1798ca10bfa7897c341e3f60e91ddb25dc0c20caab5241660263c3d6"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/iv/foundation.js"
@@ -19971,6 +19991,10 @@ hash = "b137d2243b01605a0c81bf76465f015b35605b18b4ef5c3a8650efb48cbafdff"
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/ganymede.js"
 hash = "fc0926938694db2e34248709a558eae5967bdbe4536f8919f96be285c3edecd6"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/luv/germanium.js"
+hash = "36dbc50408fc76ee9d9e44d2a3b528158b782ff24fcceee37471ea0e29ee18ea"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/helium_refrigerator.js"
@@ -20134,7 +20158,7 @@ hash = "977ec7789cd13f17fec64a8aed270ad99112b45eb3f652b1d80d9689987f46a7"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/hyperfactory.js"
-hash = "de329fac5fa5ddc9dda00c90246e45a52e2cc4a96b1ceaf4ff309657ed822267"
+hash = "82bb9878abed6b01f0f95a93c6ef9bd92f8738e7edf97d59d106f2f4cb58be8e"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/hyperstargate.js"
@@ -20234,7 +20258,7 @@ hash = "7739df84f862d379a80633d25dde0a02890c2687659ebcc987c5c5a025daf829"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/opv/assembly_line_array.js"
-hash = "7c907f8a34c4755109f4a53beab2ee54efd1defb722c58deac81f670a7d87d12"
+hash = "2645e4d4f7de9566fe2d2822ffe0998c693283c33455f0125e0640acdf9e9275"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/opv/beam_hardware.js"
@@ -20294,7 +20318,7 @@ hash = "431b14b45fc0b6ed4846d6c43fd446ac29d6491c8b6a81bcb19cbc195a8354cf"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/opv/shapes.js"
-hash = "adff79ed932bd12556e14149b57191e2bbd4fb3d388694d5039f58c10d598e44"
+hash = "b18d2474b8af05836db86f869fe14f51330b5b15ce911c6b6d481f98a11c343c"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/opv/tetron_optics.js"
@@ -20354,7 +20378,7 @@ hash = "3d2bc1e5357720c7653595bdbe1b7f7800b001056358f16e54f6b229176dab0e"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/barnard.js"
-hash = "2e459422e195fec52e227873db6e389d71afc4a6edde76054d98c3228e3b8d1d"
+hash = "9826e99f89527900c64a3149facd3b8a01337341612f084979ee6180cf5c2484"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/casings.js"
@@ -20362,7 +20386,7 @@ hash = "3210b65aa3e1cc64675539e8847b6e06debbb14db2a34065c4b4d899441d5ae4"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/composites.js"
-hash = "5a2a73ab0c7e845dbf8de6d37a9a7d09a61a07ff38de3ded911eb9c1b55fe604"
+hash = "dd2325f46fa259c9dd316cc8a1e467f80c4e9f2ec1b01ed6bccb6cfe93c672e8"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/earth_orbit.js"
@@ -20370,11 +20394,11 @@ hash = "33269e055d76af22ea87c227cb302f4ac3a9b14a5d5a15fb1d97b8d059957b9f"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/electron_beam.js"
-hash = "5e4dd2bea6599f896d303bcb74ddc03b2e0d3ad6b4916ea21d5b6ad56f358dbc"
+hash = "776de2b40648049960706eb71c231a5d2380f0c0dfd097d7aadf6c182258567c"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/foundation.js"
-hash = "13bfc3791883bca442da05f2fb7e318df29ef710c2ba14e15bd6721ac35c71e1"
+hash = "3bf2f52cfb6d3ed55237dca95850923c5f264f436fc5cb113573d09a3b613069"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/fusion.js"
@@ -20386,7 +20410,7 @@ hash = "87b5ccdfc2ffded49e6a391c79eeba659a91420fc48976ed6114bd484a460cb6"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/megabar.js"
-hash = "3d815cc36eedeb8ad5a8f946dc764c11577ee5d00aa40bdc9d5fb8d4de7f7c60"
+hash = "74c639f2d309e14113e6e43fc42333a7d84470808b67705854593b8a07a7040a"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/photonic_wafer.js"
@@ -20398,7 +20422,7 @@ hash = "964b47eb1299f7477fdcf6abdef6ac6cbedae5732d79915b8f47d9f3db710859"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/shapes.js"
-hash = "da889edbf940a7ec23f96413bd02d7ec8567d705d85546a1b8efa92226ba97bc"
+hash = "f1e6a6cf7c94fbe9075f122bade95325a56e091e284a6609ebb112de30d8efc2"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uev/sirius.js"
@@ -20490,7 +20514,7 @@ hash = "e7bf8c9a6aea0b54bd55d318d2e15b12446fea662772a7fe87a312dad94dbcf0"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/beuv_stm.js"
-hash = "ecaf5c76c8cfc595679f55d9a5d666b2327f4fb5bb647044fab3256f88e8229e"
+hash = "1e3f7c51f3ce55e07657ee6f7da095cd01b3b893de68aeae8453aa4d68767b0f"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/casings.js"
@@ -20502,7 +20526,7 @@ hash = "6f4048785db22328b6057bcb1ce4e4fa6d776fa3a2d401045c664267609cc5d1"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/cygnus.js"
-hash = "8dad3aed2fcae9c3302b9eec96b1a52b9de499988584b69c62bcdc6825fffc06"
+hash = "47b9942e99edf266e24e9318689577d499eb10686f0ca1b834173dcb8c5ea185"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/foundation.js"
@@ -20514,11 +20538,11 @@ hash = "0d7358bb313f9e6e1bbef5cb867c50716defe5cb6283d2d8f7f026d7a5a7df4b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/j0437.js"
-hash = "b810c28c4cdb78e06ea761bef5f328376eb836689a347cf97841ad98650441e6"
+hash = "3483e2e9e5e7990453b0235a3746a9631eee5ee6d094c14e53ff8b6e91b77ab7"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/levitation_melter.js"
-hash = "6748d55aea46a22f26e7666310c47a04e0f6ebfeda093a6c9a5e2d9f9e511701"
+hash = "33e53c868e9ce8b09651a382f53f7212ae9928dbd36bcbfb41f27137cca2ff9a"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/mainframe.js"
@@ -20530,11 +20554,11 @@ hash = "d8a7ee43d5289aac9cdc164308690a6713b9bb015730b972c8de85c435eccbfc"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/matrioshka.js"
-hash = "d1333d70e38500d50bf6c96d726c8d72090a7f95495b2e8798b8e9393bc5f069"
+hash = "e9c959c3ae67bb4d82ee9adecd0d4cb6c1bd2636f88b19bae564bb114a4b4d87"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/memories_cryostat.js"
-hash = "730ee6d63928a45bc8f6fcda13c7900ad6196432e1deaf0de650701e2336874a"
+hash = "af17b5ac5dceea9a1cebd8083915a6c80bac4876c92f410f8488fdd7e590f25b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/metallic_hydrogen.js"
@@ -20542,19 +20566,19 @@ hash = "7bd5bc02d02e8a376dbfeffde7789f63b35e6d3f03c1259dfd513fc71d58d195"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/mk5.js"
-hash = "81bb92841c3bc545df25ecc311c06fe5f34f1fe83e28dff40d3b5abb25917988"
+hash = "1d25549ace7493de3b10b1970ff58863528d22f6374c9d9410e9e29793811d50"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/rx_j1856.js"
-hash = "a2698d3b3dfb79343776d947e8ceda087a02df63e1a0dfcfb6a5c0e792916a79"
+hash = "074c81764c46660a3d16f94035839691e764a06f10f4ed36254ab421f43d29dd"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/shapes.js"
-hash = "cd8c69c21f0ae560371a145a86abbc11edab14c813d2b7543f8d1293a2b9cca0"
+hash = "d64b04a1512157559e495d0c5cdb42f5006ad490bbc4c79d2603c452b7956d29"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/tfln_femtosecond.js"
-hash = "a717b456f681e1db6dc716f96eb949247e6db291a192363d4764abed330293ec"
+hash = "aad03350fb54802835a75a42792523bebff094f7f65d288be04db9411f6cff04"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uiv/travel.js"

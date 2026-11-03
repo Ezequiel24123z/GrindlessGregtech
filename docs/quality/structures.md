@@ -76,6 +76,13 @@ Casings from UEV on:
 - **A passive body.** Active blocks (coils and the other GTM ActiveBlocks) stay under the T0 ceiling of 264 per structure
   (STATUS, *Active blocks*).
 - **Taught.** Each era chapter teaches its casings: what they are for and how they are made (principle 5).
+- **Bootstrap bodies.** A machine whose product a family casing needs, directly or through another machine, never contains
+  that casing anywhere: body, controller booth, accent bands, rings. Otherwise the era deadlocks. Such a machine keeps every
+  family casing its chain allows and takes a pre-era stand-in for the rest, chosen to fit the casing's job. UEV (batch 16)
+  uses its own GTM body for structural, the high-temperature smelting casing for thermal, and the UHV field ring casing for
+  field. The set is found with reachability on the dump, with the casings swapped. UEV's set: the CVI furnace and SiC fibre
+  plant (R, H, M), the electron beam furnace (R, M), the nitride magnet works and the Barnard core drill (M); the megabar press
+  trades M for the HfTaCN lining. UIV: the levitation melter. OpV: the field-frozen press.
 
 Constraints that still hold:
 

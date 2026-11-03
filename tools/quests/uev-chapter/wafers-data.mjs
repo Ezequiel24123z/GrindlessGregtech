@@ -136,9 +136,9 @@ export const QUESTS = [
   {
     key: "W_KTP_ELECTRODED", kind: "wafer", title: "Electroded Wafer", icon: "grindless:ktp_electroded_wafer", deps: ["W_KTP"], x: 4, y: 6,
     teach: {
-      for: "The &6Electroded Wafer&r is a wafer stage on the way to the Ppktp.",
+      for: "The &6Electroded Wafer&r is a wafer stage the poled crystal of the SPDC source.",
       needs: "Made in the &6Assembler&r from the KTP Wafer and Gold Foil, with argon, in the cleanroom.",
-      unlocks: "The Ppktp in the Polarizer.",
+      unlocks: "The SPDC source.",
       automate: "A pattern provider on the machine of the step before keeps it supplied.",
     },
     desc: [], tasks: [it("grindless:ktp_electroded_wafer")], rewards: [xp(50)],

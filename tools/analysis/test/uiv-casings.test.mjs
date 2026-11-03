@@ -38,9 +38,8 @@ test('new casings are machine recipes, never crafting-table', () => {
     const m = server.match(new RegExp(`gtceu\\.(\\w+)\\('grindless:${n}'\\)[\\s\\S]*?\\.EUt\\(([^)]+)\\)`));
     assert.ok(m, n);
     assert.equal(m[1], types[n], n);
-    assert.equal(m[2].trim(), n === 'rhea_casing' ? 'UV_EUT' : 'UIV_EUT');
+    assert.equal(m[2].trim(), 'UIV_EUT');
   }
-  assert.match(server, /UV_EUT = 1966080/);
   assert.match(server, /UIV_EUT = 31457280/);
 });
 

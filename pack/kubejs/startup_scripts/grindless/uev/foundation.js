@@ -82,7 +82,6 @@
     sic_sic: { form: 'dust', colour: 0x4A5650, formula: 'SiC/SiC' },
     tungsten_silicide: { form: 'dust', colour: 0x5A5A66, formula: 'WSi2' },
     tgg: { form: 'dust', colour: 0xC8E0C0, formula: 'Tb3Ga5O12' },
-    ppktp: { form: 'dust', colour: 0xE0D08A, formula: 'KTiOPO4' },
     ffkm: { form: 'dust', colour: 0x2E2E34, formula: '(C3F6)(C2F4)n' },
     polycarbonate: { form: 'dust', colour: 0xD0E0E8, formula: '(C16H14O3)n' },
     ule_glass: { form: 'dust', colour: 0xC0D8E8, formula: 'SiO2TiO2' },

@@ -7,7 +7,8 @@
   var IO = G.ioSurface
   var R = IO.recipes = {
     collect: { circuit: 1, eut: 7680, duration: 400, so2: 4000, sulfur: 8, sublimate: 1, onIo: true },
-    separate: { circuit: 2, eut: 7680, duration: 200, sublimate: 4, hydrogen: 2000, hcl: 1000, germanium: 2, indium: 1, water: 1000 },
+    // chlorination: 4 sublimate = 2 Ge + 1 In; 2 GeCl4 (8000 Cl) + 1 InCl3 (3000 Cl); the germanium line (luv/germanium.js) returns all 11000 Cl
+    separate: { circuit: 2, eut: 7680, duration: 200, sublimate: 4, chlorine: 11000, gecl4: 2000, indiumChloride: 1 },
     concrete: { circuit: 3, eut: 1920, duration: 200, sulfur: 8, rock: 8, casings: 8,
       rocks: { basalt: 'minecraft:basalt', black_sand: 'biomesoplenty:black_sand' } },
     intake: { circuit: 1, eut: 32768, duration: 400, so2: 4000, onIo: true,
@@ -43,10 +44,9 @@
     gt[IO.condenser.type]('grindless:separate')
       .circuit(s.circuit)
       .itemInputs(s.sublimate + 'x grindless:ionian_sublimate')
-      .inputFluids(Fluid.of('gtceu:hydrogen', s.hydrogen))
-      .notConsumableFluid(Fluid.of('gtceu:hydrochloric_acid', s.hcl))
-      .itemOutputs(s.germanium + 'x gtceu:germanium_dust', s.indium + 'x gtceu:indium_dust')
-      .outputFluids(Fluid.of('minecraft:water', s.water))
+      .inputFluids(Fluid.of('gtceu:chlorine', s.chlorine))
+      .itemOutputs(s.indiumChloride + 'x gtceu:indium_chloride_dust')
+      .outputFluids(Fluid.of('gtceu:germanium_tetrachloride', s.gecl4))
       .EUt(s.eut).duration(s.duration)
 
     var k = R.concrete

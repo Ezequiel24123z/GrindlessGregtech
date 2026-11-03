@@ -105,8 +105,10 @@
   var M = BA.machines
   var SIC = 'grindless:sic_composite_casing'
   var SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
-  M.drill.casing = 'grindless:superhydride_magnet_casing'
-  M.drill.texture = 'grindless:block/uev/superhydride_magnet_casing'
+  // bootstrap (uev/shapes.js T.bootstrap): the drill is the only source of the Barnard rock whose carbonyl iron becomes the bonded
+  // magnets of the superhydride magnet casing, so its body is SiC composite and its brace ring the UHV field ring
+  M.drill.casing = SIC
+  M.drill.texture = SIC_TEXTURE
   M.refinery.casing = SIC
   M.refinery.texture = SIC_TEXTURE
 
@@ -179,7 +181,11 @@
         s.box(1, 1, 1, 2, 2, 3, 'B')
         return s.booth('F', 3).fn()
       })(),
-      pal: bodyPal(M.drill.casing)
+      pal: (function () {
+        var pal = bodyPal(M.drill.casing)
+        pal.M = G.uevShapes.BOOTSTRAP.M
+        return pal
+      })()
     })
   }
   BA.order = ['drill', 'refinery']

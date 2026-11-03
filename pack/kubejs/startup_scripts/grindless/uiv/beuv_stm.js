@@ -21,8 +21,8 @@
 
   const PHOTONIC = 'grindless:photonic_casing'
   const PHOTONIC_TEXTURE = 'grindless:block/uev/photonic_casing'
-  const UEV = 'gtceu:uev_machine_casing'
-  const UEV_TEXTURE = 'gtceu:block/casings/voltage/uev/side'
+  const UEV = 'grindless:multilayer_optics_casing'
+  const UEV_TEXTURE = 'grindless:block/uiv/multilayer_optics_casing'
 
   BS.table = 'kubejs/data/grindless/tables/beuv_stm.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -58,7 +58,7 @@
       name: 'stm_lithography_cell', machine: 'gtceu:stm_lithography_cell', type: 'stm_lithography', dataKey: 'grindless_stm_lithography',
       lang: 'STM Lithography Cell',
       maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
-      width: 5, height: 5, depth: 5, casing: UEV, texture: UEV_TEXTURE
+      width: 15, height: 11, depth: 17, casing: UEV, texture: UEV_TEXTURE
     }
   ]
 

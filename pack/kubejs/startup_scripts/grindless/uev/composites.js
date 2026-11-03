@@ -145,11 +145,13 @@
     m.depth = SHAPES[k].d
   })
 
+  // bootstrap letters (uev/shapes.js T.bootstrap): the SiC/SiC makers and the magnet works never contain the casings they feed
+  var BOOT = { works: 'M', fibre: 'RHM', cvi: 'RHM' }
   function specOf(k, casing, parts) {
     var m = CO.machines[k]
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
-      pal: G.uevShapes.palette(casing)
+      pal: G.uevShapes.palette(casing, G.uevShapes.bootstrap(casing, BOOT[k]))
     })
   }
   function parts(fluidIn, fluidOut) {

@@ -78,7 +78,6 @@
         ['material', 'sic_sic', ['SiC/SiC Composite']],
         ['material', 'tungsten_silicide', ['Tungsten Silicide']],
         ['material', 'tgg', ['Terbium Gallium Garnet']],
-        ['material', 'ppktp', ['PPKTP']],
         ['material', 'ffkm', ['FFKM']],
         ['material', 'polycarbonate', ['Polycarbonate']],
         ['material', 'ule_glass', ['ULE Glass']],
