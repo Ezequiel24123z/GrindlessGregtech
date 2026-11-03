@@ -14,6 +14,7 @@
                   "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js":  -200,
                   "server_scripts/grindless/integration/cost_curve.js":  -300,
                   "server_scripts/grindless/integration/hidden.js":  -100,
+                  "server_scripts/grindless/integration/lcr_mirror.js":  -400,
                   "server_scripts/grindless/integration/universal_circuits_e.js":  -250,
                   "server_scripts/grindless/moon/offworld_only.js":  -210,
                   "server_scripts/grindless/lib/compose.js":  1000,
