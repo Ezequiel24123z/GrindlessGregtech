@@ -6,7 +6,7 @@
 //
 //   gtceu:snspd_fabrication / vdw_assembly / photonic_integration   one recipe per table entry, id grindless:<type>/<name>; the programmed
 //                          circuit picks the recipe; every recipe carries the data key of its type = <name> (its EMI line).
-//   gtceu:zone_refining (circuits 4 and 5), synchrotron (6), ion_implantation (5)   the older machines' rows of the lines (circuits 1-3,
+//   gtceu:zone_refining (circuits 4 and 5), synchrotron (6), ion_implantation (5), mocvd (9), photonic_foundry (29)   the older machines' rows of the lines (circuits 1-3,
 //                          1-5 and 1-4 are taken by UV, UV/ZPM and UHV); the older MBE (circuit 3) and photonic foundry (circuit 7) rows are
 //                          in photonics.json (server_scripts/grindless/uhv/photonics.js).
 //   gtceu:cutter, electric_blast_furnace, chemical_reactor, assembler   the line steps GTM can run (ids grindless:<type>/<name>); the
@@ -31,7 +31,9 @@
   var OLDER_IO = {
     zone_refining: { itemsIn: 2, itemsOut: 2, fluidsIn: 3, fluidsOut: 2 },
     synchrotron: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-    ion_implantation: { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 }
+    ion_implantation: { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 },
+    mocvd: { itemsIn: 4, itemsOut: 1, fluidsIn: 3, fluidsOut: 2 },
+    photonic_foundry: { itemsIn: 6, itemsOut: 3, fluidsIn: 3, fluidsOut: 1 }
   }
 
   function list(x) {

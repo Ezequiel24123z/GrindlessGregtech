@@ -16,7 +16,10 @@
       "recipes": [
         { "name": "fz_silicon_wafers", "circuit": 0, "eut": 1920, "duration": 400,
           "itemsIn": [{ "id": "grindless:fz_silicon_boule", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 100 }],
-          "itemsOut": [{ "id": "grindless:fz_silicon_wafer", "count": 8 }] }
+          "itemsOut": [{ "id": "grindless:fz_silicon_wafer", "count": 8 }] },
+        { "_why": "E1 step 22: the clad wafer is diced into four dies", "name": "dice_quantum_wafer", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:clad_quantum_wafer", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:quantum_photonic_die", "count": 4 }] }
       ]
     },
     "electric_blast_furnace": {
@@ -158,21 +161,53 @@
           "itemsOut": [{ "id": "grindless:snspd_link_wafer", "count": 1 }] },
         { "_why": "MAX-A1 (max.md, L5): the pump-bonded waveguide die and an SNSPD packaged under superfluid helium into the squeezed-light chip", "name": "squeezed_light_chip", "circuit": 7, "eut": 1966080, "duration": 800,
           "itemsIn": [{ "id": "grindless:pump_laser_bonded_die", "count": 1 }, { "id": "grindless:snspd", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 100 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:squeezed_light_chip", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:squeezed_light_chip", "count": 1 }], "fluidsOut": [] },
+        { "_why": "E1 step 15: tungsten silicide sputtered over the waveguide circuit", "name": "wsi_on_waveguides", "circuit": 10, "eut": 1966080, "duration": 500,
+          "itemsIn": [{ "id": "grindless:waveguide_circuit", "count": 1 }, { "id": "gtceu:tungsten_silicide_dust", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:wsi_waveguide_wafer", "count": 1 }] },
+        { "_why": "E1 step 16: nanowires written in resist over the waveguides and etched", "name": "wsi_nanowires_on_waveguides", "circuit": 11, "eut": 1966080, "duration": 700,
+          "itemsIn": [{ "id": "grindless:wsi_waveguide_wafer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:detector_waveguide_wafer", "count": 1 }] }
+      ]
+    },
+    "photonic_foundry": {
+      "dataKey": "grindless_photonic_foundry",
+      "recipes": [
+        { "_why": "E1 step 19: Ti/Au contacts and TiN thermal phase shifters on the encapsulated rings (circuit 29)", "name": "wafer_electrodes", "circuit": 29, "eut": 1966080, "duration": 700,
+          "itemsIn": [{ "id": "grindless:encapsulated_ring_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 1 }, { "id": "gtceu:titanium_foil", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:electroded_photonic_wafer", "count": 1 }] }
+      ]
+    },
+    "mocvd": {
+      "dataKey": "grindless_mocvd",
+      "recipes": [
+        { "_why": "E1 step 21: PECVD silica upper cladding over the printed dots (circuit 9); the reaction water is returned", "name": "silica_cladding", "circuit": 9, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:hybrid_quantum_wafer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:silane", "amount": 500 }, { "id": "gtceu:oxygen", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:clad_quantum_wafer", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }] }
       ]
     },
     "vdw_assembly": {
       "dataKey": "grindless_vdw_assembly",
       "recipes": [
-        { "name": "hbn_emitter_chip", "circuit": 1, "eut": 1966080, "duration": 500,
-          "itemsIn": [{ "id": "grindless:annealed_hbn_film", "count": 2 }, { "id": "gtceu:gold_dust", "count": 1 }, { "id": "grindless:ingaas_pump_module", "count": 1 }],
-          "itemsOut": [{ "id": "grindless:hbn_emitter_chip", "count": 1 }] },
         { "name": "graphene_modulator", "circuit": 2, "eut": 1966080, "duration": 500,
           "itemsIn": [{ "id": "grindless:encapsulated_graphene", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }, { "id": "grindless:ytterbium_fibre", "count": 1 }],
           "itemsOut": [{ "id": "grindless:graphene_modulator", "count": 1 }] },
         { "name": "encapsulate_graphene", "circuit": 3, "eut": 1966080, "duration": 700,
           "itemsIn": [{ "id": "grindless:graphene_film", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 2 }],
-          "itemsOut": [{ "id": "grindless:encapsulated_graphene", "count": 1 }] }
+          "itemsOut": [{ "id": "grindless:encapsulated_graphene", "count": 1 }] },
+        { "_why": "E1 step 17: graphene transferred onto the ring resonators of the detector wafer", "name": "graphene_rings", "circuit": 4, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:detector_waveguide_wafer", "count": 1 }, { "id": "grindless:graphene_film", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:graphene_ring_wafer", "count": 1 }] },
+        { "_why": "E1 step 18: hBN encapsulation of the graphene rings", "name": "encapsulate_rings", "circuit": 5, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:graphene_ring_wafer", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:encapsulated_ring_wafer", "count": 1 }] },
+        { "_why": "E1 step 20: InAs quantum-dot micropillars transfer-printed onto the electroded waveguides", "name": "print_dots", "circuit": 6, "eut": 1966080, "duration": 700,
+          "itemsIn": [{ "id": "grindless:electroded_photonic_wafer", "count": 1 }, { "id": "grindless:micropillar_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:hybrid_quantum_wafer", "count": 1 }] }
       ]
     },
     "photonic_integration": {
@@ -181,10 +216,13 @@
         { "name": "waveguide_circuit", "circuit": 1, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:annealed_sin_chip", "count": 1 }, { "id": "grindless:lnoi_wafer", "count": 1 }],
           "itemsOut": [{ "id": "grindless:waveguide_circuit", "count": 1 }] },
-        { "name": "quantum_photonic_chip", "circuit": 2, "eut": 1966080, "duration": 900,
-          "itemsIn": [{ "id": "grindless:waveguide_circuit", "count": 1 }, { "id": "grindless:qd_source", "count": 1 }, { "id": "grindless:snspd", "count": 1 },
-                      { "id": "grindless:sdd", "count": 1 }, { "id": "grindless:graphene_modulator", "count": 1 }, { "id": "grindless:hbn_emitter_chip", "count": 1 }],
+        { "_why": "E1 step 24: cryopackaging of the pigtailed die with its detector readout, under superfluid helium that is not used up", "name": "quantum_photonic_chip", "circuit": 2, "eut": 1966080, "duration": 900,
+          "itemsIn": [{ "id": "grindless:pigtailed_quantum_die", "count": 1 }],
+          "fluidsIn": [], "charge": [{ "id": "gtceu:superfluid_helium", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:quantum_photonic_chip", "count": 1 }] },
+        { "_why": "E1 step 23: a fibre array attached to the diced die", "name": "pigtail_die", "circuit": 11, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:quantum_photonic_die", "count": 1 }, { "id": "gtceu:normal_optical_pipe", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:pigtailed_quantum_die", "count": 1 }] },
         { "name": "optical_computer", "circuit": 3, "eut": 1966080, "duration": 1200,
           "itemsIn": [{ "id": "grindless:quantum_photonic_chip", "count": 1 }, { "id": "gtnn:optical_assembly", "count": 1 }],
           "itemsOut": [{ "id": "gtnn:optical_computer", "count": 1 }] },

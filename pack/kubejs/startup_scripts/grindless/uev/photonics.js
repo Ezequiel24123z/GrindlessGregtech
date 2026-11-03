@@ -7,10 +7,11 @@
 //   gtceu:snspd_foundry            a cryostat that patterns and packages superconducting nanowire single-photon detectors.
 //                                  The only maker of grindless:snspd. Type gtceu:snspd_fabrication (EU in): circuit 1 WSi film, 2 nanowire
 //                                  write, 3 waveguide mount, 4 cool and package.
-//   gtceu:vdw_stacker              a clean stacker that lays 2D crystals on each other. Type gtceu:vdw_assembly: circuit 1 hBN emitter chip,
-//                                  2 graphene modulator, 3 hBN-encapsulated graphene.
-//   gtceu:photonic_integration_hall  type gtceu:photonic_integration: circuit 1 waveguide circuit, 2 quantum photonic chip, 3 the optical
-//                                  computer (gtnn:optical_computer: the ONLY recipe that makes it).
+//   gtceu:vdw_stacker              a clean stacker that lays 2D crystals on each other. Type gtceu:vdw_assembly: circuit 2 graphene modulator,
+//                                  3 hBN-encapsulated graphene (4, 5 and 6: graphene rings, hBN encapsulation and printed dots on the photonic
+//                                  wafer, startup_scripts/grindless/uev/photonic_wafer.js).
+//   gtceu:photonic_integration_hall  type gtceu:photonic_integration: circuit 1 waveguide circuit, 2 quantum photonic chip (cryopackaged pigtailed die), 3 the optical
+//                                  computer (gtnn:optical_computer: the ONLY recipe that makes it), 11 the fibre pigtail.
 //
 // Voltage: UHV, the voltage of the era's first machines (the design's 7.86 M EU/t for the hall's circuit 3 is tuned down to UHV's 1.97 M EU/t
 // and made longer). New ids: the items below (the table's grindless: ids); the F1 ids (snspd, qd_source, sdd, uev_*) are not registered again.
@@ -45,7 +46,6 @@
     hbn_copper_foil: { stack: 64 },
     hbn_film: { stack: 64 },
     annealed_hbn_film: { stack: 64 },
-    hbn_emitter_chip: { stack: 64 },
     electropolished_copper_foil: { stack: 64 },
     graphene_copper_foil: { stack: 64 },
     pmma_graphene_foil: { stack: 64 },
