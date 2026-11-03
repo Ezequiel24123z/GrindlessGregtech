@@ -34,10 +34,7 @@
     }
     var b = event.recipes.gtceu[row.type]('grindless:' + row.id)
     row.items.forEach(function (s) { b.itemInputs(s) })
-    if (row.fluid) {
-      b.inputFluids(Fluid.of('gtceu:superfluid_helium_3', row.fluid))
-      b.inputFluids(Fluid.of('gtceu:nitrogen', 1000))
-    }
+    if (row.fluid) b.inputFluids(Fluid.of('gtceu:superfluid_helium_3', row.fluid))
     b.itemOutputs(row.out + 'x grindless:' + row.id)
     if (row.research) {
       b.stationResearch(function (r) { return r.researchStack(Item.of(row.research)).dataStack(Item.of('gtceu:data_module')).CWUt(256).EUt(row.eut) })
