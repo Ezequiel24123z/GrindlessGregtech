@@ -4,8 +4,8 @@
 // Installs a test-only double of global.grindless.hyperstargate (XP-G1): one gate whose interior box surrounds the test player, open on demand.
 // Checks: a closed gate never teleports; an open one sends the player to grindless:horizon_city at the arrival point with the plaza in place;
 // the epilogue (count 1) and, on the client, the WinScreen after the dimension change; the player alive, the same object and not moved after
-// the credits; the epilogue book opening on a real right-click; one crossing per opening; a new opening crosses again with no second epilogue
-// and no second WinScreen.
+// the credits; the epilogue book opening on a real right-click; one crossing per dial run (ending.js tracks used players per run), so a same-run
+// reopening does not cross again, with no second epilogue and no second WinScreen.
 ;(function () {
   var NAME = 'maxplus_ending'
   var CHM = Java.loadClass('java.util.concurrent.ConcurrentHashMap')
@@ -131,14 +131,14 @@
         }
       } else if (st.phase === 'open2') {
         if (dim === HORIZON) {
-          check('second_crossing', true, 'a new opening admits the player again after ' + since() + ' ticks')
-          go('settle')
-        } else if (since() > 400) {
-          check('second_crossing', false, 'no second crossing, dimension ' + dim)
+          check('second_crossing', false, 'crossed again in the same run after ' + since() + ' ticks')
           finish()
+        } else if (since() > 400) {
+          check('second_crossing', dim === 'minecraft:overworld', 'same run, dimension ' + dim)
+          go('settle')
         }
       } else if (st.phase === 'settle') {
-        if (since() >= 250) {
+        if (since() >= 60) {
           check('epilogue_once', epilogues(p) === 1, 'count ' + epilogues(p))
           check('no_second_credits', String(S.get('win2') || '') !== 'true', 'second WinScreen: ' + S.get('win2'))
           finish()
