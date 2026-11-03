@@ -211,4 +211,10 @@ export const QUESTS = [
     rewards: [],
   },
 ];
+// Shipped shapes and Terminal passes (a pass is up to 2,300 blocks), from the structure dump.
+const SIZE = { S3_TREE: ['25 by 15 by 25', 5], S3_HOME: ['33 by 13 by 33', 7] };
+for (const q of QUESTS) {
+  const s = SIZE[q.key];
+  if (s && q.teach) q.teach.needs += ` Its shape is ${s[0]}, built by the Terminal in ${s[1]} passes.`;
+}
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));
