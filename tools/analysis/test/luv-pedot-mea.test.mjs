@@ -25,7 +25,7 @@ test('the array is made in a cleanroom assembler from sapphire, gold and PEDOT:P
   const r = RUN.built.find((x) => x.id === 'grindless:pedot_microelectrode_array');
   assert.ok(r);
   assert.equal(r.type, 'gtceu:assembler');
-  assert.deepEqual(calls(r, 'itemInputs')[0], ['4x gtceu:sapphire_plate', '16x gtceu:gold_foil']);
+  assert.deepEqual(calls(r, 'itemInputs')[0], ['4x gtceu:sapphire_plate', '16x gtceu:gold_foil', '8x gtceu:platinum_foil', '8x gtceu:silver_foil', '8x gtceu:polystyrene_dust']);
   assert.deepEqual(calls(r, 'inputFluids')[0], [{ fluid: 'gtceu:pedot_pss', amount: 2000 }]);
   assert.deepEqual(calls(r, 'itemOutputs')[0], [ARRAY]);
   assert.equal(calls(r, 'cleanroom').length, 1);
