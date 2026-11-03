@@ -34,6 +34,7 @@
 
   "machines": [
     {"machine":"gtceu:coil_chemical_plant","types":["gtceu:large_chemical_reactor"],"energy":{"voltage":512},"needs":["eu:hv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a","gtceu:ev_energy_input_hatch","gtceu:ev_energy_input_hatch_4a","gtceu:ev_energy_input_hatch_16a"]},"package":"A1b-04","note":"Our HV Coil Chemical Plant (mega machine), modelled by A1b-04."},
+    {"id":"gtnn:exxonmobil_chemical_plant@hv","machine":"gtnn:exxonmobil_chemical_plant","types":["gtceu:chemical_plant"],"energy":{"voltage":512},"needs":["eu:hv"],"parts":["gtceu:hv_energy_input_hatch","gtceu:lv_input_bus","gtceu:lv_input_hatch","gtceu:lv_output_bus","gtceu:lv_output_hatch"],"package":"D1-HV-PROP","note":"GT--'s chemical plant built with HV machine casings (D1-HV-PROP, #250): GT-- 1.3.10 runs a recipe only up to its casings' tier, so on one HV hatch it runs the HV rows, among them the anthraquinone peroxide cycle and hydrazine that rocket fuel needs. zpm.json models the same plant on two IV hatches."},
     { "machine": "gtceu:hv_transformer_1a", "types": [], "note": "GTM's HV <-> EV transformer (1 A)." },
     { "machine": "gtceu:hv_transformer_2a", "types": [] },
     { "machine": "gtceu:hv_transformer_4a", "types": [], "note": "HV -> EV transformer (4 A -> 1 A): the gate to EV." },
