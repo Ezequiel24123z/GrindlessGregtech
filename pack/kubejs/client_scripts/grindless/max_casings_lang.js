@@ -1,4 +1,4 @@
-// priority: 5843
+// priority: 6858
 // Names, tooltips and EMI pages of the MAX casing family (D5-CAS-MAX); the recipes are in server_scripts/grindless/max/casings.js (and flux_clamp.js for the clamp).
 (function () {
     // id, name, tooltip 0, tooltip 1, EMI text
