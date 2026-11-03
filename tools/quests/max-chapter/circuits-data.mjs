@@ -57,8 +57,8 @@ export const QUESTS = [
     automate: 'Keep a few of each part per mainframe in a dedicated chest; a big stock gains nothing.',
   }, [], [it('grindless:cryo_photonic_interposer')], 150),
   q('C_MAINF', 'circuit', 'Supracausal Mainframe', 'gtnn:supracausal_mainframe', ['C_CHIP', 'C_DIE', 'C_INTERP'], 10, 0, {
-    for: 'The only circuit of MAX, and the last one the pack has. The &6Supracausal Mainframe&r joins the chip, the die and the interposer with OpV-tier circuits and a tetron array.',
-    needs: 'The photonic integration hall from UEV, superfluid helium-3 and a stock of the three parts.',
+    for: 'The only circuit of MAX, and the last one the pack has.     The &6Supracausal Mainframe&r is the end of the staged line: the Photonic Integration Hall takes a shielded quantum module (built from the interposer, tetron dies and squeezed-light chips), 3 tweezer array dies, 7 OpV circuits, programmed circuit 9 and 3,142 mB of superfluid helium-3, and runs 4,800 ticks.',
+        needs: 'The Photonic Integration Hall (see the M1 line in the lines section), superfluid helium-3 and a stock of the parts.',
     unlocks: 'Every MAX component, hatch and controller.',
     automate: 'Three part lines into one hall: give each its own chest so one slow line never starves the others.',
   }, [], [it('gtnn:supracausal_mainframe')], 250),
