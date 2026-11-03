@@ -32,8 +32,8 @@ export const QUESTS = [
     key: 'UC_WCOMP', kind: 'circuit', title: 'Wetware Computer', icon: 'gtceu:wetware_processor_computer',
     deps: ['START'], x: 4, y: 0,
     teach: {
-      for: 'The &6Wetware Processor Computer&r is the first UV circuit, and the assembly line is the only machine that builds it. It is made from wetware processor assemblies, which come from the ZPM assembler.',
-      needs: 'Several wetware processor assemblies, wetware boards, RAM and NOR chips, and an assembly line with ZPM hatches.',
+      for: 'The &6Wetware Processor Computer&r is the first UV circuit, and the assembly line is the only machine that builds it. The living part comes from Pluto: its ices and the ark and the vat grow organoids, which become stem cells and neuro processing units. The chain runs wetware processor, assembly, computer.',
+      needs: 'Several wetware processor assemblies, wetware boards, RAM and NOR chips, and an assembly line with ZPM hatches. The stem cells and neuro processing units come from the organoid line, not from a recipe of their own.',
       unlocks: 'The wetware mainframe, and through it the UV assembler.',
       automate: 'Assemblies come from the ZPM line by ME; the assembly line draws them on demand.',
     },
