@@ -9,13 +9,14 @@
   "maxEUt": 7680,
   "leaching": {
     "dimension": "minecraft:the_end",
-    "resin": { "id": "grindless:ion_exchange_resin", "chance": 100 },
     "fluidsIn": [
       { "id": "gtceu:sulfuric_acid", "amount": 100 },
       { "id": "gtceu:oxygen", "amount": 50 }
     ],
+    "fluidsOut": [
+      { "id": "gtceu:uranyl_sulfate_liquor", "amount": 2000 }
+    ],
     "itemsOut": [
-      { "id": "gtceu:uraninite_dust", "count": 2 },
       { "id": "gtnn:radioactive_waste", "count": 1, "chance": 100 }
     ],
     "energy": [

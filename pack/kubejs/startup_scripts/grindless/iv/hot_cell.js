@@ -73,7 +73,7 @@
   HC.table = TABLE
   // items in: up to three ingredients and the programmed circuit; out: uranium, plutonium, waste and the two chanced fission products.
   // Fluids in: oxygen and helium (MOX); out: NO2, xenon and krypton (reprocessing)
-  HC.maxIO = { itemsIn: 4, itemsOut: 6, fluidsIn: 2, fluidsOut: 4 }
+  HC.maxIO = { itemsIn: 4, itemsOut: 6, fluidsIn: 4, fluidsOut: 4 }
   HC.parts = {
     energy_input: { min: 1, max: 2 },
     input_bus: { min: 1, max: 3 },

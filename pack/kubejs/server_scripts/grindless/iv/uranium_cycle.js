@@ -131,17 +131,18 @@
     if (!l) {
       problems.push('no leaching entry')
     } else {
-      var resinChance = Number(l.resin && l.resin.chance)
-      if (!l.resin || !isId(l.resin.id) || !(resinChance > 0 && resinChance < MAX_CHANCE)) problems.push('leaching: resin ' + JSON.stringify(l.resin))
+      var resinChance = l.resin ? Number(l.resin.chance) : 0
+      if (l.resin && (!isId(l.resin.id) || !(resinChance > 0 && resinChance < MAX_CHANCE))) problems.push('leaching: resin ' + JSON.stringify(l.resin))
       if (!isId(l.dimension)) problems.push('leaching: dimension ' + l.dimension)
       leaching = {
         dimension: String(l.dimension),
-        resin: { id: String(l.resin && l.resin.id), chance: resinChance },
+        resin: l.resin ? { id: String(l.resin.id), chance: resinChance } : null,
         fluidsIn: fluids('leaching', l.fluidsIn),
+        fluidsOut: fluids('leaching', l.fluidsOut),
         itemsOut: items('leaching', l.itemsOut, true),
         stages: energyOf('leaching', l.energy)
       }
-      if (leaching.itemsOut.length === 0) problems.push('leaching: no output')
+      if (leaching.itemsOut.length === 0 && leaching.fluidsOut.length === 0) problems.push('leaching: no output')
     }
 
     var steps = []
@@ -239,6 +240,7 @@
     inputsOf(recipe, rec)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     outputsOf(recipe, rec)
+    rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     recipe.dimension(rec.dimension)
       .EUt(rec.eut)
       .duration(rec.duration)
@@ -297,10 +299,10 @@
           sample: vein.sample,
           veinDimension: vein.dimension,
           circuit: 0,
-          itemsIn: [{ id: table.leaching.resin.id, count: 1, chance: table.leaching.resin.chance }],
+          itemsIn: table.leaching.resin ? [{ id: table.leaching.resin.id, count: 1, chance: table.leaching.resin.chance }] : [],
           fluidsIn: table.leaching.fluidsIn,
           fluidsKept: [],
-          fluidsOut: [],
+          fluidsOut: table.leaching.fluidsOut,
           itemsOut: table.leaching.itemsOut,
           dimension: table.leaching.dimension,
           stages: table.leaching.stages,
