@@ -33,9 +33,9 @@
 //   balance             NOTE: EU per assembly of every core, from the live recipes
 //   fission_reactor|DONE  last line
 //
-// Copies (controllers face north at z 2, the structures are behind them, z 2-9; parts on the turbine hall floor):
-//   light (x 9988), heavy (x 9998), room (x 10008): input bus, water hatch, 16 A IV dynamo, output bus, tritium hatch along the front
-//   row of the floor (left to right as seen from the front), the heavy water hatch at the left end of the floor's middle row.
+// Copies (controllers face north at z 2, the structures are behind them, z 2-12; parts on the front chord's service wall):
+//   light (x 9992), heavy (x 10006), room (x 10020): input bus, water hatch, 16 A IV dynamo, output bus, tritium hatch along the lower
+//   row of the wall (left to right as seen from the front), the heavy water hatch at the left end of its upper row.
 // TEST AREA: this test builds, force-loads and clears ONLY its own band of the overworld, X 9984-10047, Y 98-112, Z 0-15 (AGENTS.md:
 // tests run at the same time in one server), with a roof at Y 111 so no hatch is rained on. The structures come from the description
 // lib/patterns.js records (global.grindless.structures).
@@ -45,7 +45,7 @@
   var SCOPE = 'fission_reactor'
   var BAND = { x0: 9984, x1: 10047, y0: 98, y1: 112, z0: 0, z1: 15 }
   var ROOF_Y = 111
-  var Y = 100
+  var Y = 98
   var STEP = 10
   var FORM_TIMEOUT = 600
   var HOLD_TICKS = 60
@@ -95,12 +95,12 @@
   var MODERATOR_PER_CHANNEL = 5
   var CHANCE = 50
 
-  // parts: 'slice,row,column' of the description (slice 7 = the front face, 6 = the generator's slice) -> role
-  var PARTS = { '7,0,0': 'inBus', '7,0,1': 'water', '7,0,2': 'dynamo', '7,0,3': 'outBus', '7,0,4': 'tritium', '6,0,0': 'moderator' }
+  // parts: 'slice,row,column' of the description   (slice 10 = the front chord's service wall, rows 1-2, columns 2-8; the controller is 10,2,5) -> role
+    var PARTS = { '10,1,2': 'inBus', '10,1,3': 'water', '10,1,4': 'dynamo', '10,1,6': 'outBus', '10,1,7': 'tritium', '10,2,2': 'moderator' }
   var COPIES = [
-    { key: 'light', x: 9988, z: 2, sink: 'buffer' },
-    { key: 'heavy', x: 9998, z: 2, sink: 'drain' },
-    { key: 'room', x: 10008, z: 2, sink: 'drain' }
+    { key: 'light', x: 9992, z: 2, sink: 'buffer' },
+    { key: 'heavy', x: 10006, z: 2, sink: 'drain' },
+    { key: 'room', x: 10020, z: 2, sink: 'drain' }
   ]
 
   var S = null

@@ -51,7 +51,7 @@
 //   naquadah_plant|DONE   last line
 //
 // Copies (controllers face north at z 2, the structures are behind them; parts on the back wall facing south, and two of the platinum
-// plant's output hatches on its sides): naq, the naquadah plant (x 11777-11783) on two EV energy hatches and EV parts, as a player runs
+// plant's output hatches on its sides): naq, the naquadah plant (x 11778-11787) on two EV energy hatches and EV parts, as a player runs
 // it before Mercury (GTM's IV voltage coil takes iridium; two hatches of a tier give the next tier's voltage), and pt, a platinum plant
 // (x 11798-11802, EV parts). TEST AREA: this test builds, force-loads and clears ONLY its own band of the overworld, X 11776-11839, Y 98-112, Z 0-15
 // (AGENTS.md: tests run at the same time in one server), with a roof at Y 111 so no hatch is rained on. The structures come from the
@@ -138,10 +138,10 @@
   // the copies: role blocks and where the parts go ('slice,row,column' of the description, slice 0 = the back) with their facing
   var COPIES = [
     {
-      key: 'naq', machine: NAQ, x: 11782, z: 2,
+      key: 'naq', machine: NAQ, x: 11786, z: 2,
       blocks: { energy: 'gtceu:ev_energy_input_hatch', energy2: 'gtceu:ev_energy_input_hatch', inBus: 'gtceu:ev_input_bus', outBus: 'gtceu:ev_output_bus',
         in1: 'gtceu:ev_input_hatch', out1: 'gtceu:ev_output_hatch', out2: 'gtceu:ev_output_hatch' },
-      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,1,0': 'out1', '0,1,1': 'out2', '0,1,2': 'energy2' },
+      parts: { '0,1,1': 'energy', '0,1,2': 'inBus', '0,1,3': 'outBus', '0,1,4': 'in1', '0,2,1': 'out1', '0,2,2': 'out2', '0,2,3': 'energy2' },
       facing: {},
       ins: ['in1'], outs: ['out1', 'out2']
     },
@@ -608,7 +608,7 @@
       var problems = []
       var lines = []
       // size (w, h, d) and part cells of each structure: the hatch is one more option of the part cells, never a new cell
-      var want = { 'gtceu:naquadah_plant': [7, 4, 5, 39], 'gtceu:platinum_plant': [5, 5, 7, 35] }
+      var want = { 'gtceu:naquadah_plant': [10, 5, 6, 47], 'gtceu:platinum_plant': [5, 5, 7, 35] }
       Object.keys(want).forEach(function (id) {
         var desc = global.grindless.patterns.describe(id)
         if (!desc) {
