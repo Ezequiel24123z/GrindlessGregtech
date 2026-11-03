@@ -271,7 +271,7 @@ export default {
         n('eth', 6.75, 1.5, F('gtceu:ethylene'), 'Ethylene', { kind: 'raw' }),
         n('eo', 9, 1.5, F('gtceu:ethylene_oxide'), 'Ethylene Oxide', { from: ['eth'], by: ['gtceu:chemical_reactor'], sub: 'Oxygen, over a silver catalyst' }),
         n('eg', 11.25, 1.5, F('gtceu:ethylene_glycol'), 'Ethylene Glycol', { from: ['eo'], by: ['gtceu:chemical_reactor'], sub: 'Hydration' }),
-        n('meohb', 11.25, -1.5, F('gtceu:methanol'), 'Methanol, Back', { kind: 'ret', from: ['edot'], sub: 'Back into sodium methoxide' }),
+        n('meohb', 11.25, -1.5, F('gtceu:methanol'), 'Methanol, Back', { kind: 'ret', from: ['dmt'], sub: 'Back into sodium methoxide' }),
         n('edot', 11.25, 0, F('gtceu:edot'), 'EDOT', { from: ['dmt', 'eg'], by: ['gtceu:large_chemical_reactor'], sub: 'Transetherification' }),
         n('sty', 11.25, 3.75, F('gtceu:styrene'), 'Styrene', { kind: 'raw' }),
         n('ps', 13.5, 3.75, I('gtceu:polystyrene_dust'), 'Polystyrene', { from: ['sty'], by: ['gtceu:chemical_reactor'] }),
@@ -283,7 +283,7 @@ export default {
         n('meap', 16, 0, I('grindless:pedot_microelectrode_array'), 'PEDOT Microelectrode Array', {
           kind: 'product', from: ['pedotpss', 'plate', 'au'], by: ['gtceu:assembler'], sub: 'Assembler: up to the organoid lab',
         }),
-        n('h2so4', 16, 3, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { kind: 'by', from: ['pedotpss'], end: 'sulfuric acid', sub: 'Back into the acid you already use' }),
+        n('h2so4', 16, 3, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { kind: 'by', from: ['pers'], end: 'sulfuric acid', sub: 'Back into the acid you already use' }),
       ],
     },
     // ---------------------------------------------------------------- B3 (microgravity smelter, wake shield facility) and B4 (crystal grower)
