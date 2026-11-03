@@ -1,4 +1,4 @@
-// priority: -6500
+// priority: -6825
 // -----------------------------------------------------------------------------------------------
 // OpV structure shapes (D5-SHAPE-OPV-A, docs/eras/lines-opv-maxplus.md section 6.1): the silhouettes of OpV's home and Cygnus machines at
 // their new scale, drawn with the OpV casing family (opv/foundation.js). A shape is fn(x, y, z) -> one char: x runs left to right, y bottom
