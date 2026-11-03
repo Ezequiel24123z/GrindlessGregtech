@@ -1,5 +1,5 @@
 # UEV (T10): several stars at once
-
+Lines, multiblock scale and the UEV casing family: `docs/eras/lines-uev-uxv.md` (D4-LINES, 2026-11-03), which wins where the two differ.\
 UEV arrives. A level 9 rocket, pushed by a direct fusion drive, reaches two more stars: Alpha Centauri A and B, 4.37 light years out, and Barnard's Star, 6 light years out. A second drive takes a level 10 rocket to Sirius B, 8.6 light years out. Sirius B is the nearest white dwarf: a Sun's mass squeezed to the size of the Earth, held up by electron degeneracy. The stellar neighbourhood chart that UHV's astrometer made (`docs/eras/uhv.md:910`) names the targets. Each place gives something only it has:
 - Alpha Centauri's orbit sits in the G-cloud, the interstellar gas and dust next to ours;
 - Barnard b, a hot, airless sub-Earth, has a metal-rich crust;

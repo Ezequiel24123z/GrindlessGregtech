@@ -1,5 +1,5 @@
 # UIV (T11): neutron stars and a black hole
-
+Lines, multiblock scale and the UIV casing family: `docs/eras/lines-uev-uxv.md` (D4-LINES, 2026-11-03), which wins where the two differ.\
 UIV arrives. No rocket goes this far: the nearest neutron star is about 400 light years out, and Cygnus X-1 is about 7,200. UEV's pulsar navigation chart (`docs/eras/uev.md:463`) fixes the way, and UHV's warp gate opens it. From the Sirius B relay, the gate throws a relay seed, a starchip with a sealed degenerate pellet and an exotic-matter cell, along a pulsar-timed course, and a far ring forms where it lands (named fiction, like UHV's gate). Three places come after it, and each gives something only it has:
 - RX J1856.5−3754, the nearest isolated neutron star, has a crust that can be lifted: neutron-rich nuclei, drip neutrons and, contained, neutronium;
 - PSR J0437−4715, the nearest millisecond pulsar, blows a wind of electron–positron pairs and keeps time well enough to navigate by;

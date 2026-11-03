@@ -1,5 +1,5 @@
 # UXV (T12): the galactic arm
-
+Lines, multiblock scale and the UXV casing family: `docs/eras/lines-uev-uxv.md` (D4-LINES, 2026-11-03), which wins where the two differ.\
 UXV is the twelfth tier: V[UXV] = 134,217,728 EU/t. The journey calls it "the galactic arm: many systems at once" (journey.md:14-54): stellar plasma, accretion disk plasma, the stellar elevator and the accretion disk skimmer. UIV went to three tier-11 places and gated on the Kerr chart (uiv.md:871-887). UXV goes back to Cygnus X-1 to work its star and its disk, then slings out to two more places at once, each with a product only it has:
 
 - **Home (Earth):** spintronics (the UXV circuit), the superfluid gyroscope, superheavies III and the island of stability, the gamma laser, and the Mk6 fusion ring.
