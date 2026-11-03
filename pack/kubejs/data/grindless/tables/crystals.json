@@ -63,7 +63,7 @@
           "kept": [{ "id": "gtceu:lead_fluoride_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:vuv_caf2_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
         { "name": "thorium_caf2", "circuit": 3, "eut": 491520, "duration": 800,
-          "itemsIn": [{ "id": "gcyr:fluorite_dust", "count": 3 }, { "id": "grindless:thorium_229", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "itemsIn": [{ "id": "gcyr:fluorite_dust", "count": 3 }, { "id": "grindless:laser_grade_thf4", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
           "kept": [{ "id": "gtceu:lead_fluoride_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:thorium_caf2_crystal", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
         { "name": "eu_yso", "circuit": 4, "eut": 491520, "duration": 800,
