@@ -11,8 +11,8 @@
 //   shared_ids          IV-A1's items the recipes take and make exist, and GT--'s casing and waste
 //   registration        gtceu:hot_cell on its own type gtceu:hot_cell, not a generator, with a structure description
 //   furnace             the electric furnace EU/t the radon composition pays for its smelting was read from GTM (4 EU/t)
-//   composed            enrichment and radon were composed from their 4 and 2 live GTM stages, none skipped, with the design's figures:
-//                       30 uraninite + 40 000 mB HF -> 1 U-235 + 9 U-238 + 40 000 mB F2 + 20 000 mB water for 1 020 000 EU of stages;
+//   composed            enrichment and radon were composed from their 5 and 2 live GTM stages, none skipped, with the design's figures:
+//                       30 uraninite + 20 000 mB F2 + 20 000 mB steam + 10 000 mB H2 -> 1 U-235 + 9 U-238 + 20 000 mB HF + 40 000 mB water (net of the c1 chain) for 21 888 000 EU of 5 stages;
 //                       1 U-238 + 10 000 mB air -> 1 000 mB radon for 1 926 400 EU (4 000 t x 480 + 8 smelts x 200 t x 4); each spent
 //                       at no more than 7 680 EU/t and at most one EU/t over the stages' energy
 //   own_recipes         every recipe of the script's table (MOX, breeder, RTG pellet, Pu-Be source, the reprocessings...) was built, none skipped; counts the rows other scripts add
@@ -22,7 +22,7 @@
 //   controller_recipe   grindless:assembler/hot_cell exists and holds its parts
 //   plutonium           NOTE: the plutonium balance from the live recipes, next to the reactor's EU per assembly
 //   <copy>_PLACED / _FORMED / _PARTS   the two copies below
-//   PROCESS_enrichment  copy chain: 30 uraninite + 40 000 mB HF, circuit 1 -> exactly 1 U-235, 9 U-238, 20 000 mB water and 40 000 mB F2;
+//   PROCESS_enrichment  copy chain: 30 uraninite + 20 000 mB F2 + 20 000 mB steam + 10 000 mB H2, circuit 1 -> exactly 1 U-235, 9 U-238, 40 000 mB water and 20 000 mB HF;
 //                       the EU drawn from the energy hatch is exactly the recipe's
 //   PROCESS_radon       copy chain: a U-238 + 10 000 mB air, circuit 4 -> 1 000 mB radon; no plutonium anywhere
 //   PROCESS_mox         copy fuel: 2 Pu + 8 U-238 + 4 Zircaloy tubes + 20 000 mB O2 + 100 mB He, circuit 2 -> 1 MOX assembly
@@ -68,14 +68,15 @@
     outBus: 'gtceu:iv_output_bus',
     in1: 'gtceu:iv_input_hatch',
     in2: 'gtceu:iv_input_hatch',
+    in3: 'gtceu:iv_input_hatch',
     out1: 'gtceu:iv_output_hatch',
     out2: 'gtceu:iv_output_hatch',
     out3: 'gtceu:iv_output_hatch'
   }
   // 'slice,row,column' of the description (slice 0 = the service wall) -> role
-  var PARTS = { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,0,5': 'out1', '0,0,6': 'out2', '0,1,0': 'out3' }
+  var PARTS = { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,1,1': 'in3', '0,0,5': 'out1', '0,0,6': 'out2', '0,1,0': 'out3' }
   var OUTS = ['out1', 'out2', 'out3']
-  var INS = ['in1', 'in2']
+  var INS = ['in1', 'in2', 'in3']
   var COPIES = [
     { key: 'chain', x: 10246, z: 2 },
     { key: 'fuel', x: 10262, z: 2 }
@@ -92,6 +93,8 @@
   var WASTE = 'gtnn:radioactive_waste'
   var FILLER = 'minecraft:cobblestone'
   var HF = 'gtceu:hydrofluoric_acid'
+  var STEAM = 'gtceu:steam'
+  var H2 = 'gtceu:hydrogen'
   var F2 = 'gtceu:fluorine'
   var WATER = 'minecraft:water'
   var AIR = 'gtceu:air'
@@ -111,8 +114,8 @@
   // the design (docs/eras/iv.md, "Hot cell", and the package statement): what the composed recipes must give
   var WANT_COMPOSED = {
     enrichment: {
-      circuit: 1, sourceEnergy: 1020000, stages: 4,
-      itemsIn: [[URANINITE, 30]], fluidsIn: [[HF, 40000]], itemsOut: [[U235, 1], [U238, 9]], fluidsOut: [[F2, 40000], [WATER, 20000]]
+      circuit: 1, sourceEnergy: 21888000, stages: 5,
+      itemsIn: [[URANINITE, 30]], fluidsIn: [[F2, 20000], [STEAM, 20000], [H2, 10000]], itemsOut: [[U235, 1], [U238, 9]], fluidsOut: [[HF, 20000], [WATER, 40000]]
     },
     radon: {
       circuit: 4, sourceEnergy: 1926400, stages: 2,
@@ -401,7 +404,7 @@
       var lines = []
       var skipped = HC().skipped || []
       if (skipped.length > 0) problems.push('skipped: ' + skipped.map(function (s) { return s.name + ' (' + s.reason + ')' }).join(', '))
-      if (HC().stagesRead !== 6) problems.push(HC().stagesRead + ' live stages read of 6')
+      if (HC().stagesRead !== 7) problems.push(HC().stagesRead + ' live stages read of 7')
       Object.keys(WANT_COMPOSED).forEach(function (name) {
         var w = WANT_COMPOSED[name]
         var r = published(name)
@@ -724,10 +727,10 @@
       var problems = []
       if (m.seen[rec.recipeId] !== true) problems.push(rec.recipeId + ' never ran (seen ' + Object.keys(m.seen).join(',') + ')')
       if ((r.out[U235] || 0) !== 1 || (r.out[U238] || 0) !== 9 || Object.keys(r.out).length !== 2) problems.push('items out ' + summary(r.out))
-      if ((r.fluids[F2] || 0) !== 40000 || (r.fluids[WATER] || 0) !== 20000 || Object.keys(r.fluids).length !== 2) problems.push('fluids out ' + fluidSummary(r.fluids))
+      if ((r.fluids[HF] || 0) !== 20000 || (r.fluids[WATER] || 0) !== 40000 || Object.keys(r.fluids).length !== 2) problems.push('fluids out ' + fluidSummary(r.fluids))
       if (Object.keys(r.left).length !== 0 || r.tanks[0].amount !== 0) problems.push('left ' + summary(r.left) + ', ' + r.tanks[0].amount + ' mB ' + r.tanks[0].id)
       if (r.eu !== rec.energy) problems.push(r.eu + ' EU drawn, the recipe is ' + rec.energy)
-      check('PROCESS_enrichment', problems.length === 0, '30 uraninite + 40 000 mB HF, circuit 1 -> [' + summary(r.out) + '], ' + fluidSummary(r.fluids) +
+      check('PROCESS_enrichment', problems.length === 0, '30 uraninite + 20 000 mB F2 + 20 000 mB steam + 10 000 mB H2, circuit 1 -> [' + summary(r.out) + '], ' + fluidSummary(r.fluids) +
         '; ' + r.eu + ' EU drawn (' + rec.duration + ' t x ' + rec.eut + ' EU/t) | ' + state(m.ctrl) + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
       // the radon run takes a U-238 like the ones the enrichment just made
       var hadU238 = (r.out[U238] || 0) > 0
@@ -882,7 +885,7 @@
 
   function start(m) {
     if (m.copy.key === 'chain') {
-      load(m, { phase: 'enrichment', circuit: 1, items: [[URANINITE, 30]], fluids: [[HF, 40000]] })
+      load(m, { phase: 'enrichment', circuit: 1, items: [[URANINITE, 30]], fluids: [[F2, 20000], [STEAM, 20000], [H2, 10000]] })
     } else {
       load(m, { phase: 'mox', circuit: 2, items: [[PU, 2], [U238, 8], [TUBE, 4]], fluids: [[O2, 20000], [HE, 100]] })
     }

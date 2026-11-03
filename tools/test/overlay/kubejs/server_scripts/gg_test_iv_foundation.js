@@ -286,7 +286,7 @@
     // id -> what the recipe must hold; items/fluids sorted, 'nc' = not consumed
     var WANT = {}
     WANT[IVF.recipes.heavyWaterElectrolysis] = { inItems: '', outItems: '', inFluids: '1000x ' + ids.heavyWater, outFluids: '1000x gtceu:oxygen, 2000x gtceu:deuterium', eut: 30, duration: 1500 }
-    WANT[IVF.recipes.zircaloyMixer] = { inItems: '1x gtceu:tin_dust, 63x gtceu:zirconium_dust', outItems: '64x ' + ids.zircaloyDust, inFluids: '', outFluids: '', eut: 1920, duration: 400 }
+    WANT['grindless:mixer/zircaloy_from_sponge'] = { inItems: '1x gtceu:tin_dust, 63x grindless:zirconium_sponge', outItems: '64x ' + ids.zircaloyDust, inFluids: '', outFluids: '', eut: 1920, duration: 400 }
     WANT[IVF.recipes.ionExchangeResin] = { inItems: '', outItems: '4x ' + ids.ionExchangeResin, inFluids: '1000x gtceu:styrene, 1000x gtceu:sulfuric_acid', outFluids: '1000x gtceu:diluted_sulfuric_acid', eut: 480, duration: 400 }
     WANT[IVF.recipes.platinumGauze] = { inItems: '16x gtceu:fine_platinum_wire, 2x gtceu:fine_rhodium_wire', outItems: '1x ' + ids.platinumGauze, inFluids: '', outFluids: '', eut: 1920, duration: 200 }
     IVF.recipes.hermeanRegolith.forEach(function (id) {
