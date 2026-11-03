@@ -399,7 +399,7 @@
       .notConsumableFluid(Fluid.of(cfg.charge.id, cfg.charge.amount))
       .itemOutputs('1x grindless:cooled_octupole_winding')
       .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
-      .addDataString(DATA_KEY, 'octupole_winding_cooldown')
+      .addDataString(TEXT_KEY, 'octupole_winding_cooldown')
       .EUt(7680).duration(600)
   }
 

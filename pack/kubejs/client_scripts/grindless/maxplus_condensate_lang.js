@@ -29,7 +29,7 @@
         ['gtceu.recipe.grindless_levitation_melting.strange_alloy_charge', 'Circuit 23: fed strangelets melted with tungsten under helium into strange alloy charges; the oxide skin leaves as dross (line P3).'],
         ['gtceu.recipe.grindless_pasta_drawing.kerr_strand_drawing', 'Circuit 8: Kerr clad strand drawn into Kerr strand wire (line P4).'],
         ['gtceu.recipe.grindless_mtj_sputtering.insulated_kerr_wire', 'Circuit 27: an oxide interlayer sputtered over the Kerr strand wire as its insulation; most of the argon is recovered (line P4).'],
-        ['gtceu.recipe.grindless_black_hole_bomb.condensate_tap', 'Circuit 4: a seed wave packet taps the stationary cloud while the horizon lock is held (never consumed); a horizon phase lock wears 1 time in 32. Gives 16,000 mB of Kerr condensate (line P1).']
+        ['gtceu.recipe.grindless_black_hole_bomb.condensate_tap', 'Circuit 4: a seed wave packet taps the stationary cloud while the horizon lock is held (not consumed); a lock wears 1 time in 32. Gives 16,000 mB of Kerr condensate (line P1).']
     ]
 
     ENTRIES.push(['gtceu.recipe.grindless_condensate_refinery.cloud_loaded_cage',

@@ -52,6 +52,11 @@
     add('tooltip.grindless.wireless_cell.made_by', 'Made in the %s')
     add('grindless.machine.wireless_energy_hatch.tooltip.0', 'Energy input for multiblocks, filled from the wireless network whenever a formed tower holds a cell of its tier or higher.')
     add('grindless.machine.wireless_dynamo_hatch.tooltip.0', 'Energy output for generator multiblocks: everything it gets goes into the wireless network (5% loss).')
+    var perAmp = [4, 16, 64, 1024, 4096]
+    perAmp.forEach(function (a) {
+      add('grindless.machine.wireless_energy_hatch_' + a + 'a.tooltip.0', 'Wireless energy hatch for ' + a + ' A: takes up to ' + a + ' A at its voltage from the wireless network, whenever a formed tower holds a cell of its tier or higher.')
+      if (a <= 64) add('grindless.machine.wireless_dynamo_hatch_' + a + 'a.tooltip.0', 'Wireless dynamo hatch for ' + a + ' A: sends up to ' + a + ' A at its voltage into the wireless network (5% loss).')
+    })
     add('grindless.machine.wireless.tooltip.network', 'One network per FTB team, for every world, stored in Wireless Energy Towers: it belongs to the team of the player who placed it. Its chunk must be loaded.')
     add('grindless.machine.wireless.tooltip.readout', 'Shift + right-click with an empty hand: the team network\'s EU and flow')
     add('tooltip.grindless.wireless_energy_cover.0', 'Feeds the single-block machine it is on from the wireless network, whenever a formed tower holds a cell of its tier or higher.')

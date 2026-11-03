@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:gcyr:dyson_system_controller"
+  ],
+  "text": [
+    "emi.grindless.info.dyson_system_controller.0",
+    "emi.grindless.info.dyson_system_controller.1"
+  ]
+}

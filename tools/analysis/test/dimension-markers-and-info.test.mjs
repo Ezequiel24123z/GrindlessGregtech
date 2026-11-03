@@ -15,16 +15,7 @@ const read = (...p) => fs.readFileSync(path.join(KUBEJS, ...p), 'utf8');
 export const MAX_INFO_CHARS = 190;
 
 // Texts already over the cap when the check was added; they end with "..." in EMI until their packages shorten them. A new text may not join.
-const KNOWN_LONG = new Set([
-  'gtceu.recipe.grindless_condensate_assembler.horizon_containment_plate',
-  'gtceu.recipe.grindless_condensate_assembler.horizon_frame_part',
-  'gtceu.recipe.grindless_black_hole_bomb.condensate_tap',
-  'gtceu.recipe.grindless_hyper_assembly_array.hyperstargate_base',
-  'gtceu.recipe.grindless_hyper_assembly_array.creative_energy',
-  'gtceu.recipe.grindless_horizon_flux_clamp.horizon_flux_clamp',
-  'gtceu.recipe.grindless_horizon_interferometry.cloud_phase_map',
-  'gtceu.recipe.grindless_rydberg_assembly.rydberg_logic_array',
-]);
+const KNOWN_LONG = new Set([]);
 
 const clientDir = path.join(KUBEJS, 'client_scripts', 'grindless');
 const PACK = path.join(ROOT, 'pack');

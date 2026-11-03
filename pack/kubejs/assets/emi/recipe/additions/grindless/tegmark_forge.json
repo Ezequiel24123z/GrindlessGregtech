@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:gtca:tegmark_forge"
+  ],
+  "text": [
+    "emi.grindless.info.tegmark_forge.0",
+    "emi.grindless.info.tegmark_forge.1"
+  ]
+}
