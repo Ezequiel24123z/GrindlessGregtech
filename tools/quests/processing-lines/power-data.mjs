@@ -408,7 +408,7 @@ export default gate({
       nodes: [
         n('rp1mix2', 0, 0, F('gtceu:rp_1_mixed_fuel'),         'RP-1 for the IV Rocket', { kind: 'raw', desc: 'The same RP-1 mix as the EV engine, only more of it per second.' }),
                 n('ivRocket', 2.25, 0, M('gtnn:iv_rocket_engine'), 'IV Rocket Engine', { tier: 'iv', from: ['rp1mix2'], figs: [P.single(8192)], sub: 'Same fuels as the EV one',
-          desc: 'The EV engine\'s big brother: it burns the same fuels several times faster, so it asks for far more of them.',
+          desc: 'The EV engine\'s big brother: it burns the same fuels several times faster,           so it asks for far more of them.' }),
       ],
     },
     ivRTG: {
