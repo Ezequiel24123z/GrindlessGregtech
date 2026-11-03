@@ -5,10 +5,13 @@
 // VA[ZPM] = 122,880 EU/t, VA[UV] = 491,520 EU/t.
 //
 //   fibre draw tower (type gtceu:fibre_draw; the programmed circuit picks the step)
-//     1 preform    5 silicon tetrachloride (GTCA's dust, one mole) + 1 ytterbium oxide (the cascade's Yb strip) + 1 aluminium dust +
-//                  100 mB germanium tetrachloride (UV-A7's germanium refinery) + 3,700 mB oxygen -> 1 Yb-doped preform + 1 glass dust
-//                  (the silica soot that misses the tube) + 4,400 mB chlorine (MCVD: SiCl4 + GeCl4 + 2 O2 each -> the oxides + the
-//                  chlorine; the aluminium co-dopant burns to alumina; GTM's units: 1,000 mB per Cl or O atom)   122,880 x 600 t
+//     1 preform    1 doped soot tube + 1,000 mB chlorine + 1,000 mB oxygen (drying, sintering and collapse) -> 1 Yb-doped preform +
+//                  1 glass dust                                                                                        122,880 x 200 t
+//     MCVD is three operations (D3-STARSHOT, docs/eras/lines-uv-uhv.md V2): circuit 12 soot (1 fused silica tube + 5 silicon
+//                  tetrachloride (GTCA's dust, one mole) + 100 mB germanium tetrachloride + 3,700 mB oxygen -> 1 soot tube + 4,400 mB
+//                  chlorine; GTM's units: 1,000 mB per Cl or O atom) 122,880 x 300 t; circuit 13 dope (soot tube + 1 aluminium dust +
+//                  250 mB ytterbium chloride solution -> doped soot tube) 122,880 x 100 t; the solution is a chemical reactor step
+//                  (1 ytterbium oxide, the cascade's Yb strip, + 1,500 mB HCl -> 250 mB solution + 750 mB water)
 //     2 draw       1 preform + 250 mB acrylate coating -> 16 ytterbium fibre spools                                   30,720 x 400 t
 //     3 module     4 fibre spools + 4 InGaAs pump modules + 1 fibre Bragg grating -> 1 fibre laser module            122,880 x 400 t
 //     4 refurbish  1 spent laser module (UV-A3's laser fusion chamber, 2 % wear) + 1 fibre spool -> 1 fibre laser module
@@ -91,6 +94,10 @@
   var EPI = 'grindless:ingaas_epi_wafer'
   var BAR = 'grindless:ingaas_diode_bar'
   var NBN = 'grindless:nbn_film_wafer'
+  var SOOT_TUBE = 'grindless:mcvd_soot_tube'
+  var DOPED_TUBE = 'grindless:doped_soot_tube'
+  var COATED_BAR = 'grindless:coated_diode_bar'
+  var YB_SOLUTION = 'gtceu:ytterbium_chloride_solution'
 
   var GECL4 = 'gtceu:germanium_tetrachloride'
   var TMGA = 'gtceu:trimethylgallium'
@@ -104,9 +111,9 @@
   // recipes of the two machines: type, circuit, contents
   var TABLE = [
     { name: 'preform', type: 'fibre_draw', circuit: 1,
-      itemsIn: [item(SICL4, 5), item(YB2O3, 1), item('gtceu:aluminium_dust', 1)],
-      fluidsIn: [fluid(GECL4, 100), fluid('gtceu:oxygen', 3700)],
-      itemsOut: [item(PREFORM, 1), item('gtceu:glass_dust', 1)], fluidsOut: [fluid('gtceu:chlorine', 4400)], eut: ZPM, duration: 600 },
+      itemsIn: [item(DOPED_TUBE, 1)],
+      fluidsIn: [fluid('gtceu:chlorine', 1000), fluid('gtceu:oxygen', 1000)],
+      itemsOut: [item(PREFORM, 1), item('gtceu:glass_dust', 1)], fluidsOut: [], eut: ZPM, duration: 200 },
     { name: 'draw', type: 'fibre_draw', circuit: 2, itemsIn: [item(PREFORM, 1)], fluidsIn: [fluid(ACRYLATE, 250)],
       itemsOut: [item(FIBRE, 16)], fluidsOut: [], eut: LUV, duration: 400 },
     { name: 'laser_module', type: 'fibre_draw', circuit: 3, itemsIn: [item(FIBRE, 4), item(PUMP, 4), item(GRATING, 1)], fluidsIn: [],
@@ -124,10 +131,23 @@
       eut: ZPM, duration: 200 },
     { name: 'nbn_film', type: 'mocvd', circuit: 4, itemsIn: [item(SAPPHIRE_WAFER, 1), item('gtceu:niobium_dust', 1)],
       fluidsIn: [fluid('gtceu:nitrogen', 100)], itemsOut: [item(NBN, 1)], fluidsOut: [], eut: ZPM, duration: 400 },
-    { name: 'pump_module', type: 'mocvd', circuit: 5, itemsIn: [item(BAR, 4), item('gtceu:copper_plate', 2)], fluidsIn: [],
+    { name: 'pump_module', type: 'mocvd', circuit: 5, itemsIn: [item(COATED_BAR, 4), item('gtceu:copper_plate', 2)], fluidsIn: [],
       itemsOut: [item(PUMP, 1)], fluidsOut: [], eut: LUV, duration: 200 },
     { name: 'arsine_scrub', type: 'mocvd', circuit: 6, itemsIn: [], fluidsIn: [fluid(ARSINE, 1000)],
       itemsOut: [item('gtceu:arsenic_dust', 1)], fluidsOut: [fluid('gtceu:hydrogen', 3000)], eut: 1920, duration: 100 }
+  ]
+
+  // D3-STARSHOT (docs/eras/lines-uv-uhv.md, V2): MCVD is three operations. Soot deposition inside the substrate tube (c12; the chlorine
+  // of the SiCl4 and GeCl4 comes off), solution doping (c13), then the preform step (c1: drying and collapse). The facet coating of the
+  // diode bars (MOCVD c31): alumina and titania mirrors, reactive-sputtered from aluminium and titanium in oxygen.
+  var STARSHOT_ROWS = [
+    { name: 'mcvd_soot', type: 'fibre_draw', circuit: 12, itemsIn: [item('grindless:fused_silica_tube', 1), item(SICL4, 5)],
+      fluidsIn: [fluid(GECL4, 100), fluid('gtceu:oxygen', 3700)], itemsOut: [item(SOOT_TUBE, 1)], fluidsOut: [fluid('gtceu:chlorine', 4400)],
+      eut: ZPM, duration: 300 },
+    { name: 'mcvd_dope', type: 'fibre_draw', circuit: 13, itemsIn: [item(SOOT_TUBE, 1), item('gtceu:aluminium_dust', 1)],
+      fluidsIn: [fluid(YB_SOLUTION, 250)], itemsOut: [item(DOPED_TUBE, 1)], fluidsOut: [], eut: ZPM, duration: 100 },
+    { name: 'facet_coating', type: 'mocvd', circuit: 31, itemsIn: [item(BAR, 8), item('gtceu:aluminium_dust', 1), item('gtceu:titanium_dust', 1)],
+      fluidsIn: [fluid('gtceu:oxygen', 500)], itemsOut: [item(COATED_BAR, 8)], fluidsOut: [], eut: ZPM, duration: 200 }
   ]
 
   // the MOCVD reactor's UHV rows (package UHV-A5): their inputs come from UHV (the SiC mirror blank) or feed only UHV (the IMM wafer)
@@ -272,6 +292,10 @@
 
   // side steps on GTM's own machines
   var SIDE = [
+    // D3-STARSHOT: the dopant solution; Yb2O3 + 6 HCl -> 2 YbCl3 + 3 H2O, reckoned per one oxide dust and 250 mB of solution (the unit of one preform)
+    { name: 'ytterbium_chloride_solution', type: 'chemical_reactor', circuit: null, itemsIn: [item(YB2O3, 1)],
+      fluidsIn: [fluid('gtceu:hydrochloric_acid', 1500)], itemsOut: [], fluidsOut: [fluid(YB_SOLUTION, 250), fluid('minecraft:water', 750)],
+      eut: 480, duration: 200 },
     { name: 'arsine', type: 'chemical_reactor', circuit: null,
       itemsIn: [item('gtceu:arsenic_dust', 2), item('gtceu:magnesium_dust', 3)], fluidsIn: [fluid('gtceu:hydrochloric_acid', 6000)],
       itemsOut: [item('gtceu:magnesium_chloride_dust', 9)], fluidsOut: [fluid(ARSINE, 2000)], eut: 480, duration: 200 },
@@ -312,6 +336,7 @@
   P.opvRows = OPV_ROWS.map(function (t) { return publish(t, t.type === 'mocvd' ? 'grindless:' + t.name : 'grindless:' + t.type + '/' + t.name) })
   P.opvA3Rows = OPV_A3_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.maxA1Rows = MAX_A1_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
+  P.starshotRows = STARSHOT_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -376,10 +401,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows, P.maxA1Rows))
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows, P.maxA1Rows, P.starshotRows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows, P.maxA1Rows).forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length + P.opvRows.length + P.opvA3Rows.length + P.maxA1Rows.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows, P.maxA1Rows, P.starshotRows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length + P.opvRows.length + P.opvA3Rows.length + P.maxA1Rows.length + P.starshotRows.length - P.skipped.length))
   }
 
   function addSide(event) {

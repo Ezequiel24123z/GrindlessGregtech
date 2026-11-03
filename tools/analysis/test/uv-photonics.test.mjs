@@ -89,8 +89,8 @@ test('ytterbium oxide comes only from the cascade strip, and the preform needs i
   assert.deepEqual(circuitOf(makers[0]), [6]);
   const strip = (EC.recipes || []).find((r) => r.name === 'ytterbium_strip');
   if (strip) assert.equal(strip.mode, 'uv');
-  assert.ok(row('preform').itemsIn.some((i) => i.id === 'gtceu:ytterbium_oxide_dust' && i.count === 1));
-  assert.ok(row('preform').fluidsIn.some((f) => f.id === 'gtceu:germanium_tetrachloride'));
+  assert.ok(side('ytterbium_chloride_solution').itemsIn.some((i) => i.id === 'gtceu:ytterbium_oxide_dust' && i.count === 1));
+  assert.ok(P.starshotRows.find((r) => r.name === 'mcvd_soot').fluidsIn.some((f) => f.id === 'gtceu:germanium_tetrachloride'));
 });
 
 test('InGaAs needs indium and the gas cabinet; the pump module chain ends in F1\'s module', () => {
@@ -113,7 +113,7 @@ test('byproduct destinations: arsine scrubbed to arsenic, chlorine and methane o
   // every arsine produced has a consumer: the epi row and the scrubber
   const arsineOut = P.recipes.concat(P.side).filter((r) => r.fluidsOut.some((f) => f.id === 'gtceu:arsine')).map((r) => r.name);
   assert.deepEqual(arsineOut.sort(), ['arsine', 'ingaas_epi']);
-  assert.deepEqual(row('preform').fluidsOut, [{ id: 'gtceu:chlorine', amount: 4400 }]);
+  assert.deepEqual(P.starshotRows.find((r) => r.name === 'mcvd_soot').fluidsOut, [{ id: 'gtceu:chlorine', amount: 4400 }]);
   assert.deepEqual(side('arsine').itemsOut, [{ id: 'gtceu:magnesium_chloride_dust', count: 9 }]);
   const src = read('server_scripts/grindless/uv/photonics.js');
   for (const word of ['chlorine', 'methane', 'salt', 'magnesium chloride', 'glass']) assert.match(src, new RegExp(word, 'i'), word);
@@ -127,7 +127,7 @@ test('refurbish takes A3\'s spent laser module; the module block is an assembler
 });
 
 test('side steps: arsine, acrylate, GaAs and sapphire boules and wafers, the grating', () => {
-  assert.deepEqual(P.side.map((r) => r.name), ['arsine', 'acrylate_coating', 'gallium_arsenide_boule', 'gallium_arsenide_wafer',
+  assert.deepEqual(P.side.map((r) => r.name), ['ytterbium_chloride_solution', 'arsine', 'acrylate_coating', 'gallium_arsenide_boule', 'gallium_arsenide_wafer',
     'sapphire_boule', 'sapphire_wafer', 'fibre_bragg_grating']);
   assert.equal(side('gallium_arsenide_boule').circuit, 6);
   assert.equal(side('acrylate_coating').circuit, 7);

@@ -48,6 +48,9 @@ $Items = [ordered]@{
     sapphire_wafer         = @('disc', '5A80D4', '9CBCF4')
     ingaas_epi_wafer       = @('disc', '7C8494', 'C080D8')
     ingaas_diode_bar       = @('bar', '8C7AA0', 'E05A5A')
+    coated_diode_bar       = @('bar', '8C7AA0', '7AC8E8')
+    mcvd_soot_tube         = @('rod', 'B8B4AC', 'E8E4D8')
+    doped_soot_tube        = @('rod', 'B8B4AC', 'C8E8D0')
     nbn_film_wafer         = @('disc', '5A80D4', 'B8A060')
 }
 
