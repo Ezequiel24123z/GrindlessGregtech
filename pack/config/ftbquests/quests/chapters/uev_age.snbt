@@ -35,7 +35,7 @@
 			size: 0.75d
 			tasks: [{ id: "173D4D8D8A2B6097", type: "checkmark" }]
 			title: "Home First"
-			x: 2.0d
+			x: 1.5d
 			y: 0.0d
 		}
 		{
@@ -48,8 +48,8 @@
 			size: 0.75d
 			tasks: [{ id: "3D84DA65CF753F02", type: "checkmark" }]
 			title: "The Heaviest Atoms"
-			x: 4.0d
-			y: -4.0d
+			x: 2.25d
+			y: -6.0d
 		}
 		{
 			dependencies: ["74B8B99C87A3BABC"]
@@ -61,8 +61,8 @@
 			size: 0.75d
 			tasks: [{ id: "191180B75250D74D", type: "checkmark" }]
 			title: "A Megabar"
-			x: 4.0d
-			y: -2.0d
+			x: 4.25d
+			y: -5.0d
 		}
 		{
 			dependencies: ["74B8B99C87A3BABC"]
@@ -75,7 +75,7 @@
 			tasks: [{ id: "33630CF84B9265FC", type: "checkmark" }]
 			title: "One Photon at a Time"
 			x: 4.0d
-			y: 2.0d
+			y: -3.25d
 		}
 		{
 			dependencies: ["74B8B99C87A3BABC"]
@@ -87,18 +87,18 @@
 			size: 0.75d
 			tasks: [{ id: "18B6662E5C1EA6FA", type: "checkmark" }]
 			title: "A Hotter Ring"
-			x: 4.0d
-			y: 4.0d
+			x: 5.25d
+			y: -1.5d
 		}
 		{
-			dependencies: ["74B8B99C87A3BABC"]
+			dependencies: ["3E4117575EE79C34", "3DDE5C2C942D2B01"]
 			description: ["The &6Direct Fusion Drive Mk1&r is made at home in the Thruster Works from Wf/W tiles, SiC/SiC plates, HfTaCN ingots, D-He3 fuel mix and a UEV emitter for its antenna. It carries a level 9 rocket to the next star and needs nothing from abroad."]
 			icon: "grindless:dfd_mk1_motor"
 			id: "19984A527170882C"
 			rewards: [{ id: "3A0BD71AD4745BC1", type: "xp", xp: 150 }]
 			tasks: [{ id: "164A7B407A68EB8E", item: "grindless:dfd_mk1_motor", type: "item" }]
 			title: "Drive Mk1"
-			x: 4.0d
+			x: 20.25d
 			y: 0.0d
 		}
 		{
@@ -111,7 +111,7 @@
 			size: 0.75d
 			tasks: [{ id: "361531248F140E58", type: "checkmark" }]
 			title: "Level Nine"
-			x: 6.0d
+			x: 21.5d
 			y: 0.0d
 		}
 		{
@@ -122,8 +122,8 @@
 			rewards: [{ id: "1368A7C1A248EE7F", type: "xp", xp: 200 }]
 			tasks: [{ dimension: "grindless:alpha_centauri_orbit", id: "596199995B625AE1", type: "dimension" }]
 			title: "First Light of Another Star"
-			x: 8.0d
-			y: -2.0d
+			x: 22.25d
+			y: -2.75d
 		}
 		{
 			dependencies: ["52CC6BA393B05B31"]
@@ -135,8 +135,8 @@
 			size: 0.75d
 			tasks: [{ id: "76E457B6617A3610", type: "checkmark" }]
 			title: "Two Suns"
-			x: 10.0d
-			y: -4.0d
+			x: 23.25d
+			y: -5.75d
 		}
 		{
 			dependencies: ["52CC6BA393B05B31"]
@@ -148,19 +148,19 @@
 			size: 0.75d
 			tasks: [{ id: "5E8C9C04DB42D9BB", type: "checkmark" }]
 			title: "Thin Gas, Old Dust"
-			x: 10.0d
-			y: -2.0d
+			x: 24.5d
+			y: -2.25d
 		}
 		{
-			dependencies: ["5FB0F9524805A6FD"]
+			dependencies: ["5FB0F9524805A6FD", "530544BFDCF5D75E"]
 			description: ["Pulsars tick like clocks, and three of them fix your place. The Pulsar Timing Station turns its timing data and the dust lab's iron-60 record into the &6Pulsar Navigation Chart&r. The chart gives the course to the white dwarf, is a catalyst of the gate's first holds at Sirius B, and is the research for the UIV casing line."]
 			icon: "grindless:pulsar_navigation_chart"
 			id: "7F279D6558D52119"
 			rewards: [{ id: "51C66F49CDED7277", type: "xp", xp: 150 }]
 			tasks: [{ id: "5CCBD9D62FD74164", item: "grindless:pulsar_navigation_chart", type: "item" }]
 			title: "The Course to Sirius"
-			x: 12.0d
-			y: -2.0d
+			x: 28.25d
+			y: -1.75d
 		}
 		{
 			dependencies: ["7AAAC4DF44923FD1"]
@@ -173,8 +173,8 @@
 				{ id: "39696BAF530DC5A7", item: "gtceu:barnard_core_drill", type: "item" }
 			]
 			title: "Barnard b"
-			x: 8.0d
-			y: 2.0d
+			x: 22.5d
+			y: 1.75d
 		}
 		{
 			dependencies: ["545210E1EB9C1D44"]
@@ -186,8 +186,8 @@
 			size: 0.75d
 			tasks: [{ id: "33CB88BD4D68F333", type: "checkmark" }]
 			title: "A Cold Red Light"
-			x: 10.0d
-			y: 4.0d
+			x: 33.0d
+			y: 2.25d
 		}
 		{
 			dependencies: ["545210E1EB9C1D44"]
@@ -197,11 +197,11 @@
 			rewards: [{ id: "79244E1C84435DBF", type: "xp", xp: 150 }]
 			tasks: [{ id: "3259718EC12A366A", item: "grindless:barnard_core_rock", type: "item" }]
 			title: "An Iron World"
-			x: 10.0d
-			y: 2.0d
+			x: 24.5d
+			y: 1.25d
 		}
 		{
-			dependencies: ["7F279D6558D52119", "7B9833873D5CD02A"]
+			dependencies: ["7F279D6558D52119", "7B9833873D5CD02A", "3A453C8950865687", "35189CD5902AFFE4"]
 			description: ["The Mk2 drive is a Mk1 motor with a UEV motor, eight bonded iron nitride magnets and a Brayton turbine wheel cast as single crystals. It is the drive for a level 10 rocket."]
 			icon: "grindless:dfd_mk2_motor"
 			id: "33D419EAF6FDDE54"
@@ -211,7 +211,7 @@
 				{ id: "33E8E3AAAFD40697", item: "grindless:brayton_turbine_wheel", type: "item" }
 			]
 			title: "Drive Mk2"
-			x: 14.0d
+			x: 29.5d
 			y: 0.0d
 		}
 		{
@@ -224,7 +224,7 @@
 			size: 0.75d
 			tasks: [{ id: "5FD3FFBC0B010F9D", type: "checkmark" }]
 			title: "Level Ten"
-			x: 16.0d
+			x: 30.75d
 			y: 0.0d
 		}
 		{
@@ -235,7 +235,7 @@
 			rewards: [{ id: "58D087410E35981D", type: "xp", xp: 250 }]
 			tasks: [{ dimension: "grindless:sirius_b_orbit", id: "31E4AC2B068FF5EF", type: "dimension" }]
 			title: "Sirius B"
-			x: 18.0d
+			x: 32.5d
 			y: 0.0d
 		}
 		{
@@ -248,8 +248,8 @@
 			size: 0.75d
 			tasks: [{ id: "17E6AA3C46EDDD1E", type: "checkmark" }]
 			title: "A Star's Core"
-			x: 20.0d
-			y: -2.0d
+			x: 36.75d
+			y: -1.5d
 		}
 		{
 			dependencies: ["31F75527A44532C5"]
@@ -261,33 +261,33 @@
 			size: 0.75d
 			tasks: [{ id: "71C868124FD38659", type: "checkmark" }]
 			title: "Fiction, Mostly"
-			x: 20.0d
-			y: 2.0d
+			x: 34.25d
+			y: -3.5d
 		}
 		{
-			dependencies: ["31F75527A44532C5"]
+			dependencies: ["7F1047B6CDE89AFA"]
 			description: ["A sealed &6Degenerate Pellet&r is a fuel that never runs out in your lifetime. The Containment Works presses it from degenerate matter and an exotic matter cell, and the gate's hold is run on it."]
 			icon: "grindless:degenerate_pellet"
 			id: "129CFFFDA25F22DC"
 			rewards: [{ id: "1A85DDA17FFA905E", type: "xp", xp: 250 }]
 			tasks: [{ id: "5B0062FA700532F6", item: "grindless:degenerate_pellet", type: "item" }]
 			title: "A White Dwarf in a Bottle"
-			x: 20.0d
-			y: 0.0d
+			x: 41.5d
+			y: -0.5d
 		}
 		{
-			dependencies: ["129CFFFDA25F22DC"]
+			dependencies: ["129CFFFDA25F22DC", "31927D93FA5DAFEE"]
 			description: ["The Warp Gate was built for UHV. At the UEV load it runs on a circuit 3 program and takes its power from the UEV wireless network. Your fuel is in the pellets and your power is in the cell."]
 			icon: "gtceu:warp_gate"
 			id: "7A1656F88B1FC86E"
 			rewards: [{ id: "3E429B56B669129F", type: "xp", xp: 250 }]
 			tasks: [{ id: "52F6D25AF9758F01", item: "gtceu:warp_gate", type: "item" }]
 			title: "The Gate at UEV"
-			x: 22.0d
+			x: 48.5d
 			y: 0.0d
 		}
 		{
-			dependencies: ["7A1656F88B1FC86E"]
+			dependencies: ["7A1656F88B1FC86E", "5E61CE1D2B9B4F60"]
 			description: [
 				"Hold the Warp Gate open at the UEV load in Sirius B orbit. Its input takes a tennessine sample, a degenerate pellet, a degenerate EOS model, four UEV circuits of any kind and circuit 3. The hold makes nothing: you tick this box when it has run."
 				"The next casing is built apart: the UIV Machine Casing line is researched with the Pulsar Navigation Chart and takes UEV casings, field generators and emitters."
@@ -299,7 +299,7 @@
 			size: 1.75d
 			tasks: [{ id: "1368294E2B9C8317", type: "checkmark" }]
 			title: "Gate to UIV"
-			x: 24.0d
+			x: 51.5d
 			y: 0.0d
 		}
 		{
@@ -315,8 +315,8 @@
 			size: 0.75d
 			tasks: [{ id: "74BB19CBCEA26C37", type: "checkmark" }]
 			title: "UEV Circuits"
-			x: 3.5d
-			y: 13.5d
+			x: 5.0d
+			y: 3.75d
 		}
 		{
 			dependencies: ["19174331BF47A9B1"]
@@ -328,11 +328,11 @@
 			size: 1.25d
 			tasks: [{ id: "7D6B1B42C65DB368", item: "gtceu:uev_circuit_assembler", type: "item" }]
 			title: "UEV Circuit Assembler"
-			x: 18.5d
-			y: 12.0d
+			x: 25.75d
+			y: 7.5d
 		}
 		{
-			dependencies: ["5FBB5CC4F79C7D79"]
+			dependencies: ["5FBB5CC4F79C7D79", "5C32C3BBED862564"]
 			description: ["The &6UEV Parts&r are the emitter, sensor, robot arm, conveyor module, pump, piston and motor of this era. Every UEV machine, hatch and the UEV hull are built from them. The UHV part of the same kind (two for the emitter and sensor) with SNSPDs, quantum dot sources, graphene modulator, graphene and boron nitride films and six-nines metals; the motor takes bonded magnets, superhydride cable, SiC/SiC plates and FFKM seals. They are made in assemblers. The UEV field generator, the UEV hull and the UEV machines. Stock each part by ME; a machine draws several of the same kind."]
 			icon: "gtceu:uev_emitter"
 			id: "3E4117575EE79C34"
@@ -347,19 +347,19 @@
 				{ id: "1A0383529BE50FF9", item: "gtceu:uev_electric_motor", type: "item" }
 			]
 			title: "UEV Parts"
-			x: 12.5d
-			y: 15.5d
+			x: 19.0d
+			y: 0.75d
 		}
 		{
-			dependencies: ["3E4117575EE79C34"]
+			dependencies: ["129CFFFDA25F22DC"]
 			description: ["The &6UEV Field Generator&r holds the plasma and the gate's fields. It is the first part that needs a degenerate pellet. A UHV field generator, two degenerate pellets, two single-crystal pump impellers, three UEV emitters and three UEV sensors. The UEV Energy Hatch, the Stellar Forge and the Mk4 fusion reactor. Pellets and impellers by ME; stock a few, since the hatch takes three."]
 			icon: "gtceu:uev_field_generator"
 			id: "5F644828F712C60C"
 			rewards: [{ id: "16297E127277B204", type: "xp", xp: 120 }]
 			tasks: [{ id: "548BBC16C1A6195A", item: "gtceu:uev_field_generator", type: "item" }]
 			title: "UEV Field Generator"
-			x: 14.5d
-			y: 16.5d
+			x: 42.25d
+			y: 0.75d
 		}
 		{
 			dependencies: ["3E4117575EE79C34", "12A3828ECE0C81B8"]
@@ -369,19 +369,19 @@
 			rewards: [{ id: "5247867DE116494E", type: "xp", xp: 150 }]
 			tasks: [{ id: "5BE55A1E6185E663", item: "gtceu:uev_machine_hull", type: "item" }]
 			title: "UEV Machine Hull"
-			x: 16.5d
-			y: 13.5d
+			x: 22.25d
+			y: 8.25d
 		}
 		{
-			dependencies: ["19174331BF47A9B1", "5F644828F712C60C"]
+			dependencies: ["5F644828F712C60C"]
 			description: ["The &6UEV Energy Hatch&r is an assembly line recipe on the UEV hull: it feeds a UEV machine its power. A UEV Machine Hull, three lanthanum superhydride cables, three Faraday isolators, an ULE cavity, three UV voltage coils, three UEV field generators and three UEV circuits of any kind. Every UEV machine that takes power from a hatch, and the wireless hatch. Craft a few by ME; each machine takes one."]
 			icon: "gtceu:uev_energy_input_hatch"
 			id: "58C1564694482EBE"
 			rewards: [{ id: "534BE26FD27D8060", type: "xp", xp: 100 }]
 			tasks: [{ id: "50704B0519835EC1", item: "gtceu:uev_energy_input_hatch", type: "item" }]
 			title: "UEV Hatches"
-			x: 18.5d
-			y: 15.0d
+			x: 44.5d
+			y: 0.25d
 		}
 		{
 			dependencies: ["572E0C57B385B5AF"]
@@ -393,8 +393,8 @@
 			size: 1.0d
 			tasks: [{ id: "56CDF5C67EF904BE", item: "grindless:lnoi_wafer", type: "item" }]
 			title: "Lithium Niobate on Insulator"
-			x: 6.5d
-			y: 10.5d
+			x: 8.0d
+			y: 8.75d
 		}
 		{
 			dependencies: ["572E0C57B385B5AF"]
@@ -406,11 +406,11 @@
 			size: 1.0d
 			tasks: [{ id: "3BD13B6D0D20912D", item: "grindless:annealed_sin_chip", type: "item" }]
 			title: "Silicon Nitride Chip"
-			x: 6.5d
-			y: 12.0d
+			x: 7.75d
+			y: 4.5d
 		}
 		{
-			dependencies: ["15B48323A772E536", "3C3FC8DE94FAC5EE"]
+			dependencies: ["15B48323A772E536", "1AC90115EC98790D"]
 			description: ["An SiN Waveguide Chip bonded to an LNOI wafer is a &6Waveguide Circuit&r: light goes in, is steered and switched, and comes out. The Photonic Integration Hall, one SiN Waveguide Chip, one LNOI wafer and a circuit 1 program. The quantum photonic chip, which puts sources and detectors on it. One chip and one wafer per circuit: stock both by ME and send circuits on."]
 			icon: "grindless:waveguide_circuit"
 			id: "1EB339EC7EEE0427"
@@ -419,8 +419,8 @@
 			size: 1.0d
 			tasks: [{ id: "5B3AB2F3F89B7D6D", item: "grindless:waveguide_circuit", type: "item" }]
 			title: "Waveguide Circuit"
-			x: 9.5d
-			y: 11.25d
+			x: 18.0d
+			y: 8.5d
 		}
 		{
 			dependencies: ["572E0C57B385B5AF"]
@@ -435,11 +435,11 @@
 				{ id: "5F1EF17AF02D692C", item: "grindless:qd_source", type: "item" }
 			]
 			title: "Quantum Dot Wafer"
-			x: 6.5d
-			y: 13.5d
+			x: 8.25d
+			y: 7.0d
 		}
 		{
-			dependencies: ["750B64193AFA4A16"]
+			dependencies: ["1DCFFEC97F5A28AF"]
 			description: ["A tungsten silicide nanowire cooled to near zero fires when a single photon lands on it: the &6SNSPD&r. The SNSPD Foundry, a WSi wafer and superfluid helium to cool and package it. The quantum photonic chip, and the entanglement station's repeater. Helium by pipe; stock packaged detectors by ME, one per chip and one per repeater."]
 			icon: "grindless:snspd"
 			id: "5C32C3BBED862564"
@@ -448,11 +448,11 @@
 			size: 1.0d
 			tasks: [{ id: "7EAD346A9678063C", item: "grindless:snspd", type: "item" }]
 			title: "Single-Photon Detector"
-			x: 8.5d
-			y: 13.5d
+			x: 12.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["572E0C57B385B5AF"]
+			dependencies: ["3EEACFBDD09FDD21"]
 			description: ["A defect in a layer of hexagonal boron nitride gives off photons one by one: the &6hBN Emitter Chip&r. The van der Waals stacker, CVD boron nitride film and a cleanroom. The quantum photonic chip, as its second light source. Film by ME; the stacker returns chips in a chest, stock a few."]
 			icon: "grindless:hbn_emitter_chip"
 			id: "5E1E28A92397EEB5"
@@ -461,11 +461,11 @@
 			size: 1.0d
 			tasks: [{ id: "7E06FC544E6C9787", item: "grindless:hbn_emitter_chip", type: "item" }]
 			title: "Single-Photon Emitter"
-			x: 6.5d
-			y: 15.0d
+			x: 16.75d
+			y: 1.5d
 		}
 		{
-			dependencies: ["750B64193AFA4A16"]
+			dependencies: ["3EEACFBDD09FDD21"]
 			description: ["Graphene between two films of boron nitride changes how much light passes when a voltage is applied: the &6Graphene Modulator&r. The van der Waals stacker, graphene film and hBN film. The quantum photonic chip. Graphene and boron nitride arrive by ME; send modulators on by ME."]
 			icon: "grindless:graphene_modulator"
 			id: "5FBB5CC4F79C7D79"
@@ -474,11 +474,11 @@
 			size: 1.0d
 			tasks: [{ id: "7311CBE2A2985560", item: "grindless:graphene_modulator", type: "item" }]
 			title: "Graphene Modulator"
-			x: 8.5d
-			y: 15.0d
+			x: 16.0d
+			y: 2.75d
 		}
 		{
-			dependencies: ["1EB339EC7EEE0427", "5C32C3BBED862564", "5FBB5CC4F79C7D79"]
+			dependencies: ["1EB339EC7EEE0427", "5FBB5CC4F79C7D79"]
 			description: ["A waveguide circuit with a quantum dot source, a detector, a modulator and an emitter on it is the &6Quantum Photonic Chip&r: a whole optical circuit on a few millimetres. The photonic integration hall, a circuit 2 program and one of each part above. The optical computer, which is a chip on an optical assembly. Parts by ME in matched counts; keep a few chips in stock, one per computer."]
 			icon: "grindless:quantum_photonic_chip"
 			id: "5F27E2F032F8C5FD"
@@ -487,8 +487,8 @@
 			size: 1.0d
 			tasks: [{ id: "39FB1EFE40BABA0D", item: "grindless:quantum_photonic_chip", type: "item" }]
 			title: "Quantum Photonic Chip"
-			x: 12.5d
-			y: 13.5d
+			x: 18.75d
+			y: 6.75d
 		}
 		{
 			dependencies: ["5F27E2F032F8C5FD"]
@@ -500,11 +500,11 @@
 			size: 1.0d
 			tasks: [{ id: "7702308B9A611F05", item: "gtnn:optical_computer", type: "item" }]
 			title: "Optical Computer"
-			x: 14.5d
-			y: 13.5d
+			x: 20.5d
+			y: 8.0d
 		}
 		{
-			dependencies: ["572E0C57B385B5AF"]
+			dependencies: ["5D8B9A9839432298"]
 			description: ["Two photons entangled over a distance let a network stay in step. A &6Quantum Repeater Node&r keeps one end of the link. The Entanglement Station, an SPDC source, an Eu:YSO memory crystal, a quantum dot source, two SNSPDs, two hollow-core fibres and superfluid helium. The UEV wireless energy hatch and the wireless covers, which each take one node. Parts by ME and nodes back by ME; one node is worth a long run."]
 			icon: "grindless:quantum_repeater_node"
 			id: "7B8852855265F1E3"
@@ -513,8 +513,8 @@
 			size: 1.0d
 			tasks: [{ id: "186E02F9F2068179", item: "grindless:quantum_repeater_node", type: "item" }]
 			title: "Quantum Repeater Node"
-			x: 6.5d
-			y: 17.0d
+			x: 36.0d
+			y: 7.75d
 		}
 		{
 			dependencies: ["7939EEE351E35C70"]
@@ -526,8 +526,8 @@
 			size: 0.75d
 			tasks: [{ id: "15CDF014D66D6A02", type: "checkmark" }]
 			title: "UEV Integration"
-			x: 5.0d
-			y: 46.75d
+			x: 11.25d
+			y: 17.25d
 		}
 		{
 			dependencies: ["72FFCD77A1A0A7D8"]
@@ -539,8 +539,8 @@
 			size: 1.0d
 			tasks: [{ id: "33B1496F2F463CE7", item: "gtceu:uev_dhe3_plasma_bucket", type: "item" }]
 			title: "First Mk4 Burn"
-			x: 9.0d
-			y: 60.0d
+			x: 21.5d
+			y: 19.0d
 		}
 		{
 			dependencies: ["72E2761F9FC0A537"]
@@ -552,8 +552,8 @@
 			size: 1.0d
 			tasks: [{ id: "5B402C5F60EA959F", item: "gtceu:uev_pb11_plasma_bucket", type: "item" }]
 			title: "Aneutronic"
-			x: 11.0d
-			y: 60.0d
+			x: 24.5d
+			y: 18.0d
 		}
 		{
 			dependencies: ["78C5C5037351F0AD"]
@@ -568,11 +568,11 @@
 				{ id: "1D3A4B3E8FB04083", item: "gtceu:naquadria_magnet_works", type: "item" }
 			]
 			title: "Plasma to Current"
-			x: 13.0d
-			y: 60.0d
+			x: 33.75d
+			y: 15.75d
 		}
 		{
-			dependencies: ["1F193E617E35A100"]
+			dependencies: ["19174331BF47A9B1", "3E4117575EE79C34"]
 			description: ["The &6Ultimate Parallel Control Hatch&r lets a mega machine run up to 4,096 copies of a recipe at once. Energy is still the limit: every copy pays its own EU/t. A UEV hull, a UEV sensor, two UEV emitters, four UEV circuits of any kind, two superhydride double cables and a neutronium gear, on an assembly line researched with the UEV emitter. The Stellar Forge at full width, and every mega machine of the era. Feed the machine a bus wide enough for the copies it will run."]
 			icon: "gtceu:uev_parallel_hatch"
 			id: "3CE8ED7227C70D82"
@@ -581,11 +581,11 @@
 			size: 1.0d
 			tasks: [{ id: "5C72191EADDB5B20", item: "gtceu:uev_parallel_hatch", type: "item" }]
 			title: "Parallel Control"
-			x: 8.0d
-			y: 44.0d
+			x: 23.0d
+			y: 7.0d
 		}
 		{
-			dependencies: ["1F193E617E35A100"]
+			dependencies: ["13C93E95696BC875"]
 			description: ["The &6UEV SMES Cell&r stores the power of the UEV wireless network. Four UHV SMES cells, sixteen lanthanum superhydride wires, eight plates and liquid helium, made in the Naquadria Magnet Works. The UEV wireless tier. Nothing to feed. Size the towers for your busiest hour."]
 			icon: "grindless:uev_smes_cell"
 			id: "5304F9E360A95261"
@@ -594,11 +594,11 @@
 			size: 1.25d
 			tasks: [{ id: "58922BAB908733EB", item: "grindless:uev_smes_cell", type: "item" }]
 			title: "The UEV Cell"
-			x: 8.0d
-			y: 46.0d
+			x: 40.75d
+			y: 10.0d
 		}
 		{
-			dependencies: ["5304F9E360A95261"]
+			dependencies: ["5304F9E360A95261", "7B8852855265F1E3", "58C1564694482EBE"]
 			description: ["Move your towers onto &6UEV SMES Cells&r and the wireless network carries UEV to every station, out to Alpha Centauri and beyond. A UEV Energy Hatch, a UEV sensor, two UEV circuits of any kind and a quantum repeater node for each wireless hatch, and one formed tower holding a UEV cell: the network runs at its strongest cell, so until then it stays at UHV. The repeater node also goes into the wireless covers. The wireless hatches at UEV, and the gate's load at Sirius B. Add cells when the network dips at your busiest hour."]
 			icon: "gtceu:uev_wireless_energy_hatch"
 			id: "31927D93FA5DAFEE"
@@ -610,8 +610,8 @@
 				{ id: "5293AF5A5AA9D0C5", item: "gtceu:uev_wireless_dynamo_hatch", type: "item" }
 			]
 			title: "The Network Goes UEV"
-			x: 10.0d
-			y: 46.0d
+			x: 46.25d
+			y: 0.75d
 		}
 		{
 			dependencies: ["31927D93FA5DAFEE"]
@@ -623,11 +623,11 @@
 			size: 1.25d
 			tasks: [{ id: "14BC06235A070553", type: "checkmark" }]
 			title: "Power for the Gate"
-			x: 12.0d
-			y: 46.0d
+			x: 48.5d
+			y: 1.5d
 		}
 		{
-			dependencies: ["1F193E617E35A100"]
+			dependencies: ["74B8B99C87A3BABC"]
 			description: ["The &6Thruster Works&r makes the Direct Fusion Drive Mk1 and Mk2, the motors of level 9 and level 10 rockets. Mk1: Wf/W tiles, SiC/SiC plates, HfTaCN ingots, D-He3 fuel mix, a UEV emitter and a circuit 6 program. Mk2: a Mk1 motor, a Brayton turbine wheel, eight bonded magnets, a UEV motor and a circuit 7 program. Level 9 and level 10 rockets. Motors go to ME; the Mk2 wheels come from the Single-Crystal Foundry."]
 			icon: "gtceu:thruster_works"
 			id: "3DDE5C2C942D2B01"
@@ -636,8 +636,8 @@
 			size: 1.0d
 			tasks: [{ id: "763A2504D1F29F88", item: "gtceu:thruster_works", type: "item" }]
 			title: "Drives for the Stars"
-			x: 8.0d
-			y: 48.0d
+			x: 13.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["37BBAC4FC45216FC"]
@@ -647,8 +647,8 @@
 			rewards: [{ id: "70B2707C7C3B0FF4", type: "xp", xp: 100 }]
 			tasks: [{ id: "55F3085FD954AB14", type: "checkmark" }]
 			title: "Alpha Centauri on AE2"
-			x: 12.0d
-			y: -16.5d
+			x: 26.0d
+			y: -7.0d
 		}
 		{
 			dependencies: ["32730EE4F1B2A321"]
@@ -658,8 +658,8 @@
 			rewards: [{ id: "139DF2F0CE0EC4A4", type: "xp", xp: 100 }]
 			tasks: [{ id: "70D8503DE3C6DB46", type: "checkmark" }]
 			title: "Barnard b on AE2"
-			x: 11.5d
-			y: 6.5d
+			x: 26.75d
+			y: 2.75d
 		}
 		{
 			dependencies: ["7739A095E6C8F041"]
@@ -669,8 +669,8 @@
 			rewards: [{ id: "148604B9496AB4E9", type: "xp", xp: 100 }]
 			tasks: [{ id: "5581DCB00F0ED7F5", type: "checkmark" }]
 			title: "Sirius B on AE2"
-			x: 22.0d
-			y: -14.5d
+			x: 36.75d
+			y: -5.0d
 		}
 		{
 			dependencies: ["10D76D10A4BAF2AC"]
@@ -689,8 +689,8 @@
 				{ id: "35616CB96764313B", item: "gtceu:methane_pyrolyser", type: "item" }
 			]
 			title: "Separations and Syngas"
-			x: 8.5d
-			y: 51.0d
+			x: 14.25d
+			y: 20.75d
 		}
 		{
 			dependencies: ["10D76D10A4BAF2AC"]
@@ -709,8 +709,8 @@
 				{ id: "5F20750F0D747EC3", item: "gtceu:isotope_column", type: "item" }
 			]
 			title: "Heavier Cuts"
-			x: 8.5d
-			y: 53.0d
+			x: 15.75d
+			y: 20.75d
 		}
 		{
 			dependencies: ["10D76D10A4BAF2AC"]
@@ -729,8 +729,8 @@
 				{ id: "365D0F1BE1E93944", item: "gtceu:zone_refining_tower", type: "item" }
 			]
 			title: "Films and Wafers"
-			x: 8.5d
-			y: 55.0d
+			x: 18.0d
+			y: 20.0d
 		}
 		{
 			dependencies: ["10D76D10A4BAF2AC"]
@@ -748,8 +748,8 @@
 				{ id: "5C29BA9F81AC50BE", item: "gtceu:spark_plasma_sinterer", type: "item" }
 			]
 			title: "Fibres and Crystals"
-			x: 8.5d
-			y: 57.0d
+			x: 19.25d
+			y: 19.75d
 		}
 		{
 			dependencies: ["37BBAC4FC45216FC"]
@@ -764,8 +764,8 @@
 				{ id: "1E6DA0B453A51E34", item: "gtceu:solar_probe_bay", type: "item" }
 			]
 			title: "A New Star Row"
-			x: 12.0d
-			y: -14.5d
+			x: 24.0d
+			y: -7.0d
 		}
 		{
 			dependencies: ["52CC6BA393B05B31"]
@@ -777,8 +777,8 @@
 			size: 0.75d
 			tasks: [{ id: "50DE662D6FFE38D5", type: "checkmark" }]
 			title: "Alpha Links"
-			x: 9.0d
-			y: -14.75d
+			x: 23.0d
+			y: -8.25d
 		}
 		{
 			dependencies: ["31F75527A44532C5"]
@@ -790,8 +790,8 @@
 			size: 0.75d
 			tasks: [{ id: "332D02E830247E96", type: "checkmark" }]
 			title: "Sirius Link"
-			x: 19.0d
-			y: -13.75d
+			x: 33.25d
+			y: -5.5d
 		}
 		{
 			dependencies: ["1F193E617E35A100"]
@@ -803,8 +803,8 @@
 			size: 0.75d
 			tasks: [{ id: "75B2786498F6C3AB", type: "checkmark" }]
 			title: "Rows of Chemistry"
-			x: 5.5d
-			y: 54.75d
+			x: 13.0d
+			y: 17.75d
 		}
 		{
 			dependencies: ["10D76D10A4BAF2AC"]
@@ -816,11 +816,11 @@
 			size: 0.75d
 			tasks: [{ id: "5E12CD753E213194", type: "checkmark" }]
 			title: "The Hotter Ring"
-			x: 6.0d
-			y: 60.75d
+			x: 17.5d
+			y: 17.5d
 		}
 		{
-			dependencies: ["572E0C57B385B5AF"]
+			dependencies: ["74B8B99C87A3BABC"]
 			description: [
 				"Heavy isotopes, megabar presses and magnets."
 				"The machines of this age start here."
@@ -832,8 +832,8 @@
 			size: 0.75d
 			tasks: [{ id: "79DE512BBD8C42C9", type: "checkmark" }]
 			title: "UEV Machines"
-			x: 4.0d
-			y: 24.5d
+			x: 10.25d
+			y: -6.5d
 		}
 		{
 			dependencies: ["1BE00654ED22DDB6"]
@@ -848,8 +848,8 @@
 				{ id: "117CC29E7E3FF1BE", item: "gtceu:stable_machine_casing", type: "item" }
 			]
 			title: "Calutron"
-			x: 7.0d
-			y: 21.5d
+			x: 13.75d
+			y: -16.0d
 		}
 		{
 			dependencies: ["79361740BE1544E3"]
@@ -859,8 +859,8 @@
 			rewards: [{ id: "5FCA6F32FAE6E0E5", type: "xp", xp: 80 }]
 			tasks: [{ id: "5DB2914AC4ED3A3F", item: "gtceu:calcium_48_dust", type: "item" }]
 			title: "Calcium-48"
-			x: 9.5d
-			y: 18.5d
+			x: 15.0d
+			y: -17.75d
 		}
 		{
 			dependencies: ["79361740BE1544E3"]
@@ -870,8 +870,8 @@
 			rewards: [{ id: "5FBFCF7A4E779BB7", type: "xp", xp: 80 }]
 			tasks: [{ id: "5FBA6497D61A3BFE", item: "gtceu:plutonium_244_dust", type: "item" }]
 			title: "Plutonium-244"
-			x: 9.5d
-			y: 20.0d
+			x: 17.25d
+			y: -17.0d
 		}
 		{
 			dependencies: ["79361740BE1544E3"]
@@ -886,8 +886,8 @@
 				{ id: "52A320958EBC388E", item: "gtceu:stable_machine_casing", type: "item" }
 			]
 			title: "Heavy Ion Cyclotron"
-			x: 9.5d
-			y: 21.5d
+			x: 18.0d
+			y: -14.75d
 		}
 		{
 			dependencies: ["5BA764E947B7B979"]
@@ -902,8 +902,8 @@
 				{ id: "712DA0136A61369D", item: "gtceu:stable_machine_casing", type: "item" }
 			]
 			title: "Recoil Separator"
-			x: 12.0d
-			y: 21.5d
+			x: 24.5d
+			y: -15.0d
 		}
 		{
 			dependencies: ["77D53467B126D5EE"]
@@ -918,8 +918,8 @@
 				{ id: "510AE8C544AF4DF5", item: "gtceu:stable_machine_casing", type: "item" }
 			]
 			title: "Superheavy Chemistry Lab"
-			x: 14.5d
-			y: 21.5d
+			x: 29.0d
+			y: -15.5d
 		}
 		{
 			dependencies: ["7997AD3A03140BA9"]
@@ -929,8 +929,8 @@
 			rewards: [{ id: "1A6FBC887A3A2EB6", type: "xp", xp: 80 }]
 			tasks: [{ id: "37966AB81810C9C8", item: "grindless:superheavy_census", type: "item" }]
 			title: "Superheavy Census"
-			x: 17.0d
-			y: 20.0d
+			x: 31.75d
+			y: -17.0d
 		}
 		{
 			dependencies: ["1BE00654ED22DDB6"]
@@ -945,8 +945,8 @@
 				{ id: "141AF73998C8BA7D", item: "gtceu:robust_machine_casing", type: "item" }
 			]
 			title: "Megabar Press"
-			x: 7.0d
-			y: 23.5d
+			x: 14.0d
+			y: -7.75d
 		}
 		{
 			dependencies: ["108A7CEF368AEE45"]
@@ -956,8 +956,8 @@
 			rewards: [{ id: "5283C20A65E56E75", type: "xp", xp: 80 }]
 			tasks: [{ id: "3EF92ADE27C994DE", item: "gtceu:lay_superhydride_ingot", type: "item" }]
 			title: "Squeeze a Hydride"
-			x: 9.5d
-			y: 23.5d
+			x: 16.0d
+			y: -8.25d
 		}
 		{
 			dependencies: ["1BE00654ED22DDB6"]
@@ -972,8 +972,8 @@
 				{ id: "1D83938AFE630824", item: "gtceu:clean_machine_casing", type: "item" }
 			]
 			title: "Electron Beam Furnace"
-			x: 7.0d
-			y: 25.5d
+			x: 15.0d
+			y: -13.25d
 		}
 		{
 			dependencies: ["5BD47CE42EDF75A2"]
@@ -988,8 +988,8 @@
 				{ id: "79A5CFF5F110C04B", item: "gtceu:heatproof_machine_casing", type: "item" }
 			]
 			title: "Single-Crystal Foundry"
-			x: 9.5d
-			y: 25.5d
+			x: 23.75d
+			y: -12.25d
 		}
 		{
 			dependencies: ["7674F530D0218D45"]
@@ -999,8 +999,8 @@
 			rewards: [{ id: "5DD3025CAD84C50D", type: "xp", xp: 80 }]
 			tasks: [{ id: "1A797E70B6C6D48F", item: "grindless:sx_blade", type: "item" }]
 			title: "Single-Crystal Blade"
-			x: 12.0d
-			y: 25.5d
+			x: 28.75d
+			y: -8.75d
 		}
 		{
 			dependencies: ["1BE00654ED22DDB6"]
@@ -1015,8 +1015,8 @@
 				{ id: "17EDC41534655381", item: "gtceu:heatproof_machine_casing", type: "item" }
 			]
 			title: "Nitride Magnet Works"
-			x: 7.0d
-			y: 27.5d
+			x: 17.5d
+			y: -11.75d
 		}
 		{
 			dependencies: ["1128B01901C86B97"]
@@ -1026,8 +1026,8 @@
 			rewards: [{ id: "120E64B3576E82D9", type: "xp", xp: 80 }]
 			tasks: [{ id: "7BD48DE68E38D3A7", item: "grindless:bonded_fe16n2_magnet", type: "item" }]
 			title: "Bonded Magnet"
-			x: 9.5d
-			y: 27.5d
+			x: 27.5d
+			y: -7.5d
 		}
 		{
 			dependencies: ["7939EEE351E35C70"]
@@ -1042,8 +1042,8 @@
 				{ id: "393799D155907268", item: "gtceu:clean_machine_casing", type: "item" }
 			]
 			title: "SiC Fibre Plant"
-			x: 7.5d
-			y: 30.5d
+			x: 15.0d
+			y: 11.5d
 		}
 		{
 			dependencies: ["34F0084064B3AF4F"]
@@ -1053,8 +1053,8 @@
 			rewards: [{ id: "7824EB3EA7CF474B", type: "xp", xp: 80 }]
 			tasks: [{ id: "533A8B89BD0DC780", item: "grindless:sic_fibre", type: "item" }]
 			title: "SiC Fibre"
-			x: 10.0d
-			y: 32.0d
+			x: 18.75d
+			y: 12.25d
 		}
 		{
 			dependencies: ["34F0084064B3AF4F"]
@@ -1069,8 +1069,8 @@
 				{ id: "17C3DF234A3B97C8", item: "gtceu:heatproof_machine_casing", type: "item" }
 			]
 			title: "CVI Furnace"
-			x: 10.0d
-			y: 30.5d
+			x: 20.5d
+			y: 10.75d
 		}
 		{
 			dependencies: ["7B6FD0C43D93BA99"]
@@ -1080,11 +1080,11 @@
 			rewards: [{ id: "3AE1924D9EA3EDC1", type: "xp", xp: 80 }]
 			tasks: [{ id: "1411EEA706F9B0D8", item: "grindless:hftacn_coil_block", type: "item" }]
 			title: "HfTaCN Coil"
-			x: 12.5d
-			y: 30.5d
+			x: 22.5d
+			y: 11.75d
 		}
 		{
-			dependencies: ["76EFA041DAC4B333"]
+			dependencies: ["76EFA041DAC4B333", "19174331BF47A9B1"]
 			description: ["The &6Stellar Forge&r is a furnace that holds a fragment of a star. A UEV hull, eleven electric blast furnaces, twenty-three HfTaCN coil blocks, four UEV field generators, five UEV pumps, three UEV sensors, three ULE cavities, three HfTaCN heating elements and any UEV circuit. The hottest recipes in the pack, which the Mk4 plasma line runs on. Fuel and heat sinks by ME; plan for the byproducts before you start."]
 			icon: "gtceu:stellar_forge"
 			id: "3875C96B236BA596"
@@ -1093,11 +1093,11 @@
 			size: 1.25d
 			tasks: [{ id: "55C52864C928DD6C", item: "gtceu:stellar_forge", type: "item" }]
 			title: "Stellar Forge"
-			x: 15.0d
-			y: 30.5d
+			x: 23.5d
+			y: 9.75d
 		}
 		{
-			dependencies: ["7939EEE351E35C70"]
+			dependencies: ["3C3FC8DE94FAC5EE"]
 			description: ["The &6SNSPD Foundry&r grows a nanowire detector that counts single photons. Two UHV hulls, three UV sensors, a float-zone silicon wafer, two SiN Waveguide Chips, a silicon drift detector, any UHV circuit and the photonic casing. The single-photon detector, which the UEV sensor, the quantum photonic chip and the repeater node take. Wafers and chips by ME and superfluid helium by pipe for the cold stage; send finished detectors on by ME."]
 			icon: "gtceu:snspd_foundry"
 			id: "1DCFFEC97F5A28AF"
@@ -1109,8 +1109,8 @@
 				{ id: "32DEFC24DB72379C", item: "grindless:photonic_casing", type: "item" }
 			]
 			title: "SNSPD Foundry"
-			x: 7.5d
-			y: 34.0d
+			x: 11.0d
+			y: 4.25d
 		}
 		{
 			dependencies: ["1DCFFEC97F5A28AF"]
@@ -1125,11 +1125,11 @@
 				{ id: "56106516C6459E28", item: "grindless:photonic_casing", type: "item" }
 			]
 			title: "Van der Waals Stacker"
-			x: 10.0d
-			y: 35.5d
+			x: 13.75d
+			y: 2.0d
 		}
 		{
-			dependencies: ["1DCFFEC97F5A28AF", "3EEACFBDD09FDD21"]
+			dependencies: ["1DCFFEC97F5A28AF", "3EEACFBDD09FDD21", "5FBB5CC4F79C7D79", "750B64193AFA4A16", "3C3FC8DE94FAC5EE"]
 			description: ["The &6Photonic Integration Hall&r bonds waveguides, sources and detectors into one optical chip. Two UHV hulls, three UV emitters, a quantum dot source, a graphene modulator, two SiN Waveguide Chips, any UHV circuit and the photonic casing; the Van der Waals Stacker is its research. The waveguide circuit, the quantum photonic chip and the optical computer. Parts in matched counts by ME; keep a stock of finished chips and send them to the assembler."]
 			icon: "gtceu:photonic_integration_hall"
 			id: "1AC90115EC98790D"
@@ -1142,8 +1142,8 @@
 				{ id: "3E93BF3C348B2353", item: "gtceu:laminated_glass", type: "item" }
 			]
 			title: "Photonic Integration Hall"
-			x: 12.5d
-			y: 35.0d
+			x: 16.75d
+			y: 6.75d
 		}
 		{
 			dependencies: ["7939EEE351E35C70"]
@@ -1158,8 +1158,8 @@
 				{ id: "727A402D2D486D44", item: "gtceu:clean_machine_casing", type: "item" }
 			]
 			title: "Helium-3 Polariser"
-			x: 7.5d
-			y: 37.5d
+			x: 19.0d
+			y: 14.25d
 		}
 		{
 			dependencies: ["15578A4882F50B8B"]
@@ -1169,11 +1169,11 @@
 			rewards: [{ id: "755BC53C955390F4", type: "xp", xp: 80 }]
 			tasks: [{ id: "51C1656AA08C0DEE", item: "gtceu:polarised_helium_3_bucket", type: "item" }]
 			title: "Polarised Helium-3"
-			x: 10.0d
-			y: 39.0d
+			x: 22.0d
+			y: 14.75d
 		}
 		{
-			dependencies: ["15578A4882F50B8B"]
+			dependencies: ["15578A4882F50B8B", "76EFA041DAC4B333", "19174331BF47A9B1"]
 			description: ["The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes. A UEV hull, five UEV emitters, four UEV sensors, four UEV field generators, any UEV circuit, two UEV fusion casings, two HfTaCN coil blocks and a Wf/W tile; the Helium-3 Polariser is its research. The plasma and burn quests that follow it. Fuel and coolant by pipe; build the plant before you light it."]
 			icon: "gtceu:uev_fusion_reactor"
 			id: "3C4381FD6FA32403"
@@ -1185,8 +1185,8 @@
 				{ id: "3AB164C2E8DBEF20", item: "grindless:uev_fusion_casing", type: "item" }
 			]
 			title: "Mk4 Fusion Reactor"
-			x: 10.0d
-			y: 37.5d
+			x: 28.5d
+			y: 9.5d
 		}
 		{
 			dependencies: ["147A35DB262693FF"]
@@ -1201,8 +1201,8 @@
 				{ id: "7B6636E89FD154BF", item: "grindless:photonic_casing", type: "item" }
 			]
 			title: "Quantum Gas Lab"
-			x: 7.5d
-			y: 41.0d
+			x: 25.75d
+			y: 14.75d
 		}
 		{
 			dependencies: ["7939EEE351E35C70"]
@@ -1212,8 +1212,8 @@
 			rewards: [{ id: "175D3FC4CDBBF1C7", type: "xp", xp: 80 }]
 			tasks: [{ id: "16A88D4229B57107", item: "grindless:li_cooling_laser", type: "item" }]
 			title: "Cooling Lasers"
-			x: 5.5d
-			y: 41.0d
+			x: 15.75d
+			y: 16.25d
 		}
 		{
 			dependencies: ["336F09E29287CDEA"]
@@ -1223,8 +1223,8 @@
 			rewards: [{ id: "586BF7808E245FA7", type: "xp", xp: 100 }]
 			tasks: [{ id: "16BED996DB73023F", item: "grindless:degenerate_eos_model", type: "item" }]
 			title: "Degenerate EOS Model"
-			x: 10.0d
-			y: 42.5d
+			x: 32.0d
+			y: 7.5d
 		}
 		{
 			dependencies: ["336F09E29287CDEA"]
@@ -1239,8 +1239,8 @@
 				{ id: "36BBF625A4664059", item: "grindless:photonic_casing", type: "item" }
 			]
 			title: "Entanglement Station"
-			x: 12.5d
-			y: 41.0d
+			x: 31.25d
+			y: 11.25d
 		}
 		{
 			dependencies: ["1299B0A10283C57E"]
@@ -1255,8 +1255,8 @@
 				{ id: "5A43B764A7FC6DD1", item: "grindless:photonic_casing", type: "item" }
 			]
 			title: "Nebula Collector"
-			x: 12.0d
-			y: -11.5d
+			x: 25.25d
+			y: -5.0d
 		}
 		{
 			dependencies: ["35EB2F3BC6F8AEB8"]
@@ -1271,8 +1271,8 @@
 				{ id: "79A6D2C8364885FF", item: "grindless:photonic_casing", type: "item" }
 			]
 			title: "Interstellar Dust Lab"
-			x: 14.5d
-			y: -11.5d
+			x: 26.75d
+			y: -5.0d
 		}
 		{
 			dependencies: ["58D016D6E9BAFE59"]
@@ -1287,11 +1287,11 @@
 				{ id: "797A11823A9849BF", item: "grindless:photonic_casing", type: "item" }
 			]
 			title: "Pulsar Timing Station"
-			x: 17.0d
-			y: -11.5d
+			x: 27.5d
+			y: -3.5d
 		}
 		{
-			dependencies: ["32730EE4F1B2A321"]
+			dependencies: ["32730EE4F1B2A321", "19174331BF47A9B1"]
 			description: ["The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal. A UEV hull, five UEV pumps, four fluid regulators, three UEV pistons, three FFKM seals, a Ta2O5 dust, any UEV circuit and the inert casing; the Barnard core drill is its research. Iron pentacarbonyl and pure iron, for the nitride magnets. Contain the carbon monoxide; keep the loop sealed and vented to a scrubber."]
 			icon: "gtceu:carbonyl_refinery"
 			id: "3664E92DBC4A97AB"
@@ -1303,8 +1303,8 @@
 				{ id: "593D5D39FDA7EF5A", item: "gtceu:inert_machine_casing", type: "item" }
 			]
 			title: "Carbonyl Refinery"
-			x: 11.5d
-			y: 4.5d
+			x: 29.5d
+			y: 3.75d
 		}
 		{
 			dependencies: ["3664E92DBC4A97AB"]
@@ -1314,11 +1314,11 @@
 			rewards: [{ id: "77DE399F55ACF478", type: "xp", xp: 80 }]
 			tasks: [{ id: "3B976D09C20B58CD", item: "gtceu:iron_pentacarbonyl_bucket", type: "item" }]
 			title: "Iron Pentacarbonyl"
-			x: 14.0d
-			y: 4.5d
+			x: 31.75d
+			y: 2.75d
 		}
 		{
-			dependencies: ["120B4D6B667EAF26"]
+			dependencies: ["120B4D6B667EAF26", "19174331BF47A9B1"]
 			description: ["The &6White Dwarf Spectrograph&r reads a dead star's light and from it the mass and radius. A UEV hull, four UEV sensors, five UEV emitters, three UEV pumps, an ULE cavity, three SNSPDs, two nuclear clocks, any UEV circuit and the photonic casing. The mass-radius chart, made in Sirius B orbit, and the Degenerate Harvester. The station asks for little by ME; keep a stock of charts."]
 			icon: "gtceu:white_dwarf_spectrograph"
 			id: "565457BFBC2B7232"
@@ -1330,11 +1330,11 @@
 				{ id: "32EAF273ADACDE8A", item: "grindless:photonic_casing", type: "item" }
 			]
 			title: "White Dwarf Spectrograph"
-			x: 22.0d
-			y: -7.5d
+			x: 34.75d
+			y: 2.0d
 		}
 		{
-			dependencies: ["565457BFBC2B7232"]
+			dependencies: ["565457BFBC2B7232", "7AD63131D4FD4BBF"]
 			description: ["The &6Degenerate Harvester&r takes matter from a white dwarf, in which atoms are crushed together. A UEV hull, five UEV robot arms, five UEV pumps, three UEV sensors, a degenerate EOS model, a mass-radius chart, two hollow-core fibres, any UEV circuit and the degenerate containment casing; the spectrograph is its research. Degenerate matter, made in Sirius B orbit, which the Containment Works bottles. Put the plant behind a safe containment loop; never route this matter by plain pipe."]
 			icon: "gtceu:degenerate_harvester"
 			id: "3970BC63BB8C9A9F"
@@ -1346,8 +1346,8 @@
 				{ id: "580B7DC1EC7E017A", item: "grindless:degenerate_containment_casing", type: "item" }
 			]
 			title: "Degenerate Harvester"
-			x: 24.5d
-			y: -7.5d
+			x: 37.25d
+			y: 0.5d
 		}
 		{
 			dependencies: ["3970BC63BB8C9A9F"]
@@ -1359,8 +1359,8 @@
 			size: 1.25d
 			tasks: [{ id: "1499500AF70755CE", item: "gtceu:containment_works", type: "item" }]
 			title: "Containment Works"
-			x: 27.0d
-			y: -7.5d
+			x: 39.25d
+			y: -0.75d
 		}
 		{
 			dependencies: ["7F1047B6CDE89AFA"]
@@ -1370,8 +1370,8 @@
 			rewards: [{ id: "5D228A727C3D2C7A", type: "xp", xp: 20 }]
 			tasks: [{ id: "116BC10DCAFA74E0", type: "checkmark" }]
 			title: "Degenerate Pellet"
-			x: 29.5d
-			y: -7.5d
+			x: 43.0d
+			y: -1.75d
 		}
 		{
 			dependencies: ["7997AD3A03140BA9"]
@@ -1381,8 +1381,8 @@
 			rewards: [{ id: "798971C9AFAEDBB2", type: "xp", xp: 100 }]
 			tasks: [{ id: "70B9065DAC2DFAE0", item: "grindless:tennessine_sample", type: "item" }]
 			title: "Tennessine Sample"
-			x: 17.0d
-			y: 21.5d
+			x: 40.25d
+			y: -7.5d
 		}
 		{
 			dependencies: ["52CC6BA393B05B31"]
@@ -1397,8 +1397,8 @@
 			size: 0.75d
 			tasks: [{ id: "509F48F93C41FCF3", type: "checkmark" }]
 			title: "Work at Alpha Centauri"
-			x: 9.0d
-			y: -8.75d
+			x: 23.5d
+			y: -4.75d
 		}
 		{
 			dependencies: ["31F75527A44532C5"]
@@ -1413,8 +1413,8 @@
 			size: 0.75d
 			tasks: [{ id: "1ADBFE13329104EA", type: "checkmark" }]
 			title: "Work at Sirius B"
-			x: 19.0d
-			y: -8.75d
+			x: 34.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["545210E1EB9C1D44"]
@@ -1429,11 +1429,11 @@
 			size: 0.75d
 			tasks: [{ id: "17BDAC5C590D22EE", type: "checkmark" }]
 			title: "Work at Barnard b"
-			x: 8.5d
-			y: 6.25d
+			x: 23.75d
+			y: 4.25d
 		}
 		{
-			dependencies: ["1BE00654ED22DDB6"]
+			dependencies: ["74B8B99C87A3BABC"]
 			description: ["Fibre, detectors, polarisers and the quantum gas line."]
 			icon: "gtceu:sic_fibre_plant"
 			id: "7939EEE351E35C70"
@@ -1442,8 +1442,8 @@
 			size: 0.75d
 			tasks: [{ id: "36B4D28AE1C47211", type: "checkmark" }]
 			title: "Fibre and Quantum Lines"
-			x: 4.5d
-			y: 36.5d
+			x: 6.75d
+			y: 9.25d
 		}
 	]
 	subtitle: ["A first light at home, then Alpha Centauri, Barnard b and a white dwarf, and a gate held open."]

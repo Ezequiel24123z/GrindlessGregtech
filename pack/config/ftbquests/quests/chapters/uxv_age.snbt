@@ -563,7 +563,10 @@
 		}
 		{
 			dependencies: ["567A7CE091E678B6"]
-			description: ["The &6UXV Energy Input Hatch&r takes the full UXV voltage."]
+			description: [
+				"The &6UXV Energy Input Hatch&r takes the full UXV voltage into a machine, and it is the door every UXV controller draws its power through."
+				"It is built in the assembly line on a UXV hull with the emitter parts of this page, UXV circuits and the lasagna cable of the age. Without it the UXV machines of the next chapters do not run. Make hatches in small batches by ME: each machine needs one, and a multiblock with parallel hatches needs more."
+			]
 			icon: "gtceu:uxv_energy_input_hatch"
 			id: "3E0AF625714AD8D6"
 			rewards: [{ id: "57885FB68C9EBCF7", type: "xp", xp: 200 }]
@@ -1211,7 +1214,10 @@
 		}
 		{
 			dependencies: ["3CCB6C8A5332CADD"]
-			description: ["The plate every UXV hull and part is cut from."]
+			description: [
+				"The &6Lasagna Plate&r is the structural plate of the UXV hull and of every UXV part: a tungsten-fibre billet with a lasagna phase pressed onto it."
+				"The Pasta Laminator makes it from the phase and a billet, which the sorting row supplies. It unlocks the UXV hull and, through it, every UXV machine. Plates stack quickly, so feed phase and billets by ME and send the plates on to the hull line."
+			]
 			icon: "grindless:lasagna_plate"
 			id: "34D1D9ED3F6FBC67"
 			rewards: [{ id: "16164FF0FF0A3286", type: "xp", xp: 80 }]

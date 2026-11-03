@@ -225,7 +225,7 @@ export const QUESTS = [
     desc: [
       "Two &6EU P2P Tunnels&r on one frequency, one on a cable at home and one on a hatch up here, and the power plant on Earth runs the Moon.",
       "The tunnels pass whatever voltage you feed them, so match it to the hatch at the far end. AE2 charges a small toll in AE energy for the delivery.",
-      "There is no recipe for the tunnel: craft an ordinary ME P2P Tunnel and right-click it with a GregTech wire or cable. That attunes it to EU, and the cable you choose is the voltage it carries. Make a pair, set both to one frequency, and keep the home end next to the generators and the far end next to the Moon base's main hatch.",
+      "There is no recipe for the tunnel: craft an ordinary ME P2P Tunnel and right-click it with a GregTech wire or cable. That attunes it to EU, and the cable you choose is the voltage it carries. Make a pair on one frequency: the home end next to the generators, the far end next to the Moon base's main hatch.",
     ],
     tasks: [it("eup2p:eu_p2p_tunnel", 2, "751D67F4EBA6DE8C")],
     rewards: [xp(60, "5D6B28FB61E42CBD")],

@@ -1606,6 +1606,19 @@
 		}
 		{
 			dependencies: ["1341919104B7CC42"]
+			description: ["A wafer of grown laser emitters is the light source of the &6Photonic Coprocessor&r, and of the creative cores of the last stage. The &6Laser Array Wafer&r is made two at a time. The MOCVD reactor with a circuit of the last tier, and the gallium, indium and arsenic feed it grows from. It draws MAX+ power. The photonic coprocessor of the next quest and the creative cores of the end of the era. Feed the metal-organic precursors by pipe and take the wafers by ME; the coprocessor takes one wafer each, so keep a small stock."]
+			icon: "grindless:laser_array_wafer"
+			id: "35B4487582FDDAE0"
+			rewards: [{ id: "3AF1FEAC6C8A8FD7", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "11907811E64734EE", item: "grindless:laser_array_wafer", type: "item" }]
+			title: "Laser Array Wafer"
+			x: 40.25d
+			y: 6.0d
+		}
+		{
+			dependencies: ["35B4487582FDDAE0"]
 			description: ["A crafting CPU of 256M storage, with enough accelerators and a photonic coprocessor, can plan a job of a billion items without losing track. The crafting storage, the accelerators and the &6Photonic Coprocessor&r. Plans that stage III asks for. Split a huge plan into several CPUs, one for each line."]
 			icon: "megacells:256m_crafting_storage"
 			id: "73BAF6EEECC416D6"
@@ -1618,7 +1631,7 @@
 				{ id: "1E47FA18CC2A2618", item: "grindless:photonic_coprocessor", type: "item" }
 			]
 			title: "Crafting at a Billion"
-			x: 40.5d
+			x: 41.5d
 			y: 6.0d
 		}
 		{
@@ -1638,8 +1651,8 @@
 				{ id: "3301A96F500A93AD", item: "grindless:pattern_memory_unit", type: "item" }
 			]
 			title: "Patterns by the Thousand"
-			x: 42.0d
-			y: 6.0d
+			x: 43.0d
+			y: 5.25d
 		}
 		{
 			dependencies: ["57131618A8A6EBF3"]

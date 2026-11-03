@@ -99,7 +99,7 @@
 			id: "56E5B02FDDF0BC16"
 			rewards: [{ id: "5E01D9A3FE24A5C3", type: "xp", xp: 100 }]
 			tasks: [{ id: "522FAF3630357BC4", item: "grindless:neptunian_quantum_seed", type: "item" }]
-			title: "Deep Neptune"
+			title: "Neptunian Seed"
 			x: 18.0d
 			y: 1.5d
 		}
@@ -211,7 +211,7 @@
 			shape: "circle"
 			size: 0.75d
 			tasks: [{ id: "527676BA1A0DDAF4", type: "checkmark" }]
-			title: "Ices Apart"
+			title: "Ice by Ice"
 			x: 25.0d
 			y: 0.5d
 		}
@@ -284,7 +284,7 @@
 			shape: "rsquare"
 			size: 1.25d
 			tasks: [{ id: "3AA71F82A20BA297", item: "grindless:sgr_a_star_image", type: "item" }]
-			title: "The Shadow"
+			title: "Shadow of the Hole"
 			x: 37.0d
 			y: 1.0d
 		}
@@ -424,7 +424,20 @@
 		}
 		{
 			dependencies: ["135F36C81C412CD0"]
-			description: ["Neutronium, silicon and gallium arsenide grow into a &6Neutronium Boule&r in a blast furnace under xenon. The cutter slices it into &6Neutronium Wafers&r. Neutronium ingots, silicon blocks, xenon, a blast furnace that reaches the temperature, and a cutter with lubricant or water. The Highly Advanced SoC wafer, and the neutronium wafer the Starchip is cut from. The boule is slow and one boule yields a great many wafers. Keep one growing and stock the wafers by ME."]
+			description: ["Gallium arsenide dust melts in a blast furnace under argon and grows into a &6Gallium Arsenide Boule&r, the seed stock of the photonic chips. A cutter slices it into wafers. Gallium arsenide dust, argon, an electric blast furnace that reaches 1600 K, and a cutter with lubricant. The gallium arsenide wafer, the InGaAs diodes, and the neutronium boule that grows from it. One boule yields eight wafers. Keep a furnace growing and send the wafers on by ME."]
+			icon: "grindless:gallium_arsenide_boule"
+			id: "78FADDA34778308B"
+			rewards: [{ id: "7E463690A8366383", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7869971F767BF5C0", item: "grindless:gallium_arsenide_boule", type: "item" }]
+			title: "Gallium Arsenide Boule"
+			x: 4.0d
+			y: -11.0d
+		}
+		{
+			dependencies: ["78FADDA34778308B"]
+			description: ["Neutronium, silicon and gallium arsenide grow into a &6Neutronium Boule&r in a blast furnace under xenon. The cutter slices it into &6Neutronium Wafers&r. Neutronium ingots, silicon blocks, the gallium arsenide boule from the quest before, xenon, a blast furnace that reaches the temperature, and a cutter with lubricant or water. The Highly Advanced SoC wafer, and the neutronium wafer the Starchip is cut from. The boule is slow and one boule yields a great many wafers. Keep one growing and stock the wafers by ME."]
 			icon: "gtceu:neutronium_boule"
 			id: "347BB93B6A76E068"
 			rewards: [{ id: "5F9FE9C40E36C9D4", type: "xp", xp: 80 }]
@@ -435,7 +448,7 @@
 				{ id: "565D718E5B6D0CB8", item: "gtceu:neutronium_wafer", type: "item" }
 			]
 			title: "Neutronium Boule"
-			x: 4.0d
+			x: 7.5d
 			y: -11.0d
 		}
 		{
@@ -923,7 +936,7 @@
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
-			description: ["The &6Superfluid Helium Plant&r cools helium below its lambda point, where it flows without friction, and splits Neptune's helium with a superleak. Its controller, the &6Cryostat Casing&r and the stainless gearboxes that run the cold compressors. Helium II for the cryomodules and the cavity works. Gas arrives by pipe; stock helium II in a dedicated tank."]
+			description: ["The &6Superfluid Helium Plant&r cools helium below its lambda point, where it flows without friction, and splits Neptune's helium with a superleak. Its controller, the &6Cryostat Casing&r, a &6Mu-Metal Shield&r that keeps stray fields off the cold stage, and the stainless gearboxes that run the cold compressors. Helium II for the cryomodules and the cavity works. Gas arrives by pipe; stock helium II in a dedicated tank."]
 			icon: "gtceu:superfluid_helium_plant"
 			id: "50932D647CEF0A54"
 			rewards: [{ id: "3A5B4438597AD1F7", type: "xp", xp: 120 }]
@@ -932,6 +945,7 @@
 			tasks: [
 				{ id: "5DB04F970177D45A", item: "gtceu:superfluid_helium_plant", type: "item" }
 				{ id: "5025515AE5D2D6DC", item: "grindless:cryostat_casing", type: "item" }
+				{ id: "1F4E45076F0C75F2", item: "grindless:mu_metal_shield", type: "item" }
 			]
 			title: "Superfluid Helium"
 			x: 3.5d
@@ -1036,7 +1050,7 @@
 			tasks: [{ id: "1EA6CADF664FD09D", item: "grindless:fibre_laser_module", type: "item" }]
 			title: "Fibre Laser Module"
 			x: 8.0d
-			y: 11.5d
+			y: 11.0d
 		}
 		{
 			dependencies: ["51F3CB52EBEB3BCB"]
@@ -1057,14 +1071,14 @@
 		}
 		{
 			dependencies: ["3D71CDF674EF3302"]
-			description: ["Diode bars stacked in a cooled mount make the &6InGaAs Pump Module&r that lights the fibre laser."]
+			description: ["Diode bars stacked in a cooled mount make the &6InGaAs Pump Module&r that lights the fibre laser. The diode line builds it from InGaAs bars and a cooled mount, so it needs the pump line running. It unlocks the fibre laser and what that laser powers. Diodes go out by ME, a few at a time."]
 			icon: "grindless:ingaas_pump_module"
 			id: "346C198E81F5FA85"
 			rewards: [{ id: "15A975F189427D96", type: "xp", xp: 80 }]
 			tasks: [{ id: "70951C01EEF6B329", item: "grindless:ingaas_pump_module", type: "item" }]
 			title: "Pump Diode Module"
-			x: 12.5d
-			y: 11.5d
+			x: 12.25d
+			y: 10.0d
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
@@ -1117,7 +1131,7 @@
 		}
 		{
 			dependencies: ["37B93B08FCFF08DA"]
-			description: ["Spin the tubes and you get &6BNNT Yarn&r: light, strong and transparent to neutrons."]
+			description: ["Spin the tubes and you get &6BNNT Yarn&r: light, strong and transparent to neutrons, so it is the fibre of the lightest parts. The yarn spinner makes it from boron nitride nanotubes, which need boron-10 from the hot cell. It unlocks the powder-in-tube line. Keep the tubes coming by ME and send the yarn on the same way."]
 			icon: "grindless:bnnt_yarn"
 			id: "3E5A326AEACCF50A"
 			rewards: [{ id: "5B77C236091ED375", type: "xp", xp: 80 }]
@@ -1126,8 +1140,8 @@
 				{ id: "115D1CE589407BD8", item: "grindless:hbn_dust", type: "item" }
 			]
 			title: "BNNT Yarn"
-			x: 8.5d
-			y: 13.0d
+			x: 8.75d
+			y: 13.25d
 		}
 		{
 			dependencies: ["3E5A326AEACCF50A"]
@@ -1140,14 +1154,15 @@
 			tasks: [
 				{ id: "56D40CDE650591EA", item: "gtceu:powder_in_tube_line", type: "item" }
 				{ id: "5039ED5323998051", item: "gtceu:uv_machine_casing", type: "item" }
+				{ id: "1B13CA27BBDE46DE", item: "grindless:silver_tube", type: "item" }
 			]
 			title: "Powder-in-Tube Line"
-			x: 10.0d
-			y: 13.0d
+			x: 11.25d
+			y: 12.5d
 		}
 		{
 			dependencies: ["1682DED202B72CC5"]
-			description: ["A drawn &6PIT Billet&r is a sheath filled with powder, ready to be rolled into wire."]
+			description: ["A drawn &6PIT Billet&r is a silver sheath filled with powder, ready to be rolled into wire. The powder-in-tube line makes it, and each one eats a silver tube. It unlocks the wire step and EnTED wire for the UV network. Remelt the returned silver into tubes and keep them stocked by ME."]
 			icon: "grindless:pit_billet"
 			id: "1352F5938C0B0298"
 			rewards: [{ id: "38E49737526E364E", type: "xp", xp: 80 }]
@@ -1157,7 +1172,7 @@
 			]
 			title: "Powder Billet"
 			x: 11.5d
-			y: 13.0d
+			y: 16.5d
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
@@ -1173,18 +1188,18 @@
 			]
 			title: "Powder Bed Printer"
 			x: 5.0d
-			y: 15.0d
+			y: 15.75d
 		}
 		{
 			dependencies: ["1CC82013F8BF2D9B"]
-			description: ["The &6Printed Probe Frame&r is the lightest rigid thing you build; the probe hangs from it."]
+			description: ["The &6Printed Probe Frame&r is the lightest rigid thing you build; the probe hangs from it. The powder bed printer prints it from atomised metal powder under argon. It unlocks the cryotank winder and every probe after it. Keep powder and argon stocked and store the frames in ME."]
 			icon: "grindless:printed_probe_frame"
 			id: "1ACAD1676B56BFC3"
 			rewards: [{ id: "58CDFDA1D1DD9503", type: "xp", xp: 80 }]
 			tasks: [{ id: "1AA67A07BA194382", item: "grindless:printed_probe_frame", type: "item" }]
 			title: "Printed Probe Frame"
 			x: 7.5d
-			y: 15.0d
+			y: 16.25d
 		}
 		{
 			dependencies: ["1ACAD1676B56BFC3"]
@@ -1199,8 +1214,8 @@
 				{ id: "1BAE79C07C32A17A", item: "gtceu:uv_machine_casing", type: "item" }
 			]
 			title: "Cryotank Winder"
-			x: 9.0d
-			y: 15.5d
+			x: 10.25d
+			y: 14.25d
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
@@ -1215,8 +1230,8 @@
 				{ id: "5D647D977A36F37E", item: "gtceu:uv_machine_casing", type: "item" }
 			]
 			title: "Thruster Works"
-			x: 1.5d
-			y: 14.0d
+			x: 3.75d
+			y: 17.25d
 		}
 		{
 			dependencies: ["56276A4A85BCF379"]
@@ -1229,8 +1244,8 @@
 				{ id: "13DDCB5F49935B73", item: "grindless:hall_thruster", type: "item" }
 			]
 			title: "Ion Thrusters"
-			x: 3.5d
-			y: 16.5d
+			x: 5.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
@@ -1246,8 +1261,8 @@
 				{ id: "54299180013D6B8C", item: "gtceu:inert_machine_casing", type: "item" }
 			]
 			title: "The Ark"
-			x: 3.0d
-			y: 14.5d
+			x: 2.25d
+			y: 16.25d
 		}
 		{
 			dependencies: ["59F34562582255AD"]
@@ -1262,8 +1277,8 @@
 				{ id: "769DCD55F55EDB6F", item: "gtceu:plascrete", type: "item" }
 			]
 			title: "Neural Culture Vat"
-			x: 5.0d
-			y: 16.5d
+			x: 4.0d
+			y: 20.25d
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
@@ -1278,19 +1293,19 @@
 				{ id: "746CA7407285CA5A", item: "grindless:station_truss_casing", type: "item" }
 			]
 			title: "Light Sail Fab"
-			x: 1.0d
-			y: 16.0d
+			x: 2.5d
+			y: 21.0d
 		}
 		{
 			dependencies: ["7E77EFDBCC3B4374"]
-			description: ["A &6Light Sail&r weighs almost nothing and reflects almost everything."]
+			description: ["A &6Light Sail&r weighs almost nothing and reflects almost everything, so light alone can push a probe to another star. It is made at the sail line from thin reflective film, in an orbital build with a truss casing. It unlocks the Starchip Fab and the launch. Sails go out by ME, one for each run."]
 			icon: "grindless:light_sail"
 			id: "3AB434D5A69FAF2B"
 			rewards: [{ id: "3FB536BDD9DFD03B", type: "xp", xp: 80 }]
 			tasks: [{ id: "7CEB583A4EB7C29B", item: "grindless:light_sail", type: "item" }]
 			title: "Light Sail"
-			x: 3.5d
-			y: 19.0d
+			x: 4.0d
+			y: 22.5d
 		}
 		{
 			dependencies: ["3AB434D5A69FAF2B"]
@@ -1305,8 +1320,8 @@
 				{ id: "5A789706E36BA627", item: "gtceu:clean_machine_casing", type: "item" }
 			]
 			title: "Starchip Fab"
-			x: 5.5d
-			y: 18.0d
+			x: 6.25d
+			y: 21.0d
 		}
 		{
 			dependencies: ["3D0F0BDA824B2E7B"]
@@ -1322,8 +1337,8 @@
 				{ id: "30838FE821EE6835", item: "grindless:laser_module_block", type: "item" }
 			]
 			title: "Laser Sail Launcher"
-			x: 7.0d
-			y: 17.0d
+			x: 7.25d
+			y: 18.25d
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
@@ -1375,7 +1390,7 @@
 		}
 		{
 			dependencies: ["762C4669D260B0F2"]
-			description: ["A &6Triton Ice Core&r is the catalyst the Pluto penetrator drills with."]
+			description: ["A &6Triton Ice Core&r is the catalyst the Pluto penetrator drills with, cut from Triton ice. It is made in the Triton line from the ice a probe brings back, so it needs that run first. It unlocks the Pluto penetrator. Keep the line stocked by ME, since the penetrator uses a core for every bore."]
 			icon: "grindless:triton_ice_core"
 			id: "76C00CDEFC09A52F"
 			rewards: [{ id: "74EE7036CCFF3E79", type: "xp", xp: 80 }]
@@ -1447,7 +1462,7 @@
 		}
 		{
 			dependencies: ["1F125850043BA593"]
-			description: ["A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed."]
+			description: ["A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed, so it is the one thing that shows what the young system was made of. A probe brings it back from the Kuiper Belt in a canister, so you need the probe line and a launch. It unlocks the annealer that keeps the ice as it was. Probes go out by ME and the canister comes back the same way."]
 			icon: "grindless:planetesimal_sample"
 			id: "3D26AB0B36F9CEB1"
 			rewards: [{ id: "3568332CA756123D", type: "xp", xp: 80 }]
@@ -1507,6 +1522,38 @@
 			title: "The Shadow"
 			x: 26.0d
 			y: 9.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Nano Forge&r is the UV hall that works matter by the atom, building nanoscale parts that no assembler can place. Its controller, built on an assembly line, and a UV energy hatch: it draws about 491,520 EU/t while it runs. The nanoscale parts of the late-game lines. Feed inputs by ME and pull the parts out by bus; give it its own power line."]
+			icon: "gtca:nano_forge"
+			id: "1468097102B4CAE6"
+			rewards: [{ id: "128D6F6632222FBB", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3E46E96305CDF75D", item: "gtca:nano_forge", type: "item" }
+				{ id: "3A742135596BE8B4", item: "gtceu:uv_machine_casing", type: "item" }
+			]
+			title: "Nano Forge"
+			x: 0.75d
+			y: 19.0d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6PCB Factory Mk I&r prints circuit boards in bulk, so the board and chip lines keep up with UV demand. Its controller, built on an assembly line, a cleanroom and a UV energy hatch: it draws about 491,520 EU/t while it runs. Boards at a rate the single assembler cannot hold, for every era after this one. Feed the inputs by ME and send the finished boards on by bus."]
+			icon: "gtca:pcb_factory_mki"
+			id: "721E38F5552E4D0B"
+			rewards: [{ id: "38A9A12BF72C0AEF", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5D10A0EA7ABD8718", item: "gtca:pcb_factory_mki", type: "item" }
+				{ id: "159A471AD5531546", item: "gtceu:uv_machine_casing", type: "item" }
+			]
+			title: "PCB Factory Mk I"
+			x: 2.0d
+			y: 24.0d
 		}
 	]
 	subtitle: ["Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are here too."]

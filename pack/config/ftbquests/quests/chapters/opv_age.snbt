@@ -443,6 +443,19 @@
 			y: 9.0d
 		}
 		{
+			dependencies: ["5DE7C491611D14C0"]
+			description: ["A sapphire crystal doped with titanium is the gain medium of a tunable laser. The &6Ti:Sapphire Boule&r is the crystal that the Lyman-alpha laser of the antihydrogen line is built round. The crystal growth furnace, two sapphire dust, a titanium dust and an iridium crucible, with a circuit of any kind. It draws OpV power. The Lyman-alpha laser, which cools the antihydrogen atoms before they freeze into a cell, beside the krypton tripler cell. Feed the dusts by ME and keep a spare crucible; one boule is used up per laser, so stock only a few."]
+			icon: "grindless:ti_sapphire_boule"
+			id: "15DB2B19BF5783B5"
+			rewards: [{ id: "3932025D0FF6D051", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7A4A4D44B1308013", item: "grindless:ti_sapphire_boule", type: "item" }]
+			title: "Ti:Sapphire Boule"
+			x: 14.5d
+			y: 9.0d
+		}
+		{
 			dependencies: ["74C17E229844F7DF"]
 			description: ["The &6OpV Sensor&r measures what the detectors of the age need to see: single photons, charge and spin. The emitter, the field generator and many controllers use one. An HPGE Compton crystal, a chain lamina stack, a cryo optical link, chain strand cable, a UXV sensor and OpV circuits, in an assembler. The energy input hatches, the annihilation shield casing and the controllers that watch a beam. Mainframes by ME in matched counts; keep sensors in a small stock."]
 			icon: "gtceu:opv_sensor"

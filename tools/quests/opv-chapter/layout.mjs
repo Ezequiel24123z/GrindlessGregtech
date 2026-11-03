@@ -68,7 +68,7 @@ const LAYOUT = {
   LINK: [17.5, 7, ['CMOS']],
   COSMIC: [20, 7, ['LINK']],
   DRIVE: [17.5, 9, ['H_OPV_CIRCUITS']],
-  TISAPH: [12.5, 9, ['H_OPV_CIRCUITS']],
+  TISAPH: [14.5, 9, ['H_OPV_CIRCUITS']],
   SENSOR: [22.5, 7, ['COSMIC']],
   COMP: [27.5, 9, ['HULL', 'DRIVE']],
   HATCH: [30, 9, ['COMP']],
