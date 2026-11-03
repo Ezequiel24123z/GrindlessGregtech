@@ -25,8 +25,8 @@
   var CX = 35168
   var CY = 100
   var COIL = 'grindless:hftacn_coil_block'
-  var PARTS_A = { 1: 'gtceu:maintenance_hatch', 2: 'gtceu:uev_energy_input_hatch', 3: 'gtceu:hv_input_bus', 5: 'gtceu:hv_input_hatch', 6: 'gtceu:hv_output_hatch' }
-  var PARTS_B = { 1: 'gtceu:maintenance_hatch', 2: 'gtceu:uev_energy_input_hatch', 3: 'gtceu:hv_input_bus', 5: 'gtceu:hv_input_hatch', 6: 'gtceu:hv_output_hatch', 7: 'gtceu:uev_parallel_hatch' }
+  var PARTS_A = { 4: 'gtceu:maintenance_hatch', 5: 'gtceu:uev_energy_input_hatch', 6: 'gtceu:hv_input_bus', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch' }
+  var PARTS_B = { 4: 'gtceu:maintenance_hatch', 5: 'gtceu:uev_energy_input_hatch', 6: 'gtceu:hv_input_bus', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch', 10: 'gtceu:uev_parallel_hatch' }
 
   ServerEvents.recipes(function (event) {
     try {
@@ -185,7 +185,7 @@
 
   function build() {
     var a = { name: 'forgeA', phase: 'forming', started: S.tick, z: 20, parts: PARTS_A, hatch: false }
-    var b = { name: 'forgeB', phase: 'forming', started: S.tick, z: 50, parts: PARTS_B, hatch: true }
+    var b = { name: 'forgeB', phase: 'forming', started: S.tick, z: 47, parts: PARTS_B, hatch: true }
     var us = [a, b]
     us.forEach(function (u) {
       var r = placeForge(CX, CY, u.z, u.parts)

@@ -34,8 +34,8 @@
   var BUDGET = 2 * 16 * 536870912
   var CX = 37792
   var CY = 100
-  // the forge's front parts row: column 4 is the controller, so the second energy hatch takes column 3
-  var PARTS = { 0: 'gtceu:maintenance_hatch', 1: ENERGY16, 2: 'gtceu:hv_input_bus', 3: ENERGY16, 5: 'gtceu:hv_output_hatch', 6: HATCH }
+  // the forge's front parts row: column 7 is the controller, the X cells are columns 4-6 and 8-10
+  var PARTS = { 4: 'gtceu:maintenance_hatch', 5: ENERGY16, 6: 'gtceu:hv_input_bus', 8: ENERGY16, 9: 'gtceu:hv_output_hatch', 10: HATCH }
   var PROBES = [
     { x: 37768, id: 'gtceu:uhv_parallel_hatch', want: 1024 },
     { x: 37770, id: 'gtceu:uev_parallel_hatch', want: 4096 },
