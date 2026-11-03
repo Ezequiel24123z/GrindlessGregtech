@@ -62,10 +62,10 @@ test('fluorine closes in mB over c1: 40,000 HF + 20,000 F2 in, 60,000 HF out', (
     return m ? Number(m[1]) : 0;
   };
   const runs = 10; // 30 uraninite at 3 a run
-  assert.match(row('uranium_tetrafluoride'), /inputFluids\(Fluid\.of\('gtceu:hydrogen_fluoride', 4000\)\)/);
+  assert.match(row('uranium_tetrafluoride'), /inputFluids\(Fluid\.of\('gtceu:hydrofluoric_acid', 4000\)\)/);
   assert.equal(amount('uranium_hexafluoride', 'gtceu:fluorine') * runs, 20000);
-  const hf = amount('enriched_uranium_deconversion', 'gtceu:hydrogen_fluoride');
-  assert.equal(hf, amount('depleted_uranium_deconversion', 'gtceu:hydrogen_fluoride'));
+  const hf = amount('enriched_uranium_deconversion', 'gtceu:hydrofluoric_acid');
+  assert.equal(hf, amount('depleted_uranium_deconversion', 'gtceu:hydrofluoric_acid'));
   assert.equal(hf * runs, 60000);
 });
 test('English only, every new material has a name and a tooltip', () => {
