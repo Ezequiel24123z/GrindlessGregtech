@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { runPackScripts } from '../lib/kubejs_static.mjs';
 
@@ -152,6 +153,108 @@ test('source: players only, plaza once, first-arrival flags, WIN_GAME once and l
   assert.match(SERVER, /ItemEvents\.rightClicked\('grindless:epilogue'/);
   assert.doesNotMatch(SERVER, /getBlock|getEntities|level\.entities/, 'no block or entity scans');
   assert.ok(/CREDITS_DELAY = (\d+)/.exec(SERVER)[1] >= 100, 'credits after the 100-tick title');
+});
+
+// the real ending.js tick handler against a fake server that models forceload (query/add/remove) and `place template`
+function lifecycle({ preForced = [], placed = false, throwOnTeleport = false } = {}) {
+  const forced = new Set(preForced);
+  const log = [];
+  let tickHandler = null;
+  let templateOk = false;
+  let online = true;
+  let tick = 0;
+  const pd = { plaza: placed };
+  const nbt = new Proxy({}, { get: (_, k) => (k === 'valueOf' ? () => ({}) : () => nbt) });
+  const player = {
+    getStringUuid: () => 'p1', getX: () => 11.5, getY: () => 60, getZ: () => 10.5, isSpectator: () => false,
+    getLevel: () => ({ dimension: 'minecraft:overworld' }),
+    teleportTo() { if (throwOnTeleport) throw new Error('injected teleport failure'); },
+    persistentData: { getBoolean: () => true, putBoolean() {} },
+    getGameProfile: () => ({ getName: () => 'P' }), give() {}, connection: { send() {} },
+  };
+  const server = {
+    persistentData: {
+      contains: () => true, getString: () => '{}', remove() {}, put() {},
+      getBoolean: (k) => (k === 'grindless_ending_plaza' ? pd.plaza : false),
+      putBoolean: (k, v) => { if (k === 'grindless_ending_plaza') pd.plaza = v; },
+    },
+    getTickCount: () => tick,
+    getPlayerList: () => ({ getPlayerCount: () => (online ? 1 : 0), getPlayers: () => ({ size: () => (online ? 1 : 0), get: () => player }) }),
+    runCommandSilent(cmd) {
+      const m = /forceload (query|add|remove) (-?\d+) (-?\d+)/.exec(cmd);
+      if (m) {
+        const key = `${m[2]},${m[3]}`;
+        log.push(`${m[1]} ${key}`);
+        if (m[1] === 'query') return forced.has(key) ? 1 : 0;
+        if (m[1] === 'add') { forced.add(key); return 1; }
+        forced.delete(key);
+        return 1;
+      }
+      if (cmd.includes('place template')) return templateOk ? 1 : 0;
+      return 1;
+    },
+  };
+  const g = { grindless: { hyperstargate: { gates: () => [{ ...gate(true), run: 1 }] } } };
+  const ctx = vm.createContext({
+    global: g, console: { error() {}, log() {} }, Item: { of: () => ({}) },
+    Java: { loadClass: () => Object.assign(function () { return nbt; }, { WIN_GAME: 1, valueOf: () => nbt }) },
+    ServerEvents: { tick: (f) => { tickHandler = f; } }, PlayerEvents: { loggedIn() {} }, ItemEvents: { rightClicked() {} },
+  });
+  vm.runInContext(SERVER, ctx);
+  const step = (to) => { tick = to; tickHandler({ server }); };
+  return { forced, log, step, setTemplate: (v) => { templateOk = v; }, leave: () => { online = false; }, adds: () => log.filter((l) => l.startsWith('add')).length, removes: () => log.filter((l) => l.startsWith('remove')).length };
+}
+const PLAZA_CHUNKS = ['-16,-16', '-16,0', '0,-16', '0,0'];
+
+test('#302 control: a first placement takes the four tickets and releases exactly those, once', () => {
+  const t = lifecycle();
+  t.step(5); t.step(6); t.setTemplate(true); t.step(7);
+  assert.equal(t.adds(), 4);
+  assert.deepEqual(t.log.filter((l) => l.startsWith('remove')).map((l) => l.slice(7)).sort(), PLAZA_CHUNKS.slice().sort());
+  assert.equal(t.forced.size, 0);
+  t.step(8); t.step(10);
+  assert.equal(t.removes(), 4, 'nothing is released twice');
+});
+
+test('#302 logout: a player who disconnects before the plaza is placed leaves no ticket behind', () => {
+  const t = lifecycle();
+  t.step(5); t.step(6);
+  assert.equal(t.forced.size, 4);
+  t.leave(); t.step(7);
+  assert.equal(t.forced.size, 0);
+  t.step(8); t.step(10);
+  assert.equal(t.removes(), 4);
+});
+
+test('#302 exception: a failing teleport releases the crossing\'s tickets', () => {
+  const t = lifecycle({ throwOnTeleport: true });
+  t.step(5); t.setTemplate(true); t.step(6);
+  assert.equal(t.forced.size, 0);
+  assert.equal(t.adds(), 4);
+  assert.equal(t.removes(), 4);
+});
+
+test('#302 timeout: a plaza that never places is cancelled and its tickets released', () => {
+  const t = lifecycle();
+  t.step(5); t.step(6); t.step(300);
+  assert.equal(t.forced.size, 0);
+  assert.equal(t.removes(), 4);
+});
+
+test('#302 existing plaza: a crossing that added nothing removes nothing, and an admin\'s forced chunks stay', () => {
+  const t = lifecycle({ placed: true, preForced: ['0,0', '-16,0'] });
+  t.step(5); t.step(6);
+  assert.equal(t.removes(), 0);
+  assert.deepEqual([...t.forced].sort(), ['-16,0', '0,0']);
+});
+
+test('#302 partially pre-forced plaza: only the chunks the crossing added are released', () => {
+  const t = lifecycle({ preForced: ['0,0', '-16,-16'] });
+  t.step(5); t.step(6);
+  assert.equal(t.adds(), 2);
+  t.setTemplate(true); t.step(7);
+  assert.equal(t.removes(), 2);
+  assert.deepEqual([...t.forced].sort(), ['-16,-16', '0,0']);
 });
 
 test('the lang has the title, subtitle and six pages that read as the design text', () => {

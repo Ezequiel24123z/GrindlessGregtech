@@ -64,6 +64,8 @@
           global.grindless = global.grindless || {}
           global.grindless.hyperstargate = { gates: function () { return [gate] } }
           log('double', 'NOTE', 'closed test gate around ' + x + ',' + y + ',' + z)
+          // #302: an admin's forced chunk inside the plaza must survive the crossing; the others must not stay forced
+          p.server.runCommandSilent('execute in ' + HORIZON + ' run forceload add 0 0')
           go('closed')
         }
       } else if (st.phase === 'closed') {
@@ -78,6 +80,9 @@
           check('teleport', d < 1.5, 'at ' + p.getX().toFixed(2) + ',' + p.getY().toFixed(2) + ',' + p.getZ().toFixed(2) + ' after ' + since() + ' ticks')
           var ground = String(p.level.getBlock(0, 3, 0).id)
           check('plaza', ground !== 'minecraft:air', 'block at 0,3,0 is ' + ground)
+          var q = function (bx, bz) { return Number(p.server.runCommandSilent('execute in ' + HORIZON + ' run forceload query ' + bx + ' ' + bz)) }
+          check('tickets_kept_preforced', q(0, 0) > 0, 'the pre-forced chunk 0,0 query ' + q(0, 0))
+          check('tickets_released', q(-16, -16) === 0 && q(-16, 0) === 0 && q(0, -16) === 0, 'queries ' + q(-16, -16) + ',' + q(-16, 0) + ',' + q(0, -16))
           check('epilogue_given', epilogues(p) === 1, 'count ' + epilogues(p))
           go('credits')
         } else if (since() > 400) {
