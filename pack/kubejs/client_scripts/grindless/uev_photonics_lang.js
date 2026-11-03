@@ -30,11 +30,10 @@
         ['gtceu.recipe.grindless_snspd_fabrication.nanowire_write', 'Circuit 2: write the nanowire meander in resist'],
         ['gtceu.recipe.grindless_snspd_fabrication.waveguide_mount', 'Circuit 3: etch the wires and mount them on a SiN waveguide chip'],
         ['gtceu.recipe.grindless_snspd_fabrication.cool_and_package', 'Circuit 4: cool in superfluid helium, bond the contacts: an SNSPD'],
-        ['gtceu.recipe.grindless_vdw_assembly.hbn_emitter_chip', 'Circuit 1: two annealed hBN films and an electrode'],
         ['gtceu.recipe.grindless_vdw_assembly.graphene_modulator', 'Circuit 2: electrodes on hBN-encapsulated graphene'],
         ['gtceu.recipe.grindless_vdw_assembly.encapsulate_graphene', 'Circuit 3: graphene between two hBN films'],
         ['gtceu.recipe.grindless_photonic_integration.waveguide_circuit', 'Circuit 1: a SiN waveguide chip bonded to an LNOI wafer'],
-        ['gtceu.recipe.grindless_photonic_integration.quantum_photonic_chip', 'Circuit 2: source, detectors, modulator and emitter on the circuit'],
+        ['gtceu.recipe.grindless_photonic_integration.quantum_photonic_chip', 'Circuit 2: the pigtailed die is cryopackaged under superfluid helium, which is not used up'],
         ['gtceu.recipe.grindless_photonic_integration.optical_computer', 'Circuit 3: the optical computer, the only recipe for it'],
         ['gtceu.recipe.grindless_molecular_beam_epitaxy.inas_quantum_dots', 'Circuit 3: InAs quantum dots on GaAs; the arsine is used up, hydrogen is returned'],
         ['gtceu.recipe.grindless_photonic_foundry.sin_waveguide_anneal', 'Circuit 7: anneal the etched SiN waveguides under argon'],
@@ -59,7 +58,6 @@
         ['hbn_copper_foil', 'hBN on Copper Foil', 'A one-layer hBN film grown on copper.', 'The copper comes back after the transfer.'],
         ['hbn_film', 'hBN Film', 'A freestanding hBN film.', 'Anneal it in a blast furnace next.'],
         ['annealed_hbn_film', 'Annealed hBN Film', 'A clean, flat hBN film.', 'Used by the van der Waals stacker and the UEV pump.'],
-        ['hbn_emitter_chip', 'hBN Emitter Chip', 'A single-photon emitter in hBN.', 'Made in the van der Waals stacker (circuit 1).'],
         ['electropolished_copper_foil', 'Electropolished Copper Foil', 'Smooth copper for large single-layer graphene.', 'The acid bath is not used up.'],
         ['graphene_copper_foil', 'Graphene on Copper Foil', 'CVD graphene from methane.', 'The hydrogen it gives off is kept.'],
         ['pmma_graphene_foil', 'PMMA-Coated Graphene Foil', 'A support layer of resist over the graphene.', 'Next: the persulfate bath.'],
@@ -70,8 +68,8 @@
         ['seven_n_indium', '7N Indium', 'Indium zone-refined to seven nines.', 'Made in the zone refining tower (circuit 5).'],
         ['inas_qd_wafer', 'InAs Quantum Dot Wafer', 'Self-assembled InAs dots on GaAs.', 'Grown in the MBE reactor (circuit 3); it takes all the arsine.'],
         ['micropillar_wafer', 'Micropillar Wafer', 'Dots inside etched micropillar cavities.', 'Mounted into a QD source in an assembler.'],
-        ['waveguide_circuit', 'Waveguide Circuit', 'A SiN circuit bonded to lithium niobate.', 'Made in the photonic integration hall (circuit 1).'],
-        ['quantum_photonic_chip', 'Quantum Photonic Chip', 'Source, detectors, modulator and emitter on one circuit.', 'Made in the photonic integration hall (circuit 2).']
+        ['waveguide_circuit', 'Waveguide Circuit', 'A SiN circuit bonded to lithium niobate.', 'The wafer the detectors, rings and dots are built on.'],
+        ['quantum_photonic_chip', 'Quantum Photonic Chip', 'A cryopackaged die: detectors, modulators and sources on one wafer.', 'Made in the photonic integration hall (circuit 2).']
     ]
 
     ITEMS.forEach(function (i) {

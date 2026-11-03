@@ -59,7 +59,7 @@ test("one recipe per lookup path: no recipe's ingredients are a subset of anothe
 test('the three machines and their types are registered; every data-keyed recipe has its EMI line in en_us', () => {
   for (const m of ['snspd_foundry', 'vdw_stacker', 'photonic_integration_hall']) assert.ok(startup.includes(`'${m}'`), m);
   for (const k of ['snspd_fabrication', 'vdw_assembly', 'photonic_integration']) assert.ok(startup.includes(`'${k}'`), k);
-  const lines = lang + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_mainframe_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_logic_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'opv_circuits_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'max_circuits_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'maxplus_circuits_lang.js')); // UIV-A7's hall rows c4-c6; UIV-A10's nb_jj_wafer; UXV-A5's c7; OpV-A2's SNSPD c6 and hall c8
+  const lines = lang + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_mainframe_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_logic_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'opv_circuits_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'max_circuits_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'maxplus_circuits_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'uev_photonic_wafer_lang.js')); // UIV-A7's hall rows c4-c6; UIV-A10's nb_jj_wafer; UXV-A5's c7; OpV-A2's SNSPD c6 and hall c8; D4-UEV-PHOTON's wafer-flow rows
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) assert.ok(lines.includes(`'gtceu.recipe.${t.dataKey}.${r.name}'`), `${t.dataKey}.${r.name}`);
@@ -126,4 +126,39 @@ test('no UIV-only input, no alumina, no SiCl4 fluid, no rhenium', () => {
       assert.ok(!/uiv|alumina|silicon_tetrachloride|gtceu:rhenium|six_n_rhenium/.test(id), `${r.type}/${r.name}: ${id}`);
     }
   }
+});
+
+test('D4-UEV-PHOTON: the monolithic wafer flow runs waveguide circuit -> QPC, and the hBN emitter chip is gone', () => {
+  const FLOW = [
+    ['snspd_fabrication', 'wsi_on_waveguides', 10, 'grindless:waveguide_circuit', 'grindless:wsi_waveguide_wafer'],
+    ['snspd_fabrication', 'wsi_nanowires_on_waveguides', 11, 'grindless:wsi_waveguide_wafer', 'grindless:detector_waveguide_wafer'],
+    ['vdw_assembly', 'graphene_rings', 4, 'grindless:detector_waveguide_wafer', 'grindless:graphene_ring_wafer'],
+    ['vdw_assembly', 'encapsulate_rings', 5, 'grindless:graphene_ring_wafer', 'grindless:encapsulated_ring_wafer'],
+    ['photonic_foundry', 'wafer_electrodes', 29, 'grindless:encapsulated_ring_wafer', 'grindless:electroded_photonic_wafer'],
+    ['vdw_assembly', 'print_dots', 6, 'grindless:electroded_photonic_wafer', 'grindless:hybrid_quantum_wafer'],
+    ['mocvd', 'silica_cladding', 9, 'grindless:hybrid_quantum_wafer', 'grindless:clad_quantum_wafer'],
+    ['cutter', 'dice_quantum_wafer', 0, 'grindless:clad_quantum_wafer', 'grindless:quantum_photonic_die'],
+    ['photonic_integration', 'pigtail_die', 11, 'grindless:quantum_photonic_die', 'grindless:pigtailed_quantum_die'],
+    ['photonic_integration', 'quantum_photonic_chip', 2, 'grindless:pigtailed_quantum_die', 'grindless:quantum_photonic_chip']
+  ];
+  for (const [type, name, circuit, input, output] of FLOW) {
+    const r = row(type, name);
+    assert.equal(r.circuit, circuit, name);
+    assert.ok(inputs(r).includes(input), `${name} takes ${input}`);
+    assert.ok(outputs(r).includes(output), `${name} makes ${output}`);
+  }
+  const qpc = row('photonic_integration', 'quantum_photonic_chip');
+  assert.ok(ids(qpc.charge).includes('gtceu:superfluid_helium'), 'helium is kept');
+  assert.equal(row('cutter', 'dice_quantum_wafer').itemsOut[0].count, 4);
+  const startupWafer = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'photonic_wafer.js'));
+  const langWafer = read(path.join(kube, 'client_scripts', 'grindless', 'uev_photonic_wafer_lang.js'));
+  for (const id of FLOW.slice(0, 9).map((f) => f[4].split(':')[1])) {
+    assert.ok(startupWafer.includes(`'${id}'`), `${id} registered`);
+    assert.ok(langWafer.includes(`['${id}',`), `${id} named`);
+    assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${id}.png`)), `${id} texture`);
+    assert.equal(producers(`grindless:${id}`).length, 1, `${id} has one producer`);
+    assert.ok(all.some((r) => inputs(r).includes(`grindless:${id}`)), `${id} has a consumer`);
+  }
+  assert.ok(!all.some((r) => inputs(r).concat(outputs(r)).includes('grindless:hbn_emitter_chip')));
+  assert.ok(!startup.includes('hbn_emitter_chip') && !lang.includes('hbn_emitter_chip'));
 });

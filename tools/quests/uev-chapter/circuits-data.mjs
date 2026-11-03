@@ -100,12 +100,6 @@ export const QUESTS = [
     unlocks: 'The quantum photonic chip, and the entanglement station\'s repeater.',
     automate: 'Helium by pipe; stock packaged detectors by ME, one per chip and one per repeater.',
   }, [it('grindless:snspd')], 120),
-  q('CH_HBN', 'circuit', 'Single-Photon Emitter', 'grindless:hbn_emitter_chip', ['VDW'], 13.25, -12, {
-    for: 'A defect in a layer of hexagonal boron nitride gives off photons one by one: the &6hBN Emitter Chip&r.',
-    needs: 'The van der Waals stacker, CVD boron nitride film and a cleanroom.',
-    unlocks: 'The quantum photonic chip, as its second light source.',
-    automate: 'Film by ME; the stacker returns chips in a chest, stock a few.',
-  }, [it('grindless:hbn_emitter_chip')], 120),
   q('CH_GRM', 'circuit', 'Graphene Modulator', 'grindless:graphene_modulator', ['VDW'], 12.5, -10.75, {
     for: 'Graphene between two films of boron nitride changes how much light passes when a voltage is applied: the &6Graphene Modulator&r.',
     needs: 'The van der Waals stacker, graphene film and hBN film.',
@@ -115,8 +109,8 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ the chip and the circuit
   q('CH_QPC', 'circuit', 'Quantum Photonic Chip', 'grindless:quantum_photonic_chip', ['CH_WG', 'CH_GRM'], 15.25, -6.75, {
-    for: 'A waveguide circuit with a quantum dot source, a detector, a modulator and an emitter on it is the &6Quantum Photonic Chip&r: a whole optical circuit on a few millimetres.',
-    needs: 'The photonic integration hall, a circuit 2 program and one of each part above.',
+    for: 'A waveguide wafer carrying detectors, graphene modulators and quantum-dot sources, diced, pigtailed and cryopackaged, is the &6Quantum Photonic Chip&r: a whole optical circuit on a few millimetres.',
+    needs: 'The photonic integration hall, a circuit 2 program, a pigtailed quantum die and superfluid helium (not used up).',
     unlocks: 'The optical computer, which is a chip on an optical assembly.',
     automate: 'Parts by ME in matched counts; keep a few chips in stock, one per computer.',
   }, [it('grindless:quantum_photonic_chip')], 180),

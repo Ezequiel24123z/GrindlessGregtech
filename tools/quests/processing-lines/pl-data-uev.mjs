@@ -226,9 +226,7 @@ export default {
           ['hcf', I('grindless:hbn_copper_foil'), 'hBN on Copper'],
           ['hf', I('grindless:hbn_film'), 'hBN Film'],
           ['ahf', I('grindless:annealed_hbn_film'), 'Annealed hBN'],
-          ['hec', I('grindless:hbn_emitter_chip'), 'Emitter Chip', 'product', { from: ['ahf', 'x_pump'] }],
         ], 'the photonic chip'),
-        L('x_pump', 12.5, 4.5, 'pl_uv:pump'),
         // graphene
         ...chain(8, [
           ['cuf', I('gtceu:copper_foil'), 'Copper Foil', 'raw'],
