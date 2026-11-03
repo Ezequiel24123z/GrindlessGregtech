@@ -15,7 +15,7 @@ Design package D2-LINES (#288), 2026-11-03, for AGENTS.md principle 7 (depth fir
 
 | Era | Line | Steps | Critical path | Status |
 |---|---|---|---|---|
-| EV | E1 Rare earths: Nether bastnasite to the separated lanthanides | 18 (samarium); La 17, Nd 17, Ce 16 | Ce 16; La 5 through Mars merrillite's strip | GTCA's live line charted and taught; one-step cerium retired; the samaric concentrate gets the SEG split (new) |
+| EV | E1 Rare earths: Nether bastnasite to the separated lanthanides | 19 (holmium); Eu 17, La 17, Nd 17, Ce 16 | Ce 16; La 5 through Mars merrillite's strip | GTCA's live line charted and taught; one-step cerium retired; the samaric concentrate is split before its holmium (new) |
 | EV | E2 Nano circuits, staged from MV's silicon | 13 (7 at MV, 6 at EV) | 13 | chart only |
 | EV | E3 Tungsten: Mars scheelite through APT to the IV hull | 10 | 10 | ammonium paratungstate route new; GTM's tungstic-acid electrolysis retired |
 | EV | E4 Platline at EV: the platinum plant | 24 (staged) | as D1 | unchanged |
@@ -29,19 +29,19 @@ Design package D2-LINES (#288), 2026-11-03, for AGENTS.md principle 7 (depth fir
 | LuV | L3 Enriched naquadah and trinium, staged from IV | 9 | 9 | chart mode 2's GT-- stages |
 | LuV | L4 Germanium and the triple-junction cell | 9 | 9 | GeCl4, GeO2, germanium boule and wafer new |
 | LuV | L5 ZBLAN from fluorides | 8 | 8 | five metal fluorides new; the ZBLAN batch becomes real |
-| ZPM | Z1 Europium from the SEG fraction, staged from E1 | 20 (17 at EV, 3 at ZPM) | 2 (the Mk1's Nd + H on native Nether neodymium, LuV) | SEG split new (EV); red mud gets a destination |
+| ZPM | Z1 Europium from the SEG fraction, staged from E1 | 20 (17 at EV, 3 at ZPM) | 2 (the Mk1's Nd + H on native Nether neodymium, LuV) | SEG split new (EV); the reductor takes its solution |
 | ZPM | Z2 Naquadria and its fuel, staged from IV | 16 | 16 | chart GT--'s naquadria stages; the power ladder retuned (section 9, D2-4) |
 | ZPM | Z3 The living medium (Enceladus) | 14 (staged from LuV) | — | unchanged |
 | ZPM | Z4 Titan: PAN carbon fibre | 6 | 6 | acrylonitrile, PAN and its fibre stages new; the reformer's one-step fibre retired |
 | ZPM | Z5 Waste and actinides; Z6 qubits | 4 to 7; 5 | — | unchanged |
 
-Against the current audit (dump `5d57213f3b83`, production chains of 4+, longest): EV 12, 24 (6 without the staged platline) becomes about 20, 24 (18 native); IV 8, 7 becomes about 14, 14; LuV 7, 9 becomes about 16, 13; ZPM 8, 14 becomes about 13, 20. Lines of 10 or more: EV 3 (E1, E2, E3) plus the platline, IV 1, LuV 2, ZPM 3. **Named gaps** (never padded): IV 14 against 16 and LuV 13 against 18. The real chemistry of those eras is shorter; the band's length comes from the staged ladders, which carry Z1 to 20 and Z2 to 16.
+Against the current audit (dump `5d57213f3b83`, production chains of 4+, longest): EV 12, 24 (6 without the staged platline) becomes about 20, 24 (19 native); IV 8, 7 becomes about 14, 14; LuV 7, 9 becomes about 16, 13; ZPM 8, 14 becomes about 13, 20. Lines of 10 or more: EV 3 (E1, E2, E3) plus the platline, IV 1, LuV 2, ZPM 3. **Named gaps** (never padded): IV 14 against 16 and LuV 13 against 18. The real chemistry of those eras is shorter; the band's length comes from the staged ladders, which carry Z1 to 20 and Z2 to 16.
 
 ## 2. EV
 
-### E1 Rare earths: Nether bastnasite to the separated lanthanides (18; cerium 16)
+### E1 Rare earths: Nether bastnasite to the separated lanthanides (19; cerium 16)
 
-**What is in the pack.** GTCA 2.2.0's GTNH-style bastnasite chain is live and EV (`integration/gtca.js:45`: the thermal reactor is kept at EV), with one stage rebuilt off-world (`grindless:centrifuge/offworld_only/diluted_to_filtered`), so the rare earths need the Moon or Mars, as `ev.md` intends. Nobody charts or teaches it: the EV chart shows only Mars merrillite's two-step cascade (audit: 5). Bastnasite and monazite are Nether ores (`veins_nether.json:76-83`: bastnasite 3, monazite 1, neodymium 1), drilled from LV; Mars gives merrillite only. **Real process:** Mountain Pass and Bayan Obo: acid cracking, conditioning, roasting that oxidises cerium to Ce(IV) so it stays undissolved, solvent extraction of the trivalent rest, and the samarium-europium-gadolinium (SEG) cut.
+**What is in the pack.** GTCA 2.2.0's GTNH-style bastnasite chain is live and EV (`integration/gtca.js:45`: the thermal reactor is kept at EV), and runs on Earth. Two of its stages are rebuilt for Earth by `moon/offworld_only.js` (strip: same recipe, the other world's outputs removed): the filtration without its lunar rutile and ilmenite (`grindless:centrifuge/offworld_only/diluted_to_filtered`, `offworld_only.json:61`), and the holmium reduction without its samarium-terbium mixture (`grindless:electric_blast_furnace/offworld_only/flsamaric_to_ho`, `offworld_only.json:67`), because samarium comes only from Mars (DECISIONS 2026-10-25). That reduction is holmium's only primary source (enriched holmium foil, wetware boards). Nobody charts or teaches it: the EV chart shows only Mars merrillite's two-step cascade (audit: 5). Bastnasite and monazite are Nether ores (`veins_nether.json:76-83`: bastnasite 3, monazite 1, neodymium 1), drilled from LV; Mars gives merrillite only. **Real process:** Mountain Pass and Bayan Obo: acid cracking, conditioning, roasting that oxidises cerium to Ce(IV) so it stays undissolved, solvent extraction of the trivalent rest, and the samarium-europium-gadolinium (SEG) cut.
 
 | # | Machine | In → out | Real process |
 |---|---|---|---|
@@ -51,7 +51,7 @@ Against the current audit (dump `5d57213f3b83`, production chains of 4+, longest
 | 3 | Cracker, 480 EU/t (`gtceu:cracker/muddy_crack`) | + steam → steam-cracked mud | steam stripping |
 | 4 | Mixer, 120 EU/t (`gtceu:mixer/muddy_crack_to_conditioned`) | + 320 mB sodium fluorosilicate → conditioned mud | conditioning (fluosilicate) |
 | 5 | Large chemical reactor, 1,920 EU/t (`conditioned_to_diluted`) | + saltpeter + 10,000 mB water → diluted mud | dilution |
-| 6 | Centrifuge off-world, 240 EU/t (`grindless:centrifuge/offworld_only/diluted_to_filtered`) | → filtered mud + SiO2 + red zircon | filtration |
+| 6 | Centrifuge, 240 EU/t (`grindless:centrifuge/offworld_only/diluted_to_filtered`) | → filtered mud + SiO2 + red zircon | filtration |
 | 7 | EBF 1,400 K, 600 EU/t (`filtered_to_oxides`) | → bastnasite rare-earth oxides | calcination |
 | 8 | Chemical bath (`to_acid_leached`) | + HCl → acid-leached oxides | carbonate leach |
 | 9 | EBF 1,200 K (`acidleached_to_roasted`) | + O2 → roasted oxides + 13 mB F2 | oxidative roast |
@@ -64,14 +64,16 @@ Against the current audit (dump `5d57213f3b83`, production chains of 4+, longest
 | 16 | Large chemical reactor (`neod_to_cl`) | Nd concentrate + HCl → La chloride + Nd oxide | chlorination |
 | 17 | Electrolyzer (`lacl_to_la`, `neodox_to_neod`) | → lanthanum; neodymium | electrowinning |
 | 16' | Large chemical reactor (new) | samaric concentrate + 2,000 mB HCl → 1,000 mB SEG chloride solution (new) | dissolution |
-| 17' | Extraction cascade, EV, new mode | SEG solution + 3,000 mB HCl strip, kerosene charge → 1 samarium chloride + 500 mB europium chloride solution (existing fluid) + 950 mB kerosene + diluted HCl | SEG split (Sm/Eu-Gd) |
-| 18' | Electrolyzer (`decomposition_electrolyzing_samarium_chloride`) | → samarium | electrowinning |
+| 17' | Extraction cascade, EV, new mode | 1,000 mB SEG solution + 500 mB HCl strip + 1,000 mB kerosene → 500 mB europium chloride solution (existing fluid) + 1,000 mB heavy rare-earth chloride solution (new: Sm, Gd, Tb, Ho) + 950 mB kerosene | SEG split: europium stripped |
+| 18' | Large chemical reactor (new; replaces GTCA's `samaric_to_flsamaric`) | 1,000 mB heavy chloride + 2,000 mB HF → 1 fluorinated samaric concentrate (GTCA) + 2,000 mB HCl (back to 16') | fluoride precipitation |
+| 19' | EBF 1,200 K, 1,920 EU/t (`grindless:electric_blast_furnace/offworld_only/flsamaric_to_ho`, unchanged) | 8 fluorinated concentrate + 4 calcium → 1 holmium | calciothermic reduction |
 
 - **Cerium branch (16):** CeO2 (12) → `cedio_to_cecl` (+ H2, NH4Cl) → `cecl_to_ceox` (+ GTCA oxalate, made from sugar and nitric acid, `oxalate_sugar`: Scheele's route) → `ceox_to_ceiii` (EBF, + carbon) → `ceiii_to_cerium`. The naquadah fuel works' cerium (ZPM) is its consumer.
 - **Mars merrillite** stays the second feed: the cascade's leach (c1) and extraction (c2) give samarium, neodymium and the mixed chlorides whose strips feed later eras. Its lanthanum and yttrium strip (`lanthanum_yttrium_strip`) is the 5-step critical path for lanthanum; it stays, because the strips are the honest route for yttrium and the heavies.
-- **Retired:** `grindless:electrolyzer/offworld_only/decomposition_electrolyzing_bastnasite` (6 bastnasite → cerium in one GTM decomposition: a 2-step bypass of the whole line; its row in `tables/offworld_only.json` goes) and `gtceu:chemical_reactor/samaric_to_flsamaric` with its large-reactor copy (the samaric concentrate's only use, a dead end that spent 2,000 mB HF: the fluorinated concentrate has no consumer).
-- **Byproducts:** SiO2 → glass and silicon; red zircon → L5 and I1's zirconium; the 13 mB F2 and the 4,000 mB HF → the fluorspar kiln and the naquadah plant; acetone and kerosene circulate; diluted HCl → distillation; lanthanum chloride's chlorine → HCl; **the europium chloride solution is stored for ZPM** (Z1; its stated future use, as MV's platinum slag was for HV).
-- **New:** `gtceu:seg_chloride_solution` (fluid). The SEG split is a new cascade mode at 1,920 EU/t, 200 t (the extraction's figures).
+- **Retired:** `grindless:electrolyzer/offworld_only/decomposition_electrolyzing_bastnasite` (6 bastnasite → cerium in one GTM decomposition: a 2-step bypass of the whole line; its row in `tables/offworld_only.json` goes) and GTCA's `samaric_to_flsamaric` in both reactors (it fluorinated the whole concentrate, so the europium was lost; 16'-18' spend the same 2,000 mB HF per fluorinated concentrate after the split, and the holmium yield is unchanged).
+- **Samarium stays Martian:** the heavy fraction carries the bastnasite's samarium into the holmium reduction, whose samarium-terbium output is already stripped on Earth; no new row yields samarium (the Moon smoke test scans every recipe for a new Earth source, `moon/offworld_only.js:10-11`).
+- **Byproducts:** SiO2 → glass and silicon; red zircon → L5 and I1's zirconium; the 13 mB F2 and the 4,000 mB HF → the fluorspar kiln and the naquadah plant; acetone and kerosene circulate; 18''s HCl → 16'; lanthanum chloride's chlorine → HCl; **the europium chloride solution is stored for ZPM** (Z1; its stated future use, as MV's platinum slag was for HV).
+- **New:** `gtceu:seg_chloride_solution` and `gtceu:heavy_rare_earth_chloride_solution` (fluids). The SEG split is a new cascade mode at 1,920 EU/t, 200 t (the extraction's figures).
 
 ### E2 Nano circuits, staged from MV's silicon (13: 7 at MV, 6 at EV)
 
@@ -254,8 +256,8 @@ Europium is not mined; it is the reducible member of the SEG cut, separated by r
 E1 steps 1-15 → SEG dissolution (16') → SEG split (17', EV) → europium reductor c1, zinc + Venus H2SO4 + mercury charge → europium sulfate (18) → c2 → europium oxide (19) → c3, metallothermic with lanthanum → europium (20). All three reductor steps exist (`zpm/europium.js`); the reductor takes the SEG solution because it is the same fluid as the froth's.
 
 - **Parallel sources:** GTCA's monazite froth (IsaMill, flotation, cascade c5, ZPM) and the Mk1's Nd + H stay; the Mk1 on native neodymium is the 2-step critical path, and the slow one (one fusion ring, one run at a time). The SEG route is the bulk one: it needs no ZPM grinding balls.
-- **Red mud gets a destination:** `gtca:red_mud_slurry` (2,000 mB from every GTCA thermal-reactor froth row, our `monazite_froth_no_europium` included) has no consumer today. New centrifuge row (ZPM, 480 EU/t): 1,000 mB red mud → 1 hematite + 1 silicon dioxide @ 50 % + 1 small rutile @ 25 % + 800 mB water. Real red mud is an iron and titanium residue; the row returns only what the residue holds.
-- **Byproducts:** zinc sulfate and lanthanum oxide loop through the reductor's c4 and c5 (as today); the reductor's rare-earth chloride → the cascade's strips.
+- **Byproducts:** zinc sulfate and lanthanum oxide loop through the reductor's c4 and c5 (as today); the reductor's rare-earth chloride → the cascade's strips. GTCA's red mud already has its centrifuge (`gtceu:centrifuge/red_mud_slurry`).
+- **No new recipe:** the reductor's c1 already takes `gtceu:europium_chloride_solution`, the fluid the SEG split makes; Z1 is D2-REE's rows plus the charts and quests.
 
 ### Z2 Naquadria and its fuel, staged from IV (16)
 
@@ -306,8 +308,8 @@ Titan's air holds acrylonitrile (detected in 2017) and the other nitriles the th
 
 | Material | Today | After | What it moves |
 |---|---|---|---|
-| Cerium (EV) | GTM's off-world bastnasite decomposition, one step | oxidative roast and the oxalate route (E1, 16) | the naquadah fuel works' cerium make-up; GTCA's cerium users; no core key item |
-| Samarium (EV) | Mars merrillite only | + bastnasite's SEG cut (off-world filter) | cheaper LuV magnets (ZPM motor), IV SmFeAsO; `ev.md` "samarium only from Mars" becomes "samarium off Earth" |
+| Cerium (EV) | GTM's bastnasite decomposition, one step (retiered to EV, `offworld_only.json:65`) | oxidative roast and the oxalate route (E1, 16) | the naquadah fuel works' cerium make-up; GTCA's cerium users; no core key item |
+| Holmium (EV, used from LuV) | GTCA's fluorination of the whole samaric concentrate, then the EBF | the same EBF after the SEG split (E1, 19) | enriched holmium foil for wetware boards (same yield); samarium stays Mars-only |
 | Lanthanum (EV, LuV) | GTCA chain (uncharted) and the merrillite strip | the same, charted; LaF3 for ZBLAN | ZBLAN, the reductor's lanthanum |
 | Europium (ZPM) | the froth and the Mk1 | + the SEG route (bulk) | Mk2 casings and coils (6 and 4 europium plates), ZPM wire |
 | Tungsten (EV) | bath, then GTM's electrolysis | bath, APT, WO3, hydrogen | same tungsten per scheelite, about 1 M EU more each; tungsten steel, the IV hull and motor, RTM coil; molybdenum as a byproduct |
@@ -346,7 +348,7 @@ Chapter notes:
 
 | Option | What it means | Consequences |
 |---|---|---|
-| **A (taken)** GTCA's live bastnasite line, charted, with merrillite as a feeder and a new SEG split | 18 steps from live recipes; two shortcuts and a dead end retired; Z1 staged from it | the deepest EV line costs 2 new rows and 1 new fluid; samarium gains a second source |
+| **A (taken)** GTCA's live bastnasite line, charted, with merrillite as a feeder and a new SEG split before the holmium | 19 steps from live recipes; the one-step cerium and the unsplit fluorination retired; Z1 staged from it | the deepest EV line costs 3 new rows and 2 new fluids; holmium keeps its only source at the same yield; samarium stays Mars-only (DECISIONS 2026-10-25) |
 | B The monazite line of research E-1 (GTNH ideas) | about 18 new recipes | duplicates a live line; GTNH is ideas only |
 | C Merrillite only, as today | 5 steps | leaves a live 17-step line uncharted and a 2-step cerium bypass |
 
@@ -391,13 +393,13 @@ Durations are the dump's (post-×2) figures; the package writes the pre-doubling
 ### D2-5 Consumers for the ZPM cell, the Neptune sample and the catalogue (#277 A2-06)
 
 - **`grindless:zpm_smes_cell`:** the UV cell is wound around four ZPM cells, as the UHV, UEV, UIV and UXV cells already are around four of the tier below (`tables/magnet_works.json`): `uv_smes_cell` takes 4 ZPM cells + 16 NaqTriEuDu wires + 8 darmstadtium plates (the 16 advanced SMD capacitors leave). Capacity agrees: 4 × 3.93 G = 15.73 G, the UV cell's. The towers' cell slots remain its other use. (`uxv_smes_cell` → `opv_smes_cell` is the same gap, between D4's and D5's bands.)
-- **`grindless:neptune_sample`:** the UV Neptune deep siphon's controller is researched from the sample (`uv/neptune.js`: research `scoop_head` → `neptune_sample`), and its rows keep it as a non-consumed calibration; the flyby bay splits into c1 Neptune flyby (recording only) and a new c3 sampling pass (sample only, aerogel spent), so no surplus is forced; `grindless:neptune_sample_flask` goes.
+- **`grindless:neptune_sample`:** the UV Neptune deep siphon's controller is researched from the sample (`uv/neptune.js`: research `scoop_head` → `neptune_sample`), and its rows keep it as a non-consumed calibration; the flyby bay splits into c1 Neptune flyby (recording only) and a new c3 sampling pass (sample only, aerogel spent), so no surplus is forced; the `grindless:centrifuge/neptune_sample_flask` recipe goes (`zpm/uranus.js:163`, with its pins in `zpm-uranus.test.mjs:88` and `gg_test_zpm_uranus.js:187`).
 - **`grindless:multimessenger_catalogue`:** the event horizon interferometer is researched from the catalogue (`uv/edge.js`: research `sapphire_boule` → `multimessenger_catalogue`) and its domain drops the 2 catalogues; `event_horizon_imaging` keeps it non-consumed.
 - Both research items then pass the audit's research role (consumed only by research or as a non-consumed input). Rejected: re-tagging the chains as `travel` (the flask would still eat the sample) or removing the cell (the network's ZPM tier needs it).
 
 ### D2-6 The carbon matter loop (`02_cost_curve.md:113`)
 
-GTM's `electrolyzer/diamond_electrolysis` (`SeparationRecipes.java`, 1 diamond dust → 64 carbon, 30 EU/t) turns ZPM's CVD diamond (1,000 mB methane → 1 plate: one carbon in, one out) into 64 carbon, which the HV gasifier turns into CO, hydrogen and ash, and the ash centrifuge into hematite: iron and carbon from gas. **Decision:** retire `diamond_electrolysis` (no real process electrolyses diamond; nothing in the band uses it), and conserve carbon in `grindless:chemical_reactor/nanodiamond_cleaning` (4 nanodiamond + 2,000 mB H2 → 3 diamond dust + 500 mB methane: the sp² shell leaves as methane, 4 carbon in, 3.5 out; today 4 → 4.5). The CVD rows already conserve carbon and stay. Graphite's 1 → 4 electrolysis stays: graphite is only mined (no carbon → graphite route in the dump); the package's `recipe-cycles.mjs` run confirms no other carbon multiplier.
+GTM's `electrolyzer/diamond_electrolysis` (`SeparationRecipes.java`, 1 diamond dust → 64 carbon, 30 EU/t) turns ZPM's CVD diamond (1,000 mB methane → 1 plate: one carbon in, one out) into 64 carbon, which the HV gasifier turns into CO, hydrogen and ash, and the ash centrifuge into hematite: iron and carbon from gas. **Decision:** retire `diamond_electrolysis` (no real process electrolyses diamond; nothing in the band uses it), and conserve carbon in `grindless:chemical_reactor/nanodiamond_cleaning` (`tables/megabar.json:80-82`): 4 nanodiamond + 4,000 mB hydrogen → 3 diamond dust + 1,000 mB methane (hydrogen etching takes the sp² shell off as methane: 4 carbon and 4,000 H in, 4 and 4,000 out; today 4 → 4.5 carbon). The CVD rows already conserve carbon and stay. Graphite's 1 → 4 electrolysis stays: graphite is only mined (no carbon → graphite route in the dump); the package's `recipe-cycles.mjs` run confirms no other carbon multiplier.
 
 ### D2-7 Blue topaz and fluorine at scale (`02_cost_curve.md:114`)
 
@@ -435,7 +437,7 @@ Full contracts are in the handoff. Each is one Sonnet session, at most 2 repairs
 
 | Wave | Id | Scope | Depends on | T1 doubt |
 |---|---|---|---|---|
-| 1 | D2-REE | E1: SEG dissolution and split; one-step cerium and the samaric fluorination retired | none | the cascade runs the SEG split by its circuit |
+| 1 | D2-REE | E1: SEG dissolution, split and fluoride precipitation; one-step cerium and the unsplit fluorination retired | none | the cascade runs the SEG split by its circuit |
 | 1 | D2-APT | E3: APT route; tungstic-acid electrolysis retired | none | none |
 | 1 | D2-FUEL | I1: liquor, IX, yellowcake, U3O8, UF4, deconversion, zircaloy from Kroll sponge; hot cell c1 re-pinned | none | the hot cell composes c1 from the new stages |
 | 1 | D2-NIOBIUM | I4: kiln digestion, aluminothermic niobium, tantalum; pyrochlore electrolysis retired | none | none |
@@ -449,7 +451,6 @@ Full contracts are in the handoff. Each is one Sonnet session, at most 2 repairs
 | 1 | D2-A206 | D2-5 | none | none |
 | 1 | D2-SIZE-EV | section 10: extraction cascade, platinum plant | none | each new shape forms (form sweep) |
 | 2 | D2-MEA | L2's array and the NPU change | D2-PEDOT | none |
-| 2 | D2-EUROPIUM | Z1: red mud row; the SEG solution through the reductor | D2-REE | the reductor's c1 runs on the SEG-made solution |
 | 2 | D2-ZBLAN | L5: fluorides and the ZBLAN batch | D2-NIOBIUM (kiln script), D2-GERMANIUM (orbital script) | none |
 | 2 | D2-SIZE-IV | section 10: fission reactor, hot cell, naquadah plant | D2-SIZE-EV (`zones.json`) | each new shape forms |
 | 3 | D2-SIZE-LUV | section 10: microgravity smelter | D2-SIZE-IV (`zones.json`) | it forms |
@@ -466,5 +467,5 @@ GTCA (LGPL-3.0) and GT-- (AGPL-3.0) are downloaded mods: their live recipes are 
 - The hot cell's c1 plan (`tables/hot_cell.json`) pins GTM ids that D2-FUEL retires; it must be re-pinned in the same package, with the new stages in a script that loads before `iv/hot_cell.js`, or c1 stops loudly.
 - D2-A206 edits two UV files (`uv/neptune.js`, `uv/edge.js`) that D3 may also touch: the integrator orders them.
 - D2-NAQPOWER changes GT--'s generator durations after generators.js's doubling; a double application would halve or double them. Its static test pins the dump figures of section 9.
-- E1's off-world filter means the rare earths need a Moon or Mars base; this is the existing gate (`offworld_only.json`), now taught.
+- E1 runs on Earth: D2-REE's rows must yield no samarium (the Moon smoke test, `moon/offworld_only.js:10-11`), and holmium's yield per samaric concentrate must stay 1 in 8.
 - The line audit counts charts: until the four chart packages land, the new lengths do not show.
