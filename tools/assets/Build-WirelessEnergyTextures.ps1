@@ -309,9 +309,9 @@ function New-CoverFace {
     $s = Copy-Canvas $Sym.art
     foreach ($arc in $Sym.arcs) { Set-Pixels $s $arc $Pal[$Dim] }
     Merge-Canvas $c $s
-    # the tier's rank as four binary pips on the bottom row, so no two tiers are the same picture in another colour
+    # the tier's rank as four binary 2x2 pips on the bottom rows, so no two tiers are the same picture in another colour
     $rank = [Array]::IndexOf($TierNames, $Tier) + 1
-    foreach ($bit in 0..3) { Set-Px $c (4 + 2 * $bit) 12 $(if (($rank -shr (3 - $bit)) -band 1) { $ramp[0] } else { $ramp[4] }) }
+    foreach ($bit in 0..3) { $v = $(if (($rank -shr (3 - $bit)) -band 1) { $ramp[0] } else { $ramp[4] }); foreach ($dy in 0, 1) { foreach ($dx in 0, 1) { Set-Px $c (4 + 2 * $bit + $dx) (11 + $dy) $v } } }
     return $c
 }
 
@@ -334,6 +334,8 @@ function New-CoverItem {
     # the symbol stays inside the plate's field
     for ($y = 0; $y -le 15; $y++) { for ($x = 0; $x -le 15; $x++) { if ($x -lt 4 -or $x -gt 11 -or $y -lt 4 -or $y -gt 11) { Set-Px $s $x $y 0 } } }
     Merge-Canvas $c $s
+    $rank = [Array]::IndexOf($TierNames, $Tier) + 1
+    foreach ($bit in 0..3) { $v = $(if (($rank -shr (3 - $bit)) -band 1) { $ramp[0] } else { $ramp[4] }); foreach ($dx in 0, 1) { Set-Px $c (4 + 2 * $bit + $dx) 10 $v; Set-Px $c (4 + 2 * $bit + $dx) 11 $v } }
     Add-Outline $c -LitArgb (Hex '565C68') -ShadeArgb (Hex '2C3038')
     return $c
 }
