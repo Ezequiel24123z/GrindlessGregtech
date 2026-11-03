@@ -1713,6 +1713,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxFounda
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxFoundationTextures.ps1 -Credits
 ```
 
+The four items of the qubit line's MAX stage (D5-QPU-MAX: `transducer_bonded_stack`, `photonic_tetron_module`, `calibrated_photonic_module`, `shielded_quantum_module`) were drawn with `-Only` on their names (new ids only); output files: `item/<id>.png`.
+
 ## MAX+ items and casings (XP-V1)
 
 Procedural, drawn by `Build-MaxPlusTextures.ps1` on the shared component body of `Era.Lib.ps1` in the `maxplus` era style (fiction: kerr condensate and the stationary horizon): violet-black bodies, lens-rounded silhouettes (`Shape = 'lens'`), a hot amber halo on the lit rim (`Trim = 'halo'`), ember motes (`Wear = 'ember-mote'`) and one orbiting bead (`Panel = 'orbit'`); the style only adds keywords, so no other era changes. It writes `item/<id>.png` for every item that `startup_scripts/grindless/maxplus/foundation.js` registers (COMPONENTS, UNIQUE, CIRCUITS, STANDINS and LINE_ITEMS are read from the script, so a new item needs no table here) and the six casings `block/maxplus/<name>.png`. The body kind comes from the words of the name (wafer: card, dust: heap, ingot: bar, cell: vial, core: orb...). The materials need no PNG (GregTech draws them from their colour). Controllers' faces are a later part.

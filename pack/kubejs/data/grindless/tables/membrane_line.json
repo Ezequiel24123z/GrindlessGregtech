@@ -26,6 +26,14 @@
           "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
           "itemsOut": [{ "id": "grindless:membrane_belt", "count": 1 }, { "id": "grindless:membrane_scrap", "count": 1, "chance": 2500 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "D5-QPU-MAX (lines-opv-maxplus.md, M1 step 29): the calibrated module wrapped in a superconducting membrane that shields it from stray magnetic flux, under liquid helium (not consumed).",
+          "name": "shielded_quantum_module", "circuit": 4, "eut": 2013265920, "duration": 1800,
+          "itemsIn": [{ "id": "grindless:calibrated_photonic_module", "count": 1 }, { "id": "grindless:superconducting_membrane", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:liquid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:shielded_quantum_module", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     }

@@ -19,7 +19,7 @@
   var JOIN = 'grindless:photonic_integration/supracausal_mainframe'
   var HALL = 'gtceu:photonic_integration'
   var TAG = 'gtceu:circuits/max'
-  var PARTS = ['grindless:squeezed_light_chip', 'grindless:tweezer_array_die', 'grindless:cryo_photonic_interposer', 'grindless:tetron_array']
+  var PARTS = ['grindless:shielded_quantum_module', 'grindless:tweezer_array_die']
 
   function classes() {
     if (C !== null) return C
