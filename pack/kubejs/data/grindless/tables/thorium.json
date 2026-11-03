@@ -11,8 +11,27 @@
       "dataKey": "grindless_pyroprocessing",
       "recipes": [
         {
-          "name": "reduce", "circuit": 1, "eut": 524288, "duration": 400,
+          "_why": "D3-TH-BACK, head-end chop (lines-uv-uhv.md row 14): the assembly is chopped and declad, the hulls go to the waste form; the oxide and the nitride fuel differ, so two circuits",
+          "name": "chop_oxide", "circuit": 10, "eut": 524288, "duration": 100,
           "itemsIn": [{ "id": "grindless:spent_thorium_oxide_fuel", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_oxide_fragments", "count": 2 }, { "id": "gtnn:radioactive_waste", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "chop_nitride", "circuit": 11, "eut": 524288, "duration": 100,
+          "itemsIn": [{ "id": "grindless:spent_thorium_nitride_fuel", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_nitride_fragments", "count": 2 }, { "id": "gtnn:radioactive_waste", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "name": "reduce", "circuit": 1, "eut": 524288, "duration": 400,
+          "itemsIn": [{ "id": "grindless:spent_oxide_fragments", "count": 2 }],
           "kept": [{ "id": "gtceu:lithium_dust", "count": 1 }],
           "charge": [{ "id": "gtceu:licl_salt", "amount": 1000 }],
           "fluidsIn": [],
@@ -25,26 +44,45 @@
           "kept": [],
           "charge": [{ "id": "gtceu:licl_salt", "amount": 1000 }],
           "fluidsIn": [],
-          "itemsOut": [{ "id": "gtceu:uranium_233_ingot", "count": 1 }, { "id": "gtceu:thorium_dust", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:u233_cathode_deposit", "count": 1 }, { "id": "gtceu:thorium_dust", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:loaded_licl_salt", "amount": 250 }]
         },
         {
           "name": "nitride", "circuit": 3, "eut": 524288, "duration": 300,
-          "itemsIn": [{ "id": "grindless:spent_thorium_nitride_fuel", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:spent_nitride_fragments", "count": 2 }],
           "kept": [],
           "charge": [{ "id": "gtceu:licl_salt", "amount": 1000 }],
           "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 25 }],
-          "itemsOut": [{ "id": "gtceu:uranium_233_ingot", "count": 1 }, { "id": "gtceu:thorium_dust", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:u233_cathode_deposit", "count": 1 }, { "id": "gtceu:thorium_dust", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:loaded_licl_salt", "amount": 250 }, { "id": "gtceu:nitrogen_15", "amount": 500 }]
         },
         {
+          "_why": "D3-TH-BACK (rows 16, 17, cathode): the cathode collects 3 of every 4 deposits' worth of U-233 (4 deposits give 3 ingots); the quarter bred from protactinium stays in the salt, which 4 refining runs load to 1,000 mB, and the hold returns it as dust, so the total per spent assembly is unchanged",
           "name": "salt", "circuit": 4, "eut": 524288, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:loaded_licl_salt", "amount": 1000 }, { "id": "gtceu:bismuth", "amount": 144 }],
+          "itemsOut": [{ "id": "gtnn:radioactive_waste", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:licl_salt", "amount": 1000 }, { "id": "gtceu:protactinium_bismuth", "amount": 144 }]
+        },
+        {
+          "name": "cathode", "circuit": 12, "eut": 524288, "duration": 200,
+          "itemsIn": [{ "id": "grindless:u233_cathode_deposit", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:uranium_233_ingot", "count": 3 }],
+          "fluidsOut": [{ "id": "gtceu:licl_salt", "amount": 250 }]
+        },
+        {
+          "name": "decay", "circuit": 13, "eut": 524288, "duration": 2400,
           "itemsIn": [],
           "kept": [],
           "charge": [],
-          "fluidsIn": [{ "id": "gtceu:loaded_licl_salt", "amount": 1000 }],
-          "itemsOut": [{ "id": "gtnn:radioactive_waste", "count": 1 }],
-          "fluidsOut": [{ "id": "gtceu:licl_salt", "amount": 1000 }]
+          "fluidsIn": [{ "id": "gtceu:protactinium_bismuth", "amount": 144 }],
+          "itemsOut": [{ "id": "gtceu:uranium_233_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:bismuth", "amount": 144 }]
         },
         {
           "_why": "UIV-A9: the Li-Sn eutectic of the divertor's capillary porous system (line 29), melted from Li and Sn in the cell",

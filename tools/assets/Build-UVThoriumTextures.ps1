@@ -9,7 +9,7 @@
   Writes (under pack/kubejs/assets/grindless/textures/):
     block/multiblock/pyroprocessing_cell/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
     block/multiblock/accelerator_driven_reactor/ the same three files
-    item/u233_fuel_rod.png
+    item/u233_fuel_rod.png, item/spent_oxide_fragments.png, item/spent_nitride_fragments.png, item/u233_cathode_deposit.png
 
   Cell face: a dark steel bezel round a furnace window; idle, the salt bath is dark. Working (4 frames, frametime 4), an orange
   molten-salt surface glows and a pale green cathode rod dips into it; the run lamp is green.
@@ -142,6 +142,43 @@ function New-Rod {
     return $c
 }
 
+function New-Fragments {
+    param($Pal)
+    $c = New-Canvas
+    # three chopped tube pieces, each a short ring of hull with the fuel showing at the cut
+    $pieces = @(@(2, 3), @(8, 2), @(5, 8))
+    foreach ($p in $pieces) {
+        $x0 = $p[0]; $y0 = $p[1]
+        for ($dy = 0; $dy -lt 4; $dy++) { for ($dx = 0; $dx -lt 6; $dx++) {
+            $edge = ($dy -eq 0 -or $dy -eq 3)
+            Set-Px $c ($x0 + $dx) ($y0 + $dy) $(if ($edge) { $Pal.Hull } elseif ($dx -eq 0 -or $dx -eq 5) { $Pal.Cut } else { $Pal.Fuel })
+        } }
+    }
+    return $c
+}
+
+function New-Deposit {
+    $c = New-Canvas
+    $steel = @((Hex 'C8CCD0'), (Hex '8A9096'), (Hex '5A6066'))
+    $metal = @((Hex 'E0F8D0'), (Hex '9CD08A'), (Hex '5E9A4E'))
+    # a cathode rod with a dendritic uranium-233 crust and a salt crust at the tip
+    for ($y = 1; $y -le 6; $y++) { Set-Px $c 7 $y $steel[1]; Set-Px $c 8 $y $steel[0] }
+    for ($y = 6; $y -le 13; $y++) {
+        $w = if ($y -lt 9) { 2 } else { 3 }
+        for ($x = 8 - $w; $x -le 7 + $w; $x++) {
+            $v = $(if ((($x * 3 + $y * 5) % 4) -eq 0) { $metal[0] } elseif ((($x + $y) % 3) -eq 0) { $metal[2] } else { $metal[1] })
+            Set-Px $c $x $y $v
+        }
+    }
+    Set-Px $c 4 12 $metal[2]; Set-Px $c 11 12 $metal[2]; Set-Px $c 5 14 $metal[1]; Set-Px $c 10 14 $metal[1]
+    Set-Px $c 7 14 (Hex 'C8E0F0'); Set-Px $c 8 14 (Hex 'C8E0F0')
+    return $c
+}
+
+$FragOx = @{ Hull = (Hex '8A9096'); Cut = (Hex '5A6066'); Fuel = (Hex 'D8D0A0') }
+$FragNi = @{ Hull = (Hex '8A9096'); Cut = (Hex '5A6066'); Fuel = (Hex 'A8B8D8') }
+$ItemFiles = @('u233_fuel_rod', 'spent_oxide_fragments', 'spent_nitride_fragments', 'u233_cathode_deposit')
+
 $kinds = @(@{ Kind = 'cell'; Dir = 'block/multiblock/pyroprocessing_cell' }, @{ Kind = 'reactor'; Dir = 'block/multiblock/accelerator_driven_reactor' })
 foreach ($k in $kinds) {
     $idle = New-Face $k.Kind 0 $false
@@ -152,6 +189,9 @@ foreach ($k in $kinds) {
     Out-Tex (Join-Frames $emi) "$($k.Dir)/overlay_front_active_emissive.png" $FrameTime
 }
 Out-Tex (New-Rod) 'item/u233_fuel_rod.png'
+Out-Tex (New-Fragments $FragOx) 'item/spent_oxide_fragments.png'
+Out-Tex (New-Fragments $FragNi) 'item/spent_nitride_fragments.png'
+Out-Tex (New-Deposit) 'item/u233_cathode_deposit.png'
 
 # self-check: ring empty, alpha 0 or 255, nothing pure black, emissive a subset of the colour layer, no two frames alike
 $problems = New-Object System.Collections.Generic.List[string]
@@ -178,13 +218,15 @@ foreach ($k in $kinds) {
         if ($same) { $problems.Add("$($k.Dir): frame $f repeats frame $($f + 1)") }
     }
 }
-$rod = Read-Png (Join-Path $OutRoot 'item\u233_fuel_rod.png')
-for ($y = 0; $y -lt $rod.H; $y++) {
-    for ($x = 0; $x -lt $rod.W; $x++) {
-        $v = $rod.P[$y * $rod.W + $x]; $a = ($v -shr 24) -band 255
-        if ($a -ne 0 -and $a -ne 255) { $problems.Add("item/u233_fuel_rod: partial alpha at $x,$y") }
-        if ($a -eq 255 -and ($v -band 0xFFFFFF) -eq 0) { $problems.Add("item/u233_fuel_rod: pure black at $x,$y") }
-        if ($a -ne 0 -and ($x -eq 0 -or $x -eq 15 -or $y -eq 0 -or $y -eq 15)) { $problems.Add("item/u233_fuel_rod: ring pixel at $x,$y") }
+foreach ($name in $ItemFiles) {
+    $rod = Read-Png (Join-Path $OutRoot "item\$name.png")
+    for ($y = 0; $y -lt $rod.H; $y++) {
+        for ($x = 0; $x -lt $rod.W; $x++) {
+            $v = $rod.P[$y * $rod.W + $x]; $a = ($v -shr 24) -band 255
+            if ($a -ne 0 -and $a -ne 255) { $problems.Add("item/${name}: partial alpha at $x,$y") }
+            if ($a -eq 255 -and ($v -band 0xFFFFFF) -eq 0) { $problems.Add("item/${name}: pure black at $x,$y") }
+            if ($a -ne 0 -and ($x -eq 0 -or $x -eq 15 -or $y -eq 0 -or $y -eq 15)) { $problems.Add("item/${name}: ring pixel at $x,$y") }
+        }
     }
 }
 if ($problems.Count -gt 0) { $problems | Select-Object -First 20 | ForEach-Object { Write-Error $_ -ErrorAction Continue }; exit 1 }
