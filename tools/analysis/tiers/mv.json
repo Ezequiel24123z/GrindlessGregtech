@@ -41,6 +41,7 @@
   ],
 
   "machines": [
+    {"machine":"gtceu:polymer_works","types":["gtceu:polymer_works"],"energy":{"voltage":128},"needs":["eu:mv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a","gtceu:hv_energy_input_hatch","gtceu:hv_energy_input_hatch_4a","gtceu:hv_energy_input_hatch_16a"]},"package":"A1b-04","note":"Our MV Polymer Works (mega machine), modelled by A1b-04."},
     { "machine": "gtceu:lv_transformer_1a", "types": [], "note": "GTM's LV <-> MV transformer (1 A)." },
     { "machine": "gtceu:lv_transformer_2a", "types": [] },
     { "machine": "gtceu:lv_transformer_4a", "types": [], "note": "LV -> MV transformer (4 A -> 1 A): LV's gate." },

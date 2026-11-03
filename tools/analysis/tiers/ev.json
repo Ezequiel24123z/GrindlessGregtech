@@ -33,6 +33,8 @@
   ],
 
   "machines": [
+    {"machine":"gtceu:ore_refinery","types":["gtceu:ore_refinery"],"energy":{"voltage":2048},"needs":["eu:ev"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:ev_energy_input_hatch","gtceu:ev_energy_input_hatch_4a","gtceu:ev_energy_input_hatch_16a","gtceu:iv_energy_input_hatch","gtceu:iv_energy_input_hatch_4a","gtceu:iv_energy_input_hatch_16a","gtceu:iv_wireless_energy_hatch","gtceu:iv_wireless_energy_hatch_4a","gtceu:iv_wireless_energy_hatch_16a","gtceu:iv_wireless_energy_hatch_64a"]},"package":"A1b-04","note":"Our EV Ore Refinery (mega machine, MEGA-4), modelled by A1b-04."},
+    {"id":"gtca:thermal_reactor@ev-rtm","machine":"gtca:thermal_reactor","types":["gtceu:thermal_reactor"],"energy":{"voltage":2048,"hatches":2},"coilTemp":4500,"needs":["eu:ev"],"parts":["gtceu:heatproof_machine_casing","gtceu:rtm_alloy_coil_block","gtceu:ev_energy_input_hatch","gtceu:lv_input_bus","gtceu:lv_output_bus","gtceu:lv_input_hatch","gtceu:lv_output_hatch","gtceu:lv_muffler_hatch"],"package":"A1b-04","note":"GTCA's thermal reactor (froth lines) on two EV hatches (IV voltage) with an RTM coil (4,500 K); its casing is not in the dump, so the heatproof casing stands in (steam's * rule). Rows above 8,192 EU/t or 4,500 K need the hotter variants."},
     { "machine": "gtceu:ev_transformer_1a", "types": [], "note": "EV -> IV transformer (1 A)." },
     { "machine": "gtceu:ev_transformer_2a", "types": [], "note": "EV -> IV transformer (2 A)." },
     { "machine": "gtceu:ev_transformer_4a", "types": [], "note": "EV -> IV transformer (4 A -> 1 A): the gate to IV." },
@@ -232,6 +234,7 @@
   ],
 
   "targets": [
+    { "id": "pair-martian", "label": "A1b-05: the martian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/martian_entangled_singularity"], "package": "A1b-05" },
     { "id": "energy-iv", "label": "IV energy available (EV -> IV transformer on the EV grid)", "item": "eu:iv" },
     { "id": "transformer-ev-iv", "label": "EV -> IV transformer (4 A -> 1 A)", "item": "gtceu:ev_transformer_4a" },
     { "id": "buffer-battery-ev", "label": "EV battery buffer", "item": "gtceu:ev_battery_buffer_4x" },

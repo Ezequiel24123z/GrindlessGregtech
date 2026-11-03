@@ -8,6 +8,8 @@
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
 
   "packages": {
+    "A1b-04": { "label": "A1b-04: the machine #266 found missing, modelled", "landedWhen": ["gtceu:smelting_complex"] },
+    "A1b-05": { "label": "A1b-05: the AE2 pair trips before UHV", "landedWhen": ["recipe:grindless:transform/venusian_entangled_singularity"] },
     "A2": { "label": "LuV-A2: the naquadah plant's mode 2 (circuits 2 and 3), the platinum plant's mode 4 and the LuV parallel hatch", "landedWhen": ["recipe:grindless:naquadah_refining/enriched_naquadah", "recipe:grindless:naquadah_refining/spent_naquadah"], "note": "lib/packages.mjs: an older dump (before A2) lists these targets as pending (WARN) instead of failing them." }
   },
   "conditions": {
@@ -66,7 +68,12 @@
     { "prefix": "gtnn:iv_dehydrator", "maxEUt": 8192, "needs": ["eu:iv"], "note": "GT--'s dehydrator stays in the pack (integration/gtnn.js); LuV-A2's mode 2 remakes its gold trifluoride through bromine trifluoride, and the bromine comes from gtceu:dehydrator/wet_bromine" }
   ],
 
+  "partAbilities": {
+    "data_access": ["gtceu:data_access_hatch", "gtceu:advanced_data_access_hatch"]
+  },
+
   "machines": [
+    {"machine":"gtceu:smelting_complex","types":["gtceu:smelting_complex"],"energy":{"voltage":8192},"needs":["eu:iv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:iv_energy_input_hatch","gtceu:iv_energy_input_hatch_4a","gtceu:iv_energy_input_hatch_16a","gtceu:iv_wireless_energy_hatch","gtceu:iv_wireless_energy_hatch_4a","gtceu:iv_wireless_energy_hatch_16a","gtceu:iv_wireless_energy_hatch_64a","gtceu:luv_energy_input_hatch","gtceu:luv_energy_input_hatch_4a","gtceu:luv_energy_input_hatch_16a","gtceu:luv_wireless_energy_hatch","gtceu:luv_wireless_energy_hatch_4a","gtceu:luv_wireless_energy_hatch_16a","gtceu:luv_wireless_energy_hatch_64a"]},"package":"A1b-04","note":"Our IV Smelting Complex (mega machine), modelled by A1b-04."},
     { "machine": "gtceu:iv_transformer_1a", "types": [], "note": "IV -> LuV transformer (1 A)." },
     { "machine": "gtceu:iv_transformer_2a", "types": [], "note": "IV -> LuV transformer (2 A)." },
     { "machine": "gtceu:iv_transformer_4a", "types": [], "note": "IV -> LuV transformer (4 A -> 1 A): the gate to LuV." },
@@ -815,6 +822,7 @@
     }
   ],
   "targets": [
+    { "id": "pair-venusian", "label": "A1b-05: the venusian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/venusian_entangled_singularity"], "package": "A1b-05" },
     { "id": "energy-luv", "label": "LuV energy available (IV -> LuV transformer on the IV grid)", "item": "eu:luv" },
     { "id": "transformer-iv-luv", "label": "IV -> LuV transformer (4 A -> 1 A)", "item": "gtceu:iv_transformer_4a" },
     { "id": "buffer-battery-iv", "label": "IV battery buffer", "item": "gtceu:iv_battery_buffer_4x" },
@@ -963,7 +971,7 @@
     { "id": "naquadah-dust-without-venus", "label": "Without the trip to Venus there's no naquadah dust", "item": "gtceu:naquadah_dust", "without": ["synthetic:inner-trip"], "expect": "unreachable" },
     { "id": "neutron-activator-not-in-iv", "label": "GT--'s neutron activator waits for LuV: its two quark cores are precision assembly at 30,720 EU/t, which only GCYM's large assembler runs, on exactly one energy hatch (IV's naquadah comes from IV-B3's plant)", "item": "gtnn:neutron_activator", "expect": "unreachable" },
     { "id": "naquadah-mode2-on-iv-hatches", "label": "LuV-A2's mode 2 runs once IV hatches exist: two IV hatches give the naquadah plant LuV voltage (30,720 EU/t)", "kind": "recipe", "recipe": "grindless:naquadah_refining/enriched_naquadah", "package": "A2" },
-    { "id": "trinium-sulfide-needs-two-iv-hatches", "label": "Trinium sulfide only comes from mode 2 on two IV (or LuV) hatches: without that build there is none", "item": "gtceu:trinium_sulfide_dust", "without": ["build:gtceu:naquadah_plant@iv2", "build:gtceu:naquadah_plant@luv*"], "expect": "unreachable", "package": "A2" },
+    { "id": "trinium-sulfide-needs-two-iv-hatches", "label": "Trinium sulfide only comes from mode 2 on two IV (or LuV) hatches: without that build there is none", "item": "gtceu:trinium_sulfide_dust", "without": ["build:gtceu:naquadah_plant@iv2", "build:gtceu:naquadah_plant@luv*"], "expect": "unreachable", "package": "A2", "note": "Guards IV and LuV only; zpm.json drops it. From ZPM, GT--'s enriched chain at its native tier (the chemical plant at ZPM casings plus the IV dehydrator) is a legitimate, worse second route (no recovery) that bypasses nothing (DECISIONS.md:255, :294)." },
     { "id": "alloy-blast-smelter", "label": "GCYM's alloy blast smelter (IV-B6: IV parts, at home)", "item": "gtceu:alloy_blast_smelter" },
     { "id": "alloy-blast-smelter-formed", "label": "Alloy blast smelter formed (2 EV hatches)", "item": "m:gtceu:alloy_blast_smelter@ev-rtm" },
     { "id": "large-packer", "label": "GCYM's large packer (IV-B6)", "item": "gtceu:large_packer" },

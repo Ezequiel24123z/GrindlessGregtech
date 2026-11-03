@@ -18,6 +18,11 @@
         "${places}"
       ],
       "note": "UHV's list: its orbit and place tokens already cover the UEV orbits and Barnard b."
+    },
+    "eu_to_start": {
+      "field": "eu",
+      "max": 2560000000,
+      "note": "The Mk4 ring: 16 UEV hatches store 16 x 160,000,000 = 2,560,000,000 EU (startup uev/fusion.js:93-94); its rows start at 1.2 G and 2.4 G (tables/fusion_mk4.json:25-33). UV's 640 M cap would never burn it (A1b-03)."
     }
   },
   "eraOrder": [
@@ -1627,6 +1632,18 @@
       "label": "Gate: the tennessine sample",
       "item": "grindless:tennessine_sample",
       "package": "A2"
+    },
+    {
+      "id": "gate-mk4-dhe3-plasma",
+      "label": "Gate: the Mk4 burns D-He3 (starts at 1.2 G EU, under the 2.56 G the ring stores)",
+      "fluid": "gtceu:uev_dhe3_plasma",
+      "package": "A7"
+    },
+    {
+      "id": "gate-mk4-pb11-plasma",
+      "label": "Gate: the Mk4 burns p-B11 (starts at 2.4 G EU)",
+      "fluid": "gtceu:uev_pb11_plasma",
+      "package": "A7"
     },
     {
       "id": "gate-pellet",
