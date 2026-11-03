@@ -20734,7 +20734,7 @@ hash = "f268995789c3db5cc5e8e4b6a8a900423a555ef6609e4b71bae9863632cd6162"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uxv/vela_pasta.js"
-hash = "9ff53be3a915828acad9b80447bf62601b43bb612e716bcb92da123d6e507836"
+hash = "520dd559004605f5a36847b05ed67df02230ef6021e281cef3c58c1f7d8a6c32"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/zpm/actinides.js"
