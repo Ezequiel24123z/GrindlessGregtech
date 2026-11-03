@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:fe56_shield_casing"],
+  "text": ["emi.grindless.info.fe56_shield_casing.0"]
+}

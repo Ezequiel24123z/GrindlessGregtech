@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:void_diamond_window"],
+  "text": ["emi.grindless.info.void_diamond_window.0"]
+}

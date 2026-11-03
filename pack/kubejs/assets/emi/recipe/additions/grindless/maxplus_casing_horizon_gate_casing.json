@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:horizon_gate_casing"],
+  "text": ["emi.grindless.info.horizon_gate_casing.0"]
+}

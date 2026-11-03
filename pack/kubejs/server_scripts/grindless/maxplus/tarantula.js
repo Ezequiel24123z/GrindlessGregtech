@@ -3,7 +3,7 @@
 //
 //   P6  VMS plasma     lift (c1) -> raw_vms_plasma; mass filter c6 -> vms_core_plasma; FRC forming c4 -> confined_vms_plasma
 //   P7  nickel-56      crucible (c1) -> ni56_slug + ime_ash; canner -> canned_ni56; hot cell c24 -> shielded_ni56_cask; burner c1 -> co56_cask,
-//                      c2 -> spent_fe56_cask (both GENERATOR rows: 2^34 and 2^33 EU/t out); hot cell c26 returns the iron
+//                      c2 -> spent_fe56_cask (both GENERATOR rows: 2^34 and 2^33 EU/t out); hot cell c26 returns the iron-56 dust
 //   P8  ime ash        solvent extraction c16 -> ime_leach_fractions; EBF -> recovered_silicon; zone refining c17 -> electronic_grade_silicon
 //   P17 sCO2 module    SCC c4 -> sx_turbine_blade; electron beam -> tbc_coated_blade; SPS c24 -> turbine_disc; hot rolling c15 -> pche_recuperator_foil;
 //                      assembler c28 -> sco2_turbine_module
@@ -46,7 +46,7 @@
     { type: 'hot_cell', name: 'shielded_ni56_cask', circuit: 24, eut: 7680, duration: 600, key: 'grindless_hot_cell',
       items: [['grindless:canned_ni56', 1], ['gtceu:lead_plate', 8], ['gtceu:boron_carbide_dust', 4]], outs: [['grindless:shielded_ni56_cask', 1]] },
     { type: 'hot_cell', name: 'spent_fe56_cask_iron', circuit: 26, eut: 7680, duration: 600, key: 'grindless_hot_cell',
-      items: [['grindless:spent_fe56_cask', 1]], outs: [['minecraft:iron_ingot', 64], ['gtceu:lead_plate', 8]] },
+      items: [['grindless:spent_fe56_cask', 1]], outs: [['gtceu:iron_56_dust', 64], ['gtceu:lead_plate', 8]] },
     // P8
     { type: 'solvent_extraction', name: 'ime_leach_fractions', circuit: 16, eut: va(7), duration: 600,
       items: [['grindless:ime_ash', 4]], fluids: [['gtceu:sulfuric_acid', 4000]],

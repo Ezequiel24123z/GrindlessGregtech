@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:kerr_coil_casing"],
+  "text": ["emi.grindless.info.kerr_coil_casing.0"]
+}
