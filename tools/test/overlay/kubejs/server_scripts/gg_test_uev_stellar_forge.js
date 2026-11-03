@@ -1,8 +1,8 @@
 // priority: -7759
 // TEST ONLY, UEV-M2 (gtceu:stellar_forge). Command: kubejs custom_command gg_test_uev_stellar_forge
-// Band ONLY: X 35136-35199, Z 0-63, Overworld Y 98-115.
+// Band ONLY: X 35136-35199, Z 0-63, Overworld Y 98-125.
 //   T1 (named uncertainty: the forge's modifier chain on 7.5.3: ebf_temp read, plasma added by the last modifier, veto, clamp):
-//     formed     forge A (no hatch) and forge B (UEV parallel hatch) form <= 16 tall with HfTaCN coils (12,600 K)
+//     formed     forge A (no hatch) and forge B (UEV parallel hatch) form 23 tall with HfTaCN coils (12,600 K)
 //     noplasma   a 9,000 K probe (8 EU/t, non-consumed stick) runs 256 copies, nothing drained
 //     plasma     with 1,000 mB uev_dhe3_plasma the same probe runs 1,024 copies, 250 mB drained once, 250 mB helium_4_ash out
 //     short      with 100 mB plasma it runs 256 copies and the tank is untouched
@@ -15,7 +15,7 @@
   var X0 = 35136
   var X1 = 35199
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 125
   var NAME = 'uev_stellar_forge'
   var ID = 'gtceu:stellar_forge'
   var STICK = 'minecraft:stick'
@@ -25,8 +25,8 @@
   var CX = 35168
   var CY = 100
   var COIL = 'grindless:hftacn_coil_block'
-  var PARTS_A = { 1: 'gtceu:maintenance_hatch', 2: 'gtceu:uev_energy_input_hatch', 3: 'gtceu:hv_input_bus', 5: 'gtceu:hv_input_hatch', 6: 'gtceu:hv_output_hatch' }
-  var PARTS_B = { 1: 'gtceu:maintenance_hatch', 2: 'gtceu:uev_energy_input_hatch', 3: 'gtceu:hv_input_bus', 5: 'gtceu:hv_input_hatch', 6: 'gtceu:hv_output_hatch', 7: 'gtceu:uev_parallel_hatch' }
+  var PARTS_A = { 4: 'gtceu:maintenance_hatch', 5: 'gtceu:uev_energy_input_hatch', 6: 'gtceu:hv_input_bus', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch' }
+  var PARTS_B = { 4: 'gtceu:maintenance_hatch', 5: 'gtceu:uev_energy_input_hatch', 6: 'gtceu:hv_input_bus', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch', 10: 'gtceu:uev_parallel_hatch' }
 
   ServerEvents.recipes(function (event) {
     try {
@@ -158,6 +158,7 @@
       var part = false
       if (sym.kind === 'controller') { controller = { x: c.x, y: c.y, z: c.z }; return }
       if (sym.kind === 'blocks') block = sym.blocks.length > 1 ? COIL : sym.blocks[0]
+      else if (sym.kind === 'frames') block = 'gtceu:' + sym.materials[0] + '_frame'
       else if (sym.kind === 'oneOf') {
         if (c.si === last && c.ri === ctrl.ri && parts[c.ci]) { block = parts[c.ci]; part = true }
         else sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0] })
@@ -185,7 +186,7 @@
 
   function build() {
     var a = { name: 'forgeA', phase: 'forming', started: S.tick, z: 20, parts: PARTS_A, hatch: false }
-    var b = { name: 'forgeB', phase: 'forming', started: S.tick, z: 50, parts: PARTS_B, hatch: true }
+    var b = { name: 'forgeB', phase: 'forming', started: S.tick, z: 47, parts: PARTS_B, hatch: true }
     var us = [a, b]
     us.forEach(function (u) {
       var r = placeForge(CX, CY, u.z, u.parts)
@@ -204,7 +205,7 @@
     var kelvin = global.grindless.coils.temperature(m)
     var ph = m.getParallelHatch()
     var hatch = ph.isPresent() ? ph.get() : null
-    var ok = !!u.bus && !!u.inH && !!u.outH && u.energy.length === 1 && u.height <= 16 && kelvin === 12600 && (u.hatch ? !!hatch : !hatch)
+    var ok = !!u.bus && !!u.inH && !!u.outH && u.energy.length === 1 && u.height === 23 && kelvin === 12600 && (u.hatch ? !!hatch : !hatch)
     check(u.name + '_formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', coil ' + kelvin + ' K, hatch ' + (hatch ? hatch.getCurrentParallel() : 'none'))
     return ok
   }

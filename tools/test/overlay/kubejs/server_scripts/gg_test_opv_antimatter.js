@@ -1,6 +1,6 @@
 // priority: -27824
 // TEST ONLY, OpV-B3a. Command: kubejs custom_command gg_test_opv_antimatter.
-// Band: X 38848-38911, Z 0-63, Y 98-115, Overworld and Nether.
+// Band: X 38848-38911, Z 0-63, Y 98-115, Overworld and Nether (the engine runs anywhere since SITE-D).
 // Observe the first 1200 ticks of the real pellet row, not its full priced duration.
 // A separate one-tick copy tests native 1/16 tile wear over 256 starts (a count band, the chance is random) without
 // changing the shipped fuel row. The integrator runs this in the grouped OpV set.
@@ -23,7 +23,7 @@
     { name: 'engine', dim: HOME, cx: 38856, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'run' },
     { name: 'wear', dim: HOME, cx: 38876, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'wear' },
     { name: 'lower_hatch', dim: HOME, cx: 38896, dynamo: 'gtceu:uxv_energy_output_hatch_16a', mode: 'refuse' },
-    { name: 'away', dim: AWAY, cx: 38856, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'refuse' }
+    { name: 'away', dim: AWAY, cx: 38856, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'anywhere' }
   ]
   function classes() {
     if (C === null) C = {
@@ -167,6 +167,15 @@
       check(u.name + '_refused', String(logic.getStatus()) !== 'WORKING' &&
         count(u.bus, 'grindless:acmf_pellet') === 1 && count(u.bus, 'grindless:antiproton_stack_opv') === 1,
         'status ' + logic.getStatus() + '; no fuel consumed')
+      u.phase = 'done'
+      return
+    }
+    if (u.mode === 'anywhere') {
+      if (S.tick - u.started < 120) return
+      var last = logic.getLastRecipe()
+      check(u.name + '_runs', String(logic.getStatus()) === 'WORKING' && last !== null && String(last.id) === REAL,
+        'SITE-D: the engine runs outside its home through an OpV dynamo; status ' + logic.getStatus() + ', recipe ' + (last === null ? 'none' : last.id))
+      u.m.setWorkingEnabled(false)
       u.phase = 'done'
       return
     }

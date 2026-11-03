@@ -26,11 +26,11 @@
       steps: [
         { recipe: 'antiproton_production/hot_antiproton_beam', circuit: 1, items: [['grindless:ir_spallation_target', 1], ['grindless:li6_hydride_shield', 1]],
           fluid: ['gtceu:jet_proton_beam', 4000], fluidOut: ['gtceu:hot_antiproton_beam', 1000], duration: 400 },
-        { recipe: 'beam_cooling/stochastic_cooling', circuit: 1, items: [['grindless:stochastic_cooling_pickup', 1]],
+        { recipe: 'beam_cooling/stochastic_cooling', mode: 1, circuit: 1, items: [['grindless:stochastic_cooling_pickup', 1]],
           fluid: ['gtceu:hot_antiproton_beam', 1000], fluidOut: ['gtceu:stochastically_cooled_beam', 1000], duration: 800 },
-        { recipe: 'beam_cooling/decelerated_antiproton_beam', circuit: 2, items: [['grindless:electron_cooler', 1]],
+        { recipe: 'beam_cooling/decelerated_antiproton_beam', mode: 1, circuit: 2, items: [['grindless:electron_cooler', 1]],
           fluid: ['gtceu:stochastically_cooled_beam', 1000], fluidOut: ['gtceu:decelerated_antiproton_beam', 1000], duration: 800 },
-        { recipe: 'beam_cooling/cold_antiproton_cell', circuit: 3, items: [['grindless:empty_penning_trap', 1], ['grindless:octupole_trap_magnet', 1]],
+        { recipe: 'beam_cooling/cold_antiproton_cell', mode: 1, circuit: 3, items: [['grindless:empty_penning_trap', 1], ['grindless:octupole_trap_magnet', 1]],
           fluid: ['gtceu:decelerated_antiproton_beam', 1000], itemOut: ['grindless:cold_antiproton_cell', 1], duration: 400 }
       ] },
     { id: 'gtceu:antimatter_trap', cx: 38830, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
@@ -112,6 +112,7 @@
     var r = u.steps[u.step]
     // a finished run re-arms itself from the inputs left in the bus: drop any such run before loading the next step
     u.m.getRecipeLogic().resetRecipeLogic()
+    if (r.mode !== undefined) u.m.setActiveRecipeType(r.mode)
     inventory(u.bus, [['gtceu:programmed_circuit', 1, '{Configuration:' + r.circuit + '}']].concat(r.items))
     if (u.out) inventory(u.out, [])
     if (u.fin) u.fin.tank.setFluidInTank(0, r.fluid ? Fluid.of(r.fluid[0], r.fluid[1]).getFluidStack() : Fluid.of('minecraft:water', 0).getFluidStack())

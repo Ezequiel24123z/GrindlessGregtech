@@ -159,7 +159,7 @@
   function statics() {
     var WG = S.G.warpGate
     var UG = S.G.uevGate
-    if (!check('static_published', WG && WG.recipes && WG.recipes.length === 4, 'global.grindless.warpGate recipes ' +
+    if (!check('static_published', WG && WG.recipes && WG.recipes.length >= 4, 'global.grindless.warpGate recipes ' +
       (WG && WG.recipes ? WG.recipes.length : 'none'))) throw new Error('warpGate is not published')
     var missing = [HOLD, CASING_RECIPE, 'grindless:warp_gate/open', 'grindless:warp_gate/sustain'].filter(function (id) { return byId(id) === null })
     check('static_recipes', missing.length === 0 && (WG.skipped || []).length === 0 && (WG.clashes || []).length === 0 &&

@@ -41,8 +41,8 @@
     { name: 'annihilation_b', dim: HOME, machine: 'annihilation_engine', cx: 38710, z: 24, bus: [[CIRCUIT, 1, '{Configuration:2}'], ['grindless:acmf_pellet', 1], ['grindless:antiproton_stack_opv', 1], ['grindless:gamma_absorber_tile', 1]] },
     { name: 'hawking_a', dim: CYG, machine: 'hawking_collector', cx: 38666, z: 40, bus: [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:stable_exotic_matter', 1], ['grindless:kugelblitz_core', 1], ['grindless:gamma_absorber_tile', 1]] },
     { name: 'hawking_b', dim: CYG, machine: 'hawking_collector', cx: 38710, z: 40, bus: [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:stable_exotic_matter', 1], ['grindless:kugelblitz_core', 1], ['grindless:gamma_absorber_tile', 1]] },
-    { name: 'bulge_a', dim: TERZ, machine: 'bulge_collector', cx: 38666, z: 32, bus: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:deployed_node_pack', 16]] },
-    { name: 'bulge_b', dim: TERZ, machine: 'bulge_collector', cx: 38710, z: 32, bus: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:deployed_node_pack', 16]] }
+    { name: 'bulge_a', dim: TERZ, machine: 'bulge_collector', cx: 38672, z: 32, bus: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:deployed_node_pack', 16]] },
+    { name: 'bulge_b', dim: TERZ, machine: 'bulge_collector', cx: 38704, z: 32, bus: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:deployed_node_pack', 16]] }
   ]
 
   function classes() {
@@ -397,7 +397,7 @@
           var live = S.units.filter(function (u) { return u.phase === 'ready' && u.m && u.m.getRecipeLogic().isWorking() }).length
           note('sources_running', live + ' of ' + SOURCES.length + ' sources working at the start')
         } else if (elapsed > 1200) {
-          check('hold_start', false, 'the hold did not start: status ' + logic.getStatus() + ', reasons ' + logic.getFailureReasons() + ', bus ' + contents(S.gateBus.getInventory()))
+          check('hold_start', false, 'the hold did not start: status ' + logic.getStatus() + ', reasons ' + logic.getFailureReasons() + ', network stored ' + stored() + ', bus ' + contents(S.gateBus.getInventory()))
           finish()
         }
         return
