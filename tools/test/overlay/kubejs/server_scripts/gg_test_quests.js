@@ -65,37 +65,37 @@ var GG_QUESTS_EXPECTED = {
   travel_and_teams: [16, 15],
   workshop: [17, 16],
   welcome: [16, 15],
-  steam_age: [45, 51],
-  lv_age: [53, 54],
-  mv_age: [52, 63],
-  hv_age: [42, 52],
+  steam_age: [49, 55],
+  lv_age: [62, 63],
+  mv_age: [59, 71],
+  hv_age: [80, 93],
   ev_age: [65, 76],
-  iv_age: [64, 82],
-  luv_age: [82, 88],
+  iv_age: [63, 81],
+  luv_age: [82, 90],
   zpm_age: [93, 95],
-  uv_age: [105, 111],
+  uv_age: [108, 114],
   uhv_age: [114, 119],
   uev_age: [104, 128],
-  uiv_age: [107, 117],
+  uiv_age: [108, 118],
   uxv_age: [89, 98],
-  opv_age: [84, 94],
+  opv_age: [85, 95],
   max_age: [84, 94],
-  maxplus_age: [147, 173]
+  maxplus_age: [148, 174]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
 var GG_UNGROUPED = { welcome: true }
 // the Processing Lines group (one generated chart per tier; dependencies include the ones on other charts' quests)
-GG_QUESTS_EXPECTED.pl_steam = [66, 59]
-GG_QUESTS_EXPECTED.pl_lv = [100, 93]
-GG_QUESTS_EXPECTED.pl_mv = [88, 91]
-GG_QUESTS_EXPECTED.pl_hv = [73, 70]
-GG_QUESTS_EXPECTED.pl_ev = [136, 135]
+GG_QUESTS_EXPECTED.pl_steam = [48, 46]
+GG_QUESTS_EXPECTED.pl_lv = [115, 113]
+GG_QUESTS_EXPECTED.pl_mv = [95, 98]
+GG_QUESTS_EXPECTED.pl_hv = [137, 135]
+GG_QUESTS_EXPECTED.pl_ev = [125, 125]
 GG_QUESTS_EXPECTED.pl_iv = [123, 125]
 GG_QUESTS_EXPECTED.pl_luv = [201, 199]
 GG_QUESTS_EXPECTED.pl_zpm = [134, 130]
-GG_QUESTS_EXPECTED.pl_uv = [177, 187]
+GG_QUESTS_EXPECTED.pl_uv = [176, 186]
 GG_QUESTS_EXPECTED.pl_uhv = [213, 201]
-GG_QUESTS_EXPECTED.pl_uev = [209, 193]
+GG_QUESTS_EXPECTED.pl_uev = [214, 199]
 GG_QUESTS_EXPECTED.pl_uiv = [342, 313]
 GG_QUESTS_EXPECTED.pl_uxv = [415, 369]
 GG_QUESTS_EXPECTED.pl_opv = [372, 327]

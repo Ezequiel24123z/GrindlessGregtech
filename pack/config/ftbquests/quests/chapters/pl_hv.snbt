@@ -1441,7 +1441,7 @@
 			y: 38.0d
 		}
 		{
-			dependencies: ["555FC2E76BF73D84"]
+			dependencies: ["520E622B03D6A657"]
 			icon: "gtceu:diluted_hydrochloric_acid_bucket"
 			id: "7C23261F00EEECB7"
 			size: 0.75d
@@ -1539,7 +1539,7 @@
 			y: 38.0d
 		}
 		{
-			dependencies: ["3AE9EE78FFC6A982"]
+			dependencies: ["3106687CAF3A88BB"]
 			icon: "gtceu:hydrochloric_acid_bucket"
 			id: "3462CD7D27F6FC9C"
 			size: 0.75d
