@@ -34,8 +34,8 @@ test('the Mond mass balance: 16 crushed give 24 iron + 4 nickel + 1 cobalt + 1 c
   assert.match(belt, /alloy: \{ ni: 19, w: 1, out: 20,/);
 });
 
-test('the coated conductor line: 20 tapes ride six rows, in order, each one a different ingredient set', () => {
-  const chain = ['nickel_tungsten_substrate', 'textured_tape', 'buffered_tape', 'coated_tape', 'capped_tape', 'itbtc_coated_conductor'].map(row);
+test('the coated conductor line: 20 tapes ride eight rows, in order, each one a different ingredient set', () => {
+  const chain = ['nickel_tungsten_substrate', 'textured_tape', 'seeded_tape', 'barrier_tape', 'buffered_tape', 'coated_tape', 'capped_tape', 'itbtc_coated_conductor'].map(row);
   chain.forEach((r) => assert.ok(r, 'row missing'));
   assert.deepEqual(chain[0].itemsIn, [{ id: 'gtceu:nickel_tungsten_dust', count: 20 }]);
   const out = (r) => r.itemsOut[0];
@@ -43,23 +43,23 @@ test('the coated conductor line: 20 tapes ride six rows, in order, each one a di
   for (let i = 1; i < chain.length; i++) {
     assert.ok(chain[i].itemsIn.some((x) => x.id === out(chain[i - 1]).id && x.count === 20), `${chain[i].name} takes ${out(chain[i - 1]).id}`);
   }
-  assert.deepEqual(chain.map((r) => out(r).id), ['grindless:nickel_tungsten_tape', 'grindless:textured_nickel_tungsten_tape', 'grindless:buffered_tape',
+  assert.deepEqual(chain.map((r) => out(r).id), ['grindless:nickel_tungsten_tape', 'grindless:textured_nickel_tungsten_tape', 'grindless:seeded_tape', 'grindless:barrier_tape', 'grindless:buffered_tape',
     'grindless:coated_tape', 'grindless:capped_tape', 'grindless:itbtc_coated_conductor']);
   const ids = (r) => r.itemsIn.map((x) => x.id).concat(r.fluidsIn.map((x) => x.id)).sort().join('|');
   assert.equal(new Set(chain.map((r) => r.circuit + ids(r))).size, chain.length);
   const fluids = (r) => r.fluidsIn.map((x) => x.id);
   assert.deepEqual(fluids(row('textured_tape')), ['gtceu:hydrogen', 'gtceu:argon']);
-  assert.deepEqual(row('buffered_tape').itemsIn.map((x) => x.id).slice(1), ['grindless:yttrium_oxide_dust', 'grindless:ysz_powder', 'gtceu:cerium_dust']);
+  assert.deepEqual(['seeded_tape', 'barrier_tape', 'buffered_tape'].map((n) => row(n).itemsIn[1].id), ['grindless:yttrium_oxide_dust', 'grindless:ysz_powder', 'gtceu:cerium_dust']);
   assert.ok(row('coated_tape').itemsIn.some((x) => x.id === 'gtceu:indium_tin_barium_titanium_cuprate_dust'));
   assert.ok(fluids(row('coated_tape')).includes('gtceu:oxygen'));
   assert.deepEqual(fluids(row('capped_tape')), ['gtceu:silver', 'gtceu:oxygen']);
   assert.ok(row('itbtc_coated_conductor').itemsIn.some((x) => x.id === 'gtceu:copper_foil'));
   const sizes = rows.filter((r) => r.circuit <= 9).map((r) => r.itemsIn.length + 1);
-  assert.ok(Math.max(...sizes) <= 5, 'the widened type holds five item inputs');
+  assert.ok(Math.max(...sizes) <= 3, 'the type holds three item inputs, the circuit included');
 });
 
-test('hts_tape.js registers every new id once, widens the type, and the lang names them all', () => {
-  const items = ['textured_nickel_tungsten_tape', 'buffered_tape', 'coated_tape', 'capped_tape'];
+test('hts_tape.js registers every new id once and the lang names them all', () => {
+  const items = ['textured_nickel_tungsten_tape', 'seeded_tape', 'barrier_tape', 'buffered_tape', 'coated_tape', 'capped_tape'];
   const materials = ['crude_metal_carbonyl', 'nickel_tetracarbonyl', 'nickel_tungsten'];
   for (const n of items) {
     assert.match(startup, new RegExp(`\\b${n}: 64`));
@@ -70,8 +70,6 @@ test('hts_tape.js registers every new id once, widens the type, and the lang nam
     assert.match(startup, new RegExp(`\\b${n}: \\{`));
     assert.match(lang, new RegExp(`material.gtceu.${n}'`));
   }
-  assert.match(startup, /ITEMS_IN = 5/);
-  assert.match(startup, /setMaxIOSize\(io.itemsIn, io.itemsOut, io.fluidsIn, io.fluidsOut\)/);
-  for (const n of ['textured_tape', 'buffered_tape', 'coated_tape', 'capped_tape']) assert.ok(lang.includes(`grindless_coated_conductor.${n}'`), n);
+  for (const n of ['textured_tape', 'seeded_tape', 'barrier_tape', 'buffered_tape', 'coated_tape', 'capped_tape']) assert.ok(lang.includes(`grindless_coated_conductor.${n}'`), n);
   assert.doesNotMatch(startup + lang, /es_es/);
 });

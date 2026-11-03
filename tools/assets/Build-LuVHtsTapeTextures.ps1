@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
-    LuV D2-TAPE: the four stages of the HTS tape between the rolled nickel-tungsten tape and the coated conductor: textured, buffered,
-    coated and capped. A tape ribbon curls diagonally across the icon; each stage adds a layer colour. Light from the top left.
+    LuV D2-TAPE: the six stages of the HTS tape between the rolled nickel-tungsten tape and the coated conductor: textured, seeded,
+    barrier, buffered, coated and capped. A tape ribbon curls diagonally across the icon; each stage adds a layer colour. Light from the top left.
 .EXAMPLE
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-LuVHtsTapeTextures.ps1 -Credits
 .PARAMETER OutRoot
@@ -44,7 +44,9 @@ $ribbonMap = @(
 $stages = [ordered]@{
     # cube-textured Ni-W: a bright metallic grain, no film yet
     'textured_nickel_tungsten_tape' = 'K=262A30 L=E4E8EC B=A8B0B8 D=626C76 A=C9D2DA S=FFFFFF'
-    # Y2O3 / YSZ / CeO2 buffer stack: a pale ceramic film
+    # Y2O3 seed, YSZ barrier, CeO2 cap: three pale ceramic films
+    'seeded_tape'                  = 'K=262A30 L=F1EBD5 B=D8CDA6 D=8A8157 A=EFE2B4 S=FFFFFF'
+    'barrier_tape'                 = 'K=262A30 L=EDE6CF B=CDBF98 D=7D7552 A=D8C277 S=FFFFFF'
     'buffered_tape'                = 'K=262A30 L=EDE6CF B=C9BF98 D=7D7552 A=E3D18A S=FFFFFF'
     # the cuprate: black-green superconducting film
     'coated_tape'                  = 'K=1B1D20 L=6E8277 B=2F3B36 D=171D1A 
