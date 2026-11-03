@@ -89,7 +89,7 @@ export default {
     },
     europium: {
       name: 'Europium without fusion',
-      line: 'europium',
+      line: 'rareearth',
       nodes: [
         n('mon', 0, 0, I('gtca:milled_monazite'), 'Milled Monazite', { kind: 'raw', sub: 'Mars rare earths' }),
         n('xan', 0, 1.5, I('gtca:potassium_ethyl_xanthate_dust'), 'Potassium Ethyl Xanthate', { kind: 'raw', sub: 'The collector' }),
@@ -102,9 +102,10 @@ export default {
           kind: 'machine', from: ['froth'], sub: 'EV\'s cascade, its ZPM mode',
         }),
         n('ecl', 10, 0.75, F('gtceu:europium_chloride_solution'), 'Europium Chloride', { kind: 'product', from: ['casc'], sub: 'The phosphoric acid goes to the EV acid loop' }),
+        L('evec', 10, -0.75, 'pl_ev:eu'),
         n('zn', 10, 2.25, I('gtceu:zinc_dust'), 'Zinc', { kind: 'raw', sub: 'Reduces the solution, then comes back (recovered with hydrogen, never spent)' }),
         n('red', 12.5, 0.75, M('gtceu:europium_reductor'), 'Europium Reductor', {
-          kind: 'ours', from: ['ecl', 'zn'], desc: 'Pulls europium out of the solution with zinc, then roasts and reduces it.',
+          kind: 'ours', from: ['ecl', 'evec', 'zn'], desc: 'Pulls europium out of the solution with zinc, then roasts and reduces it.',
         }),
         n('esul', 15, -0.75, I('gtceu:europium_sulfate_dust'), 'Europium Sulfate', { kind: 'product', from: ['red'], sub: 'Roasted to the oxide' }),
         n('eox', 17.5, -0.75, I('gtceu:europium_oxide_dust'), 'Europium Oxide', { kind: 'product', from: ['esul'], by: ['gtceu:valence_reduction'], sub: 'Reduced with lanthanum' }),
@@ -281,7 +282,7 @@ export default {
         n('npr', 0, 3.75, I('grindless:neptune_flyby_probe'), 'Neptune Flyby Probe', { kind: 'raw' }),
         n('fly', 2.5, 3.75, M('gtceu:flyby_probe_bay'), 'Flyby Probe Bay', { kind: 'ours', from: ['npr'], desc: 'Flies the probe past Neptune and Triton.' }),
         n('nrec', 5, 3, I('grindless:neptune_probe_recording'), 'Neptune Probe Recording', { kind: 'product', from: ['fly'], role: 'research', end: 'the deep space network' }),
-        n('nsam', 5, 4.5, I('grindless:neptune_sample'), 'Neptune Sample', { kind: 'product', from: ['fly'], keepShort: 'a sample the flyby probe bay returns in one step; the centrifuge flask and the Neptune siphon take it as it is, and a purification stage would be padding', end: 'the outer-planet parts' }),
+        n('nsam', 5, 4.5, I('grindless:neptune_sample'), 'Neptune Sample', { kind: 'product', from: ['fly'], role: 'research', keepShort: 'a sample the flyby probe bay returns in one step; the centrifuge flask and the Neptune siphon take it as it is, and a purification stage would be padding', end: 'the outer-planet parts' }),
         n('dsn', 2.5, 7, M('gtceu:deep_space_network'), 'Deep Space Network', { kind: 'ours', desc: 'Decodes the recordings into charts.' }),
         n('pch', 5, 7, I('grindless:pluto_kuiper_chart'), 'Pluto-Kuiper Chart', { kind: 'product', from: ['dsn'], role: 'research', end: 'the Kuiper interceptor' }),
         n('plate2', 0, 9.5, I('grindless:cvd_diamond_plate'), 'CVD Diamond Plate', { kind: 'raw' }),
