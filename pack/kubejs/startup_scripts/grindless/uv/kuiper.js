@@ -1,19 +1,17 @@
 // priority: -9900
 // -----------------------------------------------------------------------------------------------
-// UV's Kuiper belt (docs/eras/uv.md, "Machines 28-29" and line 17; package UV-B4): two multiblocks of Pluto orbit and their recipe types.
+// UV's Kuiper belt (docs/eras/uv.md, "Machines 28-29" and line 17; package UV-B4): one multiblock of Pluto orbit and its recipe type.
 //
 //   gtceu:kuiper_interceptor_bay   type kuiper_intercept. 7 x 7 x 9 station truss casing around a hollow probe hangar: a launch rail
 //                                  (titanium frames) along its floor and a sample airlock (laminated glass) at its far end. An
 //                                  ion-propelled interceptor visits a cold classical Kuiper Belt object (Arrokoth's kind) and brings a
 //                                  sample back, as Hayabusa2 did from Ryugu.
-//   gtceu:amorphous_ice_annealer   type ice_annealing. 5 x 7 x 5 station truss casing around a cryostat (the sample warms through its
-//                                  crystallisation at about 140 K) under a gas collection manifold (tungsten steel pipe casing).
 //
+// The amorphous ice annealer is gone (D3-11): its one row, planetesimal_annealing, is the volatile ice fractionator's (uv/pluto_ices.js).
 // Also registered here: grindless:kuiper_interceptor (a thruster pod, a probe RTG and a sample canister) and grindless:sample_canister
 // (the sealed return capsule; the bay gives it back empty). The planetesimal sample and the Kuiper noble gas are F1's (uv/foundation.js).
-// Parts: bay 1-2 energy hatches, 1-2 input buses, 1-2 output buses; annealer 1-2 energy hatches, 1-2 input buses, 1-4 output hatches
-// (ME parts fit). The annealer has no output bus: the refractory dust is inert silicate and carbon and stays in the machine.
-// Textures: the controllers reuse the entry probe bay's and the helium refrigerator's faces on the station truss casing; item icons by
+// Parts: bay 1-2 energy hatches, 1-2 input buses, 1-2 output buses (ME parts fit).
+// Textures: the controller reuses the entry probe bay's face on the station truss casing; item icons by
 // tools/assets/Build-UVKuiperTextures.ps1.
 // Names / tooltips: client_scripts/grindless/uv_kuiper_lang.js. Published: global.grindless.uvKuiper.
 (function () {
@@ -23,7 +21,6 @@
 
   const STATION = 'grindless:station_truss_casing'
   const STATION_TEXTURE = 'grindless:block/luv/station_truss_casing'
-  const CRYOSTAT = 'grindless:cryostat_casing'
   const MANIFOLD = 'gtceu:tungstensteel_pipe_casing'
   const GLASS = 'gtceu:laminated_glass'
 
@@ -78,19 +75,6 @@
     if (y === 3 || y === 4) return idx % 2 === 1 ? 'W' : null
     return null
   }
-  // annealer: a cold tower: frame posts, a cryostat band, glass sight windows, a manifold band and roof
-  function annealerRule(x, y, z, W, H, D) {
-    var onX = x === 0 || x === W - 1
-    var onZ = z === 0 || z === D - 1
-    if (isEdge(x, z, W, D)) return 'F'
-    if (y === H - 1) return (onX || onZ) ? 'F' : 'M'
-    var idx = onX ? z : x
-    if (y === 2) return 'K'
-    if (y === 3 || y === 4) return idx % 2 === 1 ? 'W' : null
-    if (y === 5) return 'M'
-    return null
-  }
-
   // ---------------------------------------------------------------- the bay: 7 wide, 9 deep, 7 high
   // rows bottom -> top: 0 floor (ports or truss), 1-5 the walls around the hollow hangar (rail along its floor, airlock at its far end),
   // 6 the roof. The controller sits in the front wall (z 8).
@@ -127,46 +111,10 @@
     }
   }
 
-  // ---------------------------------------------------------------- the annealer: 5 wide, 5 deep, 7 high
-  // rows bottom -> top: 0 the deck (ports or truss), 1-5 the truss shell around the core (cryostat in rows 1-3, manifold in rows 4-5),
-  // 6 the roof
-  const ANNEALER_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 4 } }
-  function annealerLayer(z) {
-    var rows = []
-    for (var y = 0; y < 7; y++) {
-      var row = ''
-      for (var x = 0; x < 5; x++) {
-        var edge = x === 0 || x === 4 || z === 0 || z === 4
-        var c = ' '
-        if (y === 0) c = 'X'
-        else if (y === 6) c = 'C'
-        else if (edge) c = z === 4 && y === 1 ? (x === 2 ? 'S' : 'X') : 'C'
-        else if (x === 2 && z === 2) c = y <= 3 ? 'K' : 'M'
-        row += c
-      }
-      rows.push(row)
-    }
-    return rows
-  }
-  const ANNEALER_SPEC = {
-    slices: dress([0, 1, 2, 3, 4].map(annealerLayer), 'C', annealerRule),
-    symbols: {
-      S: Pat.controller(),
-      X: parts(STATION, 8, ANNEALER_PARTS),
-      C: Pat.block(STATION),
-      F: Pat.frame(['tungsten_steel']),
-      W: Pat.block(GLASS),
-      K: Pat.block(CRYOSTAT),
-      M: Pat.block(MANIFOLD)
-    }
-  }
-
   // io: [items in, items out, fluids in, fluids out]; the programmed circuit counts as an item input
   K.machines = [
     { name: 'kuiper_interceptor_bay', title: 'Kuiper Interceptor Bay', type: 'kuiper_intercept', io: [3, 2, 0, 0], spec: BAY_SPEC,
-      parts: BAY_PARTS, overlay: 'entry_probe_bay', tooltips: 4 },
-    { name: 'amorphous_ice_annealer', title: 'Amorphous Ice Annealer', type: 'ice_annealing', io: [2, 0, 0, 4], spec: ANNEALER_SPEC,
-      parts: ANNEALER_PARTS, overlay: 'helium_refrigerator', tooltips: 4 }
+      parts: BAY_PARTS, overlay: 'entry_probe_bay', tooltips: 4 }
   ]
 
   StartupEvents.registry('item', function (event) {

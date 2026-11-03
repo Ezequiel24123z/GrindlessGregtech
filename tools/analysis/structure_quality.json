@@ -41,12 +41,6 @@
   "ds": 0.348,
   "c": 116
  },
- "gtceu:amorphous_ice_annealer": {
-  "v": [],
-  "bt": 5,
-  "ds": 0.343,
-  "c": 135
- },
  "gtceu:annihilation_engine": {
   "v": [],
   "bt": 7,
@@ -1753,9 +1747,9 @@
  },
  "gtceu:volatile_ice_fractionator": {
   "v": [],
-  "bt": 5,
-  "ds": 0.478,
-  "c": 231
+  "bt": 6,
+  "ds": 0.52,
+  "c": 651
  },
  "gtceu:volcanic_intake": {
   "v": [],

@@ -90,7 +90,7 @@
     roles: [['energy', UV_ENERGY], ['input', 'gtceu:uv_input_bus'], ['output', 'gtceu:uv_output_bus']] }
   var FRACTIONATOR = { name: 'volatile_ice_fractionator', duration: 600,
     roles: [['energy', UV_ENERGY], ['input', 'gtceu:uv_input_bus'], ['output', 'gtceu:uv_output_bus'], ['out1', 'gtceu:uv_output_hatch'],
-      ['out2', 'gtceu:uv_output_hatch'], ['out3', 'gtceu:uv_output_hatch']] }
+      ['out2', 'gtceu:uv_output_hatch'], ['out3', 'gtceu:uv_output_hatch'], ['out4', 'gtceu:uv_output_hatch']] }
   var SYNGAS = { name: 'syngas_plant', duration: 100,
     roles: [['energy', 'gtceu:hv_energy_input_hatch'], ['input', 'gtceu:hv_input_bus'], ['output', 'gtceu:hv_output_bus'],
       ['in1', 'gtceu:hv_input_hatch'], ['in2', 'gtceu:hv_input_hatch'], ['out1', 'gtceu:hv_output_hatch'], ['out2', 'gtceu:hv_output_hatch']] }
@@ -103,6 +103,8 @@
         outFluids: {}, outItems: { 'grindless:sputnik_ice_core': 1 } },
       { m: FRACTIONATOR, x: X0 + 25, circuit: 1, items: ['grindless:sputnik_ice_core'], fluids: {}, expect: 'run',
         outFluids: { 'gtceu:nitrogen': 16000, 'gtceu:carbon_monoxide': 2000, 'gtceu:methane': 1000 }, outItems: { 'grindless:tholin': 1 } },
+      { m: FRACTIONATOR, x: X0 + 56, circuit: 3, items: ['grindless:planetesimal_sample'], fluids: {}, expect: 'run',
+        outFluids: { 'minecraft:water': 4000, 'gtceu:carbon_monoxide': 1000, 'gtceu:nitrogen': 500, 'gtceu:kuiper_noble_gas': 250 }, outItems: {} },
       { m: SYNGAS, x: X0 + 45, circuit: 5, items: ['grindless:shift_catalyst'], fluids: SHIFT_FLUIDS, expect: 'run',
         outFluids: { 'gtceu:hydrogen': 4000, 'gtceu:carbon_dioxide': 2000 }, outItems: {} }
     ] },
@@ -154,7 +156,7 @@
       m.parts[role[0]] = machine(m, m.positions[role[0]])
       if (m.parts[role[0]] === null) throw new Error('missing part ' + role[0])
     })
-    m.outHatches = ['out1', 'out2', 'out3'].filter(function (k) { return m.parts[k] }).map(function (k) { return m.parts[k] })
+    m.outHatches = ['out1', 'out2', 'out3', 'out4'].filter(function (k) { return m.parts[k] }).map(function (k) { return m.parts[k] })
   }
   function feed(m) {
     var def = m.def
@@ -199,6 +201,7 @@
     live('grindless:penetrator_probe/charon_penetrator', PLUTO, 2, UV_VA)
     live('grindless:ice_fractionation/sputnik_ice_fractionation', null, 1, ZPM_VA)
     live('grindless:ice_fractionation/charon_ice_fractionation', null, 2, ZPM_VA)
+    live('grindless:ice_fractionation/planetesimal_annealing', null, 3, ZPM_VA)
     live('grindless:syngas/hv/pluto_shift', null, 5, 480)
     var old = byId('grindless:syngas/hv/shift')
     check('old_shift_unlocked', old !== null && dimsOf(old).length === 0, 'grindless:syngas/hv/shift has no dimension condition')

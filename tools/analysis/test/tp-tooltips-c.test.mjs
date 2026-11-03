@@ -11,14 +11,14 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const pack = path.resolve(here, '..', '..', '..', 'pack');
 const PAGES = path.join(pack, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless');
 
-const NAMES = `accelerator_driven_reactor actinide_partitioning_plant aerogel_works amorphous_ice_annealer antimatter_trap ark_biosphere assembly_hall boron_nitride_reactor cryotank_winder deep_space_network diamond_lattice_fab direct_energy_converter entry_probe_bay europium_reductor event_horizon_interferometer fibre_draw_tower flyby_probe_bay gas_giant_siphon heat_source_works ice_giant_siphon ion_implanter isotope_column kuiper_interceptor_bay kuiper_survey_telescope laser_fusion_chamber laser_sail_launcher light_sail_fab mega_factory methane_pyrolyser mocvd_reactor muon_fusion_cell naquadah_fuel_works naquadria_magnet_works naquadria_refinery neptune_deep_siphon neural_culture_vat neutrino_observatory optical_ground_station penetrator_probe_bay plasma_quench_caster plume_sampler powder_bed_printer powder_in_tube_line precursor_probe_bay pyroprocessing_cell qubit_fab ring_harvester ring_seismometer slurry_separator srf_cavity_works starchip_fab superfluid_helium_plant synchrotron tholin_reformer thruster_works triton_geyser_sampler vent_bioreactor volatile_ice_fractionator waste_retrieval_plant zone_refining_tower`.split(/\s+/);
+const NAMES = `accelerator_driven_reactor actinide_partitioning_plant aerogel_works antimatter_trap ark_biosphere assembly_hall boron_nitride_reactor cryotank_winder deep_space_network diamond_lattice_fab direct_energy_converter entry_probe_bay europium_reductor event_horizon_interferometer fibre_draw_tower flyby_probe_bay gas_giant_siphon heat_source_works ice_giant_siphon ion_implanter isotope_column kuiper_interceptor_bay kuiper_survey_telescope laser_fusion_chamber laser_sail_launcher light_sail_fab mega_factory methane_pyrolyser mocvd_reactor muon_fusion_cell naquadah_fuel_works naquadria_magnet_works naquadria_refinery neptune_deep_siphon neural_culture_vat neutrino_observatory optical_ground_station penetrator_probe_bay plasma_quench_caster plume_sampler powder_bed_printer powder_in_tube_line precursor_probe_bay pyroprocessing_cell qubit_fab ring_harvester ring_seismometer slurry_separator srf_cavity_works starchip_fab superfluid_helium_plant synchrotron tholin_reformer thruster_works triton_geyser_sampler vent_bioreactor volatile_ice_fractionator waste_retrieval_plant zone_refining_tower`.split(/\s+/);
 
 const run = runPackScripts(pack);
 const byName = new Map(controllersOf(run.registry).map((c) => [c.name, c]));
 const machines = new Map([...run.registry.machines.values()].map((m) => [m.name, m]));
 const keyOf = (t) => String((t && t.__key) || t);
 
-test('60 controllers are covered', () => assert.equal(new Set(NAMES).size, 60));
+test('59 controllers are covered', () => assert.equal(new Set(NAMES).size, 59));
 
 for (const name of NAMES) {
   test(`${name}: short tooltip, keys resolve, page exists`, () => {
