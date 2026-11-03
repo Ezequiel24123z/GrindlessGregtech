@@ -112,7 +112,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "1D0789B0F2987E54", xp: 25 }],
   },
   {
-    key: "STEAM_STEAM_ALLOY_SMELTER", id: "0B3A5E0D83643882", title: "Steam Alloy Smelter", icon: "gtceu:lp_steam_alloy_smelter", deps: ["STEAM_STEAM_MACHINES"], x: 8, y: 1.5,
+    key: "STEAM_STEAM_ALLOY_SMELTER", id: "0B3A5E0D83643882", title: "Steam Alloy Smelter", icon: "gtceu:lp_steam_alloy_smelter", deps: ["STEAM_STEAM_MACERATOR"], x: 10, y: -1.5,
     desc: [
       "Copper and tin go in and bronze comes out, with less waste than mixing dust by hand. Red alloy comes from here too, and once you have molds it casts glass, glass tubes and rubber sheets.",
       "The steam furnace is its plainer cousin, if you want one.",
@@ -184,7 +184,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5D9B3F7A1C2E6048", xp: 40 }],
   },
   {
-    key: "STEAM_IRON_WASHING", id: "3A5C7E1B9D204F68", title: "Washed Iron Ore", icon: "gtceu:purified_hematite_ore", kind: "process", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 14, y: -1.5,
+    key: "STEAM_IRON_WASHING", id: "3A5C7E1B9D204F68", title: "Washed Iron Ore", icon: "gtceu:purified_hematite_ore", kind: "process", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE","STEAM_STEAM_ALLOY_SMELTER"], x: 14, y: -1.5,
     teach: {
       for: "Iron ore is ground and washed first, so the sinter plant gets clean feed.",
       needs: "Iron ore from the drill, the steam macerator and an ore washer.",
@@ -192,13 +192,13 @@ export const QUESTS = [
       automate: "Drill, macerator and washer in a row on one conveyor.",
     },
     desc: [
-      "Hematite, goethite or magnetite all work.",
+      "Hematite, goethite or magnetite all work. The steam alloy smelter, one quest back, takes the washed ore on to sinter.",
     ],
     tasks: [{ type: "item", id: "4B6D8F2C0E315A79", item: "gtceu:purified_hematite_ore" }],
     rewards: [{ type: "xp", id: "5C7E9A3D1F4B2068", xp: 20 }],
   },
   {
-    key: "STEAM_IRON_SINTER", id: "2C4E6A8B1D3F5079", title: "Iron Sinter", icon: "grindless:iron_sinter", kind: "process", deps: ["STEAM_IRON_WASHING","STEAM_STEAM_ALLOY_SMELTER"], x: 15.25, y: -1.5,
+    key: "STEAM_IRON_SINTER", id: "2C4E6A8B1D3F5079", title: "Iron Sinter", icon: "grindless:iron_sinter", kind: "process", deps: ["STEAM_IRON_WASHING"], x: 15.25, y: -1.5,
     teach: {
       for: "Fine ore won't survive a blast furnace, so it is baked into hard lumps first.",
       needs: "Purified iron ore and coke dust, in the steam alloy smelter.",
@@ -240,7 +240,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "1B3D5F7A9C2E4068", xp: 30 }],
   },
   {
-    key: "STEAM_CLOCKWORK_OBSERVATORY", id: "1253203E620BE055", title: "Clockwork Observatory",     icon: "gtceu:steam_observatory", kind: "machine", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 12, y: -3,
+    key: "STEAM_CLOCKWORK_OBSERVATORY", id: "1253203E620BE055", title: "Clockwork Observatory",     icon: "gtceu:steam_observatory", kind: "machine", deps: ["STEAM_STEAM_MULTIS"], x: 12, y: -3,
         teach: {
           for: "It charts the Moon, one night at a time.",
           needs: "Bronze, glass and a clear sky, the controller at Y 100 or higher.",
