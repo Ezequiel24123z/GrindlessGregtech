@@ -66,6 +66,16 @@
   var FACTOR = 2
   var SITE_TABLE = 'kubejs/data/grindless/tables/site_fuels.json'
 
+  // The naquadah power ladder (docs/eras/lines-ev-zpm.md D2-4): these five reactor rows are not doubled, their final
+  // duration is written here so the same fuel gives more in a bigger plant (I 0.8 -> II 0.9 -> III 1.0 G an enriched
+  // ingot; IV 1.5 -> V 1.75 -> large 2.0 G a naquadria). I and III keep the doubled GT-- duration; EU/t is untouched.
+  var FINAL_DURATION = {
+    'gtceu:naquadah_reactor/naquadah_reactor_ii': 54932,
+    'gtceu:naquadah_reactor/naquadah_reactor_iv': 1431,
+    'gtceu:naquadah_reactor/naquadah_reactor_v': 1669,
+    'gtceu:large_naquadah_reactor/naquadah_based_liquid_fuel_depleted': 690
+  }
+
   // gtceu:steam_turbine, combustion_generator, gas_turbine, semi_fluid_generator, plasma_generator (DECISIONS.md list),
   // plus the addon generator types this pack loads: GT--'s naquadah reactor (single and large) and rocket engine.
   var TYPES = [
@@ -123,6 +133,7 @@
   // published for the test and for scripts that add burning fuels of their own: burnsInAir(recipe) gives a GT recipe
   // builder the same conditions as every fuel recipe of the burning types
   POWER.factor = FACTOR
+  POWER.finalDuration = FINAL_DURATION
   POWER.site = SITE
   POWER.siteTable = SITE_TABLE
   POWER.burnsInAir = function (builder) {
@@ -333,6 +344,7 @@
           report.failed.push(c.id + ' (' + e + ')')
           return
         }
+        if (FINAL_DURATION[c.id] !== undefined) plan.duration = FINAL_DURATION[c.id]
         event.remove({ id: c.id })
         try {
           applyPlan(event, type, c.id, plan)
