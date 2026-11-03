@@ -21,7 +21,7 @@ const c = (key, title, icon, deps, x, teach, n, xpN) => ({
 export const QUESTS = [
   c('B_TRUSS', 'Tensegrity Truss Casing', 'grindless:tensegrity_truss_casing', ['H_MAX_BODY'], 2.5, {
     for: 'A casing of struts held apart by tension, so that a structure the size of a hall keeps its shape in free fall. It is the frame of every MAX machine and the base of the five casings that follow.',
-    needs: 'An assembler, 200 ticks: two &6Exotic Composite Rods&r (the composite line), four &6Horizon Strand Single Wires&r (the strand line), two Chain Lamina Casings, tungsten steel plates and rods, a UXV sensor and 250 mB of superfluid helium-3, for four casings.',
+    needs: 'An assembler: two &6Exotic Composite Rods&r (the composite line), four &6Horizon Strand Single Wires&r (the strand line), two Chain Lamina Casings, tungsten steel, a UXV sensor and superfluid helium-3, for four casings.',
     unlocks: 'Every MAX plant and the Mirror Shell, and the clamp coil, optical table, membrane vacuum, droplet radiator and window coil casings.',
     automate: 'Rods and wires by ME, the lamina casings from their line; the helium-3 by pipe. Make them in bulk: a plant takes up to 1,800.',
   }, 4, 80),

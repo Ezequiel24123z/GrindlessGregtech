@@ -54,7 +54,7 @@ export const QUESTS = [
     deps: ['CRYO'], x: 6, y: 0,
     teach: {
       for: 'The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack.',
-      needs: 'A two-layer sphere in a 35-block box at Sgr A* orbit, about 7,060 blocks: mirror shell segments inside, a tensegrity truss outside with two stream bundle belts, and 26 cleanroom glass ports ringed by shell window coil casings. Two MAX 16 A input hatches and one or two dynamo hatches sit round the controller, at the equator of the front. Every segment is a swarm-segment craft with a cooler of its own. The Terminal needs 4 passes (a pass places up to 2,300 blocks): 2,922 truss blocks, 3,072 segments, 459 glass, 398 window coil casings and 208 stream bundle blocks.',
+      needs: 'A two-layer sphere in a 35-block box at Sgr A* orbit, about 7,060 blocks: segments inside, a truss outside with two stream bundle belts, and 26 glass ports ringed by shell window coil casings. Hatches sit round the controller, at the equator of the front. The Terminal needs 4 passes of up to 2,300 blocks.',
       unlocks: 'The segments, the four horizon machines and the last recipe.',
       automate: 'Segments leave the line on a belt; plan the bus before you place the controller.',
     },
@@ -95,7 +95,7 @@ export const QUESTS = [
     deps: ['SHELL'], x: 6, y: 2,
     teach: {
       for: 'The shell has 26 ports where light goes in and out and where the hatches sit. Each port is a cleanroom glass pane ringed by a loop of coil and membrane, which keeps the opening shielded and tuned. The ports stand on the faces, the edges and the corners of the box, in the same pattern as the Terminal\'s ghost.',
-      needs: 'The 398 &6Shell Window Coil Casings&r of the shell, from the casing quest of the Sagittarius casings section: two per batch, so about two hundred batches. Place them first with the Terminal, then the glass.',
+      needs: 'The 398 &6Shell Window Coil Casings&r of the shell, from the Sagittarius casings: two per batch. Place them first with the Terminal, then the glass.',
       unlocks: 'The glass ports and the closed shell.',
       automate: 'Run a dedicated line for the casing; its coil and membrane inputs come from the cold-metrology and membrane lines.',
     },
@@ -132,7 +132,7 @@ export const QUESTS = [
     deps: ['SEG4'], x: 16, y: -4,
     teach: {
       for: 'The &6Horizon Interferometer&r reads the light that the closed shell returns and maps the cloud of phases around the hole. Its second mode calibrates oscillators against that map.',
-      needs: 'A closed shell that has run its first recipe, and the casings and parts new to this machine.',
+      needs: 'A closed shell that has run its first recipe. The body is 2,837 blocks: 753 truss and 266 optical table casings among others, so the Terminal needs 2 passes.',
       unlocks: 'The cloud phase map and the calibrated oscillator bank of the last recipe.',
       automate: 'Maps and banks leave by bus; keep the oscillators on their own line.',
     },
@@ -154,7 +154,7 @@ export const QUESTS = [
     deps: ['SEG4'], x: 16, y: -2,
     teach: {
       for: 'The &6Ergoregion Synchroniser&r locks a clock to the spin of the hole. &oFiction:&r the hole is held still long enough to be measured. The second mode relocks a spent lock so it can be used again.',
-      needs: 'The oscillator bank, a closed shell and the casings and parts new to this machine.',
+      needs: 'The oscillator bank and a closed shell. The body is 3,185 blocks: 1,386 truss, 660 clamp coil and 206 membrane vacuum casings among others, so the Terminal needs 2 passes.',
       unlocks: 'The horizon phase lock of the last recipe.',
       automate: 'Send each spent lock back in by bus; it never leaves the line.',
     },
@@ -185,7 +185,7 @@ export const QUESTS = [
     deps: ['SEG4'], x: 16, y: 2,
     teach: {
       for: 'The &6Horizon Flux Clamp&r winds the field of the shell into a winding and, in its second mode, catches a plasmoid thrown by a reconnecting field line.',
-      needs: 'A closed shell and the casings and parts new to this machine.',
+      needs: 'A closed shell. The body is 3,378 blocks: 1,819 truss, 744 clamp coil, 446 membrane vacuum and 224 droplet radiator casings among others, so the Terminal needs 2 passes.',
       unlocks: 'The winding that the last recipe needs, and a plasmoid for the lines that use one.',
       automate: 'Windings leave by bus. A plasmoid is a hot output, so contain it and route it.',
     },
@@ -207,7 +207,7 @@ export const QUESTS = [
     deps: ['SEG4'], x: 16, y: 4,
     teach: {
       for: 'The &6Segment Reclamation Works&r strips an ablated shell segment into scrap streams. Nothing the shell wears out is thrown away.',
-      needs: 'Ablated segments from the shell, and the casings and parts new to this machine.',
+      needs: 'Ablated segments from the shell. The body is 2,379 blocks: 1,258 truss and 312 membrane vacuum casings among others, so the Terminal needs 2 passes.',
       unlocks: 'Scrap that goes back into the segment, cooler and coupler lines.',
       automate: 'Each scrap stream goes to its own line by bus.',
     },

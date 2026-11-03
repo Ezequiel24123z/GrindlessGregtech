@@ -55,7 +55,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ home
   gear('M_RYD', 'rydberg_array_works', 'Rydberg Array Works', ['M_L_RYD'], 2.5, 0, {
     for: 'Hundreds of atoms held in light, swollen to a thousand times their size and made to compute together. The &6Rydberg Array Works&r makes the logic that the imager, the ark and the shell run on.',
-    needs: 'The MAX hull, the optical table casing on atomic casing, a vacuum chamber of strand coils and a tweezer die as research.',
+    needs: 'The MAX hull, the optical table casing on atomic casing, a vacuum chamber of strand coils and a tweezer die as research. The body is 1,980 blocks (853 optical table, 733 truss, 354 membrane vacuum casings): 1 Terminal pass.',
     unlocks: 'The Rydberg logic array, which the ark, the imager and the mirror shell all consume.',
     automate: 'A spent array comes back to be refurbished, so loop it home instead of binning it.',
   }, [TABLE]),
@@ -64,7 +64,7 @@ export const QUESTS = [
   ]),
   gear('M_ATOM', 'atom_interferometer_works', 'Atom Interferometer Works', ['M_L_ATOM'], 2.5, 1.5, {
     for: 'Matter waves on an optical table, split and joined again to weigh gravity itself. The &6Atom Interferometer Works&r makes the gradiometer behind the MAX sensor.',
-    needs: 'The MAX hull and the optical table casing, a tall drop tower with a magnetic shield, and a space of its own, because every footstep shows up as noise.',
+    needs: 'The MAX hull and the optical table casing, a tall drop tower with a magnetic shield, and a space of its own, because every footstep shows up as noise. The body is 1,916 blocks (817 truss, 613 membrane vacuum, 325 optical table, 144 clamp coil casings): 1 Terminal pass.',
     unlocks: 'The matter-wave gradiometer, so the MAX sensor, and with it the controllers that want one.',
     automate: 'Run it from a pattern provider; the gradiometer is the only thing it makes, so a single chest does it.',
   }, [TABLE]),
@@ -73,7 +73,7 @@ export const QUESTS = [
   ]),
   gear('M_MEMB', 'membrane_line', 'Membrane Line', ['M_L_MEMB'], 2.5, 3, {
     for: 'A film one atom thick, rolled, grown and chilled along a long line. The &6Membrane Line&r makes the superconducting membrane that no older machine can.',
-    needs: 'The MAX hull and a long run of roller casings through a CVD zone and a cold zone, with room for the length.',
+    needs: 'The MAX hull and a long run of roller casings through a CVD zone and a cold zone, with room for the length. The body is 2,114 blocks (939 truss casings among them): 1 Terminal pass.',
     unlocks: 'The superconducting membrane, the conveyor module, the field generator and the hatches that move fluids.',
     automate: 'The line is long but quiet: feed it by ME and send the membrane to the ark and the hall.',
   }, [ROLLER]),
@@ -82,7 +82,7 @@ export const QUESTS = [
   ]),
   gear('M_ARK', 'gene_ark', 'Gene Ark', ['M_RYDA', 'M_MEMBA'], 7.5, 1.5, {
     for: 'A library of every genome the pack has met, written to crystal in a sealed cold vault. The &6Gene Ark&r makes the genome archive that goes into the last seed.',
-    needs: 'The MAX hull, a sterilising filter casing vault with a cryogenic core, a Rydberg logic array and a superconducting membrane.',
+    needs: 'The MAX hull, a sterilising filter casing vault with a cryogenic core, a Rydberg logic array and a superconducting membrane. The body is 1,915 blocks (884 membrane vacuum, 818 truss casings): 1 Terminal pass.',
     unlocks: 'The genome archive, which the later gates and MAX+ count on.',
     automate: 'Genomes arrive by ME; one archive is enough, so cap it.',
   }),
@@ -94,19 +94,19 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Sgr A* orbit
   gear('M_IMG', 'photon_ring_imager', 'Photon Ring Imager', ['M_L_IMG'], 2.5, 6, {
     for: 'It looks at the light that has gone round the hole, and from the ring it reads the spin and charts the cluster. The &6Photon Ring Imager&r is the eye of the whole era.',
-    needs: 'The MAX hull, a ring of dish panels on a truss and a cold core of receivers, built in orbit around Sagittarius A*, with a Rydberg logic array.',
+    needs: 'The MAX hull, a ring of dish panels on a truss and a cold core of receivers, built in orbit around Sagittarius A*, with a Rydberg logic array. The body is 2,144 blocks (1,228 truss, 690 optical table, 220 droplet radiator casings): 1 Terminal pass.',
     unlocks: 'The spin map and the cluster ephemeris, both on the journey.',
     automate: 'It works one image at a time, so give it its own array supply and leave it.',
   }, [it('grindless:max_srf_cavity')]),
   gear('M_WINCH', 'geroch_winch', 'Geroch Winch', ['M_L_WINCH'], 2.5, 7.5, {
     for: 'A tether dropped over the horizon and wound on a drum. The &6Geroch Winch&r takes power from the hole\'s spin; each run uses up a canister and wears the tether.',
-    needs: 'The MAX hull, a tall tower of drum casing over a tether well, and a canister and a tether for each run.',
+    needs: 'The MAX hull, a tall tower of drum casing over a tether well, and a canister and a tether for each run. The body is 3,107 blocks (1,554 truss, 420 droplet radiator, 380 clamp coil casings): 2 Terminal passes.',
     unlocks: 'The first power the galactic centre gives back.',
     automate: 'Canisters and tethers run out, so keep a pattern provider on them.',
   }, [DRUM], 150),
   gear('M_INJ', 'mass_stream_injector', 'Mass Stream Injector', ['M_L_INJ'], 2.5, 9, {
     for: 'It shapes hot flow into streams, and the streams into bundles. The &6Mass Stream Injector&r holds a shell up with moving mass.',
-    needs: 'The MAX hull, a ring of stream-turn casing round a pellet accelerator, and a matter-wave gradiometer from the atom works at home.',
+    needs: 'The MAX hull, a ring of stream-turn casing round a pellet accelerator, and a matter-wave gradiometer from the atom works at home. The body is 2,125 blocks (1,177 truss, 519 clamp coil casings): 1 Terminal pass.',
     unlocks: 'The stream bundle, which the mirror shell is built round.',
     automate: 'Pellets by ME; bundles come out in a chest and go straight to the shell.',
   }, [TURN]),
@@ -117,7 +117,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the belt
   gear('M_FURN', 'cluster_light_furnace', 'Cluster-Light Furnace', ['M_L_FURN'], 2.5, 11, {
     for: 'It melts belt rock with the concentrated light of the cluster, and heats, separates and casts in one structure. The &6Cluster-Light Furnace&r is the only source of segment truss and stream pellets in quantity.',
-    needs: 'The MAX hull, a bowl of albedo panels over a sinter hearth, and sealed hearth liners. It works only in the NSC belt.',
+    needs: 'The MAX hull, a bowl of albedo panels over a sinter hearth, and sealed hearth liners. It works only in the NSC belt. The body is 3,041 blocks (1,577 truss, 1,027 optical table, 420 droplet radiator casings): 2 Terminal passes.',
     unlocks: 'The silicate slag the feeder burns, and the truss and pellets for the shell.',
     automate: 'The hearth lining wears, so keep spares; its slag and its volatiles each have somewhere to go.',
   }, [SINTER]),
@@ -126,7 +126,7 @@ export const QUESTS = [
   ]),
   gear('M_FEED', 'accretion_feeder', 'Accretion Feeder', ['M_SLAG'], 7.5, 11, {
     for: 'Slag spiralling into a hole gives back more of its mass as light than anything else in the pack. The &6Accretion Feeder&r catches that light and turns it into power.',
-    needs: 'The MAX hull, a ring of feeder coil casing with collector panels and Wolter mirror modules, and slag pellets. The burn itself runs in the black hole orbit, not in the belt.',
+    needs: 'The MAX hull, a ring of feeder coil casing with collector panels and Wolter mirror modules, and slag pellets. The burn itself runs in the black hole orbit, not in the belt. The body is 3,415 blocks (1,726 truss, 216 droplet radiator casings): 2 Terminal passes.',
     unlocks: 'The biggest generator of the era, and a use for the slag.',
     automate: 'It wears its panels and modules as it works: rework them in the solar array fab and the assembler.',
   }, [COIL], 150),
