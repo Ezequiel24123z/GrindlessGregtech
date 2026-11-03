@@ -65,13 +65,8 @@
         ['emi.grindless.info.meta_material_loom.1',
             'The boil-off it sheds goes back to the condensate refinery. It is the only route to these four materials and runs at home.'],
 
-        ['emi.grindless.info.multi_plasma_blender.0',
-            'Blends eight plasmas, one from each place the pack has worked (stellar, lifted, filtered, very-massive-star, p-process, jet, hot flow and kerr condensate), into horizon crystal slurry. Only source of the slurry.'],
-        ['emi.grindless.info.multi_plasma_blender.1',
-            'The slurry feeds the horizon crystal furnace.'],
-
         ['emi.grindless.info.horizon_crystal_furnace.0',
-            'Grows the Hyperstargate\'s core and controller crystals from horizon crystal slurry, kept hot by condensate rather than coils. The pack refuses the two weeks of the real recipe and pays in slurry and parallel runs instead.'],
+            'Blends eight plasmas, one from each place the pack has worked (stellar, lifted, filtered, very-massive-star, p-process, jet, hot flow and kerr condensate), into horizon crystal slurry, the only source there is, then grows the Hyperstargate\'s core and controller crystals in it, kept hot by condensate rather than coils. The pack refuses the two weeks of the real recipe and pays in slurry and parallel runs instead.'],
         ['emi.grindless.info.horizon_crystal_furnace.1',
             'One core crystal takes four million mB of slurry, the most one MAX fluid hatch holds.'],
 

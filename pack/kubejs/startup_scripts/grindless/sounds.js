@@ -132,7 +132,6 @@
     'gtceu:blueshift_forge': 'loop_blueshift_forge',
     'gtceu:void_crystal_fab': 'loop_void_crystal_fab',
     'gtceu:meta_material_loom': 'loop_meta_material_loom',
-    'gtceu:multi_plasma_blender': 'loop_multi_plasma_blender',
     'gtceu:horizon_crystal_furnace': 'loop_horizon_crystal_furnace',
     'gtceu:condensate_assembler': 'loop_condensate_assembler',
     'gtceu:hyper_assembly_array': 'loop_hyper_assembly_array',

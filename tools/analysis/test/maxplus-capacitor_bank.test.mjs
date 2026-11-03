@@ -44,19 +44,18 @@ test('the capacitor is no tower cell: not in W.cells, and the tower\'s pattern d
   assert.ok(!W.table.tiers.some((t) => t.cell === 'grindless:horizon_capacitor'));
 });
 
-test('the ring: 25 x 5 x 25, 40 capacitor slots, the controller in the middle of the front', () => {
+test('the torus: 41 x 9 x 41, 40 capacitor slots, the controller in the middle of the front', () => {
   const { slices } = G.maxPlusCapacitorBank.spec;
-  assert.equal(slices.length, 25);
+  assert.equal(slices.length, 41);
   for (const rows of slices) {
-    assert.equal(rows.length, 5);
-    for (const row of rows) assert.equal(row.length, 25);
+    assert.equal(rows.length, 9);
+    for (const row of rows) assert.equal(row.length, 41);
   }
   const all = slices.flat().join('');
   assert.equal([...all].filter((c) => c === 'C').length, 40);
   assert.equal([...all].filter((c) => c === 'S').length, 1);
-  assert.equal(slices[24][1][12], 'S');
-  assert.ok(slices.every((rows) => rows[2].split('').every((c) => ' CKA'.includes(c))), 'the slot row is slots, superconducting coils and corner pillars');
-  assert.equal([...all].filter((c) => c === 'K').length, 52, 'a coil in every slot row cell that is not a slot or a corner');
-  assert.equal([...all].filter((c) => c === 'L').length, 24, 'the glass band over the coils');
-  assert.ok(slices[12].every((row) => row.slice(1, 24).trim() === ''), 'the inside of the ring is empty');
+  assert.equal(slices[40][1][20], 'S');
+  assert.ok(slices.every((rows) => rows.every((row, y) => y === 4 || !row.includes('C'))), 'slots only in the slot row');
+  assert.equal([...all].filter((c) => c === 'K').length, 36, 'a coil between each pair of slots on the centreline');
+  assert.ok(slices[20].every((row) => row.slice(3, 38).trim() === ''), 'the inside of the torus is empty');
 });

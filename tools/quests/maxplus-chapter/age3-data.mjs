@@ -57,7 +57,7 @@ export const QUESTS = [
     key: 'S3_SLURRY', kind: 'step', title: 'Horizon Crystal Slurry', icon: 'gtceu:horizon_crystal_slurry_bucket',
     deps: ['S3_TREE'], x: 8.5, y: -3,
     desc: [
-      'The &6Multi-Plasma Blender&r takes one plasma from every place you have worked and blends them into a single bucket. It is the only slurry there is.',
+      'The &6Horizon Crystal Furnace&r takes one plasma from every place you have worked and blends them into a single bucket. It is the only slurry there is.',
     ],
     tasks: [it('gtceu:horizon_crystal_slurry_bucket')],
     rewards: [xp(300)],
