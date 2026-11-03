@@ -441,7 +441,7 @@
       var why = []
       p.facs.forEach(function (f, i) {
         var m = machine(f.pos)
-        if (!m || !m.isFormed()) { try { why.push('#' + i + ' ' + String(m.getMultiblockState().error)) } catch (e) { why.push('#' + i + ' unreadable') } }
+        if (!m || !m.isFormed()) { try { var er = m.getMultiblockState().error; var pp = er.getPos(); why.push('#' + i + ' ' + String(er.getErrorInfo().getString()) + (pp ? ' @' + pp.getX() + ',' + pp.getY() + ',' + pp.getZ() : '') + ' ctrl ' + f.pos) } catch (e) { why.push('#' + i + ' unreadable') } }
       })
       check(p.name + '_formed', false, 'not ready after ' + waited + ' ticks: tower ' + ready + ', machines ' + allMachines + ', factories ' + facsReady +
         (tm && !ready ? ' (' + String(tm.getMultiblockState().error) + ')' : '') + (why.length ? ' [' + why.join('; ').substring(0, 600) + ']' : ''))

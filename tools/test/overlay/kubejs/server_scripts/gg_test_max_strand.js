@@ -176,6 +176,8 @@
     var ok = !!u.bus && !!u.outBus && u.energy.length === 1
     check(u.name + '_formed', ok, 'class ' + m.getClass().getSimpleName() + ', energy hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
     if (!ok) return false
+    m.setActiveRecipeType(/pasta_drawing/.test(u.recipe) ? 1 : /pasta_lamination/.test(u.recipe) ? 2 : 0)
+    m.getRecipeLogic().updateTickSubscription()
     setBus(u.bus, u.feed)
     u.last = m.getRecipeLogic().getLastRecipe()
     u.phase = 'run'

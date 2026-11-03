@@ -34,13 +34,13 @@
 
   var UNITS = [
     {
-      name: 'stack', id: 'gtceu:vdw_stacker', x: 36545, z: 34, circuit: 4, eut: 67108864, wafer: 'grindless:sot_heterostack',
+      name: 'stack', mode: 1, id: 'gtceu:vdw_stacker', x: 36545, z: 34, circuit: 4, eut: 67108864, wafer: 'grindless:sot_heterostack',
       inputs: [['grindless:hbn_flake', 2], ['grindless:wte2_flake', 1], ['grindless:fgt_flake', 1]],
       fluid: ['gtceu:argon', 4000],
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
     },
     {
-      name: 'track', id: 'gtceu:mtj_sputter_cluster', x: 36545, z: 1, circuit: 2, eut: 67108864, wafer: 'grindless:racetrack_chip',
+      name: 'track', mode: 2, id: 'gtceu:mtj_sputter_cluster', x: 36545, z: 1, circuit: 2, eut: 67108864, wafer: 'grindless:racetrack_chip',
       inputs: [['grindless:patterned_track_wafer', 1], ['grindless:mtj_die', 1]],
       fluid: ['gtceu:argon', 4000],
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
@@ -203,6 +203,8 @@
   }
 
   function startRun(u) {
+    u.m.setActiveRecipeType(u.mode)
+    u.m.getRecipeLogic().updateTickSubscription()
     topUp(u.energy)
     var list = u.inputs.map(function (e) { return [e[0], e[1]] })
     list.push([CIRCUIT, 1, '{Configuration:' + u.circuit + '}'])
@@ -273,7 +275,7 @@
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []
     UNITS.forEach(function (def) {
-      var u = { name: def.name, id: def.id, x: def.x, z: def.z, circuit: def.circuit, eut: def.eut, wafer: def.wafer, kept: def.kept, inputs: def.inputs, fluid: def.fluid, parts: def.parts, phase: 'forming', started: S.tick }
+      var u = { mode: def.mode || 0, name: def.name, id: def.id, x: def.x, z: def.z, circuit: def.circuit, eut: def.eut, wafer: def.wafer, kept: def.kept, inputs: def.inputs, fluid: def.fluid, parts: def.parts, phase: 'forming', started: S.tick }
       try {
         var r = place(u)
         u.pos = r.pos
