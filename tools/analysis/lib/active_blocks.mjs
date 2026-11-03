@@ -6,8 +6,9 @@
 /** The largest count today, the annihilation engine (136 heat vents + 128 fusion coils); the Mirror Shell's 1,528 overflowed. */
 export const MAX_ACTIVE_BLOCKS = 264;
 
-/** GTM's ActiveBlock ids: the wire coils (CoilBlock), the fusion and superconducting coils and the heat vent. */
-export const ACTIVE_BLOCK = /^gtceu:(?:[a-z0-9_]+_coil_block|fusion_coil|superconducting_coil|heat_vent)$/;
+/** GTM's ActiveBlock ids: the wire coils (CoilBlock), the fusion and superconducting coils and the heat vent. Our own
+ *  grindless:*_coil_block are registered as gtceu:coil, so GTM makes them ActiveBlocks too (D4-ACTIVE). */
+export const ACTIVE_BLOCK = /^(?:gtceu:(?:[a-z0-9_]+_coil_block|fusion_coil|superconducting_coil|heat_vent)|grindless:[a-z0-9_]+_coil_block)$/;
 
 function optionsOf(sym) {
   if (!sym) return [];

@@ -17,7 +17,9 @@ test('it counts GTM ActiveBlocks (coils, fusion and superconducting coils, heat 
   assert.equal(activeBlocksOf(grid('a', 5, 'gtceu:fusion_coil')), 5);
   assert.equal(activeBlocksOf(grid('a', 4, 'gtceu:cupronickel_coil_block')), 4);
   assert.equal(activeBlocksOf(grid('a', 3, 'gtceu:heat_vent')), 3);
-  assert.equal(activeBlocksOf(grid('a', 6, 'grindless:feeder_coil_casing')), 0, 'ours are plain blocks');
+  assert.equal(activeBlocksOf(grid('a', 6, 'grindless:feeder_coil_casing')), 0, 'our plain casings are not');
+  assert.equal(activeBlocksOf(grid('a', 7, 'grindless:hftacn_coil_block')), 7, 'our gtceu:coil blocks are');
+  assert.equal(activeBlocksOf(grid('a', 8, 'grindless:metallic_hydrogen_coil_block')), 8);
   assert.equal(activeBlocksOf(grid('a', 6, 'gtceu:robust_machine_casing')), 0);
   const either = { id: 'b', slices: [['SCC']], symbols: { S: { kind: 'controller' }, C: { kind: 'oneOf', options: [{ kind: 'part', ability: 'input_bus' }, { kind: 'blocks', blocks: ['gtceu:superconducting_coil'] }] } } };
   assert.equal(activeBlocksOf(either), 2);
@@ -35,4 +37,5 @@ test('the pack passes today: the largest is the annihilation engine at the ceili
   assert.equal(counts[0].id, 'gtceu:annihilation_engine');
   assert.equal(counts[0].count, 264);
   assert.deepEqual(counts.filter((r) => r.count > MAX_ACTIVE_BLOCKS), []);
+  assert.equal(counts.find((r) => r.id === 'gtceu:pulsar_wind_trap').count, 256, 'counted with our grindless coil blocks');
 });
