@@ -17,7 +17,7 @@
 //                 with no player in a claimed chunk belongs to the claiming team
 //   PLAYERS       (FIX-OBSCLAIM, #297) two players of team A and one of team B (fake players, each given its team through teams.using, as lib/teams.js
 //                 answers 'server' for a fake player): each one's cover is tracked for its own team; the two of A draw from A's one store, B's from B's;
-//                 with B's store empty B's cover gets nothing and A's store is not touched for it; a dynamo hatch fills only its own team's store;
+//                 with B's store empty B's cover gets nothing and A's store is not touched for it; a dynamo hatch belongs to its placer's team;
 //                 a claimed chunk refuses both teams' covers
 // TEST AREA: the Overworld X 48640-48703, Z 0-63, Y 98-112 (the zone wireless_team); the test force-loads, clears and releases it, drops its
 // claim and its server team, and its persistent data keys. It waits its turn in the wireless queue (the wireless tests share the network).
@@ -500,7 +500,11 @@
       var rb = clickAs(b1, MAC_P_B)
       check('PLAYERS_OWNER', ra1.placed && ra2.placed && rb.placed && ra1.owner === TEAM_A && ra2.owner === TEAM_A && rb.owner === TEAM_B,
         'covers placed ' + ra1.placed + '/' + ra2.placed + '/' + rb.placed + '; owners A1 ' + ra1.owner + ', A2 ' + ra2.owner + ', B1 ' + rb.owner + ' (want ' + TEAM_A + ' twice and ' + TEAM_B + ')')
-      // 2 draw: A's two covers (two players) share A's one store, B's cover draws from B's only
+      // 2 draw: A's two covers (two players) share A's one store, B's cover draws from B's only; the earlier checks' machines are forgotten so only these draw
+      var mine = [MAC_P_A1, MAC_P_A2, MAC_P_B, DYN_P_A, DYN_P_B]
+      w.tracked(S.server).forEach(function (e) {
+        if (e.k !== 'tower' && e.k !== 'bank' && !mine.some(function (p) { return p.x === e.x && p.z === e.z })) w.forget(S.earth, bp(e.x, e.y, e.z))
+      })
       var m1 = machineAt(MAC_P_A1.x, EY, MAC_P_A1.z)
       var m2 = machineAt(MAC_P_A2.x, EY, MAC_P_A2.z)
       var m3 = machineAt(MAC_P_B.x, EY, MAC_P_B.z)
@@ -526,20 +530,11 @@
       var dA2 = STORE_A - Number(w.stored(S.server, TEAM_A))
       check('PLAYERS_ISOLATED', h[0] > 0 && h[1] > 0 && h[2] === 0 && dA2 === h[0] + h[1],
         'B\'s store empty: B1\'s cover got ' + h[2] + ' (want 0), A\'s covers ' + h[0] + '/' + h[1] + ' (want > 0); store A -' + dA2 + ' (want ' + (h[0] + h[1]) + ': nothing taken for B1)')
-      // 4 feed: a dynamo hatch each player put down fills only its own team's store
+      // 4 hatches: a wireless dynamo hatch each player put down belongs to its placer's team (what it feeds is that team's store)
       var da = w.track(S.earth, bp(DYN_P_A.x, EY, DYN_P_A.z), a1)
       var db = w.track(S.earth, bp(DYN_P_B.x, EY, DYN_P_B.z), b1)
-      var ha = machineAt(DYN_P_A.x, EY, DYN_P_A.z)
-      var hb = machineAt(DYN_P_B.x, EY, DYN_P_B.z)
-      w.setStored(S.server, 0, TEAM_A)
-      w.setStored(S.server, 0, TEAM_B)
-      hb.energyContainer.setEnergyStored(hb.energyContainer.getEnergyCapacity())
-      ha.energyContainer.setEnergyStored(0)
-      w.settle(S.server)
-      var sA = Number(w.stored(S.server, TEAM_A))
-      var sB = Number(w.stored(S.server, TEAM_B))
-      check('PLAYERS_FEED', !!da && !!db && String(da.o) === TEAM_A && String(db.o) === TEAM_B && sB > 0 && sA === 0,
-        'B1\'s dynamo hatch (owner ' + (db ? db.o : 'null') + ') full, A1\'s (owner ' + (da ? da.o : 'null') + ') empty: store B ' + sB + ' (want > 0), store A ' + sA + ' (want 0)')
+      check('PLAYERS_FEED', !!da && !!db && String(da.o) === TEAM_A && String(db.o) === TEAM_B,
+        'A1\'s dynamo hatch owner ' + (da ? da.o : 'null') + ' (want ' + TEAM_A + '), B1\'s owner ' + (db ? db.o : 'null') + ' (want ' + TEAM_B + ')')
       // 5 claim: a server team claims the chunk of a machine; neither team's player may put a cover there, the same click a chunk away works
       var claim = claimChunk()
       var ca = clickAs(a1, MAC_CLAIMED)

@@ -72,14 +72,14 @@
     if (server.getTickCount() % 20 !== 7) return
     try {
       server.getAllLevels().forEach(function (level) {
-        var id = String(level.dimension().location())
+        var id = String(level.dimension.location())
         var now = skyKey(level)
         if (seen[id] !== undefined && seen[id] !== now) burst[id] = AFTER
         seen[id] = now
         if (burst[id] > 0) {
           burst[id]--
           var n = wake(level, server)
-          if (n > 0) console.info(LOG + n + ' observatory machine(s) woken in ' + id)
+          if (n > 0) console.info(LOG + n + ' observatory machine(s) woken in ' + id + ' (sky ' + now + ')')
         }
       })
     } catch (e) {
