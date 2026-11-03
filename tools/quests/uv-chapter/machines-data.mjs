@@ -294,7 +294,7 @@ export const QUESTS = [
     for: 'The &6Volatile Ice Fractionator&r warms a core and collects each ice as it turns to gas. Circuit 1 splits a Sputnik core into nitrogen, carbon monoxide, methane and tholin; 2 a Charon core into water, ammonia and silica; 3 anneals a Kuiper sample at about 140 K, so its noble gases escape.',
     needs: 'Its controller in a cold tower: station truss casings, titanium frames, laminated glass, frostproof bands, a steel pipe cold finger and a ring of cryostat casings. One Terminal pass.',
     unlocks: 'The gases at their sources, and the Kuiper noble gas that the cryogenic plant splits into argon, krypton and xenon.',
-    automate: 'Cores and samples in by ME, each fluid to its own hatch. The annealing dust is voided inside the machine.',
+    automate: 'Cores and samples in by ME, each fluid to its own hatch. Annealing dust is voided inside the machine.',
   }, [it(TRUSS), it('gtceu:frostproof_machine_casing'), it(CRYOSTAT)]),
 
   gear('KUIPER', 'kuiper_interceptor_bay', 'Arrokoth\'s Kin', ['M_L_KBO'], 2, 25.5, {
