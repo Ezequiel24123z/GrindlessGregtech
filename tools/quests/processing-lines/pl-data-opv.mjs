@@ -2,7 +2,7 @@
 // the spine of the line first, then its branches, each branch joined into the machine step that takes its end product.
 // O1 is a staged line: it starts at the UXV chart's si28_ash and takes the three UXV steps that make it (line id 'si28').
 // Arrows are checked against a recipe dump by pl-check.mjs (integrator).
-import { I, F, M, n, L } from './pl-lib.mjs';
+import { I, F, M, n, L, KINDS } from './pl-lib.mjs';
 
 // a path is a list of [type, id, title, options?]: 'i' item, 'f' fluid, 'm' machine, 'l' link (id is 'pl_<era>:<key>').
 // The first step is raw, machines are 'ours', the rest products; each step comes from the one before it. Keys are <prefix><index>.
@@ -16,30 +16,142 @@ function path(p, spec) {
   });
 }
 
-// lay the paths out in rows of `perRow` steps, one path after the other (every second row runs right to left)
-function place(paths, perRow) {
-  let y = 0;
-  for (const nodes of paths) {
-    nodes.forEach((nd, i) => {
-      const row = Math.floor(i / perRow);
-      const col = i % perRow;
-      nd.x = 2.5 * (row % 2 ? perRow - 1 - col : col);
-      nd.y = y + 2 * row;
-    });
-    y += 2 * Math.ceil(nodes.length / perRow);
+// Layout: the first path is the spine, a straight row at lane 0 (lanes are 2 apart, steps 2.5). Every other path is a unit that is
+// hung on the nodes already placed: right-justified under the node it feeds (so its last arrow is one step long), or left-justified
+// after the node that feeds it. Units are taken left to right; each takes the nearest lane where nothing is crowded, backward,
+// longer than 5, under a node or crossing a line (the same rules as pl-model's layoutFindings).
+const STEP = 2.5;
+const LANE = 2;
+const half = (nd) => (nd.size ?? KINDS[nd.kind].size) / 2;
+
+function segHitsBox(a, b, box) {
+  let t0 = 0, t1 = 1;
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const p = [-dx, dx, -dy, dy];
+  const q = [a.x - box.x0, box.x1 - a.x, a.y - box.y0, box.y1 - a.y];
+  for (let i = 0; i < 4; i++) {
+    if (Math.abs(p[i]) < 1e-12) { if (q[i] < 0) return false; continue; }
+    const t = q[i] / p[i];
+    if (p[i] < 0) { if (t > t1) return false; if (t > t0) t0 = t; } else { if (t < t0) return false; if (t < t1) t1 = t; }
   }
-  return y;
+  return t1 - t0 > 1e-6;
+}
+
+function segCross(a, b, c, d) {
+  const o = (p, q, r) => Math.sign((q.x - p.x) * (r.y - p.y) - (q.y - p.y) * (r.x - p.x));
+  return o(a, b, c) * o(a, b, d) < 0 && o(c, d, a) * o(c, d, b) < 0;
+}
+
+function layout(paths, name) {
+  const nodes = paths.flat();
+  const byKey = new Map(nodes.map((nd) => [nd.key, nd]));
+  const edges = [];
+  for (const nd of nodes) for (const k of nd.from || []) if (byKey.has(k)) edges.push({ a: byKey.get(k), b: nd });
+  const placed = new Set();
+  const placedEdges = new Set();
+  const lane = new Map();
+  const put = (nd, x, l) => { nd.x = x; nd.y = LANE * l; lane.set(nd.key, l); };
+  paths[0].forEach((nd, i) => put(nd, STEP * i, 0));
+  const commit = (unit) => {
+    for (const nd of unit) placed.add(nd.key);
+    for (const e of edges) if (!placedEdges.has(e) && placed.has(e.a.key) && placed.has(e.b.key)) placedEdges.add(e);
+  };
+  commit(paths[0]);
+
+  const hits = (a, b, nds, skip) => {
+    for (const o of nds) {
+      if (o === a || o === b || skip.has(o.key)) continue;
+      const h = half(o) * 0.9;
+      if (segHitsBox(a, b, { x0: o.x - h, x1: o.x + h, y0: o.y - h, y1: o.y + h })) return true;
+    }
+    return false;
+  };
+  const valid = (unit) => {
+    const fresh = new Set(unit.map((nd) => nd.key));
+    const live = nodes.filter((nd) => placed.has(nd.key) || fresh.has(nd.key));
+    for (const nd of unit) {
+      for (const o of live) {
+        if (o === nd) continue;
+        const gap = Math.max(Math.abs(nd.x - o.x), Math.abs(nd.y - o.y)) - half(nd) - half(o);
+        if (gap < 0.25) return false;
+      }
+    }
+    const fresher = edges.filter((e) => !placedEdges.has(e) && live.includes(e.a) && live.includes(e.b));
+    const all = [...placedEdges, ...fresher];
+    for (const e of fresher) {
+      const { a, b } = e;
+      if (b.x < a.x - 0.01) return false;
+      if (Math.abs(b.x - a.x) <= 0.01 && Math.abs(b.y - a.y) > 3.01) return false;
+      if (Math.hypot(b.x - a.x, b.y - a.y) > 5.01) return false;
+      if (hits(a, b, live, new Set())) return false;
+      for (const o of all) {
+        if (o === e || o.a === a || o.a === b || o.b === a || o.b === b) continue;
+        if (segCross(a, b, o.a, o.b)) return false;
+      }
+    }
+    for (const o of placedEdges) if (hits(o.a, o.b, unit, new Set())) return false;
+    return true;
+  };
+
+  const todo = new Set(paths.slice(1).map((_, i) => i + 1));
+  while (todo.size) {
+    let best = null;
+    for (const ui of todo) {
+      const unit = paths[ui];
+      const keys = new Set(unit.map((nd) => nd.key));
+      const out = edges.filter((e) => keys.has(e.a.key) && placed.has(e.b.key));
+      const inn = edges.filter((e) => keys.has(e.b.key) && placed.has(e.a.key));
+      if (!out.length && !inn.length) continue;
+      let anchor;
+      if (out.length) {
+        const e = out.reduce((m, o) => (o.b.x < m.b.x ? o : m));
+        anchor = { node: e.a, x: e.b.x - STEP, lane: lane.get(e.b.key), dir: 'out' };
+      } else {
+        const e = inn.reduce((m, o) => (o.a.x < m.a.x ? o : m));
+        anchor = { node: e.b, x: e.a.x + STEP, lane: lane.get(e.a.key), dir: 'in' };
+      }
+      if (!best || anchor.x < best.anchor.x) best = { ui, anchor };
+    }
+    if (!best) {
+      // a unit with nothing placed to hang on: start it on a fresh lane, taking the unit the most others lead into first
+      const deg = (ui) => { const ks = new Set(paths[ui].map((nd) => nd.key)); return edges.filter((e) => (ks.has(e.b.key) && !placed.has(e.a.key) && !ks.has(e.a.key)) || (ks.has(e.a.key) && !placed.has(e.b.key) && !ks.has(e.b.key))).length; };
+      const ui = [...todo].reduce((m, o) => (deg(o) > deg(m) ? o : m));
+      const l = Math.max(...lane.values()) + 1;
+      paths[ui].forEach((nd, j) => put(nd, STEP * j, l));
+      commit(paths[ui]);
+      todo.delete(ui);
+      continue;
+    }
+    const unit = paths[best.ui];
+    const at = unit.indexOf(best.anchor.node);
+    let ok = false;
+    for (const gap of [0, STEP]) {
+      for (let d = gap ? 0 : 1; d <= 40 && !ok; d++) {
+        for (const l of [best.anchor.lane + d, best.anchor.lane - d].sort((p, q) => Math.abs(p) - Math.abs(q))) {
+          const x0 = best.anchor.x + (best.anchor.dir === 'out' ? -gap : gap);
+          unit.forEach((nd, j) => put(nd, x0 + STEP * (j - at), l));
+          if (valid(unit)) { ok = true; break; }
+        }
+      }
+      if (ok) break;
+    }
+    if (!ok) throw new Error(`pl_opv: ${name}: no lane for ${unit[0].key}..${unit[unit.length - 1].key}`);
+    commit(unit);
+    todo.delete(best.ui);
+  }
+  return nodes;
 }
 
 // one cluster: the paths, the joins [target key, source key] that feed a branch end into a step, and the links below them
-function cluster(name, paths, joins, links, extra = {}, perRow = 10) {
-  const y = place(paths, perRow);
+function cluster(name, paths, joins, links, extra = {}) {
   const nodes = paths.flat();
   for (const [to, from] of joins) {
     const nd = nodes.find((o) => o.key === to);
     if (!nd) throw new Error(`pl_opv: join target ${to} is not in ${name}`);
     nd.from = [...nd.from, from];
   }
+  layout(paths, name);
+  const y = Math.max(...nodes.map((nd) => nd.y)) + 2.5;
   links.forEach(([key, ref], i) => nodes.push(L(key, 2.5 * i, y, ref)));
   return { name, ...extra, nodes };
 }
@@ -121,11 +233,9 @@ const o1 = cluster('O1 Si-28 qubit line', [
     ['i', 'grindless:tetron_array', 'Tetron Array', { end: 'MAX: the supracausal mainframe' }],
   ]),
   // byproducts of the silicon half: the tetrachloride goes back to the crude, the purge is hydrolysed, the HF joins the fluorine chain
-  [
-    n('o1_tet', 0, 0, F('gtceu:si28_tetrachloride'), 'Si-28 Tetrachloride', { kind: 'by', from: ['o1_2'], by: [dt], end: 'hydrogenated back to crude trichlorosilane in a Large Chemical Reactor (the loop)', sub: 'The distillation tower; back into step 1' }),
-    n('o1_purge', 0, 0, F('gtceu:chlorosilane_purge'), 'Chlorosilane Purge', { kind: 'by', from: ['o1_2'], by: [dt], end: 'hydrolysed in a Large Chemical Reactor to phosphoric and sulfuric acid, HCl and silica', sub: 'Carries the ash phosphorus out' }),
-    n('o1_hf', 0, 0, F('gtceu:hydrofluoric_acid'), 'Hydrofluoric Acid', { kind: 'by', from: ['o1_26'], by: [mocvd], end: 'the fluorine chain (the fluorspar kiln, the HF electrolysis)', sub: 'Tungsten plugs: WF6 and hydrogen' }),
-  ],
+  [n('o1_tet', 0, 0, F('gtceu:si28_tetrachloride'), 'Si-28 Tetrachloride', { kind: 'by', from: ['o1_2'], by: [dt], end: 'hydrogenated back to crude trichlorosilane in a Large Chemical Reactor (the loop)', sub: 'The distillation tower; back into step 1' })],
+  [n('o1_purge', 0, 0, F('gtceu:chlorosilane_purge'), 'Chlorosilane Purge', { kind: 'by', from: ['o1_2'], by: [dt], end: 'hydrolysed in a Large Chemical Reactor to phosphoric and sulfuric acid, HCl and silica', sub: 'Carries the ash phosphorus out' })],
+  [n('o1_hf', 0, 0, F('gtceu:hydrofluoric_acid'), 'Hydrofluoric Acid', { kind: 'by', from: ['o1_26'], by: [mocvd], end: 'the fluorine chain (the fluorspar kiln, the HF electrolysis)', sub: 'Tungsten plugs: WF6 and hydrogen' })],
   path('o1g_', [
     ['i', 'grindless:si_inp_wafer', 'Si-InP Wafer'],
     ['m', mbe, 'MBE Reactor'],
@@ -165,14 +275,15 @@ const o1 = cluster('O1 Si-28 qubit line', [
     ['i', 'grindless:isolated_hemt_wafer', 'Isolated HEMT Wafer'],
     ['i', 'grindless:hemt_amplifier', 'HEMT Amplifier'],
   ]),
+  [n('o1nr_0', 0, 0, I('grindless:nb_tsv_interposer'), 'Nb TSV Interposer', { kind: 'raw', sub: 'The interposer branch' })],
   [n('o1_hall', 0, 0, M('gtceu:photonic_integration_hall'), 'Photonic Integration Hall', { kind: 'ours', from: ['o1_36'], sub: 'Circuit 8, the cosmic mainframe: die, interposer, link and HEMT' })],
 ], [
   ['o1_37', 'o1g_6'],
   ['o1_41', 'o1n_7'],
-  ['o1_hall', 'o1n_7'],
+  ['o1_hall', 'o1nr_0'],
   ['o1_hall', 'o1l_8'],
   ['o1_hall', 'o1h_6'],
-], [], { line: 'si28', extends: 'pl_uxv:stars' }, 12);
+], [], { line: 'si28', extends: 'pl_uxv:stars' });
 
 // O2: the antiproton complex. The spallation station merged into the decelerator: its rows are the four cooling and capture
 // steps (spallation, stochastic cooling, electron cooling, ELENA), then the three antihydrogen foundry rows.
@@ -346,7 +457,7 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
 ], [
   ['o2x0', 'pl_uv:trap'], ['o2x1', 'pl_uhv:sps'], ['o2x2', 'pl_uev:ebf'], ['o2x3', 'pl_uhv:cgf'], ['o2x4', 'pl_uv:sheet'],
   ['o2x5', 'pl_uiv:l31_1'], ['o2x6', 'pl_ev:plate'], ['o2x7', 'pl_uhv:acc'], ['o2x8', 'pl_uhv:mbe'], ['o2x9', 'pl_luv:indium'],
-], {}, 8);
+], {});
 
 // O3: positrons to the Kugelblitz.
 const o3 = cluster('O3 Positrons to the Kugelblitz', [
@@ -393,17 +504,19 @@ const o3 = cluster('O3 Positrons to the Kugelblitz', [
     ['m', 'gtceu:gamma_optics_works', 'Gamma Optics Works'],
     ['i', 'grindless:laue_lens', 'Laue Lens'],
   ]),
+  [n('o3gr_0', 0, 0, I('grindless:gamma_laser_module'), 'Gamma Laser Module', { kind: 'raw', sub: 'The gamma laser branch' })],
+  [n('o3mr_0', 0, 0, I('grindless:gamma_multilayer_mirror'), 'Gamma Multilayer Mirror', { kind: 'raw', sub: 'The mirror branch' })],
   [n('o3a_0', 0, 0, I('grindless:gamma_absorber_tile'), 'Gamma Absorber Tile', { kind: 'raw', sub: 'O2: the absorber branch' })],
   [n('o3f_0', 0, 0, I('grindless:field_frozen_plate'), 'Field Frozen Plate', { kind: 'raw', sub: 'O5: the field-freezing line' })],
 ], [
   ['o3_3', 'o3g_2'],
-  ['o3_8', 'o3g_2'],
+  ['o3_8', 'o3gr_0'],
   ['o3_10', 'o3m_8'],
   ['o3_10', 'o3l_6'],
   ['o3_12', 'o3a_0'],
-  ['o3_14', 'o3m_8'],
+  ['o3_14', 'o3mr_0'],
   ['o3_14', 'o3f_0'],
-], [], {}, 8);
+], [], {});
 
 // O4: stable exotic matter.
 const o4 = cluster('O4 Stable exotic matter', [
@@ -428,7 +541,7 @@ const o4 = cluster('O4 Stable exotic matter', [
 ], [
   ['o4_10', 'o4n_0'],
   ['o4_13', 'o4f_0'],
-], [], {}, 8);
+], [], {});
 
 // O5: SGR chain matter and field freezing. The lamina branch is the line; the cable branch ends in the hull cables.
 const o5 = cluster('O5 Chain matter and field freezing', [
@@ -457,7 +570,7 @@ const o5 = cluster('O5 Chain matter and field freezing', [
     ['i', 'grindless:pbo_braided_chain_wire', 'PBO Braided Wire'],
     ['i', 'gtceu:chain_strand_single_cable', 'Chain Strand Cable', { end: 'the OpV hull cables' }],
   ]),
-], [], [['o5x0', 'pl_uhv:fib'], ['o5x1', 'pl_uiv:l30_5']], {}, 8);
+], [], [['o5x0', 'pl_uhv:fib'], ['o5x1', 'pl_uiv:l30_5']], {});
 
 // O6: Terzan 5 replication and the bulge. The spine is the GaN MMIC tile to the bulge collector; the debris, film and probe branches join it.
 const o6 = cluster('O6 Probes, nodes and the bulge', [
@@ -532,7 +645,7 @@ const o6 = cluster('O6 Probes, nodes and the bulge', [
   ['o6_14', 'o6s_6'],
   ['o6_14', 'o6f_3'],
   ['o6x_3', 'o6d_6'],
-], [['o6x0', 'pl_iv:hotcell'], ['o6x1', 'pl_uhv:clock']], {}, 10);
+], [['o6x0', 'pl_iv:hotcell'], ['o6x1', 'pl_uhv:clock']], {});
 
 // O7: OpV components. The spine is the REBCO pancake to the robot arm; the rotor and harmonic drive join it.
 const o7 = cluster('O7 OpV components', [
@@ -616,7 +729,7 @@ const o7 = cluster('O7 OpV components', [
 ], [
   ['o7_8', 'o7r_4'],
   ['o7_10', 'o7h_7'],
-], [], {}, 11);
+], [], {});
 
 // O8: the superheavy census IV. The californium branch joins at the census.
 const o8 = cluster('O8 Superheavy census IV', [
@@ -640,7 +753,7 @@ const o8 = cluster('O8 Superheavy census IV', [
     ['f', 'gtceu:element_126_recoil_gas', 'Element 126 Recoil Gas'],
     ['i', 'grindless:element_126_recoil', 'Element 126 Recoil'],
   ]),
-], [['o8_9', 'o8c_5']], [], {}, 10);
+], [['o8_9', 'o8c_5']], [], {});
 
 // O9: the AlN power die.
 const o9 = cluster('O9 AlN power die', [
@@ -655,7 +768,7 @@ const o9 = cluster('O9 AlN power die', [
     ['i', 'grindless:algan_patterned_wafer', 'AlGaN Patterned Wafer'],
     ['i', 'grindless:aln_power_die', 'AlN Power Die', { end: 'the OpV power parts' }],
   ]),
-], [], [], {}, 8);
+], [], [], {});
 
 export default {
   file: 'pl_opv',
