@@ -17242,7 +17242,7 @@ hash = "d4937f80d58d5983a5665a7c0102f51435f6c46f61ba8e8eddfcd375e8d86936"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uv_info_lang.js"
-hash = "67482899c66f1fa21a2f085771361d39d77dc34ea8773c409c498007895f6fc5"
+hash = "df3be97f3fe1094c48885e04b1355c1b2da0d3c988e0f1837611a80cae536351"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uv_kuiper_lang.js"
