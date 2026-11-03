@@ -1,5 +1,7 @@
 # Era IV
 
+Long process lines from EV to ZPM (D2-LINES, 2026-11-03): `docs/eras/lines-ev-zpm.md`, section 3 for IV.
+
 IV is nuclear and opens the inner planets. Up to EV, power was almost always burned; in IV it is designed. Uranium from the End is enriched in the hot cell and assembled into cores, and the reactor burns them without smoke, breeds plutonium and leaves tritium for fusion. That takes the place of the first fusion reactor, which stays in LuV. With the level 3 rocket and the thermal suit, IV goes to Venus and Mercury at the same time: naquadah comes only from Venus's deep veins, at 90 bar, and iridium and osmium only from Mercury's crust. Both feed LuV. IV also brings the kit for mass production: the assembly line that draws from AE2, the parallel hatch and the GCYM cubes. The user put it this way: "Tungsten, naquadah if it exists, and the first fusion reactor or whatever takes its place. If the player keeps crafting one at a time, the pack is wrong." (translated from Spanish)
 
 IV starts with what EV leaves behind (`ev.md`): an IV hull in Tungstensteel (tungsten only comes from Mars), the automatic lunar base (titanium), the Mars outpost (tungsten, rare earths, ice with deuterium), the platinum plant, the cryogenic plant, the level 2 rocket and the HV suit, the Earth–Moon–Mars quantum bridge, stored Nether Stars from the Wither, Nanoprocessor Supercomputers and a 32,768 EU/t power plant with an EV→IV transformer.
