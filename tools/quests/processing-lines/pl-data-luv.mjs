@@ -101,8 +101,8 @@ export default {
         }),
         n('nico', 9, -0.75, F('gtceu:nickel_tetracarbonyl'), 'Nickel Tetracarbonyl', { from: ['dist'] }),
         n('feco', 9, 0.75, F('gtceu:iron_pentacarbonyl'), 'Iron Pentacarbonyl', { from: ['dist'] }),
-        n('ir', 10, 2.25, I('gtceu:iridium_dust'), 'Iridium', { kind: 'product', role: 'resource', from: ['pplant'] }),
-        n('os', 10, 3.75, I('gtceu:osmium_dust'), 'Osmium', { kind: 'product', role: 'resource', from: ['pplant'] }),
+        n('ir', 10, 2.25, I('gtceu:iridium_dust'), 'Iridium', { kind: 'product', from: ['pplant'] }),
+        n('os', 10, 3.75, I('gtceu:osmium_dust'), 'Osmium', { kind: 'product', from: ['pplant'] }),
         n('pgs', 10, 5, I('gtceu:platinum_group_sludge_dust'), 'Platinum Group Sludge', {
           kind: 'by', role: 'resource', from: ['pplant'], end: 'circuit 2', sub: 'Circuit 2: platinum, palladium, rhodium, ruthenium',
         }),
@@ -283,7 +283,7 @@ export default {
         n('meap', 16, 0, I('grindless:pedot_microelectrode_array'), 'PEDOT Microelectrode Array', {
           kind: 'product', from: ['pedotpss', 'plate', 'au'], by: ['gtceu:assembler'], sub: 'Assembler: up to the organoid lab',
         }),
-        n('h2so4', 16, 3, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { kind: 'by', from: ['pers'], end: 'sulfuric acid', sub: 'Back into the acid you already use' }),
+        n('h2so4', 16, -3, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { kind: 'by', from: ['pers'], end: 'sulfuric acid', sub: 'Back into the acid you already use' }),
       ],
     },
     // ---------------------------------------------------------------- B3 (microgravity smelter, wake shield facility) and B4 (crystal grower)
@@ -431,7 +431,7 @@ export default {
         n('rawmi', 5, -0.75, I('gtceu:raw_meteoric_iron'), 'Raw Meteoric Iron', { from: ['hdrill'] }),
         n('rawtt', 5, 0.75, I('gtceu:raw_tetrataenite'), 'Raw Tetrataenite', { from: ['hdrill'] }),
         n('cmi', 7, -0.75, I('gtceu:crushed_meteoric_iron_ore'), 'Crushed Meteoric Iron', {
-          kind: 'product', role: 'resource', from: ['rawmi'], by: ['gtceu:macerator'], sub: 'Macerator: the coated conductor line\'s Mond process takes it',
+          kind: 'product', keepShort: 'the drill and the macerator are the whole route; the Mond process in the conductor line takes the ore from here', from: ['rawmi'], by: ['gtceu:macerator'], sub: 'Macerator: the coated conductor line\'s Mond process takes it',
         }),
         n('ctt', 7, 0.75, I('gtceu:crushed_tetrataenite_ore'), 'Crushed Tetrataenite', { from: ['rawtt'], by: ['gtceu:macerator'], sub: 'Macerator' }),
         n('aproc', 9.5, 0.75, M('gtceu:asteroid_processor', 'gtceu:asteroid_processing'), 'Asteroid Processor', {
