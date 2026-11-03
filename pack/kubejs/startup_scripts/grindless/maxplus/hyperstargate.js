@@ -74,11 +74,11 @@
     return Math.sqrt(dx * dx + dy * dy)
   }
 
-  // the nearest ring cell to each chevron's position on the circle, every 40 degrees from the top: 'x,y' -> true
+  // the nearest ring cell to each chevron's position on the circle, every 40 degrees from the top: as [x, y] pairs
   var chevrons = null
   function chevronCells() {
     if (chevrons !== null) return chevrons
-    var set = {}
+    var set = []
     var n = Math.round(360 / CHEVRON_STEP)
     for (var k = 0; k < n; k++) {
       var a = (k * CHEVRON_STEP * Math.PI) / 180
@@ -92,14 +92,20 @@
           var e = (x - tx) * (x - tx) + (y - ty) * (y - ty)
           if (e < bestD) {
             bestD = e
-            best = x + ',' + y
+            best = [x, y]
           }
         }
       }
-      set[best] = true
+      set.push(best)
     }
     chevrons = set
     return set
+  }
+
+  function isChevron(x, y) {
+    var set = chevronCells()
+    for (var i = 0; i < set.length; i++) if (set[i][0] === Number(x) && set[i][1] === Number(y)) return true
+    return false
   }
 
   // a window every 30 degrees, three cells wide, on the outer face (z 8 to 14) and on the front and back faces (z 5 and 17)
@@ -131,7 +137,7 @@
     }
     if (y === 3 && z === D_ - 4 && x === MID) return 'G'
     var d = rad(x, y)
-    if (z === PLANE && Math.abs(d - R_RING) <= 0.5) return chevronCells()[x + ',' + y] === true ? 'K' : 'R'
+    if (z === PLANE && Math.abs(d - R_RING) <= 0.5) return isChevron(x, y) ? 'K' : 'R'
     if (d < R_OPEN) return z === PLANE ? '#' : ' '
     if (z >= 5 && z <= 17 && d <= R_JACKET) {
       if (windowAt(x, y, z, d)) return 'L'
