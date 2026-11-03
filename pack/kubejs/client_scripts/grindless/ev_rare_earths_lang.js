@@ -1,3 +1,4 @@
+// priority: 10250
 // D2-REE: names and tooltips of the samaric branch fluids (startup_scripts/grindless/ev/rare_earths.js).
 ClientEvents.lang('en_us', function (event) {
   event.add('grindless', 'material.gtceu.seg_chloride_solution', 'SEG Chloride Solution')

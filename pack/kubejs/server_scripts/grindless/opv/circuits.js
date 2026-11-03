@@ -1,4 +1,4 @@
-// priority: -21654
+// priority: -21658
 // -----------------------------------------------------------------------------------------------
 // OpV circuits (package OpV-A2, docs/eras/opv.md 'A2. Circuits', process lines 11-18): the line steps that run on GTM's cutter and
 // assembler and on LuV's helium refrigerator, generated at every server load from data/grindless/tables/circuits.json. Items and fluids:

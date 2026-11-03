@@ -1,3 +1,4 @@
+// priority: 4946
 // Gregtech Grindless - names, tooltips and EMI lines of UEV's monolithic photonic wafer flow (startup_scripts/grindless/uev/photonic_wafer.js;
 // package D4-UEV-PHOTON), kept out of pack/kubejs/assets/grindless/lang/*. Names go in en_us.
 (function () {

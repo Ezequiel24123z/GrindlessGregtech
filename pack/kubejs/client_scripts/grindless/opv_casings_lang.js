@@ -1,3 +1,4 @@
+// priority: 5842
 // Names, tooltips and EMI pages of the OpV casing family (D5-CAS-OPV); the recipes are in server_scripts/grindless/opv/casings.js.
 (function () {
     // id, name, tooltip 0, tooltip 1, EMI text

@@ -1,4 +1,4 @@
-// priority: 5849
+// priority: 5852
 // Gregtech Grindless - names and tooltips of OpV's collector nodes and bulge collector (startup_scripts/grindless/opv/bulge_collector.js; package OpV-R3):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

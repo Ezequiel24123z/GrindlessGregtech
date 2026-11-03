@@ -1,3 +1,4 @@
+// priority: -7602
 // -----------------------------------------------------------------------------------------------
 // The nine intermediates of UEV's monolithic photonic wafer flow (docs/eras/lines-uev-uxv.md, E1 steps 15-24; package D4-UEV-PHOTON): the
 // detectors, the graphene modulators and the quantum-dot sources are built on the waveguide circuit itself, then the wafer is diced, pigtailed and

@@ -1,3 +1,4 @@
+// priority: -12874
 // -----------------------------------------------------------------------------------------------
 // D2-REE (docs/eras/lines-ev-zpm.md, section 2 E1 and section 9 D2-1): the samaric branch of EV's rare-earth trunk, GTCA's bastnasite
 // line, charted. Two steps are ours on the large chemical reactor; the split between them is the cascade's seg_split mode

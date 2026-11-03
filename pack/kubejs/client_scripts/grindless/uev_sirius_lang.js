@@ -1,4 +1,4 @@
-// priority: 4936
+// priority: 4933
 // Gregtech Grindless - names and tooltips of UEV's Sirius B machines (startup_scripts/grindless/uev/sirius.js; package UEV-B4):
 //
 //   block.gtceu.<machine>, gtceu.<type>                                machine and recipe type names

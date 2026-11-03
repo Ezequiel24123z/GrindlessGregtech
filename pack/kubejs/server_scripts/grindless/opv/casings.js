@@ -1,3 +1,4 @@
+// priority: -21647
 // The OpV casing family (D5-CAS-OPV, docs/eras/lines-opv-maxplus.md 7.1): the casings the bulge-era multiblocks are built from.
 //   gtceu:assembler        grindless:chain_lamina_casing   4 chain lamina stacks + 8 chain strand wires + neutronium plate and frame -> 4
 //   gtceu:assembler        grindless:tpv_wall_casing       2 TPV panels + absorber tile + 2 copper plates + a lamina stack -> 4

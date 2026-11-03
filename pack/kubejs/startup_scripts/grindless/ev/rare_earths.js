@@ -1,3 +1,4 @@
+// priority: -1350
 // -----------------------------------------------------------------------------------------------
 // D2-REE (docs/eras/lines-ev-zpm.md, section 2 E1, steps 16'-18'): the two fluids of the samaric branch of EV's rare-earth trunk.
 //
