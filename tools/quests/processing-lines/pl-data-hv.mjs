@@ -17,8 +17,8 @@ const H2_CARD = R.cmp('fluid:gtceu:hydrogen', 1000, 'Hydrogen routes of the plan
   { label: 'Gasified heavy fuel', recipe: SYN + 'gasify_heavy_fuel', perMin: 80000, eu: 7200, ins: { 'fluid:gtceu:heavy_fuel': 250, 'fluid:gtceu:steam': 250 }, out: { 'fluid:gtceu:carbon_monoxide': 250 } },
   { label: 'Methanol syngas', recipe: SYN + 'methanol_syngas', perMin: 43636.36, eu: 13200, ins: { 'fluid:gtceu:steam': 500 }, out: { 'fluid:gtceu:carbon_monoxide': 250, 'fluid:gtceu:carbon_dioxide': 125, 'gtceu:ash_dust': 0.04 } },
 ], {
-  dominates: [],
-  verdict: 'All five run at 480 EU/t with no overclock and no parallels.',
+  dominates: [['Full conversion', 'Gasified coal'], ['Full conversion', 'Methanol syngas'], ['Methanol syngas', 'Gasified coal']],
+  verdict: 'All five run at 480 EU/t with no overclock and no parallels. On hydrogen alone the full conversion beats gasified coal and methanol syngas, and methanol syngas beats gasified coal; the latter two also make carbon monoxide, which is the only reason to build them. Proposed balance decision for the owner.',
 });
 
 export default {
