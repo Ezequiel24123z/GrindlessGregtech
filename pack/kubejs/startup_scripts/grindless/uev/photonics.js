@@ -15,7 +15,7 @@
 //
 // Voltage: UHV, the voltage of the era's first machines (the design's 7.86 M EU/t for the hall's circuit 3 is tuned down to UHV's 1.97 M EU/t
 // and made longer). New ids: the items below (the table's grindless: ids); the F1 ids (snspd, qd_source, sdd, uev_*) are not registered again.
-// Geometry (lib/patterns.js): a cryostat hall, a banded tower and a dome hall (shapes in uev/shapes.js).
+// Geometry (lib/patterns.js): a cryostat hall, a banded tower and a cleanroom integration hall (shapes in uev/shapes.js).
 // Textures: tools/assets/Build-UEVPhotonicsTextures.ps1. Names: client_scripts/grindless/uev_photonics_lang.js.
 // Published for the recipe script: global.grindless.uevPhotonics.
 (function () {

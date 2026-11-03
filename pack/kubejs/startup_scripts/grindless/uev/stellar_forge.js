@@ -13,10 +13,10 @@
 //   floor(max voltage / recipe EU/t) and ParallelLogic (inputs, output room): every copy pays its full EU/t (family rule 1).
 // - Then GTM's EBF energy discount (0.95 per coil step above 1800 K, floor 0.80), perfect overclock and batch mode (rules 2, 3, 4).
 //
-// Structure (9 wide x 16 high x 9 deep, lib/patterns.js): a hearth hall of heatproof casing, stable casing, glass and corner frame posts
-// under a 7 x 7 glass-banded shaft with four rings of 8 heating coils (any coil, the lowest one sets the tier) round the central air
-// column at heights 3, 6, 9 and 12, capped by a chimney. The controller sits in the middle of the front wall, one row above the
-// floor. Parts go in the floor and the front wall's first row: 1 maintenance, 1 or 2 energy hatches, 1 parallel hatch (optional), up to 2 input and 2 output buses, up to
+// Structure (15 wide x 23 high x 15 deep, uev/shapes.js): a hearth hall of SiC composite lined with HfTaCN bricks under a 9 x 9 HfTaCN shaft in
+// glass bands with four rings of 16 heating coils (any coil, the lowest one sets the tier) round the central air column at heights 8, 11, 14
+// and 17, capped by a deck and a chimney. The controller sits in the middle of the front wall, one row above the floor. Parts go in the floor
+// and the front wall's first row: 1 maintenance, 1 or 2 energy hatches, 1 parallel hatch (optional), up to 2 input and 2 output buses, up to
 // 4 fluid input and 4 fluid output hatches.
 //
 // Textures: overlay dir grindless:block/multiblock/stellar_forge (tools/assets/Build-UEVStellarForgeTextures.ps1). Names / tooltips:
@@ -28,8 +28,8 @@
   const F = G.mega.formulas
 
   const ID = 'stellar_forge'
-  const CASING = 'gtceu:heatproof_machine_casing'
-  const CASING_TEXTURE = 'gtceu:block/casings/solid/machine_casing_heatproof'
+  const CASING = 'grindless:hftacn_lining_casing'
+  const CASING_TEXTURE = 'grindless:block/uev/hftacn_lining_casing'
   const DISCOUNT = { rate: 0.95, floor: 0.80, baseK: 1800 }
   const HATCHES = { energy: [1, 2], inputBus: 2, outputBus: 2, inputHatch: 4, outputHatch: 4, parallelHatch: 1 }
   const PLASMA = 'gtceu:uev_dhe3_plasma'
@@ -38,11 +38,10 @@
   const PLASMA_BONUS_K = 900
   const STEP_K = 450
   const MAX_PARALLEL = 2147483647
-  const W = 9
-  const H = 16
-  const D = 9
-  const CENTER = 4
-  const RING_HEIGHTS = [3, 6, 9, 12]
+  const W = 15
+  const H = 23
+  const D = 15
+  const RING_HEIGHTS = [8, 11, 14, 17]
   // 1 maintenance + 2 energy + 2 + 2 buses + 4 + 4 fluid hatches + 1 parallel hatch
   const PART_CELLS = 16
 
@@ -71,71 +70,35 @@
     return plasma ? { in: PLASMA_MB, out: PLASMA_MB } : { in: 0, out: 0 }
   }
 
-  function inRing(x, z) {
-    return Math.max(Math.abs(x - CENTER), Math.abs(z - CENTER)) === 1
-  }
-
-  // One cell of the forge. A 9 x 9 hearth hall (corner frame posts, glass-banded walls, pumps in the corners) carries a 7 x 7 glass-banded
-  // shaft that holds the four heating rings round the central air column, under a capped chimney. Row 0 and the front wall's first row take
-  // the parts (X); the rings keep the coil predicate (K); S is the controller. ' ' is outside the silhouette.
-  function cell(x, y, z) {
-    var dx = Math.abs(x - CENTER)
-    var dz = Math.abs(z - CENTER)
-    var m = Math.max(dx, dz)
-    var corner = dx === CENTER + 1 && dz === CENTER + 1
-    var ring = m === 1 && RING_HEIGHTS.indexOf(y) >= 0
-    if (z === D - 1 && x === CENTER && y === 1) return 'S'
-    if (y === 0) return m > 4 ? ' ' : (corner ? 'Q' : 'X')
-    if (y <= 3) {
-      if (m > 4) return ' '
-      if (y === 3) {
-        if (m === 4) return corner ? 'Q' : 'A'
-        if (m === 3) return 'F'
-        return ring ? 'K' : '#'
-      }
-      if (m === 4) {
-        if (corner) return 'Q'
-        if (y === 1) return z === D - 1 ? 'X' : 'A'
-        return (x + z) % 2 === 0 ? 'L' : 'F'
-      }
-      return y === 1 && dx === 3 && dz === 3 ? 'B' : '#'
-    }
-    if (y <= 13) {
-      if (m > 3) return ' '
-      if (m === 3) {
-        if (dx === 3 && dz === 3) return 'Q'
-        if (y === 4 || y === 13) return 'A'
-        return (y - 4) % 3 === 0 ? 'F' : 'L'
-      }
-      return ring ? 'K' : '#'
-    }
-    if (y === 14) return m > 3 ? ' ' : (m === 0 ? 'P' : 'F')
-    return m === 0 ? 'P' : (m === 1 ? 'A' : ' ')
-  }
-
-  // slices back -> front, rows bottom -> top, one char per column
+  // The forge (15 x 23 x 15): a stacked furnace tower girdled by four coil rings. A hearth hall of SiC composite lined with HfTaCN bricks
+  // (floor and front wall take the parts, X) carries a 9 x 9 HfTaCN shaft in glass bands; four rings of 16 heating coils (K) hang round
+  // the central air column; a deck and a pipe chimney cap it, and frame posts stand at the hearth corners. S is the controller.
   function build() {
-    var slices = []
+    var s = G.uevShapes.scene(W, H, D)
+    s.box(1, 0, 1, 13, 0, 13, 'X')
+    s.room(0, 1, 0, 14, 5, 14, 'R', 'b', '#')
+    s.room(1, 1, 1, 13, 4, 13, 'H', 'bt', '#')
+    s.box(4, 1, 14, 10, 1, 14, 'X')
+    s.edges(0, 0, 0, 14, 5, 14, 'Q')
+    s.room(3, 6, 3, 11, 20, 11, 'H', 'bt', '#')
+    ;[9, 13, 17].forEach(function (y) { s.room(3, y, 3, 11, y, 11, 'L', 'bt', '#') })
+    RING_HEIGHTS.forEach(function (y) { s.room(5, y, 5, 9, y, 9, 'K', 'bt', '#') })
+    s.box(3, 21, 3, 11, 21, 11, 'R')
+    s.room(6, 22, 6, 8, 22, 8, 'R', 'b', '#').box(7, 22, 7, 7, 22, 7, 'P')
+    var slices = G.uevShapes.slices(W, H, D, s.fn())
     var casingCells = 0
     var coilCells = 0
-    for (var z = 0; z < D; z++) {
-      var rows = []
-      for (var y = 0; y < H; y++) {
-        var row = ''
-        for (var x = 0; x < W; x++) {
-          var ch = cell(x, y, z)
-          if (ch === 'X') casingCells++
-          if (ch === 'K') coilCells++
-          row += ch
+    slices.forEach(function (rows) {
+      rows.forEach(function (row) {
+        for (var i = 0; i < row.length; i++) {
+          if (row.charAt(i) === 'X') casingCells++
+          if (row.charAt(i) === 'K') coilCells++
         }
-        rows.push(row)
-      }
-      slices.push(rows)
-    }
+      })
+    })
     return { slices: slices, casingCells: casingCells, coilCells: coilCells }
   }
-  const BUILT = build()
-
+  var BUILT = null
   // ---------------------------------------------------------------- GTM glue
   var LC = null
   function lc() {
@@ -259,6 +222,10 @@
 
   var SPEC = null
   function makeSpec() {
+    BUILT = build()
+    SF.coilCells = BUILT.coilCells
+    SF.casingCells = BUILT.casingCells
+    var pal = G.uevShapes.palette(CASING)
     return {
       slices: BUILT.slices,
       symbols: {
@@ -276,11 +243,11 @@
         ),
         '#': Pat.air(),
         F: Pat.block(CASING),
-        A: Pat.block('gtceu:stable_machine_casing'),
-        L: Pat.block('gtceu:laminated_glass'),
-        P: Pat.block('gtceu:tungstensteel_pipe_casing'),
-        B: Pat.block('gtceu:tungstensteel_gearbox'),
-        Q: Pat.frame(['tungsten_steel'])
+        R: Pat.block(pal.R),
+        H: Pat.block(pal.H),
+        L: Pat.block(pal.L),
+        P: Pat.block(pal.P),
+        Q: Pat.frame([pal.Q])
       }
     }
   }
@@ -299,8 +266,6 @@
   SF.stepK = STEP_K
   SF.maxParallel = MAX_PARALLEL
   SF.size = { width: W, height: H, depth: D }
-  SF.coilCells = BUILT.coilCells
-  SF.casingCells = BUILT.casingCells
   SF.formulas = { ceilingOf: ceilingOf, heatOf: heatOf, vetoed: vetoed, plasmaFor: plasmaFor }
   SF.modifiers = { forge: forge, plasma: plasma }
 

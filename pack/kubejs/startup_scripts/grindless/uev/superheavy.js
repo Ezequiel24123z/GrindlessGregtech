@@ -1,7 +1,7 @@
 // priority: -7646
 // -----------------------------------------------------------------------------------------------
-// UEV's superheavy element line (docs/eras/uev.md, machines 2-4, lines 3-6; package UEV-A2): the heavy ion cyclotron, the recoil
-// separator and the superheavy chemistry lab, their recipe types and the intermediate items and gases. The recipes come from
+// UEV's superheavy element line (docs/eras/uev.md, machines 2-4, lines 3-6; package UEV-A2): the Superheavy Factory (the heavy ion cyclotron,
+// which also runs the recoil separation) and the superheavy chemistry lab, their recipe types and the intermediate items and gases. The recipes come from
 // data/grindless/tables/superheavy.json (server_scripts/grindless/uev/superheavy.js); the older rows are in tables/hot_cell.json
 // (the activated target wheel, Cf-252 -> Cm-248, Bk-249 -> Cf-249, tritium -> helium-3) and ev/cryogenic_plant.js (xenon).
 //
@@ -9,8 +9,7 @@
 //                                  (not consumed) and hits the target, a helium chamber (not consumed) takes the recoil. Refuses to void.
 //   gtceu:heavy_ion_irradiation    its recipe type (EU in). Circuit 1 flerovium, 2 livermorium, 3 tennessine (target wheel), 4 oganesson,
 //                                  5 moscovium, 6 ion-tracked foil (xenon beam on polycarbonate).
-//   gtceu:recoil_separator         the gas-filled separator: dipole magnets bend the recoils away from the beam; one etched membrane per run.
-//   gtceu:recoil_separation        its recipe type. Circuits 1-5 as the cyclotron's.
+//   gtceu:recoil_separation        the gas-filled separator's recipe type, run by the same Superheavy Factory (dipole magnets bend the recoils away; one etched membrane per run). Circuits 1-5 as the cyclotron's.
 //   gtceu:superheavy_chemistry_lab gas chromatography on gold and the capsule line: one atom pool per sample.
 //   gtceu:superheavy_chemistry     its recipe type. 1 tennessine sample (stored, nothing consumes it), 2 the census.
 //
