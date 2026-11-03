@@ -20310,7 +20310,7 @@ hash = "a6596dc42de982b88462fed91cc853ef0da3a691037256ab3532eb3c7fab9c2f"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/opv/shapes.js"
-hash = "d1897d5ba10977685f58885e7003b651333ddce3aa00f11d01f84e7265a05d3c"
+hash = "a47b7b2c55fddcb6648b2e17b4f8e8af6087e27357454482efca6b6765b6e300"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/opv/tetron_optics.js"
