@@ -150,7 +150,8 @@
     var controller = null
     var buses = 0
     var parts = 0
-    var dataCell = null the controller first: slices from the front backwards
+    var dataCell = null
+    // Place from the front backwards
     cells.sort(function (a, b) { return b.si - a.si })
     cells.forEach(function (c) {
       c.x = CX - (c.ci - ctrl.ci)
