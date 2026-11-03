@@ -305,14 +305,14 @@ export function checkRate(f, get, readSrc = () => null) {
 const num = (x) => x.toLocaleString('en-US');
 const short = (k) => k.replace(/^fluid:/, '').replace(/^#/, '').replace(/^[a-z_]+:/, '').replace(/_/g, ' ');
 const unitOf = (k) => (k.startsWith('fluid:') ? 'mB' : 'items');
-const flow = (m) => Object.entries(m || {}).map(([k, v]) => `${num(v)} ${unitOf(k)} ${short(k)}`);
+const flow = (m) => Object.entries(m || {}).map(([k, v]) => `${num(v)}${k.startsWith('fluid:') ? ' mB' : ''} ${short(k)}`);
 
 // the card's words, built from its claims (which checkRate recomputes): never typed twice
 export function rateText(f) {
   const prof = (x) => `${String(x.tier).toUpperCase()}${x.amps > 1 ? ' x' + x.amps + ' A' : ''}${x.oc ? ', ' + x.oc + ' overclock' + (x.oc > 1 ? 's' : '') : ''}${x.par > 1 ? ', ' + x.par + ' parallels' : ''}`;
-  if (f.t === 'rate') return `${f.title ? f.title + ': ' : ''}${prof(f)}, ${num(f.eut)} EU/t, ${num(f.ticks)} t per run (${f.recipe.replace(/^[a-z]+:/, '')}). Per minute it takes ${flow(f.ins).join(', ') || 'nothing'} and makes ${flow(f.outs).join(', ')}.${f.hatch ? ' Each run needs room for ' + flow(f.hatch).join(', ') + '.' : ''}${f.note ? ' ' + f.note : ''}`;
-  if (f.t === 'ratio') return `${f.title ? f.title + ': ' : ''}${num(f.n)} ${f.prodName} to ${num(f.m)} ${f.consName} (${num(f.make)} against ${num(f.take)} ${unitOf(f.key)} per minute of ${short(f.key)}).${f.note ? ' ' + f.note : ''}`;
+  if (f.t === 'rate') return `${f.title ? f.title + ': ' : ''}${prof(f)}, ${num(f.eut)} EU/t, ${num(f.ticks)} t per run. Per minute: ${flow(f.ins).join(', ') || 'nothing'} in, ${flow(f.outs).join(', ')} out.${f.note ? ' ' + f.note : ''}`;
+  if (f.t === 'ratio') return `${f.title ? f.title + ': ' : ''}${num(f.n)} ${f.prodName} to ${num(f.m)} ${f.consName} (${num(f.make)} against ${num(f.take)} ${unitOf(f.key) === 'mB' ? 'mB ' : ''}per minute).${f.note ? ' ' + f.note : ''}`;
   const per = f.unit === 1 ? 'item' : f.unit === 1000 ? 'bucket' : `${num(f.unit)} units`;
-  const rows = f.routes.map((x) => `${x.label}: ${num(x.perMin)}/min, ${num(x.eu)} EU, takes ${flow(x.ins).join(' + ') || 'nothing'}${Object.keys(x.out || {}).length ? ', also ${flow(x.out).join(' + ')}' : ''}`);
+  const rows = f.routes.map((x) => `${x.label}: ${num(x.perMin)}/min, ${num(x.eu)} EU`);
   return `${f.name} (${prof(f.profile)}, per ${per} of ${f.what || short(f.key)}): ${rows.join('; ')}.${f.verdict ? ' ' + f.verdict : ''}`;
 }

@@ -10,7 +10,7 @@ const SLURRY_CARD = R.rate(HCF + 'horizon_crystal_slurry', { tier: 'max', amps: 
   ins: { 'fluid:gtceu:stellar_plasma': 12000, 'fluid:gtceu:kerr_condensate': 12000 },
   outs: { 'fluid:gtceu:horizon_crystal_slurry': 12000 },
   hatch: { 'fluid:gtceu:horizon_crystal_slurry': 1000, 'fluid:gtceu:kerr_condensate': 1000 },
-  note: 'Seven more plasmas and beams come in alongside, 12,000 mB a minute each.',
+  note: 'Seven more inputs, 12,000 mB each.',
 });
 const CORE_CARD = R.rate(HCF + 'core_crystal_boule', { tier: 'max', amps: 1024 }, {
   title: 'One core boule furnace', eut: 549755813888, ticks: 2400,
@@ -21,7 +21,7 @@ const CORE_CARD = R.rate(HCF + 'core_crystal_boule', { tier: 'max', amps: 1024 }
 });
 const CORE_RATIO = R.ratio({ recipe: HCF + 'horizon_crystal_slurry', tier: 'max', amps: 256 }, { recipe: HCF + 'core_crystal_boule', tier: 'max', amps: 1024 }, 'fluid:gtceu:horizon_crystal_slurry', 500, 3, {
   title: 'Bottleneck', make: 12000, take: 2000000, prodName: 'slurry furnaces', consName: 'core boule furnaces',
-  note: 'Slurry is the bottleneck: the furnaces that make it outnumber the boule furnaces about 167 to 1.',
+  note: 'Slurry is the bottleneck.',
 });
 const CTRL_CARD = R.rate(HCF + 'controller_crystal_boule', { tier: 'max', amps: 1024 }, {
   title: 'One controller boule furnace', eut: 549755813888, ticks: 2400,
