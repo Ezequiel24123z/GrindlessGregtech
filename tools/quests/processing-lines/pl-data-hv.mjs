@@ -61,6 +61,7 @@ export default {
     },
     epoxyline: {
       name: 'H3: Epoxy from cumene',
+      line: 'hvoil',
       nodes: [
         n('cbenzene', 0, -0.75, F('gtceu:benzene'), 'Benzene', { kind: 'raw', sub: 'From the reformer' }),
         n('cpropene', 0, 0.75, F('gtceu:propene'), 'Propene', { kind: 'raw', sub: 'Steam cracking' }),
@@ -74,6 +75,7 @@ export default {
     },
     refinery: {
       name: 'Crude oil through the refinery',
+      line: 'hvoil',
       nodes: [
         n('oil', 0, -0.75, F('gtceu:oil'), 'Crude Oil', { kind: 'raw', sub: 'MV fluid drilling rig' }),
         L('h2', 0, 0.75, 'pl_lv:h2'),
@@ -94,6 +96,7 @@ export default {
     },
     aromatics: {
       name: 'Naphtha into aromatics and olefins',
+      line: 'hvoil',
       nodes: [
         n('rcat', 0, -3, I('grindless:reforming_catalyst'), 'Reforming Catalyst', { kind: 'raw', sub: 'End platinum on silica' }),
         n('naphtha2', 0, 0, F('gtceu:naphtha'), 'Naphtha', { kind: 'raw', sub: 'From the refinery' }),
@@ -109,6 +112,7 @@ export default {
         n('ethylene', 4, 0.25, F('gtceu:ethylene'), 'Ethylene', { from: ['crack'], end: 'PE, PVC, styrene', sub: 'PE, PVC, styrene' }),
         n('propene', 4, 1.5, F('gtceu:propene'), 'Propene', { from: ['crack'], end: 'cumene, epoxy', sub: 'Cumene, then epoxy' }),
         n('butadiene', 4, 2.75, F('gtceu:butadiene'), 'Butadiene', { from: ['crack'], end: 'SBR', sub: 'Synthetic rubber' }),
+        n('methane2', 4, 4, F('gtceu:methane'), 'Methane', { from: ['crack'], end: 'chloroform, PTFE', sub: 'Chloroform, then PTFE' }),
       ],
     },
     syngas: {
@@ -148,13 +152,15 @@ export default {
     },
     ptfe: {
       name: 'H5: PTFE through R22',
+      line: 'hvoil',
       nodes: [
         n('lepidolite', 0, -1.5, I('gtceu:lepidolite_dust'), 'Lepidolite Dust', { kind: 'raw', sub: 'Or bastnasite, or topaz' }),
         n('fluorine', 2, -1.5, F('gtceu:fluorine'), 'Fluorine', { from: ['lepidolite'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer' }),
         n('hf', 4, -1.5, F('gtceu:hydrofluoric_acid'), 'Hydrofluoric Acid', { from: ['fluorine'], sub: 'With hydrogen' }),
-        n('methane', 4, 0, F('gtceu:methane'), 'Methane', { kind: 'raw', sub: 'Refinery gas, distilled' }),
-        L('cl2', 4, 1.5, 'pl_mv:cl2'),
-        n('r22', 6, 0, F('gtceu:chlorodifluoromethane'), 'Chlorodifluoromethane (R22)', { from: ['hf', 'methane', 'cl2'], by: ['gtceu:chemical_reactor'], sub: 'Chemical reactor' }),
+        n('methane', 0, 0, F('gtceu:methane'), 'Methane', { kind: 'raw', sub: 'Steam cracking' }),
+        L('cl2', 0, 1.5, 'pl_mv:cl2'),
+        n('chcl3', 4, 0.75, F('gtceu:chloroform'), 'Chloroform', { from: ['methane', 'cl2'], by: ['gtceu:chemical_reactor'], sub: 'Chemical reactor; the HCl leaves' }),
+        n('r22', 6, 0, F('gtceu:chlorodifluoromethane'), 'Chlorodifluoromethane (R22)', { from: ['hf', 'chcl3'], by: ['gtceu:chemical_reactor'], sub: 'Chemical reactor, with two hydrofluoric acid' }),
         n('tfe', 8, -0.75, F('gtceu:tetrafluoroethylene'), 'Tetrafluoroethylene', { from: ['r22'], by: ['gtceu:chemical_reactor'], sub: 'Pyrolysis' }),
         n('hcl', 8, 0.75, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { kind: 'by', from: ['r22'], end: 'PVC, epoxy', sub: 'Both steps leave it: PVC, epoxy' }),
         n('ptfe', 10, -0.75, F('gtceu:polytetrafluoroethylene'), 'PTFE', {
@@ -205,6 +211,7 @@ export default {
     },
     rocket: {
       name: 'Rocket parts',
+      line: 'hvoil',
       nodes: [
         n('fiberglass', 0, -1.5, I('gcyr:fiberglass_foil'), 'Fiberglass Foil', { kind: 'raw' }),
         n('epoxy', 0, 0, F('gtceu:epoxy'), 'Epoxy', { kind: 'raw', sub: 'Large chemical reactor' }),
@@ -231,6 +238,7 @@ export default {
     },
     sbr: {
       name: 'Synthetic rubber',
+      line: 'hvoil',
       nodes: [
         n('ethylene2', 0, -0.75, F('gtceu:ethylene'), 'Ethylene', { kind: 'raw' }),
         n('benzene2', 0, 0.75, F('gtceu:benzene'), 'Benzene', { kind: 'raw' }),
