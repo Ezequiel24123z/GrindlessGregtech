@@ -257,8 +257,11 @@ function tpRules(rec, n, output, cls, cfg) {
   const isHull = HULL_RE.test(output);
   const own = cls === 'controller' || cls === 'hatch' || cls === 'single' || cls === 'part';
   const complexPart = cls === 'part' && !BULK_PART.test(String(output).replace(/^[a-z0-9_]+:/, ''));
+  // an era's casing family is its bootstrap material, like its hull: the era's own machines are bodied in it, so it is made before
+  // the era's hatches and components exist, on the previous tier (docs/quality/structures.md, "Bootstrap bodies")
+  const family = matchesAny(cfg.familyCasings, output);
 
-  const floor = own ? n : comp ? n - 1 : null;
+  const floor = own ? (family ? n - 1 : n) : comp ? n - 1 : null;
   if (floor !== null) {
     const low = rec.items.filter((i) => { const c = tierComponent(i.id); return c && c.tier < floor; });
     if (low.length) v.push(['T-COMP', `no tier component below ${TIER_NAMES[floor]} (${low.map((i) => i.id).join(', ')})`]);
@@ -283,7 +286,7 @@ function tpRules(rec, n, output, cls, cfg) {
   if (hulls.length) v.push(['T-HULL', `a ${TIER_NAMES[hullN]} machine hull (has ${hulls.map((m) => m[0]).join(', ')})`]);
 
   if (rec.eut !== null && rec.eut !== undefined) {
-    const lowered = comp || isHull || HATCH_2A_RE.test(output) && TIER_PREFIX.get(HATCH_2A_RE.exec(output)[1]) === n || matchesAny(cfg.voltBootstrap, output, rec.id);
+    const lowered = comp || isHull || family || HATCH_2A_RE.test(output) && TIER_PREFIX.get(HATCH_2A_RE.exec(output)[1]) === n || matchesAny(cfg.voltBootstrap, output, rec.id);
     const barTier = Math.min(lowered ? n - 1 : n, 14);
     const bar = vaOf(barTier);
     if (rec.eut < bar) v.push(['T-VOLT', `EU/t >= ${bar} (VA of ${TIER_NAMES[barTier]}), has ${rec.eut}`]);

@@ -18,8 +18,10 @@
   const MC = G.memoriesCryostat || (G.memoriesCryostat = {})
   const LOG = '[grindless/uiv] '
 
-  const CRYO = 'grindless:dilution_cryostat_casing'
-  const CRYO_TEXTURE = 'grindless:block/uiv/dilution_cryostat_casing'
+  // bootstrap bodies (uiv/shapes.js T.BOOT): the millikelvin works makes the mK cryostat module of the dilution cryostat casing, and
+  // the hole burner sits on the same chain, so both stand on the ZPM cryostat casing
+  const CRYO = 'grindless:cryostat_casing'
+  const CRYO_TEXTURE = 'grindless:block/zpm/cryostat_casing'
 
   MC.table = 'kubejs/data/grindless/tables/memories_cryostat.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)

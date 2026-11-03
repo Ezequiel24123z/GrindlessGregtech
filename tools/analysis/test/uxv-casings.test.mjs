@@ -42,13 +42,14 @@ test('names and two tooltip lines exist in English only', () => {
 
 test('new casings are machine recipes at their machine voltage, never crafting-table', () => {
   assert.doesNotMatch(server, /shaped|shapeless|event\.shaped|event\.recipes\.minecraft/);
-  const expect = { gum_metal_casing: ['assembler', 'UXV_EUT'], mu_metal_shield_casing: ['assembler', 'UXV_EUT'], pulsed_field_casing: ['naquadria_magnets', 'UEV_EUT'], pasta_containment_casing: ['assembler', 'UXV_EUT'] };
+  const expect = { gum_metal_casing: ['assembler', 'UXV_EUT'], mu_metal_shield_casing: ['assembler', 'UXV_EUT'], pulsed_field_casing: ['naquadria_magnets', 'UIV_EUT'], pasta_containment_casing: ['assembler', 'UXV_EUT'] };
   for (const n of NEW) {
     const r = recipeOf(n);
     assert.equal(r.type, expect[n][0], n);
     assert.equal(r.eut, expect[n][1], n);
   }
-  assert.match(server, /UEV_EUT = 7864320/);
+  // the family casings are UXV's bootstrap material, held to VA[UIV] (recipe_quality.json familyCasings): the magnet works on two UEV hatches
+  assert.match(server, /UIV_EUT = 31457280/);
   assert.match(server, /UXV_EUT = 125829120/);
   assert.equal(VA_UXV, 15 * 2 ** 23);
   assert.equal(VA_UEV, 15 * 2 ** 19);

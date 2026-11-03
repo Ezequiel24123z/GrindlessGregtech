@@ -457,6 +457,62 @@
       "note": "Machine 8. UIV voltage on two UEV hatches (the hull is UIV; the UIV hatch needs the mainframe these machines make)."
     },
     {
+      "id": "gtceu:powder_bed_printer@uiv2",
+      "machine": "gtceu:powder_bed_printer",
+      "types": [
+        "gtceu:powder_bed_fusion"
+      ],
+      "energy": {
+        "voltage": 8388608,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_4a",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B16",
+      "note": "The UV printer on two UEV hatches runs UIV voltage (GTM 7.5.3's two-hatch rule): the rhea casing, UIV's structural casing, is printed before any UIV hatch exists."
+    },
+    {
+      "id": "gtceu:naquadria_magnet_works@uiv2",
+      "machine": "gtceu:naquadria_magnet_works",
+      "types": [
+        "gtceu:naquadria_magnets"
+      ],
+      "energy": {
+        "voltage": 8388608,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_4a",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B16",
+      "note": "The magnet works on two UEV hatches runs UIV voltage (two-hatch rule): the MH field casing and UXV's pulsed field casing are wound before any UIV hatch exists."
+    },
+    {
       "machine": "gtceu:polarised_proton_source",
       "types": [
         "gtceu:proton_polarisation"

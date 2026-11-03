@@ -81,6 +81,12 @@
  "voltBootstrap": [
   "^gtceu:(uhv|uev|uiv|uxv|opv|max)_energy_(input|output)_hatch_(4|16|64)a$"
  ],
+ "_familyCasings": "Batch 16 (docs/quality/structures.md, Bootstrap bodies): an era's casing family is its bootstrap material, like its hull. The era's own machines are bodied in it, so it is made before the era's hatches and components exist: T-VOLT holds it to VA[N-1] and T-COMP to components of tier N-1 and above. Without this, UIV's family needed UIV hatches and components made by the very machines it bodies, and the era deadlocked (reachability on dump 1cfe9942785b).",
+ "familyCasings": [
+  "^grindless:(sic_composite|hftacn_lining|superhydride_magnet|photonic|degenerate_containment)_casing$",
+  "^grindless:(rhea|mh_field|multilayer_optics|dilution_cryostat)_casing$",
+  "^grindless:(gum_metal|mu_metal_shield|pulsed_field|pasta_containment)_casing$"
+ ],
  "_circuitTier": "Concrete circuit items our recipes use and the tier of the #gtceu:circuits/<tier> tag that lists each (native dump dump-uxv-b5m2 tags.json, targeted search); tag inputs (#gtceu:circuits/<tier>) need no entry. voltBootstrap: the multi-amp energy hatches only run at tier N once the tier-N 2 A hatch exists, so like the 2 A hatches they are built at VA[N-1]. ownedPatterns: ids that count as ours without a GTM recipe (gtceu tier components of UHV and above).",
  "circuitTier": {
   "gtceu:wetware_processor_mainframe": "uhv",
@@ -130,7 +136,6 @@
   "grindless:assembler/mh_laminate|grindless:mh_laminated_yarn": ["C-COMPLEX"],
   "grindless:assembler/neon_moderator_cartridge|grindless:neon_moderator_cartridge": ["C-COMPLEX"],
   "grindless:assembler/driver_ring_casing|grindless:driver_ring_casing": ["P-DOMAIN", "T-COMP"],
-  "grindless:assembler/photonic_casing|grindless:photonic_casing": ["T-COMP"],
   "grindless:assembler/polar_cap_electrode|grindless:polar_cap_electrode": ["C-COMPLEX"],
   "grindless:assembler/ps_cooling_laser|grindless:ps_cooling_laser": ["C-COMPLEX"],
   "grindless:assembler/pumped_edfa|grindless:pumped_edfa": ["C-COMPLEX"],

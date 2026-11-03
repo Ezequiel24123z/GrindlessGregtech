@@ -3,9 +3,10 @@
 // uxv_fusion_casing is a row of tables/fusion_mk6.json. No Vela or Cas A product goes in: these bodies are built before Vela
 // (docs/eras/uxv.md, bootstrap check), so the pasta casing takes the UIV field generator and the pulsed field casing the UIV emitter.
 // The mu-metal casing is an assembler recipe because the nitride magnet works holds only two items beside its circuit.
-// The naquadria magnet works runs at VA[UEV] (its recipes sit at or under V[UEV]); the assembler at VA[UXV].
+// The family casings are UXV's bootstrap material (tools/analysis/recipe_quality.json familyCasings): the pulsed field casing is wound at
+// VA[UIV] on the naquadria magnet works with two UEV hatches (the two-hatch rule); the assembler rows run at VA[UXV].
 global.grindless.recipes('uxv/casings', function (event) {
-  var UEV_EUT = 7864320
+  var UIV_EUT = 31457280
   var UXV_EUT = 125829120
 
   event.recipes.gtceu.assembler('grindless:gum_metal_casing')
@@ -26,7 +27,7 @@ global.grindless.recipes('uxv/casings', function (event) {
     .circuit(15)
     .itemInputs('12x grindless:mh_winding', '6x grindless:ga2o3_power_die', '3x grindless:finemet_core', '6x grindless:gum_metal_billet', '4x gtceu:uiv_emitter')
     .itemOutputs('12x grindless:pulsed_field_casing')
-    .EUt(UEV_EUT)
+    .EUt(UIV_EUT)
     .duration(700)
 
   event.recipes.gtceu.assembler('grindless:pasta_containment_casing')

@@ -855,10 +855,35 @@
     }
   }
 
+  // Bootstrap swaps (docs/quality/structures.md, "Bootstrap bodies"): a machine whose product a UIV casing's chain needs holds the
+  // previous era's casing of the same job in its place (field: superhydride magnet; optics: photonic; cryo: the ZPM cryostat). Found
+  // with reachability on the batch 16 dump, the casings swapped: the droplet radiator works (M), the femtosecond writer and TFLN fab
+  // (the multilayer optics of the UIV sensor chain), the millikelvin works and spectral hole burner (the mK cryostat module, M) and the
+  // STM cell (cryo).
+  var BOOT_FIELD = { 'grindless:mh_field_casing': 'grindless:superhydride_magnet_casing' }
+  var BOOT_OPTICS = { 'grindless:multilayer_optics_casing': 'grindless:photonic_casing' }
+  var BOOT_CRYO = { 'grindless:dilution_cryostat_casing': 'grindless:cryostat_casing' }
+  function both(a, b) {
+    var o = {}
+    Object.keys(a).forEach(function (k) { o[k] = a[k] })
+    Object.keys(b).forEach(function (k) { o[k] = b[k] })
+    return o
+  }
+  T.BOOT = {
+    droplet_radiator_works: BOOT_FIELD,
+    femtosecond_writer: BOOT_OPTICS,
+    tfln_fab: BOOT_OPTICS,
+    millikelvin_cryostat_works: both(BOOT_FIELD, BOOT_CRYO),
+    spectral_hole_burner: both(BOOT_FIELD, BOOT_CRYO),
+    stm_lithography_cell: BOOT_CRYO
+  }
+
   // build(Pat, name, casing, parts) -> the structure spec of a layout
   T.build = function (Pat, name, casing, parts) {
     var lay = L[name]()
     lay.pal.F = casing
+    var swap = T.BOOT[name]
+    if (swap) Object.keys(lay.pal).forEach(function (ch) { if (swap[lay.pal[ch]]) lay.pal[ch] = swap[lay.pal[ch]] })
     lay.parts = parts
     return T.spec(Pat, lay)
   }

@@ -12,9 +12,11 @@ global.grindless.recipes('uev/casings', function (event) {
     .EUt(UEV_EUT)
     .duration(400)
 
+  // no bonded Fe16N2 magnets (batch 16): their carbonyl iron comes from Barnard b only, and Earth's and Alpha Centauri's UEV
+  // machines are bodied in this casing (reachability's era rule); the field is the LaH10 winding's
   event.recipes.gtceu.naquadria_magnets('grindless:superhydride_magnet_casing')
     .circuit(11)
-    .itemInputs('64x gtceu:lay_superhydride_single_wire', '16x grindless:sic_sic_plate', '8x grindless:bonded_fe16n2_magnet', '1x gtceu:uev_sensor')
+    .itemInputs('64x gtceu:lay_superhydride_single_wire', '16x grindless:sic_sic_plate', '1x gtceu:uev_sensor')
     .itemOutputs('16x grindless:superhydride_magnet_casing')
     .EUt(UEV_EUT)
     .duration(600)

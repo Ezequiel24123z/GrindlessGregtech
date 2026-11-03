@@ -78,11 +78,20 @@ Casings from UEV on:
 - **Taught.** Each era chapter teaches its casings: what they are for and how they are made (principle 5).
 - **Bootstrap bodies.** A machine whose product a family casing needs, directly or through another machine, never contains
   that casing anywhere: body, controller booth, accent bands, rings. Otherwise the era deadlocks. Such a machine keeps every
-  family casing its chain allows and takes a pre-era stand-in for the rest, chosen to fit the casing's job. UEV (batch 16)
-  uses its own GTM body for structural, the high-temperature smelting casing for thermal, and the UHV field ring casing for
-  field. The set is found with reachability on the dump, with the casings swapped. UEV's set: the CVI furnace and SiC fibre
-  plant (R, H, M), the electron beam furnace (R, M), the nitride magnet works and the Barnard core drill (M); the megabar press
-  trades M for the HfTaCN lining. UIV: the levitation melter. OpV: the field-frozen press.
+  family casing its chain allows and takes a stand-in for the rest, chosen to fit the casing's job: the previous era's family
+  casing of the same job where one exists, else a pre-era casing. The set is found with reachability on the dump, with the
+  casings swapped.
+  - UEV: the CVI furnace and SiC fibre plant (R, H, M), and the electron beam furnace (R, M), take their own GTM body, the
+    high-temperature smelting casing and the UHV field ring casing. The megabar press trades M for the HfTaCN lining.
+  - UIV: the levitation melter. Field, optics and cryo stand-ins (UEV superhydride magnet, UEV photonic, ZPM cryostat) go in the
+    droplet radiator works, the TFLN fab, the femtosecond writer, the millikelvin works, the spectral hole burner and the STM
+    cell (`uiv/shapes.js` `T.BOOT`).
+  - OpV: the field-frozen press.
+- **Family casings are bootstrap material.** Like a hull, an era's family casing is made before the era's own hatches and
+  components exist. Recipe quality holds it to VA[N-1] and to components of tier N-1 and up (`recipe_quality.json`
+  `familyCasings`). A machine may reach VA[N] on two tier N-1 hatches (GTM's two-hatch rule; the reachability tiers model it as
+  `@<tier>2` variants). A casing must never take a product that only exists after a later site of its own era: the
+  superhydride magnet casing lost its bonded Fe16N2 magnets (Barnard b) because Earth's UEV machines are bodied in it.
 
 Constraints that still hold:
 

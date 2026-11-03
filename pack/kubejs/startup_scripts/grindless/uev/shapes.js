@@ -75,8 +75,8 @@
   // Bootstrap bodies (docs/quality/structures.md, "Bootstrap bodies"): a machine whose product a family casing needs, directly or through
   // another machine, never contains that casing, or the era deadlocks. Each forbidden letter takes a pre-UEV stand-in: R the machine's
   // own GTM body, H the high-temperature smelting casing, M the UHV field ring casing. The set, from reachability with the casings
-  // swapped (batch 16): the CVI furnace and SiC fibre plant (R, H, M), the electron beam furnace (R, M), the nitride magnet works
-  // and the Barnard core drill (M); the megabar press takes the HfTaCN lining for M.
+  // swapped (batch 16): the CVI furnace and SiC fibre plant (R, H, M) and the electron beam furnace (R, M); the megabar press takes the
+  // HfTaCN lining for M. (The magnet casing takes no Barnard product, so the magnet works and the Barnard drill keep it.)
   T.BOOTSTRAP = { H: 'gtceu:high_temperature_smelting_casing', M: 'grindless:field_ring_casing' }
   T.bootstrap = function (primary, letters) {
     var o = {}

@@ -19,10 +19,12 @@
   const TF = G.tflnFemtosecond || (G.tflnFemtosecond = {})
   const LOG = '[grindless/uiv] '
 
-  const PHOTONIC = 'grindless:multilayer_optics_casing'
-  const PHOTONIC_TEXTURE = 'grindless:block/uiv/multilayer_optics_casing'
-  const UEV = 'grindless:multilayer_optics_casing'
-  const UEV_TEXTURE = 'grindless:block/uiv/multilayer_optics_casing'
+  // bootstrap bodies (uiv/shapes.js T.BOOT): the TFLN fab and the femtosecond writer feed the UIV sensor of the multilayer optics
+  // casing, so both stand on UEV's photonic casing
+  const PHOTONIC = 'grindless:photonic_casing'
+  const PHOTONIC_TEXTURE = 'grindless:block/uev/photonic_casing'
+  const UEV = 'grindless:photonic_casing'
+  const UEV_TEXTURE = 'grindless:block/uev/photonic_casing'
 
   TF.table = 'kubejs/data/grindless/tables/tfln_femtosecond.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
