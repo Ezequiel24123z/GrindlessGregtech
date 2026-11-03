@@ -6,13 +6,14 @@
 //
 //   gtceu:regolith_excavator   VEIN DRILL FAMILY, step 12 (after IV's Mercury vein drill). NASA's RASSOR: two counter-rotating bucket
 //                              drums (tungsten steel gearboxes) on tungsten steel frame arms either side of a brick chassis, so the
-//                              digging has no net reaction force in Mercury's low gravity. 9 wide x 5 deep x 3 high.
+//                              digging has no net reaction force in Mercury's low gravity. Here a bucket-wheel excavator on crawler
+//                              tracks (a gearbox wheel on a frame boom with a pipe conveyor, a cab and a counterweight), 9 x 8 x 17.
 //   gtceu:regolith_excavation  its recipe type (EU in): 1 bucket drum (worn by chance) + IV's iridosmine vein sample (never used up)
 //                              -> 64 Mercury regolith. The only maker of Mercury regolith.
-//   gtceu:solar_vapour_furnace Vacuum pyrolysis of regolith under 6.7 suns: two rows of five heliostat mirrors on tungsten steel posts
+//   gtceu:solar_vapour_furnace Vacuum pyrolysis of regolith under 6.7 suns: seven rows of seven heliostat mirrors on tungsten steel posts
 //                              throw the light onto a 5 x 5 tungsten steel firebox receiver over a brick vaporisation chamber; the
 //                              condenser plates (IV's night-sky radiators) on its flanks catch each fraction at its own temperature,
-//                              and the regolith crucible (heatproof casing) stands in the middle of the vacuum. 9 x 9 x 5.
+//                              and the regolith crucible (heatproof casing) stands in the middle of the vacuum. 15 x 11 x 21.
 //   gtceu:solar_vaporisation   its recipe type (EU in), Mercury's day side only (.daytime(false), IV's solar field rule). Circuit 1
 //                              low (1,400 K), 2 high (2,300 K), 3 sinter a crucible lining from the residue.
 //
@@ -96,22 +97,59 @@
     return Pat.oneOf.apply(null, options)
   }
 
-  //   G bucket drum (tungsten steel gearbox)   F drum arm (tungsten steel frame)   B heat-shield brick   P the conveyor (pipe casing)
-  //   X chassis: bricks or a part   S controller
+  //   G bucket-wheel ring (tungsten steel gearbox)   F frame (spokes, slewing tower, boom, stays)   B heat-shield brick (tracks, cab)
+  //   P the boom conveyor (pipe casing)   H heatproof counterweight   X chassis deck: bricks or a part   S controller
+  // A bucket-wheel excavator, 9 wide x 8 high x 17 long: a crawler track either side, a chassis deck, an operator cab in front, a
+  // slewing tower carrying the boom, a conveyor on the boom, the bucket wheel at the back and a counterweight behind the tower.
+  function excavatorCell(r, z, c) {
+    var dx = c - 4
+    var ch = ' '
+    if (z === 0) {
+      var d = Math.round(Math.sqrt(dx * dx + (r - 4) * (r - 4)))
+      if (d === 3) return 'G'
+      if ((r === 4 && Math.abs(dx) <= 2) || (dx === 0 && Math.abs(r - 4) <= 2)) return 'F'
+      return ' '
+    }
+    if (c === 4 && r === 4 && z <= 8) return 'F'
+    if (c === 4 && r === 3 && z >= 1 && z <= 8) return 'P'
+    if (z === 8 && r >= 2 && r <= 4 && (c === 3 || c === 5)) return 'F'
+    if (z === 8 && c === 4 && r === 2) return 'F'
+    if (c === 4 && z >= 9 && z <= 11 && r === 13 - z) return 'F'
+    if (z >= 14 && c >= 3 && c <= 5 && r >= 1 && r <= 3) {
+      if (z === 16 || c !== 4 || r === 3) return 'B'
+      return ' '
+    }
+    if (r === 1 && c >= 3 && c <= 5 && z >= 5 && z <= 13) return 'X'
+    if (r >= 2 && r <= 3 && c >= 3 && c <= 5 && z >= 10 && z <= 12) return 'H'
+    if ((c === 1 || c === 7) && z >= 2 && z <= 14) {
+      if (r === 0) return 'B'
+      if (r === 1 && z >= 4 && z <= 12) return 'B'
+    }
+    if (r === 0 && c >= 2 && c <= 6 && (z === 5 || z === 11)) return 'B'
+    return ch
+  }
+
+  function layMercury(width, height, depth, f) {
+    var slices = []
+    var mid = (width - 1) / 2
+    for (var z = 0; z < depth; z++) {
+      var rows = []
+      for (var r = 0; r < height; r++) {
+        var line = ''
+        for (var c = 0; c < width; c++) {
+          line += z === depth - 1 && r === 1 && c === mid ? 'S' : f(r, z, c)
+        }
+        rows.push(line)
+      }
+      slices.push(rows)
+    }
+    return slices
+  }
+
   HM.machines.excavator.spec = {
-    slices: [
-      // back: the chassis' back wall
-      ['  BBBBB  ', '  XXXXX  ', '  BBBBB  '],
-      // the drums on their arms either side, the conveyor running through the chassis
-      ['G BBBBB G', 'GFXPPPXFG', '  FHBHF  '],
-      ['G BBBBB G', 'GFXPPPXFG', '  FHBHF  '],
-      ['G BBBBB G', 'GFXPPPXFG', '  FHBHF  '],
-      // front: the controller in the chassis' front wall
-      ['  BBBBB  ', '  XXSXX  ', '  BBBBB  ']
-    ],
+    slices: layMercury(9, 8, 17, excavatorCell),
     symbols: {
       S: Pat.controller(),
-      // 15 chassis cells: 3 to 6 are parts, the rest bricks
       X: body(HM.machines.excavator),
       B: Pat.block(BRICK),
       G: Pat.block(GEARBOX),
@@ -123,22 +161,42 @@
 
   //   M heliostat mirror   F tungsten steel frame (posts)   B heat-shield brick   X chamber wall: bricks or a part   N condenser plate
   //   (night-sky radiator)   C receiver (tungsten steel firebox casing)   H the regolith crucible (heatproof casing)   # vacuum
-  var EMPTY = ['         ', '         ', '         ', '         ', '         ']
   var CHAMBER = ['BBBBBBBBB', ' NX###XN ', ' NX###XN ', '  B###B  ', '  CCCCC  ']
+  var CHAMBER_SLICES = [
+    ['  BBBBB  ', '  XXXXX  ', '  XXXXX  ', '  BBBBB  ', '  CCCCC  '],
+    CHAMBER,
+    ['BBBBBBBBB', ' NX#H#XN ', ' NX###XN ', '  B###B  ', '  CCCCC  '],
+    CHAMBER,
+    ['  BBBBB  ', '  XXSXX  ', '  XXXXX  ', '  BBBBB  ', '  CCCCC  ']
+  ]
+
+  // 15 wide x 11 high x 21 deep: a heliostat bed (seven rows of seven mirrors on frame posts) throws the light over a brick shield onto
+  // the 5 x 5 firebox receiver of the 9 x 5 x 5 vaporisation chamber (the crucible inside, condenser plates on its flanks and wings),
+  // under a firebox concentrator tower with a frame crown.
+  function furnaceCell(r, z, c) {
+    if (z <= 12 && z % 2 === 0) {
+      if (c % 2 === 1 && c >= 1 && c <= 13) return r <= 1 ? 'F' : (r === 2 ? 'M' : ' ')
+      return ' '
+    }
+    if (z === 15 && c >= 3 && c <= 11 && r <= 2) return 'B'
+    if ((c === 0 || c === 14) && z <= 14 && r === 0) return 'B'
+    if ((c === 3 || c === 11) && (z === 16 || z === 20) && r >= 5 && r <= 8) return 'F'
+    if (z >= 16) {
+      var cc = c - 3
+      if (cc >= 0 && cc <= 8 && r <= 4) return CHAMBER_SLICES[z - 16][r].charAt(cc)
+      if ((c === 2 || c === 12) && z >= 17 && z <= 19 && r >= 1 && r <= 3) return 'N'
+      var dx = Math.abs(c - 7)
+      var dz = Math.abs(z - 18)
+      if (dx <= 1 && dz <= 1) {
+        if (r >= 5 && r <= 9) return dx === 0 && dz === 0 ? ' ' : 'C'
+        if (r === 10) return 'F'
+      }
+    }
+    return ' '
+  }
+
   HM.machines.furnace.spec = {
-    slices: [
-      // back: the two rows of heliostats, with the light path in front of each
-      ['F F F F F', 'M M M M M', '         ', '         ', '         '],
-      EMPTY,
-      ['F F F F F', 'M M M M M', '         ', '         ', '         '],
-      EMPTY,
-      // the vaporisation chamber: its back wall, three slices with the condenser plates and the crucible, the front wall
-      ['  BBBBB  ', '  XXXXX  ', '  XXXXX  ', '  BBBBB  ', '  CCCCC  '],
-      CHAMBER,
-      ['BBBBBBBBB', ' NX#H#XN ', ' NX###XN ', '  B###B  ', '  CCCCC  '],
-      CHAMBER,
-      ['  BBBBB  ', '  XXSXX  ', '  XXXXX  ', '  BBBBB  ', '  CCCCC  ']
-    ],
+    slices: layMercury(15, 11, 21, furnaceCell),
     symbols: {
       S: Pat.controller(),
       // 31 wall cells: 4 to 8 are parts, the rest bricks

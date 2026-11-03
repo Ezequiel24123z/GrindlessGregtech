@@ -48,7 +48,7 @@
         ['tooltip.grindless.proxima_base_casing.0', 'A biocement pad faced with flare shield panels on a naquadah alloy frame.'],
         ['tooltip.grindless.proxima_base_casing.1', 'The pad of the cold-trap drill.'],
         ['emi.grindless.info.proxima_base_casing.0',
-            'A structure block: biocemented regolith faced with flare shield panels on a naquadah alloy frame, made in the Assembler. The Cold-Trap Drill stands on a 5x5 pad of it (up to 23 blocks; the hatches take the rest). The first pad comes from lunar regolith cemented in the Biomining Heap, which is built from inert casing.']
+            'A structure block: biocemented regolith faced with flare shield panels on a naquadah alloy frame, made in the Assembler. The Cold-Trap Drill stands on a 7x7 pad of it (up to 47 blocks; the hatches take the rest). The first pad comes from lunar regolith cemented in the Biomining Heap, which is built from inert casing.']
     ]
 
     ClientEvents.lang('en_us', function (event) {

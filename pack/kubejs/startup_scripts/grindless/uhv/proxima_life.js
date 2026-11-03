@@ -24,8 +24,9 @@
 //   materials far_red_pigment, clarified_xeno_lysate (liquids)
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the facility is 9 x 5 x 9 (two laminated-glass airlock walls
 // with a door, a heatproof autoclave-incinerator at the back), the rover bay 7 x 5 x 7 (a computer-casing console), the greenhouse
-// 9 x 6 x 9 (a soil bed, glass walls from row 2, GT lamps), the plant 7 x 5 x 7 (four PTFE columns round a clean reactor), the vat
-// 5 x 5 x 5 (a tungstensteel core and a laminated-glass flare window in the front wall).
+// 9 x 6 x 9 (a soil bed, glass walls from row 2, GT lamps), the plant 11 x 7 x 11 (four PTFE lysis tanks round a clean reactor), the vat
+// 11 x 7 x 9 (a tungstensteel core in a clean paddle ring and a laminated-glass flare window in the front wall; BSL-4 body, because the
+// Proxima base casing is made from line 15's flare shield panel, the vat's own product).
 // Textures: tools/assets/Build-UHVProximaLifeTextures.ps1. Names: client_scripts/grindless/uhv_proxima_life_lang.js.
 // Published: global.grindless.proximaLife (.machines, .ids, .table; the cultures for UHV-B5's biomining heap).
 (function () {
@@ -142,7 +143,7 @@
       texture: BSL4_TEXTURE,
       // items in: the mushrooms, the caustic and the circuit; fluids: the lysate or pigment and its reagent in, the residue out
       maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 2, fluidsOut: 2 },
-      width: 7, depth: 7, height: 5
+      width: 11, depth: 11, height: 7
     },
     vat: {
       name: 'radiotrophic_vat',
@@ -154,7 +155,7 @@
       texture: BSL4_TEXTURE,
       // items in: the culture, the biomass and the circuit; fluid in: water; out: the melanised biomass and the spent medium
       maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
-      width: 5, depth: 5, height: 5
+      width: 11, depth: 9, height: 7
     }
   }
 
@@ -209,20 +210,24 @@
     return r >= 2 && !corner ? 'L' : null
   }
 
-  // four PTFE columns (P) round a clean-casing reactor (C)
+  // four lysis tanks (PTFE columns, P) round a clean-casing reactor (C) on the hall's axis: a 3x3 plinth with a 1x1 stack
   function plantInner(r, si, c) {
-    if (Math.abs(c - 3) === 2 && Math.abs(si - 3) === 2) return 'P'
-    if (c === 3 && si === 3 && r <= 2) return 'C'
+    var dc = Math.abs(c - 5)
+    var ds = Math.abs(si - 5)
+    if (dc === 3 && ds === 3) return 'P'
+    if (dc <= 1 && ds <= 1) return r <= 2 || (dc === 0 && ds === 0) ? 'C' : '#'
     return '#'
   }
 
-  // the tungstensteel core (T) of the vat; the flare window (L) in the front wall
+  // the tungstensteel core (T) of the vat in a clean-casing paddle ring (C); the flare window (L) spans the front wall
   function vatInner(r, si, c) {
-    return c === 2 && si === 2 ? 'T' : '#'
+    if (c === 5 && si === 4) return 'T'
+    if (r === 1 && Math.abs(c - 5) <= 1 && Math.abs(si - 4) <= 1) return 'C'
+    return '#'
   }
 
   function vatWall(r, si, c) {
-    return si === 4 && r >= 2 && c >= 1 && c <= 3 ? 'L' : null
+    return si === 8 && r >= 3 && r <= 4 && c >= 2 && c <= 8 ? 'L' : null
   }
 
   function specOf(m, inner, wall, parts) {
