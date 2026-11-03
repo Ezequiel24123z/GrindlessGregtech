@@ -295,9 +295,9 @@
  },
  "gtceu:crystal_growth_furnace": {
   "v": [],
-  "bt": 7,
-  "ds": 0.234,
-  "c": 219
+  "bt": 8,
+  "ds": 0.254,
+  "c": 695
  },
  "gtceu:cvi_furnace": {
   "v": [],
@@ -818,8 +818,8 @@
  "gtceu:mbe_reactor": {
   "v": [],
   "bt": 7,
-  "ds": 0.347,
-  "c": 263
+  "ds": 0.448,
+  "c": 436
  },
  "gtceu:mega_chemical_complex": {
   "v": [],
@@ -1009,9 +1009,9 @@
  },
  "gtceu:nuclear_clock_lab": {
   "v": [],
-  "bt": 7,
-  "ds": 0.361,
-  "c": 253
+  "bt": 8,
+  "ds": 0.354,
+  "c": 484
  },
  "gtceu:optical_ground_station": {
   "v": [],
@@ -1123,9 +1123,9 @@
  },
  "gtceu:photonic_foundry": {
   "v": [],
-  "bt": 7,
-  "ds": 0.404,
-  "c": 375
+  "bt": 8,
+  "ds": 0.45,
+  "c": 887
  },
  "gtceu:photonic_integration_hall": {
   "v": [],
@@ -1219,7 +1219,7 @@
  },
  "gtceu:primordial_fusion_torus": {
   "v": [],
-  "bt": 7,
+  "bt": 6,
   "ds": 0.448,
   "c": 4470
  },
@@ -1639,9 +1639,9 @@
  },
  "gtceu:transuranium_facility": {
   "v": [],
-  "bt": 7,
-  "ds": 0.415,
-  "c": 360
+  "bt": 8,
+  "ds": 0.276,
+  "c": 897
  },
  "gtceu:tritium_removal_facility": {
   "v": [],

@@ -41,6 +41,7 @@
   const BONDER = 'gtceu:stainless_steel_gearbox'
   const FILTER = 'gtceu:filter_casing'
   const GLASS = 'gtceu:laminated_glass'
+  const BENCH = 'gtceu:computer_casing'
 
   PH.table = 'kubejs/data/grindless/tables/photonics.json'
   PH.reactorNoVoiding = 'grindless.machine.mbe_reactor.no_voiding'
@@ -83,7 +84,7 @@
       // items in: the InP wafer, four effusion-cell charges and the circuit; out: the wafer and the scraped arsenic;
       // fluid in: the cryoshroud's liquid nitrogen; out: the boiled-off nitrogen
       maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-      width: 7, height: 5, depth: 9
+      width: 11, height: 5, depth: 11
     },
     foundry: {
       name: 'photonic_foundry',
@@ -92,11 +93,12 @@
       dataKey: 'grindless_photonic_foundry',
       lang: 'Photonic Foundry',
       casing: CLEAN, accent: UV_CASING, frame: 'stainless_steel',
+      roof: function (si, c) { return si % 2 === 1 ? 'P' : (c % 5 === 0 ? 'A' : 'F') },
       // items in: up to four parts, a neutraliser and the circuit (the optical processor takes four kinds and the circuit);
       // out: the product, the reused donor wafer and the fluorite; fluids in: ultrapure water, oxygen, HF (or the argon charge);
       // out: the rinse water
       maxIO: { itemsIn: 6, itemsOut: 3, fluidsIn: 3, fluidsOut: 1 },
-      width: 11, height: 5, depth: 9
+      width: 21, height: 7, depth: 11
     }
   }
 
@@ -107,7 +109,7 @@
     var ez = si === 0 || si === m.depth - 1
     var top = r === m.height - 1
     if ((ex && ez) || (top && (ex || ez))) return 'Q'
-    if (top) return si % 3 === 1 ? 'A' : 'F'
+    if (top) return m.roof ? m.roof(si, c) : (si % 3 === 1 ? 'A' : 'F')
     if (r === 1) return 'A'
     return (ez ? c : si) % 3 === 0 ? 'F' : 'L'
   }
@@ -137,23 +139,34 @@
     return slices
   }
 
-  // effusion cells (T) across the back; the cryoshroud (K) on both sides of the beam path (column 3), which is vacuum; a transfer-arm
-  // gearbox (B) on each side of the load lock at the front
+  // a cluster tool: a hub chamber in the middle with its substrate stage (B), ringed by the liquid-nitrogen cryoshroud (K, open at
+  // the load lock) and, round the back and the sides, the effusion cells (T); a transfer-arm gearbox (B) either side of the load lock
   function reactorInner(r, si, c) {
-    if (si === 1) return 'T'
-    if (c === 2 || c === 4) return 'K'
-    if (r === 2 && si === 6 && (c === 1 || c === 5)) return 'B'
+    if (r > 3) return '#'
+    var dx = Math.abs(c - 5)
+    var ring = Math.max(dx, Math.abs(si - 5))
+    if (ring === 0 && r === 1) return 'B'
+    if (ring === 2) return si === 7 && dx === 0 ? '#' : 'K'
+    if (ring === 3 && si <= 5 && r <= 2) return 'T'
+    if (r === 1 && si === 8 && dx === 1) return 'B'
     return '#'
   }
 
-  // a filter ceiling in strips (P); the wafer bonders (B) on the left, the sputter chamber (T) on the right, both at the back
+  // a clean-room fab hall under a filter ceiling (the roof strips, P), with three glass bays along the back: lithography (an optical
+  // bench, N), etch (a sputter chamber column, T) and wafer bonding (bonders, B)
   function foundryInner(r, si, c) {
-    if (r === 3 && si % 2 === 1) return 'P'
-    if (si >= 2 && si <= 4 && c >= 1 && c <= 3 && r === 1) return 'B'
-    if (si >= 2 && si <= 4 && c >= 7 && c <= 9) return 'T'
+    var starts = [1, 8, 15]
+    for (var i = 0; i < 3; i++) {
+      var s = starts[i]
+      if (si < 1 || si > 3 || c < s || c > s + 4 || r > 3) continue
+      if (r === 3) return 'L'
+      if (c === s || c === s + 4 || si === 1 || si === 3) return r === 1 ? 'F' : 'L'
+      if (i === 0 && r === 1) return 'N'
+      if (i === 1 && c === s + 2) return 'T'
+      if (i === 2 && r === 1) return 'B'
+    }
     return '#'
   }
-
   function specOf(m, inner, parts) {
     return {
       slices: shell(m, inner),
@@ -166,6 +179,7 @@
         T: Pat.block(TUNGSTEN_PIPE),
         K: Pat.block(FROST),
         B: Pat.block(BONDER),
+        N: Pat.block(BENCH),
         P: Pat.block(FILTER),
         L: Pat.block(GLASS),
         '#': Pat.air()
