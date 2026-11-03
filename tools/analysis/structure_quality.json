@@ -49,9 +49,9 @@
  },
  "gtceu:annihilation_engine": {
   "v": [],
-  "bt": 7,
-  "ds": 0.3,
-  "c": 2438
+  "bt": 4,
+  "ds": 0.547,
+  "c": 806
  },
  "gtceu:annihilation_laser_works": {
   "v": [],
@@ -62,8 +62,8 @@
  "gtceu:antihydrogen_foundry": {
   "v": [],
   "bt": 5,
-  "ds": 0.391,
-  "c": 2191
+  "ds": 0.522,
+  "c": 798
  },
  "gtceu:antimatter_trap": {
   "v": [],
@@ -73,9 +73,9 @@
  },
  "gtceu:antiproton_decelerator": {
   "v": [],
-  "bt": 6,
-  "ds": 0.534,
-  "c": 2887
+  "bt": 4,
+  "ds": 0.567,
+  "c": 564
  },
  "gtceu:ark_biosphere": {
   "v": [],
@@ -115,9 +115,9 @@
  },
  "gtceu:barnard_core_drill": {
   "v": [],
-  "bt": 6,
-  "ds": 0.59,
-  "c": 294
+  "bt": 4,
+  "ds": 0.525,
+  "c": 62
  },
  "gtceu:baseline_astrometer": {
   "v": [],
@@ -193,9 +193,9 @@
  },
  "gtceu:carbonyl_refinery": {
   "v": [],
-  "bt": 6,
-  "ds": 0.465,
-  "c": 825
+  "bt": 7,
+  "ds": 0.242,
+  "c": 253
  },
  "gtceu:casimir_array": {
   "v": [],
@@ -278,7 +278,7 @@
  "gtceu:crust_lift": {
   "v": [],
   "bt": 6,
-  "ds": 0.345,
+  "ds": 0.547,
   "c": 465
  },
  "gtceu:cryobot": {
@@ -307,9 +307,9 @@
  },
  "gtceu:cvi_furnace": {
   "v": [],
-  "bt": 8,
-  "ds": 0.326,
-  "c": 776
+  "bt": 6,
+  "ds": 0.368,
+  "c": 286
  },
  "gtceu:debris_harvester": {
   "v": [],
@@ -319,9 +319,9 @@
  },
  "gtceu:decay_heat_vault": {
   "v": [],
-  "bt": 7,
-  "ds": 0.419,
-  "c": 321
+  "bt": 6,
+  "ds": 0.51,
+  "c": 962
  },
  "gtceu:deep_space_antenna": {
   "v": [],
@@ -356,8 +356,8 @@
  "gtceu:droplet_radiator_works": {
   "v": [],
   "bt": 6,
-  "ds": 0.31,
-  "c": 472
+  "ds": 0.571,
+  "c": 1114
  },
  "gtceu:ejecta_knot_sweeper": {
   "v": [],
@@ -367,9 +367,9 @@
  },
  "gtceu:electron_beam_furnace": {
   "v": [],
-  "bt": 8,
-  "ds": 0.433,
-  "c": 1005
+  "bt": 7,
+  "ds": 0.471,
+  "c": 413
  },
  "gtceu:engine_test_stand": {
   "v": [],
@@ -379,9 +379,9 @@
  },
  "gtceu:entanglement_station": {
   "v": [],
-  "bt": 7,
-  "ds": 0.401,
-  "c": 994
+  "bt": 6,
+  "ds": 0.303,
+  "c": 581
  },
  "gtceu:entry_probe_bay": {
   "v": [],
@@ -398,8 +398,8 @@
  "gtceu:ergosphere_probe_bay": {
   "v": [],
   "bt": 7,
-  "ds": 0.477,
-  "c": 282
+  "ds": 0.541,
+  "c": 393
  },
  "gtceu:europium_reductor": {
   "v": [],
@@ -427,9 +427,9 @@
  },
  "gtceu:femtosecond_writer": {
   "v": [],
-  "bt": 4,
-  "ds": 0.322,
-  "c": 597
+  "bt": 6,
+  "ds": 0.49,
+  "c": 1126
  },
  "gtceu:fibre_draw_tower": {
   "v": [],
@@ -487,9 +487,9 @@
  },
  "gtceu:gamma_optics_works": {
   "v": [],
-  "bt": 6,
-  "ds": 0.548,
-  "c": 1384
+  "bt": 4,
+  "ds": 0.541,
+  "c": 435
  },
  "gtceu:gas_giant_siphon": {
   "v": [],
@@ -529,9 +529,9 @@
  },
  "gtceu:hawking_collector": {
   "v": [],
-  "bt": 6,
-  "ds": 0.393,
-  "c": 2164
+  "bt": 5,
+  "ds": 0.513,
+  "c": 598
  },
  "gtceu:heat_source_works": {
   "v": [],
@@ -559,9 +559,9 @@
  },
  "gtceu:helium3_polariser": {
   "v": [],
-  "bt": 8,
-  "ds": 0.439,
-  "c": 746
+  "bt": 7,
+  "ds": 0.423,
+  "c": 202
  },
  "gtceu:helium_refrigerator": {
   "v": [],
@@ -673,9 +673,9 @@
  },
  "gtceu:interstellar_dust_lab": {
   "v": [],
-  "bt": 8,
-  "ds": 0.477,
-  "c": 907
+  "bt": 7,
+  "ds": 0.441,
+  "c": 414
  },
  "gtceu:ion_implanter": {
   "v": [],
@@ -697,15 +697,15 @@
  },
  "gtceu:jet_beam_line": {
   "v": [],
-  "bt": 5,
-  "ds": 0.646,
-  "c": 1542
+  "bt": 4,
+  "ds": 0.606,
+  "c": 430
  },
  "gtceu:kugelblitz_forge": {
   "v": [],
-  "bt": 7,
-  "ds": 0.346,
-  "c": 3146
+  "bt": 5,
+  "ds": 0.44,
+  "c": 1068
  },
  "gtceu:kuiper_interceptor_bay": {
   "v": [],
@@ -770,8 +770,8 @@
  "gtceu:levitation_melter": {
   "v": [],
   "bt": 6,
-  "ds": 0.653,
-  "c": 350
+  "ds": 0.435,
+  "c": 1016
  },
  "gtceu:light_sail_fab": {
   "v": [],
@@ -842,8 +842,8 @@
  "gtceu:megabar_press": {
   "v": [],
   "bt": 7,
-  "ds": 0.52,
-  "c": 934
+  "ds": 0.425,
+  "c": 227
  },
  "gtceu:membrane_line": {
   "v": [],
@@ -889,9 +889,9 @@
  },
  "gtceu:millikelvin_cryostat_works": {
   "v": [],
-  "bt": 7,
-  "ds": 0.335,
-  "c": 544
+  "bt": 5,
+  "ds": 0.403,
+  "c": 1276
  },
  "gtceu:mirror_shell": {
   "v": [],
@@ -967,9 +967,9 @@
  },
  "gtceu:nebula_collector": {
   "v": [],
-  "bt": 6,
-  "ds": 0.589,
-  "c": 490
+  "bt": 5,
+  "ds": 0.507,
+  "c": 449
  },
  "gtceu:neptune_deep_siphon": {
   "v": [],
@@ -1015,9 +1015,9 @@
  },
  "gtceu:nitride_magnet_works": {
   "v": [],
-  "bt": 7,
-  "ds": 0.481,
-  "c": 814
+  "bt": 6,
+  "ds": 0.26,
+  "c": 232
  },
  "gtceu:nuclear_clock_lab": {
   "v": [],
@@ -1178,8 +1178,8 @@
  "gtceu:polarised_proton_source": {
   "v": [],
   "bt": 7,
-  "ds": 0.28,
-  "c": 586
+  "ds": 0.485,
+  "c": 1059
  },
  "gtceu:polarized_fusion_stellarator": {
   "v": [],
@@ -1201,9 +1201,9 @@
  },
  "gtceu:positronium_condensate_lab": {
   "v": [],
-  "bt": 6,
-  "ds": 0.681,
-  "c": 327
+  "bt": 7,
+  "ds": 0.49,
+  "c": 1028
  },
  "gtceu:powder_bed_printer": {
   "v": [],
@@ -1243,15 +1243,15 @@
  },
  "gtceu:pulsar_timing_station": {
   "v": [],
-  "bt": 6,
-  "ds": 0.565,
-  "c": 635
+  "bt": 5,
+  "ds": 0.454,
+  "c": 197
  },
  "gtceu:pulsar_wind_trap": {
   "v": [],
-  "bt": 6,
-  "ds": 0.377,
-  "c": 680
+  "bt": 5,
+  "ds": 0.454,
+  "c": 1210
  },
  "gtceu:pyroprocessing_cell": {
   "v": [],
@@ -1267,9 +1267,9 @@
  },
  "gtceu:quantum_gas_lab": {
   "v": [],
-  "bt": 7,
-  "ds": 0.519,
-  "c": 809
+  "bt": 6,
+  "ds": 0.377,
+  "c": 343
  },
  "gtceu:qubit_fab": {
   "v": [],
@@ -1279,9 +1279,9 @@
  },
  "gtceu:r_process_decompressor": {
   "v": [],
-  "bt": 6,
-  "ds": 0.289,
-  "c": 388
+  "bt": 7,
+  "ds": 0.318,
+  "c": 943
  },
  "gtceu:racetrack_fab": {
   "v": [],
@@ -1393,15 +1393,15 @@
  },
  "gtceu:sic_fibre_plant": {
   "v": [],
-  "bt": 8,
-  "ds": 0.332,
-  "c": 772
+  "bt": 6,
+  "ds": 0.264,
+  "c": 319
  },
  "gtceu:single_crystal_foundry": {
   "v": [],
-  "bt": 9,
-  "ds": 0.373,
-  "c": 770
+  "bt": 6,
+  "ds": 0.272,
+  "c": 269
  },
  "gtceu:slurry_separator": {
   "v": [],
@@ -1418,8 +1418,8 @@
  "gtceu:snspd_foundry": {
   "v": [],
   "bt": 7,
-  "ds": 0.489,
-  "c": 954
+  "ds": 0.406,
+  "c": 398
  },
  "gtceu:solar_array_fab": {
   "v": [],
@@ -1439,6 +1439,12 @@
   "ds": 0.592,
   "c": 143
  },
+ "gtceu:spallation_target_station": {
+  "v": [],
+  "bt": 4,
+  "ds": 0.592,
+  "c": 567
+ },
  "gtceu:spark_plasma_sinterer": {
   "v": [],
   "bt": 6,
@@ -1448,8 +1454,8 @@
  "gtceu:spectral_hole_burner": {
   "v": [],
   "bt": 6,
-  "ds": 0.419,
-  "c": 204
+  "ds": 0.496,
+  "c": 979
  },
  "gtceu:srf_cavity_works": {
   "v": [],
@@ -1549,21 +1555,21 @@
  },
  "gtceu:stm_lithography_cell": {
   "v": [],
-  "bt": 5,
-  "ds": 0.564,
-  "c": 322
+  "bt": 7,
+  "ds": 0.444,
+  "c": 796
  },
  "gtceu:strangelet_distiller": {
   "v": [],
-  "bt": 5,
-  "ds": 0.489,
-  "c": 1270
+  "bt": 4,
+  "ds": 0.449,
+  "c": 400
  },
  "gtceu:strangelet_vault": {
   "v": [],
-  "bt": 7,
-  "ds": 0.324,
-  "c": 1528
+  "bt": 6,
+  "ds": 0.274,
+  "c": 624
  },
  "gtceu:submerged_arc_furnace": {
   "v": [],
@@ -1585,9 +1591,9 @@
  },
  "gtceu:superheavy_chemistry_lab": {
   "v": [],
-  "bt": 6,
-  "ds": 0.581,
-  "c": 889
+  "bt": 7,
+  "ds": 0.414,
+  "c": 380
  },
  "gtceu:swarm_control_station": {
   "v": [],
@@ -1627,15 +1633,15 @@
  },
  "gtceu:tetron_fab": {
   "v": [],
-  "bt": 7,
-  "ds": 0.39,
-  "c": 1415
+  "bt": 5,
+  "ds": 0.581,
+  "c": 423
  },
  "gtceu:tfln_fab": {
   "v": [],
-  "bt": 7,
-  "ds": 0.418,
-  "c": 549
+  "bt": 5,
+  "ds": 0.537,
+  "c": 1228
  },
  "gtceu:tholin_reformer": {
   "v": [],
@@ -1718,8 +1724,8 @@
  "gtceu:vdw_stacker": {
   "v": [],
   "bt": 6,
-  "ds": 0.564,
-  "c": 1004
+  "ds": 0.241,
+  "c": 250
  },
  "gtceu:vdw_stacking_cell": {
   "v": [],
@@ -1795,9 +1801,9 @@
  },
  "gtceu:white_dwarf_spectrograph": {
   "v": [],
-  "bt": 7,
-  "ds": 0.509,
-  "c": 374
+  "bt": 5,
+  "ds": 0.466,
+  "c": 312
  },
  "gtceu:wire_works": {
   "v": [],
@@ -1831,9 +1837,9 @@
  },
  "gtceu:xray_pulse_profiler": {
   "v": [],
-  "bt": 6,
-  "ds": 0.269,
-  "c": 517
+  "bt": 5,
+  "ds": 0.456,
+  "c": 1131
  },
  "gtceu:yig_lpe_furnace": {
   "v": [],

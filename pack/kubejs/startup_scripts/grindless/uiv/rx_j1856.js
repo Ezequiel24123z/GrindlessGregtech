@@ -23,6 +23,7 @@
   const CASING = 'gtceu:uiv_machine_casing'
   const CASING_TEXTURE = 'gtceu:block/casings/voltage/uiv/side'
   const SITE_CASING = 'grindless:neutron_star_site_casing'
+const SITE_TEXTURE = 'grindless:block/uiv/neutron_star_site_casing'
   const COIL = 'grindless:metallic_hydrogen_coil_block'
 
   RX.table = 'kubejs/data/grindless/tables/rx_j1856.json'
@@ -64,7 +65,7 @@
       name: 'crust_lift', machine: 'gtceu:crust_lift', type: 'crust_lifting', dataKey: 'grindless_crust_lifting', lang: 'Crust Lift',
       maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },
       parts: [['input_bus', 1, 2], ['output_bus', 1, 2], ['energy_input', 1, 2]],
-      width: 9, height: 9, depth: 15, casing: CASING, texture: CASING_TEXTURE, vacuum: true, rings: [SITE_CASING, SITE_CASING], generator: false
+      width: 9, height: 13, depth: 9, casing: SITE_CASING, texture: SITE_TEXTURE, vacuum: true, rings: [SITE_CASING, SITE_CASING], generator: false
     },
     {
       name: 'neutron_drip_separator', machine: 'gtceu:neutron_drip_separator', type: 'neutron_drip_separation',
@@ -84,14 +85,14 @@
             dataKey: 'grindless_r_process_decompression', lang: 'R-Process Decompressor',
             maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
             parts: [['input_bus', 1, 2], ['output_bus', 1, 2], ['input_hatch', 1, 2], ['output_hatch', 1, 2], ['energy_input', 1, 2]],
-            width: 9, height: 7, depth: 9, casing: CASING, texture: CASING_TEXTURE, vacuum: false, rings: [SITE_CASING, SITE_CASING], generator: false
+            width: 15, height: 13, depth: 19, casing: SITE_CASING, texture: SITE_TEXTURE, vacuum: false, rings: [SITE_CASING, SITE_CASING], generator: false
           },
           {
             // written final: a UIV dynamo hatch (2 A, 62.9M EU/t) holds the vault's 33,554,432 EU/t
             name: 'decay_heat_vault', machine: 'gtceu:decay_heat_vault', type: 'decay_heat', dataKey: 'grindless_decay_heat', lang: 'Decay Heat Vault',
             maxIO: { itemsIn: 2, itemsOut: 4, fluidsIn: 0, fluidsOut: 1 },
             parts: [['input_bus', 1, 2], ['output_bus', 1, 2], ['output_hatch', 1, 2], ['energy_output', 1, 2]],
-            width: 7, height: 7, depth: 7, casing: CASING, texture: CASING_TEXTURE, vacuum: false, rings: [SITE_CASING, SITE_CASING], generator: true
+            width: 15, height: 11, depth: 17, casing: SITE_CASING, texture: SITE_TEXTURE, vacuum: false, rings: [SITE_CASING, SITE_CASING], generator: true
           }
         ]
 

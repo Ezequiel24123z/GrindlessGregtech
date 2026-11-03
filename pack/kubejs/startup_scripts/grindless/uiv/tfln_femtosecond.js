@@ -19,10 +19,10 @@
   const TF = G.tflnFemtosecond || (G.tflnFemtosecond = {})
   const LOG = '[grindless/uiv] '
 
-  const PHOTONIC = 'grindless:photonic_casing'
-  const PHOTONIC_TEXTURE = 'grindless:block/uev/photonic_casing'
-  const UEV = 'gtceu:uev_machine_casing'
-  const UEV_TEXTURE = 'gtceu:block/casings/voltage/uev/side'
+  const PHOTONIC = 'grindless:multilayer_optics_casing'
+  const PHOTONIC_TEXTURE = 'grindless:block/uiv/multilayer_optics_casing'
+  const UEV = 'grindless:multilayer_optics_casing'
+  const UEV_TEXTURE = 'grindless:block/uiv/multilayer_optics_casing'
 
   TF.table = 'kubejs/data/grindless/tables/tfln_femtosecond.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -59,13 +59,13 @@
     {
       name: 'tfln_fab', machine: 'gtceu:tfln_fab', type: 'ion_slicing', dataKey: 'grindless_ion_slicing', lang: 'TFLN Fab',
       maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-      width: 7, height: 5, depth: 7, casing: PHOTONIC, texture: PHOTONIC_TEXTURE
+      width: 17, height: 11, depth: 23, casing: PHOTONIC, texture: PHOTONIC_TEXTURE
     },
     {
       name: 'femtosecond_writer', machine: 'gtceu:femtosecond_writer', type: 'femtosecond_writing', dataKey: 'grindless_femtosecond_writing',
       lang: 'Femtosecond Writer',
       maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-      width: 5, height: 5, depth: 7, casing: UEV, texture: UEV_TEXTURE
+      width: 13, height: 9, depth: 31, casing: UEV, texture: UEV_TEXTURE
     }
   ]
 

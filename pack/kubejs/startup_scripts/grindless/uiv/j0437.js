@@ -22,8 +22,12 @@
 
   const CASING = 'gtceu:uiv_machine_casing'
   const CASING_TEXTURE = 'gtceu:block/casings/voltage/uiv/side'
-  const CRYO = 'grindless:cryostat_casing'
-  const CRYO_TEXTURE = 'grindless:block/zpm/cryostat_casing'
+const MH = 'grindless:mh_field_casing'
+const MH_TEXTURE = 'grindless:block/uiv/mh_field_casing'
+const OPT = 'grindless:multilayer_optics_casing'
+const OPT_TEXTURE = 'grindless:block/uiv/multilayer_optics_casing'
+  const CRYO = 'grindless:dilution_cryostat_casing'
+  const CRYO_TEXTURE = 'grindless:block/uiv/dilution_cryostat_casing'
   const COIL = 'grindless:metallic_hydrogen_coil_block'
   const LINING = 'gtceu:tungsten_block'
 
@@ -59,7 +63,7 @@
       name: 'pulsar_wind_trap', machine: 'gtceu:pulsar_wind_trap', type: 'pulsar_wind_trapping', dataKey: 'grindless_pulsar_wind_trapping',
       lang: 'Pulsar Wind Trap',
       maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 2 },
-      width: 9, height: 9, depth: 9, casing: CASING, texture: CASING_TEXTURE,
+      width: 15, height: 15, depth: 31, casing: MH, texture: MH_TEXTURE,
       rings: [COIL, COIL, LINING, LINING, COIL, COIL],
       parts: [['input_bus', 1, 1], ['output_hatch', 1, 2], ['energy_input', 1, 2]]
     },
@@ -68,14 +72,14 @@
       dataKey: 'grindless_positronium_condensation',
       lang: 'Positronium Condensate Lab',
       maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
-      width: 7, height: 5, depth: 7, casing: CRYO, texture: CRYO_TEXTURE, rings: [],
+      width: 15, height: 13, depth: 17, casing: CRYO, texture: CRYO_TEXTURE, rings: [],
       parts: [['input_bus', 1, 2], ['output_bus', 1, 1], ['energy_input', 1, 2]]
     },
     {
       name: 'xray_pulse_profiler', machine: 'gtceu:xray_pulse_profiler', type: 'xray_pulse_profiling', dataKey: 'grindless_xray_pulse_profiling',
       lang: 'X-ray Pulse Profiler',
       maxIO: { itemsIn: 6, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
-      width: 7, height: 7, depth: 5, casing: CASING, texture: CASING_TEXTURE, rings: [],
+      width: 11, height: 13, depth: 29, casing: OPT, texture: OPT_TEXTURE, rings: [],
       parts: [['input_bus', 1, 2], ['output_bus', 1, 1], ['energy_input', 1, 2]]
     }
   ]

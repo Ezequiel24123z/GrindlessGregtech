@@ -18,8 +18,8 @@
   const MC = G.memoriesCryostat || (G.memoriesCryostat = {})
   const LOG = '[grindless/uiv] '
 
-  const CRYO = 'grindless:cryostat_casing'
-  const CRYO_TEXTURE = 'grindless:block/zpm/cryostat_casing'
+  const CRYO = 'grindless:dilution_cryostat_casing'
+  const CRYO_TEXTURE = 'grindless:block/uiv/dilution_cryostat_casing'
 
   MC.table = 'kubejs/data/grindless/tables/memories_cryostat.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -51,13 +51,13 @@
       name: 'spectral_hole_burner', machine: 'gtceu:spectral_hole_burner', type: 'spectral_hole_burning', dataKey: 'grindless_spectral_hole_burning',
       lang: 'Spectral Hole Burner',
       maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 },
-      width: 5, height: 5, depth: 5, casing: CRYO, texture: CRYO_TEXTURE, magnet: null
+      width: 13, height: 17, depth: 13, casing: CRYO, texture: CRYO_TEXTURE, magnet: null
     },
     {
       name: 'millikelvin_cryostat_works', machine: 'gtceu:millikelvin_cryostat_works', type: 'nuclear_demagnetisation', dataKey: 'grindless_nuclear_demagnetisation',
       lang: 'Millikelvin Cryostat Works',
       maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
-      width: 5, height: 7, depth: 5, casing: CRYO, texture: CRYO_TEXTURE, magnet: 'grindless:metallic_hydrogen_coil_block'
+      width: 13, height: 23, depth: 13, casing: CRYO, texture: CRYO_TEXTURE, magnet: 'grindless:metallic_hydrogen_coil_block'
     }
   ]
 

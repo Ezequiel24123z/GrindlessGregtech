@@ -21,6 +21,8 @@
 
   const CASING = 'gtceu:uiv_machine_casing'
   const CASING_TEXTURE = 'gtceu:block/casings/voltage/uiv/side'
+const RHEA = 'grindless:rhea_casing'
+const RHEA_TEXTURE = 'grindless:block/uiv/rhea_casing'
 
   MA.table = 'kubejs/data/grindless/tables/matrioshka.json'
   MA.site = 'gcyr:mercury_orbit'
@@ -83,7 +85,7 @@
       name: 'droplet_radiator_works', machine: 'gtceu:droplet_radiator_works', type: 'droplet_radiator_assembly', dataKey: 'grindless_droplet_radiator_assembly',
       lang: 'Droplet Radiator Works',
       maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 },
-      width: 9, height: 5, depth: 13, casing: CASING, texture: CASING_TEXTURE, vacuum: true, rings: []
+      width: 17, height: 13, depth: 21, casing: RHEA, texture: RHEA_TEXTURE, vacuum: true, rings: []
     }
   ]
 
