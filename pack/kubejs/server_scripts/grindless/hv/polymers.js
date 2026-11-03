@@ -9,7 +9,7 @@
 //                                 the oxychlorination, which closes the chlorine loop
 //                removed          vinyl_chloride_from_chlorine, vinyl_chloride_from_ethane (one step, not industrial)
 //   PTFE (H5)    R22              chloroform + 2 HF -> chlorodifluoromethane + 2 HCl   NEW, HV 240 EU/t, 240 t
-//                pyrolysis        2 R22 -> tetrafluoroethylene + 2 HCl                 NEW, HV 480 EU/t, 240 t (GTM copies it into the large chemical reactor; the UEV FFKM line takes its TFE from here)
+//                pyrolysis        2 R22 -> tetrafluoroethylene + 2 HCl                 NEW, HV 480 EU/t, 240 t (GTM copies it into the large chemical reactor at runtime; the UEV FFKM line takes its TFE from here)
 //                removed          tetrafluoroethylene_from_chloroform (the same 2 chloroform + 4 HF in one go) and the large reactor's
 //                                 tetrafluoroethylene_from_methane
 //   Epoxy (H3)   removed          the large chemical reactor's phenol_acetone_shortcut, phenol_hcl_shortcut, phenol_salt_shortcut and

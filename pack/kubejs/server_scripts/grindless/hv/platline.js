@@ -10,9 +10,10 @@
 //   gauze   ASSEMBLER, HV: 9 platinum foil + 1 rhodium foil -> 1 grindless:platinum_rhodium_gauze (480 EU/t, 5 s)
 //
 // Removed (nitrogen oxides straight from the elements, which no plant does; the Haber ammonia, the Ostwald steps and the oxidation of nitric
-// oxide stay): gtceu:large_chemical_reactor/nitric_acid_from_elements, nitrogen_dioxide_from_elements and dinitrogen_tetroxide_shortcut.
+// oxide stay): gtceu:large_chemical_reactor/nitric_acid_from_elements, nitrogen_dioxide_from_elements and dinitrogen_tetroxide_shortcut,
+// and gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia (N2O4 from ammonia and oxygen, with no NO2; integration/lcr_orphans.js then drops its large reactor twin too).
 // What stays reachable: L2's Ostwald route (nitric_oxide_from_ammonia -> nitrogen_dioxide_from_oxide -> nitric_acid_from_dioxide_1, untouched,
-// LV, no gauze) and N2O4 for the rocket fuel from NO2 (chemical_reactor/dinitrogen_tetroxide_from_dioxide, or from ammonia and oxygen).
+// LV, no gauze) and N2O4 for the rocket fuel by dimerising NO2 (chemical_reactor/dinitrogen_tetroxide_from_dioxide).
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
@@ -23,7 +24,8 @@
   var REMOVED = [
     'gtceu:large_chemical_reactor/nitric_acid_from_elements',
     'gtceu:large_chemical_reactor/nitrogen_dioxide_from_elements',
-    'gtceu:large_chemical_reactor/dinitrogen_tetroxide_shortcut'
+    'gtceu:large_chemical_reactor/dinitrogen_tetroxide_shortcut',
+    'gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia'
   ]
 
   // GTM's recipe is rebuilt with the gauze as one more chanced input (chance in 1/10000 of the runs it is consumed); the recipe is now grindless:large_chemical_reactor/nitric_acid_from_ammonia
