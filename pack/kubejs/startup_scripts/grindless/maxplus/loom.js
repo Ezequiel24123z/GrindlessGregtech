@@ -4,8 +4,8 @@
 // and casing it uses is XP-F1's (maxplus/foundation.js). The recipes, with lines T4 to T7's older-machine rows, are in
 // server_scripts/grindless/maxplus/loom.js.
 //
-//   gtceu:meta_material_loom   21 x 9 x 9 of horizon machine casing: a long warp beam of atomic casing and superconducting coils down the axis
-//                              between two glass-banded walls. Recipe type gtceu:meta_material_loom: c1 to c4 weave the four meta-materials
+//   gtceu:meta_material_loom   33 x 13 x 15 loom hall (loomShape): a long warp beam of atomic casing and superconducting coils down the axis
+//                              between heddle frames. Recipe type gtceu:meta_material_loom: c1 to c4 weave the four meta-materials
 //                              (horizon shielding, waveguide, conduit, valve body) from bound plates, Kerr strand and condensate.
 //
 // It runs at home (no site), at V[MAX] x 4 A on hatches that can carry it. Rows run as written: no overclock, no parallels, so the modifier
@@ -35,29 +35,44 @@
     name: 'meta_material_loom', machine: 'gtceu:meta_material_loom', type: 'meta_material_loom', dataKey: 'grindless_meta_material_loom',
     lang: 'Meta-Material Loom', maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: CASING, texture: 'grindless:block/max/mirror_shell_segment',
     overlay: 'grindless:block/multiblock/meta_material_loom',
-    width: 21, height: 9, depth: 9,
-    pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
+    width: 33, height: 13, depth: 15,
+    pal: {
+      F: CASING, B: 'grindless:bound_lattice_casing', K: 'grindless:kerr_coil_casing', R: 'grindless:cryostat_casing', L: 'gtceu:cleanroom_glass',
+      A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil'
+    },
     parts: parts
   }
 
-  // x left to right, y bottom to top, z back to front. Row 0 the floor (the part cells at the front), the last row the roof; the two long walls
-  // carry a glass band. The warp beam is an atomic casing bar on the axis at y = 4 with a coil every fourth cell.
-  function loomCell(x, y, z) {
-    if (y === 0) return z === 0 && x >= 8 && x <= 12 ? 'X' : 'B'
-    if (y === 8) return 'B'
-    if (x === 0 || x === 20 || z === 0 || z === 8) {
-      var along = x === 0 || x === 20 ? z : x
-      return y >= 3 && y <= 5 && along >= 3 && (x === 0 || x === 20 ? along <= 5 : along <= 17) && along % 4 !== 1 ? 'L' : 'F'
+  // x left to right, y bottom to top, z back to front (docs/eras/lines-opv-maxplus.md 6.3): a loom hall 33 long. A lattice shell with Kerr
+  // rails and cryostat roof ribs round three cryostat heddle frames; the warp beam is an atomic casing bar on the axis with a coil every
+  // fourth cell, and a cryostat cloth deck runs under it. The front face holds the controller and the part cells.
+  function loomShape() {
+    var m = ML.machine
+    var s = G.uevShapes.scene(m.width, m.height, m.depth)
+    s.room(0, 0, 0, 32, 12, 14, 'B')
+    s.edges(0, 0, 0, 32, 12, 14, 'F')
+    for (var x = 2; x <= 30; x += 4) {
+      s.room(x, 1, 0, x, 11, 14, 'K', 'bt', null)
+      s.box(x, 11, 0, x, 12, 14, 'R')
     }
-    if (y === 4 && z === 4 && x >= 2 && x <= 18) return x % 4 === 2 ? 'C' : 'A'
-    return '#'
+    for (var h = 6; h <= 26; h += 10) {
+      s.room(h, 1, 1, h + 1, 11, 13, 'R', 'bt', null)
+      s.box(h, 6, 1, h + 1, 6, 13, 'B')
+    }
+    s.box(1, 3, 1, 31, 3, 13, 'R')
+    s.box(1, 6, 7, 31, 6, 7, 'A')
+    for (var c = 2; c <= 30; c += 4) s.set(c, 6, 7, 'C')
+    s.box(1, 6, 1, 31, 6, 1, 'K').box(1, 6, 13, 31, 6, 13, 'K')
+    s.box(0, 4, 4, 0, 9, 10, 'L')
+    s.box(32, 4, 4, 32, 9, 10, 'L')
+    s.booth('F', 3)
+    return s.fn()
   }
 
   // built in the machine registry callback: uiv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: loomCell })
+    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: loomShape() })
   }
-
   function infoOf(dataKey) {
     return function (data) {
       try {

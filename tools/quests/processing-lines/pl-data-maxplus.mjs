@@ -445,7 +445,7 @@ const ROWS = {
     ["m", "gtceu:plasma_mass_filter", [5]],
     ["f", "fluid:gtceu:filtered_stellar_plasma", [7]],
     ["f", "fluid:gtceu:helium", [7], 1],
-    ["m", "gtceu:multi_plasma_blender", [8]],
+    ["m", "gtceu:horizon_crystal_furnace", [8]],
     ["f", "fluid:gtceu:horizon_crystal_slurry", [10]],
   ],
   T9: [

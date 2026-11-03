@@ -13,10 +13,9 @@
 //   assembly line array).
 // - Mode veto: the first modifier refuses a recipe of the other type (GTM keeps the cached last recipe across a mode switch).
 //
-// Structure: 15 wide x 9 high x 21 deep of horizon machine casing, a plain workable multiblock, not GTM's ordered AssemblyLineMachine: a spine of
-// atomic casing with a superconducting coil every fourth cell down the axis, a glass band on both long walls every fourth layer, and two rows
-// of part cells on the front face beside the controller (21 cells for at most 13 parts). Smaller than the OpV array (9 x 7 x 35) per side but
-// larger in volume, which suits a machine that replaces several.
+// Structure: 25 wide x 13 high x 33 deep factory hall (docs/eras/lines-opv-maxplus.md 6.3), a plain workable multiblock, not GTM's ordered
+// AssemblyLineMachine: bound lattice shell, Kerr rails, void-diamond window bays, a cryostat-chequered roof, portal frames every fourth layer, side decks, and a spine of
+// atomic casing with a superconducting coil every fourth cell down the axis. Two rows of part cells on the front face beside the controller.
 //
 // Textures: MAX art meanwhile, as the loom: the mirror shell's segment with the positronium condensate lab's face.
 (function () {
@@ -29,34 +28,45 @@
   const OVERLAY = 'grindless:block/multiblock/hyperfactory'
   const TYPES = ['assembler', 'circuit_assembler', 'assembly_line', 'forming_press', 'laser_engraver']
   const CAP = 4096
-  const W = 15
-  const H = 9
-  const D = 21
-  const CTRL = { x: 7, y: 1 }
+  const W = 25
+  const H = 13
+  const D = 33
+  const CTRL = { x: 12, y: 1 }
   // 2 energy + 4 input buses + 2 output buses + 2 input hatches + 1 output hatch + 1 parallel hatch (the data access hatch has its own cell D)
   const PART_CELLS = 12
-  const DATA = { x: 5, y: 1 }
+  const DATA = { x: 10, y: 1 }
 
-  // x left to right, y bottom to top, z back (0) to front (20); one char per cell
+  // x left to right, y bottom to top, z back (0) to front (32); one char per cell. A factory hall: a lattice floor and a cryostat-chequered roof,
+  // Kerr rails and void-window bays on the long walls, three lattice portal frames dividing the line into bays, and the atomic casing spine.
   function cell(x, y, z) {
-    var edge = x === 0 || x === W - 1 || y === 0 || y === H - 1
+    var sideWall = x === 0 || x === W - 1
+    var edge = sideWall || y === 0 || y === H - 1
     if (z === D - 1) {
       if (x === CTRL.x && y === CTRL.y) return 'S'
       if (x === DATA.x && y === DATA.y) return 'D'
       if (!edge && y <= 2 && x >= 2 && x <= W - 3) return 'X'
-      return 'F'
+      return (sideWall || y === H - 1) && y % 4 === 0 ? 'K' : 'F'
     }
-    if (z === 0) return 'F'
-    if (edge) {
-      if ((x === 0 || x === W - 1) && y === 4 && z % 4 === 2) return 'L'
-      if (z % 4 === 0) return 'A'
-      if ((y === 0 || y === H - 1) && (x + z) % 2 === 0) return 'A'
-      return 'F'
+    if (z === 0) return y % 4 === 0 ? 'K' : 'B'
+    if (y === 0) return z % 8 === 0 ? 'K' : 'B'
+    if (y === H - 1) return z % 8 === 0 ? 'K' : (x + z) % 2 === 0 ? 'R' : 'B'
+    if (sideWall) {
+      if (y === 6) return 'K'
+      if (y >= 2 && y <= 10 && z % 4 !== 0 && z % 8 !== 4) return 'W'
+      return z % 8 === 0 ? 'R' : 'B'
     }
-    if (x === 7 && y === 4) return z % 4 === 0 ? 'C' : 'A'
+    if (y === 7 && (x <= 5 || x >= W - 6) && z >= 2 && z <= D - 3) return (x + z) % 3 === 0 ? 'K' : 'B'
+    if (y === 3 && (x <= 3 || x >= W - 4) && z >= 2 && z <= D - 3) return 'R'
+    if (y === H - 2 && (x === 6 || x === W - 7 || x === 12 || x === 3 || x === W - 4)) return 'B'
+    if (z % 4 === 0) {
+      if (x === 6 || x === W - 7) return 'B'
+      if (y === H - 2 && x >= 6 && x <= W - 7) return 'B'
+      if (y === 7 && x >= 6 && x <= W - 7 && x % 2 === 0) return 'R'
+    }
+    if (x === 12 && y === 4) return z % 4 === 0 ? 'C' : 'A'
+    if (y === 1 && (x === 8 || x === 16)) return 'B'
     return '#'
   }
-
   function build() {
     var slices = []
     var parts = 0
@@ -85,7 +95,10 @@
       symbols: {
         S: Pat.controller(),
         F: Pat.block(CASING),
-        L: Pat.block('gtceu:cleanroom_glass'),
+        B: Pat.block('grindless:bound_lattice_casing'),
+        K: Pat.block('grindless:kerr_coil_casing'),
+        R: Pat.block('grindless:cryostat_casing'),
+        W: Pat.block('gtceu:cleanroom_glass'),
         A: Pat.block('gtceu:atomic_casing'),
         C: Pat.block('gtceu:superconducting_coil'),
         X: Pat.oneOf(
