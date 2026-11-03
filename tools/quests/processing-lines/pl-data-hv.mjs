@@ -193,7 +193,7 @@ export default {
         n('nh3b', 10, 7.5, F('gtceu:ammonia'), 'Ammonia', { kind: 'raw', sub: 'The LV ammonia line' }),
         n('dma', 10, 6, F('gtceu:dimethylamine'), 'Dimethylamine', { from: ['hmeoh', 'nh3b'], by: ['gtceu:large_chemical_reactor'], sub: 'Methanol and ammonia' }),
         n('udmh', 12, 4.5, F('gtceu:dimethylhydrazine'), 'UDMH', { from: ['mca', 'dma'], by: ['gtceu:large_chemical_reactor'], sub: 'Raschig process; the methanol shortcut is gone' }),
-        n('udmhhcl', 12, 6, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { kind: 'by', from: ['mca', 'dma'], end: 'PVC, epoxy', sub: 'PVC, epoxy' }),
+        n('udmhhcl', 12, 6, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { kind: 'by', from: ['dma'], end: 'PVC, epoxy', sub: 'PVC, epoxy' }),
         n('aerozine', 14, 3, F('gtceu:aerozine_50'), 'Aerozine 50', { from: ['hydrazine', 'udmh'], by: ['gtceu:mixer'], sub: 'Mixer, hydrazine and UDMH one to one' }),
         L('no2', 14, 7.5, 'pl_lv:no2'),
         n('n2o4', 14, 6, F('gtceu:dinitrogen_tetroxide'), 'Dinitrogen Tetroxide', { from: ['no2'], by: ['gtceu:chemical_reactor'], sub: 'Nitrogen dioxide, dimerised' }),
