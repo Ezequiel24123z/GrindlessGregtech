@@ -101,7 +101,7 @@
           if (he === null || he.chance !== 0) bad.push(n + ' helium not chance 0')
         }
         ins.forEach(function (x) {
-          if (x.id !== 'gtceu:programmed_circuit' && x.id !== 'grindless:nb3sn_srf_cavity' && !(x.id === 'gtceu:helium' && n !== 'ion_track') && x.chance !== x.maxChance) bad.push(n + ' ' + x.id + ' not fully consumed')
+          if (x.id !== 'gtceu:programmed_circuit' && x.id !== 'grindless:nb3sn_srf_cavity' && x.id !== 'grindless:californium_252' && !(x.id === 'gtceu:helium' && n !== 'ion_track') && x.chance !== x.maxChance) bad.push(n + ' ' + x.id + ' not fully consumed')
         })
       })
       check('chamber_kept', bad.length === 0, bad.length === 0 ? 'cavity and helium chamber are chance 0 in all six rows' : bad.join('; '))

@@ -97,6 +97,7 @@
   }
   function plain(sym) {
     if (sym.kind === 'blocks') return String(sym.blocks[0])
+    if (sym.kind === 'frames') return 'gtceu:' + sym.materials[0] + '_frame'
     if (sym.kind === 'oneOf') {
       for (var i = 0; i < sym.options.length; i++) if (sym.options[i].kind === 'blocks') return String(sym.options[i].blocks[0])
     }
@@ -164,7 +165,7 @@
 
   function statics() {
     var SI = S.G.uevSirius
-    check('static_published', SI && SI.recipes && SI.recipes.length === 5, 'global.grindless.uevSirius recipes ' + (SI && SI.recipes ? SI.recipes.length : 'none'))
+    check('static_published', SI && SI.recipes && SI.recipes.length === 6, 'global.grindless.uevSirius recipes ' + (SI && SI.recipes ? SI.recipes.length : 'none'))
     if (!SI || !SI.recipes) return
     var missing = []
     SI.recipes.forEach(function (r) { if (byId('grindless:' + r.type + '/' + r.name) === null) missing.push(r.type + '/' + r.name) })
@@ -186,12 +187,12 @@
   }
 
   function dimensions() {
-    ;['gravitational_redshift/mass_radius_chart', 'degenerate_harvesting/degenerate_matter', 'degenerate_containment/degenerate_pellet'].forEach(function (id) {
+    ;['gravitational_redshift/mass_radius_chart', 'degenerate_harvesting/degenerate_matter'].forEach(function (id) {
       var recipe = byId('grindless:' + id)
       var text = recipe === null ? 'missing' : conditionsOf(recipe)
       check('dim_' + id.split('/')[1], text.indexOf('sirius_b_orbit') >= 0, id + ' conditions ' + text)
     })
-    ;['assembler/uev_field_generator', 'assembler/degenerate_containment_casing'].forEach(function (id) {
+    ;['degenerate_containment/degenerate_pellet', 'assembler/uev_field_generator', 'assembler/degenerate_containment_casing'].forEach(function (id) {
       var recipe = byId('grindless:' + id)
       var text = recipe === null ? 'missing' : conditionsOf(recipe)
       check('dim_' + id.split('/')[1], recipe !== null && text.indexOf('orbit') < 0, id + ' conditions ' + text)
