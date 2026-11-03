@@ -3,8 +3,8 @@
 // MAX's mirror shell (docs/eras/max.md, machine 8; package MAX-G1): the multiblock, its recipe type and the credits handler. No item of its
 // own: the segment and the bundle block are F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/shell.js.
 //
-//   gtceu:mirror_shell   33 x 33 x 33 hollow shell of mirror shell segments with stream bundle block rings, the controller at the equator
-//                        of the front face, on two MAX 16 A input hatches and one or two dynamo hatches. Recipe type gtceu:black_hole_bomb:
+//   gtceu:mirror_shell   a two-layer sphere in a 35-block box (about 7,060 cells): mirror shell segments inside, a tensegrity truss outside with two stream
+//                        bundle belts, 26 cleanroom glass ports ringed by shell window coil casings, the controller at the equator of the front, on two MAX 16 A input hatches and one or two dynamo hatches. Recipe type gtceu:black_hole_bomb:
 //                        circuit 1 the vent (a generator: one seed wave packet, 2^30 EU/t out), circuit 2 the final spin map, circuit 3 the
 //                        last recipe (consumes 2^35 EU/t, makes the horizon lock and grants the maxplus stage).
 //
@@ -22,39 +22,64 @@
   const BUNDLE = 'grindless:stream_bundle_block'
   // not gtceu:superconducting_coil: a GTM ActiveBlock, and GTM 7.5.3 relights its active blocks one recursive structure check per
   // block when a working multiblock breaks (WorkableMultiblockMachine.onStructureInvalid); 1,528 of them overflowed the server stack
-  const COIL = 'grindless:feeder_coil_casing'
-  const SEGMENT_TEXTURE = 'grindless:block/max/mirror_shell_segment'
-  const N = 33
-  const MID = 16
+  const COIL = 'grindless:shell_window_coil_casing'
+  const TRUSS = 'grindless:tensegrity_truss_casing'
+  const TRUSS_TEXTURE = 'grindless:block/max/tensegrity_truss_casing'
+  const N = 35
+  const MID = 17
 
   MS.machines = [
     {
       name: 'mirror_shell', machine: 'gtceu:mirror_shell', type: 'black_hole_bomb', dataKey: 'grindless_black_hole_bomb',
-      lang: 'Mirror Shell', maxIO: { itemsIn: 8, itemsOut: 3, fluidsIn: 0, fluidsOut: 1 }, casing: SEGMENT, texture: SEGMENT_TEXTURE
+      lang: 'Mirror Shell', maxIO: { itemsIn: 8, itemsOut: 3, fluidsIn: 0, fluidsOut: 1 }, casing: TRUSS, texture: TRUSS_TEXTURE
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. Two stream bundle block rings run round the four side faces (y 8 and 24); every face
-  // is otherwise tiled 8 x 8: a cleanroom glass window ringed by feeder coil casings, segment between; the core is empty.
-  // The hatch cells are on the front face, two rows of seven round the controller at the equator.
+  // x left to right, y bottom to top, z back to front; the sphere is centred on (17, 17, 17) in a 35-block box. Two layers (Decision H-2):
+  // the inner one (15.5 < d <= 16.5) of mirror shell segments, the outer one (16.5 < d <= 17.5) a tensegrity truss with two stream bundle
+  // belts at 30 degrees north and south. 26 ports of cleanroom glass (3 x 3, through both layers) sit on the 26 directions of a cube,
+  // each ringed in the outer layer by shell window coil casings. The front pole port holds the controller (its middle cell) and the hatch
+  // cells: two rows of seven round the controller at the equator of the front. The core is empty and the box corners are free.
+  var DIRS = []
+  for (var da = -1; da <= 1; da++) {
+    for (var db = -1; db <= 1; db++) {
+      for (var dc = -1; dc <= 1; dc++) {
+        if (da !== 0 || db !== 0 || dc !== 0) {
+          var dl = Math.sqrt(da * da + db * db + dc * dc)
+          DIRS.push([da / dl, db / dl, dc / dl])
+        }
+      }
+    }
+  }
+  var CACHE = null
+
   function shellCell(x, y, z) {
-    var edge = x === 0 || x === N - 1 || y === 0 || y === N - 1 || z === 0 || z === N - 1
-    if (!edge) return '#'
-    if (z === N - 1 && x >= 13 && x <= 19 && (y === 14 || y === 18)) return 'X'
-    if ((y === 8 || y === 24) && y !== 0 && y !== N - 1) return 'A'
-    var zFace = z === 0 || z === N - 1
-    var xFace = x === 0 || x === N - 1
-    var u = zFace ? x : xFace ? y : x
-    var v = zFace ? y : z
-    var a = u % 8
-    var b = v % 8
-    if (a >= 3 && a <= 5 && b >= 3 && b <= 5) return 'L'
-    if (a >= 2 && a <= 6 && b >= 2 && b <= 6) return 'C'
-    return 'F'
+    var dx = x - MID
+    var dy = y - MID
+    var dz = z - MID
+    var d = Math.sqrt(dx * dx + dy * dy + dz * dz)
+    if (d > 17.5) return ' '
+    if (d <= 15.5) return '#'
+    var outer = d > 16.5
+    if (z === N - 1 && x >= MID - 3 && x <= MID + 3 && (y === MID - 2 || y === MID + 2)) return 'X'
+    for (var i = 0; i < DIRS.length; i++) {
+      var u = DIRS[i]
+      var p = dx * u[0] + dy * u[1] + dz * u[2]
+      if (p > 0) {
+        var r = Math.sqrt(Math.max(0, d * d - p * p))
+        if (r <= 1.6) return 'L'
+        if (outer && r <= 2.92) return 'C'
+      }
+    }
+    if (!outer) return 'F'
+    var lat = Math.abs(Math.asin(dy / d)) * 180 / Math.PI
+    if (lat >= 28 && lat <= 32.5) return 'A'
+    return 'T'
   }
 
   // slices back -> front, rows bottom -> top; the controller is the middle cell of the front slice
   function slices() {
+    if (CACHE) return CACHE
     var out = []
     for (var z = 0; z < N; z++) {
       var rows = []
@@ -67,9 +92,9 @@
       }
       out.push(rows)
     }
+    CACHE = out
     return out
   }
-
   // the output hatch is optional: only c4 (MAX+, XP-A1) makes a fluid, the condensate it taps
   function parts() {
     return [
@@ -88,7 +113,8 @@
       symbols: {
         S: Pat.controller(),
         X: Pat.oneOf.apply(null, [casing].concat(parts())),
-        F: casing,
+        F: Pat.block(SEGMENT),
+        T: casing,
         A: Pat.block(BUNDLE),
         L: Pat.block('gtceu:cleanroom_glass'),
         C: Pat.block(COIL),

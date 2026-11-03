@@ -1,11 +1,11 @@
 // priority: -5644
 // TEST ONLY, MAX-G1 (gtceu:mirror_shell). Command: kubejs custom_command gg_test_max_shell
-// Band ONLY: X 40344-40407, Z 0-63, gcyr:black_hole_orbit Y 70-102 (zones.json row max_shell).
+// Band ONLY: X 40344-40407, Z 0-63, gcyr:black_hole_orbit Y 69-103 (the 35-block sphere is 2 taller than the zones.json row max_shell, Y 70-102; the integrator widens it).
 //   T1 (named uncertainty: ONE controller carries a generator row (c1, -2^30 EU/t) and a consumer row (c3, 2^35 EU/t) of recipe type
-//   gtceu:black_hole_bomb; the 33-cube forms; c3 draws 2^35 EU/t on two MAX 16 A hatches for 1,200 t, grants maxplus and the structure survives the stage handler):
+//   gtceu:black_hole_bomb; the 35-block sphere forms; c3 draws 2^35 EU/t on two MAX 16 A hatches for 1,200 t, grants maxplus and the structure survives the stage handler):
 //     lookup   every recipe id of the package is in the recipe manager
 //     static   nothing skipped; no pending route
-//     formed   the 33-cube forms with two MAX 16 A input hatches, one MAX 16 A dynamo hatch and a bus pair
+//     formed   the 35-block sphere forms with two MAX 16 A input hatches, one MAX 16 A dynamo hatch and a bus pair
 //     c3       starts at 2^35 EU/t; the horizon lock and the spent Rydberg array reach the output bus; the maxplus world flag is set; the shell stays formed
 //     c2       starts and outputs the final spin map
 //     c1       starts as a generator and pushes EU into the dynamo hatch
@@ -16,8 +16,8 @@
   var LOADED = Date.now()
   var X0 = 40344
   var X1 = 40407
-  var Y0 = 70
-  var Y1 = 102
+  var Y0 = 69
+  var Y1 = 103
   var NAME = 'max_shell'
   var DIM = 'gcyr:black_hole_orbit'
   var CX = 40376
@@ -228,7 +228,7 @@
       u.dynamo = partsLike(m, /max_energy_output_hatch_16a/)
       u.bus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
-      var ok = !!u.bus && !!u.outBus && u.energy.length === 2 && u.dynamo.length >= 1 && u.height === 33
+      var ok = !!u.bus && !!u.outBus && u.energy.length === 2 && u.dynamo.length >= 1 && u.height === 35
       check('formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', input hatches ' + u.energy.length + ', dynamo hatches ' + u.dynamo.length +
         ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }

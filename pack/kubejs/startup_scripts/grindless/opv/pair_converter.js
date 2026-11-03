@@ -5,13 +5,13 @@
 // grindless:unsealed_positron_cell (the cell before the UEV electron beam furnace seals it with a fresh getter, line 29 c23).
 // Every other id is GTM-native (highTierContent, opv_ids.json) or F1's (opv/foundation.js).
 //
-//   gtceu:magnetic_pair_converter  9 x 9 x 9 open frame, field-aligned along the magnetar's lines, a trap on its axis. Recipe type
+//   gtceu:magnetic_pair_converter  13 x 17 x 13 open frame along the magnetar's field lines (opv/shapes.js): field-frozen pylons and hoops,
+//                                  a NEG trap vessel on the axis in a lamina jacket with field coils. Recipe type
 //                                  gtceu:magnetic_pair_production (circuit 1 boil the seed, 2 seal the cell). Only the boil is locked to SGR 1806-20 orbit.
 //
-// Geometry (lib/patterns.js: a slice has at most 16 rows): the controller sits in the front slice (z = depth - 1), forced by
-// G.uivShapes.T.slices at (mid, 1, depth - 1). The structure is a cube wireframe (edges where 2 of the 3 axes are at their extreme),
-// alternating frame post and casing along it so no single block dominates; the beam axis (dead centre) is a coil at each end and glass
-// between; the bottom front and back edges give floor cells to the buses, hatches and energy hatch.
+// Geometry (lib/patterns.js: a slice has at most 64 rows): the controller sits in the front slice (z = depth - 1), forced by
+// G.opvShapes.slices at (mid, 1, depth - 1); the hatch cells are the front of the base. Bootstrap: it holds field-frozen casing (made
+// by the field-frozen press), lamina and NEG casing; none of their chains needs a positron cell.
 // Textures: tools/assets/Build-OpVPairConverterTextures.ps1. Names: client_scripts/grindless/opv_pair_converter_lang.js.
 // Published for the recipe script: global.grindless.pairConverter.
 (function () {
@@ -20,8 +20,10 @@
   const PC = G.pairConverter || (G.pairConverter = {})
   const LOG = '[grindless/opv] '
 
-  const CASING = 'grindless:field_frozen_casing'
-  const CASING_TEXTURE = 'grindless:block/opv/field_frozen_casing'
+  const CASING = 'grindless:chain_lamina_casing'
+  const CASING_TEXTURE = 'grindless:block/opv/chain_lamina_casing'
+  const FIELD_FROZEN = 'grindless:field_frozen_casing'
+  const NEG = 'grindless:neg_xhv_casing'
   const COIL = 'gtceu:superconducting_coil'
   const GLASS = 'gtceu:fusion_glass'
 
@@ -33,8 +35,8 @@
     {
       name: 'magnetic_pair_converter', machine: 'gtceu:magnetic_pair_converter', type: 'magnetic_pair_production',
       dataKey: 'grindless_magnetic_pair_production', lang: 'Magnetic Pair Converter',
-      maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }, width: 9, height: 9, depth: 9, casing: CASING, texture: CASING_TEXTURE,
-      pal: { F: CASING, Q: 'tungsten_steel', C: COIL, L: GLASS },
+      maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }, width: 13, height: 17, depth: 13, casing: CASING, texture: CASING_TEXTURE,
+      pal: { F: CASING, K: FIELD_FROZEN, N: NEG, Q: 'tungsten_steel', C: COIL, G: GLASS },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 1 }), Pat.part('input_hatch', { min: 1, max: 1 }),
           Pat.part('output_hatch', { min: 1, max: 1 }), Pat.part('energy_input', { min: 1, max: 2 })]
@@ -42,29 +44,9 @@
     }
   ]
 
-  function abs(n) { return n < 0 ? -n : n }
-
-  // x, y, z 9 x 9 x 9, centred on (4, 4, 4); z back (0) to front (8, the controller's slice). A cube wireframe (two of the three
-  // axes at their extreme), alternating frame post and casing by coordinate parity so neither block dominates; the beam axis
-  // (x = 4, y = 4) is a coil at each end (the trap) and glass between (the plasma line); the bottom front and back rows (y = 0,
-  // z = 0 or 8, excluding the two true corners) are floor cells for the parts.
-  function cell(x, y, z) {
-    var dx = x - 4
-    var dy = y - 4
-    var dz = z - 4
-    if (dx === 0 && dy === 0) return (z === 0 || z === 8) ? 'C' : 'L'
-    var ex = abs(dx) === 4 ? 1 : 0
-    var ey = abs(dy) === 4 ? 1 : 0
-    var ez = abs(dz) === 4 ? 1 : 0
-    var extreme = ex + ey + ez
-    if (y === 0 && (z === 0 || z === 8) && abs(dx) <= 3) return 'X'
-    if (extreme >= 2) return (x + y + z) % 2 === 0 ? 'Q' : 'F'
-    return '#'
-  }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: opv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: cell })
+    return G.opvShapes.build(Pat, m.name, m.pal, m.parts())
   }
 
   // one EMI line per recipe, read from its data
