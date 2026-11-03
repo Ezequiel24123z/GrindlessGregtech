@@ -20,7 +20,7 @@
 
   var ZPM_VA = 122880
   var ACN = 'gtceu:acrylonitrile'
-  var PAN = 'gtceu:polyacrylonitrile'
+  var PAN = 'gtceu:polyacrylonitrile_dust'
   var PRE = 'grindless:pan_precursor_fibre'
   var STAB = 'grindless:stabilised_pan_fibre'
   var HCN = 'gtceu:hydrogen_cyanide'

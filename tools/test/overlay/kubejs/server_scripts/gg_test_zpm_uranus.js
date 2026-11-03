@@ -97,7 +97,7 @@
     { name: 'flyby_probe_bay', x: X0 + 50, recipe: 'grindless:outer_flyby/neptune_flyby', circuit: 1,
       roles: [['energy', ENERGY], ['input', 'gtceu:zpm_input_bus'], ['output', 'gtceu:zpm_output_bus'], ['out1', 'gtceu:zpm_output_hatch']],
       items: ['grindless:neptune_flyby_probe', 'grindless:silica_aerogel'], fluidIn: [],
-      outFluids: {}, outItems: { 'grindless:neptune_probe_recording': 1, 'grindless:neptune_sample': 1 }, duration: 600 }
+      outFluids: {}, outItems: { 'grindless:neptune_probe_recording': 1 }, duration: 600 }
   ]
   function place(m) {
     var desc = global.grindless.patterns.describe(m.id)
@@ -184,7 +184,7 @@
     })
     ;['grindless:ice_giant_siphon/uranus_ices', 'grindless:ice_giant_siphon/diamond_rain', 'grindless:ice_giant_siphon/atmosphere_sample',
       'grindless:outer_flyby/triton_flyby', 'grindless:cryogenic_isotope_separation/uranus_deuterium', 'grindless:assembler/neptune_flyby_probe',
-      'grindless:assembler/pressure_hull_casing', 'grindless:centrifuge/neptune_sample_flask', 'grindless:assembly_line/ice_giant_siphon',
+      'grindless:assembler/pressure_hull_casing', 'grindless:outer_flyby/neptune_sampling', 'grindless:assembly_line/ice_giant_siphon',
       'grindless:assembly_line/slurry_separator', 'grindless:assembly_line/flyby_probe_bay'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)
     })

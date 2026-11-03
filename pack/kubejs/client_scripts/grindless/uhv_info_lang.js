@@ -58,7 +58,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.organoid_array.2', 'Cortical Labs\' CL1 and FinalSpark\'s Neuroplatform at scale: human cortical organoids grown on microelectrode arrays and wired into GregTech\'s wetware mainframe. Earth only.')
     add('emi.grindless.info.organoid_array.3', 'Circuit 1: 4 stem cells on a chitosan scaffold, with ultrapure water and sterilised growth medium, grow an organoid processor. 2: 4 organoid processors, 4 neuro processing units, a SiC power module and an optical assembly make 4 wetware mainframes.')
     add('emi.grindless.info.organoid_array.4', 'The sterilised medium comes from the LuV organoid lab (circuit 3, a xeno radioprotectant; give the lab an output hatch). The spent medium leaves as bacterial sludge for the biofoundry\'s mutagen.')
-    add('emi.grindless.info.organoid_array.5', 'A 7x5x7 plascrete clean room with perfusion racks and a sterilizing filter ceiling. Parts go in the floor: 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output buses, 1-2 output hatches.')
+    add('emi.grindless.info.organoid_array.5', 'An 11x6x11 plascrete sterile hall with cleanroom glass windows, two bays of PTFE perfusion racks around a computer casing readout spine, stainless steel frame posts and a sterilizing filter ceiling. Parts go in the floor: 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output buses, 1-2 output hatches.')
 
     add('emi.grindless.info.pbo_plant.0', "The PBO Plant makes PBO fibre. Circuit 1: nitrate. 2: hydrolyse. 3: reduce. 4: polymerise into PBO dope. 5: spin into fibre.")
     add('emi.grindless.info.pbo_plant.1', "The fibre goes into tethers and space elevator cables.")
@@ -146,9 +146,9 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.warp_gate.4', 'A 15x15x3 ring of warp gate casing round open air; the controller on the front face, six UHV casing mounts on the top row for the modulators, 1-2 input buses, 1-2 output buses and 1-4 energy hatches in the bottom row. Earth and Proxima b orbits only.')
 
     add('emi.grindless.info.xenobiochem_plant.0', "The Xenobiochemistry Plant. Circuit 1: radioprotectant. 2: infrared pigment. 6: xeno chitin from the mushrooms. 7: chitosan from the chitin. 3: chitosan scaffolds. 4: clarified lysate from xeno biomass.")
-    add('emi.grindless.info.xenobiochem_plant.1', "It only works on Proxima b.")
-    add('emi.grindless.info.xenobiochem_plant.2', 'Where the life grows, its chemistry is done: a lysate clarified in ultrapure water, a Dsup-like radioprotectant, an infrared pigment and chitosan from the mushrooms.')
-    add('emi.grindless.info.xenobiochem_plant.3', 'Proxima b only. Circuit 1: radioprotectant. 2: infrared pigment. 6: chitin (the salt water goes to the electrolyser). 7: chitosan (its acetyl leaves as acetic acid, which the scaffold row takes). 3: chitosan scaffold. 4: clarified lysate.')
+    add('emi.grindless.info.xenobiochem_plant.1', "It runs anywhere: its rows take what Proxima b ships home. Only the gathering and growing stay on Proxima b.")
+    add('emi.grindless.info.xenobiochem_plant.2', 'The chemistry of the life Proxima b grows: a lysate clarified in ultrapure water, a Dsup-like radioprotectant, an infrared pigment and chitosan from the mushrooms.')
+    add('emi.grindless.info.xenobiochem_plant.3', 'Circuit 1: radioprotectant. 2: infrared pigment. 6: chitin (the salt water goes to the electrolyser). 7: chitosan (its acetyl leaves as acetic acid, which the scaffold row takes). 3: chitosan scaffold. 4: clarified lysate.')
     add('emi.grindless.info.xenobiochem_plant.4', 'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output buses, 1-2 output hatches. Four PTFE columns round a clean reactor.')
 
     add('emi.grindless.info.xenobotany_greenhouse.0', "The Xenobotany Greenhouse grows a characterised xeno strain with water and CO2. Circuit 1: xeno biomass and oxygen. Circuit 2: xeno mushrooms. Circuit 3: far-red pigment from biomass.")

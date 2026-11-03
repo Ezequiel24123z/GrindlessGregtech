@@ -5,14 +5,14 @@
 // (gtca:space_elevator, type gtceu:space_elevator) is GTCA's own machine; S0-8 proved it forms and runs a KubeJS recipe. Every other UHV id
 // is F1's (global.grindless.uhvFoundation): the PBO fibre, the PBO dope, the ribbon segment, the climber.
 //
-//   gtceu:pbo_plant           poly(p-phenylene benzobisoxazole), Zylon (machine 14). 7 wide x 5 high x 9 deep of chemically inert
-//                             casing: two pairs of PTFE-lined reactor trains (nitration, hydrolysis; reduction, polymerisation), the
-//                             spinneret tower (a PTFE column through the middle) and the take-up gearbox before the front wall.
+//   gtceu:pbo_plant           poly(p-phenylene benzobisoxazole), Zylon (machine 14). 13 wide x 6 high x 15 deep of chemically inert
+//                             casing: a reactor hall (nitration, hydrolysis, reduction, polymerisation vessels of PTFE pipe casing on
+//                             gearbox plinths, a frame feed line) beside the 12 high spinneret tower (a PTFE column over the take-up gearbox).
 //   gtceu:pbo_synthesis       its recipe type (EU in); the programmed circuit picks the step: 1 nitrate, 2 hydrolyse, 3 reduce,
 //                             4 polymerise, 5 spin.
-//   gtceu:tether_ribbon_works the ribbon braider and climber bench (machine 15). 11 wide x 5 high x 5 deep of robust tungsten steel
-//                             casing: a tension frame (tungsten steel frames) runs the length of the middle slice between the bobbin
-//                             gearboxes of the two outer slices.
+//   gtceu:tether_ribbon_works the ribbon braider and climber bench (machine 15). 19 wide x 6 high x 7 deep of robust tungsten steel
+//                             casing: a braiding hall with a tension frame (tungsten steel frames) down the middle and a row of
+//                             gearbox bobbin carousels along it and on either side.
 //   gtceu:tether_ribbon       its recipe type (EU in); circuits: 1 ribbon, 2 climber.
 //
 // Items (grindless:, names in client_scripts/grindless/uhv_elevator_lang.js): geo_assembled_stage, the heavy stage put together at the
@@ -101,54 +101,56 @@
     return Pat.oneOf.apply(null, options)
   }
 
-  // the plant: 7 x 5 rings with three interior rows (bottom -> top) between a floor and a roof
-  function ring(interior) {
-    var rows = ['RRRRRRR']
-    interior.forEach(function (row) { rows.push('R' + row + 'R') })
-    rows.push('RRRRRRR')
-    return rows
+  function build(width, height, depth, cell) {
+    var slices = []
+    for (var z = 0; z < depth; z++) {
+      var rows = []
+      for (var y = 0; y < height; y++) {
+        var row = ''
+        for (var x = 0; x < width; x++) row += cell(x, z, y)
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    return slices
   }
-  // dress the casing walls: frame posts (Q) on the corners and roof edges, accent ribs (A) on the roof and an accent course at the foot,
-  // glass (L) between casing mullions in the rows above
-  function dress(slices) {
-    var depth = slices.length
-    var height = slices[0].length
-    var width = slices[0][0].length
-    return slices.map(function (rows, si) {
-      return rows.map(function (row, r) {
-        var out = ''
-        for (var c = 0; c < width; c++) {
-          var ch = row.charAt(c)
-          if (ch === 'R' && r > 0) {
-            var ex = c === 0 || c === width - 1
-            var ez = si === 0 || si === depth - 1
-            var top = r === height - 1
-            if ((ex && ez) || (top && (ex || ez))) ch = 'Q'
-            else if (top) ch = si % 3 === 1 ? 'A' : 'R'
-            else if (r === 1) ch = 'A'
-            else if ((ez ? c : si) % 3 !== 0) ch = 'L'
-          }
-          out += ch
-        }
-        return out
-      })
-    })
+
+  // the plant: a 13 x 6 x 15 reactor hall (four PTFE reactor vessels on gearbox plinths, a frame feed line between them) beside a 5 x 5
+  // spinning tower 12 high at the back right corner (a PTFE spinneret column on a take-up gearbox). Inert casing walls with frame posts,
+  // roof ribs, an accent course at the foot and laminated glass between casing mullions. ' ' is anything above the lower hall.
+  function plantCell(x, z, y) {
+    var W = 13
+    var D = 15
+    var TW = 5
+    var tower = x >= W - TW && z <= TW - 1
+    var h = tower ? 12 : 6
+    if (y >= h) return ' '
+    var ex = x === 0 || x === W - 1
+    var ez = z === 0 || z === D - 1
+    var rim = ex || ez || (tower && (x === W - TW || z === TW - 1) && x !== W - 1 && z !== 0)
+    var top = y === h - 1
+    if (y === 0) return tower && !rim ? 'R' : 'X'
+    if (tower && !rim) {
+      if (top) return 'A'
+      if (x === W - 3 && z === 2) return y === 1 ? 'G' : 'P'
+      return '#'
+    }
+    if (top) {
+      if (rim) return 'Q'
+      return (x + z) % 3 === 0 ? 'A' : 'R'
+    }
+    if (rim) {
+      if (ex && ez) return 'Q'
+      if (z === D - 1 && x === 6 && y === 1) return 'S'
+      if (y === 1) return 'A'
+      return (ez ? x : z) % 3 === 0 ? 'R' : 'L'
+    }
+    if ((x === 3 || x === 7) && (z === 4 || z === 8 || z === 12)) return y === 1 ? 'G' : 'P'
+    if (x === 5 && z >= 3 && z <= D - 4 && y === 2) return 'F'
+    return '#'
   }
-  const EMPTY = '#####'
-  const TRAIN = ring(['PP#PP', 'PP#PP', EMPTY])
-  const HALL = ring([EMPTY, EMPTY, EMPTY])
   const PLANT_SPEC = {
-    slices: dress([
-      ['XXXXXXX', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR'],
-      TRAIN,
-      HALL,
-      TRAIN,
-      HALL,
-      ring(['##P##', '##P##', '##P##']),
-      ring(['##G##', EMPTY, EMPTY]),
-      HALL,
-      ['XXXXXXX', 'RRRSRRR', 'RRRRRRR', 'RRRRRRR', 'RRRRRRR']
-    ]),
+    slices: build(13, 12, 15, plantCell),
     symbols: {
       S: Pat.controller(),
       X: cells(INERT, E.minCasings.plant, E.abilities.plant),
@@ -158,21 +160,40 @@
       Q: Pat.frame([FRAME]),
       P: Pat.block(PIPE),
       G: Pat.block(GEARBOX),
+      F: Pat.frame([FRAME]),
       '#': Pat.air()
     }
   }
   E.plantSpec = PLANT_SPEC
 
-  // the works: 11 x 5 x 5; the bobbin gearboxes in the outer slices, the tension frame along the middle one
-  const BOBBINS = ['RRRRRRRRRRR', 'RG#######GR', 'RG#######GR', 'R#########R', 'RRRRRRRRRRR']
+  // the works: a 19 x 6 x 7 braiding hall; a tension frame runs its length down the middle with a gearbox bobbin carousel on it every four
+  // columns, and two more carousel rows stand on either side. Robust tungsten steel casing walls with frame posts, inert casing ribs and glass.
+  function worksCell(x, z, y) {
+    var W = 19
+    var D = 7
+    var ex = x === 0 || x === W - 1
+    var ez = z === 0 || z === D - 1
+    var rim = ex || ez
+    if (y === 0) return 'X'
+    if (y === 5) {
+      if (rim) return 'Q'
+      return x % 4 === 2 ? 'A' : 'R'
+    }
+    if (rim) {
+      if (ex && ez) return 'Q'
+      if (z === D - 1 && x === 9 && y === 1) return 'S'
+      if (y === 1) return 'A'
+      return (ez ? x : z) % 3 === 0 ? 'R' : 'L'
+    }
+    if (z === 3 && y === 2) return 'F'
+    if (x % 4 === 2) {
+      if (z === 3 && y === 1) return 'G'
+      if ((z === 1 || z === 5) && y <= 2) return 'G'
+    }
+    return '#'
+  }
   const WORKS_SPEC = {
-    slices: dress([
-      ['XXXXXXXXXXX', 'RRRRRRRRRRR', 'RRRRRRRRRRR', 'RRRRRRRRRRR', 'RRRRRRRRRRR'],
-      BOBBINS,
-      ['RRRRRRRRRRR', 'R#########R', 'RFFFFFFFFFR', 'R#########R', 'RRRRRRRRRRR'],
-      BOBBINS,
-      ['XXXXXXXXXXX', 'RRRRRSRRRRR', 'RRRRRRRRRRR', 'RRRRRRRRRRR', 'RRRRRRRRRRR']
-    ]),
+    slices: build(19, 6, 7, worksCell),
     symbols: {
       S: Pat.controller(),
       X: cells(ROBUST, E.minCasings.works, E.abilities.works),

@@ -8,11 +8,11 @@
 //                               (a 3 x 3 tungsten heater on the back wall), a wake shield wall (whipple shield casing) in front of it,
 //                               parts in the floor.
 //   gtceu:light_sail            its recipe type (EU in); circuits: 1 film, 2 pattern, 3 release.
-//   gtceu:starchip_fab          machine 18, Earth. A 5 x 5 x 5 clean room box (clean machine casing, a filter casing ceiling for ISO 1)
-//                               with the bonder (a stainless steel gearbox) in the middle of the floor.
+//   gtceu:starchip_fab          machine 18, Earth. A 9 x 6 x 9 clean room hall (clean machine casing, a filter casing ceiling for ISO 1),
+//                               a glass partition, a bonding line of five stainless steel gearboxes, a dicing saw and a test bench.
 //   gtceu:starchip              its recipe type (EU in); circuits: 1 chip, 2 sail-chip.
-//   gtceu:laser_sail_launcher   machine 23, the Moon. A 15 x 15 x 3 phased array of UV machine casing: 64 laser module blocks in four
-//                               4 x 4 quadrants, a cooling loop (tungstensteel pipe casing) round and between them, the beam director
+//   gtceu:laser_sail_launcher   machine 23, the Moon. A 21 x 7 x 21 phased array of UV machine casing: 228 laser module blocks on two
+//                               tiers in a module/pipe checkerboard, radiator fences, and a glass-windowed tower with the beam director
 //                               (a computer casing) in the centre, the roof open over the array.
 //   gtceu:laser_sail_launch     its recipe type (EU in); one recipe, circuit 1.
 //
@@ -85,7 +85,7 @@
   S.minCasings = { sail: 25, chip: 12, launch: 150 }
   S.blocks = { truss: TRUSS, shield: SHIELD, heater: HEATER, clean: CLEAN, filter: FILTER, bonder: BONDER, uvCasing: UV_CASING,
     moduleBlock: MODULE_BLOCK, pipe: PIPE, director: DIRECTOR }
-  S.laserModules = 64
+  S.laserModules = 228
 
   S.items = {
     epitaxial_silicon_wafer: { stack: 64 },
@@ -174,42 +174,50 @@
   }
   S.sailSpec = SAIL_SPEC
 
-  // starchip fab: 5 x 5 x 5; the ceiling's inner 3 x 3 is filter casing, the bonder sits in the middle of the floor
-  function chipSlice(z) {
-    var rows = []
-    for (var y = 0; y < 5; y++) {
-      var row = ''
-      for (var x = 0; x < 5; x++) {
-        var c = '#'
-        var wall = x === 0 || x === 4 || z === 0 || z === 4
-        if (y === 0) c = 'X'
-        else if (z === 4 && y === 1 && x === 2) c = 'S'
-        else if (y === 4) c = wall ? 'C' : 'F'
-        else if (wall) c = 'C'
-        else if (y === 1 && x === 2 && z === 2) c = 'B'
-        row += c
-      }
-      rows.push(row)
+  // starchip fab: a 9 x 6 x 9 clean room hall under a filter ceiling. Behind the front wall (z 5..7) the loading bay; a laminated glass
+  // partition at z = 4 (door gap at the middle) closes off the process bay behind it: the bonding line (stainless steel gearboxes) along
+  // z = 2, the dicing saw (a tungstensteel gearbox) at the back wall, the test bench (a steel gearbox) beside it
+  function chipCell(x, y, z) {
+    var last = 8
+    var cx = x === 0 || x === last
+    var cz = z === 0 || z === last
+    var wall = cx || cz
+    if (y === 0) return 'X'
+    if (y === 5) return wall ? 'R' : 'F'
+    if (wall) {
+      if (cx && cz) return 'R'
+      if (z === last && y === 1 && x === 4) return 'S'
+      if (y === 1) return 'W'
+      if (y === 2 || y === 3) return ((cx ? z : x) % 2 === 1) ? 'G' : 'C'
+      return 'C'
     }
-    return rows
+    if (z === 4 && x >= 1 && x <= 7 && x !== 4 && y <= 3) return y === 1 ? 'C' : 'G'
+    if (y === 1 && z === 2 && x >= 2 && x <= 6) return 'B'
+    if (y === 1 && z === 1 && x === 2) return 'D'
+    if (y === 1 && z === 1 && x === 6) return 'T'
+    return '#'
   }
-  // the clean room: stainless steel frame posts and roof ring, a laminated glass window band, the filter ceiling stays
-  function chipRule(x, y, z, W, H, D) {
-    var cx = x === 0 || x === W - 1
-    var cz = z === 0 || z === D - 1
-    if (y === H - 1) return 'R'
-    if (cx && cz) return 'R'
-    if (y === 2) return 'G'
-    return null
+  var chipSlices = []
+  for (var cz0 = 0; cz0 < 9; cz0++) {
+    var chipRows = []
+    for (var cy0 = 0; cy0 < 6; cy0++) {
+      var chipRow = ''
+      for (var cx0 = 0; cx0 < 9; cx0++) chipRow += chipCell(cx0, cy0, cz0)
+      chipRows.push(chipRow)
+    }
+    chipSlices.push(chipRows)
   }
   const CHIP_SPEC = {
-    slices: dress([0, 1, 2, 3, 4].map(chipSlice), 'C', chipRule),
+    slices: chipSlices,
     symbols: {
       S: Pat.controller(),
       X: cells(CLEAN, S.minCasings.chip, S.chipParts),
       C: Pat.block(CLEAN),
       F: Pat.block(FILTER),
       B: Pat.block(BONDER),
+      D: Pat.block('gtceu:tungstensteel_gearbox'),
+      T: Pat.block('gtceu:steel_gearbox'),
+      W: Pat.block('gtceu:plascrete'),
       R: Pat.frame(['stainless_steel']),
       G: Pat.block('gtceu:laminated_glass'),
       '#': Pat.air()
@@ -217,30 +225,47 @@
   }
   S.chipSpec = CHIP_SPEC
 
-  // laser sail launcher: 15 x 15 x 3. Middle row: the casing rim, the four 4 x 4 module quadrants (x and z 2..5 and 9..12), the
-  // cooling loop everywhere else inside, the beam director at the centre. The roof is the rim only, open over the array
-  function quadrant(i) { return (i >= 2 && i <= 5) || (i >= 9 && i <= 12) }
-  function launchSlice(z) {
-    var rows = []
-    for (var y = 0; y < 3; y++) {
-      var row = ''
-      for (var x = 0; x < 15; x++) {
-        var rim = x === 0 || x === 14 || z === 0 || z === 14
-        var c
-        if (y === 0) c = 'X'
-        else if (rim) c = (z === 14 && y === 1 && x === 7) ? 'S' : 'C'
-        else if (y === 2) c = '#'
-        else if (x === 7 && z === 7) c = 'D'
-        else if (quadrant(x) && quadrant(z)) c = 'L'
-        else c = 'P'
-        row += c
-      }
-      rows.push(row)
+  // laser sail launcher: a 21 x 7 x 21 phased array on a UV casing deck. Row 1 is the array: laser modules on every other cell, the
+  // tungstensteel cooling runs on the cells between them; a second tier of modules stands on every other module of the first. The rim
+  // is a casing wall topped by a radiator fence, and the beam director tower (a hollow glass-windowed column round the computer
+  // casing director) stands in the centre. The roof is open over the array
+  function launchCell(x, y, z) {
+    var last = 20
+    var dx = Math.abs(x - 10)
+    var dz = Math.abs(z - 10)
+    var core = Math.max(dx, dz)
+    var rim = x === 0 || x === last || z === 0 || z === last
+    if (y === 0) return 'X'
+    if (rim) {
+      if (y === 1) return (z === last && x === 10) ? 'S' : 'C'
+      if (y === 2) return 'C'
+      if (y === 3) return (x + z) % 2 === 0 ? 'F' : 'P'
+      if (y === 4) return (x + z) % 2 === 0 ? 'F' : '#'
+      return '#'
     }
-    return rows
+    if (core <= 2) {
+      if (y === 1) return (dx === 0 && dz === 0) ? 'D' : 'P'
+      if (core === 2) {
+        if (y === 6) return 'F'
+        return (y === 3 || y === 4) && (dx + dz) % 2 === 1 ? 'G' : 'C'
+      }
+      if (y === 6) return 'C'
+      return '#'
+    }
+    if (y === 1) return (x + z) % 2 === 0 ? 'L' : 'P'
+    if (y === 2 && x % 2 === 0 && z % 2 === 0 && (x % 4 !== 0 || z % 4 !== 0)) return 'L'
+    return '#'
   }
   var launchSlices = []
-  for (var lz = 0; lz < 15; lz++) launchSlices.push(launchSlice(lz))
+  for (var lz = 0; lz < 21; lz++) {
+    var launchRows = []
+    for (var ly = 0; ly < 7; ly++) {
+      var launchRow = ''
+      for (var lx = 0; lx < 21; lx++) launchRow += launchCell(lx, ly, lz)
+      launchRows.push(launchRow)
+    }
+    launchSlices.push(launchRows)
+  }
   const LAUNCH_SPEC = {
     slices: launchSlices,
     symbols: {
@@ -250,6 +275,8 @@
       L: Pat.block(MODULE_BLOCK),
       P: Pat.block(PIPE),
       D: Pat.block(DIRECTOR),
+      F: Pat.frame(['tungsten_steel']),
+      G: Pat.block('gtceu:fusion_glass'),
       '#': Pat.air()
     }
   }

@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------------------------
 // IV's own multiblock (docs/eras/iv.md, "Designed-core reactor"; package IV-A2): the fission reactor and its recipe type.
 //
-//   gtceu:fission_reactor   a 5x8x5 nuclear plant: a containment of radiation-proof machine casing (GT--'s, dense lead, a tungstensteel
+//   gtceu:fission_reactor   an 11x13x11 nuclear plant: a containment of radiation-proof machine casing (GT--'s, dense lead, a tungstensteel
 //                           frame and concrete) on a light concrete basemat, with four tungstensteel pipe fuel channels around a
 //                           tungstensteel control rod and a heat vent over each channel head, in front of a turbine hall of robust
 //                           tungstensteel casing with tungstensteel turbine casings, the gearbox shaft and its generator. A generator.
@@ -32,17 +32,17 @@
 // grindless.machine.fission_reactor.no_voiding, the mechanism of grindless.steam_outputs.no_voiding): nothing it makes may be thrown away.
 // While it is shut down with fuel in its buses, the controller shows a SCRAM line.
 //
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front):
-//   back five slices: the containment, 5x5. Row 0: basemat (B light concrete). Rows 1-2: shield walls (R radiation-proof casing) around
-//   the core: the four fuel channels (P tungstensteel pipe casing) at the corners of the inner 3x3, the control rod (F tungstensteel
-//   frame) in the middle, the moderator space (air) between them. Row 3: the shield lid, the channel heads (P) through it. Row 4: a heat
-//   vent (V, GTM's computer heat vent) over each channel head.
-//   front three slices: the turbine hall, 5x3x4. Row 0: the service floor (X, 15 cells): 1-2 input buses, 1-2 output buses, 1-3 fluid
-//   input hatches, at most 1 fluid output hatch and 1-4 dynamo hatches, at least 3 cells robust tungstensteel casing. Rows 1-3: robust
-//   tungstensteel casing (C) walls and roof around the turbine (T tungstensteel turbine casing, G the tungstensteel gearbox shaft) and its
-//   generator (G). The controller is in the middle of the front face, row 1. ME buses and hatches have the same abilities, so they fit.
-//
-// Textures: overlay dir grindless:block/multiblock/fission_reactor (tools/assets/Build-FissionReactorTextures.ps1) on GTM's robust
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front), 11 wide, 13 high,
+// 11 deep, an octagonal plan (about 540 blocks, D2-SIZE-IV):
+//   the containment, slices 0-7: row 0 the basemat (B light concrete); rows 1-6 an octagonal ring of shield walls (R radiation-proof
+//   casing) with a robust casing belt (C) at row 4 and a lid (C) at row 7; inside, four fuel channels (P tungstensteel pipe casing)
+//   and the control rod (F tungstensteel frame) at the centre; the channels rise through the lid in stacks up to row 11, each capped by a
+//   heat vent (V, GTM's computer heat vent) at row 12, with a ring of eight more vents on the lid (row 8).
+//   the turbine hall, slices 8-10, behind a robust casing partition: two stages of turbine casings (T) round the gearbox shaft (G). The
+//   front chord's rows 1-2 are the service wall (X, 13 cells): 1-2 input buses, 1-2 output buses, 1-3 fluid input hatches, at most 1
+//   fluid output hatch and 1-4 dynamo hatches, at least 3 cells robust tungstensteel casing. The controller is in the middle of the front
+//   face, row 2. ME buses and hatches have the same abilities, so they fit.
+//// Textures: overlay dir grindless:block/multiblock/fission_reactor (tools/assets/Build-FissionReactorTextures.ps1) on GTM's robust
 // tungstensteel casing. Names / tooltips: client_scripts/grindless/iv_fission_reactor_lang.js. Recipes and the controller recipe:
 // server_scripts/grindless/iv/fission_reactor.js. Published for those and the smoke test: global.grindless.fissionReactor.
 (function () {
@@ -151,24 +151,75 @@
 
   // ---------------------------------------------------------------- pattern
 
+  // 11 wide, 13 high, 11 deep: an octagonal containment in front of the turbine hall, built cell by cell then written out as strings
+  function fissionSlices() {
+    var W = 11, H = 13, D = 11, M = 5
+    var g = []
+    for (var z = 0; z < D; z++) {
+      g.push([])
+      for (var y = 0; y < H; y++) {
+        var row = []
+        for (var x = 0; x < W; x++) row.push(' ')
+        g[z].push(row)
+      }
+    }
+    function oct(x, z) {
+      var dx = x - M
+      var dz = z - M
+      return dx >= -5 && dx <= 5 && dz >= -5 && dz <= 5 && Math.abs(dx) + Math.abs(dz) <= 8
+    }
+    function ring(x, z) {
+      return oct(x, z) && !(oct(x - 1, z) && oct(x + 1, z) && oct(x, z - 1) && oct(x, z + 1))
+    }
+    function put(dx, dz, y, ch) {
+      g[dz + M][y][dx + M] = ch
+    }
+    for (var z2 = 0; z2 < D; z2++) {
+      for (var x2 = 0; x2 < W; x2++) {
+        if (!oct(x2, z2)) continue
+        g[z2][0][x2] = 'B'
+        g[z2][7][x2] = 'C'
+        for (var y2 = 1; y2 <= 6; y2++) {
+          if (ring(x2, z2)) g[z2][y2][x2] = y2 === 4 ? 'C' : 'R'
+          else g[z2][y2][x2] = '#'
+        }
+        // the service wall of the front chord
+        if (z2 - M === 5) {
+          g[z2][1][x2] = 'X'
+          g[z2][2][x2] = 'X'
+        }
+      }
+    }
+    // the partition between the core and the turbine hall
+    for (var x3 = 0; x3 < W; x3++) {
+      if (oct(x3, M + 2) && !ring(x3, M + 2)) for (var y3 = 1; y3 <= 6; y3++) g[M + 2][y3][x3] = 'C'
+    }
+    // the four fuel channels rise through the lid into stacks capped by a heat vent; the control rod runs the full height
+    ;[[-2, -3], [2, -3], [-2, 1], [2, 1]].forEach(function (c) {
+      for (var y4 = 1; y4 <= 11; y4++) put(c[0], c[1], y4, 'P')
+      put(c[0], c[1], 12, 'V')
+    })
+    for (var y6 = 1; y6 <= 12; y6++) put(0, -1, y6, 'F')
+    // a ring of vents on the lid
+    ;[[-4, -1], [4, -1], [-4, -3], [4, -3], [-1, -4], [1, -4], [-1, 2], [1, 2]].forEach(function (c) {
+      if (g[c[1] + M][7][c[0] + M] === 'C') put(c[0], c[1], 8, 'V')
+    })
+    // the turbine hall: two turbine stages round the gearbox shaft
+    ;[3, 4].forEach(function (dz) {
+      put(0, dz, 2, 'G')
+      put(0, dz, 1, 'T')
+      put(0, dz, 3, 'T')
+      put(-1, dz, 2, 'T')
+      put(1, dz, 2, 'T')
+    })
+    put(0, 5, 2, 'S')
+    return g.map(function (slice) {
+      return slice.map(function (row) { return row.join('') })
+    })
+  }
+
   const SPEC = {
-    slices: [
-      // the containment: back wall
-      ['BBBBB', 'RRRRR', 'RRRRR', 'RRRRR', '     '],
-      // two fuel channels, the lid with their heads, a vent over each
-      ['BBBBB', 'RP#PR', 'RP#PR', 'RPRPR', ' V V '],
-      // the control rod between the channels
-      ['BBBBB', 'R#F#R', 'R#F#R', 'RRRRR', '     '],
-      ['BBBBB', 'RP#PR', 'RP#PR', 'RPRPR', ' V V '],
-      // the containment's front wall, against the turbine hall
-      ['BBBBB', 'RRRRR', 'RRRRR', 'RRRRR', '     '],
-      // the turbine hall: the turbine around its shaft
-      ['XXXXX', 'CTGTC', 'CTTTC', 'CCCCC', '     '],
-      // the generator
-      ['XXXXX', 'CGGGC', 'CTTTC', 'CCCCC', '     '],
-      // the front face
-      ['XXXXX', 'CCSCC', 'CCCCC', 'CCCCC', '     ']
-    ],
+    slices: fissionSlices(),
     symbols: {
       S: Pat.controller(),
       X: Pat.oneOf(

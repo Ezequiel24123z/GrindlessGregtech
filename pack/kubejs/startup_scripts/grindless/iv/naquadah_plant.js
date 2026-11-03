@@ -36,18 +36,17 @@
 // hatch and the overclock, and in beforeWorking, only for the recipes that carry the keep key: the Venus acid works' precedent). The
 // LuV parallel hatch (x16) fits the same cell; mode 2 at x4 runs on two LuV hatches (each copy pays its 30,720 EU/t).
 //
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front):
-//   columns 0-3, the superacid hall, 4 high and 5 deep: a floor, walls and a roof of inert casing; its edges (`X`) take the parts; a
-//   2x2x3 block of PTFE pipe casing vessels (P) inside, between the back and front walls.
-//   columns 4-6, the activation chamber, rows 0-2 of slices 1-3, against the hall's side: radiation-proof casing (R) with a laminated
-//   glass window (G) in its front and in its outer side, onto a tungstensteel frame (F), the source holder, at its centre.
-//   The controller is in the hall's front wall, row 1, column 1.
-// The 39 `X` cells take 1-2 energy hatches (two EV hatches give IV voltage: GTM raises it one tier with two hatches of the top tier, and
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front), 10 wide, 5 high,
+// 6 deep (about 250 blocks, D2-SIZE-IV):
+//   columns 0-5, the superacid hall, 6 deep: an inert casing floor, roof and corner posts; its other edges (`X`) take the parts; four
+//   2x2x3 stacks of PTFE pipe casing vessels (P) inside, with the controller in the front wall, row 1, column 1.
+//   columns 6-9, the activation chamber, slices 1-4: a radiation-proof casing (R) shell round a 2x2x3 hollow, with laminated glass
+//   windows (G) in its front and outer side and a tungstensteel frame (F), the source holder, inside.
+// The `X` cells take 1-2 energy hatches (two EV hatches give IV voltage: GTM raises it one tier with two hatches of the top tier, and
 // IV hatches need Mercury's iridium), 1-2 input buses, 1-2 output buses, 1-6 input hatches, 1-4 output hatches and at most one parallel
-// hatch. That is at most 17 parts, so at least 22 stay inert casing and the plant holds at least 50 inert casings; the parts' limits set
-// that floor, so the casing has no minimum of its own. ME buses and hatches have the same abilities, so they fit.
-//
-// Textures: overlay dir grindless:block/multiblock/naquadah_plant (tools/assets/Build-NaquadahPlantTextures.ps1) on GTM's inert casing.
+// hatch; the parts' limits leave the rest inert casing, so the casing has no minimum of its own. ME buses and hatches have the same
+// abilities, so they fit.
+//// Textures: overlay dir grindless:block/multiblock/naquadah_plant (tools/assets/Build-NaquadahPlantTextures.ps1) on GTM's inert casing.
 // Names / tooltips: client_scripts/grindless/iv_naquadah_plant_lang.js. Published for the recipe script and the smoke test:
 // global.grindless.naquadahPlant.
 (function () {
@@ -97,19 +96,59 @@
 
   // ---------------------------------------------------------------- pattern
 
+  // 10 wide, 5 high, 6 deep: slices back -> front, rows bottom -> top, built cell by cell then written out as strings
+  function naquadahSlices() {
+    var W = 10, H = 5, D = 6
+    var g = []
+    for (var z = 0; z < D; z++) {
+      g.push([])
+      for (var y = 0; y < H; y++) {
+        var row = []
+        for (var x = 0; x < W; x++) row.push(' ')
+        g[z].push(row)
+      }
+    }
+    // the hall, columns 0-5: inert floor, roof and corner posts; the other edges are `X` (casing or a part), air inside
+    for (var z1 = 0; z1 < D; z1++) {
+      for (var x1 = 0; x1 <= 5; x1++) {
+        var edge = z1 === 0 || z1 === D - 1 || x1 === 0 || x1 === 5
+        var corner = (z1 === 0 || z1 === D - 1) && (x1 === 0 || x1 === 5)
+        for (var y1 = 0; y1 < H; y1++) {
+          if (y1 === 0 || y1 === H - 1 || corner) g[z1][y1][x1] = 'I'
+          else g[z1][y1][x1] = edge ? 'X' : '#'
+        }
+      }
+    }
+    // four PTFE vessel stacks, 2x2x3
+    ;[[1, 1], [3, 1], [1, 3], [3, 3]].forEach(function (c) {
+      for (var y2 = 1; y2 <= 3; y2++) {
+        for (var dz = 0; dz < 2; dz++) {
+          for (var dx = 0; dx < 2; dx++) g[c[1] + dz][y2][c[0] + dx] = 'P'
+        }
+      }
+    })
+    // the activation chamber, columns 6-9: a shield shell round a 2x2x3 hollow with the source holder in it
+    for (var z3 = 1; z3 <= 4; z3++) {
+      for (var x3 = 6; x3 <= 9; x3++) {
+        for (var y3 = 0; y3 < H; y3++) {
+          var inner = x3 >= 7 && x3 <= 8 && z3 >= 2 && z3 <= 3 && y3 >= 1 && y3 <= 3
+          g[z3][y3][x3] = inner ? '#' : 'R'
+        }
+      }
+    }
+    g[2][2][8] = 'F'
+    g[4][2][7] = 'G'
+    g[4][2][8] = 'G'
+    g[3][2][9] = 'G'
+    g[2][2][9] = 'G'
+    g[D - 1][1][1] = 'S'
+    return g.map(function (slice) {
+      return slice.map(function (row) { return row.join('') })
+    })
+  }
+
   const SPEC = {
-    slices: [
-      // the hall's back wall
-      ['XXXX   ', 'XXXX   ', 'XIIX   ', 'IIII   '],
-      // the hall with its PTFE vessels; the chamber's back wall
-      ['XIIXRRR', 'XPPXRRR', 'XPPXRRR', 'IIII   '],
-      // the chamber's middle: the source holder, seen through the side window
-      ['XIIXRRR', 'XPPXRFG', 'XPPXRRR', 'IIII   '],
-      // the chamber's front: its window
-      ['XIIXRRR', 'XPPXRGR', 'XPPXRRR', 'IIII   '],
-      // the hall's front wall with the controller
-      ['XXXX   ', 'XSXX   ', 'XXXX   ', 'IIII   ']
-    ],
+    slices: naquadahSlices(),
     symbols: {
       S: Pat.controller(),
       // the casing fills the cells the parts leave (no minimum: with one, tools/analysis would model the optional parallel hatch as
@@ -127,7 +166,8 @@
       P: Pat.block(VESSEL),
       R: Pat.block(SHIELD),
       G: Pat.block(WINDOW),
-      F: Pat.frame([HOLDER])
+      F: Pat.frame([HOLDER]),
+      '#': Pat.air()
     }
   }
 

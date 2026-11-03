@@ -20,7 +20,7 @@ const row = (name) => PF.recipes.find((r) => r.name === name);
 // atoms of C, H, N, O per unit: fluids per 1,000 mB molecule, gases per 1,000 mB atom, one dust or item a monomer
 const ATOMS = {
   'gtceu:acrylonitrile': { C: 3, H: 3, N: 1 },
-  'gtceu:polyacrylonitrile': { C: 3, H: 3, N: 1 },
+  'gtceu:polyacrylonitrile_dust': { C: 3, H: 3, N: 1 },
   'grindless:pan_precursor_fibre': { C: 3, H: 3, N: 1 },
   'grindless:stabilised_pan_fibre': { C: 3, H: 1, N: 1 },
   'gtceu:hydrogen_cyanide': { C: 1, H: 1, N: 1 },

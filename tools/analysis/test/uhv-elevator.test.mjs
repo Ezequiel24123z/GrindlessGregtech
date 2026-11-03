@@ -1,5 +1,5 @@
 // UHV's fibres and the space elevator (package UHV-A7), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
-//   - startup_scripts/grindless/uhv/elevator.js: two recipe types, two machines (7 x 5 x 9 PBO plant, 11 x 5 x 5 tether ribbon works),
+//   - startup_scripts/grindless/uhv/elevator.js: two recipe types, two machines (13 x 12 x 15 PBO plant, 19 x 6 x 7 tether ribbon works),
 //     the GEO-assembled stage, six materials;
 //   - server_scripts/grindless/uhv/elevator.js: the plant's five steps, the works' two, line 24's side steps, the blocks of GTCA's
 //     space elevator, its GEO lift and the controllers' crafting;
@@ -44,17 +44,17 @@ test('registration: two recipe types, two machines, the stage and six materials;
   }
 });
 
-test('patterns: plant 7 x 5 x 9, works 11 x 5 x 5, one controller, GTM part limits; the parallel hatch is optional (max 1)', () => {
+test('patterns: plant 13 x 12 x 15, works 19 x 6 x 7, one controller, GTM part limits; the parallel hatch is optional (max 1)', () => {
   for (const [id, depth, height, width, casing, abilities] of [
-    ['gtceu:pbo_plant', 9, 5, 7, 'gtceu:inert_machine_casing', ['energy_input', 'input_bus', 'input_hatch', 'output_bus', 'output_hatch', 'parallel_hatch']],
-    ['gtceu:tether_ribbon_works', 5, 5, 11, 'gtceu:robust_machine_casing', ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']]
+    ['gtceu:pbo_plant', 15, 12, 13, 'gtceu:inert_machine_casing', ['energy_input', 'input_bus', 'input_hatch', 'output_bus', 'output_hatch', 'parallel_hatch']],
+    ['gtceu:tether_ribbon_works', 7, 6, 19, 'gtceu:robust_machine_casing', ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']]
   ]) {
     const s = run.docs.structures.structures[id];
     assert.ok(s, id + ' described');
     assert.equal(s.slices.length, depth, id);
     assert.ok(s.slices.every((sl) => sl.length === height && sl.every((r) => r.length === width)), id + ' uniform slices');
     assert.equal(s.slices.flat().join('').split('').filter((c) => c === 'S').length, 1, id + ' one controller');
-    for (const sl of s.slices) for (const r of sl) for (const c of r) assert.ok(s.symbols[c], `${id} symbol ${c}`);
+    for (const sl of s.slices) for (const r of sl) for (const c of r) assert.ok(c === ' ' || c === '#' || s.symbols[c], `${id} symbol ${c}`);
     const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
     assert.deepEqual(Object.keys(lim).sort(), abilities.slice().sort(), id);
     for (const a of abilities) assert.deepEqual(lim[a], a === 'parallel_hatch' ? { max: 1, preview: 1 } : { min: 1, max: 2 }, `${id} ${a}`);

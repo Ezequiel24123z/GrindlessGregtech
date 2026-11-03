@@ -44,6 +44,7 @@
   const COIL = 'gtceu:tritanium_coil_block'
   const GEARBOX = 'gtceu:tungstensteel_gearbox'
   const HEATPROOF = 'gtceu:heatproof_machine_casing'
+  const SHIELD = 'gtnn:radiation_proof_machine_casing'
 
   CR.table = 'kubejs/data/grindless/tables/crystals.json'
   CR.furnaceNoVoiding = 'grindless.machine.crystal_growth_furnace.no_voiding'
@@ -71,7 +72,7 @@
       casing: CLEAN, accent: ROBUST, frame: 'stainless_steel',
       // items in: the crystal, the comb, the UHV circuit and the programmed circuit; out: the clock; fluid in: the xenon charge
       maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 },
-      width: 7, height: 5, depth: 9
+      width: 11, height: 7, depth: 9
     },
     furnace: {
       name: 'crystal_growth_furnace',
@@ -79,11 +80,11 @@
       type: 'crystal_growth',
       dataKey: 'grindless_crystal_growth',
       lang: 'Crystal Growth Furnace',
-      casing: ROBUST, accent: HEATPROOF, frame: 'tungsten_steel',
+      casing: ROBUST, accent: HEATPROOF, hall: CLEAN, frame: 'tungsten_steel',
       // items in: three feeds or two and a kept one, the crucible and the circuit; out: the boule and the worn crucible;
       // fluids in: oxygen and the argon charge
       maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 2, fluidsOut: 0 },
-      width: 5, height: 9, depth: 5
+      width: 17, height: 9, depth: 7
     }
   }
 
@@ -124,34 +125,83 @@
     return slices
   }
 
-  // the optical table (B) on the floor, the vacuum chamber (T) up the middle (column 3, slices 3-5) with a gearbox mount (G) on
-  // each side of it; the rest is clean air
+  // an optical hall on an isolated slab: the optical table (B) with a vacuum chamber (T) along it on flanged gearbox mounts (G), the
+  // comb enclosure (a glass cage, back left) and the shielded clock cell (radiation-proof casing, front right) at its two ends
   function labInner(r, si, c) {
-    if (c === 3 && si >= 3 && si <= 5) return 'T'
-    if (r === 1) return 'B'
-    if (r === 2 && si === 4 && (c === 2 || c === 4)) return 'G'
+    if (r === 1) return c >= 2 && c <= 8 && si >= 1 && si <= 7 ? 'B' : '#'
+    if (c === 5 && r === 2 && si >= 2 && si <= 6) return 'T'
+    if (r === 2 && si === 4 && (c === 4 || c === 6)) return 'G'
+    if (r <= 4 && c >= 2 && c <= 4 && si >= 1 && si <= 3) {
+      if (r === 4) return 'L'
+      return c === 3 && si === 2 ? '#' : 'L'
+    }
+    if (r <= 4 && c >= 6 && c <= 8 && si >= 5 && si <= 7) {
+      if (r === 4) return 'R'
+      return c === 7 && si === 6 ? '#' : 'R'
+    }
     return '#'
   }
 
-  // a puller tower: the hearth (T) on the floor, a ring of induction coils (K) round the growth channel (the centre, argon) in the
-  // rows above it, the pull-head gearboxes (G) at the top
-  function furnaceInner(r, si, c) {
+  // three Czochralski pullers (tall pull towers, five wide, one gap apart) on a shared argon manifold hall at their feet. A tower: the
+  // hearth (T) on the floor, two rings of induction coils (K) round the growth channel (the centre), the pull head (G) at the top.
+  function furnaceChar(m, si, r, c) {
+    var last = m.width - 1
+    if (si >= 5) {
+      var corner = (c === 0 || c === last) && si === m.depth - 1
+      if (corner) return 'Q'
+      if (r === 0) return 'X'
+      if (r === 3) return c % 4 === 0 ? 'A' : 'H'
+      if (r > 3) return ' '
+      if (si === m.depth - 1) {
+        if (r === 1 && c === (last / 2)) return 'S'
+        return r === 1 ? 'A' : (c % 4 === 0 ? 'H' : 'L')
+      }
+      if (c === 0 || c === last) return 'H'
+      return r === 1 ? 'T' : '#'
+    }
+    var tc = c % 6
+    if (tc === 5) return ' '
+    var edgeX = tc === 0 || tc === 4
+    var edgeZ = si === 0 || si === 4
+    var top = m.height - 1
+    if (edgeX && edgeZ && r > 0) return 'Q'
+    if (r === 0) return edgeX && edgeZ ? 'Q' : 'X'
+    if (r === top) return edgeX || edgeZ ? 'Q' : (si % 2 === 1 ? 'A' : 'F')
+    if (edgeX || edgeZ) {
+      if (r === 1) return 'A'
+      return (edgeZ ? tc : si) % 2 === 0 ? 'F' : 'L'
+    }
+    var ring = Math.max(Math.abs(tc - 2), Math.abs(si - 2))
     if (r === 1) return 'T'
-    if (si === 2 && c === 2) return '#'
-    if (r >= 2 && r <= 6) return 'K'
-    if (r === 7) return 'G'
+    if (ring === 1 && (r === 3 || r === 5)) return 'K'
+    if (ring === 0 && r === top - 1) return 'G'
     return '#'
   }
 
+  function furnaceSlices(m) {
+    var slices = []
+    for (var si = 0; si < m.depth; si++) {
+      var rows = []
+      for (var r = 0; r < m.height; r++) {
+        var row = ''
+        for (var c = 0; c < m.width; c++) row += furnaceChar(m, si, r, c)
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    return slices
+  }
   function specOf(m, inner, parts) {
     return {
-      slices: shell(m, inner),
+      slices: inner === null ? furnaceSlices(m) : shell(m, inner),
       symbols: {
         S: Pat.controller(),
         X: Pat.oneOf.apply(null, [Pat.block(m.casing)].concat(parts)),
         F: Pat.block(m.casing),
         Q: Pat.frame([m.frame]),
         A: Pat.block(m.accent),
+        H: Pat.block(m.hall || m.accent),
+        R: Pat.block(SHIELD),
         T: Pat.block(TUNGSTEN_PIPE),
         B: Pat.block(BENCH),
         K: Pat.block(COIL),
@@ -168,7 +218,7 @@
     Pat.part('energy_input', { min: 1, max: 2 }),
     G.parallelHatch.part()
   ])
-  CR.machines.furnace.spec = specOf(CR.machines.furnace, furnaceInner, [
+  CR.machines.furnace.spec = specOf(CR.machines.furnace, null, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 2 }),
     Pat.part('output_bus', { min: 1, max: 2 }),

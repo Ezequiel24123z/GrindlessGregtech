@@ -56,7 +56,7 @@ test('the patterns: one controller in the front slice, uniform size, a symbol fo
 
 test('the machine recipes: Uranus orbit only, one circuit per type slot, ZPM VA, whole numbers', () => {
   const machine = UR.recipes.filter((p) => p.dim === 'grindless:uranus_orbit');
-  assert.equal(machine.length, 7);
+  assert.equal(machine.length, 8);
   const seen = new Set();
   for (const p of UR.recipes) {
     const r = byId(p.recipeId);
@@ -80,14 +80,18 @@ test('outputs fit the consumers: hydrogen, methane, slurry, seed, recordings, sa
   assert.match(out('grindless:ice_giant_siphon/atmosphere_sample'), /ice_giant_atmosphere_sample/);
   assert.match(out('grindless:slurry_separation/slurry_decompression'), /ice_giant_diamond_seed/);
   assert.match(out('grindless:outer_flyby/neptune_flyby'), /neptune_probe_recording/);
+  assert.doesNotMatch(out('grindless:outer_flyby/neptune_flyby'), /neptune_sample/, 'c1 records only');
+  assert.match(out('grindless:outer_flyby/neptune_sampling'), /neptune_sample/);
+  assert.match(JSON.stringify(byId('grindless:outer_flyby/neptune_sampling').j.inputs), /silica_aerogel/, 'the sampling pass spends the aerogel');
   assert.match(out('grindless:outer_flyby/triton_flyby'), /triton_probe_recording/);
   assert.match(JSON.stringify(byId('grindless:ice_giant_siphon/uranus_hydrogen').j.inputs), /saturn_interior_model/);
 });
 
-test('support recipes: probe, casing, sample flask, machine crafting', () => {
-  for (const id of ['grindless:assembler/neptune_flyby_probe', 'grindless:assembler/pressure_hull_casing', 'grindless:centrifuge/neptune_sample_flask']) {
+test('support recipes: probe, casing, machine crafting; the sample flask is gone (the sample is research)', () => {
+  for (const id of ['grindless:assembler/neptune_flyby_probe', 'grindless:assembler/pressure_hull_casing']) {
     assert.ok(byId(id), id);
   }
+  assert.ok(!byId('grindless:centrifuge/neptune_sample_flask'), 'no recipe eats the Neptune sample');
   for (const m of MACHINES) assert.ok(byId('grindless:assembly_line/' + m), m + ' crafting recipe');
 });
 

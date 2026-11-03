@@ -17,13 +17,13 @@
                 'Zylon, the strongest polymer fibre: the tether\'s backbone. Programmed circuit 1: trichlorobenzene + nitration mixture -> dinitrotrichlorobenzene + diluted sulfuric acid. Circuit 2: + sodium hydroxide -> chlorodinitroresorcinol + salt.',
                 'Circuit 3: chlorodinitroresorcinol + hydrogen + hydrochloric acid, palladium kept -> diaminoresorcinol + water. Circuit 4: diaminoresorcinol + terephthalic acid + polyphosphoric acid -> PBO dope + hydrochloric acid.',
                 'Circuit 5: 1,000 mB PBO dope + 2,000 mB water -> 8 PBO fibre + phosphoric acid, which goes back to polyphosphoric acid. The hydrochloric acid feeds circuit 3, the salt and the acids GTM\'s electrolyser and distillery.',
-                'Needs 7 x 5 x 9 chemically inert casing with PTFE pipe casings and a tungstensteel gearbox (8 or more casings among the floor parts), 1 or 2 energy hatches (UHV), input and output buses and hatches.'
+                'Needs a 13 x 6 x 15 reactor hall of chemically inert casing (laminated glass windows, tungsten steel frame posts, PTFE pipe casing vessels on tungstensteel gearbox plinths) beside a 5 x 5 spinneret tower 12 blocks high (8 or more casings among the floor parts), 1 or 2 energy hatches (UHV), input and output buses and hatches.'
             ],
             worksTips: [
                 'Braids the space elevator\'s tether and builds the climber that rides it.',
                 'Programmed circuit 1: 8 carbon nanotube yarn + 4 BNNT yarn + 4 PBO fibre -> 1 tether ribbon segment.',
                 'Circuit 2: 1 InGaAs epi wafer (the laser receiver) + 2 SiC power modules + 2 betavoltaic cells -> 1 tether climber.',
-                'Needs 11 x 5 x 5 robust tungstensteel casing with tungstensteel gearboxes and a tungsten steel frame (12 or more casings among the floor parts), 1 or 2 energy hatches (UHV), input and output buses.'
+                'Needs a 19 x 6 x 7 braiding hall of robust tungstensteel casing (laminated glass windows, tungsten steel frame posts) with rows of tungstensteel gearbox bobbin carousels and a tungsten steel tension frame (12 or more casings among the floor parts), 1 or 2 energy hatches (UHV), input and output buses.'
             ],
             items: {
                 geo_assembled_stage: ['GEO-Assembled Stage', 'A heavy rocket stage put together at the top of the tether, where it never had to fight its way out of the gravity well.', 'Made by the Space Elevator (GEO lift); the level 8 rocket takes it.']
