@@ -5,7 +5,7 @@
 //   1,024 A MAX+ hatch: the inputs are spread over the buses, the recipe starts at 2^39 EU/t and the output block appears):
 //     lookup   every row of the package and the controller line is in the recipe manager
 //     static   nothing skipped; the recipe type's item inputs are the widest row's
-//     formed   the array forms with 81 input buses, one 1,024 A hatch, two output buses and two fluid hatches
+//     formed   the array forms with 74 input buses (its 80 part cells), one 1,024 A hatch, two output buses and two fluid hatches
 //     eut      the Hyperstargate base row starts at 2^39 EU/t
 //     output   a Hyperstargate base block in an output bus (the run skips to 20 ticks before the end once the recipe is measured)
 // The other rows differ by data only, on the mechanism this run proves: they are looked up, not run.
@@ -23,7 +23,7 @@
   var CIRCUIT = 'gtceu:programmed_circuit'
   var HATCH = 'gtceu:max_maxplus_energy_hatch_1024a'
   var DIM = 'gcyr:black_hole_orbit'
-  var BUSES = 81
+  var BUSES = 74
   var ROW = 'hyperstargate_base'
 
   function gridRows() {
@@ -198,8 +198,9 @@
       topUp(u.energy)
       u.buses.forEach(clearBus)
       // each distinct input in its own bus; the circuit in the first
+      // the shape has 80 part cells (74 buses, the rest of the parts): inputs past the first 73 stacks share buses
       fill(u.buses[0], CIRCUIT, 1, '{Configuration:' + u.row.circuit + '}')
-      u.row.items.forEach(function (e, k) { fill(u.buses[1 + k], e[0], e[1]) })
+      u.row.items.forEach(function (e, k) { fill(u.buses[(1 + k) % BUSES], e[0], e[1]) })
       u.row.fluids.forEach(function (f, k) {
         try { u.hatches[k].tank.setFluidInTank(0, Fluid.of(f[0], f[1]).getFluidStack()) } catch (e) { note(tag + 'fluid', 'could not fill hatch ' + k + ': ' + errText(e)) }
       })

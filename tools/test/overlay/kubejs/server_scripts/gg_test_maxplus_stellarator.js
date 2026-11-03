@@ -24,9 +24,10 @@
   var LOADED_AT = Date.now()
   var BAND = { x0: 48896, x1: 48959, y0: 98, y1: 125, z0: 0, z1: 63 }
   var BOX_X = 48897
-  var BOX_Y = 100
+  var BOX_Y = 98
+  var BOX_Y_B = 112
   var BOX_Z_A = 1
-  var BOX_Z_B = 33
+  var BOX_Z_B = 1
   var TOWER_X0 = 48936
   var TOWER_STEP = 10
   var TOWERS = 2
@@ -329,7 +330,7 @@
       if (w.track(S.level, pos(towerPos(i)))) tracked++
     }
     S.posA = anchorFor(STELLARATOR, BOX_X, BOX_Y, BOX_Z_A)
-    S.posB = anchorFor(STELLARATOR, BOX_X, BOX_Y, BOX_Z_B)
+    S.posB = anchorFor(STELLARATOR, BOX_X, BOX_Y_B, BOX_Z_B)
     S.dynA = placeStellarator(S.posA, 8, failed)
     S.dynB = placeStellarator(S.posB, 1, failed)
     var trackedDyn = 0

@@ -118,7 +118,7 @@
     var missing = ids.filter(function (i) { return !rm.byKey(new RL(i)).isPresent() })
     check('lookup', missing.length === 0, ids.length + ' ids checked; missing: ' + (missing.length ? missing.join(', ') : 'none'))
     var ML = global.grindless.membraneLine
-    check('static', !!ML && ML.skipped.length === 0 && ML.recipes.length === 3 && ML.clashes.length === 0,
+    check('static', !!ML && ML.skipped.length === 0 && ML.recipes.length === 4 && ML.clashes.length === 0,
       'recipes ' + (ML ? ML.recipes.length : null) + ', skipped ' + JSON.stringify(ML ? ML.skipped : null) + ', clashes ' + JSON.stringify(ML ? ML.clashes : null))
   }
 
@@ -196,10 +196,10 @@
     command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
     command('fill ' + X0 + ' ' + Y0 + ' 0 ' + X1 + ' ' + Y1 + ' 63 minecraft:air')
     try {
-      var g = placeShape(39530, 100, 20, 2)
+      var g = placeShape(39530, 100, 10, 2)
       note('placed', g.placed + ' blocks, ' + g.energy + ' OpV 4 A hatch cell(s); refused: ' + (g.refused.join(', ') || 'none'))
       S.main = { phase: 'forming', started: 0, pos: g.pos, next: 0 }
-      var n = placeShape(39560, 100, 20, 1)
+      var n = placeShape(39560, 100, 10, 1)
       note('neg_placed', n.placed + ' blocks, ' + n.energy + ' OpV 4 A hatch cell(s); refused: ' + (n.refused.join(', ') || 'none'))
       S.neg = { phase: 'forming', started: 0, pos: n.pos }
     } catch (e) { check('build', false, errText(e)); S.main = null; S.neg = null }

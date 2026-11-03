@@ -28,7 +28,7 @@
 
   var UNITS = [
     {
-      name: 'ark', machine: 'gtceu:gene_ark', cx: 40120, cz: 32, height: 9, energy: HATCH, energyN: 2, eut: VA_MAX,
+      name: 'ark', machine: 'gtceu:gene_ark', cx: 40120, cz: 32, height: 13, energy: HATCH, energyN: 2, eut: VA_MAX,
       parts: [HATCH, HATCH, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch'],
       items: [['grindless:encapsulated_genome_library', 4], ['grindless:rydberg_logic_array', 1], ['grindless:vitrified_cell_capsule', 1], [CIRCUIT, 1, '{Configuration:1}']],
       fluids: [['gtceu:superfluid_helium_3', 1000]],
