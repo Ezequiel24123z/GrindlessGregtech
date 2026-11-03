@@ -200,8 +200,8 @@ test('the test zone is in its band, the bench test exists, and the two pendingUs
   const z = list.find((e) => e.id === 'uxv_stellar_fractionation_hall');
   assert.ok(z);
   assert.deepEqual(z.x, [37056, 37119]);
-  assert.deepEqual(z.z, [0, 63]);
-  assert.deepEqual(z.y, [98, 115]);
+  assert.deepEqual(z.z, [0, 64]);
+  assert.deepEqual(z.y, [98, 122]);
   assert.deepEqual(z.tests, ['uxv_stellar_fractionation_hall']);
   assert.ok(/Overworld/.test(z.note));
   assert.ok(fs.existsSync(path.join(ROOT, 'tools/test/overlay/kubejs/server_scripts/gg_test_uxv_stellar_fractionation_hall.js')));

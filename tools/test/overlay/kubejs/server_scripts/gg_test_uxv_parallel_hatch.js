@@ -1,6 +1,6 @@
 // priority: -9881
 // TEST ONLY, UXV-M1 (gtceu:uxv_parallel_hatch). Command: kubejs custom_command gg_test_uxv_parallel_hatch
-// Band ONLY: X 36416-36479, Z 0-63, Overworld Y 98-115 (the forge is 16 high; zones.json carries the same Y range).
+// Band ONLY: X 36416-36479, Z 0-63, Overworld Y 98-125 (the forge is 23 high; zones.json carries the same Y range).
 //   T1 (named uncertainty: tier 12 registration of ParallelHatchPartMachine with highTierContent off, and 65,536 copies still bound by energy as a long):
 //     reports      a placed UXV hatch reports 65,536; the UHV, UEV and UIV ones beside it still 1,024, 4,096 and 16,384
 //     forge_formed gtceu:stellar_forge with one UXV energy hatch and the UXV hatch forms and sees the hatch
@@ -13,7 +13,8 @@
   var X0 = 36416
   var X1 = 36479
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 125
+  var Z1 = 63
   var NAME = 'uxv_parallel_hatch'
   var ID = 'gtceu:stellar_forge'
   var GCYM = 'gtceu:large_assembler'
@@ -23,7 +24,7 @@
   var CEILING = 256 * 65536
   var CX = 36448
   var CY = 100
-  var PARTS = { 0: 'gtceu:maintenance_hatch', 1: 'gtceu:uxv_energy_input_hatch', 2: 'gtceu:hv_input_bus', 4: 'gtceu:hv_input_hatch', 5: 'gtceu:hv_output_hatch', 6: 'gtceu:uxv_parallel_hatch' }
+  var PARTS = { 4: 'gtceu:maintenance_hatch', 5: 'gtceu:uxv_energy_input_hatch', 6: 'gtceu:hv_input_bus', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch', 10: 'gtceu:uxv_parallel_hatch' }
 
   function classes() {
     if (C !== null) return C
@@ -57,7 +58,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in minecraft:overworld run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -185,8 +186,8 @@
 
   function begin() {
     S.level = S.server.getLevel('minecraft:overworld')
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
-    command('fill ' + X0 + ' ' + Y0 + ' 0 ' + X1 + ' ' + Y1 + ' 63 minecraft:air')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
     var RL = classes().RL
     var ids = ['gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch']
     var have = ids.filter(function (i) { return !!classes().Regs.MACHINES.get(new RL(i)) })
@@ -265,13 +266,13 @@
   }
 
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   ServerEvents.customCommand('gg_test_uxv_parallel_hatch', function () {

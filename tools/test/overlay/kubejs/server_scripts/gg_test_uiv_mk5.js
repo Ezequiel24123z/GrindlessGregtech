@@ -1,6 +1,6 @@
 // priority: -8423
 // TEST ONLY, UIV-A9. Command: kubejs custom_command gg_test_uiv_mk5
-// Band ONLY: X 35456-35519, Z 0-63, Overworld Y 70-100.
+// Band ONLY: X 35456-35519, Z 0-44, Overworld Y 70-110 (two rings and the source stacked).
 //   a9_ring_*    gtceu:uiv_fusion_reactor (second registerFusionTier ring beside the Mk4) forms with 16 UIV 16 A hatches; its internal buffer
 //                (read by reflection) is above the int maximum, and it starts and runs c1 (he3he3_fuel, start 4 G, above 2^31) and c2 (pli6_fuel)
 //   a9_src_*     gtceu:polarised_proton_source forms and runs rf_dissociation (circuit 1) on detritiated protium
@@ -12,15 +12,16 @@
   var X0 = 35456
   var X1 = 35519
   var Y0 = 70
-  var Y1 = 100
+  var Y1 = 110
+  var Z1 = 44
   var NAME = 'uiv_mk5'
   var HATCH16 = 'gtceu:uiv_energy_input_hatch_16a'
   var REQUEST = 'ggTestUivMk5Request'
   var RING = 'gtceu:uiv_fusion_reactor'
   var SOURCE = 'gtceu:polarised_proton_source'
   var RUNS = [
-    { name: 'c1', fuel: 'gtceu:he3he3_fuel', recipe: 'uiv_he3he3', start: 4000000000, x: 35464 },
-    { name: 'c2', fuel: 'gtceu:pli6_fuel', recipe: 'uiv_pli6', start: 3000000000, x: 35484 }
+    { name: 'c1', fuel: 'gtceu:he3he3_fuel', recipe: 'uiv_he3he3', start: 4000000000, x: 35488, y: 75 },
+    { name: 'c2', fuel: 'gtceu:pli6_fuel', recipe: 'uiv_pli6', start: 3000000000, x: 35488, y: 87 }
   ]
   var DEC = [
     { name: 'he3he3', id: 'grindless:direct_conversion/uiv_he3he3_plasma', total: 67108864 },
@@ -59,7 +60,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in minecraft:overworld run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -175,7 +176,7 @@
     var e = 0
     var i = 0
     var o = 0
-    placeCheck(u, placeMachine(RING, u.x, 80, 30, function (c) {
+    placeCheck(u, placeMachine(RING, u.x, u.y, 2, function (c) {
       if (c.ch === 'E' && e < 16) { e++; return HATCH16 }
       if (c.ch === 'I' && i < 1) { i++; return 'gtceu:hv_input_hatch' }
       if (c.ch === 'O' && o < 1) { o++; return 'gtceu:hv_output_hatch' }
@@ -229,7 +230,7 @@
     var inH = 0
     var en = 0
     var outH = 0
-    placeCheck(u, placeMachine(SOURCE, 35500, 75, 40, function (c) {
+    placeCheck(u, placeMachine(SOURCE, 35488, 99, 2, function (c) {
       if (c.sym.kind !== 'oneOf' || c.ch !== 'X') return null
       if (en < 1) { en++; return 'gtceu:uiv_energy_input_hatch' }
       if (inB < 1) { inB++; return 'gtceu:hv_input_bus' }
@@ -284,22 +285,22 @@
 
   // ---------------------------------------------------------------- driver
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false, units: [] }
     S.level = server.getLevel('minecraft:overworld')
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     clear()
     RUNS.forEach(function (r) {
-      var u = { name: 'ring_' + r.name, x: r.x, run: r, tick: ringTick, phase: 'forming', started: 0 }
+      var u = { name: 'ring_' + r.name, x: r.x, y: r.y, run: r, tick: ringTick, phase: 'forming', started: 0 }
       try { ringBuild(u); S.units.push(u) } catch (e) { check('ring_' + r.name + '_build_exception', false, errText(e)) }
     })
     var p = { name: 'src', tick: srcTick, phase: 'forming', started: 0 }

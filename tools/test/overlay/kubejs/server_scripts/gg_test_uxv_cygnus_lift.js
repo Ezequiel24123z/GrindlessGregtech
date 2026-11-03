@@ -1,6 +1,6 @@
 // priority: -9792
 // TEST ONLY, UXV-B2 (gtceu:stellar_elevator, gtceu:plasma_mass_filter, gtceu:stellar_condensation_tower). Command: kubejs custom_command gg_test_uxv_cygnus_lift
-// Band ONLY: X 36800-36863, Z 0-63, Y 98-115, built in grindless:cygnus_x1_orbit (the dimension their recipes are locked to).
+// Band ONLY: X 36800-36863, Z 0-82, Y 98-160 (the three units one behind the other), built in grindless:cygnus_x1_orbit (the dimension their recipes are locked to).
 //   T1 (named uncertainty: the elevator's c1 row (1,000 mB liquid helium -> 1,000 mB stellar plasma + 900 mB helium, 134,217,728 EU/t) carries
 //   the Cygnus X-1 dimension lock and still starts and delivers in a 25-deep structure laid on its side, fed by two UIV energy hatches):
 //     lookup     every row, the older EHT and syngas rows and the three controllers' assembly lines are in the recipe manager
@@ -13,7 +13,8 @@
   var X0 = 36800
   var X1 = 36863
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 160
+  var Z1 = 82
   var NAME = 'uxv_cygnus_lift'
   var DIM = 'grindless:cygnus_x1_orbit'
   var CY = 102
@@ -29,9 +30,9 @@
   var HV = ['gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
 
   var UNITS = [
-    { name: 'elevator', id: 'gtceu:stellar_elevator', cx: 36808, z: 2, parts: [ENERGY, ENERGY].concat(HV, ['gtceu:hv_output_hatch']), run: true },
-    { name: 'filter', id: 'gtceu:plasma_mass_filter', cx: 36824, z: 2, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch'], run: false },
-    { name: 'tower', id: 'gtceu:stellar_condensation_tower', cx: 36840, z: 2, parts: [ENERGY, ENERGY].concat(HV), run: false }
+    { name: 'elevator', id: 'gtceu:stellar_elevator', cx: 36832, z: 2, parts: [ENERGY, ENERGY].concat(HV, ['gtceu:hv_output_hatch']), run: true },
+    { name: 'filter', id: 'gtceu:plasma_mass_filter', cx: 36832, z: 28, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch'], run: false },
+    { name: 'tower', id: 'gtceu:stellar_condensation_tower', cx: 36832, z: 68, parts: [ENERGY, ENERGY].concat(HV), run: false }
   ]
 
   function classes() {
@@ -66,7 +67,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in ' + DIM + ' run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -230,19 +231,19 @@
   }
 
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false }
     S.level = server.getLevel(DIM)
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     clear()
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []

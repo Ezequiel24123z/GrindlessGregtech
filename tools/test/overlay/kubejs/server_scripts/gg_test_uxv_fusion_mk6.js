@@ -1,6 +1,6 @@
 // priority: -9826
 // TEST ONLY, UXV-A7. Command: kubejs custom_command gg_test_uxv_fusion_mk6
-// Band ONLY: X 36672-36735, Z 0-63, Overworld Y 98-112.
+// Band ONLY: X 36672-36735, Z 0-48, Overworld Y 98-148 (four rings stacked).
 //   a7_ring_*    gtceu:uxv_fusion_reactor (15 x 7 x 17) forms with 16 UXV 16 A hatches; its internal buffer (read by reflection) is above the
 //                int maximum (16 x 2^6 x 10,000,000 = 10.24 G), and it starts and runs c1 (uxv_hot_cno, start 6 G), c2 (triple alpha, 8 G),
 //                c3 (carbon burning, 9 G) and c4 (oxygen burning, 10 G, the largest start inside the buffer)
@@ -12,16 +12,17 @@
   var X0 = 36672
   var X1 = 36735
   var Y0 = 98
-  var Y1 = 112
+  var Y1 = 148
+  var Z1 = 48
   var NAME = 'uxv_fusion_mk6'
   var HATCH16 = 'gtceu:uxv_energy_input_hatch_16a'
   var REQUEST = 'ggTestUxvFusionMk6Request'
   var RING = 'gtceu:uxv_fusion_reactor'
   var RUNS = [
-    { name: 'c1', fuels: [['gtceu:stellar_hydrogen_cut', 4000], ['gtceu:stellar_cno_cut', 4000]], recipe: 'uxv_hot_cno', start: 6000000000, x: 36680 },
-    { name: 'c2', fuels: [['gtceu:triple_alpha_fuel', 4000]], recipe: 'uxv_triple_alpha', start: 8000000000, x: 36696 },
-    { name: 'c3', fuels: [['gtceu:carbon_burning_fuel', 4000]], recipe: 'uxv_carbon_burning', start: 9000000000, x: 36712 },
-    { name: 'c4', fuels: [['gtceu:oxygen_burning_fuel', 4000]], recipe: 'uxv_oxygen_burning', start: 10000000000, x: 36728 }
+    { name: 'c1', fuels: [['gtceu:stellar_hydrogen_cut', 4000], ['gtceu:stellar_cno_cut', 4000]], recipe: 'uxv_hot_cno', start: 6000000000, x: 36704, y: 100 },
+    { name: 'c2', fuels: [['gtceu:triple_alpha_fuel', 4000]], recipe: 'uxv_triple_alpha', start: 8000000000, x: 36704, y: 112 },
+    { name: 'c3', fuels: [['gtceu:carbon_burning_fuel', 4000]], recipe: 'uxv_carbon_burning', start: 9000000000, x: 36704, y: 124 },
+    { name: 'c4', fuels: [['gtceu:oxygen_burning_fuel', 4000]], recipe: 'uxv_oxygen_burning', start: 10000000000, x: 36704, y: 136 }
   ]
   var DEC = [
     { name: 'cno', id: 'grindless:direct_conversion/uxv_cno_ash_plasma', total: 134217728 },
@@ -61,7 +62,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in minecraft:overworld run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -177,7 +178,7 @@
     var e = 0
     var i = 0
     var o = 0
-    placeCheck(u, placeMachine(RING, u.x, 105, 30, function (c) {
+    placeCheck(u, placeMachine(RING, u.x, u.y, 2, function (c) {
       if (c.ch === 'E' && e < 16) { e++; return HATCH16 }
       if (c.ch === 'I' && i < 2) { i++; return 'gtceu:hv_input_hatch' }
       if (c.ch === 'O' && o < 1) { o++; return 'gtceu:hv_output_hatch' }
@@ -244,22 +245,22 @@
 
   // ---------------------------------------------------------------- driver
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false, units: [] }
     S.level = server.getLevel('minecraft:overworld')
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     clear()
     RUNS.forEach(function (r) {
-      var u = { name: 'ring_' + r.name, x: r.x, run: r, tick: ringTick, phase: 'forming', started: 0 }
+      var u = { name: 'ring_' + r.name, x: r.x, y: r.y, run: r, tick: ringTick, phase: 'forming', started: 0 }
       try { ringBuild(u); S.units.push(u) } catch (e) { check('ring_' + r.name + '_build_exception', false, errText(e)) }
     })
     S.units.push({ name: 'dec', tick: decTick, phase: 'dec', started: 0 })
