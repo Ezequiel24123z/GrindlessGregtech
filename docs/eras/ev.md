@@ -295,7 +295,7 @@ What it gains: **a separation GTM does not do.** Martian rare earths (the KubeJS
   - Tricalcium phosphate → GTM's fertilizer; inert and voidable.
 - **Samarium cut on Earth (2026-10-25, `offworld_only.json`, "mars" rows):**
   - GTM's `rare_earth_separation` centrifuge is rebuilt without its small samarium dust, keeping cadmium, neodymium, cerium, yttrium and lanthanum.
-  - GTCA's samaric branch: `gtceu:electric_blast_furnace/flsamaric_to_ho` is rebuilt without the samarium-terbium mixture. It keeps its holmium, because LuV's wetware boards and enriched holmium have no other source, so removing the recipe outright, as first planned, would have closed LuV.
+  - GTCA's samaric branch: `gtceu:electric_blast_furnace/flsamaric_to_ho` is rebuilt without the samarium-terbium mixture. It keeps its holmium, because LuV's wetware boards and enriched holmium have no other source, so removing the recipe outright, as first planned, would have closed LuV. Its 12,000 mB of `gtca:calcium_fluoride` is dropped from the rebuilt recipe (the `fluids` option of the strip): the material is hidden, nothing consumes it and no machine stores it (principle 3).
   - The rest of the branch (`smtb_to_nitrosmtb` and `nitrosmtb_to_tnd_and_srd` in both reactors, `residue_to_smgd`, `tnd_to_terbium`) is left with no Earth input. Its terbium and gadolinium have no other use, so the hidden table takes them once `obtain.json` classifies them.
 
 ## New process lines

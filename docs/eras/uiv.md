@@ -425,7 +425,7 @@ The **Structure** sizes below are design sketches. The built shapes come from `u
   - real: pulsar winds and pair multiplicity (Goldreich & Julian 1969; Ruderman & Sutherland 1975); J0437's bow shock is seen in H-alpha;
   - named fiction: the trap's catch rate.
 - **Recipes:** c1: MH coil magnet (catalyst) → pair plasma (31,457,280 EU/t, 1,200 ticks *(tune)*).
-- **Byproducts:** annihilation gamma rays are absorbed as heat in the W lining; unused electrons go back into the wind *(voidable)*.
+- **Byproducts:** annihilation gamma rays are absorbed as heat in the W lining; unused electrons (`gtceu:wind_electrons`, 2,000 mB per trap run and 500 mB per Penning-trap cooling) are vented back into the wind *(voidable)*: no recipe consumes them, and the output hatch is set to void.
 - **Structure:** 9 × 9 × 9 *(tune)*, MH coil blocks, a tungsten lining.
 - **Crossings:** the UHV positron accumulator (line 34).
 - **Source:** Goldreich & Julian 1969.

@@ -29,7 +29,7 @@
             '\u00a77Folds pulsar X-ray pulses into a timing solution for seed navigation.'],
 
         ['gtceu.recipe.grindless_pulsar_wind_trapping.pair_plasma',
-            'Circuit 1: the coil block traps pair plasma; the gamma rays heat the lining (voided) and the spare electrons go back to the wind.'],
+            'Circuit 1: the coil traps pair plasma; gamma rays heat the lining (voided); the spare electrons are vented back to the wind (nothing uses them).'],
         ['gtceu.recipe.grindless_positronium_condensation.ps_in_aerogel',
             'Circuit 1: moderated positrons form positronium in the pores of the Ps-converter aerogel.'],
         ['gtceu.recipe.grindless_positronium_condensation.laser_cooled_ps',
@@ -41,7 +41,7 @@
         ['gtceu.recipe.grindless_xray_pulse_profiling.pulsar_navigation_solution',
             'Circuit 2: four timed pulse profiles and the neutron-star EOS chart give the navigation solution.'],
         ['gtceu.recipe.grindless_positron_accumulation.pair_plasma_cooling',
-            'Circuit 4, at PSR J0437-4715 only: the Penning trap cools pair plasma into a bunch of cooled positrons; the electrons go back.'],
+            'Circuit 4, at J0437 only: the Penning trap cools pair plasma into cooled positrons; the 500 mB of electrons are vented to the wind (nothing uses them).'],
         ['gtceu.recipe.grindless_antimatter_storage.ps_bec',
             'Circuit 4, at PSR J0437-4715 only: laser-cooled positronium condenses in a superfluid helium bath into a Ps BEC.'],
         ['gtceu.recipe.grindless_megabar.c12_hpht',
