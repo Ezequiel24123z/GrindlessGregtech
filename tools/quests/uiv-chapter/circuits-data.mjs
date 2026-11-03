@@ -88,11 +88,11 @@ export const QUESTS = [
     automate: 'One wafer yields several chips; stock them in a chest by ME.',
   }, [it('grindless:beuv_driver_asic')], 140),
   q('CH_TENSOR', 'circuit', 'Photonic Tensor Core', 'grindless:photonic_tensor_core', ['CH_ASIC', 'CH_LNOI'], 11, 3.25, {
-    for: 'Matrix products done in light: the &6Photonic Tensor Core&r is the arithmetic of the optical mainframe.',
-    needs: 'In the photonic integration hall (a circuit 4 program): a BEUV driver ASIC, a Quantum Photonic Chip and four thin-film LN modulators from the photonic foundry.',
-    unlocks: 'The optical mainframe.',
-    automate: 'Modulators and ASICs by ME; the tensor core is made one at a time and goes straight to the mainframe line.',
-  }, [it('grindless:photonic_tensor_core')], 160),
+    for: 'Matrix products done in light: the &6Photonic Tensor Core&r is the arithmetic of the optical mainframe. It takes the compute module of the first pass of the hall.',
+    needs: 'In the photonic integration hall (a circuit 4 program): a BEUV driver ASIC, a Photonic Compute Module and four thin-film LN modulators. The modulators come from the photonic foundry: an etched LNOI wafer and gold foil (circuit 6) make sixteen.',
+    unlocks: 'The comb-fed tensor core, one pass later in the same hall.',
+    automate: 'Modulators and ASICs by ME; the tensor core is made one at a time and goes straight to the next pass.',
+  }, [it('grindless:thin_film_ln_modulator'), it('grindless:photonic_tensor_core')], 160),
 
   // ------------------------------------------------------------------ memory
   q('CH_5D', 'wafer', 'Five-Dimensional Crystal', 'grindless:data_crystal_5d', ['H_LADDER'], 3.5, 5.75, {
@@ -134,11 +134,11 @@ export const QUESTS = [
     automate: 'Dies and modules in matched numbers by ME; keep one processor per mainframe.',
   }, [it('grindless:p_si_processor')], 200),
   q('MAIN', 'circuit', 'Optical Mainframe', 'gtnn:optical_mainframe', ['CH_PSI', 'CH_SIXH', 'CH_TENSOR'], 13.5, 5.75, {
-    for: 'A processor, a memory, a tensor core, a crossbar on a glass interposer and two optical assemblies make the &6Optical Mainframe&r, the UIV circuit.',
-    needs: 'The photonic integration hall: a Characterised P:Si Processor, a Six-Hour Quantum Memory, a Photonic Tensor Core, a Crossbar on Interposer and two optical assemblies. The assemblies come from the photonic foundry (optical processors from LNOI wafers, plus quantum memory chips).',
+    for: 'A processor, a memory, a comb-fed tensor core and two optical assemblies make the &6Optical Mainframe&r, the UIV circuit.',
+    needs: 'The photonic integration hall (a circuit 5 program): a Characterised P:Si Processor, a Six-Hour Quantum Memory, a Comb-Fed Tensor Core, two optical assemblies and three UEV circuits. The assemblies come from the photonic foundry (optical processors and quantum memory chips, with ultrapure water).',
     unlocks: 'The UIV parts, the controllers of Mk5 and Matrioshka and the stored proof of the gate.',
     automate: 'Keep a dedicated chest and never a big stock; every part goes into each.',
-  }, [it('gtnn:optical_mainframe')], 250),
+  }, [it('gtnn:optical_assembly', 2), it('gtnn:optical_mainframe')], 250),
   {
     key: 'H_LADDER', kind: 'reading', title: 'The Light Ladder', icon: 'grindless:beuv_exposed_wafer',
     deps: ['H_CIRC'], x: 0.5, y: 6.5,

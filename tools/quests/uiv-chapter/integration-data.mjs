@@ -194,7 +194,7 @@ export const QUESTS = [
     key: 'I_OM_NUC', kind: 'process', title: 'Heavier Cuts', icon: 'gtceu:hot_cell',
     deps: ['H_NUC'], x: 3, y: -44.5,
     teach: {
-      for: 'The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Transuranium Facility&r, &6Waste Retrieval Plant&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r and &6Superheavy Chemistry Lab&r take new rows: zirconium and flash targets, canisters, einsteinium cuts, synroc and the elements 119 and 120.',
+      for: 'The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Transuranium Facility&r, &6Waste Retrieval Plant&r, &6Superheavy Factory&r (the heavy ion cyclotron, which irradiates the target and separates the recoil on the same line) and &6Superheavy Chemistry Lab&r take new rows: zirconium and flash targets, canisters, einsteinium cuts, synroc and the elements 119 and 120.',
       needs: 'The UEV superheavy chain and the hot-cell feeds.',
       unlocks: 'The californium wheel, census II and the sled canisters.',
       automate: 'Targets and cuts move by bus; the waste canisters go to the sled line.',
