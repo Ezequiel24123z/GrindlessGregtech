@@ -191,12 +191,13 @@ test('the controllers: OpV hull, OpV components and circuits, superfluid He-3, t
   }
 });
 
-test('the annihilation shield casing: an assembler at OpV with two OpV circuits', () => {
+test('the annihilation shield casing: an assembler at 2^28 EU/t, four per run, no circuits (D5 casing family)', () => {
   assert.equal(AM.casingRecipe, 'grindless:assembler/annihilation_shield_casing');
   const r = find(AM.casingRecipe);
   assert.ok(r && r.t === 'gtceu:assembler');
   const text = JSON.stringify(r.j);
-  assert.ok(text.includes('gtceu:circuits/opv') && text.includes('grindless:annihilation_shield_casing'));
+  assert.ok(text.includes('grindless:annihilation_shield_casing') && !text.includes('gtceu:circuits/'));
+  for (const id of ['grindless:gamma_absorber_tile', 'grindless:li6_hydride_shield', 'grindless:chain_lamina_stack', 'gtceu:tungsten_plate']) assert.ok(text.includes(id), id);
 });
 
 test('"only from": nothing else in the pack makes these ids', () => {
@@ -330,7 +331,7 @@ test('DT conditioning and krypton purification are actual required production ed
   assert.ok(takes('gtceu:cold_dt_fill').some((r) => r.i.endsWith('fuel_fabrication/acmf_pellet')));
   assert.ok(takes('gtceu:purified_krypton').some((r) => r.i.endsWith('assembler/kr_tripler_cell')));
   const casing = JSON.stringify(find(AM.casingRecipe).j);
-  for (const id of ['gtceu:opv_sensor', 'gtceu:superfluid_helium_3']) assert.ok(casing.includes(id), id);
+  for (const id of ['grindless:gamma_absorber_tile', 'grindless:li6_hydride_shield']) assert.ok(casing.includes(id), id);
 });
 
 test('the native fixture fits the assigned band and exposes the grouped-run completion marker', () => {

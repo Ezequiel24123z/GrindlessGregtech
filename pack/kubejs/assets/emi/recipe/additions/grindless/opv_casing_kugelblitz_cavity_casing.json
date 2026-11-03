@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:kugelblitz_cavity_casing"],
+  "text": ["emi.grindless.info.kugelblitz_cavity_casing.0"]
+}

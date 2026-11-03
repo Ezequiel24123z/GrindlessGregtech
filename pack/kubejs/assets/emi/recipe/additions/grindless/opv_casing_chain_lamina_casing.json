@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:chain_lamina_casing"],
+  "text": ["emi.grindless.info.chain_lamina_casing.0"]
+}

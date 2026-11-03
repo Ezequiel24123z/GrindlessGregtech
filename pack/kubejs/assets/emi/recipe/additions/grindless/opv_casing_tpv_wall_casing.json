@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:tpv_wall_casing"],
+  "text": ["emi.grindless.info.tpv_wall_casing.0"]
+}

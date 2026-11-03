@@ -662,7 +662,11 @@
         "gtceu:opv_emitter",
         "gtceu:opv_sensor",
         "gtceu:opv_field_generator",
-        "gtceu:opv_machine_hull"
+        "gtceu:opv_machine_hull",
+        "grindless:neg_xhv_casing",
+        "grindless:chain_lamina_casing",
+        "grindless:tpv_wall_casing",
+        "grindless:kugelblitz_cavity_casing"
       ]
     },
     {
@@ -718,7 +722,6 @@
         "grindless:li6_hydride_shield",
         "grindless:stochastic_cooling_pickup",
         "grindless:seed_positron_plasma",
-        "grindless:neg_xhv_casing",
         "gtceu:opv_machine_casing"
       ]
     },
@@ -794,7 +797,11 @@
         "gtceu:opv_emitter",
         "gtceu:opv_sensor",
         "gtceu:opv_field_generator",
-        "gtceu:opv_machine_hull"
+        "gtceu:opv_machine_hull",
+        "grindless:neg_xhv_casing",
+        "grindless:chain_lamina_casing",
+        "grindless:tpv_wall_casing",
+        "grindless:kugelblitz_cavity_casing"
       ]
     },
     {
