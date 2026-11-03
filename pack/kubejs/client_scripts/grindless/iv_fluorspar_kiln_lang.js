@@ -28,6 +28,10 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.recipe.grindless_fluorspar_kiln.fluorine_from_hf', 'One charge: 1 alkali fluoride (returned) and 2000 mB of hydrofluoric acid give 1000 mB of fluorine; the hydrogen is flared; 64 ticks')
     add('gtceu.recipe.grindless_fluorspar_kiln.be_fluoride_from_beryllium', 'One charge: 1 beryllium and 2000 mB of hydrofluoric acid give 3 beryllium fluoride and 2000 mB of hydrogen; 64 ticks, no overclock')
     add('gtceu.recipe.grindless_fluorspar_kiln.be_fluoride_from_window_scrap', 'One charge: 1 beryllium window scrap and 2000 mB of hydrofluoric acid give 3 beryllium fluoride and 2000 mB of hydrogen; 64 ticks')
+    add('gtceu.recipe.grindless_fluorspar_kiln.barium_fluoride', 'One charge: 1 barium and 2000 mB of hydrofluoric acid give 3 barium fluoride and 2000 mB of hydrogen; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.lanthanum_fluoride', 'One charge: 5 lanthanum oxide and 6000 mB of hydrofluoric acid give 8 lanthanum fluoride and 3000 mB of water; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.aluminium_fluoride', 'One charge: 5 sapphire and 6000 mB of hydrofluoric acid give 8 aluminium fluoride and 3000 mB of water; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.sodium_fluoride', 'One charge: 3 sodium hydroxide and 1000 mB of hydrofluoric acid give 2 sodium fluoride and 1000 mB of water; 64 ticks, no overclock')
 
     add('grindless.machine.fluorspar_kiln.no_voiding', 'The scrubber keeps all the hydrofluoric acid: it leaves through the output hatches. Turn fluid voiding off')
 
@@ -35,4 +39,3 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.alkali_sulfate_dust.0', 'Inert sodium and potassium sulfate.')
     add('tooltip.grindless.alkali_sulfate_dust.1', 'The kiln\'s harmless leftover: nothing uses it, so void it.')
 })
-
