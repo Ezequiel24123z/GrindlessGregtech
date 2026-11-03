@@ -81,16 +81,15 @@ function New-Face {
     $c = New-Bezel
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    $trap = Hex '7098C8'; $atom = Hex 'C8C8E0'
-    foreach ($s in $Sites) { Set-Px $c $s[0] $s[1] $trap; Set-Px $c ($s[0] + 1) $s[1] $atom }
+    $rim = Hex '7098C8'; $glass = Hex '4A6A90'
+    # camera lens: a round aperture ringed in steel with a crosshair
+    foreach ($q in @(@(6, 4), @(7, 4), @(8, 4), @(9, 4), @(5, 5), @(10, 5), @(4, 6), @(11, 6), @(4, 7), @(11, 7), @(5, 8), @(10, 8), @(6, 9), @(7, 9), @(8, 9), @(9, 9))) { Set-Px $c $q[0] $q[1] $rim }
+    foreach ($q in @(@(7, 6), @(8, 6), @(7, 7), @(8, 7))) { Set-Px $c $q[0] $q[1] $glass }
     if ($Active) {
         $glow = Hex 'FFD870'; $halo = Hex 'FF8040'
-        $i = ($Frame * 3) % 12
-        $k = ($i + 1) % 12
-        Set-Both $c $e $Sites[$i][0] $Sites[$i][1] $halo
-        Set-Both $c $e ($Sites[$i][0] + 1) $Sites[$i][1] $glow
-        Set-Both $c $e $Sites[$k][0] $Sites[$k][1] $glow
-        Set-Both $c $e ($Sites[$k][0] + 1) $Sites[$k][1] $halo
+        $y = 5 + ($Frame % 4)
+        foreach ($x in 5..10) { Set-Both $c $e $x $y $glow }
+        Set-Both $c $e 4 $y $halo; Set-Both $c $e 11 $y $halo
     }
     $lamp = $(if ($Active) { $LampOn } else { $LampOff })
     Set-Px $c 7 12 $lamp; Set-Px $c 8 12 $lamp

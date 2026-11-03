@@ -97,12 +97,31 @@ $seedMap = @(
     '................',
     '................'
 )
+$saturnSeedMap = @(
+    '................',
+    '.....KKKKKK.....',
+    '....KCCCCCDK....',
+    '....KCCCDDDK....',
+    '.....KKKKKK.....',
+    '.....KHGGGK.....',
+    '....KHSSGGGK....',
+    '...KHSSSSSGGK...',
+    '..CCCCCCCCCCCC..',
+    '...KSSSSSSGDK...',
+    '...KSSSSGGDDK...',
+    '....KSSGGDDK....',
+    '.....KGGDDK.....',
+    '......KKKK......',
+    '................',
+    '................'
+)
+# Saturn: the ring crosses the vial and the light falls from the top-left; Uranus keeps the plain ampoule
 $seeds = @(
-    @{ Name = 'saturnian_quantum_seed'; Pal = 'K=3A2A10 C=C9A24A D=8A6320 G=B8C4CC H=EAF2F7 S=E8C26A' },
-    @{ Name = 'uranian_quantum_seed'; Pal = 'K=0E3A44 C=8FE3EE D=3E8C9C G=B8C4CC H=EAF2F7 S=7FE0E8' }
+    @{ Name = 'saturnian_quantum_seed'; Map = $saturnSeedMap; Pal = 'K=3A2A10 C=C9A24A D=8A6320 G=B8C4CC H=EAF2F7 S=E8C26A' },
+    @{ Name = 'uranian_quantum_seed'; Map = $seedMap; Pal = 'K=0E3A44 C=8FE3EE D=3E8C9C G=B8C4CC H=EAF2F7 S=7FE0E8' }
 )
 foreach ($s in $seeds) {
     $c = New-Canvas
-    Write-Map $c 0 0 $seedMap (New-Palette $s.Pal)
+    Write-Map $c 0 0 $s.Map (New-Palette $s.Pal)
     Save-Png $c (Join-Path $itemDir ($s.Name + '.png'))
 }
