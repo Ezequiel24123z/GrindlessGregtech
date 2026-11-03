@@ -114,7 +114,7 @@ test('the nuclear clock comes only from the lab; the comb from the lab\'s circui
   assert.deepEqual(producers('grindless:vuv_caf2_optic').map(([, r]) => r.name), ['vuv_caf2_optics']);
 });
 
-test('the nine boules each have their own circuit and a single maker; thorium-229 is used here, made only by the decay store', () => {
+test('the nine boules each have their own circuit and a single maker; thorium-229, made only by the decay store, reaches the Th:CaF2 crystal as laser-grade ThF4', () => {
   const circuits = BOULES.map((id) => {
     const p = producers(id);
     // MAX-B3 c30 pulls a second Eu:YSO boule for line L23 (the max.md contract)
@@ -125,7 +125,9 @@ test('the nine boules each have their own circuit and a single maker; thorium-22
   assert.equal(new Set(circuits).size, BOULES.length);
   assert.equal(GROW.length, BOULES.length);
   assert.deepEqual(producers('grindless:thorium_229').map(([, r]) => r.name), ['decay_store']);
-  assert.ok(inputs(by(GROW, 'thorium_caf2')).includes('grindless:thorium_229'));
+  // D3-9 (lines-uv-uhv.md W1 step 21): the grower takes the refined fluoride, not the raw isotope
+  assert.ok(inputs(by(GROW, 'thorium_caf2')).includes('grindless:laser_grade_thf4'));
+  assert.ok(!inputs(by(GROW, 'thorium_caf2')).includes('grindless:thorium_229'));
   // the scavenger and the cap are kept, the argon is a charge
   assert.deepEqual(ids(by(GROW, 'vuv_caf2').kept), ['gtceu:lead_fluoride_dust']);
   assert.deepEqual(ids(by(GROW, 'thorium_caf2').kept), ['gtceu:lead_fluoride_dust']);

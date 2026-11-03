@@ -1973,7 +1973,7 @@
     {"id":"grindless:tholin","kind":"item","needUse":true,"needMade":true,"made":["gtceu:ice_fractionation","gtceu:titan_entry","gtceu:triton_plume"],"used":["gtceu:chemosynthesis","gtceu:tholin_reforming"]},
     {"id":"grindless:thoria_fuel_pin","kind":"item","needUse":true,"needMade":true,"made":["gtceu:fuel_fabrication"],"used":["gtceu:fuel_fabrication"]},
     {"id":"grindless:thoria_pellet","kind":"item","needUse":true,"needMade":true,"made":["gtceu:fuel_fabrication"],"used":["gtceu:fuel_fabrication"]},
-    {"id":"grindless:thorium_229","kind":"item","needUse":true,"needMade":true,"made":["gtceu:transuranium_processing"],"used":["gtceu:crystal_growth","gtceu:fluorspar_digestion","gtceu:hot_cell","gtceu:nuclear_clock"]},
+    {"id":"grindless:thorium_229","kind":"item","needUse":true,"needMade":true,"made":["gtceu:transuranium_processing"],"used":["gtceu:fluorspar_digestion","gtceu:hot_cell","gtceu:nuclear_clock"]},
     {"id":"grindless:thorium_229_nitrate","kind":"item","needUse":true,"needMade":true,"made":["gtceu:hot_cell"],"used":["gtceu:fluorspar_digestion"]},
     {"id":"grindless:thorium_caf2_crystal","kind":"item","needUse":true,"needMade":true,"made":["gtceu:crystal_growth"],"used":["gtceu:nuclear_clock"]},
     {"id":"grindless:thorium_clock_reference","kind":"item","needUse":true,"needMade":true,"made":["gtceu:nuclear_clock"],"used":["gtceu:srf_cavity"]},
