@@ -1,12 +1,13 @@
 // priority: -6299
 // TEST ONLY, OpV-M2 (gtceu:assembly_line_array). Command: kubejs custom_command gg_test_opv_assembly_line_array
-// Band ONLY: X 38592-38655, Z 0-63, Overworld Y 98-115 (the array is 7 high; zones.json carries the same Y range).
-//   T1 (named uncertainty, S0-10: does a GTM AssemblyLineMachine on our pattern, with the x262,144 hatch, honour ordered inputs and research?):
+// Band ONLY: X 38592-38655, Z 0-63, Overworld Y 98-115 (the array is 9 high, 13 wide, 41 deep; zones.json carries the same Y range).
+//   T1 (named uncertainty, S0-10 and D5-ALA: does a GTM AssemblyLineMachine on our pattern, with the x262,144 hatch, honour ordered inputs, and does research need the data access hatch in the data cell D?):
 //     recipes         grindless:assembly_line/assembly_line_array is in the recipe manager (opv/assembly_line_array.js reports no missing input)
-//     formed          the array forms with the maintenance hatch, two OpV 16 A energy hatches, three input buses, a data access hatch, an output bus and the OpV hatch (262,144)
+//     formed          the array forms WITHOUT a data hatch (D holds the wall) with the maintenance hatch, two OpV 16 A energy hatches, three input buses, an output bus and the OpV hatch (262,144)
 //     ordered         a three-item ordered recipe starts in exactly one bus order (GTM keeps its ordered-input check); NOTE names the order that worked
 //     ordered_parallel the running ordered recipe has more than one copy and EU/t = copies x recipe EU/t (a long product, positive)
-//     research_blocked a recipe with research does not start without the data stick
+//     research_blocked a recipe with research does not start without a data hatch
+//     data_cell_forms placing the data access hatch in D re-forms the array
 //     research_parallel with the stick in the data access hatch it starts, with more than one copy and EU/t = copies x recipe EU/t
 //   Fallback (docs/eras/opv.md #### M2.): if ordered fails after one repair, the array stops enforcing the order; if research fails too, M2 stops.
 (function () {
@@ -29,9 +30,10 @@
   var BUDGET = 2 * 16 * 536870912
   var CX = 38624
   var CY = 100
-  var CZ = 16
-  // the front wall's first row: column 4 is the controller
-  var HEAD = { 1: 'gtceu:maintenance_hatch', 2: ENERGY16, 3: ENERGY16, 5: 'gtceu:data_access_hatch', 6: HATCH }
+  var CZ = 44
+  // the front wall's first row: column 6 is the controller, column 5 the data cell D
+  var HEAD = { 1: 'gtceu:maintenance_hatch', 2: ENERGY16, 3: ENERGY16, 7: HATCH }
+  var DATA_COL = 5
   var BUSES = 3
 
   ServerEvents.recipes(function (event) {
@@ -148,7 +150,7 @@
     var controller = null
     var buses = 0
     var parts = 0
-    // input buses nearest the controller first: slices from the front backwards
+    var dataCell = null the controller first: slices from the front backwards
     cells.sort(function (a, b) { return b.si - a.si })
     cells.forEach(function (c) {
       c.x = CX - (c.ci - ctrl.ci)
@@ -163,6 +165,7 @@
       if (sym.kind === 'blocks') block = sym.blocks[0]
       else if (sym.kind === 'oneOf') {
         if (c.ch === 'X' && c.si === last && HEAD[c.ci]) { block = HEAD[c.ci]; part = true; parts++ }
+        else if (c.ch === 'D' && c.si === last && c.ci === DATA_COL) { dataCell = { x: c.x, y: c.y, z: c.z }; sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0] }) }
         else if (c.ch === 'O' && c.si === 0 && c.ci === ctrl.ci) { block = 'gtceu:hv_output_bus'; part = true; parts++ }
         else if (c.ch === 'I' && buses < BUSES) { block = 'gtceu:hv_input_bus'; part = true; buses++; parts++ }
         else sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0] })
@@ -171,8 +174,9 @@
       put(c.x, c.y, c.z, block + (part ? '[facing=' + (c.ch === 'I' ? 'east' : 'north') + ']' : ''))
     })
     put(controller.x, controller.y, controller.z, ID + '[facing=north]')
-    note('array_placed', parts + ' part cells placed (expected 9: maintenance, two OpV 16 A energy hatches, data access, OpV parallel hatch, 3 input buses, output bus)')
-    return pos(controller.x, controller.y, controller.z)
+    note('array_placed', parts + ' part cells placed (expected 8: maintenance, two OpV 16 A energy hatches, OpV parallel hatch, 3 input buses, output bus); the data cell D holds the wall until the research step')
+    if (!dataCell) throw new Error('the pattern has no data cell D')
+    return { pos: pos(controller.x, controller.y, controller.z), data: dataCell }
   }
 
   function loadOrder(u, items, backFirst) {
@@ -189,7 +193,8 @@
     var found = false
     try { found = S.server.getRecipeManager().byKey(new (classes().RL)(RECIPE)).isPresent() } catch (e) { note('recipe_lookup', errText(e)) }
     check('recipes', found && R.done === true && String(R.missing) === '', RECIPE + ' in the recipe manager: ' + found + '; opv/assembly_line_array.js done ' + R.done + ', missing [' + R.missing + ']')
-    S.u = { phase: 'forming', started: S.tick, pos: placeArray() }
+    var placed = placeArray()
+    S.u = { phase: 'forming', started: S.tick, pos: placed.pos, dataCell: placed.data }
   }
 
   function tickArray(u) {
@@ -206,8 +211,8 @@
       u.buses = partsLike(m, /input_bus/).sort(function (a, b) { return b.getPos().getZ() - a.getPos().getZ() })
       var ph = m.getParallelHatch()
       var rep = ph.isPresent() ? Number(ph.get().getCurrentParallel()) : NaN
-      check('formed', u.buses.length === BUSES && !!u.data && u.energy.length === 2 && rep === 262144,
-        'class ' + m.getClass().getSimpleName() + ', input buses ' + u.buses.length + ', data access ' + !!u.data + ', OpV 16 A energy hatches ' + u.energy.length + ', parallel hatch reports ' + rep)
+      check('formed', u.buses.length === BUSES && !u.data && u.energy.length === 2 && rep === 262144,
+        'class ' + m.getClass().getSimpleName() + ', input buses ' + u.buses.length + ', data access ' + !!u.data + ' (expected none: it forms from the first preview shape), OpV 16 A energy hatches ' + u.energy.length + ', parallel hatch reports ' + rep)
       u.trials = [['back_first', true], ['front_first', false]]
       u.results = {}
       u.ti = 0
@@ -263,7 +268,21 @@
           if (m.getRecipeLogic().isWorking()) { check('research_blocked', false, 'the research recipe started without data: ' + String(m.getRecipeLogic().getLastRecipe().id)); u.rstep = 9 }
           return
         }
-        check('research_blocked', status(m) !== 'WORKING', 'no data stick: status ' + status(m) + ', reasons ' + reasons(m))
+        check('research_blocked', status(m) !== 'WORKING', 'no data hatch: status ' + status(m) + ', reasons ' + reasons(m))
+        var dc = u.dataCell
+        put(dc.x, dc.y, dc.z, 'gtceu:data_access_hatch[facing=north]')
+        u.started = S.tick
+        u.rstep = 3
+        return
+      }
+      if (u.rstep === 3) {
+        if (!m.isFormed() || partsLike(m, /data_access/).length === 0) {
+          if (S.tick - u.started > 400) { check('data_cell_forms', false, 'the data hatch in D did not re-form the array: ' + why(m)); u.phase = 'done'; return }
+          if ((S.tick - u.started) % 40 === 20 && m.checkPatternWithLock()) { m.setFlipped(m.getMultiblockState().isNeededFlip()); m.onStructureFormed() }
+          return
+        }
+        u.data = partsLike(m, /data_access/)[0]
+        check('data_cell_forms', true, 'the array formed with one data access hatch in D')
         var stick = Item.of('gtceu:data_stick', '{assembly_line_research:{research_id:"' + RESEARCH_ID + '",research_type:"gtceu:assembly_line"}}')
         var rest = u.data.importItems.insertItem(0, stick.copy(), false)
         if (!rest.isEmpty()) u.data.importItems.storage.setStackInSlot(0, stick.copy())
