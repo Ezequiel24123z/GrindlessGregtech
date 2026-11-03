@@ -282,6 +282,7 @@ GTNH tops out at MAX, and StarT's top lines stop at UXV. **No source has lines a
 
 ### M-7 Composed chains already in the pack (OpV to MAX+)
 - The audit's own links give 26 to 27 steps for `opv.wafers#L15` and `max.optics#L23` through `uhv.mercury#aluminium_reflector_film` (5), `uhv.power` (9) and `uhv.photonics` (8), and 16 for `maxplus.cond#bound_degenerate_billet` to `maxplus.cryo` to `maxplus.tara` to `maxplus.creative#horizon_computation_core`. These are the ones to turn into single named lines (section 6).
+- *Correction (D5-LINES, 2026-11-03, dump `5d57213f3b83`):* the OpV, MAX and MAX+ charts hold no link to `uhv.mercury`, `uhv.power` or `uhv.photonics` and none between the MAX+ clusters; the line audit reads `opv.wafers` L15 as 4 steps and `max.optics` L23 as 5, with no chart crossing. The 26 to 27 and the 16 above are hand compositions, not the audit's. The band's measured design is `docs/eras/lines-opv-maxplus.md`.
 
 ## 6. Existing pack lines that could be extended or merged
 
