@@ -537,8 +537,9 @@
     var have = recipeCount(TYPE_ID)
     try {
       var rp = recipeChecks()
-      // Orbit-only rows (UV-B3 Pluto shift, c5) live in SYN.orbitRecipes and are checked by gg_test_uv_pluto_ices.
-      var expected = SYN.recipes.length + (SYN.orbitRecipes || []).length
+      // Rows published apart (UV-B3 Pluto shift c5 in SYN.orbitRecipes, checked by gg_test_uv_pluto_ices; the UEV, UIV and UXV rows in
+      // SYN.uevRecipes, .uivRecipes and .uxvRecipes) are syngas recipes too: all of them count.
+      var expected = SYN.recipes.length + ['orbitRecipes', 'uevRecipes', 'uivRecipes', 'uxvRecipes'].reduce(function (n, k) { return n + (SYN[k] || []).length }, 0)
       check(SCOPE, 'recipes', rp.length === 0 && have === expected,
         'gtceu:syngas recipes=' + have + '/' + expected + ' [' + SYN.recipes.map(function (p) {
           return p.name + ' c' + p.circuit + ' ' + p.eut + 'x' + p.duration
