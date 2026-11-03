@@ -371,6 +371,7 @@
     r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
     r.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (r.temp) recipe.blastFurnaceTemp(r.temp)
+    if (r.type === 'mocvd') recipe.addDataString('grindless_mocvd', r.name)
     recipe.EUt(r.eut).duration(r.duration)
   }
 

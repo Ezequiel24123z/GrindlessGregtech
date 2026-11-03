@@ -304,6 +304,7 @@
       r.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
       r.notConsumedItems.forEach(function (id) { recipe.notConsumable(id) })
       recipe.circuit(r.circuit)
+      recipe.addDataString('grindless_' + r.type, r.name)
       r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f.id, f.amount)) })
       r.notConsumedFluids.forEach(function (f) { recipe.notConsumableFluid(Fluid.of(f.id, f.amount)) })
       r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })

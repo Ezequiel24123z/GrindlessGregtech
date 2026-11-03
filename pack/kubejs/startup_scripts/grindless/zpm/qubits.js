@@ -191,7 +191,22 @@
     })
   })
 
+  // one EMI line per recipe, read from its data; a name with no text draws nothing
+  function dataInfoOf(dataKey) {
+    return function (data) {
+      try {
+        var name = String(data.getString(dataKey))
+        if (name === '') return ''
+        var key = 'gtceu.recipe.' + dataKey + '.' + name
+        var text = String(Text.translate(key).getString())
+        return text === key ? '' : text
+      } catch (e) {
+        return ''
+      }
+    }
+  }
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
+    ['diamond_cvd', 'ion_implantation'].forEach(function (t) { GTRecipeTypes.get(t).addDataInfo(dataInfoOf('grindless_' + t)) })
     Object.keys(Q.machines).forEach(function (k) {
       var m = Q.machines[k]
       Pat.register(m.machine, m.spec)

@@ -168,6 +168,7 @@
     r.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
     r.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
+    if (r.type === 'zone_refining') recipe.addDataString('grindless_zone_refining', r.name)
     recipe.EUt(r.eut).duration(r.duration)
   }
 

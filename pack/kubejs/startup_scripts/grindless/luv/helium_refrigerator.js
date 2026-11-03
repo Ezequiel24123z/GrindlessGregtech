@@ -232,7 +232,12 @@
   // One EMI line per recipe: the loop's loss against the freezer's
   function loopInfo(data) {
     try {
-      if (String(data.getString(DATA_KEY)) === '') return ''
+      var value = String(data.getString(DATA_KEY))
+      if (value === '') return ''
+      var name = value.substring(Math.max(value.lastIndexOf('/'), value.lastIndexOf(':')) + 1)
+      var ownKey = 'gtceu.recipe.' + DATA_KEY + '.' + name
+      var own = String(Text.translate(ownKey).getString())
+      if (name !== '' && own !== ownKey) return own
       return String(Text.translate('gtceu.recipe.' + DATA_KEY, String(CONFIG.makeUp.amount), String(CONFIG.charge.amount)).getString())
     } catch (e) {
       return ''

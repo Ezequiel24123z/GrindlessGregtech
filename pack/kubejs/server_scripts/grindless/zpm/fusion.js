@@ -122,6 +122,7 @@
         }
         event.recipes.gtceu.plasma_quench('grindless:' + name)
           .circuit(p.circuit)
+          .addDataString('grindless_plasma_quench', name)
           .inputFluids(fluidOf(m.fluid, 144), fluidOf(q.argon.id, q.argon.amount))
           .itemOutputs(p.count + 'x ' + p.item)
           .outputFluids(fluidOf(q.argon.id, q.argon.returned), fluidOf(q.steam.id, q.steam.amount))
