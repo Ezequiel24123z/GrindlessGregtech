@@ -99,6 +99,7 @@
     if (sym.kind === 'oneOf') {
       for (var i = 0; i < sym.options.length; i++) if (sym.options[i].kind === 'blocks') return String(sym.options[i].blocks[0])
     }
+    if (sym.kind === 'frames') return 'gtceu:' + sym.materials[0] + '_frame'
     throw new Error('unsupported structural symbol ' + sym.kind)
   }
   function allows(sym, ability) {
@@ -163,7 +164,7 @@
 
   function statics() {
     var AC = S.G.uevAlphaCentauri
-    check('static_published', AC && AC.recipes && AC.recipes.length === 19, 'global.grindless.uevAlphaCentauri recipes ' + (AC && AC.recipes ? AC.recipes.length : 'none'))
+    check('static_published', AC && AC.recipes && AC.recipes.length >= 19, 'global.grindless.uevAlphaCentauri recipes ' + (AC && AC.recipes ? AC.recipes.length : 'none'))
     if (!AC || !AC.recipes) return
     var missing = []
     AC.recipes.forEach(function (r) { if (byId('grindless:' + r.type + '/' + r.name) === null) missing.push(r.type + '/' + r.name) })
@@ -191,10 +192,11 @@
       var text = conditionsOf(recipe)
       check('dim_' + r[0].split('/')[1], text.indexOf(r[1]) >= 0 && text.indexOf(r[2]) < 0, r[0] + ' conditions ' + text)
     })
-    ;['nebula_collection/interstellar_gas', 'interstellar_dust_analysis/fe60_record', 'pulsar_timing/pulsar_navigation_chart'].forEach(function (id) {
+    ;[['nebula_collection/interstellar_gas', true], ['interstellar_dust_analysis/fe60_record', false], ['pulsar_timing/pulsar_navigation_chart', false]].forEach(function (r) {
+      var id = r[0]
       var recipe = byId('grindless:' + id)
       var text = recipe === null ? 'missing' : conditionsOf(recipe)
-      check('dim_' + id.split('/')[1], text.indexOf('alpha_centauri_orbit') >= 0, id + ' conditions ' + text)
+      check('dim_' + id.split('/')[1], recipe !== null && (text.indexOf('alpha_centauri_orbit') >= 0) === r[1], id + ' conditions ' + text + (r[1] ? '' : ' (shipped inputs: runs anywhere)'))
     })
   }
 

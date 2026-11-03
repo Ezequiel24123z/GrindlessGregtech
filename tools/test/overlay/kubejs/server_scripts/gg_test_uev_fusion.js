@@ -1,6 +1,6 @@
 // priority: -7669
 // TEST ONLY, UEV-A7. Command: kubejs custom_command gg_test_uev_fusion
-// Band ONLY: X 32512-32575, Z 0-63, Overworld Y 70-100.
+// Band ONLY: X 32512-32575, Z 0-127, Overworld Y 70-100.
 //   a7_ring_*   gtceu:uev_fusion_reactor forms (registerFusionTier from KubeJS in the real pack) with 16 UEV hatches; its internal buffer
 //               (FusionReactorMachine.energyContainer, read by reflection: Rhino's m.energyContainer is the hatch list) is above the int
 //               maximum, and it starts and runs c1 (dhe3_fuel_mix, 1.2 G), c2 (pb11_fuel, 2.4 G, above the int maximum) and c3
@@ -22,9 +22,9 @@
   var RING = 'gtceu:uev_fusion_reactor'
   var POLARISER = 'gtceu:helium3_polariser'
   var RUNS = [
-    { name: 'c1', fuel: 'gtceu:dhe3_fuel_mix', recipe: 'uev_dhe3', start: 1200000000, x: 32520 },
-    { name: 'c2', fuel: 'gtceu:pb11_fuel', recipe: 'uev_pb11', start: 2400000000, x: 32535 },
-    { name: 'c3', fuel: 'gtceu:polarised_dhe3_fuel', recipe: 'uev_polarised_dhe3', start: 1200000000, x: 32550 }
+    { name: 'c1', fuel: 'gtceu:dhe3_fuel_mix', recipe: 'uev_dhe3', start: 1200000000, x: 32544, z: 0 },
+    { name: 'c2', fuel: 'gtceu:pb11_fuel', recipe: 'uev_pb11', start: 2400000000, x: 32544, z: 36 },
+    { name: 'c3', fuel: 'gtceu:polarised_dhe3_fuel', recipe: 'uev_polarised_dhe3', start: 1200000000, x: 32544, z: 72 }
   ]
   var DEC = [
     { name: 'dhe3', id: 'grindless:direct_conversion/uev_dhe3_plasma', total: 16777216 },
@@ -64,7 +64,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in minecraft:overworld run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 127 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -189,7 +189,7 @@
     var e = 0
     var i = 0
     var o = 0
-    placeCheck(u, placeMachine(RING, u.x, 80, 30, function (c) {
+    placeCheck(u, placeMachine(RING, u.x, 80, u.run.z, function (c) {
       if (c.ch === 'E' && e < 16) { e++; return HATCH16 }
       if (c.ch === 'I' && i < 1) { i++; return 'gtceu:hv_input_hatch' }
       if (c.ch === 'O' && o < 1) { o++; return 'gtceu:hv_output_hatch' }
@@ -246,7 +246,7 @@
   // ---------------------------------------------------------------- the polariser: forms, polarises 6N helium-3 with the laser as a tool
   function polBuild(u) {
     var x = 0
-    placeCheck(u, placeMachine(POLARISER, 32515, 75, 8, function (c) {
+    placeCheck(u, placeMachine(POLARISER, 32520, 75, 8, function (c) {
       if (c.ch === 'X') {
         x++
         if (x === 1) return 'gtceu:hv_input_bus'
@@ -314,19 +314,19 @@
 
   // ---------------------------------------------------------------- driver
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z < 128; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 127')
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false, units: [] }
     S.level = server.getLevel('minecraft:overworld')
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' 127')
     clear()
     RUNS.forEach(function (r) {
       var u = { name: 'ring_' + r.name, x: r.x, run: r, tick: ringTick, phase: 'forming', started: 0 }

@@ -420,7 +420,7 @@
     guarded('registry', checkRegistry)
     guarded('high_tier_content', function () {
       var v = Java.loadClass('com.gregtechceu.gtceu.config.ConfigHolder').INSTANCE.machines.highTierContent
-      check('high_tier_content', String(v) === 'false', 'machines.highTierContent = ' + v + ' (pack/config/gtceu.yaml keeps it off; want false)')
+      check('high_tier_content', String(v) === 'true', 'machines.highTierContent = ' + v + ' (pack/config/gtceu.yaml turns it on since TP-S0F; want true)')
     })
     var w = W()
     w.paused = true
