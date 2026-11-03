@@ -333,7 +333,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "3E3E25931D1CA960", xp: 40 }],
   },
   {
-    key: "HV_NAPHTHALENE", title: "Naphthalene", icon: "gtceu:naphthalene_bucket", kind: "process", deps: ["HV_HV_COMPONENTS"], x: 4, y: 7.5,
+    key: "HV_NAPHTHALENE", title: "Naphthalene", icon: "gtceu:naphthalene_bucket", kind: "process", deps: ["HV_REFORMING_CATALYST"], x: 10, y: -6,
     teach: {
       for: "Starts the propellant line: coal tar distilled into &6naphthalene&r.",
       needs: "Coal tar from the LV coke battery's gas, and a distillery.",
@@ -345,7 +345,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 30 }],
   },
   {
-    key: "HV_PHTHALIC_ANHYDRIDE", title: "Phthalic Anhydride", icon: "gtceu:phthalic_anhydride_dust", kind: "process", deps: ["HV_NAPHTHALENE"], x: 6, y: 7.5,
+    key: "HV_PHTHALIC_ANHYDRIDE", title: "Phthalic Anhydride", icon: "gtceu:phthalic_anhydride_dust", kind: "process", deps: ["HV_NAPHTHALENE"], x: 12, y: -6,
     teach: {
       for: "Burns naphthalene over vanadium pentoxide in air into &6phthalic anhydride&r. It takes 480 EU/t now, so it needs HV power.",
       needs: "Naphthalene, air and small vanadium pentoxide dust, in a chemical reactor on an HV hatch.",
@@ -357,7 +357,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 35 }],
   },
   {
-    key: "HV_EAQ", title: "2-Ethylanthraquinone", icon: "gtnn:exxonmobil_chemical_plant", kind: "process", deps: ["HV_PHTHALIC_ANHYDRIDE"], x: 8, y: 7.5,
+    key: "HV_EAQ", title: "2-Ethylanthraquinone", icon: "gtnn:exxonmobil_chemical_plant", kind: "process", deps: ["HV_PHTHALIC_ANHYDRIDE"], x: 14, y: -6,
     teach: {
       for: "Joins phthalic anhydride and ethylbenzene into &62-ethylanthraquinone&r in GT--'s chemical plant. Build the plant with HV machine casings: it runs a recipe only up to its casings' tier and sits idle above it, with no error.",
       needs: "The chemical plant on HV casings, phthalic anhydride and ethylbenzene from the coal gas distillery.",
@@ -369,7 +369,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 45 }],
   },
   {
-    key: "HV_EAHQ", title: "Hydrogenation to EAHQ", icon: "gtceu:ethyl_anthra_hydro_quinone_bucket", kind: "process", deps: ["HV_EAQ", "HV_SYNGAS_PLANT"], x: 10, y: 7.5,
+    key: "HV_EAHQ", title: "Hydrogenation to EAHQ", icon: "gtceu:ethyl_anthra_hydro_quinone_bucket", kind: "process", deps: ["HV_EAQ"], x: 16, y: -6,
     teach: {
       for: "Adds hydrogen to EAQ over a palladium-vanadium catalyst: &6EAHQ&r, the carrier that holds the hydrogen for the peroxide.",
       needs: "EAQ, hydrogen from the syngas plant, and the catalyst built from the MV platline's palladium.",
@@ -381,7 +381,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 40 }],
   },
   {
-    key: "HV_HYDROGEN_PEROXIDE", title: "Hydrogen Peroxide", icon: "gtceu:hydrogen_peroxide_bucket", kind: "process", deps: ["HV_EAHQ"], x: 12, y: 7.5,
+    key: "HV_HYDROGEN_PEROXIDE", title: "Hydrogen Peroxide", icon: "gtceu:hydrogen_peroxide_bucket", kind: "process", deps: ["HV_EAHQ"], x: 18, y: -6,
     teach: {
       for: "Air oxidizes EAHQ back to EAQ and releases &6hydrogen peroxide&r. This is the only route: the direct hydrogen and oxygen reactors are gone.",
       needs: "EAHQ and air in the chemical plant, whose machine casings must be HV (480 EU/t), plus a little anthracene to make up losses.",
@@ -393,7 +393,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 45 }],
   },
   {
-    key: "HV_HYDRAZINE", title: "Hydrazine", icon: "gtceu:hydrazine_bucket", kind: "process", deps: ["HV_HYDROGEN_PEROXIDE"], x: 14, y: 7.5,
+    key: "HV_HYDRAZINE", title: "Hydrazine", icon: "gtceu:hydrazine_bucket", kind: "process", deps: ["HV_HYDROGEN_PEROXIDE"], x: 20, y: -6,
     teach: {
       for: "Ammonia and peroxide make &6hydrazine&r by the peroxide process.",
       needs: "Ammonia, hydrogen peroxide and the chemical plant on HV machine casings (480 EU/t).",
@@ -405,7 +405,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 45 }],
   },
   {
-    key: "HV_HYPOCHLOROUS_ACID", title: "Hypochlorous Acid", icon: "gtceu:hypochlorous_acid_bucket", kind: "process", deps: ["HV_HV_COMPONENTS"], x: 4, y: 9,
+    key: "HV_HYPOCHLOROUS_ACID", title: "Hypochlorous Acid", icon: "gtceu:hypochlorous_acid_bucket", kind: "process", deps: ["HV_REFORMING_CATALYST"], x: 12, y: -4.5,
     teach: {
       for: "Starts the UDMH branch: chlorine in water gives &6hypochlorous acid&r.",
       needs: "Chlorine and water in the large chemical reactor.",
@@ -417,7 +417,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 30 }],
   },
   {
-    key: "HV_MONOCHLORAMINE", title: "Monochloramine", icon: "gtceu:monochloramine_bucket", kind: "process", deps: ["HV_HYPOCHLOROUS_ACID"], x: 6, y: 9,
+    key: "HV_MONOCHLORAMINE", title: "Monochloramine", icon: "gtceu:monochloramine_bucket", kind: "process", deps: ["HV_HYPOCHLOROUS_ACID"], x: 14, y: -4.5,
     teach: {
       for: "Ammonia takes the oxygen's place on the chlorine: &6monochloramine&r.",
       needs: "Hypochlorous acid and ammonia.",
@@ -429,7 +429,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 30 }],
   },
   {
-    key: "HV_DIMETHYLAMINE", title: "Dimethylamine", icon: "gtceu:dimethylamine_bucket", kind: "process", deps: ["HV_HV_COMPONENTS"], x: 6, y: 10.5,
+    key: "HV_DIMETHYLAMINE", title: "Dimethylamine", icon: "gtceu:dimethylamine_bucket", kind: "process", deps: ["HV_MONOCHLORAMINE"], x: 16, y: -3,
     teach: {
       for: "Methanol and ammonia condense into &6dimethylamine&r, the other half of UDMH.",
       needs: "Methanol from the MV biorefinery or syngas, and ammonia.",
@@ -441,7 +441,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 30 }],
   },
   {
-    key: "HV_UDMH", title: "UDMH", icon: "gtceu:dimethylhydrazine_bucket", kind: "process", deps: ["HV_MONOCHLORAMINE", "HV_DIMETHYLAMINE"], x: 8, y: 9,
+    key: "HV_UDMH", title: "UDMH", icon: "gtceu:dimethylhydrazine_bucket", kind: "process", deps: ["HV_MONOCHLORAMINE", "HV_DIMETHYLAMINE"], x: 18, y: -4.5,
     teach: {
       for: "Monochloramine and dimethylamine react by the Raschig route into &6unsymmetrical dimethylhydrazine&r. The old methanol shortcut is gone.",
       needs: "Both feeds in a large chemical reactor at 480 EU/t.",
@@ -453,7 +453,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", xp: 40 }],
   },
   {
-    key: "HV_AEROZINE_50", title: "Aerozine 50", icon: "gtceu:aerozine_50_bucket", kind: "process", deps: ["HV_HYDRAZINE", "HV_UDMH"], x: 16, y: 8.25,
+    key: "HV_AEROZINE_50", title: "Aerozine 50", icon: "gtceu:dimethylhydrazine_bucket", kind: "process", deps: ["HV_HYDRAZINE", "HV_UDMH"], x: 20, y: -3,
     teach: {
       for: "Half hydrazine, half UDMH: &6Aerozine 50&r, the storable fuel of the Titan II.",
       needs: "Equal parts hydrazine and UDMH in a mixer.",
@@ -461,11 +461,11 @@ export const QUESTS = [
       automate: "Both by pipe in one to one, the blend on to the rocket fuel mixer.",
     },
     desc: [],
-    tasks: [{ type: "item", item: "gtceu:aerozine_50_bucket" }],
+    tasks: [{ type: "checkmark" }],
     rewards: [{ type: "xp", xp: 45 }],
   },
   {
-    key: "HV_N2O4", title: "Dinitrogen Tetroxide", icon: "gtceu:dinitrogen_tetroxide_bucket", kind: "process", deps: ["HV_HV_COMPONENTS"], x: 16, y: 9.75,
+    key: "HV_N2O4", title: "Dinitrogen Tetroxide", icon: "gtceu:dinitrogen_tetroxide_bucket", kind: "process", deps: ["HV_GASOLINE"], x: 22, y: 1.5,
     teach: {
       for: "Dimerizes the nitrogen dioxide of the nitric acid line into &6N2O4&r, the oxidizer.",
       needs: "Nitrogen dioxide from the LV Ostwald line and a chemical reactor.",
