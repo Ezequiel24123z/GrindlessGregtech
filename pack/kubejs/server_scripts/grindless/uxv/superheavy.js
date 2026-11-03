@@ -29,7 +29,7 @@
         console.error(LOG + 'sintering skipped ' + r.name + ': unknown id(s) ' + missing.join(', '))
         return
       }
-      var b = event.recipes.gtceu.spark_plasma_sintering('grindless:spark_plasma_sintering/' + r.name)
+      var b = event.recipes.gtceu.spark_plasma_sintering('grindless:' + r.name)
       b.itemInputs('1x ' + r.input, '1x gtceu:tungsten_dust')
       b.circuit(r.circuit)
       b.itemOutputs('1x ' + r.output)

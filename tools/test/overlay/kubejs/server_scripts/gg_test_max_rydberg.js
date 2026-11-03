@@ -32,7 +32,7 @@
   var IDS = [
     'rydberg_assembly/rydberg_logic_array', 'rydberg_assembly/rydberg_array_refurbish', 'assembly_line/rydberg_array_works',
     'calutron_separation/rubidium_87', 'calutron_separation/rb_getter_scrap', 'quantum_degenerate_gas/atom_cartridge_rb87',
-    'crystal_growth/crystal_growth/eu_yso_boule', 'crystal_growth/crystal_growth/teo2_boule', 'nuclear_clock/nuclear_clock/lock_microcomb',
+    'crystal_growth/eu_yso_boule', 'crystal_growth/teo2_boule', 'nuclear_clock/lock_microcomb',
     'spectral_hole_burning/burned_memory_crystal', 'ion_slicing/ln_transducer_bonded_blank', 'femtosecond_writing/trimmed_microring',
     'femtosecond_writing/endcapped_hc_fibre', 'femtosecond_writing/laser_welded_glass_cell', 'beuv_lithography/microring_wafer',
     'mtj_sputtering/ar_coated_glass_cell', 'mtj_sputtering/electroded_aod', 'photonic_foundry/packaged_microcomb'

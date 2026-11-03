@@ -30,7 +30,7 @@ const OLDER = [
   ['photonics.json', 'molecular_beam_epitaxy', 'algaas_bragg_stack', 13],
   ['crystals.json', 'crystal_growth', 'silicon_cavity_spacer', 31]
 ];
-const idOf = ([, type, name]) => (type === 'crystal_growth' ? `grindless:${type}/${type}/${name}` : `grindless:${type}/${name}`);
+const idOf = ([, type, name]) => `grindless:${type}/${name}`;
 
 test('the stand-in runs the script without errors, skips nothing and names the pending route', () => {
   const mine = run.errors.filter((e) => /max[\\/]interferometer/.test(String(e.file)));

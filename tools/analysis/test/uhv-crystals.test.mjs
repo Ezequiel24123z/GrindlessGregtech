@@ -246,7 +246,7 @@ test('MAX-CS: the loader builds every shipped row unchanged: no problem, no skip
   assert.equal(run.names.length, rows.length);
   assert.deepEqual(run.clashes, []);
   for (const [type, r] of rows) {
-    const b = run.built.filter((x) => x.type === type && x.id === `grindless:${type}/${r.idPrefix || T.types[type].idPrefix || ''}${r.name}`);
+    const b = run.built.filter((x) => x.type === type && x.id === `grindless:${r.idPrefix || T.types[type].idPrefix || ''}${r.name}`);
     assert.equal(b.length, 1, `${type}/${r.name}: built once`);
     assert.equal(circuitOf(b[0]), r.circuit > 0 ? r.circuit : undefined, `${type}/${r.name}: circuit`);
   }
@@ -261,7 +261,7 @@ for (const type of ['crystal_growth', 'nuclear_clock']) {
     assert.deepEqual(run.errors, []);
     assert.deepEqual(run.names, [`${type}/probe_a`, `${type}/probe_b`]);
     assert.deepEqual(run.clashes, []);
-    for (const n of ['probe_a', 'probe_b']) assert.equal(circuitOf(run.built.find((x) => x.id === `grindless:${type}/${n}`)), 21, n);
+    for (const n of ['probe_a', 'probe_b']) assert.equal(circuitOf(run.built.find((x) => x.id === `grindless:${n}`)), 21, n);
   });
 
   test(`MAX-CS: ${type}: identical item inputs (ids, consumed or kept) are refused; circuits 33 and 0 are refused`, () => {

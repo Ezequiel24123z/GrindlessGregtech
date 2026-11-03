@@ -73,7 +73,7 @@ test('each machine: unique circuits, whole numbers, every row in the dump with i
     assert.equal(new Set(circuits).size, circuits.length, type);
     for (const r of rows) {
       assert.ok(Number.isInteger(r.duration) && r.duration > 0 && Number.isInteger(r.eut) && r.eut > 0 && r.eut <= VA_UV, r.name);
-      const rec = recipes.find((x) => x.i === `grindless:${type}/${r.recipeId.split(':')[1]}`);
+      const rec = recipes.find((x) => x.i === `grindless:${type}/${r.name}`);
       assert.ok(rec, r.recipeId);
       assert.deepEqual(circuitOf(rec), [r.circuit], r.name);
     }

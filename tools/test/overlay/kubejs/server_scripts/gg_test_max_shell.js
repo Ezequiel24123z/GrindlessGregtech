@@ -53,8 +53,8 @@
 
   var IDS = [
     'black_hole_bomb/vent_wave_packet', 'black_hole_bomb/final_spin_map', 'black_hole_bomb/horizon_lock', 'assembly_line/mirror_shell',
-    'kugelblitz_forming/write_seed_wave_packet', 'nuclear_clock/nuclear_clock/thorium_clock_reference', 'nuclear_demagnetisation/cooled_cavity_mode',
-    'srf_cavity/srf_cavity/max_srf_cavity', 'chemical_bath/polished_srf_cavity', 'swarm_segment/mirror_shell_segment'
+    'kugelblitz_forming/write_seed_wave_packet', 'nuclear_clock/thorium_clock_reference', 'nuclear_demagnetisation/cooled_cavity_mode',
+    'srf_cavity/max_srf_cavity', 'chemical_bath/polished_srf_cavity', 'swarm_segment/mirror_shell_segment'
   ]
 
   function classes() {

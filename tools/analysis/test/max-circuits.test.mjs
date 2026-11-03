@@ -37,7 +37,7 @@ const TABLE_ROWS = [
   ['memories_cryostat.json', 'nuclear_demagnetisation', 'cryo_photonic_interposer', 8, 'uiv/memories_cryostat.js']
 ];
 const MOCVD = [['pump_laser_bonded_die', 23], ['aln_on_si_wafer', 24]];
-const tableId = ([, type, name]) => (type === 'crystal_growth' ? `grindless:${type}/${type}/${name}` : `grindless:${type}/${name}`);
+const tableId = ([, type, name]) => `grindless:${type}/${name}`;
 const JOIN = 'grindless:photonic_integration/supracausal_mainframe';
 // the item of each line step: made by one row, used by the next (the join consumes the three line ends)
 const CHAIN = ['ppln_boule', 'quartz_crystal_wafer', 'ppln_thin_film_wafer', 'transducer_wafer', 'squeezer_waveguide_die', 'pump_laser_bonded_die',

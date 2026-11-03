@@ -102,7 +102,7 @@
   }
 
   function add(event, rec) {
-    var recipe = event.recipes.gtceu[rec.type](rec.recipeId)
+    var recipe = event.recipes.gtceu[rec.type]('grindless:' + rec.name)
     rec.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
     rec.kept.forEach(function (x) { recipe.notConsumable(x.count + 'x ' + x.id) })
     if (rec.circuit > 0) recipe.circuit(rec.circuit)

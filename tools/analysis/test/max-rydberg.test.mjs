@@ -38,7 +38,7 @@ const OLDER = [
   ['spin_deposition.json', 'mtj_sputtering', 'electroded_aod', 23],
   ['photonics.json', 'photonic_foundry', 'packaged_microcomb', 23]
 ];
-const idOf = ([, type, name]) => (type === 'crystal_growth' || type === 'nuclear_clock' ? `grindless:${type}/${type}/${name}` : `grindless:${type}/${name}`);
+const idOf = ([, type, name]) => `grindless:${type}/${name}`;
 
 test('the stand-in runs the script without errors, skips nothing and leaves no pending route', () => {
   const mine = run.errors.filter((e) => /max[\\/]rydberg/.test(String(e.file)));

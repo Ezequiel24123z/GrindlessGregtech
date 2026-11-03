@@ -275,7 +275,7 @@ test('OpV-B3a: the older rows sit on the contract\'s circuits and keep the older
   const where = {
     'grindless:calutron_separation/boron_10': 15, 'grindless:chemical_vapour_infiltration/octupole_potting': 9, 'grindless:nuclear_demagnetisation/levitation_cell': 7,
     'grindless:electron_beam_refining/hopg_plate': 21, 'grindless:electron_beam_refining/hohlraum_can': 22, 'grindless:electron_beam_refining/tpv_braze': 32,
-    'grindless:crystal_growth/crystal_growth/ti_sapphire': 25, 'grindless:crystal_growth/crystal_growth/lbo': 26, 'grindless:crystal_growth/crystal_growth/gasb': 27, 'grindless:molecular_beam_epitaxy/ingaassb_epi': 11,
+    'grindless:crystal_growth/ti_sapphire': 25, 'grindless:crystal_growth/lbo': 26, 'grindless:crystal_growth/gasb': 27, 'grindless:molecular_beam_epitaxy/ingaassb_epi': 11,
     'grindless:spark_plasma_sintering/gamma_absorber_tile': 15, 'grindless:actinide_partitioning/cm245_cut': 8, 'grindless:actinide_partitioning/curium_recovery': 9,
     'grindless:methane_pyrolysis/hopg_blank': 5, 'grindless:magnet_winding/octupole_winding': 9, 'grindless:magnet_winding/octupole_trap_magnet': 10, 'grindless:hot_cell/activated_absorber_decay': 22
   };

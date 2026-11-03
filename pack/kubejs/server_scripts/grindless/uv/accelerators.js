@@ -199,6 +199,7 @@
     var tableRecs = loadTable()
     tableRecs.forEach(function (rec) {
       rec.recipeId = 'grindless:' + rec.type + '/' + rec.name
+      rec.builderId = rec.builderId || 'grindless:' + rec.name
       addOne(rec)
     })
     AC.uhvRows = []

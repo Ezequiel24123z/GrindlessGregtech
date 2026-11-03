@@ -116,13 +116,13 @@ test('lines 34 and 35 older steps: SPS c14, MTJ c12, synchrotron c10-11, CVI c10
   const steps = [
     ['grindless:spark_plasma_sintering/wc_sputter_target', 14, 'gtceu:tungsten_carbide_dust', 'grindless:wc_sputter_target'],
     ['grindless:mtj_sputtering/wc_sic_multilayer', 12, 'grindless:wc_sputter_target', 'grindless:wc_sic_multilayer'],
-    ['grindless:synchrotron/synchrotron/mirror_metrology', 10, 'grindless:wc_sic_multilayer', 'grindless:mirror_metrology_record'],
-    ['grindless:synchrotron/synchrotron/laue_frame_alignment', 11, 'gtceu:tungsten_steel_frame', 'grindless:aligned_laue_frame'],
+    ['grindless:synchrotron/mirror_metrology', 10, 'grindless:wc_sic_multilayer', 'grindless:mirror_metrology_record'],
+    ['grindless:synchrotron/laue_frame_alignment', 11, 'gtceu:tungsten_steel_frame', 'grindless:aligned_laue_frame'],
     ['grindless:chemical_vapour_infiltration/superpolished_sic_blank', 10, 'gtceu:methyltrichlorosilane', 'grindless:superpolished_sic_blank'],
     ['grindless:chemical_vapour_infiltration/gamma_mirror_strip', 11, 'grindless:rejected_gamma_mirror', 'grindless:superpolished_sic_blank'],
     ['grindless:megabar_synthesis/bent_ge_tile', 8, 'grindless:seven_n_germanium', 'grindless:bent_ge_tile'],
     ['grindless:megabar_synthesis/bent_ge_rebend', 9, 'grindless:rejected_laue_tile', 'grindless:bent_ge_tile'],
-    ['grindless:crystal_growth/crystal_growth/gaas_laue_tile', 24, 'gtceu:gallium_arsenide_dust', 'grindless:gaas_laue_tile']
+    ['grindless:crystal_growth/gaas_laue_tile', 24, 'gtceu:gallium_arsenide_dust', 'grindless:gaas_laue_tile']
   ];
   for (const [id, circuit, input, output] of steps) {
     const r = find(id);
@@ -132,7 +132,7 @@ test('lines 34 and 35 older steps: SPS c14, MTJ c12, synchrotron c10-11, CVI c10
     assert.ok(ins.includes(`"${input}"`), `${id} takes ${input}`);
     assert.ok(JSON.stringify(r.j.outputs).includes(`"${output}"`), `${id} makes ${output}`);
   }
-  const metrology = find('grindless:synchrotron/synchrotron/mirror_metrology').j.inputs.item;
+  const metrology = find('grindless:synchrotron/mirror_metrology').j.inputs.item;
   assert.ok(metrology.some((x) => x.chance === 0 && JSON.stringify(x).includes('grindless:wc_sic_multilayer')), 'the multilayer is only measured');
   const strip = JSON.stringify(find('grindless:chemical_vapour_infiltration/gamma_mirror_strip').j.outputs);
   assert.ok(strip.includes('gtceu:tungsten_hexafluoride') && strip.includes('gtceu:hydrochloric_acid'), 'the stripped tungsten leaves as WF6');

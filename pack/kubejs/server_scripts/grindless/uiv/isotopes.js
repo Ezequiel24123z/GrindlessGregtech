@@ -66,7 +66,7 @@
   }
 
   function add(event, rec) {
-    var recipe = event.recipes.gtceu[rec.type]('grindless:' + rec.type + '/' + rec.name)
+    var recipe = event.recipes.gtceu[rec.type]('grindless:' + rec.name)
     rec.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
     if (rec.circuit > 0) recipe.circuit(rec.circuit)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })

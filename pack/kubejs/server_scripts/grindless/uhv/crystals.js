@@ -122,7 +122,7 @@
   }
 
   function add(event, rec, keepKey) {
-    var recipe = event.recipes.gtceu[rec.type](rec.recipeId)
+    var recipe = event.recipes.gtceu[rec.type]('grindless:' + rec.idPrefix + rec.name)
     rec.itemsIn.forEach(function (x) {
       if (x.chance >= 10000) recipe.itemInputs(x.count + 'x ' + x.id)
       else recipe.chancedInput(x.count + 'x ' + x.id, x.chance, 0)

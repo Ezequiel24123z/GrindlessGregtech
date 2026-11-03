@@ -363,7 +363,7 @@
       console.error(LOG + 'photonics recipe skipped ' + r.name + ': unknown id(s) ' + missing.join(', '))
       return
     }
-    var recipe = event.recipes.gtceu[r.type](r.recipeId)
+    var recipe = event.recipes.gtceu[r.type]('grindless:' + r.name)
     r.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
     if (r.notConsumable) recipe.notConsumable(r.notConsumable)
     if (r.circuit !== null) recipe.circuit(r.circuit)
