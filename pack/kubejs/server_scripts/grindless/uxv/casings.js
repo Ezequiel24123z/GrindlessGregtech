@@ -8,13 +8,15 @@ global.grindless.recipes('uxv/casings', function (event) {
   var UXV_EUT = 125829120
 
   event.recipes.gtceu.assembler('grindless:gum_metal_casing')
-    .itemInputs('8x grindless:gum_metal_billet', '4x grindless:w184_cvi_preform')
+    .itemInputs('8x grindless:gum_metal_billet', '4x grindless:w184_cvi_preform', '4x grindless:annealed_mu_foil', '8x gtceu:tungsten_184_single_wire')
+    .inputFluids(Fluid.of('gtceu:epoxy', 288))
     .itemOutputs('2x grindless:gum_metal_casing')
     .EUt(UXV_EUT)
     .duration(400)
 
   event.recipes.gtceu.assembler('grindless:mu_metal_shield_casing')
-    .itemInputs('16x grindless:annealed_mu_foil', '4x grindless:gum_metal_billet', '1x gtceu:uxv_sensor')
+    .itemInputs('16x grindless:annealed_mu_foil', '4x grindless:gum_metal_billet', '4x grindless:w184_cvi_preform', '1x gtceu:uxv_sensor')
+    .inputFluids(Fluid.of('gtceu:epoxy', 288))
     .itemOutputs('8x grindless:mu_metal_shield_casing')
     .EUt(UXV_EUT)
     .duration(500)
@@ -28,6 +30,7 @@ global.grindless.recipes('uxv/casings', function (event) {
 
   event.recipes.gtceu.assembler('grindless:pasta_containment_casing')
     .itemInputs('32x grindless:frc_cartridge', '32x grindless:cage_part', '32x grindless:gum_metal_billet', '1x gtceu:uiv_field_generator')
+    .inputFluids(Fluid.of('gtceu:epoxy', 576))
     .itemOutputs('64x grindless:pasta_containment_casing')
     .EUt(UXV_EUT)
     .duration(600)
