@@ -12,12 +12,12 @@
 //     circuit 1  2,000 mB diamond slurry + 500 mB H2S -> 4 diamond dust + 1 ice giant diamond seed + 1 sulfur dust + 500 mB ammonia + 500 mB water
 //                (the real ammonia water, split into its two usual fluids: there is no ammonia-water fluid)
 //   outer_flyby (the probe is consumed, the aerogel shield is spent)
-//     circuit 1  Neptune flyby probe + silica aerogel -> Neptune probe recording + 1 Neptune sample
+//     circuit 1  Neptune flyby probe + silica aerogel -> Neptune probe recording
+//     circuit 3  Neptune flyby probe + silica aerogel -> 1 Neptune sample (the sampling pass; the UV Neptune siphon's research)
 //     circuit 2  Neptune flyby probe + silica aerogel + Titan entry probe (the lander pod) -> Triton probe recording + 4,000 mB nitrogen
 //   cryogenic_isotope_separation (the Saturn column, any dimension), circuit 3: 8,000 mB Uranus hydrogen -> 62 mB deuterium + 7,938 mB hydrogen
 //     (2.5 x Saturn's 25 mB per 8,000 mB; so Uranus hydrogen has a use besides the chemistry).
-// Support: the Neptune flyby probe and the pressure hull casing (assembler), the Neptune sample flask (centrifuge: methane + hydrogen + the
-// bottle back), the three controllers' crafting recipes.
+// Support: the Neptune flyby probe and the pressure hull casing (assembler), the three controllers' crafting recipes.
 // Destinations: helium the usual cryogenics; methane, hydrogen, ammonia, water the usual chemistry; H2S the separator (its sulfur the LV
 // sulfuric acid line); diamond dust the autoclave and the lattice fab; the seed the lattice fab (cvd diamond; not consumed); nitrogen the Titan
 // bay and the lattice fab; recordings the deep space network (observatory.js); the atmosphere sample the Uranus quantum seed (travel.js).
@@ -70,7 +70,11 @@
     { name: 'neptune_flyby', type: 'outer_flyby', circuit: 1,
       itemsIn: [{ id: PROBE, count: 1 }, { id: AEROGEL, count: 1 }], notConsumed: [], worn: null,
       fluidsIn: [], fluidsOut: [],
-      itemsOut: [{ id: NEPTUNE_REC, count: 1 }, { id: NEPTUNE_SAMPLE, count: 1 }], eut: ZPM_VA, duration: 600, dim: ORBIT },
+      itemsOut: [{ id: NEPTUNE_REC, count: 1 }], eut: ZPM_VA, duration: 600, dim: ORBIT },
+    { name: 'neptune_sampling', type: 'outer_flyby', circuit: 3,
+      itemsIn: [{ id: PROBE, count: 1 }, { id: AEROGEL, count: 1 }], notConsumed: [], worn: null,
+      fluidsIn: [], fluidsOut: [],
+      itemsOut: [{ id: NEPTUNE_SAMPLE, count: 1 }], eut: ZPM_VA, duration: 600, dim: ORBIT },
     { name: 'triton_flyby', type: 'outer_flyby', circuit: 2,
       itemsIn: [{ id: PROBE, count: 1 }, { id: AEROGEL, count: 1 }, { id: LANDER, count: 1 }], notConsumed: [], worn: null,
       fluidsIn: [], fluidsOut: [{ id: 'gtceu:nitrogen', amount: 4000 }],
@@ -153,20 +157,6 @@
       .circuit(5).itemOutputs('4x grindless:pressure_hull_casing').EUt(ZPM_VA).duration(100)
   }
 
-  // CENTRIFUGE: the Neptune sample's use (rule 3: every product has a destination): its gases, and the flask goes back
-  function addFlask(event) {
-    var missing = [NEPTUNE_SAMPLE, BOTTLE].filter(function (id) { return !Item.exists(id) })
-    if (missing.length > 0 || !Fluid.exists('gtceu:methane') || !Fluid.exists('gtceu:hydrogen')) {
-      console.error(LOG + 'neptune sample flask recipe skipped, unknown id(s)')
-      return
-    }
-    event.recipes.gtceu.centrifuge('grindless:neptune_sample_flask')
-      .itemInputs('1x ' + NEPTUNE_SAMPLE).circuit(1)
-      .itemOutputs('1x ' + BOTTLE)
-      .outputFluids(Fluid.of('gtceu:methane', 2000), Fluid.of('gtceu:hydrogen', 1000))
-      .EUt(7680).duration(200)
-  }
-
   // ASSEMBLY LINE with scanner research: hull + the machine's own parts + 4 ZPM circuits + two domain parts + soldering alloy + lubricant
   function addCrafting(event) {
     var HULL = 'gtceu:zpm_machine_hull'
@@ -195,7 +185,6 @@
   ServerEvents.recipes(function (event) {
     try { addMachineRecipes(event) } catch (e) { console.error(LOG + 'uranus recipes failed: ' + e) }
     try { addParts(event) } catch (e2) { console.error(LOG + 'uranus part recipes failed: ' + e2) }
-    try { addFlask(event) } catch (e3) { console.error(LOG + 'neptune flask recipe failed: ' + e3) }
     try { addCrafting(event) } catch (e4) { console.error(LOG + 'uranus crafting failed: ' + e5(e4)) }
   })
   function e5(e) { return String(e) }

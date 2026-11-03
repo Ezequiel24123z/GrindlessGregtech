@@ -1,5 +1,5 @@
 // UHV's ceramics and the level 8 rocket (package UHV-A8), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
-//   - startup_scripts/grindless/uhv/propulsion.js: the spark plasma sinterer (5 x 5 x 7) and its type, the TaC liner, the oganesson pod,
+//   - startup_scripts/grindless/uhv/propulsion.js: the spark plasma sinterer (11 x 8 x 9) and its type, the TaC liner, the oganesson pod,
 //     boron carbide and the UHTC blend, the ICAN rocket motor (createCustom: a no-op in the stand-in, so only its source is checked);
 //   - server_scripts/grindless/uhv/propulsion.js: the sinterer's three steps, line 26's side steps (zirconia from red zircon, B4C, ZrB2,
 //     the blend), the controller's crafting, the motor's loot table and tool tag;
@@ -77,11 +77,11 @@ test('the ICAN motor: a GCYR RocketMotorBlock at tier 6 through createCustom, bl
   assert.match(server, /minecraft:mineable\/pickaxe/);
 });
 
-test('pattern: 5 x 5 x 7, one controller in the front slice, every symbol defined, GTM part limits, no hatches', () => {
+test('pattern: 11 x 8 x 9, one controller in the front slice, every symbol defined, GTM part limits, no hatches', () => {
   const s = run.docs.structures.structures['gtceu:spark_plasma_sinterer'];
   assert.ok(s, 'described');
-  assert.equal(s.slices.length, 7);
-  assert.ok(s.slices.every((sl) => sl.length === 5 && sl.every((r) => r.length === 5)), 'uniform 5 x 5 slices');
+  assert.equal(s.slices.length, 9);
+  assert.ok(s.slices.every((sl) => sl.length === 8 && sl.every((r) => r.length === 11)), 'uniform 11 x 8 slices');
   const all = s.slices.flat().join('');
   assert.equal(all.split('').filter((c) => c === 'S').length, 1);
   assert.ok(s.slices[s.slices.length - 1].join('').includes('S'), 'controller in the front slice');

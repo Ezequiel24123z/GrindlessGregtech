@@ -20,8 +20,8 @@
 //   materials ethylhexenal, ethylhexanol, phosphoryl_chloride, hdehp_extractant (line 25, before F1's hdehp_solvent),
 //             transcurium_liquor, fission_product_liquor, spent_hdehp_solvent
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the reactor is 9 x 9 x 11 (a tungstensteel flux-trap column,
-// a heatproof driver annulus and a beryllium reflector ring in an open pool), the facility 9 x 7 x 9 (four PTFE ion-exchange columns,
-// a light-concrete decay store vault, a laminated-glass glovebox window in the front wall).
+// a heatproof driver annulus and a beryllium reflector ring in an open pool), the facility 21 x 12 x 9 (a vault-casing hot-cell bank: seven
+// partitioned cells with PTFE ion-exchange columns, a glovebox window in the front wall, a decay store vault floor, a roof stack).
 // Textures: tools/assets/Build-UHVTranscuriumTextures.ps1. Names: client_scripts/grindless/uhv_transcurium_lang.js.
 // Published for the recipe script: global.grindless.transcurium.
 (function () {
@@ -32,6 +32,8 @@
 
   const SHIELD = 'gtnn:radiation_proof_machine_casing'
   const SHIELD_TEXTURE = 'gtnn:block/casings/solid/radiation_proof_machine_casing'
+  const VAULT = 'grindless:radiation_vault_casing'
+  const VAULT_TEXTURE = 'grindless:block/luv/radiation_vault_casing'
   const PIPE = 'gtceu:ptfe_pipe_casing'
   const TUNGSTEN_PIPE = 'gtceu:tungstensteel_pipe_casing'
   const HEAT = 'gtceu:heatproof_machine_casing'
@@ -75,8 +77,9 @@
       lang: 'Transuranium Facility',
       // items in: curium, americium, aluminium and the circuit; fluids out: the solvent, the spent solvent and the nitric acid back
       maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 3 },
-      width: 9, depth: 9, height: 7,
-      bands: [null, 'C', 'L', 'L', 'F', 'T', null]
+      width: 21, depth: 9, height: 8, stack: 4, window: true, floorCasing: VAULT,
+      floor: function (si, c) { return si >= 5 ? 'X' : 'C' },
+      bands: [null, 'V', 'V', 'F', 'F', 'F', 'V', null]
     }
   }
 
@@ -88,6 +91,7 @@
     var top = r === m.height - 1
     if ((ex && ez) || (top && (ex || ez))) return 'Q'
     if (top) return si % 3 === 1 ? 'H' : 'F'
+    if (m.window && ez && si === m.depth - 1 && r >= 2 && r <= 5) return c % 3 === 0 ? 'V' : 'L'
     var band = m.bands[r]
     if (band === 'L') return (ez ? c : si) % 3 === 0 ? 'F' : 'L'
     return band
@@ -100,12 +104,13 @@
     var mid = (m.width - 1) / 2
     for (var si = 0; si < m.depth; si++) {
       var rows = []
-      for (var r = 0; r < m.height; r++) {
+      for (var r = 0; r < m.height + (m.stack || 0); r++) {
         var row = ''
         for (var c = 0; c < m.width; c++) {
           var ch
           var isWall = si === 0 || si === last || c === 0 || c === m.width - 1
-          if (r === 0) ch = (si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Q' : 'X'
+          if (r >= m.height) ch = si === 1 && c === m.width - 3 ? 'T' : ' '
+          else if (r === 0) ch = (si === 0 || si === last) && (c === 0 || c === m.width - 1) ? 'Q' : (m.floor ? m.floor(si, c) : 'X')
           else if (si === last && r === 1 && c === mid) ch = 'S'
           else if (r === m.height - 1 || isWall) ch = skin(m, r, si, c)
           else ch = inner(r, si, c)
@@ -131,21 +136,21 @@
     return '#'
   }
 
-  // four ion-exchange columns (P), the decay store vault (C) on the floor
+  // a hot-cell bank: seven cells in a row behind the lead-glass window, split by concrete partitions (C), each with its own PTFE
+  // ion-exchange column (P); the decay store vault is the concrete floor at the back; a stack (T) rises from the roof
   function facilityInner(r, si, c) {
-    var dx = Math.abs(c - 4)
-    var dz = Math.abs(si - 4)
-    if (dx === 2 && dz === 2) return 'P'
-    if (r <= 2 && dx <= 1 && dz <= 1) return 'C'
+    if (r > 6) return '#'
+    if (c % 3 === 0 && si >= 1 && si <= 4) return 'C'
+    if (c % 3 === 1 && si === 2 && r <= 5) return 'P'
     return '#'
   }
-
   function specOf(m, inner, parts) {
     return {
       slices: shell(m, inner),
       symbols: {
         S: Pat.controller(),
-        X: Pat.oneOf.apply(null, [Pat.block(SHIELD)].concat(parts)),
+        X: Pat.oneOf.apply(null, [Pat.block(m.floorCasing || SHIELD)].concat(parts)),
+        V: Pat.block(VAULT),
         F: Pat.block(SHIELD),
         Q: Pat.frame(['tungsten_steel']),
         T: Pat.block(TUNGSTEN_PIPE),
@@ -274,12 +279,12 @@
       .recipeType(facility.type)
       .recipeModifier(facilityModifier(), true)
       .beforeWorking(G.noVoiding.beforeWorking({ which: 'both', reason: TC.facilityNoVoiding, name: 'transuranium facility' }))
-      .appearanceBlock(function () { return Block.getBlock(SHIELD) })
+      .appearanceBlock(function () { return Block.getBlock(VAULT) })
       .pattern(function (def) { return Pat.build(def, facility.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.transuranium_facility.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.transuranium_processing'))
       ])
-      .workableCasingModel(SHIELD_TEXTURE, 'grindless:block/multiblock/transuranium_facility')
+      .workableCasingModel(VAULT_TEXTURE, 'grindless:block/multiblock/transuranium_facility')
   })
 })()

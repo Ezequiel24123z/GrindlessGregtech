@@ -1,5 +1,5 @@
 // UHV's ZBLAN draw tower (package UHV-A10), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
-//   - startup_scripts/grindless/uhv/zblan.js: one recipe type, one machine (3 x 11 x 3 tower), the preform, zirconium tetrafluoride;
+//   - startup_scripts/grindless/uhv/zblan.js: one recipe type, one machine (7 x 19 x 7 tower), the preform, zirconium tetrafluoride;
 //   - server_scripts/grindless/uhv/zblan.js: the tower's two steps (Earth orbit only), line 31's ZrF4 row, the controller;
 //   - IV's fluorspar kiln (iv/fluorspar_kiln.js), where the captured HF goes back;
 //   - en_us text for everything new.
@@ -48,11 +48,11 @@ test('registration: the type, the machine, the preform and ZrF4 dust; F1\'s fibr
   assert.ok(run.registry.items.has('grindless:zblan_fibre'), 'F1 fibre');
 });
 
-test('pattern: 5 x 15 x 5 draw tower (spool hall, glass and pipe shaft, heatproof furnace) under a station truss roof, one controller, GTM part limits', () => {
+test('pattern: 7 x 19 x 7 draw tower (spool hall, glass and pipe shaft, heatproof furnace) under a station truss roof, one controller, GTM part limits', () => {
   const s = run.docs.structures.structures['gtceu:zblan_draw_tower'];
   assert.ok(s, 'described');
-  assert.equal(s.slices.length, 5);
-  assert.ok(s.slices.every((sl) => sl.length === 15 && sl.every((r) => r.length === 5)), 'uniform slices');
+  assert.equal(s.slices.length, 7);
+  assert.ok(s.slices.every((sl) => sl.length === 19 && sl.every((r) => r.length === 7)), 'uniform slices');
   assert.equal(s.slices.flat().join('').split('').filter((c) => c === 'S').length, 1, 'one controller');
   for (const sl of s.slices) for (const r of sl) for (const c of r) assert.ok(c === ' ' || s.symbols[c], `symbol ${c}`);
   const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
@@ -60,8 +60,8 @@ test('pattern: 5 x 15 x 5 draw tower (spool hall, glass and pipe shaft, heatproo
   assert.ok(s.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes('gtceu:clean_machine_casing')), 'floor casing');
   const truss = Object.entries(s.symbols).filter(([, v]) => (v.blocks || []).includes('grindless:station_truss_casing')).map(([k]) => k);
   assert.equal(truss.length, 1, 'station truss symbol');
-  for (const sl of s.slices) for (const ch of sl[14]) assert.ok(ch === truss[0] || ch === s.slices[2][14][2], 'truss roof (the feed gearbox in the middle)');
-  assert.equal(s.slices[2][14][2], 'G', 'feed gearbox');
+  for (const sl of s.slices) for (const ch of sl[18]) assert.ok(ch === truss[0] || ch === s.slices[3][18][3], 'truss roof (the feed gearbox in the middle)');
+  assert.equal(s.slices[3][18][3], 'G', 'feed gearbox');
 });
 
 test('recipe lookup: unique circuits, every row in the dump with its circuit, figures within UHV', () => {

@@ -31,17 +31,17 @@
 //
 // Machine class: GTM's plain electric multiblock (WorkableElectricMultiblockMachine), so its overclock is GTM's.
 //
-// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front):
-//   slice 0, the service wall: rows 0-1 and the ends of row 2 are `X` (casing or a part: the transfer ports), the rest casing.
-//   slices 1-2, the cells: a light concrete floor (B); in each cell (columns 1-2 and 4-5, rows 1-2) two PTFE vessels (V) at the back
-//   of the lower row and air in front and above them; a shield partition (column 3) between the cells; the side walls take parts in
-//   row 1 (X); the cell ceiling (row 3) is casing, with two filter casings (F) over each cell on the roof (row 4, slice 1).
-//   slice 3, the operating face: the concrete plinth, two 2x2 laminated glass windows (G), the controller between them (row 1), and a
-//   tungstensteel frame manipulator (M) through the wall over each window column (row 3).
-// The 20 `X` cells take 1-2 energy hatches, 1-3 input buses, 1-3 output buses, 1-4 input hatches, 1-4 output hatches and at most one
-// parallel hatch (IV-B6); at least 4 stay casing. ME buses and hatches have the same abilities, so they fit.
-//
-// Textures: overlay dir grindless:block/multiblock/hot_cell (tools/assets/Build-HotCellTextures.ps1) on GT--'s radiation-proof casing.
+// Geometry (lib/patterns.js: slices back -> front, rows bottom -> top, columns left -> right seen from the front), 11 wide, 6 high, 5 deep
+// (about 240 blocks, D2-SIZE-IV):
+//   slice 0, the service wall: rows 1-2 are `X` (casing or a part: the transfer ports), the rest shield casing.
+//   slices 1-3, two 4-wide cells (columns 1-4 and 6-9, rows 1-3): a light concrete floor (B); two PTFE vessels (V) at the back of each
+//   cell's lower row and one more bank above them, air in front; a shield partition (column 5) between the cells and shield side walls
+//   with ports in row 2 (X); the shield ceiling (row 4) carries a HEPA filter casing bank (F) over each cell on the roof (row 5).
+//   slice 4, the operating face: the shield wall, two 2x2 laminated glass windows (G) per cell wall, the controller on the partition
+//   (row 2), and a tungstensteel frame manipulator (M) through the wall over each window column (row 3).
+// The 22 `X` cells take 1-2 energy hatches, 1-3 input buses, 1-3 output buses, 1-4 input hatches, 1-4 output hatches and at most one
+// parallel hatch (IV-B6); at least 5 stay casing. ME buses and hatches have the same abilities, so they fit.
+//// Textures: overlay dir grindless:block/multiblock/hot_cell (tools/assets/Build-HotCellTextures.ps1) on GT--'s radiation-proof casing.
 // Names / tooltips: client_scripts/grindless/iv_hot_cell_lang.js. Published for the recipe script and the smoke test:
 // global.grindless.hotCell.
 (function () {
@@ -89,17 +89,63 @@
 
   // ---------------------------------------------------------------- pattern
 
+  // 11 wide, 6 high, 5 deep: slices back -> front, rows bottom -> top, built cell by cell then written out as strings
+  function hotCellSlices() {
+    var W = 11, H = 6, D = 5
+    var g = []
+    for (var z = 0; z < D; z++) {
+      g.push([])
+      for (var y = 0; y < H; y++) {
+        var row = []
+        for (var x = 0; x < W; x++) row.push(' ')
+        g[z].push(row)
+      }
+    }
+    var cells = [[1, 4], [6, 9]]
+    for (var z1 = 0; z1 < D; z1++) {
+      for (var x1 = 0; x1 < W; x1++) {
+        g[z1][0][x1] = 'B'
+        g[z1][4][x1] = 'R'
+        for (var y1 = 1; y1 <= 3; y1++) {
+          var wall = z1 === 0 || z1 === D - 1 || x1 === 0 || x1 === W - 1 || x1 === 5
+          g[z1][y1][x1] = wall ? 'R' : '#'
+        }
+      }
+    }
+    // the service wall (the transfer ports) and the side-wall ports
+    for (var x2 = 1; x2 <= 9; x2++) {
+      if (x2 === 5) continue
+      g[0][1][x2] = 'X'
+      g[0][2][x2] = 'X'
+    }
+    for (var z2 = 1; z2 <= 3; z2++) {
+      g[z2][2][0] = 'X'
+      g[z2][2][W - 1] = 'X'
+    }
+    cells.forEach(function (c) {
+      // the PTFE vessels at the back of each cell, the shield and windows on the operating face, the HEPA banks on the roof
+      for (var x3 = c[0]; x3 <= c[1]; x3++) {
+        g[1][1][x3] = 'V'
+        g[2][1][x3] = 'V'
+        for (var z3 = 1; z3 <= 2; z3++) g[z3][5][x3] = 'F'
+        for (var y3 = 1; y3 <= 3; y3++) g[D - 1][y3][x3] = 'R'
+      }
+      g[1][2][c[0] + 1] = 'V'
+      g[1][2][c[0] + 2] = 'V'
+      for (var wx = c[0] + 1; wx <= c[0] + 2; wx++) {
+        g[D - 1][1][wx] = 'G'
+        g[D - 1][2][wx] = 'G'
+        g[D - 1][3][wx] = 'M'
+      }
+    })
+    g[D - 1][2][5] = 'S'
+    return g.map(function (slice) {
+      return slice.map(function (row) { return row.join('') })
+    })
+  }
+
   const SPEC = {
-    slices: [
-      // the service wall: the transfer ports
-      ['XXXXXXX', 'XXXXXXX', 'XRRRRRX', 'RRRRRRR', '       '],
-      // the cells' back half: the PTFE vessels, the partition, the ceiling and the HEPA filters on the roof
-      ['BBBBBBB', 'XVVRVVX', 'R##R##R', 'RRRRRRR', ' FF FF '],
-      // the cells' front half, where the tongs work
-      ['BBBBBBB', 'X##R##X', 'R##R##R', 'RRRRRRR', '       '],
-      // the operating face: windows, the controller between them, the manipulators through the wall above
-      ['BBBBBBB', 'RGGSGGR', 'RGGRGGR', 'RMMRMMR', '       ']
-    ],
+    slices: hotCellSlices(),
     symbols: {
       S: Pat.controller(),
       X: Pat.oneOf(
