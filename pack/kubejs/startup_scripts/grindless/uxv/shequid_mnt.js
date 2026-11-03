@@ -6,7 +6,7 @@
 //
 //   gtceu:shequid_works   15 x 19 x 15 He-II cryostat in a nested room, UXV (two UIV energy hatches). Recipe type gtceu:shequid_assembly
 //                         (circuit 1 weak-link cell, 2 SHeQUID gyro).
-//   gtceu:mnt_collider    9 x 7 x 23 beamline, UXV. Recipe type gtceu:multinucleon_transfer (circuit 1 collision, 2 gas catcher, 3 MR-TOF,
+//   gtceu:mnt_collider    15 x 13 x 91 beamline, UXV. Recipe type gtceu:multinucleon_transfer (circuit 1 collision, 2 gas catcher, 3 MR-TOF,
 //                         4 island chart); the gas stopping cell is not consumed.
 //
 // F1 ids (uxv_sensor, shequid_gyro, gas_stopping_cell, island_nuclide ...) are registered in uxv/foundation.js; only the ids below are new.
@@ -22,6 +22,10 @@
   const CRYO_TEXTURE = 'grindless:block/zpm/cryostat_casing'
   const HPC = 'gtceu:high_power_casing'
   const HPC_TEXTURE = 'gtceu:block/casings/hpca/high_power_casing'
+  // UXV family (uxv/casings.js): the collider makes no product its casings need
+  const GUM = 'grindless:gum_metal_casing'
+  const GUM_TEXTURE = 'grindless:block/uxv/gum_metal_casing'
+  const PULSED = 'grindless:pulsed_field_casing'
 
   SM.table = 'kubejs/data/grindless/tables/shequid_mnt.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -53,9 +57,9 @@
     },
     {
       name: 'mnt_collider', machine: 'gtceu:mnt_collider', type: 'multinucleon_transfer', dataKey: 'grindless_multinucleon_transfer',
-      lang: 'MNT Collider', maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 2, fluidsOut: 2 }, casing: HPC, texture: HPC_TEXTURE,
-      width: 9, height: 7, depth: 23,
-      pal: { F: HPC, C: 'gtceu:superconducting_coil', P: 'gtceu:tungstensteel_pipe_casing', K: CRYO, R: 'gtceu:computer_casing', Q: 'naquadah_alloy' },
+      lang: 'MNT Collider', maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 2, fluidsOut: 2 }, casing: GUM, texture: GUM_TEXTURE,
+      width: 15, height: 13, depth: 91,
+      pal: { F: GUM, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing', A: 'gtceu:stable_machine_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -93,23 +97,34 @@
     return s.booth('F', 3).fn()
   }
 
-  // a beamline from the injector (z 0) to the MR-TOF readout at the front: the beam pipe runs through the bore, quadrupole rings every four
-  // slices, the gas catcher in cryostat casing round the middle and the spectrometer racks on the last slices
-  function beamCell(x, y, z) {
-    var edgeX = x === 0 || x === 8
-    var edgeY = y === 0 || y === 6
-    if (!edgeX && !edgeY) {
-      if (z === 0 || z === 22) return 'F'
-      return x === 4 && y === 3 && z >= 2 && z <= 17 ? 'P' : '#'
-    }
-    if (edgeX && edgeY) return 'Q'
-    if (y === 0 && x >= 2 && x <= 6 && (z <= 1 || z >= 21)) return 'X'
-    if (z % 4 === 1 && ((x === 4 && y === 6) || (edgeX && y === 3) || (x === 4 && y === 0))) return 'C'
-    if (z % 4 === 3 && ((x === 4 && y === 6) || (edgeX && y === 3) || (x === 4 && y === 0))) return 'P'
-    if (edgeY && z % 4 === 0 && z > 0 && z < 22) return 'R'
-    if (z >= 7 && z <= 10) return 'K'
-    if (z >= 15 && z <= 19 && edgeX && y >= 2 && y <= 4) return 'R'
-    return 'F'
+  // The collider (15 x 13 x 91) from the injector (z 0) to the MR-TOF readout at the front: a gum-metal linac tube with pulsed-field rings
+  // every fourth slice and superconducting coil rings every twelfth, the target hall (a gum room with sight windows round the target), the
+  // gas-stopping cell (a pulsed-field cylinder with a glass viewing band) and the MR-TOF racetrack loop, with the control booth at the front.
+  function colliderBeam() {
+    var s = G.uevShapes.scene(15, 13, 91)
+    s.box(6, 0, 0, 8, 0, 48, 'F')
+    s.cyl('z', 7, 6, 3, 1, 48, 'F', true)
+    for (var z = 3; z <= 47; z += 4) s.cyl('z', 7, 6, 4, z, z, 'M', true, null)
+    for (var k = 6; k <= 42; k += 12) s.cyl('z', 7, 6, 3, k, k, 'C', true)
+    ;[8, 24, 40].forEach(function (z) { s.box(3, 0, z, 11, 0, z, 'A').box(3, 1, z, 3, 3, z, 'Q').box(11, 1, z, 11, 3, z, 'Q') })
+    s.room(0, 0, 49, 14, 12, 65, 'F', 'f')
+    s.room(0, 0, 49, 14, 12, 49, 'F')
+    s.cyl('z', 7, 6, 3, 49, 49, '#')
+    ;[53, 59].forEach(function (z) { s.box(0, 5, z, 0, 7, z + 2, 'L').box(14, 5, z, 14, 7, z + 2, 'L') })
+    s.cyl('z', 7, 6, 2, 50, 64, 'P', true)
+    s.box(5, 12, 55, 9, 12, 59, 'A')
+    s.cyl('z', 7, 6, 4, 66, 75, 'M', true)
+    s.cyl('z', 7, 6, 4, 70, 71, 'L', true)
+    s.cyl('z', 7, 6, 4, 66, 66, 'A').cyl('z', 7, 6, 4, 75, 75, 'A')
+    s.cyl('z', 7, 6, 1, 66, 75, 'P')
+    s.cyl('z', 7, 6, 2, 76, 77, 'P', true)
+    s.room(1, 3, 78, 13, 8, 89, 'M', 'bt')
+    s.room(3, 3, 80, 11, 8, 87, 'M', 'bt', ' ')
+    s.box(2, 4, 79, 12, 7, 79, 'F').box(2, 4, 88, 12, 7, 88, 'F')
+    s.box(1, 4, 79, 1, 7, 88, 'L').box(13, 4, 79, 13, 7, 88, 'L')
+    s.box(3, 0, 78, 11, 0, 89, 'F')
+    s.box(2, 1, 78, 2, 2, 78, 'Q').box(12, 1, 78, 12, 2, 78, 'Q').box(2, 1, 89, 2, 2, 89, 'Q').box(12, 1, 89, 12, 2, 89, 'Q')
+    return s.booth('F', 3).fn()
   }
 
   // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
@@ -117,10 +132,7 @@
     if (m.name === 'shequid_works') {
       return G.uevShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: cryostatRoom() })
     }
-    return G.uivShapes.spec(Pat, {
-      w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
-      fn: beamCell
-    })
+    return G.uevShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: colliderBeam() })
   }
 
   // one EMI line per recipe, read from its data

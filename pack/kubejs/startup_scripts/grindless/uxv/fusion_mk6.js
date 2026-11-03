@@ -57,7 +57,7 @@
     var dz = z - CEN
     var r = Math.sqrt(dx * dx + dz * dz)
     if (z >= 40 && x >= 20 && x <= 24 && y <= 2) return 'G'
-    if (r < 2.5) return y === 0 || y === H - 1 ? 'G' : 'K'
+    if (r < 2.5) return y === 0 || y === H - 1 || r >= 1.5 ? 'G' : 'K'
     var dr = r - RR
     var dy = y - TY
     var dd = Math.sqrt(dr * dr + dy * dy)

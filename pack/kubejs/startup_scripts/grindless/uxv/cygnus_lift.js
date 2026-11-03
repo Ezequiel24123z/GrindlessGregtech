@@ -4,7 +4,7 @@
 // stellar condensation tower, and their recipe types. The recipes come from data/grindless/tables/cygnus_lift.json
 // (server_scripts/grindless/uxv/cygnus_lift.js). No new items: every id is F1's (uxv/foundation.js).
 //
-//   gtceu:stellar_elevator             11 x 11 x 25 funnel and boom, UXV (two UIV energy hatches). Recipe type gtceu:star_lifting
+//   gtceu:stellar_elevator             23 x 57 x 23 ring-current lift tower, UXV (two UIV energy hatches). Recipe type gtceu:star_lifting
 //                                      (circuit 1 lift, 2 elevator log); the lift is locked to the Cygnus X-1 orbit.
 //   gtceu:plasma_mass_filter           15 x 15 x 37 Archimedes solenoid, UXV. Recipe type gtceu:plasma_mass_filtering (circuit 1 stellar cuts,
 //                                      2 disk plasma); both run anywhere.
@@ -21,10 +21,6 @@
   const CL = G.cygnusLift || (G.cygnusLift = {})
   const LOG = '[grindless/uxv] '
 
-  const UXV_CASING = 'gtceu:uxv_machine_casing'
-  const UXV_TEXTURE = 'gtceu:block/casings/voltage/uxv/side'
-  const HPC = 'gtceu:high_power_casing'
-  const HPC_TEXTURE = 'gtceu:block/casings/hpca/high_power_casing'
   // the UXV family (uxv/casings.js): gum metal is the body of the filter and the tower, pulsed field their magnets. Neither product is an ancestor
   // of those casings' inputs (they sort and condense Cygnus plasma; the casing chains take foils, billets and UIV parts).
   const GUM = 'grindless:gum_metal_casing'
@@ -41,9 +37,11 @@
   CL.machines = [
     {
       name: 'stellar_elevator', machine: 'gtceu:stellar_elevator', type: 'star_lifting', dataKey: 'grindless_star_lifting',
-      lang: 'Stellar Elevator', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 2 }, casing: UXV_CASING, texture: UXV_TEXTURE,
-      width: 11, height: 11, depth: 25,
-      pal: { F: UXV_CASING, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:titanium_pipe_casing', Q: 'naquadah_alloy' },
+      lang: 'Stellar Elevator', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 2 }, casing: SIC, texture: SIC_TEXTURE,
+      // BOOTSTRAP (D4-SHAPE-UXV-B): the elevator is the first stage of the Cygnus chain that reaches the hull, so, as the filter, its F body is the UEV SiC
+      // composite; the ring-current coils are pulsed-field.
+      width: 23, height: 57, depth: 23,
+      pal: { F: SIC, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:titanium_pipe_casing', A: 'gtceu:stable_machine_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -89,33 +87,39 @@
     }
   ]
 
-  function abs(n) { return n < 0 ? -n : n }
-  // an octagon: inside the square of half-width r and the diamond of radius r + r/2
-  function oct(dx, dy, r) { return r >= 0 && abs(dx) <= r && abs(dy) <= r && abs(dx) + abs(dy) <= r + Math.floor(r / 2) }
+  // The stellar elevator (23 x 57 x 23), D4-SHAPE-UXV-B: a lift tower of ring-current coils. A base hall with the control booth at the front,
+  // a hollow lift shaft up the axis with a fusion-glass plasma core, pulsed-field ring-current coils round it every third course, three
+  // superconducting coil rings, four frame pylons with ring beams, titanium risers on the axes and a crown disc and cone at the top.
+  function liftTower() {
+    var s = G.uevShapes.scene(23, 57, 23)
+    s.room(0, 0, 0, 22, 5, 22, 'F', 't')
+    s.box(1, 1, 1, 21, 4, 21, '#')
+    s.box(0, 0, 0, 22, 0, 22, 'F')
+    s.cyl('y', 11, 11, 4, 1, 52, 'F', true)
+    s.cyl('y', 11, 11, 1, 6, 52, 'L')
+    for (var y = 7; y <= 49; y += 3) s.cyl('y', 11, 11, 7, y, y, 'M', true, null)
+    ;[14, 28, 42].forEach(function (y) { s.cyl('y', 11, 11, 5, y, y, 'C', true, null) })
+    ;[[2, 2], [20, 2], [2, 20], [20, 20]].forEach(function (p) { s.box(p[0], 1, p[1], p[0], 50, p[1], 'Q') })
+    ;[10, 20, 30, 40, 50].forEach(function (y) {
+      s.box(2, y, 2, 20, y, 2, 'Q').box(2, y, 20, 20, y, 20, 'Q').box(2, y, 2, 2, y, 20, 'Q').box(20, y, 2, 20, y, 20, 'Q')
+    })
+    ;[9, 21, 33, 45].forEach(function (y) {
+      s.box(11, y, 2, 11, y, 6, 'P').box(11, y, 16, 11, y, 20, 'P').box(2, y, 11, 6, y, 11, 'P').box(16, y, 11, 20, y, 11, 'P')
+    })
+    s.cyl('y', 11, 11, 6, 53, 53, 'A')
+    s.cyl('y', 11, 11, 4, 54, 54, 'M', true)
+    s.cyl('y', 11, 11, 2, 55, 55, 'F')
+    s.set(11, 56, 11, 'L')
+    s.box(1, 5, 11, 3, 5, 11, 'A').box(19, 5, 11, 21, 5, 11, 'A')
+    return s.booth('F', 3).fn()
+  }
 
-  // x left to right, y bottom to top, z back (0) to front (24). The crown is at the back: an outer ring of frame round four hatch ports and
-  // a glass core; the boom narrows to the funnel in three steps, the wide base chamber at the front. Coil rings every fourth layer, titanium
-  // risers along the four axes, frame lattice on the diagonals and a fusion-glass plasma core up the axis.
-  function liftCell(x, y, z) {
-    var dx = x - 5
-    var dy = y - 5
-    var r = z >= 17 ? 5 : z >= 14 ? 4 : z >= 11 ? 3 : 2
-    if (!oct(dx, dy, r)) return ' '
-    var inner = oct(dx, dy, r - 1)
-    if (z === 24) {
-      if (y === 0) return abs(dx) <= 2 ? 'X' : 'F'
-      if (y === 1 && (abs(dx) === 2 || abs(dx) === 3)) return 'X'
-      return abs(dx) <= 1 && y >= 3 && y <= 5 ? 'L' : 'F'
-    }
-    if (z === 0) {
-      if (!inner) return 'Q'
-      return dx === 0 && dy === 0 ? 'L' : 'X'
-    }
-    if (inner) return dx === 0 && dy === 0 && z <= 16 ? 'L' : '#'
-    if (z % 4 === 0) return 'C'
-    if (dx === 0 || dy === 0) return 'P'
-    if (abs(dx) + abs(dy) === r + Math.floor(r / 2)) return 'Q'
-    return 'F'
+  // built in the machine registry callback: uev/shapes.js may load after this file
+  function spec(m) {
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
+      fn: m.name === 'stellar_elevator' ? liftTower() : m.name === 'plasma_mass_filter' ? filterSolenoid() : condensationColumn()
+    })
   }
 
   // An Archimedes-type filter (15 x 15 x 37): a long gum-metal solenoid tube along the beam (z), pulsed-field winding rings round it every
@@ -160,14 +164,11 @@
     return s.booth('F', 3).fn()
   }
 
-  // built in the machine registry callback: uiv/shapes.js and uev/shapes.js may load after this file
+  // built in the machine registry callback: uev/shapes.js may load after this file
   function spec(m) {
-    if (m.name === 'stellar_elevator') {
-      return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: liftCell })
-    }
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(),
-      fn: m.name === 'plasma_mass_filter' ? filterSolenoid() : condensationColumn()
+      fn: m.name === 'stellar_elevator' ? liftTower() : m.name === 'plasma_mass_filter' ? filterSolenoid() : condensationColumn()
     })
   }
 
