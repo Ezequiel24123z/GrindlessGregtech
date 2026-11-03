@@ -7,8 +7,35 @@
 // S03, B7T and B7S are not listed by hand: they follow tables/stations.json (../luv-stations.mjs, the rule of lib/stations.js). Io
 // orbit's slot holds one of two, never both: the flux-tube tether (B7T) or, if a second station fails, the sulfur-iodine plant on
 // Io (B7S). After the table flips, regenerate luv_age, pl_luv and power and lint (docs/quests.md, section 14).
-import { I, F, M, n, L, via, build, structure, network } from './pl-lib.mjs';
+import { I, F, M, n, L, via, build, structure, network, R, rateText } from './pl-lib.mjs';
 import { STATION_PACKAGES } from '../luv-stations.mjs';
+
+// The carbonyl line's rate cards (AUD3-RATES): every figure is recomputed from the recipe dump by pl-check.mjs
+const LCR = 'grindless:large_chemical_reactor/';
+const MOND_CARD = R.rate(LCR + 'mond_crushed', { tier: 'luv' }, {
+  title: 'One Mond reactor', eut: 1920, ticks: 400,
+  ins: { 'fluid:gtceu:carbon_monoxide': 108000, 'gtceu:crushed_meteoric_iron_ore': 48 },
+  outs: { 'fluid:gtceu:crude_metal_carbonyl': 24000, 'gtceu:iron_dust': 60, 'gtceu:cobalt_dust': 3, 'grindless:asteroid_pgm_concentrate': 3 },
+  hatch: { 'fluid:gtceu:carbon_monoxide': 36000, 'fluid:gtceu:crude_metal_carbonyl': 8000 },
+  note: 'The iron, cobalt and concentrate leave by the output bus.',
+});
+const SPLIT_CARD = R.ratio({ recipe: LCR + 'mond_crushed', tier: 'luv' }, { recipe: 'grindless:distillation_tower/crude_carbonyl_split', tier: 'luv' }, 'fluid:gtceu:crude_metal_carbonyl', 2, 1, {
+  title: 'Bottleneck', make: 24000, take: 48000, prodName: 'Mond reactors', consName: 'distillation tower',
+  note: 'The Mond reactor is the slow step, so two feed one tower.',
+});
+const FEED_CARD = R.ratio({ recipe: 'grindless:distillation_tower/crude_carbonyl_split', tier: 'luv' }, { recipe: LCR + 'nickel_carbonyl_decomposition', tier: 'luv' }, 'fluid:gtceu:nickel_tetracarbonyl', 1, 1, {
+  title: 'Tower to decomposers', make: 24000, take: 24000, prodName: 'distillation tower', consName: 'nickel decomposers',
+  note: 'The iron half needs one more decomposer. Both halves together return 36,000 mB of carbon monoxide per run, which is exactly one Mond charge.',
+});
+const FE_CO = { 'fluid:gtceu:iron_pentacarbonyl': 1000 };
+const IRON_CARD = R.cmp('gtceu:iron_dust', 1, 'Iron from iron pentacarbonyl', { tier: 'luv' }, [
+  { label: 'Decomposition', recipe: LCR + 'iron_carbonyl_decomposition', perMin: 24, eu: 96000, ins: FE_CO, out: { 'fluid:gtceu:carbon_monoxide': 5000 } },
+  { label: 'Large-reactor powder', recipe: LCR + 'carbonyl_iron_powder', key: 'grindless:carbonyl_iron_powder', perMin: 6, eu: 1536000, ins: FE_CO, out: { 'fluid:gtceu:carbon_monoxide': 5000 } },
+  { label: 'Small-reactor powder', recipe: 'grindless:chemical_reactor/carbonyl_iron_powder', key: 'grindless:carbonyl_iron_powder', perMin: 6, eu: 1536000, ins: FE_CO, out: { 'fluid:gtceu:carbon_monoxide': 5000 } },
+], {
+  what: 'one iron unit', dominates: [['Decomposition', 'Large-reactor powder'], ['Decomposition', 'Small-reactor powder']],
+  verdict: 'The powder is its own item, not iron dust, so nothing replaces it; but it costs 16 times the EU per unit at a quarter of the rate, and the small and large reactor give the same figures. Proposed balance decision for the owner.',
+});
 
 export const LANDED = new Set(['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10', ...STATION_PACKAGES]);
 if (LANDED.has('B7T') && LANDED.has('B7S')) throw new Error('B7T and B7S are alternatives: only one of them lands');
@@ -89,12 +116,12 @@ export default {
         n('cmi2', 0, -0.75, I('gtceu:crushed_meteoric_iron_ore'), 'Crushed Meteoric Iron', { kind: 'raw', sub: 'The belt\'s, macerated (or its meteoric iron dust)' }),
         n('co', 0, 0.75, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'raw', sub: 'A charge; the optical miner tops it up' }),
         n('mond', 2.25, 0, M('gtceu:large_chemical_reactor', 'gtceu:large_chemical_reactor'), 'Mond Process', {
-          from: ['cmi2', 'co'], sub: 'Large chemical reactor: 16 ore, 36,000 mB carbon monoxide',
-          desc: 'Carbon monoxide carries the iron, nickel and cobalt off as gas. The platinum metals stay behind as a concentrate.',
+          from: ['cmi2', 'co'], sub: 'Large chemical reactor: 16 ore, 36,000 mB carbon monoxide', figs: [MOND_CARD],
+          desc: ['Carbon monoxide carries the iron, nickel and cobalt off as gas. The platinum metals stay behind as a concentrate.', rateText(MOND_CARD)],
         }),
         n('crude', 4.5, 0, F('gtceu:crude_metal_carbonyl'), 'Crude Metal Carbonyl', { from: ['mond'] }),
         n('conc', 4.5, 2.25, I('grindless:asteroid_pgm_concentrate'), 'Asteroid PGM Concentrate', { from: ['mond'] }),
-        n('dist', 6.75, 0, M('gtceu:distillation_tower', 'gtceu:distillation_tower'), 'Distillation Tower', { from: ['crude'], sub: 'Nickel and iron carbonyl boil apart' }),
+        n('dist', 6.75, 0, M('gtceu:distillation_tower', 'gtceu:distillation_tower'), 'Distillation Tower', { from: ['crude'], sub: 'Nickel and iron carbonyl boil apart', figs: [SPLIT_CARD, FEED_CARD], desc: [rateText(SPLIT_CARD), rateText(FEED_CARD)] }),
         n('pplant', 7.5, 3, M('gtceu:platinum_plant'), 'Platinum Plant, Mode 4', {
           kind: 'ours', from: ['conc'], sub: 'Circuit 4',
           desc: 'The EV plant learns a fourth trick. Everything the concentrate holds comes out, and the leftover sludge splits into the other four metals.',
@@ -107,7 +134,7 @@ export default {
           kind: 'by', role: 'resource', from: ['pplant'], end: 'circuit 2', sub: 'Circuit 2: platinum, palladium, rhodium, ruthenium',
         }),
         n('decomp', 11.25, 0, M('gtceu:large_chemical_reactor', 'gtceu:large_chemical_reactor'), 'Carbonyl Decomposition', {
-          from: ['nico', 'feco'], sub: 'Heated, they fall apart into metal and carbon monoxide',
+          from: ['nico', 'feco'], sub: 'Heated, they fall apart into metal and carbon monoxide', figs: [IRON_CARD], desc: [rateText(IRON_CARD)],
         }),
         n('ni', 13.5, -0.75, I('gtceu:nickel_dust'), 'Nickel', { from: ['decomp'], sub: 'Four dust a run' }),
         n('fe', 13.5, 0.75, I('gtceu:iron_dust'), 'Iron', { kind: 'by', role: 'resource', from: ['decomp'], end: 'network', sub: 'With the cobalt: to the network' }),
