@@ -1355,7 +1355,7 @@
   function ptStep(m, age) {
     var rec = m.rec
     if (m.phase === 'pt_void') {
-      if (age < HOLD_TICKS) return
+      if (age < Math.max(HOLD_TICKS, 120)) return
       var r = result(m)
       var intact = rec.itemsIn.every(function (x) { return (r.left[x.id] || 0) === x.count }) &&
         rec.fluidsIn.every(function (f, i) { return r.tanks[i].amount === f.amount })

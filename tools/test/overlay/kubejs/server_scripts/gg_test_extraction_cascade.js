@@ -158,11 +158,9 @@
   function recipeCount(typeId, dir) {
     var type = GTRegistries.RECIPE_TYPES.get(rl(typeId))
     if (!type) return -1
-    var all = S.server.getRecipeManager().getAllRecipesFor(type)
-    if (!dir) return all.size()
-    var n = 0
-    for (var i = 0; i < all.size(); i++) if (String(all.get(i).getId()).indexOf(dir) === 0) n++
-    return n
+    var all = asArray(S.server.getRecipeManager().getAllRecipesFor(type))
+    if (!dir) return all.length
+    return all.filter(function (r) { return String(r.getId()).indexOf(dir) === 0 }).length
   }
 
   // the ids (and amounts, for the detail) a live GT recipe takes and gives, read through RecipeHelper (the ingredient getters are not
