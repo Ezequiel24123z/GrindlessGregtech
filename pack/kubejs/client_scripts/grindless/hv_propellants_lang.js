@@ -15,7 +15,7 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.aerozine_50', 'Hydrazine and unsymmetrical dimethylhydrazine, half and half: a storable hypergolic fuel.')
     add('tooltip.grindless.aerozine_50.1', 'Mixed from the chemical plant\'s hydrazine and the UDMH reactors. A mixer turns it and dinitrogen tetroxide into rocket fuel.')
     add('tooltip.grindless.exxonmobil_chemical_plant.casings.0', 'Its machine casings cap the recipe voltage it runs.')
-    add('tooltip.grindless.exxonmobil_chemical_plant.casings.1', 'Peroxide and hydrazine need HV machine casings.')
+    add('tooltip.grindless.exxonmobil_chemical_plant.casings.1', 'At HV: aluminium frostproof casings, HV machine casings, steel pipes, cupronickel coils. Pipes and coils may stay low tier.')
 })
 
 ItemEvents.tooltip(event => {
