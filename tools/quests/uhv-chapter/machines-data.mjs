@@ -58,13 +58,13 @@ export const QUESTS = [
   // ------------------------------------------------------------------ transcurium
   gear('HFR', 'high_flux_reactor', 'High Flux', ['H_ISO'], 3, -3, {
     for: 'The &6High Flux Reactor&r bombards curium in a dense neutron flux and is the start of every transcurium chain.',
-    needs: 'Its controller, a UHV hull and the &6Radiation-Proof Casing&r that holds the flux in.',
+    needs: 'Its controller, radiation-proof casing, light concrete, beryllium blocks and tungstensteel and PTFE pipe casing. One Terminal pass builds it.',
     unlocks: 'Berkelium and californium targets, and the driver elements that feed them.',
     automate: 'Targets and driver elements travel by ME; send spent drivers back to the reactor.',
   }, [it(HULL), it(SHIELD), it(PTFE)]),
   gear('BK', 'transuranium_facility', 'Berkelium', ['HFR'], 5, -3, {
     for: 'The &6Transuranium Facility&r separates the irradiated targets into berkelium and californium.',
-    needs: 'Its controller, radiation-proof casing and tungstensteel pipe casing.',
+    needs: 'Its controller, radiation vault casing, radiation-proof casing, light concrete and PTFE pipe casing. One Terminal pass builds it.',
     unlocks: 'Berkelium-249 and the californium-252 source that cold-trap drilling and YBCO irradiation use as a catalyst.',
     automate: 'Keep the targets in sealed buses; leftovers go to the partitioning plant.',
   }, [it(SHIELD), it('gtceu:tungstensteel_pipe_casing')]),
@@ -87,7 +87,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ clock
   gear('CLOCK', 'nuclear_clock_lab', 'A Clock in a Nucleus', ['H_ISO'], 3, -1, {
     for: 'The &6Nuclear Clock Lab&r locks a laser onto a thorium-229 nucleus and keeps time to a part in a quintillion.',
-    needs: 'Its controller, a UHV hull and clean machine casing.',
+    needs: 'Its controller, clean and robust machine casing, computer casing, laminated glass and a few radiation-proof casings. One Terminal pass builds it.',
     unlocks: 'The nuclear clock, the timing reference for the Mercury swarm and the gate.',
     automate: 'Thorium-229 targets come by ME; the clock leaves by ME.',
   }, [it(HULL), it(CLEAN)]),
@@ -98,7 +98,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ betavoltaics
   gear('BETA', 'betavoltaic_fab', 'Fifty Years of Current', ['H_ISO'], 3, 1, {
     for: 'The &6Betavoltaic Fab&r builds cells that turn the decay of nickel-63 straight into current, for decades.',
-    needs: 'Its controller, inert machine casing and clean machine casing.',
+    needs: 'Its controller, inert machine casing, radiation vault casing, laminated glass and PTFE pipe casing. One Terminal pass builds it.',
     unlocks: 'Betavoltaic cells for sensors and probes that cannot be recharged.',
     automate: 'Nickel-63 targets by ME; cells leave by ME.',
   }, [it(INERT), it(CLEAN)]),
@@ -109,19 +109,19 @@ export const QUESTS = [
   // ------------------------------------------------------------------ photonics
   gear('LN', 'crystal_growth_furnace', 'Lithium Niobate', ['H_CRYS'], 3.5, 6, {
     for: 'The &6Crystal Growth Furnace&r pulls lithium niobate and other boules out of a melt, slowly.',
-    needs: 'Its controller, robust and heatproof casing, computer casing and tritanium coils.',
+    needs: 'Its controller, robust and heatproof casing, tritanium coils and tungstensteel pipe casing. One Terminal pass builds it.',
     unlocks: 'The lithium niobate wafer and the europium-doped boule behind optical memory. The wafer is etched into waveguides before any modulator is made.',
     automate: 'Feed seeds and melt by ME; a boule is hours of work, so run several furnaces.',
   }, [it(ROBUST), it(HEATP), it(COMP), it('gtceu:tritanium_coil_block'), it('grindless:etched_lnoi_wafer'), it('grindless:thin_film_ln_modulator')]),
   gear('MBE', 'mbe_reactor', 'Molecular Beams', ['LN'], 5.5, 6, {
     for: 'The &6MBE Reactor&r lays a crystal down one atomic layer at a time in ultra-high vacuum.',
-    needs: 'Its controller, a UHV hull and clean machine casing.',
+    needs: 'Its controller, UV machine casing, clean machine casing, frostproof casing and laminated glass. One Terminal pass builds it.',
     unlocks: 'The indium phosphide wafer and the quantum cascade laser built on it.',
     automate: 'Substrates and dopants by ME; keep the vacuum pump line free of byproducts.',
   }, [it(HULL), it(CLEAN)]),
   gear('PCM', 'photonic_foundry', 'Phase Change', ['MBE'], 7.5, 6, {
     for: 'The &6Photonic Foundry&r writes light paths and phase-change memory into a wafer.',
-    needs: 'Its controller, clean machine casing and a UHV hull.',
+    needs: 'Its controller, clean and UV machine casing, filter casing and laminated glass. One Terminal pass builds it.',
     unlocks: 'The phase-change die and the optical assembly for photonic circuits.',
     automate: 'Wafers by ME from the furnaces; dies leave by ME.',
   }, [it(HULL), it(CLEAN)]),
@@ -129,19 +129,19 @@ export const QUESTS = [
   // ------------------------------------------------------------------ silicon carbide
   gear('WATER', 'ultrapure_water_plant', 'Eighteen Megohms', ['H_CRYS'], 3.5, 8, {
     for: 'The &6Ultrapure Water Plant&r polishes water until it carries almost no ions at all.',
-    needs: 'Its controller, clean machine casing and filter casing. It takes grade 5 water, which five purification stages make from plain water.',
+    needs: 'Its controller, clean, inert and filter casing and PTFE pipe casing. It takes grade 5 water, which five purification stages make from plain water.',
     unlocks: 'Ultrapure water at eighteen megohms, which the carbide fab, the solar array fab and every foundry recipe drink. Any ion left ruins a wafer.',
     automate: 'Build the five grades in order, then pipe the result straight to the fabs; do not bucket it.'
   }, [it(CLEAN), it(FILTER), it('gtca:purified_water_grade_5_bucket'), it('gtceu:ultrapure_water_bucket')]),
   gear('SIC', 'sic_device_fab', 'Silicon Carbide', ['WATER'], 5.5, 8, {
     for: 'The &6SiC Device Fab&r grows and etches silicon carbide into power devices that run hot.',
-    needs: 'Its controller, heatproof and robust machine casing.',
+    needs: 'Its controller, heatproof and robust machine casing, tritanium coils and tungstensteel pipe casing. One Terminal pass builds it.',
     unlocks: 'SiC power modules for the UHV power stage. The boule grows from source powder made of polysilicon, graphite and argon, so the silicon line feeds it.',
     automate: 'Powder, wafers and ultrapure water by pipe and ME; modules leave by ME.'
   }, [it(HEATP), it(ROBUST), it('grindless:sic_source_powder')]),
   gear('IMM', 'solar_array_fab', 'Inverted Cells', ['SIC'], 7.5, 8, {
     for: 'The &6Solar Array Fab&r builds inverted metamorphic cells and stacks them into an array.',
-    needs: 'Its controller and clean machine casing.',
+    needs: 'Its controller, clean and stable machine casing and filter casing. One Terminal pass builds it.',
     unlocks: 'IMM solar arrays for the Mercury station and the swarm.',
     automate: 'Cells and frames by ME; arrays leave by ME.',
   }, [it(CLEAN)]),
@@ -152,7 +152,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ life
   gear('ORG', 'organoid_array', 'Organoids', ['H_CRYS'], 3.5, 12, {
     for: 'The &6Organoid Array&r grows neural tissue on a scaffold under sterile flow.',
-    needs: 'Its controller, filter casing, PTFE pipe casing and computer casing.',
+    needs: 'Its controller, plascrete, sterilizing filter casing, PTFE pipe casing, computer casing and cleanroom glass. One Terminal pass builds it.',
     unlocks: 'Neural organoids, the core of the wetware mainframe. The scaffold is chitosan, from the xenobiochemistry plant at Proxima b.',
     automate: 'Chitosan scaffolds and nutrient by ME and pipe; discard cultures on a schedule.'
   }, [it(HULL), it(FILTER), it(PTFE), it(COMP)]),
@@ -163,19 +163,19 @@ export const QUESTS = [
   // ------------------------------------------------------------------ tether
   gear('PBO', 'pbo_plant', 'PBO', ['H_HEAT'], 4, 15, {
     for: 'The &6PBO Plant&r spins the strongest fibre we know how to make.',
-    needs: 'Its controller and inert machine casing.',
+    needs: 'Its controller, inert and robust machine casing, tungsten steel frames and PTFE pipe casing. One Terminal pass builds it.',
     unlocks: 'PBO fibre for the tether ribbon.',
     automate: 'Keep the acid loop sealed and pipe the fibre out by ME.',
   }, [it(INERT)]),
   gear('RIB', 'tether_ribbon_works', 'Ribbon', ['PBO'], 6, 15, {
     for: 'The &6Tether Ribbon Works&r weaves fibre into a ribbon long enough to reach orbit.',
-    needs: 'Its controller and robust machine casing.',
+    needs: 'Its controller, robust and inert machine casing and tungstensteel gearboxes. One Terminal pass builds it.',
     unlocks: 'Tether ribbon segments for the space elevator.',
     automate: 'Fibre by ME; segments stack in a chest for the climber.',
   }, [it(ROBUST), it('grindless:tether_ribbon_segment')]),
   gear('UHTC', 'spark_plasma_sinterer', 'Three Thousand Degrees', ['PBO'], 4, 16.5, {
     for: 'The &6Spark Plasma Sinterer&r fuses ultra-high-temperature ceramics in seconds under pulsed current.',
-    needs: 'Its controller and robust machine casing.',
+    needs: 'Its controller, robust and heatproof machine casing and tungstensteel pipe casing. One Terminal pass builds it.',
     unlocks: 'UHTC tiles and nozzles for the rocket motor.',
     automate: 'Powders by ME; the dies cool before the tiles leave.',
   }, [it(ROBUST)]),
@@ -218,13 +218,13 @@ export const QUESTS = [
     ['The Magnet Works cools the coil with helium and tests it at field. Only a &6qualified coil&r goes on; a failure goes back to be rewound.', 'Keep helium on a pipe and route failures back to the winding step.'],
     [it('grindless:qualified_gate_coil')], 100),
   prod('G_CAS', 'Warp Gate Casing', 'grindless:warp_gate_casing', ['G_QUAL'], 18, 20.5,
-    ['The UHV assembler seats a qualified coil in a neutronium shell: one coil, four plates and a frame make two &6warp gate casings&r.', 'About 350 coils make a ring, so build the whole chain as one automated line.'],
+    ['The UHV assembler seats a qualified coil in a neutronium shell: one coil, four plates and a frame make two &6warp gate casings&r.', 'The gate wall needs 48 coils, so build the whole chain as one automated line.'],
     [it('grindless:warp_gate_casing')], 120),  prod('ANTIH', 'Antihydrogen', 'grindless:antihydrogen_cartridge', ['POS'], 6, 18.5,
     'A positron and an antiproton, held together long enough to make an atom. The &6Antihydrogen Cartridge&r holds a handful, and a small leak is expected: keep the cartridges sealed.',
     [it('grindless:antihydrogen_cartridge'), it('grindless:exotic_matter_cell')], 150),
   gear('ZBLAN', 'zblan_draw_tower', 'Glass from Orbit', ['H_CRYS'], 3.5, 10, {
     for: 'The &6ZBLAN Draw Tower&r pulls fluoride glass in microgravity, where it does not crystallise.',
-    needs: 'Its controller and station truss casing.',
+    needs: 'Its controller, clean and heatproof machine casing, station truss casing and tungstensteel pipe casing. One Terminal pass builds it.',
     unlocks: 'ZBLAN fibre, the lowest-loss optical fibre there is.',
     automate: 'Preforms by ME; the fibre spools out to a chest.',
   }, [it(TRUSS)]),
@@ -235,7 +235,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ mercury
   gear('GROUND', 'regolith_excavator', "Mercury's Ground", ['H_MERCURY'], 8.5, -30.5, {
     for: 'The &6Regolith Excavator&r scrapes the surface of Mercury for dust and heat-baked rock.',
-    needs: 'Its controller, heatproof machine casing and station truss casing.',
+    needs: 'Its controller, Hermean heat shield bricks, heatproof casing and tungstensteel gearboxes.',
     unlocks: 'Mercury regolith for the vapour furnace.',
     automate: 'Dust leaves by ME; keep the bay cooled.',
   }, [it(HEATP), it(TRUSS)]),
@@ -244,13 +244,13 @@ export const QUESTS = [
     [it('grindless:mercury_regolith')]),
   gear('SOLVAP', 'solar_vapour_furnace', 'Vaporised by the Sun', ['GROUND'], 10.5, -30.5, {
     for: 'The &6Solar Vapour Furnace&r uses concentrated sunlight to boil regolith into its metals.',
-    needs: 'Its controller, heatproof casing and station truss casing.',
+    needs: 'Its controller, Hermean heat shield bricks, heliostat mirrors, night sky radiators and tungstensteel firebox casing. One Terminal pass builds it.',
     unlocks: 'Metals for swarm segments, free of fuel.',
     automate: 'Feed by ME; the heat is free but the mirrors need care.',
   }, [it(HEATP), it(TRUSS)]),
   gear('SEG', 'swarm_segment_foundry', 'Segments', ['SOLVAP'], 12.5, -30.5, {
     for: 'The &6Swarm Segment Foundry&r builds the panels of a star-powered swarm.',
-    needs: 'Its controller, station truss casing and a UHV hull.',
+    needs: 'Its controller, station truss casing, hangar casing, an assembly line unit with its grating, tungsten steel frames and a UHV hull. One Terminal pass builds it.',
     unlocks: 'Swarm segments, built from films, arrays, a laser, a spreader, a power module and cells. The whole swarm is one line, from Mercury regolith to the segment.',
     automate: 'Films, arrays and cells by ME; segments go to the control station and worn ones come back.'
   }, [it(HULL), it(TRUSS)]),
@@ -259,13 +259,13 @@ export const QUESTS = [
     [it('grindless:swarm_segment')]),
   gear('M_SWARM', 'swarm_control_station', 'Swarm Control Station', ['SEG'], 14.5, -30.5, {
     for: 'The &6Swarm Control Station&r steers the segments and collects their power.',
-    needs: 'Its controller, station truss casing and a UHV hull.',
+    needs: 'A very wide, low hall: its controller, a lot of station truss and pressure hull casing, laser module blocks, sapphire blocks, Hermean heat shield bricks and a UHV hull. One Terminal pass builds it.',
     unlocks: 'Stellar power for UHV and the coronal map.',
     automate: 'Segments by ME; the station needs a steady stream.',
   }, [it(HULL), it(TRUSS)], 160),
   gear('M_PROBE', 'solar_probe_bay', 'Solar Probe Bay', ['M_SWARM'], 16.5, -30.5, {
     for: 'The &6Solar Probe Bay&r launches probes into the corona to map its field.',
-    needs: 'Its controller, heatproof casing and station truss casing.',
+    needs: 'Its controller, station truss casing, superconducting coils and laminated glass.',
     unlocks: 'The coronal field map for the Kardashev goal.',
     automate: 'Probes by ME; maps leave by ME.',
   }, [it(HEATP), it(TRUSS)]),
@@ -297,19 +297,19 @@ export const QUESTS = [
   }, [it(BASEC), it(FILTER)]),
   gear('XBIO', 'xenobiochem_plant', 'Xenobiochemistry', ['XBOT'], 23.5, -27.5, {
     for: 'The &6Xenobiochem Plant&r refines alien biomass into pigments and radioprotectants.',
-    needs: 'Its controller, Proxima base casing and PTFE pipe casing.',
+    needs: 'Its controller, sealed-lab walls, PTFE pipe casing and clean machine casing. One Terminal pass builds it.',
     unlocks: 'Chitin from the mushrooms, then chitosan and the freeze-cast scaffold that carries organoids, mixed with melanin into the flare shield. Also radioprotectant and the far-red algae. It is portable processing, so it works on any base.',
     automate: 'Biomass by ME; pipe the chitosan on and send scaffolds home.',
   }, [it(BASEC), it(PTFE), it('grindless:xeno_chitin'), it('grindless:xeno_chitosan'), it('grindless:chitosan_scaffold')]),
   gear('FUNGI', 'radiotrophic_vat', 'Black Fungi', ['XBIO'], 25.5, -27.5, {
     for: 'The &6Radiotrophic Vat&r feeds fungi on radiation instead of light.',
-    needs: 'Its controller, Proxima base casing and radiation-proof casing.',
+    needs: 'Its controller, sealed-lab walls, PTFE pipe casing and tungstensteel pipe casing.',
     unlocks: 'Melanised biomass for shielding.',
     automate: 'Fungus cultures by ME; keep the radiation source inside.',
   }, [it(BASEC), it(SHIELD)]),
   gear('M_ASTRO', 'baseline_astrometer', 'Baseline Astrometer', ['H_PROXIMA'], 19.5, -25.5, {
     for: 'The &6Baseline Astrometer&r measures the sky from two stars at once.',
-    needs: 'Its controller, Proxima base casing and clean machine casing.',
+    needs: 'A long, tall hall: its controller, station truss casing, clean machine casing, fusion glass and stainless steel frames. One Terminal pass builds it.',
     unlocks: 'The survey that points toward the next gate.',
     automate: 'Surveys leave by ME.',
   }, [it(BASEC), it(CLEAN)]),
@@ -318,7 +318,7 @@ export const QUESTS = [
     [it('grindless:proxima_regolith_survey')]),
   gear('ICE', 'cold_trap_drill', 'Night-Side Ice', ['H_PROXIMA'], 19.5, -23.5, {
     for: 'The &6Cold Trap Drill&r cores ice from the night side of Proxima b.',
-    needs: 'Its controller, Proxima base casing and cryostat casing.',
+    needs: 'Its controller, Proxima base casing, naquadah alloy frames and tungstensteel pipe casing.',
     unlocks: 'Ice cores for water and biomining.',
     automate: 'Cores leave by ME.',
   }, [it(BASEC), it(CRYOSTAT)]),
