@@ -415,9 +415,9 @@
  },
  "gtceu:extraction_cascade": {
   "v": [],
-  "bt": 4,
-  "ds": 0.7,
-  "c": 61
+  "bt": 5,
+  "ds": 0.604,
+  "c": 246
  },
  "gtceu:femtosecond_writer": {
   "v": [],
@@ -1148,8 +1148,8 @@
  "gtceu:platinum_plant": {
   "v": [],
   "bt": 3,
-  "ds": 0.519,
-  "c": 130
+  "ds": 0.514,
+  "c": 244
  },
  "gtceu:plume_sampler": {
   "v": [],
