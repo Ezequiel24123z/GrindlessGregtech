@@ -146,7 +146,23 @@
     SPEC = makeSpec()
     Pat.register('gtceu:' + ID, SPEC)
 
-    var chain = G.mega.chain({ parallel: 'fixed', cap: 1, hatch: true, discount: null, oc: 'perfect', batch: true })
+    // The data cell D is optional (so EMI draws a preview) and GTM's ResearchCondition always passes, so a research recipe would start with no
+    // data hatch at all. This veto, in the modifier and in beforeWorking (GTM restarts a cached recipe without its modifier), refuses a research
+    // recipe unless a data access hatch is formed; the hatch itself then checks that it holds the matching data.
+    var needsData = function (machine, recipe) {
+      var RC = Java.loadClass('com.gregtechceu.gtceu.common.recipe.condition.ResearchCondition')
+      var DH = Java.loadClass('com.gregtechceu.gtceu.api.capability.IDataAccessHatch')
+      var research = false
+      recipe.conditions.forEach(function (c) { if (RC.class.isInstance(c)) research = true })
+      if (!research) return false
+      var hatch = false
+      machine.getParts().forEach(function (p) { if (DH.class.isInstance(p)) hatch = true })
+      return !hatch
+    }
+    var dataVeto = function (machine, recipe) {
+      return needsData(machine, recipe) ? ModifierFunction.NULL : ModifierFunction.IDENTITY
+    }
+    var chain = [dataVeto].concat(G.mega.chain({ parallel: 'fixed', cap: 1, hatch: true, discount: null, oc: 'perfect', batch: true }))
 
     // GTM's ordered-input check pairs item handler i with recipe input i in the controller's part order, and the builder's default sorter keeps the
     // pattern's HashSet order (it changes from run to run). The line runs from the controller backwards, so sort the parts by distance from the
@@ -167,6 +183,7 @@
       .recipeType('assembly_line')
     G.mega.install(b, chain)
       ["partSorter(java.util.function.Function)"](sorterFor)
+      .beforeWorking(function (machine, recipe) { return !needsData(machine, recipe) })
       .appearanceBlock(function () { return Block.getBlock(CASING) })
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([

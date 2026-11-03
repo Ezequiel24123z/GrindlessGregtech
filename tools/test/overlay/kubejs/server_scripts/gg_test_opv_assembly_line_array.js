@@ -266,10 +266,10 @@
       }
       if (u.rstep === 1) {
         if (S.tick - u.started < 80) {
-          if (m.getRecipeLogic().isWorking()) { u.noHatchStarted = true; note('research_no_hatch', 'started without any data hatch: ' + String(m.getRecipeLogic().getLastRecipe().id)); u.started = S.tick - 80 }
+          if (m.getRecipeLogic().isWorking()) { u.noHatchStarted = true; u.started = S.tick - 80 }
           return
         }
-        note('research_no_hatch', u.noHatchStarted ? 'research ran with no hatch' : 'blocked: status ' + status(m) + ', reasons ' + reasons(m))
+        check('research_no_hatch', !u.noHatchStarted, u.noHatchStarted ? 'the research recipe started with no data hatch formed' : 'no data hatch: status ' + status(m) + ', reasons ' + reasons(m))
         var dc = u.dataCell
         put(dc.x, dc.y, dc.z, 'gtceu:data_access_hatch[facing=north]')
         u.started = S.tick

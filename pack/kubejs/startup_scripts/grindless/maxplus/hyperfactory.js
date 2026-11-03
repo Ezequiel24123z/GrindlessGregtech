@@ -128,8 +128,20 @@
     SPEC = makeSpec()
     Pat.register(HF.id, SPEC)
 
+    // D is optional (so EMI draws a preview) and GTM's ResearchCondition always passes: refuse a research recipe unless a data access hatch is
+    // formed (modifier and beforeWorking, since GTM restarts a cached recipe without its modifier); the hatch then checks it holds the data.
+    var needsData = function (machine, recipe) {
+      var RC = Java.loadClass('com.gregtechceu.gtceu.common.recipe.condition.ResearchCondition')
+      var DH = Java.loadClass('com.gregtechceu.gtceu.api.capability.IDataAccessHatch')
+      var research = false
+      recipe.conditions.forEach(function (c) { if (RC.class.isInstance(c)) research = true })
+      if (!research) return false
+      var hatch = false
+      machine.getParts().forEach(function (p) { if (DH.class.isInstance(p)) hatch = true })
+      return !hatch
+    }
     var veto = function (machine, recipe) {
-      return otherMode(machine, recipe) ? ModifierFunction.NULL : ModifierFunction.IDENTITY
+      return otherMode(machine, recipe) || needsData(machine, recipe) ? ModifierFunction.NULL : ModifierFunction.IDENTITY
     }
     var chain = [veto].concat(G.mega.chain({ parallel: 'fixed', cap: CAP, hatch: true, discount: null, oc: 'perfect', batch: true }))
 
@@ -140,6 +152,7 @@
       .renderMultiblockXEIPreview(true)
     TYPES.forEach(function (t) { b = b.recipeType(t) })
     G.mega.install(b, chain)
+      .beforeWorking(function (machine, recipe) { return !needsData(machine, recipe) })
       .appearanceBlock(function () { return Block.getBlock(CASING) })
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
