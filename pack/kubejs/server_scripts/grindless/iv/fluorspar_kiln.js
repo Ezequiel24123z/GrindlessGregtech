@@ -181,21 +181,37 @@
     }
   ]
 
+  // D2-NIOBIUM row (docs/eras/lines-ev-zpm.md I4): pyrochlore (Ca2Nb2O6F, 11 GTM dust per formula) digested in HF,
+  // Ca2Nb2O6F + 9 HF -> 2 NbOF3 + 2 CaF2 + 4.5 H2O (1,000 mB = 1 mol). The kiln's second item slot carries the two CaF2 (6 fluorite dust),
+  // which go back to the kiln's own charge (principle 3).
+  var D2_ROWS = [
+    {
+      name: 'niobium_oxyfluoride_from_pyrochlore',
+      itemIn: { id: 'gtceu:pyrochlore_dust', count: 11 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 9000 },
+      itemOut: { id: 'grindless:niobium_oxyfluoride_dust', count: 2 }, itemOut2: { id: 'gcyr:fluorite_dust', count: 6 },
+      fluidOut: { id: 'minecraft:water', amount: 4500 },
+      eut: 30, duration: 128
+    }
+  ]
+
   function addUevRows(event, rows) {
     ;(rows || UEV_ROWS).forEach(function (r) {
       var missing = []
       if (!Item.exists(r.itemIn.id)) missing.push(r.itemIn.id)
       if (!Item.exists(r.itemOut.id)) missing.push(r.itemOut.id)
+      if (r.itemOut2 && !Item.exists(r.itemOut2.id)) missing.push(r.itemOut2.id)
       if (!Fluid.exists(r.fluidIn.id)) missing.push(r.fluidIn.id)
       if (!Fluid.exists(r.fluidOut.id)) missing.push(r.fluidOut.id)
       if (missing.length > 0) {
         console.error(LOG + 'fluorspar kiln row ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
         return
       }
+      var outs = [r.itemOut.count + 'x ' + r.itemOut.id]
+      if (r.itemOut2) outs.push(r.itemOut2.count + 'x ' + r.itemOut2.id)
       event.recipes.gtceu.fluorspar_digestion('grindless:' + r.name)
         .itemInputs(r.itemIn.count + 'x ' + r.itemIn.id)
         .inputFluids(Fluid.of(r.fluidIn.id, r.fluidIn.amount))
-        .itemOutputs(r.itemOut.count + 'x ' + r.itemOut.id)
+        .itemOutputs(outs)
         .outputFluids(Fluid.of(r.fluidOut.id, r.fluidOut.amount))
         .addDataString(FK.dataKey || 'grindless_fluorspar_kiln', r.name)
         .EUt(r.eut)
@@ -246,6 +262,11 @@
       addUevRows(event, OPV_ROWS)
     } catch (e6) {
       console.error(LOG + 'fluorspar kiln OpV rows failed: ' + e6)
+    }
+    try {
+      addUevRows(event, D2_ROWS)
+    } catch (e7) {
+      console.error(LOG + 'fluorspar kiln D2 rows failed: ' + e7)
     }
     try {
       addController(event)
