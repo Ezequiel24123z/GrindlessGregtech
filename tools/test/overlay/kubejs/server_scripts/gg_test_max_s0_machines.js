@@ -252,7 +252,9 @@
       } else if (S.tick - u.started > 400) {
         var why1 = ''
         try { why1 = String(logic.getFancyTooltip()) } catch (x) { why1 = 'tooltip: ' + x }
-        check('s0_2_starts', false, 'the probe did not start: status ' + logic.getStatus() + ', reasons ' + String(logic.getFailureReasons()) + ', ' + why1 + ', last ' + (last ? last.id : 'none'))
+        var known = ''
+        try { known = ' | recipe known: ' + S.server.getRecipeManager().byKey(Utils.id('gg_test_max_s0:warp_gate/hold_s0_probe')).isPresent() + '; bus ' + String(u.bus.getInventory ? u.bus.getInventory().getStackInSlot(0) : '?') } catch (x) { known = ' | probe lookup: ' + x }
+        check('s0_2_starts', false, 'the probe did not start' + known + ': status ' + logic.getStatus() + ', reasons ' + String(logic.getFailureReasons()) + ', ' + why1 + ', last ' + (last ? last.id : 'none'))
         u.phase = 'done'
       }
       return
