@@ -1,4 +1,4 @@
-// priority: 3054
+// priority: 1478
 // Gregtech Grindless - names and tooltips of UXV's spintronic wafer (startup_scripts/grindless/uxv/spin_wafer.js; package D4-UXV-SPIN):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>   the EMI lines of the new X1 rows (tables/spin_logic.json)

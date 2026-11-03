@@ -1,4 +1,4 @@
-// priority: -10934
+// priority: -10936
 // -----------------------------------------------------------------------------------------------
 // UXV's spintronic wafer (package D4-UXV-SPIN, docs/eras/lines-uev-uxv.md section 4, X1 steps 7, 8 and 25 to 28): the 28Si wafer takes a CMOS
 // layer and a metal layer, then the MRAM, racetrack, STNO bus and MESO layers, and is cut into the dies of the spintronic mainframe.
