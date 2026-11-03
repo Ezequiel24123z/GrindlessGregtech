@@ -5,15 +5,15 @@
 // data/grindless/tables/gate.json (server_scripts/grindless/uhv/gate.js). Every item and block they use is F1's (uhv/foundation.js)
 // or older; this file registers machines only.
 //
-//   gtceu:warp_gate           type gtceu:warp_gate. A 15 x 15 x 5 ring of grindless:warp_gate_casing round open air (tungstensteel
-//                             posts, a fusion-glass window band and a superconducting coil band), with six
-//                             modulator mounts (UHV casing, where the thin-film lithium niobate modulators sit) on its top row. c1
+//   gtceu:warp_gate           type gtceu:warp_gate. A 25 x 9 x 20 gate: a 15 x 15 ring of grindless:warp_gate_casing round open air (tungsten steel
+//                             posts, a fusion-glass window band and a superconducting coil band), with six modulator mounts
+//                             (UHV casing, where the thin-film lithium niobate modulators sit) on its top row, in a stepped berm. c1
 //                             opens the gate and makes the Proxima gate seed; c2 holds it open for a minute: while it runs, a player
 //                             standing in the ring is carried to the ring a relay coordinates stick in its input bus names, else to
 //                             the other holding ring (the transit lives in server_scripts/.../gate.js; beforeWorking below records each
 //                             ring, afterWorking hands each completed run to lib/relay_platforms.js). Items do not cross: they go by AE2.
-//   gtceu:baseline_astrometer type gtceu:baseline_astrometry (observatory step 9). 9 x 9 x 9: a station truss deck with a pipe cross, a frame mast on a
-//                             gearbox dish drive and a stepped fusion-glass mirror dish, braced by four corner posts. Proxima b's orbit only: the chart is made where the baseline is.
+//   gtceu:baseline_astrometer type gtceu:baseline_astrometry (observatory step 9). 29 x 12 x 7: a truss boom with a clean-casing control hut and a
+//                             gearbox-driven fusion-glass mirror tower at each end. Proxima b's orbit only: the chart is made where the baseline is.
 //
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top; S is the controller on the front face).
 // Published: global.grindless.warpGate (.machines, .gates (the rings, see "The rings"), .order, .ids, .ringKey, .ringOf, .saveRing, .forgetRing,
@@ -47,7 +47,7 @@
       texture: GATE_TEXTURE,
       // items in: the exotic matter cells, the cartridges, the approach data, the clock, the processor and the circuit
       maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },
-      width: 15, depth: 15, height: 5
+      width: 25, depth: 20, height: 9
     },
     astrometer: {
       name: 'baseline_astrometer',
@@ -59,35 +59,68 @@
       texture: STATION_TEXTURE,
       // items in: the Sgr A* image, mirror blanks, fibre, lasers, modulators, the processor, the pigment and the circuit
       maxIO: { itemsIn: 8, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
-      width: 9, depth: 9, height: 9
+      width: 29, depth: 7, height: 12
     }
   }
 
-  // The ring: row 0 the floor of the ring wall (X: casing or a part), rows 1-4 the wall. S is the controller (front middle, row 1).
-  // Eight tungstensteel posts (corners and wall middles, F) carry a superconducting coil band (K, row 3) over fusion-glass windows (G,
-  // row 2); M the six modulator mounts on the top row: the four corners and the middle of both sides. The inside is air.
+  // The gate, 25 wide x 9 high x 20 deep (D3-SIZE-UHV1). The 15 x 15 ring of old is its heart: the wall at distance 7 from the centre (X the floor
+  // of the wall, S the controller on the front middle, row 1) round open air, as before, because the jump (server uhv/gate.js, lib/relay_platforms.js)
+  // reads the player's place from the controller (RING_HALF 7). Around it a stepped berm of 5 bands (distance 8 to 12, BAND by row, bottom up) rises to
+  // the wall, wider at the back and the sides (the front stops at the controller's face), with nine frame chevrons (CHEVRONS) standing on it.
+  //   B the gate casing   T station truss (deck)   R field ring casing (the field band)   G fusion glass (the step tops)
+  //   K superconducting coil (the wall's band, 48 in all)   F tungsten steel frames   M the six modulator mounts   X casing or a part
+  var RING = 7
+  var BAND = { 8: 'TBBRRBG', 9: 'TBRBBG', 10: 'TTBBBG', 11: 'TTBBG', 12: 'XXBG' }
+  var CHEVRONS = [[2, 2], [12, 2], [22, 2], [2, 6], [22, 6], [2, 12], [22, 12], [2, 18], [22, 18]]
+
+  function chevron(c, si) {
+    var onSide = c === 2 || c === 22
+    for (var i = 0; i < CHEVRONS.length; i++) {
+      var p = CHEVRONS[i]
+      if (p[0] === c && p[1] === si) return 3
+      var near = onSide ? (p[0] === c && Math.abs(p[1] - si) === 1) : (p[1] === si && Math.abs(p[0] - c) === 1)
+      if (near) return 2
+    }
+    return 0
+  }
+
   function gateSlices(m) {
     var slices = []
     var last = m.depth - 1
-    var mid = (m.width - 1) / 2
+    var cx = (m.width - 1) / 2
+    var cz = last - RING
     for (var si = 0; si < m.depth; si++) {
       var rows = []
       for (var r = 0; r < m.height; r++) {
         var row = ''
         for (var c = 0; c < m.width; c++) {
-          var edge = si === 0 || si === last || c === 0 || c === m.width - 1
-          var corner = (si === 0 || si === last) && (c === 0 || c === m.width - 1)
-          var sideMid = si === mid && (c === 0 || c === m.width - 1)
-          var post = corner || sideMid || (c === mid && (si === 0 || si === last))
+          var dx = Math.abs(c - cx)
+          var dz = Math.abs(si - cz)
+          var d = Math.max(dx, dz)
           var ch
-          if (!edge) ch = '#'
-          else if (r === 0) ch = 'X'
-          else if (r === 1 && si === last && c === mid) ch = 'S'
-          else if (r === m.height - 1 && (corner || sideMid)) ch = 'M'
-          else if (post) ch = 'F'
-          else if (r === 2) ch = 'G'
-          else if (r === 3) ch = 'K'
-          else ch = 'B'
+          if (d > RING) {
+            var col = BAND[d]
+            ch = col && r < col.length ? col.charAt(r) : ' '
+            if (ch === ' ' && r >= 6 && d === 10) {
+              var h = chevron(c, si)
+              if (h > 0 && r < 6 + h) ch = 'F'
+            }
+            // a relay platform sets a wireless dynamo hatch 9 east of the controller and an AE2 controller and drive 12 east (lib/relay_platforms.js)
+            if (si === last && ((dx === 9 && r === 1) || (dx === 12 && (r === 1 || r === 2)))) ch = ' '
+          } else if (d < RING) ch = r < 5 ? '#' : ' '
+          else if (r > 4) ch = ' '
+          else {
+            var corner = dx === RING && dz === RING
+            var sideMid = dz === 0 && dx === RING
+            var post = corner || sideMid || (dx === 0 && dz === RING)
+            if (r === 0) ch = 'X'
+            else if (r === 1 && si === last && c === cx) ch = 'S'
+            else if (r === 4 && (corner || sideMid)) ch = 'M'
+            else if (post) ch = 'F'
+            else if (r === 2) ch = 'G'
+            else if (r === 3) ch = 'K'
+            else ch = 'B'
+          }
           row += ch
         }
         rows.push(row)
@@ -97,30 +130,50 @@
     return slices
   }
 
-  // The astrometer, 9 x 9 x 9: row 0 the deck (X: station casing or a part, on the rim; S the controller, front middle) with a pipe
-  // cross over its casing floor; a gearbox (D) drives a frame mast (F) up the middle, braced by four corner posts; the dish on top is three
-  // stepped rings (rows 6-8: casing, casing, fusion-glass mirror). ' ' is anything.
+  // The astrometer, 29 wide x 12 high x 7 deep (D3-SIZE-UHV1): a long truss baseline (the boom: deck, pipe rail, side posts) with the control hut
+  // in the middle (clean machine casing, laminated-glass windows, S on its front wall) and a mirror tower at each end: four frame corners
+  // round a gearbox drive, truss rings, a stepped fusion-glass dish. X: deck casing or a part on the boom's rim. ' ' is anything.
   function astroSlices(m) {
     var slices = []
     var last = m.depth - 1
     var mid = (m.width - 1) / 2
+    var towers = [4, m.width - 5]
     for (var si = 0; si < m.depth; si++) {
       var rows = []
       for (var r = 0; r < m.height; r++) {
         var row = ''
         for (var c = 0; c < m.width; c++) {
-          var rim = si === 0 || si === last || c === 0 || c === m.width - 1
-          var corner = (si === 0 || si === last) && (c === 0 || c === m.width - 1)
-          var dz = Math.abs(si - mid)
-          var dx = Math.abs(c - mid)
-          var ring = Math.max(dz, dx)
           var ch = ' '
-          if (r === 0) ch = si === last && c === mid ? 'S' : rim ? 'X' : (dz === 0 || dx === 0 ? 'P' : 'B')
-          else if (si === mid && c === mid) ch = r === 1 ? 'D' : r <= 6 ? 'F' : ' '
-          else if (corner && r <= 4) ch = 'F'
-          else if (r === 6 && ring === 1) ch = 'B'
-          else if (r === 7 && ring === 2) ch = 'B'
-          else if (r === 8 && ring === 3) ch = 'W'
+          var hx = Math.abs(c - mid)
+          var inHut = hx <= 3
+          var onBoom = si >= 2 && si <= 4
+          var tower = -1
+          for (var k = 0; k < towers.length; k++) if (Math.abs(c - towers[k]) <= 2) tower = k
+          var tx = tower < 0 ? 9 : Math.abs(c - towers[tower])
+          var tz = Math.abs(si - 3)
+          if (inHut) {
+            var wall = hx === 3 || si === 0 || si === last
+            if (r === 0) ch = 'B'
+            else if (r === 1 && si === last && c === mid) ch = 'S'
+            else if (r <= 3 && wall) ch = r === 2 && (hx === 3 || si === 0 || si === last) && (si + c) % 2 === 0 ? 'L' : 'C'
+            else if (r === 4) ch = 'C'
+            else if (r <= 3) ch = '#'
+          } else if (r === 0 && onBoom) ch = (c === 0 || c === m.width - 1 || si === 2 || si === 4) ? 'X' : 'B'
+          else if (r === 1 && onBoom && tower < 0) ch = si === 3 ? 'P' : (c % 4 === 0 ? 'F' : ' ')
+          else if (tower >= 0 && tx <= 1 && tz <= 1) {
+            var corner = tx === 1 && tz === 1
+            if (r === 1 && tx === 0 && tz === 0) ch = 'D'
+            else if (r >= 1 && r <= 8 && corner) ch = 'F'
+            else if (r >= 1 && r <= 8 && tx === 0 && tz === 0) ch = 'F'
+            else if ((r === 4 || r === 7) && !(tx === 0 && tz === 0)) ch = 'B'
+          } else if (tower >= 0 && tx <= 2 && tz <= 2) {
+            var rg = Math.max(tx, tz)
+            if (r === 9 && rg === 2) ch = 'B'
+            else if (r === 10 && rg === 2) ch = 'W'
+            else if (r === 9 && rg <= 1) ch = 'B'
+            else if (r === 10 && rg === 1 && tz <= 1 && tx <= 1) ch = ' '
+            else if (r === 11 && rg === 2) ch = 'W'
+          }
           row += ch
         }
         rows.push(row)
@@ -128,8 +181,7 @@
       slices.push(rows)
     }
     return slices
-  }
-  var M = WG.machines
+  }  var M = WG.machines
   M.gate.spec = {
     slices: gateSlices(M.gate),
     symbols: {
@@ -139,6 +191,8 @@
         Pat.part('output_bus', { min: 1, max: 2 }),
         Pat.part('energy_input', { min: 1, max: 4 })),
       B: Pat.block(GATE_CASING),
+      T: Pat.block(STATION),
+      R: Pat.block('grindless:field_ring_casing'),
       M: Pat.block(MOUNT),
       F: Pat.frame(['tungsten_steel']),
       G: Pat.block('gtceu:fusion_glass'),
@@ -155,10 +209,13 @@
         Pat.part('output_bus', { min: 1, max: 1 }),
         Pat.part('energy_input', { min: 1, max: 2 })),
       B: Pat.block(STATION),
+      C: Pat.block('gtceu:clean_machine_casing'),
+      L: Pat.block('gtceu:laminated_glass'),
       F: Pat.frame(['stainless_steel']),
       D: Pat.block(GEARBOX),
       P: Pat.block('gtceu:tungstensteel_pipe_casing'),
-      W: Pat.block('gtceu:fusion_glass')
+      W: Pat.block('gtceu:fusion_glass'),
+      '#': Pat.air()
     }
   }
   WG.order = ['gate', 'astrometer']

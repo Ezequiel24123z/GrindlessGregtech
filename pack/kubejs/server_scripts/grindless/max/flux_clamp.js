@@ -49,7 +49,7 @@
     // the clamp casing: made at home from OpV parts, so the clamp can be built (no input comes from the clamp's line)
     // retuned by D5-CAS-MAX (docs/eras/lines-opv-maxplus.md 7.2): the REBCO field coil and horizon strand on a truss
     { type: 'assembler', name: 'clamp_coil_casing',
-      items: ['grindless:max_field_coil', '2x gtceu:horizon_strand_single_wire', 'grindless:tensegrity_truss_casing'],
+      items: ['grindless:max_field_coil', '2x gtceu:horizon_strand_single_wire', 'grindless:tensegrity_truss_casing', 'gtceu:opv_fluid_regulator', 'gtceu:opv_conveyor_module'],
       fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:clamp_coil_casing'], eut: MAX_VA, duration: 400 }
   ]
 

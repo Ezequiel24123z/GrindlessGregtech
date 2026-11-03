@@ -1,5 +1,5 @@
 // UHV's Dyson swarm (package UHV-B3), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
-//   - startup_scripts/grindless/uhv/swarm.js: three recipe types, three machines (9 x 7 x 9 foundry, 11 x 5 x 11 station, 7 x 5 x 7 bay),
+//   - startup_scripts/grindless/uhv/swarm.js: three recipe types, three machines (15 x 8 x 23 foundry, 41 x 7 x 41 station, 7 x 5 x 7 bay),
 //     two items;
 //   - server_scripts/grindless/uhv/swarm.js: the foundry's segment and refurbish, the station's three generator rows, the bay's probe and
 //     corona, the heat pipe's assembler row, the controllers;
@@ -88,11 +88,11 @@ function shape(id, w, d, h) {
 const partsOf = (s) => Object.keys(Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, 1]))).sort();
 const count = (s, ch) => s.slices.flat().join('').split('').filter((c) => c === ch).length;
 
-test('patterns: 9 x 7 x 9 foundry, 11 x 5 x 11 station (energy out), 7 x 5 x 7 bay, all on a truss deck', () => {
-  const fo = shape('gtceu:swarm_segment_foundry', 9, 9, 7);
+test('patterns: 15 x 8 x 23 foundry, 41 x 7 x 41 station (energy out), 7 x 5 x 7 bay, all on a truss deck', () => {
+  const fo = shape('gtceu:swarm_segment_foundry', 15, 23, 8);
   assert.deepEqual(partsOf(fo), ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']);
   assert.equal(count(fo, 'A'), 1, 'one assembly head');
-  const st = shape('gtceu:swarm_control_station', 11, 11, 5);
+  const st = shape('gtceu:swarm_control_station', 41, 41, 7);
   assert.deepEqual(partsOf(st), ['energy_output', 'input_bus', 'input_hatch', 'output_bus']);
   assert.equal(count(st, 'C'), 3, 'the formation computer');
   assert.ok(count(st, 'R') > 20, 'the receiver array');

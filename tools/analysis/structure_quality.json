@@ -115,9 +115,9 @@
  },
  "gtceu:baseline_astrometer": {
   "v": [],
-  "bt": 5,
-  "ds": 0.607,
-  "c": 151
+  "bt": 7,
+  "ds": 0.365,
+  "c": 448
  },
  "gtceu:betavoltaic_fab": {
   "v": [],
@@ -1573,15 +1573,15 @@
  },
  "gtceu:swarm_control_station": {
   "v": [],
-  "bt": 6,
-  "ds": 0.669,
-  "c": 258
+  "bt": 9,
+  "ds": 0.351,
+  "c": 1541
  },
  "gtceu:swarm_segment_foundry": {
   "v": [],
-  "bt": 6,
-  "ds": 0.491,
-  "c": 166
+  "bt": 7,
+  "ds": 0.429,
+  "c": 756
  },
  "gtceu:synchrotron": {
   "v": [],
@@ -1759,9 +1759,9 @@
  },
  "gtceu:warp_gate": {
   "v": [],
-  "bt": 5,
-  "ds": 0.545,
-  "c": 280
+  "bt": 7,
+  "ds": 0.494,
+  "c": 1849
  },
  "gtceu:waste_retrieval_plant": {
   "v": [],
