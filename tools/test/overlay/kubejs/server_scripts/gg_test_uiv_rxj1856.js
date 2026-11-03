@@ -159,7 +159,8 @@
     var missing = MACHINES.filter(function (m) { return !S.G.structures['gtceu:' + m] })
     check('static_structures', missing.length === 0, 'no descriptor for ' + missing.join(','))
     var vault = row('decay_heat', 'kilonova_decay')
-    check('vault_figures', !!vault && vault.eut === 33554432 && vault.duration === 12000 && vault.generator === true && vault.site === true && vault.circuit === 1, JSON.stringify(vault))
+    // SITE-C (62d7af2cb): the vault burns shipped capsules, so it runs anywhere (no dimension condition); the crust lift keeps the site
+    check('vault_figures', !!vault && vault.eut === 33554432 && vault.duration === 12000 && vault.generator === true && vault.site === false && vault.circuit === 1, JSON.stringify(vault))
     var ash = row('decay_heat', 'capsule_opening')
     check('vault_ash', !!ash && ash.itemsOut.some(function (o) { return o.id === 'grindless:r_process_ash' && o.count === 4 }) && ash.fluidsOut.some(function (f) { return f.id === 'gtceu:helium_4_ash' && f.amount === 1000 }), JSON.stringify(ash))
     var lift = row('crust_lifting', 'crust_lift')
