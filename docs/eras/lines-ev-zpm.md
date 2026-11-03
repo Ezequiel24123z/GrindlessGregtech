@@ -115,7 +115,7 @@ The platinum plant (24, staged, D1) is unchanged. The Moon's titanium (4) and th
 
 | # | Machine | In → out | Real process |
 |---|---|---|---|
-| 0 | In-situ leach field (End pitchblende), changed output | pregnant uranyl sulfate liquor (new fluid) | in-situ leaching |
+| 0 | In-situ leach field (End pitchblende), changed output | pregnant uranyl sulfate liquor (new fluid); the resin's 1 % wear moves to step 1 | in-situ leaching |
 | 1 | Large chemical reactor, IV (new) | liquor + ion-exchange resin (charge, 1 % wear) → uranium eluate (new) + diluted sulfuric acid (back to the field) | ion exchange |
 | 2 | Chemical reactor (new) | eluate + H2O2 → yellowcake (uranium peroxide, new) + H2SO4 | peroxide precipitation |
 | 3 | EBF 700 K (new) | yellowcake → triuranium octoxide (new) + O2 + water | calcination |
@@ -437,11 +437,11 @@ Full contracts are in the handoff. Each is one Sonnet session, at most 2 repairs
 
 | Wave | Id | Scope | Depends on | T1 doubt |
 |---|---|---|---|---|
-| 1 | D2-REE | E1: SEG dissolution, split and fluoride precipitation; one-step cerium and the unsplit fluorination retired | none | the cascade runs the SEG split by its circuit |
+| 1 | D2-REE | E1: SEG dissolution, split and fluoride precipitation; one-step cerium and the unsplit fluorination retired | none | none (a row on the cascade's proven mode table; T2 recipe lookup) |
 | 1 | D2-APT | E3: APT route; tungstic-acid electrolysis retired | none | none |
 | 1 | D2-FUEL | I1: liquor, IX, yellowcake, U3O8, UF4, deconversion, zircaloy from Kroll sponge; hot cell c1 re-pinned | none | the hot cell composes c1 from the new stages |
 | 1 | D2-NIOBIUM | I4: kiln digestion, aluminothermic niobium, tantalum; pyrochlore electrolysis retired | none | none |
-| 1 | D2-TAPE | L1: carbonyl split, Ni-W alloy, four tape stages | none | the coated conductor line selects its new circuits |
+| 1 | D2-TAPE | L1: carbonyl split, Ni-W alloy, four tape stages | none | none (rows on the line's proven circuit table; T2 recipe lookup) |
 | 1 | D2-PEDOT | L2's chemistry up to PEDOT:PSS | none | none |
 | 1 | D2-GERMANIUM | L4: chlorination, GeO2, boule, wafer, the wake shield's input | none | none |
 | 1 | D2-PAN | Z4: acrylonitrile to carbon fibre; reformer c2 retired | none | none |
