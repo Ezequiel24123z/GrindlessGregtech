@@ -30,7 +30,7 @@ const COMPONENTS = ['electric_motor', 'electric_pump', 'electric_piston', 'robot
   .map((n) => 'grindless:max_' + n);
 const BLOCKS = ['max_optical_table_casing', 'membrane_roller_casing', 'geroch_drum_casing', 'stream_turn_casing', 'mirror_shell_segment',
   'stream_bundle_block', 'feeder_coil_casing', 'test_mass_enclosure_casing', 'laser_link_casing', 'driver_ring_casing', 'clamp_coil_casing',
-  'reclamation_bay_casing'].map((n) => 'grindless:' + n);
+  'reclamation_bay_casing', 'tensegrity_truss_casing', 'membrane_vacuum_casing', 'droplet_radiator_casing', 'shell_window_coil_casing'].map((n) => 'grindless:' + n);
 const FLUIDS = { hot_flow_plasma: 'gas', filtered_hot_flow: 'gas', flux_loaded_frc: 'gas', cooled_exhaust: 'gas', sn_li_eutectic: 'liquid' };
 const MAX_V = 2 ** 31 * 16 / 16; // V[MAX] = 2^31; the cable carries 16 A of it
 const PLACES = { sgra: ['gcyr:black_hole_orbit', 'sgr_a_orbit', 14, 'hold_sgr_a_probe', 'grindless:cygnus_x1_orbit'], nsc: ['grindless:nsc_belt', 'nsc_belt', 15, 'hold_nsc_belt', 'gcyr:black_hole_orbit'] };
@@ -45,7 +45,7 @@ test('the stand-in runs the MAX foundation and its names without errors', () => 
   assert.deepEqual(run.errors.filter(mine), [], 'no console.error');
 });
 
-test('the id list is pinned: 327 items, 12 blocks, the strand and 5 fluids; nothing twice', () => {
+test('the id list is pinned: 327 items, 16 blocks, the strand and 5 fluids; nothing twice', () => {
   assert.equal(ITEMS.length, 327);
   assert.deepEqual([...got.controllers], table.ours.controllers);
   assert.deepEqual(table.ours.controllers, ['gtceu:horizon_interferometer', 'gtceu:ergoregion_synchroniser', 'gtceu:horizon_flux_clamp', 'gtceu:segment_reclamation_works']);
@@ -205,7 +205,7 @@ test('every item and block has its texture and the generator draws exactly them'
   const tex = (...p) => path.join(kube, 'assets', 'grindless', 'textures', ...p);
   // The 72 RF-7A items and 5 casings (MX-F1) are textured by a later package; the texture audit lists them.
   const texItems = ITEMS.slice(0, ITEMS.length - 72);
-  const texBlocks = BLOCKS.slice(0, BLOCKS.length - 5);
+  const texBlocks = BLOCKS.slice(0, BLOCKS.length - 9); // minus the 4 family casings (Build-MaxCasingFamilyTextures.ps1)
   for (const id of texItems) assert.ok(fs.existsSync(tex('item', `${short(id)}.png`)), `item/${short(id)}.png`);
   for (const id of texBlocks) assert.ok(fs.existsSync(tex('block', 'max', `${short(id)}.png`)), `block/max/${short(id)}.png`);
   const gen = fs.readFileSync(path.join(root, 'tools', 'assets', 'Build-MaxFoundationTextures.ps1'), 'utf8');

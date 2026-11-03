@@ -404,7 +404,11 @@
       "grindless:laser_link_casing",
       "grindless:driver_ring_casing",
       "grindless:clamp_coil_casing",
-      "grindless:reclamation_bay_casing"
+      "grindless:reclamation_bay_casing",
+      "grindless:tensegrity_truss_casing",
+      "grindless:membrane_vacuum_casing",
+      "grindless:droplet_radiator_casing",
+      "grindless:shell_window_coil_casing"
     ],
     "materials": [
       "gtceu:horizon_strand",

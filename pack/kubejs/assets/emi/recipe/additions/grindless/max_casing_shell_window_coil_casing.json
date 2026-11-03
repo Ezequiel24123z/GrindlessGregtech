@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:shell_window_coil_casing"],
+  "text": ["emi.grindless.info.shell_window_coil_casing.0"]
+}
