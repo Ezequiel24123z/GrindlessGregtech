@@ -13,11 +13,14 @@
 //                      and 11.25 raw ores a run (twice IV's 5.625), split by the vein's weights (the family's maths). The sample is the
 //                      first ingredient: no other drilling recipe starts with a belt sample.
 //   asteroid processor gtceu:asteroid_processing, anywhere:
-//                        mond_crushed   c1: 16 crushed meteoric iron + the CO charge (1,000 mB, never used up) -> 24 iron + 4 nickel +
-//                                       1 cobalt dust + 1 asteroid PGM concentrate, 1,920 EU/t x 400 t
 //                        magnetic_split c2: 16 crushed tetrataenite -> 12 tetrataenite dust + 4 meteoric iron dust, 1,920 EU/t x 200 t
-//                        mond_dust      c3: the same Mond as c1 from 16 meteoric iron dust (what GTM's ore line and the magnetic split
-//                                       leave; meteoric iron has no other use)
+//   Mond process (D2-TAPE; the processor has no fluid output, so these are chemistry, anywhere):
+//                      gtceu:large_chemical_reactor mond_crushed c1 / mond_dust c3: 16 crushed meteoric iron (or its dust, what GTM's
+//                        ore line and the magnetic split leave) + 36,000 mB CO -> 8,000 mB crude metal carbonyl + 20 iron + 1 cobalt dust
+//                        + 1 asteroid PGM concentrate, 1,920 EU/t x 400 t
+//                      gtceu:distillation_tower crude_carbonyl_split: 8,000 mB crude -> 4,000 mB nickel tetracarbonyl + 4,000 mB iron
+//                        pentacarbonyl; large chemical reactor: Ni(CO)4 -> 4 nickel + 16,000 mB CO, Fe(CO)5 -> 4 iron + 20,000 mB CO
+//                        (the 36,000 mB CO comes back: never used up); gtceu:mixer: 19 nickel + 1 tungsten -> 20 nickel-tungsten dust
 //   optical miner      gtceu:optical_mining (the boulder only on the belt; the Boudouard anywhere):
 //                        c_type_boulder c1: a capture bag (used up at 5 % a run) -> 4,000 mB water + 1,000 mB CO2 + 2 carbon dust + 1
 //                                       chondritic extract, 1,920 EU/t x 1,200 t; only in full sun (the startup's run-start check)
@@ -41,9 +44,13 @@
   var CO2 = 'gtceu:carbon_dioxide'
 
   B.recipes = {
-    mond: { crushed: 'gtceu:crushed_meteoric_iron_ore', dust: 'gtceu:meteoric_iron_dust', count: 16, charge: 1000,
-      outputs: [['gtceu:iron_dust', 24], ['gtceu:nickel_dust', 4], ['gtceu:cobalt_dust', 1], ['grindless:asteroid_pgm_concentrate', 1]],
-      eut: 1920, duration: 400 },
+    mond: { crushed: 'gtceu:crushed_meteoric_iron_ore', dust: 'gtceu:meteoric_iron_dust', count: 16, co: 36000, crude: 8000,
+      outputs: [['gtceu:iron_dust', 20], ['gtceu:cobalt_dust', 1], ['grindless:asteroid_pgm_concentrate', 1]],
+      eut: 1920, duration: 400,
+      split: { crude: 8000, ni: 4000, fe: 4000, eut: 7680, duration: 200 },
+      nickel: { fluid: 4000, dust: 4, co: 16000, eut: 1920, duration: 200 },
+      iron: { fluid: 4000, dust: 4, co: 20000, eut: 1920, duration: 200 },
+      alloy: { ni: 19, w: 1, out: 20, eut: 7680, duration: 200 } },
     split: { input: 'gtceu:crushed_tetrataenite_ore', count: 16,
       outputs: [['gtceu:tetrataenite_dust', 12], ['gtceu:meteoric_iron_dust', 4]], eut: 1920, duration: 200 },
     boulder: { bag: 'grindless:capture_bag', wear: 500, water: 4000, co2: 1000, carbon: 2, extract: 'grindless:chondritic_extract',
@@ -156,21 +163,50 @@
 
   function addProcessor(event) {
     var R = B.recipes
-    var feeds = [['mond_crushed', R.mond.crushed, 1], ['mond_dust', R.mond.dust, 3]]
-    feeds.forEach(function (f) {
-      var r = event.recipes.gtceu.asteroid_processing('grindless:' + f[0])
-        .circuit(f[2])
-        .itemInputs(R.mond.count + 'x ' + f[1])
-        .notConsumableFluid(Fluid.of(CO, R.mond.charge))
-      R.mond.outputs.forEach(function (o) { r.itemOutputs(o[1] + 'x ' + o[0]) })
-      r.EUt(R.mond.eut).duration(R.mond.duration)
-    })
     var s = event.recipes.gtceu.asteroid_processing('grindless:magnetic_split')
       .circuit(2)
       .itemInputs(R.split.count + 'x ' + R.split.input)
     R.split.outputs.forEach(function (o) { s.itemOutputs(o[1] + 'x ' + o[0]) })
     s.EUt(R.split.eut).duration(R.split.duration)
-    return ['grindless:asteroid_processing/mond_crushed', 'grindless:asteroid_processing/magnetic_split', 'grindless:asteroid_processing/mond_dust']
+    return ['grindless:asteroid_processing/magnetic_split']
+  }
+
+  // Mond process, as chemistry: the carbonylation, the distillation of the crude carbonyl, and the two decompositions give back
+  // every CO the carbonylation took (36,000 mB in, 16,000 + 20,000 out); the 20 + 4 iron and the 4 nickel are the old 24 + 4.
+  function addCarbonyl(event) {
+    var M = B.recipes.mond
+    var made = []
+    var feeds = [['mond_crushed', M.crushed, 1], ['mond_dust', M.dust, 3]]
+    feeds.forEach(function (f) {
+      var r = event.recipes.gtceu.large_chemical_reactor('grindless:' + f[0])
+        .circuit(f[2])
+        .itemInputs(M.count + 'x ' + f[1])
+        .inputFluids(Fluid.of(CO, M.co))
+        .outputFluids(Fluid.of('gtceu:crude_metal_carbonyl', M.crude))
+      M.outputs.forEach(function (o) { r.itemOutputs(o[1] + 'x ' + o[0]) })
+      r.EUt(M.eut).duration(M.duration)
+      made.push('gtceu:large_chemical_reactor/grindless/' + f[0])
+    })
+    event.recipes.gtceu.distillation_tower('grindless:crude_carbonyl_split')
+      .inputFluids(Fluid.of('gtceu:crude_metal_carbonyl', M.split.crude))
+      .outputFluids(Fluid.of('gtceu:nickel_tetracarbonyl', M.split.ni), Fluid.of('gtceu:iron_pentacarbonyl', M.split.fe))
+      .EUt(M.split.eut).duration(M.split.duration)
+    event.recipes.gtceu.large_chemical_reactor('grindless:nickel_carbonyl_decomposition')
+      .inputFluids(Fluid.of('gtceu:nickel_tetracarbonyl', M.nickel.fluid))
+      .itemOutputs(M.nickel.dust + 'x gtceu:nickel_dust')
+      .outputFluids(Fluid.of(CO, M.nickel.co))
+      .EUt(M.nickel.eut).duration(M.nickel.duration)
+    event.recipes.gtceu.large_chemical_reactor('grindless:iron_carbonyl_decomposition')
+      .inputFluids(Fluid.of('gtceu:iron_pentacarbonyl', M.iron.fluid))
+      .itemOutputs(M.iron.dust + 'x gtceu:iron_dust')
+      .outputFluids(Fluid.of(CO, M.iron.co))
+      .EUt(M.iron.eut).duration(M.iron.duration)
+    event.recipes.gtceu.mixer('grindless:nickel_tungsten_alloy')
+      .itemInputs(M.alloy.ni + 'x gtceu:nickel_dust', M.alloy.w + 'x gtceu:tungsten_dust')
+      .itemOutputs(M.alloy.out + 'x gtceu:nickel_tungsten_dust')
+      .EUt(M.alloy.eut).duration(M.alloy.duration)
+    return made.concat(['gtceu:distillation_tower/grindless/crude_carbonyl_split', 'gtceu:large_chemical_reactor/grindless/nickel_carbonyl_decomposition',
+      'gtceu:large_chemical_reactor/grindless/iron_carbonyl_decomposition', 'gtceu:mixer/grindless/nickel_tungsten_alloy'])
   }
 
   function cutTetrataenite(event) {
@@ -266,7 +302,7 @@
   ServerEvents.recipes(function (event) {
     try {
     var made = []
-    var steps = [['tetrataenite cut', cutTetrataenite], ['drilling', addDrilling], ['samples', addSamples], ['processor', addProcessor], ['miner', addMiner],
+    var steps = [['tetrataenite cut', cutTetrataenite], ['drilling', addDrilling], ['samples', addSamples], ['processor', addProcessor], ['carbonyl', addCarbonyl], ['miner', addMiner],
       ['parts', addParts], ['seed', addSeed], ['controllers', addControllers]]
     steps.forEach(function (step) {
       try {

@@ -40,9 +40,6 @@
 //     drill_refuses_lower_recipe  the lower recipe's own inputs in the harpoon drill: no progress, no output (the drill's veto)
 //     drill_harpoon_run_on_belt   the M-type sample + HSS-S bit + anchor harpoon: a run on the belt, tuff and the vein's raw ores
 //                                 only, the sample kept
-//     processor_mond              circuit 1: 16 crushed meteoric iron -> 24 iron, 4 nickel, 1 cobalt, 1 PGM concentrate; the 1,000 mB
-//                                 CO charge still in its hatch
-//     processor_mond_no_voiding   the cached Mond restart with item voiding on: no run (lib/no_voiding.js), the reason shown
 //     processor_split_voids_allowed  circuit 2 with item voiding still on: 12 tetrataenite dust + 4 meteoric iron dust
 //     miner_refuses_at_night      circuit 1 (a capture bag) at night: no run, sunState night, the no-sun reason shown
 //     miner_refuses_covered_mirror  by day with a stone over one far mirror: no run, sunState shaded with 1 covered
@@ -297,7 +294,7 @@
         String(S.G.lv.rules.recipeTier(r)) === 'luv' && lower,
         id + '; lookup=' + lookup(drilling, r) + '; dims=' + d.dims.join(',') + ' reversed=' + d.reversed + '; lower tiers skip=' + lower)
     })
-    ;['mond_crushed', 'magnetic_split', 'mond_dust'].forEach(function (name) {
+    ;['magnetic_split'].forEach(function (name) {
       var id = 'grindless:asteroid_processing/' + name
       var r = byId(id)
       var d = r === null ? null : dimensionsOf(r)
@@ -532,45 +529,9 @@
     if (m.phase === 'ready') {
       clear(m.inBus)
       clear(m.outBus)
-      circuit(m, 1)
-      add(m.inBus, [[CRUSHED_METEORIC, R.mond.count]])
-      setTank(m.inHatch, CO, R.mond.charge)
-      voiding(m, 'VOID_NONE')
-      kick(m)
-      mark(m, 'mond')
-      return
-    }
-    if (m.phase === 'mond') {
-      watch(m)
-      var got = items(m.outBus)
-      if (!got[CONCENTRATE]) {
-        if (age(m) > 800) { check('processor_mond', false, 'no concentrate in 800 ticks: ' + state(m)); m.phase = 'done' }
-        return
-      }
-      var want = {}
-      R.mond.outputs.forEach(function (o) { want[o[0]] = o[1] })
-      var charge = tank(m.inHatch)
-      var mond = ran(m)
-      check('processor_mond', same(got, want) && charge.id === CO && charge.mb === R.mond.charge && !items(m.inBus)[CRUSHED_METEORIC] &&
-        mond === 'grindless:asteroid_processing/mond_crushed',
-        'in ' + m.w.dim + ': out ' + JSON.stringify(got) + ', CO charge ' + charge.mb + ' mB ' + charge.id + ', ran ' + mond)
-      m.made = got[CONCENTRATE]
-      // GTM keeps the Mond run as the cached last recipe: the refill below restarts it without the modifier (beforeWorking refuses)
-      add(m.inBus, [[CRUSHED_METEORIC, R.mond.count]])
-      voiding(m, 'VOID_ITEMS')
-      mark(m, 'mond_void')
-      return
-    }
-    if (m.phase === 'mond_void') {
-      watch(m)
-      if (age(m) < HOLD) return
-      check('processor_mond_no_voiding', !m.seen && items(m.inBus)[CRUSHED_METEORIC] === R.mond.count &&
-        items(m.outBus)[CONCENTRATE] === m.made && shown(m, NO_VOIDING_PROCESSOR),
-        'item voiding on, 16 crushed meteoric iron back in: ' + state(m))
-      clear(m.inBus)
-      clear(m.outBus)
       circuit(m, 2)
       add(m.inBus, [[CRUSHED_TETRATAENITE, R.split.count]])
+      voiding(m, 'VOID_ITEMS')
       kick(m)
       mark(m, 'split')
       return

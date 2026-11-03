@@ -1,7 +1,7 @@
 {
   "_comment": [
     "LuV coated conductor line (gtceu:coated_conductor_line, type gtceu:coated_conductor; docs/eras/luv.md, machine 2; package LuV-A3).",
-    "server_scripts/grindless/luv/coated_conductor_line.js makes one recipe per entry, id grindless:coated_conductor/<name>; the programmed circuit is the step (1 substrate, 2 tape) and each recipe carries the data key grindless_coated_conductor = <name> (its EMI line).",
+    "server_scripts/grindless/luv/coated_conductor_line.js makes one recipe per entry, id grindless:coated_conductor/<name>; the programmed circuit is the step (1 substrate, texture and buffer; 2 coat, cap and the conductor) and each recipe carries the data key grindless_coated_conductor = <name> (its EMI line).",
     "Substrate: Ni-5at.%W (19 Ni + 1 W), rolled and annealed to a cube texture (RABiTS). Tape: a micron-thick ITBTC film on it, oxygen-annealed, with a silver cap layer: an eighth of a cast single wire's superconductor per tape.",
     "Figures marked tune in luv.md: both EU/t x durations and the tape's ITBTC share."
   ],
@@ -10,28 +10,100 @@
       "name": "nickel_tungsten_substrate",
       "step": "substrate",
       "circuit": 1,
-      "itemsIn": [
-        { "id": "gtceu:nickel_dust", "count": 19 },
-        { "id": "gtceu:tungsten_dust", "count": 1 }
-      ],
+      "itemsIn": [{ "id": "gtceu:nickel_tungsten_dust", "count": 20 }],
       "fluidsIn": [],
       "itemsOut": [{ "id": "grindless:nickel_tungsten_tape", "count": 20 }],
       "eut": 7680,
       "duration": 400
     },
     {
+      "name": "textured_tape",
+      "step": "texture",
+      "circuit": 1,
+      "itemsIn": [{ "id": "grindless:nickel_tungsten_tape", "count": 20 }],
+      "fluidsIn": [
+        { "id": "gtceu:hydrogen", "amount": 1000 },
+        { "id": "gtceu:argon", "amount": 1000 }
+      ],
+      "itemsOut": [{ "id": "grindless:textured_nickel_tungsten_tape", "count": 20 }],
+      "eut": 7680,
+      "duration": 300
+    },
+    {
+      "name": "seeded_tape",
+      "step": "buffer",
+      "circuit": 1,
+      "itemsIn": [
+        { "id": "grindless:textured_nickel_tungsten_tape", "count": 20 },
+        { "id": "grindless:yttrium_oxide_dust", "count": 2 }
+      ],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:seeded_tape", "count": 20 }],
+      "eut": 15360,
+      "duration": 150
+    },
+    {
+      "name": "barrier_tape",
+      "step": "buffer",
+      "circuit": 1,
+      "itemsIn": [
+        { "id": "grindless:seeded_tape", "count": 20 },
+        { "id": "grindless:ysz_powder", "count": 2 }
+      ],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:barrier_tape", "count": 20 }],
+      "eut": 15360,
+      "duration": 150
+    },
+    {
+      "name": "buffered_tape",
+      "step": "buffer",
+      "circuit": 1,
+      "itemsIn": [
+        { "id": "grindless:barrier_tape", "count": 20 },
+        { "id": "gtceu:cerium_dust", "count": 2 }
+      ],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:buffered_tape", "count": 20 }],
+      "eut": 15360,
+      "duration": 150
+    },
+    {
+      "name": "coated_tape",
+      "step": "coat",
+      "circuit": 2,
+      "itemsIn": [
+        { "id": "grindless:buffered_tape", "count": 20 },
+        { "id": "gtceu:indium_tin_barium_titanium_cuprate_dust", "count": 1 }
+      ],
+      "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1000 }],
+      "itemsOut": [{ "id": "grindless:coated_tape", "count": 20 }],
+      "eut": 30720,
+      "duration": 300
+    },
+    {
+      "name": "capped_tape",
+      "step": "cap",
+      "circuit": 2,
+      "itemsIn": [{ "id": "grindless:coated_tape", "count": 20 }],
+      "fluidsIn": [
+        { "id": "gtceu:silver", "amount": 45 },
+        { "id": "gtceu:oxygen", "amount": 500 }
+      ],
+      "itemsOut": [{ "id": "grindless:capped_tape", "count": 20 }],
+      "eut": 30720,
+      "duration": 200
+    },
+    {
       "name": "itbtc_coated_conductor",
       "step": "tape",
       "circuit": 2,
       "itemsIn": [
-        { "id": "grindless:nickel_tungsten_tape", "count": 16 },
-        { "id": "gtceu:indium_tin_barium_titanium_cuprate_dust", "count": 1 }
+        { "id": "grindless:capped_tape", "count": 20 },
+        { "id": "gtceu:copper_foil", "count": 20 }
       ],
-      "fluidsIn": [
-        { "id": "gtceu:oxygen", "amount": 1000 },
-        { "id": "gtceu:silver", "amount": 36 }
-      ],
-      "itemsOut": [{ "id": "grindless:itbtc_coated_conductor", "count": 16 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:itbtc_coated_conductor", "count": 20 }],
       "eut": 30720,
       "duration": 300
     },
@@ -44,9 +116,7 @@
         { "id": "gtceu:gadolinium_oxide_dust", "count": 1 },
         { "id": "grindless:ba_cu_blend", "count": 10 }
       ],
-      "fluidsIn": [
-        { "id": "gtceu:oxygen", "amount": 7000 }
-      ],
+      "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 7000 }],
       "itemsOut": [{ "id": "gtceu:gd_123_dust", "count": 2 }],
       "eut": 30720,
       "duration": 400
