@@ -72,7 +72,8 @@
     if (server.getTickCount() % 20 !== 7) return
     try {
       server.getAllLevels().forEach(function (level) {
-        var id = String(level.dimension.location())
+        // KubeJS 6's Level#getDimension() is the ResourceLocation already (as dimensions.js reads it)
+        var id = String(level.getDimension())
         var now = skyKey(level)
         if (seen[id] !== undefined && seen[id] !== now) burst[id] = AFTER
         seen[id] = now
