@@ -47,6 +47,7 @@
 
     var b = R.boule
     gt.electric_blast_furnace('grindless:germanium_boule')
+      .circuit(1)
       .itemInputs(b.germanium + 'x gtceu:germanium_dust')
       .notConsumableFluid(Fluid.of('gtceu:argon', b.argon))
       .itemOutputs(b.boules + 'x grindless:germanium_boule')

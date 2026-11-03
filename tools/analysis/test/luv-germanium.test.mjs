@@ -68,6 +68,7 @@ test('every step of the line', () => {
   assert.deepEqual(one(d, 'itemOutputs'), ['2x gtceu:germanium_dust']);
   assert.deepEqual(one(d, 'blastFurnaceTemp'), [900]);
   const b = t('grindless:germanium_boule', 'gtceu:electric_blast_furnace');
+  assert.deepEqual(one(b, 'circuit'), [1]);
   assert.deepEqual(one(b, 'itemInputs'), ['16x gtceu:germanium_dust']);
   assert.deepEqual(one(b, 'notConsumableFluid'), [{ fluid: 'gtceu:argon', amount: 1000 }]);
   assert.deepEqual(one(b, 'itemOutputs'), ['1x grindless:germanium_boule']);

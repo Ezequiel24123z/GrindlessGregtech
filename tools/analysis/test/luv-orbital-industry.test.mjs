@@ -105,7 +105,7 @@ test('all six design routes retain exact quantities, circuits, costs, dimensions
     ['containerless_naquadah_alloy', 3, ['2x gtceu:naquadah_dust', 'gtceu:osmiridium_dust', 'gtceu:trinium_dust'], [], '4x gtceu:naquadah_alloy_ingot', 30720, 2000, false],
     ['wake_uhpic_wafer', 1, ['gtceu:hpic_wafer', '4x gtceu:indium_gallium_phosphide_dust'], [['gtceu:naquadah', 288]], 'gtceu:uhpic_wafer', 30720, 600, true],
     ['wake_hpic_wafer', 2, ['gtceu:mpic_wafer', 'gtceu:indium_gallium_phosphide_dust'], [['gtceu:molten_vanadium_gallium', 144]], 'gtceu:hpic_wafer', 7680, 600, true],
-    ['triple_junction_wafer', 3, ['gtceu:germanium_plate', 'gtceu:gallium_arsenide_dust', 'gtceu:indium_gallium_phosphide_dust'], [], 'grindless:triple_junction_wafer', 7680, 400, true]
+    ['triple_junction_wafer', 3, ['grindless:germanium_wafer', 'gtceu:gallium_arsenide_dust', 'gtceu:indium_gallium_phosphide_dust'], [], 'grindless:triple_junction_wafer', 7680, 400, true]
   ];
   for (const [name, circuit, items, fluids, output, eut, duration, cleanroom] of expected) {
     const r = recipes.find(r => r.id === 'grindless:' + name);
