@@ -283,10 +283,10 @@
     // MOCVD reactor's Siemens rod (c17), whose HCl comes back
     {
       name: 'si28_trichlorosilane', mode: 'opv', circuit: 24,
-      itemsIn: [{ id: 'grindless:si28_ash', count: 4 }],
-      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 12000 }],
+      itemsIn: [{ id: 'grindless:si28_ash', count: 1 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 3000 }],
       itemsOut: [],
-      fluidsOut: [{ id: 'gtceu:si28_trichlorosilane', amount: 4000 }, { id: 'gtceu:hydrogen', amount: 4000 }],
+      fluidsOut: [{ id: 'gtceu:crude_si28_trichlorosilane', amount: 1000 }, { id: 'gtceu:hydrogen', amount: 1000 }],
       eut: 1920, duration: 100
     },
     // OpV-A2 (opv.md line 12): the InP scrap of the boule, wafer and HEMT cuts leached in HCl; indium is won back, the phosphine goes to

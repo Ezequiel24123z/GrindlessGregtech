@@ -26,10 +26,15 @@
     inas_qw_wafer: { stack: 64 },
     hbn_capped_2deg_wafer: { stack: 64 },
     // line 13: cryo-CMOS
+    annealed_soi_wafer: { stack: 64 },
+    back_gated_soi_wafer: { stack: 64 },
     gate_stack_soi_wafer: { stack: 64 },
     cryo_cmos_litho_wafer: { stack: 64 },
     cryo_cmos_implanted_wafer: { stack: 64 },
+    activated_cmos_wafer: { stack: 64 },
+    contacted_cmos_wafer: { stack: 64 },
     cryo_cmos_metal_wafer: { stack: 64 },
+    interconnected_cmos_wafer: { stack: 64 },
     untested_cryo_cmos_die: { stack: 64 },
     gold_overspray: { stack: 64 },
     // line 14: the Nb TSV interposer and the NbTiN film
@@ -58,6 +63,9 @@
   // material key -> form, colour and formula
   const MATERIALS = {
     'gtceu:si28_trichlorosilane': { form: 'liquid', colour: 0xC8D8C0, formula: '\u00B2\u2078SiHCl\u2083' },
+    'gtceu:crude_si28_trichlorosilane': { form: 'liquid', colour: 0xB4C0A0, formula: '\u00B2\u2078SiHCl\u2083(PCl\u2083)' },
+    'gtceu:si28_tetrachloride': { form: 'liquid', colour: 0xD0DCD4, formula: '\u00B2\u2078SiCl\u2084' },
+    'gtceu:chlorosilane_purge': { form: 'liquid', colour: 0x9CA888, formula: '(PCl\u2083)(S\u2082Cl\u2082)' },
     'gtceu:gan_mocvd_exhaust': { form: 'gas', colour: 0xB8C0A8, formula: '(CH\u2084)(NH\u2083)Ga' }
   }
 

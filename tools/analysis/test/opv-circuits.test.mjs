@@ -75,7 +75,8 @@ const DATA_KEYED = ['crystal_growth', 'molecular_beam_epitaxy', 'beuv_lithograph
   'femtosecond_writing', 'snspd_fabrication', 'chemical_vapour_infiltration', 'silicon_carbide', 'photonic_integration'];
 const tableId = ([, type, name]) => `grindless:${type}/${name}`;
 // the items of lines 11-18: each has a producer and a consumer among the recipes (nbtin_film_wafer waits for OpV-D1: made, not yet used)
-const CHAIN = ['si28_poly_rod', 'si_inp_boule', 'si_inp_wafer', 'inp_scrap', 'inas_qw_wafer', 'hbn_capped_2deg_wafer', 'gate_stack_soi_wafer',
+const CHAIN = ['si28_poly_rod', 'si_inp_boule', 'si_inp_wafer', 'inp_scrap', 'inas_qw_wafer', 'hbn_capped_2deg_wafer', 'annealed_soi_wafer',
+  'back_gated_soi_wafer', 'gate_stack_soi_wafer', 'activated_cmos_wafer', 'contacted_cmos_wafer', 'interconnected_cmos_wafer',
   'cryo_cmos_litho_wafer', 'cryo_cmos_implanted_wafer', 'cryo_cmos_metal_wafer', 'untested_cryo_cmos_die', 'gold_overspray', 'rrr_nb_target',
   'tsv_via_wafer', 'nb_filled_tsv_wafer', 'bonded_tsv_interposer', 'ln_on_soi_wafer', 'ln_soi_waveguide_wafer', 'snspd_link_wafer',
   'inp_hemt_epi_wafer', 'hemt_gated_wafer', 'isolated_hemt_wafer', 'hpsi_sic_wafer', 'gan_sic_epi_wafer', 'gan_gated_wafer', 'sdd_ring_wafer',
@@ -92,7 +93,7 @@ test('the stand-in runs the OpV-A2 scripts without errors and skips nothing', ()
 });
 
 test('28 items and 2 fluids registered by the startup file, named in en_us, each with a texture', () => {
-  assert.equal(OC.items.length, 28);
+  assert.equal(OC.items.length, 33);
   for (const id of OC.items) {
     const it = run.registry.items.get(id);
     assert.ok(it && /opv[\\/]circuits\.js$/.test(String(it.file)), `${id} registered by opv/circuits.js`);
@@ -102,7 +103,7 @@ test('28 items and 2 fluids registered by the startup file, named in en_us, each
     }
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), `${n}.png`);
   }
-  assert.deepEqual(plain(OC.fluids), ['gtceu:si28_trichlorosilane', 'gtceu:gan_mocvd_exhaust']);
+  assert.deepEqual(plain(OC.fluids), ['gtceu:si28_trichlorosilane', 'gtceu:crude_si28_trichlorosilane', 'gtceu:si28_tetrachloride', 'gtceu:chlorosilane_purge', 'gtceu:gan_mocvd_exhaust']);
   for (const id of OC.fluids) {
     const f = run.registry.fluids.get(id);
     assert.ok(f && /opv[\\/]circuits\.js$/.test(String(f.file)), `${id} registered by opv/circuits.js`);
@@ -161,7 +162,7 @@ test('the lines chain: every intermediate is made and used, the fluids too', () 
     assert.ok(producers(id).length >= 1, `${n} has a producer`);
     assert.ok(consumers(id).length >= 1, `${n} has a consumer`);
   }
-  for (const id of ['gtceu:si28_trichlorosilane', 'gtceu:gan_mocvd_exhaust']) {
+  for (const id of ['gtceu:si28_trichlorosilane', 'gtceu:crude_si28_trichlorosilane', 'gtceu:si28_tetrachloride', 'gtceu:chlorosilane_purge', 'gtceu:gan_mocvd_exhaust']) {
     assert.ok(producers(id).length >= 1, `${id} has a producer`);
     assert.ok(consumers(id).length >= 1, `${id} has a consumer`);
   }
@@ -175,6 +176,28 @@ test('the lines chain: every intermediate is made and used, the fluids too', () 
   assert.ok(producers('grindless:hemt_amplifier').some((r) => r.i === 'grindless:cutter/hemt_amplifiers'));
   assert.ok(producers('grindless:gan_mmic').some((r) => r.i === 'grindless:silicon_carbide/gan_mmic'));
   assert.ok(producers('grindless:sdd_die').some((r) => r.i === 'grindless:mtj_sputtering/sdd_metal'));
+});
+
+test('D5-QPU-OPV: the Si-28 qubit line runs ash -> crude -> TCS -> rod ... -> interconnected wafer, and the chlorosilane loop closes', () => {
+  const made = (id, rid) => assert.ok(producers(id).some((r) => r.i === rid), `${id} made by ${rid}`);
+  made('gtceu:crude_si28_trichlorosilane', 'grindless:solvent_extraction/ev/si28_trichlorosilane');
+  made('gtceu:si28_trichlorosilane', 'grindless:distillation_tower/si28_chlorosilane_split');
+  made('gtceu:si28_tetrachloride', 'grindless:distillation_tower/si28_chlorosilane_split');
+  made('gtceu:chlorosilane_purge', 'grindless:distillation_tower/si28_chlorosilane_split');
+  made('gtceu:crude_si28_trichlorosilane', 'grindless:chemical_reactor/si28_tetrachloride_loop');
+  made('gtceu:phosphoric_acid', 'grindless:chemical_reactor/chlorosilane_purge_hydrolysis');
+  made('grindless:annealed_soi_wafer', 'grindless:electric_blast_furnace/si28_soi_anneal');
+  made('grindless:back_gated_soi_wafer', 'grindless:ion_implantation/soi_back_gate_implant');
+  made('grindless:activated_cmos_wafer', 'grindless:electron_beam_refining/cmos_flash_anneal');
+  made('grindless:contacted_cmos_wafer', 'grindless:mocvd/cmos_tungsten_contacts');
+  made('grindless:interconnected_cmos_wafer', 'grindless:beuv_lithography/cmos_via_exposure');
+  const takes = (rid, id) => assert.ok(consumers(id).some((r) => r.i === rid), `${rid} takes ${id}`);
+  takes('grindless:mocvd/gate_stack', 'grindless:back_gated_soi_wafer');
+  takes('grindless:mtj_sputtering/cryo_cmos_metal', 'grindless:contacted_cmos_wafer');
+  takes('grindless:cutter/untested_cryo_cmos_dies', 'grindless:interconnected_cmos_wafer');
+  assert.ok(consumers('gtceu:si28_tetrachloride').some((r) => r.i === 'grindless:chemical_reactor/si28_tetrachloride_loop'));
+  assert.ok(consumers('gtceu:chlorosilane_purge').some((r) => r.i === 'grindless:chemical_reactor/chlorosilane_purge_hydrolysis'));
+  assert.ok(producers('gtnn:cosmic_mainframe').length === 1);
 });
 
 test('the join: one photonic hall row, circuit 8, the only maker of gtnn:cosmic_mainframe, from the four parts of lines 13-16', () => {

@@ -17,10 +17,15 @@
         ['inp_scrap', 'InP Scrap', 'Kerf, boule ends and wafer edges of indium phosphide.', 'Leached back to indium in the extraction cascade.'],
         ['inas_qw_wafer', 'InAs Quantum Well Wafer', 'A shallow InAs quantum well grown by MBE on semi-insulating InP.', 'An epitaxial aluminium film comes next.'],
         ['hbn_capped_2deg_wafer', 'hBN-Capped 2DEG Wafer', 'The InAs/Al wafer under an annealed hBN gate dielectric.', 'Gates are written on it by STM lithography.'],
+        ['annealed_soi_wafer', 'Annealed SOI Wafer', 'The bonded Si-28 SOI wafer after a 1,373 K nitrogen anneal that strengthens the bond.', 'A boron ground plane is implanted next.'],
+        ['back_gated_soi_wafer', 'Back-Gated SOI Wafer', 'A boron ground plane under the buried oxide lets the back gate tune thresholds at 4 K.', 'The hafnium oxide and titanium nitride gate stack comes next.'],
         ['gate_stack_soi_wafer', 'Gate Stack SOI Wafer', 'Si-28 on insulator under a hafnium oxide and titanium nitride gate stack.', 'Exposed in the BEUV scanner.'],
         ['cryo_cmos_litho_wafer', 'Patterned Cryo-CMOS Wafer', 'The gate stack patterned at 6.7 nm.', 'Its sources and drains are implanted next.'],
-        ['cryo_cmos_implanted_wafer', 'Implanted Cryo-CMOS Wafer', 'Arsenic-implanted sources and drains, ready for the metal.', 'Gold is sputtered on in the MTJ sputter tool.'],
-        ['cryo_cmos_metal_wafer', 'Metallised Cryo-CMOS Wafer', 'Gold interconnect over the cryo-CMOS transistors.', 'Diced into untested dies.'],
+        ['cryo_cmos_implanted_wafer', 'Implanted Cryo-CMOS Wafer', 'Arsenic-implanted sources and drains, dopants not yet active.', 'A millisecond flash anneal in the electron beam furnace activates them.'],
+        ['activated_cmos_wafer', 'Activated CMOS Wafer', 'Dopants activated by a millisecond electron-beam flash, without diffusing.', 'Tungsten plugs are grown in the MOCVD reactor.'],
+        ['contacted_cmos_wafer', 'Contacted CMOS Wafer', 'Tungsten contact plugs reach every source, drain and gate.', 'Gold interconnect is sputtered on next.'],
+        ['cryo_cmos_metal_wafer', 'Metallised Cryo-CMOS Wafer', 'Gold interconnect over the cryo-CMOS transistors.', 'Vias and the top metal are patterned in the BEUV scanner.'],
+        ['interconnected_cmos_wafer', 'Interconnected CMOS Wafer', 'The back end finished: vias and top metal patterned over the cryo-CMOS.', 'Diced into untested dies.'],
         ['untested_cryo_cmos_die', 'Untested Cryo-CMOS Die', 'A cryo-CMOS controller die that has not yet been cold.', 'Tested at 4 K in the helium refrigerator.'],
         ['gold_overspray', 'Gold Overspray', 'Gold scraped from the sputter shields.', 'Dissolved back to gold in the platinum plant.'],
         ['rrr_nb_target', 'High-RRR Niobium Target', 'A sputter target of SRF-grade niobium on a copper backing plate.', 'Fills the TSVs and makes the NbTiN film.'],
@@ -44,6 +49,9 @@
     // kind, id, name
     var NAMES = [
         ['material', 'si28_trichlorosilane', 'Si-28 Trichlorosilane'],
+        ['material', 'crude_si28_trichlorosilane', 'Crude Si-28 Trichlorosilane'],
+        ['material', 'si28_tetrachloride', 'Si-28 Tetrachloride'],
+        ['material', 'chlorosilane_purge', 'Chlorosilane Purge'],
         ['material', 'gan_mocvd_exhaust', 'GaN MOCVD Exhaust']
     ]
     var PREFIX = { material: 'material.gtceu.' }
@@ -54,6 +62,8 @@
         ['gtceu.recipe.grindless_molecular_beam_epitaxy.inas_qw', 'Circuit 9: an InAs quantum well on semi-insulating InP; half the arsenic comes back'],
         ['gtceu.recipe.grindless_molecular_beam_epitaxy.inp_hemt_epi', 'Circuit 10: the InGaAs/InAlAs HEMT channel on semi-insulating InP; half the arsenic comes back'],
         ['gtceu.recipe.grindless_beuv_lithography.cryo_cmos_exposure', 'Circuit 4: the cryo-CMOS gates; the mirror comes out fouled'],
+        ['gtceu.recipe.grindless_beuv_lithography.cmos_via_exposure', 'Circuit 17: vias and top metal of the cryo-CMOS back end; the mirror comes out fouled'],
+        ['gtceu.recipe.grindless_electron_beam.cmos_flash_anneal', 'Circuit 29: a millisecond flash anneal activates the dopants without letting them diffuse'],
         ['gtceu.recipe.grindless_beuv_lithography.tsv_exposure', 'Circuit 5: the through-silicon vias of the Nb interposer'],
         ['gtceu.recipe.grindless_beuv_lithography.hemt_gate_exposure', 'Circuit 6: the T-gates of the InP HEMT'],
         ['gtceu.recipe.grindless_beuv_lithography.gan_gate_exposure', 'Circuit 7: the gates of the GaN-on-SiC transistors'],

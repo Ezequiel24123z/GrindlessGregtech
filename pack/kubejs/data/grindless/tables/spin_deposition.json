@@ -74,7 +74,7 @@
           "_why": "OpV-A2 (opv.md line 13): the gold interconnect of the cryo-CMOS sputtered from foil; the overspray goes back to EV's platinum plant (c17)",
           "name": "cryo_cmos_metal", "circuit": 5, "eut": 33554432, "duration": 600,
           "itemsIn": [
-            { "id": "grindless:cryo_cmos_implanted_wafer", "count": 1 },
+            { "id": "grindless:contacted_cmos_wafer", "count": 1 },
             { "id": "gtceu:gold_foil", "count": 2 }
           ],
           "kept": [], "charge": [],
