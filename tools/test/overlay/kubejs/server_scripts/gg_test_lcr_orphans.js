@@ -1,8 +1,9 @@
 // priority: -3074
-// TEST ONLY, FIX-LCR (integration/lcr_mirror.js). Command: kubejs custom_command gg_test_lcr_mirror
+// TEST ONLY, FIX-LCR (integration/lcr_orphans.js). Command: kubejs custom_command gg_test_lcr_orphans
 // Band ONLY: X 49792-49855, Z 0-63, Overworld Y 98-115.
-//   mirror     every chemical_reactor recipe of the live manager has its large_chemical_reactor copy (same duration, EU/t, entry counts)
-//   bypasses   the orphan copies and N2O4 from ammonia are gone; the explicit nitric acid recipe, Kroll and EDC cracking are there
+//   mirror     every chemical_reactor recipe of the live manager has its large_chemical_reactor twin (GTM's runtime copy: same duration, EU/t, entry counts)
+//   edc_row    the large twin of the rebuilt vinyl_chloride_from_hydrochloric gives dichloroethane like the chemical reactor one
+//   bypasses   the orphan twins and N2O4 from ammonia are gone; the explicit nitric acid recipe, Kroll and EDC cracking are there
 //   run        a formed HV Coil Chemical Plant (type gtceu:large_chemical_reactor) runs grindless:large_chemical_reactor/edc_cracking to its output
 (function () {
   var S = null
@@ -12,7 +13,7 @@
   var X1 = 49855
   var Y0 = 98
   var Y1 = 115
-  var NAME = 'lcr_mirror'
+  var NAME = 'lcr_orphans'
   var PLANT = 'gtceu:coil_chemical_plant'
   var EDC = 'grindless:large_chemical_reactor/edc_cracking'
   var GONE = [
@@ -107,14 +108,21 @@
     })
     check('mirror', cr > 0 && missing.length === 0 && differ.length === 0, cr + ' chemical reactor recipes; without a copy ' + missing.length + ' [' + missing.slice(0, 8).join(', ') + ']; different ' +
       differ.length + ' [' + differ.slice(0, 5).join('; ') + ']')
+    var rowOut = {}
     ;['gtceu:chemical_reactor/vinyl_chloride_from_hydrochloric', 'gtceu:large_chemical_reactor/vinyl_chloride_from_hydrochloric'].forEach(function (id) {
       var r = all[id]
-      note('row', id + ': ' + (r ? 'in ' + String(r.inputs.get(classes().FluidCap)) + ' out ' + String(r.outputs.get(classes().FluidCap)) : 'absent'))
+      var ids = []
+      if (r) array(r.outputs.get(classes().FluidCap)).forEach(function (c) {
+        var st = array(c.getContent().getStacks())
+        if (st.length > 0) ids.push(String(classes().Forge.FLUIDS.getKey(st[0].getFluid())))
+      })
+      rowOut[id] = ids.join(',')
     })
-    var L = global.grindless.lcrMirror
-    check('published', !!L && L.done === true && L.failed.length === 0, L ? 'added ' + L.added.length + ', replaced ' + L.replaced.length + ', removed ' + L.removed.length + ', kept ' + L.kept.length +
-      ', explicit ' + L.explicit.length + ', failed ' + L.failed.length : 'global.grindless.lcrMirror missing')
-    if (L) note('removed_ids', L.removed.join(', '))
+    var edcRows = Object.keys(rowOut).map(function (id) { return rowOut[id] })
+    check('edc_row', edcRows.length === 2 && edcRows[0] === edcRows[1] && edcRows[0].indexOf('gtceu:dichloroethane') >= 0 && edcRows[0].indexOf('gtceu:vinyl_chloride') < 0,
+      'chemical reactor out ' + edcRows[0] + '; large reactor out ' + edcRows[1])
+    var L = global.grindless.lcrOrphans
+    check('published', !!L && L.done === true && L.removed.length > 0, L ? 'removed ' + L.removed.length + ': ' + L.removed.join(', ') : 'global.grindless.lcrOrphans missing')
     var stillThere = GONE.filter(function (id) { return !!all[id] })
     check('bypasses_gone', stillThere.length === 0, 'still live: ' + stillThere.join(', '))
     var absent = THERE.filter(function (id) { return !all[id] })
@@ -141,7 +149,7 @@
     })
     var last = desc.slices.length - 1
     var front = ['gtceu:maintenance_hatch', 'gtceu:ev_energy_input_hatch', 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
-    var behind = ['gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
+    var behind = ['gtceu:hv_input_hatch', 'gtceu:hv_output_hatch', 'gtceu:hv_output_hatch']
     var controller = null
     cells.forEach(function (c) {
       c.x = 49824 - (c.ci - ctrl.ci)
@@ -253,15 +261,15 @@
       S.started = 0
     } catch (e) { check('place_exception', false, errText(e)) }
   }
-  ServerEvents.customCommand('gg_test_lcr_mirror', function () {
+  ServerEvents.customCommand('gg_test_lcr_orphans', function () {
     if (S !== null && !S.finished) return 0
-    global.ggTestLcrMirrorRequest = true
+    global.ggTestLcrOrphansRequest = true
     return 1
   })
   ServerEvents.tick(function (event) {
     try {
-      if (global.ggTestLcrMirrorRequest && Date.now() - LOADED >= 10000) {
-        global.ggTestLcrMirrorRequest = false
+      if (global.ggTestLcrOrphansRequest && Date.now() - LOADED >= 10000) {
+        global.ggTestLcrOrphansRequest = false
         begin(event.server)
       }
       if (S === null || S.finished) return

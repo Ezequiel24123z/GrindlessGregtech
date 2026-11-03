@@ -25,11 +25,7 @@ const dimsOf = (r) => (r.j.recipeConditions || []).filter((c) => c.type === 'dim
 const read = (rel) => fs.readFileSync(path.join(pack, 'kubejs', rel), 'utf8');
 const outputsOf = (r) => JSON.stringify(r.j.outputs || r.j.result || {});
 const inputsOf = (r) => JSON.stringify(r.j.inputs || r.j.ingredients || r.j.key || {});
-// integration/lcr_mirror.js copies every chemical reactor recipe into the large one: count the pair once
-const makersOf = (id) => {
-  const hit = recipes.filter((r) => outputsOf(r).includes(`"${id}"`));
-  return hit.filter((r) => !r.i.includes(':large_chemical_reactor/') || !hit.some((x) => x.i === r.i.replace(':large_chemical_reactor/', ':chemical_reactor/'))).map((r) => r.i);
-};
+const makersOf = (id) => recipes.filter((r) => outputsOf(r).includes(`"${id}"`)).map((r) => r.i);
 const VA_UV = 491520;
 const MACHINES = { 'gtceu:light_sail_fab': 'light_sail', 'gtceu:starchip_fab': 'starchip', 'gtceu:laser_sail_launcher': 'laser_sail_launch' };
 

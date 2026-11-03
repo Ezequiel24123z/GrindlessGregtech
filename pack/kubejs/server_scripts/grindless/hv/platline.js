@@ -11,8 +11,7 @@
 //
 // Removed (nitrogen oxides straight from the elements, which no plant does; the Haber ammonia, the Ostwald steps and the oxidation of nitric
 // oxide stay): gtceu:large_chemical_reactor/nitric_acid_from_elements, nitrogen_dioxide_from_elements and dinitrogen_tetroxide_shortcut,
-// and gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia (N2O4 from ammonia and oxygen, with no NO2; integration/lcr_mirror.js then drops its
-// large reactor copy too).
+// and gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia (N2O4 from ammonia and oxygen, with no NO2; integration/lcr_orphans.js then drops its large reactor twin too).
 // What stays reachable: L2's Ostwald route (nitric_oxide_from_ammonia -> nitrogen_dioxide_from_oxide -> nitric_acid_from_dioxide_1, untouched,
 // LV, no gauze) and N2O4 for the rocket fuel by dimerising NO2 (chemical_reactor/dinitrogen_tetroxide_from_dioxide).
 //

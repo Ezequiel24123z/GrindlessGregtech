@@ -8,8 +8,8 @@
 //   4. titanium_from_tetrachloride (GTM, unchanged)   TiCl4 + 2 Mg -> hot titanium + 6 MgCl2, the vacuum freezer cools it
 //   + magnesium loop (new): 3 MgCl2 -> Mg + 2,000 Cl2 in the electrolyzer (GTM's own sodium route salt_from_magnesium_chloride stays, same 3 -> 1);
 //     step 4's 6 MgCl2 give 2 Mg + 4,000 Cl2, so the loop closes exactly: the chlorine goes back to step 2.
-// CO: methanol or tank (toxic, contained). GTM's chemical reactor and large reactor recipes are both replaced (integration/lcr_mirror.js gives the large
-// reactor the copy of ours: GTM copies only recipes built in Java), so no route skips the distillation.
+// CO: methanol or tank (toxic, contained). GTM's chemical reactor and large reactor recipes are both removed (GTM copies ours into the large reactor at runtime;
+// integration/lcr_orphans.js drops the large twin of any removed one), so no route skips the distillation.
 // Titanium gains no Earth source: crude TiCl4 needs rutile, and rutile needs lunar ilmenite (data/grindless/tables/offworld_only.json).
 (function () {
   const LOG = '[grindless/hv] Kroll line: '
@@ -27,7 +27,7 @@
 
       event.remove({ id: 'gtceu:chemical_reactor/titanium_tetrachloride' })
       event.remove({ id: 'gtceu:large_chemical_reactor/titanium_tetrachloride' })
-      // one chemical reactor recipe: integration/lcr_mirror.js copies it into the large chemical reactor under the same path, so a
+      // one chemical reactor recipe: GTM copies it into the large chemical reactor under the same path at runtime, so a
       // second, explicit large reactor recipe would replace the copy
       event.recipes.gtceu.chemical_reactor('grindless:kroll_chlorination_chemical_reactor')
         .itemInputs('2x gtceu:carbon_dust', '1x gtceu:rutile_dust')
