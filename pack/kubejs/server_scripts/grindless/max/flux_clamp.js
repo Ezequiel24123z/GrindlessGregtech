@@ -47,9 +47,10 @@
       items: ['grindless:cold_flux_pump', '2x gtceu:tungsten_steel_plate', '4x gtceu:tungsten_steel_rod', '2x gtceu:tungsten_steel_ring', 'gtceu:tungsten_steel_gear', 'gtceu:tungsten_steel_frame', '2x grindless:chain_field_coil', '2x #gtceu:circuits/max'],
       fluids: [['gtceu:epoxy', 144]], outs: ['grindless:hts_flux_pump'], eut: LOW, duration: 600 },
     // the clamp casing: made at home from OpV parts, so the clamp can be built (no input comes from the clamp's line)
-    { type: 'assembler', name: 'clamp_coil_casing', circuit: 18,
-      items: ['gtceu:opv_machine_casing', '4x gtceu:tungsten_steel_rod', '2x grindless:chain_field_coil', '2x #gtceu:circuits/max'],
-      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:clamp_coil_casing'], eut: MAX_VA, duration: 200 }
+    // retuned by D5-CAS-MAX (docs/eras/lines-opv-maxplus.md 7.2): the REBCO field coil and horizon strand on a truss
+    { type: 'assembler', name: 'clamp_coil_casing',
+      items: ['grindless:max_field_coil', '2x gtceu:horizon_strand_single_wire', 'grindless:tensegrity_truss_casing'],
+      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:clamp_coil_casing'], eut: MAX_VA, duration: 400 }
   ]
 
   function missingOf(items, fluids) {

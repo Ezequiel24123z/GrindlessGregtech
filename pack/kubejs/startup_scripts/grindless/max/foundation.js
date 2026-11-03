@@ -366,7 +366,13 @@
     laser_link_casing: { texture: 'grindless:block/max/laser_link_casing' },
     driver_ring_casing: { texture: 'grindless:block/max/driver_ring_casing' },
     clamp_coil_casing: { texture: 'grindless:block/max/clamp_coil_casing' },
-    reclamation_bay_casing: { texture: 'grindless:block/max/reclamation_bay_casing' }
+    reclamation_bay_casing: { texture: 'grindless:block/max/reclamation_bay_casing' },
+    // the MAX casing family (D5-CAS-MAX, docs/eras/lines-opv-maxplus.md 7.2): textures Build-MaxCasingFamilyTextures.ps1, names
+    // max_casings_lang.js, recipes server_scripts/grindless/max/casings.js. The window coil is a plain block, not a GTM ActiveBlock.
+    tensegrity_truss_casing: { texture: 'grindless:block/max/tensegrity_truss_casing' },
+    membrane_vacuum_casing: { texture: 'grindless:block/max/membrane_vacuum_casing' },
+    droplet_radiator_casing: { texture: 'grindless:block/max/droplet_radiator_casing' },
+    shell_window_coil_casing: { texture: 'grindless:block/max/shell_window_coil_casing' }
   }
 
   // RF-7A controllers (machines 11-14, docs/eras/max.md:194-197): named here, registered by MX-S1 to MX-S4

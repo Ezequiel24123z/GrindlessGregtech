@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:droplet_radiator_casing"],
+  "text": ["emi.grindless.info.droplet_radiator_casing.0"]
+}

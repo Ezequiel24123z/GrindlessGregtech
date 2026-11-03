@@ -3,7 +3,7 @@
   "title": "MAX: the 14 multiblocks, Sgr A* orbit and the nuclear star cluster belt, the ending",
   "extends": "opv",
   "inheritTargets": true,
-  "note": "MAX validator (MAX-C1, re-counted for RF-7A by MX-C1: 14 multiblocks, 57 lines (292 steps), 204 crossings on 71 machines, checked by max-validator.test.mjs), modelled on opv.json. Substages: max (home), max-sgra (after gate c14, gcyr:black_hole_orbit) and max-nsc (after gate c15, grindless:nsc_belt). MAX rows run on two MAX hatches or a wireless MAX tier. Exemptions (C1 lists them here; the component rule itself is enforced by recipe_quality.json exemptRecipes, which C1 does not edit): grindless:gc_relay_probe (an OpV-stage travel item: OpV parts, no MAX component); grindless:mirror_shell_segment and the casing blocks max_optical_table_casing, membrane_roller_casing, geroch_drum_casing, stream_turn_casing, stream_bundle_block and feeder_coil_casing (casing exemption, as OpV); gtceu:max_machine_hull (no circuit, as GTM's hulls); gtceu:max_machine_casing (a casing: three OpV parts, as opv_machine_casing takes opv_sensor). RF-7A removed the universe seed item and renamed the epilogue item (no recipe, granted by the MAX+ arrival), so neither keeps an exemption here. No new exemption: the maxplus stage grant (startup max/shell.js), the 2^31 ceiling (c14, c15 and the shell c3 excepted) and the no-horizon_lock-consumed rule are checked in the test.",
+  "note": "MAX validator (MAX-C1, re-counted for RF-7A by MX-C1: 14 multiblocks, 57 lines (292 steps), 204 crossings on 71 machines, checked by max-validator.test.mjs), modelled on opv.json. Substages: max (home), max-sgra (after gate c14, gcyr:black_hole_orbit) and max-nsc (after gate c15, grindless:nsc_belt). MAX rows run on two MAX hatches or a wireless MAX tier. Exemptions (C1 lists them here; the component rule itself is enforced by recipe_quality.json exemptRecipes, which C1 does not edit): grindless:gc_relay_probe (an OpV-stage travel item: OpV parts, no MAX component); grindless:mirror_shell_segment and the casing blocks max_optical_table_casing, membrane_roller_casing, geroch_drum_casing, stream_turn_casing, stream_bundle_block and feeder_coil_casing (casing exemption, as OpV), and D5-CAS-MAX's tensegrity_truss_casing, membrane_vacuum_casing, droplet_radiator_casing and shell_window_coil_casing (casings: each is made from the era's own parts on a truss); gtceu:max_machine_hull (no circuit, as GTM's hulls); gtceu:max_machine_casing (a casing: three OpV parts, as opv_machine_casing takes opv_sensor). RF-7A removed the universe seed item and renamed the epilogue item (no recipe, granted by the MAX+ arrival), so neither keeps an exemption here. No new exemption: the maxplus stage grant (startup max/shell.js), the 2^31 ceiling (c14, c15 and the shell c3 excepted) and the no-horizon_lock-consumed rule are checked in the test.",
   "eraOrder": [
     "uxv-cas-a",
     "opv",
@@ -137,7 +137,7 @@
         "grindless:eu_yso_boule", "grindless:mram_stack_wafer", "grindless:hollow_core_fibre",
         "grindless:horizon_strand_repeater", "grindless:exotic_cladding_foil", "grindless:clad_chain_strand", "grindless:horizon_strand_preform", "grindless:pbo_braid_sleeve",
         "grindless:superconducting_membrane", "grindless:matter_wave_gradiometer", "grindless:rydberg_logic_array", "grindless:genome_archive", "grindless:gc_relay_probe",
-        "grindless:max_optical_table_casing", "grindless:membrane_roller_casing"
+        "grindless:max_optical_table_casing", "grindless:membrane_roller_casing", "grindless:tensegrity_truss_casing", "grindless:membrane_vacuum_casing"
       ]
     },
     {
@@ -147,7 +147,7 @@
       "items": [
         "grindless:sgr_a_spin_map", "grindless:nsc_ephemeris", "grindless:shell_gradient_map", "grindless:launched_gc_probe", "grindless:nsc_belt_seed",
         "m:gtceu:geroch_winch", "m:gtceu:horizon_interferometer", "m:gtceu:ergoregion_synchroniser", "grindless:driver_ring_casing", "grindless:geroch_drum_casing", "grindless:geroch_canister", "grindless:horizon_tether",
-        "grindless:test_mass_enclosure_casing", "grindless:laser_link_casing"
+        "grindless:test_mass_enclosure_casing", "grindless:laser_link_casing", "grindless:droplet_radiator_casing"
       ]
     },
     {
@@ -157,7 +157,7 @@
       "items": [
         "grindless:nsc_planetesimal", "grindless:horizon_lock", "grindless:final_spin_map", "grindless:cloud_phase_map",
         "m:gtceu:mass_stream_injector", "m:gtceu:mirror_shell", "m:gtceu:accretion_feeder", "m:gtceu:cluster_light_furnace", "m:gtceu:horizon_flux_clamp", "m:gtceu:segment_reclamation_works",
-        "grindless:stream_bundle", "grindless:stream_pellet", "grindless:stream_bundle_block", "grindless:stream_turn_casing", "grindless:mirror_shell_segment", "grindless:feeder_coil_casing"
+        "grindless:stream_bundle", "grindless:stream_pellet", "grindless:stream_bundle_block", "grindless:stream_turn_casing", "grindless:mirror_shell_segment",         "grindless:feeder_coil_casing", "grindless:shell_window_coil_casing"
       ]
     }
   ],
