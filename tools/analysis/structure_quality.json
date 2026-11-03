@@ -884,8 +884,8 @@
  "gtceu:microgravity_smelter": {
   "v": [],
   "bt": 4,
-  "ds": 0.484,
-  "c": 66
+  "ds": 0.571,
+  "c": 177
  },
  "gtceu:millikelvin_cryostat_works": {
   "v": [],

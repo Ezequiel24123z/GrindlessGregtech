@@ -54,21 +54,22 @@ function harness() {
 const calls = (r, key) => JSON.parse(JSON.stringify(r.calls[key] ?? []));
 const count = (spec, char) => spec.slices.join('').split(char).length - 1;
 
-test('smelter has a 3x3x7 titanium-frame truss, eight-coil hollow levitation core and six-block drawing tower', () => {
+test('smelter is a 5x5x9 titanium-truss hall with two coil bands round a hollow levitation chamber and a six-block drawing tower', () => {
   const { G } = harness();
   const s = G.structures['gtceu:microgravity_smelter'];
-  assert.equal(s.slices.length, 7);
-  s.slices.forEach(rows => { assert.equal(rows.length, 9); rows.forEach(r => assert.equal(r.length, 3)); });
-  assert.equal(count(s, 'K'), 8);
+  assert.equal(s.slices.length, 9);
+  s.slices.forEach(rows => { assert.equal(rows.length, 12); rows.forEach(r => assert.equal(r.length, 5)); });
+  assert.equal(count(s, 'K'), 24);
   // Cached native registry: borosilicate_glass is a fluid; the structure uses its block item.
   assert.deepEqual(Array.from(s.symbols.G.blocks), ['gtceu:borosilicate_glass_block']);
-  assert.equal(s.slices[3][0], 'FCF');
-  assert.equal(s.slices[3][1], 'KAK');
-  assert.equal(s.slices[3][2], 'FGF');
-  assert.deepEqual(Array.from(s.slices[3].slice(3)), [' F ', ' G ', ' F ', ' G ', ' F ', ' G ']);
+  assert.equal(s.slices[3][2], 'KAAAK');
+  assert.equal(s.slices[3][0], 'FKKKF');
+  assert.deepEqual(Array.from(s.slices[4].slice(5)), [' CGC ', '  F  ', '  G  ', '  F  ', '  G  ', '  F  ', '  G  ']);
   s.slices.forEach((rows, z) => {
-    if (z !== 3) assert.ok(rows.slice(3).every(row => row === '   '));
+    if (z !== 4) assert.ok(rows.slice(6).every(row => row === '     '));
   });
+  const cells = s.slices.flat().join('').replace(/[ A]/g, '').length;
+  assert.ok(cells >= 153 && cells <= 207, 'cells ' + cells);
 });
 test('wake shield is a 69-cell octagonal 9x9 dish (frame rim, glass window, whipple panels) in front of a hollow 3x3x3 carousel', () => {
   const { G } = harness();
