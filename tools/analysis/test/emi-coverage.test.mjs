@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_EXPECT, runCoverage } from '../emi-coverage.mjs';
-import { auditEmiCoverage, conditionStacks, DIMENSION_MARKERS, fixtureExpectations, KNOWN_GAP_KINDS, knownFromReport, knownGaps, loadEmiData, parseEmiStack, previewBlocks, renderCoverageText, renderExpectations } from '../lib/emi_coverage.mjs';
+import { auditEmiCoverage, UPSTREAM_MULTIBLOCKS, conditionStacks, DIMENSION_MARKERS, fixtureExpectations, KNOWN_GAP_KINDS, knownFromReport, knownGaps, loadEmiData, parseEmiStack, previewBlocks, renderCoverageText, renderExpectations } from '../lib/emi_coverage.mjs';
 import { runPackScripts } from '../lib/kubejs_static.mjs';
 import { gf, gi, gt, mkDump, shaped } from './helpers.mjs';
 
@@ -420,8 +420,8 @@ test('our info pages live where EMI reads them (the emi namespace) and every pag
   const pending = new Set(exp.hidden);
   const waits = (p) => (p.stacks || []).some((s) => s.id && pending.has((s.kind === 'fluid' ? 'fluid:' : '') + s.id));
   // an addon machine's page (GTM Extended Features' Expanded Assembly Line): the audit covers only our registry
-  const ADDON = /^(extendedfeatures|gtca|gtnn):/;
-  const addon = (p) => (p.stacks || []).length > 0 && p.stacks.every((s) => s.id && ADDON.test(s.id));
+  const ADDON = /^(extendedfeatures|gtca|gtnn|gcyr):/;
+  const addon = (p) => (p.stacks || []).length > 0 && p.stacks.every((s) => s.id && (ADDON.test(s.id) || UPSTREAM_MULTIBLOCKS.has(s.id)));
   for (const p of emi.pages) assert.ok(used.has(p.id) || waits(p) || addon(p), p.file + ' covers no audited stack');
 });
 

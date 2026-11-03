@@ -1,0 +1,11 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:gtceu:assembly_line"
+  ],
+  "text": [
+    "emi.grindless.info.assembly_line.0",
+    "emi.grindless.info.assembly_line.1",
+    "emi.grindless.info.assembly_line.2"
+  ]
+}

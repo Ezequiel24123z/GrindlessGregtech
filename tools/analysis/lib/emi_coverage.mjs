@@ -27,6 +27,10 @@ import { normalizeRecipe } from './normalize.mjs';
 import { makeGlobMatcher } from './util.mjs';
 
 export const INVISIBLE_GT_TYPES = ['gtceu:electric_furnace', 'gtceu:dummy'];
+
+/** GTM 7.5.3 multiblock controllers the static run cannot see (it only runs our scripts) that carry an info page of ours: EMI draws no
+ *  preview for them (Java would be needed), so the page says how to build them (FIX-CLIENTTEXT, #296). Any other unknown id still fails. */
+export const UPSTREAM_MULTIBLOCKS = new Set(['gtceu:cleanroom', 'gtceu:assembly_line', 'gtceu:data_bank', 'gtceu:central_monitor']);
 const VANILLA_CATEGORIES = {
   'minecraft:crafting_shaped': 'minecraft:crafting',
   'minecraft:crafting_shapeless': 'minecraft:crafting',
@@ -352,7 +356,7 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
   // ---- the declarations and the pages themselves
   const problems = [...emi.problems];
   const ours = (k) => (k.startsWith(FLUID) ? registry.fluids.has(k.slice(FLUID.length)) : registry.items.has(k) || registry.machines.has(k));
-  const known = (k) => (k.startsWith(FLUID) ? dump.fluids.has(k.slice(FLUID.length)) : dump.items.has(k)) || ours(k);
+  const known = (k) => (k.startsWith(FLUID) ? dump.fluids.has(k.slice(FLUID.length)) : dump.items.has(k)) || ours(k) || UPSTREAM_MULTIBLOCKS.has(k);
   for (const p of emi.pages) {
     for (const s of [...(p.stacks || []), ...(p.inputs || []), ...(p.outputs || [])]) {
       if (s.tag) {
