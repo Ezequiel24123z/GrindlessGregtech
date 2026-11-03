@@ -559,6 +559,7 @@
 	]
 	quests: [
 		{
+			description: ["The cheapest boiler fuel. Any coal-bearing seam, or the coal line you build in the early game, keeps these boilers fed."]
 			icon: "minecraft:coal"
 			id: "3ED556DDAE344669"
 			shape: "rsquare"
@@ -611,6 +612,7 @@
 			y: 3.5d
 		}
 		{
+			description: ["It burns longer than any other boiler fuel, and a pump on a Nether lake never runs dry. It also lets a boiler run where no water-fed fuel would."]
 			icon: "minecraft:lava_bucket"
 			id: "7E7E5101922AF0BB"
 			shape: "rsquare"
@@ -663,6 +665,7 @@
 			y: 2.25d
 		}
 		{
+			description: ["Every boiler turns water into steam, so pipe it in from a pump or a rain collector."]
 			icon: "minecraft:water_bucket"
 			id: "360B3AEB0429FFB2"
 			shape: "rsquare"
@@ -672,12 +675,13 @@
 				{ id: "5C784D896902224A", item: "minecraft:water_bucket", optional_task: true, type: "item" }
 				{ id: "5CF60A17A534D133", type: "checkmark" }
 			]
-			title: "Water"
+			title: "Boiler Water"
 			x: 13.5d
 			y: 1.5d
 		}
 		{
 			dependencies: ["360B3AEB0429FFB2"]
+			description: ["It burns nothing: sunlight on its panels boils the water. Fine for a first steam line when the fuel is short."]
 			icon: "gtceu:lp_steam_solar_boiler"
 			id: "31C2095264A70995"
 			shape: "gear"
@@ -693,6 +697,7 @@
 		}
 		{
 			dependencies: ["360B3AEB0429FFB2"]
+			description: ["The steel version of the solar boiler: the same free heat, far more steam."]
 			icon: "gtceu:hp_steam_solar_boiler"
 			id: "199343D758E708FA"
 			shape: "gear"
@@ -707,6 +712,7 @@
 			y: 2.25d
 		}
 		{
+			description: ["Any boiler's steam will turn it. The first electricity most bases make comes from here."]
 			icon: "gtceu:steam_bucket"
 			id: "1F60BC1BE056BEDD"
 			shape: "rsquare"
@@ -716,7 +722,7 @@
 				{ id: "155CA91F2D0A9854", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
 				{ id: "7B197BE6A2AE04FE", type: "checkmark" }
 			]
-			title: "Steam"
+			title: "Steam for the LV Turbine"
 			x: 0.5d
 			y: 8.75d
 		}
@@ -735,11 +741,12 @@
 				{ id: "58503E0C5E389C11", item: "gtceu:lv_steam_turbine", optional_task: true, type: "item" }
 				{ id: "56EECAC44EE8F78A", type: "checkmark" }
 			]
-			title: "Steam Turbine"
+			title: "LV Steam Turbine"
 			x: 2.75d
 			y: 8.0d
 		}
 		{
+			description: ["The bronze large boiler takes the same fuels as the small ones, in bulk and with a bigger steam output."]
 			icon: "minecraft:coal"
 			id: "7ACE6630AF70D9CA"
 			shape: "rsquare"
@@ -749,7 +756,7 @@
 				{ id: "39D418C23A04BA19", item: "minecraft:coal", optional_task: true, type: "item" }
 				{ id: "79DCF987EFF2F6D5", type: "checkmark" }
 			]
-			title: "Coal"
+			title: "Coal for the Bronze Boiler"
 			x: 7.0d
 			y: 8.75d
 		}
@@ -789,11 +796,12 @@
 				{ id: "335F48F88802A51E", item: "gtceu:lv_combustion", optional_task: true, type: "item" }
 				{ id: "7EB536C9F8685E92", type: "checkmark" }
 			]
-			title: "Combustion Generator"
+			title: "LV Combustion Generator"
 			x: 11.5d
 			y: 11.0d
 		}
 		{
+			description: ["The mirrors boil it in the tower, so it needs a steady feed from a pump or a rain collector."]
 			icon: "minecraft:water_bucket"
 			id: "3DDEBAAFE6DCA1D1"
 			shape: "rsquare"
@@ -802,12 +810,13 @@
 				{ id: "7F27824D5920C343", item: "minecraft:water_bucket", optional_task: true, type: "item" }
 				{ id: "77B6B54AD0BB1A5B", type: "checkmark" }
 			]
-			title: "Water"
+			title: "Heliostat Water"
 			x: 15.75d
 			y: 8.75d
 		}
 		{
 			dependencies: ["3A7E2C5F1B9D4061", "3DDEBAAFE6DCA1D1"]
+			description: ["A ring of mirrors focuses the sun on one boiler, so it makes a great deal of steam while burning nothing. The mirrors wear slowly and need replacing."]
 			icon: "gtceu:heliostat_tower"
 			id: "11E41192B3FC2784"
 			shape: "gear"
@@ -822,6 +831,7 @@
 			y: 8.0d
 		}
 		{
+			description: ["The array's steam generators burn it like any LV turbine would."]
 			icon: "gtceu:steam_bucket"
 			id: "58B70960F0677351"
 			shape: "rsquare"
@@ -831,7 +841,7 @@
 				{ id: "1933A73CD4CA6406", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
 				{ id: "39A9F9A268B4054A", type: "checkmark" }
 			]
-			title: "Steam"
+			title: "Steam for the Array"
 			x: 22.25d
 			y: 8.75d
 		}
@@ -867,11 +877,12 @@
 				{ id: "74C5DC73502B2B4D", item: "gtceu:lv_gas_turbine", optional_task: true, type: "item" }
 				{ id: "3B091C75ED9220AD", type: "checkmark" }
 			]
-			title: "Gas Turbine"
+			title: "LV Gas Turbine"
 			x: 31.0d
 			y: 7.5d
 		}
 		{
+			description: ["The same boiler steam as before; the MV turbine just swallows more of it."]
 			icon: "gtceu:steam_bucket"
 			id: "1A53D78F7093D2FE"
 			shape: "rsquare"
@@ -881,12 +892,13 @@
 				{ id: "54A5E6B45E8F3C30", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
 				{ id: "3EF5920D5E2EB6E3", type: "checkmark" }
 			]
-			title: "Steam"
+			title: "Steam for the MV Turbine"
 			x: 0.5d
 			y: 15.0d
 		}
 		{
 			dependencies: ["1A53D78F7093D2FE"]
+			description: ["It burns the steam faster for a higher output, so a few boilers are enough to feed it."]
 			icon: "gtceu:mv_steam_turbine"
 			id: "5569FD27070A69DF"
 			shape: "gear"
@@ -896,11 +908,12 @@
 				{ id: "122CAD4E5D04E878", item: "gtceu:mv_steam_turbine", optional_task: true, type: "item" }
 				{ id: "3F176C5F595362A5", type: "checkmark" }
 			]
-			title: "Steam Turbine"
+			title: "MV Steam Turbine"
 			x: 2.75d
 			y: 15.0d
 		}
 		{
+			description: ["It burns as it comes, with no refining at all. The weakest fuel here, but nothing is simpler."]
 			icon: "gtceu:oil_medium_bucket"
 			id: "75288F7EFB601954"
 			shape: "rsquare"
@@ -930,11 +943,12 @@
 				{ id: "3F6039FDFC0BC0E7", item: "gtceu:mv_combustion", optional_task: true, type: "item" }
 				{ id: "5ECD132CD3D3B1AB", type: "checkmark" }
 			]
-			title: "Combustion Generator"
+			title: "MV Combustion Generator"
 			x: 9.25d
 			y: 17.0d
 		}
 		{
+			description: ["Drilled straight from a gas deposit and burned unrefined; the cheapest fuel for a gas turbine."]
 			icon: "gtceu:natural_gas_bucket"
 			id: "565F67AC5CCCC608"
 			shape: "rsquare"
@@ -963,12 +977,13 @@
 				{ id: "71241ED8FF1C71E8", item: "gtceu:mv_gas_turbine", optional_task: true, type: "item" }
 				{ id: "1A200D3CE11DBD99", type: "checkmark" }
 			]
-			title: "Gas Turbine"
+			title: "MV Gas Turbine"
 			x: 15.75d
 			y: 16.25d
 		}
 		{
 			dependencies: ["305F916B3530ABAD"]
+			description: ["A silicon wafer, cut and wired, becomes a panel that powers the machine under it in daylight. Good for small, remote machines."]
 			icon: "gtceu:solar_panel"
 			id: "1DD7B84584479A68"
 			size: 1.0d
@@ -982,6 +997,7 @@
 			y: 14.75d
 		}
 		{
+			description: ["Both turbines here run on the same boiler steam; the large one gets far more out of each bucket."]
 			icon: "gtceu:steam_bucket"
 			id: "7752E282A6C02EFE"
 			shape: "rsquare"
@@ -991,12 +1007,13 @@
 				{ id: "347FD67AD5C50E4E", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
 				{ id: "32EAAC42673E398A", type: "checkmark" }
 			]
-			title: "Steam"
+			title: "Steam for the HV Turbines"
 			x: 0.5d
 			y: 23.75d
 		}
 		{
 			dependencies: ["7752E282A6C02EFE"]
+			description: ["The single-block turbine at HV. It is a compact way to use surplus steam, while the large turbine below is the serious plant."]
 			icon: "gtceu:hv_steam_turbine"
 			id: "75D45A38ED1CF8EF"
 			shape: "gear"
@@ -1006,7 +1023,7 @@
 				{ id: "35B6C499188FFD3F", item: "gtceu:hv_steam_turbine", optional_task: true, type: "item" }
 				{ id: "52FF30C6F71C2676", type: "checkmark" }
 			]
-			title: "Steam Turbine"
+			title: "HV Steam Turbine"
 			x: 2.75d
 			y: 23.0d
 		}
@@ -1045,7 +1062,7 @@
 				{ id: "50AB6C240FE13FA7", item: "gtceu:hv_combustion", optional_task: true, type: "item" }
 				{ id: "19EDEA7AC272ABC4", type: "checkmark" }
 			]
-			title: "Combustion Generator"
+			title: "HV Combustion Generator"
 			x: 9.25d
 			y: 24.25d
 		}
@@ -1064,11 +1081,12 @@
 				{ id: "7E4C51B6F09E46AD", item: "gtceu:hv_gas_turbine", optional_task: true, type: "item" }
 				{ id: "51D93E77912B3FCA", type: "checkmark" }
 			]
-			title: "Gas Turbine"
+			title: "HV Gas Turbine"
 			x: 15.75d
 			y: 25.0d
 		}
 		{
+			description: ["The steel large boiler burns it by the stack and turns it into twice the steam of the bronze one."]
 			icon: "minecraft:coal"
 			id: "39DAC1D0FF7C13E5"
 			shape: "rsquare"
@@ -1078,7 +1096,7 @@
 				{ id: "1B45BC0B3D8F315F", item: "minecraft:coal", optional_task: true, type: "item" }
 				{ id: "50C82BAE3E9BCA22", type: "checkmark" }
 			]
-			title: "Coal"
+			title: "Coal for the Steel Boiler"
 			x: 20.0d
 			y: 24.25d
 		}
@@ -1102,6 +1120,7 @@
 			y: 23.5d
 		}
 		{
+			description: ["The doped silicon the cell is built on. Grow the boule in a cleanroom and cut it into wafers."]
 			icon: "gtceu:phosphorus_wafer"
 			id: "1827990D2CC8A4B0"
 			shape: "rsquare"
@@ -1117,6 +1136,7 @@
 		}
 		{
 			dependencies: ["1827990D2CC8A4B0"]
+			description: ["A better cover than the MV panel: the same idea, with far more power for the machine it sits on."]
 			icon: "gtceu:ulv_solar_panel"
 			id: "1C4EB30BC886A251"
 			size: 1.0d
@@ -1150,6 +1170,7 @@
 			y: 31.5d
 		}
 		{
+			description: ["The plant boils it with the turbine's exhaust, so it wants clean water. Distill it from ordinary water."]
 			icon: "gtceu:distilled_water_bucket"
 			id: "7FD6D26BABB2EA2D"
 			shape: "rsquare"
@@ -1163,6 +1184,7 @@
 			y: 32.25d
 		}
 		{
+			description: ["Any gas the turbines take will do; refinery gas is simply the cheapest to make."]
 			icon: "gtceu:refinery_gas_bucket"
 			id: "399D820371E4A082"
 			shape: "rsquare"
@@ -1196,6 +1218,7 @@
 			y: 32.25d
 		}
 		{
+			description: ["Titanium doubles the steel boiler's output again from the same fuel."]
 			icon: "minecraft:coal"
 			id: "1D77F23B39BB5169"
 			shape: "rsquare"
@@ -1205,7 +1228,7 @@
 				{ id: "1FF7F406D6EFFC8F", item: "minecraft:coal", optional_task: true, type: "item" }
 				{ id: "77C0AF00EC1B5B73", type: "checkmark" }
 			]
-			title: "Coal"
+			title: "Coal for the Titanium Boiler"
 			x: 13.5d
 			y: 31.0d
 		}
@@ -1246,6 +1269,7 @@
 		}
 		{
 			dependencies: ["509D8E16F2FFD75B"]
+			description: ["RP-1 kerosene mixed with oxygen in the chemical plant. It is the fuel the first rocket engine burns."]
 			icon: "gtceu:rp_1_mixed_fuel_bucket"
 			id: "3DA909F15E4B53E6"
 			size: 1.0d
@@ -1274,11 +1298,12 @@
 				{ id: "1848A6F120EFF5B3", item: "gtnn:ev_rocket_engine", optional_task: true, type: "item" }
 				{ id: "77DFD696B9E841B4", type: "checkmark" }
 			]
-			title: "Rocket Engine"
+			title: "EV Rocket Engine"
 			x: 30.75d
 			y: 31.0d
 		}
 		{
+			description: ["Without it the engine seizes, so it has to flow in constantly. A small amount lasts a long time."]
 			icon: "gtceu:lubricant_bucket"
 			id: "1F88C8EDA3519707"
 			shape: "rsquare"
@@ -1293,6 +1318,7 @@
 			y: 37.25d
 		}
 		{
+			description: ["The best fuel the large engine takes by far, made by adding octane boosters to plain gasoline."]
 			icon: "gtceu:high_octane_gasoline_bucket"
 			id: "141B5B813FD9887B"
 			shape: "rsquare"
@@ -1346,6 +1372,7 @@
 			y: 41.75d
 		}
 		{
+			description: ["The biggest boiler of the line; it still burns coal, only more of it per second."]
 			icon: "minecraft:coal"
 			id: "1495DE4490F71A0F"
 			shape: "rsquare"
@@ -1355,7 +1382,7 @@
 				{ id: "5C09F101B78C8792", item: "minecraft:coal", optional_task: true, type: "item" }
 				{ id: "7CAA1B6752F6B56E", type: "checkmark" }
 			]
-			title: "Coal"
+			title: "Coal for the Tungstensteel Boiler"
 			x: 7.0d
 			y: 37.5d
 		}
@@ -1379,6 +1406,7 @@
 			y: 37.5d
 		}
 		{
+			description: ["The same RP-1 mix as the EV engine, only more of it per second."]
 			icon: "gtceu:rp_1_mixed_fuel_bucket"
 			id: "10BC23329A359542"
 			shape: "rsquare"
@@ -1387,12 +1415,13 @@
 				{ id: "124E5F7A26802C0F", item: "gtceu:rp_1_mixed_fuel_bucket", optional_task: true, type: "item" }
 				{ id: "18631719CDFB083A", type: "checkmark" }
 			]
-			title: "RP-1 Mixed Fuel"
+			title: "RP-1 for the IV Rocket"
 			x: 13.5d
 			y: 37.5d
 		}
 		{
 			dependencies: ["10BC23329A359542"]
+			description: ["The EV engine's big brother: it burns the same fuels several times faster,           so it asks for far more of them."]
 			icon: "gtnn:iv_rocket_engine"
 			id: "55EB7C90F8212EE5"
 			shape: "gear"
@@ -1402,7 +1431,7 @@
 				{ id: "3B02F64455D8469B", item: "gtnn:iv_rocket_engine", optional_task: true, type: "item" }
 				{ id: "7BAC7837CCC5D5CC", type: "checkmark" }
 			]
-			title: "Rocket Engine"
+			title: "IV Rocket Engine"
 			x: 15.75d
 			y: 37.5d
 		}
@@ -1479,6 +1508,7 @@
 		}
 		{
 			dependencies: ["3C6755E902FEF468"]
+			description: ["The strongest solar cover panel. It feeds the machine under it in daylight, with no fuel."]
 			icon: "gtceu:lv_solar_panel"
 			id: "7F0EEA7EB03BB9AA"
 			size: 1.0d
@@ -1512,6 +1542,7 @@
 		}
 		{
 			dependencies: ["7A5E1A85E6D4E433"]
+			description: ["The burnt rod is not waste: macerate it and the naquadah plant re-enriches part of it."]
 			icon: "gtceu:long_naquadah_rod"
 			id: "32DA85B8180ED570"
 			shape: "circle"
@@ -1526,6 +1557,7 @@
 			y: 55.75d
 		}
 		{
+			description: ["The cell the panels are built from. Cut it from naquadah wafers in the cleanroom."]
 			icon: "gcyr:photovoltaic_cell"
 			id: "70F29F44F8EE8982"
 			shape: "rsquare"
@@ -1541,6 +1573,7 @@
 		}
 		{
 			dependencies: ["70F29F44F8EE8982"]
+			description: ["The panel the orbital station is made of. The station counts one only while its top sees open sky, so build it for the station you have."]
 			icon: "grindless:orbital_solar_panel"
 			id: "170A010206286D7D"
 			size: 1.0d
@@ -1570,6 +1603,7 @@
 			y: 56.5d
 		}
 		{
+			description: ["One half of the fusion fuel. Split it out of heavy water, which the heavy water line already makes."]
 			icon: "gtceu:deuterium_bucket"
 			id: "12AE9D9C05C6405F"
 			shape: "rsquare"
@@ -1584,6 +1618,7 @@
 			y: 56.5d
 		}
 		{
+			description: ["The reactor's coolant: it carries the heat out of the chamber and is melted again to be reused."]
 			icon: "gtceu:magnesium_bucket"
 			id: "1B0A64A4DD006A0B"
 			shape: "rsquare"
@@ -1615,6 +1650,7 @@
 		}
 		{
 			dependencies: ["7EE65AE45E5168EE"]
+			description: ["What the Mk1 makes from deuterium and tritium. Send it to a large plasma turbine, and it cools back into helium."]
 			icon: "gtceu:helium_plasma_bucket"
 			id: "12A6FDE4906BA019"
 			size: 1.0d
@@ -1677,6 +1713,7 @@
 			y: 63.75d
 		}
 		{
+			description: ["The wire the tether pays out. It wears away over time, so keep a stock of spools coming."]
 			icon: "grindless:tether_spool"
 			id: "72D564594B339ED9"
 			shape: "rsquare"
@@ -1691,6 +1728,7 @@
 			y: 63.0d
 		}
 		{
+			description: ["The tether's cathode ionizes it to make contact with the plasma. Bring it from Mars."]
 			icon: "gtceu:argon_bucket"
 			id: "3557AB78C4ABF9F6"
 			shape: "rsquare"
@@ -1998,6 +2036,7 @@
 			y: 87.5d
 		}
 		{
+			description: ["The bare machine casing. Wiring and a few parts turn it into a transformer or a battery buffer."]
 			icon: "gtceu:lv_machine_hull"
 			id: "3F30A6656E0CFBCC"
 			shape: "rsquare"
@@ -2012,6 +2051,7 @@
 		}
 		{
 			dependencies: ["39A5A5CC76591697", "3F30A6656E0CFBCC"]
+			description: ["It joins two tiers of the grid, so a generator can feed a higher-voltage line. Match its wires to both sides."]
 			icon: "gtceu:lv_transformer_1a"
 			id: "1CB00A8238CEC252"
 			size: 1.0d
@@ -2026,6 +2066,7 @@
 		}
 		{
 			dependencies: ["3F30A6656E0CFBCC"]
+			description: ["It stores the surplus and gives it back when the grid runs short, so night and stalled boilers hurt less."]
 			icon: "gtceu:lv_battery_buffer_4x"
 			id: "5A90DEBD7F2451BA"
 			size: 1.0d
@@ -2039,6 +2080,7 @@
 			y: 93.25d
 		}
 		{
+			description: ["The empty shell every battery is built on. Fill it with the cell materials of its tier."]
 			icon: "gtceu:lv_battery_hull"
 			id: "1DD9B8EADA8EBAC0"
 			shape: "rsquare"
@@ -2069,6 +2111,7 @@
 			y: 91.0d
 		}
 		{
+			description: ["Drawn from tin ingots on the wiremill. Wrap it in rubber and it becomes a cable."]
 			icon: "gtceu:tin_single_wire"
 			id: "3B2125BC87FC669D"
 			shape: "rsquare"
@@ -2115,6 +2158,7 @@
 		}
 		{
 			dependencies: ["366AB48E5BF50431"]
+			description: ["A linked pair of quantum rings puts your storage network on another planet. Once it is up, an EU tunnel can cross it too."]
 			icon: "ae2:quantum_link"
 			id: "58B2E63DFD2DE970"
 			size: 1.0d
@@ -2128,6 +2172,7 @@
 			y: 94.0d
 		}
 		{
+			description: ["The storage cell of the substation. Etch and charge them in bulk from an engraved lapis crystal."]
 			icon: "gtceu:lapotron_crystal"
 			id: "56341035C7044592"
 			shape: "rsquare"
@@ -2142,6 +2187,7 @@
 		}
 		{
 			dependencies: ["56341035C7044592"]
+			description: ["A large multiblock filled with lapotron crystals that stores far more than any buffer. Use it to carry the base through the night."]
 			icon: "gtceu:power_substation"
 			id: "755AF9B54C201779"
 			size: 1.0d
@@ -2155,6 +2201,7 @@
 			y: 91.0d
 		}
 		{
+			description: ["A capacitor cell is made from batteries of one tier, so reuse whatever your battery line already makes."]
 			icon: "gtceu:lv_lithium_battery"
 			id: "1A5654A5282AA2BB"
 			shape: "rsquare"
@@ -2164,7 +2211,7 @@
 				{ id: "7D38B81C77322663", item: "gtceu:lv_lithium_battery", optional_task: true, type: "item" }
 				{ id: "1348853C62E926F2", type: "checkmark" }
 			]
-			title: "Batteries"
+			title: "Cell Batteries"
 			x: 0.5d
 			y: 99.75d
 		}

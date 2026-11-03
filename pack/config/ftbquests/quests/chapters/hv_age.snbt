@@ -456,7 +456,7 @@
 		}
 		{
 			dependencies: ["5D511A6DD8DA757A"]
-			description: ["Joins phthalic anhydride and ethylbenzene into &62-ethylanthraquinone&r in GT--'s chemical plant. Build the plant with HV machine casings: it runs a recipe only up to its casings' tier and sits idle above it, with no error. The chemical plant on HV casings, phthalic anhydride and ethylbenzene from the coal gas distillery. The hydrogenation step. The EAQ then circulates and is never used up. Anhydride by bus, ethylbenzene by pipe, the EAQ on to the hydrogenation hatch."]
+			description: ["Joins phthalic anhydride and ethylbenzene into &62-ethylanthraquinone&r in GT--'s chemical plant.       At HV build it from aluminium frostproof plant casings, HV machine casings, steel pipe casings and cupronickel coils. Only the machine casings set the recipe tier: a lower tier sits idle with no error, while pipes and coils can stay low tier. The preview draws titanium pipes and nichrome coils, which are EV and not needed here. The chemical plant as above, phthalic anhydride and ethylbenzene from the coal gas distillery. The hydrogenation step. The EAQ then circulates and is never used up. Anhydride by bus, ethylbenzene by pipe, the EAQ on to the hydrogenation hatch."]
 			icon: "gtnn:exxonmobil_chemical_plant"
 			id: "31DFB4094256A533"
 			rewards: [{ id: "77CC09A91047DA64", type: "xp", xp: 45 }]
@@ -561,12 +561,12 @@
 		{
 			dependencies: ["140DA37B98D4C09F", "1CAED3D02E02B699"]
 			description: ["Half hydrazine, half UDMH: &6Aerozine 50&r, the storable fuel of the Titan II. Equal parts hydrazine and UDMH in a mixer. Rocket fuel. Both by pipe in one to one, the blend on to the rocket fuel mixer."]
-			icon: "gtceu:dimethylhydrazine_bucket"
+			icon: "gtceu:aerozine_50_bucket"
 			id: "766F5C6E9A08D3ED"
 			rewards: [{ id: "133BFC3269BC7F1C", type: "xp", xp: 45 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "72BB7D6E160C64C8", type: "checkmark" }]
+			tasks: [{ id: "7E88B5AB18517CF5", item: "gtceu:aerozine_50_bucket", type: "item" }]
 			title: "Aerozine 50"
 			x: 20.0d
 			y: -9.0d

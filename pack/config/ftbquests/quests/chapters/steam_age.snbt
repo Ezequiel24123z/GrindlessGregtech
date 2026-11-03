@@ -181,7 +181,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["4F0049B2E382BA8E"]
+			dependencies: ["0238F574F77C30E5"]
 			description: [
 				"Copper and tin go in and bronze comes out, with less waste than mixing dust by hand. Red alloy comes from here too, and once you have molds it casts glass, glass tubes and rubber sheets."
 				"The steam furnace is its plainer cousin, if you want one."
@@ -194,8 +194,8 @@
 				{ id: "2708C54E534B1E99", item: "gtceu:lp_steam_furnace", optional_task: true, type: "item" }
 			]
 			title: "Steam Alloy Smelter"
-			x: 8.0d
-			y: 1.5d
+			x: 10.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["4F0049B2E382BA8E"]
@@ -288,8 +288,8 @@
 		{
 			dependencies: ["376295DE4FA3B31E"]
 			description: [
-				"The furnace that runs the whole iron line: what you feed it picks the mode, sinter into pig iron, pig iron into steel. Bricks, steel, coke, and calcite from the lapis vein. Pig iron and Bessemer steel, at a pace the primitive furnaces cannot match. Sinter, pig iron, coke and calcite by conveyor, steam from the boiler hall."
-				"Raw ore no longer goes in. The next four quests follow the iron from the washer to the steel."
+				"The fast, scalable steel route: what you feed it picks the mode, sinter into pig iron, pig iron into steel. Bricks, steel, coke, and calcite from the lapis vein. Pig iron and Bessemer steel, at a pace the primitive furnaces cannot match. Sinter, pig iron, coke and calcite by conveyor, steam from the boiler hall."
+				"The primitive furnace keeps its slow route from ingots, but this one is the line you scale up. The next four quests follow the iron from the washer to the steel."
 			]
 			icon: "gtceu:steam_blast_furnace"
 			id: "4B8E2D6A1F9C3057"
@@ -302,10 +302,10 @@
 			y: 1.5d
 		}
 		{
-			dependencies: ["376295DE4FA3B31E"]
+			dependencies: ["376295DE4FA3B31E", "0B3A5E0D83643882"]
 			description: [
 				"Iron ore is ground and washed first, so the sinter plant gets clean feed. Iron ore from the drill, the steam macerator and an ore washer. Purified ore for the sinter plant. Drill, macerator and washer in a row on one conveyor."
-				"Hematite, goethite or magnetite all work."
+				"Hematite, goethite or magnetite all work. The steam alloy smelter, one quest back, takes the washed ore on to sinter."
 			]
 			icon: "gtceu:purified_hematite_ore"
 			id: "3A5C7E1B9D204F68"
@@ -320,8 +320,8 @@
 		{
 			dependencies: ["3A5C7E1B9D204F68"]
 			description: [
-				"Fine ore won't survive a blast furnace, so it is baked into hard lumps first. Purified iron ore, coke dust and calcite, in the steam blast furnace. Feed for the pig iron run. Ore, coke and calcite by bus; sinter leaves by bus."
-				"Sinter is the furnace's first mode."
+				"Fine ore won't survive a blast furnace, so it is baked into hard lumps first. Purified iron ore and coke dust, in the steam alloy smelter. Feed for the pig iron run. Ore and coke dust by bus; sinter leaves by bus."
+				"The steam alloy smelter presses four purified ore and one coke dust into four sinter. The blast furnace takes it from there."
 			]
 			icon: "grindless:iron_sinter"
 			id: "2C4E6A8B1D3F5079"
@@ -353,7 +353,7 @@
 			dependencies: ["1D3F5B7A9C2E4086"]
 			description: [
 				"Blowing air through molten pig iron burns the carbon out and leaves steel. Pig iron and steam, in the same steam blast furnace. Every steel recipe from here on. Pig iron in by bus, ingots out by bus, steam from the boiler hall."
-				"Ore can't skip the pig iron stage any more."
+				"Pig iron is the fast route to steel; the primitive blast furnace still makes it slowly from ingots."
 			]
 			icon: "gtceu:steel_ingot"
 			id: "4F6A8C1B3D5E7092"
@@ -366,7 +366,7 @@
 			y: -1.5d
 		}
 		{
-			dependencies: ["376295DE4FA3B31E"]
+			dependencies: ["67124C424660DDAE"]
 			description: [
 				"It charts the Moon, one night at a time. Bronze, glass and a clear sky, the controller at Y 100 or higher. The lunar chart the optical observatory reads in LV. Steam by pipe; it runs itself every clear night."
 				"Through the eyepiece the Moon shows dark seas and bright highlands. Above the haze of your coke ovens is the place to stand."

@@ -18,7 +18,7 @@ hash = "7cc7798fb08dcf9b66e8f46186764beb6ed0c382ad8232baa973cff5ef50ef17"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hv_age.snbt"
-hash = "d5114124352aca36307ea2702d48ec256ed9d3b52b1f3ad805fbc725b2b8b469"
+hash = "6a16ef1344d01a7020cfb7291dfd0b263a555a09b3c62b31ba66ccc10bd26aa4"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/iv_age.snbt"
@@ -58,7 +58,7 @@ hash = "f1217093cf3670f26e2bb566500bbb286825b5cbc14c7ef2d17b383d0a3e4649"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_hv.snbt"
-hash = "ffb6cd0a744584b1e9f8fa1a76edc7710b016bb8002fe0f415c8858e055d0f2f"
+hash = "d9f461bb366e2cc0e3293fb640af48e8e4aeb34a344523f7943a334e4dd9845f"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_iv.snbt"
@@ -66,7 +66,7 @@ hash = "bab4c90608e4ab2146841dd5f3476d11cf868507c65139c1bfbd8c2c4fdfb65c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_luv.snbt"
-hash = "99c1f40cf8a2f96bbcc2b276514ed8cd5b125c54c5083f21ed97ff6a4263f544"
+hash = "6b012a4945d1ab7af5edd76e18a690627a775d49a3c010908b3ba0b1c5e8d8bc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_lv.snbt"
@@ -118,11 +118,11 @@ hash = "d09761fbd8f2d6d26c0b72d1288c69af63a762f3e4869caf313715f3d096b686"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "a2fa68cab28c1b537fc9414f4ff011c9a801f5eff585f733b59aaf3ab8ab07b1"
+hash = "bda2e67ed54473070fbb8036204b5f67b6646cf64eb9b6debcb995d81054a8f7"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/steam_age.snbt"
-hash = "8cd00116e9440b857d4d597910b207df6e12870fa6fcf6d0eb42a887151faff3"
+hash = "5f02b4204e60afc3e18872d73d45443effe3ad85be98e3be3f73b2d32aab8c38"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/storage.snbt"
@@ -17694,7 +17694,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "211a947331103f4b00c50e208575c9a5e31f55cfd8476fbb67b3cd71b493f373"
+hash = "fff184937a1f05f21428a8ff0bd9b3590edb4bfd61835f6a5cb8f0baa6d26497"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_city.json"

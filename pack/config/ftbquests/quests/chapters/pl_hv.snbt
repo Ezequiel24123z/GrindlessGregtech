@@ -29,49 +29,49 @@
 			linked_quest: "193E72A27638CE3B"
 			shape: "rsquare"
 			x: 11.5d
-			y: 26.25d
+			y: 27.5d
 		}
 		{
 			id: "3C08F3CCB4B5AB94"
 			linked_quest: "1D62F8CA7C28023C"
 			shape: "rsquare"
 			x: 11.5d
-			y: 27.75d
+			y: 29.0d
 		}
 		{
 			id: "70766B9CD31D7B38"
 			linked_quest: "5448FA5C814B1DBD"
 			shape: "rsquare"
-			x: 28.75d
-			y: 26.25d
+			x: 24.75d
+			y: 27.5d
 		}
 		{
 			id: "176CD836C3332B5D"
 			linked_quest: "78585557B7EC2D58"
 			shape: "rsquare"
 			x: 0.5d
-			y: 33.5d
+			y: 34.75d
 		}
 		{
 			id: "7BEC53FFCE3791A3"
 			linked_quest: "79841FC0203AF089"
 			shape: "rsquare"
 			x: 12.5d
-			y: 35.0d
+			y: 36.25d
 		}
 		{
 			id: "3EB7264EE8B81AA1"
 			linked_quest: "17A63D77B152EC0C"
 			shape: "rsquare"
 			x: 14.5d
-			y: 41.0d
+			y: 42.25d
 		}
 		{
 			id: "1EA272AD59F358F0"
 			linked_quest: "170DB957782774D8"
 			shape: "rsquare"
 			x: 5.5d
-			y: 44.5d
+			y: 45.75d
 		}
 	]
 	quests: [
@@ -903,6 +903,20 @@
 			y: 19.75d
 		}
 		{
+			dependencies: ["1B4D0FA2CD07C0A4"]
+			icon: "gtceu:methane_bucket"
+			id: "50D90B498F56A836"
+			size: 1.0d
+			subtitle: "Chloroform, then PTFE"
+			tasks: [
+				{ id: "1034C960872420A5", item: "gtceu:methane_bucket", optional_task: true, type: "item" }
+				{ id: "1EF463A4F71785F2", type: "checkmark" }
+			]
+			title: "Methane"
+			x: 13.5d
+			y: 21.0d
+		}
+		{
 			icon: "grindless:shift_catalyst"
 			id: "3FA30314DAAC0EBF"
 			shape: "rsquare"
@@ -914,7 +928,7 @@
 			]
 			title: "Shift Catalyst"
 			x: 0.5d
-			y: 23.25d
+			y: 24.5d
 		}
 		{
 			icon: "gtceu:coal_dust"
@@ -928,7 +942,7 @@
 			]
 			title: "Coal Dust"
 			x: 0.5d
-			y: 24.75d
+			y: 26.0d
 		}
 		{
 			icon: "gtceu:steam_bucket"
@@ -941,7 +955,7 @@
 			]
 			title: "Steam"
 			x: 0.5d
-			y: 26.25d
+			y: 27.5d
 		}
 		{
 			icon: "gtceu:heavy_fuel_bucket"
@@ -955,7 +969,7 @@
 			]
 			title: "Heavy Fuel"
 			x: 0.5d
-			y: 27.75d
+			y: 29.0d
 		}
 		{
 			dependencies: ["3FA30314DAAC0EBF", "141C508103AC22D7", "5450FBA8871FE44F", "78BB9B4CA6962DEA"]
@@ -973,7 +987,7 @@
 			]
 			title: "Syngas Plant"
 			x: 3.0d
-			y: 25.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["19E1CF6EE30E5C44"]
@@ -987,7 +1001,7 @@
 			]
 			title: "Carbon Monoxide"
 			x: 5.5d
-			y: 24.0d
+			y: 25.25d
 		}
 		{
 			dependencies: ["19E1CF6EE30E5C44"]
@@ -1001,7 +1015,7 @@
 			]
 			title: "Hydrogen"
 			x: 5.5d
-			y: 25.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["19E1CF6EE30E5C44"]
@@ -1015,7 +1029,7 @@
 			]
 			title: "Carbon Dioxide"
 			x: 5.5d
-			y: 27.0d
+			y: 28.25d
 		}
 		{
 			dependencies: ["19E1CF6EE30E5C44"]
@@ -1029,7 +1043,7 @@
 			]
 			title: "Ash"
 			x: 5.5d
-			y: 28.5d
+			y: 29.75d
 		}
 		{
 			dependencies: ["71E5DDE3B0BC514E"]
@@ -1044,7 +1058,7 @@
 			]
 			title: "Hydrogen, Shifted"
 			x: 7.5d
-			y: 24.0d
+			y: 25.25d
 		}
 		{
 			icon: "gtceu:naphtha_bucket"
@@ -1057,7 +1071,7 @@
 			]
 			title: "Naphtha"
 			x: 11.5d
-			y: 23.25d
+			y: 24.5d
 		}
 		{
 			icon: "gtceu:refinery_gas_bucket"
@@ -1070,7 +1084,7 @@
 			]
 			title: "Refinery Gas"
 			x: 11.5d
-			y: 24.75d
+			y: 26.0d
 		}
 		{
 			dependencies: ["38505D979BA4C8A2", "58D54C4E316D35DF", "193E72A27638CE3B", "1D62F8CA7C28023C"]
@@ -1085,7 +1099,7 @@
 			]
 			title: "Large Chemical Reactor"
 			x: 14.0d
-			y: 25.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["181E47CD9D767CF8"]
@@ -1098,7 +1112,7 @@
 			]
 			title: "Raw Gasoline"
 			x: 16.5d
-			y: 25.5d
+			y: 26.75d
 		}
 		{
 			icon: "gtceu:toluene_bucket"
@@ -1112,7 +1126,7 @@
 			]
 			title: "Toluene"
 			x: 16.5d
-			y: 27.0d
+			y: 28.25d
 		}
 		{
 			dependencies: ["33A57BF78B8EE399", "5B4EE371262EFACD"]
@@ -1126,7 +1140,7 @@
 			]
 			title: "Gasoline"
 			x: 18.5d
-			y: 26.25d
+			y: 27.5d
 		}
 		{
 			dependencies: ["39BFC0FAB2D7CD50"]
@@ -1141,7 +1155,7 @@
 			]
 			title: "Combustion Generator"
 			x: 20.5d
-			y: 26.25d
+			y: 27.5d
 		}
 		{
 			icon: "gtceu:lepidolite_dust"
@@ -1155,7 +1169,7 @@
 			]
 			title: "Lepidolite Dust"
 			x: 24.75d
-			y: 23.25d
+			y: 24.5d
 		}
 		{
 			dependencies: ["5322582EB15CCEDB"]
@@ -1169,7 +1183,7 @@
 			]
 			title: "Fluorine"
 			x: 26.75d
-			y: 23.25d
+			y: 24.5d
 		}
 		{
 			dependencies: ["792D7FB5F6297F15"]
@@ -1183,35 +1197,49 @@
 			]
 			title: "Hydrofluoric Acid"
 			x: 28.75d
-			y: 23.25d
+			y: 24.5d
 		}
 		{
 			icon: "gtceu:methane_bucket"
 			id: "7225437D4DF43B6C"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Refinery gas, distilled"
+			subtitle: "Steam cracking"
 			tasks: [
 				{ id: "1BD7F54C2714F4B7", item: "gtceu:methane_bucket", optional_task: true, type: "item" }
 				{ id: "7F347D5C20ED50A2", type: "checkmark" }
 			]
 			title: "Methane"
-			x: 28.75d
-			y: 24.75d
+			x: 24.75d
+			y: 26.0d
 		}
 		{
-			dependencies: ["550FA4A333567A77", "7225437D4DF43B6C", "5448FA5C814B1DBD"]
+			dependencies: ["7225437D4DF43B6C", "5448FA5C814B1DBD"]
+			icon: "gtceu:chloroform_bucket"
+			id: "399ED066473B4021"
+			size: 1.0d
+			subtitle: "Chemical reactor; the HCl leaves"
+			tasks: [
+				{ id: "7AF38500728095A5", item: "gtceu:chloroform_bucket", optional_task: true, type: "item" }
+				{ id: "7258163E0488335E", type: "checkmark" }
+			]
+			title: "Chloroform"
+			x: 28.75d
+			y: 26.75d
+		}
+		{
+			dependencies: ["550FA4A333567A77", "399ED066473B4021"]
 			icon: "gtceu:chlorodifluoromethane_bucket"
 			id: "14F8BF819AA2A086"
 			size: 1.0d
-			subtitle: "Chemical reactor"
+			subtitle: "Chemical reactor, with two hydrofluoric acid"
 			tasks: [
 				{ id: "3793A2E0CDDF38EF", item: "gtceu:chlorodifluoromethane_bucket", optional_task: true, type: "item" }
 				{ id: "715F31354D76C5F1", type: "checkmark" }
 			]
 			title: "Chlorodifluoromethane (R22)"
 			x: 30.75d
-			y: 24.75d
+			y: 26.0d
 		}
 		{
 			dependencies: ["14F8BF819AA2A086"]
@@ -1225,7 +1253,7 @@
 			]
 			title: "Tetrafluoroethylene"
 			x: 32.75d
-			y: 24.0d
+			y: 25.25d
 		}
 		{
 			dependencies: ["14F8BF819AA2A086"]
@@ -1239,7 +1267,7 @@
 			]
 			title: "Hydrochloric Acid"
 			x: 32.75d
-			y: 25.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["5AB8B93E680717EE"]
@@ -1254,7 +1282,7 @@
 			]
 			title: "PTFE"
 			x: 34.75d
-			y: 24.0d
+			y: 25.25d
 		}
 		{
 			dependencies: ["78585557B7EC2D58"]
@@ -1268,7 +1296,7 @@
 			]
 			title: "Naphthalene"
 			x: 2.5d
-			y: 33.5d
+			y: 34.75d
 		}
 		{
 			icon: "gtceu:small_vanadium_pentoxide_dust"
@@ -1282,7 +1310,7 @@
 			]
 			title: "Vanadium Pentoxide"
 			x: 2.5d
-			y: 35.0d
+			y: 36.25d
 		}
 		{
 			dependencies: ["524E5A33D9980623", "532236A466D95522"]
@@ -1296,7 +1324,7 @@
 			]
 			title: "Phthalic Anhydride"
 			x: 4.5d
-			y: 33.5d
+			y: 34.75d
 		}
 		{
 			icon: "gtceu:ethylbenzene_bucket"
@@ -1310,7 +1338,7 @@
 			]
 			title: "Ethylbenzene"
 			x: 4.5d
-			y: 32.0d
+			y: 33.25d
 		}
 		{
 			dependencies: ["35D4AF3456623625", "5B2F3C3885B577E4"]
@@ -1324,7 +1352,7 @@
 			]
 			title: "2-Ethylanthraquinone"
 			x: 6.5d
-			y: 33.5d
+			y: 34.75d
 		}
 		{
 			icon: "gtnn:orange_metal_catalyst"
@@ -1338,7 +1366,7 @@
 			]
 			title: "Palladium-Vanadium Catalyst"
 			x: 8.5d
-			y: 35.0d
+			y: 36.25d
 		}
 		{
 			dependencies: ["735ACED9494E8741", "161E7435BCD7BBFB", "7BD1B818DF45AF37"]
@@ -1352,7 +1380,7 @@
 			]
 			title: "EAHQ"
 			x: 8.5d
-			y: 33.5d
+			y: 34.75d
 		}
 		{
 			icon: "gtceu:hydrogen_bucket"
@@ -1366,7 +1394,7 @@
 			]
 			title: "Hydrogen"
 			x: 8.5d
-			y: 32.0d
+			y: 33.25d
 		}
 		{
 			dependencies: ["312A0048321507B9"]
@@ -1381,7 +1409,7 @@
 			]
 			title: "Hydrogen Peroxide"
 			x: 10.5d
-			y: 33.5d
+			y: 34.75d
 		}
 		{
 			dependencies: ["312A0048321507B9"]
@@ -1396,7 +1424,7 @@
 			]
 			title: "EAQ, Back"
 			x: 10.5d
-			y: 32.0d
+			y: 33.25d
 		}
 		{
 			dependencies: ["3EBC1400943D6A75", "79841FC0203AF089"]
@@ -1410,7 +1438,7 @@
 			]
 			title: "Hydrazine"
 			x: 12.5d
-			y: 33.5d
+			y: 34.75d
 		}
 		{
 			icon: "gtceu:chlorine_bucket"
@@ -1424,7 +1452,7 @@
 			]
 			title: "Chlorine"
 			x: 4.5d
-			y: 38.0d
+			y: 39.25d
 		}
 		{
 			dependencies: ["520E622B03D6A657"]
@@ -1438,7 +1466,7 @@
 			]
 			title: "Hypochlorous Acid"
 			x: 6.5d
-			y: 38.0d
+			y: 39.25d
 		}
 		{
 			dependencies: ["520E622B03D6A657"]
@@ -1452,7 +1480,7 @@
 			]
 			title: "Diluted Hydrochloric Acid"
 			x: 6.5d
-			y: 39.5d
+			y: 40.75d
 		}
 		{
 			icon: "gtceu:ammonia_bucket"
@@ -1466,7 +1494,7 @@
 			]
 			title: "Ammonia"
 			x: 8.5d
-			y: 36.5d
+			y: 37.75d
 		}
 		{
 			dependencies: ["555FC2E76BF73D84", "339AD59CDC6211A5"]
@@ -1480,7 +1508,7 @@
 			]
 			title: "Monochloramine"
 			x: 8.5d
-			y: 38.0d
+			y: 39.25d
 		}
 		{
 			icon: "gtceu:methanol_bucket"
@@ -1494,7 +1522,7 @@
 			]
 			title: "Methanol"
 			x: 8.5d
-			y: 39.5d
+			y: 40.75d
 		}
 		{
 			icon: "gtceu:ammonia_bucket"
@@ -1508,7 +1536,7 @@
 			]
 			title: "Ammonia"
 			x: 10.5d
-			y: 41.0d
+			y: 42.25d
 		}
 		{
 			dependencies: ["120BE0F912D8147F", "16AAB3771407027A"]
@@ -1522,7 +1550,7 @@
 			]
 			title: "Dimethylamine"
 			x: 10.5d
-			y: 39.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["3D19FFFCAFCDE9C0", "3106687CAF3A88BB"]
@@ -1536,7 +1564,7 @@
 			]
 			title: "UDMH"
 			x: 12.5d
-			y: 38.0d
+			y: 39.25d
 		}
 		{
 			dependencies: ["3106687CAF3A88BB"]
@@ -1550,7 +1578,7 @@
 			]
 			title: "Hydrochloric Acid"
 			x: 12.5d
-			y: 39.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["736416437FCC77AA", "3AE9EE78FFC6A982"]
@@ -1564,7 +1592,7 @@
 			]
 			title: "Aerozine 50"
 			x: 14.5d
-			y: 36.5d
+			y: 37.75d
 		}
 		{
 			dependencies: ["17A63D77B152EC0C"]
@@ -1578,7 +1606,7 @@
 			]
 			title: "Dinitrogen Tetroxide"
 			x: 14.5d
-			y: 39.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["7D7FBFA8E22DB80D", "5644D87B9AF3E5DF"]
@@ -1593,7 +1621,7 @@
 			]
 			title: "Rocket Fuel"
 			x: 16.5d
-			y: 38.0d
+			y: 39.25d
 		}
 		{
 			icon: "gcyr:fiberglass_foil"
@@ -1606,7 +1634,7 @@
 			]
 			title: "Fiberglass Foil"
 			x: 0.5d
-			y: 44.5d
+			y: 45.75d
 		}
 		{
 			icon: "gtceu:epoxy_bucket"
@@ -1620,7 +1648,7 @@
 			]
 			title: "Epoxy"
 			x: 0.5d
-			y: 46.0d
+			y: 47.25d
 		}
 		{
 			icon: "gtceu:nitrogen_bucket"
@@ -1634,7 +1662,7 @@
 			]
 			title: "Nitrogen"
 			x: 0.5d
-			y: 47.5d
+			y: 48.75d
 		}
 		{
 			icon: "gtceu:stainless_steel_drum"
@@ -1648,7 +1676,7 @@
 			]
 			title: "Stainless Steel Drum"
 			x: 0.5d
-			y: 49.0d
+			y: 50.25d
 		}
 		{
 			icon: "gcyr:para_aramid_foil"
@@ -1661,7 +1689,7 @@
 			]
 			title: "Para-Aramid Foil"
 			x: 0.5d
-			y: 50.5d
+			y: 51.75d
 		}
 		{
 			dependencies: ["55051CE9CD604D31", "35DCEFE8D74600BF", "1886CB536C2D67BA", "1C420FC78FDA42D4", "311A139B9FC53881"]
@@ -1676,7 +1704,7 @@
 			]
 			title: "Composite Autoclave"
 			x: 3.0d
-			y: 47.5d
+			y: 48.75d
 		}
 		{
 			dependencies: ["17FF6DB17A913F3D"]
@@ -1689,7 +1717,7 @@
 			]
 			title: "Ablative Tile"
 			x: 5.5d
-			y: 46.0d
+			y: 47.25d
 		}
 		{
 			dependencies: ["17FF6DB17A913F3D"]
@@ -1702,7 +1730,7 @@
 			]
 			title: "Overwrapped Tank"
 			x: 5.5d
-			y: 49.0d
+			y: 50.25d
 		}
 		{
 			dependencies: ["170DB957782774D8", "36DD20256A75AB1E"]
@@ -1716,7 +1744,7 @@
 			]
 			title: "Untested Rocket Motor"
 			x: 7.5d
-			y: 45.25d
+			y: 46.5d
 		}
 		{
 			icon: "gtceu:rocket_fuel_bucket"
@@ -1730,7 +1758,7 @@
 			]
 			title: "Rocket Fuel"
 			x: 7.5d
-			y: 46.75d
+			y: 48.0d
 		}
 		{
 			dependencies: ["53AC102F9CD5F7B4", "775B016ED47B7AB4"]
@@ -1745,7 +1773,7 @@
 			]
 			title: "Engine Test Stand"
 			x: 9.5d
-			y: 46.0d
+			y: 47.25d
 		}
 		{
 			dependencies: ["157EA680C1789E68"]
@@ -1758,7 +1786,7 @@
 			]
 			title: "Basic Rocket Motor"
 			x: 11.5d
-			y: 45.25d
+			y: 46.5d
 		}
 		{
 			dependencies: ["157EA680C1789E68"]
@@ -1772,7 +1800,7 @@
 			]
 			title: "Carbon Dioxide"
 			x: 11.5d
-			y: 46.75d
+			y: 48.0d
 		}
 		{
 			dependencies: ["77C862679060227F"]
@@ -1786,7 +1814,7 @@
 			]
 			title: "Basic Fuel Tank"
 			x: 7.5d
-			y: 49.0d
+			y: 50.25d
 		}
 		{
 			icon: "gtceu:ethylene_bucket"
@@ -1799,7 +1827,7 @@
 			]
 			title: "Ethylene"
 			x: 15.75d
-			y: 44.5d
+			y: 45.75d
 		}
 		{
 			icon: "gtceu:benzene_bucket"
@@ -1812,7 +1840,7 @@
 			]
 			title: "Benzene"
 			x: 15.75d
-			y: 46.0d
+			y: 47.25d
 		}
 		{
 			dependencies: ["3F34D8A943DCDAA0", "73769D9507929992"]
@@ -1825,7 +1853,7 @@
 			]
 			title: "Styrene"
 			x: 17.75d
-			y: 45.25d
+			y: 46.5d
 		}
 		{
 			icon: "gtceu:butadiene_bucket"
@@ -1839,7 +1867,7 @@
 			]
 			title: "Butadiene"
 			x: 17.75d
-			y: 46.75d
+			y: 48.0d
 		}
 		{
 			dependencies: ["1EFC616E069199BE", "171F1F0F5BCDE30F"]
@@ -1853,7 +1881,7 @@
 			]
 			title: "Raw SBR"
 			x: 19.75d
-			y: 46.0d
+			y: 47.25d
 		}
 		{
 			icon: "gtceu:sulfur_dust"
@@ -1866,7 +1894,7 @@
 			]
 			title: "Sulfur"
 			x: 19.75d
-			y: 47.5d
+			y: 48.75d
 		}
 		{
 			dependencies: ["512B9A72D3976371", "1E923E842B1231CC"]
@@ -1881,7 +1909,7 @@
 			]
 			title: "Styrene-Butadiene Rubber"
 			x: 21.75d
-			y: 46.75d
+			y: 48.0d
 		}
 		{
 			icon: "gtceu:nickel_dust"
@@ -1894,7 +1922,7 @@
 			]
 			title: "Nickel"
 			x: 0.5d
-			y: 54.0d
+			y: 55.25d
 		}
 		{
 			icon: "gtceu:chromium_dust"
@@ -1907,7 +1935,7 @@
 			]
 			title: "Chromium"
 			x: 0.5d
-			y: 55.5d
+			y: 56.75d
 		}
 		{
 			dependencies: ["3C1D7FCA60CA4A18", "7A326166EC450414"]
@@ -1921,7 +1949,7 @@
 			]
 			title: "Nichrome Dust"
 			x: 2.5d
-			y: 54.75d
+			y: 56.0d
 		}
 		{
 			dependencies: ["3F2356C520754FA1"]
@@ -1936,7 +1964,7 @@
 			]
 			title: "Electric Blast Furnace"
 			x: 4.5d
-			y: 54.75d
+			y: 56.0d
 		}
 		{
 			dependencies: ["1A4539D627DD3CE3"]
@@ -1949,7 +1977,7 @@
 			]
 			title: "Hot Nichrome Ingot"
 			x: 6.5d
-			y: 54.75d
+			y: 56.0d
 		}
 		{
 			dependencies: ["59C2BA67ACEFE36D"]
@@ -1964,7 +1992,7 @@
 			]
 			title: "Vacuum Freezer"
 			x: 8.5d
-			y: 54.75d
+			y: 56.0d
 		}
 		{
 			dependencies: ["37D679796BA6A282"]
@@ -1977,7 +2005,7 @@
 			]
 			title: "Nichrome"
 			x: 10.5d
-			y: 54.75d
+			y: 56.0d
 		}
 		{
 			dependencies: ["5D0A39315F25FE22"]
@@ -1991,7 +2019,7 @@
 			]
 			title: "Nichrome Coil"
 			x: 12.5d
-			y: 54.75d
+			y: 56.0d
 		}
 	]
 	subtitle: ["Crude oil goes through the refinery, hydrogen comes from carbon, and the rocket's parts get cured and fired."]

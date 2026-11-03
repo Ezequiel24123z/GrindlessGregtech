@@ -2879,7 +2879,7 @@
 			]
 			title: "Ender Pearl"
 			x: 0.5d
-			y: 98.75d
+			y: 100.25d
 		}
 		{
 			icon: "gtceu:helium_3_bucket"
@@ -2893,10 +2893,24 @@
 			]
 			title: "Helium-3"
 			x: 0.5d
-			y: 100.25d
+			y: 101.75d
 		}
 		{
-			dependencies: ["1502188D51EF738B", "32ECC0024E6F5E4F"]
+			icon: "gtceu:raw_meteoric_iron"
+			id: "50047202BA727A37"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The belt's rock: the harpoon drill"
+			tasks: [
+				{ id: "196C786CA7105D0D", item: "gtceu:raw_meteoric_iron", optional_task: true, type: "item" }
+				{ id: "38C86BCA226B165A", type: "checkmark" }
+			]
+			title: "Raw Meteoric Iron"
+			x: 0.5d
+			y: 98.75d
+		}
+		{
+			dependencies: ["50047202BA727A37", "1502188D51EF738B", "32ECC0024E6F5E4F"]
 			icon: "grindless:asteroid_quantum_seed"
 			id: "7CBC782168D5D862"
 			size: 1.25d
@@ -2907,7 +2921,7 @@
 			]
 			title: "Quantum Seeds"
 			x: 3.0d
-			y: 99.5d
+			y: 101.0d
 		}
 		{
 			icon: "gtceu:titanium_frame"
@@ -2920,7 +2934,7 @@
 			]
 			title: "Titanium Frame"
 			x: 0.5d
-			y: 101.75d
+			y: 103.25d
 		}
 		{
 			dependencies: ["7840D10D59C8EB0C"]
@@ -2934,7 +2948,7 @@
 			]
 			title: "Station Truss Casing"
 			x: 3.0d
-			y: 101.75d
+			y: 103.25d
 		}
 		{
 			icon: "gcyr:kapton_k_plate"
@@ -2947,7 +2961,7 @@
 			]
 			title: "Kapton K Plate"
 			x: 0.5d
-			y: 103.25d
+			y: 104.75d
 		}
 		{
 			dependencies: ["33E45C3F1492E595"]
@@ -2961,7 +2975,7 @@
 			]
 			title: "Cryogenic Fuel Tank"
 			x: 3.0d
-			y: 103.25d
+			y: 104.75d
 		}
 	]
 	subtitle: ["Trinium and enriched naquadah, superconducting tape and magnets, living circuits, and the first factories in orbit."]

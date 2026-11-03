@@ -65,7 +65,7 @@ var GG_QUESTS_EXPECTED = {
   travel_and_teams: [16, 15],
   workshop: [17, 16],
   welcome: [16, 15],
-  steam_age: [49, 55],
+  steam_age: [49, 56],
   lv_age: [62, 63],
   mv_age: [59, 71],
   hv_age: [80, 93],
@@ -88,10 +88,10 @@ var GG_UNGROUPED = { welcome: true }
 GG_QUESTS_EXPECTED.pl_steam = [48, 46]
 GG_QUESTS_EXPECTED.pl_lv = [115, 113]
 GG_QUESTS_EXPECTED.pl_mv = [95, 98]
-GG_QUESTS_EXPECTED.pl_hv = [137, 135]
+GG_QUESTS_EXPECTED.pl_hv = [139, 137]
 GG_QUESTS_EXPECTED.pl_ev = [125, 125]
 GG_QUESTS_EXPECTED.pl_iv = [123, 125]
-GG_QUESTS_EXPECTED.pl_luv = [201, 199]
+GG_QUESTS_EXPECTED.pl_luv = [202, 200]
 GG_QUESTS_EXPECTED.pl_zpm = [134, 130]
 GG_QUESTS_EXPECTED.pl_uv = [176, 186]
 GG_QUESTS_EXPECTED.pl_uhv = [213, 201]
@@ -108,10 +108,10 @@ GG_QUESTS_EXPECTED.multiblocks = [417, 0]
 // mode in game). After flipping the table and regenerating it (docs/quests.md), these are the counts of each mode. Since QB-2 (2026-11-02)
 // LuV is one chapter (luv_age); the stations-off modes' merged count is not recorded yet: regenerate in that mode and record it here.
 var GG_QUESTS_LUV_MODES = {
-  pending: { pl_luv: [198, 197], power: [113, 124] },
-  tether: { luv_age: [82, 90], pl_luv: [201, 199], power: [116, 127] },
-  sulfur_iodine_stations_off: { pl_luv: [204, 202], power: [116, 126] },
-  sulfur_iodine_stations_on: { luv_age: [82, 90], pl_luv: [204, 202], power: [116, 127] }
+  pending: { pl_luv: [199, 198], power: [113, 124] },
+  tether: { luv_age: [82, 90], pl_luv: [202, 200], power: [116, 127] },
+  sulfur_iodine_stations_off: { pl_luv: [205, 203], power: [116, 126] },
+  sulfur_iodine_stations_on: { luv_age: [82, 90], pl_luv: [205, 203], power: [116, 126] }
 }
 ;(function () {
   var st = global.grindless && global.grindless.stations
