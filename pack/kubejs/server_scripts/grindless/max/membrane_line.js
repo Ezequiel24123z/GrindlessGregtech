@@ -174,12 +174,14 @@
 
   // QR-MAX (docs/eras/max.md, Controllers): MAX hull, MAX components, 4 MAX circuits, 1,000 mB superfluid He-3 and three domain inputs,
   // at VA[MAX] for 2,400 t behind station research on an item of the machine's own line. No conveyor, sensor or field generator (A3's).
+  // The membrane line is a bootstrap producer: its rolling makes the shield of the first MAX circuit (lines-opv-maxplus.md M1, row 29),
+  // so it takes OpV circuits and OpV robot arms (docs/quality/structures.md, bootstrap rule).
   function addControllers(event) {
     var vaMax = Number(GTValues.VA[14])
     var HULL = 'gtceu:max_machine_hull'
     var defs = [
-      { name: 'membrane_line', research: 'grindless:rebco_on_pbo_web',
-        parts: ['4x grindless:max_electric_motor', '4x grindless:max_electric_piston', '2x grindless:max_robot_arm'],
+      { name: 'membrane_line', research: 'grindless:rebco_on_pbo_web', circuit: '4x #gtceu:circuits/opv',
+        parts: ['4x grindless:max_electric_motor', '4x grindless:max_electric_piston', '2x gtceu:opv_robot_arm'],
         domain: ['2x grindless:max_field_coil', '2x gtceu:horizon_strand_single_cable', '2x grindless:chain_lamina_stack'] }
     ]
     ML.controllerRecipes = []
@@ -196,7 +198,7 @@
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       b.itemInputs(HULL)
       d.parts.forEach(function (s) { b.itemInputs(s) })
-      b.itemInputs('4x #gtceu:circuits/max')
+      b.itemInputs(d.circuit || '4x #gtceu:circuits/max')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of(HE3, 1000))
       b.itemOutputs(machine)

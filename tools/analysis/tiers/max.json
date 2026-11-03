@@ -21,6 +21,7 @@
     "MAX-T1": { "label": "gate c14 to Sgr A*", "landedWhen": ["recipe:grindless:warp_gate/hold_sgr_a_probe"] },
     "MAX-T2": { "label": "gate c15 to the belt", "landedWhen": ["recipe:grindless:warp_gate/hold_nsc_belt"] },
     "MAX-B3": { "label": "Rydberg array works", "landedWhen": ["gtceu:rydberg_array_works"] },
+    "B16-MAX": { "label": "batch 16: the qubit stage's UHV and UIV machines on two OpV hatches", "landedWhen": ["grindless:shielded_quantum_module"] },
     "MAX-B2": { "label": "atom interferometer works", "landedWhen": ["gtceu:atom_interferometer_works"] },
     "MAX-B1": { "label": "membrane line", "landedWhen": ["gtceu:membrane_line"] },
     "MAX-B4": { "label": "gene ark", "landedWhen": ["gtceu:gene_ark"] },
@@ -63,6 +64,9 @@
         {"partsFromStructure":true, "id": "gtceu:swarm_segment_foundry@max", "machine": "gtceu:swarm_segment_foundry", "types": ["gtceu:swarm_segment"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-H1", "note": "Makes mirror_shell_segment at Sgr A* orbit (T-VOLT exemption in recipe_quality.json)." },
     {"partsFromStructure":true, "id": "gtceu:helium_refrigerator@max", "machine": "gtceu:helium_refrigerator", "types": ["gtceu:closed_loop_cooling"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
     {"partsFromStructure":true, "id": "gtceu:asteroid_processor@max", "machine": "gtceu:asteroid_processor", "types": ["gtceu:asteroid_processing"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+    {"partsFromStructure":true, "id": "gtceu:tfln_fab@max", "machine": "gtceu:tfln_fab", "types": ["gtceu:ion_slicing"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "B16-MAX", "note": "M1 rows 26-28 (lines-opv-maxplus.md) run at VH[MAX] on UHV and UIV machines before any MAX hatch: two OpV hatches reach it (GTM 7.5.3's two-hatch rule). Reachability model only; in game the machine accepts the higher hatches." },
+    {"partsFromStructure":true, "id": "gtceu:photonic_foundry@max", "machine": "gtceu:photonic_foundry", "types": ["gtceu:photonic_foundry"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "B16-MAX" },
+    {"partsFromStructure":true, "id": "gtceu:millikelvin_cryostat_works@max", "machine": "gtceu:millikelvin_cryostat_works", "types": ["gtceu:nuclear_demagnetisation"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "B16-MAX" },
     {"partsFromStructure":true, "id": "gtceu:accretion_disk_skimmer@max", "machine": "gtceu:accretion_disk_skimmer", "types": ["gtceu:disk_skimming"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" }
       ],
   "machinesFromRegistry": [

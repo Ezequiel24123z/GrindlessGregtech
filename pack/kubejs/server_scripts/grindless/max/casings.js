@@ -34,7 +34,7 @@
     { name: 'shell_window_coil_casing', out: 2, duration: 400,
       items: ['grindless:max_field_coil', 'grindless:superconducting_membrane', '2x ' + STRAND, TRUSS, 'grindless:max_sensor', '2x grindless:ffkm_seal'] },
     { name: 'membrane_roller_casing', circuit: 15,
-      items: ['gtceu:opv_machine_casing', '8x gtceu:tungsten_steel_rod', '4x gtceu:tungsten_steel_plate', '2x grindless:ffkm_seal', '2x #gtceu:circuits/max'] },
+      items: ['gtceu:opv_machine_casing', '8x gtceu:tungsten_steel_rod', '4x gtceu:tungsten_steel_plate', '2x grindless:ffkm_seal', '2x #gtceu:circuits/opv'] },
     { name: 'geroch_drum_casing', circuit: 16,
       items: ['gtceu:opv_machine_casing', '4x gtceu:tungsten_steel_plate', '2x gtceu:tungsten_steel_rod', '2x grindless:chain_composite_rod', '2x #gtceu:circuits/max'] }
   ]
