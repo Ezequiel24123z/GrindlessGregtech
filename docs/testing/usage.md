@@ -109,6 +109,18 @@ Proves every multiblock our startup scripts register forms from its own first EM
 - Markers: `GGTEST|form_sweep|<id>|PASS|WxHxD, N ticks` (checked in the placing tick; `, forced` if GTM's explicit check formed it), `...|FAIL|<GTM error, refused cell>`, `...|NOTE|<reason>`, and `GGTEST|form_sweep|DONE|failures=N ids=M next=<cursor|none>`.
 - Zone `form_sweep` (X 36064-36127, Z 0-127); the cell is cleared after each id.
 
+## Factory load baselines (AUD3-PERF)
+
+Measures representative industrial loads (`tools/test/overlay/kubejs/server_scripts/gg_test_factory_load.js`, config `kubejs/config/gg_test_factory_load.json`, zone `factory_load`).
+
+- Command: `tools\test\Invoke-GGTest.ps1 -Commands 'kubejs custom_command gg_test_factory_load' -WaitForLog 'GGTEST\|factory_load\|DONE@@180' -LockWaitMin 15 -Slots 1`. One exclusive slot; never beside the EMI audit or another timing run.
+- Profiles, one after the other in the same band: `control` (nothing built: fixture overhead), `midgame` (HV wireless tower + N HV centrifuges with HV wireless covers), `endgame` (UV tower, N UV centrifuges, F Mega Factories with 2 modules and a UV parallel hatch; the factories' UV energy hatch is topped up by the fixture, declared, not wireless).
+- Per profile, after `warmupTicks`, a window of `windowTicks` real samples of the server's own tick-time ring: mean, p95, max, ticks over 50 ms; output rate against the requested rate; Java heap peak; loaded and forced chunk counts before, at peak and after cleanup. A measurement that cannot be read is reported `null` or `unavailable`, never guessed. Loaded sites are the band's forced chunks plus those counts.
+- Then (midgame) backpressure: every output slot full, nothing may run or accumulate; then the band is cleared and the tracked wireless endpoints and forced chunks must return to the pre-run values (abandoned-endpoint cancellation; the Hyperstargate arrival ticket of #302 is not exercised here).
+- Markers: `GGTEST|factory_load|<check>|PASS|FAIL|NOTE`; one `summary_<profile>` NOTE per profile carries compact JSON, also written to `kubejs/exported/factory_load.json` (collected as `results/server/kubejs-exported/factory_load.json`).
+- Budget: 50 ms is the 20 TPS tick budget. The first baselines come before any threshold: no regression limit is set until repeated runs give the noise. Nothing here is claimed as a failure without evidence.
+- Baselines: see the run recorded below.
+
 ## Choosing the backend
 
 - Default: `azure` (`Default` in `tools/test/backends.psd1`). `-ShowBackend` prints the resolved values and exits.
