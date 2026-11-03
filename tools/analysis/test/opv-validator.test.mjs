@@ -23,7 +23,7 @@ const MAINFRAME = 'gtnn:cosmic_mainframe';
 const HALL = 'gtceu:photonic_integration_hall';
 const OPV_GROUPS = ['opv-foundation', 'opv-sgr-items', 'opv-terzan5-items', 'max-hold'];
 const MACHINES = ['tetron_fab', 'gamma_optics_works', 'antihydrogen_foundry', 'strangelet_vault', 'annihilation_engine', 'jet_beam_line',
-  'spallation_target_station', 'antiproton_decelerator', 'strangelet_distiller', 'kugelblitz_forge', 'hawking_collector', 'magnetic_pair_converter',
+  'antiproton_decelerator', 'strangelet_distiller', 'kugelblitz_forge', 'hawking_collector', 'magnetic_pair_converter',
   'field_frozen_press', 'debris_harvester', 'replication_refinery', 'von_neumann_foundry', 'collector_node_works', 'bulge_collector'];
 
 test('real tiers (opv): the substages in order after UXV (SGR, Terzan 5, then MAX), resources and groups at their era', () => {

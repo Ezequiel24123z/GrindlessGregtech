@@ -16,8 +16,8 @@ const site = 'grindless:cygnus_x1_orbit';
 test('B3b startup and recipe handlers have no package errors', () => {
   assert.deepEqual(run.errors.filter(e => /antimatter_cygnus/.test(e.file)), []);
   assert.deepEqual(plain(A.errors), []);
-  assert.equal(A.recipes.length, 5);
-  assert.equal(A.controllers.length, 3);
+  assert.equal(A.recipes.length, 6);
+  assert.equal(A.controllers.length, 2);
 });
 test('exact design beam yields, EU/t and durations; only the jet is tied to Cygnus', () => {
   const expected = [
@@ -25,7 +25,8 @@ test('exact design beam yields, EU/t and durations; only the jet is tied to Cygn
     ['jet_beam_extraction', 'flux_boosted_jet_beam', 2, 503316480, 200, 'jet_proton_beam', 2000],
     ['antiproton_production', 'hot_antiproton_beam', 1, 503316480, 400, 'hot_antiproton_beam', 1000],
     ['beam_cooling', 'stochastic_cooling', 1, 268435456, 800, 'stochastically_cooled_beam', 1000],
-    ['beam_cooling', 'cold_antiproton_cell', 2, 503316480, 1200, null, null]
+    ['beam_cooling', 'decelerated_antiproton_beam', 2, 536870912, 800, 'decelerated_antiproton_beam', 1000],
+    ['beam_cooling', 'cold_antiproton_cell', 3, 268435456, 400, null, null]
   ];
   for (const [type, name, circuit, eut, duration, fluid, amount] of expected) {
     const row = A.recipes.find(r => r.type === type && r.name === name);
@@ -46,9 +47,9 @@ test('wear, spent shield/target destinations and Penning containment', () => {
   ]);
   assert.equal(A.recipes[3].wear[0].chance, 156);
   assert.equal(A.recipes[4].wear[0].chance, 156);
-  assert.deepEqual(plain(A.recipes[4].itemsIn), ['grindless:empty_penning_trap']);
-  assert.deepEqual(plain(A.recipes[4].kept), ['grindless:octupole_trap_magnet']);
-  assert.deepEqual(plain(A.recipes[4].itemsOut), ['grindless:cold_antiproton_cell']);
+  assert.deepEqual(plain(A.recipes[5].itemsIn), ['grindless:empty_penning_trap']);
+  assert.deepEqual(plain(A.recipes[5].kept), ['grindless:octupole_trap_magnet']);
+  assert.deepEqual(plain(A.recipes[5].itemsOut), ['grindless:cold_antiproton_cell']);
 });
 test('three controllers meet the OpV component, research and domain-input contract', () => {
   for (const m of A.machines) {
@@ -73,7 +74,7 @@ test('three designed structures are hollow, varied and functional', () => {
   }
 });
 test('names, short tooltips, EMI guidance and new ids exist in en_us', () => {
-  const matcher = /jet_beam_line|spallation_target_station|antiproton_decelerator|hot_antiproton_beam|stochastically_cooled_beam|spent_li6_shield|jet_beam_extraction|antiproton_production|beam_cooling/;
+  const matcher = /jet_beam_line|antiproton_decelerator|hot_antiproton_beam|stochastically_cooled_beam|spent_li6_shield|jet_beam_extraction|antiproton_production|beam_cooling/;
   const keys = Object.keys(run.lang.en_us).filter(k => matcher.test(k)).sort();
   assert.ok(keys.length > 0);
   for (const m of A.machines) for (const lang of ['en_us']) {

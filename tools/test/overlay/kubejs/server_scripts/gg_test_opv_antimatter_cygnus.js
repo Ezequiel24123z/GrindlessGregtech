@@ -22,19 +22,18 @@
         { recipe: 'jet_beam_extraction/jet_proton_beam', circuit: 1, items: [['grindless:srf_cavity', 1], ['grindless:be_beam_window', 1]], fluidOut: ['gtceu:jet_proton_beam', 1000], duration: 200 },
         { recipe: 'jet_beam_extraction/flux_boosted_jet_beam', circuit: 2, items: [['grindless:srf_cavity', 1], ['grindless:be_beam_window', 1]], fluid: ['gtceu:flux_loaded_plasma', 100], fluidOut: ['gtceu:jet_proton_beam', 2000], duration: 200 }
       ] },
-    { id: 'gtceu:spallation_target_station', cx: 38805, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
+    { id: 'gtceu:antiproton_decelerator', cx: 38806, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
       steps: [
         { recipe: 'antiproton_production/hot_antiproton_beam', circuit: 1, items: [['grindless:ir_spallation_target', 1], ['grindless:li6_hydride_shield', 1]],
-          fluid: ['gtceu:jet_proton_beam', 4000], fluidOut: ['gtceu:hot_antiproton_beam', 1000], duration: 400 }
-      ] },
-    { id: 'gtceu:antiproton_decelerator', cx: 38824, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
-      steps: [
+          fluid: ['gtceu:jet_proton_beam', 4000], fluidOut: ['gtceu:hot_antiproton_beam', 1000], duration: 400 },
         { recipe: 'beam_cooling/stochastic_cooling', circuit: 1, items: [['grindless:stochastic_cooling_pickup', 1]],
           fluid: ['gtceu:hot_antiproton_beam', 1000], fluidOut: ['gtceu:stochastically_cooled_beam', 1000], duration: 800 },
-        { recipe: 'beam_cooling/cold_antiproton_cell', circuit: 2, items: [['grindless:electron_cooler', 1], ['grindless:empty_penning_trap', 1], ['grindless:octupole_trap_magnet', 1]],
-          fluid: ['gtceu:stochastically_cooled_beam', 1000], itemOut: ['grindless:cold_antiproton_cell', 1], duration: 1200 }
+        { recipe: 'beam_cooling/decelerated_antiproton_beam', circuit: 2, items: [['grindless:electron_cooler', 1]],
+          fluid: ['gtceu:stochastically_cooled_beam', 1000], fluidOut: ['gtceu:decelerated_antiproton_beam', 1000], duration: 800 },
+        { recipe: 'beam_cooling/cold_antiproton_cell', circuit: 3, items: [['grindless:empty_penning_trap', 1], ['grindless:octupole_trap_magnet', 1]],
+          fluid: ['gtceu:decelerated_antiproton_beam', 1000], itemOut: ['grindless:cold_antiproton_cell', 1], duration: 400 }
       ] },
-    { id: 'gtceu:antimatter_trap', cx: 38840, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
+    { id: 'gtceu:antimatter_trap', cx: 38830, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
       steps: [
         { recipe: 'antimatter_storage/antiproton_stack_opv', circuit: 6, items: [['grindless:cold_antiproton_cell', 8], ['grindless:octupole_trap_magnet', 1]],
           itemOut: ['grindless:antiproton_stack_opv', 1], duration: 400 }
@@ -201,7 +200,7 @@
         command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
         clear()
         var A = global.grindless.antimatterCygnus
-        check('registration', !!A && A.errors.length === 0 && A.recipes.length === 5 && !!A.trap, A ? JSON.stringify(A.errors) : 'no package global')
+        check('registration', !!A && A.errors.length === 0 && A.recipes.length === 6 && !!A.trap, A ? JSON.stringify(A.errors) : 'no package global')
         var ids = A.controllers.concat(A.recipes.map(function (r) { return 'grindless:' + r.type + '/' + r.name }), ['grindless:antimatter_storage/antiproton_stack_opv'])
         var missing = ids.filter(function (id) { return !S.server.getRecipeManager().byKey(new (classes().RL)(id)).isPresent() })
         check('lookup', missing.length === 0, '9 recipe ids; missing ' + missing.join(','))
