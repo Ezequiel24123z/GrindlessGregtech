@@ -1672,6 +1672,14 @@ Procedural, drawn by `Build-OpVBeamHardwareTextures.ps1` with the shape routines
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVBeamHardwareTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVBeamHardwareTextures.ps1 -Credits
 ```
+
+## OpV circuits: Si-28 qubit line wafers (D5-QPU-OPV)
+
+Procedural, drawn by `Build-OpVCircuitsTextures.ps1`; nothing is copied from another mod. It writes the 33 item icons that `startup_scripts/grindless/opv/circuits.js` registers (`item/<id>.png`), including the five wafers of the Si-28 qubit line (`annealed_soi_wafer`, `back_gated_soi_wafer`, `activated_cmos_wafer`, `contacted_cmos_wafer`, `interconnected_cmos_wafer`). The three new fluids need no PNG.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVCircuitsTextures.ps1
+```
 
 ## OpV tetron fab and gamma optics works (OpV-B1)
 
