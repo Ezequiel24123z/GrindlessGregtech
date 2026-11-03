@@ -31,10 +31,10 @@ const s = (key, title, icon, deps, x, y, teach, tasks, xpN) => ({
 
 export const QUESTS = [
   s('S_SI28', 'Silicon-28 and the CMOS Wafer', 'grindless:si28_cmos_wafer', ['H_SPIN'], 2.5, 0, {
-    for: 'Spins that last need a silicon with no nuclear spin of its own, so the line starts with silicon-28 and a CMOS wafer, the floor under every layer after it.',
-    needs: 'The hot cell enriches silicon dust with hydrogen fluoride into silicon-28 dust (circuit 5). Zone refining melts it under argon into an ingot (circuit 6, 800 ticks); the cutter slices a wafer with water (400 ticks). The ion implanter loads hydrogen (circuit 6). The MOCVD reactor grows a hafnia gate and a titanium nitride gate (circuit 10, 700 ticks), and the Photonic Foundry lays tungsten vias and a copper layer (circuit 17).',
-    unlocks: 'The 28Si M1 Wafer, which every later module is grown on.',
-    automate: 'Silicon, acid and argon by ME and by pipe; wafers pass from machine to machine by pattern provider.',
+    for: 'Lasting spins need silicon with no nuclear spin, so the line starts with silicon-28 and a CMOS wafer, the floor of every layer.',
+    needs: 'The hot cell enriches silicon dust with hydrogen fluoride into silicon-28 dust (circuit 5). Zone refining melts it under argon into an ingot (circuit 6, 800 ticks); the cutter slices a wafer with water (400 ticks). The ion implanter loads hydrogen (circuit 6); the MOCVD reactor grows hafnia and titanium nitride gates (circuit 10, 700 ticks), and the Photonic Foundry lays tungsten vias and a copper layer (circuit 17).',
+    unlocks: 'The 28Si M1 Wafer, the base of every later module.',
+    automate: 'Silicon, acid and argon by ME and by pipe; wafers move between machines by pattern provider.',
   }, [it('grindless:si28_fz_wafer'), it('grindless:si28_cmos_wafer'), it('grindless:si28_m1_wafer')], 120),
   s('S_MRAM', 'MRAM Stack', 'grindless:mram_wafer', ['S_SI28'], 6, 0, {
     for: 'The magnetic tunnel junctions that store a bit as the direction of a magnet. They are laid on the M1 wafer by the &6Spintronic Cluster Tool&r.',
@@ -42,9 +42,9 @@ export const QUESTS = [
     unlocks: 'The racetrack module, which writes tracks over the MRAM wafer.',
     automate: 'Targets by ME from the melter; return the heusler powder to the target line so nothing is lost.',
   }, [it('grindless:mram_stack_wafer'), it('grindless:mram_wafer')], 140),
-  s('S_RACE', 'Racetrack', 'grindless:racetrack_chip', ['S_MRAM'], 9.5, 0, {
+  s('S_RACE', 'Racetrack', 'grindless:racetrack_chip', ['S_MRAM'], 9.5, 1.5, {
     for: 'A racetrack is a nanowire along which magnetic domains move like cars on a track. It stores more bits per area than any plain memory.',
-    needs: 'The Cluster Tool lays a synthetic antiferromagnet over the MRAM wafer (circuit 3, 600 ticks). The nitride magnet works anneals it (circuit 10) and electron beam refining writes the track (circuit 16). The Cluster Tool then patterns the nanowires (circuit 1; a quarter of the platinum comes off as sludge) and joins the MTJ die for the racetrack chip (circuit 2, 900 ticks).',
+    needs: 'The Cluster Tool lays a synthetic antiferromagnet over the MRAM wafer (circuit 3, 600 ticks). The nitride magnet works anneals it (circuit 10) and electron beam refining writes the track (circuit 16). It patterns the nanowires (circuit 1; a quarter of the platinum comes off as sludge) and joins the MTJ die for the racetrack chip (circuit 2, 900 ticks).',
     unlocks: 'The oscillator module, which is grown on the racetrack chip.',
     automate: 'Keep the platinum sludge in a chest or send it to the platinum line; it is the byproduct that pays for the sputter targets.',
   }, [it('grindless:saf_track_wafer'), it('grindless:patterned_track_wafer'), it('grindless:racetrack_chip')], 160),
@@ -60,7 +60,7 @@ export const QUESTS = [
     unlocks: 'The ME-on-spin wafer.',
     automate: 'The flux comes back from the skim recipe (circuit 3); keep a spare platinum crucible.',
   }, [it('grindless:yig_film_wafer'), it('grindless:yig_waveguide_wafer'), it('grindless:magnonic_bus')], 180),
-  s('S_OXIDE', 'Oxide Membranes', 'grindless:me_switch_wafer', ['S_BUS'], 9.5, 2.5, {
+  s('S_OXIDE', 'Oxide Membranes', 'grindless:me_switch_wafer', ['S_BUS'], 8, 2.5, {
     for: 'A magnetoelectric membrane flips a magnet with a voltage instead of a current, so it switches with far less heat. It is made of oxides that only grow in a pulsed laser plume.',
     needs: 'The Cluster Tool, with a KrF laser and oxygen: a strontium ruthenate electrode on a dysprosium scandate substrate (circuit 1, 400 ticks), a bismuth ferrite film (circuit 2) and a cobalt-iron layer (circuit 3). Electron beam refining then patterns the switch (circuit 19).',
     unlocks: 'The ME-on-spin wafer.',
@@ -78,7 +78,7 @@ export const QUESTS = [
     unlocks: 'The spintronic mainframe.',
     automate: 'Lubricant by pipe; dice a stack at a time and send the dies straight to the integration hall.',
   }, [it('grindless:me_on_spin_wafer'), it('grindless:meso_spin_wafer'), it('grindless:spintronic_wafer'), it('grindless:spintronic_die')], 200),
-  s('S_MAIN', 'Spintronic Mainframe', 'gtnn:spintronic_mainframe', ['S_DICE', 'S_RACE', 'S_OXIDE'], 9.5, 5, {
+  s('S_MAIN', 'Spintronic Mainframe', 'gtnn:spintronic_mainframe', ['S_DICE', 'S_RACE', 'S_OXIDE'], 10.5, 5, {
     for: 'The end of the line: a mainframe that computes in spin waves. It is the circuit every UXV machine asks for.',
     needs: 'The Photonic Integration Hall (3,000 ticks, circuit 7): a spintronic die, an MTJ die, a shielded interposer and UIV circuits. The interposer is a mu-metal shield can on a glass interposer, soldered in the Photonic Foundry (circuit 22).',
     unlocks: 'The UXV circuit chain and every UXV machine that needs it.',
