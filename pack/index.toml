@@ -20618,7 +20618,7 @@ hash = "cf56d7e6a6ed7680d845bdfeea9dfb0151a06e70d85cb9420d8760455dbb85e1"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/crystals.js"
-hash = "9475f9b0b5b20d4d860d78fdc47f93f152ea918e3d3521a3314d817644895820"
+hash = "fb4e011b85e2b75980a607661c373b4385d5c9d2430407d3b4bbd43f7aedfac4"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/elevator.js"
@@ -20646,7 +20646,7 @@ hash = "2898021106826733259d9b3a3c85e15a6a49b9ead1e9b2852b15b035bab5c261"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/photonics.js"
-hash = "c0bb0b57bc5a050c19f7f34cd10dd0af911d96018336c1b7a9616e82e50e1255"
+hash = "2b5c80c747831c806b54a605a0097f94afa4ca55199c0d9a20ee8c6ebfa0f2b4"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/power_devices.js"
@@ -20670,7 +20670,7 @@ hash = "29fe2e59fb44d252c46df312c9eeb93954e6811cf5be30b415dee44de1e62def"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/transcurium.js"
-hash = "86ba2d87e8b601ea43a81a860001062f83731ec24fd4cb925001f9d87f17865d"
+hash = "328b9bc0455a681fa1c1c8c1e8e5420a919dbeaad8a9e1a235d12b28b5b90a3f"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uhv/travel.js"
