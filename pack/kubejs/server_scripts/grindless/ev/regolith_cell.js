@@ -27,16 +27,18 @@
 //
 // Titanium (Cambridge's FFC process). The ilmenite sits in the cathode basket of the Molten Salt Charge, a crucible of calcium chloride:
 // in the molten salt the oxide ions leave the metal and go to the platinum anode as oxygen. No chlorine, no magnesium, no carbon. The
-// yield is the Kroll chain's own (GTM: 5 ilmenite -> 3 rutile -> 3 TiCl4 -> 3 titanium ingots), the iron is the ilmenite's iron
+// yield is the Kroll chain's own (5 ilmenite -> 3 rutile -> 3 TiCl4 -> 3 titanium ingots), the iron is the ilmenite's iron
 // (the Kroll's first stage gives it as wrought iron) and the oxygen is the 3 oxygen of FeTiO3 (3,000 mB). The energy is the sum of the
-// Kroll stages it replaces, with no discount (docs/eras/ev.md), read in GTM 7.5.3's recipes (STAGES below, checked by the smoke test):
-//   rutile  EBF 1,600 t x 480 EU/t, once per 5 ilmenite       768,000
-//   TiCl4   chemical reactor 400 t x 480, once per ingot     3 x 192,000
-//   Kroll   EBF 800 t x 480, once per ingot                  3 x 384,000
-//   cooling vacuum freezer 144 t x 480, once per ingot       3 x  69,120
-//   total                                                    2,703,360 EU = 1,408 ticks at 1,920 EU/t
-// The Kroll's magnesium and chlorine loop (magnesium chloride + sodium in the chemical reactor, salt electrolysis) is not counted: ev.md
-// names the four stages above. The cell pays with the platinum anode, the charge, the trip and the site instead.
+// Kroll stages it replaces, with no discount (docs/eras/ev.md), read in the live recipes (hv/kroll.js; STAGES below, checked by the smoke test):
+//   rutile       EBF 1,600 t x 480 EU/t, once per 5 ilmenite          768,000
+//   chlorination chemical reactor 400 t x 480, once per ingot        3 x 192,000
+//   distillery   crude TiCl4, 100 t x 120, once per ingot            3 x  12,000
+//   Kroll        EBF 800 t x 480, once per ingot                     3 x 384,000
+//   cooling      vacuum freezer 144 t x 480, once per ingot          3 x  69,120
+//   magnesium    MgCl2 electrolysis 150 t x 120, twice per ingot     6 x  18,000
+//   total                                                            2,847,360 EU = 1,483 ticks at 1,920 EU/t
+// The magnesium loop is counted: the Kroll consumes 2 Mg an ingot and the electrolysis gives them back from its 6 MgCl2, with the chlorine
+// for the chlorination. The cell pays with the platinum anode, the charge, the trip and the site instead.
 //
 // Proxima tailings (UHV-B5, docs/eras/uhv.md line 16). The biomining heap's leached tailings (Proxima b's basalt, its PGM, rare earths
 // and part of its calcium taken by the cultures) come to the Moon by AE2. The cell runs the melt below silicon's potential: the iron
@@ -88,12 +90,15 @@
   const TAILINGS = 'grindless:leached_tailings'
   const SILICA = 'gtceu:silicon_dioxide_dust'
 
-  // GTM 7.5.3's titanium chain (the recipes the titanium mode replaces): EU/t, ticks and runs per batch of 5 ilmenite (3 ingots)
+  // The live Kroll line (hv/kroll.js) the titanium mode replaces: EU/t, ticks and runs per batch of 5 ilmenite (3 ingots).
+  // Magnesium loop: each ingot's Kroll run leaves 6 MgCl2, which the electrolyzer turns back into its 2 Mg in 2 runs of 3 MgCl2.
   const STAGES = [
     { name: 'rutile', id: 'gtceu:electric_blast_furnace/rutile_from_ilmenite', eut: 480, duration: 1600, runs: 1 },
-    { name: 'chloride', id: 'gtceu:chemical_reactor/titanium_tetrachloride', eut: 480, duration: 400, runs: 3 },
+    { name: 'chloride', id: 'grindless:chemical_reactor/kroll_chlorination_chemical_reactor', eut: 480, duration: 400, runs: 3 },
+    { name: 'distillery', id: 'grindless:distillery/kroll_crude_tetrachloride', eut: 120, duration: 100, runs: 3 },
     { name: 'kroll', id: 'gtceu:electric_blast_furnace/titanium_from_tetrachloride', eut: 480, duration: 800, runs: 3 },
-    { name: 'cooling', id: 'gtceu:vacuum_freezer/cool_hot_titanium_ingot', eut: 480, duration: 144, runs: 3 }
+    { name: 'cooling', id: 'gtceu:vacuum_freezer/cool_hot_titanium_ingot', eut: 480, duration: 144, runs: 3 },
+    { name: 'magnesium', id: 'grindless:electrolyzer/magnesium_chloride_electrolysis', eut: 120, duration: 150, runs: 6 }
   ]
   const KROLL_ENERGY = STAGES.reduce(function (sum, s) { return sum + s.eut * s.duration * s.runs }, 0)
 

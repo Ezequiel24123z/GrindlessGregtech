@@ -58,7 +58,7 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
   {
-    key: "IV_LEU_FUEL", id: "77E9A2979A7161D3", title: "LEU Fuel", icon: "grindless:leu_fuel_assembly", deps: ["IV_FUEL_FABRICATION_PLANT", "hv:HV_END_VEINS"], x: 19, y: 0.75,
+    key: "IV_LEU_FUEL", id: "77E9A2979A7161D3", title: "LEU Fuel", icon: "grindless:leu_fuel_assembly", deps: ["IV_FISSION_REACTOR", "hv:HV_END_VEINS"], x: 19, y: 0.75,
     desc: [
       "An &6LEU Fuel Assembly&r is enriched uranium pressed into pellets and sealed in Zircaloy tubes with a breath of helium. The zirconium comes from the End's zircon, with a pinch of tin.",
     ],
