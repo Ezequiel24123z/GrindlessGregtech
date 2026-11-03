@@ -60,3 +60,5 @@ Parsing error loading custom advancement colossalchests:uncolossal: Failed to pa
 Couldn't load tag struts:wrenches
 # Minecraft: chunks a test generates away from any player log this when a structure's POI block (bell, bed, workstation) was never registered; the POI is rebuilt on load, harmless (seen by D1-HV-PROP, #250).
 POI data mismatch: never registered
+# Minecraft 1.20.1: an allay generated in a test's chunks (a woodland mansion or pillager outpost cage) fails to decode its vibration listener's source; the allay loads without it, harmless (seen in the hot cell's band at batch 14's T2).
+\[net\.minecraft\.world\.entity\.animal\.allay\.Allay/\]: No key selector in MapLike

@@ -80,8 +80,10 @@
   var NAQ_TYPE = 'gtceu:naquadah_refining'
   var PLANT = 'gtceu:platinum_plant'
   var PGM_TYPE = 'gtceu:pgm_refining'
-  // the platinum plant's rows of UHV and later eras (circuits 5 and up), added by their own scripts beside the composed modes 1 to 4
-  var PGM_LATE_ROW = /^grindless:pgm_refining\/(uhv|uev|uiv|uxv|opv)\//
+  // the platinum plant's rows of UHV and later eras (circuits 5 and up), added by their own scripts beside the composed modes 1 to 4;
+  // UHV's crucible row carries the type twice in its id (grindless:pgm_refining/pgm_refining/uhv/iridium_crucible), like 154 other
+  // table-built ids in the batch 14 dump: an id quirk, not a lookup problem
+  var PGM_LATE_ROW = /^grindless:(pgm_refining\/){1,2}(uhv|uev|uiv|uxv|opv)\//
   var NAQ_MAX_EUT = 7680
   var PGM_MAX_EUT = 1920
 

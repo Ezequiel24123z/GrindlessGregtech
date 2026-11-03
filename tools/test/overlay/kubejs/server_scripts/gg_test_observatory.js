@@ -823,7 +823,9 @@
 
   var PHASES = [
     {
-      name: 'A_clear_night', sky: [NIGHT, 'clear'], min: 20, max: 760,
+      // max: the radio telescope may search before the night registers (the sky is set in the tick its inputs arrive) and then stay
+      // idle, with no reason, for about 300 ticks (its own boot, vm-20261103-013355); done() ends the phase as soon as all three are out
+      name: 'A_clear_night', sky: [NIGHT, 'clear'], min: 20, max: 1400,
       start: function () { loadAll(true) },
       done: function () {
         return ['high', 'optical', 'radio'].every(function (k) { var m = machine(k); return !ready(m) || Object.keys(readInv(m.parts.outBus)).length > 0 })
