@@ -1,4 +1,4 @@
-// priority: -10749
+// priority: -10752
 // -----------------------------------------------------------------------------------------------
 // UXV's Cassiopeia A machine and the emitter's gamma source (docs/eras/uxv.md, machines 21 and 8, process line 25; package UXV-B5): the ejecta
 // knot sweeper and the annihilation laser works, and their recipe types. The recipes come from data/grindless/tables/cas_a.json

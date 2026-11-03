@@ -1,3 +1,4 @@
+// priority: -10740
 // -----------------------------------------------------------------------------------------------
 // UXV casing family (package D4-CASE-UXV, docs/eras/lines-uev-uxv.md section 9): the four new structure blocks a UXV multiblock's
 // body is made of. A multiblock's body is its era's own family of casings, each needing a product only that era makes

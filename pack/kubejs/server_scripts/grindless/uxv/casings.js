@@ -1,3 +1,4 @@
+// priority: -26069
 // UXV casing family recipes (package D4-CASE-UXV, docs/eras/lines-uev-uxv.md section 9). Ids: startup_scripts/grindless/uxv/casings.js.
 // uxv_fusion_casing is a row of tables/fusion_mk6.json. No Vela or Cas A product goes in: these bodies are built before Vela
 // (docs/eras/uxv.md, bootstrap check), so the pasta casing takes the UIV field generator and the pulsed field casing the UIV emitter.

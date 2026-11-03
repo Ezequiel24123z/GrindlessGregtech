@@ -1,4 +1,4 @@
-// priority: 1668
+// priority: 1664
 // Gregtech Grindless - names and tooltips of UXV's ejecta knot sweeper and annihilation laser works, their items and the package's older rows
 // (startup_scripts/grindless/uxv/cas_a.js; package UXV-B5):
 //

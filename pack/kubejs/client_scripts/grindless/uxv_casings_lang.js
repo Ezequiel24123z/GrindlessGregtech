@@ -1,3 +1,4 @@
+// priority: 1676
 // Gregtech Grindless - names and tooltips of the UXV casing family (startup_scripts/grindless/uxv/casings.js):
 //   block.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1). Names go in en_us.
 (function () {

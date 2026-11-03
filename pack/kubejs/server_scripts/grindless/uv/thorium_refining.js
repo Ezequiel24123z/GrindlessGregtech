@@ -1,3 +1,4 @@
+// priority: -26039
 // -----------------------------------------------------------------------------------------------
 // Recipes of UV's thorium front end (docs/eras/lines-uv-uhv.md, V1 rows 1-8; package D3-TH-FRONT), generated at every server load from
 // data/grindless/tables/thorium_refining.json: n-butanol, TBP, the THOREX solvent, dissolution, extraction, strip, oxalate and thoria.

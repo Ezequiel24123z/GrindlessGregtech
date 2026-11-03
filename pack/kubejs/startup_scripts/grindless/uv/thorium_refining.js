@@ -1,3 +1,4 @@
+// priority: -10716
 // -----------------------------------------------------------------------------------------------
 // Ids of UV's thorium front end (docs/eras/lines-uv-uhv.md, V1 rows 2-12; package D3-TH-FRONT): the THOREX solvent line and the fuel
 // fabrication rows that turn thoria into pins. Recipes: server_scripts/grindless/uv/thorium_refining.js (table tables/thorium_refining.json)

@@ -1,3 +1,4 @@
+// priority: 1750
 // Gregtech Grindless - names and tooltips of UV's thorium front end (startup_scripts/grindless/uv/thorium_refining.js):
 //
 //   grindless:thoria_pellet / thorium_nitride_pellet / thoria_fuel_pin / thorium_nitride_fuel_pin / cladding_tube_15_15ti   names + two tooltip lines each
