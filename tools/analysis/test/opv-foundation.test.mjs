@@ -26,7 +26,8 @@ const ITEMS = ['bulge_relay_seed', 'launched_bulge_seed', 'chain_lamina_stack', 
   'silicate_debris_fraction', 'si_alloy_powder', 'cluster_sinter_casing', 'collector_node', 'spent_collector_node', 'deployed_node_pack',
   'probe_seed', 'vitamin_kit', 'pathfinder_probe', 'launched_pathfinder', 'pathfinder_probe_core', 'bulge_light_census', 'superheavy_census_iv',
   'element_124_recoil', 'element_126_recoil', 'chain_strand_repeater', 'sgr_a_chart'].map((n) => 'grindless:' + n);
-const BLOCKS = ['grindless:field_frozen_casing', 'grindless:annihilation_shield_casing', 'grindless:neg_xhv_casing'];
+const BLOCKS = ['grindless:field_frozen_casing', 'grindless:annihilation_shield_casing', 'grindless:neg_xhv_casing',
+  'grindless:chain_lamina_casing', 'grindless:tpv_wall_casing', 'grindless:kugelblitz_cavity_casing'];
 const MATERIALS = { 'gtceu:chain_strand': 'ingot', 'grindless:superfluid_helium_3': 'liquid', 'grindless:jet_proton_beam': 'gas', 'grindless:hot_pair_plasma': 'gas' };
 // F1 names it, uiv/tfln_femtosecond.js registers it
 const EXISTING = 'grindless:si28_soi_wafer';
@@ -79,7 +80,7 @@ test('the stand-in runs the OpV foundation and its names without errors', () => 
 
 test('the id list is pinned: count and every id', () => {
   assert.equal(ITEMS.length, 69);
-  assert.equal(BLOCKS.length, 3);
+  assert.equal(BLOCKS.length, 6);
   assert.equal(Object.keys(MATERIALS).length, 4);
   const got = run.global.grindless.opvFoundation;
   assert.deepEqual([...got.items], ITEMS);

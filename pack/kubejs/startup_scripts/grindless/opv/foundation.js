@@ -9,7 +9,8 @@
 //     them. There is no gtceu:opv_parallel_hatch in GTM: M1 registers it through lib/parallel_hatch.js.
 //   Items made by one package and used by another (docs/eras/opv.md F1): the relay seed, chain matter parts, crystals, wafers and dies,
 //     gamma optics, the antiproton beam line, antimatter cells, exotic matter, the Terzan 5 probe economy and the era's data items.
-//   Blocks (grindless:): field_frozen_casing, annihilation_shield_casing, neg_xhv_casing.
+//   Blocks (grindless:): field_frozen_casing, annihilation_shield_casing, neg_xhv_casing, and the family chain_lamina_casing,
+//     tpv_wall_casing, kugelblitz_cavity_casing (textures: tools/assets/Build-OpVCasingFamilyTextures.ps1; names: opv_casings_lang.js).
 //   Materials: gtceu:chain_strand is a GT material with an ingot, a wire and a single cable, 16 A at V[OpV] with no loss (S0-7); the
 //     three fluids keep the grindless: namespace like UXV's plasmas.
 //   Not registered here: grindless:si28_soi_wafer exists already (uiv/tfln_femtosecond.js); grindless:opv_smes_cell is W's; each
@@ -106,7 +107,11 @@
   const BLOCKS = {
     field_frozen_casing: { texture: 'grindless:block/opv/field_frozen_casing' },
     annihilation_shield_casing: { texture: 'grindless:block/opv/annihilation_shield_casing' },
-    neg_xhv_casing: { texture: 'grindless:block/opv/neg_xhv_casing' }
+    neg_xhv_casing: { texture: 'grindless:block/opv/neg_xhv_casing' },
+    // the bulge casing family (D5-CAS-OPV, docs/eras/lines-opv-maxplus.md 7.1): recipes in server_scripts/grindless/opv/casings.js
+    chain_lamina_casing: { texture: 'grindless:block/opv/chain_lamina_casing' },
+    tpv_wall_casing: { texture: 'grindless:block/opv/tpv_wall_casing' },
+    kugelblitz_cavity_casing: { texture: 'grindless:block/opv/kugelblitz_cavity_casing' }
   }
 
   // material key (with its namespace) -> form, colour and formula. cable: a 16 A wire and cable at V[OpV] with no loss (S0-7)

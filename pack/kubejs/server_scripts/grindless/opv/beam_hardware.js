@@ -20,7 +20,7 @@
 //   electric_blast_furnace   CeB6 from cerium and boron; the pickup tank vacuum-brazed; the spent LiH shield baked out (LiH back to the sinterer, the steel can and the
 //                            tungsten skin back as dust, the bred gas to the tritium removal facility)
 //   lathe                    the CeB6 boule cut to two cathodes; the kerf is CeB6 powder the crystal growth furnace grows again
-//   assembler                the five beam parts at VA[OpV] and grindless:neg_xhv_casing (2 OpV circuits, docs/eras/opv.md *Common*); the e-gun
+//   assembler                the four beam parts at VA[OpV]; grindless:neg_xhv_casing at 2^28 (the D5 casing family, docs/eras/lines-opv-maxplus.md 7.1); the e-gun
 //                            takes an activated NEG chamber (line 25) and the LiH shield the UEV lead-polymer liner
 //
 // grindless:spent_li6_shield (B3) is another package's id: a row that takes it skips itself (logged as pending, not as an error) until
@@ -87,10 +87,10 @@
     row('opv/cooler_electron_gun', 'assembler', null, [item('grindless:ceb6_cathode', 1), item('grindless:chain_field_coil', 2),
       item('grindless:activated_neg_chamber', 1), item('gtceu:tantalum_foil', 2), item('gtceu:copper_foil', 1)], [fluid(NITROGEN, 1000)],
       [item('grindless:cooler_electron_gun', 1)], [], OPV_VA, 400),
-    // line 25: the activated chambers in a titanium frame, two OpV circuits for the pumping controls (docs/eras/opv.md *Common*)
-    row('opv/neg_xhv_casing', 'assembler', null, [item('grindless:activated_neg_chamber', 4), item('gtceu:titanium_plate', 4),
-      item('gtceu:copper_foil', 2), item('gtceu:titanium_ring', 4), item('#gtceu:circuits/opv', 2)], [fluid(NITROGEN, 1000)],
-      [item('grindless:neg_xhv_casing', 2)], [], OPV_VA, 600)
+    // line 25: one activated chamber (the getter pumps the wall itself) in a stainless frame between two chain lamina stacks
+    row('opv/neg_xhv_casing', 'assembler', null, [item('grindless:activated_neg_chamber', 1), item('grindless:chain_lamina_stack', 2),
+      item('gtceu:stainless_steel_frame', 1)], [],
+      [item('grindless:neg_xhv_casing', 4)], [], 268435456, 400)
   ]
 
   function missingIds(r) {

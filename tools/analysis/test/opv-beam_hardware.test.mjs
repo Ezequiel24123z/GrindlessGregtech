@@ -95,7 +95,7 @@ test('the products: OpV assembler rows above V[UXV] with only OpV circuits, ever
     const circuits = itemsIn(rows[0]).filter((id) => /^#gtceu:circuits\//.test(id));
     assert.ok(circuits.every((c) => c === '#gtceu:circuits/opv'), `${n}: ${circuits}`);
   }
-  assert.deepEqual(itemsIn(makers('grindless:neg_xhv_casing')[0]).filter((id) => /circuits/.test(id)), ['#gtceu:circuits/opv']);
+  assert.deepEqual(itemsIn(makers('grindless:neg_xhv_casing')[0]).filter((id) => /circuits/.test(id)), []);
   for (const id of OPVB.items.concat(PRODUCTS)) {
     assert.ok(makers(id).length > 0, `${id} is made`);
     for (const r of makers(id)) assert.ok(euOf(r) > 0 && euOf(r) < MAX_INT, `${r.i}: ${euOf(r)} EU/t`);

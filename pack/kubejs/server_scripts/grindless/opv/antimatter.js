@@ -9,7 +9,7 @@
 //                                  stack (2^30 EU/t); both wear the gamma absorber tile.
 //   assembly_line                  the controllers (OpV hull + OpV components + OpV circuits + superfluid He-3 + 3 domain items, behind
 //                                  station research), grindless:assembly_line/<machine>.
-//   assembler                      the annihilation shield casing (2 OpV circuits).
+//   assembler                      the annihilation shield casing (4 per run at 2^28, no circuits; D5 casing family).
 //
 // Row keys: "site" true puts recipe.dimension(cygnus_x1_orbit) on it; "kept" are not consumed; "wear" are consumed by their chance (out of
 // 10000); "chanceOut" are outputs made by their chance; "generator" writes the EUt negative.
@@ -204,10 +204,10 @@
     })
   }
 
-  // the shield casing has no crafting-table recipe: an assembler at OpV with two OpV circuits
+  // the shield casing has no crafting-table recipe: an assembler at 2^28 (D5 casing family, docs/eras/lines-opv-maxplus.md 7.1)
   function addCasing(event) {
     var OUT = 'grindless:annihilation_shield_casing'
-    var ins = ['gtceu:opv_machine_casing', 'gtceu:tungsten_steel_plate', 'gtceu:opv_sensor', 'gtceu:lead_plate', 'gtceu:boron_carbide_dust']
+    var ins = ['gtceu:tungsten_plate', 'grindless:gamma_absorber_tile', 'grindless:li6_hydride_shield', 'grindless:chain_lamina_stack']
     var missing = [OUT].concat(ins).filter(function (id) { return !Item.exists(id) })
     AM.casingRecipe = ''
     if (missing.length > 0) {
@@ -215,13 +215,10 @@
       return
     }
     var b = event.recipes.gtceu.assembler('grindless:annihilation_shield_casing')
-    b.itemInputs('gtceu:opv_machine_casing')
-    b.itemInputs('4x gtceu:tungsten_steel_plate')
-    b.itemInputs('gtceu:opv_sensor', '4x gtceu:lead_plate', '2x gtceu:boron_carbide_dust')
-    b.itemInputs('2x #gtceu:circuits/opv')
-    b.inputFluids(Fluid.of('gtceu:superfluid_helium_3', 250))
-    b.itemOutputs('2x ' + OUT)
-    b.EUt(503316480).duration(200)
+    b.itemInputs('4x grindless:gamma_absorber_tile')
+    b.itemInputs('grindless:li6_hydride_shield', '2x grindless:chain_lamina_stack', '2x gtceu:tungsten_plate')
+    b.itemOutputs('4x ' + OUT)
+    b.EUt(268435456).duration(400)
     AM.casingRecipe = 'grindless:assembler/annihilation_shield_casing'
   }
 
