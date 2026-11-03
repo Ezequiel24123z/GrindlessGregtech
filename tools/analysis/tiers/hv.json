@@ -394,7 +394,7 @@
     { "id": "tank-wrapped", "label": "Composite-wrapped tank (autoclave: stainless barrel + para-aramid + epoxy + N2)", "item": "grindless:composite_overwrapped_tank" },
     { "id": "motor-without-tested", "label": "Untested rocket engine (HV assembler: 4 qualified thrusters + 2 tiles + Kapton K + stainless frame)", "item": "grindless:untested_rocket_motor" },
     { "id": "recipe-firing-motor", "label": "Test stand with an HV hatch: untested engine + rocket fuel -> basic rocket motor", "kind": "recipe", "type": "gtceu:static_fire", "output": "gcyr:basic_rocket_motor", "input": ["grindless:untested_rocket_motor", "fluid:gtceu:rocket_fuel"] },
-    { "id": "fuel-rocket", "label": "Rocket fuel (dimethylhydrazine + O2 or N2O4; 8 B for the Moon and 0.5 B per static firing)", "fluid": "gtceu:rocket_fuel" },
+    { "id": "fuel-rocket", "label": "Rocket fuel (Aerozine 50 + N2O4; 8 B for the Moon and 0.5 B per static firing)", "fluid": "gtceu:rocket_fuel" },
     { "id": "rocket-chip-destination", "label": "GCYR destination chip (magnetic iron sheet + PE plate + the lunar landing chart, which isn't consumed)", "item": "gcyr:id_chip" },
     { "id": "motor-only-from-bench", "label": "The basic rocket motor only comes from the static firing: without the test stand there's no motor", "item": "gcyr:basic_rocket_motor", "without": ["operate:gtceu:engine_test_stand*"], "expect": "unreachable" },
     { "id": "motor-needs-thrusters-qualified", "label": "Without the MV thruster firing there's no untested engine", "item": "grindless:untested_rocket_motor", "without": ["grindless:static_fire/power_thrusters"], "expect": "unreachable" },

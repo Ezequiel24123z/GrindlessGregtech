@@ -428,12 +428,14 @@
     }
     check(SCOPE, 'methanol_ratio', ratioOk, ratioDetail)
 
-    // the rocket: GTM's rocket fuel through methanol and ammonia, and GCYR's own hydrogen fuel
-    var chain = ['gtceu:mixer/rocket_fuel_from_dinitrogen_tetroxide', 'gtceu:chemical_reactor/dimethylhydrazine_from_methanol',
-      'gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia', 'gtceu:chemical_reactor/ammonia_from_elements',
+    // the rocket: rocket fuel from Aerozine 50 and N2O4 (methanol, ammonia and the peroxide cycle), and GCYR's own hydrogen fuel
+    var chain = ['grindless:mixer/rocket_fuel', 'grindless:mixer/aerozine_50', 'gtceu:chemical_plant/hydrazine',
+      'gtceu:chemical_plant/hydrogen_peroxide_air', 'gtceu:chemical_plant/ethyl_anthra_hydro_quinone',
+      'gtceu:chemical_reactor/dimethylhydrazine_from_dimethylamine', 'gtceu:chemical_reactor/dimethylamine', 'gtceu:chemical_reactor/monochloramine',
+      'gtceu:chemical_reactor/hypochlorous_acid', 'gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia', 'gtceu:chemical_reactor/ammonia_from_elements',
       'gtceu:chemical_reactor/methanol_from_monoxide', 'gcyr:rocket_fuel/hydrogen', 'gcyr:rocket_fuel/rocket_fuel']
     var missingChain = present(chain)
-    check(SCOPE, 'rocket_chain', missingChain.length === 0, 'rocket fuel = UDMH (methanol + ammonia) + N2O4 (ammonia), and GCYR burns hydrogen as a tier 1 fuel' +
+    check(SCOPE, 'rocket_chain', missingChain.length === 0, 'rocket fuel = Aerozine 50 (hydrazine from the plant: ammonia + peroxide; UDMH from dimethylamine and monochloramine) + N2O4 (ammonia), and GCYR burns hydrogen as a tier 1 fuel' +
       (missingChain.length > 0 ? ' missing=' + missingChain.join(',') : ''))
     try {
       note(SCOPE, 'h2_bill', h2Bill())
@@ -465,25 +467,42 @@
 
   // the hydrogen and CO of 8 B of rocket fuel (what GCYR's tank must hold to fly to the Moon), from GTM's recipes as they are loaded
   function h2Bill() {
-    var rf = readRecipe('gtceu:mixer/rocket_fuel_from_dinitrogen_tetroxide')
-    var udmh = readRecipe('gtceu:chemical_reactor/dimethylhydrazine_from_methanol')
+    var rf = readRecipe('grindless:mixer/rocket_fuel')
+    var mix = readRecipe('grindless:mixer/aerozine_50')
+    var hz = readRecipe('gtceu:chemical_plant/hydrazine')
+    var eahq = readRecipe('gtceu:chemical_plant/ethyl_anthra_hydro_quinone')
+    var perox = readRecipe('gtceu:chemical_plant/hydrogen_peroxide_air')
+    var dma = readRecipe('gtceu:chemical_reactor/dimethylamine')
+    var mcl = readRecipe('gtceu:chemical_reactor/monochloramine')
+    var udmh = readRecipe('gtceu:chemical_reactor/dimethylhydrazine_from_dimethylamine')
     var n2o4 = readRecipe('gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia')
     var nh3 = readRecipe('gtceu:chemical_reactor/ammonia_from_elements')
     var meoh = readRecipe('gtceu:chemical_reactor/methanol_from_monoxide')
     var fuel = 8000
     var runsRf = fuel / fluidAmount(rf, 'fluidsOut', 'rocket_fuel')
-    var udmhNeed = runsRf * fluidAmount(rf, 'fluidsIn', 'dimethylhydrazine')
+    var a50Need = runsRf * fluidAmount(rf, 'fluidsIn', 'aerozine_50')
     var n2o4Need = runsRf * fluidAmount(rf, 'fluidsIn', 'dinitrogen_tetroxide')
+    var runsMix = a50Need / fluidAmount(mix, 'fluidsOut', 'aerozine_50')
+    var hzNeed = runsMix * fluidAmount(mix, 'fluidsIn', 'hydrazine')
+    var udmhNeed = runsMix * fluidAmount(mix, 'fluidsIn', 'dimethylhydrazine')
+    var runsHz = hzNeed / fluidAmount(hz, 'fluidsOut', 'hydrazine')
+    var peroxNeed = runsHz * fluidAmount(hz, 'fluidsIn', 'hydrogen_peroxide')
+    // the peroxide cycle gives its EAQ back: every peroxide mB costs the hydrogen that turns one mB of EAQ into EAHQ
+    var h2Perox = peroxNeed / fluidAmount(perox, 'fluidsOut', 'hydrogen_peroxide') * fluidAmount(perox, 'fluidsIn', 'ethyl_anthra_hydro_quinone') /
+      fluidAmount(eahq, 'fluidsOut', 'ethyl_anthra_hydro_quinone') * fluidAmount(eahq, 'fluidsIn', 'hydrogen')
     var runsUdmh = udmhNeed / fluidAmount(udmh, 'fluidsOut', 'dimethylhydrazine')
+    var methanolNeed = runsUdmh * fluidAmount(dma, 'fluidsIn', 'methanol') * fluidAmount(udmh, 'fluidsIn', 'dimethylamine') / fluidAmount(dma, 'fluidsOut', 'dimethylamine')
     var runsN2o4 = n2o4Need / fluidAmount(n2o4, 'fluidsOut', 'dinitrogen_tetroxide')
-    var methanolNeed = runsUdmh * fluidAmount(udmh, 'fluidsIn', 'methanol')
-    var ammoniaNeed = runsUdmh * fluidAmount(udmh, 'fluidsIn', 'ammonia') + runsN2o4 * fluidAmount(n2o4, 'fluidsIn', 'ammonia')
+    // UDMH takes ammonia twice: once in its dimethylamine, once in its monochloramine
+    var ammoniaNeed = runsHz * fluidAmount(hz, 'fluidsIn', 'ammonia') + runsN2o4 * fluidAmount(n2o4, 'fluidsIn', 'ammonia') +
+      runsUdmh * (fluidAmount(udmh, 'fluidsIn', 'dimethylamine') / fluidAmount(dma, 'fluidsOut', 'dimethylamine') * fluidAmount(dma, 'fluidsIn', 'ammonia') +
+        fluidAmount(udmh, 'fluidsIn', 'monochloramine') / fluidAmount(mcl, 'fluidsOut', 'monochloramine') * fluidAmount(mcl, 'fluidsIn', 'ammonia'))
     var runsMeoh = methanolNeed / fluidAmount(meoh, 'fluidsOut', 'methanol')
     var runsNh3 = ammoniaNeed / fluidAmount(nh3, 'fluidsOut', 'ammonia')
-    var h = runsMeoh * fluidAmount(meoh, 'fluidsIn', 'hydrogen') + runsNh3 * fluidAmount(nh3, 'fluidsIn', 'hydrogen')
+    var h = h2Perox + runsMeoh * fluidAmount(meoh, 'fluidsIn', 'hydrogen') + runsNh3 * fluidAmount(nh3, 'fluidsIn', 'hydrogen')
     var co = runsMeoh * fluidAmount(meoh, 'fluidsIn', 'carbon_monoxide')
-    return fuel + ' mB of rocket fuel need ' + Math.round(h) + ' mB of hydrogen and ' + Math.round(co) + ' mB of CO (methanol ' + Math.round(methanolNeed) +
-      ', ammonia ' + Math.round(ammoniaNeed) + '); the plant: mode 2 gives the methanol syngas from ' + (co / 2000 * 3).toFixed(1) + ' dust, mode 3 the rest of the hydrogen from ' +
+    return fuel + ' mB of rocket fuel need ' + Math.round(h) + ' mB of hydrogen (peroxide cycle ' + Math.round(h2Perox) + ') and ' + Math.round(co) + ' mB of CO (methanol ' + Math.round(methanolNeed) +
+      ', ammonia ' + Math.round(ammoniaNeed) + ', hydrazine ' + Math.round(hzNeed) + ', UDMH ' + Math.round(udmhNeed) + '); the plant: mode 2 gives the methanol syngas from ' + (co / 2000 * 3).toFixed(1) + ' dust, mode 3 the rest of the hydrogen from ' +
       ((h - co * 4) / 4000).toFixed(1) + ' dust. GCYR also flies on 8 000 mB of plain hydrogen (2 dust of mode 3 each 4 000 mB)'
   }
 
@@ -518,8 +537,9 @@
     var have = recipeCount(TYPE_ID)
     try {
       var rp = recipeChecks()
-      // Orbit-only rows (UV-B3 Pluto shift, c5) live in SYN.orbitRecipes and are checked by gg_test_uv_pluto_ices.
-      var expected = SYN.recipes.length + (SYN.orbitRecipes || []).length
+      // Rows published apart (UV-B3 Pluto shift c5 in SYN.orbitRecipes, checked by gg_test_uv_pluto_ices; the UEV, UIV and UXV rows in
+      // SYN.uevRecipes, .uivRecipes and .uxvRecipes) are syngas recipes too: all of them count.
+      var expected = SYN.recipes.length + ['orbitRecipes', 'uevRecipes', 'uivRecipes', 'uxvRecipes'].reduce(function (n, k) { return n + (SYN[k] || []).length }, 0)
       check(SCOPE, 'recipes', rp.length === 0 && have === expected,
         'gtceu:syngas recipes=' + have + '/' + expected + ' [' + SYN.recipes.map(function (p) {
           return p.name + ' c' + p.circuit + ' ' + p.eut + 'x' + p.duration
