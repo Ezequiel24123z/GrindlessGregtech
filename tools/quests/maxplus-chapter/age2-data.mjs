@@ -206,4 +206,10 @@ export const QUESTS = [
     rewards: [xp(300)],
   },
 ];
+// Shipped shapes and Terminal passes (a pass is up to 2,300 blocks), from the structure dump.
+const SIZE = { J_M31: ['17 by 51 by 17', 4], J_VOID: ['19 by 19 by 19', 2], SCALE: ['25 by 13 by 33', 5] };
+for (const q of QUESTS) {
+  const s = SIZE[q.key];
+  if (s && q.teach) q.teach.needs += ` Its shape is ${s[0]}, built by the Terminal in ${s[1]} passes.`;
+}
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

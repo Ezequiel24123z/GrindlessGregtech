@@ -162,7 +162,7 @@ export const QUESTS = [
     key: 'HG_STRUCT', kind: 'reading', title: 'The Structure', icon: 'grindless:hyperstargate_ring_block',
     deps: ['HG_IRIS', 'HG_IFACE', 'HG_LOCKED', 'HG_BASE'], x: 13, y: 5.5,
     desc: [
-      'The ring stands 41 by 43 by 9 at Sgr A* orbit: 151 ring blocks and 9 locked chevrons on the ring. The base row holds the iris, the base, 4 power units and a 4,096 A wireless MAX+ hatch: the dial draws its power through that hatch from the network store, which only the capacitor banks make large enough.',
+      'The ring stands in a 59 by 60 by 23 shell at Sgr A* orbit: 151 ring blocks and 9 locked chevrons on the ring, wrapped in a jacket of horizon gate casing, a cold channel of primordial cryostat casing, void diamond windows and an Fe-56 pedestal. The base row holds the iris, the base, 4 power units and a 4,096 A wireless MAX+ hatch: the dial draws its power through that hatch from the network store, which only the capacitor banks make large enough.',
     ],
     tasks: [ck()],
     rewards: [xp(100)],
@@ -212,4 +212,13 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
 ];
+// Shipped shapes and Terminal passes (a pass is up to 2,300 blocks), from the structure dump.
+const SIZE = {
+  TR_FURN: ['21 by 23 by 21', 3], TR_COND: ['25 by 15 by 25', 5], TR_BANK: ['41 by 9 by 41', 2], TR_ARRAY: ['33 by 13 by 33', 7],
+  HG_MACH: ['59 by 60 by 23', 6],
+};
+for (const q of QUESTS) {
+  const s = SIZE[q.key];
+  if (s && q.teach) q.teach.needs += ` Its shape is ${s[0]}, built by the Terminal in ${s[1]} passes.`;
+}
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));
