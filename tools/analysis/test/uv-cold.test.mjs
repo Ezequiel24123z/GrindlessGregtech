@@ -19,7 +19,7 @@ const byId = (id) => recipes.find((r) => r.i === id || r.i === id.replace(/^grin
 const row = (name) => C.recipes.find((r) => r.name === name);
 const circuitOf = (r) => r.j.inputs.item.filter((i) => i.content.type === 'gtceu:circuit').map((i) => i.content.configuration);
 const read = (rel) => fs.readFileSync(path.join(pack, 'kubejs', rel), 'utf8');
-const NEW_ITEMS = ['rrr_niobium_sheet', 'niobium_scrap', 'bare_srf_cavity', 'srf_cavity', 'mu_metal_shield'];
+const NEW_ITEMS = ['rrr_niobium_sheet', 'niobium_scrap', 'bare_srf_cavity', 'srf_cavity', 'mu_metal_shield', 'niobium_half_cell', 'dressed_srf_cavity'];
 const MATERIALS = ['electropolish_acid', 'spent_electropolish_acid'];
 const VA = 122880;
 // ids of GTM or other packages that the stand-in may not know
@@ -32,7 +32,7 @@ test('the stand-in runs the cold scripts without errors, nothing clashing', () =
   assert.deepEqual(C.skipped.filter((s) => !EXTERNAL.test(s.reason)), []);
 });
 
-test('registration: two recipe types, two machines, five items', () => {
+test('registration: two recipe types, two machines, seven items', () => {
   assert.ok(run.registry.recipeTypes.has('gtceu:superfluid_helium'));
   assert.ok(run.registry.recipeTypes.has('gtceu:srf_cavity'));
   assert.deepEqual(run.registry.machines.get('gtceu:superfluid_helium_plant').recipeTypes, ['gtceu:superfluid_helium']);
@@ -89,14 +89,14 @@ test('contract numbers: RRR, cavity, surface, cryomodule', () => {
   const rrr = row('rrr');
   assert.deepEqual(rrr.itemsIn, [{ id: 'gtceu:niobium_ingot', count: 4 }]);
   assert.deepEqual(rrr.itemsOut, [{ id: 'grindless:rrr_niobium_sheet', count: 3 }, { id: 'grindless:niobium_scrap', count: 1 }]);
-  assert.deepEqual(row('cavity').itemsIn, [{ id: 'grindless:rrr_niobium_sheet', count: 9 }]);
+  assert.deepEqual(row('cavity').itemsIn, [{ id: 'grindless:niobium_half_cell', count: 18 }]);
   assert.deepEqual(row('cavity').itemsOut, [{ id: 'grindless:bare_srf_cavity', count: 1 }]);
   const surface = row('surface');
   assert.deepEqual(surface.fluidsIn, [{ id: 'gtceu:electropolish_acid', amount: 500 }, { id: 'gtceu:nitrogen', amount: 100 }]);
   assert.deepEqual(surface.itemsOut, [{ id: 'grindless:srf_cavity', count: 1 }]);
   assert.deepEqual(surface.fluidsOut, [{ id: 'gtceu:spent_electropolish_acid', amount: 500 }]);
   const mod = row('cryomodule');
-  assert.deepEqual(mod.itemsIn, [{ id: 'grindless:srf_cavity', count: 8 }, { id: 'gtceu:uv_field_generator', count: 2 }, { id: 'grindless:mu_metal_shield', count: 1 }]);
+  assert.deepEqual(mod.itemsIn, [{ id: 'grindless:dressed_srf_cavity', count: 8 }, { id: 'gtceu:uv_field_generator', count: 2 }, { id: 'grindless:mu_metal_shield', count: 1 }]);
   assert.deepEqual(mod.fluidsIn, [{ id: 'gtceu:superfluid_helium', amount: 4000 }]);
   assert.deepEqual(mod.itemsOut, [{ id: 'grindless:srf_cryomodule', count: 1 }]);
 });

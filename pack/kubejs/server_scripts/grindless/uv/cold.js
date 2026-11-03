@@ -10,9 +10,11 @@
 //                (only helium-4 passes a superleak; the concentrate goes to ZPM's isotope column unchanged)             122,880 x 200 t
 //   SRF cavity works (type gtceu:srf_cavity; the programmed circuit picks the step)
 //     1 rrr      4 niobium ingots -> 3 RRR niobium sheets + 1 niobium scrap (electron-beam melted five times)           30,720 x 300 t
-//     2 cavity   9 RRR sheets -> 1 bare nine-cell cavity                                                                30,720 x 300 t
+//     14 half_cells  1 RRR sheet -> 2 niobium half-cells (deep drawing)                                                   30,720 x 200 t
+//     2 cavity   18 half-cells (nine sheets) -> 1 bare nine-cell cavity                                                 30,720 x 300 t
+//     15 dressed_cavity  1 SRF cavity + 2 titanium plates + 100 mB helium (leak-test fill) -> 1 dressed SRF cavity      61,440 x 300 t
 //     3 surface  1 bare cavity + 500 mB electropolish acid + 100 mB nitrogen -> 1 N-doped cavity + 500 mB spent acid    122,880 x 200 t
-//     4 module   8 cavities + 4,000 mB superfluid helium + 2 UV field generators + 1 mu-metal shield -> 1 SRF cryomodule 122,880 x 600 t
+//     4 module   8 dressed cavities + 4,000 mB superfluid helium + 2 UV field generators + 1 mu-metal shield -> 1 SRF cryomodule 122,880 x 600 t
 //   side steps (no new machine)
 //     electropolish acid  mixer: 500 mB hydrofluoric acid + 500 mB sulfuric acid -> 1,000 mB electropolish acid
 //     scrap               macerator: 1 niobium scrap -> 1 niobium dust (GTM's own dust -> ingot recipe takes it back to step 1)
@@ -43,6 +45,8 @@
   var CRYOMODULE_BLOCK = UV.srfCryomoduleBlock || 'grindless:srf_cryomodule_block'
   var SHEET = 'grindless:rrr_niobium_sheet'
   var SCRAP = 'grindless:niobium_scrap'
+  var HALF_CELL = 'grindless:niobium_half_cell'
+  var DRESSED = 'grindless:dressed_srf_cavity'
   var BARE = 'grindless:bare_srf_cavity'
   var CAVITY = 'grindless:srf_cavity'
   var SHIELD = 'grindless:mu_metal_shield'
@@ -60,11 +64,17 @@
       fluidsOut: [fluid(SUPERFLUID, 990), fluid(HE3, 10)], eut: VA, duration: 200 },
     { name: 'rrr', type: 'srf_cavity', circuit: 1, itemsIn: [item('gtceu:niobium_ingot', 4)], fluidsIn: [],
       itemsOut: [item(SHEET, 3), item(SCRAP, 1)], fluidsOut: [], eut: VA / 4, duration: 300 },
-    { name: 'cavity', type: 'srf_cavity', circuit: 2, itemsIn: [item(SHEET, 9)], fluidsIn: [], itemsOut: [item(BARE, 1)], fluidsOut: [],
+    // D3-SRF (docs/eras/lines-uv-uhv.md V4 rows 2, 3, 5): the sheet deep-drawn into two half-cells (c14), 18 of them electron-beam welded into
+    // the bare cavity (c2; nine sheets a cavity, as before), the finished cavity welded into its titanium helium vessel (c15)
+    { name: 'half_cells', type: 'srf_cavity', circuit: 14, itemsIn: [item(SHEET, 1)], fluidsIn: [], itemsOut: [item(HALF_CELL, 2)], fluidsOut: [],
+      eut: VA / 4, duration: 200 },
+    { name: 'cavity', type: 'srf_cavity', circuit: 2, itemsIn: [item(HALF_CELL, 18)], fluidsIn: [], itemsOut: [item(BARE, 1)], fluidsOut: [],
       eut: VA / 4, duration: 300 },
+    { name: 'dressed_cavity', type: 'srf_cavity', circuit: 15, itemsIn: [item(CAVITY, 1), item('gtceu:titanium_plate', 2)],
+      fluidsIn: [fluid('gtceu:helium', 100)], itemsOut: [item(DRESSED, 1)], fluidsOut: [], eut: VA / 2, duration: 300 },
     { name: 'surface', type: 'srf_cavity', circuit: 3, itemsIn: [item(BARE, 1)], fluidsIn: [fluid(ACID, 500), fluid('gtceu:nitrogen', 100)],
       itemsOut: [item(CAVITY, 1)], fluidsOut: [fluid(SPENT, 500)], eut: VA, duration: 200 },
-    { name: 'cryomodule', type: 'srf_cavity', circuit: 4, itemsIn: [item(CAVITY, 8), item('gtceu:uv_field_generator', 2), item(SHIELD, 1)],
+    { name: 'cryomodule', type: 'srf_cavity', circuit: 4, itemsIn: [item(DRESSED, 8), item('gtceu:uv_field_generator', 2), item(SHIELD, 1)],
       fluidsIn: [fluid(SUPERFLUID, 4000)], itemsOut: [item(CRYOMODULE, 1)], fluidsOut: [], eut: VA, duration: 600 },
     // UIV-A2 (docs/eras/uiv.md, line 1): liquid para-H2 frozen in a superfluid helium bath into the solid target the pulser compresses
     { name: 'para_h2_target', type: 'srf_cavity', circuit: 5, itemsIn: [], fluidsIn: [fluid('gtceu:liquid_para_hydrogen', 1000), fluid(SUPERFLUID, 100)],
