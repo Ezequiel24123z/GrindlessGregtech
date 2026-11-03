@@ -416,13 +416,15 @@
     var st = w.settle(S.server)
     var after = snapshot()
     var want = 2 * CELL_EU + w.cells[UEV_CELL].capacity
-    var uevGot = after.uev2 - before.uev2
-    var uevCap = w.rate(UEV, 2) * w.settleTicks
-    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === UEV && Number(st.capacity) === want &&
-          after.uiv2 === 0 && after.uiv16 === 0 && after.uiv64 === 0 && Number(st.skippedAbove) === 3 && uevGot === uevCap,
-      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + UEV +
-      '); ' + st.skippedAbove + ' hatches above it skipped (want 3), the UIV hatches hold ' + after.uiv2 + ', ' + after.uiv16 + ' and ' + after.uiv64 + ' EU (want 0); the UEV hatch got ' + uevGot +
-      ' EU (want ' + uevCap + ')')
+    var lowGot = after.uev2 - before.uev2
+    var lowCap = w.rate(UEV, 2) * w.settleTicks
+    var fed = ['uiv2', 'uiv16', 'uiv64'].every(function (k) { return after[k] - before[k] > 0 && after[k] - before[k] <= w.rate(UIV, hatch(k).amps) * w.settleTicks })
+    // the network's tier is its strongest cell (pack wireless_energy.js): the UIV cells of tower A lift it, so every hatch is fed and none is skipped
+    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === UIV && Number(st.capacity) === want &&
+          fed && Number(st.skippedAbove) === 0 && lowGot > 0 && lowGot <= lowCap,
+      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + UIV +
+      ', the strongest cell); ' + st.skippedAbove + ' hatches skipped (want 0), the UIV hatches got ' + (after.uiv2 - before.uiv2) + ', ' + (after.uiv16 - before.uiv16) + ' and ' + (after.uiv64 - before.uiv64) + ' EU (want each > 0 and within its cap); the UEV hatch got ' + lowGot +
+      ' EU (want 1..' + lowCap + ')')
   }
 
   function swapB() {
@@ -442,6 +444,7 @@
     // the capacity in status() is the last settlement's: JUMP checks it after the next one
     check('STORED', Number(full.stored) === want && want > Math.pow(2, 39),
       'set ' + want + ' EU (3 x ' + CELL_EU + ', above 2^39), the network reports stored ' + full.stored)
+    HATCHES.forEach(function (h) { var m = machineAt(h); m.energyContainer.changeEnergy(-Number(m.energyContainer.getEnergyStored())) })
     var before = snapshot()
     var st = w.settle(S.server)
     var after = snapshot()

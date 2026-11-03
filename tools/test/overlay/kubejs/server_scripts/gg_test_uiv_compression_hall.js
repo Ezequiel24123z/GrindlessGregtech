@@ -1,6 +1,6 @@
 // priority: -8360
 // TEST ONLY, UIV-M2 (gtceu:neutronium_compression_hall). Command: kubejs custom_command gg_test_uiv_compression_hall
-// Band ONLY: X 35840-35903, Z 0-63, Overworld Y 98-112.
+// Band ONLY: X 35840-35903, Z 0-76, Overworld Y 98-112.
 //   T1 (named uncertainty: the pellet count read from an input bus inside a modifier; the implosion recipe keeps its explosive):
 //     formed     hall A (no hatch) and hall B (UIV parallel hatch) form
 //     c4         4 pellets + a compressor probe (30 EU/t): 256 copies
@@ -16,6 +16,7 @@
   var X1 = 35903
   var Y0 = 98
   var Y1 = 112
+  var Z1 = 76
   var NAME = 'uiv_compression_hall'
   var ID = 'gtceu:neutronium_compression_hall'
   var PELLET = 'grindless:neutronium_pellet'
@@ -68,7 +69,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in minecraft:overworld run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -303,19 +304,19 @@
   }
 
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false }
     S.level = server.getLevel('minecraft:overworld')
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     clear()
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     try { S.units = build() } catch (e) { check('build_exception', false, errText(e)); S.units = [] }

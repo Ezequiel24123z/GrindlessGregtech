@@ -6929,9 +6929,9 @@
 		{
 			dependencies: ["16DE3DA155AA3D06"]
 			description: [
-				"One slurry furnace: MAX x256 A, 137,438,953,472 EU/t, 100 t per run (horizon_crystal_furnace/horizon_crystal_slurry). Per minute it takes 12,000 mB stellar plasma, 12,000 mB kerr condensate and makes 12,000 mB horizon crystal slurry. Each run needs room for 1,000 mB horizon crystal slurry, 1,000 mB kerr condensate. Seven more plasmas and beams come in alongside, 12,000 mB a minute each."
-				"Bottleneck: 500 slurry furnaces to 3 core boule furnaces (12,000 against 2,000,000 mB per minute of horizon crystal slurry). Slurry is the bottleneck: the furnaces that make it outnumber the boule furnaces about 167 to 1."
-				"Bottleneck: 125 slurry furnaces to 3 controller boule furnaces (12,000 against 500,000 mB per minute of horizon crystal slurry)."
+				"One slurry furnace: MAX x256 A, 137,438,953,472 EU/t, 100 t per run. Per minute: 12,000 mB stellar plasma, 12,000 mB kerr condensate in, 12,000 mB horizon crystal slurry out. Seven more inputs, 12,000 mB each."
+				"Bottleneck: 500 slurry furnaces to 3 core boule furnaces (12,000 against 2,000,000 mB per minute). Slurry is the bottleneck."
+				"Bottleneck: 125 slurry furnaces to 3 controller boule furnaces (12,000 against 500,000 mB per minute)."
 			]
 			icon: "gtceu:horizon_crystal_furnace"
 			id: "7A9A30E48F8CE513"
@@ -7053,7 +7053,7 @@
 		}
 		{
 			dependencies: ["394D43D092298C2C", "724595D2389EB8E4"]
-			description: ["One core boule furnace: MAX x1024 A, 549,755,813,888 EU/t, 2,400 t per run (horizon_crystal_furnace/core_crystal_boule). Per minute it takes 2,000,000 mB horizon crystal slurry, 50,000 mB kerr condensate and makes 0.5 items core crystal boule. Each run needs room for 4,000,000 mB horizon crystal slurry, 100,000 mB kerr condensate. The slurry buffer must hold 4,000,000 mB before a run starts."]
+			description: ["One core boule furnace: MAX x1024 A, 549,755,813,888 EU/t, 2,400 t per run. Per minute: 2,000,000 mB horizon crystal slurry, 50,000 mB kerr condensate in, 0.5 core crystal boule out. The slurry buffer must hold 4,000,000 mB before a run starts."]
 			icon: "gtceu:horizon_crystal_furnace"
 			id: "3AB9CBE52532A455"
 			shape: "gear"
@@ -7228,7 +7228,7 @@
 		}
 		{
 			dependencies: ["78D8F9B6B6B1FD61"]
-			description: ["One controller boule furnace: MAX x1024 A, 549,755,813,888 EU/t, 2,400 t per run (horizon_crystal_furnace/controller_crystal_boule). Per minute it takes 500,000 mB horizon crystal slurry and makes 0.5 items controller crystal boule. Each run needs room for 1,000,000 mB horizon crystal slurry."]
+			description: ["One controller boule furnace: MAX x1024 A, 549,755,813,888 EU/t, 2,400 t per run. Per minute: 500,000 mB horizon crystal slurry in, 0.5 controller crystal boule out."]
 			icon: "gtceu:horizon_crystal_furnace"
 			id: "5CAD369EF7847C22"
 			shape: "gear"

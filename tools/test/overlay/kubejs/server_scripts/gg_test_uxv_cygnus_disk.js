@@ -1,6 +1,6 @@
 // priority: -9791
 // TEST ONLY, UXV-B3 (gtceu:accretion_disk_skimmer, gtceu:frc_former, gtceu:bz_dynamo). Command: kubejs custom_command gg_test_uxv_cygnus_disk
-// Band ONLY: X 36864-36927, Z 0-63, Y 98-115, built in grindless:cygnus_x1_orbit (the dimension their recipes are locked to).
+// Band ONLY: X 36864-36927, Z 0-110, Y 98-120 (the three units one behind the other), built in grindless:cygnus_x1_orbit (the dimension their recipes are locked to).
 //   T1 (named uncertainty: the BZ dynamo's spin_down row, written final at 2^30 EU/t as a generator, starts in the orbit with 400 mB of
 //   flux-loaded plasma and its two UIV 16 A dynamo hatches (2^29 each) carry and receive the whole 2^30 EU/t):
 //     lookup     every row, the older magnet works row and the four controllers' assembly lines are in the recipe manager
@@ -14,7 +14,8 @@
   var X0 = 36864
   var X1 = 36927
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 120
+  var Z1 = 110
   var NAME = 'uxv_cygnus_disk'
   var DIM = 'grindless:cygnus_x1_orbit'
   var CY = 106
@@ -30,9 +31,9 @@
   ]
 
   var UNITS = [
-    { name: 'skimmer', id: 'gtceu:accretion_disk_skimmer', cx: 36872, z: 2, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_hatch'], energy: 2, run: false },
-    { name: 'former', id: 'gtceu:frc_former', cx: 36892, z: 2, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch'], energy: 2, run: false },
-    { name: 'dynamo', id: 'gtceu:bz_dynamo', cx: 36912, z: 2, parts: [DYNAMO, DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_input_hatch'], energy: 0, run: true }
+    { name: 'skimmer', id: 'gtceu:accretion_disk_skimmer', cx: 36896, z: 2, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_hatch'], energy: 2, run: false },
+    { name: 'former', id: 'gtceu:frc_former', cx: 36896, z: 24, parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch'], energy: 2, run: false },
+    { name: 'dynamo', id: 'gtceu:bz_dynamo', cx: 36896, z: 68, parts: [DYNAMO, DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_input_hatch'], energy: 0, run: true }
   ]
 
   function classes() {
@@ -67,7 +68,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in ' + DIM + ' run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -216,19 +217,19 @@
   }
 
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false }
     S.level = server.getLevel(DIM)
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     clear()
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []

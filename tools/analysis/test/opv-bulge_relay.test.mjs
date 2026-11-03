@@ -146,14 +146,14 @@ test('A0 adds no OpV component and no OpV circuit tag (opv.md "Bootstrap check")
   }
 });
 
-test('the zone row: band X 37824-37887, Z 0-63, Y 98-115, its test, inside no other row', () => {
+test('the zone row: band X 37824-37887, Z 0-63, Y 98-128, its test, inside no other row', () => {
   const z = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'test', 'zones.json'), 'utf8'));
   const rows = z.zones || z.bands || z;
   const zone = rows.find((b) => b.id === 'opv_bulge_relay');
   assert.ok(zone, 'zones.json row');
   assert.deepEqual(zone.x, [37824, 37887]);
   assert.deepEqual(zone.z, [0, 63]);
-  assert.deepEqual(zone.y, [98, 115]);
+  assert.deepEqual(zone.y, [98, 128]);
   assert.deepEqual(zone.tests, ['opv_bulge_relay', 'opv_chain_matter']);
   assert.match(zone.note, /^OpV-A0:/);
   for (const o of rows) {

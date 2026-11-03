@@ -1,7 +1,7 @@
 // priority: -6524
 // TEST ONLY, OpV-A0 chain matter (process lines 1 and 2). Command: kubejs custom_command gg_test_opv_chain_matter
 // Markers: GGTEST|opv_chain_matter|<check>|PASS/FAIL|..., then GGTEST|opv_chain_matter|DONE|failures=N.
-// Band ONLY: X 37824-37887, Z 0-63, Y 98-115 (zones.json row opv_bulge_relay), built in grindless:sgr1806_orbit, the dimension the OpV-A0 rows of
+// Band ONLY: X 37824-37887, Z 0-63, Y 98-128 (zones.json row opv_bulge_relay), built in grindless:sgr1806_orbit, the dimension the OpV-A0 rows of
 // tables/vela_pasta.json are locked to. gg_test_opv_bulge_relay uses the same band in grindless:cygnus_x1_orbit; the SGR platform (64,100,64) is far.
 // Doubt: UXV-B4's four pasta machines form at SGR 1806-20 with UXV hatches and run the new circuit 3-5 rows there (the rows existed only at Vela).
 //   lookup      the 11 OpV-A0 rows, the PBO plant's c8 braid and the strand cable covering are in the recipe manager
@@ -16,7 +16,7 @@
   var X0 = 37824
   var X1 = 37887
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 128
   var NAME = 'opv_chain_matter'
   var DIM = 'grindless:sgr1806_orbit'
   var CY = 102
@@ -35,16 +35,16 @@
 
   // feed: the input bus; recipe: the row expected to run; out: [id, at least] in the output bus; stays/gone: input bus after the run
   var UNITS = [
-    { name: 'extractor', id: 'gtceu:pasta_extractor', cx: 37830, z: 8,
+    { name: 'extractor', id: 'gtceu:pasta_extractor', cx: 37825, z: 4,
       feed: [[CIRCUIT, 1, C3], ['grindless:bulge_chart', 1], ['grindless:neutronium_pellet', 4]],
       recipe: 'grindless:pasta_extraction/chain_crust', out: [['grindless:chain_crust_slab', 1]], stays: 'grindless:bulge_chart' },
-    { name: 'sorter', id: 'gtceu:pasta_phase_sorter', cx: 37842, z: 8,
+    { name: 'sorter', id: 'gtceu:pasta_phase_sorter', cx: 37838, z: 4,
       feed: [[CIRCUIT, 1, C3], ['grindless:chain_crust_slab', 1], ['grindless:cage_part', 1]],
       recipe: 'grindless:pasta_sorting/chain_caging', out: [['grindless:caged_chain_phase', 1], ['gtceu:iron_dust', 2]], gone: 'grindless:cage_part' },
-    { name: 'draw_bench', id: 'gtceu:pasta_phase_sorter', cx: 37852, z: 8,
+    { name: 'draw_bench', id: 'gtceu:pasta_phase_sorter', cx: 37858, z: 4, y: 98,
       feed: [[CIRCUIT, 1, C3], ['grindless:caged_chain_phase', 1]],
       recipe: 'grindless:pasta_drawing/chain_strand_drawing', out: [['gtceu:chain_strand_ingot', 4]], gone: 'grindless:caged_chain_phase' },
-    { name: 'laminator', id: 'gtceu:pasta_phase_sorter', cx: 37862, z: 8,
+    { name: 'laminator', id: 'gtceu:pasta_phase_sorter', cx: 37838, z: 4, y: 114,
       feed: [[CIRCUIT, 1, C3], ['grindless:caged_chain_lattice', 1]],
       recipe: 'grindless:pasta_lamination/chain_lamina', out: [['grindless:chain_lamina', 4]], gone: 'grindless:caged_chain_lattice' }
   ]
@@ -143,6 +143,12 @@
       c.z = u.z - (c.si - ctrl.si)
       if (c.sym.kind === 'oneOf') xs.push(c)
     })
+    // the shapes outgrew fixed anchors: cx and z are the low X and Z corner of the unit's box; its low Y is u.y or Y0
+    var mnX = 1e9
+    var mnY = 1e9
+    var mnZ = 1e9
+    cells.forEach(function (c) { mnX = Math.min(mnX, c.x); mnY = Math.min(mnY, c.y); mnZ = Math.min(mnZ, c.z) })
+    cells.forEach(function (c) { c.x += u.cx - mnX; c.y += (u.y || Y0) - mnY; c.z += u.z - mnZ })
     xs.sort(function (a, b) { return a.z - b.z || a.x - b.x })
     var chosen = {}
     var n = xs.length
@@ -186,6 +192,8 @@
     var ok = !!u.bus && !!u.outBus && u.energy.length === 1
     check(u.name + '_formed', ok, 'class ' + m.getClass().getSimpleName() + ', energy hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
     if (!ok) return false
+    m.setActiveRecipeType(/pasta_drawing/.test(u.recipe) ? 1 : /pasta_lamination/.test(u.recipe) ? 2 : 0)
+    m.getRecipeLogic().updateTickSubscription()
     setBus(u.bus, u.feed)
     u.last = m.getRecipeLogic().getLastRecipe()
     u.phase = 'run'
@@ -254,7 +262,7 @@
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []
     UNITS.forEach(function (def) {
-      var u = { name: def.name, id: def.id, cx: def.cx, z: def.z, parts: [ENERGY].concat(HV), feed: def.feed, recipe: def.recipe, out: def.out,
+      var u = { name: def.name, id: def.id, cx: def.cx, z: def.z, y: def.y, parts: [ENERGY].concat(HV), feed: def.feed, recipe: def.recipe, out: def.out,
         stays: def.stays || null, gone: def.gone || null, phase: 'forming', started: S.tick }
       try {
         u.pos = place(u)

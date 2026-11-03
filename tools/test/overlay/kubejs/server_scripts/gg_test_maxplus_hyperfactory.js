@@ -24,9 +24,9 @@
   var PROBE_EUT = 64
   var INT_MAX = 2147483647
   var CEILING = 4096 * 4194304
-  var CX = 46880
-  var CY = 102
-  var PARTS = { 2: ENERGY, 3: 'gtceu:hv_input_bus', 4: 'gtceu:hv_output_bus', 5: 'gtceu:data_access_hatch', 6: HATCH, 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch' }
+  var CX = 46866
+  var CY = Y0
+  var PARTS = { 2: ENERGY, 3: 'gtceu:hv_input_bus', 4: 'gtceu:hv_output_bus', 10: 'gtceu:data_access_hatch', 6: HATCH, 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch' }
 
   ServerEvents.recipes(function (event) {
     try {
@@ -133,11 +133,17 @@
     var last = desc.slices.length - 1
     var controller = null
     var parts = 0
+    // the shape outgrew a fixed anchor: cx and cz are the low X and Z corner of its box; its low Y is Y0
+    var mnX = 1e9
+    var mnY = 1e9
+    var mnZ = 1e9
     cells.forEach(function (c) {
-      c.x = cx - (c.ci - ctrl.ci)
-      c.y = cy + (c.ri - ctrl.ri)
-      c.z = cz - (c.si - ctrl.si)
+      c.x = -c.ci
+      c.y = c.ri
+      c.z = -c.si
+      mnX = Math.min(mnX, c.x); mnY = Math.min(mnY, c.y); mnZ = Math.min(mnZ, c.z)
     })
+    cells.forEach(function (c) { c.x += cx - mnX; c.y += cy - mnY; c.z += cz - mnZ })
     cells.forEach(function (c) {
       var sym = c.sym
       var block = null
@@ -169,7 +175,7 @@
     put(46852, 100, 5, HATCH + '[facing=north]')
     put(46854, 100, 5, OLD + '[facing=north]')
     S.hatchTick = 40
-    try { S.fac = { phase: 'forming', started: S.tick, pos: placeFactory(CX, CY, 40) } } catch (e) { check('factory_build', false, errText(e)); S.fac = null }
+    try { S.fac = { phase: 'forming', started: S.tick, pos: placeFactory(CX, CY, 20) } } catch (e) { check('factory_build', false, errText(e)); S.fac = null }
   }
 
   function measureHatches() {

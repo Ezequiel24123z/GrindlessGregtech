@@ -28,7 +28,7 @@
 // builder's holders when the event ends, so they go through serialize() + set('inputs'). Priority: the lowest band of the server
 // scripts (tools/analysis/script_order.json), after every script that adds, removes or derives a recipe.
 //
-// Published: global.grindless.costCurve = { eras, scaledCount, tierOfEut, validateTable, makeSelector, scaleRecipe, stats }.
+// Published: global.grindless.costCurve = { eras, scaledCount, tierOfEut, validateTable, makeSelector, scaleRecipe, isOrdered, stats }.
 //
 // Rhino: var + function declarations only (this Rhino throws "redeclaration of var").
 (function () {
@@ -42,7 +42,7 @@
 
   var S = {
     tables: 0, enabled: [], scanned: 0, selected: { original: 0, added: 0 }, changed: { original: 0, added: 0 },
-    items: 0, fluids: 0, removed: { original: 0, added: 0 }, errors: 0, verifyFail: 0, firstError: '', ms: 0
+    items: 0, fluids: 0, split: 0, removed: { original: 0, added: 0 }, errors: 0, verifyFail: 0, firstError: '', ms: 0
   }
 
   function has(o, k) {
@@ -184,17 +184,25 @@
     return out
   }
 
-  /** The recipe with its consumed inputs scaled (`pin`: optional [{re, count}] of item inputs held at a count): {json, changed, items, fluids}. Pure: `json` is never modified. */
-  function scaleRecipe(json, itemFactor, fluidFactor, pin) {
+  /** The recipe with its consumed inputs scaled (`pin`: optional [{re, count}] of item inputs held at a count; `ordered`: the type matches
+   *  its item inputs in order, one bus each, so an input over a stack is split, see splitStacks): {json, changed, items, fluids, split}.
+   *  Pure: `json` is never modified. */
+  function scaleRecipe(json, itemFactor, fluidFactor, pin, ordered) {
     var inputs = copy(json.inputs)
     var items = 0
     var fluids = 0
+    var split = 0
     if (Array.isArray(inputs.item)) {
       inputs.item = inputs.item.map(function (e) {
         var s = scaleItem(e, itemFactor, pin)
         if (s !== e) items++
         return s
       })
+      if (ordered) {
+        var sp = splitStacks(inputs.item)
+        inputs.item = sp.list
+        split = sp.split
+      }
     }
     if (Array.isArray(inputs.fluid)) {
       inputs.fluid = inputs.fluid.map(function (e) {
@@ -205,7 +213,33 @@
     }
     var out = copy(json)
     out.inputs = inputs
-    return { json: out, changed: items + fluids > 0, items: items, fluids: fluids }
+    return { json: out, changed: items + fluids + split > 0, items: items, fluids: fluids, split: split }
+  }
+
+  // GTM's assembly line matches its item inputs in order, one input bus each, and an ME input bus slot holds one stack, so a sized input
+  // over 64 could never be fed by ME (T2 mass_production, 2026-11-03: the LuV motor's 128 fine ruridit wire). It becomes several entries
+  // of 64 and a remainder, as GTCEu's own recipes write it; the total, and so the cost, is unchanged.
+  var ORDERED_TYPES = { 'gtceu:assembly_line': true }
+  var STACK = 64
+  function splitStacks(list) {
+    var out = []
+    var n = 0
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i]
+      var c = e && e.content
+      if (!c || typeof c !== 'object' || c.type !== SIZED || typeof c.count !== 'number' || c.count <= STACK) {
+        out.push(e)
+        continue
+      }
+      for (var left = c.count; left > 0; left -= STACK) {
+        var part = copy(e)
+        part.content = copy(c)
+        part.content.count = left > STACK ? STACK : left
+        out.push(part)
+      }
+      n++
+    }
+    return { list: out, split: n }
   }
 
   function isStrings(a) {
@@ -352,7 +386,7 @@
     function apply(id, json, type) {
       var sel = select(id, json, type)
       if (sel === null || !sel.enabled) return null
-      var r = scaleRecipe(json, sel.item, sel.fluid, sel.pin)
+      var r = scaleRecipe(json, sel.item, sel.fluid, sel.pin, ORDERED_TYPES[String(type || json.type)] === true)
       r.era = sel.era
       r.via = sel.via
       return r
@@ -422,6 +456,7 @@
     S.changed.original++
     S.items += res.items
     S.fluids += res.fluids
+    S.split += res.split
   }
 
   function scanAdded(r, sel, drop) {
@@ -447,6 +482,7 @@
     S.changed.added++
     S.items += res.items
     S.fluids += res.fluids
+    S.split += res.split
   }
 
   function removeBypasses(event, ids) {
@@ -513,7 +549,7 @@
     S.ms = Date.now() - started
     console.info(LOG + 'enabled ' + S.enabled.join(',') + ': scanned ' + S.scanned + ' GT recipes, selected ' + S.selected.original + ' original + ' +
       S.selected.added + ' added, changed ' + S.changed.original + ' + ' + S.changed.added + ' (' + S.items + ' item and ' + S.fluids +
-      ' fluid inputs), removed ' + S.removed.original + ' + ' + S.removed.added + ', errors ' + S.errors + ', ' + S.ms + ' ms')
+      ' fluid inputs, ' + S.split + ' ordered inputs split into stacks), removed ' + S.removed.original + ' + ' + S.removed.added + ', errors ' + S.errors + ', ' + S.ms + ' ms')
     if (S.firstError) console.error(LOG + 'first error: ' + S.firstError)
     } catch (e) {
       console.error(LOG + 'recipes handler failed: ' + e)
@@ -522,6 +558,6 @@
 
   G.costCurve = {
     eras: ERAS, scaledCount: scaledCount, tierOfEut: tierOfEut, validateTable: validateTable, makeSelector: makeSelector,
-    scaleRecipe: scaleRecipe, stats: S
+    scaleRecipe: scaleRecipe, isOrdered: function (type) { return ORDERED_TYPES[String(type)] === true }, stats: S
   }
 })()

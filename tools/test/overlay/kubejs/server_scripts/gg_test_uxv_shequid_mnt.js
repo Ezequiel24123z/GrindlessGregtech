@@ -1,6 +1,6 @@
 // priority: -9942
 // TEST ONLY, UXV-A6 (gtceu:shequid_works, gtceu:mnt_collider). Command: kubejs custom_command gg_test_uxv_shequid_mnt
-// Band ONLY: X 36608-36671, Z 0-63, Overworld Y 98-112.
+// Band ONLY: X 36608-36671, Z 0-112, Overworld Y 98-120.
 //   T1 (named uncertainty: the collider's c1, 134,217,728 EU/t, four times V[UIV], is accepted by two UIV energy hatches and the
 //   multiblock modifier leaves it running, with the gas stopping cell kept in the bus):
 //     lookup     every table row, the controllers' and the sensor's assembly lines are in the recipe manager
@@ -15,7 +15,8 @@
   var X0 = 36608
   var X1 = 36671
   var Y0 = 98
-  var Y1 = 112
+  var Y1 = 120
+  var Z1 = 112
   var NAME = 'uxv_shequid_mnt'
   var CX = 36640
   var CY = 100
@@ -31,13 +32,13 @@
 
   var UNITS = [
     {
-      name: 'shequid', id: 'gtceu:shequid_works', z: 10, circuit: 2, eut: 33554432, out: 'grindless:shequid_gyro',
+      name: 'shequid', id: 'gtceu:shequid_works', z: 2, circuit: 2, eut: 33554432, out: 'grindless:shequid_gyro',
       inputs: [['grindless:weak_link_cell', 2], ['grindless:mtj_die', 1]],
       fluid: ['gtceu:superfluid_helium', 1000], outFluid: 'gtceu:superfluid_helium',
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
     },
     {
-      name: 'collision', id: 'gtceu:mnt_collider', z: 40, circuit: 1, eut: 134217728, out: 'grindless:spent_actinide_target',
+      name: 'collision', id: 'gtceu:mnt_collider', z: 20, circuit: 1, eut: 134217728, out: 'grindless:spent_actinide_target',
       inputs: [['grindless:u238_beam_charge', 1], ['grindless:cm248_target', 1], ['grindless:gas_stopping_cell', 1]],
       fluid: null, outFluid: 'gtceu:mnt_product_gas', keep: 'grindless:gas_stopping_cell',
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
@@ -76,7 +77,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in minecraft:overworld run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -190,7 +191,7 @@
     u.outBus = partsLike(m, /output_bus/)[0]
     u.hatch = partsLike(m, /^(?!.*energy).*input_hatch/)[0]
     u.outHatch = partsLike(m, /output_hatch/)[0]
-    var ok = !!u.bus && !!u.outBus && !!u.hatch && !!u.outHatch && u.energy.length === 2 && u.height <= 16
+    var ok = !!u.bus && !!u.outBus && !!u.hatch && !!u.outHatch && u.energy.length === 2 && u.height <= 19
     check(u.name + '_formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', UIV energy hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
     return ok
   }
@@ -253,19 +254,19 @@
   }
 
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false }
     S.level = server.getLevel('minecraft:overworld')
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     clear()
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []

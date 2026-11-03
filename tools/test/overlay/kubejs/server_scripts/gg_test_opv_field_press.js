@@ -1,6 +1,6 @@
 // priority: -6776
 // TEST ONLY, OpV-A3 (gtceu:field_frozen_press, the OpV field generator and the six OpV hatches). Command: kubejs custom_command gg_test_opv_field_press
-// Band ONLY: X 38016-38079, Z 0-63, Y 98-115, in grindless:sgr1806_orbit (the press's rows are locked to SGR 1806-20's orbit).
+// Band ONLY: X 38016-38079, Z 0-63, Y 98-120, in grindless:sgr1806_orbit (the press's rows are locked to SGR 1806-20's orbit).
 //   T1 (named uncertainty: machine 13 forms at its site on two UXV 4 A hatches, and an OpV 16 A energy hatch it made feeds a 2^30 row as long):
 //     lookup          the press rows, its controller, the field generator, the six hatches, EB c22 and line 45's older rows are in the recipe manager
 //     static_clean    nothing skipped, no clash, one field generator and six hatch recipes made
@@ -17,7 +17,7 @@
   var X0 = 38016
   var X1 = 38079
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 120
   var NAME = 'opv_field_press'
   var SGR = 'grindless:sgr1806_orbit'
   var CY = 106

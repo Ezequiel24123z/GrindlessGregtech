@@ -1,6 +1,6 @@
 // priority: -6743
 // TEST ONLY, OpV-F3 (electron beam circuit space). Command: kubejs custom_command gg_test_opv_eb_circuits
-// Band ONLY: X 37632-37695, Z 0-15, Overworld Y 98-112.
+// Band ONLY: X 37632-37695, Z 0-23, Overworld Y 98-112.
 //   T1 (named uncertainty: GTM's lookup picks the right row when two electron beam recipes share a circuit and differ in one item;
 //   the loader's subset-clash list stays empty for the shipped rows). The two probe rows are throwaway rows of this script only:
 //     probe_a  clay ball + flint, circuit 31 -> poppy        probe_b  clay ball + snowball, circuit 31 -> allium
@@ -18,7 +18,7 @@
   var X0 = 37632
   var X1 = 37695
   var Z0 = 0
-  var Z1 = 15
+  var Z1 = 23
   var Y0 = 98
   var Y1 = 112
   var NAME = 'opv_eb_circuits'

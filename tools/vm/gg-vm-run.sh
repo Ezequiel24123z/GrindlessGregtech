@@ -56,9 +56,16 @@ if [ ! -f "$ws/.gg-ready" ]; then
         && touch "$ws/.gg-ready" || finish HARNESS 2 "checkout of $sha failed"
 fi
 touch "$ws"
-# keep the newest checkouts only (by last use)
+# the run holds its checkout's in-use lock (shared, fd 8) until it exits, so another run's cleanup never deletes a checkout in use
+# (with more distinct SHAs running at once than KEEP_WS, a run lost its checkout mid-run and ended without Show-GGResults.ps1 or
+# summary.json). Taken and tested under the workspace lock, so taking and cleaning never race.
+exec 8>"$ROOT/workspaces/.inuse-${sha:0:12}"
+flock -s 8 || finish HARNESS 2 "cannot lock checkout $ws"
+# keep the newest checkouts only (by last use), never one another run holds
 ls -1dt "$ROOT"/workspaces/src-* 2>/dev/null | tail -n +"$((KEEP_WS + 1))" | while read -r old; do
-    [ "$old" != "$ws" ] && rm -rf "$old"
+    [ "$old" = "$ws" ] && continue
+    lock="$ROOT/workspaces/.inuse-${old##*/src-}"
+    ( flock -n -x 7 || exit 0; rm -rf "$old"; rm -f "$lock" ) 7>"$lock"
 done
 exec 9>&-
 

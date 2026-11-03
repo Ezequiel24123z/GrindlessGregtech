@@ -150,9 +150,9 @@
       blocks: { energy: 'gtceu:ev_energy_input_hatch', inBus: 'gtceu:ev_input_bus', outBus: 'gtceu:ev_output_bus', in1: 'gtceu:ev_input_hatch',
         in2: 'gtceu:ev_input_hatch', in3: 'gtceu:ev_input_hatch', out1: 'gtceu:ev_output_hatch', out2: 'gtceu:ev_output_hatch', out3: 'gtceu:ev_output_hatch',
         out4: 'gtceu:ev_output_hatch' },
-      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,1,1': 'in3', '0,1,2': 'out1', '0,1,3': 'out2',
-        '1,1,0': 'out3', '1,1,4': 'out4' },
-      facing: { out3: 'east', out4: 'west' },
+      parts: { '0,0,0': 'energy', '0,0,1': 'inBus', '0,0,2': 'outBus', '0,0,3': 'in1', '0,0,4': 'in2', '0,0,5': 'in3', '0,0,6': 'out1', '0,1,0': 'out2',
+        '0,1,6': 'out3', '1,1,0': 'out4' },
+      facing: { out4: 'east' },
       ins: ['in1', 'in2', 'in3'], outs: ['out1', 'out2', 'out3', 'out4']
     }
   ]
@@ -608,7 +608,7 @@
       var problems = []
       var lines = []
       // size (w, h, d) and part cells of each structure: the hatch is one more option of the part cells, never a new cell
-      var want = { 'gtceu:naquadah_plant': [10, 5, 6, 47], 'gtceu:platinum_plant': [5, 5, 7, 35] }
+      var want = { 'gtceu:naquadah_plant': [10, 5, 6, 47], 'gtceu:platinum_plant': [7, 7, 9, 46] }
       Object.keys(want).forEach(function (id) {
         var desc = global.grindless.patterns.describe(id)
         if (!desc) {

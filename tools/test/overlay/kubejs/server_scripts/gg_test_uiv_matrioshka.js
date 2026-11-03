@@ -3,7 +3,7 @@
 // Band ONLY: X 35520-35583, Z 0-63, Y 98-115. No block is placed: live-registry and live-recipe checks.
 // The two machines work at gcyr:mercury_orbit; the test reads the orbit condition from the loaded recipes.
 //   T1 (named uncertainties): machines registered; every A10 recipe loaded; the research write carries the assembly-line research NBT;
-//   the rad-hard controller is an assembly-line recipe with research; the orbit rows carry the dimension condition; the new Mercury swarm row is live
+//   the rad-hard controller is an assembly-line recipe with research; the three observation rows carry the dimension condition (SITE-C dropped it from the radiator module and TPV tile, which do not use the place); the new Mercury swarm row is live
 (function () {
   var S = null
   var C = null
@@ -14,7 +14,7 @@
     'droplet_collector', 'c12_polish', 'c12_metallise', 'matrioshka_node', 'tpv_dicing', 'tpv_segment', 'matrioshka_tpv_shell', 'aqfp_die',
     'aqfp_bond', 'logic_tile_block', 'schottky_die', 'rad_hard_controller', 'w_sputter', 'hfo2_passivate', 'selective_emitter', 'emitter_shell',
     'ingaasb_dust', 'stibine', 'stibine_scrub']
-  var ORBIT = ['research_write', 'ns_eos_chart', 'kerr_chart', 'radiator_module', 'tpv_tile']
+  var ORBIT = ['research_write', 'ns_eos_chart', 'kerr_chart']
 
   function classes() {
     if (C !== null) return C

@@ -190,7 +190,7 @@ test('lang: every key in en_us, the machine tooltips and each info page', () => 
   assert.ok(lang.includes('Stock for OpV'));
 });
 
-test('the native fixture: band X 36672-36735, Z 0-63, Y 98-112, Overworld, and the zones row', () => {
+test('the native fixture: band X 36672-36735, Z 0-48, Y 98-148, Overworld, and the zones row', () => {
   const o = read(OVERLAY);
   assert.ok(o.includes('uxv_fusion_mk6'));
   assert.ok(o.includes('gg_test_uxv_fusion_mk6'));
@@ -199,7 +199,7 @@ test('the native fixture: band X 36672-36735, Z 0-63, Y 98-112, Overworld, and t
   const all = JSON.stringify(zones);
   assert.ok(all.includes('"id": "uxv_fusion_mk6"') || all.includes('"id":"uxv_fusion_mk6"'));
   const z = (function find(x) { if (Array.isArray(x)) { for (const y of x) { const r = find(y); if (r) return r; } } else if (x && typeof x === 'object') { if (x.id === 'uxv_fusion_mk6') return x; for (const v of Object.values(x)) { const r = find(v); if (r) return r; } } return null; })(zones);
-  assert.deepEqual([z.x, z.z, z.y], [[36672, 36735], [0, 63], [98, 112]]);
+  assert.deepEqual([z.x, z.z, z.y], [[36672, 36735], [0, 48], [98, 148]]);
   assert.deepEqual(z.tests, ['uxv_fusion_mk6']);
 });
 

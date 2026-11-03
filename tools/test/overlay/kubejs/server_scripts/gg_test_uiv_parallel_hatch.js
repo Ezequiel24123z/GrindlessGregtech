@@ -1,6 +1,6 @@
 // priority: -8456
 // TEST ONLY, UIV-M1 (gtceu:uiv_parallel_hatch). Command: kubejs custom_command gg_test_uiv_parallel_hatch
-// Band ONLY: X 35392-35455, Z 0-63, Overworld Y 98-115.
+// Band ONLY: X 35392-35455, Z 0-63, Overworld Y 98-125.
 //   T1 (named uncertainty: tier 11 registration of ParallelHatchPartMachine with highTierContent off, and its use in a mega):
 //     reports      a placed UIV hatch reports 16,384; the UHV and UEV ones beside it still 1,024 and 4,096
 //     forge_formed gtceu:stellar_forge with one UIV energy hatch and the UIV hatch forms and sees the hatch
@@ -13,7 +13,8 @@
   var X0 = 35392
   var X1 = 35455
   var Y0 = 98
-  var Y1 = 115
+  var Y1 = 125
+  var Z1 = 63
   var NAME = 'uiv_parallel_hatch'
   var ID = 'gtceu:stellar_forge'
   var GCYM = 'gtceu:large_assembler'
@@ -21,7 +22,7 @@
   var COIL = 'grindless:hftacn_coil_block'
   var CX = 35424
   var CY = 100
-  var PARTS = { 0: 'gtceu:maintenance_hatch', 1: 'gtceu:uiv_energy_input_hatch', 2: 'gtceu:hv_input_bus', 4: 'gtceu:hv_input_hatch', 5: 'gtceu:hv_output_hatch', 6: 'gtceu:uiv_parallel_hatch' }
+  var PARTS = { 4: 'gtceu:maintenance_hatch', 5: 'gtceu:uiv_energy_input_hatch', 6: 'gtceu:hv_input_bus', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch', 10: 'gtceu:uiv_parallel_hatch' }
 
   ServerEvents.recipes(function (event) {
     try {
@@ -63,7 +64,7 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function command(text) { return S.server.runCommandSilent('execute in minecraft:overworld run ' + text) }
   function pos(x, y, z) { return new (classes().Pos)(x, y, z) }
-  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
+  function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= Z1 && y >= Y0 && y <= Y1 }
   function put(x, y, z, block) {
     if (!inBand(x, y, z)) throw new Error('refused: ' + x + ',' + y + ',' + z + ' is outside the band')
     return command('setblock ' + x + ' ' + y + ' ' + z + ' ' + block + ' replace')
@@ -87,7 +88,16 @@
     }
     return m.isFormed()
   }
-  function why(m) { try { return String(m.getMultiblockState().error) } catch (e) { return 'unknown' } }
+  function why(m) {
+    try {
+      var er = m.getMultiblockState().error
+      var info = ''
+      try { info = ' | ' + String(er.getErrorInfo().getString()) } catch (x) { }
+      var q = ''
+      try { var bp = er.getPos(); q = ' | found ' + String(S.level.getBlockState(bp).getBlock().builtInRegistryHolder().key().location()) + ' at ' + bp.getX() + ',' + bp.getY() + ',' + bp.getZ() } catch (x2) { }
+      return q + info.substring(0, 400)
+    } catch (e) { return 'unknown' }
+  }
   function field(o, name) {
     try {
       var v = o[name]
@@ -136,9 +146,10 @@
       var part = false
       if (sym.kind === 'controller') { controller = { x: c.x, y: c.y, z: c.z }; return }
       if (sym.kind === 'blocks') block = sym.blocks.length > 1 ? COIL : sym.blocks[0]
+      else if (sym.kind === 'frames') block = 'gtceu:' + sym.materials[0] + '_frame'
       else if (sym.kind === 'oneOf') {
         if (c.si === last && c.ri === ctrl.ri && PARTS[c.ci]) { block = PARTS[c.ci]; part = true }
-        else sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0] })
+        else sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0]; if (!block && o.kind === 'frames') block = 'gtceu:' + o.materials[0] + '_frame' })
       }
       if (!block) return
       put(c.x, c.y, c.z, block + (part ? '[facing=north]' : ''))
@@ -183,8 +194,8 @@
 
   function begin() {
     S.level = S.server.getLevel('minecraft:overworld')
-    command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
-    command('fill ' + X0 + ' ' + Y0 + ' 0 ' + X1 + ' ' + Y1 + ' 63 minecraft:air')
+    command('forceload add ' + X0 + ' 0 ' + X1 + ' ' + Z1)
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
     var RL = classes().RL
     var ids = ['gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch']
     var have = ids.filter(function (i) { return !!classes().Regs.MACHINES.get(new RL(i)) })
@@ -259,13 +270,13 @@
   }
 
   function clear() {
-    for (var z = 0; z < 64; z += 8) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + (z + 7) + ' minecraft:air')
+    for (var z = 0; z <= Z1; z += 4) command('fill ' + X0 + ' ' + Y0 + ' ' + z + ' ' + X1 + ' ' + Y1 + ' ' + Math.min(z + 3, Z1) + ' minecraft:air')
   }
   function finish() {
     if (S.finished) return
     S.finished = true
     try { clear() } catch (e) { }
-    command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
+    command('forceload remove ' + X0 + ' 0 ' + X1 + ' ' + Z1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
   ServerEvents.customCommand('gg_test_uiv_parallel_hatch', function () {

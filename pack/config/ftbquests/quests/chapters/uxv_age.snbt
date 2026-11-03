@@ -355,7 +355,7 @@
 		}
 		{
 			dependencies: ["3BB0A93D15E3A2D3"]
-			description: ["A shell of gum metal, a titanium alloy that bends without breaking, backed by a tungsten-184 preform. It is the plain wall of the age: the Spintronic Cluster Tool, the Mk6 ring and the polar cap tap are mostly made of it. An assembler (400 ticks): 8 gum metal billets, 4 tungsten-184 CVI preforms, 4 annealed mu-metal foils and 8 tungsten-184 single wires, with epoxy, for two casings. Most UXV structures: the Mk6 Fusion Reactor (about 2,000), the MNT Collider (about 2,000), the Stellar Fractionation Hall (about 1,800), the Pasta Mill (about 1,700), the BZ Dynamo (about 1,400), the Spintronic Cluster Tool (about 1,400), the Stellar Condensation Tower (about 860) and the FRC Former (about 690). Billets, preforms and foils by ME: a structure takes thousands, so build the casing a dedicated line."]
+			description: ["A shell of gum metal, a titanium alloy that bends without breaking, backed by a tungsten-184 preform. It is the plain wall of the age. An assembler (400 ticks): 8 gum metal billets, 4 tungsten-184 CVI preforms, 4 annealed mu-metal foils and 8 tungsten-184 single wires, with epoxy, for two casings. Most UXV structures: the Mk6 Fusion Reactor (about 2,000), the MNT Collider (about 2,000), the Stellar Fractionation Hall (about 1,800), the Pasta Mill (about 1,700), the BZ Dynamo (about 1,400), the Spintronic Cluster Tool (about 1,400), the Stellar Condensation Tower (about 860) and the FRC Former (about 690). Billets, preforms and foils by ME: a structure takes thousands, so build the casing a dedicated line."]
 			hide_dependency_lines: true
 			icon: "grindless:gum_metal_casing"
 			id: "3AE94BE58677BDB5"
@@ -369,7 +369,7 @@
 		}
 		{
 			dependencies: ["3AE94BE58677BDB5"]
-			description: ["A casing wound with metallic hydrogen cable and finemet cores that holds a field pulsed fast enough to steer a plasma, a beam or a stream of dense matter. The reactor, the collider and the elevator ring are lined with it. The naquadria magnet works, circuit 15: 12 metallic hydrogen windings, 6 Ga2O3 power dies, 3 finemet cores, 6 gum metal billets and 4 UIV emitters, for twelve casings. The Mk6 Fusion Reactor (about 1,300), the Pasta Mill (about 810), the MNT Collider (about 800), the BZ Dynamo (about 790), the Stellar Elevator (about 740), the FRC Former (about 460) and the Plasma Mass Filter (about 260). The windings are the bottleneck; send them and the dies to the works by ME and keep the power dies stocked."]
+			description: ["A casing wound with metallic hydrogen cable and finemet cores that holds a field pulsed fast enough to steer a plasma, a beam or a stream of dense matter. The naquadria magnet works, circuit 15: 12 metallic hydrogen windings, 6 Ga2O3 power dies, 3 finemet cores, 6 gum metal billets and 4 UIV emitters, for twelve casings. The Mk6 Fusion Reactor (about 1,300), the Pasta Mill (about 810), the MNT Collider (about 800), the BZ Dynamo (about 790), the Stellar Elevator (about 740), the FRC Former (about 460) and the Plasma Mass Filter (about 260). The windings are the bottleneck; send them and the dies to the works by ME and keep the power dies stocked."]
 			icon: "grindless:pulsed_field_casing"
 			id: "5EE4709C70DD7071"
 			rewards: [{ id: "717CA54CEF3317C2", type: "xp", xp: 120 }]
@@ -378,7 +378,7 @@
 			tasks: [{ count: 64L, id: "702ED9439810BD34", item: "grindless:pulsed_field_casing", type: "item" }]
 			title: "Pulsed Field Casing"
 			x: 26.0d
-			y: 12.5d
+			y: 13.75d
 		}
 		{
 			dependencies: ["3AE94BE58677BDB5"]
@@ -486,7 +486,7 @@
 			y: 13.5d
 		}
 		{
-			dependencies: ["3B4ABEFD993C5FE7", "1595ABB6AB097B3E"]
+			dependencies: ["3B4ABEFD993C5FE7"]
 			description: ["Push magnetic domains along a nanowire with current pulses and read them as they pass a head. The &6Racetrack Chip&r is the memory of the mainframe. The Spintronic Cluster Tool, an MTJ die and a patterned SAF track wafer. The spintronic mainframe, as its storage. Wafers by ME; the fab returns chips in a chest, so stock a few."]
 			icon: "grindless:racetrack_chip"
 			id: "33E470E07FDCB9C9"
@@ -499,7 +499,7 @@
 			y: 12.0d
 		}
 		{
-			dependencies: ["3044F5740EC5319D", "1595ABB6AB097B3E"]
+			dependencies: ["3044F5740EC5319D"]
 			description: ["One 28Si wafer carries the CMOS layer, the memory, the racetrack, the spin-wave bus and a multiferroic switch read by a spin-orbit stack. Cut in four, it makes the &6Spintronic Die&r. The MOCVD reactor, the photonic foundry, the vdW stacker, the MRAM wafer, the racetrack chip and the magnonic bus. The spintronic mainframe, as its logic, memory and bus in one. Run the wafer line as one chain by ME; the cutter returns four dies per wafer."]
 			icon: "grindless:spintronic_die"
 			id: "528E7523EDB83CC3"
@@ -512,7 +512,7 @@
 			y: 14.5d
 		}
 		{
-			dependencies: ["33E470E07FDCB9C9", "528E7523EDB83CC3", "7486DF37973BED77"]
+			dependencies: ["33E470E07FDCB9C9", "528E7523EDB83CC3", "7E9BF22B379A4CEB"]
 			description: ["Spin waves in a garnet film carry signals between the chips with almost no heat. Logic, memory and that bus together are the &6Spintronic Mainframe&r, the UXV circuit. The photonic integration hall, a racetrack chip, a MESO logic die, an MRAM wafer, an MTJ die, a shielded interposer and a magnonic bus from the YIG furnace. The UXV hull, emitter and hatches, the OpV casing and the controller of every UXV machine. They take any UXV circuit. One of each part per mainframe: keep a dedicated chest, never a big stock."]
 			icon: "gtnn:spintronic_mainframe"
 			id: "72D835B7C533F4A5"
@@ -979,7 +979,7 @@
 		}
 		{
 			dependencies: ["5AF879F7A50C63BE", "75CFD23128DE819C"]
-			description: ["One factory, two targets. An einsteinium-254 target struck by the titanium beam gives element 121; a fermium-257 target gives element 122. The census III asks for both. In the &6Superheavy Factory&r, a target, an oven charge, an Nb3Sn SRF cavity and helium (circuit 9 for 121, circuit 10 for 122) make the recoil gas; each run takes 48,000 ticks. The same factory then separates the atoms with an etched membrane (2,400 ticks, circuits 8 and 9). The chemistry lab seals each batch in a capsule (circuit 8 and 9), and Census III joins both, with Census II (circuit 10). The Superheavy Census III, and with it the island chart. Run both targets in one factory on a schedule; the atoms live a few seconds, so pipe the gas to the lab by ME and never store it."]
+			description: ["An einsteinium-254 target struck by the titanium beam gives element 121; a fermium-257 target gives element 122. In the &6Superheavy Factory&r, a target, an oven charge, an Nb3Sn SRF cavity and helium (circuit 9 for 121, circuit 10 for 122) make the recoil gas; each run takes 48,000 ticks. It then separates the atoms with an etched membrane (2,400 ticks, circuits 8 and 9). The lab seals each batch in a capsule (circuit 8 and 9), and Census III joins both, with Census II (circuit 10). The Superheavy Census III, and with it the island chart. Run both targets in one factory on a schedule; the atoms last seconds: pipe the gas to the lab by ME, never store it."]
 			hide_dependency_lines: true
 			icon: "grindless:element_122_recoil"
 			id: "7C6AF6956C2E7314"
@@ -1010,7 +1010,7 @@
 		}
 		{
 			dependencies: ["77ECA9A3DDFB480D"]
-			description: ["The &6Spintronic Cluster Tool&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit. It also patterns racetrack nanowires and grows oxide films by pulsed laser. A UIV hull, about 1,350 gum metal and 870 mu-metal shield casings, the magnetron parts, and sputter targets from the melter. The shape is about 31 by 11 by 31 and about 2,350 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. The magnetic tunnel junction die, and through it the MRAM wafer, the racetrack chip and the multiferroic films of the MESO logic die. The Spintronic Cluster Tool also takes over the old racetrack fab and the oxide pulsed laser chamber: racetrack patterning and the oxide films run in it. Targets and silicon-28 by ME; the dies come out in a chest."]
+			description: ["The &6Spintronic Cluster Tool&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit. A UIV hull, about 1,350 gum metal and 870 mu-metal shield casings, the magnetron parts, and sputter targets from the melter. The shape is about 31 by 11 by 31 and about 2,350 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. The magnetic tunnel junction die, and through it the MRAM wafer, the racetrack chip and the multiferroic films of the MESO logic die. It also replaces the old racetrack fab and oxide laser chamber. Targets and silicon-28 by ME; the dies come out in a chest."]
 			icon: "gtceu:mtj_sputter_cluster"
 			id: "1595ABB6AB097B3E"
 			rewards: [{ id: "1835656A2A02BB85", type: "xp", xp: 120 }]
@@ -1234,7 +1234,7 @@
 		}
 		{
 			dependencies: ["1C34EDB89AD1F5C9"]
-			description: ["The &6Pasta Mill&r separates the rods from the sheets inside a cage that keeps each one squeezed, pulls spaghetti phase through aerogel into strand wire, and presses lasagna phase onto a tungsten-fibre billet as plate. The anti-phase residue goes to the core sample the gate keeps. Pasta as wire or plate is fiction: outside a neutron star it would fly apart at once. A UIV hull, about 1,670 pasta containment and 810 pulsed field casings and the pasta hatches. The mill also takes over the old draw bench and laminator: the draw line and the press line are modes of this one machine. The shape is about 55 by 13 by 19 and about 2,850 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. Pasta strand wire, which the motor, the field generator and the SMES cell are wound with, and lasagna plate for the UXV hull. Raw pasta by ME; send each phase to its own line, and stock a few spools and plates."]
+			description: ["The &6Pasta Mill&r separates rods from sheets in a squeezing cage, pulls spaghetti phase through aerogel into strand wire and presses lasagna phase onto a tungsten-fibre billet as plate. The residue goes to the core sample. Outside a neutron star, pasta would fly apart. A UIV hull, about 1,670 pasta containment and 810 pulsed field casings. It replaces the draw bench and laminator. About 55 by 13 by 19 and 2,850 blocks: GTM's Terminal places about 2,300 blocks per pass, so a structure this large takes two. Pasta strand wire, which the motor, the field generator and the SMES cell are wound with, and lasagna plate for the UXV hull. Raw pasta by ME; each phase to its own line."]
 			icon: "gtceu:pasta_phase_sorter"
 			id: "353D67B60E559EE1"
 			rewards: [{ id: "75883048E114CE67", type: "xp", xp: 120 }]
@@ -1341,7 +1341,7 @@
 		}
 		{
 			dependencies: ["3463B33FE3C32710"]
-			description: ["Spins that last need a silicon with no nuclear spin of its own, so the line starts with silicon-28 and a CMOS wafer, the floor under every layer after it. The hot cell enriches silicon dust with hydrogen fluoride into silicon-28 dust (circuit 5). Zone refining melts it under argon into an ingot (circuit 6, 800 ticks); the cutter slices a wafer with water (400 ticks). The ion implanter loads hydrogen (circuit 6). The MOCVD reactor grows a hafnia gate and a titanium nitride gate (circuit 10, 700 ticks), and the Photonic Foundry lays tungsten vias and a copper layer (circuit 17). The 28Si M1 Wafer, which every later module is grown on. Silicon, acid and argon by ME and by pipe; wafers pass from machine to machine by pattern provider."]
+			description: ["Lasting spins need silicon with no nuclear spin, so the line starts with silicon-28 and a CMOS wafer, the floor of every layer. The hot cell enriches silicon dust with hydrogen fluoride into silicon-28 dust (circuit 5). Zone refining melts it under argon into an ingot (circuit 6, 800 ticks); the cutter slices a wafer with water (400 ticks). The ion implanter loads hydrogen (circuit 6); the MOCVD reactor grows hafnia and titanium nitride gates (circuit 10, 700 ticks), and the Photonic Foundry lays tungsten vias and a copper layer (circuit 17). The 28Si M1 Wafer, the base of every later module. Silicon, acid and argon by ME and by pipe; wafers move between machines by pattern provider."]
 			icon: "grindless:si28_cmos_wafer"
 			id: "794B4368FD9DDBD0"
 			rewards: [{ id: "77EA927AAB1E81EA", type: "xp", xp: 120 }]
@@ -1374,7 +1374,7 @@
 		}
 		{
 			dependencies: ["37CEE1000998A174"]
-			description: ["A racetrack is a nanowire along which magnetic domains move like cars on a track. It stores more bits per area than any plain memory. The Cluster Tool lays a synthetic antiferromagnet over the MRAM wafer (circuit 3, 600 ticks). The nitride magnet works anneals it (circuit 10) and electron beam refining writes the track (circuit 16). The Cluster Tool then patterns the nanowires (circuit 1; a quarter of the platinum comes off as sludge) and joins the MTJ die for the racetrack chip (circuit 2, 900 ticks). The oscillator module, which is grown on the racetrack chip. Keep the platinum sludge in a chest or send it to the platinum line; it is the byproduct that pays for the sputter targets."]
+			description: ["A racetrack is a nanowire along which magnetic domains move like cars on a track. It stores more bits per area than any plain memory. The Cluster Tool lays a synthetic antiferromagnet over the MRAM wafer (circuit 3, 600 ticks). The nitride magnet works anneals it (circuit 10) and electron beam refining writes the track (circuit 16). It patterns the nanowires (circuit 1; a quarter of the platinum comes off as sludge) and joins the MTJ die for the racetrack chip (circuit 2, 900 ticks). The oscillator module, which is grown on the racetrack chip. Keep the platinum sludge in a chest or send it to the platinum line; it is the byproduct that pays for the sputter targets."]
 			icon: "grindless:racetrack_chip"
 			id: "399C5261E9B68BA2"
 			rewards: [{ id: "1C2C5CAD23A227CD", type: "xp", xp: 160 }]
@@ -1387,7 +1387,7 @@
 			]
 			title: "Racetrack"
 			x: 36.5d
-			y: 19.5d
+			y: 21.0d
 		}
 		{
 			dependencies: ["794B4368FD9DDBD0"]
@@ -1436,7 +1436,7 @@
 				{ id: "1DE508AE9C59DB60", item: "grindless:me_switch_wafer", type: "item" }
 			]
 			title: "Oxide Membranes"
-			x: 36.5d
+			x: 35.0d
 			y: 22.0d
 		}
 		{
@@ -1483,7 +1483,7 @@
 			size: 1.0d
 			tasks: [{ id: "31F87802173CFD38", item: "gtnn:spintronic_mainframe", type: "item" }]
 			title: "Spintronic Mainframe"
-			x: 36.5d
+			x: 37.5d
 			y: 24.5d
 		}
 	]

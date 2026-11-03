@@ -31,16 +31,16 @@
     'megabar_synthesis/bent_ge_tile', 'megabar_synthesis/bent_ge_rebend', 'crystal_growth/gaas_laue_tile'
   ]
 
-  // a unit's structure runs from its z (the controller's slice) to z + depth - 1: tetron 14-24, gamma 30-44
+  // a unit's structure runs from its z (the controller's slice) to z + depth - 1: tetron 2-18, gamma 24-54
   var UNITS = [
     {
-      name: 'tetron', id: 'gtceu:tetron_fab', z: 14, circuit: 1, eut: 268435456, out: 'grindless:tetron_die',
+      name: 'tetron', id: 'gtceu:tetron_fab', z: 2, circuit: 1, eut: 268435456, out: 'grindless:tetron_die',
       inputs: [['grindless:gated_2deg_wafer', 1], ['grindless:cryo_cmos_die', 1]],
       fluid: null, outFluid: null,
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
     },
     {
-      name: 'gamma', id: 'gtceu:gamma_optics_works', z: 30, circuit: 2, eut: 268435456, out: 'grindless:gamma_multilayer_mirror',
+      name: 'gamma', id: 'gtceu:gamma_optics_works', z: 24, circuit: 2, eut: 268435456, out: 'grindless:gamma_multilayer_mirror',
       inputs: [['grindless:superpolished_sic_blank', 1], ['grindless:wc_sic_multilayer', 1], ['grindless:mirror_metrology_record', 1]],
       fluid: null, outFluid: null,
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']

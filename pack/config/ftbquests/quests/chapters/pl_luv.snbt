@@ -452,7 +452,7 @@
 			dependencies: ["121D187CE90B4F38", "5D6907AB957947BB"]
 			description: [
 				"Carbon monoxide carries the iron, nickel and cobalt off as gas. The platinum metals stay behind as a concentrate."
-				"One Mond reactor: LUV, 1,920 EU/t, 400 t per run (large_chemical_reactor/mond_crushed). Per minute it takes 108,000 mB carbon monoxide, 48 items crushed meteoric iron ore and makes 24,000 mB crude metal carbonyl, 60 items iron dust, 3 items cobalt dust, 3 items asteroid pgm concentrate. Each run needs room for 36,000 mB carbon monoxide, 8,000 mB crude metal carbonyl. The iron, cobalt and concentrate leave by the output bus."
+				"One Mond reactor: LUV, 1,920 EU/t, 400 t per run. Per minute: 108,000 mB carbon monoxide, 48 crushed meteoric iron ore in, 24,000 mB crude metal carbonyl, 60 iron dust, 3 cobalt dust, 3 asteroid pgm concentrate out. The iron, cobalt and concentrate leave by the output bus."
 			]
 			icon: "gtceu:large_chemical_reactor"
 			id: "36A6F7A9AB5D024C"
@@ -496,8 +496,8 @@
 		{
 			dependencies: ["3575F498A0E5F81A"]
 			description: [
-				"Bottleneck: 2 Mond reactors to 1 distillation tower (24,000 against 48,000 mB per minute of crude metal carbonyl). The Mond reactor is the slow step, so two feed one tower."
-				"Tower to decomposers: 1 distillation tower to 1 nickel decomposers (24,000 against 24,000 mB per minute of nickel tetracarbonyl). The iron half needs one more decomposer. Both halves together return 36,000 mB of carbon monoxide per run, which is exactly one Mond charge."
+				"Bottleneck: 2 Mond reactors to 1 distillation tower (24,000 against 48,000 mB per minute). The Mond reactor is the slow step, so two feed one tower."
+				"Tower to decomposers: 1 distillation tower to 1 nickel decomposers (24,000 against 24,000 mB per minute). The iron half needs one more decomposer. Both halves together return 36,000 mB of carbon monoxide per run, which is exactly one Mond charge."
 			]
 			icon: "gtceu:distillation_tower"
 			id: "370A40969E2539B9"
@@ -596,7 +596,7 @@
 		}
 		{
 			dependencies: ["39B888EF432D16C7", "51C59EB2F49DEA71"]
-			description: ["Iron from iron pentacarbonyl (LUV, per item of one iron unit): Decomposition: 24/min, 96,000 EU, takes 1,000 mB iron pentacarbonyl, also ${flow(x.out).join()}; Large-reactor powder: 6/min, 1,536,000 EU, takes 1,000 mB iron pentacarbonyl, also ${flow(x.out).join()}; Small-reactor powder: 6/min, 1,536,000 EU, takes 1,000 mB iron pentacarbonyl, also ${flow(x.out).join()}. The powder is its own item, not iron dust, so nothing replaces it; but it costs 16 times the EU per unit at a quarter of the rate, and the small and large reactor give the same figures. Proposed balance decision for the owner."]
+			description: ["Iron from iron pentacarbonyl (LUV, per item of one iron unit): Decomposition: 24/min, 96,000 EU; Large-reactor powder: 6/min, 1,536,000 EU; Small-reactor powder: 6/min, 1,536,000 EU. The powder is its own item, not iron dust, so nothing replaces it; but it costs 16 times the EU per unit at a quarter of the rate, and the small and large reactor give the same figures. Proposed balance decision for the owner."]
 			icon: "gtceu:large_chemical_reactor"
 			id: "1BB0F30B56CA828D"
 			shape: "gear"
