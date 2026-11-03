@@ -170,7 +170,7 @@ export const QUESTS = [
   }, [PHOTO]),
     prod('COOL', 'Cooling Lasers', 'grindless:li_cooling_laser', ['H_FIBRE'], 11.75, -8.25, ['The lithium and potassium cooling lasers come from a fibre draw run on a UEV emitter, lithium-6 and potassium-40. The Quantum Gas Lab needs both.']),
     prod('EOS', 'Degenerate EOS Model', 'grindless:degenerate_eos_model', ['QGL'], 28, -17, ['Computed in the Quantum Gas Lab in Earth orbit from the lithium and potassium isotope dusts, the two cooling lasers and helium. The Degenerate Harvester and the Warp Gate hold both consume one.'], 100),
-    gear('ENT', 'entanglement_station', 'Entanglement Station', ['QGL'], 27.25, -13.25, {
+    gear('ENT', 'entanglement_station', 'Entanglement Station', ['QGL', 'SNSPD'], 27.25, -13.25, {
       for: 'The &6Entanglement Station&r ties two photons together across a distance.',
       needs: 'Two UHV hulls, three UV emitters, two SPDC sources, two hollow-core fibres, an SNSPD, any UHV circuit and the photonic casing; the Quantum Gas Lab is its research.',
       unlocks: 'The quantum repeater node, which the wireless hatches take.',
@@ -178,7 +178,7 @@ export const QUESTS = [
     }, [PHOTO], 150),
 
   // ------------------------------------------------------------------ Alpha Centauri
-  gear('NEB', 'nebula_collector', 'Nebula Collector', ['H_ALPHA'], 21.25, -29.5, {
+  gear('NEB', 'nebula_collector', 'Nebula Collector', ['H_ALPHA', 'HULL'], 21.25, -29.5, {
     for: 'The &6Nebula Collector&r gathers gas from a nebula and sorts it by element.',
       needs: 'A UEV hull, five UEV pumps, four UEV sensors, three UEV emitters, three scoop coils, three aerogel tiles, any UEV circuit and the photonic casing.',
       unlocks: 'Gas streams that the Alpha Centauri lines consume, and the Interstellar Dust Lab.',
@@ -207,7 +207,7 @@ export const QUESTS = [
   prod('IPC', 'Iron Pentacarbonyl', 'gtceu:iron_pentacarbonyl_bucket', ['MOND'], 27.75, -21.75, ['The carrier that purifies Barnard iron. Handle it as a toxic fluid.']),
 
   // ------------------------------------------------------------------ Sirius B
-  gear('SPEC', 'white_dwarf_spectrograph', 'White Dwarf Spectrograph', ['H_SIRIUS', 'HULL'], 30.75, -22.5, {
+  gear('SPEC', 'white_dwarf_spectrograph', 'White Dwarf Spectrograph', ['H_SIRIUS', 'HULL', 'SNSPD'], 30.75, -22.5, {
     for: 'The &6White Dwarf Spectrograph&r reads a dead star\'s light and from it the mass and radius.',
       needs: 'A UEV hull, four UEV sensors, five UEV emitters, three UEV pumps, an ULE cavity, three SNSPDs, two nuclear clocks, any UEV circuit and the photonic casing.',
       unlocks: 'The mass-radius chart, made in Sirius B orbit, and the Degenerate Harvester.',
@@ -268,3 +268,6 @@ export const QUESTS = [
     rewards: [],
   },
 ];
+
+// Long forward links to the chart quests: the lines are hidden, the dependencies stay.
+for (const q of QUESTS) if (['ENT', 'SPEC', 'NEB'].includes(q.key)) q.raw = { ...(q.raw || {}), hide_dependency_lines: 'true' };
