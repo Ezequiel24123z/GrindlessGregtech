@@ -253,6 +253,7 @@ test('the blade waits on Barnard\'s rhenium: the 6N rhenium row eats GTM\'s rhen
   assert.deepEqual(ids(by('electron_beam_refining', 'rhenium').itemsIn), ['gtceu:rhenium_ingot']);
   assert.ok(inputs(by('mixer', 'sx_master_alloy')).includes('grindless:six_n_rhenium'));
   assert.ok(!inputs(by('mixer', 'sx_master_alloy')).includes('gtceu:rhenium_ingot'));
+  assert.ok(inputs(by('mixer', 'sx_master_alloy')).includes('grindless:six_n_hafnium'));
   assert.ok(inputs(by('single_crystal_casting', 'sx_blade')).includes('grindless:sx_master_alloy_dust'));
 });
 

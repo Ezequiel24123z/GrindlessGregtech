@@ -164,7 +164,7 @@
     "mixer": {
       "recipes": [
         { "name": "sx_master_alloy", "circuit": 0, "eut": 1920, "duration": 200,
-          "itemsIn": [{ "id": "gtceu:nickel_dust", "count": 6 }, { "id": "grindless:six_n_rhenium", "count": 1 }, { "id": "gtceu:ruthenium_dust", "count": 1 }, { "id": "grindless:six_n_tantalum", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "gtceu:nickel_dust", "count": 6 }, { "id": "grindless:six_n_rhenium", "count": 1 }, { "id": "gtceu:ruthenium_dust", "count": 1 }, { "id": "grindless:six_n_tantalum", "count": 1 }, { "id": "grindless:six_n_hafnium", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:sx_master_alloy_dust", "count": 9 }], "fluidsOut": [] },
         { "name": "ysz_powder", "circuit": 0, "eut": 480, "duration": 200,
           "itemsIn": [{ "id": "gtceu:zirconia_dust", "count": 8 }, { "id": "grindless:yttrium_oxide_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],

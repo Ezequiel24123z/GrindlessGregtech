@@ -261,6 +261,7 @@ test('older rows: 13 in 9 files, each carries UIV-B2 and the free circuit', () =
   assert.ok(cen && cen.circuit === 3 && mine(cen) && cen.itemsIn.length <= 6);
   assert.ok(ids(cen.itemsIn).includes('grindless:element_120_recoil') && ids(cen.itemsIn).includes('grindless:element_119_recoil'));
   assert.deepEqual(ids(cen.itemsOut), ['grindless:superheavy_census_ii']);
+  assert.deepEqual(ids(cen.kept), ['grindless:superheavy_census']);
   const plat = read('server_scripts', 'grindless', 'ev', 'platinum_plant.js');
   assert.match(plat, /UIV_ROWS = \[[\s\S]*?circuit: 10,[\s\S]*?r_process_ash/);
   assert.match(plat, /addUivRows\(event\)/);

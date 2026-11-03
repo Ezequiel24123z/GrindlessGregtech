@@ -103,6 +103,7 @@ test('recoil separator and chem lab: atoms, captures and census III', () => {
   const census = by(CHEM, 'census_iii');
   assert.equal(census.circuit, 10);
   assert.deepEqual(ids(census.itemsIn), ['grindless:element_121_recoil', 'grindless:element_122_recoil', 'grindless:sealed_capsule']);
+  assert.deepEqual(ids(census.kept), ['grindless:superheavy_census_ii']);
   assert.deepEqual(ids(census.itemsOut), ['grindless:superheavy_census_iii']);
   for (const t of [REC, CHEM]) {
     const used = t.map((r) => r.circuit);

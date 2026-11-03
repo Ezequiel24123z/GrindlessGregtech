@@ -58,7 +58,7 @@
         ['terbium_oxide_dust', 'Terbium Oxide Dust', 'Terbia from the rare-earth cascade.', 'Stripped in the extraction cascade (circuit 10).'],
         ['ysz_powder', 'YSZ Powder', 'Yttria-stabilised zirconia.', 'Pressed to an ingot in a compressor.'],
         ['ysz_ingot', 'YSZ Ingot', 'The target of the thermal barrier coating.', 'Evaporated onto SX blades in the electron beam furnace (circuit 5).'],
-        ['sx_master_alloy_dust', 'SX Master Alloy Dust', 'Nickel with rhenium, ruthenium and tantalum.', 'Cast in the single-crystal foundry; gates are remelted into it.'],
+        ['sx_master_alloy_dust', 'SX Master Alloy Dust', 'Nickel with rhenium, ruthenium, tantalum and hafnium.', 'Cast in the single-crystal foundry; gates are remelted into it.'],
         ['ceramic_shell_mould', 'Ceramic Shell Mould', 'A zirconia-alumina investment shell with a grain selector.', 'Fired shell stuccoed in an assembler (circuit 25); one per casting.'],
         ['ceramic_slurry', 'Ceramic Slurry', 'Yttria-stabilised zirconia and sapphire grain in a polyvinyl butyral binder.', 'Mixed (circuit 1); dipped onto a polyethylene pattern in the mixer (circuit 2).'],
         ['green_ceramic_shell', 'Green Ceramic Shell', 'Unfired shell with the polyethylene pattern still inside.', 'Fired in the blast furnace with oxygen (circuit 1); the pattern burns out as carbon dioxide.'],

@@ -182,7 +182,7 @@
           "itemsIn": [{ "id": "grindless:ktp_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }], "charge": [],
           "itemsOut": [{ "id": "grindless:ktp_electroded_wafer", "count": 1 }], "fluidsOut": [] },
         { "name": "spdc_source", "circuit": 0, "eut": 491520, "duration": 300,
-          "itemsIn": [{ "id": "gtceu:ppktp_dust", "count": 2 }, { "id": "gtceu:uv_emitter", "count": 1 }, { "id": "grindless:faraday_isolator", "count": 1 }, { "id": "grindless:photonic_chip", "count": 1 }, { "id": "gtceu:glass_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:ktp_electroded_wafer", "count": 1 }, { "id": "gtceu:uv_emitter", "count": 1 }, { "id": "grindless:faraday_isolator", "count": 1 }, { "id": "grindless:photonic_chip", "count": 1 }, { "id": "gtceu:glass_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:spdc_source", "count": 1 }], "fluidsOut": [] },
         { "name": "ule_mirror_coat", "circuit": 0, "eut": 491520, "duration": 300,
           "itemsIn": [{ "id": "grindless:ule_spacer", "count": 1 }, { "id": "grindless:tantalum_pentoxide_dust", "count": 2 }, { "id": "gtceu:silicon_dioxide_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],

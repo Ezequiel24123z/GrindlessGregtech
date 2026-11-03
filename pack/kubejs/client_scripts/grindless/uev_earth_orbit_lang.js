@@ -62,7 +62,7 @@
         ['ktp_boule', 'KTP Boule', 'A potassium titanyl phosphate crystal.', 'Sliced into wafers.'],
         ['ktp_wafer', 'KTP Wafer', 'A thin slice of KTP.', 'Gets gold electrodes.'],
         ['ktp_electroded_wafer', 'Electroded KTP Wafer', 'Ready for periodic poling.', 'Poled in the polarizer.'],
-        ['spdc_source', 'SPDC Source', 'A PPKTP crystal pumped by an emitter.', 'Makes entangled photon pairs.'],
+        ['spdc_source', 'SPDC Source', 'A poled KTP wafer pumped by an emitter.', 'Makes entangled photon pairs.'],
         ['ule_soot', 'ULE Soot', 'Silica and titania from flame hydrolysis.', 'The chlorine goes to the chlorine users.'],
         ['ule_boule', 'ULE Boule', 'Ultra-low expansion glass.', 'Turned into a spacer.'],
         ['ule_spacer', 'ULE Spacer', 'A rod that barely changes length.', 'Mirrors go on both ends.'],

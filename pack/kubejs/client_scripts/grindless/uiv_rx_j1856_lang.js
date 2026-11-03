@@ -58,7 +58,7 @@
         ['gtceu.recipe.grindless_transuranium_processing.es254_extraction', 'Circuit 9: einsteinium-254 pulled out of the actinide liquor with HDEHP; the solvent is kept'],
         ['gtceu.recipe.grindless_heavy_ion_irradiation.es254_bombard', 'Circuit 8: a calcium-48 beam on the einsteinium-254 target; the wheel comes back activated'],
         ['gtceu.recipe.grindless_recoil_separation.element_119_recoil', 'Circuit 7: element 119 caught from its recoil gas on the membrane'],
-        ['gtceu.recipe.grindless_superheavy_chemistry.census_ii', 'Circuit 3: elements 119 and 120 counted in a sealed capsule']
+        ['gtceu.recipe.grindless_superheavy_chemistry.census_ii', 'Circuit 3: elements 119 and 120 counted in a sealed capsule; census I stays in the lab']
     ]
 
     // [name, en, tooltip 0 en, tooltip 1 en]

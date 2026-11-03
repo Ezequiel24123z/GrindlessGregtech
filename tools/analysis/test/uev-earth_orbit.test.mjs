@@ -128,6 +128,12 @@ test('the older rows exist: fibre draw 6-8, crystal furnace tgg and ktp, pyrolys
   assert.match(outerChem, /cnt_sock/);
 });
 
+test('the SPDC source takes the electroded KTP wafer, not PPKTP dust', () => {
+  const r = rowsOf(T).find((x) => x.name === 'spdc_source');
+  assert.ok(ids(r.itemsIn).includes('grindless:ktp_electroded_wafer'));
+  assert.ok(!ids(r.itemsIn).includes('gtceu:ppktp_dust'));
+});
+
 test('both machines are registered with their types and Earth-orbit casing; every item has a name, tooltips and a texture', () => {
   assert.match(startup, /gtceu:quantum_gas_lab|quantum_gas_lab/);
   assert.match(startup, /entanglement_station/);
