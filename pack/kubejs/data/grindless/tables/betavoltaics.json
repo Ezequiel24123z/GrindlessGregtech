@@ -6,6 +6,67 @@
       "dataKey": "grindless_ultrapure_water",
       "recipes": [
         {
+          "name": "carbon_filtration",
+          "circuit": 2,
+          "eut": 491520,
+          "duration": 200,
+          "itemsIn": [],
+          "chanced": [{ "id": "gtceu:activated_carbon_dust", "count": 1, "chance": 500 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 8000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtca:purified_water_grade_1", "amount": 8000 }]
+        },
+        {
+          "name": "reverse_osmosis",
+          "circuit": 3,
+          "eut": 491520,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtca:purified_water_grade_1", "amount": 8000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtca:purified_water_grade_2", "amount": 6000 }, { "id": "gtceu:salt_water", "amount": 2000 }]
+        },
+        {
+          "name": "electrodeionisation",
+          "circuit": 4,
+          "eut": 491520,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtca:purified_water_grade_2", "amount": 6000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtca:purified_water_grade_3", "amount": 6000 }]
+        },
+        {
+          "name": "uv_oxidation",
+          "circuit": 5,
+          "eut": 491520,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtca:purified_water_grade_3", "amount": 6000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtca:purified_water_grade_4", "amount": 6000 }, { "id": "gtceu:carbon_dioxide", "amount": 50 }]
+        },
+        {
+          "name": "degassing",
+          "circuit": 6,
+          "eut": 491520,
+          "duration": 200,
+          "itemsIn": [],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtca:purified_water_grade_4", "amount": 6000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtca:purified_water_grade_5", "amount": 6000 }]
+        },
+        {
           "name": "ultrapure_water",
           "circuit": 1,
           "eut": 491520,
@@ -13,9 +74,9 @@
           "itemsIn": [{ "id": "gtceu:sodium_hydroxide_dust", "count": 1 }],
           "kept": [{ "id": "grindless:ion_exchange_resin", "count": 1 }],
           "charge": [],
-          "fluidsIn": [{ "id": "minecraft:water", "amount": 8000 }, { "id": "gtceu:hydrochloric_acid", "amount": 1000 }],
+          "fluidsIn": [{ "id": "gtca:purified_water_grade_5", "amount": 6000 }, { "id": "gtceu:hydrochloric_acid", "amount": 1000 }],
           "itemsOut": [],
-          "fluidsOut": [{ "id": "gtceu:ultrapure_water", "amount": 6000 }, { "id": "gtceu:salt_water", "amount": 2000 }]
+          "fluidsOut": [{ "id": "gtceu:ultrapure_water", "amount": 6000 }, { "id": "gtceu:salt_water", "amount": 1000 }]
         }
       ]
     },
