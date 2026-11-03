@@ -462,8 +462,7 @@
     var s = S.IO.recipes.separate
     circuit(C.P.inBus, s.circuit)
     insert(C.P.inBus, SUBLIMATE, s.sublimate)
-    setTank(C.P.in1, 'gtceu:hydrogen', s.hydrogen)
-    setTank(C.P.in2, 'gtceu:hydrochloric_acid', s.hcl)
+    setTank(C.P.in1, 'gtceu:chlorine', s.chlorine)
     wake(C)
     phase('voiding')
   }
@@ -474,8 +473,8 @@
     var s = S.IO.recipes.separate
     var reasons = failureReasons(C.ctrl)
     var shown = reasons.some(function (x) { return NO_VOIDING.test(x) })
-    var kept = count(C.P.inBus, SUBLIMATE) === s.sublimate && tankInfo(C.P.in1).amount === s.hydrogen &&
-      tankInfo(C.P.in2).amount === s.hcl && Object.keys(readBus(C.P.outBus)).length === 0
+    var kept = count(C.P.inBus, SUBLIMATE) === s.sublimate &&     tankInfo(C.P.in1).amount === s.chlorine &&
+          Object.keys(readBus(C.P.outBus)).length === 0
     check('no_voiding', kept && shown, 'circuit 2 inputs, controller voiding items and fluids, 60 ticks: inputs kept=' + kept +
       ', refusal shown=' + shown + ' [' + reasons.join('; ') + ']; ' + state(C))
     C.ctrl.setVoidingMode(lazy().VoidingMode.VOID_NONE)
@@ -486,15 +485,14 @@
     var C = S.ow.condenser
     var s = S.IO.recipes.separate
     var out = readBus(C.P.outBus)
-    if ((out['gtceu:germanium_dust'] || 0) > 0 && status(C) !== 'WORKING') {
+    if ((out['gtceu:indium_chloride_dust'] || 0) > 0 && status(C) !== 'WORKING') {
       var fluids = outFluids(C)
-      var h2 = tankInfo(C.P.in1)
-      var hcl = tankInfo(C.P.in2)
-      check('separate_anywhere', out['gtceu:germanium_dust'] === s.germanium && out['gtceu:indium_dust'] === s.indium &&
-        Object.keys(out).length === 2 && fluids['minecraft:water'] === s.water && Object.keys(fluids).length === 1 &&
-        count(C.P.inBus, SUBLIMATE) === 0 && h2.amount === 0 && hcl.id === 'gtceu:hydrochloric_acid' && hcl.amount === s.hcl,
-        'Overworld circuit 2: ' + s.sublimate + ' sublimates + ' + s.hydrogen + ' mB hydrogen -> ' + summary(out) + ', fluids ' +
-        summary(fluids) + '; hydrogen left ' + h2.amount + ' mB, HCl kept ' + hcl.amount + ' mB')
+      var cl = tankInfo(C.P.in1)
+      check('separate_anywhere', out['gtceu:indium_chloride_dust'] === s.indiumChloride &&
+        Object.keys(out).length === 1 && fluids['gtceu:germanium_tetrachloride'] === s.gecl4 && Object.keys(fluids).length === 1 &&
+        count(C.P.inBus, SUBLIMATE) === 0 && cl.amount === 0,
+        'Overworld circuit 2: ' + s.sublimate + ' sublimates + ' + s.chlorine + ' mB chlorine -> ' + summary(out) + ', fluids ' +
+        summary(fluids) + '; chlorine left ' + cl.amount + ' mB')
       C.ctrl.setWorkingEnabled(false)
       C.off = true
       optionalIo()
