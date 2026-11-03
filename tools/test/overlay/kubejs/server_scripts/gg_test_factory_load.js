@@ -438,9 +438,23 @@
       return
     }
     if (waited > FORM_TICKS) {
+      var why = []
+      p.facs.forEach(function (f, i) {
+        var m = machine(f.pos)
+        if (!m || !m.isFormed()) { try { why.push('#' + i + ' ' + String(m.getMultiblockState().error)) } catch (e) { why.push('#' + i + ' unreadable') } }
+      })
       check(p.name + '_formed', false, 'not ready after ' + waited + ' ticks: tower ' + ready + ', machines ' + allMachines + ', factories ' + facsReady +
-        (tm && !ready ? ' (' + String(tm.getMultiblockState().error) + ')' : ''))
-      p.phase = 'abandon'
+        (tm && !ready ? ' (' + String(tm.getMultiblockState().error) + ')' : '') + (why.length ? ' [' + why.join('; ').substring(0, 600) + ']' : ''))
+      if (ready && allMachines && p.facs.length > 0) {
+        // measure what did form; the factories that did not are dropped from this profile and the failure above stands
+        p.facs = p.facs.filter(function (f) { return !!f.m })
+        p.factories = p.facs.length
+        var w2 = wireless()
+        w2.paused = false
+        w2.setStored(S.server, STORE)
+        p.facs.forEach(function (f) { f.m.setActiveRecipeType(0); f.m.getRecipeLogic().updateTickSubscription() })
+        p.phase = 'warm'
+      } else p.phase = 'abandon'
       p.phaseAt = S.tick
     }
   }
@@ -536,6 +550,7 @@
       p.pressSamples0 = p.samples.length
       // every output slot full: nothing may start, nothing may accumulate
       p.units.forEach(function (u) { if (u.m) setAll(u.m.exportItems, RECIPES[p.tier].output, 64) })
+      p.pressFull = pressure(p).items
       return
     }
     p.phase = 'abandon'
@@ -560,8 +575,8 @@
       ticks: p.pressTicks, workingMid: mid.working, workingEnd: end.working, itemsMid: mid.items, itemsEnd: end.items,
       tick: pressSamples, meanVsWindowMs: round((pressSamples.meanMs || 0) - (p.windowStats.meanMs || 0), 3)
     }
-    check('backpressure_stalled', end.working === 0 && end.items === mid.items && end.items === p.machines * 64,
-      'outputs full: machines working ' + mid.working + ' -> ' + end.working + ', output items ' + mid.items + ' -> ' + end.items + ' (full: ' + (p.machines * 64) + '); mean tick ' +
+    check('backpressure_stalled', end.working === 0 && end.items === mid.items && end.items === p.pressFull && p.pressFull > 0,
+      'outputs full: machines working ' + mid.working + ' -> ' + end.working + ', output items ' + mid.items + ' -> ' + end.items + ' (full: ' + p.pressFull + '); mean tick ' +
       pressSamples.meanMs + ' ms stalled vs ' + p.windowStats.meanMs + ' ms running (difference ' + p.backpressure.meanVsWindowMs + ' ms)')
     p.samples = p.samples.slice(0, p.pressSamples0)
     p.phase = 'abandon'
@@ -570,12 +585,14 @@
 
   // the abandoned endpoints: the band is cleared with the tower and every cover still in it; the network must forget them
   function abandon(p) {
-    var el = S.tick - p.phaseAt
-    if (el === 0) {
+    if (!p.cleared) {
+      p.cleared = true
       clearBand()
       p.trackedAtClear = trackedInBand()
+      p.phaseAt = S.tick
       return
     }
+    var el = S.tick - p.phaseAt
     if (el === 1) {
       dropEntities()
       p.entitiesAfterClear = bandEntities()
