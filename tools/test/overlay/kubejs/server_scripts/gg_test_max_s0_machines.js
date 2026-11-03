@@ -28,7 +28,7 @@
     if (!ON) return
     var Long = Java.loadClass('java.lang.Long')
     try {
-      event.recipes.gtceu.warp_gate('gg_test_max_s0:warp_gate/s0_probe').notConsumable('1x ' + DANDELION).itemOutputs('1x ' + POPPY).EUt(Long.valueOf(GATE_EUT)).duration(GATE_TICKS)
+      event.recipes.gtceu.warp_gate('gg_test_max_s0:warp_gate/hold_s0_probe').notConsumable('1x ' + DANDELION).itemOutputs('1x ' + POPPY).EUt(Long.valueOf(GATE_EUT)).duration(GATE_TICKS)
     } catch (e) { console.error('[gg_test max_s0] could not add the warp gate probe: ' + errText(e)) }
   })
 
