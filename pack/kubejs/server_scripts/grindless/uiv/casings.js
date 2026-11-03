@@ -1,16 +1,15 @@
 // priority: -24478
 // UIV casing family recipes (package D4-CASE-UIV, docs/eras/lines-uev-uxv.md section 9). Ids: startup_scripts/grindless/uiv/casings.js.
-// The rhea casing is printed on the UV powder bed printer, so it runs at VA[UV]; the other three at VA[UIV] = 31,457,280 EU/t.
+// All four casings run at VA[UIV] = 31,457,280 EU/t: the rhea casing is a UIV structure part, so it is printed at its era's voltage.
 // neutron_star_site_casing (tables/rx_j1856.json) and uiv_fusion_casing (tables/mk5.json) are rows of their own tables.
 // The printer takes 3 inputs and the cryostat works 4, so the rhea casing has no circuit.
 global.grindless.recipes('uiv/casings', function (event) {
-  var UV_EUT = 1966080
   var UIV_EUT = 31457280
 
   event.recipes.gtceu.powder_bed_fusion('grindless:rhea_casing')
     .itemInputs('12x grindless:rhea_am_powder', '4x gtceu:rhea_plate', '2x grindless:wf_rhea_billet')
     .itemOutputs('2x grindless:rhea_casing')
-    .EUt(UV_EUT)
+    .EUt(UIV_EUT)
     .duration(400)
 
   event.recipes.gtceu.naquadria_magnets('grindless:mh_field_casing')

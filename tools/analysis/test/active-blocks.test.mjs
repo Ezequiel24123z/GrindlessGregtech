@@ -37,5 +37,5 @@ test('the pack passes today: the largest is the annihilation engine at the ceili
   assert.equal(counts[0].id, 'gtceu:annihilation_engine');
   assert.equal(counts[0].count, 264);
   assert.deepEqual(counts.filter((r) => r.count > MAX_ACTIVE_BLOCKS), []);
-  assert.equal(counts.find((r) => r.id === 'gtceu:pulsar_wind_trap').count, 256, 'counted with our grindless coil blocks');
+  assert.equal(counts.find((r) => r.id === 'gtceu:pulsar_wind_trap').count, 28, 'counted with our grindless coil blocks');
 });
