@@ -1,4 +1,4 @@
-// priority: -13224
+// priority: -26358
 // -----------------------------------------------------------------------------------------------
 // D2-MATTER (#363, docs/eras/lines-ev-zpm.md section 9, D2-6): the carbon loop closes. GTM's electrolyzer/diamond_electrolysis turns one
 // diamond dust into 64 carbon, which fed the HV gasifier and the ash centrifuge (iron from gas). No real process electrolyses diamond and
