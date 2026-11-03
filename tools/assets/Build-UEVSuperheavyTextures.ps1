@@ -8,7 +8,7 @@
 
   Writes (under pack/kubejs/assets/grindless/textures/):
     block/multiblock/<machine>/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
-      for heavy_ion_cyclotron, recoil_separator, superheavy_chemistry_lab
+      for heavy_ion_cyclotron (the Superheavy Factory, which absorbed the recoil separator in D4-SHAPE-UEV-B) and superheavy_chemistry_lab
     item/<name>.png for target_wheel_blank, activated_target_wheel, sealed_capsule, the five *_atoms, polycarbonate_foil,
       ion_tracked_foil, etched_membrane, berkelium_oxide_dust
 
@@ -42,7 +42,7 @@ $OutRoot = [System.IO.Path]::GetFullPath($OutRoot)
 $ScriptName = Split-Path -Leaf $PSCommandPath
 $FrameTime = 4
 $Frames = 4
-$Machines = @('heavy_ion_cyclotron', 'recoil_separator', 'superheavy_chemistry_lab')
+$Machines = @('heavy_ion_cyclotron', 'superheavy_chemistry_lab')
 $Items = @('target_wheel_blank', 'activated_target_wheel', 'sealed_capsule', 'flerovium_atoms', 'livermorium_atoms', 'tennessine_atoms',
     'oganesson_atoms', 'moscovium_atoms', 'polycarbonate_foil', 'ion_tracked_foil', 'etched_membrane', 'berkelium_oxide_dust',
     'cast_polycarbonate_film', 'lead_polymer_liner', 'ca48_plasma_bunch')
@@ -140,7 +140,7 @@ function New-Face {
     $c = New-Bezel
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    # recoil_separator
+    # the generic face (drawn for the recoil separator before D4-SHAPE-UEV-B merged it into the cyclotron)
     for ($x = 4; $x -le 11; $x++) { Set-Px $c $x 6 (Hex '2C3A44'); Set-Px $c $x 7 (Hex '2C3A44') }
     foreach ($x in @(5, 8, 10)) { Set-Px $c $x 4 (Hex '8A4C4C'); Set-Px $c $x 9 (Hex '4C4C8A') }
     if ($Active) {

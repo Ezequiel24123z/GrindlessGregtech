@@ -273,6 +273,7 @@ From UHV (`DECISIONS.md:426-451`, `docs/STATUS.md`; the ids are `pack/kubejs/sta
 
 ### 3. Gas-filled recoil separator: `gtceu:recoil_separator`, type `gtceu:recoil_separation` (Earth)
 
+- **Merged (D4-SHAPE-UEV-B, 2026-11-03):** the controller is gone. `gtceu:recoil_separation` now runs in the Superheavy Factory (`gtceu:heavy_ion_cyclotron`, section 2); see `lines-uev-uxv.md`.
 - **What it gains:** it separates single atoms from 10¹² beam particles a second. This is a step no other machine does.
 - **Recipes:** c1–c5 turn a recoil gas into a superheavy atom sample (3,932,160 EU/t *(tune)*). c3 uses a non-consumed helium-filled chamber.
 - **Byproducts:** the beam dump and scattered target go to the hot cell *(contained)*.
@@ -500,6 +501,7 @@ From UHV (`DECISIONS.md:426-451`, `docs/STATUS.md`; the ids are `pack/kubejs/sta
 
 ### 25. Containment works: `gtceu:degenerate_containment_works`, type `gtceu:degenerate_containment` (Sirius B orbit)
 
+- **Merged (D4-SHAPE-UEV-B, 2026-11-03):** the controller (shipped as `gtceu:containment_works`) is gone. `gtceu:degenerate_containment` now runs in the Degenerate Works (`gtceu:degenerate_harvester`); see `lines-uev-uxv.md`.
 - **What it gains:** UHV's Casimir exotic-matter stasis holds a degenerate pellet.
 - **Recipes:** c1, degenerate matter + exotic matter → degenerate pellet (UEV field generator).
 - **Byproducts:** *(contained)*.

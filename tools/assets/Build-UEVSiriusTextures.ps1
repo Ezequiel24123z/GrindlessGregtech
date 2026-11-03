@@ -9,10 +9,9 @@
   Writes (under pack/kubejs/assets/grindless/textures/):
     block/multiblock/white_dwarf_spectrograph/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
     block/multiblock/degenerate_harvester/ the same three
-    block/multiblock/containment_works/ the same three
 
   Spectrograph face: a slit and a spectrum band; working (4 frames) a dark absorption line sweeps across it. Harvester face: a pale dense
-  core in a ring; working (4 frames) it pulses and a cold ring turns. Containment face: a sealed pellet between two clamps; working
+  core in a ring; working (4 frames) it pulses and a cold ring turns. (New-SealFace, the containment works' face, is no longer written: D4-SHAPE-UEV-B merged that machine into the harvester.) Its old brief: a sealed pellet between two clamps; working
   (4 frames) the field lines close around it. The *_emissive layer holds only the glow and the lamp.
 
   Conventions: transparent background, outer 1 px ring of the face empty, every pixel fully opaque or fully transparent, none pure
@@ -140,7 +139,7 @@ function New-SealFace {
     return Finish-Face $c $e $Active
 }
 
-foreach ($face in @(@('white_dwarf_spectrograph', 'New-SpectrumFace'), @('degenerate_harvester', 'New-CoreFace'), @('containment_works', 'New-SealFace'))) {
+foreach ($face in @(@('white_dwarf_spectrograph', 'New-SpectrumFace'), @('degenerate_harvester', 'New-CoreFace'))) {
     $Dir = "block/multiblock/$($face[0])"
     $idle = & $face[1] 0 $false
     Out-Tex $idle.C "$Dir/overlay_front.png"
@@ -163,7 +162,7 @@ function Test-Pixels {
         }
     }
 }
-foreach ($face in 'white_dwarf_spectrograph', 'degenerate_harvester', 'containment_works') {
+foreach ($face in 'white_dwarf_spectrograph', 'degenerate_harvester') {
     $Dir = "block/multiblock/$face"
     $png = @{}
     foreach ($n in 'overlay_front', 'overlay_front_active', 'overlay_front_active_emissive') { $png[$n] = Read-Png (Join-Path $OutRoot ("$Dir/$n.png" -replace '/', '\')) }

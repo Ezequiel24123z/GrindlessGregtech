@@ -1367,7 +1367,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVMegaba
 
 ## UEV heavy-ion machines and items (UEV-A2)
 
-Procedural, drawn by `Build-UEVSuperheavyTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:heavy_ion_cyclotron`, `gtceu:recoil_separator` and `gtceu:superheavy_chemistry_lab` (still, animated active and emissive frames) and the 12 items of the superheavy lines.
+Procedural, drawn by `Build-UEVSuperheavyTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:heavy_ion_cyclotron` (the Superheavy Factory, which absorbed the recoil separator) and `gtceu:superheavy_chemistry_lab` (still, animated active and emissive frames) and the 12 items of the superheavy lines.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSuperheavyTextures.ps1
@@ -1376,7 +1376,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSuperh
 
 | File (under `textures/`) | Notes |
 |---|---|
-| `block/multiblock/{heavy_ion_cyclotron,recoil_separator,superheavy_chemistry_lab}/overlay_front*.png` (+ `.mcmeta`) | The three controller faces: still, active and active emissive. |
+| `block/multiblock/{heavy_ion_cyclotron,superheavy_chemistry_lab}/overlay_front*.png` (+ `.mcmeta`) | The two controller faces: still, active and active emissive. |
 | `item/*.png` (12, listed by `-Credits`) | Target wheel blank and activated wheel, sealed capsule, the five superheavy atom samples (Fl, Lv, Ts, Og, Mc), polycarbonate foil, ion-tracked foil, etched membrane and berkelium oxide. |
 
 ## UEV photonics machines and items (UEV-A6)
@@ -1450,7 +1450,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaSmelt
 
 ## UEV Sirius B (UEV-B4)
 
-Procedural, drawn by `Build-UEVSiriusTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:white_dwarf_spectrograph`, `gtceu:degenerate_harvester` and `gtceu:containment_works` (still, animated active and emissive frames). B4 adds no item textures: its items and the containment casing were drawn by UEV-F1.
+Procedural, drawn by `Build-UEVSiriusTextures.ps1`; nothing is copied from another mod. The controller faces of `gtceu:white_dwarf_spectrograph` and `gtceu:degenerate_harvester` (the Degenerate Works, which absorbed the containment works) (still, animated active and emissive frames). B4 adds no item textures: its items and the containment casing were drawn by UEV-F1.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSiriusTextures.ps1
@@ -1459,7 +1459,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVSirius
 
 | File (under `textures/`) | Notes |
 |---|---|
-| `block/multiblock/{white_dwarf_spectrograph,degenerate_harvester,containment_works}/overlay_front*.png` (+ `.mcmeta`) | The three Sirius B controller faces: still, active and active emissive. |
+| `block/multiblock/{white_dwarf_spectrograph,degenerate_harvester}/overlay_front*.png` (+ `.mcmeta`) | The two Sirius B controller faces: still, active and active emissive. |
 
 ## LuV Mega Chemical Complex (MEGA-6)
 
