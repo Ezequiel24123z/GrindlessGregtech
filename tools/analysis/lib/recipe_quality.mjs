@@ -183,7 +183,7 @@ function controllerRules(rec, t, cfg) {
   return v;
 }
 
-const BULK_PART = /(casing|coil|glass|firebox|gearbox|pipe_casing|machine_casing|block|frame|wall|brick|plating|vent|grating|heat_shield)$/;
+const BULK_PART = /(casing|coil|glass|window|firebox|gearbox|pipe_casing|machine_casing|block|frame|wall|brick|plating|vent|grating|heat_shield)$/;
 
 function partRules(rec, t, output) {
   const v = [];
