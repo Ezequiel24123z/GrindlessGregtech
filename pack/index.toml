@@ -19590,7 +19590,7 @@ hash = "ee81d0dc94ff47093e753c8ca99589f6890b2c076db7f94068b3cb7c49cddd9a"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uxv/casings.js"
-hash = "de9de1a6db8b8cebe3c39b3ed67ddf96f5635323aeed4d5d3abd975a868d4dff"
+hash = "45abe04c2b34250f2016a51350dc2cdb4a3a04a9a74b71ac41ba781b585f64f4"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uxv/cuts.js"
