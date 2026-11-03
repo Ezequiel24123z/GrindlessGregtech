@@ -119,7 +119,15 @@ Measures representative industrial loads (`tools/test/overlay/kubejs/server_scri
 - Then (midgame) backpressure: every output slot full, nothing may run or accumulate; then the band is cleared and the tracked wireless endpoints and forced chunks must return to the pre-run values (abandoned-endpoint cancellation; the Hyperstargate arrival ticket of #302 is not exercised here).
 - Markers: `GGTEST|factory_load|<check>|PASS|FAIL|NOTE`; one `summary_<profile>` NOTE per profile carries compact JSON, also written to `kubejs/exported/factory_load.json` (collected as `results/server/kubejs-exported/factory_load.json`).
 - Budget: 50 ms is the 20 TPS tick budget. The first baselines come before any threshold: no regression limit is set until repeated runs give the noise. Nothing here is claimed as a failure without evidence.
-- Baselines: see the run recorded below.
+- Baselines: run `vm-20261103-170232-6bfeae9c-962617` (commit 6bfeae9c5, Linux VM, 1 exclusive slot; window 200 ticks after 60 warmup; tick source: the server's `tickTimes` ring). Single run: noise unknown, so no threshold yet.
+
+  | Profile | Load | Tick mean / p95 / max (ms) | Ticks over 50 ms | Output (actual/requested items/s) |
+  |---|---|---|---|---|
+  | control | nothing built | 3.45 / 12.90 / 29.25 | 0 | - |
+  | midgame | 24 HV centrifuges, HV wireless tower | 1.93 / 2.28 / 105.28 | 1 | 24 / 24 |
+  | endgame | 16 UV centrifuges, UV wireless tower (0 of 4 Mega Factories formed) | 0.65 / 0.84 / 3.92 | 0 | 16 / 16 |
+
+  Control reads higher than the loaded profiles: it runs first, right after boot and the forced-chunk load, so early-run noise dominates; the figures are an upper bound for fixture overhead, not a per-machine cost. Backpressure (midgame): 9216 items in full outputs, 0 working, count unchanged. Cleanup: tracked wireless endpoints 25 and 17 at the clear, 0 after 60 ticks; forced chunks 0 before and 0 after; loaded chunks 625 before the run, 1649 after (unloading is deferred). Heap is `null`: `java.lang.Runtime` is outside KubeJS's class filter. Open: the four endgame Mega Factories did not form in the fixture (`endgame_formed` FAIL, GTM pattern errors; a follow-up contract is needed), and the Hyperstargate arrival ticket (#302) is not exercised.
 
 ## Choosing the backend
 
