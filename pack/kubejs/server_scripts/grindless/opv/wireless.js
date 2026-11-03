@@ -5,12 +5,12 @@
 //
 //   grindless:chain_strand_repeater   the OpV link: two chain strand wires round the UXV link (the pasta strand repeater), timed by a
 //                                     tetron die (the UXV repeater's recipe, uxv/vela_pasta.js line 48, one tier up)
-//   grindless:opv_smes_cell           the OpV cell (16,106,127,360,000 EU, four UXV cells' worth): chain strand wound on chain lamina
-//                                     stacks, held by two OpV field generators
+//   grindless:opv_smes_cell           the OpV cell (16,106,127,360,000 EU, four UXV cells' worth): four UXV cells, which bring the
+//                                     field, rewound with chain strand on chain lamina stacks
 //
 // Both are assembler rows at VA[OpV] (503,316,480 EU/t): GCYM's large assembler on two UXV 4 A hatches until A4 gives
 // gtceu:opv_assembler its recipe (docs/eras/opv.md 'Voltages and controllers'). Their inputs come from A0 (the strand wire, the lamina
-// stack), A2 (the die) and A3 (the field generator).
+// stack), A2 (the die) and D4 (the UXV cell).
 (function () {
   const LOG = '[grindless/opv_wireless] '
   const OPV = 13
@@ -19,7 +19,7 @@
   const ROWS = [
     { name: 'chain_strand_repeater', items: ['2x gtceu:chain_strand_single_wire', '1x grindless:pasta_strand_repeater', '1x grindless:tetron_die', '1x gtceu:soldering_alloy_ingot'],
       fluids: [['gtceu:lubricant', 100]], out: 'grindless:chain_strand_repeater', duration: 300 },
-    { name: 'opv_smes_cell', items: ['16x gtceu:chain_strand_single_wire', '4x grindless:chain_lamina_stack', '2x gtceu:opv_field_generator'],
+    { name: 'opv_smes_cell', items: ['16x gtceu:chain_strand_single_wire', '4x grindless:chain_lamina_stack', '4x grindless:uxv_smes_cell'],
       fluids: [], out: 'grindless:opv_smes_cell', duration: 600 }
   ]
   OW.rows = ROWS
