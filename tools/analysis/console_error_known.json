@@ -1,4 +1,3 @@
-
 {
  "note": "console.error lines the KubeJS stand-in logs (\"file: message\" -> count and why). May only shrink: fix the cause, then rerun check-static.mjs --write-baselines.",
  "known": {
@@ -10,9 +9,29 @@
    "count": 1,
    "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
   },
-  "kubejs/server_scripts/grindless/iv/hot_cell.js: [grindless/iv] hot cell skipped enrichment: no source recipe gtceu:chemical_reactor/uranium_hexafluoride": {
+  "kubejs/server_scripts/grindless/luv/circuit_line.js: [grindless/luv] circuit assembly line: gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy left as it is: no original recipe gtnn:circuit_assembly_line/we": {
    "count": 1,
    "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
+  },
+  "kubejs/server_scripts/grindless/luv/circuit_line.js: [grindless/luv] circuit assembly line: no gtceu:molten_cerrobase_140 route, so the line cannot be built: no original recipe gtceu:extractor/extract_cerrobase_140_ingot": {
+   "count": 1,
+   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
+  },
+  "kubejs/server_scripts/grindless/uv/edge.js: [grindless/uv] UHV energy hatch failed: Error: no original recipe gtceu:assembly_line/energy_hatch_uhv": {
+   "count": 1,
+   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
+  },
+  "kubejs/server_scripts/grindless/zpm/naquadria.js: [grindless/zpm] naquadria reactor failed: Error: no original recipe gtceu:assembly_line/large_naquadah_reactor": {
+   "count": 1,
+   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
+  },
+  "kubejs/server_scripts/grindless/zpm/observatory.js: [grindless/zpm] UV energy hatch failed: Error: no original recipe gtceu:assembly_line/energy_hatch_uv": {
+   "count": 1,
+   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
+  },
+  "kubejs/server_scripts/grindless/iv/hot_cell.js: [grindless/iv] hot cell skipped enrichment: no source recipe gtceu:centrifuge/uranium_hexafluoride_separation": {
+   "count": 1,
+   "why": "D2-FUEL (batch 16): the hot cell composes enrichment from GTM's centrifuge UF6 separation; the static stand-in has no GTM originals, the game does (T1 vm-20261103-103425-65c24a68)"
   },
   "kubejs/server_scripts/grindless/iv/hot_cell.js: [grindless/iv] hot cell skipped radon: no source recipe gtceu:large_chemical_reactor/radon_from_uranium_238": {
    "count": 1,
@@ -62,11 +81,7 @@
    "count": 1,
    "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
   },
-  "kubejs/server_scripts/grindless/luv/circuit_line.js: [grindless/luv] circuit assembly line: gtnn:circuit_assembly_line/wetware_processor_luv_soldering_alloy left as it is: no original recipe gtnn:circuit_assembly_line/we": {
-   "count": 1,
-   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
-  },
-  "kubejs/server_scripts/grindless/luv/circuit_line.js: [grindless/luv] circuit assembly line: no gtceu:molten_cerrobase_140 route, so the line cannot be built: no original recipe gtceu:extractor/extract_cerrobase_140_ingot": {
+  "kubejs/server_scripts/grindless/luv/helium_refrigerator.js: [grindless/luv] helium refrigerator: cannot read gtceu:vacuum_freezer/liquid_helium; using the table's 460.8 EU per mB": {
    "count": 1,
    "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
   },
@@ -87,22 +102,6 @@
    "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
   },
   "kubejs/server_scripts/grindless/mv/mega_polymer_works.js: [grindless/mv] polymer works skipped rubber_plate: no source recipe gtceu:chemical_reactor/rubber": {
-   "count": 1,
-   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
-  },
-  "kubejs/server_scripts/grindless/uv/edge.js: [grindless/uv] UHV energy hatch failed: Error: no original recipe gtceu:assembly_line/energy_hatch_uhv": {
-   "count": 1,
-   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
-  },
-  "kubejs/server_scripts/grindless/zpm/naquadria.js: [grindless/zpm] naquadria reactor failed: Error: no original recipe gtceu:assembly_line/large_naquadah_reactor": {
-   "count": 1,
-   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
-  },
-  "kubejs/server_scripts/grindless/zpm/observatory.js: [grindless/zpm] UV energy hatch failed: Error: no original recipe gtceu:assembly_line/energy_hatch_uv": {
-   "count": 1,
-   "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
-  },
-  "kubejs/server_scripts/grindless/luv/helium_refrigerator.js: [grindless/luv] helium refrigerator: cannot read gtceu:vacuum_freezer/liquid_helium; using the table's 460.8 EU per mB": {
    "count": 1,
    "why": "AF-A1 initial seed: stand-in console.error lines and the M8-04 layout overflows known at v1.1.0; AF-M 210 and the script owners remove them"
   }
@@ -162,6 +161,12 @@
     "grindless:tholin_reforming/tholin_hydrolysis",
     "grindless:titan_entry/lake_sampling",
     "grindless:zone_refining/fused_quartz_sphere_blank"
+   ]
+  },
+  {
+   "reason": "D2-FUEL (batch 16): the hot cell composes enrichment from GTM's centrifuge UF6 separation; the static stand-in has no GTM originals, the game does (T1 vm-20261103-103425-65c24a68)",
+   "added": [
+    "kubejs/server_scripts/grindless/iv/hot_cell.js: [grindless/iv] hot cell skipped enrichment: no source recipe gtceu:centrifuge/uranium_hexafluoride_separation"
    ]
   }
  ]
