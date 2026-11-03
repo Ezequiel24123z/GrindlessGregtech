@@ -61,6 +61,8 @@
 
   // the recipe data key: the EMI line gtceu.recipe.grindless_closed_loop (the source recipe's id is its value)
   const DATA_KEY = 'grindless_closed_loop'
+  // a recipe that names its own EMI text (gtceu.recipe.grindless_closed_loop.<name>) carries the name here
+  const TEXT_KEY = 'grindless_closed_loop_text'
   const CHARGE_KEY = 'grindless.machine.helium_refrigerator.charge'
 
   // ---------------------------------------------------------------- the table (data/grindless/tables/helium_refrigerator.json)
@@ -108,6 +110,7 @@
   HR.config = CONFIG
   HR.charge = CONFIG.charge
   HR.dataKey = DATA_KEY
+  HR.textKey = TEXT_KEY
   // items in: the hot ingot or the mold; out: the ingot. Fluids in: molten metal, make-up, liquid nitrogen, the charge; out: nitrogen
   HR.maxIO = { itemsIn: 1, itemsOut: 1, fluidsIn: 4, fluidsOut: 1 }
   HR.parts = {
@@ -233,6 +236,8 @@
   function loopInfo(data) {
     try {
       if (String(data.getString(DATA_KEY)) === '') return ''
+      var own = String(data.getString(TEXT_KEY))
+      if (own !== '') return String(Text.translate('gtceu.recipe.' + DATA_KEY + '.' + own).getString())
       return String(Text.translate('gtceu.recipe.' + DATA_KEY, String(CONFIG.makeUp.amount), String(CONFIG.charge.amount)).getString())
     } catch (e) {
       return ''
