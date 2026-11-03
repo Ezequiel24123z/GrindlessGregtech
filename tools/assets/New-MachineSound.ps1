@@ -20,6 +20,7 @@ param(
   [switch]$Plan,          # print the subscription tier and what would be generated, call nothing else
   [switch]$IndexOnly,     # no API call: rebuild sounds.json from the spec and the .ogg files present
   [switch]$Master,        # no API call: master the existing .ogg files that lack the GG_MASTER mark (-Force: all of them)
+  [switch]$Cut,           # no API call: move the loop point of the existing .ogg files that lack the GG_CUT mark to the best seam (-Force: all)
   [string]$KeyFile = 'C:\Nueva carpeta\elevenlabskey.txt'
 )
 $ErrorActionPreference = 'Stop'
@@ -65,6 +66,90 @@ function Invoke-Native($exe, [string[]]$argv) {
   return [pscustomobject]@{ Code = $p.ExitCode; Text = $err.Result }
 }
 
+$cutTag = 'GG_CUT=1'
+Add-Type -Language CSharp -TypeDefinition @'
+using System;
+public static class LoopCut {
+  // The crossfaded loop is circular: any rotation of it is as seamless as the original join. Pick the rotation whose cut is a quiet
+  // step (two neighbouring samples that almost agree) and where the 50 ms before the cut match the 50 ms after it in level.
+  public static int[] Candidates(float[] x, int rate, int count) {
+    int n = x.Length, seg = Math.Max(1, (int)Math.Round(rate * 0.05));
+    double[] sq = new double[n + 1];
+    double dsum = 0;
+    for (int i = 0; i < n; i++) { sq[i + 1] = sq[i] + (double)x[i] * x[i]; double d = x[(i + 1) % n] - x[i]; dsum += d * d; }
+    double drms = Math.Sqrt(dsum / n);
+    double[] score = new double[n];
+    for (int k = 0; k < n; k++) score[k] = double.MaxValue;
+    for (int k = seg; k <= n - seg; k++) {
+      double a = Math.Sqrt((sq[k + seg] - sq[k]) / seg), b = Math.Sqrt((sq[k] - sq[k - seg]) / seg);
+      double db = Math.Abs(20 * Math.Log10(Math.Max(a, 1e-9) / Math.Max(b, 1e-9)));
+      double r = drms > 1e-9 ? Math.Abs(x[k] - x[k - 1]) / drms : 0;
+      score[k] = db + 1.5 * r + 0.5 * (Math.Abs(x[k]) + Math.Abs(x[k - 1])) / Math.Max(drms, 1e-9);
+    }
+    int[] res = new int[count];
+    for (int c = 0; c < count; c++) {
+      int best = seg; for (int k = seg; k <= n - seg; k++) if (score[k] < score[best]) best = k;
+      res[c] = best;
+      for (int k = Math.Max(0, best - 400); k <= Math.Min(n - 1, best + 400); k++) score[k] = double.MaxValue;
+    }
+    return res;
+  }
+  // The audit's two seam measures on a file played end to start.
+  public static double Measure(float[] x, int rate, out double mismatchDb) {
+    int n = x.Length, seg = Math.Max(1, (int)Math.Round(rate * 0.05));
+    double a = 0, b = 0, dsum = 0;
+    for (int i = 0; i < seg; i++) { a += (double)x[i] * x[i]; b += (double)x[n - seg + i] * x[n - seg + i]; }
+    mismatchDb = Math.Abs(20 * Math.Log10(Math.Max(Math.Sqrt(a / seg), 1e-9) / Math.Max(Math.Sqrt(b / seg), 1e-9)));
+    for (int i = 1; i < n; i++) { double d = x[i] - x[i - 1]; dsum += d * d; }
+    double drms = Math.Sqrt(dsum / (n - 1));
+    return drms > 1e-9 ? Math.Abs(x[0] - x[n - 1]) / drms : 0;
+  }  public static float[] ReadWav(string path) {
+    byte[] b = System.IO.File.ReadAllBytes(path);
+    int p = 12;
+    while (p + 8 <= b.Length) {
+      string id = System.Text.Encoding.ASCII.GetString(b, p, 4);
+      int len = BitConverter.ToInt32(b, p + 4);
+      if (id == "data") { if (len <= 0 || p + 8 + len > b.Length) len = b.Length - p - 8; float[] f = new float[len / 4]; Buffer.BlockCopy(b, p + 8, f, 0, f.Length * 4); return f; }
+      p += 8 + len + (len & 1);
+    }
+    throw new Exception("no data chunk in " + path);
+  }
+}
+'@
+
+function Get-LoopCuts([float[]]$x, [int]$rate) { return [LoopCut]::Candidates($x, $rate, 12) }
+
+function Invoke-LoopRotate($ffmpeg, [string]$inWav, [string]$outWav, [int]$k, [string]$id) {
+  $g = "[0:a]asplit[a][b];[a]atrim=start_sample=$k,asetpts=PTS-STARTPTS[x];[b]atrim=end_sample=$k,asetpts=PTS-STARTPTS[y];[x][y]concat=n=2:v=0:a=1[o]"
+  $r = Invoke-Native $ffmpeg @('-y', '-hide_banner', '-i', $inWav, '-filter_complex', $g, '-map', '[o]', '-c:a', 'pcm_f32le', $outWav)
+  if ($r.Code) { throw "ffmpeg rotate failed for $id" }
+}
+
+# Tries the cut candidates in order and keeps the first whose encoded file passes the audit's seam measures (the lossy encode adds noise
+# to the two end samples, so the check is made on the decoded Ogg).
+function Invoke-Cut($ffmpeg, [string]$src, [object]$spec, [object]$row, [string]$dest) {
+  $rate = [int]$spec.sampleRate
+  $wav = Join-Path $rawDir "$($row.id).cut.wav"; $rot = Join-Path $rawDir "$($row.id).rot.wav"; $chk = Join-Path $rawDir "$($row.id).chk.wav"
+  $d = Invoke-Native $ffmpeg @('-y', '-hide_banner', '-i', $src, '-ac', '1', '-ar', "$rate", '-c:a', 'pcm_f32le', $wav)
+  if ($d.Code) { throw "ffmpeg decode failed for $($row.id)" }
+  $x = [LoopCut]::ReadWav($wav)
+  $out = "$dest.tmp.ogg"; $bestOut = "$dest.best.ogg"; $bestScore = [double]::MaxValue; $bestInfo = ''
+  foreach ($k in (Get-LoopCuts $x $rate)) {
+    Invoke-LoopRotate $ffmpeg $wav $rot $k $row.id
+    $e = Invoke-Native $ffmpeg @('-y', '-v', 'error', '-i', $rot, '-ac', '1', '-ar', "$rate", '-c:a', 'libvorbis', '-q:a', "$([int]$row.quality)", '-map_metadata', '-1', '-metadata', $masterTag, '-metadata', $cutTag, '-fflags', '+bitexact', '-flags:a', '+bitexact', $out)
+    if ($e.Code) { throw "ffmpeg encode failed for $($row.id)" }
+    $v = Invoke-Native $ffmpeg @('-y', '-hide_banner', '-i', $out, '-ac', '1', '-ar', "$rate", '-c:a', 'pcm_f32le', $chk)
+    if ($v.Code) { throw "ffmpeg verify decode failed for $($row.id)" }
+    $mis = 0.0; $ratio = [LoopCut]::Measure([LoopCut]::ReadWav($chk), $rate, [ref]$mis)
+    $score = [Math]::Max($ratio / 3.0, $mis / 2.0)
+    if ($score -lt $bestScore) { $bestScore = $score; Copy-Item $out $bestOut -Force; $bestInfo = "sample $k, level step $($mis.ToString('0.0')) dB, sample step x$($ratio.ToString('0.0'))" }
+    if ($score -le 1) { break }
+  }
+  Move-Item $bestOut $dest -Force
+  Remove-Item $wav, $rot, $chk, $out -ErrorAction SilentlyContinue
+  Write-Host "$($row.id): cut at $bestInfo"
+}
+
 function Invoke-Master($ffmpeg, [string]$src, [double]$trim, [object]$spec, [object]$row, [string]$dest) {
   $inv = [Globalization.CultureInfo]::InvariantCulture
   $tmp = Join-Path $rawDir "$($row.id).master.wav"
@@ -81,6 +166,9 @@ function Invoke-Master($ffmpeg, [string]$src, [double]$trim, [object]$spec, [obj
   $loop = Join-Path $rawDir "$($row.id).loop.wav"
   $r = Invoke-Native $ffmpeg @('-y', '-hide_banner', '-i', $tmp, '-filter_complex', $graph, '-map', '[o]', '-c:a', 'pcm_f32le', $loop)
   if ($r.Code) { throw "ffmpeg crossfade failed for $($row.id)" }
+  $rotWav = Join-Path $rawDir "$($row.id).rot.wav"
+  Invoke-LoopRotate $ffmpeg $loop $rotWav (Get-LoopCuts ([LoopCut]::ReadWav($loop)) ([int]$spec.sampleRate))[0] $row.id
+  Move-Item $rotWav $loop -Force
   $st = Invoke-Native $ffmpeg @('-hide_banner', '-i', $loop, '-af', 'astats=measure_perchannel=none:measure_overall=RMS_level+Peak_level', '-f', 'null', '-')
   $rms = [regex]::Matches($st.Text, 'RMS level dB:\s*(-?[\d.]+)'); $pk = [regex]::Matches($st.Text, 'Peak level dB:\s*(-?[\d.]+)')
   if ($rms.Count -eq 0 -or $pk.Count -eq 0) { throw "$($row.id): could not measure the level" }
@@ -88,19 +176,20 @@ function Invoke-Master($ffmpeg, [string]$src, [double]$trim, [object]$spec, [obj
   # up to 5 dB beyond the peak limit is allowed for impulsive files; a soft clip then holds the peak
   $gain = [Math]::Min($targetRms - $rmsDb, $peakLimit - $peakDb + 5)
   $clip = if ($gain -gt $peakLimit - $peakDb + 0.05) { ",asoftclip=type=tanh:threshold=$([Math]::Pow(10, ($peakLimit - 2) / 20).ToString('0.####', $inv))" } else { '' }
-  $af = "volume=$($gain.ToString('0.00', $inv))dB$clip,afade=t=in:d=0.003,afade=t=out:st=$(($d - $crossfade - 0.003).ToString($inv)):d=0.003"
+  $af = "volume=$($gain.ToString('0.00', $inv))dB$clip"
   $out = "$dest.tmp.ogg"
-  $e = Invoke-Native $ffmpeg @('-y', '-v', 'error', '-i', $loop, '-af', $af, '-ac', '1', '-ar', "$($spec.sampleRate)", '-c:a', 'libvorbis', '-q:a', "$([int]$row.quality)", '-map_metadata', '-1', '-metadata', $masterTag, '-fflags', '+bitexact', '-flags:a', '+bitexact', $out)
+  $e = Invoke-Native $ffmpeg @('-y', '-v', 'error', '-i', $loop, '-af', $af, '-ac', '1', '-ar', "$($spec.sampleRate)", '-c:a', 'libvorbis', '-q:a', "$([int]$row.quality)", '-map_metadata', '-1',   '-metadata', $masterTag, '-metadata', $cutTag, '-fflags', '+bitexact', '-flags:a', '+bitexact', $out)
   if ($e.Code) { throw "ffmpeg encode failed for $($row.id)" }
   Move-Item $out $dest -Force
   Remove-Item $tmp, $loop -ErrorAction SilentlyContinue
   Write-Host ("{0}: rms {1} -> gain {2:N1} dB, {3:N1} KB" -f $row.id, $rmsDb, $gain, ((Get-Item $dest).Length / 1KB))
 }
 
-function Test-Mastered([string]$file) {
+function Test-Tagged([string]$file, [string]$tag) {
   $b = [IO.File]::ReadAllBytes($file)
-  return [Text.Encoding]::GetEncoding(28591).GetString($b, 0, [Math]::Min($b.Length, 4096)).Contains($masterTag)
+  return [Text.Encoding]::GetEncoding(28591).GetString($b, 0, [Math]::Min($b.Length, 4096)).Contains($tag)
 }
+function Test-Mastered([string]$file) { return (Test-Tagged $file $masterTag) }
 function Get-Key {
   if ($env:GG_ELEVENLABS_KEY) { return $env:GG_ELEVENLABS_KEY.Trim() }
   if (-not (Test-Path $KeyFile)) { throw "No API key: set GG_ELEVENLABS_KEY or provide $KeyFile" }
@@ -131,6 +220,20 @@ if ($Master) {
     $src = Join-Path $rawDir "$($s.id).src.ogg"
     Copy-Item $f $src -Force
     Invoke-Master $ffmpeg $src 0 $spec $s $f
+    Remove-Item $src
+  }
+  Write-Index $spec; Write-Host 'sounds.json rebuilt'; return
+}
+
+if ($Cut) {
+  $ffmpeg = Get-Ffmpeg
+  foreach ($s in $rows) {
+    $f = Join-Path $outDir "$($s.id).ogg"
+    if (-not (Test-Path $f)) { continue }
+    if (-not $Force -and (Test-Tagged $f $cutTag)) { continue }
+    $src = Join-Path $rawDir "$($s.id).src.ogg"
+    Copy-Item $f $src -Force
+    Invoke-Cut $ffmpeg $src $spec $s $f
     Remove-Item $src
   }
   Write-Index $spec; Write-Host 'sounds.json rebuilt'; return
