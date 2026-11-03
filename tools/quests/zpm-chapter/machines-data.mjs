@@ -131,7 +131,7 @@ export const QUESTS = [
     automate: 'The culture is not consumed in small runs; keep a seed batch alive in ME.',
   }, []),
   prod('ARCH', 'Archaea', 'grindless:archaeal_culture', ['VENT'], 4, 6,
-    '&6Archaea&r are a culture that thrives where nothing else survives, and the biology behind the aerogel recipes. The vent bioreactor grows them from a seed batch, with heat and nutrients. They unlock the aerogel works. A seed batch survives small runs, so keep one alive in ME and draw from it.',
+    '&6Archaea&r are a culture that thrives where nothing else survives, and the biology behind the aerogel recipes. The vent bioreactor grows them from a seed batch, with heat and nutrients. They feed the aerogel works. A seed batch survives small runs, so keep one alive in ME and draw from it.',
     [it('grindless:archaeal_culture')]),
   gear('AERO', 'aerogel_works', 'Aerogel', ['ARCH'], 6, 6, {
     for: 'The &6Aerogel Works&r dries silica gel so slowly that it stays as a foam that is almost all air.',

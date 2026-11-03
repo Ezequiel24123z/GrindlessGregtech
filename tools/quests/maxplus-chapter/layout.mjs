@@ -144,9 +144,9 @@ const LAYOUT = {
   PW_DYN: [31.75, -4.75, ['PW_NI', 'PW_TORUS']],
   PW_STORE: [33.25, -4.75, ['PW_DYN']],
   AE_A1: [40, 2.5, ['SCALE']],
-  AE_A2: [40.5, 6, ['AE_A1', 'AE_LASER']],
-  AE_LASER: [38, 6, ['AE_A1']],
-  AE_A3: [42, 6, ['AE_A2']],
+  AE_A2: [41.5, 6, ['AE_LASER']],
+  AE_LASER: [40.25, 6, ['AE_A1']],
+  AE_A3: [43, 5.25, ['AE_A2']],
   PAR: [41, 4.5, ['SCALE']],
 
   // building the gate
