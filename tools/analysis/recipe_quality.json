@@ -87,6 +87,7 @@
   "^grindless:(rhea|mh_field|multilayer_optics|dilution_cryostat)_casing$",
   "^grindless:(gum_metal|mu_metal_shield|pulsed_field|pasta_containment)_casing$",
   "^grindless:(chain_lamina|tpv_wall|kugelblitz_cavity)_casing$",
+  "^grindless:(field_frozen|annihilation_shield|neg_xhv)_casing$",
   "^grindless:(tensegrity_truss|droplet_radiator|shell_window_coil|clamp_coil|primordial_cryostat)_casing$",
   "^grindless:(void_diamond_window|horizon_gate_casing)$"
  ],

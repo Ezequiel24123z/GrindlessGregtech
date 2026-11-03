@@ -11,8 +11,8 @@
           "itemsIn": [{ "id": "grindless:field_frozen_billet", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:field_frozen_plate", "count": 4 }], "fluidsOut": [] },
         { "name": "field_frozen_casing", "circuit": 3, "eut": 503316480, "duration": 400, "site": true,
-          "itemsIn": [{ "id": "grindless:field_frozen_plate", "count": 4 }, { "id": "grindless:chain_field_coil", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
-          "itemsOut": [{ "id": "grindless:field_frozen_casing", "count": 2 }], "fluidsOut": [] }
+          "itemsIn": [{ "id": "grindless:field_frozen_plate", "count": 4 }, { "id": "gtceu:uxv_sensor", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:field_frozen_casing", "count": 3 }], "fluidsOut": [] }
       ]
     }
   }

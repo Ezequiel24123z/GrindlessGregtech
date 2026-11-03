@@ -59,8 +59,8 @@ test('press c1-c3: canned stacks -> billet + spent cans -> plates -> casing; c1-
   assert.deepEqual(ids(c2.itemsOut), [['grindless:field_frozen_plate', 4]]);
   const c3 = rec('field_frozen_casing');
   assert.deepEqual([c3.circuit, c3.eut, c3.duration, c3.site], [3, 503316480, 400, SITE]);
-  assert.deepEqual(ids(c3.itemsIn), [['grindless:field_frozen_plate', 4], ['grindless:chain_field_coil', 2]]);
-  assert.deepEqual(ids(c3.itemsOut), [['grindless:field_frozen_casing', 2]]);
+  assert.deepEqual(ids(c3.itemsIn), [['grindless:field_frozen_plate', 4], ['gtceu:uxv_sensor', 2]]);
+  assert.deepEqual(ids(c3.itemsOut), [['grindless:field_frozen_casing', 3]]);
   for (const r of FP.recipes) {
     assert.ok(r.eut < 2 ** 31, `${r.name}: below 2^31`);
     assert.ok(JSON.stringify(find(`grindless:field_freezing/${r.name}`).j.recipeConditions || []).includes(SITE), `${r.name}: dimension lock`);

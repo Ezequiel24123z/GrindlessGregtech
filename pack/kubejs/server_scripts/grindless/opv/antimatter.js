@@ -207,7 +207,7 @@
   // the shield casing has no crafting-table recipe: an assembler at 2^28 (D5 casing family, docs/eras/lines-opv-maxplus.md 7.1)
   function addCasing(event) {
     var OUT = 'grindless:annihilation_shield_casing'
-    var ins = ['gtceu:tungsten_plate', 'grindless:gamma_absorber_tile', 'grindless:li6_hydride_shield', 'grindless:chain_lamina_stack']
+    var ins = ['gtceu:tungsten_plate', 'grindless:gamma_absorber_tile', 'grindless:li6_hydride_shield', 'grindless:chain_lamina_stack', 'gtceu:uxv_sensor', 'gtceu:uxv_electric_motor']
     var missing = [OUT].concat(ins).filter(function (id) { return !Item.exists(id) })
     AM.casingRecipe = ''
     if (missing.length > 0) {
@@ -217,6 +217,7 @@
     var b = event.recipes.gtceu.assembler('grindless:annihilation_shield_casing')
     b.itemInputs('4x grindless:gamma_absorber_tile')
     b.itemInputs('grindless:li6_hydride_shield', '2x grindless:chain_lamina_stack', '2x gtceu:tungsten_plate')
+    b.itemInputs('2x gtceu:uxv_sensor', 'gtceu:uxv_electric_motor')
     b.inputFluids(Fluid.of('gtceu:superfluid_helium_3', 250))
     b.itemOutputs('4x ' + OUT)
     b.EUt(503316480).duration(400)

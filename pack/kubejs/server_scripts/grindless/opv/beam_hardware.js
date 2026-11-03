@@ -87,9 +87,10 @@
     row('opv/cooler_electron_gun', 'assembler', null, [item('grindless:ceb6_cathode', 1), item('grindless:chain_field_coil', 2),
       item('grindless:activated_neg_chamber', 1), item('gtceu:tantalum_foil', 2), item('gtceu:copper_foil', 1)], [fluid(NITROGEN, 1000)],
       [item('grindless:cooler_electron_gun', 1)], [], OPV_VA, 400),
-    // line 25: one activated chamber (the getter pumps the wall itself) in a stainless frame between two chain lamina stacks
+    // line 25: one activated chamber (the getter pumps the wall itself) in a stainless frame between two chain lamina stacks,
+    // two UXV pumps roughing the wall down to the getter's range
     row('opv/neg_xhv_casing', 'assembler', null, [item('grindless:activated_neg_chamber', 1), item('grindless:chain_lamina_stack', 2),
-      item('gtceu:stainless_steel_frame', 1)], [fluid(NITROGEN, 1000)],
+      item('gtceu:stainless_steel_frame', 1), item('gtceu:uxv_electric_pump', 2)], [fluid(NITROGEN, 1000)],
       [item('grindless:neg_xhv_casing', 4)], [], OPV_VA, 400)
   ]
 
