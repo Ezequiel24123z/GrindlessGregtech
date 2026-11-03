@@ -15,6 +15,10 @@
 //   CLAIM         a server team claims one chunk (FTB Chunks' own claim): a fake player's cover click on a machine there is refused (event
 //                 cancelled, no cover, nothing tracked) and the same click one chunk away works; unclaimed again, it works; a hatch tracked
 //                 with no player in a claimed chunk belongs to the claiming team
+//   PLAYERS       (FIX-OBSCLAIM, #297) two players of team A and one of team B (fake players, each given its team through teams.using, as lib/teams.js
+//                 answers 'server' for a fake player): each one's cover is tracked for its own team; the two of A draw from A's one store, B's from B's;
+//                 with B's store empty B's cover gets nothing and A's store is not touched for it; a dynamo hatch fills only its own team's store;
+//                 a claimed chunk refuses both teams' covers
 // TEST AREA: the Overworld X 48640-48703, Z 0-63, Y 98-112 (the zone wireless_team); the test force-loads, clears and releases it, drops its
 // claim and its server team, and its persistent data keys. It waits its turn in the wireless queue (the wireless tests share the network).
 // var + function everywhere (this Rhino throws "redeclaration of var" for const/let inside functions that run more than once).
@@ -45,6 +49,12 @@
   var MAC_FREE = { x: BAND.x0 + 40, z: 4 }
   var MAC_CLAIMED = { x: BAND.x0 + 52, z: 4 }
   var HATCH_CLAIMED = { x: BAND.x0 + 54, z: 8 }
+  // PLAYERS: chunk (X 3042, Z 1); two players of team A and one of team B each put a cover on their own machine, and each team's player puts a dynamo hatch down
+  var MAC_P_A1 = { x: BAND.x0 + 34, z: 24 }
+  var MAC_P_A2 = { x: BAND.x0 + 36, z: 24 }
+  var MAC_P_B = { x: BAND.x0 + 38, z: 24 }
+  var DYN_P_A = { x: BAND.x0 + 40, z: 24 }
+  var DYN_P_B = { x: BAND.x0 + 42, z: 24 }
   var HATCH_A_LV = { x: BAND.x0 + 30, z: 40 }
   var HATCH_A_MV = { x: BAND.x0 + 32, z: 40 }
   var HATCH_B_MV = { x: BAND.x0 + 34, z: 40 }
@@ -53,6 +63,7 @@
   var MV_CELL = 'grindless:mv_capacitor_cell'
   var HATCH_LV = 'gtceu:lv_wireless_energy_hatch'
   var HATCH_MV = 'gtceu:mv_wireless_energy_hatch'
+  var DYNAMO_LV = 'gtceu:lv_wireless_dynamo_hatch'
   var MACERATOR = 'gtceu:lv_macerator'
   var STORE_A = 50000000
   var STORE_B = 30000000
@@ -311,6 +322,9 @@
     setblock(HATCH_A_MV.x, EY, HATCH_A_MV.z, HATCH_MV + '[facing=north]', failed)
     setblock(HATCH_B_MV.x, EY, HATCH_B_MV.z, HATCH_MV + '[facing=north]', failed)
     ;[MAC_A, MAC_B, MAC_FREE, MAC_CLAIMED].forEach(function (p) { setblock(p.x, EY, p.z, MACERATOR + '[facing=north]', failed) })
+    ;[MAC_P_A1, MAC_P_A2, MAC_P_B].forEach(function (p) { setblock(p.x, EY, p.z, MACERATOR + '[facing=north]', failed) })
+    setblock(DYN_P_A.x, EY, DYN_P_A.z, DYNAMO_LV + '[facing=north]', failed)
+    setblock(DYN_P_B.x, EY, DYN_P_B.z, DYNAMO_LV + '[facing=north]', failed)
     setblock(HATCH_CLAIMED.x, EY, HATCH_CLAIMED.z, HATCH_LV + '[facing=north]', failed)
     note('PLACED', 'tower A ' + a + ' blocks, tower B ' + b + ' blocks' + (failed.length ? ' FAILED ' + failed.slice(0, 8).join('; ') : ''))
     return failed.length === 0
@@ -437,6 +451,107 @@
     check('OWNER_BY_CLAIM', hatch !== null && String(hatch.o) === claimId, 'a hatch tracked with no player in a claimed chunk: owner ' + (hatch ? hatch.o : 'null') + ' (want the claiming team ' + claimId + ')')
   }
 
+  // ---------------------------------------------------------------- two players of different teams (FIX-OBSCLAIM, #297)
+
+  // a fake player with its own profile; lib/teams.js answers 'server' for a fake player, so the run gives each a team through teams.using
+  function namedPlayer(name) {
+    var L = lazy()
+    var Profile = Java.loadClass('com.mojang.authlib.GameProfile')
+    return L.FPF.get(S.earth, new Profile(L.UUID.nameUUIDFromBytes(('gg-claim-' + name).getBytes()), name))
+  }
+
+  function clickAs(player, p) {
+    var L = lazy()
+    var w = W()
+    player.setShiftKeyDown(false)
+    player.setPositionAndRotation(p.x + 0.5, EY + 2.2, p.z + 0.5, 0, 90)
+    player.setItemInHand(L.Hand.MAIN_HAND, Item.of(w.coverItemId('energy', 1), 2))
+    var pos = bp(p.x, EY, p.z)
+    var ev = L.FH.onRightClickBlock(player, L.Hand.MAIN_HAND, pos, new L.BHR(new L.Vec3(p.x + 0.5, EY + 1.0, p.z + 0.5), L.Direction.UP, pos, false))
+    var on = machineAt(p.x, EY, p.z).getCoverContainer().getCoverAtSide(L.Direction.UP)
+    var entry = w.tracked(S.server).filter(function (e) { return e.k === 'cover' && e.x === p.x && e.z === p.z })[0]
+    player.setItemInHand(L.Hand.MAIN_HAND, Item.empty)
+    return { cancelled: ev.isCanceled(), placed: on !== null, owner: entry ? String(entry.o) : null }
+  }
+
+  function reportPlayers() {
+    var w = W()
+    var t = T()
+    var teamOf = {}
+    var a1 = namedPlayer('gg_claim_a1')
+    var a2 = namedPlayer('gg_claim_a2')
+    var b1 = namedPlayer('gg_claim_b1')
+    teamOf['gg_claim_a1'] = TEAM_A
+    teamOf['gg_claim_a2'] = TEAM_A
+    teamOf['gg_claim_b1'] = TEAM_B
+    function nameOf(p) { return String(p.getGameProfile().getName()) }
+    try {
+      t.using({
+        teamOfPlayer: function (p) { return teamOf[nameOf(p)] || null },
+        // FTB Chunks' rule as the pack uses it: the claim's own team only; the claim itself is FTB Chunks' real one
+        claimRefuses: function (p, level, pos) {
+          var c = t.claimOwner(level, pos)
+          return c !== null && c !== undefined && String(c) !== teamOf[nameOf(p)]
+        }
+      })
+      // 1 each player puts a cover on his own machine; the network it belongs to is its placer's team
+      var ra1 = clickAs(a1, MAC_P_A1)
+      var ra2 = clickAs(a2, MAC_P_A2)
+      var rb = clickAs(b1, MAC_P_B)
+      check('PLAYERS_OWNER', ra1.placed && ra2.placed && rb.placed && ra1.owner === TEAM_A && ra2.owner === TEAM_A && rb.owner === TEAM_B,
+        'covers placed ' + ra1.placed + '/' + ra2.placed + '/' + rb.placed + '; owners A1 ' + ra1.owner + ', A2 ' + ra2.owner + ', B1 ' + rb.owner + ' (want ' + TEAM_A + ' twice and ' + TEAM_B + ')')
+      // 2 draw: A's two covers (two players) share A's one store, B's cover draws from B's only
+      var m1 = machineAt(MAC_P_A1.x, EY, MAC_P_A1.z)
+      var m2 = machineAt(MAC_P_A2.x, EY, MAC_P_A2.z)
+      var m3 = machineAt(MAC_P_B.x, EY, MAC_P_B.z)
+      m1.energyContainer.setEnergyStored(0)
+      m2.energyContainer.setEnergyStored(0)
+      m3.energyContainer.setEnergyStored(0)
+      w.setStored(S.server, STORE_A, TEAM_A)
+      w.setStored(S.server, STORE_B, TEAM_B)
+      w.settle(S.server)
+      var g = [stored(m1), stored(m2), stored(m3)]
+      var dA = STORE_A - Number(w.stored(S.server, TEAM_A))
+      var dB = STORE_B - Number(w.stored(S.server, TEAM_B))
+      check('PLAYERS_SHARE', g[0] > 0 && g[1] > 0 && g[2] > 0 && dA === g[0] + g[1] && dB === g[2],
+        'gains A1 ' + g[0] + ', A2 ' + g[1] + ', B1 ' + g[2] + '; store A -' + dA + ' (want ' + (g[0] + g[1]) + ' = both A players\' covers, one network), store B -' + dB + ' (want ' + g[2] + ')')
+      // 3 B's store runs dry: B's cover gets nothing, nothing came from A's store for it, A's two go on
+      w.setStored(S.server, 0, TEAM_B)
+      w.setStored(S.server, STORE_A, TEAM_A)
+      m1.energyContainer.setEnergyStored(0)
+      m2.energyContainer.setEnergyStored(0)
+      m3.energyContainer.setEnergyStored(0)
+      w.settle(S.server)
+      var h = [stored(m1), stored(m2), stored(m3)]
+      var dA2 = STORE_A - Number(w.stored(S.server, TEAM_A))
+      check('PLAYERS_ISOLATED', h[0] > 0 && h[1] > 0 && h[2] === 0 && dA2 === h[0] + h[1],
+        'B\'s store empty: B1\'s cover got ' + h[2] + ' (want 0), A\'s covers ' + h[0] + '/' + h[1] + ' (want > 0); store A -' + dA2 + ' (want ' + (h[0] + h[1]) + ': nothing taken for B1)')
+      // 4 feed: a dynamo hatch each player put down fills only its own team's store
+      var da = w.track(S.earth, bp(DYN_P_A.x, EY, DYN_P_A.z), a1)
+      var db = w.track(S.earth, bp(DYN_P_B.x, EY, DYN_P_B.z), b1)
+      var ha = machineAt(DYN_P_A.x, EY, DYN_P_A.z)
+      var hb = machineAt(DYN_P_B.x, EY, DYN_P_B.z)
+      w.setStored(S.server, 0, TEAM_A)
+      w.setStored(S.server, 0, TEAM_B)
+      hb.energyContainer.setEnergyStored(hb.energyContainer.getEnergyCapacity())
+      ha.energyContainer.setEnergyStored(0)
+      w.settle(S.server)
+      var sA = Number(w.stored(S.server, TEAM_A))
+      var sB = Number(w.stored(S.server, TEAM_B))
+      check('PLAYERS_FEED', !!da && !!db && String(da.o) === TEAM_A && String(db.o) === TEAM_B && sB > 0 && sA === 0,
+        'B1\'s dynamo hatch (owner ' + (db ? db.o : 'null') + ') full, A1\'s (owner ' + (da ? da.o : 'null') + ') empty: store B ' + sB + ' (want > 0), store A ' + sA + ' (want 0)')
+      // 5 claim: a server team claims the chunk of a machine; neither team's player may put a cover there, the same click a chunk away works
+      var claim = claimChunk()
+      var ca = clickAs(a1, MAC_CLAIMED)
+      var cb = clickAs(b1, MAC_CLAIMED)
+      var unclaimed = unclaimChunk()
+      check('PLAYERS_CLAIM', ca.cancelled && !ca.placed && ca.owner === null && cb.cancelled && !cb.placed && cb.owner === null,
+        'claim ' + claim + '; a player of A: cancelled ' + ca.cancelled + ', placed ' + ca.placed + '; a player of B: cancelled ' + cb.cancelled + ', placed ' + cb.placed + '; unclaimed again ' + unclaimed)
+    } finally {
+      t.using(null)
+    }
+  }
+
   // ---------------------------------------------------------------- driver
 
   function finish() {
@@ -462,6 +577,7 @@
       if (ta === 'formed' && tb === 'formed') {
         guarded('TOWERS', reportTowers)
         guarded('STORES', reportStores)
+        guarded('PLAYERS', reportPlayers)
         guarded('CLAIM', reportClaim)
         S.phase = 'end'
       } else if (ta.indexOf('failed') === 0 || tb.indexOf('failed') === 0 || since > 400) {

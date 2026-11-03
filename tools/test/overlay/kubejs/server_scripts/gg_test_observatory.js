@@ -823,14 +823,24 @@
 
   var PHASES = [
     {
-      // max: the radio telescope may search before the night registers (the sky is set in the tick its inputs arrive) and then stay
-      // idle, with no reason, for about 300 ticks (its own boot, vm-20261103-013355); done() ends the phase as soon as all three are out
-      name: 'A_clear_night', sky: [NIGHT, 'clear'], min: 20, max: 1400,
-      start: function () { loadAll(true) },
+      // max: a start within 40 ticks of the night flip plus the longest run (600); done() ends the phase as soon as all three are out
+      name: 'A_clear_night', sky: [NIGHT, 'clear'], min: 20, max: 720,
+      start: function () { S.firstWork = {}; loadAll(true) },
+      // the wake (server_scripts/grindless/observatory/sky_wake.js): a ready machine starts within 40 ticks of the night flip
+      watch: function (elapsed) {
+        S.machines.forEach(function (m) {
+          if (ready(m) && S.firstWork[m.key] === undefined && stateOf(m).status === 'WORKING') S.firstWork[m.key] = elapsed
+        })
+      },
       done: function () {
         return ['high', 'optical', 'radio'].every(function (k) { var m = machine(k); return !ready(m) || Object.keys(readInv(m.parts.outBus)).length > 0 })
       },
       finish: function () {
+        S.machines.forEach(function (m) {
+          if (!ready(m) || m.key === 'low') return
+          var t = S.firstWork[m.key]
+          check(m.scope, 'A_wake_' + m.key, t !== undefined && t <= 40, 'first WORKING at +' + t + ' ticks after the night flip (max 40)')
+        })
         var high = machine('high')
         if (ready(high)) {
           check(high.scope, 'A_draft', outCount(high, DRAFT) === 1 && inCount(high, PAPER) === 0 && inCount(high, COAL) === 0,
