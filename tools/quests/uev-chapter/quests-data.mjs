@@ -234,7 +234,7 @@ export const QUESTS = [
   },
   {
     key: 'HOLD', kind: 'exit', title: 'Gate to UIV', icon: 'gtceu:warp_gate',
-    deps: ['WARP', 'TENS'], x: 51.5, y: 0,
+    deps: ['WARP', 'TENS', 'EOS'], x: 51.5, y: 0,
     desc: [
       'Hold the Warp Gate open at the UEV load in Sirius B orbit. Its input takes a tennessine sample, a degenerate pellet, a degenerate EOS model, four UEV circuits of any kind and circuit 3. The hold makes nothing: you tick this box when it has run.',
       'The next casing is built apart: the UIV Machine Casing line is researched with the Pulsar Navigation Chart and takes UEV casings, field generators and emitters.',
@@ -243,3 +243,6 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
 ];
+
+// The link from the degenerate EOS model is hidden; the dependency stays.
+for (const q of QUESTS) if (q.key === 'HOLD') q.raw = { ...(q.raw || {}), hide_dependency_lines: 'true' };

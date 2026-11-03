@@ -48,7 +48,7 @@ export const QUESTS = [
     it('gtceu:uev_emitter'), it('gtceu:uev_sensor'), it('gtceu:uev_robot_arm'), it('gtceu:uev_conveyor_module'),
     it('gtceu:uev_electric_pump'), it('gtceu:uev_electric_piston'), it('gtceu:uev_electric_motor'),
   ], 100),
-  q('FIELD', 'step', 'UEV Field Generator', 'gtceu:uev_field_generator', ['S_PELLET'], 38.75, -12.75, {
+  q('FIELD', 'step', 'UEV Field Generator', 'gtceu:uev_field_generator', ['S_PELLET', 'SX'], 38.75, -12.75, {
     for: 'The &6UEV Field Generator&r holds the plasma and the gate\'s fields. It is the first part that needs a degenerate pellet.',
     needs: 'A UHV field generator, two degenerate pellets, two single-crystal pump impellers, three UEV emitters and three UEV sensors.',
     unlocks: 'The UEV Energy Hatch, the Stellar Forge and the Mk4 fusion reactor.',
@@ -135,3 +135,6 @@ export const QUESTS = [
     automate: 'Parts by ME and nodes back by ME; one node is worth a long run.',
   }, [it('grindless:quantum_repeater_node')], 180),
 ];
+
+// The long link from the single-crystal foundry is hidden; the dependency stays.
+for (const q of QUESTS) if (q.key === 'FIELD') q.raw = { ...(q.raw || {}), hide_dependency_lines: 'true' };
