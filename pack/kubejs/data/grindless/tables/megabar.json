@@ -78,8 +78,8 @@
           "itemsIn": [{ "id": "grindless:sodium_borohydride_dust", "count": 1 }, { "id": "gtceu:ammonium_chloride_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "gtceu:ammonia_borane_dust", "count": 1 }, { "id": "gtceu:salt_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
         { "name": "nanodiamond_cleaning", "circuit": 0, "eut": 7680, "duration": 300,
-          "itemsIn": [{ "id": "grindless:nanodiamond_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 2000 }], "charge": [],
-          "itemsOut": [{ "id": "gtceu:diamond_dust", "count": 4 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 500 }] }
+          "itemsIn": [{ "id": "grindless:nanodiamond_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 4000 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:diamond_dust", "count": 3 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 1000 }] }
       ]
     },
     "compressor": {
