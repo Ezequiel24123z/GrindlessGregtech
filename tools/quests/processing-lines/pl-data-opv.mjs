@@ -340,7 +340,7 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
   ['o2_11', 'o2l_6'],
   ['o2_13', 'o2v_6'],
   ['o2w_10', 'o2w_9'],
-  ['o2_engine', 'o2s_1'],
+  ['o2_engine', 'o2s_2'],
   ['o2_engine', 'o2a_7'],
   ['o2_engine', 'o2b_7'],
   ['o2_engine', 'o2g_6'],
