@@ -9,7 +9,8 @@
 //   parallel hatch's parallel (the MAX+ hatch x4,194,304: 2^34), cut to what the energy hatches carry (floor(max voltage / recipe EU/t); lib/mega.js
 //   clamps the result to an int), then to inputs and output room, then GTM's perfect subtick overclock and batch mode. No discount: it saves
 //   machines, hatches and time, not power. It needs the 1,024 A MAX+ energy hatch (GTM's 64 A substation hatches do not fit an energy_input cell).
-// - Research: the assembly line's research recipes need a data access hatch in the formed machine (one, as the OpV assembly line array).
+// - Research: the assembly line's research recipes need a data access hatch in the formed machine (one, in the marked head cell D, as the OpV
+//   assembly line array).
 // - Mode veto: the first modifier refuses a recipe of the other type (GTM keeps the cached last recipe across a mode switch).
 //
 // Structure: 15 wide x 9 high x 21 deep of horizon machine casing, a plain workable multiblock, not GTM's ordered AssemblyLineMachine: a spine of
@@ -32,14 +33,16 @@
   const H = 9
   const D = 21
   const CTRL = { x: 7, y: 1 }
-  // 2 energy + 4 input buses + 2 output buses + 2 input hatches + 1 output hatch + 1 data access + 1 parallel hatch
-  const PART_CELLS = 13
+  // 2 energy + 4 input buses + 2 output buses + 2 input hatches + 1 output hatch + 1 parallel hatch (the data access hatch has its own cell D)
+  const PART_CELLS = 12
+  const DATA = { x: 5, y: 1 }
 
   // x left to right, y bottom to top, z back (0) to front (20); one char per cell
   function cell(x, y, z) {
     var edge = x === 0 || x === W - 1 || y === 0 || y === H - 1
     if (z === D - 1) {
       if (x === CTRL.x && y === CTRL.y) return 'S'
+      if (x === DATA.x && y === DATA.y) return 'D'
       if (!edge && y <= 2 && x >= 2 && x <= W - 3) return 'X'
       return 'F'
     }
@@ -92,12 +95,12 @@
           Pat.part('output_bus', { min: 1, max: 2 }),
           Pat.part('input_hatch', { max: 2 }),
           Pat.part('output_hatch', { max: 1 }),
-          {
-            kind: 'part', ability: 'data_access', limits: { exact: 1 },
-            build: function () { return Predicates.abilities(PartAbility.DATA_ACCESS).setExactLimit(1) }
-          },
           G.parallelHatch.part()
         ),
+        D: Pat.oneOf(Pat.block(CASING), {
+          kind: 'part', ability: 'data_access', limits: { max: 1 },
+          build: function () { return Predicates.abilities(PartAbility.DATA_ACCESS).setMaxGlobalLimited(1) }
+        }),
         '#': Pat.air()
       }
     }
@@ -125,18 +128,31 @@
     SPEC = makeSpec()
     Pat.register(HF.id, SPEC)
 
+    // D is optional (so EMI draws a preview) and GTM's ResearchCondition always passes: refuse a research recipe unless a data access hatch is
+    // formed (modifier and beforeWorking, since GTM restarts a cached recipe without its modifier); the hatch then checks it holds the data.
+    var needsData = function (machine, recipe) {
+      var RC = Java.loadClass('com.gregtechceu.gtceu.common.recipe.condition.ResearchCondition')
+      var DH = Java.loadClass('com.gregtechceu.gtceu.api.capability.IDataAccessHatch')
+      var research = false
+      recipe.conditions.forEach(function (c) { if (c instanceof RC) research = true })
+      if (!research) return false
+      var hatch = false
+      machine.getParts().forEach(function (p) { if (p instanceof DH) hatch = true })
+      return !hatch
+    }
     var veto = function (machine, recipe) {
-      return otherMode(machine, recipe) ? ModifierFunction.NULL : ModifierFunction.IDENTITY
+      return otherMode(machine, recipe) || needsData(machine, recipe) ? ModifierFunction.NULL : ModifierFunction.IDENTITY
     }
     var chain = [veto].concat(G.mega.chain({ parallel: 'fixed', cap: CAP, hatch: true, discount: null, oc: 'perfect', batch: true }))
 
     var b = event.create(ID, 'multiblock')
       .langValue('Hyperfactory')
       .rotationState(RotationState.NON_Y_AXIS)
-      // EMI draws no preview for patterns with an exact-limit data access hatch (GTM's own assembly line has the same gap)
-      .renderMultiblockXEIPreview(false)
+      // the data access hatch sits in the marked cell D with a global maximum, not an exact limit: EMI draws no preview for the latter
+      .renderMultiblockXEIPreview(true)
     TYPES.forEach(function (t) { b = b.recipeType(t) })
     G.mega.install(b, chain)
+      .beforeWorking(function (machine, recipe) { return !needsData(machine, recipe) })
       .appearanceBlock(function () { return Block.getBlock(CASING) })
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([

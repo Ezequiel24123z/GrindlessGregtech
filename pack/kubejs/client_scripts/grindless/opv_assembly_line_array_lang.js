@@ -13,10 +13,10 @@
         ['block.gtceu.assembly_line_array', 'Assembly Line Array'],
 
         ['grindless.machine.assembly_line_array.tooltip.0',
-            '\u00a77Four assembly tracks under one gantry: runs assembly line recipes in bulk.'],
+            '\u00a77Gantry hall over four tracks: bulk assembly lines. Data hatch: marked head cell.'],
 
         ['emi.grindless.info.assembly_line_array.0',
-            'It runs the assembly line\'s own recipes, with their research and ordered inputs, and has no recipes of its own. One input bus per slice along the line, in order; a data access hatch holds the research.'],
+            'It runs the assembly line\'s own recipes, with their research and ordered inputs, and has no recipes of its own. One input bus per slice along the line, in order. Research needs one data access hatch in the marked head cell, next to the controller; without it only recipes with no research run.'],
         ['emi.grindless.info.assembly_line_array.1',
             'Copies: as many as the energy allows, times the parallel hatch\'s (up to x262,144 with the OpV one). Every copy pays its full EU/t. It overclocks perfectly and batches.']
     ]
