@@ -22,7 +22,8 @@
 //   zircaloy_steps    GTM's own EBF (both, with and without argon, at 2,100 K) and vacuum freezer recipes of zircaloy
 //   no_decomposition  no electrolyzer or centrifuge recipe splits iridosmine, Hermean regolith, fluorite, the concentrate or the tritiated
 //                     water, and heavy water only through our electrolysis
-//   tritium           only the Moon's detritiation recipe may give tritium (deuterium_separation gone, ender air without it)
+//   tritium           no GTM or GT-- recipe gives tritium (deuterium_separation gone, ender air without it); the Moon's detritiation does
+//                     (later eras' own rows may too)
 //   tables            global.grindless.ivFoundation.checkTables(): Venus, Mercury and leach tables, the fluorite entry, the sample pairs
 //   samples           the vein sample recipes (Venus, Mercury, the End's pitchblende and the fluorite one)
 //   fluorite_drilling the fluorite vein's drilling recipes, from the existing generators; #forge:raw_materials/fluorite holds GCYR's raw ore
@@ -136,16 +137,6 @@
 
   function eutOf(r) {
     return Number(caps().helper.getRealEUt(r).getTotalEU())
-  }
-
-  function ingredientsText(r) {
-    return asArray(r.getIngredients()).map(function (ing) {
-      try {
-        return String(ing.toJson())
-      } catch (e) {
-        return '?'
-      }
-    }).join(' ')
   }
 
   function dimensionsOf(def) {
@@ -288,7 +279,7 @@
     WANT[IVF.recipes.heavyWaterElectrolysis] = { inItems: '', outItems: '', inFluids: '1000x ' + ids.heavyWater, outFluids: '1000x gtceu:oxygen, 2000x gtceu:deuterium', eut: 30, duration: 1500 }
     WANT['grindless:mixer/zircaloy_from_sponge'] = { inItems: '1x gtceu:tin_dust, 63x grindless:zirconium_sponge', outItems: '64x ' + ids.zircaloyDust, inFluids: '', outFluids: '', eut: 1920, duration: 400 }
     WANT[IVF.recipes.ionExchangeResin] = { inItems: '', outItems: '4x ' + ids.ionExchangeResin, inFluids: '1000x gtceu:styrene, 1000x gtceu:sulfuric_acid', outFluids: '1000x gtceu:diluted_sulfuric_acid', eut: 480, duration: 400 }
-    WANT[IVF.recipes.platinumGauze] = { inItems: '16x gtceu:fine_platinum_wire, 2x gtceu:fine_rhodium_wire', outItems: '1x ' + ids.platinumGauze, inFluids: '', outFluids: '', eut: 1920, duration: 200 }
+    WANT[IVF.recipes.platinumGauze] = { inItems: '16x gtceu:fine_platinum_wire, 2x gtceu:fine_rhodium_wire, 2x grindless:ion_exchange_resin, 2x grindless:platinum_electrode, 1x gtceu:soldering_alloy_ingot', outItems: '1x ' + ids.platinumGauze, inFluids: '1000x gtceu:hydrochloric_acid', outFluids: '', eut: 1920, duration: 200 }
     IVF.recipes.hermeanRegolith.forEach(function (id) {
       var block = 'gcyr:' + id.substring(id.indexOf('_from_') + 6)
       WANT[id] = { inItems: '1x ' + block, outItems: '1x ' + ids.hermeanRegolithDust, inFluids: '', outFluids: '', eut: 2, duration: 98 }
@@ -392,10 +383,12 @@
       var separation = byId(server, 'gtceu:centrifuge/deuterium_separation') !== null
       var enderAir = byId(server, 'grindless:distillation_tower/offworld_only/distill_liquid_ender_air')
       var enderOuts = enderAir === null ? 'missing' : describe(gtFluids(enderAir.getOutputContents(caps().fluid)))
-      var onlyDetritiation = makers.every(function (id) { return id === 'grindless:detritiation/tritiated_heavy_water' })
-      check('tritium', onlyDetritiation && !separation && enderAir !== null,
-        scanned + ' GT recipes; giving tritium: ' + (makers.join(', ') || 'none') + '; deuterium_separation ' + (separation ? 'STILL LOADED' : 'gone') +
-        '; liquid ender air distillation gives ' + enderOuts)
+      // IV's rule is that GTM's and GT--'s tritium routes are gone; the Moon's detritiation gives it, and later eras' own rows may too
+      var foreign = makers.filter(function (id) { return id.indexOf('grindless:') !== 0 })
+      var moon = makers.indexOf('grindless:detritiation/tritiated_heavy_water') >= 0
+      check('tritium', foreign.length === 0 && moon && !separation && enderAir !== null,
+        scanned + ' GT recipes; giving tritium: ' + (makers.join(', ') || 'none') + '; not ours: ' + (foreign.join(', ') || 'none') +
+        '; deuterium_separation ' + (separation ? 'STILL LOADED' : 'gone') + '; liquid ender air distillation gives ' + enderOuts)
     })
 
     safely('tables', function () {
@@ -426,7 +419,6 @@
     safely('samples', function () {
       var problems = []
       var details = []
-      var BI = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
       var veins = IVF.venusVeins().concat(IVF.mercuryVeins()).concat(IVF.leachVeins())
       var fluorite = global.grindless.lv.extraVeins().filter(function (v) { return v.id === 'fluorite' })
       veins.concat(fluorite).forEach(function (v) {
@@ -436,8 +428,10 @@
           problems.push('missing ' + id)
           return
         }
-        var text = ingredientsText(r)
-        var out = String(BI.ITEM.getKey(r.getResultItem(server.registryAccess()).getItem()))
+        // the sample recipes are GT assembler recipes: read their contents, not the vanilla result (which is air for a GTRecipe)
+        var text = describe(gtItems(r.getInputContents(caps().item)))
+        var outs = gtItems(r.getOutputContents(caps().item))
+        var out = outs.length > 0 ? outs[0].id : 'none'
         if (text.indexOf('grindless:empty_vein_probe') < 0) problems.push(id + ' has no probe')
         v.samplePair.forEach(function (p) {
           if (text.indexOf(p.replace(/^#/, '')) < 0) problems.push(id + ' lacks ' + p)

@@ -19,7 +19,7 @@
 //                         sinter kept: chance 0), the outputs, EU/t and ticks as the table's stages spent at IV
 //     energy_sources      every stage of the table read back from the game: a live recipe (EU/t x ticks), GTM's blast-furnace stage of a
 //                         material (mass x K / 50 ticks at VA[MV]), GTM's small-pipe extrusion (mass ticks at 6 x VA[ULV or LV])
-//     controller_recipes  both shaped recipes exist and hold their parts
+//     controller_recipes  both controller recipes (GT assembler) exist and hold their parts
 //     balance             NOTE: the EU of one LEU assembly from the live recipes, next to IV-A2's assumption
 //   in the world (band X 10496-10559, Z 0-15: the Overworld at Y 98-112 with a roof at Y 111, the End at Y 198-214)
 //     <copy>_PLACED / _FORMED / _PARTS   for the three copies below
@@ -435,11 +435,11 @@
         problems.push(k + ' recipe ' + id + ' missing')
         return
       }
-      var out = String(r.getResultItem(S.server.registryAccess()).getId())
+      // the controller recipes are GT assembler recipes: read their contents, not the vanilla result and ingredients (air and none)
+      var outs = itemContents(r, false)
+      var out = outs.length > 0 ? outs[0].id : 'none'
       var ids = {}
-      asArray(r.getIngredients()).forEach(function (ing) {
-        asArray(ing.getItemIds()).forEach(function (iid) { ids[String(iid)] = true })
-      })
+      itemContents(r, true).forEach(function (x) { ids[x.id] = true })
       var parts = u.craftingParts[k]
       var missing = parts.filter(function (pid) { return pid !== parts[0] && !ids[pid] })
       if (out !== parts[0] || missing.length > 0) problems.push(id + ' -> ' + out + ' missing ' + missing.join(','))

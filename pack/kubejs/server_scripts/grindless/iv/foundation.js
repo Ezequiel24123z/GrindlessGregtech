@@ -15,9 +15,9 @@
 //   ion exchange resin        CHEMICAL REACTOR: 1,000 mB styrene + 1,000 mB sulfuric acid -> 4 grindless:ion_exchange_resin + 1,000 mB
 //                             diluted sulfuric acid (sulfonated polystyrene beads; the water the sulfonation gives dilutes the rest of
 //                             the acid, which GTM's distillery concentrates again). 480 EU/t for 20 s. The leach field wears it.
-//   platinum gauze            ASSEMBLER, EV: 16 fine platinum wire + 2 fine rhodium wire -> 1 grindless:platinum_gauze (woven
-//                             platinum-rhodium, 90:10 like real catalyst gauze), 1,920 EU/t for 10 s. Pt and Rh come from the platinum
-//                             plant.
+//   platinum gauze            ASSEMBLER, EV: 16 fine platinum wire + 2 fine rhodium wire, woven on 2 platinum electrodes with solder, the
+//                             2 resin beds and 1,000 mB of hydrochloric acid cleaning it -> 1 grindless:platinum_gauze (platinum-rhodium,
+//                             90:10 like real catalyst gauze), 1,920 EU/t for 10 s. Pt and Rh come from the platinum plant.
 //   Hermean regolith dust     MACERATOR, anywhere: 1 Mercury rock or Mercury cobblestone (the stone the Mercury drill brings up) -> 1
 //                             gtceu:hermean_regolith_dust, with GTM's numbers for stone (2 EU/t, 98 ticks), like the lunar regolith.
 //                             GCYR gives these blocks no maceration.
