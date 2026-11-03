@@ -35,7 +35,7 @@
     { name: 'void_diamond_window', out: 2, duration: 200, fluid: SF3,
       items: ['2x grindless:void_grown_diamond', PLATE, 'grindless:max_sensor', 'gtceu:opv_emitter', SEAL] },
     { name: 'horizon_gate_casing', out: 2, duration: 600, fluid: HE3, line: true, research: 'grindless:max_field_coil',
-      items: ['4x ' + PLATE, 'grindless:void_grown_diamond', 'grindless:max_field_coil', 'grindless:max_field_generator', '2x gtceu:opv_emitter', SEAL] }
+      items: ['4x ' + PLATE, 'grindless:void_grown_diamond', 'grindless:max_field_coil', 'grindless:max_field_generator', 'gtceu:opv_emitter', SEAL] }
   ]
 
   ServerEvents.recipes(function (event) {

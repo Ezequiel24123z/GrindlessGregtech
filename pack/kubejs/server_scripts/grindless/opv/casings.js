@@ -2,7 +2,7 @@
 // The OpV casing family (D5-CAS-OPV, docs/eras/lines-opv-maxplus.md 7.1): the casings the bulge-era multiblocks are built from.
 //   gtceu:assembler        grindless:chain_lamina_casing   4 chain lamina stacks + 8 chain strand wires + neutronium plate and frame + a UXV sensor -> 4
 //   gtceu:assembler        grindless:tpv_wall_casing       2 TPV panels + absorber tile + 2 copper plates + a lamina stack + 2 UXV sensors -> 3
-//   gtceu:assembly_line    grindless:kugelblitz_cavity_casing  (station research: the gamma multilayer mirror) + a UXV field generator -> 2
+//   gtceu:assembly_line    grindless:kugelblitz_cavity_casing  (station research: the gamma multilayer mirror) + a UXV field generator -> 3
 // The three older casings are retuned where they are made (field press c3, opv/antimatter.js, opv/beam_hardware.js).
 // Published for the tests: global.grindless.opvCasings.recipes (ids made) and .skipped (ids with their reason).
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
@@ -18,7 +18,7 @@
       items: ['4x grindless:chain_lamina_stack', '8x gtceu:chain_strand_single_wire', '2x gtceu:neutronium_plate', 'gtceu:neutronium_frame', '2x gtceu:tungsten_plate', '2x gtceu:stainless_steel_plate', 'gtceu:uxv_sensor'] },
     { id: 'tpv_wall_casing', type: 'assembler', out: 3, eut: 503316480, duration: 400, fluid: 250,
       items: ['2x grindless:tpv_panel', 'grindless:gamma_absorber_tile', '2x gtceu:copper_plate', 'grindless:chain_lamina_stack', '2x gtceu:tungsten_plate', '2x gtceu:stainless_steel_plate', '2x gtceu:uxv_sensor'] },
-    { id: 'kugelblitz_cavity_casing', type: 'assembly_line', out: 2, eut: 503316480, duration: 600,
+    { id: 'kugelblitz_cavity_casing', type: 'assembly_line', out: 3, eut: 503316480, duration: 600,
       research: 'grindless:gamma_multilayer_mirror',
       items: ['grindless:gamma_multilayer_mirror', '2x grindless:field_frozen_plate', 'grindless:annihilation_shield_casing', '4x gtceu:chain_strand_single_wire', 'gtceu:uxv_field_generator'] }
   ]
