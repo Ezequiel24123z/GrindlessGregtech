@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:multilayer_optics_casing"],
+  "text": ["emi.grindless.info.multilayer_optics_casing.0"]
+}

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:mh_field_casing"],
+  "text": ["emi.grindless.info.mh_field_casing.0"]
+}
