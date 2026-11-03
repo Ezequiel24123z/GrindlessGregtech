@@ -33,7 +33,7 @@ function harness() {
     Java: { loadClass: () => ({}) },
   });
   G.readJsonTable = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, 'pack', p), 'utf8'));
-  for (const f of ['lib/patterns.js', 'lib/coils.js', 'lib/parallel_hatch.js', 'lib/mega.js', 'uev/stellar_forge.js']) {
+  for (const f of ['lib/patterns.js', 'lib/coils.js', 'lib/parallel_hatch.js', 'lib/mega.js', 'uev/shapes.js', 'uev/stellar_forge.js']) {
     vm.runInContext(read('startup_scripts', f), context);
   }
   return { G, registry, calls, b, errors, context };
@@ -83,9 +83,12 @@ test('plasma and ash: once per run, whatever the copies; nothing without plasma'
   assert.equal(C.heatOf(12600, true) - C.heatOf(12600, false), 900);
 });
 
-test('the pattern: 9 x 16 x 9 (<= 16 tall), four rings of 8 coils, one controller', () => {
-  assert.ok(SF.size.height <= 16);
-  assert.equal(SF.coilCells, 32);
+test('the pattern: 15 x 23 x 15, four rings of 16 coils, one controller', () => {
+  const h = harness();
+  h.registry.filter(([ty]) => ty === 'gtceu:machine').pop()[1]({ create: () => h.b });
+  const S = h.G.stellarForge;
+  assert.deepEqual(plain(S.size), { width: 15, height: 23, depth: 15 });
+  assert.equal(S.coilCells, 64);
   assert.equal(SF.type, 'gtceu:electric_blast_furnace');
 });
 
