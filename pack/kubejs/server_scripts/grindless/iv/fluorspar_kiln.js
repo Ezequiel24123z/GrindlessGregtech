@@ -181,6 +181,18 @@
     }
   ]
 
+  // D2-NIOBIUM row (docs/eras/lines-ev-zpm.md I4): pyrochlore (Ca2Nb2O6F, 11 GTM dust per formula) digested in HF,
+  // Ca2Nb2O6F + 9 HF -> 2 NbOF3 + 2 CaF2 + 4.5 H2O (1,000 mB = 1 mol). The kiln has one item slot out, so it carries the niobium cut
+  // (1 dust per Nb, the cascade's unit) and the two CaF2 (6 fluorite dust) are the inert calcium slag, voided.
+  var D2_ROWS = [
+    {
+      name: 'niobium_oxyfluoride_from_pyrochlore',
+      itemIn: { id: 'gtceu:pyrochlore_dust', count: 11 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 9000 },
+      itemOut: { id: 'grindless:niobium_oxyfluoride_dust', count: 2 }, fluidOut: { id: 'minecraft:water', amount: 4500 },
+      eut: 30, duration: 128
+    }
+  ]
+
   function addUevRows(event, rows) {
     ;(rows || UEV_ROWS).forEach(function (r) {
       var missing = []
@@ -246,6 +258,11 @@
       addUevRows(event, OPV_ROWS)
     } catch (e6) {
       console.error(LOG + 'fluorspar kiln OpV rows failed: ' + e6)
+    }
+    try {
+      addUevRows(event, D2_ROWS)
+    } catch (e7) {
+      console.error(LOG + 'fluorspar kiln D2 rows failed: ' + e7)
     }
     try {
       addController(event)
