@@ -326,7 +326,7 @@
       if (c.ch === 'M') return SOCKETS[nextSocket()] || null
       if (sym.kind === 'blocks') return sym.blocks[0]
       if (sym.kind === 'oneOf') {
-        if (c.si === lay.last && c.ry === lay.bounds.y0 && PARTS[c.ci]) return PARTS[c.ci] + '[facing=north]'
+        if (c.si === lay.last && c.ry === 0 && PARTS[c.ci]) return PARTS[c.ci] + '[facing=north]'
         var found = null
         sym.options.forEach(function (o) { if (!found && o.kind === 'blocks') found = o.blocks[0] })
         return found
