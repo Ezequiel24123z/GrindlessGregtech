@@ -117,9 +117,9 @@ test('millikelvin cryostat works: circuits 1-3, 31457280 EU/t, module is a catal
   const rc = T.types.nuclear_demagnetisation.recipes;
   // OpV-A1 appends c4 superfluid_he3 and c5 superleak_plug (opv.md line 5), both on the kept module; OpV-B1 c6 tested_tetron_die
   // (OpV line 19, the parity test on the kept module)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3], ['superfluid_he3', 4], ['superleak_plug', 5], ['tested_tetron_die', 6], ['levitation_cell', 7], ['cryo_photonic_interposer', 8], ['cold_tested_superleak', 11], ['tested_sis_die', 9], ['cooled_cavity_mode', 10], ['horizon_interposer', 32], ['calibrated_photonic_module', 12]]); // D5-QPU-MAX c12; XP-A3 c32 (Q2 step 5) // MAX-D2 c9 (line 22); MAX-A2 c11 (line 41); MAX-A1 c8 (line 7)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3], ['superfluid_he3', 4], ['superleak_plug', 5], ['tested_tetron_die', 6], ['levitation_cell', 7], ['cryo_photonic_interposer', 8], ['cold_tested_superleak', 11], ['tested_sis_die', 9], ['cooled_cavity_mode', 10], ['horizon_interposer', 32], ['calibrated_photonic_module', 12], ['tested_horizon_module', 13]]); // D5-QPU-MAXP c13; D5-QPU-MAX c12; XP-A3 c32 (Q2 step 5) // MAX-D2 c9 (line 22); MAX-A2 c11 (line 41); MAX-A1 c8 (line 7)
   for (const r of rc.slice(3)) assert.deepEqual(ids(r.kept), ['grindless:mk_cryostat_module'], r.name);
-  for (const r of rc) assert.equal(r.eut, r.name === 'calibrated_photonic_module' ? 1073741824 : /^XP-A3/.test(r._why) ? 536870912 : 31457280, r.name);
+  for (const r of rc) assert.equal(r.eut, r.name === 'tested_horizon_module' ? 2013265920 : r.name === 'calibrated_photonic_module' ? 1073741824 : /^XP-A3/.test(r._why) ? 536870912 : 31457280, r.name);
   assert.equal(rc[0].duration, 1600);
   assert.deepEqual(inputs(rc[0]), ['gtceu:prni5_dust', 'gtceu:copper_plate']);
   assert.deepEqual(outputs(rc[0]), ['grindless:nuclear_stage']);

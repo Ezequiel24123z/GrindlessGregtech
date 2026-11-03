@@ -71,7 +71,7 @@ var GG_QUESTS_EXPECTED = {
   hv_age: [86, 99],
   ev_age: [72, 83],
   iv_age: [92, 110],
-  luv_age: [92, 100],
+  luv_age: [122, 131],
   zpm_age: [96, 98],
   uv_age: [121, 127],
   uhv_age: [124, 129],
@@ -109,9 +109,9 @@ GG_QUESTS_EXPECTED.multiblocks = [417, 0]
 // LuV is one chapter (luv_age); the stations-off modes' merged count is not recorded yet: regenerate in that mode and record it here.
 var GG_QUESTS_LUV_MODES = {
   pending: { pl_luv: [255, 252], power: [113, 124] },
-  tether: { luv_age: [92, 100], pl_luv: [258, 254], power: [116, 127] },
+  tether: { luv_age: [122, 131], pl_luv: [258, 254], power: [116, 127] },
   sulfur_iodine_stations_off: { pl_luv: [261, 257], power: [116, 126] },
-  sulfur_iodine_stations_on: { luv_age: [92, 100], pl_luv: [261, 257], power: [116, 126] }
+  sulfur_iodine_stations_on: { luv_age: [122, 131], pl_luv: [261, 257], power: [116, 126] }
 }
 ;(function () {
   var st = global.grindless && global.grindless.stations

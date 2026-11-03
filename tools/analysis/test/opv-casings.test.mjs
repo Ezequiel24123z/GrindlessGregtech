@@ -52,6 +52,7 @@ test('the retuned casings: shield and NEG at 2^28 with lamina stacks, the field-
   assert.equal(nm.length, 1);
   assert.ok(JSON.stringify(nm[0].j).includes('grindless:chain_lamina_stack'));
   assert.ok(JSON.stringify(nm[0].j).includes('gtceu:stainless_steel_frame'));
+  assert.ok(JSON.stringify(nm[0].j).includes('gtceu:uxv_electric_pump'));
   assert.ok(text('grindless:assembler/annihilation_shield_casing').includes('grindless:chain_lamina_stack'));
 });
 

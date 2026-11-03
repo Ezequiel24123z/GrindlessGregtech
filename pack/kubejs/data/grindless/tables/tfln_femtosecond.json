@@ -124,7 +124,10 @@
           "itemsOut": [{ "id": "grindless:laser_welded_glass_cell", "count": 1 }], "fluidsOut": [] },
         { "_why": "XP-A3 (maxplus.md, Q2 step 2, c20): the interposer waveguides written into the enhanced LN-on-insulator and sealed with a fused-silica cladding tube", "name": "interposer_waveguides", "circuit": 20, "eut": 536870912, "duration": 2400,
           "itemsIn": [{ "id": "grindless:ln_on_insulator_plus", "count": 1 }, { "id": "grindless:fused_silica_tube", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:interposer_waveguides", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:interposer_waveguides", "count": 1 }], "fluidsOut": [] },
+        { "_why": "D5-QPU-MAXP (lines-opv-maxplus.md, X1 step 31, c21): the horizon interposer laid over the stacked module and laser-written waveguide links cut between them", "name": "linked_horizon_module", "circuit": 21, "eut": 2013265920, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:stacked_horizon_module", "count": 1 }, { "id": "grindless:horizon_interposer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:linked_horizon_module", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_reactor": {
