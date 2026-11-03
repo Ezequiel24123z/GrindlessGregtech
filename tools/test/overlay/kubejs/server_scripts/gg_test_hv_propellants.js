@@ -24,6 +24,9 @@
   var Y0 = 98
   var Y1 = 125
   var ORIGIN = { x: X0 + 2, y: Y0 + 2, z: Z0 + 2 }
+  // the plant needs one chunk of the band: only that chunk is loaded and cleared, so the band's other chunks are never generated
+  var CX1 = Math.min(X0 + 15, X1)
+  var CZ1 = Math.min(Z0 + 15, Z1)
   var DIM = 'minecraft:overworld'
   var PLANT = 'gtnn:exxonmobil_chemical_plant'
   var HV_HATCH = 'gtceu:hv_energy_input_hatch'
@@ -140,7 +143,7 @@
   // ---------------------------------------------------------------- the plant
 
   function clearBand() {
-    for (var y = Y0; y <= Y1; y++) command('fill ' + X0 + ' ' + y + ' ' + Z0 + ' ' + X1 + ' ' + y + ' ' + Z1 + ' minecraft:air')
+    for (var y = Y0; y <= Y1; y++) command('fill ' + X0 + ' ' + y + ' ' + Z0 + ' ' + CX1 + ' ' + y + ' ' + CZ1 + ' minecraft:air')
   }
 
   function readShapes() {
@@ -211,8 +214,8 @@
   function place(shape, extra, build) {
     var cut = shapeCells(shape)
     if (cut.ctrl === null) return { error: 'the preview has no controller block' }
-    if (cut.w > X1 - ORIGIN.x || cut.d > Z1 - ORIGIN.z || cut.h > Y1 - ORIGIN.y) {
-      return { error: 'the preview ' + cut.w + ' x ' + cut.h + ' x ' + cut.d + ' does not fit the band' }
+    if (cut.w > CX1 - ORIGIN.x || cut.d > CZ1 - ORIGIN.z || cut.h > Y1 - ORIGIN.y) {
+      return { error: 'the preview ' + cut.w + ' x ' + cut.h + ' x ' + cut.d + ' does not fit the chunk the test loads' }
     }
     S.cut = cut
     var ctrlPos = null
@@ -451,13 +454,13 @@
     if (S.finished) return
     S.finished = true
     try { clearBand() } catch (e) { }
-    command('forceload remove ' + X0 + ' ' + Z0 + ' ' + X1 + ' ' + Z1)
+    command('forceload remove ' + X0 + ' ' + Z0 + ' ' + CX1 + ' ' + CZ1)
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
   }
 
   function begin(server) {
     S = { server: server, level: server.getLevel(DIM), tick: 0, failed: 0, finished: false, phase: 'warmup', stage: -1, carried: null, shapeIx: -1, tiers: [] }
-    command('forceload add ' + X0 + ' ' + Z0 + ' ' + X1 + ' ' + Z1)
+    command('forceload add ' + X0 + ' ' + Z0 + ' ' + CX1 + ' ' + CZ1)
     clearBand()
     staticChecks()
     var r = readShapes()
