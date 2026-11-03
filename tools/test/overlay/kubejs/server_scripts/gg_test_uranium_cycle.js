@@ -12,9 +12,9 @@
 //   static (no world)
 //     shared_ids          IV-A1's sample, resin, pellet, tube and assembly, zircaloy, GT--'s waste and the GTM dusts and fluids exist
 //     registration        both machines on their own type, not generators, with a structure description
-//     table               uranium_cycle.json loaded: 4 recipes (1 leach vein + 3 steps), none skipped, no lookup subset, IV maxEUt
-//     leach_recipe        the live grindless:in_situ_leaching/pitchblende_end: sample not consumed (chance 0), resin chanced 1 %, 100 mB
-//                         acid + 50 mB oxygen -> 2 uraninite + waste chanced 1 %, exactly one dimension condition (the End, not reversed)
+//     table               uranium_cycle.json loaded: at least this cycle's 4 recipes (1 leach vein + 3 steps), none skipped, no lookup subset, IV maxEUt
+//     leach_recipe        the live grindless:in_situ_leaching/pitchblende_end: sample not consumed (chance 0), no resin, 100 mB
+//                         acid + 50 mB oxygen -> 2 000 mB uranyl sulfate liquor + waste chanced 1 %, exactly one dimension condition (the End, not reversed)
 //     step_<name>         each live fuel_fabrication recipe: its own circuit, items and fluids as the design says (the hydrogen of the
 //                         sinter kept: chance 0), the outputs, EU/t and ticks as the table's stages spent at IV
 //     energy_sources      every stage of the table read back from the game: a live recipe (EU/t x ticks), GTM's blast-furnace stage of a
@@ -24,8 +24,7 @@
 //   in the world (band X 10496-10559, Z 0-15: the Overworld at Y 98-112 with a roof at Y 111, the End at Y 198-214)
 //     <copy>_PLACED / _FORMED / _PARTS   for the three copies below
 //     end_surface         NOTE: the highest ground under the End band (the field is built above it)
-//     PROCESS_end         copy end (the End): 5 batches, 10 uraninite, 500 mB acid and 250 mB oxygen used, the sample still there, the
-//                         resin at most 1 used, exactly 5 x the recipe's EU; no "only in the End" line
+//     PROCESS_end         copy end (the End): 5 batches, 10 000 mB liquor in the output hatch, 500 mB acid and 250 mB oxygen used, the sample still there, exactly 5 x the recipe's EU; no "only in the End" line
 //     no_voiding          copy end: set to void items, nothing runs and the refusal is shown
 //     resumes             copy end: voiding off, one more batch
 //     refuses_on_earth    copy earth (the Overworld): loaded the same, nothing runs, nothing is used, and the controller says why
@@ -92,7 +91,8 @@
 
   // the design (docs/eras/iv.md, the package statement): what the live recipes must hold. Energy is checked against the table's stages.
   var MAX_EUT = 7680
-  var WANT_LEACH = { acid: 100, oxygen: 50, uraninite: 2, resinChance: 100, wasteChance: 100 }
+  var LIQUOR = 'gtceu:uranyl_sulfate_liquor'
+  var WANT_LEACH = { acid: 100, oxygen: 50, liquor: 2000, wasteChance: 100 }
   var WANT_STEPS = {
     leu_pellets: { circuit: 1, items: [[U235, 1], [U238, 9]], fluids: [[OXYGEN, 20000]], kept: [[HYDROGEN, 500]], out: [PELLET, 10] },
     zircaloy_cladding_tube: { circuit: 2, items: [[ZIRCALOY, 1]], fluids: [], kept: [], out: [TUBE, 2] },
@@ -106,6 +106,7 @@
   var ROLE_BLOCKS = {
     inBus: 'gtceu:iv_input_bus',
     outBus: 'gtceu:iv_output_bus',
+    outHatch: 'gtceu:iv_output_hatch',
     acid: 'gtceu:iv_input_hatch',
     oxygen: 'gtceu:iv_input_hatch',
     hydrogen: 'gtceu:iv_input_hatch',
@@ -113,7 +114,7 @@
     energy: 'gtceu:iv_energy_input_hatch'
   }
   // parts: 'slice,row,column' of each description -> role
-  var FIELD_PARTS_AT = { '9,4,1': 'inBus', '9,4,2': 'outBus', '9,4,4': 'acid', '9,4,5': 'oxygen', '9,5,3': 'energy' }
+  var FIELD_PARTS_AT = { '9,4,1': 'inBus', '9,4,2': 'outBus', '9,5,2': 'outHatch', '9,4,4': 'acid', '9,4,5': 'oxygen', '9,5,3': 'energy' }
   var PLANT_PARTS_AT = { '12,0,0': 'inBus', '12,0,1': 'outBus', '12,0,2': 'energy', '11,0,0': 'oxygen', '11,0,1': 'hydrogen', '11,0,2': 'helium' }
   var COPIES = [
     { key: 'end', machine: FIELD, dim: END, x: 10500, z: 2, y0: 200, partsAt: FIELD_PARTS_AT },
@@ -299,7 +300,7 @@
     var u = UC()
     var problems = []
     var recipes = u.recipes || []
-    if (recipes.length !== 4) problems.push(recipes.length + ' recipes')
+    if (recipes.length < 4) problems.push(recipes.length + ' recipes (at least the 4 of this cycle)')
     if ((u.skipped || []).length > 0) problems.push('skipped ' + JSON.stringify(u.skipped))
     if ((u.clashes || []).length > 0) problems.push('lookup subsets ' + u.clashes.join('; '))
     if (u.maxEut !== MAX_EUT) problems.push('maxEut ' + u.maxEut)
@@ -327,16 +328,15 @@
     var fin = fluidContents(r, true)
     var sample = ins.filter(function (x) { return x.id === SAMPLE })
     var resin = ins.filter(function (x) { return x.id === RESIN })
-    if (ins.length !== 2) problems.push(ins.length + ' item inputs')
+    if (ins.length !== 1) problems.push(ins.length + ' item inputs')
     if (sample.length !== 1 || sample[0].chance !== 0 || sample[0].count !== 1) problems.push('sample ' + JSON.stringify(sample))
-    if (resin.length !== 1 || resin[0].chance !== WANT_LEACH.resinChance || resin[0].maxChance !== 10000) problems.push('resin ' + JSON.stringify(resin))
+    if (resin.length !== 0) problems.push('resin ' + JSON.stringify(resin))
     var wantFluids = [{ id: ACID, amount: WANT_LEACH.acid, chance: 10000 }, { id: OXYGEN, amount: WANT_LEACH.oxygen, chance: 10000 }]
     if (JSON.stringify(fin) !== JSON.stringify(wantFluids)) problems.push('fluids ' + JSON.stringify(fin))
-    if (fluidContents(r, false).length !== 0) problems.push('fluid outputs')
-    var ore = outs.filter(function (x) { return x.id === URANINITE })
+    var fout = fluidContents(r, false)
+    if (JSON.stringify(fout) !== JSON.stringify([{ id: LIQUOR, amount: WANT_LEACH.liquor, chance: 10000 }])) problems.push('fluid outputs ' + JSON.stringify(fout))
     var waste = outs.filter(function (x) { return x.id === WASTE })
-    if (outs.length !== 2) problems.push(outs.length + ' item outputs')
-    if (ore.length !== 1 || ore[0].count !== WANT_LEACH.uraninite || ore[0].chance !== 10000) problems.push('uraninite ' + JSON.stringify(ore))
+    if (outs.length !== 1) problems.push(outs.length + ' item outputs')
     if (waste.length !== 1 || waste[0].count !== 1 || waste[0].chance !== WANT_LEACH.wasteChance) problems.push('waste ' + JSON.stringify(waste))
     var d = dimensionsOf(r)
     if (d.dims.length !== 1 || d.dims[0].id !== END || d.dims[0].reverse !== false) problems.push('dimension conditions ' + JSON.stringify(d.dims))
@@ -459,12 +459,12 @@
     var hc = global.grindless.hotCell
     var enrich = hc && hc.recipes ? hc.recipes.filter(function (r) { return r.name === 'enrichment' })[0] : null
     var enrichEu = enrich ? Number(enrich.energy) : ENRICHMENT_EU
-    var batches = 30 / WANT_LEACH.uraninite
+    var batches = 15
     var leachEu = batches * leach.energy
     var fab = pellets.energy + 2 * tube.energy + assembly.energy
     var total = leachEu + enrichEu + fab
     note('balance', 'one LEU assembly: leaching ' + batches + ' x ' + leach.energy + ' = ' + leachEu + ' EU (' + (batches * WANT_LEACH.acid) + ' mB acid, ' +
-      (batches * WANT_LEACH.oxygen) + ' mB oxygen, ' + (batches / 100).toFixed(2) + ' resin, ' + (batches / 100).toFixed(2) + ' waste) + enrichment ' +
+      (batches * WANT_LEACH.oxygen) + ' mB oxygen, ' + (batches / 100).toFixed(2) + ' waste) + enrichment ' +
       enrichEu + ' EU (' + (enrich ? 'the hot cell\'s live recipe' : 'iv.md\'s figure; the hot cell is not on this branch') + ') + pellets ' + pellets.energy +
       ' + 2 tubes ' + (2 * tube.energy) + ' + assembly ' + assembly.energy + ' = ' + total + ' EU (' + (total / 1e6).toFixed(2) + ' M), plus 20,000 mB oxygen,' +
       ' 2 Zircaloy ingots and 100 mB helium; IV-A2 assumed ' + A2_ASSUMED + '. The reactor gets 1.31 G (light water) or 2.62 G EU (heavy water) from it: ' +
@@ -776,7 +776,7 @@
     emptyBus(m.P.inBus)
     emptyBus(m.P.outBus)
     fillBus(m.P.inBus, SAMPLE, 1)
-    fillBus(m.P.inBus, RESIN, 16)
+    setTank(m.P.outHatch, LIQUOR, 0)
     setTank(m.P.acid, ACID, batches * WANT_LEACH.acid)
     setTank(m.P.oxygen, OXYGEN, batches * WANT_LEACH.oxygen)
   }
@@ -789,22 +789,20 @@
   function endStep(m, age) {
     var plan = planOfName('pitchblende_end')
     if (m.phase === 'running') {
-      var made = readBus(m.P.outBus)[URANINITE] || 0
-      if (!(made >= LEACH_RUNS * WANT_LEACH.uraninite && tankOf(m.P.acid) === 0) && age < RUN_TIMEOUT) return
+      var made = tankOf(m.P.outHatch)
+      if (!(made >= LEACH_RUNS * WANT_LEACH.liquor && tankOf(m.P.acid) === 0) && age < RUN_TIMEOUT) return
       var ins = readBus(m.P.inBus)
       var outs = readBus(m.P.outBus)
       var problems = []
-      if (made !== LEACH_RUNS * WANT_LEACH.uraninite) problems.push(made + ' uraninite')
+      if (made !== LEACH_RUNS * WANT_LEACH.liquor) problems.push(made + ' mB liquor')
       if (tankOf(m.P.acid) !== 0 || tankOf(m.P.oxygen) !== 0) problems.push('fluids left')
       if ((ins[SAMPLE] || 0) !== 1) problems.push('sample ' + (ins[SAMPLE] || 0))
-      if (!((ins[RESIN] || 0) >= 15 && (ins[RESIN] || 0) <= 16)) problems.push('resin ' + (ins[RESIN] || 0))
       if (plan && energyUsed(m) !== LEACH_RUNS * plan.energy) problems.push(energyUsed(m) + ' EU (wanted ' + LEACH_RUNS * plan.energy + ')')
       if (m.seen[LEACH_ID] !== true) problems.push(LEACH_ID + ' never seen running')
       var lines = displayLines(m)
       var wrongLine = lines.some(function (l) { return NOT_END.test(l) })
       if (wrongLine) problems.push('shows the not-in-the-End line in the End')
-      check('PROCESS_end', problems.length === 0, LEACH_RUNS + ' batches in the End: ' + made + ' uraninite, ' + (outs[WASTE] || 0) + ' waste, resin ' +
-        (ins[RESIN] || 0) + ' of 16 left, sample ' + (ins[SAMPLE] || 0) + ', ' + leachText(m) + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
+      check('PROCESS_end', problems.length === 0, LEACH_RUNS + ' batches in the End: ' + made + ' mB liquor, ' + (outs[WASTE] || 0) + ' waste, sample ' + (ins[SAMPLE] || 0) + ', ' + leachText(m) + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
       m.madeBefore = made
       setTank(m.P.acid, ACID, WANT_LEACH.acid)
       setTank(m.P.oxygen, OXYGEN, WANT_LEACH.oxygen)
@@ -814,7 +812,7 @@
     }
     if (m.phase === 'void_items' && age >= HOLD_TICKS) {
       var shown = failureReasons(m).some(function (r) { return NO_VOIDING.test(r) })
-      var still = tankOf(m.P.acid) === WANT_LEACH.acid && tankOf(m.P.oxygen) === WANT_LEACH.oxygen && (readBus(m.P.outBus)[URANINITE] || 0) === m.madeBefore &&
+      var still = tankOf(m.P.acid) === WANT_LEACH.acid && tankOf(m.P.oxygen) === WANT_LEACH.oxygen && tankOf(m.P.outHatch) === m.madeBefore &&
         energyUsed(m) === 0
       check('no_voiding', still && shown, 'set to void items: refusal shown=' + shown + ', reasons=[' + failureReasons(m).join(' ; ') + '], ' + leachText(m))
       setVoiding(m, 'VOID_NONE')
@@ -822,10 +820,10 @@
       return
     }
     if (m.phase === 'resume') {
-      var after = readBus(m.P.outBus)[URANINITE] || 0
-      if (!(after >= m.madeBefore + WANT_LEACH.uraninite && tankOf(m.P.acid) === 0) && age < RUN_TIMEOUT) return
-      var ok = after === m.madeBefore + WANT_LEACH.uraninite && tankOf(m.P.acid) === 0 && tankOf(m.P.oxygen) === 0 && (!plan || energyUsed(m) === plan.energy)
-      check('resumes', ok, 'voiding off: one more batch, uraninite ' + m.madeBefore + ' -> ' + after + ', ' + leachText(m))
+      var after = tankOf(m.P.outHatch)
+      if (!(after >= m.madeBefore + WANT_LEACH.liquor && tankOf(m.P.acid) === 0) && age < RUN_TIMEOUT) return
+      var ok = after === m.madeBefore + WANT_LEACH.liquor && tankOf(m.P.acid) === 0 && tankOf(m.P.oxygen) === 0 && (!plan || energyUsed(m) === plan.energy)
+      check('resumes', ok, 'voiding off: one more batch, liquor ' + m.madeBefore + ' -> ' + after + ', ' + leachText(m))
       m.phase = 'done'
     }
   }
@@ -837,7 +835,7 @@
     var outs = readBus(m.P.outBus)
     var ins = readBus(m.P.inBus)
     var untouched = tankOf(m.P.acid) === LEACH_RUNS * WANT_LEACH.acid && tankOf(m.P.oxygen) === LEACH_RUNS * WANT_LEACH.oxygen &&
-      Object.keys(outs).length === 0 && energyUsed(m) === 0 && Object.keys(m.seen).length === 0 && (ins[RESIN] || 0) === 16
+      Object.keys(outs).length === 0 && energyUsed(m) === 0 && Object.keys(m.seen).length === 0 && (ins[SAMPLE] || 0) === 1
     var lines = displayLines(m)
     var shown = lines.some(function (l) { return NOT_END.test(l) })
     check('refuses_on_earth', untouched && shown, 'Overworld, loaded for ' + LEACH_RUNS + ' batches, after ' + age + ' ticks: ' + leachText(m) +

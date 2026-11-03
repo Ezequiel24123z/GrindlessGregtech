@@ -33,7 +33,7 @@
 //     blocks into the ground (rows 0-2), a PTFE pipe casing wellhead on the ground (row 3) and a tungstensteel frame valve tree on it
 //     (row 4); everything else in the field is free (the ground, end stone, anything). Slices 7-9 are the header house on the ground
 //     (rows 3-6, columns 1-5) of chemically inert casing: floor and roof casing; the walls (rows 4-5, symbol X, 23 cells) take the
-//     parts (1-2 input buses, 1-2 output buses, 1-3 fluid input hatches, 1-2 energy hatches), the rest casing; inside, two
+//     parts (1-2 input buses, 1-2 output buses, 1 fluid output hatch for the liquor, 1-3 fluid input hatches, 1-2 energy hatches), the rest casing; inside, two
 //     ion-exchange columns of PTFE pipe casing stand up through the roof (rows 4-7) with air between them. The controller is in the
 //     middle of the front wall, row 4.
 //   fuel plant, 3 wide x 4 high x 13 deep, along the line from the back: the pellet press bay (slices 0-2, the press's tungstensteel
@@ -90,7 +90,7 @@
   // a slice of the field with injection wells at both edges (the corners of the five-spot)
   const EDGE_WELLS = ['P     P', 'P     P', 'P     P', 'Q     Q', 'F     F', '       ', '       ', '       ']
 
-  const FIELD_PARTS = { input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 }, input_hatch: { min: 1, max: 3 }, energy_input: { min: 1, max: 2 } }
+  const FIELD_PARTS = { input_bus: { min: 1, max: 2 }, output_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 1 }, input_hatch: { min: 1, max: 3 }, energy_input: { min: 1, max: 2 } }
 
   const FIELD_SPEC = {
     slices: [
@@ -113,11 +113,12 @@
     ],
     symbols: {
       S: Pat.controller(),
-      // 23 wall cells: 4 to 9 are parts, the rest inert casing
+      // 23 wall cells: 5 to 10 are parts, the rest inert casing
       X: Pat.oneOf(
         Pat.block(HOUSE, { min: 12 }),
         Pat.part('input_bus', FIELD_PARTS.input_bus),
         Pat.part('output_bus', FIELD_PARTS.output_bus),
+        Pat.part('output_hatch', FIELD_PARTS.output_hatch),
         Pat.part('input_hatch', FIELD_PARTS.input_hatch),
         Pat.part('energy_input', FIELD_PARTS.energy_input)
       ),
