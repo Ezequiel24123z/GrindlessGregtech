@@ -34,4 +34,4 @@ applyTo: "pack/pack.toml,pack/index.toml,pack/mods/**,pack/.gitattributes,tools/
 5. `tools\prism\Build-PrismInstance.ps1 -Channel vX.Y.Z -OutDir <dir>`, then `gh release create vX.Y.Z --verify-tag --latest --title "vX.Y.Z: <summary>" --notes-file docs/releases/vX.Y.Z.md <zip>`.
 6. Test-Promotion again without `-SkipRelease`: it now checks the Prism asset too, and must pass.
 7. Move the channels to the tag's commit: `git push origin vX.Y.Z^{commit}:refs/heads/releases`, the same for `playable`, and `main` (or `main` ahead by docs-only commits).
-8. Edit the `releases-channel` release note to say `Current version: vX.Y.Z`. Update `docs/STATUS.md` and `DECISIONS.md`, and send the owner the short summary.
+8. Edit the `releases-channel` release note to say `Current version: vX.Y.Z`, and refresh its zip: `tools\prism\Build-PrismInstance.ps1 -Channel releases -OutDir <dir>`, then `gh release upload releases-channel <dir>\Gregtech-Grindless-releases.zip --clobber`. The zip must carry the bootstrap's full licence text (CREDITS.md). Update `docs/STATUS.md` and `DECISIONS.md`, and send the owner the short summary.

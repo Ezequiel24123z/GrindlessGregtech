@@ -58,6 +58,8 @@ Mixin config emi_loot\.mixins\.json does not specify "minVersion" property
 Parsing error loading custom advancement colossalchests:uncolossal: Failed to parse 'location' field
 # Create / Struts: the struts:wrenches tag names create:wrench, which this Create version lacks; the tag loads without it.
 Couldn't load tag struts:wrenches
+# Minecraft: a brand-new server folder has no server.properties until the first boot writes it; the first read logs this, harmless (README server guide, audit A7d-02, #278).
+Failed to load properties from file: server\.properties
 # Minecraft: chunks a test generates away from any player log this when a structure's POI block (bell, bed, workstation) was never registered; the POI is rebuilt on load, harmless (seen by D1-HV-PROP, #250).
 POI data mismatch: never registered
 # Minecraft 1.20.1: an allay generated in a test's chunks (a woodland mansion or pillager outpost cage) fails to decode its vibration listener's source; the allay loads without it, harmless (seen in the hot cell's band at batch 14's T2).
