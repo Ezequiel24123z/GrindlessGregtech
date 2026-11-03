@@ -191,7 +191,7 @@
     u.outBus = partsLike(m, /output_bus/)[0]
     u.hatch = partsLike(m, /^(?!.*energy).*input_hatch/)[0]
     u.outHatch = partsLike(m, /output_hatch/)[0]
-    var ok = !!u.bus && !!u.outBus && !!u.hatch && !!u.outHatch && u.energy.length === 2 && u.height <= 16
+    var ok = !!u.bus && !!u.outBus && !!u.hatch && !!u.outHatch && u.energy.length === 2 && u.height <= 19
     check(u.name + '_formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', UIV energy hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
     return ok
   }

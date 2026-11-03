@@ -22,7 +22,7 @@
   var COIL = 'grindless:hftacn_coil_block'
   var CX = 35424
   var CY = 100
-  var PARTS = { 0: 'gtceu:maintenance_hatch', 1: 'gtceu:uiv_energy_input_hatch', 2: 'gtceu:hv_input_bus', 4: 'gtceu:hv_input_hatch', 5: 'gtceu:hv_output_hatch', 6: 'gtceu:uiv_parallel_hatch' }
+  var PARTS = { 4: 'gtceu:maintenance_hatch', 5: 'gtceu:uiv_energy_input_hatch', 6: 'gtceu:hv_input_bus', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch', 10: 'gtceu:uiv_parallel_hatch' }
 
   ServerEvents.recipes(function (event) {
     try {

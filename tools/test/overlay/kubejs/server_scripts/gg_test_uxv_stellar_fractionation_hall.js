@@ -100,7 +100,8 @@
       var er = m.getMultiblockState().error
       var info = ''
       try { info = ' | ' + String(er.getErrorInfo().getString()) + ' @ ' + String(er.getPos()) } catch (x) { }
-      return String(er) + info
+      var q = ''; try { var bp = er.getPos(); q = ' | found ' + String(S.level.getBlockState(bp).getBlock().builtInRegistryHolder().key().location()) + ' at ' + bp.getX() + ',' + bp.getY() + ',' + bp.getZ() } catch (x2) { }
+      return q + info.substring(0, 400)
     } catch (e) { return 'unknown' }
   }
   function field(o, name) {

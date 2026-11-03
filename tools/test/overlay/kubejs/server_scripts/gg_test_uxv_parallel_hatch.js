@@ -24,7 +24,7 @@
   var CEILING = 256 * 65536
   var CX = 36448
   var CY = 100
-  var PARTS = { 0: 'gtceu:maintenance_hatch', 1: 'gtceu:uxv_energy_input_hatch', 2: 'gtceu:hv_input_bus', 4: 'gtceu:hv_input_hatch', 5: 'gtceu:hv_output_hatch', 6: 'gtceu:uxv_parallel_hatch' }
+  var PARTS = { 4: 'gtceu:maintenance_hatch', 5: 'gtceu:uxv_energy_input_hatch', 6: 'gtceu:hv_input_bus', 8: 'gtceu:hv_input_hatch', 9: 'gtceu:hv_output_hatch', 10: 'gtceu:uxv_parallel_hatch' }
 
   function classes() {
     if (C !== null) return C
