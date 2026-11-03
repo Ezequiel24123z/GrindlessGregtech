@@ -210,6 +210,25 @@ $BouleBase = @(
 )
 
 $items = @(
+    # a heap of teal silicon carbide grains: a pile (B) with lighter (G) and darker (D) grains
+    @{ Name = 'sic_source_powder'; Pal = 'K=1E3A38 W=9AD8C8 D=2E6A60 B=4A9A8A G=B8F0E0'
+        Map = @(
+            '................',
+            '................',
+            '................',
+            '................',
+            '................',
+            '................',
+            '.......KK.......',
+            '......KGBK......',
+            '.....KBBGBK.....',
+            '....KBGBBBBK....',
+            '...KBBBBGBBDK...',
+            '..KBGBBBBBBBDK..',
+            '.KBBBBGBBBBBDDK.',
+            '.KDDDDDDDDDDDDK.',
+            '..KKKKKKKKKKKK..',
+            '................') },
     # a teal 4H-SiC crystal with a few growth facets (G)
     @{ Name = 'sic_boule'; Pal = 'K=1E3A38 W=9AD8C8 D=2E6A60 B=4A9A8A T=7ACCBA G=B8F0E0'
         Map = (Get-FilledMap $BouleBase { param($x, $y) if (($y -eq 6 -and $x -eq 8) -or ($y -eq 10 -and $x -eq 7)) { 'G' } else { 'B' } }) },

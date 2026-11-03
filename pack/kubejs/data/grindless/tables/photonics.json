@@ -310,7 +310,10 @@
           "circuit": 6,
           "eut": 491520,
           "duration": 200,
-          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }],
+          "itemsIn": [
+            { "id": "grindless:etched_lnoi_wafer", "count": 1 },
+            { "id": "gtceu:gold_foil", "count": 4 }
+          ],
           "kept": [],
           "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
           "charge": [],
@@ -538,6 +541,19 @@
           "itemsIn": [{ "id": "grindless:clock_steered_oscillator", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }],
           "kept": [], "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }, { "id": "gtceu:soldering_alloy", "amount": 36 }], "charge": [],
           "itemsOut": [{ "id": "grindless:optical_phase_lock_unit", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "D3-LIGHT (lines-uv-uhv.md W3 step 5): ridge waveguides milled into the LNOI film by argon ions before the gold electrodes go on",
+          "name": "lnoi_etch",
+          "circuit": 28,
+          "eut": 491520,
+          "duration": 300,
+          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:etched_lnoi_wafer", "count": 1 }],
+          "fluidsOut": []
         }
         ]
     },

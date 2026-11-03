@@ -10,7 +10,7 @@
           "circuit": 1,
           "eut": 122880,
           "duration": 600,
-          "itemsIn": [{ "id": "gtca:silicon_carbide_dust", "count": 16 }],
+          "itemsIn": [{ "id": "grindless:sic_source_powder", "count": 16 }],
           "kept": [],
           "fluidsIn": [],
           "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
@@ -172,6 +172,22 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:diamond_power_wafer", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1800 }]
+        },
+        {
+          "_why": "D3-LIGHT (lines-uv-uhv.md W3): PVT source powder synthesised from electronic-grade silicon and graphite under argon",
+          "name": "sic_source_powder",
+          "circuit": 11,
+          "eut": 122880,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:polysilicon", "count": 8 },
+            { "id": "gtceu:graphite_dust", "count": 8 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sic_source_powder", "count": 16 }],
+          "fluidsOut": []
         }
       ]
     },
