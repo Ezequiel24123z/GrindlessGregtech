@@ -162,7 +162,7 @@
     // the preview shape shows one energy cell (min 1, max 2): a second hatch goes on a casing cell beside it, on the same floor row
     var firstE = parsed.filter(function (c) { return c.id === HATCH })[0]
     while (firstE && energy < want) {
-      var spare = parsed.filter(function (c) { return c.id === casing && c.y === firstE.y && c.z === firstE.z && Math.abs(c.x - firstE.x) === 1 })[0]
+      var spare = parsed.filter(function (c) { return c.id === casing && c.y === firstE.y && c.z === firstE.z })[0]
       if (!spare) break
       spare.id = HATCH
       spare.props = firstE.props
@@ -170,7 +170,7 @@
     }
     // the first row takes two fluids (ferric chloride and the liquid nitrogen charge): a second fluid input hatch on the casing cell beside the first
     var firstH = parsed.filter(function (c) { return /^gtceu:[a-z0-9]+_input_hatch$/.test(c.id) })[0]
-    var spareH = firstH && parsed.filter(function (c) { return c.id === casing && c.y === firstH.y && c.z === firstH.z && Math.abs(c.x - firstH.x) === 1 })[0]
+    var spareH = firstH && parsed.filter(function (c) { return c.id === casing && c.y === firstH.y && c.z === firstH.z })[0]
     if (spareH) { spareH.id = firstH.id; spareH.props = firstH.props }
     parsed.forEach(function (c) {
       if (/input_bus/.test(c.id)) c.id = 'gtceu:hv_input_bus'
