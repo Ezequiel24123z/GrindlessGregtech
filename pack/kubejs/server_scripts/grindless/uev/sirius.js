@@ -1,6 +1,6 @@
 // priority: -23250
 // -----------------------------------------------------------------------------------------------
-// Recipes of UEV's white dwarf spectrograph, degenerate harvester and containment works (machines and recipe types:
+// Recipes of UEV's white dwarf spectrograph and the Degenerate Works (the degenerate harvester, which also runs the containment type) (machines and recipe types:
 // startup_scripts/grindless/uev/sirius.js; docs/eras/uev.md, machines 23-25 and line 28; package UEV-B4), generated at every server load from
 // data/grindless/tables/sirius.json, plus the recipes of the three controllers.
 //
@@ -8,7 +8,7 @@
 //                          Sirius B orbit only (recipe.dimension(grindless:sirius_b_orbit), the pattern of uev/earth_orbit.js); every recipe carries
 //                          the data key of its type = <name> (its EMI line). The nuclear clock, the chart and the helium are kept inputs.
 //   gtceu:assembler        the degenerate containment casing and the UEV field generator (circuit 0, anywhere: the pellet inside is the orbit-only part).
-//   assembly line          the controllers: station research, UEV-era circuits, 3 domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
+//   assembly line          the controllers (two): station research, UEV-era circuits, domain parts of the line, soldering alloy and lubricant, grindless:assembly_line/<machine>.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.uevSirius.recipes, .skipped, .clashes, .controllerRecipes.
@@ -88,6 +88,7 @@
     if (GTM_TYPES[rec.type] === true) return null
     var io = null
     Object.keys(SI.machines || {}).forEach(function (k) { if (SI.machines[k].type === rec.type) io = SI.machines[k].maxIO })
+    ;(SI.typeOnly || []).forEach(function (t) { if (t.type === rec.type) io = t.maxIO })
     if (io === null) return 'no slots known for type ' + rec.type
     var circuit = rec.circuit > 0 ? 1 : 0
     if (rec.itemsIn.length + rec.kept.length + circuit > io.itemsIn) return 'too many item inputs (the type holds ' + io.itemsIn + ')'
@@ -179,10 +180,9 @@
     var defs = [
       { m: M.spectrograph, research: 'grindless:snspd', era: 'gtceu:neutronium',
         ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + SENSOR, '3x ' + EMITTER, '2x ' + PUMP, C, 'grindless:ule_cavity', '2x grindless:snspd', 'grindless:nuclear_clock'] },
-      { m: M.harvester, research: M.spectrograph.machine, era: 'gtceu:neutronium',
-        ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + ARM, '3x ' + PUMP, '2x ' + SENSOR, C, 'grindless:degenerate_eos_model', 'grindless:mass_radius_chart', 'grindless:hollow_core_fibre'] },
-      { m: M.works, research: M.harvester.machine, era: 'gtceu:tritanium',
-        ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + EMITTER, '3x ' + PUMP, '2x ' + REG, C, 'grindless:degenerate_containment_casing', 'grindless:faraday_isolator', 'grindless:spdc_source'] }
+      { m: M.harvester, research: M.spectrograph.machine, era: 'gtceu:tritanium',
+        ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + ARM, '3x ' + PUMP, '2x ' + SENSOR, '3x ' + EMITTER, '2x ' + REG, C, 'grindless:degenerate_eos_model', 'grindless:mass_radius_chart',
+          'grindless:hollow_core_fibre', 'grindless:degenerate_containment_casing', 'grindless:faraday_isolator', 'grindless:spdc_source'] }
     ]
     SI.controllerRecipes = []
     defs.forEach(function (d) {

@@ -73,7 +73,7 @@ test('real tiers (uxv): the Validator\'s leak checks are unreachable checks gate
   un('ti44-only-cas-a', [`operate:${SWEEPER}*`], [TI44, 'grindless:ti44_core']);
   un('es254-only-transuranium', ['operate:gtceu:transuranium_facility*'], ['gtceu:einsteinium_dust']);
   un('cm248-only-hot-cell', ['operate:gtceu:hot_cell*'], ['gtceu:curium_248_dust']);
-  un('element-121-122-only-chain', ['operate:gtceu:heavy_ion_cyclotron*', 'operate:gtceu:recoil_separator*', 'operate:gtceu:superheavy_chemistry_lab*'], []);
+  un('element-121-122-only-chain', ['operate:gtceu:heavy_ion_cyclotron*', 'operate:gtceu:superheavy_chemistry_lab*'], []);
   un('island-only-mnt', ['operate:gtceu:mnt_collider*'], ['grindless:island_nuclide', 'grindless:island_chart']);
   un('mtj-stacks-only-sputter', ['operate:gtceu:mtj_sputter_cluster*'], ['grindless:mtj_stack_wafer', 'grindless:mram_stack_wafer', 'grindless:saf_track_wafer']);
   un('oxide-films-only-pld', ['operate:gtceu:oxide_pld_chamber*'], []);

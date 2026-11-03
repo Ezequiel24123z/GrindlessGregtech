@@ -214,9 +214,9 @@ export const QUESTS = [
   },
   {
     key: 'S_PELLET', kind: 'step', title: 'A White Dwarf in a Bottle', icon: 'grindless:degenerate_pellet',
-    deps: ['PEL'], x: 41.5, y: -0.5,
+    deps: ['DEG'], x: 41.5, y: -0.5,
     desc: [
-      'A sealed &6Degenerate Pellet&r is a fuel that never runs out in your lifetime. The Containment Works presses it from degenerate matter and an exotic matter cell, and the gate\'s hold is run on it.',
+      'A sealed &6Degenerate Pellet&r is a fuel that never runs out in your lifetime. The Degenerate Works presses it from degenerate matter and an exotic matter cell, and the gate\'s hold is run on it.',
     ],
     tasks: [it('grindless:degenerate_pellet')],
     rewards: [xp(250)],

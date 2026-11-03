@@ -241,7 +241,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [
-      it('gtceu:calutron'), it('gtceu:heavy_ion_cyclotron'), it('gtceu:recoil_separator'),
+      it('gtceu:calutron'), it('gtceu:heavy_ion_cyclotron'),
       it('gtceu:superheavy_chemistry_lab'), it('gtceu:synchrotron'), it('gtceu:electron_beam_furnace'),
     ],
     rewards: [xp(120)],

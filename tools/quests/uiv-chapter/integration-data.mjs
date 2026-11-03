@@ -202,7 +202,7 @@ export const QUESTS = [
     desc: [],
     tasks: [
       it('gtceu:fuel_fabrication_plant'), it('gtceu:hot_cell'), it('gtceu:actinide_partitioning_plant'), it('gtceu:transuranium_facility'),
-      it('gtceu:waste_retrieval_plant'), it('gtceu:heavy_ion_cyclotron'), it('gtceu:recoil_separator'), it('gtceu:superheavy_chemistry_lab'),
+      it('gtceu:waste_retrieval_plant'), it('gtceu:heavy_ion_cyclotron'), it('gtceu:superheavy_chemistry_lab'),
     ],
     rewards: [xp(150)],
   },

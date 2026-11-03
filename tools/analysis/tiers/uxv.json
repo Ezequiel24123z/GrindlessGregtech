@@ -1389,7 +1389,6 @@
       ],
       "without": [
         "operate:gtceu:heavy_ion_cyclotron*",
-        "operate:gtceu:recoil_separator*",
         "operate:gtceu:superheavy_chemistry_lab*"
       ],
       "expect": "unreachable",
@@ -2184,7 +2183,6 @@
       "items": [
         "m:gtceu:calutron",
         "m:gtceu:heavy_ion_cyclotron",
-        "m:gtceu:recoil_separator",
         "m:gtceu:superheavy_chemistry_lab",
         "m:gtceu:megabar_press",
         "m:gtceu:electron_beam_furnace",
@@ -2224,7 +2222,6 @@
       "items": [
         "m:gtceu:white_dwarf_spectrograph",
         "m:gtceu:degenerate_harvester",
-        "m:gtceu:containment_works",
         "grindless:degenerate_matter",
         "grindless:degenerate_pellet",
         "grindless:mass_radius_chart",

@@ -15,7 +15,7 @@
 //
 // Voltage: UHV, the voltage of the era's first machines (the design's 7.86 M EU/t for the hall's circuit 3 is tuned down to UHV's 1.97 M EU/t
 // and made longer). New ids: the items below (the table's grindless: ids); the F1 ids (snspd, qd_source, sdd, uev_*) are not registered again.
-// Geometry (lib/patterns.js): a cryostat hall, a banded tower and a dome hall (shapes in uev/shapes.js).
+// Geometry (lib/patterns.js): a cryostat hall, a banded tower and a cleanroom integration hall (shapes in uev/shapes.js).
 // Textures: tools/assets/Build-UEVPhotonicsTextures.ps1. Names: client_scripts/grindless/uev_photonics_lang.js.
 // Published for the recipe script: global.grindless.uevPhotonics.
 (function () {
@@ -141,21 +141,30 @@
         return s.booth('F', 3).fn()
       }
     },
+    // the integration hall (23 x 11 x 23): a cleanroom hall of photonic casing round a central gallery under a clerestory of glass. Four
+    // flip-chip bonder cells down the left (SiC, a gearbox stage and a pump), four fibre-attach cells down the right, SiC roof ribs.
     hall: {
-      w: 11, h: 9, d: 13,
+      w: 23, h: 11, d: 23,
       fn: function () {
-        return G.uevShapes.hall({
-          w: 11, d: 13, hh: 6, mull: 4, crown: G.uevShapes.dome(11, 13, 3),
-          inner: function (x, y, z) {
-            var ax = x < 5 ? 5 - x : x - 5
-            if (ax === 3 && z % 4 === 2) return y === 1 ? 'B' : (y <= 3 ? 'P' : null)
-            if (ax === 0 && z === 6 && y <= 2) return y === 1 ? 'B' : 'C'
-            return null
-          }
+        var s = G.uevShapes.scene(23, 11, 23)
+        s.box(7, 0, 0, 15, 0, 22, 'X')
+        s.room(0, 1, 0, 22, 4, 22, 'O', 'bt', '#')
+        ;[4, 9, 14, 19].forEach(function (z) {
+          s.box(0, 3, z, 0, 4, z + 1, 'L').box(22, 3, z, 22, 4, z + 1, 'L')
+          s.room(2, 1, z - 1, 6, 4, z + 2, 'R', '', '#')
+          s.set(4, 2, z, 'B').set(4, 3, z, 'C')
+          s.room(16, 1, z - 1, 20, 4, z + 2, 'R', '', '#')
+          s.set(18, 2, z, 'B').set(18, 3, z, 'P')
         })
+        s.room(6, 5, 1, 16, 9, 21, 'O', 'bt', '#')
+        s.box(8, 10, 1, 14, 10, 21, 'L')
+        s.box(7, 8, 1, 15, 8, 1, 'L').box(7, 8, 21, 15, 8, 21, 'L')
+        s.box(10, 10, 6, 12, 10, 16, 'R')
+        return s.booth('R', 3).fn()
       }
     }
   }
+
   Object.keys(UP.machines).forEach(function (k) {
     var m = UP.machines[k]
     m.width = SHAPES[k].w

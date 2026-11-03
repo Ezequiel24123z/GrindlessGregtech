@@ -56,12 +56,12 @@ test('real tiers (uev): the Validator\'s leak checks are unreachable checks gate
     if (any) assert.ok(t[id].anyOf.includes(any), `${id}: ${any}`);
   };
   un('isotopes-only-calutron', ['operate:gtceu:calutron*']);
-  un('superheavy-only-chain', ['operate:gtceu:heavy_ion_cyclotron*', 'operate:gtceu:recoil_separator*', `operate:${CHAIN}*`], TENNESSINE);
+  un('superheavy-only-chain', ['operate:gtceu:heavy_ion_cyclotron*', `operate:${CHAIN}*`], TENNESSINE);
   un('megabar-only-press', ['operate:gtceu:megabar_press*']);
   un('fe16n2-only-works', ['operate:gtceu:nitride_magnet_works*'], 'gtceu:fe16n2_dust');
   un('mk4-plasmas-only-mk4', ['operate:gtceu:uev_fusion_reactor*']);
   un('barnard-rock-only-drill', ['operate:gtceu:barnard_core_drill*'], 'grindless:barnard_core_rock');
-  un('pellets-only-containment', ['operate:gtceu:containment_works*'], 'grindless:degenerate_pellet');
+  un('pellets-only-containment', ['operate:gtceu:degenerate_harvester*'], 'grindless:degenerate_pellet');
   for (const id of ['site-warp-gate']) assert.ok(t[id], id);
   const syn = byId(uev().synthetic);
   assert.ok(syn['swarm-station'].produces.includes('eu:uev'));

@@ -181,9 +181,9 @@
  },
  "gtceu:calutron": {
   "v": [],
-  "bt": 6,
-  "ds": 0.339,
-  "c": 704
+  "bt": 8,
+  "ds": 0.564,
+  "c": 1576
  },
  "gtceu:carbonyl_refinery": {
   "v": [],
@@ -263,12 +263,6 @@
   "ds": 0.429,
   "c": 3690
  },
- "gtceu:containment_works": {
-  "v": [],
-  "bt": 7,
-  "ds": 0.454,
-  "c": 395
- },
  "gtceu:crust_lift": {
   "v": [],
   "bt": 6,
@@ -331,9 +325,9 @@
  },
  "gtceu:degenerate_harvester": {
   "v": [],
-  "bt": 6,
-  "ds": 0.523,
-  "c": 349
+  "bt": 8,
+  "ds": 0.487,
+  "c": 1567
  },
  "gtceu:diamond_lattice_fab": {
   "v": [],
@@ -535,9 +529,9 @@
  },
  "gtceu:heavy_ion_cyclotron": {
   "v": [],
-  "bt": 6,
-  "ds": 0.375,
-  "c": 727
+  "bt": 7,
+  "ds": 0.559,
+  "c": 2579
  },
  "gtceu:heavy_water_plant": {
   "v": [],
@@ -1123,9 +1117,9 @@
  },
  "gtceu:photonic_integration_hall": {
   "v": [],
-  "bt": 7,
-  "ds": 0.402,
-  "c": 563
+  "bt": 6,
+  "ds": 0.5,
+  "c": 1590
  },
  "gtceu:plasma_mass_filter": {
   "v": [],
@@ -1288,12 +1282,6 @@
   "bt": 6,
   "ds": 0.509,
   "c": 2095
- },
- "gtceu:recoil_separator": {
-  "v": [],
-  "bt": 6,
-  "ds": 0.222,
-  "c": 600
  },
  "gtceu:refinery": {
   "v": [],
@@ -1519,9 +1507,9 @@
  },
  "gtceu:stellar_forge": {
   "v": [],
-  "bt": 7,
-  "ds": 0.406,
-  "c": 535
+  "bt": 6,
+  "ds": 0.501,
+  "c": 1500
  },
  "gtceu:stellar_fractionation_hall": {
   "v": [],
@@ -1651,9 +1639,9 @@
  },
  "gtceu:uev_fusion_reactor": {
   "v": [],
-  "bt": 6,
-  "ds": 0.603,
-  "c": 480
+  "bt": 7,
+  "ds": 0.409,
+  "c": 2294
  },
  "gtceu:uiv_fusion_reactor": {
   "v": [],

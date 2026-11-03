@@ -279,9 +279,9 @@ export default {
           ['l20_5', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
           ['l20_6', I('gtceu:einsteinium_dust'), 'Einsteinium'],
           ['l20_7', I('grindless:es254_target'), 'Es-254 Target'],
-          ['l21_0', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours', { from: ['l20_7', 'l21_t8'] }],
+          ['l21_0', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours', { from: ['l20_7', 'l21_t8'] }],
           ['l21_1', F('gtceu:element_121_recoil_gas'), 'Element 121 Recoil Gas'],
-          ['l21_2', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
+          ['l21_2', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours'],
           ['l21_3', I('grindless:element_121_atoms'), 'Element 121 Atoms', undefined, { from: ['l21_2', 'l21_m4'] }],
           ['l21_5', mach('gtceu:superheavy_chemistry_lab'), 'Superheavy Chemistry Lab', 'ours'],
           ['l21_4', I('grindless:element_121_recoil'), 'Element 121 Recoil'],
@@ -300,7 +300,7 @@ export default {
         ]),
         ...chain(6, [
           ['l21_m0', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil', 'raw'],
-          ['l21_m1', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
+          ['l21_m1', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours'],
           ['l21_m2', I('grindless:ion_tracked_foil'), 'Ion-Tracked Foil'],
           ['l21_m3', mach('gtceu:ev_chemical_reactor'), 'Chemical Reactor', 'ours'],
           ['l21_m4', I('grindless:etched_membrane'), 'Etched Membrane'],
@@ -308,9 +308,9 @@ export default {
         // line 22
         ...chain(8, [
           ['l22_0', I('grindless:ti50_oven_charge'), 'Ti-50 Oven Charge', 'raw'],
-          ['l22_1', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
+          ['l22_1', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours'],
           ['l22_2', F('gtceu:element_122_recoil_gas'), 'Element 122 Recoil Gas'],
-          ['l22_3', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
+          ['l22_3', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours'],
           ['l22_4', I('grindless:element_122_atoms'), 'Element 122 Atoms'],
           ['l22_5', mach('gtceu:superheavy_chemistry_lab'), 'Superheavy Chemistry Lab', 'ours'],
           ['l22_6', I('grindless:element_122_recoil'), 'Element 122 Recoil'],

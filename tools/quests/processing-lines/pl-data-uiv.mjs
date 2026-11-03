@@ -164,10 +164,10 @@ export default {
         ...chain(0, [
           ['l9_0', I('gtceu:polytetrafluoroethylene_foil'), 'Polytetrafluoroethylene Foil', 'raw'],
           ['l9_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
-          ['l9_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
+          ['l9_2', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours'],
           ['l9_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l9_2', 'x9_cav', 'x9_cf'] }],
           ['l9_4', I('grindless:etched_membrane'), 'Etched Membrane'],
-          ['l9_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
+          ['l9_5', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours'],
           ['l9_6', I('grindless:element_120_recoil'), 'Element 120 Recoil'],
         ], 'the superheavy census'),
         L('x9_cav', 7.5, -2, 'pl_uev:nsc'),
@@ -176,10 +176,10 @@ export default {
         ...chain(2, [
           ['l32_0', I('gtceu:polytetrafluoroethylene_foil'), 'Polytetrafluoroethylene Foil', 'raw'],
           ['l32_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
-          ['l32_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
+          ['l32_2', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours'],
           ['l32_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l32_2', 'x9_cf'] }],
           ['l32_4', I('grindless:etched_membrane'), 'Etched Membrane'],
-          ['l32_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
+          ['l32_5', mach('gtceu:heavy_ion_cyclotron'), 'Superheavy Factory', 'ours'],
           ['l32_6', I('grindless:element_119_recoil'), 'Element 119 Recoil'],
         ], 'the superheavy census'),
         // line 30

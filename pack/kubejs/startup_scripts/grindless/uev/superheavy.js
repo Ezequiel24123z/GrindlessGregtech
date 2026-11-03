@@ -1,7 +1,7 @@
 // priority: -7646
 // -----------------------------------------------------------------------------------------------
-// UEV's superheavy element line (docs/eras/uev.md, machines 2-4, lines 3-6; package UEV-A2): the heavy ion cyclotron, the recoil
-// separator and the superheavy chemistry lab, their recipe types and the intermediate items and gases. The recipes come from
+// UEV's superheavy element line (docs/eras/uev.md, machines 2-4, lines 3-6; package UEV-A2): the Superheavy Factory (the heavy ion cyclotron,
+// which also runs the recoil separation) and the superheavy chemistry lab, their recipe types and the intermediate items and gases. The recipes come from
 // data/grindless/tables/superheavy.json (server_scripts/grindless/uev/superheavy.js); the older rows are in tables/hot_cell.json
 // (the activated target wheel, Cf-252 -> Cm-248, Bk-249 -> Cf-249, tritium -> helium-3) and ev/cryogenic_plant.js (xenon).
 //
@@ -9,8 +9,7 @@
 //                                  (not consumed) and hits the target, a helium chamber (not consumed) takes the recoil. Refuses to void.
 //   gtceu:heavy_ion_irradiation    its recipe type (EU in). Circuit 1 flerovium, 2 livermorium, 3 tennessine (target wheel), 4 oganesson,
 //                                  5 moscovium, 6 ion-tracked foil (xenon beam on polycarbonate).
-//   gtceu:recoil_separator         the gas-filled separator: dipole magnets bend the recoils away from the beam; one etched membrane per run.
-//   gtceu:recoil_separation        its recipe type. Circuits 1-5 as the cyclotron's.
+//   gtceu:recoil_separation        the gas-filled separator's recipe type, run by the same Superheavy Factory (dipole magnets bend the recoils away; one etched membrane per run). Circuits 1-5 as the cyclotron's.
 //   gtceu:superheavy_chemistry_lab gas chromatography on gold and the capsule line: one atom pool per sample.
 //   gtceu:superheavy_chemistry     its recipe type. 1 tennessine sample (stored, nothing consumes it), 2 the census.
 //
@@ -61,14 +60,11 @@
 
   SH.machines = [
     {
-      name: 'heavy_ion_cyclotron', type: 'heavy_ion_irradiation', lang: 'Heavy Ion Cyclotron', shape: 'ring',
+      // the Superheavy Factory: the cyclotron and the gas-filled separator on its beam line (Decision D4-4), two recipe types
+      name: 'heavy_ion_cyclotron', type: 'heavy_ion_irradiation', types: ['heavy_ion_irradiation', 'recoil_separation'],
+      lang: 'Superheavy Factory', shape: 'ring',
       maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 2 },
-      width: 17, depth: 15, height: 7, energyMax: 4, tips: 3, sound: 'ARC'
-    },
-    {
-      name: 'recoil_separator', type: 'recoil_separation', lang: 'Recoil Separator', shape: 'dipoles',
-      maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
-      width: 9, depth: 19, height: 7, energyMax: 2, tips: 3, sound: 'ARC'
+      width: 31, depth: 47, height: 11, energyMax: 4, tips: 3, sound: 'ARC'
     },
     {
       name: 'superheavy_chemistry_lab', type: 'superheavy_chemistry', lang: 'Superheavy Chemistry Lab', shape: 'bench',
@@ -76,55 +72,56 @@
       width: 9, depth: 11, height: 7, energyMax: 2, tips: 3, sound: 'ARC'
     }
   ]
+  // the recoil separation type has no controller of its own: the Superheavy Factory runs it
+  SH.typeOnly = [{ type: 'recoil_separation', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 } }]
   SH.machines.forEach(function (m) {
     m.machine = 'gtceu:' + m.name
     m.dataKey = 'grindless_' + m.type
     m.noVoiding = 'grindless.machine.' + m.name + '.no_voiding'
   })
 
-  // The cyclotron is a magnet ring with two dees in its gap, an injector stub on the left and the extraction line on the right; the
-  // separator a long gantry (beam tube, coil rings, a dipole pair mid-way, a beam dump); the lab a bench hall under a gas-line ridge.
-  // Built in the registry callback (shapes.js may load after this file).
+  // The Superheavy Factory (31 x 11 x 47): the cyclotron is a SiC yoke disk with a superhydride return band, four spiral sector poles
+  // round a hub and an ECR injector on its left; a beam tube runs back to the target-wheel vault (radiation-proof corners), the
+  // gas-filled separator bends away from the beam there (superhydride dipoles at the corner and mid-way) and runs forward along the
+  // right to its focal-plane detector hall. The lab is a bench hall under a gas-line ridge. Built in the registry callback.
   function ringShape() {
-    var yoke = G.uevShapes.ring({
-      w: 13, d: 15, r1: 4, r2: 6,
-      prof: function (y, seg) {
-        if (y === 1 || y === 5) return 'A'
-        if (y === 2 || y === 4) return 'C'
-        if (y === 3) return seg % 2 === 0 ? 'P' : 'L'
-        return 'F'
-      },
-      hub: function (x, y, z, q) {
-        if (q >= 16) return ' '
-        if (y === 0) return 'A'
-        if (x !== 6 && y === 1) return 'B'
-        if (x !== 6 && y === 2) return 'A'
-        return y <= 5 ? '#' : ' '
+    var s = G.uevShapes.scene(31, 11, 47)
+    var cx = 15, cz = 31, r = 11
+    s.cyl('y', cx, cz, r, 0, 0, 'X')
+    s.cyl('y', cx, cz, r, 1, 7, 'R', true)
+    s.cyl('y', cx, cz, r, 3, 4, 'M', true)
+    s.cyl('y', cx, cz, r, 6, 6, 'C', true)
+    s.cyl('y', cx, cz, 2, 1, 7, 'A', true)
+    s.cyl('y', cx, cz, 2, 8, 8, 'L')
+    var dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+    dirs.forEach(function (d) {
+      for (var t = 3; t <= 9; t++) {
+        var shift = Math.floor((t - 3) / 3)
+        for (var w = -1; w <= 1; w++) {
+          var px = cx + d[0] * t - d[1] * (w + shift)
+          var pz = cz + d[1] * t + d[0] * (w + shift)
+          for (var y = 3; y <= 5; y++) s.set(px, y, pz, y === 5 ? 'R' : 'M')
+        }
       }
     })
-    return function (x, y, z) {
-      if (x < 2 || x > 14) {
-        if (z !== 7) return ' '
-        if (y === 1) return 'A'
-        if (y === 2) return x < 2 ? (x === 0 ? 'B' : 'C') : (x % 2 === 0 ? 'C' : 'P')
-        return ' '
-      }
-      return yoke(x - 2, y, z)
-    }
-  }
-  function gantryShape() {
-    var tube = G.uevShapes.gantry({
-      w: 9, h: 7, d: 19, ty: 3, pz: 4, ring: 2,
-      extra: function (x, y, z) {
-        var dx = x < 4 ? 4 - x : x - 4
-        if (z === 0 && dx <= 3 && y >= 1 && y <= 5) return 'F'
-        if (z === 1 && dx <= 2 && y >= 2 && y <= 4) return dx === 0 && y === 3 ? 'P' : 'A'
-        if (z >= 7 && z <= 11 && dx >= 2 && dx <= 3 && y >= 1 && y <= 5) return 'B'
-        if (z >= 7 && z <= 11 && dx <= 1 && (y === 1 || y === 5)) return 'C'
-        return null
-      }
-    })
-    return tube
+    s.box(1, 1, cz - 2, 3, 3, cz + 2, 'M').box(1, 2, cz, 3, 2, cz, '#').box(4, 3, cz - 1, 4, 3, cz + 1, 'P')
+    s.box(0, 1, cz - 1, 0, 3, cz + 1, 'B')
+    s.cyl('z', cx, 3, 1, 5, cz - r, 'P', true)
+    s.room(10, 0, 0, 20, 7, 8, 'R', 'f')
+    s.box(10, 0, 0, 20, 0, 8, 'X')
+    s.edges(10, 0, 0, 20, 7, 8, 'A')
+    s.cyl('z', cx, 3, 3, 2, 3, 'A', true).cyl('z', cx, 3, 1, 2, 3, 'B')
+    s.cyl('x', 3, 4, 1, 21, 28, 'P', true)
+    s.room(26, 0, 1, 30, 6, 7, 'M', 'f')
+    s.box(26, 0, 1, 30, 0, 7, 'X')
+    s.cyl('z', 28, 3, 1, 8, 37, 'P', true)
+    s.room(26, 1, 18, 30, 5, 24, 'M', 'f')
+    s.room(25, 0, 37, 30, 6, 44, 'R', 'f')
+    s.box(25, 0, 37, 30, 0, 44, 'X')
+    s.box(26, 1, 38, 29, 1, 43, 'A').box(27, 3, 38, 28, 4, 43, 'L')
+    s.box(26, 0, 8, 30, 0, 36, 'X')
+    s.box(13, 0, cz + r, 17, 0, 46, 'X')
+    return s.booth('R', 3).fn()
   }
   // The lab is a radiation-proof hall: SiC walls, a row of four HfTaCN hot cells with glass windows down the right, and a gas
   // thermochromatography column rack (pipe over a coil-banded gearbox) on the left, with a ridge skylight over the aisle.
@@ -146,8 +143,7 @@
     return s.booth('R', 3).fn()
   }
   var SHAPES = {
-    heavy_ion_cyclotron: { w: 17, h: 7, d: 15, fn: ringShape },
-    recoil_separator: { w: 9, h: 7, d: 19, fn: gantryShape },
+    heavy_ion_cyclotron: { w: 31, h: 11, d: 47, fn: ringShape, casing: 'grindless:sic_composite_casing', texture: 'grindless:block/uev/sic_composite_casing', extra: { A: SHIELD, C: COIL } },
     superheavy_chemistry_lab: { w: 15, h: 9, d: 17, fn: benchShape, casing: 'grindless:sic_composite_casing', texture: 'grindless:block/uev/sic_composite_casing' }
   }
   SH.machines.forEach(function (m) {
@@ -166,10 +162,7 @@
         Pat.part('output_hatch', { min: 0, max: 2 }),
         Pat.part('energy_input', { min: 1, max: m.energyMax })
       ],
-      pal: SHAPES[m.name].casing ? G.uevShapes.palette(SHAPES[m.name].casing) : {
-        F: SHIELD, A: TANK, L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
-        C: COIL, B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
-      }
+      pal: G.uevShapes.palette(SHAPES[m.name].casing, SHAPES[m.name].extra)
     })
   }
 
@@ -207,7 +200,7 @@
   })
 
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
-    SH.machines.forEach(function (m) {
+    SH.machines.map(function (m) { return { type: m.type, maxIO: m.maxIO } }).concat(SH.typeOnly).forEach(function (m) {
       event.create(m.type)
         .category('multiblock')
         .setEUIO('in')
@@ -218,25 +211,34 @@
   })
 
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
+    SH.typeOnly.forEach(function (t) {
+      var type = GTRecipeTypes.get(t.type)
+      if (type == null) throw new Error(LOG + 'recipe type gtceu:' + t.type + ' is not registered')
+      type.addDataInfo(infoOf('grindless_' + t.type))
+    })
     SH.machines.forEach(function (m) {
-      var type = GTRecipeTypes.get(m.type)
-      if (type == null) throw new Error(LOG + 'recipe type gtceu:' + m.type + ' is not registered')
-      type.addDataInfo(infoOf(m.dataKey))
+      var types = m.types || [m.type]
+      types.forEach(function (name) {
+        if (GTRecipeTypes.get(name) == null) throw new Error(LOG + 'recipe type gtceu:' + name + ' is not registered')
+      })
+      GTRecipeTypes.get(m.type).addDataInfo(infoOf(m.dataKey))
       m.spec = makeSpec(m)
       Pat.register(m.machine, m.spec)
 
-      event.create(m.name, 'multiblock')
+      var builder = event.create(m.name, 'multiblock')
         .langValue(m.lang)
         .rotationState(RotationState.NON_Y_AXIS)
-        .recipeType(m.type)
+      builder = types.length > 1 ? builder.recipeTypes(types[0], types[1]) : builder.recipeType(m.type)
+      var tips = [Text.translate('grindless.machine.' + m.name + '.tooltip.0')]
+      tips.push(types.length > 1
+        ? Text.translate('gtceu.machine.available_recipe_map_2.tooltip', Text.translate('gtceu.' + types[0]), Text.translate('gtceu.' + types[1]))
+        : Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)))
+      builder
         .recipeModifier(G.noVoiding.modifier({ which: 'both', reason: m.noVoiding, name: m.name }, G.parallelHatch.overclock), true)
         .beforeWorking(G.noVoiding.beforeWorking({ which: 'both', reason: m.noVoiding, name: m.name }))
         .appearanceBlock(function () { return Block.getBlock(SHAPES[m.name].casing || SHIELD) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
-        ["tooltips(net.minecraft.network.chat.Component[])"]([
-          Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
-          Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type))
-        ])
+        ["tooltips(net.minecraft.network.chat.Component[])"](tips)
         .workableCasingModel(SHAPES[m.name].texture || SHIELD_TEXTURE, 'grindless:block/multiblock/' + m.name)
     })
   })

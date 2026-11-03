@@ -1319,7 +1319,6 @@
       ],
       "without": [
         "operate:gtceu:heavy_ion_cyclotron*",
-        "operate:gtceu:recoil_separator*",
         "operate:gtceu:superheavy_chemistry_lab*"
       ],
       "expect": "unreachable",

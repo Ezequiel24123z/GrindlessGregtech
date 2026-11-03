@@ -20,8 +20,8 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.entanglement_station.2', 'Entangles photons from an SPDC source with an Eu:YSO memory and checks them with SNSPDs: the only maker of quantum repeater nodes.')
     add('emi.grindless.info.entanglement_station.3', 'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, an optional input hatch. Accepts a parallel hatch.')
 
-    add('emi.grindless.info.heavy_ion_cyclotron.0', "The Heavy Ion Cyclotron fires a calcium-48 beam at an actinide target; a helium chamber takes the recoil. Circuit 1: flerovium (plutonium-244). 2: livermorium (curium-248). 3: tennessine (target wheel). 4: oganesson (californium-249). 5: moscovium (americium). 6: a xenon beam on polycarbonate foil. Circuits 7 and 8 are the element 120 and 119 lines.")
-    add('emi.grindless.info.heavy_ion_cyclotron.1', "The SRF cavity and the helium are not used up, and the xenon is recovered. It refuses to void: the recoil gases, the helium and the activated target wheel (to the Hot Cell) always have a place to go. The gases go on to the Recoil Separator.")
+    add('emi.grindless.info.heavy_ion_cyclotron.0', "The Superheavy Factory (the Heavy Ion Cyclotron) fires a calcium-48 beam at an actinide target; a helium chamber takes the recoil. Circuit 1: flerovium (plutonium-244). 2: livermorium (curium-248). 3: tennessine (target wheel). 4: oganesson (californium-249). 5: moscovium (americium). 6: a xenon beam on polycarbonate foil. Circuits 7 and 8 are the element 120 and 119 lines.")
+    add('emi.grindless.info.heavy_ion_cyclotron.1', "The SRF cavity and the helium are not used up, and the xenon is recovered. It refuses to void: the recoil gases, the helium and the activated target wheel (to the Hot Cell) always have a place to go. The same machine then runs the recoil separation: one recoil gas and one etched membrane give one atom item, and the atoms go on to the Superheavy Chemistry Lab.")
 
     add('emi.grindless.info.helium3_polariser.0', "The Helium-3 Polariser aligns the nuclear spins of 6N helium-3 by optical pumping. Circuit 1: polarises the gas. Circuit 2: mixes the polarised gas with deuterium into polarised fuel. Circuit 3: polarises helium-3 for a later era.")
     add('emi.grindless.info.helium3_polariser.1', "The 1,083 nm laser is a tool: it is never consumed. Depolarised gas goes back to the cryogenic plant. The polarised fuel feeds the Mk4 Fusion Reactor.")
@@ -41,8 +41,6 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.quantum_gas_lab.1', "The cooling lasers and the ULE cavity are tools: they are never consumed.")
     add('emi.grindless.info.quantum_gas_lab.2', 'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, an optional input hatch. Accepts a parallel hatch.')
 
-    add('emi.grindless.info.recoil_separator.0', "The Recoil Separator is a gas-filled separator: dipole magnets bend the recoiling atoms away from the beam and an etched membrane catches them. Circuits 1 to 5, as the Heavy Ion Cyclotron: one recoil gas and one etched membrane give one atom item. Circuits 6 and 7 are the element 120 and 119 lines.")
-    add('emi.grindless.info.recoil_separator.1', "The membrane is used up, the helium comes back. It refuses to void: the helium and the atoms must never be thrown away. The atoms go on to the Superheavy Chemistry Lab.")
 
     add('emi.grindless.info.single_crystal_foundry.0', "The Single-Crystal Foundry casts single-crystal parts in a withdrawal furnace under argon: one grain, no boundaries to creep along. Circuit 1: SX blade. 2: pump impeller. 3: Brayton turbine wheel from eight coated SX blades.")
     add('emi.grindless.info.single_crystal_foundry.1', "It is the only maker of those parts. The argon is never used up, the gate is remelted in a macerator and the dross goes to the platinum plant. It refuses to void.")

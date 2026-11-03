@@ -14,8 +14,8 @@
 // F1 registered the casing grindless:uev_fusion_casing and the fluids dhe3_fuel_mix, pb11_fuel and polarised_dhe3_fuel (uev/foundation.js):
 // they are used here, never registered again. New here: the 6N helium-3, the polarised helium-3, the ash of the helium plasma, the three
 // Mk4 plasma grades the direct energy converter eats, and plain boron trifluoride (GTM has only the two isotope forms).
-// Geometry (lib/patterns.js): the polariser 7 wide x 7 high x 9 deep (clean casing), the ring 11 x 5 x 13 of fusion casing, a rounded
-// annulus around the plasma channel (docs/research/uev-s0.md S0-6: every energy cell takes an energy input part).
+// Geometry (lib/patterns.js): the polariser 13 x 9 x 17, the Mk4 ring a torus 33 x 9 x 33 (SiC composite wall, six fusion casing bands, HfTaCN
+// lining and a lit central solenoid; docs/research/uev-s0.md S0-6: every energy cell takes an energy input part).
 // Textures: tools/assets/Build-UEVFusionTextures.ps1. Names: client_scripts/grindless/uev_fusion_lang.js.
 // Published for the recipe script: global.grindless.uevFusion.
 // -----------------------------------------------------------------------------------------------
@@ -94,49 +94,63 @@
     })
   }
 
-  // the Mk4 ring: a rounded 3-wide annulus 11 x 5 x 13 around an open plasma channel. The HfTaCN coil (UEV-A5) lines the channel on three
-  // rows, the outer wall carries the energy cells (E) between laminated-glass ports, a pipe course sits between, and frame posts stand
-  // on the four corners. The fuel in at the left (I) and out at the right (O). At most 16 energy hatches, as GTM's rings: 16 x
-  // 160,000,000 = 2,560,000,000 EU buffer. GTM's fusion_reactor type and FusionReactorMachine are unchanged: only the cells moved.
-  UF.ring.width = 11
-  UF.ring.height = 5
-  UF.ring.depth = 13
-  function ringCell(x, y, z) {
-    var W = 11, D = 13
-    var ex = x < W - 1 - x ? x : W - 1 - x
-    var ez = z < D - 1 - z ? z : D - 1 - z
-    if (ex + ez < 2) return ' '
-    var e = ex < ez ? ex : ez
-    if (e > 2) return y >= 1 && y <= 3 ? '#' : ' '
-    if (e === 1 && ex === 1 && ez === 1) return 'Q'
-    if (x === 0 && z === 6 && y === 1) return 'I'
-    if (x === W - 1 && z === 6 && y === 1) return 'O'
-    if (y === 0) return e === 0 ? 'E' : 'C'
-    if (y === 4) return e === 1 ? 'A' : 'C'
-    if (e === 2) return 'K'
-    if (e === 1) return y === 2 ? 'P' : 'C'
-    if (y === 2) return (x + z) % 3 === 0 ? 'C' : 'L'
-    return 'E'
+  // the Mk4 ring: a torus 33 x 9 x 33. The wall is two layers thick round a plasma channel of radius 2: the outer layer is SiC composite
+  // with six fusion casing bands (the energy cells E sit on their outer equator), glass-windowed sectors and passive toroidal magnets
+  // (superhydride) above and below; the inner layer is the HfTaCN lining and a lit HfTaCN central solenoid stands in the hole. The fuel
+  // goes in at the left (I) and out at the right (O). At most 16 energy hatches, as GTM's rings: 16 x 160,000,000 = 2,560,000,000 EU
+  // buffer. GTM's fusion_reactor type and FusionReactorMachine are unchanged: only the cells moved.
+  UF.ring.width = 33
+  UF.ring.height = 9
+  UF.ring.depth = 33
+  function ringCell() {
+    var s = G.uevShapes.scene(33, 9, 33)
+    var R = 11
+    var sector = 3.141592653589793 / 12
+    for (var z = 0; z < 33; z++) for (var x = 0; x < 33; x++) for (var y = 0; y < 9; y++) {
+      var rho = Math.sqrt((x - 16) * (x - 16) + (z - 16) * (z - 16))
+      var dr = rho - R
+      var dy = y - 4
+      var d = Math.sqrt(dr * dr + dy * dy)
+      if (d > 4.2 || d <= 2.2) continue
+      var k = Math.floor((Math.atan2(z - 16, x - 16) + 3.141592653589793) / sector) % 4
+      var ch
+      if (d <= 3.2) {
+        if (dy < -1 || dy > 1) continue
+        ch = 'H'
+      }
+      else if (k === 0) ch = (dy === 0 && dr > 0 && rho > 14.5) ? 'E' : 'C'
+      else if (k === 2) ch = (dy >= -1 && dy <= 1 && dr > 0) ? 'L' : 'R'
+      else ch = (dr > -1.5 && dr < 1.5 && (dy > 2 || dy < -2)) ? 'M' : 'R'
+      s.set(x, y, z, ch)
+    }
+    s.set(1, 4, 16, 'I').set(31, 4, 16, 'O')
+    s.cyl('y', 16, 16, 2, 1, 7, 'K', true, '#').box(16, 1, 16, 16, 7, 16, 'Q')
+    s.cyl('y', 16, 16, 2, 0, 0, 'M').cyl('y', 16, 16, 2, 8, 8, 'M')
+    ;[[3, 3], [29, 3], [3, 29], [29, 29]].forEach(function (p) { s.box(p[0], 0, p[1], p[0] + 1, 2, p[1] + 1, 'Q') })
+    return s.booth('R', 3).fn()
   }
   function ringSpec() {
+    var F = G.uevShapes.family
+    var parts = Pat.oneOf(Pat.block(CASING), Pat.part('energy_input', { min: 1, max: 16 }))
     return {
-      slices: G.uevShapes.slices(11, 5, 13, ringCell),
+      slices: G.uevShapes.slices(33, 9, 33, ringCell()),
       symbols: {
         S: Pat.controller(),
         C: Pat.block(CASING),
+        R: Pat.block(F.R),
+        H: Pat.block(F.H),
+        M: Pat.block(F.M),
         K: Pat.block('grindless:hftacn_coil_block'),
-        A: Pat.block('gtceu:stable_machine_casing'),
         L: Pat.block('gtceu:laminated_glass'),
-        P: Pat.block('gtceu:tungstensteel_pipe_casing'),
         Q: Pat.frame(['tungsten_steel']),
-        E: Pat.oneOf(Pat.block(CASING), Pat.part('energy_input', { min: 1, max: 16 })),
+        X: Pat.oneOf(Pat.block(F.R), Pat.part('energy_input', { min: 1, max: 16 })),
+        E: parts,
         I: Pat.oneOf(Pat.block(CASING), Pat.part('input_hatch', { min: 1, max: 3 })),
         O: Pat.oneOf(Pat.block(CASING), Pat.part('output_hatch', { min: 1, max: 3 })),
         '#': Pat.air()
       }
     }
   }
-
   // ---------------------------------------------------------------- materials (gases)
 
   GTCEuStartupEvents.registry('gtceu:material', function (event) {

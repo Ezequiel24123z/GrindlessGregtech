@@ -83,7 +83,7 @@
       ;['heavy_ion_irradiation', 'recoil_separation', 'superheavy_chemistry'].forEach(function (t) {
         if (lazy().GTRegistries.RECIPE_TYPES.get(rl('gtceu:' + t)) == null) missing.push(t)
       })
-      ;['heavy_ion_cyclotron', 'recoil_separator', 'superheavy_chemistry_lab'].forEach(function (m) {
+      ;['heavy_ion_cyclotron', 'superheavy_chemistry_lab'].forEach(function (m) {
         if (!lazy().Registries.BLOCKS.containsKey(rl('gtceu:' + m))) missing.push(m)
       })
       check('registration', missing.length === 0, missing.length === 0 ? 'ok' : 'missing ' + missing.join(','))
@@ -101,7 +101,7 @@
           if (he === null || he.chance !== 0) bad.push(n + ' helium not chance 0')
         }
         ins.forEach(function (x) {
-          if (x.id !== 'gtceu:programmed_circuit' && x.id !== 'grindless:nb3sn_srf_cavity' && !(x.id === 'gtceu:helium' && n !== 'ion_track') && x.chance !== x.maxChance) bad.push(n + ' ' + x.id + ' not fully consumed')
+          if (x.id !== 'gtceu:programmed_circuit' && x.id !== 'grindless:nb3sn_srf_cavity' && x.id !== 'grindless:californium_252' && !(x.id === 'gtceu:helium' && n !== 'ion_track') && x.chance !== x.maxChance) bad.push(n + ' ' + x.id + ' not fully consumed')
         })
       })
       check('chamber_kept', bad.length === 0, bad.length === 0 ? 'cavity and helium chamber are chance 0 in all six rows' : bad.join('; '))

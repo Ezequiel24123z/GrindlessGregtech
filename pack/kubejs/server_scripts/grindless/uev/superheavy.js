@@ -1,7 +1,7 @@
 // priority: -23274
 // -----------------------------------------------------------------------------------------------
 // Recipes of UEV's superheavy line (docs/eras/uev.md, machines 2-4, lines 3-6; package UEV-A2), generated at every server load from
-// data/grindless/tables/superheavy.json (machines and recipe types: startup_scripts/grindless/uev/superheavy.js), plus the three
+// data/grindless/tables/superheavy.json (machines and recipe types: startup_scripts/grindless/uev/superheavy.js), plus the two
 // controller recipes.
 //
 //   gtceu:heavy_ion_irradiation / recoil_separation / superheavy_chemistry   one recipe per entry of types.<type>, id
@@ -24,7 +24,7 @@
     recoil_separation: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 },
     superheavy_chemistry: { itemsIn: 6, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }
   }
-  var CONTROLLERS = ['heavy_ion_cyclotron', 'recoil_separator', 'superheavy_chemistry_lab']
+  var CONTROLLERS = ['heavy_ion_cyclotron', 'superheavy_chemistry_lab']
 
   function list(x) {
     return Array.isArray(x) ? x : []
@@ -161,10 +161,8 @@
     // QR-R6: assembly line with station research (the previous machine, the calutron for the cyclotron), the era fluid and domain inputs
     var ins = {
       heavy_ion_cyclotron: { research: 'gtceu:calutron', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:ca48_beam', 'grindless:target_wheel', 'grindless:nb3sn_srf_cavity'] },
-      recoil_separator: { research: 'gtceu:heavy_ion_cyclotron', era: 'gtceu:tritanium',
-        ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:etched_membrane', 'grindless:ion_tracked_foil', 'grindless:nb3sn_srf_cavity'] },
-      superheavy_chemistry_lab: { research: 'gtceu:recoil_separator', era: 'gtceu:neutronium',
+        ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:ca48_beam', 'grindless:target_wheel', 'grindless:nb3sn_srf_cavity', '2x grindless:etched_membrane', 'grindless:ion_tracked_foil'] },
+      superheavy_chemistry_lab: { research: 'gtceu:heavy_ion_cyclotron', era: 'gtceu:neutronium',
         ins: [HULL, '2x ' + SENSOR, '2x ' + FIELD, '4x #gtceu:circuits/uhv', '2x grindless:sealed_capsule', 'grindless:polycarbonate_foil', 'grindless:etched_membrane'] }
     }
     CONTROLLERS.forEach(function (name) {
