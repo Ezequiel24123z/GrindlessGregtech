@@ -170,8 +170,8 @@
  "gtceu:bound_matter_press": {
   "v": [],
   "bt": 4,
-  "ds": 0.441,
-  "c": 1037
+  "ds": 0.415,
+  "c": 2448
  },
  "gtceu:bulge_collector": {
   "v": [],
@@ -266,8 +266,8 @@
  "gtceu:condensate_refinery": {
   "v": [],
   "bt": 5,
-  "ds": 0.432,
-  "c": 1019
+  "ds": 0.429,
+  "c": 3690
  },
  "gtceu:containment_works": {
   "v": [],
@@ -578,8 +578,8 @@
  "gtceu:hills_slingshot": {
   "v": [],
   "bt": 5,
-  "ds": 0.52,
-  "c": 1099
+  "ds": 0.345,
+  "c": 4285
  },
  "gtceu:horizon_capacitor_bank": {
   "v": [],
@@ -1009,9 +1009,9 @@
  },
  "gtceu:nickel_56_burner": {
   "v": [],
-  "bt": 4,
-  "ds": 0.505,
-  "c": 878
+  "bt": 7,
+  "ds": 0.426,
+  "c": 3685
  },
  "gtceu:nitride_magnet_works": {
   "v": [],
@@ -1081,9 +1081,9 @@
  },
  "gtceu:pair_instability_crucible": {
   "v": [],
-  "bt": 5,
-  "ds": 0.532,
-  "c": 1091
+  "bt": 6,
+  "ds": 0.373,
+  "c": 3850
  },
  "gtceu:pasta_draw_bench": {
   "v": [],
@@ -1183,9 +1183,9 @@
  },
  "gtceu:polarized_fusion_stellarator": {
   "v": [],
-  "bt": 4,
-  "ds": 0.619,
-  "c": 3458
+  "bt": 7,
+  "ds": 0.34,
+  "c": 4908
  },
  "gtceu:polymer_works": {
   "v": [],
@@ -1231,15 +1231,15 @@
  },
  "gtceu:primordial_fusion_torus": {
   "v": [],
-  "bt": 4,
-  "ds": 0.59,
-  "c": 1782
+  "bt": 7,
+  "ds": 0.448,
+  "c": 4470
  },
  "gtceu:pristine_gas_works": {
   "v": [],
-  "bt": 4,
-  "ds": 0.671,
-  "c": 1854
+  "bt": 6,
+  "ds": 0.373,
+  "c": 4211
  },
  "gtceu:pulsar_timing_station": {
   "v": [],
@@ -1615,9 +1615,9 @@
  },
  "gtceu:tarantula_stellar_lift": {
   "v": [],
-  "bt": 5,
-  "ds": 0.435,
-  "c": 2013
+  "bt": 6,
+  "ds": 0.416,
+  "c": 4437
  },
  "gtceu:tether_ribbon_works": {
   "v": [],
