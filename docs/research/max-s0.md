@@ -7,7 +7,7 @@ Status: done. Native runs on Azure (`-Backend azure -NoFallback`, temp pack copy
 All overlay-only, off unless `kubejs/config/gg_test_max_s0.json` says `{"enabled": true}` (default false). Under `tools/test/overlay/kubejs/`:
 
 - `startup_scripts/gg_test_max_s0_parts.js`: strand cable material, gate, tier-14 parallel hatch, frames, generator multiblocks, 33- and 25-cubes.
-- `server_scripts/gg_test_max_s0_{machines,cube,dump,relay_1,relay_2}.js`.
+- `server_scripts/gg_test_max_s0_{machines,cube,dump}.js`. Batch 16 (2026-11-03) retired `relay_1` and `relay_2` (the platform is proven by `max_gate_gc` and `max_gate_nsc`) and the frame, cable and generator legs of `machines` (their test-only multiblocks are gone); the answers below stand.
 - `data/grindless/gcyr/planets/{s0_max_bh_orbit,s0_max_bh_real,s0_max_nsc_belt}.json`, `data/grindless/dimension/{s0_max_bh_orbit,s0_max_nsc_belt}.json`.
 - `tools/test/zones.json` row `max_s0` (x 38720-38783). Y is 70-102, not 70-100, because the 33-cube needs 33 rows.
 
