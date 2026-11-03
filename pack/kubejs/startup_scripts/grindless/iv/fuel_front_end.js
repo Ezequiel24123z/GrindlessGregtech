@@ -1,4 +1,4 @@
-// priority: -2500
+// priority: -2650
 // -----------------------------------------------------------------------------------------------
 // IV's uranium front end (docs/eras/lines-ev-zpm.md, I1): the GT materials of the new steps between the leach field and GTM's UF6
 // centrifuge. The recipes are in server_scripts/grindless/iv/fuel_front_end.js; the names in client_scripts/grindless/iv_fuel_front_end_lang.js.

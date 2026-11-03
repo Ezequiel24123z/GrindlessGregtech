@@ -1,4 +1,4 @@
-// priority: -20000
+// priority: -16474
 // -----------------------------------------------------------------------------------------------
 // IV's uranium front end (docs/eras/lines-ev-zpm.md, I1 and D2-3; startup_scripts/grindless/iv/fuel_front_end.js has the materials).
 // It loads after iv/foundation.js (-16424), so it can remove that script's zircaloy mixer, and before iv/hot_cell.js (-27666 loads later
@@ -21,75 +21,71 @@
 // -----------------------------------------------------------------------------------------------
 
 ServerEvents.recipes(function (event) {
-  var LOG = '[grindless] '
-  var RETIRED = [
-    'gtceu:chemical_reactor/uranium_hexafluoride',
-    'gtceu:large_chemical_reactor/uranium_hexafluoride',
-    'gtceu:electrolyzer/enriched_uranium_hexafluoride_separation',
-    'gtceu:electrolyzer/depleted_uranium_hexafluoride_separation',
-    'grindless:mixer/zircaloy'
-  ]
-  RETIRED.forEach(function (id) { event.remove({ id: id }) })
+  try {
+    event.remove({ id: 'gtceu:chemical_reactor/uranium_hexafluoride' })
+    event.remove({ id: 'gtceu:large_chemical_reactor/uranium_hexafluoride' })
+    event.remove({ id: 'gtceu:electrolyzer/enriched_uranium_hexafluoride_separation' })
+    event.remove({ id: 'gtceu:electrolyzer/depleted_uranium_hexafluoride_separation' })
+    event.remove({ id: 'grindless:mixer/zircaloy' })
 
-  var RESIN = 'grindless:ion_exchange_resin'
-  var SPONGE = 'grindless:zirconium_sponge'
+    event.recipes.gtceu.large_chemical_reactor('grindless:uranium_eluate')
+      .inputFluids(Fluid.of('gtceu:uranyl_sulfate_liquor', 3000))
+      .chancedInput('1x grindless:ion_exchange_resin', 100, 0)
+      .outputFluids(Fluid.of('gtceu:uranium_eluate', 3000), Fluid.of('gtceu:diluted_sulfuric_acid', 2000))
+      .EUt(1920).duration(200)
 
-  // rows: type, name, itemsIn / fluidsIn ([id, amount]), itemsOut / fluidsOut, wear (chanced input), temp, eut, duration
-  var ROWS = [
-    { type: 'large_chemical_reactor', name: 'uranium_eluate',
-      fluidsIn: [['gtceu:uranyl_sulfate_liquor', 3000]], wear: [[RESIN, 100]],
-      fluidsOut: [['gtceu:uranium_eluate', 3000], ['gtceu:diluted_sulfuric_acid', 2000]], eut: 1920, duration: 200 },
-    { type: 'chemical_reactor', name: 'yellowcake',
-      fluidsIn: [['gtceu:uranium_eluate', 3000], ['gtceu:hydrogen_peroxide', 1500]],
-      itemsOut: [['gtceu:yellowcake_dust', 3]], fluidsOut: [['gtceu:sulfuric_acid', 2000]], eut: 480, duration: 200 },
-    { type: 'electric_blast_furnace', name: 'triuranium_octoxide',
-      itemsIn: [['gtceu:yellowcake_dust', 3]], itemsOut: [['gtceu:triuranium_octoxide_dust', 1]],
-      fluidsOut: [['gtceu:steam', 3000]], temp: 700, eut: 1920, duration: 300 },
-    { type: 'electric_blast_furnace', name: 'uraninite_from_octoxide',
-      itemsIn: [['gtceu:triuranium_octoxide_dust', 1]], fluidsIn: [['gtceu:hydrogen', 2000]],
-      itemsOut: [['gtceu:uraninite_dust', 3]], fluidsOut: [['gtceu:steam', 2000]], temp: 900, eut: 1920, duration: 400 },
-    { type: 'large_chemical_reactor', name: 'uranium_tetrafluoride',
-      itemsIn: [['gtceu:uraninite_dust', 3]], fluidsIn: [['gtceu:hydrogen_fluoride', 4000]],
-      itemsOut: [['gtceu:uranium_tetrafluoride_dust', 5]], fluidsOut: [['gtceu:water', 2000]], eut: 1920, duration: 300 },
-    { type: 'large_chemical_reactor', name: 'uranium_hexafluoride',
-      itemsIn: [['gtceu:uranium_tetrafluoride_dust', 5]], fluidsIn: [['gtceu:fluorine', 2000]],
-      fluidsOut: [['gtceu:uranium_hexafluoride', 1000]], eut: 3840, duration: 300 },
-    { type: 'large_chemical_reactor', name: 'enriched_uranium_deconversion',
-      fluidsIn: [['gtceu:enriched_uranium_hexafluoride', 1000], ['gtceu:steam', 2000], ['gtceu:hydrogen', 1000]],
-      itemsOut: [['gtceu:uranium_235_dust', 1]], fluidsOut: [['gtceu:hydrogen_fluoride', 6000], ['gtceu:water', 2000]], eut: 1920, duration: 200 },
-    { type: 'large_chemical_reactor', name: 'depleted_uranium_deconversion',
-      fluidsIn: [['gtceu:depleted_uranium_hexafluoride', 1000], ['gtceu:steam', 2000], ['gtceu:hydrogen', 1000]],
-      itemsOut: [['gtceu:uranium_238_dust', 1]], fluidsOut: [['gtceu:hydrogen_fluoride', 6000], ['gtceu:water', 2000]], eut: 1920, duration: 200 },
-    { type: 'mixer', name: 'zircaloy_from_sponge',
-      itemsIn: [[SPONGE, 63], ['gtceu:tin_dust', 1]], itemsOut: [['gtceu:zircaloy_dust', 64]], eut: 1920, duration: 400 }
-  ]
+    event.recipes.gtceu.chemical_reactor('grindless:yellowcake')
+      .inputFluids(Fluid.of('gtceu:uranium_eluate', 3000), Fluid.of('gtceu:hydrogen_peroxide', 1500))
+      .itemOutputs('3x gtceu:yellowcake_dust')
+      .outputFluids(Fluid.of('gtceu:sulfuric_acid', 2000))
+      .EUt(480).duration(200)
 
-  function missing(r) {
-    var out = []
-    ;(r.itemsIn || []).concat(r.itemsOut || [], r.wear || []).forEach(function (x) { if (!Item.exists(x[0])) out.push(x[0]) })
-    ;(r.fluidsIn || []).concat(r.fluidsOut || []).forEach(function (x) { if (!Fluid.exists(x[0])) out.push(x[0]) })
-    return out
+    event.recipes.gtceu.electric_blast_furnace('grindless:triuranium_octoxide')
+      .itemInputs('3x gtceu:yellowcake_dust')
+      .itemOutputs('1x gtceu:triuranium_octoxide_dust')
+      .outputFluids(Fluid.of('gtceu:steam', 3000))
+      .blastFurnaceTemp(700)
+      .EUt(1920).duration(300)
+
+    event.recipes.gtceu.electric_blast_furnace('grindless:uraninite_from_octoxide')
+      .itemInputs('1x gtceu:triuranium_octoxide_dust')
+      .inputFluids(Fluid.of('gtceu:hydrogen', 2000))
+      .itemOutputs('3x gtceu:uraninite_dust')
+      .outputFluids(Fluid.of('gtceu:steam', 2000))
+      .blastFurnaceTemp(900)
+      .EUt(1920).duration(400)
+
+    event.recipes.gtceu.large_chemical_reactor('grindless:uranium_tetrafluoride')
+      .itemInputs('3x gtceu:uraninite_dust')
+      .inputFluids(Fluid.of('gtceu:hydrogen_fluoride', 4000))
+      .itemOutputs('5x gtceu:uranium_tetrafluoride_dust')
+      .outputFluids(Fluid.of('gtceu:water', 2000))
+      .EUt(1920).duration(300)
+
+    event.recipes.gtceu.large_chemical_reactor('grindless:uranium_hexafluoride')
+      .itemInputs('5x gtceu:uranium_tetrafluoride_dust')
+      .inputFluids(Fluid.of('gtceu:fluorine', 2000))
+      .outputFluids(Fluid.of('gtceu:uranium_hexafluoride', 1000))
+      .EUt(3840).duration(300)
+
+    event.recipes.gtceu.large_chemical_reactor('grindless:enriched_uranium_deconversion')
+      .inputFluids(Fluid.of('gtceu:enriched_uranium_hexafluoride', 1000), Fluid.of('gtceu:steam', 2000), Fluid.of('gtceu:hydrogen', 1000))
+      .itemOutputs('1x gtceu:uranium_235_dust')
+      .outputFluids(Fluid.of('gtceu:hydrogen_fluoride', 6000), Fluid.of('gtceu:water', 2000))
+      .EUt(1920).duration(200)
+
+    event.recipes.gtceu.large_chemical_reactor('grindless:depleted_uranium_deconversion')
+      .inputFluids(Fluid.of('gtceu:depleted_uranium_hexafluoride', 1000), Fluid.of('gtceu:steam', 2000), Fluid.of('gtceu:hydrogen', 1000))
+      .itemOutputs('1x gtceu:uranium_238_dust')
+      .outputFluids(Fluid.of('gtceu:hydrogen_fluoride', 6000), Fluid.of('gtceu:water', 2000))
+      .EUt(1920).duration(200)
+
+    event.recipes.gtceu.mixer('grindless:zircaloy_from_sponge')
+      .itemInputs('63x grindless:zirconium_sponge', '1x gtceu:tin_dust')
+      .itemOutputs('64x gtceu:zircaloy_dust')
+      .EUt(1920).duration(400)
+  } catch (e) {
+    console.error('[grindless] uranium front end skipped: ' + e)
   }
-
-  ROWS.forEach(function (r) {
-    var gone = missing(r)
-    if (gone.length > 0) {
-      console.error(LOG + 'uranium front end skipped ' + r.name + ': unknown id(s) ' + gone.join(', '))
-      return
-    }
-    try {
-      var b = event.recipes.gtceu[r.type]('grindless:' + r.name)
-      ;(r.itemsIn || []).forEach(function (x) { b.itemInputs(x[1] + 'x ' + x[0]) })
-      ;(r.wear || []).forEach(function (x) { b.chancedInput('1x ' + x[0], x[1], 0) })
-      ;(r.fluidsIn || []).forEach(function (x) { b.inputFluids(Fluid.of(x[0], x[1])) })
-      ;(r.itemsOut || []).forEach(function (x) { b.itemOutputs(x[1] + 'x ' + x[0]) })
-      ;(r.fluidsOut || []).forEach(function (x) { b.outputFluids(Fluid.of(x[0], x[1])) })
-      if (r.temp) b.blastFurnaceTemp(r.temp)
-      b.EUt(r.eut).duration(r.duration)
-    } catch (e) {
-      console.error(LOG + 'uranium front end skipped ' + r.name + ': the builder failed: ' + e)
-    }
-  })
-
-  console.info(LOG + 'uranium front end: ' + ROWS.length + ' rows, ' + RETIRED.length + ' retired')
 })
+

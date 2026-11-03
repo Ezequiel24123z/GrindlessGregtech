@@ -1,4 +1,4 @@
-// priority: 2995
+// priority: 9250
 // Gregtech Grindless - names and tooltips of IV's uranium front end (startup_scripts/grindless/iv/fuel_front_end.js and
 // server_scripts/grindless/iv/fuel_front_end.js; docs/eras/lines-ev-zpm.md, I1). Every key is in en_us.
 ClientEvents.lang('en_us', event => {

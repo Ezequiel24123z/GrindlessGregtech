@@ -37,7 +37,7 @@ test('every step name of c1 is a row of the script or GTM centrifuge', () => {
     if (s === 'gtceu:centrifuge/uranium_hexafluoride_separation') continue;
     const m = /^grindless:large_chemical_reactor\/(\w+)$/.exec(s);
     assert.ok(m, s);
-    assert.ok(script.includes(`name: '${m[1]}'`), s);
+    assert.ok(script.includes(`('grindless:${m[1]}')`), s);
   }
   assert.ok(!cell.stages.some((s) => s.includes('electrolyzer')));
 });
@@ -47,28 +47,27 @@ test('the leach field gives liquor, no uraninite, and the resin wear moved to st
   assert.deepEqual(l.fluidsOut, [{ id: 'gtceu:uranyl_sulfate_liquor', amount: 2000 }]);
   assert.ok(!l.resin);
   assert.ok(!l.itemsOut.some((o) => o.id === 'gtceu:uraninite_dust'));
-  assert.match(script, /name: 'uranium_eluate'[\s\S]*?wear: \[\[RESIN, 100\]\]/);
+  assert.match(script, /'grindless:uranium_eluate'[\s\S]*?chancedInput\('1x grindless:ion_exchange_resin', 100, 0\)/);
 });
 
 test('zircaloy is made from the Hf-free sponge, 63 + 1 like the material', () => {
-  assert.match(script, /name: 'zircaloy_from_sponge'[\s\S]*?\[SPONGE, 63\], \['gtceu:tin_dust', 1\]/);
-  assert.ok(!/itemsIn: \[\['gtceu:zirconium_dust'/.test(script));
+  assert.match(script, /'grindless:zircaloy_from_sponge'[\s\S]*?'63x grindless:zirconium_sponge', '1x gtceu:tin_dust'/);
+  assert.ok(!/'\d+x gtceu:zirconium_dust'/.test(script));
 });
 
 test('fluorine closes in mB over c1: 40,000 HF + 20,000 F2 in, 60,000 HF out', () => {
-  const amount = (name, side, id) => {
-    const row = new RegExp(`name: '${name}'[\\s\\S]*?\\n    \\{|name: '${name}'[\\s\\S]*?\\n  \\]`).exec(script)[0];
-    const m = new RegExp(`${side}: \\[[^\\n]*?'${id}', (\\d+)\\]`).exec(row);
+  const row = (name) => new RegExp("'grindless:" + name + "'\\)([\\s\\S]*?)\\.EUt").exec(script)[1];
+  const amount = (name, id) => {
+    const m = new RegExp("Fluid\\.of\\('" + id + "', (\\d+)\\)").exec(row(name));
     return m ? Number(m[1]) : 0;
   };
   const runs = 10; // 30 uraninite at 3 a run
-  assert.equal(amount('uranium_tetrafluoride', 'fluidsIn', 'gtceu:hydrogen_fluoride') * runs, 40000);
-  assert.equal(amount('uranium_hexafluoride', 'fluidsIn', 'gtceu:fluorine') * runs, 20000);
-  const hf = amount('enriched_uranium_deconversion', 'fluidsOut', 'gtceu:hydrogen_fluoride');
-  assert.equal(hf, amount('depleted_uranium_deconversion', 'fluidsOut', 'gtceu:hydrogen_fluoride'));
+  assert.match(row('uranium_tetrafluoride'), /inputFluids\(Fluid\.of\('gtceu:hydrogen_fluoride', 4000\)\)/);
+  assert.equal(amount('uranium_hexafluoride', 'gtceu:fluorine') * runs, 20000);
+  const hf = amount('enriched_uranium_deconversion', 'gtceu:hydrogen_fluoride');
+  assert.equal(hf, amount('depleted_uranium_deconversion', 'gtceu:hydrogen_fluoride'));
   assert.equal(hf * runs, 60000);
 });
-
 test('English only, every new material has a name and a tooltip', () => {
   const lang = text('client_scripts', 'grindless', 'iv_fuel_front_end_lang.js');
   for (const m of ['uranyl_sulfate_liquor', 'uranium_eluate', 'yellowcake', 'triuranium_octoxide', 'uranium_tetrafluoride']) {
