@@ -303,7 +303,6 @@ const m1 = cluster('m1', 'M1 Si-28 qubit line: the MAX stage', {
     ['i', 'gtnn:supracausal_mainframe', 'Supracausal Mainframe', { end: 'the MAX circuit networks' }],
   ],
   joins: [['h.1', '7.end'], ['h.3', '5.end'], ['h.9', '6.end']],
-  links: [[`pl_max:${P('ms', 2)}13`, 'h.7']],
 }, { line: 'si28' });
 
 const m2 = cluster('m2', 'M2 Horizon strand and the tether', {
@@ -330,7 +329,6 @@ const m4 = cluster('m4', 'M4 The belt and the mirror segment', {
   cut: { 53: [6] },
   tail: { 13: [['m', 'gtceu:swarm_segment_foundry'], ['i', 'grindless:mirror_shell_segment']] },
   joins: [['13.10', '37.end'], ['13.10', '30.end'], ['30.2', '53.5']],
-  links: [[`pl_max:${P('lk', 50)}9`, '13.10']],
   end: 'the mirror shell segment',
 });
 
