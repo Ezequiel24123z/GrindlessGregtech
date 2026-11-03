@@ -4,7 +4,8 @@
     "_why": "AF-A2 classes. creative-reward is clean on the v1.1.0 book, so it is an error. count-stack became an error once AF-Q2b fixed the MAX and MAX+ counts (0 on the batch dump a5bb77a5988c), and task-hidden once the linter read hidden_until.json as the game does (a group's `unless` switch shows it: tether_spool in the shipped tether mode). The others find work for the quest packages (lint.mjs --new-classes lists them as warnings; on that dump: task-no-recipe 526, same-title 949, empty-description 4140, mostly Processing Lines nodes by design) and stay info (listed, never counted) until those packages fix them; set each to warn or error then.",
     "creative-reward": "error",
     "count-stack": "error",
-    "task-hidden": "error"
+    "task-hidden": "error",
+    "empty-description:multiblocks": "error"
   },
   "maxEdge": 5.0,
   "maxVerticalDrop": 3.0,

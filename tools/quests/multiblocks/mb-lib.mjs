@@ -51,6 +51,230 @@ export function originOf(id, ours) {
   return MOD_NAMES[ns] || ns;
 }
 
+// ---------------------------------------------------------------- descriptions (docs/quests.md, section 19): text from data only
+export const DESC_MAX_CHARS = 450;
+export const DESC_MAX_WORDS = 66; // lint-config limits.default.maxWords is 70
+const SENTENCE_QTY = /\b\d+\s*(?:x\s*)?(?:ingots?|plates?|dusts?|blocks?|bricks?|logs?|planks?|items?|mb|buckets?|stacks?|nuggets?|gems?|pieces?|cables?|wires?|rods?|bolts?|screws?|gears?|casings?|ores?)\b|\bx\s?\d+\b/i;
+
+const cap = (w) => w.charAt(0).toUpperCase() + w.slice(1);
+const words = (s) => s.split('_').filter(Boolean);
+const idTitle = (id) => words(id.split(':').pop().replace(/\//g, '_')).map((w) => TIER_NAMES[w] || cap(w)).join(' ');
+
+// a display name for an item, fluid or tag id: "forge:plates/steel" -> "Steel plates", "gtceu:circuits/hv" -> "HV circuits"
+export function niceName(id) {
+  if (id.startsWith('#')) id = id.slice(1);
+  const path = id.split(':').pop();
+  if (!path.includes('/')) return idTitle(id);
+  const [category, ...rest] = path.split('/');
+  const mat = rest.join('/');
+  if (category === 'circuits') return `${mat.toUpperCase()} circuits`;
+  return `${words(mat).map(cap).join(' ')} ${category.replace(/_/g, ' ')}`;
+}
+
+export function joinList(list) {
+  if (list.length <= 1) return list.join('');
+  return list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1];
+}
+
+// the id of one recipe content entry: an item, a tag or a fluid
+function contentId(c) {
+  if (!c || typeof c !== 'object') return null;
+  const v = c.ingredient || c;
+  if (Array.isArray(v.value) && v.value.length) return contentId(v.value[0]);
+  if (v.item) return typeof v.item === 'string' ? v.item : v.item.id || null;
+  if (v.fluid) return v.fluid;
+  if (v.tag) return '#' + v.tag;
+  if (typeof v.id === 'string') return v.id;
+  return null;
+}
+
+// crafting and machine recipe outputs of one recipe json: every id it produces, first main output first
+export function recipeOutputIds(j) {
+  const out = [];
+  if (j.result) out.push(contentId(j.result));
+  const o = j.outputs || {};
+  for (const kind of ['item', 'fluid']) for (const e of o[kind] || []) out.push(contentId(e.content));
+  return out.filter(Boolean);
+}
+
+// the main product of a machine recipe: the first item output without a chance, else the first fluid output
+function mainProduct(j) {
+  const o = j.outputs || {};
+  for (const kind of ['item', 'fluid']) {
+    for (const e of o[kind] || []) {
+      if (e.chance !== undefined && e.chance < 10000) continue;
+      const id = contentId(e.content);
+      if (id) return id;
+    }
+  }
+  return null;
+}
+
+// ingredient ids of one recipe json, most used first (shaped crafting counts its pattern), circuits and ids without a name skipped
+export function recipeInputIds(j) {
+  const order = [];
+  const count = new Map();
+  const add = (id, n = 1) => {
+    if (!id) return;
+    if (!count.has(id)) order.push(id);
+    count.set(id, (count.get(id) || 0) + n);
+  };
+  if (j.key && j.pattern) {
+    const uses = {};
+    for (const row of j.pattern) for (const ch of row) uses[ch] = (uses[ch] || 0) + 1;
+    for (const k of Object.keys(j.key)) add(contentId(j.key[k]), uses[k] || 1);
+  }
+  for (const e of Array.isArray(j.ingredients) ? j.ingredients : []) add(contentId(e));
+  const inp = j.inputs || {};
+  for (const kind of ['item', 'fluid']) for (const e of inp[kind] || []) add(contentId(e.content));
+  return order.sort((a, b) => count.get(b) - count.get(a) || order.indexOf(a) - order.indexOf(b));
+}
+
+// recipes: [{ i, t, j }]; controllers: [{ id }]; returns Map id -> ingredient ids of its cheapest-id-sorted recipe
+export function controllerInputs(recipes, controllers) {
+  const idSet = new Set(controllers.map((c) => c.id));
+  const best = new Map();
+  for (const r of recipes) {
+    if (!r.j) continue;
+    for (const id of recipeOutputIds(r.j)) {
+      if (!idSet.has(id)) continue;
+      const cur = best.get(id);
+      if (!cur || String(r.i) < String(cur.i)) best.set(id, r);
+    }
+  }
+  const out = new Map();
+  for (const [id, r] of best) out.set(id, recipeInputIds(r.j));
+  return out;
+}
+
+// the most common main products of the recipes of some recipe types: [{ id, n }] sorted by count, then id
+export function mainProducts(recipes, typeIds, limit = 4) {
+  const types = new Set(typeIds);
+  const n = new Map();
+  for (const r of recipes) {
+    if (!r.j || !types.has(r.t)) continue;
+    const id = mainProduct(r.j);
+    if (id) n.set(id, (n.get(id) || 0) + 1);
+  }
+  return [...n].map(([id, c]) => ({ id, n: c })).sort((a, b) => b.n - a.n || a.id.localeCompare(b.id)).slice(0, limit);
+}
+
+// the main casing and the heating coil of a structure ({ slices, symbols } of structures.json), by block count
+export function structureParts(st) {
+  if (!st || !st.slices) return null;
+  const uses = {};
+  for (const sl of st.slices) for (const row of sl) for (const ch of row) uses[ch] = (uses[ch] || 0) + 1;
+  const blocks = new Map();
+  for (const [sym, def] of Object.entries(st.symbols || {})) {
+    const opts = def.kind === 'oneOf' ? def.options || [] : [def];
+    for (const o of opts) {
+      if (o.kind !== 'blocks' || !o.blocks || !o.blocks.length) continue;
+      const id = o.blocks[0];
+      blocks.set(id, (blocks.get(id) || 0) + (uses[sym] || 0));
+    }
+  }
+  const ranked = [...blocks].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  const coil = ranked.find(([id]) => /coil/.test(id));
+  const casing = ranked.find(([id]) => /casing|machine_hull|firebricks|solid_machine/.test(id) && !/coil|pipe|gearbox|turbine/.test(id)) || ranked.find(([id]) => !/coil|frame/.test(id));
+  return { casing: casing ? casing[0] : null, coil: coil ? coil[0] : null };
+}
+
+const part = (s) => s.replace(/(?:§|\\u00a7)./gi, '').replace(/\s*[—–]\s*/g, ', ').replace(/\s+/g, ' ').trim();
+const endSentence = (s) => (/[.!?]$/.test(s) ? s : s + '.');
+
+// c: { name, ours, origin, tooltip, types: [id], io: [itemIn, itemOut, fluidIn, fluidOut], products: [id], parts: { casing, coil },
+//      inputs: [id], usedBy: [name] }. Returns one paragraph, at most DESC_MAX_CHARS characters and DESC_MAX_WORDS words.
+export function describeController(c) {
+  const typeNames = (c.types || []).map(idTitle);
+  const shown = typeNames.length > 3 ? [...typeNames.slice(0, 3), 'others'] : typeNames;
+  const clean = (ids) => ids.map(niceName).filter((n) => !SENTENCE_QTY.test(n));
+  const build = (o) => {
+    const out = [];
+    const tip = c.tooltip && !SENTENCE_QTY.test(c.tooltip) ? endSentence(part(c.tooltip)) : '';
+    if (tip) out.push(tip);
+    else out.push(shown.length ? `A ${c.origin} multiblock for ${joinList(shown)} recipes.` : `A ${c.origin} multiblock.`);
+    if (tip && shown.length) out.push(`Runs ${joinList(shown)} recipes.`);
+    const p = c.parts || {};
+    if (p.casing) {
+      const cn = p.coil ? niceName(p.coil) : '';
+      const coil = cn && o.coil ? (/ coil block$/i.test(cn) ? `, with ${cn.replace(/ coil block$/i, '')} coils` : `, with ${cn}`) : '';
+      out.push(`Build it mostly from ${niceName(p.casing)}${coil}.`);
+    }
+    const ins = clean(c.inputs || []).slice(0, o.inputs);
+    if (ins.length) out.push(`The controller is crafted from ${joinList(ins)}.`);
+    const prods = clean((c.products || []).map((x) => x.id || x)).slice(0, o.products);
+    if (prods.length) out.push(`Unlocks ${joinList(prods)}.`);
+    if (o.usedBy && (c.usedBy || []).length) out.push(`Also needed to craft ${joinList(c.usedBy.slice(0, 2))}.`);
+    if (o.automate && c.io) {
+      const [ii, io, fi, fo] = c.io;
+      const feed = [ii > 0 ? 'item buses' : '', fi > 0 ? 'fluid hatches' : ''].filter(Boolean);
+      const take = [io > 0 ? 'item buses' : '', fo > 0 ? 'fluid hatches' : ''].filter(Boolean);
+      if (feed.length && take.length) out.push(`Automate it through input ${joinList(feed)} and output ${joinList(take)}.`);
+      else if (feed.length) out.push(`Automate it through input ${joinList(feed)}.`);
+      else if (take.length) out.push(`Automate it through output ${joinList(take)}.`);
+    }
+    return out.join(' ');
+  };
+  const steps = [
+    { inputs: 3, products: 3, coil: true, usedBy: true, automate: true },
+    { inputs: 3, products: 3, coil: true, usedBy: false, automate: true },
+    { inputs: 3, products: 3, coil: true, usedBy: false, automate: false },
+    { inputs: 2, products: 2, coil: true, usedBy: false, automate: false },
+    { inputs: 2, products: 2, coil: false, usedBy: false, automate: false },
+    { inputs: 1, products: 1, coil: false, usedBy: false, automate: false },
+    { inputs: 0, products: 1, coil: false, usedBy: false, automate: false },
+    { inputs: 0, products: 0, coil: false, usedBy: false, automate: false },
+  ];
+  let text = '';
+  for (const s of steps) {
+    text = build(s);
+    if (text.length <= DESC_MAX_CHARS && text.split(/\s+/).length <= DESC_MAX_WORDS) return text;
+  }
+  const first = text.split(/(?<=\.) /)[0];
+  return first.length <= DESC_MAX_CHARS ? first : first.slice(0, DESC_MAX_CHARS - 1).replace(/\s+\S*$/, '') + '.';
+}
+
+// our tooltips: machine name -> first tooltip line, from grindless.machine.<name>.tooltip.0 in the lang scripts
+export function tooltipsFromLang(text) {
+  const out = new Map();
+  for (const m of text.matchAll(/grindless\.machine\.([a-z0-9_]+)\.tooltip\.0['"]\s*,\s*(['"])((?:\\.|(?!\2)[^\\])*)\2/g)) {
+    if (!out.has(m[1])) out.set(m[1], m[3].replace(/\\(['"\\])/g, '$1'));
+  }
+  return out;
+}
+
+// the descriptions of a list of controllers [{ id, name, ours, ... }]: Map id -> text. All inputs are plain data, so a test can feed them.
+export function describeAll({ controllers, machines, recipeTypes, recipes, structures, tooltips }) {
+  const byId = new Map(machines.map((m) => [m.id, m]));
+  const ioOf = new Map(recipeTypes.map((t) => [t.id, t.io || [0, 0, 0, 0]]));
+  const inputs = controllerInputs(recipes, controllers);
+  const usedBy = new Map();
+  for (const c of controllers) for (const id of inputs.get(c.id) || []) {
+    if (id === c.id) continue;
+    if (!usedBy.has(id)) usedBy.set(id, []);
+    usedBy.get(id).push(c.name);
+  }
+  const out = new Map();
+  for (const c of controllers) {
+    const m = byId.get(c.id) || {};
+    const types = (m.types || []).filter((t) => ioOf.has(t) || recipes.some((r) => r.t === t));
+    const io = types.length ? types.reduce((a, t) => a.map((v, i) => v + (ioOf.get(t) || [0, 0, 0, 0])[i]), [0, 0, 0, 0]) : null;
+    out.set(c.id, describeController({
+      name: c.name,
+      ours: c.ours,
+      origin: originOf(c.id, c.ours),
+      tooltip: c.ours ? tooltips.get(c.id.split(':')[1]) : null,
+      types,
+      io,
+      products: mainProducts(recipes, types, 3),
+      parts: structureParts(structures[c.id]),
+      inputs: inputs.get(c.id) || [],
+      usedBy: (usedBy.get(c.id) || []).slice().sort(),
+    }));
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------- SNBT (the book's format: tabs, LF, keys sorted)
 const str = (s) => '"' + String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"';
 function dnum(v) {
@@ -68,6 +292,7 @@ export const XP = 10; // the side-quest reward: ~300 quests, so really small
 
 function controllerQuest(c, indent) {
   return questSnbt({
+    ...(c.desc ? { description: '[' + str(c.desc) + ']' } : {}),
     icon: str(c.id),
     id: str(hid('multiblocks:' + c.id)),
     rewards: '[' + compound({ id: str(hid('multiblocks:reward:' + c.id)), type: '"xp"', xp: String(XP) }) + ']',
