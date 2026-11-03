@@ -19,8 +19,9 @@
   const LM = G.levitationMelter || (G.levitationMelter = {})
   const LOG = '[grindless/uiv] '
 
-  const CASING = 'grindless:rhea_casing'
-  const CASING_TEXTURE = 'grindless:block/uiv/rhea_casing'
+  // Bootstrap body: the melter makes the RHEA ingot that every UIV family casing needs, so it cannot be built from them
+  const CASING = 'gtceu:uev_machine_casing'
+  const CASING_TEXTURE = 'gtceu:block/casings/voltage/uev/side'
   const COIL = 'grindless:hftacn_coil_block'
 
   LM.table = 'kubejs/data/grindless/tables/levitation_melter.json'

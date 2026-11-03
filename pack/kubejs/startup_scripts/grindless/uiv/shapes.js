@@ -746,7 +746,7 @@
   L.levitation_melter = function () {
     var w = 15, d = 15, hb = 6
     return {
-      w: w, h: 17, d: d, pal: pal({ A: MH, C: 'grindless:hftacn_coil_block', Q: 'tungsten_steel' }),
+      w: w, h: 17, d: d, pal: pal({ A: 'gtceu:uhv_machine_casing', C: 'grindless:hftacn_coil_block', Q: 'tungsten_steel' }),
       fn: T.compose([
         T.at(2, hb, 2, 11, 11, 11, T.cyl({
           R: 5, h: 7, dome: 4, win: [2, 3], bands: { 4: 'C' },
