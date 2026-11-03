@@ -2571,7 +2571,7 @@
     {"id":"gtceu:polarized_fusion_stellarator","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:polycarbonate_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:assembler","gtceu:chemical_reactor","gtceu:large_chemical_reactor","gtceu:nitride_magnet_synthesis"]},
     {"id":"gtceu:polymer_works","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembler","gtceu:multiblock_info"],"used":["emi:info"]},
-    {"id":"gtceu:polystyrene_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"]},
+    {"id":"gtceu:polystyrene_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:assembler","gtceu:chemical_reactor","gtceu:large_chemical_reactor"]},
     {"id":"gtceu:positron_accumulator","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:positronium_condensate_lab","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:potassium_40_dust","kind":"item","needUse":true,"needMade":true,"made":["gtceu:calutron_separation"],"used":["gtceu:fibre_draw","gtceu:quantum_degenerate_gas"]},
