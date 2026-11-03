@@ -650,4 +650,16 @@ export const QUESTS = [
         tasks: [{ type: "item", id: "791A459098A43495", item: "gtceu:wire_works" }],
         rewards: [{ type: "xp", id: "3C4547840227F1B1", xp: 40 }],
   },
+  {
+    key: "LV_WIRELESS_ENERGY_TOWER", title: "Wireless Energy Tower", icon: "gtceu:wireless_energy_tower", kind: "machine", deps: ["LV_LV_TO_MV_TRANSFORMER"], x: 16, y: 0,
+    teach: {
+      for: "The &6Wireless Energy Tower&r stores power for one network shared by every world, and makes none.",
+      needs: "An LV hull, an emitter and a sensor for the controller, solid casings, and capacitor cells for its slots.",
+      unlocks: "One EU network for the whole server, with no cable between bases.",
+      automate: "Keep the cells charged from your plants. The tower only holds what you give it.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:wireless_energy_tower" }],
+    rewards: [{ type: "xp", xp: 40 }],
+  },
 ];

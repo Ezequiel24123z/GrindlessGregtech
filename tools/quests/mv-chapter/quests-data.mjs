@@ -601,4 +601,16 @@ export const QUESTS = [
         tasks: [{ type: "item", id: "15FEC3AC6D61B5F5", item: "gtceu:polymer_works" }],
         rewards: [{ type: "xp", id: "3236E3D5ABD0F3DA", xp: 50 }],
   },
+  {
+    key: "MV_CENTRAL_MONITOR", title: "Central Monitor", icon: "gtceu:central_monitor", kind: "machine", deps: ["MV_CLEANROOM"], x: 24, y: 0,
+    teach: {
+      for: "The &6Central Monitor&r is a wall of screens that shows what your machines are doing, and the controls to match.",
+      needs: "Frostproof casing, MV circuits and a computer monitor cover for the controller, then monitor screens for the wall.",
+      unlocks: "One place to read the whole factory, instead of walking to each machine.",
+      automate: "It watches and does not move items, so keep its screens bound to the machines you care about.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:central_monitor" }],
+    rewards: [{ type: "xp", xp: 40 }],
+  },
 ];
