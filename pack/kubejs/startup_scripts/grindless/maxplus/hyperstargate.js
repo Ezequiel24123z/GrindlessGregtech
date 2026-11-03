@@ -66,7 +66,6 @@
   var STEP_X1 = 46
   var BUTTRESS_SLOPE = 0.342
   var POWER_X = [19, 24, 34, 39]
-  var CHEVRON_STEP = 40
 
   function rad(x, y) {
     var dx = x - MID
@@ -74,41 +73,10 @@
     return Math.sqrt(dx * dx + dy * dy)
   }
 
-  // the nearest ring cell to each chevron's position on the circle, every 40 degrees from the top: [x, y] pairs
-  var chevronList = null
-  function chevronCells() {
-    if (chevronList !== null) return chevronList
-    var list = []
-    var count = Math.round(360 / CHEVRON_STEP)
-    for (var k = 0; k < count; k++) {
-      var ang = (k * CHEVRON_STEP * Math.PI) / 180
-      var tx = MID + R_RING * Math.sin(ang)
-      var ty = CY + R_RING * Math.cos(ang)
-      var cx = Math.round(tx)
-      var cy = Math.round(ty)
-      var pick = [cx, cy]
-      var bestErr = 1e9
-      for (var ox = -2; ox <= 2; ox++) {
-        for (var oy = -2; oy <= 2; oy++) {
-          var px = cx + ox
-          var py = cy + oy
-          if (Math.abs(rad(px, py) - R_RING) > 0.5) continue
-          var err = (px - tx) * (px - tx) + (py - ty) * (py - ty)
-          if (err < bestErr) {
-            bestErr = err
-            pick = [px, py]
-          }
-        }
-      }
-      list.push(pick)
-    }
-    chevronList = list
-    return list
-  }
-
+  // the ring cell nearest to each chevron's position on the circle, every 40 degrees from the top (angles 0, 40, ... 320), fixed: x, y pairs
+  var CHEVRONS = [[29, 57], [46, 51], [56, 35], [52, 16], [38, 5], [20, 5], [6, 16], [2, 35], [12, 51]]
   function isChevron(x, y) {
-    var list = chevronCells()
-    for (var i = 0; i < list.length; i++) if (list[i][0] === Number(x) && list[i][1] === Number(y)) return true
+    for (var i = 0; i < CHEVRONS.length; i++) if (CHEVRONS[i][0] == x && CHEVRONS[i][1] == y) return true
     return false
   }
   // a window every 30 degrees, three cells wide, on the outer face (z 8 to 14) and on the front and back faces (z 5 and 17)

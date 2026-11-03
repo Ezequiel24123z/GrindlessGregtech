@@ -20174,7 +20174,7 @@ hash = "82bb9878abed6b01f0f95a93c6ef9bd92f8738e7edf97d59d106f2f4cb58be8e"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/hyperstargate.js"
-hash = "827dec8d822d59c102d120168c4fc5aab4560860785d736aba37f90ed8e1d313"
+hash = "ca28ccc4e7a946ba6c112aeeb071d22b49d5d0b6b38d9e3922377a35e744e0c3"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/loom.js"
