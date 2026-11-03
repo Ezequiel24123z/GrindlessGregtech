@@ -40,7 +40,7 @@
         ['gtceu.recipe.grindless_superheavy_chemistry.element_122_catch',
             'Circuit 9: element 122 sealed in a capsule'],
         ['gtceu.recipe.grindless_superheavy_chemistry.census_iii',
-            'Circuit 10: elements 121 and 122 counted together in one capsule'],
+            'Circuit 10: elements 121 and 122 counted together in one capsule; census II stays in the lab'],
         ['gtceu.recipe.grindless_transuranium_processing.fm257_plating',
             'Circuit 10: fermium-257 plated on titanium from nitric acid; most of the bath is recovered'],
         ['gtceu.recipe.grindless_transuranium_processing.cm248_plating',

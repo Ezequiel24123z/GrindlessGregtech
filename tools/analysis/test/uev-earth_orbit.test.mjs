@@ -111,7 +111,7 @@ test('byproducts are routed: no recipe outputs a void marker', () => {
 
 test('the robot arm, the isolator, the lobster-eye MCP and the three material producers exist', () => {
   const made = (id) => mine.some((r) => ids(r.itemsOut).includes(id));
-  for (const id of ['gtceu:uev_robot_arm', 'grindless:faraday_isolator', 'grindless:hollow_core_fibre', 'grindless:lobster_eye_mcp', 'gtceu:tgg_dust', 'gtceu:ppktp_dust', 'gtceu:ule_glass_dust']) {
+  for (const id of ['gtceu:uev_robot_arm', 'grindless:faraday_isolator', 'grindless:hollow_core_fibre', 'grindless:lobster_eye_mcp', 'gtceu:tgg_dust', 'gtceu:ule_glass_dust']) {
     assert.ok(made(id), id);
   }
   assert.ok(ids(row('assembler', 'faraday_isolator').itemsIn).includes('grindless:terbium_oxide_dust') || mine.some((r) => ids(r.itemsIn).includes('grindless:terbium_oxide_dust')));
@@ -126,6 +126,12 @@ test('the older rows exist: fibre draw 6-8, crystal furnace tgg and ktp, pyrolys
   assert.equal(cg.find((r) => r.name === 'tgg').circuit, 6);
   assert.equal(cg.find((r) => r.name === 'ktp').circuit, 7);
   assert.match(outerChem, /cnt_sock/);
+});
+
+test('the SPDC source takes the electroded KTP wafer, not PPKTP dust', () => {
+  const r = rowsOf(T).find((x) => x.name === 'spdc_source');
+  assert.ok(ids(r.itemsIn).includes('grindless:ktp_electroded_wafer'));
+  assert.ok(!ids(r.itemsIn).includes('gtceu:ppktp_dust'));
 });
 
 test('both machines are registered with their types and Earth-orbit casing; every item has a name, tooltips and a texture', () => {

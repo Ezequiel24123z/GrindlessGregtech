@@ -389,7 +389,7 @@
           "fluidsOut": []
         },
         {
-          "_why": "UIV-B2: elements 119 and 120 counted together in a sealed capsule (census II)",
+          "_why": "UIV-B2: elements 119 and 120 counted together in a sealed capsule, on top of census I, which stays (census II)",
           "name": "census_ii",
           "circuit": 3,
           "eut": 3932160,
@@ -399,7 +399,7 @@
             { "id": "grindless:element_120_recoil", "count": 1 },
             { "id": "grindless:sealed_capsule", "count": 1 }
           ],
-          "kept": [],
+          "kept": [{ "id": "grindless:superheavy_census", "count": 1 }],
           "charge": [],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:superheavy_census_ii", "count": 1 }],
@@ -438,7 +438,7 @@
           "fluidsOut": []
         },
         {
-          "_why": "UXV-A1 line 22: elements 121 and 122 counted together in a sealed capsule (census III)",
+          "_why": "UXV-A1 line 22: elements 121 and 122 counted together in a sealed capsule, on top of census II, which stays (census III)",
           "name": "census_iii",
           "circuit": 10,
           "eut": 3932160,
@@ -448,7 +448,7 @@
             { "id": "grindless:element_122_recoil", "count": 1 },
             { "id": "grindless:sealed_capsule", "count": 1 }
           ],
-          "kept": [],
+          "kept": [{ "id": "grindless:superheavy_census_ii", "count": 1 }],
           "charge": [],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:superheavy_census_iii", "count": 1 }],
