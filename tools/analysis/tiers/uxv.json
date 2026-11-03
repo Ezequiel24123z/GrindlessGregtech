@@ -468,6 +468,7 @@
       "note": "Machine 1 (home, H): two UIV hatches give V[UXV] (docs/eras/uxv.md \"Voltages and controllers\")."
     },
     {
+      "id": "gtceu:vdw_stacker@uxv",
       "machine": "gtceu:vdw_stacker",
       "types": [
         "gtceu:vdw_stacking"
