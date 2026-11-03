@@ -1,5 +1,7 @@
 # Era LuV
 
+Long process lines from EV to ZPM (D2-LINES, 2026-11-03): `docs/eras/lines-ev-zpm.md`, section 4 for LuV.
+
 LuV is cryogenics and the outer system. IV made power by design and reached the inner planets. LuV puts a first station in Earth orbit and goes past Mars, to the asteroid belt and to three of Jupiter's moons: Io, Europa and Ganymede.
 - Out there, everything is cold and dark, and near Io the radiation kills electronics.
 - The cold becomes a tool:

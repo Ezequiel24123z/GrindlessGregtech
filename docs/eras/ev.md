@@ -1,5 +1,7 @@
 # EV era
 
+Long process lines from EV to ZPM (D2-LINES, 2026-11-03): `docs/eras/lines-ev-zpm.md`, section 2 for EV.
+
 EV is titanium, platinum and fine chemistry. Here multiblocks become the normal way to produce. Recipes reach 1,920 EU/t, they need acids, gases and a cleanroom at the same time, and the standalone machine falls short. Titanium only comes from the Moon, so EV's first job is to make the lunar base work on its own and connected to home: a tripod drill, a solar array that powers it, a cell that extracts oxygen from regolith and Titanium from Ilmenite without chlorine, and a plant that liquefies gases with the lunar cold, all linked by AE2. On Earth, the platinum plant closes out fine chemistry, and nano circuits are the wall. At the end, an antenna on the far side of the Moon charts the route to **Mars**, the only place with tungsten. Without it there is no Tungsten Steel and no IV. EV brings together seven of our multiblocks (six new ones and the platinum plant), four family steps and the GTM ones. That makes eleven of ours, the ×1.35 target of rule 7 in `AGENTS.md` (see *Raising EV to the target*).
 
 You enter EV with what HV's end leaves you. On Earth: EV hull of lunar Titanium, an 8,192 EU/t power station, cleanroom, freezer, tower, large chemical reactor and an AE2 network with 256k. On the Moon: the tier 1 rocket, the suit, the lunar drill, the stored Helium-3, the Waystones and the first Earth–Moon AE2 bridge.

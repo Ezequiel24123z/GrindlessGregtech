@@ -157,6 +157,7 @@ Candidates of 12 or more steps first, then the shorter ones that serve the Steam
 - **Mapping:** GTM has centrifuge, mixer, sifter, EBF, vacuum freezer, EM separator (verify), reactors. New: digester, dissolution tank (large-reactor recipe flags), Hf, Zr, Th intermediates. Pack slots: `ev.cascade` (samarium, neodymium, 2 x 5) and `zpm.europium` (5) are extended or merged into this.
 - **Adaptation:** HNO3 digestion, TBP solvent-extraction cascade, oxalate precipitation, calcination (the real industry); later, chelating-resin ion-exchange columns.
 - **Touches:** **europium, samarium, gadolinium, cerium, lanthanum, neodymium, thorium, uranium, hafnium, zirconium**, titanium, phosphorus.
+- **Correction (D2-LINES, verified on dump 5d57213f3b83):** GTCA 2.2.0's bastnasite chain is live in the pack at EV (its thermal reactor is kept at EV, `integration/gtca.js:45`): 17 stages from crushed bastnasite to lanthanum and neodymium, with cerium dioxide split out after an oxidative roast and two stages rebuilt for Earth without the other worlds' outputs (`moon/offworld_only.js`: the filtration loses its lunar rutile and ilmenite, the holmium reduction its samarium). Bastnasite and monazite are Nether ores (`veins_nether.json:76-83`), drilled from LV; Mars gives only merrillite. The design uses that chain, not a new monazite line (`docs/eras/lines-ev-zpm.md`, E1).
 
 ### E-2 Naquadah, enriched and naquadria ladder (15 steps in the pack's own chart)
 - **Source:** pack chart: `iv.naquadah` (7) to `luv.naquadah#enriched_naquadah_ingot` (4) to `zpm.naquadria` (4). Source designs: GTM `NaquadahRecipes.java` (LGPL, import), GTNH `goodgenerator/loader/NaquadahRecipeLoader.java` (LGPL code, ideas; 10 steps, 15 with enriched and naquadria, 43 recipes), StarT `chemical_plant.js` skips (MIT).
@@ -165,6 +166,7 @@ Candidates of 12 or more steps first, then the shorter ones that serve the Steam
 - **Mapping:** GTM has all three materials. New: fluoroantimonic acid, P507, adamantine intermediates, neutron activator.
 - **Adaptation:** treat it as the transuranic analogue of PUREX: dissolution, solvent extraction and partitioning with a real tails stream.
 - **Touches:** naquadah, **gallium, antimony, titanium**, adamantium.
+- **Correction (D2-LINES, verified on dump 5d57213f3b83):** the pack's naquadah chemistry is GT-- 1.3.10's: the neutron activator with fluoroantimonic acid (naquadah), the xenon, gold-fluoride and palladium-on-carbon loops (enriched naquadah and trinium), and naquadria through radon, caesium and nitryl fluorides back to the activator. It uses no P507 and no naquadahine. Staged from Venus's ore, the ladder counts 16 steps to the excited naquadah fuel (`docs/eras/lines-ev-zpm.md`, Z2).
 
 ### E-3 Thorium and uranium molten-salt fuel loop (about 12 steps)
 - **Source:** GTNH `gtPlusPlus/.../RecipeLoaderLFTR.java`, `RecipeLoaderNuclear.java` (LGPL code, ideas). About 35 recipes.
@@ -189,6 +191,7 @@ Candidates of 12 or more steps first, then the shorter ones that serve the Steam
 ### E-6 Other lines in the band (4 to 9 steps)
 - Aerogel (sol-gel), 7 to 8 steps, EV to ZPM: StarT `lines/gate_lines/aerogels.js` 8-73, MIT. Touches silicon. Adaptation: a supercritical CO2 drying vessel with batch pressure cycling.
 - Zirconium via titanite, 7 steps, IV to UV: StarT `lines/abydos_lines/zirconium.js` 49-103, MIT. Touches **titanium, zirconium, hafnium**. Hafnium feeds the UEV `six_n_hafnium` chain.
+  - **Correction (D2-LINES, verified on dump 5d57213f3b83):** the pack already separates zirconium from hafnium on the End's red zircon: `grindless:chemical_reactor/zircon_chlorination`, the extraction cascade's `zr_hf_cut`, `zirconia_hydrolysis` and the fuel fabrication plant's `kroll_zr_sponge`. No titanite route is needed.
 - Xenotime rare earths, 5 steps, EV to IV: StarT `lines/abydos_lines/rare_earth.js` 5-39, MIT. Touches **yttrium, lutetium, dysprosium, europium, samarium**.
 - Cryptands, 7 to 8 steps (9-10 est. from crude), EV to IV: StarT `lines/cryptands.js`, MIT. Touches sodium, lithium, potassium, silver, palladium.
 - Water grades 1-5, 5 to 7 steps, LuV to UV: GTNH `PurifiedWaterRecipes.java` (ideas); the start of line U-3.
@@ -328,5 +331,6 @@ Risks: (1) StarT's MIT scripts call custom machine types from StarT-Core (LGPL) 
 - **Above MAX nothing exists** in any source. MAX+ lines are pack-only.
 - **Estimates:** GTNH M-1, M-2, M-4, M-5 and the superconductor bases are [est.]; counts in sections 3 to 5 marked "est." need tracing before commitment. Not traced: Eye of Harmony outputs, Space Mining and Elevator, bio and DNA, BEC throughput, Godforge costs, StarT fusion MK4 and `multiblock_recipes/*`, StarT-Core Java, GTNH cracker recipe source, the GTNH wiki.
 - **GTM coverage of new intermediates** (anthraquinone cycle, K2Cr2O7, PBI recipe depth, EM separator, sifter) was checked only by general knowledge and a read of `PlatGroupMetalsRecipes.java`; verify against GTM 7.5.3 before any package.
+  - **Correction (D2-LINES, verified on dump 5d57213f3b83):** GTM 7.5.3 has the whole PBI chain (chlorobenzene, nitrochlorobenzene, dichlorobenzidine over copper, diaminobenzidine with zinc, dimethylbenzene, phthalic acid over potassium dichromate, diphenyl isophthalate, PBI) and the electromagnetic separator (22 recipes). It has no thiophene, EDOT, polystyrene, acrylonitrile, uranium tetrafluoride, yellowcake, tungsten trioxide or ammonium paratungstate.
 - **Decisions the owner must make before the platline and rare-earth packages:** where Os and Ir first appear if the line runs at MV to HV (today Mercury and the asteroid belt); where titanium first appears if Kroll runs at HV (today the Moon at EV); whether rare earths appear at HV (P-3) or EV; and whether GT5-Unofficial (LGPL) may be reused literally or stays ideas only.
 - **Existing chart data:** the audit's link counts (section 6) rest on the chart's raws and crossings and were not re-verified in recipes.

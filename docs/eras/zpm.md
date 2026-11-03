@@ -1,5 +1,7 @@
 # Era ZPM
 
+Long process lines from EV to ZPM (D2-LINES, 2026-11-03): `docs/eras/lines-ev-zpm.md`, section 5 for ZPM.
+
 ZPM is naquadria and the ringed and ice giants. LuV reached Jupiter's moons, put two stations in orbit and lit the first fusion ring. ZPM goes twice as far, to Saturn and Uranus, and **lands nowhere**:
 - every base out there is a station in orbit;
 - every sample of a moon or a deeper layer comes up by probe, siphon or flythrough.
