@@ -1,5 +1,5 @@
 {
-	autofocus_id: "5BF897978D5CE1AB"
+	autofocus_id: "5F8DFEDD3EF69F40"
 	consume_items: false
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
@@ -15,169 +15,86 @@
 			linked_quest: "56C1CC49EE43FB68"
 			shape: "rsquare"
 			x: 0.5d
-			y: 27.75d
-		}
-		{
-			id: "7080A0A8897A2FE5"
-			linked_quest: "706EBF5AC6E6A649"
-			shape: "rsquare"
-			x: 15.0d
-			y: 28.5d
+			y: 45.0d
 		}
 		{
 			id: "730332780BDB43FA"
 			linked_quest: "1A3EAE1BFB47BDE8"
 			shape: "rsquare"
-			x: 23.25d
-			y: 26.75d
-		}
-		{
-			id: "1AF9990B7F3A6608"
-			linked_quest: "5F16A671CF08E9B6"
-			shape: "rsquare"
-			x: 0.5d
-			y: 36.25d
+			x: 15.0d
+			y: 44.0d
 		}
 	]
 	quests: [
 		{
-			icon: "gtceu:lv_gas_collector"
-			id: "5BF897978D5CE1AB"
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Breathes in the Overworld"
-			tasks: [
-				{ id: "128002E320F7031E", item: "gtceu:lv_gas_collector", optional_task: true, type: "item" }
-				{ id: "1DB2BFFF39242457", type: "checkmark" }
-			]
-			title: "Gas Collector"
-			x: 0.75d
-			y: 2.75d
-		}
-		{
-			dependencies: ["5BF897978D5CE1AB"]
-			icon: "gtceu:air_bucket"
-			id: "75EF9150D357BAC9"
-			size: 1.0d
-			tasks: [
-				{ id: "3E7992BFB9223C7F", item: "gtceu:air_bucket", optional_task: true, type: "item" }
-				{ id: "7D1EF06AEB5A4A35", type: "checkmark" }
-			]
-			title: "Air"
-			x: 2.75d
-			y: 2.75d
-		}
-		{
-			dependencies: ["75EF9150D357BAC9"]
-			icon: "gtceu:oxygen_bucket"
-			id: "5BED4655BDD34ED3"
-			size: 1.0d
-			subtitle: "Centrifuge"
-			tasks: [
-				{ id: "50783CC0803DD473", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
-				{ id: "7545807A60E3A0AE", type: "checkmark" }
-			]
-			title: "Oxygen"
-			x: 4.75d
-			y: 2.0d
-		}
-		{
-			dependencies: ["75EF9150D357BAC9"]
-			icon: "gtceu:nitrogen_bucket"
-			id: "376DA31AF22E8CD8"
-			size: 0.75d
-			subtitle: "Aluminium in the EBF; MV pyrolysis runs faster with it"
-			tasks: [
-				{ id: "7D5043254D8FBC31", item: "gtceu:nitrogen_bucket", optional_task: true, type: "item" }
-				{ id: "1E7D7D8DFCECF4E7", type: "checkmark" }
-			]
-			title: "Nitrogen"
-			x: 4.75d
-			y: 3.5d
-		}
-		{
-			icon: "gtceu:sulfur_dust"
-			id: "57C76B992225F740"
+			icon: "grindless:vein_sample_copper"
+			id: "76D2241F249FEBC9"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "The Nether, or realgar in the centrifuge"
+			subtitle: "The copper vein also holds pyrite"
 			tasks: [
-				{ id: "5F06F8D887B33AFF", item: "gtceu:sulfur_dust", optional_task: true, type: "item" }
-				{ id: "18DEDFD2AF3FA409", type: "checkmark" }
+				{ id: "3297DFCDA63BC8BB", item: "grindless:vein_sample_copper", optional_task: true, type: "item" }
+				{ id: "115BEC40C369C328", type: "checkmark" }
 			]
-			title: "Sulfur"
-			x: 4.75d
-			y: 0.5d
+			title: "Copper Vein Sample"
+			x: 0.5d
+			y: 7.5d
 		}
 		{
-			dependencies: ["57C76B992225F740", "5BED4655BDD34ED3"]
-			icon: "gtceu:sulfur_dioxide_bucket"
-			id: "37F88658FB3A6D80"
+			icon: "grindless:bronze_drill_bit"
+			id: "337DB0AD82B9E92B"
+			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Chemical reactor"
+			subtitle: "Wears out now and then"
 			tasks: [
-				{ id: "191E239913DCE89B", item: "gtceu:sulfur_dioxide_bucket", optional_task: true, type: "item" }
-				{ id: "52723DFEDB09E256", type: "checkmark" }
+				{ id: "3A55F1931CCB2C94", item: "grindless:bronze_drill_bit", optional_task: true, type: "item" }
+				{ id: "538132525280192B", type: "checkmark" }
 			]
-			title: "Sulfur Dioxide"
-			x: 6.75d
-			y: 1.25d
+			title: "Bronze Drill Bit"
+			x: 0.5d
+			y: 9.0d
 		}
 		{
-			dependencies: ["37F88658FB3A6D80"]
-			icon: "gtceu:sulfur_trioxide_bucket"
-			id: "7DD608D1C868A1C4"
+			dependencies: ["76D2241F249FEBC9", "337DB0AD82B9E92B"]
+			description: ["The copper vein hands back raw pyrite among other ores, for as long as the drill runs."]
+			icon: "gtceu:lv_vein_drill"
+			id: "5F8DFEDD3EF69F40"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1532B345920C7A09", item: "gtceu:lv_vein_drill", optional_task: true, type: "item" }
+				{ id: "328C27FB9493ED9B", type: "checkmark" }
+			]
+			title: "LV Vein Drill"
+			x: 2.5d
+			y: 8.25d
+		}
+		{
+			dependencies: ["5F8DFEDD3EF69F40"]
+			icon: "gtceu:raw_pyrite"
+			id: "590A28B278F8A3AB"
 			size: 1.0d
-			subtitle: "More oxygen"
 			tasks: [
-				{ id: "715027F7C131807F", item: "gtceu:sulfur_trioxide_bucket", optional_task: true, type: "item" }
-				{ id: "3085C7A15ECC4690", type: "checkmark" }
+				{ id: "184EBDBA73A8A3B6", item: "gtceu:raw_pyrite", optional_task: true, type: "item" }
+				{ id: "56E4219D4FED66EB", type: "checkmark" }
 			]
-			title: "Sulfur Trioxide"
-			x: 8.75d
-			y: 1.25d
+			title: "Raw Pyrite"
+			x: 4.5d
+			y: 8.25d
 		}
 		{
-			dependencies: ["7DD608D1C868A1C4"]
-			description: ["GregTech's long way round: three reactors and a lot of oxygen. The sulfide roaster next door does it in one go."]
-			icon: "gtceu:sulfuric_acid_bucket"
-			id: "5DB10211B3E10692"
-			size: 1.25d
-			subtitle: "Add water"
-			tasks: [
-				{ id: "347A298933FBBCA2", item: "gtceu:sulfuric_acid_bucket", optional_task: true, type: "item" }
-				{ id: "52B75C0F8705FF6C", type: "checkmark" }
-			]
-			title: "Sulfuric Acid"
-			x: 10.75d
-			y: 1.25d
-		}
-		{
+			dependencies: ["590A28B278F8A3AB"]
 			icon: "gtceu:pyrite_dust"
 			id: "5C6CB5123D0B49BC"
-			shape: "rsquare"
 			size: 1.0d
+			subtitle: "Macerator, washer, centrifuge"
 			tasks: [
 				{ id: "58BFB45D1A2B3282", item: "gtceu:pyrite_dust", optional_task: true, type: "item" }
 				{ id: "16B99A12418AE5F5", type: "checkmark" }
 			]
 			title: "Pyrite Dust"
-			x: 15.0d
-			y: 1.5d
-		}
-		{
-			icon: "gtceu:galena_dust"
-			id: "32F405A210E05887"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Sphalerite, stibnite and tetrahedrite work too"
-			tasks: [
-				{ id: "75E827A8E1CB40D7", item: "gtceu:galena_dust", optional_task: true, type: "item" }
-				{ id: "312A1ECAB08E695A", type: "checkmark" }
-			]
-			title: "Galena Dust"
-			x: 15.0d
-			y: 3.0d
+			x: 6.5d
+			y: 8.25d
 		}
 		{
 			icon: "gtceu:air_bucket"
@@ -190,8 +107,8 @@
 				{ id: "541F238EDFC48DD3", type: "checkmark" }
 			]
 			title: "Air"
-			x: 15.0d
-			y: 4.5d
+			x: 6.5d
+			y: 10.0d
 		}
 		{
 			icon: "gtceu:vanadium_dust"
@@ -204,8 +121,8 @@
 				{ id: "3C3A58BAB0CEB8BD", type: "checkmark" }
 			]
 			title: "Vanadium"
-			x: 15.0d
-			y: 6.0d
+			x: 6.5d
+			y: 11.5d
 		}
 		{
 			icon: "gtceu:diatomite_dust"
@@ -217,8 +134,8 @@
 				{ id: "792581532B6551BB", type: "checkmark" }
 			]
 			title: "Diatomite"
-			x: 15.0d
-			y: 7.5d
+			x: 6.5d
+			y: 13.0d
 		}
 		{
 			dependencies: ["1C070843E3F7630F", "1C734E12E86F170D"]
@@ -231,11 +148,11 @@
 				{ id: "17BE4AF5F424B2F6", type: "checkmark" }
 			]
 			title: "Contact Catalyst"
-			x: 17.0d
-			y: 6.75d
+			x: 8.5d
+			y: 12.25d
 		}
 		{
-			dependencies: ["5C6CB5123D0B49BC", "32F405A210E05887", "5FE8A53ECDFED0DE", "34083C1B1C2AFD7A"]
+			dependencies: ["5C6CB5123D0B49BC", "5FE8A53ECDFED0DE", "34083C1B1C2AFD7A"]
 			description: [
 				"Roasts sulfide ore in air and turns the fumes straight into acid, with steam on the side."
 				"What the EBF does with bottled oxygen, it does with air and one machine."
@@ -249,21 +166,22 @@
 				{ id: "7E3976E72FBA4753", type: "checkmark" }
 			]
 			title: "Sulfide Roaster"
-			x: 19.0d
-			y: 3.75d
+			x: 10.5d
+			y: 9.5d
 		}
 		{
 			dependencies: ["5070093A89A4FD3D"]
 			icon: "gtceu:sulfuric_acid_bucket"
-			id: "39171A724C0BED9D"
-			size: 1.25d
+			id: "5DB10211B3E10692"
+			size: 1.0d
+			subtitle: "Roasting contact acid plant"
 			tasks: [
-				{ id: "7D4C22C0DFB7A0A2", item: "gtceu:sulfuric_acid_bucket", optional_task: true, type: "item" }
-				{ id: "3D2552A962D58F72", type: "checkmark" }
+				{ id: "347A298933FBBCA2", item: "gtceu:sulfuric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "52B75C0F8705FF6C", type: "checkmark" }
 			]
 			title: "Sulfuric Acid"
-			x: 21.5d
-			y: 0.75d
+			x: 12.5d
+			y: 7.5d
 		}
 		{
 			dependencies: ["5070093A89A4FD3D"]
@@ -276,8 +194,8 @@
 				{ id: "5DDF9973975F5038", type: "checkmark" }
 			]
 			title: "Steam"
-			x: 21.5d
-			y: 2.25d
+			x: 12.5d
+			y: 9.0d
 		}
 		{
 			dependencies: ["5070093A89A4FD3D"]
@@ -290,36 +208,8 @@
 				{ id: "36FE999007E26DAB", type: "checkmark" }
 			]
 			title: "Hematite"
-			x: 21.5d
-			y: 3.75d
-		}
-		{
-			dependencies: ["5070093A89A4FD3D"]
-			icon: "gtceu:massicot_dust"
-			id: "109C73D7E1548249"
-			size: 1.0d
-			subtitle: "From galena"
-			tasks: [
-				{ id: "3CA60DD410DDFDED", item: "gtceu:massicot_dust", optional_task: true, type: "item" }
-				{ id: "70D1CF78DF563B3B", type: "checkmark" }
-			]
-			title: "Massicot"
-			x: 21.5d
-			y: 5.25d
-		}
-		{
-			dependencies: ["5070093A89A4FD3D"]
-			icon: "gtceu:silver_nugget"
-			id: "583ECDE163C2B75D"
-			size: 1.0d
-			subtitle: "Also from galena"
-			tasks: [
-				{ id: "7C6EE862330ED8B2", item: "gtceu:silver_nugget", optional_task: true, type: "item" }
-				{ id: "30F65F2CFEFF2A8E", type: "checkmark" }
-			]
-			title: "Silver Nugget"
-			x: 21.5d
-			y: 6.75d
+			x: 12.5d
+			y: 10.5d
 		}
 		{
 			dependencies: ["77BE0EE5C777A2CE"]
@@ -332,50 +222,8 @@
 				{ id: "17F14021EC3D95FF", type: "checkmark" }
 			]
 			title: "Steam Turbine"
-			x: 23.5d
-			y: 2.25d
-		}
-		{
-			dependencies: ["109C73D7E1548249"]
-			icon: "gtceu:lead_dust"
-			id: "7E9CF0D074448BD2"
-			size: 0.75d
-			subtitle: "Electrolyzer"
-			tasks: [
-				{ id: "1C4D660A79BAEB52", item: "gtceu:lead_dust", optional_task: true, type: "item" }
-				{ id: "12ABA2F5505421A4", type: "checkmark" }
-			]
-			title: "Lead"
-			x: 23.5d
-			y: 5.25d
-		}
-		{
-			dependencies: ["583ECDE163C2B75D"]
-			icon: "gtceu:silver_ingot"
-			id: "5FDADE302C4FBFFB"
-			size: 0.75d
-			subtitle: "Mirrors and photographic plates"
-			tasks: [
-				{ id: "39824F186EA3A913", item: "gtceu:silver_ingot", optional_task: true, type: "item" }
-				{ id: "74C8ACE966B9DDC1", type: "checkmark" }
-			]
-			title: "Silver"
-			x: 23.5d
-			y: 6.75d
-		}
-		{
-			icon: "gtceu:sulfuric_acid_bucket"
-			id: "344B94A42C0B9B6B"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Either acid line"
-			tasks: [
-				{ id: "5F2310717F849164", item: "gtceu:sulfuric_acid_bucket", optional_task: true, type: "item" }
-				{ id: "7AFB430A2A820D64", type: "checkmark" }
-			]
-			title: "Sulfuric Acid"
-			x: 0.5d
-			y: 12.0d
+			x: 14.5d
+			y: 9.0d
 		}
 		{
 			icon: "gtceu:salt_dust"
@@ -387,22 +235,23 @@
 				{ id: "767D87F0050CB287", type: "checkmark" }
 			]
 			title: "Salt"
-			x: 0.5d
-			y: 13.5d
+			x: 12.5d
+			y: 6.0d
 		}
 		{
-			dependencies: ["344B94A42C0B9B6B", "31422BC38C16E67D"]
+			dependencies: ["5DB10211B3E10692", "31422BC38C16E67D"]
 			icon: "gtceu:lv_chemical_reactor"
 			id: "7001A56E711B830D"
 			shape: "gear"
 			size: 1.25d
+			subtitle: "The salt cake process"
 			tasks: [
 				{ id: "5D1F5C6ED9FBC77F", item: "gtceu:lv_chemical_reactor", optional_task: true, type: "item" }
 				{ id: "1E582F68F20584F1", type: "checkmark" }
 			]
 			title: "Chemical Reactor"
-			x: 2.5d
-			y: 12.75d
+			x: 14.5d
+			y: 6.75d
 		}
 		{
 			dependencies: ["7001A56E711B830D"]
@@ -414,8 +263,8 @@
 				{ id: "7D36092D81CCF7B2", type: "checkmark" }
 			]
 			title: "Sodium Bisulfate"
-			x: 4.5d
-			y: 12.0d
+			x: 16.5d
+			y: 5.0d
 		}
 		{
 			dependencies: ["7001A56E711B830D"]
@@ -427,23 +276,23 @@
 				{ id: "38150870277E8B53", type: "checkmark" }
 			]
 			title: "Hydrochloric Acid"
-			x: 4.5d
-			y: 13.5d
+			x: 16.5d
+			y: 7.5d
 		}
 		{
 			dependencies: ["340DBFDEA0D64B78"]
 			description: ["Etches circuit boards and washes a few stubborn ores. You will want more than you think."]
 			icon: "gtceu:sodium_persulfate_bucket"
 			id: "5FB263B2B1CC3789"
-			size: 1.25d
+			size: 1.0d
 			subtitle: "Electrolyzer"
 			tasks: [
 				{ id: "1937D0D01F12E1C9", item: "gtceu:sodium_persulfate_bucket", optional_task: true, type: "item" }
 				{ id: "3794C5EE14E17BAC", type: "checkmark" }
 			]
 			title: "Sodium Persulfate"
-			x: 6.5d
-			y: 11.25d
+			x: 18.5d
+			y: 5.0d
 		}
 		{
 			dependencies: ["340DBFDEA0D64B78", "70BD789CCFA11DC7"]
@@ -456,8 +305,8 @@
 				{ id: "551D1B74E6555BE2", type: "checkmark" }
 			]
 			title: "Hydrogen"
-			x: 6.5d
-			y: 12.75d
+			x: 18.5d
+			y: 6.5d
 		}
 		{
 			icon: "gtceu:iron_dust"
@@ -469,22 +318,638 @@
 				{ id: "1BA529D25A31D09F", type: "checkmark" }
 			]
 			title: "Iron Dust"
-			x: 4.5d
-			y: 15.0d
+			x: 16.5d
+			y: 9.0d
 		}
 		{
 			dependencies: ["70BD789CCFA11DC7", "311D8A81588B485D"]
 			icon: "gtceu:iron_iii_chloride_bucket"
 			id: "13D27CCCAAB9C52B"
-			size: 1.25d
+			size: 1.0d
 			subtitle: "The other board etchant"
 			tasks: [
 				{ id: "76CB7BB7B8FC8A33", item: "gtceu:iron_iii_chloride_bucket", optional_task: true, type: "item" }
 				{ id: "377305F014676E70", type: "checkmark" }
 			]
 			title: "Iron III Chloride"
+			x: 18.5d
+			y: 8.0d
+		}
+		{
+			icon: "gtceu:crushed_bauxite_ore"
+			id: "74DE1A922FAF8EDD"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Gallium hides in it"
+			tasks: [
+				{ id: "1BC1E6F25D888B93", item: "gtceu:crushed_bauxite_ore", optional_task: true, type: "item" }
+				{ id: "70631ECC9B666ADB", type: "checkmark" }
+			]
+			title: "Crushed Bauxite"
+			x: 18.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5FB263B2B1CC3789", "74DE1A922FAF8EDD"]
+			icon: "gtceu:gallium_dust"
+			id: "7C5DCC2AB2360C89"
+			size: 1.0d
+			subtitle: "Chemical bath, a little at a time"
+			tasks: [
+				{ id: "1C8C196E82E7D3EE", item: "gtceu:gallium_dust", optional_task: true, type: "item" }
+				{ id: "3D5E5497D3C165BE", type: "checkmark" }
+			]
+			title: "Gallium"
+			x: 20.5d
+			y: 4.5d
+		}
+		{
+			icon: "gtceu:realgar_dust"
+			id: "5887C91D880A8283"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "79267A003A969D99", item: "gtceu:realgar_dust", optional_task: true, type: "item" }
+				{ id: "16DEAFBFB788CC7F", type: "checkmark" }
+			]
+			title: "Realgar Dust"
+			x: 20.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5887C91D880A8283"]
+			icon: "gtceu:arsenic_dust"
+			id: "58DFC4B61FEEE416"
+			size: 1.0d
+			subtitle: "Centrifuge"
+			tasks: [
+				{ id: "3F3DD656066C3735", item: "gtceu:arsenic_dust", optional_task: true, type: "item" }
+				{ id: "3092C570EBA5C9AF", type: "checkmark" }
+			]
+			title: "Arsenic"
+			x: 22.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5887C91D880A8283"]
+			icon: "gtceu:sulfur_dust"
+			id: "71A31ECF387F798D"
+			size: 0.75d
+			subtitle: "Acid and rubber"
+			tasks: [
+				{ id: "36D69CCF8F596DE0", item: "gtceu:sulfur_dust", optional_task: true, type: "item" }
+				{ id: "1392C2C042DE4DDF", type: "checkmark" }
+			]
+			title: "Sulfur"
+			x: 22.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["7C5DCC2AB2360C89", "58DFC4B61FEEE416"]
+			icon: "gtceu:gallium_arsenide_dust"
+			id: "162641406869CF74"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "1618E114B4C96B11", item: "gtceu:gallium_arsenide_dust", optional_task: true, type: "item" }
+				{ id: "119FFE25C565BC43", type: "checkmark" }
+			]
+			title: "Gallium Arsenide"
+			x: 22.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["162641406869CF74"]
+			description: ["A pinch of gallium arsenide per diode, and the good circuits of LV are open."]
+			icon: "gtceu:diode"
+			id: "781A445DB81F73DE"
+			size: 1.0d
+			subtitle: "Assembler"
+			tasks: [
+				{ id: "542889A2B782B7AA", item: "gtceu:diode", optional_task: true, type: "item" }
+				{ id: "3491D8B18A4BA9D4", type: "checkmark" }
+			]
+			title: "Diode"
+			x: 24.5d
+			y: 4.0d
+		}
+		{
+			icon: "gtceu:galena_dust"
+			id: "32F405A210E05887"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Roasted for silver"
+			tasks: [
+				{ id: "75E827A8E1CB40D7", item: "gtceu:galena_dust", optional_task: true, type: "item" }
+				{ id: "312A1ECAB08E695A", type: "checkmark" }
+			]
+			title: "Galena Dust"
+			x: 9.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["32F405A210E05887"]
+			icon: "gtceu:silver_ingot"
+			id: "5FDADE302C4FBFFB"
+			size: 1.0d
+			subtitle: "The roaster and a furnace"
+			tasks: [
+				{ id: "39824F186EA3A913", item: "gtceu:silver_ingot", optional_task: true, type: "item" }
+				{ id: "74C8ACE966B9DDC1", type: "checkmark" }
+			]
+			title: "Silver"
+			x: 13.5d
+			y: 14.0d
+		}
+		{
+			dependencies: ["32F405A210E05887"]
+			icon: "gtceu:lead_dust"
+			id: "7E9CF0D074448BD2"
+			size: 0.75d
+			subtitle: "Galena's other half: solder and batteries"
+			tasks: [
+				{ id: "1C4D660A79BAEB52", item: "gtceu:lead_dust", optional_task: true, type: "item" }
+				{ id: "12ABA2F5505421A4", type: "checkmark" }
+			]
+			title: "Lead"
+			x: 13.5d
+			y: 16.0d
+		}
+		{
+			dependencies: ["5FDADE302C4FBFFB"]
+			icon: "gtceu:silver_foil"
+			id: "70FC655CE2A74091"
+			size: 1.0d
+			subtitle: "Bender"
+			tasks: [
+				{ id: "39738F7834993774", item: "gtceu:silver_foil", optional_task: true, type: "item" }
+				{ id: "32FE9793F29A48B2", type: "checkmark" }
+			]
+			title: "Silver Foil"
+			x: 17.5d
+			y: 12.0d
+		}
+		{
+			icon: "gtceu:phenolic_circuit_board"
+			id: "1F229361CB54ADE2"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Wood dust and glue"
+			tasks: [
+				{ id: "180B0EF20F1E8051", item: "gtceu:phenolic_circuit_board", optional_task: true, type: "item" }
+				{ id: "155A3499FAAF61CD", type: "checkmark" }
+			]
+			title: "Phenolic Board"
+			x: 18.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["5FB263B2B1CC3789", "13D27CCCAAB9C52B", "70FC655CE2A74091", "1F229361CB54ADE2"]
+			icon: "gtceu:phenolic_printed_circuit_board"
+			id: "1D5BFD5FB065939D"
+			size: 1.0d
+			subtitle: "Persulfate or iron chloride etch"
+			tasks: [
+				{ id: "7655BDF5BF492C89", item: "gtceu:phenolic_printed_circuit_board", optional_task: true, type: "item" }
+				{ id: "5482077262785117", type: "checkmark" }
+			]
+			title: "Etched Board"
+			x: 21.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["781A445DB81F73DE", "1D5BFD5FB065939D"]
+			description: ["Two etched boards, four basic circuits and three diodes: the MV gate asks for eight of these."]
+			icon: "gtceu:good_electronic_circuit"
+			id: "1C36FDBF415ECCD5"
+			size: 1.25d
+			subtitle: "Circuit assembler"
+			tasks: [
+				{ id: "3FFE3F0B1729CA85", item: "gtceu:good_electronic_circuit", optional_task: true, type: "item" }
+				{ id: "1B1133C9DBDF2599", type: "checkmark" }
+			]
+			title: "Good Electronic Circuit"
+			x: 25.5d
+			y: 8.0d
+		}
+		{
+			icon: "minecraft:coal"
+			id: "378AFA6D945E1927"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "15F6734FEC74A549", item: "minecraft:coal", optional_task: true, type: "item" }
+				{ id: "109FBF76CC86AAF8", type: "checkmark" }
+			]
+			title: "Coal"
+			x: 0.5d
+			y: 21.75d
+		}
+		{
+			dependencies: ["378AFA6D945E1927"]
+			icon: "gtceu:coking_battery"
+			id: "5120CDEED5EE35DE"
+			shape: "gear"
+			size: 1.5d
+			subtitle: "Coke, creosote and coal gas"
+			tasks: [
+				{ id: "500BC008730CC8F2", item: "gtceu:coking_battery", optional_task: true, type: "item" }
+				{ id: "34E1D1052B65F7F0", type: "checkmark" }
+			]
+			title: "Coke Battery"
+			x: 2.5d
+			y: 21.75d
+		}
+		{
+			dependencies: ["5120CDEED5EE35DE"]
+			icon: "gtceu:coal_gas_bucket"
+			id: "34BE38C043B29ED4"
+			size: 1.0d
+			tasks: [
+				{ id: "7828A253ED92C25F", item: "gtceu:coal_gas_bucket", optional_task: true, type: "item" }
+				{ id: "3CA481C409B286E0", type: "checkmark" }
+			]
+			title: "Coal Gas"
+			x: 4.5d
+			y: 21.75d
+		}
+		{
+			dependencies: ["34BE38C043B29ED4"]
+			icon: "gtceu:lv_gas_turbine"
+			id: "5932AF3288255CF7"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Burns it for power"
+			tasks: [
+				{ id: "13DAE2E43545E9D6", item: "gtceu:lv_gas_turbine", optional_task: true, type: "item" }
+				{ id: "15FFBF6E4D5F2F89", type: "checkmark" }
+			]
+			title: "Gas Turbine"
 			x: 6.5d
-			y: 14.25d
+			y: 19.5d
+		}
+		{
+			dependencies: ["34BE38C043B29ED4"]
+			icon: "gtceu:lv_distillery"
+			id: "74A88EDF511766BC"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "One fraction per circuit"
+			tasks: [
+				{ id: "16F016CDFA0BD570", item: "gtceu:lv_distillery", optional_task: true, type: "item" }
+				{ id: "779ED2AD3C237F8D", type: "checkmark" }
+			]
+			title: "Distillery"
+			x: 6.5d
+			y: 21.75d
+		}
+		{
+			dependencies: ["74A88EDF511766BC"]
+			icon: "gtceu:coal_tar_bucket"
+			id: "78585557B7EC2D58"
+			size: 0.75d
+			subtitle: "Distil it again: creosote, phenol, naphthalene"
+			tasks: [
+				{ id: "1E77A11D231FEE54", item: "gtceu:coal_tar_bucket", optional_task: true, type: "item" }
+				{ id: "50BA09173F43751C", type: "checkmark" }
+			]
+			title: "Coal Tar"
+			x: 8.5d
+			y: 20.25d
+		}
+		{
+			dependencies: ["74A88EDF511766BC"]
+			icon: "gtceu:coke_dust"
+			id: "75A43E979C472240"
+			size: 0.75d
+			subtitle: "Carbon for the sinter"
+			tasks: [
+				{ id: "1834AB7D6CD65472", item: "gtceu:coke_dust", optional_task: true, type: "item" }
+				{ id: "37C6A7137E2D0407", type: "checkmark" }
+			]
+			title: "Coke Dust"
+			x: 8.5d
+			y: 24.75d
+		}
+		{
+			dependencies: ["74A88EDF511766BC"]
+			icon: "gtceu:ammonia_bucket"
+			id: "79841FC0203AF089"
+			size: 1.0d
+			subtitle: "Coke-oven ammonia, before Haber"
+			tasks: [
+				{ id: "3D815D2A3A9F51ED", item: "gtceu:ammonia_bucket", optional_task: true, type: "item" }
+				{ id: "71A77CE6A2C3181E", type: "checkmark" }
+			]
+			title: "Ammonia"
+			x: 8.5d
+			y: 21.75d
+		}
+		{
+			icon: "gtceu:oxygen_bucket"
+			id: "7E1EF950B9D776E1"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Gas collector and centrifuge"
+			tasks: [
+				{ id: "169DC16F05A3C43C", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "70D74D52DEC92E90", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 10.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["79841FC0203AF089", "7E1EF950B9D776E1"]
+			icon: "gtceu:nitric_oxide_bucket"
+			id: "14C29149F8F28F2F"
+			size: 1.0d
+			subtitle: "Ostwald oxidation"
+			tasks: [
+				{ id: "19EAD144D8A24539", item: "gtceu:nitric_oxide_bucket", optional_task: true, type: "item" }
+				{ id: "5EAA51DC60FD1317", type: "checkmark" }
+			]
+			title: "Nitric Oxide"
+			x: 10.5d
+			y: 22.5d
+		}
+		{
+			dependencies: ["14C29149F8F28F2F", "7E1EF950B9D776E1"]
+			icon: "gtceu:nitrogen_dioxide_bucket"
+			id: "17A63D77B152EC0C"
+			size: 1.0d
+			subtitle: "More oxygen"
+			tasks: [
+				{ id: "553CF2814BF8BD5E", item: "gtceu:nitrogen_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "1F4ABA7778F8454E", type: "checkmark" }
+			]
+			title: "Nitrogen Dioxide"
+			x: 12.5d
+			y: 22.5d
+		}
+		{
+			dependencies: ["17A63D77B152EC0C"]
+			description: ["GregTech's long way to nitric acid. Later lines need it by the bucket."]
+			icon: "gtceu:nitric_acid_bucket"
+			id: "782D3B7EA5568EEC"
+			size: 1.0d
+			subtitle: "Absorbed in water; the NO loops back"
+			tasks: [
+				{ id: "5D365E2E19F3C688", item: "gtceu:nitric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "717770B38609591D", type: "checkmark" }
+			]
+			title: "Nitric Acid"
+			x: 14.5d
+			y: 22.5d
+		}
+		{
+			icon: "gtceu:silver_dust"
+			id: "76AA6804D2926D15"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the sulfide roaster's galena"
+			tasks: [
+				{ id: "577E7626666090EC", item: "gtceu:silver_dust", optional_task: true, type: "item" }
+				{ id: "3DE70A403D08072E", type: "checkmark" }
+			]
+			title: "Silver Dust"
+			x: 14.5d
+			y: 24.75d
+		}
+		{
+			dependencies: ["782D3B7EA5568EEC", "76AA6804D2926D15"]
+			icon: "gtceu:silver_nitrate_dust"
+			id: "57F58B1484CB921B"
+			size: 1.0d
+			subtitle: "Dissolving silver"
+			tasks: [
+				{ id: "5692F3A079D8C8FF", item: "gtceu:silver_nitrate_dust", optional_task: true, type: "item" }
+				{ id: "358CA45F69C27C18", type: "checkmark" }
+			]
+			title: "Silver Nitrate"
+			x: 16.5d
+			y: 24.0d
+		}
+		{
+			icon: "gtceu:salt_dust"
+			id: "5C2B5F36FB8F3E3B"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "742A3CB39D5BA9EF", item: "gtceu:salt_dust", optional_task: true, type: "item" }
+				{ id: "304BCCF0C05C2014", type: "checkmark" }
+			]
+			title: "Salt"
+			x: 18.5d
+			y: 24.0d
+		}
+		{
+			dependencies: ["57F58B1484CB921B", "5C2B5F36FB8F3E3B"]
+			icon: "gtceu:silver_chloride_dust"
+			id: "1534680227A9FD1D"
+			size: 1.0d
+			subtitle: "Precipitation"
+			tasks: [
+				{ id: "3A2E08DE08CA2465", item: "gtceu:silver_chloride_dust", optional_task: true, type: "item" }
+				{ id: "14520494640CFCD5", type: "checkmark" }
+			]
+			title: "Silver Chloride"
+			x: 18.5d
+			y: 22.5d
+		}
+		{
+			dependencies: ["57F58B1484CB921B", "5C2B5F36FB8F3E3B"]
+			icon: "gtceu:sodium_nitrate_dust"
+			id: "78C37A3D6D79431D"
+			size: 0.75d
+			subtitle: "A real fertilizer too"
+			tasks: [
+				{ id: "5DFF440E879B2628", item: "gtceu:sodium_nitrate_dust", optional_task: true, type: "item" }
+				{ id: "3A730E0FD5910A40", type: "checkmark" }
+			]
+			title: "Sodium Nitrate"
+			x: 18.5d
+			y: 25.5d
+		}
+		{
+			icon: "gtceu:glue_bucket"
+			id: "7FF7CCB9B7A98BFC"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Impure gelatin"
+			tasks: [
+				{ id: "753514F4739A97EB", item: "gtceu:glue_bucket", optional_task: true, type: "item" }
+				{ id: "5CBBCFECCB36EE73", type: "checkmark" }
+			]
+			title: "Glue"
+			x: 20.5d
+			y: 21.75d
+		}
+		{
+			dependencies: ["1534680227A9FD1D", "7FF7CCB9B7A98BFC"]
+			icon: "gtceu:photographic_emulsion_bucket"
+			id: "55D0289FF09F9C87"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "7D0F19B3D1279BDB", item: "gtceu:photographic_emulsion_bucket", optional_task: true, type: "item" }
+				{ id: "7CA31E447CCFE14D", type: "checkmark" }
+			]
+			title: "Photographic Emulsion"
+			x: 20.5d
+			y: 23.25d
+		}
+		{
+			icon: "gtceu:glass_plate"
+			id: "38924C8787ABC653"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "70371DA336AF216B", item: "gtceu:glass_plate", optional_task: true, type: "item" }
+				{ id: "573EBE035E44E418", type: "checkmark" }
+			]
+			title: "Glass Plate"
+			x: 20.5d
+			y: 24.75d
+		}
+		{
+			dependencies: ["55D0289FF09F9C87", "38924C8787ABC653"]
+			icon: "grindless:photographic_plate"
+			id: "78D93043F7778D88"
+			size: 1.0d
+			subtitle: "Plate coating"
+			tasks: [
+				{ id: "13F11CD7F52AAC05", item: "grindless:photographic_plate", optional_task: true, type: "item" }
+				{ id: "7EBC97B366C42EBD", type: "checkmark" }
+			]
+			title: "Photographic Plate"
+			x: 22.5d
+			y: 24.0d
+		}
+		{
+			description: ["It's never used up. Copy it by hand if you want a spare."]
+			icon: "grindless:lunar_chart_draft"
+			id: "15CD134A685BA795"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Drawn by the steam age's observatory"
+			tasks: [
+				{ id: "56B662640FA64BAC", item: "grindless:lunar_chart_draft", optional_task: true, type: "item" }
+				{ id: "190108526A3E525B", type: "checkmark" }
+			]
+			title: "Lunar Chart (Draft)"
+			x: 22.5d
+			y: 21.75d
+		}
+		{
+			icon: "minecraft:paper"
+			id: "52005DFF50024EC0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "56A074EC2185F7E5", item: "minecraft:paper", optional_task: true, type: "item" }
+				{ id: "1158BA11C7BD9453", type: "checkmark" }
+			]
+			title: "Paper"
+			x: 22.5d
+			y: 25.75d
+		}
+		{
+			dependencies: ["15CD134A685BA795", "52005DFF50024EC0", "78D93043F7778D88"]
+			description: ["Long exposures on clear nights, at any height. The steam age's chart guides it and stays in one piece."]
+			icon: "gtceu:optical_observatory"
+			id: "306C84643922BDAF"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "57193DAFC9B96A33", item: "gtceu:optical_observatory", optional_task: true, type: "item" }
+				{ id: "77911EE3B6C4EB04", type: "checkmark" }
+			]
+			title: "Optical Observatory"
+			x: 24.5d
+			y: 23.75d
+		}
+		{
+			dependencies: ["306C84643922BDAF"]
+			icon: "grindless:lunar_map"
+			id: "388F688236DC7298"
+			size: 1.25d
+			tasks: [
+				{ id: "549D44E45F6A6399", item: "grindless:lunar_map", optional_task: true, type: "item" }
+				{ id: "758D961C8F810B83", type: "checkmark" }
+			]
+			title: "Photographic Lunar Map"
+			x: 26.5d
+			y: 22.75d
+		}
+		{
+			dependencies: ["306C84643922BDAF"]
+			icon: "grindless:lunar_ephemeris"
+			id: "3954D84FC7C457CA"
+			size: 0.75d
+			subtitle: "Where the Moon will be"
+			tasks: [
+				{ id: "7E8DA32522B2B55C", item: "grindless:lunar_ephemeris", optional_task: true, type: "item" }
+				{ id: "168D2AAE4647C490", type: "checkmark" }
+			]
+			title: "Lunar Ephemeris"
+			x: 26.5d
+			y: 24.75d
+		}
+		{
+			icon: "gtceu:lv_gas_collector"
+			id: "5BF897978D5CE1AB"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Breathes in the Overworld"
+			tasks: [
+				{ id: "128002E320F7031E", item: "gtceu:lv_gas_collector", optional_task: true, type: "item" }
+				{ id: "1DB2BFFF39242457", type: "checkmark" }
+			]
+			title: "Gas Collector"
+			x: 0.75d
+			y: 30.25d
+		}
+		{
+			dependencies: ["5BF897978D5CE1AB"]
+			icon: "gtceu:air_bucket"
+			id: "75EF9150D357BAC9"
+			size: 1.0d
+			tasks: [
+				{ id: "3E7992BFB9223C7F", item: "gtceu:air_bucket", optional_task: true, type: "item" }
+				{ id: "7D1EF06AEB5A4A35", type: "checkmark" }
+			]
+			title: "Air"
+			x: 2.75d
+			y: 30.25d
+		}
+		{
+			dependencies: ["75EF9150D357BAC9"]
+			icon: "gtceu:oxygen_bucket"
+			id: "5BED4655BDD34ED3"
+			size: 1.25d
+			subtitle: "Centrifuge"
+			tasks: [
+				{ id: "50783CC0803DD473", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "7545807A60E3A0AE", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 4.75d
+			y: 29.5d
+		}
+		{
+			dependencies: ["75EF9150D357BAC9"]
+			icon: "gtceu:nitrogen_bucket"
+			id: "376DA31AF22E8CD8"
+			size: 0.75d
+			subtitle: "Aluminium in the EBF; MV pyrolysis runs faster with it"
+			tasks: [
+				{ id: "7D5043254D8FBC31", item: "gtceu:nitrogen_bucket", optional_task: true, type: "item" }
+				{ id: "1E7D7D8DFCECF4E7", type: "checkmark" }
+			]
+			title: "Nitrogen"
+			x: 4.75d
+			y: 31.0d
 		}
 		{
 			icon: "gtceu:raw_sapphire"
@@ -497,8 +962,8 @@
 				{ id: "51922778F2ABB9AF", type: "checkmark" }
 			]
 			title: "Raw Sapphire"
-			x: 10.75d
-			y: 13.25d
+			x: 9.0d
+			y: 31.5d
 		}
 		{
 			dependencies: ["1E89202592F1F682"]
@@ -511,8 +976,8 @@
 				{ id: "71834C40F5A60387", type: "checkmark" }
 			]
 			title: "Sapphire Dust"
-			x: 12.75d
-			y: 13.25d
+			x: 11.0d
+			y: 31.5d
 		}
 		{
 			dependencies: ["3F94AA2A1F381357"]
@@ -525,8 +990,8 @@
 				{ id: "7A99ACBB450D4D31", type: "checkmark" }
 			]
 			title: "Electrolyzer"
-			x: 14.75d
-			y: 13.25d
+			x: 13.0d
+			y: 31.5d
 		}
 		{
 			dependencies: ["7C7EA4687020CFB9"]
@@ -538,8 +1003,8 @@
 				{ id: "7E08BDAFA5A249CB", type: "checkmark" }
 			]
 			title: "Aluminium Dust"
-			x: 16.75d
-			y: 12.5d
+			x: 15.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["7C7EA4687020CFB9"]
@@ -552,8 +1017,8 @@
 				{ id: "3F475146FD12C01C", type: "checkmark" }
 			]
 			title: "Oxygen"
-			x: 16.75d
-			y: 14.0d
+			x: 15.0d
+			y: 32.25d
 		}
 		{
 			dependencies: ["14F157B5E41B2D31"]
@@ -567,8 +1032,8 @@
 				{ id: "34D4ADD225B0DFE7", type: "checkmark" }
 			]
 			title: "Electric Blast Furnace"
-			x: 18.75d
-			y: 12.5d
+			x: 17.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["3942A5EEDEF5E274"]
@@ -580,8 +1045,8 @@
 				{ id: "7398776BA8BAA169", type: "checkmark" }
 			]
 			title: "Aluminium"
-			x: 20.75d
-			y: 12.5d
+			x: 19.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5F51561F02FCF315"]
@@ -594,8 +1059,8 @@
 				{ id: "594B884613528F84", type: "checkmark" }
 			]
 			title: "Aluminium Plate"
-			x: 22.75d
-			y: 12.5d
+			x: 21.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5A4B541D8CC0EE0E"]
@@ -608,8 +1073,8 @@
 				{ id: "7F31F9699C456BF5", type: "checkmark" }
 			]
 			title: "MV Machine Casing"
-			x: 24.75d
-			y: 11.0d
+			x: 23.0d
+			y: 29.25d
 		}
 		{
 			dependencies: ["5A4B541D8CC0EE0E", "733F1F2452A6C7D0"]
@@ -622,105 +1087,8 @@
 				{ id: "1A8CDEC1D93E304C", type: "checkmark" }
 			]
 			title: "MV Machine Hull"
-			x: 26.75d
-			y: 12.5d
-		}
-		{
-			icon: "gtceu:sphalerite_dust"
-			id: "3B4EC36C63AE9591"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "31A0303B4AE86106", item: "gtceu:sphalerite_dust", optional_task: true, type: "item" }
-				{ id: "5197476E0B0B91B4", type: "checkmark" }
-			]
-			title: "Sphalerite Dust"
-			x: 31.0d
-			y: 11.0d
-		}
-		{
-			icon: "gtceu:realgar_dust"
-			id: "5887C91D880A8283"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "79267A003A969D99", item: "gtceu:realgar_dust", optional_task: true, type: "item" }
-				{ id: "16DEAFBFB788CC7F", type: "checkmark" }
-			]
-			title: "Realgar Dust"
-			x: 31.0d
-			y: 12.5d
-		}
-		{
-			dependencies: ["3B4EC36C63AE9591"]
-			icon: "gtceu:gallium_dust"
-			id: "7C5DCC2AB2360C89"
-			size: 1.0d
-			subtitle: "Electrolyzer, a little at a time"
-			tasks: [
-				{ id: "1C8C196E82E7D3EE", item: "gtceu:gallium_dust", optional_task: true, type: "item" }
-				{ id: "3D5E5497D3C165BE", type: "checkmark" }
-			]
-			title: "Gallium"
-			x: 33.0d
-			y: 11.0d
-		}
-		{
-			dependencies: ["5887C91D880A8283"]
-			icon: "gtceu:arsenic_dust"
-			id: "58DFC4B61FEEE416"
-			size: 1.0d
-			subtitle: "Centrifuge"
-			tasks: [
-				{ id: "3F3DD656066C3735", item: "gtceu:arsenic_dust", optional_task: true, type: "item" }
-				{ id: "3092C570EBA5C9AF", type: "checkmark" }
-			]
-			title: "Arsenic"
-			x: 33.0d
-			y: 12.5d
-		}
-		{
-			dependencies: ["5887C91D880A8283"]
-			icon: "gtceu:sulfur_dust"
-			id: "71A31ECF387F798D"
-			size: 0.75d
-			subtitle: "Acid and rubber"
-			tasks: [
-				{ id: "36D69CCF8F596DE0", item: "gtceu:sulfur_dust", optional_task: true, type: "item" }
-				{ id: "1392C2C042DE4DDF", type: "checkmark" }
-			]
-			title: "Sulfur"
-			x: 33.0d
-			y: 14.0d
-		}
-		{
-			dependencies: ["7C5DCC2AB2360C89", "58DFC4B61FEEE416"]
-			icon: "gtceu:gallium_arsenide_dust"
-			id: "162641406869CF74"
-			size: 1.0d
-			subtitle: "Mixer"
-			tasks: [
-				{ id: "1618E114B4C96B11", item: "gtceu:gallium_arsenide_dust", optional_task: true, type: "item" }
-				{ id: "119FFE25C565BC43", type: "checkmark" }
-			]
-			title: "Gallium Arsenide"
-			x: 35.0d
-			y: 11.75d
-		}
-		{
-			dependencies: ["162641406869CF74"]
-			description: ["A pinch of gallium arsenide per diode, and the good circuits of LV are open."]
-			icon: "gtceu:diode"
-			id: "781A445DB81F73DE"
-			size: 1.25d
-			subtitle: "Assembler"
-			tasks: [
-				{ id: "542889A2B782B7AA", item: "gtceu:diode", optional_task: true, type: "item" }
-				{ id: "3491D8B18A4BA9D4", type: "checkmark" }
-			]
-			title: "Diode"
-			x: 37.0d
-			y: 11.75d
+			x: 25.0d
+			y: 30.75d
 		}
 		{
 			icon: "gtceu:quartz_sand_dust"
@@ -733,7 +1101,7 @@
 			]
 			title: "Quartz Sand"
 			x: 0.5d
-			y: 18.75d
+			y: 36.0d
 		}
 		{
 			icon: "gtceu:coke_dust"
@@ -746,7 +1114,7 @@
 			]
 			title: "Coke Dust"
 			x: 0.5d
-			y: 20.25d
+			y: 37.5d
 		}
 		{
 			icon: "grindless:graphite_electrode"
@@ -760,7 +1128,7 @@
 			]
 			title: "Graphite Electrode"
 			x: 0.5d
-			y: 21.75d
+			y: 39.0d
 		}
 		{
 			icon: "minecraft:cobblestone"
@@ -774,7 +1142,7 @@
 			]
 			title: "Cobblestone"
 			x: 0.5d
-			y: 23.25d
+			y: 40.5d
 		}
 		{
 			dependencies: ["1DCC7755DF59E3AE", "7A646DD83B7A66CF", "190CFC46B6412C3A", "3C3D3502FD8DEAA4"]
@@ -789,7 +1157,7 @@
 			]
 			title: "Submerged Arc Furnace"
 			x: 3.0d
-			y: 21.0d
+			y: 38.25d
 		}
 		{
 			dependencies: ["50914A7877DC2282"]
@@ -803,7 +1171,7 @@
 			]
 			title: "Silicon (AE2)"
 			x: 5.5d
-			y: 18.75d
+			y: 36.0d
 		}
 		{
 			dependencies: ["50914A7877DC2282"]
@@ -817,7 +1185,7 @@
 			]
 			title: "Carbon Dioxide"
 			x: 5.5d
-			y: 20.25d
+			y: 37.5d
 		}
 		{
 			dependencies: ["50914A7877DC2282"]
@@ -831,7 +1199,7 @@
 			]
 			title: "Ash"
 			x: 5.5d
-			y: 21.75d
+			y: 39.0d
 		}
 		{
 			dependencies: ["50914A7877DC2282"]
@@ -844,7 +1212,7 @@
 			]
 			title: "Obsidian"
 			x: 5.5d
-			y: 23.25d
+			y: 40.5d
 		}
 		{
 			dependencies: ["72549D2D2A1011EF"]
@@ -858,7 +1226,7 @@
 			]
 			title: "Obsidian Dust"
 			x: 7.5d
-			y: 23.25d
+			y: 40.5d
 		}
 		{
 			dependencies: ["3EB8ADBDC776A2DF"]
@@ -873,7 +1241,7 @@
 			]
 			title: "Sky Stone Dust"
 			x: 9.5d
-			y: 23.25d
+			y: 40.5d
 		}
 		{
 			icon: "minecraft:water_bucket"
@@ -886,7 +1254,7 @@
 			]
 			title: "Water"
 			x: 13.75d
-			y: 18.75d
+			y: 36.0d
 		}
 		{
 			dependencies: ["73F12C3F6247982B"]
@@ -901,7 +1269,7 @@
 			]
 			title: "Heliostat Tower"
 			x: 15.75d
-			y: 18.75d
+			y: 36.0d
 		}
 		{
 			dependencies: ["7C1774883E4B34E1"]
@@ -915,7 +1283,7 @@
 			]
 			title: "Steam"
 			x: 17.75d
-			y: 18.75d
+			y: 36.0d
 		}
 		{
 			dependencies: ["11C8A87D0BE6CDDB"]
@@ -929,7 +1297,7 @@
 			]
 			title: "Steam Turbine"
 			x: 19.75d
-			y: 18.75d
+			y: 36.0d
 		}
 		{
 			dependencies: ["3F0C83E38EF69529"]
@@ -945,7 +1313,7 @@
 			]
 			title: "Distilled Water, Back Up"
 			x: 21.75d
-			y: 18.75d
+			y: 36.0d
 		}
 		{
 			icon: "gtceu:silver_ingot"
@@ -959,7 +1327,7 @@
 			]
 			title: "Silver"
 			x: 13.75d
-			y: 20.75d
+			y: 38.0d
 		}
 		{
 			dependencies: ["1E6C75E88AF1BEA8"]
@@ -972,7 +1340,7 @@
 			]
 			title: "Silver Foil"
 			x: 15.75d
-			y: 20.75d
+			y: 38.0d
 		}
 		{
 			dependencies: ["17965F008E3CF2A3"]
@@ -986,7 +1354,7 @@
 			]
 			title: "Heliostat Mirror"
 			x: 17.75d
-			y: 20.75d
+			y: 38.0d
 		}
 		{
 			dependencies: ["56C1CC49EE43FB68"]
@@ -1000,7 +1368,7 @@
 			]
 			title: "Lubricant"
 			x: 2.5d
-			y: 27.75d
+			y: 45.0d
 		}
 		{
 			icon: "gtceu:stone_dust"
@@ -1013,7 +1381,7 @@
 			]
 			title: "Stone Dust"
 			x: 2.5d
-			y: 29.25d
+			y: 46.5d
 		}
 		{
 			dependencies: ["751D03C3C9B1D654", "152A086C9EEAA6AC"]
@@ -1027,7 +1395,7 @@
 			]
 			title: "Drilling Fluid"
 			x: 4.5d
-			y: 28.5d
+			y: 45.75d
 		}
 		{
 			icon: "grindless:steel_drill_bit"
@@ -1040,7 +1408,7 @@
 			]
 			title: "Steel Drill Bit"
 			x: 4.5d
-			y: 26.75d
+			y: 44.0d
 		}
 		{
 			icon: "grindless:vein_sample_iron"
@@ -1054,7 +1422,7 @@
 			]
 			title: "Vein Sample"
 			x: 4.5d
-			y: 30.25d
+			y: 47.5d
 		}
 		{
 			dependencies: ["34CDD62DD8E1D773", "37C079003D956ABB", "3CCC2AE912E34FC7"]
@@ -1069,7 +1437,7 @@
 			]
 			title: "LV Vein Drill"
 			x: 6.75d
-			y: 28.5d
+			y: 45.75d
 		}
 		{
 			dependencies: ["52FBD32E666844F2"]
@@ -1084,7 +1452,7 @@
 			]
 			title: "Raw Ore"
 			x: 9.0d
-			y: 27.75d
+			y: 45.0d
 		}
 		{
 			dependencies: ["52FBD32E666844F2"]
@@ -1097,7 +1465,7 @@
 			]
 			title: "Cobblestone"
 			x: 9.0d
-			y: 29.25d
+			y: 46.5d
 		}
 		{
 			dependencies: ["79C393BC546028D5"]
@@ -1112,79 +1480,7 @@
 			]
 			title: "Stone Dust, Back In"
 			x: 11.0d
-			y: 29.25d
-		}
-		{
-			dependencies: ["706EBF5AC6E6A649"]
-			icon: "gtceu:lv_gas_turbine"
-			id: "5932AF3288255CF7"
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Burns it for power"
-			tasks: [
-				{ id: "13DAE2E43545E9D6", item: "gtceu:lv_gas_turbine", optional_task: true, type: "item" }
-				{ id: "15FFBF6E4D5F2F89", type: "checkmark" }
-			]
-			title: "Gas Turbine"
-			x: 17.0d
-			y: 27.0d
-		}
-		{
-			dependencies: ["706EBF5AC6E6A649"]
-			icon: "gtceu:lv_distillery"
-			id: "74A88EDF511766BC"
-			shape: "gear"
-			size: 1.25d
-			subtitle: "One fraction per circuit"
-			tasks: [
-				{ id: "16F016CDFA0BD570", item: "gtceu:lv_distillery", optional_task: true, type: "item" }
-				{ id: "779ED2AD3C237F8D", type: "checkmark" }
-			]
-			title: "Distillery"
-			x: 17.0d
-			y: 30.0d
-		}
-		{
-			dependencies: ["74A88EDF511766BC"]
-			icon: "gtceu:coal_tar_bucket"
-			id: "78585557B7EC2D58"
-			size: 1.25d
-			subtitle: "Distil it again: creosote, phenol, naphthalene"
-			tasks: [
-				{ id: "1E77A11D231FEE54", item: "gtceu:coal_tar_bucket", optional_task: true, type: "item" }
-				{ id: "50BA09173F43751C", type: "checkmark" }
-			]
-			title: "Coal Tar"
-			x: 19.0d
-			y: 29.25d
-		}
-		{
-			dependencies: ["74A88EDF511766BC"]
-			icon: "gtceu:ammonia_bucket"
-			id: "79841FC0203AF089"
-			size: 1.25d
-			subtitle: "Burnt with oxygen, it starts nitric acid"
-			tasks: [
-				{ id: "3D815D2A3A9F51ED", item: "gtceu:ammonia_bucket", optional_task: true, type: "item" }
-				{ id: "71A77CE6A2C3181E", type: "checkmark" }
-			]
-			title: "Ammonia"
-			x: 19.0d
-			y: 30.75d
-		}
-		{
-			dependencies: ["74A88EDF511766BC"]
-			icon: "gtceu:coke_dust"
-			id: "75A43E979C472240"
-			size: 0.75d
-			subtitle: "The arc furnace's carbon"
-			tasks: [
-				{ id: "1834AB7D6CD65472", item: "gtceu:coke_dust", optional_task: true, type: "item" }
-				{ id: "37C6A7137E2D0407", type: "checkmark" }
-			]
-			title: "Coke Dust"
-			x: 19.0d
-			y: 32.25d
+			y: 46.5d
 		}
 		{
 			icon: "gtceu:calcite_dust"
@@ -1196,8 +1492,8 @@
 				{ id: "37D9736FA8E09D96", type: "checkmark" }
 			]
 			title: "Calcite"
-			x: 23.25d
-			y: 28.25d
+			x: 15.0d
+			y: 45.5d
 		}
 		{
 			dependencies: ["1A3EAE1BFB47BDE8", "3273E05BE192C962"]
@@ -1210,8 +1506,8 @@
 				{ id: "75B10EE6089FDE26", type: "checkmark" }
 			]
 			title: "Fertilizer"
-			x: 25.25d
-			y: 27.5d
+			x: 17.0d
+			y: 44.75d
 		}
 		{
 			icon: "minecraft:oak_sapling"
@@ -1224,8 +1520,8 @@
 				{ id: "163A01A7944E09A6", type: "checkmark" }
 			]
 			title: "Sapling"
-			x: 25.25d
-			y: 29.0d
+			x: 17.0d
+			y: 46.25d
 		}
 		{
 			dependencies: ["161A8ED9F51EDC21", "51BE35381B5DA8CA"]
@@ -1239,8 +1535,8 @@
 				{ id: "5E8ED4500483450D", type: "checkmark" }
 			]
 			title: "LV Greenhouse"
-			x: 27.25d
-			y: 28.25d
+			x: 19.0d
+			y: 45.5d
 		}
 		{
 			dependencies: ["1C1C534CFB221F5B"]
@@ -1252,104 +1548,8 @@
 				{ id: "74B7AC5904DF7AD0", type: "checkmark" }
 			]
 			title: "Logs"
-			x: 29.25d
-			y: 28.25d
-		}
-		{
-			icon: "minecraft:paper"
-			id: "52005DFF50024EC0"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "56A074EC2185F7E5", item: "minecraft:paper", optional_task: true, type: "item" }
-				{ id: "1158BA11C7BD9453", type: "checkmark" }
-			]
-			title: "Paper"
-			x: 2.5d
-			y: 35.5d
-		}
-		{
-			icon: "gtceu:glass_plate"
-			id: "38924C8787ABC653"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "70371DA336AF216B", item: "gtceu:glass_plate", optional_task: true, type: "item" }
-				{ id: "573EBE035E44E418", type: "checkmark" }
-			]
-			title: "Glass Plate"
-			x: 0.5d
-			y: 37.75d
-		}
-		{
-			icon: "gtceu:small_silver_dust"
-			id: "586399B66DD432D0"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "The emulsion"
-			tasks: [
-				{ id: "74BE91D4313B172C", item: "gtceu:small_silver_dust", optional_task: true, type: "item" }
-				{ id: "1885534316A87346", type: "checkmark" }
-			]
-			title: "Small Pile of Silver Dust"
-			x: 0.5d
-			y: 39.25d
-		}
-		{
-			dependencies: ["38924C8787ABC653", "586399B66DD432D0"]
-			icon: "grindless:photographic_plate"
-			id: "78D93043F7778D88"
-			size: 1.0d
-			subtitle: "Assembler"
-			tasks: [
-				{ id: "13F11CD7F52AAC05", item: "grindless:photographic_plate", optional_task: true, type: "item" }
-				{ id: "7EBC97B366C42EBD", type: "checkmark" }
-			]
-			title: "Photographic Plate"
-			x: 2.5d
-			y: 38.5d
-		}
-		{
-			dependencies: ["5F16A671CF08E9B6", "52005DFF50024EC0", "78D93043F7778D88"]
-			description: ["Long exposures on clear nights, at any height. The steam age's chart guides it and stays in one piece."]
-			icon: "gtceu:optical_observatory"
-			id: "306C84643922BDAF"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "57193DAFC9B96A33", item: "gtceu:optical_observatory", optional_task: true, type: "item" }
-				{ id: "77911EE3B6C4EB04", type: "checkmark" }
-			]
-			title: "Optical Observatory"
-			x: 4.5d
-			y: 37.0d
-		}
-		{
-			dependencies: ["306C84643922BDAF"]
-			icon: "grindless:lunar_map"
-			id: "388F688236DC7298"
-			size: 1.25d
-			tasks: [
-				{ id: "549D44E45F6A6399", item: "grindless:lunar_map", optional_task: true, type: "item" }
-				{ id: "758D961C8F810B83", type: "checkmark" }
-			]
-			title: "Photographic Lunar Map"
-			x: 6.5d
-			y: 36.25d
-		}
-		{
-			dependencies: ["306C84643922BDAF"]
-			icon: "grindless:lunar_ephemeris"
-			id: "3954D84FC7C457CA"
-			size: 1.25d
-			subtitle: "Where the Moon will be"
-			tasks: [
-				{ id: "7E8DA32522B2B55C", item: "grindless:lunar_ephemeris", optional_task: true, type: "item" }
-				{ id: "168D2AAE4647C490", type: "checkmark" }
-			]
-			title: "Lunar Ephemeris"
-			x: 6.5d
-			y: 37.75d
+			x: 21.0d
+			y: 45.5d
 		}
 		{
 			icon: "minecraft:beetroot"
@@ -1362,8 +1562,8 @@
 				{ id: "5DB07FB9CD49A12B", type: "checkmark" }
 			]
 			title: "Crops"
-			x: 10.75d
-			y: 35.5d
+			x: 25.25d
+			y: 44.0d
 		}
 		{
 			dependencies: ["7F0921332C91819E"]
@@ -1376,8 +1576,8 @@
 				{ id: "1016FD203ED6868D", type: "checkmark" }
 			]
 			title: "Biomass"
-			x: 12.75d
-			y: 35.5d
+			x: 27.25d
+			y: 44.0d
 		}
 		{
 			icon: "gtceu:obsidian_dust"
@@ -1389,8 +1589,8 @@
 				{ id: "5E6F474FBB884574", type: "checkmark" }
 			]
 			title: "Obsidian Dust"
-			x: 12.75d
-			y: 37.0d
+			x: 27.25d
+			y: 45.5d
 		}
 		{
 			icon: "grindless:creature_model_enderman"
@@ -1403,8 +1603,8 @@
 				{ id: "3DB9825CFB283EFB", type: "checkmark" }
 			]
 			title: "Enderman Model"
-			x: 12.75d
-			y: 38.5d
+			x: 27.25d
+			y: 47.0d
 		}
 		{
 			dependencies: ["78196EE68F118BA4", "70473C9E03BE7F08", "77DF7AE068111355"]
@@ -1418,8 +1618,8 @@
 				{ id: "30328261A7549D4E", type: "checkmark" }
 			]
 			title: "Creature Simulator"
-			x: 14.75d
-			y: 37.0d
+			x: 29.25d
+			y: 45.5d
 		}
 		{
 			dependencies: ["1AAE407AE16A2463"]
@@ -1431,10 +1631,10 @@
 				{ id: "1F741BAB31D51027", type: "checkmark" }
 			]
 			title: "Ender Pearl"
-			x: 16.75d
-			y: 37.0d
+			x: 31.25d
+			y: 45.5d
 		}
 	]
-	subtitle: ["Sulfur becomes acid, air becomes gases, sapphire becomes aluminium, and the arc furnace makes silicon for AE2."]
+	subtitle: ["Pyrite becomes acid and etched boards, coal gas becomes nitric acid and photographic plates, and sapphire becomes aluminium."]
 	title: "LV Lines"
 }

@@ -2344,19 +2344,6 @@
 			y: 36.5d
 		}
 		{
-			dependencies: ["5E62AB00D97F5F31"]
-			icon: "grindless:relay_seed"
-			id: "17745B0A5CEA91FF"
-			size: 1.25d
-			tasks: [
-				{ id: "1F891996DF87F456", item: "grindless:relay_seed", optional_task: true, type: "item" }
-				{ id: "5628BF644B2C6705", type: "checkmark" }
-			]
-			title: "Relay Seed"
-			x: 94.25d
-			y: 37.25d
-		}
-		{
 			dependencies: ["5E62AB00D97F5F31", "75DF7E9F37652BC6"]
 			icon: "grindless:sailcraft"
 			id: "1AA902DA00F9AFB4"

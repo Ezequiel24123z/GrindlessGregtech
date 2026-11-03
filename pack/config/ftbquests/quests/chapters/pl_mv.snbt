@@ -1,21 +1,28 @@
 {
-	autofocus_id: "140A1C3C4979392E"
+	autofocus_id: "5F4A302D13D7A87F"
 	consume_items: false
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "pl_mv"
 	group: "3027186E3042DDFB"
-	icon: "gtceu:ore_plant"
+	icon: "gtceu:mv_vein_drill"
 	id: "3DD4AC1ED2526A8B"
 	order_index: 2
 	progression_mode: "flexible"
 	quest_links: [
 		{
+			id: "58375C52001E87B2"
+			linked_quest: "70A91737242112D0"
+			shape: "rsquare"
+			x: 36.75d
+			y: 0.5d
+		}
+		{
 			id: "78BA164EA44832CD"
 			linked_quest: "162641406869CF74"
 			shape: "rsquare"
-			x: 23.25d
-			y: 2.25d
+			x: 40.75d
+			y: 3.5d
 		}
 		{
 			id: "74A0FAF7B573E821"
@@ -23,13 +30,6 @@
 			shape: "rsquare"
 			x: 0.5d
 			y: 13.25d
-		}
-		{
-			id: "58375C52001E87B2"
-			linked_quest: "70A91737242112D0"
-			shape: "rsquare"
-			x: 19.25d
-			y: 13.0d
 		}
 		{
 			id: "1C91EE718836F734"
@@ -52,180 +52,257 @@
 			x: 8.5d
 			y: 31.0d
 		}
-		{
-			id: "7E212844780A65CB"
-			linked_quest: "388F688236DC7298"
-			shape: "rsquare"
-			x: 29.0d
-			y: 28.75d
-		}
-		{
-			id: "3254E134CC050F59"
-			linked_quest: "3954D84FC7C457CA"
-			shape: "rsquare"
-			x: 29.0d
-			y: 30.25d
-		}
 	]
 	quests: [
 		{
-			icon: "minecraft:raw_copper"
-			id: "140A1C3C4979392E"
+			icon: "grindless:vein_sample_nickel"
+			id: "5F4A302D13D7A87F"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Or any raw ore from the drills"
 			tasks: [
-				{ id: "10245AF70AC16EA5", item: "minecraft:raw_copper", optional_task: true, type: "item" }
-				{ id: "7E48B5FBFEEAD5BE", type: "checkmark" }
+				{ id: "10180084540228D3", item: "grindless:vein_sample_nickel", optional_task: true, type: "item" }
+				{ id: "1CB36365BF9181D0", type: "checkmark" }
 			]
-			title: "Raw Copper"
+			title: "Nickel Vein Sample"
 			x: 0.5d
 			y: 2.0d
 		}
 		{
-			icon: "minecraft:water_bucket"
-			id: "7117E4A2A9FA2934"
+			icon: "grindless:vanadium_steel_drill_bit"
+			id: "1898CAFED213EEF4"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Or a little distilled water"
 			tasks: [
-				{ id: "3E146D37F19602F9", item: "minecraft:water_bucket", optional_task: true, type: "item" }
-				{ id: "3B83B9B4266B962F", type: "checkmark" }
+				{ id: "5F1AC6997104670F", item: "grindless:vanadium_steel_drill_bit", optional_task: true, type: "item" }
+				{ id: "578606F6A2724568", type: "checkmark" }
 			]
-			title: "Water"
+			title: "Vanadium Steel Drill Bit"
 			x: 0.5d
 			y: 3.5d
 		}
 		{
-			dependencies: ["140A1C3C4979392E", "7117E4A2A9FA2934"]
-			description: [
-				"The steam chart's whole Large Steam line, in one hall: crush, wash, spin, crush again."
-				"Same dust and same byproducts, so every byproduct still needs somewhere to go."
-			]
-			icon: "gtceu:ore_plant"
-			id: "5334E508185B316C"
+			dependencies: ["5F4A302D13D7A87F", "1898CAFED213EEF4"]
+			description: ["The nickel vein hands back raw pentlandite among other ores, for as long as the drill runs."]
+			icon: "gtceu:mv_vein_drill"
+			id: "32D31169D8C7C8B1"
 			shape: "gear"
 			size: 1.5d
 			tasks: [
-				{ id: "70D52818945A4FFA", item: "gtceu:ore_plant", optional_task: true, type: "item" }
-				{ id: "397296008976F6B3", type: "checkmark" }
+				{ id: "7B5B0B8FBB0BFF0B", item: "gtceu:mv_vein_drill", optional_task: true, type: "item" }
+				{ id: "57E9ACDBC2AF7887", type: "checkmark" }
 			]
-			title: "Ore Plant"
+			title: "MV Vein Drill"
 			x: 2.5d
 			y: 2.75d
 		}
 		{
-			dependencies: ["5334E508185B316C"]
-			icon: "gtceu:copper_dust"
-			id: "5352A7D1281CEEA3"
+			dependencies: ["32D31169D8C7C8B1"]
+			icon: "gtceu:raw_pentlandite"
+			id: "3A043A52C159D705"
 			size: 1.0d
-			subtitle: "The steam line's dust, in one hall"
 			tasks: [
-				{ id: "39F94C289AF95FC9", item: "gtceu:copper_dust", optional_task: true, type: "item" }
-				{ id: "5056424DD09D5A5A", type: "checkmark" }
+				{ id: "3D796696968516AC", item: "gtceu:raw_pentlandite", optional_task: true, type: "item" }
+				{ id: "5E12C397004FF69E", type: "checkmark" }
 			]
-			title: "Copper Dust"
-			x: 5.0d
+			title: "Raw Pentlandite"
+			x: 4.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["3A043A52C159D705"]
+			icon: "gtceu:crushed_pentlandite_ore"
+			id: "786AB26D616C7EF7"
+			size: 1.0d
+			subtitle: "Macerator"
+			tasks: [
+				{ id: "534CB5187EF5AA58", item: "gtceu:crushed_pentlandite_ore", optional_task: true, type: "item" }
+				{ id: "15C73BC45F027C58", type: "checkmark" }
+			]
+			title: "Crushed Pentlandite"
+			x: 6.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["786AB26D616C7EF7"]
+			icon: "gtceu:purified_pentlandite_ore"
+			id: "3CED5B9CE31B82A1"
+			size: 1.0d
+			subtitle: "Ore washer"
+			tasks: [
+				{ id: "13A6F809E864AF13", item: "gtceu:purified_pentlandite_ore", optional_task: true, type: "item" }
+				{ id: "3ED60043CFF0102F", type: "checkmark" }
+			]
+			title: "Purified Pentlandite"
+			x: 8.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["3CED5B9CE31B82A1"]
+			description: ["The acid eats the nickel and leaves the platinum group behind as a grey sludge."]
+			icon: "gtceu:platinum_group_sludge_dust"
+			id: "3775F6A687195025"
+			size: 1.0d
+			subtitle: "Sulfuric acid in a reactor"
+			tasks: [
+				{ id: "3207F64E9905AD35", item: "gtceu:platinum_group_sludge_dust", optional_task: true, type: "item" }
+				{ id: "1B5543D758CE6DF5", type: "checkmark" }
+			]
+			title: "Platinum Group Sludge"
+			x: 10.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["3775F6A687195025"]
+			icon: "gtceu:platinum_metal_dust"
+			id: "331EAD993596CA2B"
+			size: 1.0d
+			subtitle: "Centrifuge"
+			tasks: [
+				{ id: "55EC6B462AC948D3", item: "gtceu:platinum_metal_dust", optional_task: true, type: "item" }
+				{ id: "7A235F165FCCE985", type: "checkmark" }
+			]
+			title: "Platinum Metal Dust"
+			x: 12.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["3775F6A687195025"]
+			icon: "gtceu:palladium_metal_dust"
+			id: "1F3B95ACA3A5AD72"
+			size: 1.0d
+			subtitle: "The same centrifuge run"
+			tasks: [
+				{ id: "10AAA9740D938BC0", item: "gtceu:palladium_metal_dust", optional_task: true, type: "item" }
+				{ id: "780881699ED644BD", type: "checkmark" }
+			]
+			title: "Palladium Metal Dust"
+			x: 12.5d
+			y: 5.0d
+		}
+		{
+			icon: "gtceu:aqua_regia_bucket"
+			id: "1A9B00ECEFCE5F1F"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Mixer: nitric and hydrochloric acid"
+			tasks: [
+				{ id: "11B50BC90AB3CB38", item: "gtceu:aqua_regia_bucket", optional_task: true, type: "item" }
+				{ id: "3E1F6CC7A6AEEAA3", type: "checkmark" }
+			]
+			title: "Aqua Regia"
+			x: 12.5d
+			y: 3.25d
+		}
+		{
+			dependencies: ["331EAD993596CA2B", "1A9B00ECEFCE5F1F"]
+			icon: "gtceu:concentrated_platinum_bucket"
+			id: "5624E3D6E4B95F65"
+			size: 1.0d
+			subtitle: "Chemical reactor"
+			tasks: [
+				{ id: "112F44E653418462", item: "gtceu:concentrated_platinum_bucket", optional_task: true, type: "item" }
+				{ id: "750C558DCA81F378", type: "checkmark" }
+			]
+			title: "Concentrated Platinum"
+			x: 14.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["331EAD993596CA2B"]
+			icon: "gtceu:platinum_slag_dust"
+			id: "157EB3D6BDC1AA4A"
+			size: 0.75d
+			subtitle: "Stored: HV leaches the rhodium out"
+			tasks: [
+				{ id: "54E59EEDB45496A4", item: "gtceu:platinum_slag_dust", optional_task: true, type: "item" }
+				{ id: "338164B9548B4BC5", type: "checkmark" }
+			]
+			title: "Platinum Slag"
+			x: 14.5d
 			y: 0.5d
 		}
 		{
-			dependencies: ["5334E508185B316C"]
-			icon: "gtceu:cobalt_dust"
-			id: "126F9C63160F964F"
-			size: 0.75d
-			subtitle: "Cobalt brass"
-			tasks: [
-				{ id: "321A886147032537", item: "gtceu:cobalt_dust", optional_task: true, type: "item" }
-				{ id: "332B9AAA1741C360", type: "checkmark" }
-			]
-			title: "Cobalt"
-			x: 5.0d
-			y: 1.75d
-		}
-		{
-			dependencies: ["5334E508185B316C"]
-			icon: "gtceu:gold_dust"
-			id: "7F26B4878C13CC15"
-			size: 0.75d
-			subtitle: "Electrum and the circuit wires"
-			tasks: [
-				{ id: "5B0716C56DB58B9E", item: "gtceu:gold_dust", optional_task: true, type: "item" }
-				{ id: "74BE798FE831A0DC", type: "checkmark" }
-			]
-			title: "Gold"
-			x: 5.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["5334E508185B316C"]
-			icon: "gtceu:nickel_dust"
-			id: "772E9C680D345515"
-			size: 0.75d
-			subtitle: "Stainless steel, below"
-			tasks: [
-				{ id: "1704B062C789998E", item: "gtceu:nickel_dust", optional_task: true, type: "item" }
-				{ id: "178078B1FC03696D", type: "checkmark" }
-			]
-			title: "Nickel"
-			x: 5.0d
-			y: 4.25d
-		}
-		{
-			dependencies: ["5334E508185B316C"]
-			icon: "gtceu:stone_dust"
-			id: "3ECF4CC21E53BE78"
+			icon: "gtceu:ammonium_chloride_bucket"
+			id: "779784F7DA18585B"
+			shape: "rsquare"
 			size: 1.0d
-			subtitle: "The tailings"
 			tasks: [
-				{ id: "1A0026C68A870403", item: "gtceu:stone_dust", optional_task: true, type: "item" }
-				{ id: "55236B22DFD485A7", type: "checkmark" }
+				{ id: "5EC04160D3C5772F", item: "gtceu:ammonium_chloride_bucket", optional_task: true, type: "item" }
+				{ id: "3D2362DC2CA9F7C3", type: "checkmark" }
 			]
-			title: "Stone Dust"
-			x: 5.0d
-			y: 5.5d
+			title: "Ammonium Chloride"
+			x: 14.5d
+			y: 3.5d
 		}
 		{
-			dependencies: ["3ECF4CC21E53BE78"]
-			icon: "gtceu:mv_centrifuge"
-			id: "37E1FD6ABC7D63BC"
-			shape: "gear"
-			size: 1.25d
-			subtitle: "Stone dust separation"
+			dependencies: ["5624E3D6E4B95F65", "779784F7DA18585B"]
+			description: ["The same reaction the large reactor runs, small enough for MV. It also drops platinum salt."]
+			icon: "gtceu:palladium_rich_ammonia_bucket"
+			id: "38084CFC5460616E"
+			size: 1.0d
+			subtitle: "Chemical reactor, MV scale"
 			tasks: [
-				{ id: "551113A1556AF4C2", item: "gtceu:mv_centrifuge", optional_task: true, type: "item" }
-				{ id: "318E96586C6D5DCE", type: "checkmark" }
+				{ id: "3BBC59A1CE465289", item: "gtceu:palladium_rich_ammonia_bucket", optional_task: true, type: "item" }
+				{ id: "360BB509440D5887", type: "checkmark" }
 			]
-			title: "Centrifuge"
-			x: 7.0d
-			y: 5.5d
+			title: "Palladium-Rich Ammonia"
+			x: 16.5d
+			y: 2.75d
 		}
 		{
-			dependencies: ["37E1FD6ABC7D63BC"]
-			icon: "gtceu:quartzite_dust"
-			id: "15E1D3CC3B2E8A43"
+			dependencies: ["5624E3D6E4B95F65"]
+			icon: "gtceu:platinum_salt_dust"
+			id: "18D8AA1E8BBFB08C"
 			size: 0.75d
-			subtitle: "Glass dust"
+			subtitle: "Kept: HV refines it into platinum"
 			tasks: [
-				{ id: "3D18EB531AFF8B9C", item: "gtceu:quartzite_dust", optional_task: true, type: "item" }
-				{ id: "5A2CFB49CDA6D4D6", type: "checkmark" }
+				{ id: "71F94E78A54689CD", item: "gtceu:platinum_salt_dust", optional_task: true, type: "item" }
+				{ id: "364F3494016095B1", type: "checkmark" }
 			]
-			title: "Quartzite"
-			x: 9.0d
-			y: 4.75d
+			title: "Platinum Salt"
+			x: 16.5d
+			y: 1.25d
 		}
 		{
-			dependencies: ["37E1FD6ABC7D63BC"]
-			icon: "gtceu:metal_mixture_dust"
-			id: "76D93624226C7F19"
-			size: 1.25d
-			subtitle: "Kept: the EV centrifuge splits it"
+			dependencies: ["38084CFC5460616E", "1F3B95ACA3A5AD72"]
+			icon: "gtceu:palladium_raw_dust"
+			id: "3E92D2B6663995D1"
+			size: 1.0d
+			subtitle: "Chemical reactor"
 			tasks: [
-				{ id: "728278CE1FF99797", item: "gtceu:metal_mixture_dust", optional_task: true, type: "item" }
-				{ id: "599C4EAEA8766482", type: "checkmark" }
+				{ id: "7D01CD480DEC6D81", item: "gtceu:palladium_raw_dust", optional_task: true, type: "item" }
+				{ id: "76A7FB3E5788B8E1", type: "checkmark" }
 			]
-			title: "Metal Mixture"
-			x: 9.0d
-			y: 6.25d
+			title: "Raw Palladium"
+			x: 16.5d
+			y: 5.0d
+		}
+		{
+			icon: "gtceu:formic_acid_bucket"
+			id: "3B7526F22E5514E3"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "55FACF1DDF82F0DD", item: "gtceu:formic_acid_bucket", optional_task: true, type: "item" }
+				{ id: "34D8928B8C7784CE", type: "checkmark" }
+			]
+			title: "Formic Acid"
+			x: 18.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["3E92D2B6663995D1", "3B7526F22E5514E3"]
+			icon: "gtceu:palladium_dust"
+			id: "7198B0D076667301"
+			size: 1.25d
+			subtitle: "Raw palladium separation"
+			tasks: [
+				{ id: "11F32258A80CD81B", item: "gtceu:palladium_dust", optional_task: true, type: "item" }
+				{ id: "1CF7F068B773746C", type: "checkmark" }
+			]
+			title: "Palladium"
+			x: 20.5d
+			y: 5.0d
 		}
 		{
 			icon: "minecraft:sand"
@@ -237,8 +314,8 @@
 				{ id: "3AE9554367774C2B", type: "checkmark" }
 			]
 			title: "Sand"
-			x: 13.25d
-			y: 0.75d
+			x: 24.75d
+			y: 1.25d
 		}
 		{
 			dependencies: ["7175D25489718417"]
@@ -251,8 +328,8 @@
 				{ id: "700B5A8A82EACCA6", type: "checkmark" }
 			]
 			title: "Silicon Dioxide"
-			x: 15.25d
-			y: 0.75d
+			x: 26.75d
+			y: 1.25d
 		}
 		{
 			icon: "gtceu:carbon_dust"
@@ -265,8 +342,8 @@
 				{ id: "38180D45A94CB992", type: "checkmark" }
 			]
 			title: "Carbon Dust"
-			x: 15.25d
-			y: 2.25d
+			x: 26.75d
+			y: 2.75d
 		}
 		{
 			dependencies: ["370E8C453F35D5B8", "7F608DE81C849B19"]
@@ -280,8 +357,8 @@
 				{ id: "73B9CDB284068025", type: "checkmark" }
 			]
 			title: "Electric Blast Furnace"
-			x: 17.25d
-			y: 1.5d
+			x: 28.75d
+			y: 2.0d
 		}
 		{
 			dependencies: ["58A045B4E4E38A51"]
@@ -293,8 +370,8 @@
 				{ id: "71B6A52A2C7D72D4", type: "checkmark" }
 			]
 			title: "Hot Silicon Ingot"
-			x: 19.25d
-			y: 0.75d
+			x: 30.75d
+			y: 1.25d
 		}
 		{
 			dependencies: ["58A045B4E4E38A51"]
@@ -307,40 +384,112 @@
 				{ id: "3A76DED8E8F1D10A", type: "checkmark" }
 			]
 			title: "Carbon Monoxide"
-			x: 19.25d
-			y: 2.25d
+			x: 30.75d
+			y: 2.75d
 		}
 		{
 			dependencies: ["795EB23A6DA5B410"]
-			icon: "gtceu:silicon_ingot"
-			id: "5BA23EBE92918B00"
-			size: 1.0d
-			subtitle: "Cooled in the chemical bath"
-			tasks: [
-				{ id: "7BB4F82739E6813F", item: "gtceu:silicon_ingot", optional_task: true, type: "item" }
-				{ id: "74CF01AA2301A38F", type: "checkmark" }
-			]
-			title: "Silicon"
-			x: 21.25d
-			y: 0.75d
-		}
-		{
-			dependencies: ["5BA23EBE92918B00"]
 			icon: "gtceu:silicon_dust"
 			id: "7F3B1584A5EC2760"
 			size: 1.0d
-			subtitle: "Macerator"
+			subtitle: "Cooled in the chemical bath, then the macerator"
 			tasks: [
 				{ id: "78E4F7F37D94895F", item: "gtceu:silicon_dust", optional_task: true, type: "item" }
 				{ id: "7DD322BE6A167085", type: "checkmark" }
 			]
 			title: "Silicon Dust"
-			x: 23.25d
-			y: 0.75d
+			x: 32.75d
+			y: 1.25d
 		}
 		{
-			dependencies: ["7F3B1584A5EC2760", "162641406869CF74"]
-			description: ["A pile of silicon dust and a pinch of LV's gallium arsenide, grown into one big crystal."]
+			icon: "gtceu:hydrochloric_acid_bucket"
+			id: "387823F06BDA5AB0"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Chlorine and hydrogen, or the polysilicon furnace"
+			tasks: [
+				{ id: "3E8DA798654D45ED", item: "gtceu:hydrochloric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "31075A5AC40886F5", type: "checkmark" }
+			]
+			title: "Hydrochloric Acid"
+			x: 32.75d
+			y: 2.75d
+		}
+		{
+			dependencies: ["7F3B1584A5EC2760", "387823F06BDA5AB0"]
+			description: ["Silicon dust and hydrochloric acid make a mix of chlorosilanes, with hydrogen on the side."]
+			icon: "gtceu:crude_trichlorosilane_bucket"
+			id: "75A539BFEAB2FA67"
+			size: 1.0d
+			subtitle: "Hydrochlorination"
+			tasks: [
+				{ id: "10062814BEE0DEC9", item: "gtceu:crude_trichlorosilane_bucket", optional_task: true, type: "item" }
+				{ id: "5EFC6BF259406681", type: "checkmark" }
+			]
+			title: "Crude Trichlorosilane"
+			x: 34.75d
+			y: 2.0d
+		}
+		{
+			dependencies: ["75A539BFEAB2FA67"]
+			icon: "gtceu:trichlorosilane_bucket"
+			id: "37E0E46F6AE7C0A4"
+			size: 1.0d
+			subtitle: "Distillery"
+			tasks: [
+				{ id: "3D2C4C2628A0B74B", item: "gtceu:trichlorosilane_bucket", optional_task: true, type: "item" }
+				{ id: "5250DDE428333A16", type: "checkmark" }
+			]
+			title: "Trichlorosilane"
+			x: 36.75d
+			y: 2.0d
+		}
+		{
+			dependencies: ["75A539BFEAB2FA67"]
+			icon: "grindless:chlorosilane_bottoms"
+			id: "760CCBC3C5E16FF6"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Back into hydrogenation"
+			tasks: [
+				{ id: "7ACB5823D63F120C", item: "grindless:chlorosilane_bottoms", optional_task: true, type: "item" }
+				{ id: "3FBEF723953CB947", type: "checkmark" }
+			]
+			title: "Chlorosilane Bottoms"
+			x: 36.75d
+			y: 3.5d
+		}
+		{
+			dependencies: ["37E0E46F6AE7C0A4", "70A91737242112D0"]
+			icon: "gtceu:siemens_feed_bucket"
+			id: "3F617074AAA2CFBD"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "556BDA3AC79F58AE", item: "gtceu:siemens_feed_bucket", optional_task: true, type: "item" }
+				{ id: "3B80E7DE83308EA0", type: "checkmark" }
+			]
+			title: "Siemens Feed"
+			x: 38.75d
+			y: 2.0d
+		}
+		{
+			dependencies: ["3F617074AAA2CFBD"]
+			icon: "grindless:polysilicon"
+			id: "7CBC278945A8AE32"
+			size: 1.0d
+			subtitle: "Siemens furnace: hot rods grow the silicon"
+			tasks: [
+				{ id: "7B6621FCBB27355E", item: "grindless:polysilicon", optional_task: true, type: "item" }
+				{ id: "102E75179C4A63FE", type: "checkmark" }
+			]
+			title: "Polysilicon"
+			x: 40.75d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7CBC278945A8AE32", "162641406869CF74"]
+			description: ["Polysilicon and a pinch of LV's gallium arsenide, grown into one big crystal."]
 			icon: "gtceu:silicon_boule"
 			id: "7BBADF62374B8923"
 			size: 1.0d
@@ -350,8 +499,8 @@
 				{ id: "141F366E100BE696", type: "checkmark" }
 			]
 			title: "Silicon Boule"
-			x: 25.25d
-			y: 1.5d
+			x: 42.75d
+			y: 2.0d
 		}
 		{
 			dependencies: ["7BBADF62374B8923"]
@@ -364,64 +513,22 @@
 				{ id: "3F150E2CAEC1B35B", type: "checkmark" }
 			]
 			title: "Silicon Wafer"
-			x: 27.25d
-			y: 1.5d
+			x: 44.75d
+			y: 2.0d
 		}
 		{
 			dependencies: ["305F916B3530ABAD"]
-			icon: "gtceu:ilc_wafer"
-			id: "1C7659EAE352A09C"
-			size: 1.0d
-			subtitle: "Laser engraver, red lens"
-			tasks: [
-				{ id: "703DDE49762D2D24", item: "gtceu:ilc_wafer", optional_task: true, type: "item" }
-				{ id: "5A6A9B4BDE38CA2F", type: "checkmark" }
-			]
-			title: "ILC Wafer"
-			x: 29.25d
-			y: 0.75d
-		}
-		{
-			dependencies: ["305F916B3530ABAD"]
-			icon: "gtceu:ram_wafer"
-			id: "16EC00EBE3A1709C"
-			size: 1.0d
-			subtitle: "Green lens"
-			tasks: [
-				{ id: "1113734CFD2EA594", item: "gtceu:ram_wafer", optional_task: true, type: "item" }
-				{ id: "763AF937FA939E5A", type: "checkmark" }
-			]
-			title: "RAM Wafer"
-			x: 29.25d
-			y: 2.25d
-		}
-		{
-			dependencies: ["1C7659EAE352A09C"]
 			icon: "gtceu:ilc_chip"
 			id: "1DA952BCA999523F"
 			size: 1.25d
-			subtitle: "Cutter"
+			subtitle: "Laser engraver, then the cutter"
 			tasks: [
 				{ id: "1D8364946D78C19D", item: "gtceu:ilc_chip", optional_task: true, type: "item" }
 				{ id: "19F94169BFBCD7DF", type: "checkmark" }
 			]
 			title: "ILC Chip"
-			x: 31.25d
-			y: 0.75d
-		}
-		{
-			dependencies: ["16EC00EBE3A1709C"]
-			icon: "gtceu:ram_chip"
-			id: "789C44B2ADB7CB6F"
-			size: 1.25d
-			subtitle: "Cutter"
-			tasks: [
-				{ id: "10F5355153B1FAF3", item: "gtceu:ram_chip", optional_task: true, type: "item" }
-				{ id: "12BB3354276E7ACC", type: "checkmark" }
-			]
-			title: "RAM Chip"
-			x: 31.25d
-			y: 2.25d
+			x: 46.75d
+			y: 2.0d
 		}
 		{
 			icon: "minecraft:oak_log"
@@ -606,7 +713,7 @@
 			]
 			title: "Crude Oil"
 			x: 15.25d
-			y: 10.75d
+			y: 11.5d
 		}
 		{
 			dependencies: ["5A7A0DCA855148BF"]
@@ -621,7 +728,7 @@
 			]
 			title: "Distillery"
 			x: 17.25d
-			y: 10.75d
+			y: 11.5d
 		}
 		{
 			dependencies: ["11AE48749D98C844"]
@@ -634,7 +741,7 @@
 			]
 			title: "Sulfuric Light Fuel"
 			x: 19.25d
-			y: 10.0d
+			y: 10.75d
 		}
 		{
 			dependencies: ["11AE48749D98C844"]
@@ -647,10 +754,24 @@
 			]
 			title: "Sulfuric Heavy Fuel"
 			x: 19.25d
-			y: 11.5d
+			y: 12.25d
 		}
 		{
-			dependencies: ["17F4FDC0C6AFF611", "38B9150B1A9B70FF", "70A91737242112D0"]
+			icon: "gtceu:hydrogen_bucket"
+			id: "3FF9050BDB52DE72"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the LV electrolyzer line"
+			tasks: [
+				{ id: "1691E754D51ED148", item: "gtceu:hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "57FE6BF906CFAF4A", type: "checkmark" }
+			]
+			title: "Hydrogen"
+			x: 19.25d
+			y: 13.75d
+		}
+		{
+			dependencies: ["17F4FDC0C6AFF611", "38B9150B1A9B70FF", "3FF9050BDB52DE72"]
 			icon: "gtceu:mv_chemical_reactor"
 			id: "788CBEF57C2426E1"
 			shape: "gear"
@@ -662,7 +783,7 @@
 			]
 			title: "Chemical Reactor"
 			x: 21.25d
-			y: 11.5d
+			y: 12.25d
 		}
 		{
 			dependencies: ["788CBEF57C2426E1"]
@@ -675,7 +796,7 @@
 			]
 			title: "Light Fuel"
 			x: 23.25d
-			y: 10.0d
+			y: 10.75d
 		}
 		{
 			dependencies: ["788CBEF57C2426E1"]
@@ -688,7 +809,7 @@
 			]
 			title: "Heavy Fuel"
 			x: 23.25d
-			y: 11.5d
+			y: 12.25d
 		}
 		{
 			dependencies: ["788CBEF57C2426E1"]
@@ -702,14 +823,14 @@
 			]
 			title: "Hydrogen Sulfide"
 			x: 23.25d
-			y: 13.0d
+			y: 13.75d
 		}
 		{
 			dependencies: ["35A04771E8252D31", "5A497DE21401B625"]
 			description: ["Five parts light to one heavy. It runs MV's power until gasoline shows up."]
 			icon: "gtceu:diesel_bucket"
 			id: "3B49C5C485933961"
-			size: 1.25d
+			size: 1.0d
 			subtitle: "Mixer"
 			tasks: [
 				{ id: "3D40A01D2A0FC07D", item: "gtceu:diesel_bucket", optional_task: true, type: "item" }
@@ -717,7 +838,119 @@
 			]
 			title: "Diesel"
 			x: 25.25d
+			y: 11.5d
+		}
+		{
+			dependencies: ["3B49C5C485933961"]
+			icon: "gtceu:kerosene_bucket"
+			id: "7D28AEC912902688"
+			size: 1.0d
+			subtitle: "Distillery"
+			tasks: [
+				{ id: "5CFB583CDB1B7E16", item: "gtceu:kerosene_bucket", optional_task: true, type: "item" }
+				{ id: "36C3D0FA2D3374A4", type: "checkmark" }
+			]
+			title: "Kerosene"
+			x: 27.25d
+			y: 11.5d
+		}
+		{
+			dependencies: ["7D28AEC912902688"]
+			icon: "gtceu:rp_1_rocket_fuel_bucket"
+			id: "509D8E16F2FFD75B"
+			size: 1.0d
+			subtitle: "Distillery again"
+			tasks: [
+				{ id: "3EC5311BEBCD041B", item: "gtceu:rp_1_rocket_fuel_bucket", optional_task: true, type: "item" }
+				{ id: "548755C1E394B36F", type: "checkmark" }
+			]
+			title: "RP-1"
+			x: 29.25d
+			y: 11.5d
+		}
+		{
+			icon: "gtceu:oxygen_bucket"
+			id: "5CD15C7B14FD5AF8"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3ED8EDE0B5EF47E5", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "3CD3A825D7106F12", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 29.25d
+			y: 10.0d
+		}
+		{
+			icon: "gtceu:power_thruster"
+			id: "7F3DB4C870C461F1"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Assembler"
+			tasks: [
+				{ id: "53F037E4978AEAE7", item: "gtceu:power_thruster", optional_task: true, type: "item" }
+				{ id: "767EA3F6BD266742", type: "checkmark" }
+			]
+			title: "Power Thruster"
+			x: 29.25d
+			y: 13.0d
+		}
+		{
+			dependencies: ["509D8E16F2FFD75B", "5CD15C7B14FD5AF8", "7F3DB4C870C461F1"]
+			description: ["No rocket flies on an engine nobody has lit. Four thrusters burn kerosene together, and the ones that pass come out qualified."]
+			icon: "gtceu:engine_test_stand"
+			id: "5967D24700F210AB"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "547AB74F99F4E912", item: "gtceu:engine_test_stand", optional_task: true, type: "item" }
+				{ id: "77692ACFFFFE4542", type: "checkmark" }
+			]
+			title: "Engine Test Stand"
+			x: 31.25d
+			y: 11.5d
+		}
+		{
+			dependencies: ["5967D24700F210AB"]
+			icon: "grindless:qualified_power_thruster"
+			id: "170DB957782774D8"
+			size: 1.25d
+			subtitle: "HV's rocket motor wants four"
+			tasks: [
+				{ id: "3DDC843208C318BB", item: "grindless:qualified_power_thruster", optional_task: true, type: "item" }
+				{ id: "1DDA9C6AE15CF386", type: "checkmark" }
+			]
+			title: "Qualified Thruster"
+			x: 33.25d
 			y: 10.75d
+		}
+		{
+			dependencies: ["5967D24700F210AB"]
+			icon: "gtceu:carbon_dioxide_bucket"
+			id: "5A5AFC686B2574CF"
+			size: 0.75d
+			subtitle: "Greenhouse, or methanol"
+			tasks: [
+				{ id: "3CB388D53CEDD251", item: "gtceu:carbon_dioxide_bucket", optional_task: true, type: "item" }
+				{ id: "778547F3352A11D4", type: "checkmark" }
+			]
+			title: "Carbon Dioxide"
+			x: 33.25d
+			y: 12.25d
+		}
+		{
+			dependencies: ["5967D24700F210AB"]
+			icon: "minecraft:water_bucket"
+			id: "57A6BC9A90C9BC16"
+			size: 0.75d
+			subtitle: "Back to the pumps, or void it"
+			tasks: [
+				{ id: "53A22FF049BBD7F1", item: "minecraft:water_bucket", optional_task: true, type: "item" }
+				{ id: "7185F9727BD67AA3", type: "checkmark" }
+			]
+			title: "Water"
+			x: 33.25d
+			y: 13.75d
 		}
 		{
 			dependencies: ["5DB10211B3E10692"]
@@ -745,7 +978,7 @@
 			]
 			title: "Sulfuric Acid, Back"
 			x: 6.5d
-			y: 20.0d
+			y: 19.25d
 		}
 		{
 			dependencies: ["78196EE68F118BA4"]
@@ -788,7 +1021,7 @@
 			]
 			title: "Polyethylene"
 			x: 6.5d
-			y: 21.5d
+			y: 20.75d
 		}
 		{
 			icon: "gtceu:salt_water_bucket"
@@ -819,30 +1052,45 @@
 			y: 24.5d
 		}
 		{
-			dependencies: ["3F098B86CDAAC38D", "5448FA5C814B1DBD", "15043AB7481B7736"]
+			dependencies: ["3F098B86CDAAC38D", "5448FA5C814B1DBD"]
+			icon: "gtceu:dichloroethane_bucket"
+			id: "18FE5F8E57B64878"
+			size: 1.0d
+			subtitle: "Chemical reactor, iron chloride as the catalyst"
+			tasks: [
+				{ id: "12D10DA11B04EC25", item: "gtceu:dichloroethane_bucket", optional_task: true, type: "item" }
+				{ id: "3DCF77B05F53A8B0", type: "checkmark" }
+			]
+			title: "Ethylene Dichloride"
+			x: 6.5d
+			y: 23.0d
+		}
+		{
+			dependencies: ["18FE5F8E57B64878"]
 			icon: "gtceu:vinyl_chloride_bucket"
 			id: "365E71F07FE451E2"
 			size: 1.0d
+			subtitle: "EDC cracking"
 			tasks: [
 				{ id: "7D92E40A3D513907", item: "gtceu:vinyl_chloride_bucket", optional_task: true, type: "item" }
 				{ id: "32EAC38DFC8195E4", type: "checkmark" }
 			]
 			title: "Vinyl Chloride"
-			x: 6.5d
+			x: 8.5d
 			y: 23.0d
 		}
 		{
-			dependencies: ["5448FA5C814B1DBD"]
+			dependencies: ["18FE5F8E57B64878"]
 			icon: "gtceu:hydrochloric_acid_bucket"
 			id: "15043AB7481B7736"
-			size: 1.0d
-			subtitle: "Goes back in with oxygen"
+			size: 0.75d
+			subtitle: "Cracking gives one back for each vinyl chloride"
 			tasks: [
 				{ id: "31D5D568083C7B22", item: "gtceu:hydrochloric_acid_bucket", optional_task: true, type: "item" }
 				{ id: "7DDF50A8C1470121", type: "checkmark" }
 			]
 			title: "Hydrochloric Acid"
-			x: 6.5d
+			x: 8.5d
 			y: 24.5d
 		}
 		{
@@ -857,7 +1105,7 @@
 				{ id: "1F21B9274FC6E6E1", type: "checkmark" }
 			]
 			title: "PVC"
-			x: 8.5d
+			x: 10.5d
 			y: 23.0d
 		}
 		{
@@ -871,7 +1119,7 @@
 				{ id: "37D7034B05692F01", type: "checkmark" }
 			]
 			title: "Ruby Dust"
-			x: 12.75d
+			x: 14.75d
 			y: 23.0d
 		}
 		{
@@ -885,7 +1133,7 @@
 				{ id: "106CFA4EB029CBF1", type: "checkmark" }
 			]
 			title: "Electrolyzer"
-			x: 14.75d
+			x: 16.75d
 			y: 23.0d
 		}
 		{
@@ -898,7 +1146,7 @@
 				{ id: "39A1F26D18D21130", type: "checkmark" }
 			]
 			title: "Manganese"
-			x: 16.75d
+			x: 18.75d
 			y: 19.25d
 		}
 		{
@@ -911,7 +1159,7 @@
 				{ id: "7BFB9ACC622D901B", type: "checkmark" }
 			]
 			title: "Nickel"
-			x: 16.75d
+			x: 18.75d
 			y: 20.75d
 		}
 		{
@@ -924,7 +1172,7 @@
 				{ id: "7BCDEB7A207F85D5", type: "checkmark" }
 			]
 			title: "Chromium"
-			x: 16.75d
+			x: 18.75d
 			y: 22.25d
 		}
 		{
@@ -937,7 +1185,7 @@
 				{ id: "1726B18B1D443D8B", type: "checkmark" }
 			]
 			title: "Aluminium"
-			x: 16.75d
+			x: 18.75d
 			y: 23.75d
 		}
 		{
@@ -950,7 +1198,7 @@
 				{ id: "57BEC70C2311A45B", type: "checkmark" }
 			]
 			title: "Iron Dust"
-			x: 16.75d
+			x: 18.75d
 			y: 25.25d
 		}
 		{
@@ -964,7 +1212,7 @@
 				{ id: "596BD04C6BDE6F3E", type: "checkmark" }
 			]
 			title: "Stainless Steel Dust"
-			x: 18.75d
+			x: 20.75d
 			y: 20.75d
 		}
 		{
@@ -978,7 +1226,7 @@
 				{ id: "5FFCDC0D49308E5D", type: "checkmark" }
 			]
 			title: "Stainless Steel"
-			x: 20.75d
+			x: 22.75d
 			y: 20.75d
 		}
 		{
@@ -992,7 +1240,7 @@
 				{ id: "78F69037B019A664", type: "checkmark" }
 			]
 			title: "Kanthal Dust"
-			x: 18.75d
+			x: 20.75d
 			y: 24.5d
 		}
 		{
@@ -1006,7 +1254,7 @@
 				{ id: "372683DB18488902", type: "checkmark" }
 			]
 			title: "Kanthal"
-			x: 20.75d
+			x: 22.75d
 			y: 24.5d
 		}
 		{
@@ -1021,7 +1269,7 @@
 				{ id: "3F21B88E156E1B9B", type: "checkmark" }
 			]
 			title: "Kanthal Coil"
-			x: 22.75d
+			x: 24.75d
 			y: 24.5d
 		}
 		{
@@ -1135,175 +1383,7 @@
 			x: 12.5d
 			y: 30.25d
 		}
-		{
-			icon: "gtceu:diesel_bucket"
-			id: "7DD593921B25E8AE"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "From the fuel line"
-			tasks: [
-				{ id: "7DE3700BC293064C", item: "gtceu:diesel_bucket", optional_task: true, type: "item" }
-				{ id: "78EFF65BE52E4B10", type: "checkmark" }
-			]
-			title: "Diesel"
-			x: 16.75d
-			y: 30.25d
-		}
-		{
-			dependencies: ["7DD593921B25E8AE"]
-			icon: "gtceu:kerosene_bucket"
-			id: "7D28AEC912902688"
-			size: 1.0d
-			subtitle: "Distillery"
-			tasks: [
-				{ id: "5CFB583CDB1B7E16", item: "gtceu:kerosene_bucket", optional_task: true, type: "item" }
-				{ id: "36C3D0FA2D3374A4", type: "checkmark" }
-			]
-			title: "Kerosene"
-			x: 18.75d
-			y: 30.25d
-		}
-		{
-			dependencies: ["7D28AEC912902688"]
-			icon: "gtceu:rp_1_rocket_fuel_bucket"
-			id: "509D8E16F2FFD75B"
-			size: 1.0d
-			subtitle: "Distillery again"
-			tasks: [
-				{ id: "3EC5311BEBCD041B", item: "gtceu:rp_1_rocket_fuel_bucket", optional_task: true, type: "item" }
-				{ id: "548755C1E394B36F", type: "checkmark" }
-			]
-			title: "RP-1"
-			x: 20.75d
-			y: 30.25d
-		}
-		{
-			icon: "gtceu:oxygen_bucket"
-			id: "5CD15C7B14FD5AF8"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "3ED8EDE0B5EF47E5", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
-				{ id: "3CD3A825D7106F12", type: "checkmark" }
-			]
-			title: "Oxygen"
-			x: 20.75d
-			y: 28.75d
-		}
-		{
-			icon: "gtceu:power_thruster"
-			id: "7F3DB4C870C461F1"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Assembler"
-			tasks: [
-				{ id: "53F037E4978AEAE7", item: "gtceu:power_thruster", optional_task: true, type: "item" }
-				{ id: "767EA3F6BD266742", type: "checkmark" }
-			]
-			title: "Power Thruster"
-			x: 20.75d
-			y: 31.75d
-		}
-		{
-			dependencies: ["509D8E16F2FFD75B", "5CD15C7B14FD5AF8", "7F3DB4C870C461F1"]
-			description: ["No rocket flies on an engine nobody has lit. Four thrusters burn kerosene together, and the ones that pass come out qualified."]
-			icon: "gtceu:engine_test_stand"
-			id: "5967D24700F210AB"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "547AB74F99F4E912", item: "gtceu:engine_test_stand", optional_task: true, type: "item" }
-				{ id: "77692ACFFFFE4542", type: "checkmark" }
-			]
-			title: "Engine Test Stand"
-			x: 22.75d
-			y: 30.25d
-		}
-		{
-			dependencies: ["5967D24700F210AB"]
-			icon: "grindless:qualified_power_thruster"
-			id: "170DB957782774D8"
-			size: 1.25d
-			subtitle: "HV's rocket motor wants four"
-			tasks: [
-				{ id: "3DDC843208C318BB", item: "grindless:qualified_power_thruster", optional_task: true, type: "item" }
-				{ id: "1DDA9C6AE15CF386", type: "checkmark" }
-			]
-			title: "Qualified Thruster"
-			x: 24.75d
-			y: 29.5d
-		}
-		{
-			dependencies: ["5967D24700F210AB"]
-			icon: "gtceu:carbon_dioxide_bucket"
-			id: "5A5AFC686B2574CF"
-			size: 0.75d
-			subtitle: "Greenhouse, or methanol"
-			tasks: [
-				{ id: "3CB388D53CEDD251", item: "gtceu:carbon_dioxide_bucket", optional_task: true, type: "item" }
-				{ id: "778547F3352A11D4", type: "checkmark" }
-			]
-			title: "Carbon Dioxide"
-			x: 24.75d
-			y: 31.0d
-		}
-		{
-			dependencies: ["5967D24700F210AB"]
-			icon: "minecraft:water_bucket"
-			id: "57A6BC9A90C9BC16"
-			size: 0.75d
-			subtitle: "Back to the pumps, or void it"
-			tasks: [
-				{ id: "53A22FF049BBD7F1", item: "minecraft:water_bucket", optional_task: true, type: "item" }
-				{ id: "7185F9727BD67AA3", type: "checkmark" }
-			]
-			title: "Water"
-			x: 24.75d
-			y: 32.5d
-		}
-		{
-			icon: "minecraft:paper"
-			id: "78E24E72C05280D7"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "5128D8014F7CC40C", item: "minecraft:paper", optional_task: true, type: "item" }
-				{ id: "1178EABDD17EF8B8", type: "checkmark" }
-			]
-			title: "Paper"
-			x: 29.0d
-			y: 31.75d
-		}
-		{
-			dependencies: ["388F688236DC7298", "3954D84FC7C457CA", "78E24E72C05280D7"]
-			description: ["Radar through cloud and rain, at night. A thunderstorm drowns the echo, so it waits."]
-			icon: "gtceu:radio_telescope"
-			id: "3BDA005617E8520F"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "1155588747CBE583", item: "gtceu:radio_telescope", optional_task: true, type: "item" }
-				{ id: "1C7F7BA9F252D3C4", type: "checkmark" }
-			]
-			title: "Radio Telescope"
-			x: 31.5d
-			y: 29.5d
-		}
-		{
-			dependencies: ["3BDA005617E8520F"]
-			icon: "grindless:lunar_landing_chart"
-			id: "518C08D5EDC71D81"
-			size: 1.25d
-			subtitle: "HV writes the rocket's chip from it"
-			tasks: [
-				{ id: "1362854C90C5CC7E", item: "grindless:lunar_landing_chart", optional_task: true, type: "item" }
-				{ id: "30B27BDFDF8766EF", type: "checkmark" }
-			]
-			title: "Lunar Landing-Site Chart"
-			x: 34.0d
-			y: 29.5d
-		}
 	]
-	subtitle: ["One plant runs the whole ore chain, wood and crude oil turn into chemistry, and sand turns into chips."]
+	subtitle: ["A nickel vein becomes platinum and palladium, wood and crude oil turn into chemistry, and sand turns into chips."]
 	title: "MV Lines"
 }

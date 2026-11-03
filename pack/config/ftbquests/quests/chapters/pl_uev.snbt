@@ -108,6 +108,13 @@
 			x: 3.0d
 			y: 38.0d
 		}
+		{
+			id: "10248546096B2B33"
+			linked_quest: "5E62AB00D97F5F31"
+			shape: "rsquare"
+			x: 40.0d
+			y: 46.25d
+		}
 	]
 	quests: [
 		{
@@ -1374,19 +1381,6 @@
 			]
 			title: "Fibre Preform"
 			x: 39.75d
-			y: 22.75d
-		}
-		{
-			dependencies: ["11D329B03445F129"]
-			icon: "grindless:divertor"
-			id: "1EF1A0BAE36D61C8"
-			size: 1.25d
-			tasks: [
-				{ id: "185DD64616B31F3A", item: "grindless:divertor", optional_task: true, type: "item" }
-				{ id: "147C8778394504F7", type: "checkmark" }
-			]
-			title: "Divertor"
-			x: 42.25d
 			y: 22.75d
 		}
 		{
@@ -2877,6 +2871,88 @@
 			title: "Aerogel Tile"
 			x: 47.5d
 			y: 38.75d
+		}
+		{
+			icon: "grindless:degenerate_matter"
+			id: "546D0470F1DDC375"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "31DB0090FAB89414", item: "grindless:degenerate_matter", optional_task: true, type: "item" }
+				{ id: "3EAFB1F9250F141A", type: "checkmark" }
+			]
+			title: "Degenerate Matter"
+			x: 35.0d
+			y: 42.75d
+		}
+		{
+			icon: "grindless:exotic_matter_cell"
+			id: "1D2A39FD0C93B196"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5051B35C4D81E675", item: "grindless:exotic_matter_cell", optional_task: true, type: "item" }
+				{ id: "38D61892BD3C2BB7", type: "checkmark" }
+			]
+			title: "Exotic Matter Cell"
+			x: 37.5d
+			y: 45.5d
+		}
+		{
+			dependencies: ["546D0470F1DDC375", "1D2A39FD0C93B196"]
+			description: ["Holds the degenerate matter in a stasis field as a pellet."]
+			icon: "gtceu:containment_works"
+			id: "3CABF5031F9F40FF"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1CC0ADBA8FEEED0B", item: "gtceu:containment_works", optional_task: true, type: "item" }
+				{ id: "70D8EB4B04FBFCDF", type: "checkmark" }
+			]
+			title: "Containment Works"
+			x: 37.5d
+			y: 43.5d
+		}
+		{
+			dependencies: ["3CABF5031F9F40FF"]
+			icon: "grindless:degenerate_pellet"
+			id: "5E99F930D182E137"
+			size: 1.25d
+			tasks: [
+				{ id: "59EBC223428A8D14", item: "grindless:degenerate_pellet", optional_task: true, type: "item" }
+				{ id: "3EDFA96666756B14", type: "checkmark" }
+			]
+			title: "Degenerate Pellet"
+			x: 40.0d
+			y: 43.5d
+		}
+		{
+			dependencies: ["5E99F930D182E137", "5E62AB00D97F5F31", "1D2A39FD0C93B196"]
+			description: ["Seats the pellet and a starchip in one relay seed."]
+			icon: "gtceu:starchip_fab"
+			id: "1C3C8CF507EAB643"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1C9D3CB49DFC5553", item: "gtceu:starchip_fab", optional_task: true, type: "item" }
+				{ id: "3691C3812B54C391", type: "checkmark" }
+			]
+			title: "Starchip Fab"
+			x: 42.25d
+			y: 45.0d
+		}
+		{
+			dependencies: ["1C3C8CF507EAB643"]
+			icon: "grindless:relay_seed"
+			id: "5B23015A7FF3B5D8"
+			size: 1.25d
+			tasks: [
+				{ id: "53BEC552490B7B71", item: "grindless:relay_seed", optional_task: true, type: "item" }
+				{ id: "57B36A5CA2AA2DB0", type: "checkmark" }
+			]
+			title: "Relay Seed"
+			x: 44.75d
+			y: 45.0d
 		}
 	]
 	subtitle: ["Isotopes and the heaviest atoms, pressure and fibres, light for computers and clocks, and the dust and rock of other stars."]

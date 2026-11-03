@@ -23,7 +23,7 @@
 			]
 			title: "Coal"
 			x: 0.5d
-			y: 2.25d
+			y: 4.5d
 		}
 		{
 			dependencies: ["154FF345AAD6A8D6"]
@@ -39,7 +39,7 @@
 			]
 			title: "Coke Oven"
 			x: 2.5d
-			y: 0.75d
+			y: 6.0d
 		}
 		{
 			dependencies: ["154FF345AAD6A8D6"]
@@ -57,21 +57,21 @@
 			]
 			title: "Coke Battery"
 			x: 2.5d
-			y: 3.75d
+			y: 3.0d
 		}
 		{
 			dependencies: ["1BB9058088B1F853", "1ED4FDAC4CCC7162"]
 			icon: "gtceu:coke_gem"
 			id: "19979B49F362A2DF"
-			size: 1.25d
-			subtitle: "Steel, and later the arc furnace"
+			size: 1.0d
+			subtitle: "Fuel and reducing agent of the steelworks"
 			tasks: [
 				{ id: "558427C895432BAE", item: "gtceu:coke_gem", optional_task: true, type: "item" }
 				{ id: "312A765EDB371974", type: "checkmark" }
 			]
 			title: "Coke"
 			x: 4.5d
-			y: 0.75d
+			y: 4.5d
 		}
 		{
 			dependencies: ["1ED4FDAC4CCC7162"]
@@ -85,7 +85,7 @@
 			]
 			title: "Creosote"
 			x: 4.5d
-			y: 2.25d
+			y: 1.5d
 		}
 		{
 			dependencies: ["1ED4FDAC4CCC7162"]
@@ -99,7 +99,7 @@
 			]
 			title: "Coal Gas"
 			x: 4.5d
-			y: 3.75d
+			y: 3.0d
 		}
 		{
 			dependencies: ["56C1CC49EE43FB68"]
@@ -113,7 +113,7 @@
 			]
 			title: "Treated Planks"
 			x: 6.5d
-			y: 1.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["56C1CC49EE43FB68"]
@@ -128,235 +128,27 @@
 			]
 			title: "Liquid Boiler"
 			x: 6.5d
-			y: 3.0d
+			y: 2.5d
 		}
 		{
-			icon: "minecraft:iron_ingot"
-			id: "7E3E0FAF651CBA0B"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "1405BE1A9B9DA2E0", item: "minecraft:iron_ingot", optional_task: true, type: "item" }
-				{ id: "3B040BDF6CE01C1E", type: "checkmark" }
-			]
-			title: "Iron Ingot"
-			x: 10.75d
-			y: 0.5d
-		}
-		{
-			icon: "gtceu:coke_gem"
-			id: "17BAAC00E4102F89"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "From the ovens"
-			tasks: [
-				{ id: "5E1E11BF7D4BEF59", item: "gtceu:coke_gem", optional_task: true, type: "item" }
-				{ id: "75AE19F680C5473A", type: "checkmark" }
-			]
-			title: "Coke"
-			x: 10.75d
-			y: 2.0d
-		}
-		{
-			icon: "minecraft:raw_iron"
-			id: "37E266BF3B107FD4"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Or magnetite, hematite, goethite, limonite"
-			tasks: [
-				{ id: "7C66FE2A3709F23B", item: "minecraft:raw_iron", optional_task: true, type: "item" }
-				{ id: "15E607000009EA9F", type: "checkmark" }
-			]
-			title: "Raw Iron"
-			x: 10.75d
-			y: 3.5d
-		}
-		{
-			icon: "gtceu:calcite_dust"
-			id: "333D84BAF94F8236"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "The flux: raw, dust or block"
-			tasks: [
-				{ id: "7ED394505C39FDB4", item: "gtceu:calcite_dust", optional_task: true, type: "item" }
-				{ id: "7FC670BAD03EAD3F", type: "checkmark" }
-			]
-			title: "Calcite"
-			x: 10.75d
-			y: 5.0d
-		}
-		{
-			dependencies: ["7E3E0FAF651CBA0B", "17BAAC00E4102F89"]
-			description: ["Iron and coke in, steel out, one ingot at a time. Slow, but it never asks for steam."]
-			icon: "gtceu:primitive_blast_furnace"
-			id: "7C31F92375067B31"
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "7BF7579A99E8248D", item: "gtceu:primitive_blast_furnace", optional_task: true, type: "item" }
-				{ id: "3FB24500AF560556", type: "checkmark" }
-			]
-			title: "Primitive Blast Furnace"
-			x: 12.75d
-			y: 1.25d
-		}
-		{
-			dependencies: ["17BAAC00E4102F89", "37E266BF3B107FD4", "333D84BAF94F8236"]
-			description: ["Takes the ore straight from the vein and hands back steel, four loads at once. It drinks a lot of steam for the favour."]
-			icon: "gtceu:steam_blast_furnace"
-			id: "3CE683E53434D0D0"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "50E2B51F0D81D1D4", item: "gtceu:steam_blast_furnace", optional_task: true, type: "item" }
-				{ id: "161E7F94B528A5C1", type: "checkmark" }
-			]
-			title: "Steam Blast Furnace"
-			x: 12.75d
-			y: 4.25d
-		}
-		{
-			dependencies: ["7C31F92375067B31", "3CE683E53434D0D0"]
-			icon: "gtceu:steel_ingot"
-			id: "5CD0DB7DDC7BCF45"
-			size: 1.25d
-			tasks: [
-				{ id: "71F8C5C560F71EBA", item: "gtceu:steel_ingot", optional_task: true, type: "item" }
-				{ id: "71401067D93B9321", type: "checkmark" }
-			]
-			title: "Steel"
-			x: 14.75d
-			y: 2.75d
-		}
-		{
-			dependencies: ["3CE683E53434D0D0"]
-			description: ["Lime from the flux and ash from the coke. Void it, or keep it: LV mixes it into fertilizer."]
-			icon: "gtceu:ash_dust"
-			id: "1A3EAE1BFB47BDE8"
-			size: 0.75d
-			tasks: [
-				{ id: "7888308736C3CDE8", item: "gtceu:ash_dust", optional_task: true, type: "item" }
-				{ id: "159E39BF938A55E2", type: "checkmark" }
-			]
-			title: "Ash"
-			x: 14.75d
-			y: 4.75d
-		}
-		{
-			icon: "minecraft:paper"
-			id: "53BC9C82556B9DF1"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "3A55A8D261DDB15C", item: "minecraft:paper", optional_task: true, type: "item" }
-				{ id: "3DF092B66E135039", type: "checkmark" }
-			]
-			title: "Paper"
-			x: 19.0d
-			y: 0.5d
-		}
-		{
-			icon: "gtceu:coal_dust"
-			id: "55667EFBCB109E00"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "The ink"
-			tasks: [
-				{ id: "30E68CE3A7C2161F", item: "gtceu:coal_dust", optional_task: true, type: "item" }
-				{ id: "79E0A8247DC9CF3C", type: "checkmark" }
-			]
-			title: "Coal Dust"
-			x: 19.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["53BC9C82556B9DF1", "55667EFBCB109E00"]
-			description: ["A clear night, the controller at Y 100 or higher, and it draws the Moon. Daylight or rain just make it wait."]
-			icon: "gtceu:steam_observatory"
-			id: "37689F7CFDADB7DC"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "372DBF45D3C3F0C0", item: "gtceu:steam_observatory", optional_task: true, type: "item" }
-				{ id: "71919B11EF86FA29", type: "checkmark" }
-			]
-			title: "Clockwork Observatory"
-			x: 21.0d
-			y: 1.25d
-		}
-		{
-			dependencies: ["37689F7CFDADB7DC"]
-			description: ["It's never used up. Copy it by hand if you want a spare."]
-			icon: "grindless:lunar_chart_draft"
-			id: "5F16A671CF08E9B6"
-			size: 1.25d
-			subtitle: "LV's optical observatory reads it"
-			tasks: [
-				{ id: "717784AF8E438D4A", item: "grindless:lunar_chart_draft", optional_task: true, type: "item" }
-				{ id: "5AF5CDD4977E322A", type: "checkmark" }
-			]
-			title: "Lunar Chart (Draft)"
-			x: 23.0d
-			y: 1.25d
-		}
-		{
-			description: ["Two raw ores from the iron vein, a probe, and that is the last time you swing a pickaxe at it."]
-			icon: "gtceu:raw_goethite"
-			id: "3E12E056BF035A8B"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Mined once, by hand"
-			tasks: [
-				{ id: "3DECB6C9DC36A6C7", item: "gtceu:raw_goethite", optional_task: true, type: "item" }
-				{ id: "5E70007567772080", type: "checkmark" }
-			]
-			title: "Raw Goethite"
-			x: 0.5d
-			y: 8.5d
-		}
-		{
-			icon: "grindless:empty_vein_probe"
-			id: "33EE5B62F8800597"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "58A90D3099A4E806", item: "grindless:empty_vein_probe", optional_task: true, type: "item" }
-				{ id: "7C62919944DD82ED", type: "checkmark" }
-			]
-			title: "Empty Vein Probe"
-			x: 0.5d
-			y: 10.0d
-		}
-		{
-			dependencies: ["3E12E056BF035A8B", "33EE5B62F8800597"]
+			description: ["Two raw ores from the iron vein and an empty probe make it. After that nobody swings a pickaxe at iron again."]
 			icon: "grindless:vein_sample_iron"
 			id: "3572E6F3E0157401"
+			shape: "rsquare"
 			size: 1.0d
+			subtitle: "A probe on the iron vein"
 			tasks: [
 				{ id: "32F25871260DECB5", item: "grindless:vein_sample_iron", optional_task: true, type: "item" }
 				{ id: "3E230C7CAB69568E", type: "checkmark" }
 			]
 			title: "Iron Vein Sample"
-			x: 2.5d
-			y: 9.25d
-		}
-		{
-			icon: "gtceu:bronze_plate"
-			id: "3ED3028B836AED08"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "3B500F76E8375A0E", item: "gtceu:bronze_plate", optional_task: true, type: "item" }
-				{ id: "3D7B59486E96FC2B", type: "checkmark" }
-			]
-			title: "Bronze Plate"
 			x: 0.5d
-			y: 11.5d
+			y: 8.0d
 		}
 		{
-			dependencies: ["3ED3028B836AED08"]
 			icon: "grindless:bronze_drill_bit"
 			id: "3A600EB27F37EECC"
+			shape: "rsquare"
 			size: 1.0d
 			subtitle: "Wears out now and then"
 			tasks: [
@@ -364,8 +156,8 @@
 				{ id: "1D42289A4F7AEEEC", type: "checkmark" }
 			]
 			title: "Bronze Drill Bit"
-			x: 2.5d
-			y: 11.5d
+			x: 0.5d
+			y: 9.5d
 		}
 		{
 			dependencies: ["3572E6F3E0157401", "3A600EB27F37EECC"]
@@ -379,22 +171,8 @@
 				{ id: "170F658E7C45B106", type: "checkmark" }
 			]
 			title: "Steam Vein Drill"
-			x: 4.5d
-			y: 10.0d
-		}
-		{
-			dependencies: ["501339470EC206FA"]
-			icon: "gtceu:raw_goethite"
-			id: "3D17304982F9676E"
-			size: 1.25d
-			subtitle: "With the vein's other ores"
-			tasks: [
-				{ id: "57165452E464BA92", item: "gtceu:raw_goethite", optional_task: true, type: "item" }
-				{ id: "39ADB9219BDC2DDF", type: "checkmark" }
-			]
-			title: "Raw Goethite, Forever"
-			x: 6.5d
-			y: 9.25d
+			x: 2.5d
+			y: 8.75d
 		}
 		{
 			dependencies: ["501339470EC206FA"]
@@ -407,217 +185,136 @@
 				{ id: "3810E5C5E58959BB", type: "checkmark" }
 			]
 			title: "Cobblestone"
-			x: 6.5d
-			y: 10.75d
+			x: 4.5d
+			y: 10.5d
 		}
 		{
-			icon: "gtceu:rubber_sapling"
-			id: "5DD59270C0E1B1C8"
+			dependencies: ["501339470EC206FA"]
+			icon: "gtceu:raw_goethite"
+			id: "5138888205E30B05"
+			size: 1.0d
+			subtitle: "With the vein's other ores"
+			tasks: [
+				{ id: "3FF7B7E6A0268FD4", item: "gtceu:raw_goethite", optional_task: true, type: "item" }
+				{ id: "766BF307C4A7679C", type: "checkmark" }
+			]
+			title: "Raw Goethite, Forever"
+			x: 4.5d
+			y: 8.75d
+		}
+		{
+			dependencies: ["5138888205E30B05"]
+			icon: "gtceu:crushed_goethite_ore"
+			id: "7FCE07B8D68AE2A9"
+			size: 1.0d
+			subtitle: "Macerator"
+			tasks: [
+				{ id: "50ED01ECD2E8B50B", item: "gtceu:crushed_goethite_ore", optional_task: true, type: "item" }
+				{ id: "7051A7E7791F5024", type: "checkmark" }
+			]
+			title: "Crushed Goethite"
+			x: 6.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["7FCE07B8D68AE2A9"]
+			icon: "gtceu:purified_goethite_ore"
+			id: "1AFF27B285BE8EB1"
+			size: 1.0d
+			subtitle: "Ore washer"
+			tasks: [
+				{ id: "54394C260EDA2D91", item: "gtceu:purified_goethite_ore", optional_task: true, type: "item" }
+				{ id: "734EAD863E5CBA27", type: "checkmark" }
+			]
+			title: "Purified Goethite"
+			x: 8.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["19979B49F362A2DF"]
+			icon: "gtceu:coke_dust"
+			id: "31F6EF3DCAA91E44"
+			size: 1.0d
+			subtitle: "Ground in a mortar"
+			tasks: [
+				{ id: "15AC5116E73A8103", item: "gtceu:coke_dust", optional_task: true, type: "item" }
+				{ id: "57786969701268FD", type: "checkmark" }
+			]
+			title: "Coke Dust"
+			x: 6.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["1AFF27B285BE8EB1", "31F6EF3DCAA91E44"]
+			description: ["Purified ore and coke dust baked into lumps the furnace can swallow. Any iron ore sinters the same way."]
+			icon: "grindless:iron_sinter"
+			id: "3938C6A7974D9B32"
+			size: 1.0d
+			subtitle: "Alloy smelter"
+			tasks: [
+				{ id: "364DF99218EAA86B", item: "grindless:iron_sinter", optional_task: true, type: "item" }
+				{ id: "113B6ED31831A98C", type: "checkmark" }
+			]
+			title: "Iron Sinter"
+			x: 8.5d
+			y: 7.5d
+		}
+		{
+			icon: "gtceu:calcite_dust"
+			id: "333D84BAF94F8236"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Never used up"
+			subtitle: "The flux: raw, dust or block"
 			tasks: [
-				{ id: "51FEFDF6DA0FECE0", item: "gtceu:rubber_sapling", optional_task: true, type: "item" }
-				{ id: "31A1E5AD9571CA47", type: "checkmark" }
+				{ id: "7ED394505C39FDB4", item: "gtceu:calcite_dust", optional_task: true, type: "item" }
+				{ id: "7FC670BAD03EAD3F", type: "checkmark" }
 			]
-			title: "Rubber Sapling"
-			x: 10.75d
-			y: 9.75d
+			title: "Calcite"
+			x: 9.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["5DD59270C0E1B1C8"]
-			description: ["A sapling in, logs and resin out, and the sapling stays. Chopping trees was never the fun part."]
-			icon: "gtceu:steam_greenhouse"
-			id: "78562FF10AF5A565"
-			shape: "gear"
-			size: 1.5d
+			dependencies: ["3938C6A7974D9B32", "19979B49F362A2DF", "333D84BAF94F8236"]
+			description: ["Sinter, coke and flux in the steam blast furnace: four loads at once, and it drinks a lot of steam for the favour."]
+			icon: "grindless:pig_iron"
+			id: "5F13854A9857E8EB"
+			size: 1.0d
+			subtitle: "Steam blast furnace"
 			tasks: [
-				{ id: "57479F03AF789091", item: "gtceu:steam_greenhouse", optional_task: true, type: "item" }
-				{ id: "1A0D86268D1CEA71", type: "checkmark" }
+				{ id: "36D05F53DA9120A5", item: "grindless:pig_iron", optional_task: true, type: "item" }
+				{ id: "5AC0588CEFA4FA1D", type: "checkmark" }
 			]
-			title: "Steam Greenhouse"
-			x: 12.75d
-			y: 9.75d
+			title: "Pig Iron"
+			x: 9.0d
+			y: 5.0d
 		}
 		{
-			dependencies: ["78562FF10AF5A565"]
-			icon: "gtceu:rubber_log"
-			id: "52F1DFFCFB787143"
+			dependencies: ["5F13854A9857E8EB"]
+			icon: "gtceu:steel_ingot"
+			id: "5CD0DB7DDC7BCF45"
+			size: 1.25d
+			subtitle: "Bessemer blow, same furnace"
+			tasks: [
+				{ id: "71F8C5C560F71EBA", item: "gtceu:steel_ingot", optional_task: true, type: "item" }
+				{ id: "71401067D93B9321", type: "checkmark" }
+			]
+			title: "Steel"
+			x: 11.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["5F13854A9857E8EB"]
+			description: ["Lime from the flux and ash from the coke. Void it, or keep it: LV mixes it into fertilizer."]
+			icon: "gtceu:ash_dust"
+			id: "1A3EAE1BFB47BDE8"
 			size: 0.75d
-			subtitle: "Planks, or charcoal in the coke oven"
 			tasks: [
-				{ id: "5BD0517B6E08B0BF", item: "gtceu:rubber_log", optional_task: true, type: "item" }
-				{ id: "7FFCFDDD96C3B0B5", type: "checkmark" }
+				{ id: "7888308736C3CDE8", item: "gtceu:ash_dust", optional_task: true, type: "item" }
+				{ id: "159E39BF938A55E2", type: "checkmark" }
 			]
-			title: "Rubber Log"
-			x: 14.75d
-			y: 8.5d
-		}
-		{
-			dependencies: ["78562FF10AF5A565"]
-			icon: "gtceu:sticky_resin"
-			id: "10ACDD20C76B14CE"
-			size: 1.0d
-			tasks: [
-				{ id: "3FB57ED4AE5B7B55", item: "gtceu:sticky_resin", optional_task: true, type: "item" }
-				{ id: "1F061308E134E56F", type: "checkmark" }
-			]
-			title: "Sticky Resin"
-			x: 14.75d
-			y: 10.0d
-		}
-		{
-			dependencies: ["10ACDD20C76B14CE"]
-			icon: "gtceu:raw_rubber_dust"
-			id: "1FC56868A867409C"
-			size: 1.0d
-			subtitle: "Steam extractor"
-			tasks: [
-				{ id: "535CE9E1A2E3E8E7", item: "gtceu:raw_rubber_dust", optional_task: true, type: "item" }
-				{ id: "1253367C9C11D3DF", type: "checkmark" }
-			]
-			title: "Raw Rubber"
-			x: 16.75d
-			y: 10.0d
-		}
-		{
-			description: ["The steam age has no other sulfur. Pack a flint and steel."]
-			icon: "gtceu:raw_sulfur"
-			id: "7ED1ADD8DD9656A7"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "From the Nether"
-			tasks: [
-				{ id: "1EE5F3E3F215154C", item: "gtceu:raw_sulfur", optional_task: true, type: "item" }
-				{ id: "7CDD1738B40AB70C", type: "checkmark" }
-			]
-			title: "Raw Sulfur"
-			x: 14.75d
-			y: 11.5d
-		}
-		{
-			dependencies: ["7ED1ADD8DD9656A7"]
-			icon: "gtceu:sulfur_dust"
-			id: "5851CAAE8EB3AF5E"
-			size: 1.0d
-			subtitle: "Any furnace"
-			tasks: [
-				{ id: "3A11B4251CDA6BD0", item: "gtceu:sulfur_dust", optional_task: true, type: "item" }
-				{ id: "5EA9DE438CFF2A19", type: "checkmark" }
-			]
-			title: "Sulfur"
-			x: 16.75d
-			y: 11.5d
-		}
-		{
-			dependencies: ["1FC56868A867409C", "5851CAAE8EB3AF5E"]
-			description: ["Pressed into sheets, it insulates the cable that leaves the steam age."]
-			icon: "gtceu:rubber_ingot"
-			id: "51A57A8B30D2BE8C"
-			size: 1.25d
-			subtitle: "Steam alloy smelter"
-			tasks: [
-				{ id: "384D854F3B4B84CA", item: "gtceu:rubber_ingot", optional_task: true, type: "item" }
-				{ id: "30CA8671E9CA5D3E", type: "checkmark" }
-			]
-			title: "Rubber"
-			x: 18.75d
-			y: 10.75d
-		}
-		{
-			icon: "minecraft:sand"
-			id: "712D5EF975A6777F"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "1A42758A97DCAA50", item: "minecraft:sand", optional_task: true, type: "item" }
-				{ id: "195E732FD7ECA30E", type: "checkmark" }
-			]
-			title: "Sand"
-			x: 0.5d
-			y: 15.0d
-		}
-		{
-			dependencies: ["712D5EF975A6777F"]
-			icon: "gtceu:quartz_sand_dust"
-			id: "1F3CFEACDA43434A"
-			size: 1.0d
-			subtitle: "Mortar or macerator"
-			tasks: [
-				{ id: "1E9CD1F02E7353BF", item: "gtceu:quartz_sand_dust", optional_task: true, type: "item" }
-				{ id: "3521D606C0F4F273", type: "checkmark" }
-			]
-			title: "Quartz Sand"
-			x: 2.5d
-			y: 15.0d
-		}
-		{
-			icon: "minecraft:flint"
-			id: "3A7D776CB565F139"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "50383361257EB410", item: "minecraft:flint", optional_task: true, type: "item" }
-				{ id: "739F3B9D49C13BF0", type: "checkmark" }
-			]
-			title: "Flint"
-			x: 0.5d
-			y: 16.5d
-		}
-		{
-			dependencies: ["3A7D776CB565F139"]
-			icon: "gtceu:flint_dust"
-			id: "7D8C9031ACD72E2E"
-			size: 1.0d
-			tasks: [
-				{ id: "59E0557191FEB121", item: "gtceu:flint_dust", optional_task: true, type: "item" }
-				{ id: "16519128D176F109", type: "checkmark" }
-			]
-			title: "Flint Dust"
-			x: 2.5d
-			y: 16.5d
-		}
-		{
-			dependencies: ["1F3CFEACDA43434A", "7D8C9031ACD72E2E"]
-			icon: "gtceu:glass_dust"
-			id: "5C91978C48398474"
-			size: 1.0d
-			tasks: [
-				{ id: "7F12ACC50DAE9535", item: "gtceu:glass_dust", optional_task: true, type: "item" }
-				{ id: "14677DEFA65DD772", type: "checkmark" }
-			]
-			title: "Glass Dust"
-			x: 4.5d
-			y: 15.75d
-		}
-		{
-			description: ["Sand won't melt into glass here: the glass dust has to be cast. The mold is why glass waits for steel."]
-			icon: "gtceu:block_casting_mold"
-			id: "1DDC0A772FAE3BDC"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Hammered from a steel mold"
-			tasks: [
-				{ id: "3F22FE29A5F15541", item: "gtceu:block_casting_mold", optional_task: true, type: "item" }
-				{ id: "38E757F74638F268", type: "checkmark" }
-			]
-			title: "Block Casting Mold"
-			x: 4.5d
-			y: 17.25d
-		}
-		{
-			dependencies: ["5C91978C48398474", "1DDC0A772FAE3BDC"]
-			icon: "minecraft:glass"
-			id: "13A67EEFCFCD47C5"
-			size: 1.25d
-			subtitle: "Steam alloy smelter"
-			tasks: [
-				{ id: "36CCB38B7A650984", item: "minecraft:glass", optional_task: true, type: "item" }
-				{ id: "51DBEF295C848006", type: "checkmark" }
-			]
-			title: "Glass"
-			x: 6.5d
-			y: 16.5d
+			title: "Ash"
+			x: 11.0d
+			y: 6.5d
 		}
 		{
 			icon: "minecraft:clay"
@@ -630,7 +327,7 @@
 			]
 			title: "Clay"
 			x: 0.5d
-			y: 18.75d
+			y: 13.75d
 		}
 		{
 			icon: "minecraft:brick"
@@ -643,7 +340,7 @@
 			]
 			title: "Brick"
 			x: 0.5d
-			y: 20.25d
+			y: 15.25d
 		}
 		{
 			dependencies: ["325B56288D65F719"]
@@ -656,7 +353,7 @@
 			]
 			title: "Clay Dust"
 			x: 2.5d
-			y: 18.75d
+			y: 13.75d
 		}
 		{
 			dependencies: ["1FA0E8A2522F4E74"]
@@ -669,7 +366,7 @@
 			]
 			title: "Brick Dust"
 			x: 2.5d
-			y: 20.25d
+			y: 15.25d
 		}
 		{
 			dependencies: ["709E81C0B2F5010A", "3DF282CD6C0B845F"]
@@ -682,7 +379,7 @@
 			]
 			title: "Fireclay Dust"
 			x: 4.5d
-			y: 19.5d
+			y: 14.5d
 		}
 		{
 			dependencies: ["3B05554945DB27BB"]
@@ -696,7 +393,7 @@
 			]
 			title: "Compressed Fireclay"
 			x: 6.5d
-			y: 19.5d
+			y: 14.5d
 		}
 		{
 			dependencies: ["17B108E034D53C89"]
@@ -710,7 +407,7 @@
 			]
 			title: "Firebrick"
 			x: 8.5d
-			y: 19.5d
+			y: 14.5d
 		}
 		{
 			dependencies: ["1BE502741401DDB9"]
@@ -724,50 +421,101 @@
 			]
 			title: "Firebricks"
 			x: 10.5d
-			y: 19.5d
+			y: 14.5d
 		}
 		{
-			description: ["The Welcome quest gives it once. The machine keeps it."]
-			icon: "grindless:horizon_shard"
-			id: "780971A499DDA99A"
+			icon: "minecraft:sand"
+			id: "712D5EF975A6777F"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Never used up"
 			tasks: [
-				{ id: "5D110F1FF673B3A0", item: "grindless:horizon_shard", optional_task: true, type: "item" }
-				{ id: "1E126BA4901F5C6C", type: "checkmark" }
+				{ id: "1A42758A97DCAA50", item: "minecraft:sand", optional_task: true, type: "item" }
+				{ id: "195E732FD7ECA30E", type: "checkmark" }
 			]
-			title: "Horizon Shard"
+			title: "Sand"
+			x: 14.75d
+			y: 13.75d
+		}
+		{
+			dependencies: ["712D5EF975A6777F"]
+			icon: "gtceu:quartz_sand_dust"
+			id: "1F3CFEACDA43434A"
+			size: 1.0d
+			subtitle: "Mortar or macerator"
+			tasks: [
+				{ id: "1E9CD1F02E7353BF", item: "gtceu:quartz_sand_dust", optional_task: true, type: "item" }
+				{ id: "3521D606C0F4F273", type: "checkmark" }
+			]
+			title: "Quartz Sand"
+			x: 16.75d
+			y: 13.75d
+		}
+		{
+			icon: "minecraft:flint"
+			id: "3A7D776CB565F139"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "50383361257EB410", item: "minecraft:flint", optional_task: true, type: "item" }
+				{ id: "739F3B9D49C13BF0", type: "checkmark" }
+			]
+			title: "Flint"
 			x: 14.75d
 			y: 15.25d
 		}
 		{
-			dependencies: ["780971A499DDA99A"]
-			description: ["Circuit 1 and the shard: a stack of logs every few seconds, out of nowhere. It is the steam age's automatic log source; the greenhouse grows trees where the collector's other rows feed other lines."]
-			icon: "gtceu:lv_horizon_collector"
-			id: "5C562BD093CBA553"
-			shape: "gear"
-			size: 1.5d
+			dependencies: ["3A7D776CB565F139"]
+			icon: "gtceu:flint_dust"
+			id: "7D8C9031ACD72E2E"
+			size: 1.0d
 			tasks: [
-				{ id: "123B0E23B9ED2AEF", item: "gtceu:lv_horizon_collector", optional_task: true, type: "item" }
-				{ id: "5E1863C4E69B8C50", type: "checkmark" }
+				{ id: "59E0557191FEB121", item: "gtceu:flint_dust", optional_task: true, type: "item" }
+				{ id: "16519128D176F109", type: "checkmark" }
 			]
-			title: "Horizon Collector"
+			title: "Flint Dust"
 			x: 16.75d
 			y: 15.25d
 		}
 		{
-			dependencies: ["5C562BD093CBA553"]
-			icon: "minecraft:oak_log"
-			id: "3E1EEB5B79AEA64B"
-			size: 1.25d
-			subtitle: "Charcoal, planks, and the first rubber"
+			dependencies: ["1F3CFEACDA43434A", "7D8C9031ACD72E2E"]
+			icon: "gtceu:glass_dust"
+			id: "5C91978C48398474"
+			size: 1.0d
 			tasks: [
-				{ id: "18442F38C9A956A5", item: "minecraft:oak_log", optional_task: true, type: "item" }
-				{ id: "5750C2B1B223EBE3", type: "checkmark" }
+				{ id: "7F12ACC50DAE9535", item: "gtceu:glass_dust", optional_task: true, type: "item" }
+				{ id: "14677DEFA65DD772", type: "checkmark" }
 			]
-			title: "Oak Logs"
+			title: "Glass Dust"
 			x: 18.75d
+			y: 14.5d
+		}
+		{
+			description: ["Sand won't melt into glass here: the glass dust has to be cast. The mold is why glass waits for steel."]
+			icon: "gtceu:block_casting_mold"
+			id: "1DDC0A772FAE3BDC"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Hammered from a steel mold"
+			tasks: [
+				{ id: "3F22FE29A5F15541", item: "gtceu:block_casting_mold", optional_task: true, type: "item" }
+				{ id: "38E757F74638F268", type: "checkmark" }
+			]
+			title: "Block Casting Mold"
+			x: 18.75d
+			y: 16.0d
+		}
+		{
+			dependencies: ["5C91978C48398474", "1DDC0A772FAE3BDC"]
+			icon: "minecraft:glass"
+			id: "13A67EEFCFCD47C5"
+			size: 1.25d
+			subtitle: "Steam alloy smelter"
+			tasks: [
+				{ id: "36CCB38B7A650984", item: "minecraft:glass", optional_task: true, type: "item" }
+				{ id: "51DBEF295C848006", type: "checkmark" }
+			]
+			title: "Glass"
+			x: 20.75d
 			y: 15.25d
 		}
 		{
@@ -782,7 +530,7 @@
 			]
 			title: "Raw Copper"
 			x: 0.5d
-			y: 24.0d
+			y: 19.75d
 		}
 		{
 			dependencies: ["3BF35BF7A1D6642C"]
@@ -797,7 +545,7 @@
 			]
 			title: "Large Steam Macerator"
 			x: 2.5d
-			y: 24.0d
+			y: 19.75d
 		}
 		{
 			dependencies: ["51BD4DA3E2F038B4"]
@@ -810,7 +558,7 @@
 			]
 			title: "Crushed Copper Ore"
 			x: 4.5d
-			y: 24.0d
+			y: 19.75d
 		}
 		{
 			dependencies: ["51BD4DA3E2F038B4"]
@@ -824,7 +572,7 @@
 			]
 			title: "Cobalt"
 			x: 4.5d
-			y: 25.5d
+			y: 21.25d
 		}
 		{
 			dependencies: ["57DD80B06E178AED"]
@@ -838,7 +586,7 @@
 			]
 			title: "Large Steam Ore Washer"
 			x: 6.5d
-			y: 24.0d
+			y: 19.75d
 		}
 		{
 			dependencies: ["5964C76DE3156B25"]
@@ -851,7 +599,7 @@
 			]
 			title: "Purified Copper Ore"
 			x: 8.5d
-			y: 24.0d
+			y: 19.75d
 		}
 		{
 			dependencies: ["5964C76DE3156B25"]
@@ -865,7 +613,7 @@
 			]
 			title: "Stone Dust"
 			x: 8.5d
-			y: 25.5d
+			y: 21.25d
 		}
 		{
 			dependencies: ["599FD4D94406B958"]
@@ -879,7 +627,7 @@
 			]
 			title: "Large Steam Thermal Centrifuge"
 			x: 10.5d
-			y: 24.0d
+			y: 19.75d
 		}
 		{
 			dependencies: ["53BF7448A6082858"]
@@ -892,7 +640,7 @@
 			]
 			title: "Refined Copper Ore"
 			x: 12.5d
-			y: 24.0d
+			y: 19.75d
 		}
 		{
 			dependencies: ["53BF7448A6082858"]
@@ -906,7 +654,7 @@
 			]
 			title: "Gold"
 			x: 12.5d
-			y: 25.5d
+			y: 21.25d
 		}
 		{
 			dependencies: ["3AA5FCF4B44B9245"]
@@ -920,7 +668,7 @@
 			]
 			title: "Copper Dust"
 			x: 14.5d
-			y: 24.0d
+			y: 19.75d
 		}
 		{
 			dependencies: ["3AA5FCF4B44B9245"]
@@ -934,9 +682,9 @@
 			]
 			title: "Nickel"
 			x: 14.5d
-			y: 25.5d
+			y: 21.25d
 		}
 	]
-	subtitle: ["Coal turns into coke and steel, and ore and wood start arriving without a pickaxe."]
+	subtitle: ["Coal turns into coke and steel, and ore arrives without a pickaxe."]
 	title: "Steam Lines"
 }

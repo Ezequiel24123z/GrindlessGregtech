@@ -11,11 +11,18 @@
 	progression_mode: "flexible"
 	quest_links: [
 		{
-			id: "5F6C763A605C0409"
-			linked_quest: "5448FA5C814B1DBD"
+			id: "5B65CBFDB3638309"
+			linked_quest: "764BA173F9F2EF69"
 			shape: "rsquare"
-			x: 4.5d
-			y: 12.75d
+			x: 0.5d
+			y: 14.25d
+		}
+		{
+			id: "7F54E2705A4AE8C5"
+			linked_quest: "398204A27CC9D892"
+			shape: "rsquare"
+			x: 21.25d
+			y: 15.0d
 		}
 		{
 			id: "3BB71360206D221E"
@@ -357,159 +364,7 @@
 			y: 3.5d
 		}
 		{
-			icon: "gtceu:ilmenite_dust"
-			id: "39212E20005B180A"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Lunar, down the bridge"
-			tasks: [
-				{ id: "72C75BBB76E92EEA", item: "gtceu:ilmenite_dust", optional_task: true, type: "item" }
-				{ id: "7AE959264E56BBB8", type: "checkmark" }
-			]
-			title: "Ilmenite Dust"
-			x: 0.5d
-			y: 14.25d
-		}
-		{
-			icon: "gtceu:carbon_dust"
-			id: "5660B2FA9A5B9183"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "1560708020AEFA1D", item: "gtceu:carbon_dust", optional_task: true, type: "item" }
-				{ id: "5903DAAB442A8129", type: "checkmark" }
-			]
-			title: "Carbon Dust"
-			x: 0.5d
-			y: 15.75d
-		}
-		{
-			dependencies: ["39212E20005B180A", "5660B2FA9A5B9183"]
-			icon: "gtceu:electric_blast_furnace"
-			id: "3C775E595179791B"
-			shape: "gear"
-			size: 1.25d
-			tasks: [
-				{ id: "760AC39272618555", item: "gtceu:electric_blast_furnace", optional_task: true, type: "item" }
-				{ id: "73147D654FAD6D67", type: "checkmark" }
-			]
-			title: "Electric Blast Furnace"
-			x: 2.5d
-			y: 15.0d
-		}
-		{
-			dependencies: ["3C775E595179791B"]
-			icon: "gtceu:rutile_dust"
-			id: "11F7845ED1F2EA24"
-			size: 1.0d
-			tasks: [
-				{ id: "5158E3920F0AE84E", item: "gtceu:rutile_dust", optional_task: true, type: "item" }
-				{ id: "1B593900E2A4B536", type: "checkmark" }
-			]
-			title: "Rutile"
-			x: 4.5d
-			y: 14.25d
-		}
-		{
-			dependencies: ["3C775E595179791B"]
-			icon: "gtceu:wrought_iron_ingot"
-			id: "75162C544B395673"
-			size: 0.75d
-			subtitle: "The iron in the ilmenite"
-			tasks: [
-				{ id: "3044B6674BB3AEDC", item: "gtceu:wrought_iron_ingot", optional_task: true, type: "item" }
-				{ id: "549618025E06DA09", type: "checkmark" }
-			]
-			title: "Wrought Iron"
-			x: 4.5d
-			y: 15.75d
-		}
-		{
-			dependencies: ["11F7845ED1F2EA24", "5448FA5C814B1DBD"]
-			icon: "gtceu:titanium_tetrachloride_bucket"
-			id: "32504C3C1F5AE292"
-			size: 1.0d
-			subtitle: "Chemical reactor, with carbon"
-			tasks: [
-				{ id: "12254D8B1F9A8BA9", item: "gtceu:titanium_tetrachloride_bucket", optional_task: true, type: "item" }
-				{ id: "13BEFB88E68E1C93", type: "checkmark" }
-			]
-			title: "Titanium Tetrachloride"
-			x: 6.5d
-			y: 14.25d
-		}
-		{
-			dependencies: ["11F7845ED1F2EA24"]
-			icon: "gtceu:carbon_monoxide_bucket"
-			id: "7C05E13157F03FE3"
-			size: 0.75d
-			subtitle: "Toxic: methanol, or a tank"
-			tasks: [
-				{ id: "54CD6962E705E397", item: "gtceu:carbon_monoxide_bucket", optional_task: true, type: "item" }
-				{ id: "7C98E0F889787BA8", type: "checkmark" }
-			]
-			title: "Carbon Monoxide"
-			x: 6.5d
-			y: 15.75d
-		}
-		{
-			icon: "gtceu:magnesium_dust"
-			id: "5F2A286E380E4088"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "5F0D626410819D6A", item: "gtceu:magnesium_dust", optional_task: true, type: "item" }
-				{ id: "75A2B005D1B16900", type: "checkmark" }
-			]
-			title: "Magnesium"
-			x: 6.5d
-			y: 12.75d
-		}
-		{
-			dependencies: ["32504C3C1F5AE292", "5F2A286E380E4088"]
-			description: ["The Kroll process: magnesium strips the chlorine off. The regolith cell does the same job in one step, but only on the Moon."]
-			icon: "gtceu:hot_titanium_ingot"
-			id: "7FFC26BFA9A516DD"
-			size: 1.0d
-			subtitle: "The EBF again"
-			tasks: [
-				{ id: "75A161853A3724DC", item: "gtceu:hot_titanium_ingot", optional_task: true, type: "item" }
-				{ id: "198852D16BC4A889", type: "checkmark" }
-			]
-			title: "Hot Titanium Ingot"
-			x: 8.5d
-			y: 14.25d
-		}
-		{
-			dependencies: ["32504C3C1F5AE292"]
-			icon: "gtceu:magnesium_chloride_dust"
-			id: "7887D1CC5390C96D"
-			size: 1.0d
-			tasks: [
-				{ id: "57CC1C1D6B5DBCC7", item: "gtceu:magnesium_chloride_dust", optional_task: true, type: "item" }
-				{ id: "5BEF7D4831B1F196", type: "checkmark" }
-			]
-			title: "Magnesium Chloride"
-			x: 8.5d
-			y: 15.75d
-		}
-		{
-			dependencies: ["7887D1CC5390C96D"]
-			icon: "gtceu:magnesium_dust"
-			id: "1924A26CBC50BE37"
-			shape: "circle"
-			size: 0.75d
-			subtitle: "Sodium takes the chlorine; the salt goes back to the electrolyzer"
-			tasks: [
-				{ id: "31BB496C93C862F4", item: "gtceu:magnesium_dust", optional_task: true, type: "item" }
-				{ id: "5AA3A021F9F9C22B", type: "checkmark" }
-			]
-			title: "Magnesium, Back"
-			x: 10.5d
-			y: 15.75d
-		}
-		{
-			dependencies: ["7FFC26BFA9A516DD"]
+			dependencies: ["764BA173F9F2EF69"]
 			description: ["Rolls the ingot while it still glows, so the freezer and the bender sit this one out. The cooling water leaves as steam."]
 			icon: "gtceu:hot_strip_mill"
 			id: "744843BADCF43DFB"
@@ -520,11 +375,11 @@
 				{ id: "1639600285015326", type: "checkmark" }
 			]
 			title: "Hot Strip Mill"
-			x: 10.5d
+			x: 2.5d
 			y: 12.0d
 		}
 		{
-			dependencies: ["7FFC26BFA9A516DD"]
+			dependencies: ["764BA173F9F2EF69"]
 			icon: "gtceu:vacuum_freezer"
 			id: "30510EDD0C3447B6"
 			shape: "gear"
@@ -534,7 +389,7 @@
 				{ id: "7DF1A31B9B6BA7D9", type: "checkmark" }
 			]
 			title: "Vacuum Freezer"
-			x: 10.5d
+			x: 2.5d
 			y: 14.25d
 		}
 		{
@@ -548,7 +403,7 @@
 				{ id: "3FE00597401DF937", type: "checkmark" }
 			]
 			title: "Titanium Plate"
-			x: 12.5d
+			x: 4.5d
 			y: 11.25d
 		}
 		{
@@ -562,7 +417,7 @@
 				{ id: "7AFFD65CC18475A2", type: "checkmark" }
 			]
 			title: "Steam"
-			x: 12.5d
+			x: 4.5d
 			y: 12.5d
 		}
 		{
@@ -575,7 +430,7 @@
 				{ id: "381EB6E68D30FF58", type: "checkmark" }
 			]
 			title: "Titanium"
-			x: 12.5d
+			x: 4.5d
 			y: 14.25d
 		}
 		{
@@ -589,7 +444,7 @@
 				{ id: "5DAB985E712683A0", type: "checkmark" }
 			]
 			title: "Crushed Pentlandite"
-			x: 16.75d
+			x: 8.75d
 			y: 14.25d
 		}
 		{
@@ -603,7 +458,7 @@
 				{ id: "1052AE873BF03774", type: "checkmark" }
 			]
 			title: "Purified Pentlandite"
-			x: 18.75d
+			x: 10.75d
 			y: 14.25d
 		}
 		{
@@ -617,7 +472,7 @@
 				{ id: "14867AE6F4909D5A", type: "checkmark" }
 			]
 			title: "Platinum Electrode"
-			x: 18.75d
+			x: 10.75d
 			y: 15.75d
 		}
 		{
@@ -635,7 +490,7 @@
 				{ id: "7BE24A97907BCDA9", type: "checkmark" }
 			]
 			title: "Platinum Plant"
-			x: 20.75d
+			x: 12.75d
 			y: 15.0d
 		}
 		{
@@ -649,7 +504,7 @@
 				{ id: "501032D66B5E7952", type: "checkmark" }
 			]
 			title: "Nickel"
-			x: 22.75d
+			x: 14.75d
 			y: 12.75d
 		}
 		{
@@ -662,7 +517,7 @@
 				{ id: "7CE1366D79C082CE", type: "checkmark" }
 			]
 			title: "Platinum Group Sludge"
-			x: 22.75d
+			x: 14.75d
 			y: 14.25d
 		}
 		{
@@ -676,7 +531,7 @@
 				{ id: "11375B966070DE9E", type: "checkmark" }
 			]
 			title: "Sulfuric Acid"
-			x: 22.75d
+			x: 14.75d
 			y: 15.75d
 		}
 		{
@@ -689,7 +544,7 @@
 				{ id: "1524A3FE83227D05", type: "checkmark" }
 			]
 			title: "Platinum"
-			x: 25.25d
+			x: 17.25d
 			y: 11.0d
 		}
 		{
@@ -703,7 +558,7 @@
 				{ id: "757C871A07C5524F", type: "checkmark" }
 			]
 			title: "Palladium"
-			x: 25.25d
+			x: 17.25d
 			y: 12.25d
 		}
 		{
@@ -717,7 +572,7 @@
 				{ id: "1B8C9376813373AF", type: "checkmark" }
 			]
 			title: "Rhodium"
-			x: 25.25d
+			x: 17.25d
 			y: 13.5d
 		}
 		{
@@ -731,7 +586,7 @@
 				{ id: "5C6E7377E50C2F07", type: "checkmark" }
 			]
 			title: "Ruthenium"
-			x: 25.25d
+			x: 17.25d
 			y: 14.75d
 		}
 		{
@@ -745,7 +600,7 @@
 				{ id: "7F2794E1E5FAAE8C", type: "checkmark" }
 			]
 			title: "Nitrogen Dioxide"
-			x: 25.25d
+			x: 17.25d
 			y: 16.0d
 		}
 		{
@@ -759,7 +614,7 @@
 				{ id: "1C709147A0D0FA56", type: "checkmark" }
 			]
 			title: "Nitric Acid"
-			x: 27.25d
+			x: 19.25d
 			y: 16.0d
 		}
 		{
@@ -773,11 +628,11 @@
 				{ id: "7D5F2C4EEE641CFD", type: "checkmark" }
 			]
 			title: "Calcium Chloride"
-			x: 25.25d
+			x: 17.25d
 			y: 17.25d
 		}
 		{
-			dependencies: ["56280033A496EDB1", "5DC3250C7363995F", "3757C105262ED912"]
+			dependencies: ["56280033A496EDB1", "5DC3250C7363995F", "3757C105262ED912", "398204A27CC9D892"]
 			icon: "gtceu:smelting_complex"
 			id: "70EA84BEF20FEFC7"
 			shape: "gear"
@@ -788,7 +643,7 @@
 				{ id: "5116AAB48D6EB763", type: "checkmark" }
 			]
 			title: "Smelting Complex"
-			x: 29.25d
+			x: 21.25d
 			y: 13.5d
 		}
 		{
@@ -801,7 +656,7 @@
 				{ id: "10D30A7AB8C00FAE", type: "checkmark" }
 			]
 			title: "Palladium Ingot"
-			x: 31.25d
+			x: 23.25d
 			y: 12.25d
 		}
 		{
@@ -814,7 +669,7 @@
 				{ id: "3C09E719C1FA70F3", type: "checkmark" }
 			]
 			title: "Rhodium Ingot"
-			x: 31.25d
+			x: 23.25d
 			y: 13.5d
 		}
 		{
@@ -827,7 +682,7 @@
 				{ id: "32046F72E21110C7", type: "checkmark" }
 			]
 			title: "Ruthenium Ingot"
-			x: 31.25d
+			x: 23.25d
 			y: 14.75d
 		}
 		{
@@ -842,7 +697,7 @@
 				{ id: "718241BC2F9090CC", type: "checkmark" }
 			]
 			title: "Electrodes, Back"
-			x: 27.25d
+			x: 19.25d
 			y: 11.0d
 		}
 		{
@@ -856,7 +711,7 @@
 				{ id: "781F546B7079966B", type: "checkmark" }
 			]
 			title: "Ruthenium Catalyst"
-			x: 27.25d
+			x: 19.25d
 			y: 14.75d
 		}
 		{
@@ -1689,16 +1544,16 @@
 			y: 28.25d
 		}
 		{
-			icon: "gtceu:silicon_dust"
+			icon: "grindless:polysilicon"
 			id: "5E94AFCE2AFD005C"
 			shape: "rsquare"
 			size: 1.0d
 			subtitle: "64 for each boule"
 			tasks: [
-				{ id: "55B621387BC99968", item: "gtceu:silicon_dust", optional_task: true, type: "item" }
+				{ id: "55B621387BC99968", item: "grindless:polysilicon", optional_task: true, type: "item" }
 				{ id: "759E622525950C5D", type: "checkmark" }
 			]
-			title: "Silicon"
+			title: "Polysilicon"
 			x: 0.5d
 			y: 38.25d
 		}
