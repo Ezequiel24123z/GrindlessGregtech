@@ -32,26 +32,6 @@ export const QUESTS = [
     desc: [], tasks: [it("grindless:fz_silicon_wafer")], rewards: [xp(50)],
   },
   {
-    key: "W_WSI", kind: "wafer", title: "WSi Wafer", icon: "grindless:wsi_wafer", deps: ["W_FZ_SILICON"], x: 4, y: 0,
-    teach: {
-      for: "The &6WSi Wafer&r is a wafer stage on the way to the WSi Nanowire Wafer.",
-      needs: "Made in the &6SNSPD Fabrication&r from the FZ Silicon Wafer and Tungsten Silicide, with argon, in the cleanroom.",
-      unlocks: "The WSi Nanowire Wafer in the SNSPD Fabrication.",
-      automate: "Chain the machines by ME, and keep a small buffer of this wafer between steps.",
-    },
-    desc: [], tasks: [it("grindless:wsi_wafer")], rewards: [xp(50)],
-  },
-  {
-    key: "W_WSI_NANOWIRE", kind: "wafer", title: "Nanowire Wafer", icon: "grindless:wsi_nanowire_wafer", deps: ["W_WSI"], x: 6, y: 0,
-    teach: {
-      for: "The &6Nanowire Wafer&r is a wafer stage on the way to the SNSPD Die.",
-      needs: "Made in the &6SNSPD Fabrication&r from the WSi Wafer, with PMMA resist, in the cleanroom.",
-      unlocks: "The SNSPD Die in the SNSPD Fabrication.",
-      automate: "A pattern provider on the machine of the step before keeps it supplied.",
-    },
-    desc: [], tasks: [it("grindless:wsi_nanowire_wafer")], rewards: [xp(50)],
-  },
-  {
     key: "W_OXIDISED", kind: "wafer", title: "Oxidised Wafer", icon: "grindless:oxidised_wafer", deps: ["W_FZ_SILICON"], x: 4, y: 1.5,
     teach: {
       for: "The &6Oxidised Wafer&r is a wafer stage on the way to the Trenched Oxide Wafer.",
@@ -60,47 +40,6 @@ export const QUESTS = [
       automate: "Chain the machines by ME, and keep a small buffer of this wafer between steps.",
     },
     desc: [], tasks: [it("grindless:oxidised_wafer")], rewards: [xp(50)],
-  },
-  {
-    key: "W_SIN_COATED", kind: "wafer", title: "SiN-Coated Wafer", icon: "grindless:sin_coated_wafer", deps: ["W_OXIDISED"], x: 6, y: 1.5,
-    teach: {
-      for: "The &6SiN-Coated Wafer&r is a wafer stage on the way to the Sin Lithographed Wafer.",
-      needs: "Made in the &6Chemical Reactor&r from the Oxidised Wafer, with silane, in the cleanroom.",
-      unlocks: "The Sin Lithographed Wafer and LN On Sin Wafer in the Synchrotron.",
-      automate: "Chain the machines by ME, and keep a small buffer of this wafer between steps.",
-    },
-    desc: [], tasks: [it("grindless:sin_coated_wafer")], rewards: [xp(50)],
-  },
-  {
-    key: "W_SIN_LITHOGRAPHED", kind: "wafer", title: "Lithographed Wafer", icon: "grindless:sin_lithographed_wafer", deps: ["W_SIN_COATED"], x: 8, y: 1.5,
-    teach: {
-      for: "The &6Lithographed Wafer&r is a wafer stage on the way to the Sin Etched Wafer.",
-      needs: "Made in the &6Synchrotron&r from the SiN-Coated Wafer, with PMMA resist, in the cleanroom.",
-      unlocks: "The Sin Etched Wafer and Silicon in the Chemical Reactor.",
-      automate: "Feed it by ME from the machine before it; keep a few spare wafers in stock.",
-    },
-    desc: [], tasks: [it("grindless:sin_lithographed_wafer")], rewards: [xp(50)],
-  },
-  {
-    key: "W_SIN_ETCHED", kind: "wafer", title: "Etched Wafer", icon: "grindless:sin_etched_wafer", deps: ["W_SIN_LITHOGRAPHED"], x: 10, y: 1.5,
-    teach: {
-      for: "The &6Etched Wafer&r is a wafer stage on the way to the Annealed Sin Chip.",
-      needs: "Made in the &6Chemical Reactor&r from the Lithographed Wafer, with distilled water, in the cleanroom.",
-      unlocks: "The Annealed Sin Chip in the Photonic Foundry.",
-      automate: "Feed it by ME from the machine before it; keep a few spare wafers in stock.",
-    },
-    desc: [], tasks: [it("grindless:sin_etched_wafer")], rewards: [xp(50)],
-  },
-  {
-    key: "W_MICROPILLAR", kind: "wafer", title: "Micropillar Wafer", icon: "grindless:micropillar_wafer", deps: ["H_WAF"], x: 2, y: 4.5,
-    teach: {
-      for: "The &6Micropillar Wafer&r is a wafer stage on the way to the QD Source.",
-      needs: "Made in the &6Chemical Reactor&r from the InAs QD Wafer, with distilled water, in the cleanroom.",
-      unlocks: "The QD Source in the Assembler.",
-      automate: "Feed it by ME from the machine before it; keep a few spare wafers in stock.",
-    },
-    desc: [], tasks: [it("grindless:micropillar_wafer")], rewards: [xp(50)],
-    raw: { hide_dependency_lines: 'true' },
   },
   {
     key: "W_SDD_IMPLANTED", kind: "wafer", title: "Implanted Wafer", icon: "grindless:sdd_implanted_wafer", deps: ["W_OXIDISED"], x: 6, y: 3,

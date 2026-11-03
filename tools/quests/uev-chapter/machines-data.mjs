@@ -53,13 +53,13 @@ export const QUESTS = [
   prod('PU', 'Plutonium-244', 'gtceu:plutonium_244_dust', ['CAL'], 13.25, -41.5, ['The heavy target the beam hits. Keep a stock of it before the cyclotron.']),
   gear('HIC', 'heavy_ion_cyclotron', 'Superheavy Factory', ['CAL'], 14, -39.25, {
     for: 'The &6Superheavy Factory&r accelerates calcium-48 until it can fuse with a plutonium target, then picks the few new atoms out of the beam on the same line.',
-    needs: 'Two UHV hulls, three UV sensors, three UV field generators, a Nb3Sn cavity, a target wheel, calcium-48 beam charges, three etched membranes, two ion-tracked foils, any UHV circuit and the stable casing; the Calutron is its research.',
-    unlocks: 'Counted atoms of flerovium and heavier, ready for the chemistry lab.',
-    automate: 'Beam, target, membranes and foils arrive by ME; the output is a few atoms, so sort them by element and send them to the chemistry lab.',
+    needs: 'Four UHV hulls, eight UV sensors, seven UV field generators, fifteen UHV circuits, seven beam charges, three target wheels, three Nb3Sn cavities, eight etched membranes, four ion-tracked foils and the stable casing; the Calutron is its research. A very large structure (31x11x47), and GTM\'s Terminal places it in three passes.',
+    unlocks: 'Irradiation and recoil separation in one machine: counted atoms of flerovium and heavier, ready for the chemistry lab.',
+    automate: 'Beam, target, membranes and foils arrive by ME; sort the few atoms by element.',
   }, [STABLE]),
   gear('SHL', 'superheavy_chemistry_lab', 'Superheavy Chemistry Lab', ['HIC'], 25, -40, {
     for: 'The &6Superheavy Chemistry Lab&r studies a handful of atoms before they decay.',
-    needs: 'Two UHV hulls, three UV sensors, three UV field generators, three sealed capsules, a polycarbonate foil, an etched membrane, any UHV circuit and the stable casing; the Superheavy Factory is its research.',
+    needs: 'Four UHV hulls, eight UV sensors, eight UV field generators, sixteen UHV circuits, eight sealed capsules, four polycarbonate foils, four etched membranes and the stable casing; the Superheavy Factory is its research.',
         unlocks: 'The tennessine sample and the superheavy census, which the Warp Gate hold and the later lines ask for.',
     automate: 'Atoms come by hatch from the Superheavy Factory; log the results, then discard the decayed rest.',
   }, [STABLE]),
@@ -115,7 +115,7 @@ export const QUESTS = [
   prod('COIL', 'HfTaCN Coil', 'grindless:hftacn_coil_block', ['CVI'], 18.5, -12.75, ['The hottest coil in the pack. The UEV Lines chart shows what it gives.']),
   gear('FORGE', 'stellar_forge', 'Stellar Forge', ['COIL', 'HULL'], 19.5, -14.75, {
     for: 'The &6Stellar Forge&r is a furnace that holds a fragment of a star.',
-      needs: 'A UEV hull, eleven electric blast furnaces, twenty-three HfTaCN coil blocks, four UEV field generators, five UEV pumps, three UEV sensors, three ULE cavities, three HfTaCN heating elements and any UEV circuit.',
+      needs: 'A UEV hull, eleven electric blast furnaces, twenty-three HfTaCN coil blocks, four UEV field generators, five UEV pumps, three UEV sensors, three ULE cavities, three HfTaCN heating elements and six UEV circuits. It is a large structure (15x23x15): GTM\'s Terminal places about 2,300 per pass and this one takes two.',
     unlocks: 'The hottest recipes in the pack, which the Mk4 plasma line runs on.',
     automate: 'Fuel and heat sinks by ME; plan for the byproducts before you start.',
     }, [], 150),
@@ -123,19 +123,19 @@ export const QUESTS = [
   // ------------------------------------------------------------------ photonics
   gear('SNSPD', 'snspd_foundry', 'SNSPD Foundry', ['CH_SIN'], 7, -20.25, {
     for: 'The &6SNSPD Foundry&r grows a nanowire detector that counts single photons.',
-      needs: 'Two UHV hulls, three UV sensors, a float-zone silicon wafer, two SiN Waveguide Chips, a silicon drift detector, any UHV circuit and the photonic casing.',
+      needs: 'Four UHV hulls, ten UHV sensors, ten UHV emitters, eleven UHV pumps, fourteen UHV circuits, three float-zone silicon wafers, four SiN Waveguide Chips, three silicon drift detectors and the photonic casing. It takes the detector stages of the Photonic Fab.',
       unlocks: 'The single-photon detector, which the UEV sensor, the quantum photonic chip and the repeater node take.',
       automate: 'Wafers and chips by ME and superfluid helium by pipe for the cold stage; send finished detectors on by ME.',
   }, [PHOTO]),
     gear('VDW', 'vdw_stacker', 'Van der Waals Stacker', ['SNSPD'], 9.75, -22.5, {
     for: 'The &6Van der Waals Stacker&r lays one atomic film on another, in the order the design asks for.',
-      needs: 'Two UHV hulls, three UV robot arms, hBN films, a graphene film, any UHV circuit and the photonic casing.',
+      needs: 'Three UHV hulls, nine UHV robot arms, nine conveyor modules, nine pistons, eleven UHV circuits, three hBN films, five annealed hBN films, two graphene films and the photonic casing. It lays the films of the Photonic Fab.',
     unlocks: 'The graphene modulator and the hBN emitter chip.',
     automate: 'Films by ME; the stacker returns finished chips in a chest.',
   }, [PHOTO]),
   gear('PHOT', 'photonic_integration_hall', 'Photonic Integration Hall', ['SNSPD', 'VDW', 'CH_GRM', 'CH_QD', 'CH_SIN'], 12.75, -17.75, {
     for: 'The &6Photonic Integration Hall&r bonds waveguides, sources and detectors into one optical chip.',
-      needs: 'Two UHV hulls, three UV emitters, a quantum dot source, a graphene modulator, two SiN Waveguide Chips, any UHV circuit and the photonic casing; the Van der Waals Stacker is its research.',
+      needs: 'Five UHV hulls, thirteen UHV emitters, thirteen sensors, thirteen motors, seventeen UHV circuits, four quantum dot sources, four graphene modulators, five SiN Waveguide Chips and the photonic casing; the Van der Waals Stacker is its research. It is a large structure (23x11x23): GTM\'s Terminal places about 2,300 per pass and this one takes two.',
     unlocks: 'The waveguide circuit, the quantum photonic chip and the optical computer.',
     automate: 'Parts in matched counts by ME; keep a stock of finished chips and send them to the assembler.',
   }, [PHOTO, it('gtceu:laminated_glass')], 150),
@@ -150,7 +150,7 @@ export const QUESTS = [
   prod('HE3', 'Polarised Helium-3', 'gtceu:polarised_helium_3_bucket', ['POL'], 18, -9.75, ['A bucket of polarised helium-3. Fusion at Mk4 starts from this.']),
   gear('MK4', 'uev_fusion_reactor', 'Mk4 Fusion Reactor', ['POL', 'COIL', 'HULL'], 24.5, -15, {
     for: 'The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes.',
-      needs: 'A UEV hull, five UEV emitters, four UEV sensors, four UEV field generators, any UEV circuit, two UEV fusion casings, two HfTaCN coil blocks and a Wf/W tile; the Helium-3 Polariser is its research.',
+      needs: 'A UEV hull, five UEV emitters, four UEV sensors, four UEV field generators, nine UEV circuits, two UEV fusion casings, two HfTaCN coil blocks and a Wf/W tile; the Helium-3 Polariser is its research. It is a large structure (33x9x33) and GTM\'s Terminal places about 2,300 per pass, so plan two.',
       unlocks: 'The plasma and burn quests that follow it.',
     automate: 'Fuel and coolant by pipe; build the plant before you light it.',
     }, [it('grindless:uev_fusion_casing')], 180),
@@ -208,10 +208,10 @@ export const QUESTS = [
     automate: 'The station asks for little by ME; keep a stock of charts.',
   }, [PHOTO], 150),
     gear('DEG', 'degenerate_harvester', 'Degenerate Works', ['SPEC', 'EOS'], 33.25, -24, {
-    for: 'The &6Degenerate Works&r takes matter from a white dwarf, in which atoms are crushed together, and bottles it into a pellet that can be carried safely.',
-      needs: 'A UEV hull, five UEV robot arms, five UEV pumps, three UEV sensors, a degenerate EOS model, a mass-radius chart, two hollow-core fibres, three UEV emitters, two fluid regulators, a Faraday isolator, an SPDC source, any UEV circuit and the degenerate containment casing; the spectrograph is its research.',
-      unlocks: 'Degenerate matter, made in Sirius B orbit, which the same works bottles at once.',
-    automate: 'Put the plant behind a safe containment loop; never route this matter by plain pipe. An exotic matter cell comes by ME and the pellets leave by ME.',
+    for: 'The &6Degenerate Works&r takes matter from a white dwarf and bottles it into a pellet that can be carried safely.',
+      needs: 'A UEV hull, five UEV arms, five pumps, three sensors, five emitters, three regulators, nine UEV circuits, an EOS model, a mass-radius chart, two hollow-core fibres, two Faraday isolators, two SPDC sources and the degenerate containment casing; the spectrograph is its research. It is a large structure (21x15x29), so GTM\'s Terminal places it in two passes.',
+      unlocks: 'Degenerate matter, made in Sirius B orbit, which the same works bottles at once: it runs the degenerate containment recipes itself.',
+    automate: 'Keep the plant behind a containment loop; never pipe this matter. Cells and pellets move by ME.',
   }, [it('grindless:degenerate_containment_casing')], 150),
     { key: 'PELP', kind: 'step', title: 'Degenerate Pellet', icon: 'grindless:degenerate_pellet', deps: ['DEG'], x: 39, y: -26.25,
       desc: ['The pellet is taught in &6A White Dwarf in a Bottle&r; tick this once the Degenerate Works runs.'], tasks: [{ type: 'checkmark' }], rewards: [xp(20)] },
