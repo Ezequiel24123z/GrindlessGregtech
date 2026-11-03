@@ -155,7 +155,7 @@
       else if (sym.kind === 'frames') block = 'gtceu:' + sym.materials[0] + '_frame'
       else if (sym.kind === 'oneOf') {
         var isOut = sym.options.some(function (o) { return o.ability === 'output_hatch' })
-        if (isOut) { block = OUT_HATCH; part = true; outCells++ }
+        if (isOut && outCells < 12) { block = OUT_HATCH; part = true; outCells++ }
         else if (c.si === last && c.ri === ctrl.ri && PARTS[c.ci]) { block = PARTS[c.ci]; part = true }
         else sym.options.forEach(function (o) { if (!block && o.kind === 'blocks') block = o.blocks[0] })
       }
