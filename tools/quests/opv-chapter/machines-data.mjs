@@ -101,16 +101,16 @@ export const QUESTS = [
   gear('JET', 'jet_beam_line', 'Jet Beam Line', ['M_L_JET'], 2, 7.5, {
     for: 'The &6Jet Beam Line&r draws protons from the base of the Cygnus X-1 jet and bunches them on superconducting cavities into a beam no Earth injector can reach.',
     needs: 'An OpV hull, the high power casing and SRF cryomodule blocks, with a chain field coil, an FRC cartridge and a field-frozen plate in the controller. Only its jet extraction is tied to Cygnus X-1.',
-    unlocks: 'The proton beam for the spallation station, and through it every antiproton.',
+    unlocks: 'The proton beam for the antiproton complex, and through it every antiproton.',
     automate: 'Power and coolant by pipe; the beam is continuous, so give it a dedicated supply.',
   }, [POWER, SRFB], 200),
   prod('SRF', 'SRF Cryomodule Block', 'grindless:srf_cryomodule_block', ['JET'], 4.5, 7.5,
     ['The &6SRF Cryomodule Block&r is a niobium cavity in its own cryostat, which accelerates a beam with very little loss. The jet beam line and the antiproton decelerator are built of them, so make them first.']),
   gear('COOLER', 'antiproton_decelerator', 'Antiproton Complex', ['JET'], 2, 10.5, {
-    for: 'The &6Antiproton Complex&r hits an iridium target with the beam, collects the antiprotons with a magnetic horn, then cools them from gigaelectronvolts to kiloelectronvolts, first by stochastic cooling and then with electrons, and fills them into traps. The target hall, the ring and the trap hall are one structure.',
-    needs: 'An OpV hull, the high power, negative-potential and annihilation shield casings and the cryomodule blocks, with the beam line in front of it.',
-    unlocks: 'Trapped antiprotons for the antihydrogen foundry, and tritium for the hydrogen lines from the shield.',
-    automate: 'Targets by ME; the tritium is a byproduct, so pipe it away at once. The traps fill slowly, so run a second complex before adding a second target.',
+    for: 'The &6Antiproton Complex&r is four machines in one hall, one recipe row each. An iridium target and a lithium hydride shield make a hot antiproton beam; stochastic and electron cooling slow it, and ELENA, the last ring, bunches it into a Penning trap: the &6Cold Antiproton Cell&r.',
+    needs: 'An OpV hull, the NEG XHV and annihilation shield casings and SRF cryomodule blocks, behind the jet beam line. Each row burns a part: target, pickup, electron cooler, or a trap.',
+    unlocks: 'The cold antiproton cell for the antihydrogen foundry, and the antiproton stacks.',
+    automate: 'Parts by ME; the empty traps come back from the foundry, so loop them.',
   }, [POWER, NEG, SRFB, SHIELD], 200),
   gear('SDIST', 'strangelet_distiller', 'Strangelet Distiller', ['COOLER'], 2, 12, {
     for: 'The &6Strangelet Distiller&r boils the strangeness out of a lead-208 fireball and catches it as a droplet seed, catalysed by a pasta core sample.',
@@ -169,4 +169,15 @@ export const QUESTS = [
     automate: 'Every input comes from the cluster by belt, so wire it to the refinery.',
   }, [ROBUST, GRATING], 250),
 ];
+// Shipped shapes and Terminal passes (a pass is up to 2,300 blocks), from the structure dump.
+const SIZE = {
+  TFAB: ['17 by 11 by 15', 2], GOPT: ['31 by 9 by 9', 1], AHF: ['25 by 11 by 13', 2], VAULT: ['13 by 13 by 13', 1],
+  JET: ['45 by 7 by 7', 1], COOLER: ['29 by 7 by 29', 2], SDIST: ['19 by 11 by 11', 1], KFORGE: ['23 by 17 by 23', 3],
+  MPC: ['13 by 17 by 13', 2], PRESS: ['11 by 15 by 11', 1], HARV: ['15 by 7 by 15', 1], REFINE: ['13 by 15 by 13', 2],
+  NODEW: ['21 by 9 by 13', 2], FOUNDRY: ['17 by 13 by 17', 2],
+};
+for (const q of QUESTS) {
+  const s = SIZE[q.key];
+  if (s) q.teach.needs += ` Its shape is ${s[0]}, built by the Terminal in ${s[1] === 1 ? 'one pass' : s[1] + ' passes'}.`;
+}
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));
