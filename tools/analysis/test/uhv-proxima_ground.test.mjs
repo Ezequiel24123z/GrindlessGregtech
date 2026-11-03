@@ -30,7 +30,9 @@ const has = (json, id) => json.includes(`"${id}"`);
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const inputs = (r) => ids(r.itemsIn).concat(ids(r.kept), ids(r.fluidsIn));
 const outputs = (r) => ids(r.itemsOut).concat(ids(r.fluidsOut));
-const makers = (id) => recipes.filter((r) => has(outs(r), id)).map((r) => r.i).sort();
+// integration/lcr_mirror.js copies every chemical reactor recipe into the large one: count the pair once
+const notMirror = (r, all) => !r.i.includes(':large_chemical_reactor/') || !all.some((x) => x.i === r.i.replace(':large_chemical_reactor/', ':chemical_reactor/'));
+const makers = (id) => { const hit = recipes.filter((r) => has(outs(r), id)); return hit.filter((r) => notMirror(r, hit)).map((r) => r.i).sort(); };
 const users = (id) => recipes.filter((r) => has(ins(r), id)).map((r) => r.i).sort();
 
 const PROXIMA = 'gcyr:proxima_centauri_b';

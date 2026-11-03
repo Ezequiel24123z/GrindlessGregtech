@@ -126,7 +126,8 @@ test('line 31: ZrO2 + 4 HF -> ZrF4 + 2 H2O on GTM\'s chemical reactor, from F1\'
   assert.ok(rec, idOf(r));
   assert.equal(rec.t, 'gtceu:chemical_reactor');
   const makers = recipes.filter((x) => outputsOf(x).includes('"gtceu:zirconium_tetrafluoride_dust"'));
-  assert.deepEqual(makers.map((x) => x.i), [idOf(r)]);
+  // integration/lcr_mirror.js adds the large chemical reactor copy of the same recipe
+  assert.deepEqual(makers.map((x) => x.i).sort(), [idOf(r), idOf(r).replace(':chemical_reactor/', ':large_chemical_reactor/')].sort());
 });
 
 test('controller: assembly line, UHV hull + 3 UHV motors + UHV circuits + station research', () => {
