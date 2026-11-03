@@ -56,7 +56,7 @@ export const QUESTS = [
     for: 'The same junctions in a grid make memory that keeps its bits with the power off. The &6MRAM Wafer&r is sputtered, annealed and etched.',
     needs: 'The MTJ sputter cluster, the photonic foundry and a Heusler target.',
     unlocks: 'The spintronic mainframe, which takes the wafer whole as its fast memory.',
-    automate: 'Dies and targets by ME; keep a few wafers waiting for the racetrack fab.',
+    automate: 'Dies and targets by ME; keep a few wafers waiting for the Spintronic Cluster Tool.',
   }, [], [it('grindless:mram_wafer')], 120),
   q('DSO', 'wafer', 'Scandate Substrate', 'grindless:dysco3_substrate', ['MTJD'], 7, 4.5, {
     for: 'Oxide films only grow well on a crystal whose spacing matches theirs. Dysprosium scandate is grown as a boule, sliced, polished and annealed into a &6DyScO3 Substrate&r.',
@@ -66,7 +66,7 @@ export const QUESTS = [
   }, [], [it('grindless:dysco3_substrate')], 120),
   q('RACED', 'circuit', 'Racetrack Chip', 'grindless:racetrack_chip', ['MRAM', 'C_L_RACE'], 9.5, 3, {
     for: 'Push magnetic domains along a nanowire with current pulses and read them as they pass a head. The &6Racetrack Chip&r is the memory of the mainframe.',
-    needs: 'The racetrack fab, an MTJ die and a patterned SAF track wafer.',
+    needs: 'The Spintronic Cluster Tool, an MTJ die and a patterned SAF track wafer.',
     unlocks: 'The spintronic mainframe, as its storage.',
     automate: 'Wafers by ME; the fab returns chips in a chest, so stock a few.',
   }, [], [it('grindless:racetrack_chip')], 150),

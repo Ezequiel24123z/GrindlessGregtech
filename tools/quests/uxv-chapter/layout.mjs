@@ -39,6 +39,7 @@ const LAYOUT = {
   OPV: [35, -3, ['BULGE']],
   MTJ: [10, 10.5, ['H_UXV_MACHINES']],
   YIG: [10, 15, ['H_UXV_MACHINES']],
+  VDWC: [12.5, 15, ['YIG']],
   WEAK: [7.5, 14, ['H_UXV_MACHINES']],
   MNT: [10, 9, ['H_UXV_MACHINES']],
   ELEV: [12.5, 9.5, ['H_UXV_MACHINES']],
