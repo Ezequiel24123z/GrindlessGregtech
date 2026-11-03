@@ -1,7 +1,39 @@
 // pl_maxplus: the MAX+ lines (docs/eras/maxplus.md "Lines") and the Hyperstargate tree, checked against the built tables and a recipe dump by pl-check.mjs.
 // A row is one line: [kind, id, [from...], by?]; kind is i (item), f (fluid), m (machine) or l (a link to an older chart: 'pl_x:key'); from = earlier node indexes.
 // A by flag marks a by-product leaf drawn beside its source; a peek flag marks an item still hidden in EMI. Machines are the mod's own multiblocks; GTM steps are plain item-to-item arrows.
-import { I, F, M, L, n } from './pl-lib.mjs';
+import { I, F, M, L, n, R, rateText } from './pl-lib.mjs';
+
+// The horizon furnace's rate cards (AUD3-RATES): every figure is recomputed from the recipe dump by pl-check.mjs
+const HCF = 'grindless:horizon_crystal_furnace/';
+const SLURRY_CARD = R.rate(HCF + 'horizon_crystal_slurry', { tier: 'max', amps: 256 }, {
+  title: 'One slurry furnace', eut: 137438953472, ticks: 100,
+  ins: { 'fluid:gtceu:stellar_plasma': 12000, 'fluid:gtceu:kerr_condensate': 12000 },
+  outs: { 'fluid:gtceu:horizon_crystal_slurry': 12000 },
+  hatch: { 'fluid:gtceu:horizon_crystal_slurry': 1000, 'fluid:gtceu:kerr_condensate': 1000 },
+  note: 'Seven more plasmas and beams come in alongside, 12,000 mB a minute each.',
+});
+const CORE_CARD = R.rate(HCF + 'core_crystal_boule', { tier: 'max', amps: 1024 }, {
+  title: 'One core boule furnace', eut: 549755813888, ticks: 2400,
+  ins: { 'fluid:gtceu:horizon_crystal_slurry': 2000000, 'fluid:gtceu:kerr_condensate': 50000 },
+  outs: { 'grindless:core_crystal_boule': 0.5 },
+  hatch: { 'fluid:gtceu:horizon_crystal_slurry': 4000000, 'fluid:gtceu:kerr_condensate': 100000 },
+  note: 'The slurry buffer must hold 4,000,000 mB before a run starts.',
+});
+const CORE_RATIO = R.ratio({ recipe: HCF + 'horizon_crystal_slurry', tier: 'max', amps: 256 }, { recipe: HCF + 'core_crystal_boule', tier: 'max', amps: 1024 }, 'fluid:gtceu:horizon_crystal_slurry', 500, 3, {
+  title: 'Bottleneck', make: 12000, take: 2000000, prodName: 'slurry furnaces', consName: 'core boule furnaces',
+  note: 'Slurry is the bottleneck: the furnaces that make it outnumber the boule furnaces about 167 to 1.',
+});
+const CTRL_CARD = R.rate(HCF + 'controller_crystal_boule', { tier: 'max', amps: 1024 }, {
+  title: 'One controller boule furnace', eut: 549755813888, ticks: 2400,
+  ins: { 'fluid:gtceu:horizon_crystal_slurry': 500000 },
+  outs: { 'grindless:controller_crystal_boule': 0.5 },
+  hatch: { 'fluid:gtceu:horizon_crystal_slurry': 1000000 },
+});
+const CTRL_RATIO = R.ratio({ recipe: HCF + 'horizon_crystal_slurry', tier: 'max', amps: 256 }, { recipe: HCF + 'controller_crystal_boule', tier: 'max', amps: 1024 }, 'fluid:gtceu:horizon_crystal_slurry', 125, 3, {
+  title: 'Bottleneck', make: 12000, take: 500000, prodName: 'slurry furnaces', consName: 'controller boule furnaces',
+});
+const CARDS = { t8_10: [SLURRY_CARD, CORE_RATIO, CTRL_RATIO], t9_7: [CORE_CARD], t10_6: [CTRL_CARD] };
+const withCards = (nd) => (CARDS[nd.key] ? { ...nd, figs: [...(nd.figs || []), ...CARDS[nd.key]], desc: [...[].concat(nd.desc || []), ...CARDS[nd.key].map(rateText)] } : nd);
 
 const ROWS = {
   P1: [
@@ -1253,7 +1285,7 @@ const cluster = (name, nums, extra = {}) => {
     const used = new Set(ns.flatMap((nd) => nd.from));
     const ends = ns.filter((nd) => !used.has(nd.key) && !['by', 'link', 'raw', 'ours'].includes(nd.kind));
     const sink = r === 0 ? ends.reduce((a, b) => (b.x > a.x ? b : a), ends[0]) : null;
-    for (const nd of ns) out.push(ends.includes(nd) && nd !== sink ? { ...nd, kind: 'dest', end: nd.end || ENDS[num] } : nd);
+    for (const nd of ns) out.push(withCards(ends.includes(nd) && nd !== sink ? { ...nd, kind: 'dest', end: nd.end || ENDS[num] } : nd));
     cursor += hi - lo + 2.5;
   });
   return { name, ...extra, nodes: out };

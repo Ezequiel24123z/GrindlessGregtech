@@ -236,6 +236,8 @@ function profileProblem(rec, p, readSrc) {
   }
   return null;
 }
+// what one run moves of each input and output: the buffer a hatch or bus must hold so the run can start (and finish)
+const perRun = (r) => Object.fromEntries(Object.entries({ ...r.in, ...r.out }).map(([k, v]) => [k, round2(v / r.runs)]));
 const same = (claimed, got, what) => {
   for (const [k, v] of Object.entries(claimed || {})) if (round2(v) !== got[k]) return `${what} ${k}: card says ${v}, the recipe gives ${got[k] === undefined ? 'none' : got[k]}`;
   return null;
@@ -255,7 +257,7 @@ export function checkRate(f, get, readSrc = () => null) {
       const got = rateOf(r, f);
       if (got.eut !== f.eut) return fail(`${f.recipe}: ${got.eut} EU/t, not ${f.eut}`);
       if (got.ticks !== f.ticks) return fail(`${f.recipe}: ${got.ticks} t per run, not ${f.ticks}`);
-      const bad2 = same(f.outs, got.out, 'makes') || same(f.ins, got.in, 'takes');
+      const bad2 = same(f.outs, got.out, 'makes') || same(f.ins, got.in, 'takes') || same(f.hatch, perRun(got), 'holds per run');
       return bad2 ? fail(`${f.recipe}: ${bad2}`) : { ok: true, how: `${f.recipe}: ${got.eut} EU/t, ${got.ticks} t` };
     }
     if (f.t === 'cmp') {
@@ -308,7 +310,7 @@ const flow = (m) => Object.entries(m || {}).map(([k, v]) => `${num(v)} ${unitOf(
 // the card's words, built from its claims (which checkRate recomputes): never typed twice
 export function rateText(f) {
   const prof = (x) => `${String(x.tier).toUpperCase()}${x.amps > 1 ? ' x' + x.amps + ' A' : ''}${x.oc ? ', ' + x.oc + ' overclock' + (x.oc > 1 ? 's' : '') : ''}${x.par > 1 ? ', ' + x.par + ' parallels' : ''}`;
-  if (f.t === 'rate') return `${f.title ? f.title + ': ' : ''}${prof(f)}, ${num(f.eut)} EU/t, ${num(f.ticks)} t per run (${f.recipe.replace(/^[a-z]+:/, '')}). Per minute it takes ${flow(f.ins).join(', ') || 'nothing'} and makes ${flow(f.outs).join(', ')}.${f.note ? ' ' + f.note : ''}`;
+  if (f.t === 'rate') return `${f.title ? f.title + ': ' : ''}${prof(f)}, ${num(f.eut)} EU/t, ${num(f.ticks)} t per run (${f.recipe.replace(/^[a-z]+:/, '')}). Per minute it takes ${flow(f.ins).join(', ') || 'nothing'} and makes ${flow(f.outs).join(', ')}.${f.hatch ? ' Each run needs room for ' + flow(f.hatch).join(', ') + '.' : ''}${f.note ? ' ' + f.note : ''}`;
   if (f.t === 'ratio') return `${f.title ? f.title + ': ' : ''}${num(f.n)} ${f.prodName} to ${num(f.m)} ${f.consName} (${num(f.make)} against ${num(f.take)} ${unitOf(f.key)} per minute of ${short(f.key)}).${f.note ? ' ' + f.note : ''}`;
   const per = f.unit === 1 ? 'item' : f.unit === 1000 ? 'bucket' : `${num(f.unit)} units`;
   const rows = f.routes.map((x) => `${x.label}: ${num(x.perMin)}/min, ${num(x.eu)} EU, takes ${flow(x.ins).join(' + ') || 'nothing'}${Object.keys(x.out || {}).length ? ', also ${flow(x.out).join(' + ')}' : ''}`);
