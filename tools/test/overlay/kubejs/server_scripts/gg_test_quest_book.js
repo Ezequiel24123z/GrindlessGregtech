@@ -15,11 +15,13 @@
 //     kubejs/exported/ (collected with the results) so the dependency lines can be looked at.
 //
 // HOW TO RUN (client suite only). Copy tools\test\overlay to a scratch folder, add kubejs\config\gg_test_quest_book.json =
-// {"enabled": true} and kubejs\config\gg_test_lean_world.json = {"enabled": true, "viewers": "absent"} to it, then
+// {"enabled": true} to it, then run it with the EMI audit's heap (one slot, the bench otherwise idle):
 //   powershell -File tools\test\Invoke-GGTest.ps1 -Suite client -OverlayDir <that folder> [-PackDir <copy of pack>] `
-//     -ClientExclude '^emi-1\.1\.22\+1\.20\.1\+forge\.jar$;;^jei-1\.20\.1-forge-15\.20\.0\.134\.jar$;;^emi_loot-0\.7\.9\+1\.20\.1\+forge\.jar$;;^craftingstationjei-1\.20\.1-Forge-2\.2\.1\.jar$'
-// Without the viewers and structures the 4 GB test client has room: with them it ran out of heap while the test area generated
-// (batch 14, vm-20261103-020722-d895335c-2899304; tools\test\README.md, the lean world). Players' instances get 10 GB.
+//     -EmiAuditClientXmx 8G -EmiAuditTimeoutSec 1800 -Slots 1
+// Every client run also runs the mandatory EMI coverage audit, so the viewers cannot be left out. Since batch 14 the audit and the
+// book's screenshots no longer fit the 4 GB test client in 600 s (out of heap: vm-20261103-020722-d895335c-2899304; out of time with
+// a lean world: vm-20261103-023148-9942706d-2902202); with 8 GB both pass in about 5 minutes (vm-20261103-024257-9942706d-2903221).
+// Players' instances get 10 GB.
 // One marker per run: the tests drive the same player.
 //
 // MARKERS: GGTEST|quest_book|<check>|PASS|FAIL|NOTE|<detail>; the last line is GGTEST|quest_book|DONE.
