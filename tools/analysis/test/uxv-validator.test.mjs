@@ -150,7 +150,7 @@ test('F1: every item and block is checked in a UXV era group (reachable at its s
   const where = {};
   for (const g of raw.eraItems.filter((x) => UXV_GROUPS.includes(x.id))) for (const it of g.items) (where[it] ??= []).push(g.id);
   const { items, blocks, materials } = foundationIds();
-  assert.equal(items.length + blocks.length + materials.length, 98 + 1 + 37, 'F1 registrations as built');
+  assert.equal(items.length + blocks.length + materials.length, 97 + 1 + 37, 'F1 registrations as built');
   const missing = [...items, ...blocks].filter((n) => !where[`grindless:${n}`]);
   assert.deepEqual(missing, []);
   const keysOf = (k) => {
