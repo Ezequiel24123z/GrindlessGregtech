@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-
+import { runPackScripts } from '../lib/kubejs_static.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const read = p => fs.readFileSync(path.join(root, ...p.split('/')), 'utf8');
 const mk1 = JSON.parse(read('pack/kubejs/data/grindless/tables/fusion_mk1.json'));
@@ -187,19 +187,21 @@ function startupPattern() {
   return src;
 }
 
-test('chamber startup: 13 x 13 x 13 shell with 32 laser module blocks on the beam ring, UV casing, spent module item', () => {
+test('chamber startup: 15 x 15 x 15 hall, a spherical chamber and 44 laser module blocks on twelve beamline arms, UV casing, spent module item', () => {
   const src = startupPattern();
   assert.match(src, /gtceu:laser_fusion_chamber/);
   assert.match(src, /gtceu:uv_machine_casing/);
   assert.match(src, /grindless:laser_module_block/);
   assert.match(src, /grindless:spent_laser_module/);
-  assert.match(src, /'CLLLLCCCLLLLC'/);
-  const ring = 'CLLLLCCCLLLLC';
-  const perimeter = (z, x) => ring[(z === 0 || z === 12) ? x : z];
-  let lasers = 0;
-  for (let z = 0; z < 13; z++) for (let x = 0; x < 13; x++) if ((z === 0 || z === 12 || x === 0 || x === 12) && perimeter(z, x) === 'L') lasers++;
-  assert.equal(lasers, 32);
-  assert.match(src, /SIZE = 13/);
+  assert.match(src, /SIZE = 15/);
+  const s = runPackScripts(path.join(root, 'pack')).docs.structures.structures['gtceu:laser_fusion_chamber'];
+  assert.equal(s.slices.length, 15);
+  assert.ok(s.slices.every(sl => sl.length === 15 && sl.every(r => r.length === 15)));
+  const syms = Object.entries(s.symbols).filter(([, v]) => v.kind === 'blocks' && v.blocks.length === 1 && v.blocks[0] === 'grindless:laser_module_block').map(([k]) => k);
+  const lasers = s.slices.flat().join('').split('').filter(c => syms.includes(c)).length;
+  assert.equal(lasers, 44);
+  const cells = s.slices.flat().join('').split('').filter(c => c !== ' ' && s.symbols[c] && s.symbols[c].kind !== 'air').length;
+  assert.ok(cells >= 1020 && cells <= 1380, 'about 1,200 cells: ' + cells);
 });
 
 test('chamber lang: en_us names the machine, recipe type, no-voiding reason and spent module', () => {

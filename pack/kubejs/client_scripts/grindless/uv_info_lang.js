@@ -58,7 +58,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.heat_source_works.2', 'Curium-244 heat sources behind hot cell walls. Programmed circuit 1: 4 curium oxide -> 1 curium-244 pellet + 1 heavy curium oxide (stored for UHV). Circuit 2: 1 pellet + 1 iridium foil + 1 carbon-carbon aeroshell -> 1 GPHS module (+ iridium scrap, 25%).')
     add('emi.grindless.info.heat_source_works.3', 'Circuit 3: 4 GPHS modules + 8 silicon dust + 8 germanium dust + 1 UV machine hull -> 1 probe RTG. Circuit 4: 1 americium dust -> 8 americium micro sources.')
     add('emi.grindless.info.heat_source_works.4', 'Circuit 5: 1 curium-244 pellet -> 2 curium RTG pellets; IV\'s RTG cell burns one for 3 times as long as a plutonium pellet. The scrap melts back into the iridium foil route.')
-    add('emi.grindless.info.heat_source_works.5', 'Needs, in the front and back rows: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 output buses, and 4 or more radiation proof casings among them. Refuses to run while it voids.')
+    add('emi.grindless.info.heat_source_works.5', 'Needs, in the front and back rows: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 output buses, and 4 or more radiation vault casings among them (7 x 5 x 13, three bays behind glass). Refuses to run while it voids.')
 
     add('emi.grindless.info.kuiper_interceptor_bay.0', "The Kuiper Interceptor Bay launches a Kuiper interceptor with the Pluto-Kuiper chart and returns a planetesimal sample and a sample canister. It only works in Pluto orbit.")
     add('emi.grindless.info.kuiper_interceptor_bay.1', "The sample goes to the Amorphous Ice Annealer.")
@@ -71,12 +71,12 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.laser_fusion_chamber.1', "The spent laser module comes back and can be refurbished.")
     add('emi.grindless.info.laser_fusion_chamber.2', 'Proton-boron-11 fusion: three alpha particles and almost no neutrons. One capsule per run pays 2,621,440 EU/t (5 A UV). Programmed circuit 1: 1 p-B11 capsule, 400 ticks, 3,000 mB helium. Circuit 2: 1 D-He-3 capsule, 600 ticks, 1,000 mB helium + 1,000 mB hydrogen.')
     add('emi.grindless.info.laser_fusion_chamber.3', 'Each run has a 2% chance to wear out 1 fibre laser module into a spent laser module. The helium goes to the helium refrigerator.')
-    add('emi.grindless.info.laser_fusion_chamber.4', 'A 13x13x13 chamber of UV casing with a ring of 32 laser module blocks round its waist. In the floor: 1-8 dynamo hatches, 1 input bus (the capsule injector), 1-2 output hatches, 1 output bus.')
+    add('emi.grindless.info.laser_fusion_chamber.4', 'A 15x15x15 hall around a spherical chamber of UV casing, fed by twelve beamline arms of 44 laser module blocks in all, on a superconducting coil ring. In the floor: 1-8 dynamo hatches, 1 input bus (the capsule injector), 1-2 output hatches, 1 output bus.')
 
     add('emi.grindless.info.laser_sail_launcher.0', "The Laser Sail Launcher fires sails from the Moon. Circuit 1: launches the Starshot probe (sailcraft, heliopause data and a fibre laser module). Circuit 2: launches the relay seed.")
     add('emi.grindless.info.laser_sail_launcher.1', "It only works on the Moon.")
-    add('emi.grindless.info.laser_sail_launcher.2', 'Works only on the Moon: no air to scatter the beam. A 15 x 15 x 3 phased array of 64 laser module blocks, open to the sky.')
-    add('emi.grindless.info.laser_sail_launcher.3', 'Four 4 x 4 quadrants of modules, a tungstensteel cooling loop round them, the beam director (a computer casing) in the centre.')
+    add('emi.grindless.info.laser_sail_launcher.2', 'Works only on the Moon: no air to scatter the beam. A 21 x 7 x 21 phased array of 228 laser module blocks on two tiers, open to the sky.')
+    add('emi.grindless.info.laser_sail_launcher.3', 'A checkerboard of modules and coolant pipes, radiator fences round them, and a glass-windowed tower with the beam director (a computer casing) in the centre.')
     add('emi.grindless.info.laser_sail_launcher.4', 'One sail-chip a launch, aimed with the heliopause data (kept): one Starshot probe in flight. Draws 16 A of UV.')
     add('emi.grindless.info.laser_sail_launcher.5', 'Each launch wears the array: a fibre laser module from the bus is spent at 64 % and comes out as a spent module for the draw tower.')
 
@@ -162,7 +162,7 @@ ClientEvents.lang('en_us', event => {
 
     add('emi.grindless.info.starchip_fab.0', "The Starchip Fab builds interstellar hardware. Circuit 1: starchip. 2: sailcraft. 3: relay seed. 4: ergosphere probe. It only works in Earth orbit and needs a clean room.")
     add('emi.grindless.info.starchip_fab.1', "Sailcraft and relay seeds are launched by the Laser Sail Launcher.")
-    add('emi.grindless.info.starchip_fab.2', 'A 5 x 5 x 5 clean room box with a filter casing ceiling and the bonder (a stainless steel gearbox) in the middle of the floor.')
+    add('emi.grindless.info.starchip_fab.2', 'A 9 x 6 x 9 clean room hall with a filter casing ceiling, a glass partition, a bonding line of five stainless steel gearboxes, a dicing saw and a test bench.')
     add('emi.grindless.info.starchip_fab.3', 'Circuit 1: a photonic chip, an NV diamond chip and an americium micro source bonded on a neutronium wafer: a starchip of a few grams.')
     add('emi.grindless.info.starchip_fab.4', 'Circuit 2: the starchip mounted on a light sail: a sail-chip ready for the launcher on the Moon.')
     add('emi.grindless.info.starchip_fab.5', 'The wafer kerf comes out as silicon dust.')

@@ -50,8 +50,8 @@ test('registration: three recipe types, three machines, three carriers, three ga
   }
 });
 
-test('patterns: sail fab 7 x 7 x 7, starchip fab 5 x 5 x 5, launcher 15 x 15 x 3 with 64 laser module blocks', () => {
-  const dims = { 'gtceu:light_sail_fab': [7, 7, 7], 'gtceu:starchip_fab': [5, 5, 5], 'gtceu:laser_sail_launcher': [15, 3, 15] };
+test('patterns: sail fab 7 x 7 x 7, starchip fab 9 x 6 x 9, launcher 21 x 7 x 21 with about 220 laser module blocks', () => {
+  const dims = { 'gtceu:light_sail_fab': [7, 7, 7], 'gtceu:starchip_fab': [9, 6, 9], 'gtceu:laser_sail_launcher': [21, 7, 21] };
   const count = (s, block) => {
     const syms = Object.entries(s.symbols).filter(([, v]) => v.kind === 'blocks' && v.blocks.length === 1 && v.blocks[0] === block).map(([k]) => k);
     return s.slices.flat().join('').split('').filter((c) => syms.includes(c)).length;
@@ -71,10 +71,11 @@ test('patterns: sail fab 7 x 7 x 7, starchip fab 5 x 5 x 5, launcher 15 x 15 x 3
   assert.equal(count(fab, 'gtceu:tungsten_block'), 9, '3 x 3 heater');
   assert.ok(count(fab, 'grindless:whipple_shield_casing') > 0, 'wake shield wall');
   const chip = run.docs.structures.structures['gtceu:starchip_fab'];
-  assert.equal(count(chip, 'gtceu:filter_casing'), 9, 'filter ceiling');
-  assert.equal(count(chip, 'gtceu:stainless_steel_gearbox'), 1, 'the bonder');
+  assert.equal(count(chip, 'gtceu:filter_casing'), 49, 'filter ceiling');
+  assert.equal(count(chip, 'gtceu:stainless_steel_gearbox'), 5, 'the bonding line');
+  assert.equal(count(chip, 'gtceu:tungstensteel_gearbox'), 1, 'the dicing saw');
   const launcher = run.docs.structures.structures['gtceu:laser_sail_launcher'];
-  assert.equal(count(launcher, 'grindless:laser_module_block'), 64, '64 laser module blocks');
+  assert.equal(count(launcher, 'grindless:laser_module_block'), 228, 'laser module blocks');
   assert.equal(count(launcher, 'gtceu:computer_casing'), 1, 'the beam director');
 });
 
