@@ -63,20 +63,45 @@ test('assembler rows: names unique, circuit 0, figures, ids', () => {
   assert.deepEqual(outputs(rc[2]), ['gtceu:uiv_sensor']);
 });
 
-test('hall rows: circuits 4-6 after the three UEV rows, within the hall slots (8 items in with the circuit, 2 out, 1 fluid in)', () => {
+test('hall rows: compute module c12, tensor core c4, comb-fed core c13, mainframe c5, repeater c6, within the hall slots (8 items in with the circuit, 2 out, 1 fluid in)', () => {
   const rc = HALL.types.photonic_integration.recipes;
   assert.deepEqual(rc.slice(0, 3).map((r) => r.name), ['waveguide_circuit', 'quantum_photonic_chip', 'optical_computer']);
-  assert.deepEqual(rc.slice(3, 6).map((r) => [r.name, r.circuit]), [['photonic_tensor_core', 4], ['optical_mainframe', 5], ['pulsar_timed_repeater', 6]]);
-  for (const r of rc.slice(3, 6)) {
+  assert.deepEqual(rc.slice(3, 8).map((r) => [r.name, r.circuit]), [['photonic_compute_module', 12], ['photonic_tensor_core', 4], ['comb_fed_tensor_core', 13], ['optical_mainframe', 5], ['pulsar_timed_repeater', 6]]);
+  for (const r of rc.slice(3, 8)) {
     assert.ok(r.itemsIn.length + 1 <= 8 && r.itemsOut.length <= 2, r.name);
-    assert.match(r._why, /UIV-A7/, r.name);
+    assert.match(r._why, /UIV-A7|D4-UIV-MAINFRAME/, r.name);
   }
-  assert.deepEqual(inputs(rc[3]), ['grindless:beuv_driver_asic', 'grindless:quantum_photonic_chip', 'grindless:thin_film_ln_modulator']);
-  assert.deepEqual(outputs(rc[3]), ['grindless:photonic_tensor_core']);
-  assert.deepEqual(inputs(rc[4]), ['grindless:crossbar_on_interposer', 'grindless:six_hour_memory', 'grindless:p_si_processor', 'grindless:photonic_tensor_core', 'gtnn:optical_assembly', '#gtceu:circuits/uev']);
-  assert.deepEqual(outputs(rc[4]), ['gtnn:optical_mainframe']);
-  assert.deepEqual(inputs(rc[5]), ['grindless:eo_transceiver', 'grindless:telecom_memory', 'grindless:pumped_edfa', 'grindless:disciplined_clock_core']);
-  assert.deepEqual(outputs(rc[5]), ['grindless:pulsar_timed_repeater']);
+  assert.deepEqual(inputs(rc[3]), ['grindless:quantum_photonic_chip', 'grindless:crossbar_on_interposer']);
+  assert.deepEqual(outputs(rc[3]), ['grindless:photonic_compute_module']);
+  assert.deepEqual(inputs(rc[4]), ['grindless:beuv_driver_asic', 'grindless:photonic_compute_module', 'grindless:thin_film_ln_modulator']);
+  assert.deepEqual(outputs(rc[4]), ['grindless:photonic_tensor_core']);
+  assert.deepEqual(inputs(rc[5]), ['grindless:photonic_tensor_core', 'grindless:eo_microcomb']);
+  assert.deepEqual(outputs(rc[5]), ['grindless:comb_fed_tensor_core']);
+  assert.deepEqual(inputs(rc[6]), ['grindless:six_hour_memory', 'grindless:p_si_processor', 'grindless:comb_fed_tensor_core', 'gtnn:optical_assembly', '#gtceu:circuits/uev']);
+  assert.ok(!inputs(rc[6]).includes('grindless:crossbar_on_interposer'));
+  assert.deepEqual(outputs(rc[6]), ['gtnn:optical_mainframe']);
+  assert.deepEqual(inputs(rc[7]), ['grindless:eo_transceiver', 'grindless:telecom_memory', 'grindless:pumped_edfa', 'grindless:disciplined_clock_core']);
+  assert.deepEqual(outputs(rc[7]), ['grindless:pulsar_timed_repeater']);
+  const circuits = rc.map((r) => r.circuit);
+  assert.equal(new Set(circuits).size, circuits.length, 'hall circuits are unique');
+});
+
+test('eo_microcomb has two consumers: the hall comb-fed core and the UIV sensor', () => {
+  const all = [...HALL.types.photonic_integration.recipes, ...MF.types.assembler.recipes];
+  assert.deepEqual(all.filter((r) => inputs(r).includes('grindless:eo_microcomb')).map((r) => r.name).sort(), ['comb_fed_tensor_core', 'uiv_sensor']);
+});
+
+test('compute module items: registered, named, textured, produced only by the hall', () => {
+  const start = read('startup_scripts', 'grindless', 'uiv', 'mainframe_module.js');
+  const registered = [...start.matchAll(/^\s+([a-z0-9_]+): \{ stack: \d+ \}/gm)].map((m) => m[1]);
+  assert.deepEqual(registered, ['photonic_compute_module', 'comb_fed_tensor_core']);
+  const lang = read('client_scripts', 'grindless', 'uiv_mainframe_module_lang.js');
+  for (const n of registered) {
+    assert.match(lang, new RegExp(`'${n}', '[^']+', '[^']+', '[^']+'\\]`), n);
+    assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
+    assert.deepEqual(producers(`grindless:${n}`), [`photonics_uev.json:photonic_integration/${n}`], n);
+  }
+  for (const n of ['photonic_compute_module', 'comb_fed_tensor_core']) assert.ok(read('client_scripts', 'grindless', 'uiv_mainframe_lang.js').includes(`'gtceu.recipe.grindless_photonic_integration.${n}'`), n);
 });
 
 test('older rows: foundry c13 crossbar, MBE c7 ThF4 film, clock lab c3, pulsar timing c3, marked UIV-A7 and appended last', () => {
@@ -168,7 +193,7 @@ test('no recipe in the table is a subset of another of its type', () => {
 
 test('every contract id has a real use (temporary EMI exceptions are for these)', () => {
   const used = new Set();
-  for (const r of [...HALL.types.photonic_integration.recipes.slice(3, 6), ...MF.types.assembler.recipes]) inputs(r).forEach((i) => used.add(i));
+  for (const r of [...HALL.types.photonic_integration.recipes.slice(3, 8), ...MF.types.assembler.recipes]) inputs(r).forEach((i) => used.add(i));
   for (const id of ['grindless:eo_transceiver', 'grindless:glass_interposer', 'grindless:eo_microcomb', 'grindless:beuv_driver_asic', 'grindless:six_hour_memory',
     'grindless:p_si_processor', 'grindless:telecom_memory', 'grindless:pumped_edfa']) assert.ok(used.has(id), id);
 });
@@ -182,6 +207,7 @@ test('lang parity: every ITEM and row key has en_us, every item has a texture', 
   assert.deepEqual(itemNames.slice().sort(), registered.slice().sort());
   const flat = [...lang.matchAll(/^\s+\['((?:gtceu|emi)\.[^']+)',\s*$/gm)].map((m) => m[1]);
   const want = [
+    'gtceu.recipe.grindless_photonic_integration.photonic_compute_module', 'gtceu.recipe.grindless_photonic_integration.comb_fed_tensor_core',
     'gtceu.recipe.grindless_photonic_integration.photonic_tensor_core', 'gtceu.recipe.grindless_photonic_integration.optical_mainframe',
     'gtceu.recipe.grindless_photonic_integration.pulsar_timed_repeater', 'gtceu.recipe.grindless_photonic_foundry.pcm_crossbar',
     'gtceu.recipe.grindless_molecular_beam_epitaxy.thf4_film', 'gtceu.recipe.grindless_nuclear_clock.chip_clock',
