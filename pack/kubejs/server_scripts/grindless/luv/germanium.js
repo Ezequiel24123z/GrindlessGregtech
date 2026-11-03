@@ -1,3 +1,4 @@
+// priority: -18174
 // LuV germanium line L4 (docs/eras/lines-ev-zpm.md section 4), steps after Io's chlorination (luv/io_surface.js "separate").
 // Germanium, indium and chlorine are conserved: per condenser run (4 sublimate = 2 Ge + 1 In) 11,000 mB chlorine go in at the condenser,
 // 8,000 return from the hydrolysis HCl and 3,000 from the indium chloride. The cascade's scrub (ev/extraction_cascade.js) purifies the GeCl4.

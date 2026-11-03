@@ -1,3 +1,4 @@
+// priority: 7650
 // Gregtech Grindless - names and tooltips of LuV's germanium line (startup_scripts/grindless/luv/germanium.js; package D2-GERMANIUM).
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {

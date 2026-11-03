@@ -1,3 +1,4 @@
+// priority: -4050
 // LuV germanium line L4 (package D2-GERMANIUM, docs/eras/lines-ev-zpm.md section 4): Io's chlorination, scrub, hydrolysis, reduction, boule and wafer.
 // Recipes: server_scripts/grindless/luv/germanium.js. Names: client_scripts/grindless/luv_germanium_lang.js.
 (function () {
