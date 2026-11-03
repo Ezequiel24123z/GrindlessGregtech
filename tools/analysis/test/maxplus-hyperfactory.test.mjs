@@ -70,7 +70,7 @@ test('registers one multiblock with the five types and the mega chain', () => {
   assert.ok(h.calls.some((c) => c[0] === 'workableCasingModel' && c[1] === 'grindless:block/max/mirror_shell_segment'));
   const d = h.G.patterns.describe('gtceu:hyperfactory');
   assert.ok(d, 'pattern registered');
-  assert.equal(d.slices.length, 21);
+  assert.equal(d.slices.length, 33);
   const kinds = JSON.stringify(plain(d.symbols));
   for (const a of ['parallel_hatch', 'data_access', 'energy_input', 'input_bus']) assert.match(kinds, new RegExp(a));
 });

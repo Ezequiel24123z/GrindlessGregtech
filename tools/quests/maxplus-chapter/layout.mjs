@@ -150,7 +150,6 @@ const LAYOUT = {
   PAR: [41, 4.5, ['SCALE']],
 
   // building the gate
-  TR_BLEND: [51.5, -2, ['S3_TREE']],
   TR_FURN: [50, 1.5, ['S3_TREE']],
   TR_COND: [53.5, 1.5, ['S3_TREE']],
   TR_BANK: [50, -1.5, ['S3_TREE']],

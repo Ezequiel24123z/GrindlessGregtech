@@ -236,7 +236,7 @@ function recount() {
   };
 }
 
-test('re-count: 59 lines (270 steps), 187 crossings on 56 older machines, 18 MAX+ machines (a gap is reported, never padded)', (t) => {
+test('re-count: 59 lines (270 steps), 187 crossings on 56 older machines, 17 MAX+ machines (a gap is reported, never padded)', (t) => {
   const c = recount();
   t.diagnostic(`lines ${c.lines}, steps ${c.stepSum}, min ${c.min}; crossings Cr column ${c.crSum}, era rows ${c.eraSum}, total ${c.total}; machines ${c.machines} (stated ${c.totalMachines})`);
   assert.ok(c.min >= 4, 'no line under 4 steps');
@@ -247,8 +247,8 @@ test('re-count: 59 lines (270 steps), 187 crossings on 56 older machines, 18 MAX
   assert.equal(c.total, 187);
   assert.equal(c.machines, 56);
   assert.equal(c.totalMachines, 56);
-  assert.equal(IDS().controllers.ids.length, 18, '18 MAX+ machines in the id table');
-  assert.equal(pack().r.registry.machines.size > 0 && [...pack().r.registry.machines].filter(([id, m]) => /maxplus[\\/]/.test(m.file || '') && m.kind === 'multiblock' && id !== 'gtceu:hyperfactory').length, hasG1() ? 18 : 17, 'multiblocks registered');
+  assert.equal(IDS().controllers.ids.length, 17, '17 MAX+ machines in the id table');
+  assert.equal(pack().r.registry.machines.size > 0 && [...pack().r.registry.machines].filter(([id, m]) => /maxplus[\\/]/.test(m.file || '') && m.kind === 'multiblock' && id !== 'gtceu:hyperfactory').length, hasG1() ? 17 : 16, 'multiblocks registered');
 });
 
 test('docs: the Bootstrap check table has a row per gate and controller group', () => {

@@ -103,7 +103,6 @@
   "loop_mirror_shell": { "sounds": [ { "name": "grindless:loop_mirror_shell", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
   "loop_mnt_collider": { "sounds": [ { "name": "grindless:loop_mnt_collider", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
   "loop_mtj_sputter_cluster": { "sounds": [ { "name": "grindless:loop_mtj_sputter_cluster", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
-  "loop_multi_plasma_blender": { "sounds": [ { "name": "grindless:loop_multi_plasma_blender", "volume": 0.7, "attenuation_distance": 32, "stream": false } ] },
   "loop_muon_fusion_cell": { "sounds": [ { "name": "grindless:loop_muon_fusion_cell", "volume": 0.65, "attenuation_distance": 28, "stream": false } ] },
   "loop_naquadah_fuel_works": { "sounds": [ { "name": "grindless:loop_naquadah_fuel_works", "volume": 0.65, "attenuation_distance": 28, "stream": false } ] },
   "loop_naquadah_plant": { "sounds": [ { "name": "grindless:loop_naquadah_plant", "volume": 0.65, "attenuation_distance": 28, "stream": false } ] },
