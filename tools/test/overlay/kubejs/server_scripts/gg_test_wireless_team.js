@@ -457,7 +457,7 @@
   function namedPlayer(name) {
     var L = lazy()
     var Profile = Java.loadClass('com.mojang.authlib.GameProfile')
-    return L.FPF.get(S.earth, new Profile(L.UUID.nameUUIDFromBytes(('gg-claim-' + name).getBytes()), name))
+    return L.FPF.get(S.earth, new Profile(L.UUID.fromString('6c1a0000-0000-4000-8000-0000000297' + (name.charAt(name.length - 2) === 'a' ? '0' : '1') + name.charAt(name.length - 1)), name))
   }
 
   function clickAs(player, p) {
