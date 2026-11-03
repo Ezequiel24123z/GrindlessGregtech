@@ -1,4 +1,4 @@
-// priority: 6851
+// priority: 6655
 // Gregtech Grindless - names, tooltips and EMI lines of the Si-28 qubit line's MAX stage (package D5-QPU-MAX, docs/eras/lines-opv-maxplus.md, M1):
 //
 //   item.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)   the four items registered in startup_scripts/grindless/max/foundation.js
