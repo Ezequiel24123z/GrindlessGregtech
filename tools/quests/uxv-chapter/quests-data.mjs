@@ -83,7 +83,7 @@ export const QUESTS = [
     key: 'E121', kind: 'step', title: 'Element 121', icon: 'grindless:element_121_recoil',
     deps: ['ES254'], x: 6, y: 6,
     desc: [
-      'Titanium-50 on einsteinium in the heavy ion cyclotron. The recoil separator catches the few atoms, and the superheavy lab seals them as an &6Element 121 Recoil&r.',
+      'Titanium-50 on einsteinium in the heavy ion cyclotron. The recoil is caught in the same Superheavy Factory and the superheavy lab seals them as an &6Element 121 Recoil&r.',
     ],
     tasks: [it('grindless:element_121_recoil')],
     rewards: [xp(200)],
@@ -202,7 +202,7 @@ export const QUESTS = [
     key: 'V_FIC', kind: 'reading', title: 'Pasta as Cable', icon: 'gtceu:pasta_strand_single_wire',
     deps: ['PHASE'], x: 16, y: 2,
     desc: [
-      'The draw bench pulls spaghetti into wire and the laminator presses lasagna into plate: the UXV cable and the UXV hull. Outside a neutron star both would fly apart at once. That is fiction; the crust is real.',
+      'The Pasta Mill draws spaghetti into wire and presses lasagna into plate: the UXV cable and the UXV hull. Outside a neutron star both would fly apart at once. That is fiction; the crust is real.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
