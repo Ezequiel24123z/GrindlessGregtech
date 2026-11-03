@@ -7,8 +7,11 @@
 //   gtceu:pyroprocessing_cell        the molten-salt pyroprocess (EBR-II at Argonne): spent thorium fuel in, U-233 and thorium out, the
 //                                    LiCl salt kept in a loop. Electric multiblock with a parallel hatch, in radiation-proof casing; it
 //                                    refuses to void (the radioactive waste goes to ZPM's waste retrieval plant).
-//   gtceu:pyroprocessing             its recipe type (EU in). Circuit 1: spent oxide fuel -> thorium-uranium metal. 2: the metal -> U-233
-//                                    and thorium. 3: spent nitride fuel -> U-233, thorium and the 15N back. 4: the loaded salt cleaned.
+//   gtceu:pyroprocessing             its recipe type (EU in). Circuit 1: spent oxide fragments -> thorium-uranium metal. 2: the metal -> U-233
+//                                    cathode deposit and thorium. 3: spent nitride fragments -> deposit, thorium and the 15N back. 4: the
+//                                    loaded salt cleaned, its protactinium taken into bismuth. 10/11: the oxide / nitride assembly chopped
+//                                    to fragments (the hulls are radioactive waste). 12: the cathode (deposits -> U-233 ingots, salt back).
+//                                    13: the protactinium hold (Pa-Bi -> U-233 dust + bismuth). 5-9 are the transcurium rows.
 //   gtceu:accelerator_driven_reactor a subcritical core driven by a proton beam on a lead-bismuth target (MYRRHA, Rubbia's energy
 //                                    amplifier): a generator multiblock fed by an assembly, giving 1,572,864 EU/t (3 A UV).
 //   gtceu:accelerator_driven         its recipe type (generator, EU out). One recipe per assembly; polonium-210 is the target's
@@ -17,9 +20,10 @@
 //   (docs/research/uv-s0.md, S0-6).
 //
 // New ids (the F1 ones are in uv/foundation.js and are not registered again):
-//   items     grindless:u233_fuel_rod (the thorium cycle's rod; burnt by IV's fission reactor once tables/fission_cores.json lists it)
+//   items     grindless:u233_fuel_rod (the thorium cycle's rod; burnt by IV's fission reactor once tables/fission_cores.json lists it),
+//             spent_oxide_fragments, spent_nitride_fragments, u233_cathode_deposit (D3-TH-BACK)
 //   materials triton_nitric_oxide (the NO of Triton nitrogen), lead_bismuth_eutectic, polonium_210, thorium_uranium_metal,
-//             licl_salt, loaded_licl_salt
+//             licl_salt, loaded_licl_salt, protactinium_bismuth
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top): the cell is 7 x 7 x 7 (a PTFE column in a heatproof and glass
 // vessel), the reactor 11 x 13 x 11 (a UV-casing pool ring, a pipe column up the core, the 4 SRF cryomodules in the back wall).
 // Textures: tools/assets/Build-UVThoriumTextures.ps1. Names: client_scripts/grindless/uv_thorium_lang.js.
@@ -49,9 +53,13 @@
   TH.reactorNoVoiding = 'grindless.machine.accelerator_driven_reactor.no_voiding'
   TH.reactorEUt = 1572864
   TH.items = {
-    u233_fuel_rod: { stack: 16 }
+    u233_fuel_rod: { stack: 16 },
+    spent_oxide_fragments: { stack: 16 },
+    spent_nitride_fragments: { stack: 16 },
+    u233_cathode_deposit: { stack: 16 }
   }
   TH.materials = {
+    protactinium_bismuth: { form: 'liquid', colour: 0xB8A0D8, formula: 'Pa-Bi', radioactive: true },
     triton_nitric_oxide: { form: 'gas', colour: 0xE0A8C8, formula: '15NO(T)' },
     lead_bismuth_eutectic: { form: 'liquid', colour: 0x8A8F9E, formula: 'PbBi' },
     polonium_210: { form: 'liquid', colour: 0x9EE08A, formula: 'Po-210', radioactive: true },
