@@ -84,11 +84,15 @@ function New-Face {
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 5; $x -le 10; $x++) { Set-Px $c $x $y $Pit } }
     $steel = Hex '6E8CB0'
-    foreach ($p in $Ring) { Set-Px $c $p[0] $p[1] $steel }
+    # two C-shaped jaws facing each other across a field gap
+    foreach ($y in 4..9) { Set-Px $c 4 $y $steel; Set-Px $c 11 $y $steel }
+    foreach ($x in 5, 10) { Set-Px $c $x 4 $steel; Set-Px $c $x 9 $steel }
     if ($Active) {
         $glow = Hex '8CE8FF'; $hot = Hex 'FFF0A0'
-        for ($k = 0; $k -lt 4; $k++) { $p = $Ring[($Frame * 3 + $k) % 12]; Set-Both $c $e $p[0] $p[1] $glow }
-        foreach ($p in @(@(7, 6), @(8, 6), @(7, 7), @(8, 7))) { Set-Both $c $e $p[0] $p[1] $(if (($Frame % 2) -eq 0) { $hot } else { $glow }) }
+        $col = 6 + ($Frame % 4)
+        foreach ($y in 5..8) { Set-Both $c $e $col $y $glow }
+        foreach ($y in 6, 7) { Set-Both $c $e (15 - $col) $y $hot }
+        foreach ($p in @(@(5, 6), @(5, 7), @(10, 6), @(10, 7))) { Set-Both $c $e $p[0] $p[1] $glow }
     }
     $lamp = $(if ($Active) { $LampOn } else { $LampOff })
     Set-Px $c 7 12 $lamp; Set-Px $c 8 12 $lamp

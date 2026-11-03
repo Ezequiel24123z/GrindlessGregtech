@@ -26,7 +26,7 @@ export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 
 // Thresholds, stated in docs/reforge/06_assets_audit.md.
 export const LIMITS = {
   recolourCorr: 0.97, recolourHue: 12, recolourSat: 0.15, recolourLum: 0.08,
-  minOpaqueForRecolour: 24, overlayOpaque: 0.6, lightingInverted: -0.08, lowDetailColours: 3, eraLumZ: 3,
+  minOpaqueForRecolour: 24, overlayOpaque: 0.6, controllerFaceOpaque: 0.8, lightingInverted: -0.08, lowDetailColours: 3, eraLumZ: 3,
   soundRmsLoud: -14, soundRmsQuiet: -34, soundRelative: 4, soundPeak: -1, seamJumpRatio: 4, seamLevelDb: 3,
   soundHf: 0.45, soundCycleStrength: 0.85, soundCycleSeconds: 2, soundMinSeconds: 4, soundMaxSeconds: 12, sharedLoopControllers: 5,
 };
@@ -588,7 +588,8 @@ export function auditTextures({ root = ROOT, packDir = 'pack', gtmJar = null, st
     const strip = s.w === 16 && s.frames > 1;
     if (!isOverlay && !strip && (s.w !== 16 || s.h !== 16) && !/^grindless:(gui|entity)/.test(rl)) { row.categories.add('inconsistent'); row.detail.push(`size ${s.w}x${s.h}`); }
     if (s.frames > 1 && !fs.existsSync(`${fileOf(rl)}.mcmeta`)) { row.categories.add('inconsistent'); row.detail.push('animated strip without .mcmeta'); }
-    if (isOverlay && !/_active/.test(rl) && s.opaqueFrac > LIMITS.overlayOpaque) { row.categories.add('inconsistent'); row.detail.push(`overlay ${(s.opaqueFrac * 100) | 0}% opaque`); }
+    // a multiblock controller's face is the shared steel bezel (about 77% opaque) by design, so it gets its own limit
+    if (isOverlay && !/_active/.test(rl) && s.opaqueFrac > (/block\/multiblock\/[^/]+\/overlay_front$/.test(rl) ? LIMITS.controllerFaceOpaque : LIMITS.overlayOpaque)) { row.categories.add('inconsistent'); row.detail.push(`overlay ${(s.opaqueFrac * 100) | 0}% opaque`); }
     if (!isOverlay && s.opaque >= 40 && s.light < LIMITS.lightingInverted) { row.categories.add('inconsistent'); row.detail.push(`lit from the bottom-right (${s.light.toFixed(2)})`); }
     if (!isOverlay && s.colours > 1 && s.colours <= LIMITS.lowDetailColours && s.opaque >= 40) { row.categories.add('inconsistent'); row.detail.push(`only ${s.colours} colours`); }
     const es = eraStat.get(row.era);
