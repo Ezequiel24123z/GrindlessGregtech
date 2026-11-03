@@ -24,7 +24,8 @@
     fluids: [[KERR, 4000]] }
   var CONTROLLER = { out: 'gtceu:hyperfactory', research: 'grindless:horizon_photonic_engine', cwut: 64,
     items: ['1x ' + HULL, '2x grindless:horizon_machine_casing', '8x #gtceu:circuits/maxplus', '4x ' + CIRCUIT, '1x gtceu:max_parallel_hatch',
-      '2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor'],
+      '2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor',
+      '2x grindless:maxplus_fluid_regulator'],
     fluids: [[KERR, 2000]] }
   HR.specs = { hatch: HATCH, controller: CONTROLLER }
 
