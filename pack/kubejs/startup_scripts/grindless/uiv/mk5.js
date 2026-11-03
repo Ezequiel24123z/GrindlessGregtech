@@ -20,8 +20,8 @@
   const LOG = '[grindless/uiv] '
 
   const UIV = 11
-  const CRYO = 'grindless:cryostat_casing'
-  const CRYO_TEXTURE = 'grindless:block/zpm/cryostat_casing'
+  const CRYO = 'grindless:mh_field_casing'
+  const CRYO_TEXTURE = 'grindless:block/uiv/mh_field_casing'
   const CASING = 'grindless:uiv_fusion_casing'
   const CASING_TEXTURE = 'grindless:block/uiv/uiv_fusion_casing'
   const COIL = 'grindless:metallic_hydrogen_coil_block'
@@ -56,7 +56,7 @@
   MK.source = {
     name: 'polarised_proton_source', machine: 'gtceu:polarised_proton_source', type: 'proton_polarisation', dataKey: 'grindless_proton_polarisation',
     lang: 'Polarised Proton Source', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 2 },
-    width: 7, height: 5, depth: 7
+    width: 13, height: 11, depth: 27
   }
   MK.ring = { name: 'uiv_fusion_reactor', machine: 'gtceu:uiv_fusion_reactor', type: 'fusion_reactor', lang: 'Mk5 Fusion Reactor' }
   MK.tier = UIV

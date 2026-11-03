@@ -19,8 +19,8 @@
   const LM = G.levitationMelter || (G.levitationMelter = {})
   const LOG = '[grindless/uiv] '
 
-  const CASING = 'gtceu:uev_machine_casing'
-  const CASING_TEXTURE = 'gtceu:block/casings/voltage/uev/side'
+  const CASING = 'grindless:rhea_casing'
+  const CASING_TEXTURE = 'grindless:block/uiv/rhea_casing'
   const COIL = 'grindless:hftacn_coil_block'
 
   LM.table = 'kubejs/data/grindless/tables/levitation_melter.json'
@@ -50,7 +50,7 @@
     lang: 'Levitation Melter',
     // items in: up to four feeds plus the circuit; out: the product, the BeO and the dross; one helium in
     maxIO: { itemsIn: 5, itemsOut: 3, fluidsIn: 1, fluidsOut: 1 },
-    width: 7, height: 7, depth: 9
+    width: 15, height: 17, depth: 15
   }
 
   // An induction tower (uiv/shapes.js): a base hall under a glazed tube banded by levitation coils, the crucible on its axis. Built in the

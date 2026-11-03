@@ -184,6 +184,82 @@
     }
   }
 
+  // ---------------------------------------------------------------- D4-SHAPE-UIV-A: parts composed into a silhouette (local coordinates)
+
+  // a rectangular building. o: { w, h, d, ground (floor row = parts), slab, roof 'lid' | 'rim', win [rows], mull, bands [rows], sky, post, inner(x, y, z) }
+  T.shell = function (o) {
+    var w = o.w
+    var h = o.h
+    var d = o.d
+    var mull = o.mull || 3
+    var win = o.win || [2, 2]
+    var sky = o.sky || 4
+    var bands = o.bands || []
+    return function (x, y, z) {
+      var ex = x === 0 || x === w - 1
+      var ez = z === 0 || z === d - 1
+      var wall = ex || ez
+      if (y === 0) return o.ground ? 'X' : (o.slab ? 'F' : (wall ? 'A' : '#'))
+      if (y === h - 1 && h > 1) {
+        if (o.roof === 'lid') return wall ? 'A' : ((x + z) % sky === 0 ? 'L' : 'F')
+        if (o.roof === 'rim') return wall ? 'A' : '#'
+      }
+      if (!wall) return (o.inner && o.inner(x, y, z)) || '#'
+      if (ex && ez) return o.post || 'F'
+      if (bands.indexOf(y) >= 0) return 'A'
+      if (y >= win[0] && y <= win[1]) return (ez ? x : z) % mull === 0 ? 'F' : 'L'
+      return 'F'
+    }
+  }
+
+  // a round vessel on a square plan of side 2R + 1. o: { R, h (wall rows), dome (rows), ground, lid, bands {row: char}, win [rows], inner(x, y, z, r) }
+  T.cyl = function (o) {
+    var R = o.R
+    var H = o.h
+    var n = o.dome || 0
+    var win = o.win || [2, 2]
+    return function (x, y, z) {
+      var r = rad(x - R, z - R)
+      if (r > R + 0.5) return ' '
+      var wall = r >= R - 0.5
+      if (y >= H) {
+        if (!n) return ' '
+        if (y === H) return wall ? 'A' : ' '
+        var q = r / (R + 0.5)
+        var hs = Math.round(n * Math.sqrt(Math.max(0, 1 - q * q)))
+        return y - H === (hs > 0 ? hs - 1 : 0) && y - H < n ? (r > R - 1.5 ? 'A' : 'L') : ' '
+      }
+      if (y === 0) return o.ground ? 'X' : (wall ? 'A' : '#')
+      if (!wall) {
+        if (o.lid && y === H - 1) return 'F'
+        return (o.inner && o.inner(x, y, z, r)) || '#'
+      }
+      if (o.bands && o.bands[y]) return o.bands[y]
+      if (y === 1 || y === H - 1) return 'A'
+      if (y >= win[0] && y <= win[1]) return (x + z) % 3 === 0 ? 'F' : 'L'
+      return 'F'
+    }
+  }
+
+  // a silhouette from parts { x, y, z, w, h, d, fn }; a solid cell of any part wins over the air of another
+  T.at = function (x, y, z, w, h, d, fn) { return { x: x, y: y, z: z, w: w, h: h, d: d, fn: fn } }
+  T.compose = function (parts) {
+    return function (x, y, z) {
+      var air = false
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i]
+        var lx = x - p.x
+        var ly = y - p.y
+        var lz = z - p.z
+        if (lx < 0 || ly < 0 || lz < 0 || lx >= p.w || ly >= p.h || lz >= p.d) continue
+        var ch = p.fn(lx, ly, lz)
+        if (ch === '#') air = true
+        else if (ch && ch !== ' ') return ch
+      }
+      return air ? '#' : ' '
+    }
+  }
+
   // ---------------------------------------------------------------- the layouts: name -> function returning { w, h, d, fn, pal }
 
   var P0 = {
@@ -198,6 +274,10 @@
   }
   var COIL_MH = 'grindless:metallic_hydrogen_coil_block'
   var SITE = 'grindless:neutron_star_site_casing'
+  var RHEA = 'grindless:rhea_casing'
+  var MH = 'grindless:mh_field_casing'
+  var OPT = 'grindless:multilayer_optics_casing'
+  var CRY = 'grindless:dilution_cryostat_casing'
   var L = {}
   T.layouts = L
 
@@ -223,159 +303,265 @@
     }
   }
 
-  // STM lithography cell: a glazed bay under a dome, the scan tower and its probe (coil tip) in the middle, vibration-isolation pads around it
+  // STM lithography cell: the domed scan chamber at the back on its vibration-isolation pads (scan tower and probe on the axis), a low
+  // load-lock hall across the front with its lock chambers and the transfer tube to the chamber
   L.stm_lithography_cell = function () {
-    var w = 9, d = 9, hh = 5, cx = 4, cz = 4
+    var w = 15, d = 17
     return {
-      w: w, h: hh + 3, d: d, pal: pal({ A: 'gtceu:uev_machine_casing' }),
-      fn: T.hall({
-        w: w, d: d, hh: hh, mull: 4, crown: T.dome(w, d, 3),
-        inner: function (x, y, z) {
-          var dx = x - cx
-          var dz = z - cz
-          if (dx === 0 && dz === 0) return y === 3 ? 'C' : (y === 1 ? 'B' : 'Q')
-          if (y === 1 && cheb(dx, dz) === 2 && (dx === 0 || dz === 0)) return 'B'
-          if (y === 1 && cheb(dx, dz) === 1) return 'A'
-          return null
-        }
-      })
-    }
-  }
-
-  // TFLN fab: a cleanroom hall with two rows of process bays (machine blocks under hoods of pipe) and a roof ridge
-  L.tfln_fab = function () {
-    var w = 13, d = 11, hh = 6
-    return {
-      w: w, h: hh + 3, d: d, pal: pal({ A: 'gtceu:uev_machine_casing' }),
-      fn: T.hall({
-        w: w, d: d, hh: hh, mull: 3, crown: T.sink(w, d),
-        inner: function (x, y, z) {
-          var bay = (x === 3 || x === 9) && z % 3 === 1 && z > 1 && z < d - 2
-          if (bay) return y === 1 ? 'B' : (y === 2 ? 'A' : (y === 3 ? 'P' : null))
-          if (x >= 4 && x <= 8 && z === 5 && y === 1) return x === 6 ? 'C' : 'P'
-          return null
-        }
-      })
-    }
-  }
-
-  // femtosecond writer: a long beamline - portal frames every fourth slice, the pulse compressor coils banding the tube
-  L.femtosecond_writer = function () {
-    return {
-      w: 9, h: 7, d: 21, pal: pal({ A: 'gtceu:uev_machine_casing', Q: 'titanium' }),
-      fn: T.beamline({ w: 9, h: 7, d: 21, ty: 3, pz: 4, ring: 2, jaws: true })
-    }
-  }
-
-  // x-ray pulse profiler: an undulator - the same drawn-out line, narrower, magnets jawing the tube
-  L.xray_pulse_profiler = function () {
-    return {
-      w: 7, h: 9, d: 17, pal: pal({ Q: 'stainless_steel' }),
-      fn: T.beamline({ w: 7, h: 9, d: 17, ty: 4, pz: 4, ring: 0, jaws: true })
-    }
-  }
-
-  // polarised proton source: a linac with RF cavity rings and, at the back, the source bottle (glass cube around a coil core)
-  L.polarised_proton_source = function () {
-    var w = 9, h = 8, d = 15, cx = 4
-    return {
-      w: w, h: h, d: d, pal: pal({ C: COIL_MH, Q: 'stainless_steel' }),
-      fn: T.beamline({
-        w: w, h: h, d: d, ty: 3, pz: 3, ring: 1,
-        extra: function (x, y, z) {
-          if (z > 4 || y === 0) return null
-          var dx = abs(x - cx)
-          if (z === 0 || (dx === 3 && z <= 4) || y === 6 || (y === 1 && z <= 4 && dx <= 3)) {
-            if (y > 6 || dx > 3) return null
-            if (y === 1) return z === 2 && dx <= 1 ? 'X' : 'F'
-            if (dx === 3 && z === 4 && y !== 6) return 'Q'
-            return (dx === 3 && z === 0) || (y === 6) ? 'A' : 'L'
+      w: w, h: 11, d: d, pal: pal({ A: CRY, M: RHEA }),
+      fn: T.compose([
+        T.at(3, 0, 0, 9, 11, 9, T.cyl({
+          R: 4, h: 8, dome: 3, ground: true, bands: { 4: 'M' }, win: [5, 6],
+          inner: function (x, y, z, r) {
+            if (r < 0.5) return y <= 2 ? 'B' : (y === 5 ? 'C' : 'P')
+            if (y === 1 && r >= 2 && r < 3) return 'M'
+            return null
           }
-          if (dx === 0 && z === 2 && y >= 2 && y <= 5) return y === 3 ? 'C' : 'B'
-          return null
-        }
-      })
+        })),
+        T.at(0, 0, 9, w, 5, 8, T.shell({
+          w: w, h: 5, d: 8, ground: true, roof: 'lid', win: [2, 3], mull: 4, sky: 3, bands: [1],
+          inner: function (x, y, z) {
+            var dx = abs(x - 7)
+            if (dx >= 2 && dx <= 5 && (z === 2 || z === 5)) return y === 1 ? 'B' : (y === 2 ? 'M' : null)
+            if (y === 1 && dx === 0 && z <= 5) return 'P'
+            return null
+          }
+        }))
+      ])
     }
   }
 
-  // positronium condensate lab: a trap hall, the Penning trap (coil triplet around a pipe) in the middle, a mast over it
-  L.positronium_condensate_lab = function () {
-    var w = 11, d = 9, hh = 5, cx = 5, cz = 4
-    return {
-      w: w, h: hh + 4, d: d, pal: pal({ A: 'grindless:cryostat_casing', Q: 'stainless_steel' }),
-      fn: T.hall({
-        w: w, d: d, hh: hh, mull: 3, crown: T.spire(w, d, 4),
-        inner: function (x, y, z) {
-          var dx = x - cx
-          var dz = z - cz
-          if (dz === 0 && dx === 0) return y === 2 ? 'C' : 'P'
-          if (dz === 0 && abs(dx) === 1 && y === 2) return 'C'
-          if (dz === 0 && abs(dx) >= 2 && abs(dx) <= 4 && y === 1) return abs(dx) % 2 === 0 ? 'B' : 'P'
-          if (dz === 0 && abs(dx) <= 1 && y === 3) return 'A'
-          return null
-        }
-      })
-    }
-  }
-
-  // spectral hole burner / millikelvin works: a cryostat stack - a vacuum can with window slits, stage plates of falling radius on a
-  // central rod, pulse-tube coolers on the lid
-  function cryo(w, h, stages, magnetBand) {
-    var cx = (w - 1) / 2
-    var R = cx
-    var step = Math.floor((h - 3) / stages)
-    return T.drum({
-      w: w, d: w, R: R, hh: h - 2,
-      band: function (y) { return magnetBand && y >= h - 5 && y <= h - 4 ? 'C' : null },
-      inner: function (x, y, z, r) {
-        var dx = x - cx
-        var dz = z - cx
-        if (r < 0.5) return y % step === 0 ? 'C' : 'P'
-        var s = (y - 1) % step === step - 1 ? Math.floor((y - 1) / step) : -1
-        if (s >= 0 && s < stages && r <= R - 1 - s * (R - 2) / stages) return s % 2 === 0 ? 'A' : 'F'
-        if (abs(dx) === 1 && abs(dz) === 1 && y >= 2 && y < h - 3 && y % step !== step - 1) return null
-        return null
-      },
-      crown: function (x, k, z, r) {
-        var dx = abs(x - cx)
-        var dz = abs(z - cx)
-        if (r > R - 0.5) return ' '
-        if (k === 0) return 'A'
-        if (dx === 0 && dz === 0) return k <= 2 ? 'Q' : ' '
-        if (dx === 2 && dz === 2 && (cx >= 3)) return k <= 2 ? (k === 1 ? 'B' : 'P') : ' '
-        if (dx === 0 && dz === 2 && cx >= 3 && k === 1) return 'P'
-        return ' '
-      }
+  // TFLN fab: the ion-slicing line under one open-roofed hall - implanter, bonder, split furnace and polisher in order from the back,
+  // each under its own glazed hood on four posts, a conveyor of machine blocks down the aisle, an exhaust stack on every hood
+  L.tfln_fab = function () {
+    var w = 17, d = 23
+    var zs = [1, 6, 11, 16]
+    var parts = []
+    zs.forEach(function (z0) {
+      parts.push(T.at(6, 5, z0, 5, 6, 5, T.shell({
+        w: 5, h: 6, d: 5, roof: 'lid', win: [1, 3], mull: 3, sky: 2, bands: [],
+        inner: function (x, y, z) { return x === 2 && z === 2 && y >= 3 ? 'P' : null }
+      })))
     })
-  }
-  L.millikelvin_cryostat_works = function () {
-    var w = 9, h = 14
-    return { w: w, h: h, d: w, pal: pal({ A: 'gtceu:uev_machine_casing', C: COIL_MH, Q: 'stainless_steel' }), fn: cryo(w, h, 4, true) }
-  }
-  L.spectral_hole_burner = function () {
-    var w = 7, h = 10
-    return { w: w, h: h, d: w, pal: pal({ A: 'gtceu:uev_machine_casing', Q: 'stainless_steel' }), fn: cryo(w, h, 3, false) }
+    parts.push(T.at(0, 0, 0, w, 5, d, T.shell({
+      w: w, h: 5, d: d, ground: true, roof: 'rim', win: [2, 3], mull: 4, bands: [1],
+      inner: function (x, y, z) {
+        var k = (z - 1) % 5
+        var st = (z - 1) >= 0 && z <= 20 && k <= 4
+        if (st && (x === 6 || x === 10) && (k === 0 || k === 4)) return y <= 3 ? 'F' : null
+        if (x === 8 && y === 1) return z % 2 === 0 ? 'B' : 'M'
+        if (st && k === 2 && abs(x - 8) <= 2 && y === 1 && x !== 8) return 'B'
+        if (st && k === 2 && abs(x - 8) <= 2 && y === 2) return 'M'
+        return null
+      }
+    })))
+    return { w: w, h: 11, d: d, pal: pal({ A: RHEA, M: RHEA }), fn: T.compose(parts) }
   }
 
-  // droplet radiator works: a fin array - serrated radiator fins standing on foot rails, a pipe header across the back, a service spine
-  // down the middle. The front stays open (vacuum).
-  L.droplet_radiator_works = function () {
-    var w = 13, h = 9, d = 13, cx = 6
-    return {
-      w: w, h: h, d: d, pal: pal({ A: 'grindless:droplet_radiator_module', Q: 'tungsten_steel' }),
-      fn: function (x, y, z) {
-        var fin = x % 3 === 0
-        if (y === 0) return abs(x - cx) <= 1 ? 'X' : (fin ? 'F' : ' ')
-        if (z === 0 && y === 2) return 'P'
-        if (z === 0 && y === 1 && x % 3 === 0) return 'C'
-        if (!fin) return ' '
-        var top = 4 + (z % 2 === 0 ? 2 : 1) + (x === cx ? 1 : 0)
-        if (y > top) return ' '
-        if (z === 0 || z === d - 1) return 'Q'
-        if (y === top) return 'F'
-        if (y === 3 && z % 4 === 2) return 'P'
-        return y % 2 === 1 ? 'A' : 'L'
+  // femtosecond writer: an optical table running the length of the machine - four amplifier cabinets chained along one beam tube (compressor
+  // coil rings at its end) - into a glazed stage hall with the five-axis stage on a pedestal under a gantry beam
+  L.femtosecond_writer = function () {
+    var parts = [
+      T.at(5, 2, 0, 3, 3, 22, function (x, y, z) {
+        if (x === 1 && y === 1) return '#'
+        return z >= 16 && z % 2 === 1 ? 'C' : 'P'
+      })
+    ]
+    ;[1, 5, 9, 13].forEach(function (z0) {
+      parts.push(T.at(3, 1, z0, 7, 5, 4, T.shell({ w: 7, h: 5, d: 4, roof: 'rim', win: [2, 3], mull: 3, bands: [] })))
+    })
+    parts.push(T.at(3, 0, 0, 7, 2, 31, function (x, y, z) {
+      if (y === 0) return 'X'
+      return x === 0 || x === 6 ? 'A' : null
+    }))
+    parts.push(T.at(0, 0, 22, 13, 9, 9, T.shell({
+      w: 13, h: 9, d: 9, ground: true, roof: 'rim', win: [3, 4], mull: 3, bands: [1],
+      inner: function (x, y, z) {
+        var dx = abs(x - 6)
+        var dz = z - 4
+        if (dx <= 1 && abs(dz) <= 1) return y === 1 ? 'B' : (y === 2 ? 'M' : (dx === 0 && dz === 0 && y <= 5 ? 'P' : null))
+        if (y === 6 && dz === 0 && dx <= 4) return 'A'
+        if (y >= 1 && y <= 5 && abs(dx) === 4 && dz === 0) return 'P'
+        return null
       }
+    })))
+    return { w: 13, h: 9, d: 31, pal: pal({ A: RHEA, M: RHEA }), fn: T.compose(parts) }
+  }
+
+  // x-ray pulse profiler: a telescope - a long ribbed tube raised on pylons over a floor strip, jawed by undulator magnets and
+  // banded by one steering coil ring, ending over the detector deck (a low hall) under the glazed detector can
+  L.xray_pulse_profiler = function () {
+    var parts = [
+      T.at(1, 4, 0, 9, 9, 23, function (x, y, z) {
+        var dx = x - 4
+        var dy = y - 4
+        var r = rad(dx, dy)
+        if (r < 3.5) {
+          if (z === 12 && cheb(dx, dy) === 2) return 'C'
+          if (z >= 4 && z <= 18 && z % 2 === 0 && dx === 0 && abs(dy) === 2) return 'A'
+          return '#'
+        }
+        if (r >= 4.5) return ' '
+        if (z % 2 === 0) return z % 4 === 0 ? 'A' : 'F'
+        return dx === 0 || dy === 0 || abs(dx) === abs(dy) ? 'A' : null
+      }),
+      T.at(4, 0, 0, 3, 4, 20, function (x, y, z) {
+        if (y === 0) return 'X'
+        return x === 1 && z % 6 === 2 ? 'F' : null
+      }),
+      T.at(1, 5, 21, 9, 8, 8, T.shell({
+        w: 9, h: 8, d: 8, roof: 'lid', win: [2, 5], mull: 3, sky: 3, bands: [1]
+      })),
+      T.at(0, 0, 18, 11, 5, 11, T.shell({
+        w: 11, h: 5, d: 11, ground: true, roof: 'rim', win: [2, 3], mull: 3, bands: [1],
+        inner: function (x, y, z) {
+          if (y === 1 && z >= 3 && z <= 7 && abs(x - 5) >= 2 && abs(x - 5) <= 3) return 'B'
+          if (y === 2 && z >= 3 && z <= 7 && abs(x - 5) === 3) return 'A'
+          return null
+        }
+      }))
+    ]
+    return { w: 11, h: 13, d: 29, pal: pal({ A: RHEA }), fn: T.compose(parts) }
+  }
+
+  // polarised proton source, in line from the back: the dissociator (a glazed box, RF coils on the beam tube), the sextupole train (open magnet
+  // cages round the tube), the storage cell (a domed drum on the axis) and the ice-cryostat hall across the front
+  L.polarised_proton_source = function () {
+    var parts = [
+      T.at(5, 3, 0, 3, 3, 12, function (x, y, z) {
+        if (x === 1 && y === 1) return '#'
+        return z % 2 === 0 && z >= 2 && z <= 6 ? 'C' : 'P'
+      }),
+      T.at(2, 0, 0, 9, 8, 7, T.shell({ w: 9, h: 8, d: 7, ground: true, roof: 'lid', win: [2, 5], mull: 3, sky: 3, bands: [1] })),
+      T.at(2, 0, 7, 9, 9, 6, function (x, y, z) {
+        var dx = x - 4
+        var dy = y - 4
+        if (y === 0) return abs(dx) <= 1 ? 'X' : null
+        var m = cheb(dx, dy)
+        if (m === 3 && z % 3 === 0) return 'F'
+        if (m === 3 && abs(dx) === 3 && abs(dy) === 3) return 'M'
+        if (m === 4 && z % 3 === 0 && (dx === 0 || dy === 0)) return 'A'
+        if (m === 2 && dx !== 0 && dy !== 0 && z % 3 === 1 && abs(dx) === 2 && abs(dy) === 2) return 'B'
+        return null
+      }),
+      T.at(1, 0, 12, 11, 11, 11, T.cyl({
+        R: 5, h: 9, dome: 2, ground: true, bands: { 4: 'M' }, win: [5, 6],
+        inner: function (x, y, z, r) {
+          if (r < 0.5) return y <= 2 ? 'B' : 'P'
+          if (y === 1 && r >= 2 && r < 3) return 'A'
+          return null
+        }
+      })),
+      T.at(0, 0, 22, 13, 4, 5, T.shell({ w: 13, h: 4, d: 5, ground: true, roof: 'lid', win: [2, 2], mull: 3, sky: 3, bands: [1] }))
+    ]
+    return { w: 13, h: 11, d: 27, pal: pal({ A: CRY, M: RHEA, C: COIL_MH }), fn: T.compose(parts) }
+  }
+
+  // positronium condensate lab: the aerogel-target cryostat (a domed drum, Penning trap coil cross and target stack on the axis) at the back
+  // between two slim accumulator columns, the laser hall across the front with its tables and mirror posts
+  L.positronium_condensate_lab = function () {
+    return {
+      w: 15, h: 13, d: 17, pal: pal({ A: OPT, M: MH }),
+      fn: T.compose([
+        T.at(3, 0, 0, 9, 13, 9, T.cyl({
+          R: 4, h: 10, dome: 3, ground: true, bands: { 5: 'M', 6: 'M' }, win: [3, 3],
+          inner: function (x, y, z, r) {
+            var dx = x - 4
+            var dz = z - 4
+            if (y === 5 && r > 0.5 && r < 1.5 && (dx === 0 || dz === 0)) return 'C'
+            if (r < 0.5) return y % 2 === 0 ? 'A' : 'P'
+            if (y === 1 && r >= 2 && r < 3) return 'M'
+            return null
+          }
+        })),
+        T.at(0, 0, 2, 3, 10, 3, T.cyl({ R: 1, h: 9, dome: 0, ground: true, bands: { 4: 'M' } })),
+        T.at(12, 0, 2, 3, 10, 3, T.cyl({ R: 1, h: 9, dome: 0, ground: true, bands: { 4: 'M' } })),
+        T.at(0, 0, 9, 15, 5, 8, T.shell({
+          w: 15, h: 5, d: 8, ground: true, roof: 'lid', win: [2, 3], mull: 3, sky: 3, bands: [1],
+          inner: function (x, y, z) {
+            var dx = abs(x - 7)
+            if (dx >= 2 && dx <= 5 && z >= 2 && z <= 5) return y === 1 ? 'B' : (y === 2 && (z === 2 || z === 5) ? 'A' : null)
+            if (y === 2 && dx === 0 && z <= 5) return 'P'
+            return null
+          }
+        }))
+      ])
+    }
+  }
+
+  // spectral hole burner: a dilution column (slim drum on the axis, stage plates and the ZEFOZ coil cross) inside a wide magnet jacket of
+  // field casing, ringed by optics windows, pulse-tube coolers on the lid
+  L.spectral_hole_burner = function () {
+    return {
+      w: 13, h: 17, d: 13, pal: pal({ A: MH, M: OPT, Q: 'stainless_steel' }),
+      fn: T.cyl({
+        R: 6, h: 14, dome: 3, ground: true, bands: { 3: 'A', 4: 'A', 9: 'A', 10: 'A' }, win: [6, 7],
+        inner: function (x, y, z, r) {
+          var dx = x - 6
+          var dz = z - 6
+          if (y === 6 && r > 0.5 && r < 1.5 && (dx === 0 || dz === 0)) return 'C'
+          if (r >= 2.5 && r < 3.5 && y <= 8) return 'F'
+          if (r < 0.5) return y % 3 === 0 ? 'M' : 'P'
+          if (y % 4 === 0 && y <= 8 && r < 3.5) return y % 8 === 0 ? 'A' : 'M'
+          return null
+        }
+      })
+    }
+  }
+
+  // millikelvin works: a squat magnet base (field casing drum with a flat lid, 9 T bore) carrying a tall dilution column - slim vacuum
+  // can, stage plates falling in radius on the rod, domed top with the pulse-tube coolers
+  L.millikelvin_cryostat_works = function () {
+    return {
+      w: 13, h: 23, d: 13, pal: pal({ A: MH, M: OPT, Q: 'stainless_steel' }),
+      fn: T.compose([
+        T.at(0, 0, 0, 13, 8, 13, T.cyl({
+          R: 6, h: 8, ground: true, lid: true, bands: { 3: 'A', 4: 'A', 5: 'A' }, win: [2, 2],
+          inner: function (x, y, z, r) { return r < 3.5 && y <= 6 ? (r < 2.5 ? 'P' : 'F') : null }
+        })),
+        T.at(2, 8, 2, 9, 15, 9, T.cyl({
+          R: 4, h: 12, dome: 3, win: [3, 9],
+          inner: function (x, y, z, r) {
+            if (r < 0.5) return y % 3 === 0 ? 'M' : 'P'
+            if (y % 3 === 2 && y <= 9 && r < 4 - Math.floor(y / 3)) return y % 6 === 2 ? 'A' : 'M'
+            return null
+          }
+        }))
+      ])
+    }
+  }
+
+  // droplet radiator works, in the order the metal flows: the melt tank (a domed drum, heater coil on its axis) at the back, an orifice wall
+  // of pipe nozzles, a glazed drop chamber, and at the front a bank of tall radiator fins on a spine that catch and shed the heat
+  L.droplet_radiator_works = function () {
+    return {
+      w: 17, h: 13, d: 21, pal: pal({ A: MH, Q: 'tungsten_steel' }),
+      fn: T.compose([
+        T.at(5, 0, 0, 7, 12, 7, T.cyl({
+          R: 3, h: 9, dome: 3, ground: true, bands: { 4: 'A' }, win: [5, 6],
+          inner: function (x, y, z, r) {
+            if (y === 5 && r < 1.5) return r < 0.5 ? 'P' : 'C'
+            if (r < 0.5) return y <= 3 ? 'B' : 'P'
+            return null
+          }
+        })),
+        T.at(0, 0, 7, 17, 7, 1, function (x, y, z) {
+          if (y === 0) return 'X'
+          if (y === 2 && x % 2 === 0) return 'P'
+          return x === 0 || x === 16 || y % 2 === 0 ? 'A' : 'F'
+        }),
+        T.at(0, 0, 8, 17, 7, 8, T.shell({
+          w: 17, h: 7, d: 8, ground: true, roof: 'lid', win: [2, 4], mull: 3, sky: 5, bands: [1]
+        })),
+        T.at(0, 0, 16, 17, 13, 5, function (x, y, z) {
+          if (y === 0) return abs(x - 8) <= 1 || x % 3 === 2 ? 'X' : null
+          if (x % 3 !== 2) return y === 2 && z === 0 ? 'P' : null
+          var top = 8 + (z % 2) + (x === 8 ? 2 : 0)
+          if (y > top) return ' '
+          if (y === top || z === 0 || z === 4) return 'F'
+          return (y + z) % 4 === 0 ? 'F' : 'A'
+        })
+      ])
     }
   }
 
@@ -383,28 +569,32 @@
   // a headframe with the winding wheel on top
   L.crust_lift = function () {
     var w = 9, d = 9, hh = 10, cx = 4, cz = 4
+    function crown(x, k, z) {
+      var dx = abs(x - cx)
+      if (z !== cz) return ' '
+      if (k === 0) return dx === 2 || dx === 0 ? 'A' : ' '
+      if (k === 1) return dx === 1 || dx === 2 ? 'A' : ' '
+      return dx === 0 ? 'C' : (dx === 1 ? 'A' : ' ')
+    }
     return {
-      w: w, h: hh + 3, d: d, pal: pal({ A: SITE, C: COIL_MH, Q: 'tungsten_steel' }),
-      fn: T.hall({
-        w: w, d: d, hh: hh, mull: 4, crown: function (x, k, z) {
-          var dx = abs(x - cx)
-          if (z !== cz) return ' '
-          if (k === 0) return dx === 2 || dx === 0 ? 'Q' : ' '
-          if (k === 1) return dx === 1 ? 'Q' : (dx === 2 ? 'Q' : ' ')
-          return dx === 0 ? 'C' : (dx === 1 ? 'Q' : ' ')
-        },
-        inner: function (x, y, z) {
-          var dx = x - cx
-          var dz = z - cz
-          var cage = y >= 4 && y <= 6
-          if (abs(dx) === 1 && abs(dz) === 1) return cage ? 'Q' : null
-          if (cage && cheb(dx, dz) === 1 && y === 4) return 'A'
-          if (cage && cheb(dx, dz) <= 1 && y === 6) return 'A'
-          if (dx === 0 && dz === 0 && y >= 7) return 'P'
-          if (abs(dx) === 3 && dz === 0 && y >= 2) return 'P'
-          return null
-        }
-      })
+      w: w, h: hh + 3, d: d, pal: pal({ A: RHEA, C: COIL_MH, Q: 'tungsten_steel' }),
+      fn: T.compose([
+        T.at(0, hh, 0, w, 3, d, crown),
+        T.at(0, 0, 0, w, hh, d, T.shell({
+          w: w, h: hh, d: d, ground: true, roof: 'lid', win: [4, 6], mull: 3, sky: 3, bands: [1, 8],
+          inner: function (x, y, z) {
+            var dx = x - cx
+            var dz = z - cz
+            var cage = y >= 4 && y <= 6
+            if (abs(dx) === 1 && abs(dz) === 1) return cage ? 'Q' : null
+            if (cage && cheb(dx, dz) === 1 && y === 4) return 'A'
+            if (cage && cheb(dx, dz) <= 1 && y === 6) return 'A'
+            if (dx === 0 && dz === 0 && y >= 7) return 'P'
+            if (abs(dx) === 3 && dz === 0 && y >= 2) return 'P'
+            return null
+          }
+        }))
+      ])
     }
   }
 
@@ -461,76 +651,92 @@
 
   // r-process decompressor: a ziggurat - stepped terraces ringed with coil collars, a central pressure shaft, floor rim and cross for the parts
   L.r_process_decompressor = function () {
-    var w = 11, d = 13, h = 10, cx = 5, cz = 6
-    return {
-      w: w, h: h, d: d, pal: pal({ A: SITE, C: COIL_MH, Q: 'tungsten_steel' }),
-      fn: function (x, y, z) {
-        var dx = abs(x - cx)
-        var dz = abs(z - cz)
-        var level = y === 0 ? 0 : Math.floor((y - 1) / 2)
-        var inset = level
-        var ex = cx - inset
-        var ez = cz - inset
-        if (y === 0) {
-          var onRim = dx === cx || dz === cz
-          return onRim || dx === 0 || dz === 0 ? 'X' : ' '
-        }
-        if (dx > ex || dz > ez) return ' '
-        var rim = dx === ex || dz === ez
-        var top = y === h - 1
-        if (top) return (dx <= 1 && dz <= 1) ? ((dx === 0 && dz === 0) ? 'C' : 'L') : (rim ? 'A' : ' ')
-        if (rim) {
-          if (dx === ex && dz === ez) return 'Q'
-          if ((y - 1) % 2 === 0) return 'C'
-          return (dx + dz) % 3 === 0 ? 'F' : 'L'
-        }
-        if (dx === 0 && dz === 0) return 'P'
-        if ((y - 1) % 2 === 0 && (dx + dz) % 4 === 0 && y < h - 2) return 'A'
-        return '#'
+    var w = 15, d = 19, h = 13, cx = 7, cz = 6, dz0 = 13
+    function zig(x, y, z) {
+      var dx = abs(x - cx)
+      var dz = abs(z - cz)
+      var ex = cx - Math.floor((y - 1) / 2)
+      var ez = cz - Math.floor((y - 1) / 2)
+      if (y === 0) return dx === cx || dz === cz || dx === 0 || dz === 0 ? 'X' : ' '
+      if (dx > ex || dz > ez) return ' '
+      var rim = dx === ex || dz === ez
+      if (y === h - 1) return (dx <= 1 && dz <= 1) ? 'L' : (rim ? 'A' : ' ')
+      if (rim) {
+        if (dx === ex && dz === ez) return 'Q'
+        if ((y - 1) % 2 === 0) return 'M'
+        return (dx + dz) % 3 === 0 ? 'F' : 'L'
       }
+      if (dx === 0 && dz === 0) return 'P'
+      if ((y - 1) % 2 === 0 && (dx + dz) % 4 === 0 && y < h - 2) return 'A'
+      return '#'
+    }
+    return {
+      w: w, h: h, d: d, pal: pal({ A: RHEA, M: MH, C: COIL_MH, Q: 'tungsten_steel' }),
+      fn: T.compose([
+        T.at(0, 0, 0, w, h, 13, zig),
+        T.at(0, 0, dz0, w, 7, 6, T.shell({
+          w: w, h: 7, d: 6, ground: true, roof: 'lid', win: [2, 4], mull: 4, sky: 3, bands: [1, 5],
+          inner: function (x, y, z) {
+            if (y === 2 && (z === 2 || z === 3) && x % 2 === 1 && x >= 1 && x <= 13) return 'C'
+            if (y === 4 && x === 7 && (z === 2 || z === 3)) return 'C'
+            if (y === 1 && z === 3 && x % 2 === 0) return 'P'
+            return null
+          }
+        }))
+      ])
     }
   }
 
   // decay-heat vault: a squat armoured vault - a bank of generator blocks under a roof of heat-sink fins, glazed viewing slits
   L.decay_heat_vault = function () {
-    var w = 9, d = 9, hh = 5, cx = 4
+    var w = 15, d = 17, hh = 8
     return {
-      w: w, h: hh + 3, d: d, pal: pal({ A: SITE, C: COIL_MH, Q: 'tungsten_steel' }),
-      fn: T.hall({
-        w: w, d: d, hh: hh, mull: 2, crown: T.sink(w, d),
-        inner: function (x, y, z) {
-          var dx = x - cx
-          var dz = z - 4
-          if (cheb(dx, dz) <= 1 && y <= 2) return y === 1 ? 'B' : (dx === 0 && dz === 0 ? 'C' : 'A')
-          if (abs(dx) === 3 && z % 2 === 0 && y === 1) return 'P'
-          if (cheb(dx, dz) <= 1 && y === 3) return 'P'
-          return null
-        }
-      })
+      w: w, h: 11, d: d, pal: pal({ A: RHEA, C: COIL_MH, Q: 'tungsten_steel' }),
+      fn: T.compose([
+        T.at(0, hh, 0, w, 3, d, function (x, k, z) {
+          if (x < 1 || x > w - 2 || z < 1 || z > d - 2) return ' '
+          if (x % 3 === 1) return k === 2 ? 'Q' : (k === 1 ? 'A' : 'F')
+          return k === 0 && z % 4 === 0 && x % 3 === 0 ? 'P' : ' '
+        }),
+        T.at(0, 0, 0, w, hh, d, T.shell({
+          w: w, h: hh, d: d, ground: true, roof: 'rim', win: [3, 4], mull: 4, sky: 5, bands: [1, 6],
+          inner: function (x, y, z) {
+            var cell = (x - 3) % 4 === 0 && (z - 3) % 4 === 0 && x >= 3 && x <= 11 && z >= 3 && z <= 13
+            if (cell) return y === 1 ? 'B' : (y <= 3 ? 'A' : (y === 4 ? 'P' : null))
+            if (x === 7 && z === 7 && y === 6) return 'C'
+            if ((x === 1 || x === 13) && z % 2 === 0 && y === 1) return 'P'
+            return null
+          }
+        }))
+      ])
     }
   }
 
   // pulsar wind trap: a magnetic torus - a tube of alternating coil and lining rows around an open plasma channel, a lattice spire hub
   L.pulsar_wind_trap = function () {
-    var w = 13, d = 13, h = 9, cx = 6, cz = 6
+    var w = 15, d = 31, h = 15, cx = 7, cy = 7
     return {
-      w: w, h: h, d: d, pal: pal({ A: 'gtceu:tungsten_block', C: COIL_MH, Q: 'tungsten_steel' }),
+      w: w, h: h, d: d, pal: pal({ A: RHEA, W: 'gtceu:tungsten_block', C: COIL_MH, Q: 'tungsten_steel' }),
       fn: function (x, y, z) {
         var dx = x - cx
-        var dz = z - cz
-        var r = rad(dx, dz)
-        if (r < 2.5) {
-          if (dx === 0 && dz === 0) return y >= 1 && y <= h - 2 ? (y === h - 2 ? 'C' : 'Q') : (y === 0 ? 'X' : ' ')
-          if (y === 0 && r < 1.5) return 'X'
+        var dy = y - cy
+        var r = rad(dx, dy)
+        if (y === 0) return abs(dx) <= 2 ? 'X' : ' '
+        var ringSlice = z % 3 === 0
+        if (z === 6 || z === 24) {
+          if (r >= 6 && r < 7.5) return 'F'
+          if (r >= 4.5 && r < 6) return 'A'
+        }
+        if (z === 15 && r >= 4.5 && r < 5.5) return 'C'
+        if (r < 4.5) return r >= 3.5 && ringSlice ? ((z === 3 || z === 27) ? 'W' : 'A') : '#'
+        if (r < 5.5) {
+          if (ringSlice) return z % 6 === 0 ? 'F' : 'A'
+          if (abs(dx) === 0 || abs(dy) === 0 || abs(abs(dx) - abs(dy)) === 0) return 'Q'
           return ' '
         }
-        if (r > 6.4) return ' '
-        if (r < 3.5) return (y === 1 || y === 4) ? 'P' : ' '
-        if (y === 0) return 'X'
-        var t = r < 4.5 ? 0 : (r < 5.5 ? 1 : 2)
-        if (y === h - 1) return t === 1 ? 'L' : 'A'
-        if (t === 1) return '#'
-        return (y - 1) % 4 < 2 ? 'C' : 'A'
+        if (ringSlice && dx === 0 && y < cy && r < 7.5) return 'Q'
+        if (ringSlice && z % 6 === 0 && r < 6.5) return 'F'
+        return ' '
       }
     }
   }
@@ -538,25 +744,27 @@
   // levitation melter: a round induction tower - a base hall, then a glazed tube banded by levitation coils with the crucible and its
   // pipe feed on the axis, a cooling collar on top
   L.levitation_melter = function () {
-    var w = 9, d = 9, hb = 3, hh = 11, cx = 4, cz = 4
-    var base = T.hall({ w: w, d: d, hh: hb, mull: 4 })
+    var w = 15, d = 15, hb = 6
     return {
-      w: w, h: hh, d: d, pal: pal({ A: 'gtceu:uev_machine_casing', C: 'grindless:hftacn_coil_block', Q: 'tungsten_steel' }),
-      fn: function (x, y, z) {
-        if (y < hb) return base(x, y, z)
-        var r = rad(x - cx, z - cz)
-        var k = y - hb
-        if (r > 3.5) return ' '
-        var top = y === hh - 1
-        if (r >= 2.5) {
-          if (top) return 'A'
-          if (k % 3 === 0) return 'C'
-          return k % 3 === 1 ? 'L' : 'F'
-        }
-        if (top) return r < 1.5 ? 'P' : 'A'
-        if (r < 0.5) return k < 2 ? 'B' : (k < 5 ? 'F' : 'P')
-        return '#'
-      }
+      w: w, h: 17, d: d, pal: pal({ A: MH, C: 'grindless:hftacn_coil_block', Q: 'tungsten_steel' }),
+      fn: T.compose([
+        T.at(2, hb, 2, 11, 11, 11, T.cyl({
+          R: 5, h: 7, dome: 4, win: [2, 3], bands: { 4: 'C' },
+          inner: function (x, y, z, r) {
+            if (y === 4 && r >= 1.5 && r < 2.5) return 'C'
+            if (r < 0.5) return y < 3 ? 'B' : (y < 5 ? 'F' : 'P')
+            return null
+          }
+        })),
+        T.at(0, 0, 0, w, hb, d, T.shell({
+          w: w, h: hb, d: d, ground: true, roof: 'lid', win: [2, 3], mull: 4, sky: 4, bands: [1, 4],
+          inner: function (x, y, z) {
+            if (y === 1 && (x === 4 || x === 10) && z % 2 === 0) return 'P'
+            if (y === 1 && x === 7 && z >= 4 && z <= 10) return 'B'
+            return null
+          }
+        }))
+      ])
     }
   }
 
