@@ -161,7 +161,6 @@ export default {
         ['spin_die', I('grindless:spintronic_die'), 'Spintronic Die'],
         ['mainframe', I('gtnn:spintronic_mainframe'), 'Spintronic Mainframe'],
       ], 'the spintronic computers');
-      c.vlink('s28', 2.5, 'hotcell', 'pl_iv:hotcell');
       // above: the Heusler, SAF, MTJ die, garnet and shielded interposer branches, deeper the further right they join
       c.feed('tool1', [
         ['l3_0', I('grindless:five_n_manganese'), '5N Manganese', 'raw'],
