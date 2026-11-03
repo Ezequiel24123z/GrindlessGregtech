@@ -58,7 +58,7 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.organoid_array.2', 'Cortical Labs\' CL1 and FinalSpark\'s Neuroplatform at scale: human cortical organoids grown on microelectrode arrays and wired into GregTech\'s wetware mainframe. Earth only.')
     add('emi.grindless.info.organoid_array.3', 'Circuit 1: 4 stem cells on a chitosan scaffold, with ultrapure water and sterilised growth medium, grow an organoid processor. 2: 4 organoid processors, 4 neuro processing units, a SiC power module and an optical assembly make 4 wetware mainframes.')
     add('emi.grindless.info.organoid_array.4', 'The sterilised medium comes from the LuV organoid lab (circuit 3, a xeno radioprotectant; give the lab an output hatch). The spent medium leaves as bacterial sludge for the biofoundry\'s mutagen.')
-    add('emi.grindless.info.organoid_array.5', 'A 7x5x7 plascrete clean room with perfusion racks and a sterilizing filter ceiling. Parts go in the floor: 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output buses, 1-2 output hatches.')
+    add('emi.grindless.info.organoid_array.5', 'An 11x6x11 plascrete sterile hall with cleanroom glass windows, two bays of PTFE perfusion racks around a computer casing readout spine, stainless steel frame posts and a sterilizing filter ceiling. Parts go in the floor: 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output buses, 1-2 output hatches.')
 
     add('emi.grindless.info.pbo_plant.0', "The PBO Plant makes PBO fibre. Circuit 1: nitrate. 2: hydrolyse. 3: reduce. 4: polymerise into PBO dope. 5: spin into fibre.")
     add('emi.grindless.info.pbo_plant.1', "The fibre goes into tethers and space elevator cables.")

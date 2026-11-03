@@ -5,9 +5,9 @@
 // rocket motor. Every other id is F1's (global.grindless.uhvFoundation): uhtc_tile, uhtc_nozzle, zirconia, zirconium_diboride,
 // oganesson_propellant; the thruster works and its type are UV-A11's (startup_scripts/grindless/uv/propulsion.js).
 //
-//   gtceu:spark_plasma_sinterer    machine 16. 5 wide x 5 high x 7 deep of robust tungsten steel casing: two hydraulic rams (tungsten steel
-//                                  frames) press the graphite die from above and below through the middle slices, driven by
-//                                  tungsten steel gearboxes, between water jackets (tungsten steel pipe casings) at both ends.
+//   gtceu:spark_plasma_sinterer    machine 16. 11 wide x 8 high x 9 deep of robust tungsten steel casing: two hydraulic rams (tungsten steel
+//                                  frames) press the heatproof graphite die stack from above and below through the middle of the hall, driven
+//                                  by tungsten steel gearboxes, between four water jackets (tungsten steel pipe casings).
 //   gtceu:spark_plasma_sintering   its recipe type (EU in); circuits: 1 UHTC tile, 2 TaC liner, 3 UHTC nozzle.
 //   grindless:ican_rocket_motor    a GCYR rocket motor at tier 6 (S0-2: GCYR 0.2.9's KubeJS motor builder makes a fuel tank, so the
 //                                  block is a real argent_matter.gcyr.common.block.RocketMotorBlock through createCustom, with its
@@ -87,52 +87,55 @@
     return Pat.oneOf.apply(null, options)
   }
 
-  // a 5 x 5 ring around three interior rows (bottom -> top): the lower ram, the die, the upper ram
-  function ring(interior) {
-    var rows = ['RRRRR']
-    interior.forEach(function (row) { rows.push('R' + row + 'R') })
-    rows.push('RRRRR')
-    return rows
+  // an 11 x 8 x 9 press hall: the die stack (heatproof casing) in the middle, a ram (tungsten steel frames) above and below it on gearbox
+  // drives, four water jackets (tungsten steel pipe casings) round the press and a pulsed power bank of gearbox-driven frames. Robust
+  // tungsten steel walls with frame posts, heatproof ribs on the roof and at the foot, laminated glass between casing mullions.
+  function cell(x, z, y) {
+    var W = 11
+    var D = 9
+    var top = 7
+    var cx = 5
+    var cz = 4
+    var ex = x === 0 || x === W - 1
+    var ez = z === 0 || z === D - 1
+    var rim = ex || ez
+    if (y === 0) return 'X'
+    if (y === top) {
+      if (rim) return 'Q'
+      return (x + z) % 2 === 0 ? 'A' : 'R'
+    }
+    if (rim) {
+      if (ex && ez) return 'Q'
+      if (z === D - 1 && x === cx && y === 1) return 'S'
+      if (y === 1) return 'A'
+      return (ez ? x : z) % 2 === 1 ? 'L' : 'R'
+    }
+    var dx = Math.abs(x - cx)
+    var dz = Math.abs(z - cz)
+    var core = dx === 0 && dz === 0
+    if (dx <= 1 && dz <= 1) {
+      if (y === 1 || y === top - 1) return core ? 'F' : 'G'
+      if (y === 2 || y === top - 2) return core ? 'F' : '#'
+      return core ? 'A' : '#'
+    }
+    if ((dx === 3 && dz <= 1) || (dz === 3 && dx <= 1)) return y <= 3 ? 'W' : '#'
+    return '#'
   }
-  const JACKET = ring(['WWW', '###', 'WWW'])
-  const RAM = ring(['#F#', '###', '#F#'])
-
-  // dress the casing walls: frame posts (Q) on the corners and roof edges, heatproof ribs (A) on the roof and a course at the foot,
-  // glass (L) between casing mullions in the rows above
-  function dress(slices) {
-    var depth = slices.length
-    var height = slices[0].length
-    var width = slices[0][0].length
-    return slices.map(function (rows, si) {
-      return rows.map(function (row, r) {
-        var out = ''
-        for (var c = 0; c < width; c++) {
-          var ch = row.charAt(c)
-          if (ch === 'R' && r > 0) {
-            var ex = c === 0 || c === width - 1
-            var ez = si === 0 || si === depth - 1
-            var top = r === height - 1
-            if ((ex && ez) || (top && (ex || ez))) ch = 'Q'
-            else if (top) ch = si % 2 === 1 ? 'A' : 'R'
-            else if (r === 1) ch = 'A'
-            else if ((ez ? c : si) % 2 === 1) ch = 'L'
-          }
-          out += ch
-        }
-        return out
-      })
-    })
+  function slices() {
+    var out = []
+    for (var z = 0; z < 9; z++) {
+      var rows = []
+      for (var y = 0; y < 8; y++) {
+        var row = ''
+        for (var x = 0; x < 11; x++) row += cell(x, z, y)
+        rows.push(row)
+      }
+      out.push(rows)
+    }
+    return out
   }
   const SPEC = {
-    slices: dress([
-      ['XXXXX', 'RRRRR', 'RRRRR', 'RRRRR', 'RRRRR'],
-      JACKET,
-      RAM,
-      ring(['GFG', '###', 'GFG']),
-      RAM,
-      JACKET,
-      ['XXXXX', 'RRSRR', 'RRRRR', 'RRRRR', 'RRRRR']
-    ]),
+    slices: slices(),
     symbols: {
       S: Pat.controller(),
       X: cells(ROBUST, P.minCasings, P.abilities),

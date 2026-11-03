@@ -16,7 +16,7 @@
                 'Fluoride glass that crystallises when drawn under gravity: Earth orbit only. Programmed circuit 1: zirconium tetrafluoride + barium + lanthanum + aluminium + sodium + quicklime + hydrogen fluoride -> 1 ZBLAN preform.',
                 'Circuit 2: 1 ZBLAN preform -> 8 ZBLAN fibre spools.',
                 'The metals are fluorinated in the melt by hydrogen fluoride; the off-gas is caught by the quicklime as fluorite, which goes back to the fluorspar kiln. The hydrogen and water come out as fluids.',
-                'Needs a 3 x 11 x 3 clean room casing tower under a station truss roof (3 or more casings among the floor parts), 1 or 2 energy hatches, input and output buses and hatches.'
+                'Needs a 7 x 19 x 7 clean room casing tower with a spool hall, a glass and pipe cooling shaft and a heatproof preform furnace under a station truss roof (3 or more casings among the floor parts), 1 or 2 energy hatches, input and output buses and hatches.'
             ],
             items: {
                 zblan_preform: ['ZBLAN Preform', 'A rod of zirconium, barium, lanthanum, aluminium and sodium fluoride glass, ready to draw.', 'Made in the ZBLAN Draw Tower (circuit 1), in Earth orbit.']

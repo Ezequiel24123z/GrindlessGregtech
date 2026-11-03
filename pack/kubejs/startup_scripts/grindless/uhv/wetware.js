@@ -6,9 +6,9 @@
 //
 //   gtceu:organoid_array      cortical organoids grown on microelectrode arrays (Cortical Labs' CL1, FinalSpark's Neuroplatform),
 //                             then wired into GTM's wetware mainframe four at a time. Earth only (the recipes carry
-//                             .dimension('minecraft:overworld')). A 7 wide x 5 high x 7 deep sterile room in LuV's organoid lab
-//                             casing (plascrete, cleanroom glass windows): the parts in the floor, two rows of perfusion racks
-//                             inside (PTFE pipe casing, the microelectrode readout in a computer casing between them), a
+//                             .dimension('minecraft:overworld')). A 11 wide x 6 high x 11 deep sterile hall in LuV's organoid lab
+//                             casing (plascrete, cleanroom glass windows, stainless frame posts): the parts in the floor, two bays of perfusion
+//                             racks inside (PTFE pipe casing, the microelectrode readout in a computer casing between them), a
 //                             sterilizing filter ceiling over the racks.
 //   gtceu:organoid_computing  its recipe type (EU in); the programmed circuit picks the step: 1 organoid, 2 mainframe.
 //
@@ -66,18 +66,48 @@
     )
   }
 
-  const FLOOR = 'XXXXXXX'
-  const WALL = 'PPPPPPP'
+  // a 11 wide x 6 high x 11 deep sterile hall: perfusion racks (PTFE lines) in two bays with a computer-casing readout spine between
+  // them, cleanroom glass windows in the walls and a sterilizing filter ceiling over the racks
+  function hall(x, z, y) {
+    var W = 11
+    var D = 11
+    var top = 5
+    var ex = x === 0 || x === W - 1
+    var ez = z === 0 || z === D - 1
+    var rim = ex || ez
+    if (y === 0) return 'X'
+    if (y === top) {
+      if (ex && ez) return 'Z'
+      if (rim) return 'P'
+      return x >= 2 && x <= W - 3 && z >= 2 && z <= D - 3 ? 'F' : 'P'
+    }
+    if (rim) {
+      if (ex && ez) return 'Z'
+      if (z === D - 1 && x === 5 && y === 1) return 'S'
+      if (y === 2 && (ez ? x : z) % 2 === 1) return 'W'
+      return 'P'
+    }
+    if (z < 2 || z > D - 3 || x < 2 || x > W - 3) return '#'
+    var col = x - 2
+    if (col % 4 === 0) return 'R'
+    if (col % 4 === 2) return z % 2 === 0 ? 'M' : '#'
+    return '#'
+  }
+  function hallSlices() {
+    var slices = []
+    for (var z = 0; z < 11; z++) {
+      var rows = []
+      for (var y = 0; y < 6; y++) {
+        var row = ''
+        for (var x = 0; x < 11; x++) row += hall(x, z, y)
+        rows.push(row)
+      }
+      slices.push(rows)
+    }
+    return slices
+  }
   const SPEC = {
-    slices: [
-      [FLOOR, 'ZPPPPPZ', 'ZPWWWPZ', 'ZPPPPPZ', 'ZZZZZZZ'],
-      [FLOOR, 'P#R#R#P', 'P#M#M#P', 'P#R#R#P', WALL],
-      [FLOOR, 'P#R#R#P', 'W#M#M#W', 'P#R#R#P', 'PPFFFPP'],
-      [FLOOR, 'P#R#R#P', 'W#M#M#W', 'P#R#R#P', 'PPFFFPP'],
-      [FLOOR, 'P#R#R#P', 'W#M#M#W', 'P#R#R#P', 'PPFFFPP'],
-      [FLOOR, 'P#####P', 'P#####P', 'P#####P', WALL],
-      [FLOOR, 'ZPPSPPZ', 'ZPWWWPZ', 'ZPPPPPZ', 'ZZZZZZZ']
-    ],
+    slices: hallSlices(),
     symbols: {
       S: Pat.controller(),
       X: cells(W.minCasings),

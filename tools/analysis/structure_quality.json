@@ -1052,8 +1052,8 @@
  "gtceu:organoid_array": {
   "v": [],
   "bt": 6,
-  "ds": 0.632,
-  "c": 194
+  "ds": 0.638,
+  "c": 490
  },
  "gtceu:organoid_lab": {
   "v": [],
@@ -1100,8 +1100,8 @@
  "gtceu:pbo_plant": {
   "v": [],
   "bt": 6,
-  "ds": 0.415,
-  "c": 230
+  "ds": 0.449,
+  "c": 765
  },
  "gtceu:penetrator_probe_bay": {
   "v": [],
@@ -1430,8 +1430,8 @@
  "gtceu:spark_plasma_sinterer": {
   "v": [],
   "bt": 6,
-  "ds": 0.351,
-  "c": 152
+  "ds": 0.425,
+  "c": 472
  },
  "gtceu:spectral_hole_burner": {
   "v": [],
@@ -1610,8 +1610,8 @@
  "gtceu:tether_ribbon_works": {
   "v": [],
   "bt": 5,
-  "ds": 0.424,
-  "c": 211
+  "ds": 0.474,
+  "c": 495
  },
  "gtceu:tetron_fab": {
   "v": [],
@@ -1832,8 +1832,8 @@
  "gtceu:zblan_draw_tower": {
   "v": [],
   "bt": 7,
-  "ds": 0.33,
-  "c": 195
+  "ds": 0.271,
+  "c": 443
  },
  "gtceu:zero_g_crystal_grower": {
   "v": [],
