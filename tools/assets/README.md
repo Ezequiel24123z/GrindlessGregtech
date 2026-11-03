@@ -1729,6 +1729,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxPlusTe
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxPlusTextures.ps1 -Preview C:\temp\maxplus-preview.png
 ```
 
+The five items of the qubit line's MAX+ stage (D5-QPU-MAXP: `stacked_horizon_module`, `linked_horizon_module`, `condensate_cooled_module`, `tested_horizon_module`, `horizon_module_scrap`) were drawn with `-Only` on their names (new ids only); output files: `item/<id>.png`.
+
 ## MAX wireless tier (MAX-W)
 
 Procedural, drawn by `Build-MaxWirelessTextures.ps1` with the routines and palette of `Build-WirelessEnergyTextures.ps1`; nothing is copied from another mod. It writes the MAX SMES cell (`block/wireless/smes_cell_max`, the table's max row texture), the covers on a machine's face (`block/cover/wireless_{energy,dynamo}_cover_max`) and the cover items (`item/wireless/{energy,dynamo}_cover_max`): 5 files.

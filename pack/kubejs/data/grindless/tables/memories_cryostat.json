@@ -170,7 +170,10 @@
           "itemsOut": [{ "id": "grindless:horizon_interposer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] },
         { "_why": "D5-QPU-MAX (lines-opv-maxplus.md, M1 step 28, c12): the photonic tetron module cooled in the mK module and its microwave-to-optical transduction calibrated at 10 mK; the mixture is returned.", "name": "calibrated_photonic_module", "circuit": 12, "eut": 1073741824, "duration": 2400,
           "itemsIn": [{ "id": "grindless:photonic_tetron_module", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:calibrated_photonic_module", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] }
+          "itemsOut": [{ "id": "grindless:calibrated_photonic_module", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] },
+        { "_why": "D5-QPU-MAXP (lines-opv-maxplus.md, X1 step 33, c13): the condensate-cooled horizon module cooled in the mK module and its spin links and waveguides tested at 10 mK; the mixture is returned.", "name": "tested_horizon_module", "circuit": 13, "eut": 2013265920, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:condensate_cooled_module", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:tested_horizon_module", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] }
       ]
     }
   }

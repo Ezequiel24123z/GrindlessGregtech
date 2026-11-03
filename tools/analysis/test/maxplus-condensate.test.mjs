@@ -22,13 +22,13 @@ test('the stand-in runs the script without errors, skips nothing', () => {
   const mine = run.errors.filter((e) => /maxplus[\\/]condensate/.test(String(e.file)));
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(MC.skipped), []);
-  assert.equal(MC.recipes.length, 14);
+  assert.equal(MC.recipes.length, 15); // D5-QPU-MAXP added c12 condensate_cooled_module
   assert.equal(MC.controllerRecipes.length, 2);
 });
 
 test('machine rows: unique circuits per type, run at Sgr A*, never above V[MAX] x 16', () => {
   const rows = [...server.matchAll(/type: '(condensate_refinery|bound_matter_press)'[^\n]*name: '([a-z_0-9]+)', circuit: (\d+), eut: ([^,]+),/g)];
-  assert.equal(rows.length, 10);
+  assert.equal(rows.length, 11);
   const seen = new Set();
   for (const [, type, name, circuit, eut] of rows) {
     const k = `${type}:${circuit}`;
@@ -46,11 +46,12 @@ test('the recompress row returns the boil-off as condensate (no free source: 4 i
 
 test('lang: every recipe row has an en_us entry', () => {
   const names = [...server.matchAll(/name: '([a-z_0-9]+)', circuit: \d+, eut: (?:VA_MAX|V_MAX)/g)].map((m) => m[1]);
-  assert.equal(names.length, 10);
+  assert.equal(names.length, 11);
   // XP-H1's c4 row (line T4) is named in the loom's lang file, XP-H3's c3 row (line T1) in the assembler's
   const assemblerLang = read(kube, 'client_scripts', 'grindless', 'maxplus_assembler_lang.js');
   for (const n of names) {
     assert.ok(lang.includes(`.${n}'`) || (n === 'graded_horizon_laminate' && loomLang.includes(`.${n}'`))
+      || (n === 'condensate_cooled_module' && lang.includes(`.${n}'`) === false && read(kube, 'client_scripts', 'grindless', 'maxplus_circuits_lang.js').includes(`.${n}'`))
       || (n === 'laminated_containment_core' && assemblerLang.includes(`.${n}'`)), `no lang key for ${n}`);
   }
   assert.ok(lang.includes("'gtceu.condensate_refinery'") && lang.includes("'gtceu.bound_matter_press'"));

@@ -51,7 +51,8 @@
     'sic_waveguide_tube six_n_caesium snspd_array_die spent_fe56_cask spin_interconnect_wafer stabilised_kerr_wire stacked_logic_wafer strange_alloy_charge strange_cage_lining ' +
     'superfluid_reservoir_core sx_turbine_blade tbc_coated_blade thick_conduit_tape thick_kerr_fcl_tape thorium_nav_clock turbine_disc vms_lift_nozzle void_crystal_lattice ' +
     'void_grown_diamond void_holographic_block wear_coated_rotor zone_plate_wafer ' +
-    'frozen_spin_hd polarized_hd_pellet').split(' ')
+    'frozen_spin_hd polarized_hd_pellet ' +
+    'stacked_horizon_module linked_horizon_module condensate_cooled_module tested_horizon_module horizon_module_scrap').split(' ')
 
   var ITEMS = {}
   COMPONENTS.concat(LINE_ITEMS, CIRCUITS).forEach(function (name) { ITEMS[name] = { stack: 64 } })

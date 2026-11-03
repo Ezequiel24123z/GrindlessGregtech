@@ -65,9 +65,9 @@ test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
 test('femtosecond writer: femtosecond_writing circuits 1-4, figures and slots', () => {
   const rc = T.types.femtosecond_writing.recipes;
   // OpV-A1 appended c5 (the flexspline teeth), OpV-A2 c6 (the LN-on-SOI link waveguides)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['interposer_blank', 1], ['lattice_2pp', 2], ['orifice_plate', 3], ['crystal_blank', 4], ['flexspline_teeth', 5], ['ln_soi_waveguides', 6], ['squeezer_waveguide_die', 7], ['isolator_waveguide_die', 10], ['droplet_nozzle_plate', 8], ['trimmed_microring', 9], ['endcapped_hc_fibre', 11], ['laser_welded_glass_cell', 12], ['interposer_waveguides', 20]]); // XP-A3 c20 (Q2 step 2) // MAX-B3 c9, c11, c12 // MAX-D1 c8 (L15) // MAX-A2 c10 // MAX-A1 c7
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['interposer_blank', 1], ['lattice_2pp', 2], ['orifice_plate', 3], ['crystal_blank', 4], ['flexspline_teeth', 5], ['ln_soi_waveguides', 6], ['squeezer_waveguide_die', 7], ['isolator_waveguide_die', 10], ['droplet_nozzle_plate', 8], ['trimmed_microring', 9], ['endcapped_hc_fibre', 11], ['laser_welded_glass_cell', 12], ['interposer_waveguides', 20], ['linked_horizon_module', 21]]); // D5-QPU-MAXP c21; XP-A3 c20 (Q2 step 2) // MAX-B3 c9, c11, c12 // MAX-D1 c8 (L15) // MAX-A2 c10 // MAX-A1 c7
   for (const r of rc) {
-    assert.equal(r.eut, /^XP-A3/.test(r._why) ? 536870912 : 7864320, r.name);
+    assert.equal(r.eut, r.name === 'linked_horizon_module' ? 2013265920 : /^XP-A3/.test(r._why) ? 536870912 : 7864320, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);
     assert.ok(ids(r.fluidsIn).length <= 1 && ids(r.fluidsOut).length <= 1, r.name);
   }

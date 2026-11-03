@@ -36,6 +36,9 @@
       items: [], fluids: [[KERR, 16000]], outs: ['4x grindless:condensate_boil_off'], fluidOuts: [[SETTLED, 12000]] },
     { type: 'condensate_refinery', key: 'grindless_condensate_refinery', name: 'recompress_boil_off', circuit: 10, eut: VA_MAX, duration: 300,
       items: ['4x grindless:condensate_boil_off'], fluids: [], outs: [], fluidOuts: [[KERR, 4000]] },
+    // D5-QPU-MAXP (X1 step 32, c12): the linked horizon module jacketed in 1,000 mB of Kerr condensate (the processor's own, moved here)
+    { type: 'condensate_refinery', key: 'grindless_condensate_refinery', name: 'condensate_cooled_module', circuit: 12, eut: VA_MAX, duration: 1800,
+      items: ['1x grindless:linked_horizon_module'], fluids: [[KERR, 1000]], outs: ['1x grindless:condensate_cooled_module'], fluidOuts: [] },
     { type: 'condensate_refinery', key: 'grindless_condensate_refinery', name: 'neutronium_bind', circuit: 2, eut: V_MAX * 2, duration: 1200,
       items: ['16x grindless:compressed_neutronium_core'], fluids: [[SETTLED, 32000]],
       outs: ['8x grindless:bound_neutronium_ingot', '8x grindless:condensate_boil_off'], fluidOuts: [] },
