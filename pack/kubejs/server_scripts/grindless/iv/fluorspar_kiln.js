@@ -176,7 +176,7 @@
     {
       name: 'magnesium_fluoride',
       itemIn: { id: 'gtceu:magnesium_dust', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 2000 },
-      itemOut: { id: 'grindless:magnesium_fluoride_dust', count: 1 }, fluidOut: { id: 'gtceu:hydrogen', amount: 1000 },
+      itemOut: { id: 'grindless:magnesium_fluoride_dust', count: 1 }, fluidOut: { id: 'gtceu:hydrogen', amount: 2000 },
       eut: 30, duration: 64
     }
   ]
