@@ -53,7 +53,7 @@ test('published figures', () => {
   assert.deepEqual(plain(S.types), ['gtceu:distillation_tower', 'gtceu:distillery']);
   assert.equal(S.cap, 4096);
   assert.equal(S.maxOutputs, 12);
-  assert.deepEqual(plain(S.size), { width: 13, height: 13, depth: 25 });
+  assert.deepEqual(plain(S.size), { width: 21, height: 21, depth: 61 });
 });
 
 test('registers a multiblock with the two modes, tower first, in the UXV casing look', () => {
@@ -62,7 +62,7 @@ test('registers a multiblock with the two modes, tower first, in the UXV casing 
   assert.deepEqual(h.calls.find((c) => c[0] === 'create'), ['create', 'stellar_fractionation_hall', 'multiblock']);
   assert.deepEqual(h.calls.filter((c) => c[0] === 'recipeType').map((c) => c[1]), ['distillation_tower', 'distillery']);
   assert.ok(h.calls.some((c) => c[0] === 'langValue' && c[1] === 'Stellar Fractionation Hall'));
-  assert.ok(h.calls.some((c) => c[0] === 'workableCasingModel' && c[1] === 'gtceu:block/casings/voltage/uxv/side' && c[2] === 'grindless:block/multiblock/stellar_fractionation_hall'));
+  assert.ok(h.calls.some((c) => c[0] === 'workableCasingModel' && c[1] === 'grindless:block/uxv/gum_metal_casing' && c[2] === 'grindless:block/multiblock/stellar_fractionation_hall'));
   assert.equal(h.calls.filter((c) => c[0].startsWith('tooltips'))[0][1].length, 4);
 });
 
@@ -82,24 +82,24 @@ test('modifier chain: mode veto, fixed parallel with hatch, perfect overclock, b
   assert.equal(list[0](machine, { getType: () => ({ registryName: 'gtceu:distillery' }) }), 'IDENTITY');
 });
 
-test('structure: 13 x 13 x 25 (lies on its side, 13 rows per slice), one controller on the front face, two columns, parts and 12 output hatches', () => {
+test('structure: 21 x 21 x 61 (lies on its side, 21 rows per slice), one controller on the front face, two columns, parts and 12 output hatches', () => {
   const h = harness();
   register(h);
   const d = h.G.patterns.describe('gtceu:stellar_fractionation_hall');
   assert.ok(d, 'pattern described');
-  assert.equal(d.slices.length, 25);
+  assert.equal(d.slices.length, 61);
   const count = {};
   d.slices.forEach((rows) => {
-    assert.equal(rows.length, 13);
+    assert.equal(rows.length, 21);
     rows.forEach((row) => {
-      assert.equal(row.length, 13);
+      assert.equal(row.length, 21);
       for (const ch of row) count[ch] = (count[ch] || 0) + 1;
     });
   });
   assert.equal(count.S, 1);
-  assert.equal(d.slices[24][1][6], 'S', 'controller in the middle of the front face, one row up');
+  assert.equal(d.slices[60][1][10], 'S', 'controller in the middle of the front face, one row up');
   const kinds = d.symbols.X.options.map((o) => o.kind + ':' + (o.ability || o.blocks));
-  assert.deepEqual(plain(kinds), ['blocks:gtceu:uxv_machine_casing', 'part:maintenance', 'part:energy_input', 'part:input_bus', 'part:output_bus', 'part:input_hatch', 'part:parallel_hatch']);
+  assert.deepEqual(plain(kinds), ['blocks:grindless:gum_metal_casing', 'part:maintenance', 'part:energy_input', 'part:input_bus', 'part:output_bus', 'part:input_hatch', 'part:parallel_hatch']);
   // parts take at most 12 cells (1 + 2 + 2 + 2 + 4 + 1), so the casing floor leaves exactly that room, and the cells are enough
   assert.equal(d.symbols.X.options[0].limits.min, count.X - 12);
   assert.ok(count.X >= 12);
