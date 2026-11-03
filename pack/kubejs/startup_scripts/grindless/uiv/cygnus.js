@@ -23,6 +23,8 @@
 
   const CASING = 'gtceu:uiv_machine_casing'
   const CASING_TEXTURE = 'gtceu:block/casings/voltage/uiv/side'
+  const BAY_CASING = 'grindless:rhea_casing'
+  const BAY_TEXTURE = 'grindless:block/uiv/rhea_casing'
   const COIL = 'grindless:metallic_hydrogen_coil_block'
 
   CY.table = 'kubejs/data/grindless/tables/cygnus.json'
@@ -43,7 +45,7 @@
       name: 'ergosphere_probe_bay', machine: 'gtceu:ergosphere_probe_bay', type: 'ergosphere_probing', dataKey: 'grindless_ergosphere_probing',
       lang: 'Ergosphere Probe Bay', maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
       parts: [['input_bus', 1, 2], ['output_bus', 1, 2], ['energy_input', 1, 2]],
-      width: 9, height: 7, depth: 9, casing: CASING, texture: CASING_TEXTURE, generator: false
+      width: 15, height: 9, depth: 15, casing: BAY_CASING, texture: BAY_TEXTURE, generator: false
     },
     {
       // written final: two 4 A UIV wireless dynamo hatches (or one 16 A) hold the engine's 268,435,456 EU/t
@@ -56,7 +58,7 @@
 
   var PAL = {
     A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
-    C: COIL, B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
+    C: COIL, B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel', M: 'grindless:mh_field_casing'
   }
 
   function abs(n) { return n < 0 ? -n : n }
@@ -65,34 +67,32 @@
   // the probe bay: a framed hall (floor row of parts, glazed courses, a mast on the roof) with a drop rail down the middle, a coil gate on it
   // and a winch over the gate
   function bayFn() {
-    var w = 9
-    var d = 9
-    var hh = 5
-    var cx = 4
-    var cz = 4
+    var w = 15
+    var d = 15
+    var cx = 7
     return function (x, y, z) {
-      var ex = x === 0 || x === w - 1
-      var ez = z === 0 || z === d - 1
       var dx = x - cx
-      var dz = z - cz
-      if (y >= hh) {
-        var k = y - hh
-        if (z !== cz || k >= 2) return ' '
-        if (dx === 0) return k === 1 ? 'C' : 'Q'
-        return k === 0 && abs(dx) <= 2 ? 'Q' : ' '
+      var ex = x === 0 || x === w - 1
+      var frame = z === 0 || z === 7 || z === d - 1
+      if (y === 0) return abs(dx) <= 2 ? 'X' : ' '
+      if (y === 8) return z === 7 && abs(dx) <= 1 ? (dx === 0 ? 'Q' : 'M') : ' '
+      if (y === 7) {
+        if (frame) return 'M'
+        return ex ? 'F' : ' '
       }
-      if (y === 0) return ex && ez ? 'Q' : 'X'
-      var top = y === hh - 1
-      if (!(ex || ez || top)) {
-        if (dx === 0 && y === 1 && abs(dz) <= 2) return dz === 0 ? 'C' : 'P'
-        if (dx === 0 && dz === 0 && y === 3) return 'B'
-        if (abs(dx) === 2 && abs(dz) === 2 && y <= 3) return 'Q'
-        return '#'
+      if (ex) {
+        if (frame) return 'M'
+        if (y === 1) return 'F'
+        return z % 3 === 1 ? 'L' : 'F'
       }
-      if (ex && ez) return 'Q'
-      if (top) return (ex || ez) ? 'A' : ((x + z) % 3 === 0 ? 'L' : 'F')
-      if (y === 1) return 'A'
-      return (ez ? x : z) % 2 === 0 ? 'F' : 'L'
+      if (frame && abs(dx) <= 2 && y <= 2 && z === d - 1) return 'F'
+      if (dx === 0 && z === 7 && y >= 4 && y <= 5) return 'C'
+      if (dx === 0 && y === 1 && abs(z - 7) <= 3) return 'P'
+      if (dx === 0 && z === 7 && y === 6) return 'B'
+      if (abs(dx) === 2 && z === 7 && y <= 5) return 'Q'
+      if (frame && abs(dx) === 6 && y <= 6) return 'M'
+      if (abs(dx) <= 2 || (z === 7 && abs(dx) <= 3)) return '#'
+      return ' '
     }
   }
 

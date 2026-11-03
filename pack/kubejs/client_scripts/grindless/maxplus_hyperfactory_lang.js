@@ -8,11 +8,11 @@
     var ENTRIES = [
         ['gtceu.hyperfactory', 'Hyperfactory'],
         ['block.gtceu.hyperfactory', 'Hyperfactory'],
-        ['grindless.machine.hyperfactory.tooltip.0', '\u00a77Five assembly machines in one, 4,096x the hatch.'],
+        ['grindless.machine.hyperfactory.tooltip.0', '\u00a77Five machines in one, 4,096x the hatch. Data hatch: marked head cell.'],
         ['block.gtceu.max_maxplus_parallel_hatch', 'MAX+ Parallel Control Hatch'],
         ['grindless.machine.maxplus_parallel_hatch.tooltip', '\u00a77Sets the parallels of a recipe: up to 4,194,304 copies at once.'],
         ['emi.grindless.info.hyperfactory.0', 'The top of the mega family: five machines in one, at 4,096 times the parallel hatch.'],
-        ['emi.grindless.info.hyperfactory.1', 'It needs one MAX+ parallel hatch and a 1,024 A MAX+ energy hatch; the copies are cut by the voltage, never by an overflow.'],
+        ['emi.grindless.info.hyperfactory.1', 'It needs one MAX+ parallel hatch and a 1,024 A MAX+ energy hatch; the copies are cut by the voltage, never by an overflow. The assembly line\'s research recipes also need one data access hatch in the marked head cell, in the controller\'s row.'],
         ['emi.grindless.info.max_maxplus_parallel_hatch.0', 'Up to 4,194,304 parallel copies (4^11). The Hyperfactory takes it as its parallel hatch.'],
         ['emi.grindless.info.max_maxplus_energy_hatch_1024a.0', 'A MAX+ energy input of 1,024 amps. The Hyperfactory and the other mega machines draw their power through it.']
     ]

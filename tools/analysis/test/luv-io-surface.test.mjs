@@ -28,8 +28,8 @@ function a1() {
 const A1 = a1();
 const OURS = new Set(['gtceu:fumarole_condenser', 'gtceu:volcanic_intake']);
 const ITEMS = new Set([...IDS.items, ...A1.items, ...A1.blocks, A1.ids.denseTitaniumPlate, ...OURS,
-  'grindless:platinum_gauze', 'grindless:zircaloy_cladding_tube']); // IV's assembly line parts
-const FLUIDS = new Set([...IDS.fluids, 'gtceu:soldering_alloy', 'gtceu:lubricant']);
+  'grindless:platinum_gauze', 'grindless:zircaloy_cladding_tube', 'gtceu:indium_chloride_dust']); // IV's assembly line parts; the germanium line's dust
+const FLUIDS = new Set([...IDS.fluids, 'gtceu:soldering_alloy', 'gtceu:lubricant', 'gtceu:chlorine', 'gtceu:germanium_tetrachloride']);
 
 const REMOVED = [];
 function run() {
@@ -236,9 +236,11 @@ test('recipes: one lookup path each; the intake pays 32,768 EU/t per module from
   assert.deepEqual(one(c['grindless:collect'], 'outputFluids'), [{ fluid: 'gtceu:sulfur_dioxide', amount: 4000 }]);
   assert.deepEqual(one(c['grindless:collect'], 'itemOutputs'), ['8x gtceu:sulfur_dust', '1x grindless:ionian_sublimate']);
   assert.deepEqual(one(c['grindless:separate'], 'circuit'), [2]);
-  assert.deepEqual(one(c['grindless:separate'], 'notConsumableFluid'), [{ fluid: 'gtceu:hydrochloric_acid', amount: 1000 }]);
+  assert.deepEqual(one(c['grindless:separate'], 'itemInputs'), ['4x grindless:ionian_sublimate']);
+  assert.deepEqual(one(c['grindless:separate'], 'inputFluids'), [{ fluid: 'gtceu:chlorine', amount: 11000 }]);
   assert.deepEqual(calls(c['grindless:separate'], 'dimension'), []);
-  assert.deepEqual(one(c['grindless:separate'], 'itemOutputs'), ['2x gtceu:germanium_dust', '1x gtceu:indium_dust']);
+  assert.deepEqual(one(c['grindless:separate'], 'itemOutputs'), ['1x gtceu:indium_chloride_dust']);
+  assert.deepEqual(one(c['grindless:separate'], 'outputFluids'), [{ fluid: 'gtceu:germanium_tetrachloride', amount: 2000 }]);
   for (const n of ['basalt', 'black_sand']) assert.deepEqual(calls(c[`grindless:sulfur_concrete_${n}`], 'dimension'), [], 'the concrete runs anywhere');
   for (const n of ['basalt', 'black_sand']) assert.deepEqual(one(c[`grindless:sulfur_concrete_${n}`], 'circuit'), [3]);
   const [heat] = byType['gtceu:volcanic_heat'];
@@ -273,7 +275,7 @@ test('germanium only from Io: the germanite electrolysis keeps everything but it
   assert.deepEqual(one(r, 'itemOutputs').flat(), ['2x gtceu:zinc_dust', '2x gtceu:iron_dust', '4x gtceu:sulfur_dust']);
   assert.deepEqual(one(r, 'EUt'), [60]);
   assert.deepEqual(one(r, 'duration'), [414]);
-  const makers = RUN.built.filter((x) => calls(x, 'itemOutputs').flat(2).some((s) => /germanium/.test(String(s))));
+  const makers = RUN.built.filter((x) => [...calls(x, 'itemOutputs').flat(2), ...calls(x, 'outputFluids').flat(2).map((f) => f.fluid)].some((s) => /germanium/.test(String(s))));
   assert.deepEqual(makers.map((x) => x.id), ['grindless:separate']);
   assert.ok(IDS.items.includes('gtca:germanite_dust'));
 });

@@ -68,7 +68,7 @@
   FK.recipeType = 'gtceu:' + TYPE
   FK.maxCharges = MAX_CHARGES
   // one charge: fluorite in; acid and water in; HF out; gypsum out
-  FK.maxIO = { itemsIn: 1, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 }
+  FK.maxIO = { itemsIn: 1, itemsOut: 2, fluidsIn: 2, fluidsOut: 1 }
   FK.feedParts = {
     energy_input: { min: 1, max: 2 },
     input_bus: { min: 1, max: 2 },
