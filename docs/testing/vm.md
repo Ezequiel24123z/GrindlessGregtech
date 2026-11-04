@@ -22,6 +22,7 @@ scratch: [rebuild.md](rebuild.md).
 | `/var/lib/grindless/dumps` | Batch dumps (`<sha12>/`, recipes.json and the rest of `gg_dump`); `latest` points at the newest, exported as `$GG_DUMP` |
 | `/var/lib/grindless/artifacts` | `gg-vm-run.sh`: results kept 14 days |
 | `/var/lib/grindless/backups`, `inventory`, `/srv` | Leisure archive: never touched by the bench or its scripts |
+| `/srv/grindless-play` | The owner's live play server (the `releases` pack, README "Run a server"): systemd `grindless-play` (port 25525, RCON 25710 on localhost via `mc-cmd`, `-Xmx10G`, `CPUWeight=1000`, `OOMScoreAdjust=-600`), daily world backup `grindless-play-backup.timer` (04:30 UTC, newest 5 in `backups/`). Agents never stop it, kill its JVM or edit it; the bench's ports (25565 and up) and orphan sweep never reach it |
 | `/opt/grindless/tools` | Installed copies of `tools/vm/*.sh` |
 | `/opt/grindless/runtime` | Node (checksum-verified tarball) |
 | `/etc/grindless/bench.env` | This VM's sizing (`GG_BENCH_*`), written once by the bootstrap, then edited by hand |
