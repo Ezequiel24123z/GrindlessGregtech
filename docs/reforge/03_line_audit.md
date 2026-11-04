@@ -13,45 +13,87 @@ No pack content changed. MAX rows (8 lines, 5 to 7 steps) are data only: RF-7A d
 - **Destination:** consumers of each end product in the dump (recycling, decomposition and repacking recipes ignored). Travel keys (`grindless:*_key`) are consumed by use and count as having a sink.
 - **Skip route:** a recipe, usable at or below the line's era (RF-3H), outside the line, not of a type the line owns, producing the end product with fewer steps from base than the line, from obtainable non-same-material inputs. It is a lower-bound depth heuristic, not a price comparison, so it can only produce `fix`, never `remove`.
 - **Duplicate:** at least 4 shared intermediates covering 75% of the smaller line (or the same products and at least 2 shared).
-- **Verdicts:** `keep`, `fix`, `merge`, `remove`; rules in `judge()`. Short-line and isolation rules apply from EV on, the reach-back rule from LuV on.
+- **Verdicts:** `keep`, `fix`, `merge`, `remove`; rules in `judge()`. Short-line and isolation rules apply from EV on, the reach-back rule from LuV on. Once #413 lands, keepShort exempts a short line at any era.
 - **Roles (LD-T1):** implements the line rule of `docs/eras/ev.md:481-500`. A declared `role` (power, resource, infrastructure, research, travel) is tested against the dump and, if it holds, the line is not judged as production; a failed role is judged as production with the failure in the reason. `line` joins clusters of one chapter into one line, `extends` (3 steps or fewer) makes a branch end that needs a consumer, `keepShort` lets a short production line stay with its reason listed, and a short line of ours that replaces a stock chain is a fold. The skip route also drops ores with no vein, same-material loops, parallel sources of earlier lines and fold chains. The role, fold and resource tests are approximations; the audit prints each failed role. **LD-T2:** the role tests follow RF-3S's intent: infrastructure follows consumers up to three hops to a machine, structure, casing or suit part, and a machine or structure block placed in the world needs no consumer; research and travel accept consumption as a material when the recipe's output is a research item, a travel part or a site machine; resource also accepts site fluids, air and consumable capture gear beside wear parts, and still needs an end product that feeds a line. Recycling, packing and decomposition are never uses.
 
 Limits: the chart covers chart lines, not every multiblock; the cost matrix lists key items only; skippability ignores recipe cost. Verdicts are leads for the packages below, to be confirmed against `docs/eras/<era>.md`.
 
-## Current state (batch 16 close, 2026-11-03)
+## Current state (#284 design pass, 2026-11-04)
 
-Regenerated against the batch 16 dump `84c44332278e` (`data/03_lines.csv`, 285 rows: a cluster gives one row per end product, and `line` joins clusters into one line). 258 keep, 26 fix, 1 merge, 0 remove; batch 3 had 190 keep and 157 fix of 395.
+The batch 16 regeneration against dump `84c44332278e` (`data/03_lines.csv`, 285 rows) gave 258 keep, 26 fix, 1 merge and 0 remove. A cluster gives one row per end product, and `line` joins clusters into one line. For comparison, batch 3 had 190 keep and 157 fix out of 395 rows.
+
+The #284 design pass checked every one of the 27 non-keep rows against the scripts and that dump. It needs no recipe change:
+- 26 rows are reclassified `keep`.
+- The UXV X2 merge stands.
+- The CSV now reads 284 keep, 0 fix, 1 merge and 0 remove.
+
+These 27 verdicts are set by hand in `data/03_lines.csv`, each with its evidence in the reason column, until the three packages below land:
+- #413 changes the audit tool;
+- #414 and #415 change only the charts.
+
+**Do not regenerate the CSV before then**: a regeneration reverts the 26 hand-set verdicts. After the packages, the integrator regenerates it once, and some of the 27 rows leave the CSV. A row can leave because it folds into its trunk, because it is a feeder that is now consumed, or because it is now drawn as a `by` or `ret` node.
+
+Rows, Lines, Real and Longest below are the batch 16 figures.
 
 | Era | Rows | Lines | Real (4+) | Longest | Keep | Fix | Merge |
 |---|---|---|---|---|---|---|---|
 | steam | 4 | 4 | 3 | 6 | 4 | 0 | 0 |
-| lv | 10 | 9 | 4 | 10 | 9 | 1 | 0 |
-| mv | 11 | 7 | 6 | 10 | 10 | 1 | 0 |
+| lv | 10 | 9 | 4 | 10 | 10 | 0 | 0 |
+| mv | 11 | 7 | 6 | 10 | 11 | 0 | 0 |
 | hv | 14 | 7 | 8 | 20 | 14 | 0 | 0 |
-| ev | 20 | 8 | 16 | 24 | 18 | 2 | 0 |
+| ev | 20 | 8 | 16 | 24 | 20 | 0 | 0 |
 | iv | 15 | 9 | 9 | 12 | 15 | 0 | 0 |
-| luv | 32 | 13 | 12 | 13 | 30 | 2 | 0 |
+| luv | 32 | 13 | 12 | 13 | 32 | 0 | 0 |
 | zpm | 25 | 11 | 8 | 24 | 25 | 0 | 0 |
-| uv | 12 | 6 | 11 | 18 | 10 | 2 | 0 |
-| uhv | 14 | 10 | 12 | 23 | 13 | 1 | 0 |
+| uv | 12 | 6 | 11 | 18 | 12 | 0 | 0 |
+| uhv | 14 | 10 | 12 | 23 | 14 | 0 | 0 |
 | uev | 13 | 11 | 10 | 19 | 13 | 0 | 0 |
-| uiv | 29 | 10 | 27 | 11 | 25 | 4 | 0 |
-| uxv | 22 | 10 | 19 | 27 | 18 | 3 | 1 |
+| uiv | 29 | 10 | 27 | 11 | 29 | 0 | 0 |
+| uxv | 22 | 10 | 19 | 27 | 21 | 0 | 1 |
 | opv | 21 | 9 | 21 | 23 | 21 | 0 | 0 |
-| max | 32 | 21 | 22 | 33 | 22 | 10 | 0 |
+| max | 32 | 21 | 22 | 33 | 32 | 0 | 0 |
 | maxplus | 11 | 11 | 11 | 39 | 11 | 0 | 0 |
 
-The 27 rows left are tracked in #284:
-- Feeder ends that the D4 and D5 charts close as `dest` rows, which the per-end-product split counts as lines of 1 to 3 steps (UIV I2 L32 and I9 L23; UXV X5 L31, X6 L39, X7 L49; MAX M3, M4, M5 and M8). Their clusters' longest rows run 4 to 9 steps.
-- Bypasses: LV fertilizer, MV silicon and UV superfluid helium; a shorter stock recipe makes the same end product (LV and MV costs are only reviewed, AGENTS.md principle 2).
-- Short or isolated:
-  - EV lunar titanium: 3 steps, a resource route with no declared role.
-  - EV nano circuits: 15 steps, no crossing.
-  - LuV Mond ends iridium and osmium: 2 steps, the platinum plant's asteroid mode.
-  - MAX Penrose payload: 3 steps.
-  - UIV I2 L9 and I9 L39: isolated.
-- Reach-back: UV spent fuel and UHV betavoltaics cross only the previous era.
-- Merge: UXV X2 (the sensor) shares 7 intermediates with X1.
+### #284 decisions
+
+Dump facts below are from `84c44332278e`.
+
+| Rows | Was | Decision and evidence | Package |
+|---|---|---|---|
+| UIV I2 L9, I9 L39 | fix (isolated) | **Split artefact.** The numbered split (`line-audit.mjs:77-82`) groups nodes by row number only and drops links another node consumes (`:80`). With L9's links x9_cav and x9_cf (`pl-data-uiv.mjs:247-248`) and L39's link x39_cc (`:500`), L9 crosses UHV and L39 crosses LuV. | #413 |
+| UIV I2 L32, I9 L23; UXV X6 L39, X7 L49 | fix (short) | **Spurs and continuations.** Each row continues or branches from a trunk in another row, which the split ignores. Counted with its ancestors, each is 4 or 5 steps. | #413 |
+| UXV X5 L31 | fix (short) | **Not a row.** It heads the L30 trunk (`pl-data-uxv.mjs:447-448`), so it is part of L30. | #413 |
+| UXV X2 L6 | merge | **Merge confirmed.** L6 repeats X1's MTJ chain, and `grindless:mtj_die` has one producer. X2 takes the die as one raw node sourced from X1; a link may not target its own chapter (`pl-model.mjs:133`). X2 L18 keeps 4 steps and its content reach. | #414 |
+| MAX M3 sapphire_web_wafer, stabilised_npro_laser; M4 sn_li_eutectic, droplet_nozzle_plate, iridium_target; M5 degenerate_sr_cartridge, atom_optics_modulator, fe16n2_ring_magnet; M8 rydberg_laser_die | fix (short) | **Feeders, not line ends.** In the dump, each is an input of another row's recipe in the same cluster; the chart lacks the join. The joins are listed below. | #414 |
+| MAX Penrose payload | fix (short) | **Chart omission.** max_penrose_payload also takes turned_payload_core and payload_casing (row 24, indexes 5 and 8), which makes the line 4 steps. | #414 |
+| LV fertilizer | fix (bypass) | **Not a line** (2 steps; AGENTS.md principle 7). Fertilizer only boosts the stock greenhouse, and LV costs are only reviewed (principle 2). keepShort currently works only from EV on (`line-audit.mjs:621,636`). | #413, #415 |
+| MV silicon (ILC chip) | fix (bypass) | **False positive.** The cutter's cut_ilc recipes from ilc_wafer are ilc_chip's only producers, so the "bypass" is the line's own last step. The node lacks its `by`. | #415 |
+| EV lunar titanium | fix (short) | **Resource head**, 3 steps: tripod drill, ore plant, regolith cell. Kroll (`pl_hv:kroll`) is the counted titanium line. Gets keepShort. Open question below. | #415 |
+| EV nano circuits | fix (isolated) | **Chart omission.** cpu_wafer is made by engrave_cpu_silicon from the MV silicon wafer. The epoxy board comes from the HV epoxy: solidify_epoxy_to_plate, then epoxy_board, then advanced_circuit_board_iron3. Both are drawn as raw. | #415 |
+| LuV Mond iridium, osmium | fix (short) | **By-products** of platinum plant mode 4 (principle 3), like the sludge node beside them (`pl-data-luv.mjs:133`). They end in the IV iridium line. | #415 |
+| UV superfluid helium | fix (bypass) | **Fusion ash.** The helium comes out of D-He3 laser fusion, a power plant. The other helium node (`pl-data-uv.mjs:142`) is already `by`. | #415 |
+| UV spent laser module | fix (reach) | **Returnable wear part.** Its only consumer is fibre_draw/refurbish, and the sail node already marks it `ret` (`:355`). | #415 |
+| UHV betavoltaic cell | fix (reach) | **Reach under-recorded.** nickel_62_target is made only by hot_cell/nickel_62_enrichment (IV), and diamond_diode only from the ZPM cvd_diamond_plate. Both are drawn as raw. | #415 |
+
+MAX joins for #414, in `pl-data-max.mjs` refs (`row.index`):
+- lock: `50.3` from `50.16`; `48.9` from `56.5`.
+- m4: `15.9` from `15.2`, `15.5` and `15.8`; `42.8` from `42.4`.
+- m5: `4.11` from `4.4`, `4.7` and `4.10`; `32.7` from `31.2`.
+- m8: `19.8` from `19.2`.
+- penrose: `24.9` from `24.5` and `24.8`.
+
+Packages, all for the implementer (Sonnet) with at most 2 repairs:
+- **#413 LA-TOOL** (`tools/analysis/line-audit.mjs`, its test and its README section). Numbered rows walk their ancestors and consumed links. A row under 4 steps that another row consumes folds into that row. keepShort applies at every era; the short rule stays EV+.
+- **#414 LA-CHART-MAX-UXV** (`pl-data-max.mjs`, `pl-data-uxv.mjs`): the joins above, the Penrose inputs, and X2's raw MTJ die. Depends on #413.
+- **#415 LA-CHART-LOWER** (`pl-data-{lv,mv,ev,luv,uv,uhv}.mjs`): the nine lower rows. Its LV fertilizer change depends on #413.
+
+None of these packages changes a recipe or an item.
+
+**Open question (owner, non-blocking):** EV lunar titanium could stay a 3-step resource head with keepShort (this design), or gain the real FFC steps: salt-leaching the cathode sponge, then electron-beam or vacuum-arc melting. The risk of the longer route is that it becomes worse than Kroll, which removes its reason to exist.
+
+**Risks:**
+- The numbered-row change makes trunk rows include their feeders, so steps, inner items and Longest change. Cross-cluster duplicate or skip verdicts may also change. Each package lists every verdict change against this CSV, and a new non-keep verdict is an escalation.
+- MAX dest rows 47, 48, 55 and 57 remain outside this pass.
 
 ## Batch 3 close (2026-11-01, history)
 
