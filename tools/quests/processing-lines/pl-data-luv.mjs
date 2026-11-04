@@ -128,8 +128,8 @@ export default {
         }),
         n('nico', 9, -0.75, F('gtceu:nickel_tetracarbonyl'), 'Nickel Tetracarbonyl', { from: ['dist'] }),
         n('feco', 9, 0.75, F('gtceu:iron_pentacarbonyl'), 'Iron Pentacarbonyl', { from: ['dist'] }),
-        n('ir', 10, 2.25, I('gtceu:iridium_dust'), 'Iridium', { kind: 'product', from: ['pplant'] }),
-        n('os', 10, 3.75, I('gtceu:osmium_dust'), 'Osmium', { kind: 'product', from: ['pplant'] }),
+        n('ir', 10, 2.25, I('gtceu:iridium_dust'), 'Iridium', { kind: 'by', role: 'resource', from: ['pplant'], end: 'the IV iridium and osmium line' }),
+        n('os', 10, 3.75, I('gtceu:osmium_dust'), 'Osmium', { kind: 'by', role: 'resource', from: ['pplant'], end: 'the IV iridium and osmium line' }),
         n('pgs', 10, 5, I('gtceu:platinum_group_sludge_dust'), 'Platinum Group Sludge', {
           kind: 'by', role: 'resource', from: ['pplant'], end: 'circuit 2', sub: 'Circuit 2: platinum, palladium, rhodium, ruthenium',
         }),

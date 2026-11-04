@@ -57,11 +57,16 @@ const data = {
         n('fab', 2.5, 3, mach('gtceu:fuel_fabrication_plant'), 'Fuel Fabrication Plant', { kind: 'ours', from: ['u233l'], desc: 'Casts the uranium-233 into HFIR driver elements.' }),
         n('drv', 5, 3, I('grindless:hfir_driver_element'), 'HFIR Driver Element', { kind: 'product', from: ['fab'] }),
         // 4 nickel-63 betavoltaics
-        n('n62', 5, 1.5, I('grindless:nickel_62_target'), 'Nickel-62 Target', { kind: 'raw', sub: 'Pressed from enriched nickel' }),
+        // the nickel-62 row sits between the clock row and the betavoltaic row, so its hot cell is drawn one size smaller
+        n('nid', 2.5, 1.5, I('gtceu:nickel_dust'), 'Nickel', { kind: 'raw' }),
+        n('hcn', 5, 1.5, mach('gtceu:hot_cell'), 'Hot Cell', { kind: 'ours', size: 1.25, from: ['nid'], desc: 'Enriches nickel-62 through carbon monoxide; the gas and the rest of the nickel come back.' }),
+        n('n62', 7.5, 1.5, I('grindless:nickel_62_target'), 'Nickel-62 Target', { from: ['hcn'], sub: 'Enriched in the IV hot cell' }),
         n('hfrn', 7.5, 3, mach('gtceu:high_flux_reactor'), 'High Flux Reactor', { kind: 'ours', from: ['n62'], desc: 'Captures a neutron in the target, with a driver element beside it.' }),
         n('n63', 10, 3, I('grindless:nickel_63_target'), 'Nickel-63 Target', { kind: 'product', from: ['hfrn'] }),
         n('pl', 12.5, 3, F('gtceu:nickel_63_plating_liquor'), 'Plating Liquor', { kind: 'product', from: ['n63'] }),
-        n('bfab', 15, 3, mach('gtceu:betavoltaic_fab'), 'Betavoltaic Fab', { kind: 'ours', from: ['pl'], desc: 'Plates the diamond with nickel-63 and seals the cell.' }),
+        L('zplate', 12.5, 1.5, 'pl_zpm:plate'),
+        n('diode', 15, 1.5, I('grindless:diamond_diode'), 'Diamond Diode', { from: ['zplate'], by: ['gtceu:diamond_cvd'], sub: 'Doped diamond grown on the CVD plate' }),
+        n('bfab', 15, 3, mach('gtceu:betavoltaic_fab'), 'Betavoltaic Fab', { kind: 'ours', from: ['pl', 'diode'], desc: 'Plates the diamond with nickel-63 and seals the cell.' }),
         n('bcell', 17.5, 3, I('grindless:betavoltaic_cell'), 'Betavoltaic Cell', { kind: 'product', from: ['bfab'], end: 'small, steady current for stations and probes' }),
         n('dpl', 12.5, 4.5, F('gtceu:depleted_nickel_plating_liquor'), 'Depleted Liquor', { kind: 'ret', from: ['pl'], sub: 'Back to the plating bath' }),
         // 1 transcurium breeding
