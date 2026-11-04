@@ -558,7 +558,7 @@
 			dependencies: ["709BF1A7462EE188"]
 			icon: "gtceu:iridium_dust"
 			id: "3A51125E741BE31D"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "78BFFE8B5C151516", item: "gtceu:iridium_dust", optional_task: true, type: "item" }
 				{ id: "190425C41B7D43A1", type: "checkmark" }
@@ -571,7 +571,7 @@
 			dependencies: ["709BF1A7462EE188"]
 			icon: "gtceu:osmium_dust"
 			id: "1007B8E74A97F166"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "5431BC6482EA1A41", item: "gtceu:osmium_dust", optional_task: true, type: "item" }
 				{ id: "5A584D77774FB344", type: "checkmark" }

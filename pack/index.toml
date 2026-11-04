@@ -54,7 +54,7 @@ hash = "4fce71beca694b0cc8c1b93f332108b068bc3fe9316935c877a79caf6083abb1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_ev.snbt"
-hash = "a2eb2376d5d6af9c5d8760d416ea94e2dbbd68ed86857dfd607b301d61a3050a"
+hash = "048b78303fcb6c8625a4d3a3f138dfdb632eb09e1f2b6494a8af77aba47489cb"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_hv.snbt"
@@ -66,7 +66,7 @@ hash = "f6c56998f4bcdac16452ae0389601a114858dd8018cea71a7f12791541bf889c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_luv.snbt"
-hash = "2b62825b761646d6da0155c701434c76f3b69e1f78eeff2a060fdc925c0ac93a"
+hash = "92864f3f0150ed12fb8e86959fbe930e74251d01159b8f238af2a32e10168380"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_lv.snbt"
@@ -74,7 +74,7 @@ hash = "71111bb9ab51decaf43042cebe6c7c84f6abfc1d3304ae3ec6cb2493c933d9e5"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_max.snbt"
-hash = "7f9e8d224b716e25432eb8102d54c78c48fbf3a24802559b6767daf0abe8759e"
+hash = "1cdc37c679d025deb8e74b2492916a0759bd38e9af5abebd61e7c74f0796ab33"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_maxplus.snbt"
@@ -98,7 +98,7 @@ hash = "d59702d356ef5795b866a90a1840932b3b4b27a1fdae17508ac368f95113e997"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uhv.snbt"
-hash = "3474a4bef98c2d2d86ad3547228b218104b9648f263077546c04c8519872e0f3"
+hash = "e4a709dc3881bc56415a59fdb3459d7500b43933613a5c7c66a5a5e6c4f66889"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uiv.snbt"
@@ -106,11 +106,11 @@ hash = "9515fb4ad933e989feb67dc4beec324e56e8933f169877fcdb7f58400189505c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uv.snbt"
-hash = "601c229f41d7860b26082fcc5163d66533e4990f0d0290cd1b37588a6df444a2"
+hash = "d97a1c3fc666b2332431521befa18f008ccf42b7e85be81290a3b0b496359d6c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uxv.snbt"
-hash = "6ffd722470d95a4bc8a1a8e0da30e9cdee618b215f42717bf6acf5178e9bb965"
+hash = "830b43e3b5f0c55b4d63a5fc892adea0d4dc52b77477453de3d25c27eaefb436"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_zpm.snbt"

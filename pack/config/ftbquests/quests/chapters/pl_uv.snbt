@@ -70,28 +70,28 @@
 			id: "5CC78C34CD162103"
 			linked_quest: "132326AF4E432EEB"
 			shape: "rsquare"
-			x: 63.25d
+			x: 63.0d
 			y: 61.75d
 		}
 		{
 			id: "73AB08E0E588FA8B"
 			linked_quest: "1C3ABC190214A62A"
 			shape: "rsquare"
-			x: 43.75d
+			x: 43.5d
 			y: 48.25d
 		}
 		{
 			id: "17122ED0F46AB8D9"
 			linked_quest: "10D7DA8F16132672"
 			shape: "rsquare"
-			x: 45.0d
+			x: 44.75d
 			y: 51.75d
 		}
 		{
 			id: "7C4D24990F51D7F7"
 			linked_quest: "305F916B3530ABAD"
 			shape: "rsquare"
-			x: 26.5d
+			x: 26.25d
 			y: 40.25d
 		}
 	]
@@ -1855,7 +1855,7 @@
 			dependencies: ["1968DD76CD3743D3"]
 			icon: "gtceu:helium_bucket"
 			id: "5E840E3827C362E5"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "7AA5D1C4C7A0A218", item: "gtceu:helium_bucket", optional_task: true, type: "item" }
 				{ id: "1B1E9978B9BE6D46", type: "checkmark" }
@@ -1881,7 +1881,8 @@
 			dependencies: ["705C2604CD4594D7"]
 			icon: "grindless:spent_laser_module"
 			id: "1DF9CC3F595C6367"
-			size: 1.25d
+			shape: "circle"
+			size: 0.75d
 			tasks: [
 				{ id: "7A573B1365241D04", item: "grindless:spent_laser_module", optional_task: true, type: "item" }
 				{ id: "1469CE9A5F40CCE9", type: "checkmark" }
@@ -2152,7 +2153,7 @@
 				{ id: "164EF0FB45DE6CB7", type: "checkmark" }
 			]
 			title: "Curium Oxide"
-			x: 42.75d
+			x: 42.5d
 			y: 35.5d
 		}
 		{
@@ -2166,7 +2167,7 @@
 				{ id: "75C61B1A1E299EC4", type: "checkmark" }
 			]
 			title: "Americium"
-			x: 43.0d
+			x: 42.75d
 			y: 38.25d
 		}
 		{
@@ -2181,7 +2182,7 @@
 				{ id: "15572846CDB67B9F", type: "checkmark" }
 			]
 			title: "Heat Source Works"
-			x: 44.75d
+			x: 44.5d
 			y: 38.75d
 		}
 		{
@@ -2195,7 +2196,7 @@
 				{ id: "562CD1AB23963857", type: "checkmark" }
 			]
 			title: "Curium-244 Pellet"
-			x: 48.5d
+			x: 48.25d
 			y: 38.25d
 		}
 		{
@@ -2209,7 +2210,7 @@
 				{ id: "7E387186F4874424", type: "checkmark" }
 			]
 			title: "GPHS Module"
-			x: 51.5d
+			x: 51.25d
 			y: 39.0d
 		}
 		{
@@ -2223,7 +2224,7 @@
 				{ id: "733B7415AB217301", type: "checkmark" }
 			]
 			title: "Probe RTG"
-			x: 54.0d
+			x: 53.75d
 			y: 42.75d
 		}
 		{
@@ -2237,7 +2238,7 @@
 				{ id: "7BF518C26B93406C", type: "checkmark" }
 			]
 			title: "Americium Micro-Source"
-			x: 47.0d
+			x: 46.75d
 			y: 37.0d
 		}
 		{
@@ -2250,7 +2251,7 @@
 				{ id: "7ED411A3D6050658", type: "checkmark" }
 			]
 			title: "Tritanium"
-			x: 46.75d
+			x: 46.5d
 			y: 34.25d
 		}
 		{
@@ -2265,7 +2266,7 @@
 				{ id: "33C661B608EDE30D", type: "checkmark" }
 			]
 			title: "Powder Bed Printer"
-			x: 48.5d
+			x: 48.25d
 			y: 33.75d
 		}
 		{
@@ -2278,7 +2279,7 @@
 				{ id: "3C362D834C3C095E", type: "checkmark" }
 			]
 			title: "Tritanium Powder"
-			x: 50.75d
+			x: 50.5d
 			y: 32.75d
 		}
 		{
@@ -2292,7 +2293,7 @@
 				{ id: "15049BCA34649D60", type: "checkmark" }
 			]
 			title: "Near-Net Chamber"
-			x: 51.25d
+			x: 51.0d
 			y: 31.25d
 		}
 		{
@@ -2306,7 +2307,7 @@
 				{ id: "1E08A566785AD62A", type: "checkmark" }
 			]
 			title: "Printed Chamber"
-			x: 54.25d
+			x: 54.0d
 			y: 31.25d
 		}
 		{
@@ -2321,7 +2322,7 @@
 				{ id: "18BDEDDA348FB7C5", type: "checkmark" }
 			]
 			title: "Thruster Works"
-			x: 55.25d
+			x: 55.0d
 			y: 34.5d
 		}
 		{
@@ -2335,7 +2336,7 @@
 				{ id: "740B49AC4AEB58A0", type: "checkmark" }
 			]
 			title: "Ion Thruster"
-			x: 55.75d
+			x: 55.5d
 			y: 38.25d
 		}
 		{
@@ -2349,7 +2350,7 @@
 				{ id: "168D894F47CA2941", type: "checkmark" }
 			]
 			title: "Thruster Pod"
-			x: 55.75d
+			x: 55.5d
 			y: 40.25d
 		}
 		{
@@ -2363,7 +2364,7 @@
 				{ id: "71685FE920818B2E", type: "checkmark" }
 			]
 			title: "Kuiper Interceptor"
-			x: 58.5d
+			x: 58.25d
 			y: 42.5d
 		}
 		{
@@ -2378,7 +2379,7 @@
 				{ id: "7A68341B1593D381", type: "checkmark" }
 			]
 			title: "Kuiper Interceptor Bay"
-			x: 62.0d
+			x: 61.75d
 			y: 42.0d
 		}
 		{
@@ -2391,7 +2392,7 @@
 				{ id: "3FFE2ABEB39B57C5", type: "checkmark" }
 			]
 			title: "Planetesimal Sample"
-			x: 63.25d
+			x: 63.0d
 			y: 40.25d
 		}
 		{
@@ -2406,7 +2407,7 @@
 				{ id: "509B20193997F520", type: "checkmark" }
 			]
 			title: "Volatile Ice Fractionator"
-			x: 64.5d
+			x: 64.25d
 			y: 43.0d
 		}
 		{
@@ -2419,7 +2420,7 @@
 				{ id: "3C25F7D426B3D4ED", type: "checkmark" }
 			]
 			title: "Water"
-			x: 68.5d
+			x: 68.25d
 			y: 42.75d
 		}
 		{
@@ -2432,7 +2433,7 @@
 				{ id: "195873DBA1FAB5C4", type: "checkmark" }
 			]
 			title: "Kuiper Noble Gas"
-			x: 65.25d
+			x: 65.0d
 			y: 47.75d
 		}
 		{
@@ -2445,7 +2446,7 @@
 				{ id: "14C2704603D1192A", type: "checkmark" }
 			]
 			title: "Carbon Monoxide"
-			x: 66.25d
+			x: 66.0d
 			y: 40.5d
 		}
 		{
@@ -2460,7 +2461,7 @@
 				{ id: "76F46DCBCBB7E7A7", type: "checkmark" }
 			]
 			title: "Zone Refining Tower"
-			x: 66.5d
+			x: 66.25d
 			y: 60.75d
 		}
 		{
@@ -2474,7 +2475,7 @@
 				{ id: "7426DB274B3DCAFE", type: "checkmark" }
 			]
 			title: "Germanium Tetrachloride"
-			x: 70.25d
+			x: 70.0d
 			y: 61.5d
 		}
 		{
@@ -2487,7 +2488,7 @@
 				{ id: "36717145812EEEC4", type: "checkmark" }
 			]
 			title: "Germanium Ingot"
-			x: 73.75d
+			x: 73.5d
 			y: 63.0d
 		}
 		{
@@ -2501,7 +2502,7 @@
 				{ id: "53BF94561ADEB55A", type: "checkmark" }
 			]
 			title: "HPGe Crystal"
-			x: 77.75d
+			x: 77.5d
 			y: 64.75d
 		}
 		{
@@ -2514,7 +2515,7 @@
 				{ id: "3ED9E43FBC1CFEAB", type: "checkmark" }
 			]
 			title: "Boron Trioxide"
-			x: 30.5d
+			x: 30.25d
 			y: 43.5d
 		}
 		{
@@ -2529,7 +2530,7 @@
 				{ id: "5DF82E0EF918CC8D", type: "checkmark" }
 			]
 			title: "Boron Nitride Reactor"
-			x: 34.0d
+			x: 33.75d
 			y: 42.25d
 		}
 		{
@@ -2543,7 +2544,7 @@
 				{ id: "10DA4E175767958D", type: "checkmark" }
 			]
 			title: "Hexagonal Boron Nitride"
-			x: 38.75d
+			x: 38.5d
 			y: 41.0d
 		}
 		{
@@ -2557,7 +2558,7 @@
 				{ id: "3F5F5C2E4097DEF1", type: "checkmark" }
 			]
 			title: "Nanotube Dust"
-			x: 41.5d
+			x: 41.25d
 			y: 43.5d
 		}
 		{
@@ -2571,7 +2572,7 @@
 				{ id: "78C97525361A7D4D", type: "checkmark" }
 			]
 			title: "BNNT Yarn"
-			x: 43.25d
+			x: 43.0d
 			y: 45.0d
 		}
 		{
@@ -2586,7 +2587,7 @@
 				{ id: "3AE4288F230F99BC", type: "checkmark" }
 			]
 			title: "Cryotank Winder"
-			x: 47.75d
+			x: 47.5d
 			y: 46.75d
 		}
 		{
@@ -2599,7 +2600,7 @@
 				{ id: "38BB890A8E7B398E", type: "checkmark" }
 			]
 			title: "BNNT Fuel Tank"
-			x: 50.25d
+			x: 50.0d
 			y: 46.0d
 		}
 		{
@@ -2613,7 +2614,7 @@
 				{ id: "719120EACDF1F0D8", type: "checkmark" }
 			]
 			title: "Aerogel Fuel Tank"
-			x: 46.25d
+			x: 46.0d
 			y: 49.75d
 		}
 		{
@@ -2628,7 +2629,7 @@
 				{ id: "1EA3FC5C209CCF32", type: "checkmark" }
 			]
 			title: "Wake Shield Facility"
-			x: 28.75d
+			x: 28.5d
 			y: 39.0d
 		}
 		{
@@ -2641,7 +2642,7 @@
 				{ id: "713130F71B240DC9", type: "checkmark" }
 			]
 			title: "Epitaxial Silicon Wafer"
-			x: 31.25d
+			x: 31.0d
 			y: 38.75d
 		}
 		{
@@ -2656,7 +2657,7 @@
 				{ id: "3218A9EE4FB9D438", type: "checkmark" }
 			]
 			title: "Light Sail Fab"
-			x: 34.75d
+			x: 34.5d
 			y: 39.25d
 		}
 		{
@@ -2670,7 +2671,7 @@
 				{ id: "3A0A7D59E2A06515", type: "checkmark" }
 			]
 			title: "Nitride-Coated Carrier"
-			x: 37.75d
+			x: 37.5d
 			y: 37.5d
 		}
 		{
@@ -2684,7 +2685,7 @@
 				{ id: "5EB1EDF3A275ADCB", type: "checkmark" }
 			]
 			title: "Patterned Sail Carrier"
-			x: 40.5d
+			x: 40.25d
 			y: 37.75d
 		}
 		{
@@ -2698,7 +2699,7 @@
 				{ id: "3C9BE4CF52C3741E", type: "checkmark" }
 			]
 			title: "Light Sail"
-			x: 41.75d
+			x: 41.5d
 			y: 40.0d
 		}
 		{
@@ -2712,7 +2713,7 @@
 				{ id: "16E4C77521600E92", type: "checkmark" }
 			]
 			title: "Fibre Laser Module"
-			x: 48.0d
+			x: 47.75d
 			y: 31.75d
 		}
 		{
@@ -2725,7 +2726,7 @@
 				{ id: "752F48B98BB5A495", type: "checkmark" }
 			]
 			title: "Sapphire Block"
-			x: 89.75d
+			x: 89.5d
 			y: 31.0d
 		}
 		{
@@ -2740,7 +2741,7 @@
 				{ id: "79F521885A2D2323", type: "checkmark" }
 			]
 			title: "Electric Blast Furnace"
-			x: 94.25d
+			x: 94.0d
 			y: 33.0d
 		}
 		{
@@ -2753,7 +2754,7 @@
 				{ id: "370E3B0C385750BE", type: "checkmark" }
 			]
 			title: "Sapphire Boule"
-			x: 97.75d
+			x: 97.5d
 			y: 35.75d
 		}
 		{
@@ -2767,7 +2768,7 @@
 				{ id: "3698F43C00E10BA8", type: "checkmark" }
 			]
 			title: "Sapphire Wafer"
-			x: 100.5d
+			x: 100.25d
 			y: 37.75d
 		}
 		{
@@ -2781,7 +2782,7 @@
 				{ id: "1FBA7292A5E02252", type: "checkmark" }
 			]
 			title: "Niobium Nitride Film Wafer"
-			x: 101.25d
+			x: 101.0d
 			y: 42.5d
 		}
 		{
@@ -2796,7 +2797,7 @@
 				{ id: "19CDEF1AE350216B", type: "checkmark" }
 			]
 			title: "Qubit Fab"
-			x: 104.25d
+			x: 104.0d
 			y: 42.75d
 		}
 		{
@@ -2810,7 +2811,7 @@
 				{ id: "54E29D93EC3D0563", type: "checkmark" }
 			]
 			title: "SNSPD Array"
-			x: 105.25d
+			x: 105.0d
 			y: 40.0d
 		}
 		{
@@ -2824,7 +2825,7 @@
 				{ id: "71228CAC5F12E94F", type: "checkmark" }
 			]
 			title: "PMMA Wafer"
-			x: 82.0d
+			x: 81.75d
 			y: 42.25d
 		}
 		{
@@ -2838,7 +2839,7 @@
 				{ id: "348BEA0CFB702AB0", type: "checkmark" }
 			]
 			title: "Protons"
-			x: 82.75d
+			x: 82.5d
 			y: 43.5d
 		}
 		{
@@ -2853,7 +2854,7 @@
 				{ id: "77655C4B903DC77A", type: "checkmark" }
 			]
 			title: "Synchrotron"
-			x: 84.5d
+			x: 84.25d
 			y: 40.75d
 		}
 		{
@@ -2867,7 +2868,7 @@
 				{ id: "337D8AA40FD242AA", type: "checkmark" }
 			]
 			title: "Exposed Wafer"
-			x: 85.0d
+			x: 84.75d
 			y: 38.25d
 		}
 		{
@@ -2880,7 +2881,7 @@
 				{ id: "1245A04233DBA999", type: "checkmark" }
 			]
 			title: "Photonic Chip"
-			x: 87.0d
+			x: 86.75d
 			y: 37.5d
 		}
 		{
@@ -2893,7 +2894,7 @@
 				{ id: "5EDB65D1B072BB13", type: "checkmark" }
 			]
 			title: "Antiproton Cartridge"
-			x: 87.0d
+			x: 86.75d
 			y: 44.25d
 		}
 		{
@@ -2908,7 +2909,7 @@
 				{ id: "3D21C77D66F0FBF1", type: "checkmark" }
 			]
 			title: "Antimatter Trap"
-			x: 89.5d
+			x: 89.25d
 			y: 43.75d
 		}
 		{
@@ -2921,7 +2922,7 @@
 				{ id: "1EC5AE16585F2D13", type: "checkmark" }
 			]
 			title: "Antiproton Trap"
-			x: 93.25d
+			x: 93.0d
 			y: 44.75d
 		}
 		{
@@ -2935,7 +2936,7 @@
 				{ id: "580B381DE1112AA8", type: "checkmark" }
 			]
 			title: "ICAN Pellet"
-			x: 95.5d
+			x: 95.25d
 			y: 48.25d
 		}
 		{
@@ -2949,7 +2950,7 @@
 				{ id: "773581D0E7FF8298", type: "checkmark" }
 			]
 			title: "NV Diamond Chip"
-			x: 89.5d
+			x: 89.25d
 			y: 36.5d
 		}
 		{
@@ -2962,7 +2963,7 @@
 				{ id: "12C2ADF2504A7ACC", type: "checkmark" }
 			]
 			title: "Neutronium Wafer"
-			x: 87.5d
+			x: 87.25d
 			y: 39.0d
 		}
 		{
@@ -2977,7 +2978,7 @@
 				{ id: "7F88950CFCFC6C68", type: "checkmark" }
 			]
 			title: "Starchip Fab"
-			x: 91.5d
+			x: 91.25d
 			y: 37.25d
 		}
 		{
@@ -2990,7 +2991,7 @@
 				{ id: "3B8CFB797A90F694", type: "checkmark" }
 			]
 			title: "Starchip"
-			x: 96.0d
+			x: 95.75d
 			y: 39.0d
 		}
 		{
@@ -3003,7 +3004,7 @@
 				{ id: "153BFC6F92DF2BB3", type: "checkmark" }
 			]
 			title: "Sailcraft"
-			x: 97.75d
+			x: 97.5d
 			y: 42.75d
 		}
 		{
@@ -3017,7 +3018,7 @@
 				{ id: "3D6A586AF1E099DF", type: "checkmark" }
 			]
 			title: "Precursor Probe"
-			x: 96.25d
+			x: 96.0d
 			y: 49.75d
 		}
 		{
@@ -3031,7 +3032,7 @@
 				{ id: "78DCFDC5FB0AB57D", type: "checkmark" }
 			]
 			title: "Heliopause Data"
-			x: 97.25d
+			x: 97.0d
 			y: 48.25d
 		}
 		{
@@ -3046,7 +3047,7 @@
 				{ id: "36DDC37D263FA5C9", type: "checkmark" }
 			]
 			title: "Laser Sail Launcher"
-			x: 99.25d
+			x: 99.0d
 			y: 45.5d
 		}
 		{
@@ -3060,7 +3061,7 @@
 				{ id: "7DF54BA9DBFDA421", type: "checkmark" }
 			]
 			title: "Starshot Probe"
-			x: 102.75d
+			x: 102.5d
 			y: 45.75d
 		}
 		{
@@ -3075,7 +3076,7 @@
 				{ id: "5E8B8BFF22C9F3AA", type: "checkmark" }
 			]
 			title: "Spent Laser Module"
-			x: 100.0d
+			x: 99.75d
 			y: 39.75d
 		}
 		{
@@ -3090,7 +3091,7 @@
 				{ id: "7E69A0EC60463AE5", type: "checkmark" }
 			]
 			title: "Optical Ground Station"
-			x: 107.0d
+			x: 106.75d
 			y: 44.5d
 		}
 		{
@@ -3103,7 +3104,7 @@
 				{ id: "37794A9C48A6DC0D", type: "checkmark" }
 			]
 			title: "Proxima Approach Data"
-			x: 110.75d
+			x: 110.5d
 			y: 42.25d
 		}
 		{
@@ -3117,7 +3118,7 @@
 				{ id: "7BA7C0400036BB34", type: "checkmark" }
 			]
 			title: "Fibre Laser Module"
-			x: 96.25d
+			x: 96.0d
 			y: 46.5d
 		}
 		{
@@ -3131,7 +3132,7 @@
 				{ id: "5079B668F01E012C", type: "checkmark" }
 			]
 			title: "Americium Micro-Source"
-			x: 88.75d
+			x: 88.5d
 			y: 40.25d
 		}
 		{
@@ -3145,7 +3146,7 @@
 				{ id: "386786D14849F887", type: "checkmark" }
 			]
 			title: "Probe RTG"
-			x: 92.25d
+			x: 92.0d
 			y: 47.0d
 		}
 		{
@@ -3159,7 +3160,7 @@
 				{ id: "3E12C96F38C59E0C", type: "checkmark" }
 			]
 			title: "Thruster Pod"
-			x: 92.5d
+			x: 92.25d
 			y: 49.25d
 		}
 		{
@@ -3173,7 +3174,7 @@
 				{ id: "59986914F9677BDB", type: "checkmark" }
 			]
 			title: "HPGe Crystal"
-			x: 94.5d
+			x: 94.25d
 			y: 51.25d
 		}
 		{
@@ -3187,7 +3188,7 @@
 				{ id: "3872AB66800F3335", type: "checkmark" }
 			]
 			title: "Light Sail"
-			x: 94.75d
+			x: 94.5d
 			y: 40.5d
 		}
 	]

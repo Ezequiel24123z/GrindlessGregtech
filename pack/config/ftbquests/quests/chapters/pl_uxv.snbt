@@ -2315,8 +2315,8 @@
 				{ id: "7A5667C2E886B4F7", type: "checkmark" }
 			]
 			title: "SiN Membrane"
-			x: 13.0d
-			y: 49.75d
+			x: 0.5d
+			y: 49.5d
 		}
 		{
 			dependencies: ["188769E4F307A1D2"]
@@ -2329,8 +2329,8 @@
 				{ id: "5B237FB527A04363", type: "checkmark" }
 			]
 			title: "Electron Beam Furnace"
-			x: 15.5d
-			y: 49.75d
+			x: 3.0d
+			y: 49.5d
 		}
 		{
 			dependencies: ["3156EF5F684E6483"]
@@ -2342,8 +2342,8 @@
 				{ id: "1D2E502BDE4946ED", type: "checkmark" }
 			]
 			title: "Nanoaperture Array"
-			x: 18.0d
-			y: 49.75d
+			x: 5.5d
+			y: 49.5d
 		}
 		{
 			dependencies: ["5146D22DD28534F3"]
@@ -2356,8 +2356,8 @@
 				{ id: "78D88F5FC36EA902", type: "checkmark" }
 			]
 			title: "SHeQUID Works"
-			x: 20.5d
-			y: 49.75d
+			x: 8.0d
+			y: 49.5d
 		}
 		{
 			dependencies: ["1447D48D6DB988B0"]
@@ -2369,11 +2369,11 @@
 				{ id: "72515929C5768F16", type: "checkmark" }
 			]
 			title: "Weak Link Cell"
-			x: 23.0d
-			y: 49.75d
+			x: 10.5d
+			y: 49.5d
 		}
 		{
-			dependencies: ["7A8F4ACFB3CD90C4", "7F985D1692D220C0"]
+			dependencies: ["7A8F4ACFB3CD90C4", "53291DA94A56D227"]
 			icon: "grindless:shequid_gyro"
 			id: "75F0CEC3B5E6EA38"
 			size: 1.25d
@@ -2382,8 +2382,8 @@
 				{ id: "55F3D651D92152EA", type: "checkmark" }
 			]
 			title: "SHeQUID Gyro"
-			x: 25.5d
-			y: 49.75d
+			x: 13.0d
+			y: 49.5d
 		}
 		{
 			dependencies: ["75F0CEC3B5E6EA38"]
@@ -2395,140 +2395,22 @@
 				{ id: "39643A225B457756", type: "checkmark" }
 			]
 			title: "UXV Sensor"
-			x: 28.0d
-			y: 49.75d
+			x: 15.5d
+			y: 49.5d
 		}
 		{
-			icon: "grindless:silicon_28_dust"
+			icon: "grindless:mtj_die"
 			id: "53291DA94A56D227"
 			shape: "rsquare"
 			size: 1.0d
+			subtitle: "From the spintronic mainframe line (X1)"
 			tasks: [
-				{ id: "5FCC61F5BC10F7AC", item: "grindless:silicon_28_dust", optional_task: true, type: "item" }
+				{ id: "5FCC61F5BC10F7AC", item: "grindless:mtj_die", optional_task: true, type: "item" }
 				{ id: "1B99C3F6000018A2", type: "checkmark" }
 			]
-			title: "Silicon 28"
-			x: 0.5d
-			y: 47.25d
-		}
-		{
-			dependencies: ["53291DA94A56D227"]
-			icon: "gtceu:zone_refining_tower"
-			id: "1E155390DA5A388D"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "7CF4C4912A8BAB19", item: "gtceu:zone_refining_tower", optional_task: true, type: "item" }
-				{ id: "3C6913AB9A567611", type: "checkmark" }
-			]
-			title: "Zone Refining Tower"
-			x: 3.0d
-			y: 47.25d
-		}
-		{
-			dependencies: ["1E155390DA5A388D"]
-			icon: "grindless:si28_fz_ingot"
-			id: "5D2A92A1C3D011A9"
-			size: 1.25d
-			tasks: [
-				{ id: "19A9389F2C127BC0", item: "grindless:si28_fz_ingot", optional_task: true, type: "item" }
-				{ id: "35666EE4A74236DC", type: "checkmark" }
-			]
-			title: "Si-28 FZ Ingot"
-			x: 5.5d
-			y: 47.25d
-		}
-		{
-			dependencies: ["5D2A92A1C3D011A9"]
-			icon: "grindless:si28_fz_wafer"
-			id: "18956C7710493B04"
-			size: 1.25d
-			tasks: [
-				{ id: "727E97CDEA4EC53C", item: "grindless:si28_fz_wafer", optional_task: true, type: "item" }
-				{ id: "37D309608DB89255", type: "checkmark" }
-			]
-			title: "Si-28 FZ Wafer"
-			x: 8.0d
-			y: 47.25d
-		}
-		{
-			dependencies: ["18956C7710493B04"]
-			icon: "grindless:h_si28_wafer"
-			id: "1C55390385468B69"
-			size: 1.25d
-			tasks: [
-				{ id: "15AADD153CC22C67", item: "grindless:h_si28_wafer", optional_task: true, type: "item" }
-				{ id: "5772A1903DACE7E9", type: "checkmark" }
-			]
-			title: "H Si-28 Wafer"
-			x: 10.5d
-			y: 47.25d
-		}
-		{
-			dependencies: ["1C55390385468B69"]
-			icon: "gtceu:mtj_sputter_cluster"
-			id: "55E611940207FD2D"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "5F9A9BE2CFB7DFEB", item: "gtceu:mtj_sputter_cluster", optional_task: true, type: "item" }
-				{ id: "7C2BD3A87F7F5CD3", type: "checkmark" }
-			]
-			title: "Spintronic Cluster Tool"
-			x: 13.0d
-			y: 47.25d
-		}
-		{
-			dependencies: ["55E611940207FD2D"]
-			icon: "grindless:mtj_stack_wafer"
-			id: "1E80DB6E1ED007A1"
-			size: 1.25d
-			tasks: [
-				{ id: "1218BFC60C590484", item: "grindless:mtj_stack_wafer", optional_task: true, type: "item" }
-				{ id: "7F74D1F472339322", type: "checkmark" }
-			]
-			title: "MTJ Stack Wafer"
-			x: 15.5d
-			y: 47.25d
-		}
-		{
-			dependencies: ["1E80DB6E1ED007A1"]
-			icon: "grindless:annealed_mtj_wafer"
-			id: "70CD6DDC5D627675"
-			size: 1.25d
-			tasks: [
-				{ id: "7545F69DF4B10BB7", item: "grindless:annealed_mtj_wafer", optional_task: true, type: "item" }
-				{ id: "1A1306376D3BA976", type: "checkmark" }
-			]
-			title: "Annealed MTJ Wafer"
-			x: 18.0d
-			y: 47.25d
-		}
-		{
-			dependencies: ["70CD6DDC5D627675"]
-			icon: "grindless:etched_mtj_wafer"
-			id: "364A69455DC6281D"
-			size: 1.25d
-			tasks: [
-				{ id: "15C9F73122E51407", item: "grindless:etched_mtj_wafer", optional_task: true, type: "item" }
-				{ id: "7837E519DA2F9D9C", type: "checkmark" }
-			]
-			title: "Etched MTJ Wafer"
-			x: 20.5d
-			y: 47.25d
-		}
-		{
-			dependencies: ["364A69455DC6281D"]
-			icon: "grindless:mtj_die"
-			id: "7F985D1692D220C0"
-			size: 1.25d
-			tasks: [
-				{ id: "7537313591E44629", item: "grindless:mtj_die", optional_task: true, type: "item" }
-				{ id: "39C565E13F901DFD", type: "checkmark" }
-			]
 			title: "MTJ Die"
-			x: 23.0d
-			y: 47.25d
+			x: 10.5d
+			y: 47.0d
 		}
 		{
 			icon: "gtceu:titanium_tetrachloride_ice_dust"
@@ -2540,7 +2422,7 @@
 				{ id: "160CA49D7E44A7EA", type: "checkmark" }
 			]
 			title: "TiCl4 Ice"
-			x: 32.25d
+			x: 19.75d
 			y: 49.75d
 		}
 		{
@@ -2554,7 +2436,7 @@
 				{ id: "1642CD0BECF4ED23", type: "checkmark" }
 			]
 			title: "Calutron"
-			x: 34.75d
+			x: 22.25d
 			y: 49.75d
 		}
 		{
@@ -2567,7 +2449,7 @@
 				{ id: "55DF3C7C5255FA73", type: "checkmark" }
 			]
 			title: "Ti-50 Chloride"
-			x: 37.25d
+			x: 24.75d
 			y: 49.75d
 		}
 		{
@@ -2581,7 +2463,7 @@
 				{ id: "365C4247C085980F", type: "checkmark" }
 			]
 			title: "Pyroprocessing Cell"
-			x: 39.75d
+			x: 27.25d
 			y: 49.75d
 		}
 		{
@@ -2594,7 +2476,7 @@
 				{ id: "137D0307352708A1", type: "checkmark" }
 			]
 			title: "Ti-50 Sponge"
-			x: 42.25d
+			x: 29.75d
 			y: 49.75d
 		}
 		{
@@ -2608,7 +2490,7 @@
 				{ id: "19C3300D00132746", type: "checkmark" }
 			]
 			title: "Levitation Melter"
-			x: 44.75d
+			x: 32.25d
 			y: 49.75d
 		}
 		{
@@ -2621,7 +2503,7 @@
 				{ id: "32500A9447FED3A5", type: "checkmark" }
 			]
 			title: "Titanium 50"
-			x: 47.25d
+			x: 34.75d
 			y: 49.75d
 		}
 		{
@@ -2635,7 +2517,7 @@
 				{ id: "747B343C33D6F3A1", type: "checkmark" }
 			]
 			title: "Assembler"
-			x: 49.75d
+			x: 37.25d
 			y: 49.75d
 		}
 		{
@@ -2648,7 +2530,7 @@
 				{ id: "32B18662B79B3CE6", type: "checkmark" }
 			]
 			title: "Ti-50 Oven Charge"
-			x: 52.25d
+			x: 39.75d
 			y: 49.75d
 		}
 		{
@@ -2662,7 +2544,7 @@
 				{ id: "7E14D2D1DFACBBC7", type: "checkmark" }
 			]
 			title: "Superheavy Factory"
-			x: 54.75d
+			x: 42.25d
 			y: 49.75d
 		}
 		{
@@ -2675,7 +2557,7 @@
 				{ id: "3D06D83F031BCA8D", type: "checkmark" }
 			]
 			title: "Element 122 Recoil Gas"
-			x: 57.25d
+			x: 44.75d
 			y: 49.75d
 		}
 		{
@@ -2689,7 +2571,7 @@
 				{ id: "78F04DE43571A95A", type: "checkmark" }
 			]
 			title: "Superheavy Factory"
-			x: 59.75d
+			x: 47.25d
 			y: 49.75d
 		}
 		{
@@ -2702,7 +2584,7 @@
 				{ id: "5E94CB99EB05AB8C", type: "checkmark" }
 			]
 			title: "Element 122 Atoms"
-			x: 62.25d
+			x: 49.75d
 			y: 49.75d
 		}
 		{
@@ -2716,7 +2598,7 @@
 				{ id: "57A9BFC03E324EF4", type: "checkmark" }
 			]
 			title: "Superheavy Chemistry Lab"
-			x: 64.75d
+			x: 52.25d
 			y: 49.75d
 		}
 		{
@@ -2729,7 +2611,7 @@
 				{ id: "172344DC5D50C8D3", type: "checkmark" }
 			]
 			title: "Element 122 Recoil"
-			x: 67.25d
+			x: 54.75d
 			y: 49.75d
 		}
 		{
@@ -2742,7 +2624,7 @@
 				{ id: "70628D587CB7B001", type: "checkmark" }
 			]
 			title: "Superheavy Census III"
-			x: 69.75d
+			x: 57.25d
 			y: 49.75d
 		}
 		{
@@ -2755,7 +2637,7 @@
 				{ id: "53D0C17E89D43D62", type: "checkmark" }
 			]
 			title: "Es-254 Target"
-			x: 52.25d
+			x: 39.75d
 			y: 47.25d
 		}
 		{
@@ -2769,7 +2651,7 @@
 				{ id: "708D7A0CC5DC8009", type: "checkmark" }
 			]
 			title: "Superheavy Factory"
-			x: 54.75d
+			x: 42.25d
 			y: 47.25d
 		}
 		{
@@ -2782,7 +2664,7 @@
 				{ id: "1B9215F203C562EE", type: "checkmark" }
 			]
 			title: "Element 121 Recoil Gas"
-			x: 57.25d
+			x: 44.75d
 			y: 47.25d
 		}
 		{
@@ -2796,7 +2678,7 @@
 				{ id: "37DCD8F8A17ECCE8", type: "checkmark" }
 			]
 			title: "Superheavy Factory"
-			x: 59.75d
+			x: 47.25d
 			y: 47.25d
 		}
 		{
@@ -2809,7 +2691,7 @@
 				{ id: "5931777AB609F4FF", type: "checkmark" }
 			]
 			title: "Element 121 Atoms"
-			x: 62.25d
+			x: 49.75d
 			y: 47.25d
 		}
 		{
@@ -2823,7 +2705,7 @@
 				{ id: "3BCEC5E96DB8FFA7", type: "checkmark" }
 			]
 			title: "Superheavy Chemistry Lab"
-			x: 64.75d
+			x: 52.25d
 			y: 47.25d
 		}
 		{
@@ -2836,7 +2718,7 @@
 				{ id: "172A8504445057A7", type: "checkmark" }
 			]
 			title: "Element 121 Recoil"
-			x: 67.25d
+			x: 54.75d
 			y: 47.25d
 		}
 		{
@@ -2849,7 +2731,7 @@
 				{ id: "5606DB3DE2EDE4D1", type: "checkmark" }
 			]
 			title: "Es/Fm Liquor"
-			x: 32.25d
+			x: 19.75d
 			y: 57.25d
 		}
 		{
@@ -2863,7 +2745,7 @@
 				{ id: "500ACE485F7498BD", type: "checkmark" }
 			]
 			title: "Actinide Partitioning Plant"
-			x: 34.75d
+			x: 22.25d
 			y: 57.25d
 		}
 		{
@@ -2876,7 +2758,7 @@
 				{ id: "34CBDCB72A3CBBE6", type: "checkmark" }
 			]
 			title: "Fermium"
-			x: 37.25d
+			x: 24.75d
 			y: 57.25d
 		}
 		{
@@ -2890,7 +2772,7 @@
 				{ id: "76AD92B107EB11CA", type: "checkmark" }
 			]
 			title: "Calutron"
-			x: 39.75d
+			x: 27.25d
 			y: 57.25d
 		}
 		{
@@ -2903,7 +2785,7 @@
 				{ id: "3C7317A22D36DD03", type: "checkmark" }
 			]
 			title: "Fermium 257"
-			x: 42.25d
+			x: 29.75d
 			y: 57.25d
 		}
 		{
@@ -2917,7 +2799,7 @@
 				{ id: "717485EE3B46ED31", type: "checkmark" }
 			]
 			title: "Transuranium Facility"
-			x: 44.75d
+			x: 32.25d
 			y: 57.25d
 		}
 		{
@@ -2930,7 +2812,7 @@
 				{ id: "1958E8AC5F930580", type: "checkmark" }
 			]
 			title: "Fm-257 Plated Blank"
-			x: 47.25d
+			x: 34.75d
 			y: 57.25d
 		}
 		{
@@ -2944,7 +2826,7 @@
 				{ id: "303835AB96EF0734", type: "checkmark" }
 			]
 			title: "Spark Plasma Sinterer"
-			x: 49.75d
+			x: 37.25d
 			y: 57.25d
 		}
 		{
@@ -2957,7 +2839,7 @@
 				{ id: "72D673074675F7C6", type: "checkmark" }
 			]
 			title: "Fm-257 Target"
-			x: 52.25d
+			x: 39.75d
 			y: 57.25d
 		}
 		{
@@ -2970,7 +2852,7 @@
 				{ id: "5D01A858D814A5E1", type: "checkmark" }
 			]
 			title: "Flashed Target"
-			x: 32.25d
+			x: 19.75d
 			y: 59.75d
 		}
 		{
@@ -2984,7 +2866,7 @@
 				{ id: "7C4C420A55001BD0", type: "checkmark" }
 			]
 			title: "Hot Cell"
-			x: 34.75d
+			x: 22.25d
 			y: 59.75d
 		}
 		{
@@ -2997,7 +2879,7 @@
 				{ id: "3836F6A58BBEC713", type: "checkmark" }
 			]
 			title: "Es/Fm Liquor"
-			x: 37.25d
+			x: 24.75d
 			y: 59.75d
 		}
 		{
@@ -3011,7 +2893,7 @@
 				{ id: "38939EC10CC2A8DF", type: "checkmark" }
 			]
 			title: "Actinide Partitioning Plant"
-			x: 39.75d
+			x: 27.25d
 			y: 59.75d
 		}
 		{
@@ -3024,7 +2906,7 @@
 				{ id: "153024BAE0B99FB9", type: "checkmark" }
 			]
 			title: "Es-254 Solution"
-			x: 42.25d
+			x: 29.75d
 			y: 59.75d
 		}
 		{
@@ -3038,7 +2920,7 @@
 				{ id: "7981B9DFEF5E9955", type: "checkmark" }
 			]
 			title: "Transuranium Facility"
-			x: 44.75d
+			x: 32.25d
 			y: 59.75d
 		}
 		{
@@ -3051,7 +2933,7 @@
 				{ id: "7FE46551C984BEB7", type: "checkmark" }
 			]
 			title: "Einsteinium"
-			x: 47.25d
+			x: 34.75d
 			y: 59.75d
 		}
 		{
@@ -3064,7 +2946,7 @@
 				{ id: "757B22A2259829AD", type: "checkmark" }
 			]
 			title: "Es-254 Target"
-			x: 49.75d
+			x: 37.25d
 			y: 59.75d
 		}
 		{
@@ -3077,7 +2959,7 @@
 				{ id: "793351E6AACEC41A", type: "checkmark" }
 			]
 			title: "Polycarbonate Foil"
-			x: 32.25d
+			x: 19.75d
 			y: 62.25d
 		}
 		{
@@ -3091,7 +2973,7 @@
 				{ id: "1952B3050C95CEBC", type: "checkmark" }
 			]
 			title: "Superheavy Factory"
-			x: 34.75d
+			x: 22.25d
 			y: 62.25d
 		}
 		{
@@ -3104,7 +2986,7 @@
 				{ id: "5581EE5B5DF151C2", type: "checkmark" }
 			]
 			title: "Ion-Tracked Foil"
-			x: 37.25d
+			x: 24.75d
 			y: 62.25d
 		}
 		{
@@ -3118,7 +3000,7 @@
 				{ id: "12781F6ABF5CD75B", type: "checkmark" }
 			]
 			title: "Chemical Reactor"
-			x: 39.75d
+			x: 27.25d
 			y: 62.25d
 		}
 		{
@@ -3131,7 +3013,7 @@
 				{ id: "5669C2AAB2F535DE", type: "checkmark" }
 			]
 			title: "Etched Membrane"
-			x: 42.25d
+			x: 29.75d
 			y: 62.25d
 		}
 		{

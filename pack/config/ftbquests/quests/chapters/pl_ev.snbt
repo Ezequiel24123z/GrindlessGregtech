@@ -45,6 +45,20 @@
 			x: 0.5d
 			y: 61.75d
 		}
+		{
+			id: "5E047CAA0744CE5B"
+			linked_quest: "305F916B3530ABAD"
+			shape: "rsquare"
+			x: 3.0d
+			y: 63.25d
+		}
+		{
+			id: "1C666505D10C1DF7"
+			linked_quest: "396599D18F2784AE"
+			shape: "rsquare"
+			x: 12.0d
+			y: 67.0d
+		}
 	]
 	quests: [
 		{
@@ -2334,10 +2348,11 @@
 			y: 61.0d
 		}
 		{
+			dependencies: ["305F916B3530ABAD"]
 			icon: "gtceu:cpu_wafer"
 			id: "7893AB9516A5A25F"
-			shape: "rsquare"
 			size: 1.0d
+			subtitle: "Laser engraver: MV's silicon wafer"
 			tasks: [
 				{ id: "1BA9B1F50BA75752", item: "gtceu:cpu_wafer", optional_task: true, type: "item" }
 				{ id: "39EFD8B0D0547142", type: "checkmark" }
@@ -2417,11 +2432,11 @@
 			y: 64.75d
 		}
 		{
+			dependencies: ["396599D18F2784AE"]
 			icon: "gtceu:epoxy_printed_circuit_board"
 			id: "3FB15AC005D498E5"
-			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Epoxy board from the HV line"
+			subtitle: "HV's epoxy cast into a plate, then gold and electrum foil in the chemical reactor"
 			tasks: [
 				{ id: "7016E7A75DE8ABA5", item: "gtceu:epoxy_printed_circuit_board", optional_task: true, type: "item" }
 				{ id: "16AA0D6A9C68387F", type: "checkmark" }

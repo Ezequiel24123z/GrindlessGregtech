@@ -21,8 +21,8 @@
 			id: "1D185F7BBFA1CAC4"
 			linked_quest: "364039A602E3B270"
 			shape: "rsquare"
-			x: 43.0d
-			y: 34.75d
+			x: 25.5d
+			y: 32.75d
 		}
 	]
 	quests: [
@@ -840,8 +840,8 @@
 				{ id: "1EED2A5BB6B87640", type: "checkmark" }
 			]
 			title: "Sapphire Dust"
-			x: 30.5d
-			y: 14.75d
+			x: 13.0d
+			y: 20.75d
 		}
 		{
 			dependencies: ["5DDD897B9F4F3369"]
@@ -854,8 +854,8 @@
 				{ id: "516FC614716A58AB", type: "checkmark" }
 			]
 			title: "Crystal Growth Furnace"
-			x: 33.0d
-			y: 14.75d
+			x: 15.5d
+			y: 20.75d
 		}
 		{
 			dependencies: ["56272449811A49AD"]
@@ -867,8 +867,8 @@
 				{ id: "3A8303BFCCC4FE24", type: "checkmark" }
 			]
 			title: "Sapphire Web Wafer"
-			x: 35.5d
-			y: 14.75d
+			x: 18.0d
+			y: 20.75d
 		}
 		{
 			icon: "gtceu:vanadium_magnetite_dust"
@@ -880,8 +880,8 @@
 				{ id: "5EC3EF771963BD85", type: "checkmark" }
 			]
 			title: "Vanadium Magnetite Dust"
-			x: 5.5d
-			y: 14.75d
+			x: 13.0d
+			y: 16.75d
 		}
 		{
 			dependencies: ["31F24E4872CCB0E8"]
@@ -894,8 +894,8 @@
 				{ id: "5C2BB18A3EF0BFE1", type: "checkmark" }
 			]
 			title: "Extraction Cascade"
-			x: 8.0d
-			y: 14.75d
+			x: 15.5d
+			y: 16.75d
 		}
 		{
 			dependencies: ["185FCB968393C853"]
@@ -907,11 +907,11 @@
 				{ id: "5F085BD822AB7F5D", type: "checkmark" }
 			]
 			title: "Vanadium Pentoxide"
-			x: 10.5d
-			y: 12.75d
+			x: 18.0d
+			y: 18.75d
 		}
 		{
-			dependencies: ["5DCECC30AE89101B"]
+			dependencies: ["5DCECC30AE89101B", "75FCB834D8487319"]
 			icon: "gtceu:mtj_sputter_cluster"
 			id: "1F0EAA810F0F6B05"
 			shape: "gear"
@@ -921,8 +921,8 @@
 				{ id: "3C61AFD5C8B1C042", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 13.0d
-			y: 12.75d
+			x: 20.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["1F0EAA810F0F6B05"]
@@ -934,8 +934,8 @@
 				{ id: "114FECF4376109D9", type: "checkmark" }
 			]
 			title: "VO2 On Sapphire"
-			x: 15.5d
-			y: 12.75d
+			x: 23.0d
+			y: 18.75d
 		}
 		{
 			dependencies: ["15241C96572CFFF3"]
@@ -948,8 +948,8 @@
 				{ id: "75B69E81A57E26E2", type: "checkmark" }
 			]
 			title: "Beuv Scanner"
-			x: 18.0d
-			y: 12.75d
+			x: 25.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["3B1C741D6ED47741"]
@@ -961,8 +961,8 @@
 				{ id: "54C5E4D13E64A57F", type: "checkmark" }
 			]
 			title: "Patterned VO2 Metasurface"
-			x: 20.5d
-			y: 14.75d
+			x: 28.0d
+			y: 20.75d
 		}
 		{
 			dependencies: ["3A265508CD71F391"]
@@ -975,8 +975,8 @@
 				{ id: "774E5888DB6C9324", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 23.0d
-			y: 14.75d
+			x: 30.5d
+			y: 20.75d
 		}
 		{
 			dependencies: ["31291D892825954B"]
@@ -988,8 +988,8 @@
 				{ id: "5589B88685E9E1D2", type: "checkmark" }
 			]
 			title: "Metallised Metasurface"
-			x: 25.5d
-			y: 14.75d
+			x: 33.0d
+			y: 20.75d
 		}
 		{
 			dependencies: ["351F83C822CC8617"]
@@ -1001,8 +1001,8 @@
 				{ id: "3676C1DDFDD66582", type: "checkmark" }
 			]
 			title: "Tunable Impedance Sheet"
-			x: 28.0d
-			y: 14.75d
+			x: 35.5d
+			y: 20.75d
 		}
 		{
 			dependencies: ["5E3445EA0F0BF89E", "73573C9AEB50E337"]
@@ -1015,8 +1015,8 @@
 				{ id: "1F9CE7E761C94641", type: "checkmark" }
 			]
 			title: "Ergoregion Synchroniser"
-			x: 30.5d
-			y: 16.75d
+			x: 38.0d
+			y: 18.75d
 		}
 		{
 			dependencies: ["7E7582BFEAC36558"]
@@ -1028,8 +1028,8 @@
 				{ id: "57266AF81C23EAAD", type: "checkmark" }
 			]
 			title: "Horizon Phase Lock"
-			x: 33.0d
-			y: 16.75d
+			x: 40.5d
+			y: 18.75d
 		}
 		{
 			dependencies: ["3E147C75F8028619", "5E3D1C4729DB7252"]
@@ -1042,8 +1042,8 @@
 				{ id: "399D2D2E09129FB3", type: "checkmark" }
 			]
 			title: "Mirror Shell"
-			x: 35.5d
-			y: 16.75d
+			x: 43.0d
+			y: 18.75d
 		}
 		{
 			dependencies: ["5F17A8A3D9EA9AE7"]
@@ -1055,8 +1055,8 @@
 				{ id: "18A84536CBC62CC7", type: "checkmark" }
 			]
 			title: "Horizon Lock"
-			x: 38.0d
-			y: 16.75d
+			x: 45.5d
+			y: 18.75d
 		}
 		{
 			icon: "grindless:thorium_229"
@@ -1068,8 +1068,8 @@
 				{ id: "14374C121EBF66D2", type: "checkmark" }
 			]
 			title: "Thorium 229"
-			x: 25.5d
-			y: 40.75d
+			x: 8.0d
+			y: 38.75d
 		}
 		{
 			dependencies: ["3C3D4D3F346F937B"]
@@ -1082,8 +1082,8 @@
 				{ id: "72A4B009EFE78A2D", type: "checkmark" }
 			]
 			title: "Nuclear Clock Lab"
-			x: 28.0d
-			y: 40.75d
+			x: 10.5d
+			y: 38.75d
 		}
 		{
 			dependencies: ["391890EFB0AF3F32"]
@@ -1095,8 +1095,8 @@
 				{ id: "5CBBDA39ABD28E45", type: "checkmark" }
 			]
 			title: "Thorium Clock Reference"
-			x: 30.5d
-			y: 38.75d
+			x: 13.0d
+			y: 36.75d
 		}
 		{
 			dependencies: ["36B1B50C0DD7FB9D"]
@@ -1109,8 +1109,8 @@
 				{ id: "180DF909776F9286", type: "checkmark" }
 			]
 			title: "SRF Cavity Works"
-			x: 33.0d
-			y: 38.75d
+			x: 15.5d
+			y: 36.75d
 		}
 		{
 			dependencies: ["5A06FFA86731814F"]
@@ -1122,8 +1122,8 @@
 				{ id: "110121556A804208", type: "checkmark" }
 			]
 			title: "Max SRF Cavity"
-			x: 35.5d
-			y: 38.75d
+			x: 18.0d
+			y: 36.75d
 		}
 		{
 			dependencies: ["15010D3FB0E03D52"]
@@ -1135,8 +1135,8 @@
 				{ id: "378DF418782288AF", type: "checkmark" }
 			]
 			title: "Polished SRF Cavity"
-			x: 38.0d
-			y: 38.75d
+			x: 20.5d
+			y: 36.75d
 		}
 		{
 			dependencies: ["75D2B89DBFE78A25"]
@@ -1149,8 +1149,8 @@
 				{ id: "58C391FF83AF1905", type: "checkmark" }
 			]
 			title: "Millikelvin Cryostat Works"
-			x: 40.5d
-			y: 36.75d
+			x: 23.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["52FFF8B962CAA105"]
@@ -1162,8 +1162,8 @@
 				{ id: "1D2F252BFEFE7399", type: "checkmark" }
 			]
 			title: "Cooled Cavity Mode"
-			x: 43.0d
-			y: 36.75d
+			x: 25.5d
+			y: 34.75d
 		}
 		{
 			dependencies: ["11D979CCBDF9A635", "364039A602E3B270"]
@@ -1176,8 +1176,8 @@
 				{ id: "1B8CCC3B65E694F4", type: "checkmark" }
 			]
 			title: "Kugelblitz Forge"
-			x: 45.5d
-			y: 36.75d
+			x: 28.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["33ACC42DA9D489E6"]
@@ -1189,8 +1189,8 @@
 				{ id: "5321C20F14122937", type: "checkmark" }
 			]
 			title: "Seed Wave Packet"
-			x: 48.0d
-			y: 36.75d
+			x: 30.5d
+			y: 34.75d
 		}
 		{
 			icon: "grindless:metal_rich_bloom"
@@ -1202,8 +1202,8 @@
 				{ id: "341C45212DD335C4", type: "checkmark" }
 			]
 			title: "Metal Rich Bloom"
-			x: 28.0d
-			y: 44.75d
+			x: 10.5d
+			y: 42.75d
 		}
 		{
 			dependencies: ["1D61AAB69DE199A7"]
@@ -1216,8 +1216,8 @@
 				{ id: "18F4343CE4B1268E", type: "checkmark" }
 			]
 			title: "Cluster Light Furnace"
-			x: 30.5d
-			y: 42.75d
+			x: 13.0d
+			y: 40.75d
 		}
 		{
 			dependencies: ["75F376490623BE11"]
@@ -1229,8 +1229,8 @@
 				{ id: "17051650FCBC7116", type: "checkmark" }
 			]
 			title: "Pellet Blank"
-			x: 33.0d
-			y: 42.75d
+			x: 15.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["74149570883B6216"]
@@ -1243,8 +1243,8 @@
 				{ id: "77BE0D026F0742AF", type: "checkmark" }
 			]
 			title: "Megabar Press"
-			x: 35.5d
-			y: 42.75d
+			x: 18.0d
+			y: 40.75d
 		}
 		{
 			dependencies: ["514B3128685A30C9"]
@@ -1256,8 +1256,8 @@
 				{ id: "78374EF3B240F8C1", type: "checkmark" }
 			]
 			title: "Dense Pellet"
-			x: 38.0d
-			y: 42.75d
+			x: 20.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["5385CE849B69E774"]
@@ -1269,8 +1269,8 @@
 				{ id: "57D858F59EC1B6F0", type: "checkmark" }
 			]
 			title: "Turned Pellet Core"
-			x: 40.5d
-			y: 40.75d
+			x: 23.0d
+			y: 38.75d
 		}
 		{
 			dependencies: ["5CBB535DE8093A28"]
@@ -1283,8 +1283,8 @@
 				{ id: "5C85BEE450033481", type: "checkmark" }
 			]
 			title: "SRF Cavity Works"
-			x: 43.0d
-			y: 40.75d
+			x: 25.5d
+			y: 38.75d
 		}
 		{
 			dependencies: ["5049CE9CA496ED97"]
@@ -1296,8 +1296,8 @@
 				{ id: "146960BAE1BE6404", type: "checkmark" }
 			]
 			title: "Sc Jacketed Pellet"
-			x: 45.5d
-			y: 40.75d
+			x: 28.0d
+			y: 38.75d
 		}
 		{
 			dependencies: ["5752591D9BE0C938"]
@@ -1309,8 +1309,8 @@
 				{ id: "18950978985A1EED", type: "checkmark" }
 			]
 			title: "Stream Pellet"
-			x: 48.0d
-			y: 40.75d
+			x: 30.5d
+			y: 38.75d
 		}
 		{
 			icon: "gtceu:niobium_ingot"
@@ -1322,8 +1322,8 @@
 				{ id: "3912BF45A6901191", type: "checkmark" }
 			]
 			title: "Niobium Ingot"
-			x: 5.5d
-			y: 18.75d
+			x: 13.0d
+			y: 12.75d
 		}
 		{
 			dependencies: ["3411756BB6F362C8"]
@@ -1336,8 +1336,8 @@
 				{ id: "1CCA56D2322F71CA", type: "checkmark" }
 			]
 			title: "Single Crystal Foundry"
-			x: 8.0d
-			y: 18.75d
+			x: 15.5d
+			y: 12.75d
 		}
 		{
 			dependencies: ["7A63E7B909F99BDC"]
@@ -1349,8 +1349,8 @@
 				{ id: "782CA1375463011F", type: "checkmark" }
 			]
 			title: "Large Grain Nb Disc"
-			x: 10.5d
-			y: 16.75d
+			x: 18.0d
+			y: 14.75d
 		}
 		{
 			dependencies: ["1CC8A6698A5DC556"]
@@ -1363,8 +1363,8 @@
 				{ id: "5813268A0952BAB8", type: "checkmark" }
 			]
 			title: "SRF Cavity Works"
-			x: 13.0d
-			y: 16.75d
+			x: 20.5d
+			y: 14.75d
 		}
 		{
 			dependencies: ["13408244D4745890"]
@@ -1376,8 +1376,8 @@
 				{ id: "5C7B445FA04D64AC", type: "checkmark" }
 			]
 			title: "Nb Driver Cell"
-			x: 15.5d
-			y: 16.75d
+			x: 23.0d
+			y: 14.75d
 		}
 		{
 			dependencies: ["1A22145CAF1038A3"]
@@ -1389,8 +1389,8 @@
 				{ id: "39A1F47C312D7FCE", type: "checkmark" }
 			]
 			title: "Polished Driver Cell"
-			x: 18.0d
-			y: 16.75d
+			x: 25.5d
+			y: 14.75d
 		}
 		{
 			dependencies: ["5F98F4BFDA81B544"]
@@ -1402,8 +1402,8 @@
 				{ id: "1420304F6AED0464", type: "checkmark" }
 			]
 			title: "Nb3sn Driver Cell"
-			x: 20.5d
-			y: 18.75d
+			x: 28.0d
+			y: 16.75d
 		}
 		{
 			dependencies: ["7697FC85157D03B8"]
@@ -1416,8 +1416,8 @@
 				{ id: "5C5F33C92414501B", type: "checkmark" }
 			]
 			title: "Helium Refrigerator"
-			x: 23.0d
-			y: 18.75d
+			x: 30.5d
+			y: 16.75d
 		}
 		{
 			dependencies: ["5B72290A5E647A08"]
@@ -1429,8 +1429,8 @@
 				{ id: "53E9534378086759", type: "checkmark" }
 			]
 			title: "Conduction Cooled Cell"
-			x: 25.5d
-			y: 18.75d
+			x: 33.0d
+			y: 16.75d
 		}
 		{
 			dependencies: ["7757F3A328A7A471"]
@@ -1442,8 +1442,8 @@
 				{ id: "75F5F8D4704B880F", type: "checkmark" }
 			]
 			title: "SRF Driver Module"
-			x: 28.0d
-			y: 18.75d
+			x: 35.5d
+			y: 16.75d
 		}
 		{
 			icon: "grindless:itbtc_coated_conductor"
@@ -1455,8 +1455,8 @@
 				{ id: "59840847C9316E60", type: "checkmark" }
 			]
 			title: "Itbtc Coated Conductor"
-			x: 0.5d
-			y: 18.75d
+			x: 8.0d
+			y: 20.75d
 		}
 		{
 			dependencies: ["17FF1ECAE868D1CA"]
@@ -1469,8 +1469,8 @@
 				{ id: "5A7C8ACBF7C39276", type: "checkmark" }
 			]
 			title: "Coated Conductor Line"
-			x: 3.0d
-			y: 18.75d
+			x: 10.5d
+			y: 20.75d
 		}
 		{
 			dependencies: ["7ED7C1B663A62376"]
@@ -1482,8 +1482,8 @@
 				{ id: "7B2C617AAF4440D9", type: "checkmark" }
 			]
 			title: "Pump Buffered Tape"
-			x: 5.5d
-			y: 20.75d
+			x: 13.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["51AA74C03ED865A0"]
@@ -1496,8 +1496,8 @@
 				{ id: "111F071DCC3DBE07", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 8.0d
-			y: 20.75d
+			x: 15.5d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7AF7AC4C28064597"]
@@ -1509,8 +1509,8 @@
 				{ id: "3AE3FDCF29B11869", type: "checkmark" }
 			]
 			title: "Thick Pump Tape"
-			x: 10.5d
-			y: 20.75d
+			x: 18.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["151B6E6C91CD04AB"]
@@ -1523,8 +1523,8 @@
 				{ id: "1643DB7A973D7204", type: "checkmark" }
 			]
 			title: "Hts Magnet Works"
-			x: 13.0d
-			y: 20.75d
+			x: 20.5d
+			y: 22.75d
 		}
 		{
 			dependencies: ["50E43C26B9E02FEB"]
@@ -1536,8 +1536,8 @@
 				{ id: "5F4C58F38265D38D", type: "checkmark" }
 			]
 			title: "Flux Pump Stator"
-			x: 15.5d
-			y: 22.75d
+			x: 23.0d
+			y: 24.75d
 		}
 		{
 			dependencies: ["1327F169911F0BE1"]
@@ -1550,8 +1550,8 @@
 				{ id: "7DE6D7134FC58B60", type: "checkmark" }
 			]
 			title: "Nitride Magnet Works"
-			x: 18.0d
-			y: 22.75d
+			x: 25.5d
+			y: 24.75d
 		}
 		{
 			dependencies: ["351F055A766DEF3A"]
@@ -1563,8 +1563,8 @@
 				{ id: "33D58EDAE47413F0", type: "checkmark" }
 			]
 			title: "Fe16n2 Rotor Magnet"
-			x: 20.5d
-			y: 22.75d
+			x: 28.0d
+			y: 24.75d
 		}
 		{
 			dependencies: ["767DEF223ABCCD2F"]
@@ -1577,8 +1577,8 @@
 				{ id: "7D1ECE346C0D7154", type: "checkmark" }
 			]
 			title: "Helium Refrigerator"
-			x: 23.0d
-			y: 22.75d
+			x: 30.5d
+			y: 24.75d
 		}
 		{
 			dependencies: ["11B08FEF11CD0924"]
@@ -1590,8 +1590,8 @@
 				{ id: "39324E1BFC3B1893", type: "checkmark" }
 			]
 			title: "Cold Flux Pump"
-			x: 25.5d
-			y: 20.75d
+			x: 33.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["1648BAEA8D084050"]
@@ -1603,8 +1603,8 @@
 				{ id: "7E98D1144C9F099C", type: "checkmark" }
 			]
 			title: "Hts Flux Pump"
-			x: 28.0d
-			y: 20.75d
+			x: 35.5d
+			y: 22.75d
 		}
 		{
 			dependencies: ["1F365528ADAA67D5"]
@@ -1617,8 +1617,8 @@
 				{ id: "3FA9E04F89D730A9", type: "checkmark" }
 			]
 			title: "Horizon Flux Clamp"
-			x: 30.5d
-			y: 20.75d
+			x: 38.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["31600B87A32A2DA7"]
@@ -1630,8 +1630,8 @@
 				{ id: "5C36239B45DB6EB8", type: "checkmark" }
 			]
 			title: "Horizon Flux Clamp"
-			x: 33.0d
-			y: 20.75d
+			x: 40.5d
+			y: 22.75d
 		}
 		{
 			icon: "gtceu:sapphire_dust"
@@ -1643,8 +1643,8 @@
 				{ id: "7B3A7956193DAE26", type: "checkmark" }
 			]
 			title: "Sapphire Dust"
-			x: 28.0d
-			y: 48.75d
+			x: 10.5d
+			y: 46.75d
 		}
 		{
 			dependencies: ["5945CF29D0D9192C"]
@@ -1657,8 +1657,8 @@
 				{ id: "74D6B3BD4A240C98", type: "checkmark" }
 			]
 			title: "Crystal Growth Furnace"
-			x: 30.5d
-			y: 46.75d
+			x: 13.0d
+			y: 44.75d
 		}
 		{
 			dependencies: ["3C4CC6EDA7D6E81E"]
@@ -1670,8 +1670,8 @@
 				{ id: "34FF57E9E70518DD", type: "checkmark" }
 			]
 			title: "Sapphire Resonator Disc"
-			x: 33.0d
-			y: 46.75d
+			x: 15.5d
+			y: 44.75d
 		}
 		{
 			dependencies: ["582C83A662F40F2C"]
@@ -1683,8 +1683,8 @@
 				{ id: "71C9645F686CE151", type: "checkmark" }
 			]
 			title: "Polished Sapphire Disc"
-			x: 35.5d
-			y: 46.75d
+			x: 18.0d
+			y: 44.75d
 		}
 		{
 			dependencies: ["5034389573CDD88F"]
@@ -1697,8 +1697,8 @@
 				{ id: "53DD9783AD1F4688", type: "checkmark" }
 			]
 			title: "Helium Refrigerator"
-			x: 38.0d
-			y: 46.75d
+			x: 20.5d
+			y: 44.75d
 		}
 		{
 			dependencies: ["3763D24801B5470B"]
@@ -1710,8 +1710,8 @@
 				{ id: "5127D4332F1676C2", type: "checkmark" }
 			]
 			title: "Cryo Sapphire Oscillator"
-			x: 40.5d
-			y: 44.75d
+			x: 23.0d
+			y: 42.75d
 		}
 		{
 			dependencies: ["3FA4A76E95DBB04A"]
@@ -1724,8 +1724,8 @@
 				{ id: "3771F81DDAB72D2B", type: "checkmark" }
 			]
 			title: "Nuclear Clock Lab"
-			x: 43.0d
-			y: 44.75d
+			x: 25.5d
+			y: 42.75d
 		}
 		{
 			dependencies: ["337BCB0154363BCD"]
@@ -1737,8 +1737,8 @@
 				{ id: "30C4241F63032988", type: "checkmark" }
 			]
 			title: "Clock Steered Oscillator"
-			x: 45.5d
-			y: 44.75d
+			x: 28.0d
+			y: 42.75d
 		}
 		{
 			dependencies: ["369764CF23CABB9A"]
@@ -1751,8 +1751,8 @@
 				{ id: "7B6D2820D010581F", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 48.0d
-			y: 44.75d
+			x: 30.5d
+			y: 42.75d
 		}
 		{
 			dependencies: ["58A3ACF4FE5297CB"]
@@ -1764,8 +1764,8 @@
 				{ id: "5341582027664C60", type: "checkmark" }
 			]
 			title: "Optical Phase Lock Unit"
-			x: 50.5d
-			y: 42.75d
+			x: 33.0d
+			y: 40.75d
 		}
 		{
 			dependencies: ["7C3F76B66F3432C3"]
@@ -1777,8 +1777,8 @@
 				{ id: "579FC02079A40912", type: "checkmark" }
 			]
 			title: "Phase Lock Oscillator Bank"
-			x: 53.0d
-			y: 42.75d
+			x: 35.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["5B66BA9DBB82DDC7"]
@@ -1791,8 +1791,8 @@
 				{ id: "540D65CC1572C335", type: "checkmark" }
 			]
 			title: "Horizon Interferometer"
-			x: 55.5d
-			y: 42.75d
+			x: 38.0d
+			y: 40.75d
 		}
 		{
 			dependencies: ["5E9BB2DA3F649DA7"]
@@ -1804,8 +1804,8 @@
 				{ id: "75E7A024A2756B70", type: "checkmark" }
 			]
 			title: "Calibrated Oscillator Bank"
-			x: 58.0d
-			y: 42.75d
+			x: 40.5d
+			y: 40.75d
 		}
 		{
 			icon: "gtceu:silicon_dioxide_dust"
@@ -1817,8 +1817,8 @@
 				{ id: "7BDB0B5D3FC6B5BB", type: "checkmark" }
 			]
 			title: "Silicon Dioxide Dust"
-			x: 18.0d
-			y: 30.75d
+			x: 0.5d
+			y: 28.75d
 		}
 		{
 			dependencies: ["3A1FE4D599870F90"]
@@ -1831,8 +1831,8 @@
 				{ id: "7D5C07661674E0A2", type: "checkmark" }
 			]
 			title: "Zone Refining Tower"
-			x: 20.5d
-			y: 30.75d
+			x: 3.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["35DCC80DCB4A7F49"]
@@ -1844,8 +1844,8 @@
 				{ id: "71688D946BF4C7EE", type: "checkmark" }
 			]
 			title: "Ultrapure Silica Plate"
-			x: 23.0d
-			y: 30.75d
+			x: 5.5d
+			y: 28.75d
 		}
 		{
 			dependencies: ["59BF6BC3AEF45BFC"]
@@ -1857,8 +1857,8 @@
 				{ id: "73147876E94A92DA", type: "checkmark" }
 			]
 			title: "Zero Expansion Baseplate"
-			x: 25.5d
-			y: 28.75d
+			x: 8.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["30D6794B1E2F558A"]
@@ -1871,8 +1871,8 @@
 				{ id: "3E94C6127D36C390", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 28.0d
-			y: 28.75d
+			x: 10.5d
+			y: 30.75d
 		}
 		{
 			dependencies: ["306931118F79FA45"]
@@ -1884,8 +1884,8 @@
 				{ id: "1929D6CE59177177", type: "checkmark" }
 			]
 			title: "Coated Bench Optics"
-			x: 30.5d
-			y: 28.75d
+			x: 13.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["19B3480323928F01"]
@@ -1897,8 +1897,8 @@
 				{ id: "57CEEC5B9F68B191", type: "checkmark" }
 			]
 			title: "Hydroxide Bonded Bench"
-			x: 33.0d
-			y: 28.75d
+			x: 15.5d
+			y: 30.75d
 		}
 		{
 			dependencies: ["56A0E4CD077A3440"]
@@ -1911,8 +1911,8 @@
 				{ id: "1B4D426E39B051EF", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 35.5d
-			y: 26.75d
+			x: 18.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["77AD377E30C50090"]
@@ -1924,11 +1924,11 @@
 				{ id: "73D8331C4B130958", type: "checkmark" }
 			]
 			title: "Bonded Optical Bench"
-			x: 38.0d
-			y: 26.75d
+			x: 20.5d
+			y: 28.75d
 		}
 		{
-			dependencies: ["7BB35E2C411F6847", "3583D9C2C6FA3DAC"]
+			dependencies: ["7BB35E2C411F6847", "3583D9C2C6FA3DAC", "1BCD568DE81B0672"]
 			icon: "gtceu:horizon_interferometer"
 			id: "1B1F66E0620EC735"
 			shape: "gear"
@@ -1938,8 +1938,8 @@
 				{ id: "3D92BCB270D612A2", type: "checkmark" }
 			]
 			title: "Horizon Interferometer"
-			x: 40.5d
-			y: 26.75d
+			x: 23.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["1B1F66E0620EC735"]
@@ -1951,8 +1951,8 @@
 				{ id: "77E3FF39A6011BF5", type: "checkmark" }
 			]
 			title: "Cloud Phase Map"
-			x: 43.0d
-			y: 26.75d
+			x: 25.5d
+			y: 28.75d
 		}
 		{
 			icon: "gtceu:platinum_dust"
@@ -1964,8 +1964,8 @@
 				{ id: "76BB7B59E640F68B", type: "checkmark" }
 			]
 			title: "Platinum Dust"
-			x: 18.0d
-			y: 24.75d
+			x: 0.5d
+			y: 32.75d
 		}
 		{
 			dependencies: ["3D8BFA7CA963E4B5"]
@@ -1978,8 +1978,8 @@
 				{ id: "35ED92FB6D9A5D6D", type: "checkmark" }
 			]
 			title: "Platinum Plant"
-			x: 20.5d
-			y: 26.75d
+			x: 3.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["1551C7E18C4D110E"]
@@ -1991,8 +1991,8 @@
 				{ id: "13C12AE66EAA25E8", type: "checkmark" }
 			]
 			title: "GR Platinum Sponge"
-			x: 23.0d
-			y: 26.75d
+			x: 5.5d
+			y: 34.75d
 		}
 		{
 			dependencies: ["5F453377E513B6FB"]
@@ -2005,8 +2005,8 @@
 				{ id: "5611DACCDC2A7E1B", type: "checkmark" }
 			]
 			title: "Levitation Melter"
-			x: 25.5d
-			y: 26.75d
+			x: 8.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["5CE75CB26A3C44A3"]
@@ -2018,8 +2018,8 @@
 				{ id: "7B1611585A2E743C", type: "checkmark" }
 			]
 			title: "Au Pt Ingot"
-			x: 28.0d
-			y: 26.75d
+			x: 10.5d
+			y: 34.75d
 		}
 		{
 			dependencies: ["7DE7492311143DA0"]
@@ -2031,8 +2031,8 @@
 				{ id: "1BE7D0A61DA6DFF8", type: "checkmark" }
 			]
 			title: "Au Pt Test Mass"
-			x: 30.5d
-			y: 24.75d
+			x: 13.0d
+			y: 32.75d
 		}
 		{
 			dependencies: ["1562F7ED2BA8916F"]
@@ -2045,8 +2045,8 @@
 				{ id: "3576B3A88D500863", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 33.0d
-			y: 24.75d
+			x: 15.5d
+			y: 32.75d
 		}
 		{
 			dependencies: ["556568737E823BDD"]
@@ -2058,8 +2058,8 @@
 				{ id: "7ABCAA15C707C084", type: "checkmark" }
 			]
 			title: "Coated Test Mass"
-			x: 35.5d
-			y: 24.75d
+			x: 18.0d
+			y: 32.75d
 		}
 		{
 			dependencies: ["1B4DA02A52D15C8A", "152963FAE4245C08"]
@@ -2071,8 +2071,8 @@
 				{ id: "7BCE4B63CC643F00", type: "checkmark" }
 			]
 			title: "Gravitational Reference Sensor"
-			x: 38.0d
-			y: 24.75d
+			x: 20.5d
+			y: 32.75d
 		}
 		{
 			icon: "grindless:aln_wafer"
@@ -2083,8 +2083,8 @@
 				{ id: "576407E0ACEBC6FD", type: "checkmark" }
 			]
 			title: "Aln Wafer"
-			x: 30.5d
-			y: 22.75d
+			x: 13.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["33D46EBE07A24F99"]
@@ -2097,8 +2097,8 @@
 				{ id: "3F9D0E2680F8EF2A", type: "checkmark" }
 			]
 			title: "Mocvd Reactor"
-			x: 33.0d
-			y: 22.75d
+			x: 15.5d
+			y: 34.75d
 		}
 		{
 			dependencies: ["1392682C1110E683"]
@@ -2110,8 +2110,8 @@
 				{ id: "7C1538F91FF95653", type: "checkmark" }
 			]
 			title: "UV LED Die"
-			x: 35.5d
-			y: 22.75d
+			x: 18.0d
+			y: 34.75d
 		}
 		{
 			icon: "gtceu:indium_dust"
@@ -2123,8 +2123,8 @@
 				{ id: "7EAA12EF3CE360B7", type: "checkmark" }
 			]
 			title: "Indium Dust"
-			x: 23.0d
-			y: 52.75d
+			x: 5.5d
+			y: 50.75d
 		}
 		{
 			dependencies: ["32639E39F07A9C3B"]
@@ -2137,8 +2137,8 @@
 				{ id: "13D44385EA29FC28", type: "checkmark" }
 			]
 			title: "Extraction Cascade"
-			x: 25.5d
-			y: 52.75d
+			x: 8.0d
+			y: 50.75d
 		}
 		{
 			dependencies: ["3B8ED4C52B13568E"]
@@ -2150,8 +2150,8 @@
 				{ id: "313A6858B22CE789", type: "checkmark" }
 			]
 			title: "Indium Sulfate"
-			x: 28.0d
-			y: 52.75d
+			x: 10.5d
+			y: 50.75d
 		}
 		{
 			dependencies: ["5280538B1F975DC4"]
@@ -2164,8 +2164,8 @@
 				{ id: "381B5939BF59AA06", type: "checkmark" }
 			]
 			title: "Zone Refining Tower"
-			x: 30.5d
-			y: 50.75d
+			x: 13.0d
+			y: 48.75d
 		}
 		{
 			dependencies: ["5574B16580691FBD"]
@@ -2177,8 +2177,8 @@
 				{ id: "14C22AE7E05101B6", type: "checkmark" }
 			]
 			title: "Six N Indium"
-			x: 33.0d
-			y: 50.75d
+			x: 15.5d
+			y: 48.75d
 		}
 		{
 			dependencies: ["7C2A3C5B23263FF7", "53610D5CC530CB39"]
@@ -2190,8 +2190,8 @@
 				{ id: "1CBEFE57D3DC8B97", type: "checkmark" }
 			]
 			title: "Wetted Emitter Crown"
-			x: 35.5d
-			y: 50.75d
+			x: 18.0d
+			y: 48.75d
 		}
 		{
 			dependencies: ["317CCABADBE9A8BD"]
@@ -2203,8 +2203,8 @@
 				{ id: "52BA901BFC21DA76", type: "checkmark" }
 			]
 			title: "Feep Thruster"
-			x: 38.0d
-			y: 50.75d
+			x: 20.5d
+			y: 48.75d
 		}
 		{
 			icon: "gtceu:tungsten_dust"
@@ -2215,8 +2215,8 @@
 				{ id: "36453E52B5A5DF6F", type: "checkmark" }
 			]
 			title: "Tungsten Dust"
-			x: 28.0d
-			y: 54.75d
+			x: 10.5d
+			y: 52.75d
 		}
 		{
 			dependencies: ["1459FD93D7D7C469"]
@@ -2229,8 +2229,8 @@
 				{ id: "319787D81BE4CF6E", type: "checkmark" }
 			]
 			title: "Electron Beam Furnace"
-			x: 30.5d
-			y: 54.75d
+			x: 13.0d
+			y: 52.75d
 		}
 		{
 			dependencies: ["3EEE658C7479045B"]
@@ -2242,8 +2242,8 @@
 				{ id: "1924FED07BFAB561", type: "checkmark" }
 			]
 			title: "Porous Tungsten Crown"
-			x: 33.0d
-			y: 54.75d
+			x: 15.5d
+			y: 52.75d
 		}
 		{
 			icon: "gtceu:neodymium_dust"
@@ -2255,8 +2255,8 @@
 				{ id: "149140460BFC8881", type: "checkmark" }
 			]
 			title: "Neodymium Dust"
-			x: 25.5d
-			y: 30.75d
+			x: 5.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["75128CBDB67EB51E"]
@@ -2269,8 +2269,8 @@
 				{ id: "7AA07D49C22A656D", type: "checkmark" }
 			]
 			title: "Crystal Growth Furnace"
-			x: 28.0d
-			y: 30.75d
+			x: 8.0d
+			y: 26.75d
 		}
 		{
 			dependencies: ["16FBCA124C3FDF5E"]
@@ -2282,8 +2282,8 @@
 				{ id: "3B0CBE934D1E358F", type: "checkmark" }
 			]
 			title: "ND YAG Boule"
-			x: 30.5d
-			y: 32.75d
+			x: 13.0d
+			y: 26.75d
 		}
 		{
 			dependencies: ["5CE2A34385A4BCC7"]
@@ -2295,8 +2295,8 @@
 				{ id: "122CCBF41F27A732", type: "checkmark" }
 			]
 			title: "Npro Crystal"
-			x: 33.0d
-			y: 32.75d
+			x: 15.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["5AC473AFCFCAA528", "36BAC267E57E7A3F", "30324E6A725A7011"]
@@ -2309,8 +2309,8 @@
 				{ id: "370183F239CA86C1", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 35.5d
-			y: 32.75d
+			x: 18.0d
+			y: 26.75d
 		}
 		{
 			dependencies: ["5BD13EBEAB6BD61D"]
@@ -2322,8 +2322,8 @@
 				{ id: "132FCD8314D4FB9A", type: "checkmark" }
 			]
 			title: "Stabilised Npro Laser"
-			x: 38.0d
-			y: 32.75d
+			x: 20.5d
+			y: 26.75d
 		}
 		{
 			icon: "grindless:gallium_arsenide_wafer"
@@ -2334,8 +2334,8 @@
 				{ id: "75F213926A31367C", type: "checkmark" }
 			]
 			title: "Gallium Arsenide Wafer"
-			x: 28.0d
-			y: 34.75d
+			x: 10.5d
+			y: 28.75d
 		}
 		{
 			dependencies: ["5287E448C534D719"]
@@ -2348,8 +2348,8 @@
 				{ id: "15587A9A6CADAECE", type: "checkmark" }
 			]
 			title: "Mocvd Reactor"
-			x: 30.5d
-			y: 34.75d
+			x: 13.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["345F8D06BF349FF3"]
@@ -2361,8 +2361,8 @@
 				{ id: "11A3A63021DD70FD", type: "checkmark" }
 			]
 			title: "Gaas 808 Pump Bar"
-			x: 33.0d
-			y: 34.75d
+			x: 15.5d
+			y: 28.75d
 		}
 		{
 			icon: "grindless:ultrapure_silica_tube"
@@ -2373,8 +2373,8 @@
 				{ id: "766FCE0D9C216DD8", type: "checkmark" }
 			]
 			title: "Ultrapure Silica Tube"
-			x: 28.0d
-			y: 36.75d
+			x: 10.5d
+			y: 24.75d
 		}
 		{
 			dependencies: ["7ABE861B2CC9E6E3"]
@@ -2387,8 +2387,8 @@
 				{ id: "3F483F6D9FB6BD57", type: "checkmark" }
 			]
 			title: "Fibre Draw Tower"
-			x: 30.5d
-			y: 36.75d
+			x: 13.0d
+			y: 24.75d
 		}
 		{
 			dependencies: ["71DA537785AF5D0E"]
@@ -2400,8 +2400,8 @@
 				{ id: "539A362729A81261", type: "checkmark" }
 			]
 			title: "YB Doped Fibre"
-			x: 33.0d
-			y: 36.75d
+			x: 15.5d
+			y: 24.75d
 		}
 		{
 			icon: "gtceu:silicon_dust"
@@ -2413,8 +2413,8 @@
 				{ id: "598C63D61BDD5B4F", type: "checkmark" }
 			]
 			title: "Silicon Dust"
-			x: 25.5d
-			y: 58.75d
+			x: 8.0d
+			y: 56.75d
 		}
 		{
 			dependencies: ["3386ACE50E89D951"]
@@ -2427,8 +2427,8 @@
 				{ id: "1D756BB51F366493", type: "checkmark" }
 			]
 			title: "Zone Refining Tower"
-			x: 28.0d
-			y: 58.75d
+			x: 10.5d
+			y: 56.75d
 		}
 		{
 			dependencies: ["1B43B8353522CFFF"]
@@ -2440,8 +2440,8 @@
 				{ id: "7F3C47F9924DF102", type: "checkmark" }
 			]
 			title: "Fz Silicon Rod"
-			x: 30.5d
-			y: 56.75d
+			x: 13.0d
+			y: 54.75d
 		}
 		{
 			dependencies: ["766333C7671BB69A"]
@@ -2453,8 +2453,8 @@
 				{ id: "5BE2197780D569A5", type: "checkmark" }
 			]
 			title: "Fz Wafer"
-			x: 33.0d
-			y: 56.75d
+			x: 15.5d
+			y: 54.75d
 		}
 		{
 			dependencies: ["5CCD51CFB5D196F3"]
@@ -2467,8 +2467,8 @@
 				{ id: "5BEC697F86693896", type: "checkmark" }
 			]
 			title: "Ion Implanter"
-			x: 35.5d
-			y: 56.75d
+			x: 18.0d
+			y: 54.75d
 		}
 		{
 			dependencies: ["545C3825A26E516A"]
@@ -2480,8 +2480,8 @@
 				{ id: "5373447D056619CB", type: "checkmark" }
 			]
 			title: "Simox SOI Wafer"
-			x: 38.0d
-			y: 56.75d
+			x: 20.5d
+			y: 54.75d
 		}
 		{
 			dependencies: ["184CAE49222D8F33"]
@@ -2494,8 +2494,8 @@
 				{ id: "5B81B784ECC604D3", type: "checkmark" }
 			]
 			title: "Beuv Scanner"
-			x: 40.5d
-			y: 54.75d
+			x: 23.0d
+			y: 52.75d
 		}
 		{
 			dependencies: ["13C758A2B17E54DA"]
@@ -2507,8 +2507,8 @@
 				{ id: "31D7F49894EAD15A", type: "checkmark" }
 			]
 			title: "Rad Hard Fpga Wafer"
-			x: 43.0d
-			y: 54.75d
+			x: 25.5d
+			y: 52.75d
 		}
 		{
 			dependencies: ["5FF811CBD8BA3D82"]
@@ -2520,8 +2520,8 @@
 				{ id: "51ED48029DC110D8", type: "checkmark" }
 			]
 			title: "Fpga Die"
-			x: 45.5d
-			y: 54.75d
+			x: 28.0d
+			y: 52.75d
 		}
 		{
 			dependencies: ["5A87ACCD0CA27F0A"]
@@ -2533,8 +2533,8 @@
 				{ id: "7D077AE4B95559EE", type: "checkmark" }
 			]
 			title: "Phasemeter Board"
-			x: 48.0d
-			y: 54.75d
+			x: 30.5d
+			y: 52.75d
 		}
 		{
 			icon: "grindless:nsc_planetesimal"
@@ -2546,7 +2546,7 @@
 				{ id: "57FD75BA39262E9E", type: "checkmark" }
 			]
 			title: "Nsc Planetesimal"
-			x: 67.0d
+			x: 59.75d
 			y: 16.75d
 		}
 		{
@@ -2560,7 +2560,7 @@
 				{ id: "3919E13F336FF136", type: "checkmark" }
 			]
 			title: "Cluster Light Furnace"
-			x: 69.5d
+			x: 62.25d
 			y: 16.75d
 		}
 		{
@@ -2573,7 +2573,7 @@
 				{ id: "7B79ED4F54CA075E", type: "checkmark" }
 			]
 			title: "Metal Rich Bloom"
-			x: 72.0d
+			x: 64.75d
 			y: 16.75d
 		}
 		{
@@ -2587,7 +2587,7 @@
 				{ id: "18C785071ED22AD1", type: "checkmark" }
 			]
 			title: "Carbonyl Refinery"
-			x: 74.5d
+			x: 67.25d
 			y: 16.75d
 		}
 		{
@@ -2600,7 +2600,7 @@
 				{ id: "73275E40ADC3C4B8", type: "checkmark" }
 			]
 			title: "Carbonyl Fe Ni Powder"
-			x: 77.0d
+			x: 69.75d
 			y: 16.75d
 		}
 		{
@@ -2614,7 +2614,7 @@
 				{ id: "5873033C3FEB42BB", type: "checkmark" }
 			]
 			title: "Levitation Melter"
-			x: 79.5d
+			x: 72.25d
 			y: 16.75d
 		}
 		{
@@ -2627,7 +2627,7 @@
 				{ id: "7B4BEA23A454CE64", type: "checkmark" }
 			]
 			title: "Segment Alloy Ingot"
-			x: 82.0d
+			x: 74.75d
 			y: 16.75d
 		}
 		{
@@ -2641,7 +2641,7 @@
 				{ id: "7224296389E10C57", type: "checkmark" }
 			]
 			title: "Cluster Light Furnace"
-			x: 84.5d
+			x: 77.25d
 			y: 16.75d
 		}
 		{
@@ -2654,7 +2654,7 @@
 				{ id: "3709C3FBDBEC4876", type: "checkmark" }
 			]
 			title: "Segment Truss Billet"
-			x: 87.0d
+			x: 79.75d
 			y: 16.75d
 		}
 		{
@@ -2667,7 +2667,7 @@
 				{ id: "783423738406ABD1", type: "checkmark" }
 			]
 			title: "Segment Truss"
-			x: 89.5d
+			x: 82.25d
 			y: 16.75d
 		}
 		{
@@ -2681,7 +2681,7 @@
 				{ id: "53C5ABEBE8F6FFEB", type: "checkmark" }
 			]
 			title: "Swarm Segment Foundry"
-			x: 92.0d
+			x: 84.75d
 			y: 16.75d
 		}
 		{
@@ -2694,7 +2694,7 @@
 				{ id: "1F788A25F975EA64", type: "checkmark" }
 			]
 			title: "Mirror Shell Segment"
-			x: 94.5d
+			x: 87.25d
 			y: 16.75d
 		}
 		{
@@ -2707,7 +2707,7 @@
 				{ id: "3C6F2DDA1684ABD2", type: "checkmark" }
 			]
 			title: "Nsc Planetesimal"
-			x: 69.5d
+			x: 62.25d
 			y: 18.75d
 		}
 		{
@@ -2721,7 +2721,7 @@
 				{ id: "3323087B15BF0A57", type: "checkmark" }
 			]
 			title: "Asteroid Processor"
-			x: 72.0d
+			x: 64.75d
 			y: 20.75d
 		}
 		{
@@ -2734,7 +2734,7 @@
 				{ id: "34591F652F237373", type: "checkmark" }
 			]
 			title: "Iron Core Fragment"
-			x: 74.5d
+			x: 67.25d
 			y: 20.75d
 		}
 		{
@@ -2748,7 +2748,7 @@
 				{ id: "37A1E3C5A4E99B81", type: "checkmark" }
 			]
 			title: "Helium Refrigerator"
-			x: 77.0d
+			x: 69.75d
 			y: 20.75d
 		}
 		{
@@ -2761,7 +2761,7 @@
 				{ id: "352951BC11164817", type: "checkmark" }
 			]
 			title: "Cryo Milled Core"
-			x: 79.5d
+			x: 72.25d
 			y: 20.75d
 		}
 		{
@@ -2774,7 +2774,7 @@
 				{ id: "586F66C0CEF13F31", type: "checkmark" }
 			]
 			title: "Tetrataenite Concentrate"
-			x: 82.0d
+			x: 74.75d
 			y: 18.75d
 		}
 		{
@@ -2787,7 +2787,7 @@
 				{ id: "3F83141A84209235", type: "checkmark" }
 			]
 			title: "Cold Pressed Tetrataenite"
-			x: 84.5d
+			x: 77.25d
 			y: 18.75d
 		}
 		{
@@ -2801,7 +2801,7 @@
 				{ id: "12218F0418014D4F", type: "checkmark" }
 			]
 			title: "Nitride Magnet Works"
-			x: 87.0d
+			x: 79.75d
 			y: 18.75d
 		}
 		{
@@ -2814,7 +2814,7 @@
 				{ id: "15CFFE0DD12A51AC", type: "checkmark" }
 			]
 			title: "Halbach Segment Coupler"
-			x: 89.5d
+			x: 82.25d
 			y: 18.75d
 		}
 		{
@@ -2827,7 +2827,7 @@
 				{ id: "3FC775D56EB56C5F", type: "checkmark" }
 			]
 			title: "Mixed Rare Earth Chloride Dust"
-			x: 72.0d
+			x: 64.75d
 			y: 12.75d
 		}
 		{
@@ -2841,7 +2841,7 @@
 				{ id: "19029A86645C2A1C", type: "checkmark" }
 			]
 			title: "Extraction Cascade"
-			x: 74.5d
+			x: 67.25d
 			y: 12.75d
 		}
 		{
@@ -2854,7 +2854,7 @@
 				{ id: "150A9848B7E9DC64", type: "checkmark" }
 			]
 			title: "Er Ho Oxide"
-			x: 77.0d
+			x: 69.75d
 			y: 12.75d
 		}
 		{
@@ -2868,7 +2868,7 @@
 				{ id: "7DA10C00CD0E8692", type: "checkmark" }
 			]
 			title: "Levitation Melter"
-			x: 79.5d
+			x: 72.25d
 			y: 12.75d
 		}
 		{
@@ -2881,7 +2881,7 @@
 				{ id: "3852956B71A63E9C", type: "checkmark" }
 			]
 			title: "Er3ni Ingot"
-			x: 82.0d
+			x: 74.75d
 			y: 14.75d
 		}
 		{
@@ -2894,7 +2894,7 @@
 				{ id: "54485CDA1756009E", type: "checkmark" }
 			]
 			title: "Er3ni Spheres"
-			x: 84.5d
+			x: 77.25d
 			y: 14.75d
 		}
 		{
@@ -2907,7 +2907,7 @@
 				{ id: "1BE471911FB89DCB", type: "checkmark" }
 			]
 			title: "Charged Pulse Tube"
-			x: 87.0d
+			x: 79.75d
 			y: 14.75d
 		}
 		{
@@ -2920,7 +2920,7 @@
 				{ id: "3F9E3921C57C3978", type: "checkmark" }
 			]
 			title: "Shell Cryocooler"
-			x: 89.5d
+			x: 82.25d
 			y: 14.75d
 		}
 		{
@@ -2933,7 +2933,7 @@
 				{ id: "597D26D0956C0177", type: "checkmark" }
 			]
 			title: "Silicon Carbide Dust"
-			x: 62.0d
+			x: 54.75d
 			y: 20.75d
 		}
 		{
@@ -2947,7 +2947,7 @@
 				{ id: "3A952D73C6382A49", type: "checkmark" }
 			]
 			title: "Crystal Growth Furnace"
-			x: 64.5d
+			x: 57.25d
 			y: 20.75d
 		}
 		{
@@ -2960,7 +2960,7 @@
 				{ id: "5F3DD675C4CEE0EC", type: "checkmark" }
 			]
 			title: "SIC Substrate Wafer"
-			x: 67.0d
+			x: 59.75d
 			y: 22.75d
 		}
 		{
@@ -2974,7 +2974,7 @@
 				{ id: "5994693B262803F1", type: "checkmark" }
 			]
 			title: "SIC Device Fab"
-			x: 69.5d
+			x: 62.25d
 			y: 22.75d
 		}
 		{
@@ -2987,7 +2987,7 @@
 				{ id: "78DEE9F98E6617CA", type: "checkmark" }
 			]
 			title: "SIC Cmos Wafer"
-			x: 72.0d
+			x: 64.75d
 			y: 22.75d
 		}
 		{
@@ -3001,7 +3001,7 @@
 				{ id: "53CC8C566149CCAA", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 74.5d
+			x: 67.25d
 			y: 22.75d
 		}
 		{
@@ -3014,7 +3014,7 @@
 				{ id: "55CE4EEAC3D7D4E2", type: "checkmark" }
 			]
 			title: "Mram Stack Wafer"
-			x: 77.0d
+			x: 69.75d
 			y: 24.75d
 		}
 		{
@@ -3028,7 +3028,7 @@
 				{ id: "3652E89F016BCAC1", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 79.5d
+			x: 72.25d
 			y: 24.75d
 		}
 		{
@@ -3041,7 +3041,7 @@
 				{ id: "51E0F8A6DC80278A", type: "checkmark" }
 			]
 			title: "Racetrack Memory Die"
-			x: 82.0d
+			x: 74.75d
 			y: 24.75d
 		}
 		{
@@ -3054,7 +3054,7 @@
 				{ id: "18D39DAE0E6674F8", type: "checkmark" }
 			]
 			title: "Segment Controller"
-			x: 84.5d
+			x: 77.25d
 			y: 24.75d
 		}
 		{
@@ -3067,8 +3067,8 @@
 				{ id: "135CD9C5F6310866", type: "checkmark" }
 			]
 			title: "Lithium Dust"
-			x: 67.0d
-			y: 38.75d
+			x: 59.75d
+			y: 24.75d
 		}
 		{
 			dependencies: ["74731F46DA07E1B5"]
@@ -3081,8 +3081,8 @@
 				{ id: "524DA383EC45E37B", type: "checkmark" }
 			]
 			title: "Extraction Cascade"
-			x: 69.5d
-			y: 38.75d
+			x: 62.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["5F47290F9AA872EB"]
@@ -3094,8 +3094,8 @@
 				{ id: "7D9197BD39664CCF", type: "checkmark" }
 			]
 			title: "SN LI Eutectic"
-			x: 72.0d
-			y: 38.75d
+			x: 64.75d
+			y: 24.75d
 		}
 		{
 			icon: "gtceu:tungsten_plate"
@@ -3106,8 +3106,8 @@
 				{ id: "31209E425B0C8B5D", type: "checkmark" }
 			]
 			title: "Tungsten Plate"
-			x: 67.0d
-			y: 40.75d
+			x: 59.75d
+			y: 28.75d
 		}
 		{
 			dependencies: ["73DA25AF3E94A042"]
@@ -3120,8 +3120,8 @@
 				{ id: "33B4AE3498E18192", type: "checkmark" }
 			]
 			title: "Femtosecond Writer"
-			x: 69.5d
-			y: 40.75d
+			x: 62.25d
+			y: 28.75d
 		}
 		{
 			dependencies: ["5B7E5A17E2996293"]
@@ -3133,8 +3133,8 @@
 				{ id: "55267533BD4BC8A7", type: "checkmark" }
 			]
 			title: "Droplet Nozzle Plate"
-			x: 72.0d
-			y: 40.75d
+			x: 64.75d
+			y: 28.75d
 		}
 		{
 			icon: "grindless:sic_sic_plate"
@@ -3145,8 +3145,8 @@
 				{ id: "7C15327AD4C83E0C", type: "checkmark" }
 			]
 			title: "SIC SIC Plate"
-			x: 67.0d
-			y: 42.75d
+			x: 59.75d
+			y: 26.75d
 		}
 		{
 			dependencies: ["3BB4A89273DCF843"]
@@ -3159,8 +3159,8 @@
 				{ id: "32DC35BF46D30403", type: "checkmark" }
 			]
 			title: "Spark Plasma Sinterer"
-			x: 69.5d
-			y: 42.75d
+			x: 62.25d
+			y: 26.75d
 		}
 		{
 			dependencies: ["12859892FC0B6C49"]
@@ -3172,11 +3172,11 @@
 				{ id: "11DAA025D8CB201A", type: "checkmark" }
 			]
 			title: "Radiator Collector Shell"
-			x: 72.0d
-			y: 42.75d
+			x: 64.75d
+			y: 26.75d
 		}
 		{
-			dependencies: ["1CDE4B54706E1131"]
+			dependencies: ["12A36BE48FB88F96", "1EF7644B38B36B93", "1CDE4B54706E1131"]
 			icon: "gtceu:droplet_radiator_works"
 			id: "5E2EAD9CFF2793D8"
 			shape: "gear"
@@ -3186,8 +3186,8 @@
 				{ id: "5FEF26E6F118F4F4", type: "checkmark" }
 			]
 			title: "Droplet Radiator Works"
-			x: 74.5d
-			y: 42.75d
+			x: 67.25d
+			y: 26.75d
 		}
 		{
 			dependencies: ["5E2EAD9CFF2793D8"]
@@ -3199,8 +3199,8 @@
 				{ id: "3F9FFCAF56895DCE", type: "checkmark" }
 			]
 			title: "Shell Droplet Radiator"
-			x: 77.0d
-			y: 42.75d
+			x: 69.75d
+			y: 26.75d
 		}
 		{
 			icon: "grindless:ablated_shell_segment"
@@ -3212,7 +3212,7 @@
 				{ id: "72B39EA9FA99062D", type: "checkmark" }
 			]
 			title: "Ablated Shell Segment"
-			x: 62.0d
+			x: 54.75d
 			y: 16.75d
 		}
 		{
@@ -3226,7 +3226,7 @@
 				{ id: "135D2121B13F1B16", type: "checkmark" }
 			]
 			title: "Segment Reclamation Works"
-			x: 64.5d
+			x: 57.25d
 			y: 16.75d
 		}
 		{
@@ -3239,7 +3239,7 @@
 				{ id: "3A453662EEC17A4F", type: "checkmark" }
 			]
 			title: "Cryocooler Scrap"
-			x: 67.0d
+			x: 59.75d
 			y: 14.75d
 		}
 		{
@@ -3252,7 +3252,7 @@
 				{ id: "7868D5F699885DF8", type: "checkmark" }
 			]
 			title: "Er3ni Grit"
-			x: 69.5d
+			x: 62.25d
 			y: 14.75d
 		}
 		{
@@ -3265,7 +3265,7 @@
 				{ id: "5219708C684ABE14", type: "checkmark" }
 			]
 			title: "Er Rich Fraction"
-			x: 72.0d
+			x: 64.75d
 			y: 14.75d
 		}
 		{
@@ -3279,7 +3279,7 @@
 				{ id: "596E0F9F78A3065A", type: "checkmark" }
 			]
 			title: "Extraction Cascade"
-			x: 74.5d
+			x: 67.25d
 			y: 14.75d
 		}
 		{
@@ -3292,8 +3292,8 @@
 				{ id: "1A0629840C10D259", type: "checkmark" }
 			]
 			title: "Nsc Planetesimal"
-			x: 62.0d
-			y: 24.75d
+			x: 54.75d
+			y: 28.75d
 		}
 		{
 			dependencies: ["3208C563948EE30C"]
@@ -3306,8 +3306,8 @@
 				{ id: "3847400ED29E1D49", type: "checkmark" }
 			]
 			title: "Cluster Light Furnace"
-			x: 64.5d
-			y: 24.75d
+			x: 57.25d
+			y: 28.75d
 		}
 		{
 			dependencies: ["5AFD7C900D5E6938"]
@@ -3319,8 +3319,8 @@
 				{ id: "57DFD182FA844646", type: "checkmark" }
 			]
 			title: "Silicate Slag"
-			x: 67.0d
-			y: 26.75d
+			x: 59.75d
+			y: 30.75d
 		}
 		{
 			dependencies: ["1E0C2ED2ADBB7F89"]
@@ -3333,8 +3333,8 @@
 				{ id: "78F987C4177AFCFF", type: "checkmark" }
 			]
 			title: "Solar Vapour Furnace"
-			x: 69.5d
-			y: 26.75d
+			x: 62.25d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5E0DE2BC66710993"]
@@ -3346,8 +3346,8 @@
 				{ id: "3D3AA98C249E3033", type: "checkmark" }
 			]
 			title: "Devolatilised Slag"
-			x: 72.0d
-			y: 26.75d
+			x: 64.75d
+			y: 30.75d
 		}
 		{
 			dependencies: ["54B11A83D1610E69"]
@@ -3360,8 +3360,8 @@
 				{ id: "5927EAA15FC33C86", type: "checkmark" }
 			]
 			title: "Regolith Cell"
-			x: 74.5d
-			y: 26.75d
+			x: 67.25d
+			y: 30.75d
 		}
 		{
 			dependencies: ["1334AD7AF17A7303"]
@@ -3373,7 +3373,7 @@
 				{ id: "527C33C1E62258DB", type: "checkmark" }
 			]
 			title: "Ca Al Oxide Residue"
-			x: 77.0d
+			x: 69.75d
 			y: 28.75d
 		}
 		{
@@ -3386,7 +3386,7 @@
 				{ id: "5092F2CD85BDA701", type: "checkmark" }
 			]
 			title: "Slag Compact"
-			x: 79.5d
+			x: 72.25d
 			y: 28.75d
 		}
 		{
@@ -3400,7 +3400,7 @@
 				{ id: "1020BC08A8F774BD", type: "checkmark" }
 			]
 			title: "Spark Plasma Sinterer"
-			x: 82.0d
+			x: 74.75d
 			y: 28.75d
 		}
 		{
@@ -3413,7 +3413,7 @@
 				{ id: "5D651FBE3C7FA178", type: "checkmark" }
 			]
 			title: "Slag Pellet"
-			x: 84.5d
+			x: 77.25d
 			y: 28.75d
 		}
 		{
@@ -3426,8 +3426,8 @@
 				{ id: "3442BA2FACA6891F", type: "checkmark" }
 			]
 			title: "K2taf7 Dust"
-			x: 67.0d
-			y: 30.75d
+			x: 59.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["5C0E4351C9B7E31D"]
@@ -3440,8 +3440,8 @@
 				{ id: "361FE432766175C1", type: "checkmark" }
 			]
 			title: "Extraction Cascade"
-			x: 69.5d
-			y: 30.75d
+			x: 62.25d
+			y: 36.75d
 		}
 		{
 			dependencies: ["59511562BCFD3D0D"]
@@ -3453,8 +3453,8 @@
 				{ id: "5B69D47450659464", type: "checkmark" }
 			]
 			title: "Hafnium Tantalum Oxide"
-			x: 72.0d
-			y: 30.75d
+			x: 64.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["1E066ED045B7DEC3"]
@@ -3466,8 +3466,8 @@
 				{ id: "143D47F4907C7A3A", type: "checkmark" }
 			]
 			title: "Ta Hf C Powder"
-			x: 74.5d
-			y: 30.75d
+			x: 67.25d
+			y: 36.75d
 		}
 		{
 			dependencies: ["72431761943EE12C"]
@@ -3480,8 +3480,8 @@
 				{ id: "736AD28ABF45FB47", type: "checkmark" }
 			]
 			title: "Spark Plasma Sinterer"
-			x: 77.0d
-			y: 32.75d
+			x: 69.75d
+			y: 34.75d
 		}
 		{
 			dependencies: ["5090CF8398EB5A66"]
@@ -3493,8 +3493,8 @@
 				{ id: "323C397FC89237DA", type: "checkmark" }
 			]
 			title: "Ta Hf C Billet"
-			x: 79.5d
-			y: 32.75d
+			x: 72.25d
+			y: 34.75d
 		}
 		{
 			dependencies: ["1489E218067B03E9"]
@@ -3507,8 +3507,8 @@
 				{ id: "3DB25C266FDDA0A5", type: "checkmark" }
 			]
 			title: "CVI Furnace"
-			x: 82.0d
-			y: 32.75d
+			x: 74.75d
+			y: 34.75d
 		}
 		{
 			dependencies: ["1549BF29F5F33712"]
@@ -3520,8 +3520,8 @@
 				{ id: "7C399D67669F8901", type: "checkmark" }
 			]
 			title: "Sealed Hearth Liner"
-			x: 84.5d
-			y: 32.75d
+			x: 77.25d
+			y: 34.75d
 		}
 		{
 			icon: "grindless:pgm_residue"
@@ -3533,8 +3533,8 @@
 				{ id: "3B4A84C6A3F23242", type: "checkmark" }
 			]
 			title: "Pgm Residue"
-			x: 67.0d
-			y: 44.75d
+			x: 49.75d
+			y: 34.75d
 		}
 		{
 			dependencies: ["581FB01FEFE02940"]
@@ -3547,8 +3547,8 @@
 				{ id: "779C18AB1F16DB7E", type: "checkmark" }
 			]
 			title: "Platinum Plant"
-			x: 69.5d
-			y: 44.75d
+			x: 52.25d
+			y: 34.75d
 		}
 		{
 			dependencies: ["3622F3479D0F2E40"]
@@ -3560,8 +3560,8 @@
 				{ id: "57E1A054EE076E1E", type: "checkmark" }
 			]
 			title: "Iridium Sponge"
-			x: 72.0d
-			y: 44.75d
+			x: 54.75d
+			y: 34.75d
 		}
 		{
 			dependencies: ["79DD8814158AD86C"]
@@ -3574,8 +3574,8 @@
 				{ id: "7ABE11714373DC63", type: "checkmark" }
 			]
 			title: "Electron Beam Furnace"
-			x: 74.5d
-			y: 44.75d
+			x: 57.25d
+			y: 34.75d
 		}
 		{
 			dependencies: ["169E08FDE103C8EB"]
@@ -3587,8 +3587,8 @@
 				{ id: "35A6A5CB94514FD2", type: "checkmark" }
 			]
 			title: "Iridium Target"
-			x: 77.0d
-			y: 44.75d
+			x: 59.75d
+			y: 34.75d
 		}
 		{
 			icon: "grindless:sic_mirror_tow"
@@ -3599,8 +3599,8 @@
 				{ id: "18EB3CBB24C28E62", type: "checkmark" }
 			]
 			title: "SIC Mirror Tow"
-			x: 67.0d
-			y: 34.75d
+			x: 54.75d
+			y: 30.75d
 		}
 		{
 			dependencies: ["561EA4C78AE52275"]
@@ -3613,8 +3613,8 @@
 				{ id: "7DF2564B774AC080", type: "checkmark" }
 			]
 			title: "CVI Furnace"
-			x: 69.5d
-			y: 34.75d
+			x: 57.25d
+			y: 30.75d
 		}
 		{
 			dependencies: ["7274A505ABD80A8D"]
@@ -3626,11 +3626,11 @@
 				{ id: "76CCD3AE81DAC756", type: "checkmark" }
 			]
 			title: "SIC Grazing Shell"
-			x: 72.0d
-			y: 36.75d
+			x: 59.75d
+			y: 32.75d
 		}
 		{
-			dependencies: ["7F56C6AE03E050BF"]
+			dependencies: ["7F56C6AE03E050BF", "3A0631BBEE222F96"]
 			icon: "gtceu:mtj_sputter_cluster"
 			id: "3A2AEF23C958293F"
 			shape: "gear"
@@ -3640,8 +3640,8 @@
 				{ id: "1E4B8E52A80B70AF", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 74.5d
-			y: 36.75d
+			x: 62.25d
+			y: 32.75d
 		}
 		{
 			dependencies: ["3A2AEF23C958293F"]
@@ -3653,8 +3653,8 @@
 				{ id: "5EDB955D83A6547A", type: "checkmark" }
 			]
 			title: "Iridium Coated Shell"
-			x: 77.0d
-			y: 36.75d
+			x: 64.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["18499F1E16F1DED1"]
@@ -3666,8 +3666,8 @@
 				{ id: "1E47713FDDDE33C5", type: "checkmark" }
 			]
 			title: "Wolter Mirror Module"
-			x: 79.5d
-			y: 36.75d
+			x: 67.25d
+			y: 32.75d
 		}
 		{
 			icon: "gtceu:silicon_dioxide_dust"
@@ -3680,7 +3680,7 @@
 			]
 			title: "Silicon Dioxide Dust"
 			x: 20.5d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["579EBA4AC0EFE20B"]
@@ -3693,7 +3693,7 @@
 			]
 			title: "Silica Alcogel"
 			x: 23.0d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["34E5C42A092F71FE"]
@@ -3706,7 +3706,7 @@
 			]
 			title: "Silylated Alcogel"
 			x: 25.5d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["392164896F180DEC"]
@@ -3720,7 +3720,7 @@
 			]
 			title: "Aerogel Works"
 			x: 28.0d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["5999A2916D16FB6C"]
@@ -3733,7 +3733,7 @@
 			]
 			title: "Aerogel Superleak Plug"
 			x: 30.5d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["5E1D0B70E226A1CD"]
@@ -3746,7 +3746,7 @@
 			]
 			title: "Potted Superleak"
 			x: 33.0d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["15D458244D8F1D97"]
@@ -3760,7 +3760,7 @@
 			]
 			title: "Shequid Works"
 			x: 35.5d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["3EF09B4A463C9D45"]
@@ -3773,7 +3773,7 @@
 			]
 			title: "Calibrated Superleak"
 			x: 38.0d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["5C05F21B64BDAD57"]
@@ -3787,7 +3787,7 @@
 			]
 			title: "Millikelvin Cryostat Works"
 			x: 40.5d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["15DAFA22B83A46CB"]
@@ -3800,7 +3800,7 @@
 			]
 			title: "Cold Tested Superleak"
 			x: 43.0d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["121D8D2D478BF8C9"]
@@ -3813,7 +3813,7 @@
 			]
 			title: "Superfluid Valve"
 			x: 45.5d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["756A4E407463E1DA"]
@@ -3826,7 +3826,7 @@
 			]
 			title: "Max Fluid Regulator"
 			x: 48.0d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			icon: "grindless:strontium_carbonate_dust"
@@ -3838,8 +3838,8 @@
 				{ id: "5E7B3AD94F675FDC", type: "checkmark" }
 			]
 			title: "Strontium Carbonate Dust"
-			x: 20.5d
-			y: 88.75d
+			x: 15.5d
+			y: 70.75d
 		}
 		{
 			dependencies: ["3EB8B7B250FDA064"]
@@ -3852,8 +3852,8 @@
 				{ id: "5AE24ED26E519D63", type: "checkmark" }
 			]
 			title: "Calutron"
-			x: 23.0d
-			y: 88.75d
+			x: 18.0d
+			y: 70.75d
 		}
 		{
 			dependencies: ["30FE0105695C2133"]
@@ -3865,8 +3865,8 @@
 				{ id: "783AC228F27D2911", type: "checkmark" }
 			]
 			title: "Sr88 Isotope"
-			x: 25.5d
-			y: 88.75d
+			x: 20.5d
+			y: 70.75d
 		}
 		{
 			dependencies: ["70213F72603A5B61"]
@@ -3879,8 +3879,8 @@
 				{ id: "1D0C65844FBD86E6", type: "checkmark" }
 			]
 			title: "Quantum Gas Lab"
-			x: 28.0d
-			y: 88.75d
+			x: 23.0d
+			y: 70.75d
 		}
 		{
 			dependencies: ["34D8B3B6729E73C5"]
@@ -3892,8 +3892,8 @@
 				{ id: "79520502A68824B1", type: "checkmark" }
 			]
 			title: "Degenerate Sr Cartridge"
-			x: 30.5d
-			y: 88.75d
+			x: 25.5d
+			y: 70.75d
 		}
 		{
 			icon: "grindless:lithium_niobate_wafer"
@@ -3905,7 +3905,7 @@
 			]
 			title: "Lithium Niobate Wafer"
 			x: 20.5d
-			y: 90.75d
+			y: 72.75d
 		}
 		{
 			dependencies: ["1AA30286BA7E78C5"]
@@ -3919,7 +3919,7 @@
 			]
 			title: "Tfln Fab"
 			x: 23.0d
-			y: 90.75d
+			y: 72.75d
 		}
 		{
 			dependencies: ["1DDF5BE63BC33C1C"]
@@ -3932,7 +3932,7 @@
 			]
 			title: "Atom Optics Modulator"
 			x: 25.5d
-			y: 90.75d
+			y: 72.75d
 		}
 		{
 			icon: "grindless:cryo_cmos_die"
@@ -3944,7 +3944,7 @@
 			]
 			title: "Cryo Cmos Die"
 			x: 20.5d
-			y: 92.75d
+			y: 68.75d
 		}
 		{
 			dependencies: ["52B7BE2912202909"]
@@ -3958,7 +3958,7 @@
 			]
 			title: "Shequid Works"
 			x: 23.0d
-			y: 92.75d
+			y: 68.75d
 		}
 		{
 			dependencies: ["748C507C741B592F"]
@@ -3971,10 +3971,10 @@
 			]
 			title: "Shequid Rotation Ref"
 			x: 25.5d
-			y: 92.75d
+			y: 68.75d
 		}
 		{
-			dependencies: ["5549C94FBB6CB666"]
+			dependencies: ["72A743F379F29563", "557E726E09A93F65", "5549C94FBB6CB666"]
 			icon: "gtceu:atom_interferometer_works"
 			id: "1F1094B4B84A04B9"
 			shape: "gear"
@@ -3985,7 +3985,7 @@
 			]
 			title: "Atom Interferometer Works"
 			x: 28.0d
-			y: 92.75d
+			y: 68.75d
 		}
 		{
 			dependencies: ["1F1094B4B84A04B9"]
@@ -3998,7 +3998,7 @@
 			]
 			title: "Matter Wave Gradiometer"
 			x: 30.5d
-			y: 92.75d
+			y: 68.75d
 		}
 		{
 			icon: "grindless:itbtc_coated_conductor"
@@ -4011,7 +4011,7 @@
 			]
 			title: "Itbtc Coated Conductor"
 			x: 18.0d
-			y: 70.75d
+			y: 72.75d
 		}
 		{
 			dependencies: ["570912EE8528FEDB"]
@@ -4025,7 +4025,7 @@
 			]
 			title: "Coated Conductor Line"
 			x: 20.5d
-			y: 68.75d
+			y: 74.75d
 		}
 		{
 			dependencies: ["7439425AA858F11E"]
@@ -4038,7 +4038,7 @@
 			]
 			title: "Rebco Tape Max"
 			x: 23.0d
-			y: 68.75d
+			y: 74.75d
 		}
 		{
 			dependencies: ["3A1E4C3C4F1A502F"]
@@ -4051,7 +4051,7 @@
 			]
 			title: "Stabilised Rebco Tape"
 			x: 25.5d
-			y: 68.75d
+			y: 74.75d
 		}
 		{
 			dependencies: ["51F940A0BD37D008"]
@@ -4065,7 +4065,7 @@
 			]
 			title: "CVI Furnace"
 			x: 28.0d
-			y: 68.75d
+			y: 74.75d
 		}
 		{
 			dependencies: ["531BC18F454C347F"]
@@ -4078,7 +4078,7 @@
 			]
 			title: "Cmc Coil Former"
 			x: 30.5d
-			y: 70.75d
+			y: 72.75d
 		}
 		{
 			dependencies: ["3D83EAB4F8B70A52"]
@@ -4092,7 +4092,7 @@
 			]
 			title: "Hts Magnet Works"
 			x: 33.0d
-			y: 70.75d
+			y: 72.75d
 		}
 		{
 			dependencies: ["5A7C3A3EA0B3032D"]
@@ -4105,7 +4105,7 @@
 			]
 			title: "Max Coil Winding"
 			x: 35.5d
-			y: 70.75d
+			y: 72.75d
 		}
 		{
 			dependencies: ["72ACDF9B814062CB"]
@@ -4118,7 +4118,7 @@
 			]
 			title: "Max Field Coil"
 			x: 38.0d
-			y: 70.75d
+			y: 72.75d
 		}
 		{
 			icon: "grindless:sic_fibre"
@@ -4172,7 +4172,7 @@
 			]
 			title: "CVI Furnace"
 			x: 20.5d
-			y: 72.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["7AEFC561A7B08FC8"]
@@ -4185,7 +4185,7 @@
 			]
 			title: "SIC SIC Preform"
 			x: 23.0d
-			y: 72.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["75357A562F0C7D0A"]
@@ -4198,7 +4198,7 @@
 			]
 			title: "Exotic Infiltrated Preform"
 			x: 25.5d
-			y: 72.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["1F6F2695E5F2E373"]
@@ -4212,7 +4212,7 @@
 			]
 			title: "Spark Plasma Sinterer"
 			x: 28.0d
-			y: 72.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["7B6D9B95C8CE9E2B"]
@@ -4278,7 +4278,7 @@
 			]
 			title: "PBO Fibre"
 			x: 15.5d
-			y: 78.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["1AA47FD7DA6DC057"]
@@ -4292,7 +4292,7 @@
 			]
 			title: "PBO Plant"
 			x: 18.0d
-			y: 78.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["5AE33B311B5F85E0"]
@@ -4305,7 +4305,7 @@
 			]
 			title: "PBO Belt Web"
 			x: 20.5d
-			y: 76.75d
+			y: 78.75d
 		}
 		{
 			dependencies: ["7E929858ACDCC780"]
@@ -4318,7 +4318,7 @@
 			]
 			title: "Primed Belt Web"
 			x: 23.0d
-			y: 76.75d
+			y: 78.75d
 		}
 		{
 			dependencies: ["1E7D02255F20EA9C"]
@@ -4332,7 +4332,7 @@
 			]
 			title: "Electron Beam Furnace"
 			x: 25.5d
-			y: 76.75d
+			y: 78.75d
 		}
 		{
 			dependencies: ["3733272DC77FFA0C"]
@@ -4345,7 +4345,7 @@
 			]
 			title: "Refractory Wear Coat"
 			x: 28.0d
-			y: 76.75d
+			y: 78.75d
 		}
 		{
 			dependencies: ["53EC337231146A56"]
@@ -4359,7 +4359,7 @@
 			]
 			title: "Helium Refrigerator"
 			x: 30.5d
-			y: 78.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["39FC188F60ADCE9D"]
@@ -4372,7 +4372,7 @@
 			]
 			title: "Cryo Conditioned Web"
 			x: 33.0d
-			y: 78.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["7B1816757AC4E825"]
@@ -4386,7 +4386,7 @@
 			]
 			title: "Membrane Line"
 			x: 35.5d
-			y: 78.75d
+			y: 76.75d
 		}
 		{
 			dependencies: ["1FE6A8E41988956F"]
@@ -4399,7 +4399,7 @@
 			]
 			title: "Membrane Belt"
 			x: 38.0d
-			y: 78.75d
+			y: 76.75d
 		}
 		{
 			icon: "gtceu:fe16n2_dust"
@@ -4411,8 +4411,8 @@
 				{ id: "79B9F3F9483B2AE6", type: "checkmark" }
 			]
 			title: "Fe16n2 Dust"
-			x: 20.5d
-			y: 94.75d
+			x: 25.5d
+			y: 66.75d
 		}
 		{
 			dependencies: ["1FA45013D3F1047E"]
@@ -4425,8 +4425,8 @@
 				{ id: "79E8AFEFA1A51640", type: "checkmark" }
 			]
 			title: "Nitride Magnet Works"
-			x: 23.0d
-			y: 94.75d
+			x: 28.0d
+			y: 66.75d
 		}
 		{
 			dependencies: ["1A8216684D963779"]
@@ -4438,8 +4438,8 @@
 				{ id: "18C53232A4CBCCDD", type: "checkmark" }
 			]
 			title: "Fe16n2 Ring Magnet"
-			x: 25.5d
-			y: 94.75d
+			x: 30.5d
+			y: 66.75d
 		}
 		{
 			icon: "grindless:yig_film_wafer"
@@ -4505,7 +4505,7 @@
 			]
 			title: "YIG On Ln Wafer"
 			x: 30.5d
-			y: 82.75d
+			y: 78.75d
 		}
 		{
 			dependencies: ["12D633435A6929B5"]
@@ -4519,7 +4519,7 @@
 			]
 			title: "Femtosecond Writer"
 			x: 33.0d
-			y: 82.75d
+			y: 78.75d
 		}
 		{
 			dependencies: ["7AE99443412D1F27"]
@@ -4532,7 +4532,7 @@
 			]
 			title: "Isolator Waveguide Die"
 			x: 35.5d
-			y: 82.75d
+			y: 78.75d
 		}
 		{
 			dependencies: ["5864AC2FBDC42FEE"]
@@ -4545,7 +4545,7 @@
 			]
 			title: "Max Optical Isolator"
 			x: 38.0d
-			y: 82.75d
+			y: 78.75d
 		}
 		{
 			icon: "grindless:yttrium_oxide_dust"
@@ -4558,7 +4558,7 @@
 			]
 			title: "Yttrium Oxide Dust"
 			x: 15.5d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["73945D069E435025"]
@@ -4572,7 +4572,7 @@
 			]
 			title: "Extraction Cascade"
 			x: 18.0d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["3609C8E2D1450FC6", "1835561704177DE9"]
@@ -4585,7 +4585,7 @@
 			]
 			title: "Ybco Precursor Powder"
 			x: 20.5d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["5828BD2D37F2B306"]
@@ -4599,7 +4599,7 @@
 			]
 			title: "Single Crystal Foundry"
 			x: 23.0d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["5E51ACC2374DB68C"]
@@ -4612,7 +4612,7 @@
 			]
 			title: "Tsmg Ybco Bulk"
 			x: 25.5d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["1F4879323BD04B2B"]
@@ -4626,7 +4626,7 @@
 			]
 			title: "High Flux Reactor"
 			x: 28.0d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["300D5FCEE66D33AD"]
@@ -4639,10 +4639,10 @@
 			]
 			title: "Irradiated Ybco Bulk"
 			x: 30.5d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
-			dependencies: ["12414E61F9C50C72"]
+			dependencies: ["12414E61F9C50C72", "72FFAEEADC2B0D6A"]
 			icon: "gtceu:nitride_magnet_works"
 			id: "7BB4838CFA406DE2"
 			shape: "gear"
@@ -4653,7 +4653,7 @@
 			]
 			title: "Nitride Magnet Works"
 			x: 33.0d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["7BB4838CFA406DE2"]
@@ -4666,7 +4666,7 @@
 			]
 			title: "Bearing Rotor Ring"
 			x: 35.5d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["1C02E6B8F18E858D"]
@@ -4679,7 +4679,7 @@
 			]
 			title: "Sc Magnetic Bearing"
 			x: 38.0d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			icon: "gtceu:mixed_rare_earth_chloride_dust"
@@ -4692,7 +4692,7 @@
 			]
 			title: "Mixed Rare Earth Chloride Dust"
 			x: 20.5d
-			y: 84.75d
+			y: 82.75d
 		}
 		{
 			dependencies: ["76A2A36D571E2B5C"]
@@ -4706,7 +4706,7 @@
 			]
 			title: "Extraction Cascade"
 			x: 23.0d
-			y: 84.75d
+			y: 82.75d
 		}
 		{
 			dependencies: ["366D92200301B2C7"]
@@ -4719,7 +4719,7 @@
 			]
 			title: "Tb Dy Oxide"
 			x: 25.5d
-			y: 84.75d
+			y: 82.75d
 		}
 		{
 			dependencies: ["5CE393130A4D7467"]
@@ -4733,7 +4733,7 @@
 			]
 			title: "Levitation Melter"
 			x: 28.0d
-			y: 84.75d
+			y: 82.75d
 		}
 		{
 			dependencies: ["79A8AA18ADAC4A33"]
@@ -4746,7 +4746,7 @@
 			]
 			title: "Terfenol Ingot"
 			x: 30.5d
-			y: 86.75d
+			y: 80.75d
 		}
 		{
 			dependencies: ["74ED46BC497889FB"]
@@ -4760,7 +4760,7 @@
 			]
 			title: "Single Crystal Foundry"
 			x: 33.0d
-			y: 86.75d
+			y: 80.75d
 		}
 		{
 			dependencies: ["50321D0359535D71"]
@@ -4773,7 +4773,7 @@
 			]
 			title: "Oriented Terfenol Rod"
 			x: 35.5d
-			y: 86.75d
+			y: 80.75d
 		}
 		{
 			dependencies: ["3B9D1BC607280C4C"]
@@ -4786,7 +4786,7 @@
 			]
 			title: "Laminated Terfenol Stack"
 			x: 38.0d
-			y: 86.75d
+			y: 80.75d
 		}
 		{
 			icon: "grindless:ablated_shell_segment"
@@ -4799,7 +4799,7 @@
 			]
 			title: "Ablated Shell Segment"
 			x: 0.5d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["7E577098BBC44E56"]
@@ -4813,7 +4813,7 @@
 			]
 			title: "Segment Reclamation Works"
 			x: 3.0d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["760564E05F0013BF"]
@@ -4826,7 +4826,7 @@
 			]
 			title: "Stripped Membrane Scrap"
 			x: 5.5d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["535FAF96D725FF63"]
@@ -4840,7 +4840,7 @@
 			]
 			title: "Biofoundry"
 			x: 8.0d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["595476F37447D67B"]
@@ -4853,7 +4853,7 @@
 			]
 			title: "Bioleached Re Liquor"
 			x: 10.5d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["52C871A47231EE99"]
@@ -4867,7 +4867,7 @@
 			]
 			title: "Extraction Cascade"
 			x: 13.0d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["79C1EAE9CD1CA44E"]
@@ -4880,7 +4880,7 @@
 			]
 			title: "Y Ba Cu Raffinate"
 			x: 15.5d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["304F3247C9958A19"]
@@ -4893,7 +4893,7 @@
 			]
 			title: "Ybco Oxalate"
 			x: 18.0d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			icon: "gtceu:phosphorus_dust"
@@ -4906,7 +4906,7 @@
 			]
 			title: "Phosphorus Dust"
 			x: 52.25d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["3417B744BFD4574E"]
@@ -4920,7 +4920,7 @@
 			]
 			title: "Biofoundry"
 			x: 54.75d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["7B756C05CE72A469"]
@@ -4933,7 +4933,7 @@
 			]
 			title: "Synthetic Oligo Pool"
 			x: 57.25d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["1985A27E44B58411"]
@@ -4947,7 +4947,7 @@
 			]
 			title: "Organoid Lab"
 			x: 59.75d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["5CBC6F272BF7E514"]
@@ -4960,7 +4960,7 @@
 			]
 			title: "Organoid Genome Extract"
 			x: 62.25d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["1C7E66C5DACD05A1"]
@@ -4974,7 +4974,7 @@
 			]
 			title: "Ark Biosphere"
 			x: 64.75d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["3BF6709C96118492"]
@@ -4987,7 +4987,7 @@
 			]
 			title: "Ark Genome Set"
 			x: 67.25d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["186D23B9A739B5C9"]
@@ -5001,7 +5001,7 @@
 			]
 			title: "Xenobotany Greenhouse"
 			x: 69.75d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["33332024270A0E6B"]
@@ -5014,7 +5014,7 @@
 			]
 			title: "Xeno Genome Set"
 			x: 72.25d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["50536ED9BA50EE25"]
@@ -5028,7 +5028,7 @@
 			]
 			title: "Aerogel Works"
 			x: 74.75d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["5AE9F29B54178F68"]
@@ -5041,7 +5041,7 @@
 			]
 			title: "Encapsulated Genome Library"
 			x: 77.25d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["710F16860FCB6B30"]
@@ -5055,7 +5055,7 @@
 			]
 			title: "Gene Ark"
 			x: 79.75d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["3EB4E5366CEFEA93"]
@@ -5068,7 +5068,7 @@
 			]
 			title: "Genome Archive"
 			x: 82.25d
-			y: 62.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["1985A27E44B58411"]
@@ -5082,7 +5082,7 @@
 			]
 			title: "Biofoundry"
 			x: 59.75d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["32053509DEF430BA"]
@@ -5095,7 +5095,7 @@
 			]
 			title: "Syn3 Genome Cassettes"
 			x: 62.25d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["1D63E372E7B78A72"]
@@ -5109,7 +5109,7 @@
 			]
 			title: "Vent Bioreactor"
 			x: 64.75d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["1D672EE9320D3D69"]
@@ -5122,7 +5122,7 @@
 			]
 			title: "Recipient Mycoplasma Culture"
 			x: 67.25d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["386F9C49AC99890B"]
@@ -5136,7 +5136,7 @@
 			]
 			title: "Xenobiochem Plant"
 			x: 69.75d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["3D6FDACCBA32F11A"]
@@ -5149,7 +5149,7 @@
 			]
 			title: "Transplanted Minimal Cell"
 			x: 72.25d
-			y: 66.75d
+			y: 64.75d
 		}
 		{
 			dependencies: ["5231A2A36B4C557E"]
@@ -5163,7 +5163,7 @@
 			]
 			title: "Radiotrophic Vat"
 			x: 74.75d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["5F86D75B9EAAEA85"]
@@ -5176,7 +5176,7 @@
 			]
 			title: "Hardened Minimal Cell"
 			x: 77.25d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["381052184213AEF2"]
@@ -5190,7 +5190,7 @@
 			]
 			title: "Aerogel Works"
 			x: 79.75d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["54E78C2ABB128778"]
@@ -5203,7 +5203,7 @@
 			]
 			title: "Vitrified Cell Capsule"
 			x: 82.25d
-			y: 64.75d
+			y: 62.75d
 		}
 		{
 			icon: "grindless:sic_fibre"
@@ -5216,7 +5216,7 @@
 			]
 			title: "SIC Fibre"
 			x: 3.0d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["7F86FB1F10C5A50E"]
@@ -5230,7 +5230,7 @@
 			]
 			title: "SIC Fibre Plant"
 			x: 5.5d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["56F48A6B032E4EBD"]
@@ -5243,7 +5243,7 @@
 			]
 			title: "SIC Mirror Tow"
 			x: 8.0d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["19611D2BEABCD241"]
@@ -5257,7 +5257,7 @@
 			]
 			title: "CVI Furnace"
 			x: 10.5d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["5A1E48F0BCF562D9"]
@@ -5270,7 +5270,7 @@
 			]
 			title: "SIC Dish Blank"
 			x: 13.0d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["5F8BD9F62EE30162"]
@@ -5284,7 +5284,7 @@
 			]
 			title: "Ion Implanter"
 			x: 15.5d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["374CD0A4C0431063"]
@@ -5297,7 +5297,7 @@
 			]
 			title: "Figured Dish Blank"
 			x: 18.0d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["1E2602CF58D5CF42"]
@@ -5311,7 +5311,7 @@
 			]
 			title: "MTJ Sputter Cluster"
 			x: 20.5d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["5DEE7938608943F9"]
@@ -5324,7 +5324,7 @@
 			]
 			title: "Gold Coated Dish"
 			x: 23.0d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["705B7811699DEA44"]
@@ -5337,7 +5337,7 @@
 			]
 			title: "Imager Dish Panel"
 			x: 25.5d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["378ECEC5ABFCC3A0", "7E731CECB48FE5F5", "15EBBC7A3E519089", "51AA9958FCA241B1"]
@@ -5351,7 +5351,7 @@
 			]
 			title: "Photon Ring Imager"
 			x: 28.0d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["5A8CE88BD406C378"]
@@ -5364,7 +5364,7 @@
 			]
 			title: "Sgr A Spin Map"
 			x: 30.5d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			icon: "gtceu:niobium_dust"
@@ -5377,7 +5377,7 @@
 			]
 			title: "Niobium Dust"
 			x: 3.0d
-			y: 104.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["1A62AF69D87E6610"]
@@ -5391,7 +5391,7 @@
 			]
 			title: "MTJ Sputter Cluster"
 			x: 5.5d
-			y: 104.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["3512E137EC037611"]
@@ -5404,7 +5404,7 @@
 			]
 			title: "Nb Alox Nb Trilayer"
 			x: 8.0d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["5425277025BDFA78"]
@@ -5418,7 +5418,7 @@
 			]
 			title: "Beuv Scanner"
 			x: 10.5d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["1B98943DD635E9D1"]
@@ -5431,7 +5431,7 @@
 			]
 			title: "SIS Junction Wafer"
 			x: 13.0d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["78C0036125E4FF6A"]
@@ -5444,7 +5444,7 @@
 			]
 			title: "Anodised Junction Wafer"
 			x: 15.5d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["1DD4597AD0DE4CCB"]
@@ -5457,7 +5457,7 @@
 			]
 			title: "SIS Die"
 			x: 18.0d
-			y: 104.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["3E200D6B8E090A74"]
@@ -5471,7 +5471,7 @@
 			]
 			title: "Millikelvin Cryostat Works"
 			x: 20.5d
-			y: 104.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["1527FCE4E5A834C9"]
@@ -5484,7 +5484,7 @@
 			]
 			title: "Tested SIS Die"
 			x: 23.0d
-			y: 104.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["5243DA77A33A9117"]
@@ -5497,7 +5497,7 @@
 			]
 			title: "SIS Mixer"
 			x: 25.5d
-			y: 104.75d
+			y: 92.75d
 		}
 		{
 			icon: "grindless:semi_insulating_inp_wafer"
@@ -5510,7 +5510,7 @@
 			]
 			title: "Semi Insulating INP Wafer"
 			x: 5.5d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			dependencies: ["1C6501D8453F0EB3"]
@@ -5524,7 +5524,7 @@
 			]
 			title: "Mocvd Reactor"
 			x: 8.0d
-			y: 98.75d
+			y: 86.75d
 		}
 		{
 			dependencies: ["744C15D06D69D0AF"]
@@ -5537,7 +5537,7 @@
 			]
 			title: "INP UTC Epi Wafer"
 			x: 10.5d
-			y: 98.75d
+			y: 86.75d
 		}
 		{
 			dependencies: ["5AB6B0FA0FF02AA9"]
@@ -5551,7 +5551,7 @@
 			]
 			title: "Beuv Scanner"
 			x: 13.0d
-			y: 98.75d
+			y: 86.75d
 		}
 		{
 			dependencies: ["71651736DA5FA5AC"]
@@ -5564,7 +5564,7 @@
 			]
 			title: "UTC Photodiode Wafer"
 			x: 15.5d
-			y: 98.75d
+			y: 86.75d
 		}
 		{
 			dependencies: ["5826995F7D5768F5"]
@@ -5577,7 +5577,7 @@
 			]
 			title: "Passivated UTC Wafer"
 			x: 18.0d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			dependencies: ["7446CAB936483B64"]
@@ -5590,7 +5590,7 @@
 			]
 			title: "UTC Die"
 			x: 20.5d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			dependencies: ["199CA4AE2C952682"]
@@ -5604,7 +5604,7 @@
 			]
 			title: "Photonic Foundry"
 			x: 23.0d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			dependencies: ["5AE94E9C9ADB8D38"]
@@ -5617,7 +5617,7 @@
 			]
 			title: "Photonic Lo Module"
 			x: 25.5d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			icon: "gtceu:indium_dust"
@@ -5630,7 +5630,7 @@
 			]
 			title: "Indium Dust"
 			x: 0.5d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["32CF3956B678216E"]
@@ -5644,7 +5644,7 @@
 			]
 			title: "Crystal Growth Furnace"
 			x: 3.0d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["1E5158B74594DBF6"]
@@ -5657,7 +5657,7 @@
 			]
 			title: "Semi Insulating INP Wafer"
 			x: 5.5d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["349F090DE86F725C"]
@@ -5671,7 +5671,7 @@
 			]
 			title: "Mbe Reactor"
 			x: 8.0d
-			y: 108.75d
+			y: 96.75d
 		}
 		{
 			dependencies: ["10F8D62714EC3751"]
@@ -5684,7 +5684,7 @@
 			]
 			title: "INP Hemt Epi"
 			x: 10.5d
-			y: 108.75d
+			y: 96.75d
 		}
 		{
 			dependencies: ["536DD9F1D6CDAE90"]
@@ -5698,7 +5698,7 @@
 			]
 			title: "Beuv Scanner"
 			x: 13.0d
-			y: 108.75d
+			y: 96.75d
 		}
 		{
 			dependencies: ["74CB26EF0D9A0FDA"]
@@ -5711,7 +5711,7 @@
 			]
 			title: "Hemt Gate Wafer"
 			x: 15.5d
-			y: 108.75d
+			y: 96.75d
 		}
 		{
 			dependencies: ["1C45185D4F92902C"]
@@ -5724,7 +5724,7 @@
 			]
 			title: "Hemt Die"
 			x: 18.0d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["19B70743B9C8E145"]
@@ -5738,7 +5738,7 @@
 			]
 			title: "Helium Refrigerator"
 			x: 20.5d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["1DAF63947EF5E0D1"]
@@ -5751,7 +5751,7 @@
 			]
 			title: "Cryo Tested LNA"
 			x: 23.0d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["15B48EEADAEE1739"]
@@ -5764,7 +5764,7 @@
 			]
 			title: "Cryo LNA Module"
 			x: 25.5d
-			y: 106.75d
+			y: 94.75d
 		}
 		{
 			icon: "gtceu:lepidolite_dust"
@@ -5776,7 +5776,7 @@
 			]
 			title: "Lepidolite Dust"
 			x: 44.75d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["7259DEE96A4C7089"]
@@ -5790,7 +5790,7 @@
 			]
 			title: "Calutron"
 			x: 47.25d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["17C0E8E796055881"]
@@ -5803,7 +5803,7 @@
 			]
 			title: "Rb87 Isotope"
 			x: 49.75d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["7AA82D8A9C3F9F54"]
@@ -5817,7 +5817,7 @@
 			]
 			title: "Quantum Gas Lab"
 			x: 52.25d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["3829EE4ECC832226"]
@@ -5830,10 +5830,10 @@
 			]
 			title: "Atom Cartridge Rb87"
 			x: 54.75d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
-			dependencies: ["19056D8340D1EB89", "797BA1A5DE323A67", "3EF8F23D79C47F7B"]
+			dependencies: ["19056D8340D1EB89", "797BA1A5DE323A67", "3EF8F23D79C47F7B", "3D83801CBC91683B"]
 			icon: "gtceu:rydberg_array_works"
 			id: "1107F9F8EE91CFEE"
 			shape: "gear"
@@ -5844,7 +5844,7 @@
 			]
 			title: "Rydberg Array Works"
 			x: 57.25d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["1107F9F8EE91CFEE"]
@@ -5857,7 +5857,7 @@
 			]
 			title: "Rydberg Logic Array"
 			x: 59.75d
-			y: 102.75d
+			y: 90.75d
 		}
 		{
 			icon: "grindless:gallium_arsenide_wafer"
@@ -5869,8 +5869,8 @@
 				{ id: "7855564197BF33D3", type: "checkmark" }
 			]
 			title: "Gallium Arsenide Wafer"
-			x: 44.75d
-			y: 108.75d
+			x: 49.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["5593AE8FCC19D642"]
@@ -5883,8 +5883,8 @@
 				{ id: "392F16190252500B", type: "checkmark" }
 			]
 			title: "Mocvd Reactor"
-			x: 47.25d
-			y: 108.75d
+			x: 52.25d
+			y: 92.75d
 		}
 		{
 			dependencies: ["3C1770176B483A17"]
@@ -5896,8 +5896,8 @@
 				{ id: "1F010FB799B79D9A", type: "checkmark" }
 			]
 			title: "Rydberg Laser Die"
-			x: 49.75d
-			y: 108.75d
+			x: 54.75d
+			y: 92.75d
 		}
 		{
 			icon: "gtca:silicon_tetrachloride_dust"
@@ -5910,7 +5910,7 @@
 			]
 			title: "Silicon Tetrachloride Dust"
 			x: 34.75d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			dependencies: ["7B2C806D3A4D60AE"]
@@ -5923,7 +5923,7 @@
 			]
 			title: "Synthetic Silica Soot"
 			x: 37.25d
-			y: 98.75d
+			y: 86.75d
 		}
 		{
 			dependencies: ["110375B7AAC6D2F7"]
@@ -5937,7 +5937,7 @@
 			]
 			title: "Zone Refining Tower"
 			x: 39.75d
-			y: 98.75d
+			y: 86.75d
 		}
 		{
 			dependencies: ["15731C862501D555"]
@@ -5950,7 +5950,7 @@
 			]
 			title: "Ultrapure Silica Tube"
 			x: 42.25d
-			y: 98.75d
+			y: 86.75d
 		}
 		{
 			dependencies: ["78A8AAF41E48C6F2"]
@@ -5964,7 +5964,7 @@
 			]
 			title: "Fibre Draw Tower"
 			x: 44.75d
-			y: 98.75d
+			y: 86.75d
 		}
 		{
 			dependencies: ["750C4C3F4BAC0D8D"]
@@ -5977,7 +5977,7 @@
 			]
 			title: "Hollow Core Fibre"
 			x: 47.25d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			dependencies: ["3C5F52C2EC0CAE40"]
@@ -5991,7 +5991,7 @@
 			]
 			title: "Femtosecond Writer"
 			x: 49.75d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			dependencies: ["31E75ADA0394D04E"]
@@ -6004,7 +6004,7 @@
 			]
 			title: "Endcapped Hc Fibre"
 			x: 52.25d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			dependencies: ["5A6278A640D683A5"]
@@ -6017,7 +6017,7 @@
 			]
 			title: "UV Fibre Harness"
 			x: 54.75d
-			y: 100.75d
+			y: 88.75d
 		}
 		{
 			icon: "gtceu:tellurium_dust"
@@ -6030,7 +6030,7 @@
 			]
 			title: "Tellurium Dust"
 			x: 34.75d
-			y: 104.75d
+			y: 90.75d
 		}
 		{
 			dependencies: ["3063A1FE91EB93F7"]
@@ -6044,7 +6044,7 @@
 			]
 			title: "Crystal Growth Furnace"
 			x: 37.25d
-			y: 106.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["19BE1C6D9505D99C"]
@@ -6057,7 +6057,7 @@
 			]
 			title: "Teo2 Boule"
 			x: 39.75d
-			y: 106.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["12ED9EF1681683FE"]
@@ -6070,7 +6070,7 @@
 			]
 			title: "Teo2 AOD Blank"
 			x: 42.25d
-			y: 106.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["5D2BBFFA3DBDA9F3"]
@@ -6084,7 +6084,7 @@
 			]
 			title: "Tfln Fab"
 			x: 44.75d
-			y: 106.75d
+			y: 92.75d
 		}
 		{
 			dependencies: ["704B3E68D41DB817"]
@@ -6097,7 +6097,7 @@
 			]
 			title: "Ln Transducer Bonded Blank"
 			x: 47.25d
-			y: 104.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["53E0FEAC3DED7DD0"]
@@ -6111,7 +6111,7 @@
 			]
 			title: "MTJ Sputter Cluster"
 			x: 49.75d
-			y: 104.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["5ABA4D35181FC864"]
@@ -6124,7 +6124,7 @@
 			]
 			title: "Electroded AOD"
 			x: 52.25d
-			y: 104.75d
+			y: 94.75d
 		}
 		{
 			dependencies: ["3ABD44820C0C6163"]
@@ -6137,7 +6137,7 @@
 			]
 			title: "Crossed AOD Pair"
 			x: 54.75d
-			y: 104.75d
+			y: 94.75d
 		}
 		{
 			icon: "grindless:pbo_fibre"
@@ -6149,7 +6149,7 @@
 			]
 			title: "PBO Fibre"
 			x: 10.5d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["3BD8D2C0F0078E8B"]
@@ -6163,7 +6163,7 @@
 			]
 			title: "PBO Plant"
 			x: 13.0d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["3E0955994CFDABA7"]
@@ -6176,7 +6176,7 @@
 			]
 			title: "PBO Carrier Web"
 			x: 15.5d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["39DC985096841F4E"]
@@ -6190,7 +6190,7 @@
 			]
 			title: "Mocvd Reactor"
 			x: 18.0d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["556C59D175961352"]
@@ -6203,7 +6203,7 @@
 			]
 			title: "Buffered PBO Web"
 			x: 20.5d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["1348937FF8A6ED64"]
@@ -6217,7 +6217,7 @@
 			]
 			title: "Coated Conductor Line"
 			x: 23.0d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["5C7366F0F36BD5A8"]
@@ -6230,7 +6230,7 @@
 			]
 			title: "Rebco On PBO Web"
 			x: 25.5d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["778417B6296E04F4"]
@@ -6244,7 +6244,7 @@
 			]
 			title: "Hts Magnet Works"
 			x: 28.0d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["3DD75A322ECED740"]
@@ -6257,7 +6257,7 @@
 			]
 			title: "Pinned Rebco Web"
 			x: 30.5d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["3A7E0389F2BE01CC"]
@@ -6271,7 +6271,7 @@
 			]
 			title: "Membrane Line"
 			x: 33.0d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["338F23C268CC519E"]
@@ -6284,7 +6284,7 @@
 			]
 			title: "Superconducting Membrane"
 			x: 35.5d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["5E22CE45449F0280"]
@@ -6298,7 +6298,7 @@
 			]
 			title: "Vdw Stacker"
 			x: 20.5d
-			y: 116.75d
+			y: 104.75d
 		}
 		{
 			dependencies: ["76F8AE858045D49F"]
@@ -6311,7 +6311,7 @@
 			]
 			title: "Graphene HBN Film"
 			x: 23.0d
-			y: 116.75d
+			y: 104.75d
 		}
 		{
 			icon: "gtceu:malachite_dust"
@@ -6324,7 +6324,7 @@
 			]
 			title: "Malachite Dust"
 			x: 0.5d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["17818311E5785151"]
@@ -6338,7 +6338,7 @@
 			]
 			title: "Extraction Cascade"
 			x: 3.0d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["7A6D969A441A3E9E"]
@@ -6351,7 +6351,7 @@
 			]
 			title: "Cathode Copper"
 			x: 5.5d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["1CD6DD608D21B900"]
@@ -6365,7 +6365,7 @@
 			]
 			title: "Hot Strip Mill"
 			x: 8.0d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["1290AB9DDD02578A"]
@@ -6378,7 +6378,7 @@
 			]
 			title: "Rolled Cu Foil"
 			x: 10.5d
-			y: 114.75d
+			y: 102.75d
 		}
 		{
 			dependencies: ["3ECA01BE3D969AE7"]
@@ -6392,7 +6392,7 @@
 			]
 			title: "Single Crystal Foundry"
 			x: 13.0d
-			y: 114.75d
+			y: 102.75d
 		}
 		{
 			dependencies: ["14FE2164440C004C"]
@@ -6405,7 +6405,7 @@
 			]
 			title: "Cu111 Foil"
 			x: 15.5d
-			y: 114.75d
+			y: 102.75d
 		}
 		{
 			dependencies: ["56A6BA15DFA699DC"]
@@ -6418,7 +6418,7 @@
 			]
 			title: "Electropolished Cu111 Foil"
 			x: 18.0d
-			y: 114.75d
+			y: 102.75d
 		}
 		{
 			icon: "grindless:hafnium_chloride_dust"
@@ -6430,7 +6430,7 @@
 			]
 			title: "Hafnium Chloride Dust"
 			x: 39.75d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["5E7D179E2CD4580F"]
@@ -6444,7 +6444,7 @@
 			]
 			title: "Extraction Cascade"
 			x: 42.25d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["79F305DA048B1EAB"]
@@ -6457,7 +6457,7 @@
 			]
 			title: "Hafnia Powder"
 			x: 44.75d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["71A504D192C25035"]
@@ -6471,7 +6471,7 @@
 			]
 			title: "Electron Beam Furnace"
 			x: 47.25d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["7341935A9D1D2787"]
@@ -6484,7 +6484,7 @@
 			]
 			title: "Hafnia Target"
 			x: 49.75d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["5F2420B4BA569968"]
@@ -6498,7 +6498,7 @@
 			]
 			title: "MTJ Sputter Cluster"
 			x: 52.25d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["1E6EBCE52799DFE4"]
@@ -6511,7 +6511,7 @@
 			]
 			title: "Hfo2 Sio2 Stack"
 			x: 54.75d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["13223573370CCDF1"]
@@ -6525,7 +6525,7 @@
 			]
 			title: "Membrane Line"
 			x: 57.25d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			dependencies: ["7E9DE4048E784A06"]
@@ -6538,7 +6538,7 @@
 			]
 			title: "Albedo Multilayer Panel"
 			x: 59.75d
-			y: 112.75d
+			y: 100.75d
 		}
 		{
 			icon: "gtceu:silicon_dioxide_dust"
@@ -6551,7 +6551,7 @@
 			]
 			title: "Silicon Dioxide Dust"
 			x: 39.75d
-			y: 114.75d
+			y: 102.75d
 		}
 		{
 			dependencies: ["18423E493D76196E"]
@@ -6565,7 +6565,7 @@
 			]
 			title: "Zone Refining Tower"
 			x: 42.25d
-			y: 114.75d
+			y: 102.75d
 		}
 		{
 			dependencies: ["7854741220A40E1B"]
@@ -6578,7 +6578,7 @@
 			]
 			title: "Ultrapure Silica Target"
 			x: 44.75d
-			y: 114.75d
+			y: 102.75d
 		}
 		{
 			icon: "grindless:cvd_diamond_plate"
@@ -6591,7 +6591,7 @@
 			]
 			title: "Cvd Diamond Plate"
 			x: 0.5d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["7B12D72D417D451C"]
@@ -6605,7 +6605,7 @@
 			]
 			title: "Diamond Lattice Fab"
 			x: 3.0d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["3CF122D7A51F0D7A"]
@@ -6618,7 +6618,7 @@
 			]
 			title: "Power Diamond Plate"
 			x: 5.5d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["54F9C27A06FA4B7D"]
@@ -6632,7 +6632,7 @@
 			]
 			title: "Ion Implanter"
 			x: 8.0d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["59A161A13A7334F2"]
@@ -6645,7 +6645,7 @@
 			]
 			title: "Boron Delta Diamond"
 			x: 10.5d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["54902B46CFC7DBED"]
@@ -6659,7 +6659,7 @@
 			]
 			title: "MTJ Sputter Cluster"
 			x: 13.0d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["3D795B6FBC1C6B0B"]
@@ -6672,7 +6672,7 @@
 			]
 			title: "Metallised Diamond"
 			x: 15.5d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["1C25D1A09EBCA280"]
@@ -6686,7 +6686,7 @@
 			]
 			title: "SIC Device Fab"
 			x: 18.0d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["1652C25A86F7D64A"]
@@ -6699,7 +6699,7 @@
 			]
 			title: "Diamond Power Wafer"
 			x: 20.5d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["5357870175EF943F"]
@@ -6712,7 +6712,7 @@
 			]
 			title: "Diamond Power Die"
 			x: 23.0d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			icon: "grindless:mh_winding"
@@ -6725,7 +6725,7 @@
 			]
 			title: "Mh Winding"
 			x: 27.25d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["1988DFAA150E19D0"]
@@ -6739,7 +6739,7 @@
 			]
 			title: "Accretion Disk Skimmer"
 			x: 29.75d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["326CC351379D3969"]
@@ -6752,7 +6752,7 @@
 			]
 			title: "Hot Flow Plasma"
 			x: 32.25d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["7EADE6AFAAC8DBBE"]
@@ -6766,7 +6766,7 @@
 			]
 			title: "Plasma Mass Filter"
 			x: 34.75d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["7BC67919F08C3D3A"]
@@ -6779,7 +6779,7 @@
 			]
 			title: "Filtered Hot Flow"
 			x: 37.25d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["39CC5C3FF72BB080"]
@@ -6793,7 +6793,7 @@
 			]
 			title: "FRC Former"
 			x: 39.75d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["7D42286F9652E5E9"]
@@ -6806,7 +6806,7 @@
 			]
 			title: "Flux Loaded FRC"
 			x: 42.25d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["7EFB1782CB3FB5D5"]
@@ -6820,7 +6820,7 @@
 			]
 			title: "BZ Dynamo"
 			x: 44.75d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			dependencies: ["56662B1B868001B3"]
@@ -6833,7 +6833,7 @@
 			]
 			title: "Cooled Exhaust"
 			x: 47.25d
-			y: 120.75d
+			y: 108.75d
 		}
 		{
 			icon: "gtnn:radioactive_waste"
@@ -6846,7 +6846,7 @@
 			]
 			title: "Radioactive Waste"
 			x: 0.5d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["12FC9ECE46603623"]
@@ -6860,7 +6860,7 @@
 			]
 			title: "Waste Retrieval Plant"
 			x: 3.0d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["15DEB985C74C9282"]
@@ -6873,7 +6873,7 @@
 			]
 			title: "Retrieved Waste Mix"
 			x: 5.5d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["52D4995B47E004E8"]
@@ -6887,7 +6887,7 @@
 			]
 			title: "Decay Heat Vault"
 			x: 8.0d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["3CF5078E979847A5"]
@@ -6900,7 +6900,7 @@
 			]
 			title: "Cooled Waste Mix"
 			x: 10.5d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["7E0D53F5E3371602"]
@@ -6914,7 +6914,7 @@
 			]
 			title: "Hot Cell"
 			x: 13.0d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["7365EEE76608EF45"]
@@ -6927,7 +6927,7 @@
 			]
 			title: "Vitrified Waste Log"
 			x: 15.5d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["73879066C1BB2925"]
@@ -6940,7 +6940,7 @@
 			]
 			title: "Sealed Waste Log"
 			x: 18.0d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["11B48592A8F40AE4"]
@@ -6953,7 +6953,7 @@
 			]
 			title: "Geroch Canister"
 			x: 20.5d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			icon: "gtceu:yttrium_dust"
@@ -6966,7 +6966,7 @@
 			]
 			title: "Yttrium Dust"
 			x: 24.75d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["1A5B0F975C651310"]
@@ -6980,7 +6980,7 @@
 			]
 			title: "Crystal Growth Furnace"
 			x: 27.25d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["591B2488C7B601F1"]
@@ -6993,7 +6993,7 @@
 			]
 			title: "EU YSO Boule"
 			x: 29.75d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["75C503D85A536182"]
@@ -7006,7 +7006,7 @@
 			]
 			title: "EU YSO Slab"
 			x: 32.25d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["5E50B58BE3DA4989"]
@@ -7020,7 +7020,7 @@
 			]
 			title: "Spectral Hole Burner"
 			x: 34.75d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["12EA33614A7DFA50"]
@@ -7033,7 +7033,7 @@
 			]
 			title: "Burned Memory Crystal"
 			x: 37.25d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["3C2813342B1557B6"]
@@ -7047,7 +7047,7 @@
 			]
 			title: "Fibre Draw Tower"
 			x: 39.75d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["381A906EB62A2EA8"]
@@ -7060,7 +7060,7 @@
 			]
 			title: "Memory Fibre Pigtail"
 			x: 42.25d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			dependencies: ["1EA3D869A95B8569"]
@@ -7073,7 +7073,7 @@
 			]
 			title: "Quantum Memory Node"
 			x: 44.75d
-			y: 124.75d
+			y: 112.75d
 		}
 		{
 			icon: "grindless:sic_sic_plate"
@@ -7084,8 +7084,8 @@
 				{ id: "54E399CD5A0D8BF1", type: "checkmark" }
 			]
 			title: "SIC SIC Plate"
-			x: 0.75d
-			y: 128.75d
+			x: 8.0d
+			y: 118.75d
 		}
 		{
 			dependencies: ["5B5F8AF970A865A0"]
@@ -7098,8 +7098,8 @@
 				{ id: "758257D84B7DDD66", type: "checkmark" }
 			]
 			title: "Spark Plasma Sinterer"
-			x: 3.25d
-			y: 128.75d
+			x: 10.5d
+			y: 118.75d
 		}
 		{
 			dependencies: ["3F6938BE58A65DCE"]
@@ -7111,11 +7111,11 @@
 				{ id: "7DC7BA13F82EEBA1", type: "checkmark" }
 			]
 			title: "Payload Casing"
-			x: 5.75d
-			y: 128.75d
+			x: 13.0d
+			y: 118.75d
 		}
 		{
-			dependencies: ["3CA276C18DEC3EB4"]
+			dependencies: ["36872A79C1A396E1", "3CA276C18DEC3EB4"]
 			icon: "grindless:max_penrose_payload"
 			id: "3A848099E95E65F5"
 			size: 1.25d
@@ -7124,8 +7124,8 @@
 				{ id: "73C6822790731A0A", type: "checkmark" }
 			]
 			title: "Max Penrose Payload"
-			x: 8.25d
-			y: 128.75d
+			x: 15.5d
+			y: 118.75d
 		}
 		{
 			icon: "grindless:degenerate_eos_model"
@@ -7137,8 +7137,8 @@
 				{ id: "7E0A5CA344BA56E8", type: "checkmark" }
 			]
 			title: "Degenerate Eos Model"
-			x: 0.75d
-			y: 130.75d
+			x: 0.5d
+			y: 118.75d
 		}
 		{
 			dependencies: ["391DAC1DD79C23BF"]
@@ -7151,8 +7151,8 @@
 				{ id: "1376B21684214AAC", type: "checkmark" }
 			]
 			title: "Degenerate Harvester"
-			x: 3.25d
-			y: 130.75d
+			x: 3.0d
+			y: 118.75d
 		}
 		{
 			dependencies: ["3362B7A1A61CA677"]
@@ -7164,8 +7164,8 @@
 				{ id: "3240EA19A67A6CA9", type: "checkmark" }
 			]
 			title: "Degenerate Matter Slug"
-			x: 5.75d
-			y: 132.75d
+			x: 5.5d
+			y: 116.75d
 		}
 		{
 			dependencies: ["3455DCCCC36228DE"]
@@ -7178,8 +7178,8 @@
 				{ id: "737555FAD18A9C60", type: "checkmark" }
 			]
 			title: "Megabar Press"
-			x: 8.25d
-			y: 132.75d
+			x: 8.0d
+			y: 116.75d
 		}
 		{
 			dependencies: ["7A633705A7B9A94E"]
@@ -7191,8 +7191,8 @@
 				{ id: "54F0F2661439EABD", type: "checkmark" }
 			]
 			title: "Compressed Payload Core"
-			x: 10.75d
-			y: 132.75d
+			x: 10.5d
+			y: 116.75d
 		}
 		{
 			dependencies: ["17C77C7F391A4C55"]
@@ -7204,8 +7204,8 @@
 				{ id: "7DDC66C27D17E4B8", type: "checkmark" }
 			]
 			title: "Turned Payload Core"
-			x: 13.25d
-			y: 132.75d
+			x: 13.0d
+			y: 116.75d
 		}
 		{
 			icon: "grindless:cvd_diamond_plate"
@@ -7217,8 +7217,8 @@
 				{ id: "587E5425E1C262B8", type: "checkmark" }
 			]
 			title: "Cvd Diamond Plate"
-			x: 17.5d
-			y: 128.75d
+			x: 19.75d
+			y: 116.75d
 		}
 		{
 			dependencies: ["596451E952989B41"]
@@ -7231,8 +7231,8 @@
 				{ id: "1906051AF156689E", type: "checkmark" }
 			]
 			title: "Diamond Lattice Fab"
-			x: 20.0d
-			y: 128.75d
+			x: 22.25d
+			y: 116.75d
 		}
 		{
 			dependencies: ["1912EC7032A36A51"]
@@ -7244,8 +7244,8 @@
 				{ id: "56D60F09A6406730", type: "checkmark" }
 			]
 			title: "Collector Diamond Plate"
-			x: 22.5d
-			y: 128.75d
+			x: 24.75d
+			y: 116.75d
 		}
 		{
 			dependencies: ["194156DE2A01F989"]
@@ -7258,8 +7258,8 @@
 				{ id: "1A88675C9F8871EE", type: "checkmark" }
 			]
 			title: "Ion Implanter"
-			x: 25.0d
-			y: 128.75d
+			x: 27.25d
+			y: 116.75d
 		}
 		{
 			dependencies: ["1058E0DF674966F9"]
@@ -7271,8 +7271,8 @@
 				{ id: "758153A476088004", type: "checkmark" }
 			]
 			title: "Pin Diamond Plate"
-			x: 27.5d
-			y: 128.75d
+			x: 29.75d
+			y: 116.75d
 		}
 		{
 			dependencies: ["5A1DC52A21286E9B"]
@@ -7285,8 +7285,8 @@
 				{ id: "761C0253E06BE377", type: "checkmark" }
 			]
 			title: "Betavoltaic Fab"
-			x: 30.0d
-			y: 128.75d
+			x: 32.25d
+			y: 116.75d
 		}
 		{
 			dependencies: ["71C7FE4029F8A557"]
@@ -7298,8 +7298,8 @@
 				{ id: "36603B79297FF8DE", type: "checkmark" }
 			]
 			title: "Diamond Photocell"
-			x: 32.5d
-			y: 128.75d
+			x: 34.75d
+			y: 116.75d
 		}
 		{
 			dependencies: ["55B063A5907FBE9D"]
@@ -7312,8 +7312,8 @@
 				{ id: "7B1601D6F2D03213", type: "checkmark" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 35.0d
-			y: 128.75d
+			x: 37.25d
+			y: 116.75d
 		}
 		{
 			dependencies: ["341056D6FA61B163"]
@@ -7325,8 +7325,8 @@
 				{ id: "7BA6191313E290C4", type: "checkmark" }
 			]
 			title: "Metallised Photocell"
-			x: 37.5d
-			y: 128.75d
+			x: 39.75d
+			y: 116.75d
 		}
 		{
 			dependencies: ["1D0FE85D601786AC"]
@@ -7339,8 +7339,8 @@
 				{ id: "7AB0233FAC8F7B11", type: "checkmark" }
 			]
 			title: "Solar Array Fab"
-			x: 40.0d
-			y: 128.75d
+			x: 42.25d
+			y: 116.75d
 		}
 		{
 			dependencies: ["3AE787435B6D653C"]
@@ -7352,8 +7352,8 @@
 				{ id: "3F9E599C8532FFF9", type: "checkmark" }
 			]
 			title: "Xuv Collector Panel"
-			x: 42.5d
-			y: 128.75d
+			x: 44.75d
+			y: 116.75d
 		}
 		{
 			icon: "grindless:itbtc_coated_conductor"
@@ -7366,7 +7366,7 @@
 			]
 			title: "Itbtc Coated Conductor"
 			x: 0.5d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["18AD10C9CA8B4346"]
@@ -7380,7 +7380,7 @@
 			]
 			title: "Coated Conductor Line"
 			x: 3.0d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["3E19F069DC9E9A43"]
@@ -7393,7 +7393,7 @@
 			]
 			title: "Smes Buffered Tape"
 			x: 5.5d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["58E9762F8C828B00"]
@@ -7407,7 +7407,7 @@
 			]
 			title: "MTJ Sputter Cluster"
 			x: 8.0d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["52C79E271F710042"]
@@ -7420,7 +7420,7 @@
 			]
 			title: "Thick Rebco Tape"
 			x: 10.5d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["59E5E15EBF1698F9"]
@@ -7434,7 +7434,7 @@
 			]
 			title: "Hts Magnet Works"
 			x: 13.0d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["39F45A1F8A2D0414"]
@@ -7447,7 +7447,7 @@
 			]
 			title: "Smes Toroid Winding"
 			x: 15.5d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["7DE2D8B401860F73"]
@@ -7461,7 +7461,7 @@
 			]
 			title: "Naquadria Magnet Works"
 			x: 18.0d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["19B66DC235695415"]
@@ -7474,7 +7474,7 @@
 			]
 			title: "Braced Smes Toroid"
 			x: 20.5d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["58B8364BD8F99679"]
@@ -7488,7 +7488,7 @@
 			]
 			title: "Helium Refrigerator"
 			x: 23.0d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["58F6CD57E63DA235"]
@@ -7501,7 +7501,7 @@
 			]
 			title: "Cold Smes Toroid"
 			x: 25.5d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			icon: "gtceu:silicon_wafer"
@@ -7514,7 +7514,7 @@
 			]
 			title: "Silicon Wafer"
 			x: 29.75d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["3272E7451F654875"]
@@ -7528,7 +7528,7 @@
 			]
 			title: "Mocvd Reactor"
 			x: 32.25d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["58AA18C896865636"]
@@ -7541,7 +7541,7 @@
 			]
 			title: "Nitride Film Wafer"
 			x: 34.75d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["521A7267BD39CC56"]
@@ -7555,7 +7555,7 @@
 			]
 			title: "Beuv Scanner"
 			x: 37.25d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["182F9CE74EA7F7E9"]
@@ -7568,7 +7568,7 @@
 			]
 			title: "Microring Wafer"
 			x: 39.75d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["34AA039CAD6C4202"]
@@ -7582,7 +7582,7 @@
 			]
 			title: "Femtosecond Writer"
 			x: 42.25d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["3EF5FD8D18EA0EEB"]
@@ -7595,7 +7595,7 @@
 			]
 			title: "Trimmed Microring"
 			x: 44.75d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["3C91409B180FB462"]
@@ -7609,7 +7609,7 @@
 			]
 			title: "Photonic Foundry"
 			x: 47.25d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["5FE66960364CC50C"]
@@ -7622,7 +7622,7 @@
 			]
 			title: "Packaged Microcomb"
 			x: 49.75d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["53AC921045691FEB"]
@@ -7636,7 +7636,7 @@
 			]
 			title: "Nuclear Clock Lab"
 			x: 52.25d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			dependencies: ["3082E7BF3CBF44CA"]
@@ -7649,7 +7649,7 @@
 			]
 			title: "Clock Locked Microcomb"
 			x: 54.75d
-			y: 136.75d
+			y: 122.75d
 		}
 		{
 			icon: "grindless:gallium_arsenide_wafer"
@@ -7661,7 +7661,7 @@
 			]
 			title: "Gallium Arsenide Wafer"
 			x: 0.75d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["75B0D8AA21639666"]
@@ -7675,7 +7675,7 @@
 			]
 			title: "Mbe Reactor"
 			x: 3.25d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["3E1E9107EE5D959E"]
@@ -7688,7 +7688,7 @@
 			]
 			title: "Algaas Bragg Stack"
 			x: 5.75d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["7AC8B283F580E8AB"]
@@ -7701,7 +7701,7 @@
 			]
 			title: "Released Algaas Film"
 			x: 8.25d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["76F259C59A5FDC56"]
@@ -7714,7 +7714,7 @@
 			]
 			title: "Transferred Crystalline Mirror"
 			x: 10.75d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["3814EBEBEBBF466D"]
@@ -7728,7 +7728,7 @@
 			]
 			title: "Helium Refrigerator"
 			x: 13.25d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["7AF89AF4D9496943"]
@@ -7741,7 +7741,7 @@
 			]
 			title: "Cryo Reference Cavity"
 			x: 15.75d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			icon: "gtceu:silicon_dust"
@@ -7754,7 +7754,7 @@
 			]
 			title: "Silicon Dust"
 			x: 0.75d
-			y: 142.75d
+			y: 128.75d
 		}
 		{
 			dependencies: ["5F99A400062ECAE6"]
@@ -7768,7 +7768,7 @@
 			]
 			title: "Crystal Growth Furnace"
 			x: 3.25d
-			y: 142.75d
+			y: 128.75d
 		}
 		{
 			dependencies: ["5CCF164564F09DA6"]
@@ -7781,7 +7781,7 @@
 			]
 			title: "Silicon Cavity Spacer"
 			x: 5.75d
-			y: 142.75d
+			y: 128.75d
 		}
 		{
 			icon: "gtceu:hastelloy_c_276_plate"
@@ -7794,7 +7794,7 @@
 			]
 			title: "Hastelloy C 276 Plate"
 			x: 20.0d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["54F729CA3E543C4F"]
@@ -7807,7 +7807,7 @@
 			]
 			title: "FCL Substrate Strip"
 			x: 22.5d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["31FA6D1EDDC3815D"]
@@ -7821,7 +7821,7 @@
 			]
 			title: "Coated Conductor Line"
 			x: 25.0d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["57AEB6740CFB7130"]
@@ -7834,7 +7834,7 @@
 			]
 			title: "FCL Tape"
 			x: 27.5d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["718580AB39F765F0"]
@@ -7848,7 +7848,7 @@
 			]
 			title: "MTJ Sputter Cluster"
 			x: 30.0d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["7F2F2DF4BEE8AB38"]
@@ -7861,7 +7861,7 @@
 			]
 			title: "Thick Film FCL Tape"
 			x: 32.5d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["39714E7695B648DC"]
@@ -7875,7 +7875,7 @@
 			]
 			title: "Hts Magnet Works"
 			x: 35.0d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["3DA5AE3E9724B5E6"]
@@ -7888,7 +7888,7 @@
 			]
 			title: "FCL Coil"
 			x: 37.5d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["5D3A1D691690E805"]
@@ -7902,7 +7902,7 @@
 			]
 			title: "Helium Refrigerator"
 			x: 40.0d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			dependencies: ["11C305F7940D4D2B"]
@@ -7915,7 +7915,7 @@
 			]
 			title: "Cold FCL Module"
 			x: 42.5d
-			y: 140.75d
+			y: 126.75d
 		}
 		{
 			icon: "gtceu:silicon_dioxide_dust"
@@ -7928,7 +7928,7 @@
 			]
 			title: "Silicon Dioxide Dust"
 			x: 0.5d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["702FDDE5AA0C8DBE"]
@@ -7942,7 +7942,7 @@
 			]
 			title: "Zone Refining Tower"
 			x: 3.0d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["30174F44E9DC4EC4"]
@@ -7955,7 +7955,7 @@
 			]
 			title: "Ultrapure Silica Plate"
 			x: 5.5d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["3B23951B9F077754"]
@@ -7969,7 +7969,7 @@
 			]
 			title: "Femtosecond Writer"
 			x: 8.0d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["11139273D7F622DC"]
@@ -7982,7 +7982,7 @@
 			]
 			title: "Laser Welded Glass Cell"
 			x: 10.5d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["12B2499C5D6EC6DF"]
@@ -7995,7 +7995,7 @@
 			]
 			title: "Annealed Glass Cell"
 			x: 13.0d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["7D85C2A522E602BE"]
@@ -8009,7 +8009,7 @@
 			]
 			title: "MTJ Sputter Cluster"
 			x: 15.5d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["72BB3C728D68F535"]
@@ -8022,7 +8022,7 @@
 			]
 			title: "Ar Coated Glass Cell"
 			x: 18.0d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["3DD9A7EFC3E564FB"]
@@ -8036,7 +8036,7 @@
 			]
 			title: "Helium Refrigerator"
 			x: 20.5d
-			y: 146.75d
+			y: 132.75d
 		}
 		{
 			dependencies: ["7C1827624DF506BA"]
@@ -8049,7 +8049,7 @@
 			]
 			title: "Cold Qualified Cell"
 			x: 23.0d
-			y: 146.75d
+			y: 132.75d
 		}
 	]
 	subtitle: ["The qubit line, strand and tether, the horizon lock, the mirror segment, components, the gene ark, imaging and neutral-atom logic"]
