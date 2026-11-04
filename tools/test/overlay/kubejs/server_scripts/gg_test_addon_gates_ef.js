@@ -13,6 +13,8 @@
 //   addon_shipped        the removed types came with recipes from the addon (so the zeros below are our removal, not a missing mod)
 //   scan                 one pass over every recipe of the manager (item outputs of GT and crafting recipes) could read them all
 //   removed_types        0 recipes of each removed type in the recipe manager
+//   no_disassembler_logic  machine_disassembly has no custom recipe logic left (startup_scripts/grindless/integration/
+//                        extendedfeatures_disassembler.js): the addon's logic needs an integrated server and emptied EMI on servers
 //   removed_ids          the named recipes are gone (platinum_processing_line, end_stone_processing, ...)
 //   removed_controllers  no recipe of any type makes a removed controller
 //   hidden               the removed controllers are in #c:hidden_from_recipe_viewers (hidden in EMI)
@@ -284,6 +286,12 @@
     check('removed_types', bad.length === 0, parts.join(', ') + (bad.length > 0 ? ' | still there: ' + bad.join(', ') : ''))
   }
 
+  function checkNoDisassemblerLogic() {
+    var type = lazy().GTRegistries.RECIPE_TYPES.get(rl(NS + 'machine_disassembly'))
+    var n = type ? Number(type.getCustomRecipeLogicRunners().size()) : -1
+    check('no_disassembler_logic', n === 0, 'machine_disassembly custom recipe logic runners=' + (n < 0 ? 'type missing' : n))
+  }
+
   function checkRemovedIds(rm) {
     var still = REMOVED_IDS.filter(function (id) { return present(rm, id) })
     check('removed_ids', still.length === 0, 'checked ' + REMOVED_IDS.length + ' ids (platinum_processing_line, naquadah_processing_line, ' +
@@ -436,6 +444,7 @@
     })
     if (sc === null) return
     step('removed_types', function () { checkRemovedTypes(rm, sc) })
+    step('no_disassembler_logic', checkNoDisassemblerLogic)
     step('removed_ids', function () { checkRemovedIds(rm) })
     step('removed_controllers', function () { checkRemovedControllers(sc) })
     step('hidden', checkHidden)
