@@ -29,13 +29,16 @@ an agent or the integrator ([architecture.md](architecture.md)).
 
 ## Required and optional checks
 
-Nothing is required yet. Candidates: `T0 (Check-Fast)` (fast, deterministic) and `Linux runner checks`. Keep
-`Windows lock policy` optional until the hosted-runner issue is understood.
+Two repository rulesets (#410, Settings > Rules > Rulesets):
 
-To make one required: GitHub > Settings > Branches (or Rules > Rulesets) > the protected branch > "Require status
-checks to pass" > add the job name exactly as shown above. A path-filtered workflow (Harness) never reports on PRs
-that do not touch its paths, so a required Harness check would block those PRs: require T0 only, or remove the path
-filter first.
+- `main: T0 required`: `main` needs a passing `T0 (Check-Fast)` (not strict; repository admins may bypass, which is how
+  the integrator fast-forwards `main` to a commit whose T0 already passed on the integration branch).
+- `Protected refs: no rewrite or deletion`: `main`, `ezequiel24123z-project-reforge` and `releases` refuse force
+  pushes and deletion, with no bypass. Release promotion only fast-forwards them.
+
+Everything else is optional. Keep `Windows lock policy` optional until the hosted-runner issue is understood. A
+path-filtered workflow (Harness) never reports on PRs that do not touch its paths, so a required Harness check would
+block those PRs: require T0 only, or remove the path filter first.
 
 ## Why no self-hosted runner on the VM
 
