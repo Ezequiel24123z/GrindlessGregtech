@@ -138,9 +138,9 @@ const chapter = {
         n('chamber2', 28.5, 3, M('gtceu:laser_fusion_chamber'), 'Laser Fusion Chamber', {
           kind: 'ours', from: ['dhe3'], desc: 'The same chamber fires the helium-3 capsules; its lasers are the ones above.',
         }),
-        n('alpha2', 31, 3, F('gtceu:helium'), 'Helium', { kind: 'product', from: ['chamber2'], end: 'the network: nothing is vented' }),
+        n('alpha2', 31, 3, F('gtceu:helium'), 'Helium', { kind: 'by', from: ['chamber2'], end: 'the network: nothing is vented' }),
         n('alpha', 28.5, -2.25, F('gtceu:helium'), 'Helium', { kind: 'by', from: ['chamber'], end: 'the network: nothing is vented' }),
-        n('spentL', 28.5, -0.75, I('grindless:spent_laser_module'), 'Spent Laser Module', { kind: 'product', from: ['chamber'], end: 'refurbished in the fibre draw tower' }),
+        n('spentL', 28.5, -0.75, I('grindless:spent_laser_module'), 'Spent Laser Module', { kind: 'ret', from: ['chamber'], end: 'refurbished in the fibre draw tower' }),
         // fibre lasers
         // the fibre: MCVD in three operations, the draw and the grating (V2 steps 1-5)
         n('tube', 16, 6, I('grindless:fused_silica_tube'), 'Fused Silica Tube', { kind: 'raw', sub: 'The substrate the glass is laid inside' }),

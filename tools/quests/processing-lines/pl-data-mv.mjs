@@ -72,7 +72,7 @@ export default {
           desc: 'Polysilicon and a pinch of LV\'s gallium arsenide, grown into one big crystal.',
         }),
         n('wafer', 20, 0, I('gtceu:silicon_wafer'), 'Silicon Wafer', { from: ['boule'], sub: 'Cutter' }),
-        n('ilc', 22, 0, I('gtceu:ilc_chip'), 'ILC Chip', { kind: 'product', from: [via('wafer', 'gtceu:ilc_wafer')], sub: 'Laser engraver, then the cutter' }),
+        n('ilc', 22, 0, I('gtceu:ilc_chip'), 'ILC Chip', { kind: 'product', from: [via('wafer', 'gtceu:ilc_wafer')], by: ['gtceu:laser_engraver', 'gtceu:cutter'], sub: 'Laser engraver, then the cutter' }),
       ],
     },
     wood: {

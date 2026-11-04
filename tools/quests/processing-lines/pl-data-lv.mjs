@@ -207,7 +207,10 @@ export default {
           kind: 'ours', from: ['fert', 'sapling'],
           desc: 'Twice the steam greenhouse, and fertilizer doubles it again. The steam age\'s slag ends up as wood.',
         }),
-        n('logs', 6, 1.5, I('minecraft:oak_log'), 'Logs', { kind: 'product', from: ['gh'] }),
+        n('logs', 6, 1.5, I('minecraft:oak_log'), 'Logs', {
+          kind: 'product', from: ['gh'],
+          keepShort: 'two steps; fertilizer only boosts the stock greenhouse, so this is not a line and LV costs are only reviewed',
+        }),
       ],
     },
     creatures: {
