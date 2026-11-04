@@ -1,0 +1,12 @@
+# High-risk release, CI and security files (#410). Pull requests touching them request the owner's review.
+/.github/workflows/          @Ezequiel24123z
+/.github/CODEOWNERS          @Ezequiel24123z
+/.github/dependabot.yml      @Ezequiel24123z
+/SECURITY.md                 @Ezequiel24123z
+/tools/release/              @Ezequiel24123z
+/tools/prism/                @Ezequiel24123z
+/tools/Update-PackIndex.ps1  @Ezequiel24123z
+/tools/Get-Packwiz.ps1       @Ezequiel24123z
+/tools/Check-Fast.ps1        @Ezequiel24123z
+/pack/pack.toml              @Ezequiel24123z
+/pack/index.toml             @Ezequiel24123z
