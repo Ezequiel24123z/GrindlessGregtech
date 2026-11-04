@@ -325,16 +325,7 @@ export default {
         ['l18_6', I('gtceu:uxv_sensor'), 'UXV Sensor'],
       ], 'the UXV sensor');
       c.feed('l18_5', [
-        ['l6_0', I('grindless:silicon_28_dust'), 'Silicon 28', 'raw'],
-        ['l6_1', ZONE, 'Zone Refining Tower'],
-        ['l6_2', I('grindless:si28_fz_ingot'), 'Si-28 FZ Ingot'],
-        ['l6_3', I('grindless:si28_fz_wafer'), 'Si-28 FZ Wafer'],
-        ['l6_4', I('grindless:h_si28_wafer'), 'H Si-28 Wafer'],
-        ['l6_5', TOOL, 'Spintronic Cluster Tool'],
-        ['l6_6', I('grindless:mtj_stack_wafer'), 'MTJ Stack Wafer'],
-        ['l6_7', I('grindless:annealed_mtj_wafer'), 'Annealed MTJ Wafer'],
-        ['l6_8', I('grindless:etched_mtj_wafer'), 'Etched MTJ Wafer'],
-        ['l6_9', I('grindless:mtj_die'), 'MTJ Die'],
+        ['l6_0', I('grindless:mtj_die'), 'MTJ Die', 'raw', { sub: 'From the spintronic mainframe line (X1)' }],
       ], -1, 1);
     }),
 
