@@ -329,7 +329,8 @@ export function renderChapter(world, era, chapter) {
   if (ch.order === undefined) throw new Error(`${chapter.filename}: CHAPTER.order is required`);
   const group = eraGroupId({ ...ch, era, filename: chapter.filename });
   // Every era chapter shares the Progression group (QB-0), so its place there is its era's place in ERAS, not CHAPTER.order.
-  const order = group === PROGRESSION_GROUP.id ? ERAS.indexOf(era) : ch.order;
+  const eraIndex = ERAS.indexOf(era);
+  const order = group === PROGRESSION_GROUP.id && eraIndex >= 0 ? eraIndex : ch.order;
   const links = chapter.links;
   const lines = [
     '{',
