@@ -2,9 +2,9 @@
 
 A GregTech Modern 7.5.3 modpack for Minecraft 1.20.1 (Forge). You only gather by hand at the very start. After that, everything you need comes out of machines you build and automate, from a steam-powered drill on Earth to a stargate at the edge of the Local Group.
 
-| ![Steam vein drill](docs/images/steam-vein-drill.jpg) | ![Warp gate](docs/images/warp-gate.jpg) | ![Stellar forge](docs/images/stellar-forge.jpg) |
+| ![Steam vein drill](docs/images/steam-vein-drill.png) | ![Stellar forge](docs/images/stellar-forge.png) | ![Hyperstargate](docs/images/hyperstargate.png) |
 |:---:|:---:|:---:|
-| Steam vein drill (Steam Age) | Warp gate (UHV) | Stellar forge (UEV) |
+| Steam vein drill (Steam Age) | Stellar forge (UEV) | Hyperstargate (MAX+, end of the pack) |
 
 ## What the pack is like
 
@@ -16,7 +16,7 @@ The difficulty comes from length and from lines that depend on each other, not f
 
 Along the way you will find:
 
-- More than 300 multiblocks made for this pack, each with an EMI page that explains what it does, on top of GregTech Modern's own machines.
+- 300 validated multiblocks in v1.5.0, each with an EMI page that explains what it does, on top of GregTech Modern's own machines.
 - A quest book with one chapter per tier that introduces new materials, circuits and machines as they appear, plus a flowchart of every processing line.
 - Rockets from Gregicality Rocketry in the first space tiers, then orbital stations, probes, warp gates and relays further out.
 - Applied Energistics 2 as the logistics backbone, with quantum bridges between planets, and a wireless EU network shared by every dimension.
@@ -56,7 +56,7 @@ The pack is distributed as an instance for [Prism Launcher](https://prismlaunche
 
 The instance uses Minecraft 1.20.1, Forge 47.4.28 and Java 17, and is set to use up to 10 GB of memory. Leave the Minecraft and Forge versions as they are.
 
-Each time you launch, the instance checks for a newer tested version and updates the pack files. Your saves are not touched, but back up any world you care about before an update; FTB Backups 2 also keeps copies in the instance's `backups` folder. Worlds started on v1.0.0 or later have carried over to every update so far, but an update may need a new world when there is no other way to make a change. Its release notes will say so. Worlds from v0.17.0 or earlier do not work.
+Each time you launch, the instance checks for a newer tested version and updates the pack files. Your saves are not deleted, but save compatibility is not guaranteed while the pack is in active development. Back up any world you care about before an update; FTB Backups 2 also keeps copies in the instance's `backups` folder. Read the release notes before updating: **v1.5.0 requires a new world.** Worlds from v0.17.0 or earlier do not work.
 
 <details>
 <summary>Pinned versions, older instances and manual setup</summary>
