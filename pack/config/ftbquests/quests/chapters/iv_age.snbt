@@ -6,7 +6,7 @@
 	group: "3F021F40CD26BF57"
 	icon: "gtceu:fission_reactor"
 	id: "10A73E7D249CDD67"
-	order_index: 0
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{

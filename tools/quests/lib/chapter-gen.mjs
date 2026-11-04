@@ -21,9 +21,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { pathToFileURL } from 'node:url';
-import { eraGroupId } from './groups.mjs';
+import { eraGroupId, PROGRESSION_GROUP } from './groups.mjs';
 
-export const ERAS = ['steam', 'lv', 'mv', 'hv', 'iv', 'ev', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
+export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 
 // kind -> shape and size (section 4.2); an explicit shape or size on the quest wins
 export const KINDS = {
@@ -327,6 +327,9 @@ export function renderChapter(world, era, chapter) {
   const focus = e.byKey.get(ch.autofocus);
   if (!focus) throw new Error(`${chapter.filename}: autofocus ${ch.autofocus} is not a quest of era ${era}`);
   if (ch.order === undefined) throw new Error(`${chapter.filename}: CHAPTER.order is required`);
+  const group = eraGroupId({ ...ch, era, filename: chapter.filename });
+  // Every era chapter shares the Progression group (QB-0), so its place there is its era's place in ERAS, not CHAPTER.order.
+  const order = group === PROGRESSION_GROUP.id ? ERAS.indexOf(era) : ch.order;
   const links = chapter.links;
   const lines = [
     '{',
@@ -334,10 +337,10 @@ export function renderChapter(world, era, chapter) {
     '\tdefault_hide_dependency_lines: false',
     '\tdefault_quest_shape: ""',
     '\tfilename: ' + str(chapter.filename),
-    '\tgroup: ' + str(eraGroupId({ ...ch, era, filename: chapter.filename })),
+    '\tgroup: ' + str(group),
     '\ticon: ' + str(ch.icon),
     '\tid: ' + str(ch.id || newId(era, 'chapter|' + chapter.filename)),
-    '\torder_index: ' + ch.order,
+    '\torder_index: ' + order,
     links.length ? '\tquest_links: [\n' + links.map((l) => linkSnbt(l, '\t\t')).join('\n') + '\n\t]' : '\tquest_links: [ ]',
     '\tquests: [',
     shown.map((c) => questSnbt(c, '\t\t')).join('\n'),

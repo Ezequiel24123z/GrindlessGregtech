@@ -6,7 +6,7 @@
 	group: "3F021F40CD26BF57"
 	icon: "grindless:horizon_lock"
 	id: "588638B155C27216"
-	order_index: 0
+	order_index: 15
 	quest_links: [ ]
 	quests: [
 		{

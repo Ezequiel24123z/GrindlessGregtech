@@ -6,7 +6,7 @@
 	group: "3F021F40CD26BF57"
 	icon: "gtceu:uxv_machine_casing"
 	id: "5A3F1380F484E77B"
-	order_index: 0
+	order_index: 12
 	quest_links: [ ]
 	quests: [
 		{

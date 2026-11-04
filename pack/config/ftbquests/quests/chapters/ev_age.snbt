@@ -6,7 +6,7 @@
 	group: "3F021F40CD26BF57"
 	icon: "gtceu:ev_vein_drill"
 	id: "36522099DD26AB80"
-	order_index: 0
+	order_index: 4
 	quest_links: [ ]
 	quests: [
 		{
