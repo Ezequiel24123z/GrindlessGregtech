@@ -16,7 +16,7 @@ The difficulty comes from length and from lines that depend on each other, not f
 
 Along the way you will find:
 
-- 300 validated multiblocks in v1.5.0, each with an EMI page that explains what it does, on top of GregTech Modern's own machines.
+- 300 validated multiblocks in v1.5.1, each with an EMI page that explains what it does, on top of GregTech Modern's own machines.
 - A quest book with one chapter per tier that introduces new materials, circuits and machines as they appear, plus a flowchart of every processing line.
 - Rockets from Gregicality Rocketry in the first space tiers, then orbital stations, probes, warp gates and relays further out.
 - Applied Energistics 2 as the logistics backbone, with quantum bridges between planets, and a wireless EU network shared by every dimension.
@@ -61,7 +61,7 @@ Each time you launch, the instance checks for a newer tested version and updates
 <details>
 <summary>Pinned versions, older instances and manual setup</summary>
 
-Every release on GitHub also has a zip pinned to that version, for example `Gregtech-Grindless-v1.5.0.zip`. A pinned instance never updates.
+Every release on GitHub also has a zip pinned to that version, for example `Gregtech-Grindless-v1.5.1.zip`. A pinned instance never updates.
 
 To move a pinned or older instance to the releases channel without touching its worlds, close Minecraft, open Edit Instance, then Settings, then Custom commands, and set the pre-launch command to:
 
@@ -71,7 +71,7 @@ To move a pinned or older instance to the releases channel without touching its 
 
 Instances that point at `/playable/` still update for now. The old `/jugable/` branch is gone, so those instances need this change to keep updating.
 
-To set up an instance by hand, create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17, put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in its `minecraft` (or `.minecraft`) folder and use the command above. Replace `releases` with a version tag such as `v1.5.0` to stay on one version.
+To set up an instance by hand, create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17, put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in its `minecraft` (or `.minecraft`) folder and use the command above. Replace `releases` with a version tag such as `v1.5.1` to stay on one version.
 
 Never open an updated world with an older version of the pack. Restore a backup instead.
 
@@ -111,7 +111,7 @@ echo -Xms8G -Xmx8G >> user_jvm_args.txt
 
 The first boot builds the world and takes a couple of minutes; it may log once that `server.properties` could not be loaded, because the file does not exist yet. Teams, wireless energy and travel are handled by the pack's own mods and scripts, so they need nothing extra on the server. Players join with the same pack version as the server.
 
-To move to a new version, stop the server, back up the `world` folder, and run the packwiz command from step 2 again. Replace `releases` in the URL with a version tag such as `v1.5.0` to stay on one version. Never start an updated world with an older version of the pack.
+To move to a new version, stop the server, back up the `world` folder, and run the packwiz command from step 2 again. Replace `releases` in the URL with a version tag such as `v1.5.1` to stay on one version. Never start an updated world with an older version of the pack.
 
 ## Known issues
 

@@ -14,7 +14,7 @@ hash = "82fb6847898d1e98a12c4ea0b5df0af06d868ab5bb0bf4ebeba65596b9db7b6d"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/ev_age.snbt"
-hash = "abf46c81bd134c27f2da0150bbd6879c2d3fb139ed8e50f67f604afcb5157252"
+hash = "842b78c832404ca88e8ddeb0ad0aed3d866a72e51f8890cf008305a69d4b00c6"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hv_age.snbt"
@@ -22,11 +22,11 @@ hash = "58f0de84f5d6d71fd1b5ea8b47adc2c13cc3e96ed0e6d31f3c1dc5a77230e425"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/iv_age.snbt"
-hash = "9b17416f21a71eff8913b91a58df76e91d360e3e600efe9f19544bb86ec11525"
+hash = "a9b298e63a3272ffafd4b9baf98028641134808748b84359ac238c2b7a065976"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/luv_age.snbt"
-hash = "ef33d3889769bcf9f47b16825d2b8c6e7de64bd0ed44da256159ec0474922292"
+hash = "a388877d432ec2763e2c426c3a8558b9256b16d87daa3dced2bf7e153279f3eb"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
@@ -34,11 +34,11 @@ hash = "ddaee8bf89e2376f72981898302586823a97112ecca11b450cc602e6c7a27d26"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/max_age.snbt"
-hash = "a982cb7c4a9b636bc127b6ddc8fbc1ca9509efd1c329bd0de0aac5a9881fbd5d"
+hash = "748a79767f9a2dd7ccc5af6d0a73cca1431c796b7be7b550b2ca23b824b00b34"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/maxplus_age.snbt"
-hash = "8e02c120de96f5c25055ce850bfd26cc648e75eafe4651291144da94222fc292"
+hash = "d902a5c5baff7179789fe007009496cdc347b99a77022d0b79258e8aa2dbf4b6"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
@@ -50,7 +50,7 @@ hash = "6de7b6638027d7400de5266e28e4595239245c702f75eabc0d28fdf2c4742776"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/opv_age.snbt"
-hash = "7c488723683ba4cf089f96e637c99c95783e40925bdf1e820e1aed0121180b8f"
+hash = "4fce71beca694b0cc8c1b93f332108b068bc3fe9316935c877a79caf6083abb1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_ev.snbt"
@@ -134,23 +134,23 @@ hash = "0ee7b8c399b8327c36dce2359cccec2ddf82c7a4a52058049d618c4e9cbe19dc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uev_age.snbt"
-hash = "e3c80ad3eb92626904b2d12051ed800115d472bc857f7e8a5ff957f92a48a463"
+hash = "c045af8a3bd6fea06ea9ce30e5aae74a49276055509fd30f538126897b12e328"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uhv_age.snbt"
-hash = "f4022df661dcfee450aefff45aded2ca4294beac5754fe169ea7dcd61ff7488b"
+hash = "e001cd9d2b767d84d626f632066cffc0276b024c239325b0234bf41b1a5885d0"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uiv_age.snbt"
-hash = "8b1a5863e88e4bc91407b04ddd357a2f6387bcbd88e9ab4935fb621cafb31afa"
+hash = "b1239e31bac5a096ca84e3f825fb71782adf6bdc5fa7433163e6e0a2292e4470"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uv_age.snbt"
-hash = "e523c888916a088437113b8a5fb67a5cd6b62e648d3a0fc7d48163a4a0e30cec"
+hash = "4ae58619e00155436f732a467da198c44a42d4ce319b9cb0a5b1012d0dc1044b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uxv_age.snbt"
-hash = "92176fe821340c51964d50958121140734e4d7a6e7f02971b29b1f7903f7733a"
+hash = "740b8d144f64a734a7f4dcee8baaa039c874045dbfcd33c2aef72ca44034b2f3"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/welcome.snbt"
@@ -162,7 +162,7 @@ hash = "cbb314be5ce1e42a29e93f66f2477c5358a855275a1c328dba935757708f014c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/zpm_age.snbt"
-hash = "878e1198eced23d6bf9f22ef0799cfa8cd7856408bda759e608b2d82b3644987"
+hash = "1e54b36b1ca9881dba8ca6ef1f63becca99247014dc76e53a3757ff08bbe34c1"
 
 [[files]]
 file = "config/ftbquests/quests/data.snbt"
@@ -16402,7 +16402,7 @@ hash = "79db6db1d6da47993eeac55cf0a178f245ae9cc8227d6c9fa4fdfde12fce4ed4"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_fluorspar_kiln_lang.js"
-hash = "ca345f84864a659eeede1cf29322f6c9ec599564b9ef7aed5340582ce92ace56"
+hash = "f201c63857ef17469b87960a49265a60b6c181582bd9206dd6a2e36f7b535a83"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/iv_foundation_lang.js"
@@ -19823,6 +19823,10 @@ hash = "5c15850df5ba122be21df31b494426a8172d9db4631a16a486fefc6489c02f10"
 [[files]]
 file = "kubejs/startup_scripts/grindless/integration/dimension_markers.js"
 hash = "c3c46e888a56746e0ca94fb8e3001ad1e56f470d9a391aee384ae12392a3d982"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/integration/extendedfeatures_disassembler.js"
+hash = "efd1d77bd1e2ae6f94e64bea6cb623470d08f54772b59f46dba220e3822a7d07"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/integration/recipe_info_wrap.js"
