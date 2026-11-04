@@ -33,6 +33,8 @@ These 27 verdicts are set by hand in `data/03_lines.csv`, each with its evidence
 
 **Do not regenerate the CSV before then**: a regeneration reverts the 26 hand-set verdicts. After the packages, the integrator regenerates it once, and some of the 27 rows leave the CSV. A row can leave because it folds into its trunk, because it is a feeder that is now consumed, or because it is now drawn as a `by` or `ret` node.
 
+**Regenerated after #413 to #415 (2026-11-04, VM run exec-20261104-193407-2141451, commit fe1224428, same dump):** 270 rows, all `keep`; no verdict is set by hand any more. Fifteen rows left: the nine MAX feeders joined into their clusters (m4, m5, m8 and the lock), UXV X5 L31 folded into L30, the X2 L6 merge (X2 takes X1's MTJ die as a raw node), and the by-products and returns drawn as such (LuV iridium and osmium, UV fusion helium, UV spent laser module). Penrose now counts 4 steps, and UXV X2 L18 drops from 9 to 4 steps (reach 8). Left open: the MAX destination rows 47, 48, 55 and 57, and the owner's question on EV lunar titanium (keepShort resource head or the real FFC steps).
+
 Rows, Lines, Real and Longest below are the batch 16 figures.
 
 | Era | Rows | Lines | Real (4+) | Longest | Keep | Fix | Merge |

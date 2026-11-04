@@ -1,79 +1,60 @@
 era,number,line,in_dump,stages_found,stages
 zpm,4,"Gas giant volatiles",0,1,3
 zpm,5,"Helium-3 power",1,1,5
-zpm,6,"Titan organics",0,0,4
+zpm,6,"Titan organics",0,1,4
 zpm,7,"Enceladus",0,0,3
-zpm,10,"Living chemistry",0,0,3
+zpm,10,"Living chemistry",0,1,3
 zpm,12,"Duranium and the quench",1,1,5
-zpm,13,"Network storage",0,0,4
+zpm,13,"Network storage",0,1,4
 zpm,14,"Charts and data",0,0,5
-uv,1,"Americium and neutronium",1,0,8
-uv,4,"Curium heat",1,0,6
-uv,5,"Muon-catalysed fusion",1,1,6
-uv,10,"High-purity germanium",1,0,8
-uv,11,"Boron nitride nanotubes",1,0,7
-uv,12,"Sail film",0,0,6
+uv,6,"Boron-11",1,1,8
+uv,7,"Neptune helium-3",1,2,9
+uv,12,"Sail film",0,1,6
 uv,13,"SRF accelerators",0,2,6
-uv,14,"EnTED wire",0,0,6
+uv,14,"EnTED wire",0,2,6
 uv,15,"Printed parts",0,0,5
-uv,16,"Pluto's and Charon's ices",0,1,7
-uv,17,"Kuiper noble gases",1,3,8
-uv,18,"Antiprotons",1,3,8
-uv,19,"Closed life and wetware",1,0,7
-uv,20,"Starshot",1,0,7
-uv,21,"Superconducting nanowire detectors",1,0,5
+uv,16,"Pluto's and Charon's ices",0,2,7
 uv,22,"X-ray lithography",0,1,6
-uhv,1,"Transcurium breeding: heavy curium oxide + Am-243 → transcurium target → HFIR → irradiated target → transcurium liquor → HDEHP separation → Bk-249 + Cf-252 → sealed Cf-252 source",1,3,9
-uhv,2,"Uranium-233 driver fuel: U-233 → fuel fabrication plant → HFIR driver → HFIR → spent driver → pyroprocessing cell → U-233",1,0,8
+uhv,2,"Uranium-233 driver fuel: U-233 → fuel fabrication plant → HFIR driver → HFIR → spent driver → pyroprocessing cell → U-233",1,3,8
 uhv,5,"Lithium niobate photonics: Mars lithium carbonate → LiNbO₃ boule → LN wafer → helium implant → LNOI wafer → thin-film modulator → optical processor",0,3,8
-uhv,6,"Phase-change memory: Io germanium + antimony + tellurium → GST target → sputtered film → PCM die → optical processor → optical assembly",1,2,7
-uhv,8,"VUV fluoride optics: fluorspar → fluorite → CaF₂ + PbF₂ scavenger → VUV CaF₂ boule → VUV optics → xenon HHG cell → VUV frequency comb",1,3,8
-uhv,10,"Silicon carbide power: SiC powder → PVT boule → wafer → epi wafer → aluminium implant → device wafer → SiC power module",0,3,8
 uhv,11,"Ultrapure water: water → RO permeate → EDI water → UV-ozone water → degassed water → ultrafiltered water → ultrapure water",0,2,8
-uhv,16,"Proxima biomining: cold-trap regolith → biomining heap → PGM liquor → platinum plant → PGM salts → ruthenium + iridium → RTAN and the crucible",1,0,8
-uhv,17,"Proxima biocement: leached tailings → calcium liquor + urea → *Sporosarcina* culture → MICP heap → biocemented regolith → site casing",1,2,7
-uhv,18,"Proxima ices: ice core → melt and sublimation → carbon dioxide split off → deuterium-rich water → heavy water plant → heavy water → deuterium (UV's muon cell)",1,3,8
 uhv,20,"MgB₂ links: Mercury magnesium + boron → MgB₂ powder → PIT billet → drawn wire → reacted wire → MgB₂ cable (gate ring, swarm station)",0,0,7
 uhv,21,"Space photovoltaics: gallium + indium + arsenic + phosphorus → IMM epi → lift-off → IMM film → coverglass laminate → IMM array → swarm segment",0,3,8
 uhv,22,"Carbon-12 spreaders: syngas CO → isotope column → ¹²CO → methanation → ¹²CH₄ → CVD diamond → C-12 spreader",0,0,8
-uhv,23,"Swarm segments and their wear: Mercury aluminium → reflector film → segment → swarm station → worn segment → refurbishment → stripped film → aluminium",1,1,9
-uhv,24,"PBO fibre: benzene + chlorine → 1,2,3-trichlorobenzene → dinitrotrichlorobenzene → dinitroresorcinol → diaminoresorcinol → PBO dope (in PPA) → PBO fibre",1,3,8
-uhv,25,"HDEHP extractant: propene + syngas → butyraldehyde → 2-ethylhexenal → 2-ethylhexanol → HDEHP (with POCl₃) → kerosene solvent → transuranium facility",0,0,8
+uhv,25,"HDEHP extractant: propene + syngas → butyraldehyde → 2-ethylhexenal → 2-ethylhexanol → HDEHP (with POCl₃) → kerosene solvent → transuranium facility",0,2,8
 uhv,26,"Ultra-high-temperature ceramics: zirconia + boron carbide → ZrB₂ powder → ZrB₂–SiC blend → spark plasma sinterer → UHTC tile → UHTC nozzle → ICAN motor",0,3,8
 uhv,27,"Positrons to antihydrogen: magnesium-24 → synchrotron → sodium-22 → moderated source → Surko trap → positron cartridge → antimatter trap → antihydrogen cartridge",1,3,9
-uhv,28,"Casimir exotic matter (fiction): SiC mirror blank → NbN film → coated plate → cavity stack → harvest → exotic matter cell → warp gate",1,0,8
 uhv,29,"RTAN superconductor: ruthenium + americium + neutronium + trinium → RTAN dust → EBF ingot → PIT billet → RTAN wire → UHV cell",0,0,7
-uhv,30,"Oganesson propellant: Mk3 off-gas → crude oganesson → cryogenic plant → pure oganesson → propellant pod → swarm station",1,2,7
-uhv,31,"ZBLAN fibre: zirconia + HF → ZrF₄ → fluoride batch (Ba, La, Al, Na) → melt → preform → microgravity draw → ZBLAN fibre",1,2,8
-uhv,32,"Far-red photosynthesis: xeno genome data → biofoundry → far-red gene cassette → engineered algae → algae bioreactor (Proxima) → algal biomass → biorefinery fuel",1,3,8
+uhv,31,"ZBLAN fibre: zirconia + HF → ZrF₄ → fluoride batch (Ba, La, Al, Na) → melt → preform → microgravity draw → ZBLAN fibre",1,3,8
+uhv,32,"Far-red photosynthesis: xeno genome data → biofoundry → far-red gene cassette → engineered algae → algae bioreactor (Proxima) → algal biomass → biorefinery fuel",1,0,8
 uev,1,"Calcium-48: calcite → CaCl₂ → Ca-48 40 % (calutron) → Ca-48 97 % → Ca-48 metal → ECR oven charge → Ca-48 beam",0,1,8
 uev,3,"Curium-248: Cf-252 (UHV HFIR) → aged Cf-252 (hot cell store) → Cf/Cm mix → Cm cut (ZPM partitioning) → Cm nitrate → CmO₂ → Cm-248 target",1,1,8
+uev,4,"Californium-249: Bk-249 (UHV, stored) → aged Bk (330 d, store) → Bk/Cf mix → HDEHP cut (ZPM partitioning) → Cf nitrate → Cf oxide → Cf-249 target",1,2,8
 uev,6,"Ion-track membranes: Xe (EV cryo) → Xe beam charge → polycarbonate foil → tracked foil → UV-sensitised foil → etched membrane → filter cartridge",1,0,7
 uev,7,"Superhydride: La/Y oxide (EV cascade) → La–Y alloy → La–Y foil → (La,Y)H₁₀ (press) → PIT billet (UV) → wire → strand → cable → cable cooled with superfluid He",1,3,10
-uev,8,"Ammonia borane: borax → boric acid → trimethyl borate → NaBH₄ → ammonia borane → pressed charge",1,2,7
 uev,11,"Hafnium: zircon → (Zr,Hf)Cl₄ → thiocyanate liquor → MIBK cut (EV cascade) → Hf strip → HfO₂ → HfCl₄ → Kroll sponge → 6N Hf (EB)",1,1,10
-uev,12,"Single-crystal superalloy: Ni + Re + Ru + Ta → master melt → shell mould → SX casting → blade → heat-treated blade → bond coat → EB-PVD YSZ blade",1,1,8
+uev,12,"Single-crystal superalloy: Ni + Re + Ru + Ta → master melt → shell mould → SX casting → blade → heat-treated blade → bond coat → EB-PVD YSZ blade",1,2,8
 uev,14,"HfTaCN coil: HfO₂ (line 11) + Ta₂O₅ (line 13) → milled oxide–carbon blend → (Hf,Ta)C (carbothermal) → (Hf,Ta)CN → milled powder → SPS billet (UHV SPS) → heating element → coil block",0,2,7
 uev,18,"WSi SNSPD: FZ Si wafer (UV) → Ta₂O₅/SiO₂ mirror → WSi film → HSQ resist → patterned wire → etched detector → packaged detector → cooled detector (UV superfluid He)",0,1,9
 uev,20,"Graphene: CH₄ → electropolished Cu → CVD graphene → PMMA-coated → transferred → hBN-encapsulated graphene → modulator",1,2,8
 uev,21,"SiN waveguides: FZ Si wafer (UV zone refining) → thermal oxide → LPCVD SiN → synchrotron lithography (UV) → etched waveguides → annealed SiN chip",0,1,7
 uev,22,"InAs quantum dots: indium (LuV Io) → 7N In (UV zone refining) → arsenic source → GaAs substrate → InAs QD growth (UHV MBE) → micropillar → QD source",0,2,8
 uev,23,"D–He-3 power: He-3 (EV Moon, ZPM Saturn, nebula) → 6N He-3 (EV cryo) → D₂ (IV heavy water) → D–He-3 mix → Mk4 plasma → DEC power (ZPM) → He-4 ash → recovered He-4 (EV cryo)",0,2,9
-uev,25,"Proton–boron: borax → boric acid → BF₃ → ¹¹BF₃ (ZPM column) → ¹¹B powder → p–¹¹B pellet → Mk4 c2",0,0,8
+uev,25,"Proton–boron: borax → boric acid → BF₃ → ¹¹BF₃ (ZPM column) → ¹¹B powder → p–¹¹B pellet → Mk4 c2",0,1,8
 uev,26,"Nebula gas: interstellar gas → compressed gas → cryogenic fractions (EV) → H/D → He-3/He-4 (UV superfluid flush) → Ne",1,1,6
 uev,27,"Silicon drift detectors: polysilicon → FZ Si (UV zone refining) → oxidised wafer → drift rings (ZPM implanter) → annealed wafer → metallised → SDD",1,2,7
-uev,28,"Degenerate matter: Sirius B → degenerate matter → stasis field (UHV Casimir) → contained pellet → field generator core → UEV field generator",0,0,7
-uev,30,"Potassium-40: KCl → K-40 chloride (calutron) → K-40 metal → dispenser → cooled cloud → Fermi mixture → EOS model",0,0,8
+uev,28,"Degenerate matter: Sirius B → degenerate matter → stasis field (UHV Casimir) → contained pellet → field generator core → UEV field generator",0,2,7
+uev,30,"Potassium-40: KCl → K-40 chloride (calutron) → K-40 metal → dispenser → cooled cloud → Fermi mixture → EOS model",0,1,8
 uev,33,"YSZ: Zr (line 11) → ZrO₂ → Y₂O₃ (EV cascade) → YSZ powder → EB-PVD ingot → coated blade",0,2,6
 uev,35,"FFKM seals: HF (IV kiln) → CHClF₂ → TFE → PMVE → FFKM rubber → cured seal",0,0,6
 uev,36,"MCP optics: lead glass → etchable-core tube → multi-fibre (UV draw tower) → fused boule → sliced plate → etched, reduced plate → lobster-eye MCP",0,1,8
-uev,38,"SRF cavities: Nb (line 13) → RRR Nb (EB) → half-cells → welded cavity → electropolished → Sn vapour diffusion → Nb₃Sn cavity → cooled cavity (UV superfluid He)",0,3,8
-uev,39,"PPKTP: KH₂PO₄ + TiO₂ → KTP flux → KTP crystal (UHV furnace) → wafer → electrode pattern → poled PPKTP → coated → SPDC source",1,3,9
+uev,37,"Silica aerogel: SiCl₄ + ethanol → TEOS → sol → gel → aged gel → aerogel tile (supercritical CO₂)",1,0,7
+uev,39,"PPKTP: KH₂PO₄ + TiO₂ → KTP flux → KTP crystal (UHV furnace) → wafer → electrode pattern → poled PPKTP → coated → SPDC source",0,3,9
 uiv,1,"Metallic hydrogen cable: protium (IV heavy water plant) → o/p-converted H₂ (EV cryogenic plant) → liquid para-H₂ → solid H₂ target (UV superfluid He) → ramp-compressed MH (1) → quenched MH rod → MH wire → FFKM-insulated MH cable",1,1,9
-uiv,3,"Lonsdaleite: methane → pyrolytic graphite (ZPM methane pyrolyser) → shocked lonsdaleite (1 c2) → acid-leached → laser-cut race → bearing → UIV piston",1,3,8
+uiv,3,"Lonsdaleite: methane → pyrolytic graphite (ZPM methane pyrolyser) → shocked lonsdaleite (1 c2) → acid-leached → laser-cut race → bearing (races + tungsten plate + lubricant + 1 LuV magnetic bearing housing) → UIV piston",1,3,8
 uiv,5,"RHEA plate: columbite → Nb/Ta fluoride split (EV extraction cascade) → Nb₂O₅ + Ta₂O₅ → reduced Nb/Ta → EB-refined (UEV) → levitation RHEA (2) → homogenised ingot → hot-forged slab (EV hot strip mill) → RHEA plate",0,2,10
 uiv,8,"BMG gear: Zr sponge (IV fuel fabrication) → master alloy → undercooled melt (2 c4) → suction-cast BMG → flexspline → strain-wave gear → UIV robot arm (Hofmann 2016)",1,3,8
-uiv,9,"Element 120: TiCl₄ → Ti-50 chloride (UEV calutron) → Ti-50 sponge (UV pyroprocessing) → melted Ti-50 (2 c3) → oven charge → beam on Cf-249 (UEV cyclotron; Cf-249 from the IV hot cell's Bk-249 decay store) → element 120 recoil (UEV separator) → census II entry",1,2,9
+uiv,9,"Element 120: TiCl₄ → Ti-50 chloride (UEV calutron) → Ti-50 sponge (UV pyroprocessing) → melted Ti-50 (2 c3) → oven charge → beam on Cf-249 (UEV cyclotron; Cf-249 from the IV hot cell's Bk-249 decay store) → element 120 recoil (UEV separator, on the shared ion-tracked foil: the heavy-ion step keeps a UHV Cf-252 fission source that cross-checks the beam fluence by counting fission-fragment tracks) → census II entry",1,2,9
 uiv,12,"Glass interposer: SiCl₄ + TiCl₄ → ULE soot → ULE glass → fs-written (4) → KOH-etched → metallised vias (UHV foundry) → interposer",1,3,8
 uiv,18,"Microcomb: Si wafer → oxide preform → trenches by X-ray lithography (UV synchrotron c7) → Si₃N₄ fill from SiH₄ + NH₃ (UEV `sin_lpcvd` pattern) → CMP and anneal (UHV foundry) → EO-tunable soliton comb (3 c4, with LNOI) → UIV sensor (Pfeiffer 2016; Snigirev 2023)",0,2,8
 uiv,21,"C-12 heat spreader: p–N-15 burn (10 c3) → C-12 ash → C-12 methane (HV syngas plant, `hv/syngas_plant.js:82`) → CVD C-12 diamond (ZPM diamond lattice) → polished spreader → metallised → Matrioshka node",0,0,8
@@ -82,8 +63,9 @@ uiv,27,"He-3–He-3 power: He-3 ash → He-3/He-4 split (UV superfluid He) → p
 uiv,28,"p–N-15 power: N-15 oxide (EV cryogenic plant) → N-15 → ¹⁵NH₃ → polarised ice (9 c3) → pellet → Mk5 c3 (ZPM DEC) → C-12 ash",1,1,8
 uiv,30,"Neutronium: crust lift run (13) → NS crust → inner-crust matter (14) → drip neutrons → neutron superfluid (15, UV superfluid He cooling) → caged → contained neutronium pellet → UIV field generator",1,2,9
 uiv,31,"Kilonova fuel: crust nuclei (14) → decompressed (16) → hot r-process mix → sealed capsule (17) → aged capsule → opened ash → cuts (EV platinum plant, ZPM Eu reductor, IV hot cell)",1,2,8
-uiv,32,"Element 119: U-238 target (IV fuel fabrication) → neutron flash (16 c2; Ivy Mike, Ghiorso 1955) → Es/Fm debris (IV hot cell) → actinide cut (ZPM actinide partitioning) → Es-254 (UHV transuranium HDEHP) → target → Ca-48 beam (UEV cyclotron) → element 119 recoil → census II entry",1,3,10
+uiv,32,"Element 119: U-238 target (IV fuel fabrication) → neutron flash (16 c2; Ivy Mike, Ghiorso 1955) → Es/Fm debris (IV hot cell) → actinide cut (ZPM actinide partitioning) → Es-254 (UHV transuranium HDEHP) → target → Ca-48 beam (UEV cyclotron) → element 119 recoil (on the same Cf-252-checked ion-tracked foil as line 9) → census II entry",1,3,10
 uiv,37,"TPV shell: In/Ga/As/Sb → InGaAsSb epi (UV MOCVD) → air-bridge reflector (UHV foundry) → diced cell → TPV tile (12 c2) → wired segment → outer shell (LaPotin 2022)",1,2,7
+uiv,39,"Maglev conveyor: Fe₁₆N₂ (UEV) → bonded Halbach → RHEA-cased (2) → MH winding (ZPM magnet works) → potted → maglev stator + 1 `gtceu:uev_conveyor_module` (the belt frame it rebuilds; its only use) + 4 LuV ITBTC coated-conductor tape (the levitation guideway) → UIV conveyor",1,3,9
 uiv,44,"EDFA repeater: Er₂O₃ (ZPM Eu reductor) → ErCl₃ solution doping → MCVD preform (UV fibre draw) → Er fibre → spliced → pumped EDFA → repeater (classical heralding channel)",0,2,8
 uiv,45,"Neon moderator: Ne (EV cryogenic plant) → purified → solid Ne on a cone (UV superfluid He) → annealed → moderator cartridge → Ps lab (19) (Mills & Gullikson 1986)",1,1,6
 uxv,1,"CoFeB target: cobaltite → Co (EV extraction cascade) → 5N Co (UEV electron beam furnace) → CoFeB melt with Fe, B (UIV levitation melter) → atomised (UV powder bed) → HIP blank (UV powder bed) → bonded `cofeb_target`",1,2,7
@@ -94,15 +76,13 @@ uxv,5,"Ta seed target: columbite → Nb/Ta split (EV extraction cascade) → Ta�
 uxv,7,"MRAM wafer: line 6's Si-28 prefix to `h_si28_wafer` (ZPM) → Heusler/MgO stack (1 c2) → L2₁ anneal (UEV nitride magnet works) → ion-beam etch (ZPM ion implanter) → Cu back end (UHV foundry) → tested `mram_wafer`",0,1,7
 uxv,8,"Racetrack chip: line 6's Si-28 prefix to `h_si28_wafer` → SAF track stack from `saf_target_set` (1 c3) → field anneal (UEV nitride magnet works) → tracks written (UEV electron beam furnace) → notch-etched (4 c1) → `racetrack_chip` with `mtj_die` read heads (4 c2)",0,2,7
 uxv,9,"DyScO₃: monazite froth (GTCA) → EuCl₃ solution (EV extraction cascade c5) → depleted liquor (ZPM Eu reductor c1) → Dy₂O₃ (Eu reductor c10) + Sc₂O₃ (EV extraction cascade) → calcined (IV fluorspar kiln) → Czochralski boule (UHV crystal growth) → (110) slices → polished → terrace-annealed `dysco3_substrate`",1,3,10
-uxv,11,"MESO logic die: merrillite (Mars) → REE chloride solution (EV extraction cascade c1) → mixed RE chloride (c2) → La₂O₃ (c11, as built, `ev/extraction_cascade.js:162`) → La-BFO powder with Bi₂O₃, Fe₂O₃ (IV fluorspar kiln) → `la_bfo_target` (UV powder bed) → BFO film on line 10's wafer (2 c2) → CoFe magnet (2 c3) → patterned `me_switch_wafer` (UEV electron beam furnace) → MESO cell with `sot_readout_stack` (UHV foundry) → `meso_logic_die`",0,2,12
-uxv,12,"hBN flake: air → N₂ (EV cryogenic plant) → BN (UV BN reactor) → Ba-BN charge → HPHT crystal (UEV megabar) → acid-leached `hbn_crystal` → exfoliated `hbn_flake` (3 c3)",1,2,7
+uxv,11,"MESO logic die: merrillite (Mars) → REE chloride solution (EV extraction cascade c1) → mixed RE chloride (c2) → La₂O₃ (c11, as built, `ev/extraction_cascade.js:162`) → La-BFO powder with Bi₂O₃, Fe₂O₃ (IV fluorspar kiln) → `la_bfo_target` (UV powder bed) → BFO film on line 10's wafer (2 c2) → CoFe magnet (2 c3) → patterned `me_switch_wafer` (UEV electron beam furnace) → MESO cell with `sot_readout_stack` (UHV foundry) → `meso_logic_die`",0,1,12
 uxv,13,"WTe₂ flake: metal sludge (EV platinum plant) → Te (large chemical reactor, `uhv/photonics.js:17`) → 7N Te (UV zone refining) → ampoule with W (EV extraction cascade) → CVT crystal (UHV crystal growth) → Te-flux annealed `wte2_crystal` → exfoliated `wte2_flake` (3 c1)",1,1,7
 uxv,14,"FGT flake: `ionian_sublimate` (LuV Io surface, `luv/io_surface.js:39-48`) → Ge dust → GeCl₄ (UV zone refining c1) → Ge ingot (c2) → Fe₃GeTe₂ charge with line 13's 7N Te and 5N Fe (UEV electron beam furnace) → CVT `fgt_crystal` (UHV crystal growth) → exfoliated `fgt_flake` (3 c2)",1,3,8
 uxv,16,"GGG wafer: monazite froth → EuCl₃ solution (EV extraction cascade c5) → depleted liquor (ZPM Eu reductor c1) → Gd₂O₃ (Eu reductor c7, as built, `zpm/europium.js:113-119`) → GGG oxide with `gallium_oxide_dust` (IV fluorspar kiln) → Czochralski boule in `grindless:iridium_crucible` (UHV crystal growth) → (111) slices → polished, O₂-annealed `ggg_wafer`",1,2,10
 uxv,17,"Magnonic bus: merrillite → REE chloride solution (EV extraction cascade c1) → mixed RE chloride (c2) → Y₂O₃ (c11, as built) → dissolved in `lpe_flux` with Fe₂O₃ (5 c1, in a `pt_lpe_crucible`) → YIG film on `ggg_wafer` (5 c2) → annealed → waveguides written (UEV electron beam furnace) → `magnonic_bus` with line 4's Pt antennas and line 44's `stno_array` as the spin-wave source",1,2,10
 uxv,19,"Fm-257 target: U-238 target (IV fuel fabrication) → neutron flash (UIV line 32) → Es/Fm debris (IV hot cell) → actinide cut (ZPM actinide partitioning) → Fm fraction (UHV transuranium, HDEHP, as built by UIV-B2) → Fm-257 (UEV calutron c10) → molecular-plated on Ti (UHV transuranium) → sintered `fm257_target`",0,2,9
 uxv,20,"Es-254 target: line 19's prefix to the actinide cut → Es-254 (UHV transuranium, HDEHP, as built by UIV-B2) → molecular-plated (UHV transuranium) → sintered `es254_target`",0,1,5
-uxv,21,"Element 121: TiCl₄ → Ti-50 chloride (UEV calutron c7, `isotopes.json:104-116`) → Ti-50 sponge (UV pyroprocessing c6, `transcurium_pyroprocessing.json:28`) → melted (UIV levitation melter c3) → `ti50_oven_charge` (`isotopes_uiv.json:39`) → Ti-50 beam on `es254_target` (UEV cyclotron) → recoils separated (UEV recoil separator) → caught, `element_121_recoil` (UEV chem lab)",1,2,9
 uxv,22,"Element 122, census III: line 21's Ti-50 prefix to `ti50_oven_charge` → beam on `fm257_target` (UEV cyclotron) → recoils (UEV recoil separator) → `element_122_recoil` → `superheavy_census_iii` with line 21's recoil (UEV chem lab)",0,2,6
 uxv,23,"Cm-248 target: curium oxide (ZPM actinide partitioning) → heavy curium oxide (UV heat source works c1) → `transcurium_target` (UHV transuranium c4) → irradiated (UHV HFIR c1) → transcurium liquor (UHV transuranium c1) → Cf-252 (c2) → `gtceu:curium_248_dust` by Cf-252 alpha decay (IV hot cell c8, `hot_cell.json:184-191`) → plated (UHV transuranium) → sintered `cm248_target`",1,3,11
 uxv,24,"Island nuclides: depleted UF₆ → UF₄ → U metal charge (IV fuel fabrication) → U-238 beam (UV synchrotron) → on `cm248_target` (7 c1, through the `gas_stopping_cell`) → thermalised (7 c2) → MR-TOF-selected `island_nuclide` (7 c3)",0,2,8
@@ -113,56 +93,13 @@ uxv,35,"UXV pump: Na + K (ordinary stock; natural Na is all Na-23) → NaK → A
 uxv,36,"UXV piston: merrillite → REE chloride solution (EV extraction cascade c1) → mixed RE chloride (c2) → Tb₄O₇ (c10, as built) → Tb (ZPM Eu reductor c6, as built) → Terfenol-D melt with Dy (line 9's Dy₂O₃ reduced, Eu reductor c11; UIV levitation melter) → [112] Bridgman rod (UHV crystal growth) → prestressed in a `lasagna_plate` housing → `uxv_electric_piston` with a strand drive coil (LuV coated conductor line)",0,1,9
 uxv,37,"UXV conveyor: Ni, Mn, Ga → 5N (UEV electron beam furnace) → Ni₂MnGa melt (UIV levitation melter) → single crystal (UHV crystal growth) → twin-trained (UEV nitride magnet works) → `uxv_conveyor_module` (MSM elements driven by strand coils, LuV coated conductor line)",0,1,6
 uxv,38,"Mk6 casing: scheelite → WO₃ (EV extraction cascade) → W-184 (UEV calutron c13) → W-184 wire → fibre preform (UEV CVI) → infiltrated `wf_rhea_billet` (UIV) → `uxv_fusion_casing`",1,1,8
-uxv,41,"KrF laser (PLD part): air → Kr (EV cryogenic plant) → KrF premix with F₂ (IV fluorspar kiln) → discharge tube with `vuv_caf2_optic` windows (UHV crystal growth, as built, `uhv/crystals.js:16`) → pulsed-power head → `krf_excimer_laser`",1,1,6
+uxv,41,"KrF laser (PLD part): air → Kr (EV cryogenic plant) → KrF premix with F₂ (IV fluorspar kiln) → discharge tube with `vuv_caf2_optic` windows (UHV crystal growth, as built, `uhv/crystals.js:16`) → pulsed-power head → `krf_excimer_laser`",1,2,6
 uxv,42,"LPE crucible: line 4's pentlandite prefix → 5N Pt (EV platinum plant) → electron-beam melted (UEV electron beam furnace) → sheet (EV hot strip mill) → spun, welded `pt_lpe_crucible`",0,2,6
 uxv,44,"STNO array: line 6's Si-28 prefix to `h_si28_wafer` → Heusler/MgO nanopillar stack (1 c4) → pillars defined (UEV electron beam furnace) → ion-milled (ZPM ion implanter) → SiN-planarised (UV MOCVD) → Au contacts, phase-locked `stno_array` (UHV foundry)",0,1,7
 opv,10,"Compton crystal (A1): GeCl₄ (extraction) → 13N Ge (zone) → boule (CG) → contacts (implanter) → 77 K test (cryo) → `hpge_compton_crystal`",1,2,7
+opv,11,"SOI wafer (A2): `si28_ash` → SiHCl₃ (extraction) → poly (MOCVD) → FZ (zone) → H implant → `si28_soi_wafer` (TFLN smart cut)",1,2,6
 opv,18,"Drift detector (A2): FZ Si (zone) → drift rings (implanter) → anode (BEUV) → `sdd_die` (sputter)",0,1,4
-opv,22,"LiH shield (D1): Li-6 → ⁶LiH (pyro) → tiles (SPS) → canned (EB) → `li6_hydride_shield`",1,2,6
+opv,20,"Beam window (D1): BeF₂ (fluorspar) → Be (EB) → foil (hot strip) → brazed → `be_beam_window`",1,1,5
+opv,31,"ACMF pellet (B3): Cm-245 (actinide) → W-Re hohlraum (EB) → DT fill (cryo) → `acmf_pellet` (fuel fab)",1,0,5
+opv,32,"Gamma absorber (B3): B-10 (calutron) → B₄C-10 → W/B₄C tile (SPS) → `gamma_absorber_tile`",1,1,5
 opv,35,"Laue lens (B1): `bent_ge_tile` (zone, megabar), `gaas_laue_tile` (CG), alignment (synchrotron) → `aligned_laue_frame` → `laue_lens`",1,1,4
-max,1,"Horizon strand cable",0,3,9
-max,2,"Superconducting membrane",0,1,7
-max,3,"Albedo multilayer panel (Raman 2014)",0,1,6
-max,4,"Matter-wave gradiometer",0,1,6
-max,5,"Squeezed-light chip (Nehra 2022, Science 377:1333; Vahlbruch 2016, PRL 117:110801)",0,1,6
-max,6,"Tweezer array die (Kaufman and Ni 2021)",0,1,6
-max,7,"Cryo photonic interposer (Mirhosseini 2020, Nature 588:599)",0,1,6
-max,8,"Diamond power die (Donato 2020, J Phys D 53:093001)",0,1,6
-max,9,"MAX field coil",0,1,6
-max,10,"Exotic composite rod and rotor",0,0,7
-max,11,"Membrane belt",0,1,6
-max,12,"Genome archive (Church 2012; Goldman 2013; Grass 2015)",0,1,7
-max,13,"Segment truss",0,1,6
-max,14,"Stream pellets",0,1,6
-max,15,"Shell droplet radiator",0,1,5
-max,16,"Hot flow to flux-loaded FRC",0,1,5
-max,17,"Geroch canister",0,1,6
-max,18,"Seed wave packet",0,1,6
-max,19,"Rydberg logic array",0,1,5
-max,20,"Horizon tether",0,1,6
-max,21,"Imager dish panel",0,1,6
-max,22,"SIS mixer",0,1,7
-max,23,"Quantum memory node",0,1,6
-max,24,"Penrose payload",0,1,6
-max,25,"Slag pellet (feeder fuel)",0,1,6
-max,26,"XUV collector panel",0,1,6
-max,27,"SMES toroid",0,1,6
-max,28,"Minimal boot cell (Hutchison 2016, Science 351:aad6253; Lartigue 2007, Science 317:632)",0,1,6
-max,29,"Clock-locked microcomb (Kippenberg 2018, Science 361:eaan8083)",0,1,6
-max,30,"Shell cryocooler",0,1,6
-max,31,"Optical isolator",0,1,6
-max,32,"SC magnetic bearing",0,1,6
-max,33,"Crystalline reference cavity (Kessler 2012, Nat Photon 6:687; Cole 2013, Nat Photon 7:644)",0,1,6
-max,34,"Cu(111) growth foil",0,1,5
-max,35,"Magnetostrictive stack (Engdahl 2000)",0,1,5
-max,36,"Ta-Hf-C hearth liner (Cedillos-Barraza 2016)",0,1,5
-max,37,"Tetrataenite coupler (Lewis 2014, J Phys Condens Matter 26:064213)",0,1,6
-max,38,"Segment controller",0,1,6
-max,39,"SC fault-current limiter (Noe and Steurer 2007, SUST 20:R15)",0,1,6
-max,40,"UV fibre harness (Russell 2003, Science 299:358)",0,1,6
-max,41,"Superfluid valve",0,1,8
-max,42,"Wolter mirror module (Weisskopf 2000)",0,1,6
-max,43,"Cryogenic glass cell (Schymik 2021, PR Applied 16:034013)",0,1,6
-max,44,"Photonic local oscillator (Ito 2004, IEEE JSTQE 10:709)",0,1,6
-max,45,"Cryogenic IF amplifier",0,1,7
-max,46,"Crossed AOD pair (Bluvstein 2022, Nature 604:451)",0,1,6
