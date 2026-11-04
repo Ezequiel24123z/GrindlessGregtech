@@ -93,3 +93,49 @@ test('Test-Promotion blocks on a wrong SHA, version, red T0 or missing Prism ass
   assert.equal(badSha.status, 1);
   assert.match(badSha.stdout, /FAIL\s+sha-format/);
 });
+
+test('Test-Promotion picks the authoritative T0 run regardless of gh ordering', { skip: !pwsh || !posix }, () => {
+  const sha = spawnSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8', cwd: repo }).stdout.trim();
+  const ver = /^version\s*=\s*"([^"]+)"/m.exec(read('pack', 'pack.toml'))[1];
+  const zip = `Gregtech-Grindless-v${ver}.zip`;
+  const at = (min) => `2026-11-03T21:${String(min).padStart(2, '0')}:00Z`;
+  const run = (databaseId, conclusion, min, extra = {}) => ({
+    databaseId, headSha: sha, status: 'completed', conclusion, attempt: 1, event: 'push', headBranch: 'main',
+    createdAt: at(min), startedAt: at(min), ...extra,
+  });
+  const pending = (databaseId, status, min) => run(databaseId, '', min, { status });
+  const cases = [
+    { name: 'success only', runs: [run(1, 'success', 0)], accepted: 1 },
+    { name: 'cancelled then success', runs: [run(2, 'success', 5), run(1, 'cancelled', 0)], accepted: 2 },
+    { name: 'v1.5.0: success then a cancelled duplicate', accepted: 41723532478, runs: [
+      run(41724181972, 'cancelled', 42, { headBranch: 'main' }), run(41723532478, 'success', 37, { headBranch: 'v1.5.0' })] },
+    { name: 'success then skipped', runs: [run(2, 'skipped', 5), run(1, 'success', 0)], accepted: 1 },
+    { name: 'failure superseded by a newer green run', runs: [run(2, 'success', 5), run(1, 'failure', 0)], accepted: 2 },
+    { name: 're-run attempt started after a failure', accepted: 1, runs: [
+      run(2, 'failure', 5), run(1, 'success', 0, { attempt: 2, startedAt: at(9) })] },
+    { name: 'success then a later failure', runs: [run(2, 'failure', 5), run(1, 'success', 0)], why: /newest authoritative T0 run 2 \[main push, failure.*is not green/ },
+    { name: 'success then a later timeout behind a cancel', runs: [run(3, 'cancelled', 9), run(2, 'timed_out', 5), run(1, 'success', 0)], why: /run 2 \[main push, timed_out/ },
+    { name: 'only cancelled or skipped', runs: [run(2, 'skipped', 5), run(1, 'cancelled', 0)], why: /no authoritative T0 run for exactly [0-9a-f]{40}: only run 2/ },
+    { name: 'no runs', runs: [], why: /no T0 run for exactly [0-9a-f]{40}/ },
+    { name: 'in progress only', runs: [pending(1, 'in_progress', 0)], why: /has not finished: run 1 \[main push, in_progress.*wait for it/ },
+    { name: 'green with a newer run still queued', runs: [pending(2, 'queued', 5), run(1, 'success', 0)], why: /has not finished: run 2 \[main push, queued/ },
+    { name: 'wrong SHA: green only for another commit', why: /no authoritative T0 run.*only run 1 .*cancelled.*1 run\(s\) of other SHAs ignored/, runs: [
+      run(2, 'success', 5, { headSha: 'f'.repeat(40) }), run(1, 'cancelled', 0)] },
+  ];
+  for (const c of cases) {
+    for (const runs of c.runs.length > 1 ? [c.runs, [...c.runs].reverse()] : [c.runs]) {
+      const r = ps([path.join(repo, 'tools', 'release', 'Test-Promotion.ps1'), '-Sha', sha, '-Version', ver, '-GhExe', fakeGh({ runs, assets: [zip] })]);
+      const label = `${c.name} (${runs === c.runs ? 'gh order' : 'reversed'}):\n${r.stdout}${r.stderr}`;
+      if (c.accepted) {
+        assert.equal(r.status, 0, label);
+        assert.match(r.stdout, new RegExp(`PASS  t0-success -- accepted run ${c.accepted} \\[`), label);
+        assert.match(r.stdout, /PROMOTION OK/, label);
+      } else {
+        assert.equal(r.status, 1, label);
+        assert.match(r.stdout, /FAIL  t0-success -- /, label);
+        assert.match(r.stdout, c.why, label);
+        assert.match(r.stdout, /PROMOTION BLOCKED: t0-success$/m, label);
+      }
+    }
+  }
+});
