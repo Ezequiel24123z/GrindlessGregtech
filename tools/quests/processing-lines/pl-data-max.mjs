@@ -94,6 +94,9 @@ function segCross(a, b, c, d) {
 }
 
 function layout(paths, name, seed = 0) {
+  // seeds 0 and 1 are the plain layout; a later seed (tried only when both fail) draws each unit's lane side, and now and then the next unit
+  let r = seed;
+  const rnd = seed > 1 ? () => { r = (r + 0x6d2b79f5) | 0; let t = Math.imul(r ^ (r >>> 15), 1 | r); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; } : null;
   const nodes = paths.flat();
   const byKey = new Map(nodes.map((nd) => [nd.key, nd]));
   const edges = [];
@@ -147,6 +150,7 @@ function layout(paths, name, seed = 0) {
   const todo = new Set(paths.slice(1).map((_, i) => i + 1));
   while (todo.size) {
     let best = null;
+    const cands = [];
     for (const ui of todo) {
       const unit = paths[ui];
       const keys = new Set(unit.map((nd) => nd.key));
@@ -162,7 +166,9 @@ function layout(paths, name, seed = 0) {
         anchor = { node: e.b, x: e.a.x + STEP, lane: lane.get(e.a.key), dir: 'in' };
       }
       if (!best || anchor.x < best.anchor.x) best = { ui, anchor };
+      cands.push({ ui, anchor });
     }
+    if (rnd && cands.length > 1 && rnd() < 0.3) best = cands[Math.floor(rnd() * cands.length)];
     if (!best) {
       // a unit with nothing placed to hang on: start it on a fresh lane, taking the unit the most others lead into first
       const deg = (ui) => { const ks = new Set(paths[ui].map((nd) => nd.key)); return edges.filter((e) => (ks.has(e.b.key) && !placed.has(e.a.key) && !ks.has(e.a.key)) || (ks.has(e.a.key) && !placed.has(e.b.key) && !ks.has(e.b.key))).length; };
@@ -175,10 +181,11 @@ function layout(paths, name, seed = 0) {
     }
     const unit = paths[best.ui];
     const at = unit.indexOf(best.anchor.node);
+    const side = rnd ? (rnd() < 0.5 ? 1 : -1) : ((best.ui * 7 + seed) % 2 ? 1 : -1);
     let ok = false;
     for (const gap of [0, STEP, 2 * STEP, 3 * STEP]) {
       for (let d = gap ? 0 : 1; d <= 40 && !ok; d++) {
-        for (const l of [best.anchor.lane + d, best.anchor.lane - d].sort((p, q) => Math.abs(p) - Math.abs(q) || (((best.ui * 7 + seed) % 2 ? 1 : -1) * (q - p)))) {
+        for (const l of [best.anchor.lane + d, best.anchor.lane - d].sort((p, q) => Math.abs(p) - Math.abs(q) || (side * (q - p)))) {
           const x0 = best.anchor.x + (best.anchor.dir === 'out' ? -gap : gap);
           unit.forEach((nd, j) => put(nd, x0 + STEP * (j - at), l));
           if (valid(unit)) { ok = true; break; }
@@ -281,7 +288,7 @@ function cluster(prefix, name, spec, extra = {}) {
   const rest = units.filter((u) => u !== spine);
   const paths = [spine, ...rest, ...linkUnits];
   for (let seed = 0; ; seed++) {
-    try { layout(paths, name, seed); break; } catch (e) { if (seed >= 60) throw e; }
+    try { layout(paths, name, seed); break; } catch (e) { if (seed >= 400) throw e; }
   }
   return { name, ...extra, nodes: paths.flat() };
 }
@@ -318,7 +325,7 @@ const lock = cluster('lk', 'M3 The horizon lock', {
   joins: [
     ['50.12', '54.end'], ['50.10', '51.end'],
     ['48.9', '47.8'],['47.8', '47.13'], ['49.5', '49.11'], ['56.4', '56.10'], ['56.4', '56.13'],
-    
+    ['50.3', '50.16'], ['48.9', '56.5'],
   ],
   links: [['pl_opv:o3_11', '18.8']],
 });
@@ -327,7 +334,8 @@ const m4 = cluster('m4', 'M4 The belt and the mirror segment', {
   rows: [13, 37, 30, 38, 15, 53, 25, 36, 42],
   cut: { 53: [6] },
   tail: { 13: [['m', 'gtceu:swarm_segment_foundry'], ['i', 'grindless:mirror_shell_segment']] },
-  joins: [['13.10', '37.end'], ['13.10', '30.end'], ['30.2', '53.5']],
+  joins: [['13.10', '37.end'], ['13.10', '30.end'], ['30.2', '53.5'], ['42.8', '42.4']],
+  set: { '15.9': ['15.2', '15.5', '15.8'] },
   end: 'the mirror shell segment',
 });
 
@@ -335,7 +343,8 @@ const m5 = cluster('m5', 'M5 MAX components', {
   rows: [41, 4, 9, 10, 11, 31, 32, 35, 52],
   cut: { 52: [8] },
   tail: { 41: [['i', 'grindless:max_fluid_regulator']] },
-  joins: [['32.2', '52.7']],
+  joins: [['32.2', '52.7'], ['32.7', '31.2']],
+  set: { '4.11': ['4.4', '4.7', '4.10'] },
   end: 'the MAX fluid regulator',
 });
 
@@ -354,7 +363,7 @@ const m7 = cluster('m7', 'M7 Photon ring imager parts', {
 
 const m8 = cluster('m8', 'M8 Neutral-atom logic', {
   rows: [19, 40, 46],
-  joins: [['19.8', '40.end'], ['19.8', '46.end']],
+  joins: [['19.8', '40.end'], ['19.8', '46.end'], ['19.8', '19.2']],
 });
 
 const membrane = cluster('ms', 'Superconducting membrane', { rows: [2, 34], cut: { 2: [0] }, joins: [['2.1', '34.end']] });
@@ -376,7 +385,7 @@ export default {
     frc: one(16, 'Flux-loaded FRC'),
     geroch: one(17, 'Geroch canister'),
     memory: one(23, 'Quantum memory node'),
-    penrose: one(24, 'Penrose payload'),
+    penrose: cluster('', 'Penrose payload', { rows: [24], set: { '24.9': ['24.5', '24.8'] } }),
     xuv: one(26, 'XUV collector panel'),
     smes: one(27, 'SMES toroid'),
     microcomb: one(29, 'Microcomb'),
