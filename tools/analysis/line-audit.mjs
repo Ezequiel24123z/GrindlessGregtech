@@ -72,17 +72,36 @@ const resLabel = (res) => String(res || '').replace(/^fluid:/, '').replace(/^[a-
 // Design lines of a cluster: the numbered rows where the data has them (pl-data-max.mjs: keys l<row>_<step>), otherwise each
 // chain to its own end product (an item or fluid no other node of the cluster consumes), taken with its ancestors. A cluster with
 // one chain end, or none (a loop), is one line. A chain end made twice (two nodes of one resource) counts once.
+// A numbered row (#284) is its own nodes, every ancestor reached through `from` (nodes of other rows and the links they consume,
+// which count as its crossings) and the cluster's unconsumed links. A row under REAL_STEPS whose last node (highest step) a node
+// of another row consumes is not a line of its own: the consuming row already counts it. A row of REAL_STEPS or more stays.
 export function splitChains(nodes) {
   const real = nodes.filter((nd) => !nd.link);
-  if (real.length && real.every((nd) => /^l\d+_\d+$/.test(nd.key))) {
-    const rows = new Map();
-    for (const nd of real) { const k = Number(/^l(\d+)_/.exec(nd.key)[1]); if (!rows.has(k)) rows.set(k, []); rows.get(k).push(nd); }
-    const loose = nodes.filter((nd) => nd.link && !nodes.some((o) => o.from.some((f) => refOf(f) === nd.key)));
-    return [...rows].map(([num, ns]) => ({ label: `L${num}`, nodes: [...ns, ...loose], sink: ns[ns.length - 1] }));
-  }
   const byKey = new Map(nodes.map((nd) => [nd.key, nd]));
   const consumed = new Set();
   for (const nd of nodes) for (const f of nd.from) consumed.add(refOf(f));
+  if (real.length && real.every((nd) => /^l\d+_\d+$/.test(nd.key))) {
+    const rowOf = (nd) => Number(/^l(\d+)_/.exec(nd.key)[1]);
+    const stepOf = (nd) => Number(/_(\d+)$/.exec(nd.key)[1]);
+    const rows = new Map();
+    for (const nd of real) { const k = rowOf(nd); if (!rows.has(k)) rows.set(k, []); rows.get(k).push(nd); }
+    const loose = nodes.filter((nd) => nd.link && !consumed.has(nd.key));
+    // `rows` keeps a cluster's row labels when folding leaves one row (collectLines: multi); `own` carries the row's tags
+    const parts = [...rows].map(([num, ns]) => {
+      const own = new Set(ns.map((nd) => nd.key));
+      const keep = new Set(own);
+      const walk = (nd) => { for (const f of nd.from) { const src = byKey.get(refOf(f)); if (src && !keep.has(src.key)) { keep.add(src.key); walk(src); } } };
+      for (const nd of ns) walk(nd);
+      const up = nodes.filter((nd) => keep.has(nd.key) && !own.has(nd.key));
+      return { num, ns, part: { label: `L${num}`, nodes: [...ns, ...up, ...loose], own: ns, sink: ns[ns.length - 1], rows: rows.size } };
+    });
+    const folds = ({ num, ns, part }) => {
+      const last = ns.reduce((a, b) => (stepOf(b) > stepOf(a) ? b : a));
+      return lineSteps(part.nodes) < REAL_STEPS && real.some((o) => rowOf(o) !== num && o.from.some((f) => refOf(f) === last.key));
+    };
+    const kept = parts.filter((p) => !folds(p));
+    return (kept.length ? kept : parts).map((p) => p.part);
+  }
   const seen = new Set();
   const sinks = [];
   for (const nd of real) {
@@ -177,6 +196,8 @@ export function collectLines(model) {
       const all = grp.nodes;
       const clusterDefs = g.keys.map((k) => ch.clusters[k]).filter(Boolean);
       const parts = splitChains(all);
+      // a numbered cluster keeps its row labels when folding leaves it one row
+      const multi = parts.length > 1 || (parts[0]?.rows || 0) > 1;
       for (const part of parts) {
         const nodes = part.nodes;
         const crossings = [];
@@ -189,7 +210,7 @@ export function collectLines(model) {
         for (const n2 of nodes) for (const f of n2.from) outKeys.add(refOf(f));
         const leaf = (nd) => !nd.link && !outKeys.has(nd.key) && nd.from.length && !['info', 'by', 'ret', 'dest', 'raw'].includes(nd.kind);
         let products;
-        if (parts.length > 1 && part.sink) products = [part.sink];
+        if (multi && part.sink) products = [part.sink];
         else {
           products = nodes.filter((nd) => !nd.link && nd.kind === 'product' && nd.res && !nd.machine && !grp.joined.has(nd.key));
           if (!products.length) products = nodes.filter((nd) => leaf(nd) && nd.res && !nd.machine);
@@ -197,9 +218,9 @@ export function collectLines(model) {
         const name = ch.clusters[g.keys[0]]?.name || g.keys[0];
         const lineId = ch.clusters[g.keys[0]]?.line;
         lines.push({
-          era, cluster, clusters: g.keys, id: `${era}.${cluster}${parts.length > 1 ? `#${part.label}` : ''}`, name: parts.length > 1 ? `${name}: ${part.label}` : name,
-          multi: parts.length > 1, nodes, crossings, products,
-          ...tagsOf(nodes, part.sink, clusterDefs),
+          era, cluster, clusters: g.keys, id: `${era}.${cluster}${multi ? `#${part.label}` : ''}`, name: multi ? `${name}: ${part.label}` : name,
+          multi, nodes, crossings, products,
+          ...tagsOf(part.own || nodes, part.sink, clusterDefs),
           lineId: lineId ?? '',
           steps: lineSteps(nodes),
           mbs: [...new Set(nodes.filter((nd) => !nd.link && (isMachine(nd))).map((nd) => nd.item))],
@@ -633,7 +654,8 @@ export function judge(l, { used, dup, skipped, endInfo, kind = 'production', rol
   } else if (kind === 'branch') {
     if (!used.size && !cross.length && !l.products.some((p) => p.end)) { verdict = 'fix'; reason = 'branch end has no consumer'; }
     else reason = `branch end of ${l.extends}: ${reason}`;
-  } else if (short && l.keepShort) {
+  } else if (!real && l.keepShort) {
+    // a declared short line stays at any era (#284); the short fix below stays EV+
     reason = `keepShort (${l.keepShort}): ${l.steps} steps; ${reason}`;
   } else if (short) {
     verdict = 'fix'; reason = `only ${l.steps} steps (a real line has ${REAL_STEPS}+)`;

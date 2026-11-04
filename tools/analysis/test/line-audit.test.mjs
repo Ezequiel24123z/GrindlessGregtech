@@ -113,6 +113,15 @@ test('tags: extends branch end, keepShort and fold verdicts', () => {
   assert.equal(judge(line({ steps: 2 }), ctx({ kind: 'production' })).verdict, 'fix');
 });
 
+test('keepShort keeps a short line at any era, before the bypass check; the short fix stays EV+', () => {
+  const skip = ctx({ skipped: [{ res: 'gtceu:x' }] });
+  const ks = judge(line({ era: 'lv', steps: 2, keepShort: 'yield booster' }), skip);
+  assert.equal(ks.verdict, 'keep');
+  assert.match(ks.reason, /keepShort \(yield booster\)/);
+  assert.equal(judge(line({ era: 'lv', steps: 2 }), skip).verdict, 'fix');
+  assert.equal(judge(line({ era: 'lv', steps: 2 }), ctx()).verdict, 'keep');
+});
+
 test('roles: pass and fail per role, and a failed role is judged as production', () => {
   const eu = buildFacts([rec('g', 'gtceu:gen', ['gtceu:fuel'], 'gtceu:x', { euOut: 100 })]);
   const L = (role, extra = {}) => ({ era: 'ev', role, steps: 2, products: [{ res: 'gtceu:p' }], machines: new Set(['gtceu:other']), inner: new Set(), raws: new Set(), ...extra });
@@ -306,6 +315,52 @@ test('splitChains: numbered rows are lines, a cluster with two end products is t
   const two = [n('r', 'raw', 'x'), n('i', 'item', 'm', ['r']), n('p1', 'product', 'a', ['i']), n('p2', 'product', 'b', ['i'])];
   assert.equal(splitChains(two).length, 2);
   assert.equal(splitChains(chain()).length, 1);
+});
+
+// #284: numbered rows walk their ancestors and the links they consume; short feeder rows fold into the row that consumes them
+const M = (key, from, item = 'gtceu:m') => n(key, 'machine', null, from, { item });
+test('splitChains numbered: a row that consumes a link counts the crossing', () => {
+  const m = { chapters: [
+    { file: 'pl_uhv', clusters: { cf: { name: 'CF' } }, nodes: [n('t', 'product', 'gtceu:t', [], { cluster: 'cf' })] },
+    { file: 'pl_uiv', clusters: { a: { name: 'A' } }, nodes: [
+      n('xl', 'item', null, [], { link: true, target: { chapter: 'pl_uhv', cluster: 'cf', key: 't' } }),
+      n('l1_0', 'raw', 'gtceu:r'), M('l1_1', ['l1_0', 'xl']), n('l1_2', 'item', 'gtceu:i', ['l1_1']), M('l1_3', ['l1_2']), n('l1_4', 'product', 'gtceu:p', ['l1_3']),
+      n('l2_0', 'raw', 'gtceu:s'), M('l2_1', ['l2_0']), n('l2_2', 'product', 'gtceu:q', ['l2_1']),
+    ] },
+  ] };
+  const l1 = collectLines(m).find((l) => l.id === 'uiv.a#L1');
+  assert.deepEqual(l1.crossings.map((c) => `${c.era}:${c.key}`), ['uhv:t']);
+});
+
+test('splitChains numbered: a spur row counts its trunk ancestors', () => {
+  const nodes = [
+    n('l1_0', 'raw', 'gtceu:r'), M('l1_1', ['l1_0']), n('l1_2', 'item', 'gtceu:a', ['l1_1']), M('l1_3', ['l1_2']), n('l1_4', 'item', 'gtceu:b', ['l1_3']),
+    M('l1_5', ['l1_4']), n('l1_6', 'product', 'gtceu:c', ['l1_5']),
+    M('l2_5', ['l1_4']), n('l2_6', 'product', 'gtceu:d', ['l2_5']),
+  ];
+  const parts = splitChains(nodes);
+  assert.deepEqual(parts.map((p) => p.label), ['L1', 'L2']);
+  const l2 = parts.find((p) => p.label === 'L2');
+  assert.ok(l2.nodes.some((nd) => nd.key === 'l1_0'));
+  assert.equal(lineSteps(l2.nodes), 3);
+  assert.equal(l2.sink.key, 'l2_6');
+});
+
+test('splitChains numbered: a short row another row consumes folds; a 4-step one stays', () => {
+  const trunk = [n('l1_0', 'item', 'gtceu:h', ['l2_1']), M('l1_1', ['l1_0']), n('l1_2', 'item', 'gtceu:a', ['l1_1']), M('l1_3', ['l1_2']), n('l1_4', 'item', 'gtceu:b', ['l1_3']),
+    M('l1_5', ['l1_4']), n('l1_6', 'item', 'gtceu:c', ['l1_5']), M('l1_7', ['l1_6']), n('l1_8', 'product', 'gtceu:p', ['l1_7'])];
+  const feeder = [n('l2_0', 'raw', 'gtceu:r'), M('l2_1', ['l2_0'])];
+  const other = [n('l3_0', 'raw', 'gtceu:s'), M('l3_1', ['l3_0']), n('l3_2', 'product', 'gtceu:q', ['l3_1'])];
+  const folded = splitChains([...feeder, ...trunk, ...other]);
+  assert.deepEqual(folded.map((p) => p.label), ['L1', 'L3']);
+  assert.equal(lineSteps(folded[0].nodes), 5);
+  // a lone row left by folding keeps its label
+  const m = { chapters: [{ file: 'pl_uxv', clusters: { a: { name: 'A' } }, nodes: [...feeder, ...trunk] }] };
+  assert.deepEqual(collectLines(m).map((l) => l.id), ['uxv.a#L1']);
+  const long = [n('l2_0', 'raw', 'gtceu:r'), M('l2_1', ['l2_0']), n('l2_2', 'item', 'gtceu:x', ['l2_1']), M('l2_3', ['l2_2']), n('l2_4', 'item', 'gtceu:y', ['l2_3']),
+    M('l2_5', ['l2_4']), n('l2_6', 'item', 'gtceu:z', ['l2_5']), M('l2_7', ['l2_6'])];
+  assert.equal(lineSteps(long), 4);
+  assert.deepEqual(splitChains([...long, ...trunk.map((nd) => (nd.key === 'l1_0' ? { ...nd, from: ['l2_7'] } : nd))]).map((p) => p.label), ['L2', 'L1']);
 });
 
 test('parseDesignLines reads the first table only; designReport counts the missing', () => {
