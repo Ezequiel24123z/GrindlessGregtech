@@ -50,8 +50,6 @@ Output item is not one of:
 EUt can't be explicitly set to 0, id: gcyr:(diesel|gasoline)\b
 # ExtendedAE / MEGA Cells: EMC interface loot tables need ProjectE, which the pack does not ship.
 Couldn't parse element loot_tables:(expatternprovider:blocks/ex_emc_interface|megacells:blocks/mega_emc_interface)$
-# Naturalist: its tortoise loot table references minecraft:turtle_scute, which Minecraft 1.20.1 lacks; the loot table is skipped.
-Couldn't parse element loot_tables:naturalist:entities/tortoise$
 # EMI Loot: its mixin config omits minVersion (a mod packaging warning only).
 Mixin config emi_loot\.mixins\.json does not specify "minVersion" property
 # Colossal Chests: the 'uncolossal' advancement has a bad 'location' field; the advancement is skipped.
