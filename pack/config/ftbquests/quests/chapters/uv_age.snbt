@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "uv_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "grindless:pluto_kuiper_chart"
 	id: "3B0B0A09EAE09EEB"
 	order_index: 8

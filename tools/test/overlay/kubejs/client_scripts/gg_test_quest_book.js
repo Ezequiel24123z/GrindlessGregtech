@@ -15,7 +15,7 @@
 //     (openGui(), selectChapter, zoomed out, scrolled to the part to look at): Welcome, Steam Age, the rocket at the end of
 //     HV, the End row of MV, the lunar base in EV, and IV's nuclear half and its planets. Toasts are cleared before each shot.
 //     Screenshots go to kubejs/exported/
-//     (collected with the results).
+//     (collected with the results). Then every quest of every chapter must be visible to the player (visibility()).
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
   var CHM = Java.loadClass('java.util.concurrent.ConcurrentHashMap')
@@ -179,6 +179,35 @@
     return null
   }
 
+  // Every quest of every chapter stays visible to the test player: hide_quest_until_deps_visible on the generated chapters only
+  // routes FTB Quests' visibility through its per-team cache. Also notes the cost of 50 frames' worth of Quest#isVisible calls
+  // on the longest eras (before that flag each call walked the dependency chain back to the book's first quest).
+  function visibility() {
+    var CQF = Java.loadClass('dev.ftb.mods.ftbquests.client.ClientQuestFile')
+    var JSystem = Java.loadClass('java.lang.System')
+    var file = CQF.INSTANCE
+    var data = file.selfTeamData
+    var hidden = []
+    var flagged = 0
+    var chs = file.getAllChapters()
+    for (var i = 0; i < chs.size(); i++) {
+      var ch = chs.get(i)
+      if (ch.isHideQuestUntilDepsVisible()) flagged++
+      var qs = ch.getQuests()
+      for (var j = 0; j < qs.size(); j++) if (!qs.get(j).isVisible(data)) hidden.push(ch.getFilename() + '/' + qs.get(j).getCodeString())
+    }
+    ;['uhv_age', 'maxplus_age'].forEach(function (name) {
+      var ch = findClientChapter(name)
+      if (ch === null) return
+      var qs = ch.getQuests()
+      var t0 = Number(JSystem.nanoTime())
+      for (var k = 0; k < 50; k++) for (var j = 0; j < qs.size(); j++) qs.get(j).isVisible(data)
+      log('client_visibility_cost', 'NOTE', name + ': 50 x ' + qs.size() + ' isVisible calls in ' + ((Number(JSystem.nanoTime()) - t0) / 1e6).toFixed(1) + ' ms')
+    })
+    log('client_visibility', 'NOTE', chs.size() + ' chapters, ' + flagged + ' with hide_quest_until_deps_visible, ' + hidden.length + ' hidden quests')
+    return hidden.length === 0 ? '' : hidden.length + ' quests not visible: ' + hidden.slice(0, 20).join(', ')
+  }
+
   function screenName(mc) {
     var scr = field(mc, ['screen', 'f_91080_'])
     if (scr === null || typeof scr === 'function') return 'none'
@@ -192,7 +221,9 @@
     var b = c.book
     if (b.i >= SHOTS.length) {
       mc.setScreen(null)
-      S.put('bookResult', b.errors.length === 0 ? 'PASS book opened on ' + b.shots.join(', ') + ' (screenshots in kubejs/exported)' : 'FAIL ' + b.errors.join('; '))
+      var hidden = visibility()
+      if (hidden !== '') b.errors.push(hidden)
+      S.put('bookResult', b.errors.length === 0 ? 'PASS book opened on ' + b.shots.join(', ') + ' (screenshots in kubejs/exported); every quest visible' : 'FAIL ' + b.errors.join('; '))
       c.book = null
       return true
     }

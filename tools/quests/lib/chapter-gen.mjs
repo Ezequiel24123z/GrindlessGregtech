@@ -339,6 +339,9 @@ export function renderChapter(world, era, chapter) {
     '\tdefault_quest_shape: ""',
     '\tfilename: ' + str(chapter.filename),
     '\tgroup: ' + str(group),
+    // Every quest stays visible; FTB Quests 2001.4 caches visibility only through this flag. Without it Quest#isVisible walks
+    // the dependency chain back to the book's first quest, several times per quest every frame: late eras ran at 1-3 FPS.
+    '\thide_quest_until_deps_visible: true',
     '\ticon: ' + str(ch.icon),
     '\tid: ' + str(ch.id || newId(era, 'chapter|' + chapter.filename)),
     '\torder_index: ' + order,

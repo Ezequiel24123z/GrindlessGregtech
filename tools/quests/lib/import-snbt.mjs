@@ -17,7 +17,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const QUESTS_DIR = path.resolve(HERE, '..');
 export const BOOK_CHAPTERS = path.resolve(HERE, '../../../pack/config/ftbquests/quests/chapters');
 
-const CHAPTER_KEYS = new Set(['autofocus_id', 'default_hide_dependency_lines', 'default_quest_shape', 'filename', 'group', 'icon', 'id', 'order_index', 'quest_links', 'quests', 'subtitle', 'title']);
+const CHAPTER_KEYS = new Set(['autofocus_id', 'default_hide_dependency_lines', 'default_quest_shape', 'filename', 'group', 'hide_quest_until_deps_visible', 'icon', 'id', 'order_index', 'quest_links', 'quests', 'subtitle', 'title']);
 const QUEST_KEYS = new Set(['dependencies', 'description', 'icon', 'id', 'optional', 'rewards', 'shape', 'size', 'tasks', 'title', 'x', 'y']);
 const TASK_KEYS = new Set(['id', 'type', 'item', 'count', 'dimension']);
 const REWARD_KEYS = new Set(['id', 'type', 'item', 'count', 'xp']);

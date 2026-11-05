@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "uiv_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:uiv_machine_casing"
 	id: "19D3A63D234D284C"
 	order_index: 11

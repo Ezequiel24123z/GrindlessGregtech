@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "uxv_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:uxv_machine_casing"
 	id: "5A3F1380F484E77B"
 	order_index: 12

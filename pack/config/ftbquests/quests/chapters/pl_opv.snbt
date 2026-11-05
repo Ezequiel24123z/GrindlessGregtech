@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_opv"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "grindless:tetron_array"
 	id: "55A7346FC92E7386"
 	order_index: 13

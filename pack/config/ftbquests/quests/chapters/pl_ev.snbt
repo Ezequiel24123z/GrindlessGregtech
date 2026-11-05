@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_ev"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:regolith_cell"
 	id: "13353673592F6D0F"
 	order_index: 4

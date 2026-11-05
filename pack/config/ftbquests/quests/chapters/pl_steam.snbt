@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_steam"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:coke_oven"
 	id: "7B09D354F2129914"
 	order_index: 0

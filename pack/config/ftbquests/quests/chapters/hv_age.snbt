@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "hv_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:refinery"
 	id: "7CD2454BDDCF0DD6"
 	order_index: 3

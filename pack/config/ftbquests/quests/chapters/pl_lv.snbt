@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_lv"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:sulfide_roaster"
 	id: "5D7AEFA3B5E913C9"
 	order_index: 1

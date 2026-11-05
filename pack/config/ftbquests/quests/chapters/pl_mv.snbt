@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_mv"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:mv_vein_drill"
 	id: "3DD4AC1ED2526A8B"
 	order_index: 2

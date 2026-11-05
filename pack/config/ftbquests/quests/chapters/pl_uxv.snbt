@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_uxv"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtnn:spintronic_mainframe"
 	id: "7F9F255C3195C375"
 	order_index: 12

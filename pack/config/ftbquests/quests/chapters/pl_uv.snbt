@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_uv"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:pyroprocessing_cell"
 	id: "512E105EBAED817A"
 	order_index: 8

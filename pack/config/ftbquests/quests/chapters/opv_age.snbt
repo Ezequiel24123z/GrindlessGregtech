@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "opv_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:opv_machine_casing"
 	id: "120F8C9CFD67A41F"
 	order_index: 13

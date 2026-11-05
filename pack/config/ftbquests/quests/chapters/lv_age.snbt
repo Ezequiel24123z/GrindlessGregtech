@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "lv_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:lv_machine_hull"
 	id: "34A0FD45D2A63F82"
 	order_index: 1

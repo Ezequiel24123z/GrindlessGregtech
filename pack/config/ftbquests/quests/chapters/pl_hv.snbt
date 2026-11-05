@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_hv"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:refinery"
 	id: "51F53E667E31552F"
 	order_index: 3

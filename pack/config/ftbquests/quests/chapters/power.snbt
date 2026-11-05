@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "power"
 	group: "7C6BF927E205E2F4"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:lv_steam_turbine"
 	id: "3BAA93BF8B4F3550"
 	order_index: 5

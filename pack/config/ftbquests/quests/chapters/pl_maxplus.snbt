@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_maxplus"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:hyper_assembly_array"
 	id: "1A5FF326AD20CC8C"
 	order_index: 15

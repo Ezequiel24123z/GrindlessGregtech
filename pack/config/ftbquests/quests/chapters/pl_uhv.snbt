@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_uhv"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:high_flux_reactor"
 	id: "3F00026F4534FBA3"
 	order_index: 9

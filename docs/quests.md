@@ -117,6 +117,7 @@ Owner, 2026-11-02: "Cada tier debe ser una sola pestaña/capitulo, no 6 capitulo
 - **One start per chapter.** The first chapter of the book starts with no dependencies; each age chapter starts with a quest that depends on the exit of the previous one (Steam depends on *Bronze*, LV on *LV Steam Turbine*). No quest floats.
 - `dependency_requirement: "one_completed"` only for "any of these routes works".
 - Quests on other tabs (quality of life) that ask for something from an age depend on the quest in that age where they open, not on anything loose.
+- **Visibility is cached.** Generated chapters set `hide_quest_until_deps_visible: true`. Without it, FTB Quests checks each quest's visibility every frame by walking its dependency chain back to the start of the book, which dropped the long late chapters to about 1 fps. Every quest is still visible as long as no quest is hidden and no dependency dangles, and the client quest book test checks both.
 
 ## 6. Tasks
 

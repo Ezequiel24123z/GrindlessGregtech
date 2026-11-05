@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "max_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:max_machine_casing"
 	id: "3B8CF180B26E4F1F"
 	order_index: 14

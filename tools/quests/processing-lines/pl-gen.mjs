@@ -161,6 +161,8 @@ function chapterSnbt(m) {
     '\tdefault_quest_shape: ""',
     '\tfilename: ' + str(m.file),
     '\tgroup: ' + str(groupId(m.groupTitle)),
+    // FTB Quests caches visibility only through this flag (see lib/chapter-gen.mjs); every quest stays visible.
+    '\thide_quest_until_deps_visible: true',
     '\ticon: ' + str(m.icon),
     '\tid: ' + str(m.id),
     '\torder_index: ' + m.order,

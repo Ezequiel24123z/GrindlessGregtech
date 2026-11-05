@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "iv_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:fission_reactor"
 	id: "10A73E7D249CDD67"
 	order_index: 5

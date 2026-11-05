@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_zpm"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:naquadria_refinery"
 	id: "165E6C18BABFC89F"
 	order_index: 7

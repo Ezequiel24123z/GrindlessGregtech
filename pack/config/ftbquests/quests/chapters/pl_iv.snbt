@@ -5,6 +5,7 @@
 	default_quest_shape: ""
 	filename: "pl_iv"
 	group: "3027186E3042DDFB"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:fission_reactor"
 	id: "389DF6C36AF262FD"
 	order_index: 5

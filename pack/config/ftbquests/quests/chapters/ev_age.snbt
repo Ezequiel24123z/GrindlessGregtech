@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "ev_age"
 	group: "3F021F40CD26BF57"
+	hide_quest_until_deps_visible: true
 	icon: "gtceu:ev_vein_drill"
 	id: "36522099DD26AB80"
 	order_index: 4
