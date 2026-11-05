@@ -184,7 +184,6 @@
   // on the longest eras (before that flag each call walked the dependency chain back to the book's first quest).
   function visibility() {
     var CQF = Java.loadClass('dev.ftb.mods.ftbquests.client.ClientQuestFile')
-    var JSystem = Java.loadClass('java.lang.System')
     var file = CQF.INSTANCE
     var data = file.selfTeamData
     var hidden = []
@@ -200,9 +199,9 @@
       var ch = findClientChapter(name)
       if (ch === null) return
       var qs = ch.getQuests()
-      var t0 = Number(JSystem.nanoTime())
+      var t0 = Date.now()
       for (var k = 0; k < 50; k++) for (var j = 0; j < qs.size(); j++) qs.get(j).isVisible(data)
-      log('client_visibility_cost', 'NOTE', name + ': 50 x ' + qs.size() + ' isVisible calls in ' + ((Number(JSystem.nanoTime()) - t0) / 1e6).toFixed(1) + ' ms')
+      log('client_visibility_cost', 'NOTE', name + ': 50 x ' + qs.size() + ' isVisible calls in ' + (Date.now() - t0) + ' ms')
     })
     log('client_visibility', 'NOTE', chs.size() + ' chapters, ' + flagged + ' with hide_quest_until_deps_visible, ' + hidden.length + ' hidden quests')
     return hidden.length === 0 ? '' : hidden.length + ' quests not visible: ' + hidden.slice(0, 20).join(', ')
@@ -221,7 +220,8 @@
     var b = c.book
     if (b.i >= SHOTS.length) {
       mc.setScreen(null)
-      var hidden = visibility()
+      var hidden
+      try { hidden = visibility() } catch (e) { hidden = 'visibility check threw: ' + e }
       if (hidden !== '') b.errors.push(hidden)
       S.put('bookResult', b.errors.length === 0 ? 'PASS book opened on ' + b.shots.join(', ') + ' (screenshots in kubejs/exported); every quest visible' : 'FAIL ' + b.errors.join('; '))
       c.book = null
