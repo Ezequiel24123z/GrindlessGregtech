@@ -17,6 +17,7 @@ const CHAPTER = `{
 \tdefault_quest_shape: ""
 \tfilename: "tst_age"
 \tgroup: "3F021F40CD26BF57"
+\thide_quest_until_deps_visible: true
 \ticon: "minecraft:stone"
 \tid: "1000000000000000"
 \torder_index: 7
