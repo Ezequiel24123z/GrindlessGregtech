@@ -21365,11 +21365,6 @@ hash = "f8f3c1eaf7e42e97410fda02dab3d01b1a4ab94629f6e4d08379712c62c57564"
 metafile = true
 
 [[files]]
-file = "mods/inventory-profiles-next.pw.toml"
-hash = "bd9bb0f70ee4f97f44a0ccd67d639c8e7cc4aeb99412324f10325ed88fc509df"
-metafile = true
-
-[[files]]
 file = "mods/iron-furnaces.pw.toml"
 hash = "2c92777a27ff2be54fcc77cf20a0d51d8dfda0daf4cb652f003e8ba0d33e338c"
 metafile = true
@@ -21422,11 +21417,6 @@ metafile = true
 [[files]]
 file = "mods/legendary-tooltips.pw.toml"
 hash = "e30db6c8a93c294a526dc5be26546aad76cf366ce925030795c952f1ea421f9b"
-metafile = true
-
-[[files]]
-file = "mods/libipn.pw.toml"
-hash = "02f25b50a3aec9e2a41c570fdc33423025f9c63c65e6d2d006bba48b58c0e745"
 metafile = true
 
 [[files]]
