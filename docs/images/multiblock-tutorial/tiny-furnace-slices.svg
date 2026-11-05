@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="390" viewBox="0 0 600 390" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="14" y="28" font-size="16" font-weight="700">A tiny example machine (3 x 3 x 3): slice by slice</text>
+<text x="14" y="56" font-size="12" fill="#555">Each slice as you see it standing in front of the controller: characters left → right, rows bottom → top.</text>
+<text x="14" y="80" font-size="12.5" font-weight="600">Slice 1 · back</text>
+<rect x="14" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="26" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="38" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="50" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="62" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="74" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="14" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="26" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="38" y="110" width="24" height="24" fill="#9fd6ea" stroke="#888" stroke-width="0.6" fill-opacity="0.6"/>
+<text x="50" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">G</text>
+<rect x="62" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="74" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="14" y="86" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="26" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="38" y="86" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="50" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="62" y="86" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="74" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<text x="112" y="80" font-size="12.5" font-weight="600">Slice 2</text>
+<rect x="112" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="124" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="136" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="148" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="160" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="172" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="112" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="124" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="136" y="110" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="148" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="160" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="172" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="112" y="86" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="124" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="136" y="86" width="24" height="24" fill="#4a4a4a" stroke="#888" stroke-width="0.6"/>
+<text x="148" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">M</text>
+<rect x="160" y="86" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="172" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<text x="210" y="80" font-size="12.5" font-weight="600">Slice 3 · front</text>
+<rect x="210" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="222" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="234" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="246" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="258" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="270" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="210" y="110" width="24" height="24" fill="#5aa864" stroke="#888" stroke-width="0.6"/>
+<text x="222" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">E</text>
+<rect x="234" y="110" width="24" height="24" fill="#e8a33d" stroke="#888" stroke-width="0.6"/>
+<text x="246" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">S</text>
+<rect x="258" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="270" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="210" y="86" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="222" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="234" y="86" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="246" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="258" y="86" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="270" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<text x="14" y="193" font-size="13" font-weight="600">Legend</text>
+<rect x="14" y="204" width="20" height="20" fill="#e8a33d" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="218.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">S</text>
+<text x="44" y="218.5" font-size="12">controller (the block you click to open the machine) (1 cell)</text>
+<rect x="14" y="230" width="20" height="20" fill="#cfc9b0" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="244.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<text x="44" y="244.5" font-size="12">heatproof machine casing (22 cells)</text>
+<rect x="14" y="256" width="20" height="20" fill="#9fd6ea" stroke="#555" stroke-width="0.8" fill-opacity="0.55"/>
+<text x="24" y="270.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">G</text>
+<text x="44" y="270.5" font-size="12">tempered glass (1 cell)</text>
+<rect x="14" y="282" width="20" height="20" fill="#5aa864" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="296.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">E</text>
+<text x="44" y="296.5" font-size="12">energy hatch ×1 (1 cell)</text>
+<rect x="14" y="308" width="20" height="20" fill="#4a4a4a" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="322.5" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">M</text>
+<text x="44" y="322.5" font-size="12">muffler hatch ×1 (1 cell)</text>
+<rect x="14" y="334" width="20" height="20" fill="#ffffff" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="348.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">#</text>
+<text x="44" y="348.5" font-size="12">air: must stay empty (1 cell)</text>
+<text x="14" y="372" font-size="11" fill="#666">A blank cell means any block can go there.</text>
+</svg>

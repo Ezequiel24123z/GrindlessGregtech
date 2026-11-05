@@ -1,0 +1,317 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="732" height="529" viewBox="0 0 732 529" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="14" y="28" font-size="16" font-weight="700">gtceu:submerged_arc_furnace: slice by slice</text>
+<text x="14" y="56" font-size="12" fill="#555">Each slice as you see it standing in front of the controller: characters left → right, rows bottom → top.</text>
+<text x="14" y="80" font-size="12.5" font-weight="600">Slice 1 · back</text>
+<rect x="14" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="26" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="38" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="50" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="62" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="74" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="86" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="98" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="110" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="122" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="14" y="182" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="26" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="38" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="50" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="62" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="74" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="86" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="98" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="110" y="182" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="122" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="14" y="158" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="26" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="38" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="50" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="62" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="74" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="86" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="98" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="110" y="158" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="122" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="14" y="134" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="26" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="38" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="50" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="62" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="74" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="86" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="98" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="110" y="134" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="122" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="14" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="26" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="38" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="50" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="62" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="74" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="86" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="98" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="110" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="122" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="14" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="38" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="62" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="86" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="110" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<text x="160" y="80" font-size="12.5" font-weight="600">Slice 2</text>
+<rect x="160" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="172" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="184" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="196" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="208" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="220" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="232" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="244" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="256" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="268" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="160" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="172" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="184" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="196" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="208" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="220" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="232" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="244" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="256" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="268" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="160" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="172" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="184" y="158" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="196" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="208" y="158" width="24" height="24" fill="#c8742c" stroke="#888" stroke-width="0.6"/>
+<text x="220" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">C</text>
+<rect x="232" y="158" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="244" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="256" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="268" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="160" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="172" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="184" y="134" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="196" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="208" y="134" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="220" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="232" y="134" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="244" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="256" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="268" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="160" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="172" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="184" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="196" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="208" y="110" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="220" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="232" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="244" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="256" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="268" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="160" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="184" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="208" y="86" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="220" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="232" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="256" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<text x="306" y="80" font-size="12.5" font-weight="600">Slice 3</text>
+<rect x="306" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="318" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="330" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="342" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="354" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="366" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="378" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="390" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="402" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="414" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="306" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="318" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="330" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="342" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="354" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="366" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="378" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="390" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="402" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="414" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="306" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="318" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="330" y="158" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="342" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="354" y="158" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="366" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="378" y="158" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="390" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="402" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="414" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="306" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="318" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="330" y="134" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="342" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="354" y="134" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="366" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="378" y="134" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="390" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="402" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="414" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="306" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="318" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="330" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="342" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="354" y="110" width="24" height="24" fill="#6f8aa6" stroke="#888" stroke-width="0.6"/>
+<text x="366" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">P</text>
+<rect x="378" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="390" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="402" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="414" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="306" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="330" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="354" y="86" width="24" height="24" fill="#4a4a4a" stroke="#888" stroke-width="0.6"/>
+<text x="366" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">M</text>
+<rect x="378" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="402" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<text x="452" y="80" font-size="12.5" font-weight="600">Slice 4</text>
+<rect x="452" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="464" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="476" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="488" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="500" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="512" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="524" y="206" width="24" height="24" fill="#a8553c" stroke="#888" stroke-width="0.6"/>
+<text x="536" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<rect x="548" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="560" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="452" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="464" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="476" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="488" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="500" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="512" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="524" y="182" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="536" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="548" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="560" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="452" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="464" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="476" y="158" width="24" height="24" fill="#c8742c" stroke="#888" stroke-width="0.6"/>
+<text x="488" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">C</text>
+<rect x="500" y="158" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="512" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="524" y="158" width="24" height="24" fill="#c8742c" stroke="#888" stroke-width="0.6"/>
+<text x="536" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">C</text>
+<rect x="548" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="560" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="452" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="464" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="476" y="134" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="488" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="500" y="134" width="24" height="24" fill="#ffffff" stroke="#888" stroke-width="0.6"/>
+<text x="512" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#999">#</text>
+<rect x="524" y="134" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="536" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="548" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="560" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="452" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="464" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="476" y="110" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="488" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="500" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="512" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="524" y="110" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="536" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="548" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="560" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="452" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="476" y="86" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="488" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="500" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="524" y="86" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="536" y="102.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="548" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<text x="598" y="80" font-size="12.5" font-weight="600">Slice 5 · front</text>
+<rect x="598" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="610" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="622" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="634" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="646" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="658" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="670" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="682" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="694" y="206" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="706" y="222.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="598" y="182" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="610" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="622" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="634" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="646" y="182" width="24" height="24" fill="#e8a33d" stroke="#888" stroke-width="0.6"/>
+<text x="658" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">S</text>
+<rect x="670" y="182" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="682" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="694" y="182" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="706" y="198.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="598" y="158" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="610" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="622" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="634" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="646" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="658" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="670" y="158" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="682" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="694" y="158" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="706" y="174.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="598" y="134" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="610" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="622" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="634" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="646" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="658" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="670" y="134" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="682" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="694" y="134" width="24" height="24" fill="#8a939c" stroke="#888" stroke-width="0.6"/>
+<text x="706" y="150.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<rect x="598" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="610" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="622" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="634" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="646" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="658" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="670" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="682" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="694" y="110" width="24" height="24" fill="#cfc9b0" stroke="#888" stroke-width="0.6"/>
+<text x="706" y="126.8" font-size="13.2" font-family="Consolas, monospace" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<rect x="598" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="622" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="646" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="670" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<rect x="694" y="86" width="24" height="24" fill="#f3f3f3" stroke="#888" stroke-width="0.6"/>
+<text x="14" y="265" font-size="13" font-weight="600">Legend</text>
+<rect x="14" y="276" width="20" height="20" fill="#e8a33d" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="290.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">S</text>
+<text x="44" y="290.5" font-size="12">controller (the block you click to open the machine) (1 cell)</text>
+<rect x="14" y="302" width="20" height="20" fill="#cfc9b0" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="316.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">X</text>
+<text x="44" y="316.5" font-size="12">heatproof machine casing (at least 66); hatches go in these cells too: energy hatch ×2, input</text>
+<text x="44" y="331.5" font-size="12">bus ×1, input hatch ×1, output bus ×1, output hatch ×1 (72 cells)</text>
+<rect x="14" y="343" width="20" height="20" fill="#a8553c" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="357.5" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">B</text>
+<text x="44" y="357.5" font-size="12">firebricks (9 cells)</text>
+<rect x="14" y="369" width="20" height="20" fill="#c8742c" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="383.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">C</text>
+<text x="44" y="383.5" font-size="12">cupronickel coil block (3 cells)</text>
+<rect x="14" y="395" width="20" height="20" fill="#8a939c" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="409.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">F</text>
+<text x="44" y="409.5" font-size="12">steel frame box (21 cells)</text>
+<rect x="14" y="421" width="20" height="20" fill="#6f8aa6" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="435.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">P</text>
+<text x="44" y="435.5" font-size="12">steel pipe casing (1 cell)</text>
+<rect x="14" y="447" width="20" height="20" fill="#4a4a4a" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="461.5" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">M</text>
+<text x="44" y="461.5" font-size="12">muffler hatch ×1 (1 cell)</text>
+<rect x="14" y="473" width="20" height="20" fill="#ffffff" stroke="#555" stroke-width="0.8"/>
+<text x="24" y="487.5" font-size="12" font-weight="700" text-anchor="middle" fill="#222">#</text>
+<text x="44" y="487.5" font-size="12">air: must stay empty (21 cells)</text>
+<text x="14" y="511" font-size="11" fill="#666">A blank cell means any block can go there.</text>
+</svg>

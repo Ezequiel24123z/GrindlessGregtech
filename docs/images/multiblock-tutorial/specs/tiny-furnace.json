@@ -1,0 +1,17 @@
+{
+  "id": "toy:tiny_furnace",
+  "title": "A tiny example machine (3 x 3 x 3)",
+  "slices": [
+    ["XXX", "XGX", "XXX"],
+    ["XXX", "X#X", "XMX"],
+    ["XXX", "ESX", "XXX"]
+  ],
+  "symbols": {
+    "S": { "kind": "controller" },
+    "X": { "kind": "blocks", "blocks": ["gtceu:heatproof_machine_casing"] },
+    "G": { "kind": "blocks", "blocks": ["gtceu:tempered_glass"] },
+    "E": { "kind": "part", "ability": "energy_input", "limits": { "exact": 1 } },
+    "M": { "kind": "part", "ability": "muffler", "limits": { "exact": 1 } },
+    "#": { "kind": "air" }
+  }
+}

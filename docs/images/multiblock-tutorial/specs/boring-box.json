@@ -1,0 +1,15 @@
+{
+  "id": "toy:boring_box",
+  "title": "Before: a plain 5 x 6 x 5 box",
+  "slices": [
+    ["XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX"],
+    ["XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX"],
+    ["XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX"],
+    ["XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX"],
+    ["XXXXX", "XXSXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX"]
+  ],
+  "symbols": {
+    "S": { "kind": "controller" },
+    "X": { "kind": "blocks", "blocks": ["gtceu:heatproof_machine_casing"] }
+  }
+}
