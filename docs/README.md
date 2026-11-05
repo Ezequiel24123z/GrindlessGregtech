@@ -16,6 +16,7 @@ Players only need the [README](../README.md). This folder is for anyone curious 
 ## Development
 
 - [STATUS.md](STATUS.md): where the project stands and what is still open.
+- [multiblock-tutorial.md](multiblock-tutorial.md): how to add or improve a multiblock, step by step.
 - [testing](testing/): the test bench, the validation server and how to run them.
 - [quality](quality/): the standards for recipes, structures, items, EMI pages and sounds.
 - [reforge](reforge/): the v1.0.0 rework, including the cost model, the line audit and the asset audit.
