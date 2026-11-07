@@ -1,14 +1,9 @@
-name = "Crafting Station: J/EMI Edition Updated"
-filename = "craftingstationjei-1.20.1-Forge-2.2.1.jar"
+name = "Crafting Station: J/EMI Edition Updated (Grindless patch gg1)"
+filename = "craftingstationjei-1.20.1-Forge-2.2.1-gg1.jar"
 side = "both"
 pin = true
 
 [download]
-url = "https://cdn.modrinth.com/data/rc8HlDUK/versions/6HnKGwNa/craftingstationjei-1.20.1-Forge-2.2.1.jar"
+url = "https://github.com/Ezequiel24123z/Crafting-Station-JEI-Edition/releases/download/gg1/craftingstationjei-1.20.1-Forge-2.2.1-gg1.jar"
 hash-format = "sha512"
-hash = "df40766fddadc3ec659fc4e383c0a79c9e981212a3a5f48f457f5ccf33c31b931c1e8d89cf687375bf307c27434d4531fecfde37ff2850b45fff1ad803ed8200"
-
-[update]
-[update.modrinth]
-mod-id = "rc8HlDUK"
-version = "6HnKGwNa"
+hash = "0b0e50f6d852e30968056ee1e84136352ca540166bba413676f230016cc20d2559c4a340cb507b09975cabb583d1469d019456a1a6f6e9256d5730187badc1d1"
