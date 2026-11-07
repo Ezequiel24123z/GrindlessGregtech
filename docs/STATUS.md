@@ -53,6 +53,15 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions that must report back use the default agent: the `implementer` agent has no cross-session messaging, so its handoff is only its task_complete summary in the session's `events.jsonl`.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration. On 2026-11-02 the Copilot co-author lines were removed from the whole history, so every older hash changed: documentation references follow, dump and run names keep the old hashes.
 
+## Current server (2026-11-07)
+- The play server and persistent bench records moved from Central India to Spain Central: Standard D2as v5,
+  2 vCPU, 8 GiB RAM, Premium SSD P6 (64 GiB). Java uses `-Xms1G -Xmx6G`; FTB's 9 force-loaded chunks keep
+  ticking offline. The former India resource group is deleted; access remains `grindless-vm`.
+- One occasional native server test at a time, with the play service stopped by the integrator with the owner's
+  agreement. The required 8 GiB EMI client belongs on `-Backend home`, not this 8 GiB VM. See `docs/testing/vm.md`.
+- The 90 GiB monthly outgoing traffic quota and the EUR 99 pre-tax Azure budget preserve headroom under the
+  owner's EUR 120 total monthly limit. Daily world backups, clean reboot recovery and quota persistence work.
+
 ## Owner questions (closed: the owner delegated every decision on 2026-11-03)
 The owner asked the integrator to take the decisions that best fit the pack (DECISIONS.md, 2026-11-03, *Owner delegation*). Every default below stands as a decision, not a pending question.
 - **The mega audit's decisions** (#230), answered by the owner on 2026-11-02: MIT licence; worlds may break when needed; no casing chain; the Hyperstargate's plates to about 10x; a denser MAX+ plant; per-team multiplayer (all built in batch 13); the minor items were not answered, so their defaults stand. Principle 7 answered the same day: depth first in every tier (AGENTS.md principle 7, DECISIONS.md).
@@ -89,7 +98,7 @@ The owner asked the integrator to take the decisions that best fit the pack (DEC
 - **Test environment:**
   - GCYR's configured low gravity is not applied in game (menu only); the design no longer claims it.
   - A same-save reopen in the headless test client deadlocks on our fixture's synchronous Rhino callback (not a persistence defect).
-  - The 4 GB test client is tight with EMI plus world generation; leave spark out of copied clients in EMI stages. The EMI audit needs an 8 GB client alone on the VM. The quest book stage runs with the EMI audit's heap (8 GB, one slot; `gg_test_quest_book.js` has the command): every client run includes the mandatory EMI coverage audit, and since batch 14 the audit and the book's screenshots no longer fit the 4 GB test client.
+  - The 4 GB test client is tight with EMI plus world generation; leave spark out of copied clients in EMI stages. The EMI audit needs an 8 GB client alone on the home backend: the current play VM has only 8 GiB total. The quest book stage runs with the EMI audit's heap (8 GB, one slot; `gg_test_quest_book.js` has the command): every client run includes the mandatory EMI coverage audit, and since batch 14 the audit and the book's screenshots no longer fit the 4 GB test client.
   - A batch dump for the validator comes from a minimal overlay (`gg_dump.js` only): the full test overlay adds probe recipes, the lava probe among them, that fail the `auto` checks. `--table` must target the existing hidden table so that its `removeRecipes` are kept. Commit a fresh pack index before any VM dump (the VM runs skip the refresh).
   - The bench waits at most 180 s for a marker: a T1 of a longer recipe skips to its end with `setProgress(duration - 20)` once the first output is measured.
   - `gg-vm-run.sh` takes `-LockWaitMin` up to 15 (a larger value fails at once); a fixture that times out stops the rest of its run, so a suspect runs alone. Test bands stay 64 wide in X; a structure that outgrew its band widens Z and Y in its own row (batch 16 grew 157 structures).
