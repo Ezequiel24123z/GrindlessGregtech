@@ -23,10 +23,9 @@
             # force one from this side (or in backends.local.psd1).
             MemoryMax     = ''
             MemorySwapMax = ''
-            # Concurrent server JVMs (one slot per run, own ports and run dir, MemoryMax = (RAM - reserve) / Slots up to
-            # the per-run cap). Measured on the 4 vCPU / 32 GiB VM: 3 runs at once (server or client) pass with about 2x
-            # timeout headroom and 15 GiB free; CPU is the limit (docs/testing/vm.md#sizing). Size it to the VM you use.
-            Slots         = 3
+            # The 2 vCPU / 8 GiB play VM permits one occasional server run, with the play service stopped first.
+            # Client EMI runs need 8 GiB heap plus native memory and belong on the home backend.
+            Slots         = 1
             # Backend that runs instead when this one is unreachable or fails before the suite starts (never after a
             # real test FAIL). -NoFallback disables it for one run.
             Fallback      = 'home'
