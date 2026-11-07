@@ -181,6 +181,10 @@ file = "config/waystones-common.toml"
 hash = "4d675290258544ce6315f869065f23b79985cae1525f0bca91a2e81852e8adb4"
 
 [[files]]
+file = "defaultconfigs/ftbchunks/ftbchunks-world.snbt"
+hash = "8ee8783bc672178eaf8c98869ae5cee654085c989333810c465f7ae00d52d539"
+
+[[files]]
 file = "defaultconfigs/ftbessentials-server.snbt"
 hash = "7982dcf071c7263d4bcfd85711ffb111493ab972f4c8a8388386630082ddff3d"
 
