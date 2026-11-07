@@ -10,6 +10,9 @@ or EUR 97.90 with 21% VAT, without reservations or Spot eviction. The subscripti
 The outgoing traffic quota is 90 GiB per UTC month; once exhausted, non-loopback outgoing traffic is blocked
 until the next month. This keeps the server within Azure's first 100 GB monthly free internet egress allowance;
 that allowance is shared with other Azure resources, not reserved for this VM.
+Even if the free allowance is already used elsewhere, 90 GiB of outgoing traffic at EUR 0.0781/GB adds at most
+about EUR 9.14 including 21% VAT: roughly EUR 107.04 total at the current rates. The Azure budget is EUR 99
+before tax, filtered to `grindless-play-spain`, with owner alerts at 80% and 100%; alerts are not spending caps.
 
 ## Access
 
@@ -34,7 +37,7 @@ that allowance is shared with other Azure resources, not reserved for this VM.
 | `/opt/grindless/tools` | Installed copies of `tools/vm/*.sh` |
 | `/opt/grindless/runtime` | Node (checksum-verified tarball) |
 | `/etc/grindless/bench.env` | This VM's sizing (`GG_BENCH_*`), written once by the bootstrap, then edited by hand |
-| `/usr/local/sbin/grindless-egress-budget`, `/var/lib/grindless/egress-budget.json` | Monthly nftables quota controller and its durable accounting; `grindless-egress-budget-sync.timer` saves usage each minute and resets it at the UTC month boundary |
+| `/usr/local/sbin/grindless-egress-budget`, `/var/lib/grindless/egress-budget.json` | Monthly nftables quota controller and its durable accounting; source and units in `tools/vm/play-budget/`. `grindless-egress-budget-sync.timer` saves usage each minute and resets it at the UTC month boundary |
 | `/var/log/grindless/runs.log` | One `GGCLASS` line per `gg-vm-run.sh` run |
 
 All of it is owned by the bench user (`azureuser`).
@@ -102,6 +105,12 @@ Historical runs on the former validation VM (run ids are the harness `runId`s):
 - Harness scripts (`tools/test/remote/*`): nothing to do; each run uploads them by content hash.
 - VM scripts: `scp tools/vm/*.sh grindless-vm:/opt/grindless/tools/`, then re-run the bootstrap (it changes only
   what is missing) and the health check.
+- Traffic quota: install `tools/vm/play-budget/egress-budget.py` as `/usr/local/sbin/grindless-egress-budget`,
+  its three unit files under `/etc/systemd/system/`, and `play-service.conf` as
+  `/etc/systemd/system/grindless-play.service.d/budget.conf`. Install `nftables`; reload systemd and enable
+  `grindless-egress-budget.service` and `grindless-egress-budget-sync.timer`. Never reset existing usage on an
+  update: use `python3 /usr/local/sbin/grindless-egress-budget reload` to replace the rules while preserving it.
+  Azure platform addresses and the VM's private subnet bypass the quota so management still works at exhaustion.
 - OS updates: `sudo apt-get upgrade`, then reboot and run the health check. Kernel and JDK updates need one server run.
 
 ## Reboot and recovery

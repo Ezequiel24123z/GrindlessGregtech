@@ -1,0 +1,13 @@
+[Unit]
+Description=Monthly 90 GiB outgoing traffic budget
+Before=grindless-play.service
+After=network-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/python3 /usr/local/sbin/grindless-egress-budget start
+ExecStop=/usr/bin/python3 /usr/local/sbin/grindless-egress-budget stop
+
+[Install]
+WantedBy=multi-user.target
