@@ -257,8 +257,8 @@ The 2026-10-25 voice pass (section 8) cut *Read the Recipes* from Welcome (EMI's
 
 Why this order, checked against the recipe dump of v0.4.0:
 
-- **Glass comes after steel.** With GTM's `hardGlassRecipes`, sand does not melt into glass: you need glass dust and the block mold in the alloy smelter, and the mold comes from steel plates. The vein probe and the greenhouse use glass, so the vein drill and the greenhouse come after steel, not before as `docs/eras/steam.md` assumed.
-- **Steam sulfur only comes from the Nether.** Steam macerators (and the electric LV and MV ones) only give the first output (`addOutputLimit`), with no byproducts until HV. Rubber needs sulfur, so the first rubber means a trip to the Nether with a flint and steel, as in GTCP Modern (*S is for Sulfur*). In LV, the centrifuge gets it from the realgar in the copper and tin vein.
+- **Glass comes after steel.** Since v1.5.4 `hardGlassRecipes` is off, so sand smelts into glass in a furnace; the quest still sits after steel because the block mold in the alloy smelter (glass dust, a mold from steel plates) is the machine route. The vein probe and the greenhouse use glass, so the vein drill and the greenhouse come after steel, not before as `docs/eras/steam.md` assumed.
+- **Steam sulfur only comes from the Nether.** Steam macerators (and the electric LV and MV ones) only give the first output (`addOutputLimit`), with no byproducts until HV. Rubber needs sulfur, so the first rubber means a trip to the Nether with a flint and steel (vanilla recipe since v1.5.4), as in GTCP Modern (*S is for Sulfur*). In LV, the centrifuge gets it from the realgar in the copper and tin vein.
 - **Firebricks need the steam compressor** (refractory clay is not pressed by hand), and so does wrought iron (nuggets are not joined by hand).
 - **The Large Bronze Boiler asks for LV circuits:** it hangs off the circuit quest as an optional one.
 

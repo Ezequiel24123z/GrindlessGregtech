@@ -426,7 +426,7 @@
 		{
 			dependencies: ["6D95C40FFB75ABEB"]
 			description: [
-				"Sand won't smelt into glass here. It takes the long way round, through quartz sand and glass dust, and the alloy smelter casts it with the block mold."
+				"Sand smelts into glass in a furnace as in vanilla. The long way round, through quartz sand and glass dust cast with the block mold in the alloy smelter, also works and scales to machines."
 				"Worth it, because the extractor, the vein probe and the greenhouse all want glass."
 			]
 			icon: "minecraft:glass"
@@ -455,7 +455,7 @@
 		{
 			dependencies: ["64373EE5BFA62739"]
 			description: [
-				"This early, the only sulfur is sulfur ore in the Nether. Your steel makes a flint and steel: light a portal, grab some ore and smelt it into dust."
+				"This early, the only sulfur is sulfur ore in the Nether. Craft a flint and steel as in vanilla: light a portal, grab some ore and smelt it into dust."
 				"Bring back extra. At home, sulfur comes out of the realgar in the copper-tin vein, once you have a centrifuge to split it."
 			]
 			icon: "gtceu:sulfur_dust"

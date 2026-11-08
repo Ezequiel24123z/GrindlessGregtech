@@ -281,7 +281,7 @@ export const QUESTS = [
   {
     key: "STEAM_GLASS", id: "64A0425E87F233F6", title: "Glass", icon: "minecraft:glass", deps: ["STEAM_CASTING_MOLDS"], x: 18, y: 0,
     desc: [
-      "Sand won't smelt into glass here. It takes the long way round, through quartz sand and glass dust, and the alloy smelter casts it with the block mold.",
+      "Sand smelts into glass in a furnace as in vanilla. The long way round, through quartz sand and glass dust cast with the block mold in the alloy smelter, also works and scales to machines.",
       "Worth it, because the extractor, the vein probe and the greenhouse all want glass.",
     ],
     tasks: [{ type: "item", id: "018B744EC3166BF6", item: "gtceu:quartz_sand_dust" }, { type: "item", id: "573CDB7EADF7589F", item: "gtceu:glass_dust" }, { type: "item", id: "21A61C6D87C21AE2", item: "minecraft:glass" }],
@@ -298,7 +298,7 @@ export const QUESTS = [
   {
     key: "STEAM_SULFUR_FROM_THE_NETHER", id: "221A824594716C2E", title: "Sulfur from the Nether", icon: "gtceu:sulfur_dust", deps: ["STEAM_STEAM_EXTRACTOR"], x: 22, y: 0,
     desc: [
-      "This early, the only sulfur is sulfur ore in the Nether. Your steel makes a flint and steel: light a portal, grab some ore and smelt it into dust.",
+      "This early, the only sulfur is sulfur ore in the Nether. Craft a flint and steel as in vanilla: light a portal, grab some ore and smelt it into dust.",
       "Bring back extra. At home, sulfur comes out of the realgar in the copper-tin vein, once you have a centrifuge to split it.",
     ],
     tasks: [{ type: "item", id: "20696957C9820316", item: "gtceu:sulfur_dust" }],

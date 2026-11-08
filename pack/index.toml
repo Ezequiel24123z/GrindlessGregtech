@@ -122,7 +122,7 @@ hash = "1915dd7cfe52d3ab7d5f66c61e99947dbf591d895e58ef2cba65c42c8d1cb1b6"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/steam_age.snbt"
-hash = "9233b1bd5d136f73b5687a44d076bd06f662a5eedbd6eb24314471a7f632d82c"
+hash = "6204d0deb27a842bc02a7d2e983d8c54c4dc6e6c8f60d79622028912570d207c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/storage.snbt"
@@ -170,7 +170,7 @@ hash = "2791f469e47423518db67636d05116c6bc63d290198b227980e7d0da1919c086"
 
 [[files]]
 file = "config/gtceu.yaml"
-hash = "20be14e7342b001be811b0b7d86ddcea3d3af0662e62a9ba667709d4cb8d7669"
+hash = "460111449c20b9a61f1fdc43fb562e08bcd101a7d355cf214d66dd1d10b76727"
 
 [[files]]
 file = "config/ironfurnaces-client.toml"
@@ -21010,7 +21010,7 @@ metafile = true
 
 [[files]]
 file = "mods/crafting-station-jei-edition-updated.pw.toml"
-hash = "b0d000721d93c942a8796693aae76ee28dc7072001b7765460d26efe3c1ab88e"
+hash = "7e13262f0db3354f921812d0d4297a4755a6b72bf1e24f9a63354b56acd6e1aa"
 metafile = true
 
 [[files]]

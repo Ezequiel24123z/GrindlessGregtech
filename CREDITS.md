@@ -15,6 +15,7 @@ The pack's own files are released under the MIT License ([LICENSE](LICENSE)). Th
 | packwiz-installer-bootstrap 0.0.3 | packwiz (github.com/packwiz/packwiz-installer-bootstrap) | MIT | Shipped in the Prism instance zip with its full licence text (tools/prism/packwiz-installer-bootstrap.LICENSE.txt); pinned by digest. AF-H #214. |
 | packwiz | packwiz (github.com/packwiz/packwiz) | MIT | Builds the pack index (tools/Get-Packwiz.ps1, pinned by build and digest); not shipped. AF-H #214. |
 | Gregtech Terminals 6.8.5 (gtceuterminal) | Bgame (github.com/BgameXl/gtceu-terminal-addon) | MIT | Installed mod. The Hologram Projector calls its public `BlockPatternReflection` to read GTM's pattern grid; no code copied. |
+| Crafting Station: J/EMI Edition 2.2.1 (patch gg2) | Leclowndu93150 (github.com/Leclowndu93150/Crafting-Station-JEI-Edition), original Crafting Station by its authors | MIT (owner-stated; no LICENSE file found in the fork tree, to confirm) | Installed mod from our fork (github.com/Ezequiel24123z/Crafting-Station-JEI-Edition, tag gg2, source 26d91aa8): grid-aware EMI input sources, server-side fill, coalesced recipe lookups. Attribution kept; upstream credit stays in the fork. |
 
 ## Ideas and processes
 
