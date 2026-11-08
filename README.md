@@ -111,6 +111,8 @@ echo -Xms8G -Xmx8G >> user_jvm_args.txt
 
 The first boot builds the world and takes a couple of minutes; it may log once that `server.properties` could not be loaded, because the file does not exist yet. Teams, wireless energy and travel are handled by the pack's own mods and scripts, so they need nothing extra on the server. Players join with the same pack version as the server.
 
+FTB Chunks keeps chunks marked for force-loading ticking even when every team member is offline. Merely claiming a chunk does not force-load it. The pack sets `force_load_mode: "always"` in `defaultconfigs/ftbchunks/ftbchunks-world.snbt`, without changing claim protection or chunk limits (25 force-loaded chunks per team by default). Existing worlds may override this with their saved configuration: stop the server, set `force_load_mode: "always"` in `<world>/serverconfig/ftbchunks-world.snbt`, then start it again.
+
 To move to a new version, stop the server, back up the `world` folder, and run the packwiz command from step 2 again. Replace `releases` in the URL with a version tag such as `v1.5.3` to stay on one version. Never start an updated world with an older version of the pack.
 
 ## Known issues

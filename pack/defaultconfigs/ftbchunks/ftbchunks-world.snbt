@@ -1,0 +1,4 @@
+{
+	# Keep FTB force-loaded chunks ticking even when every team member is offline.
+	force_load_mode: "always"
+}

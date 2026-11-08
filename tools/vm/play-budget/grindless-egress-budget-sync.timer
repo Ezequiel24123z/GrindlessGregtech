@@ -1,0 +1,10 @@
+[Unit]
+Description=Save monthly outgoing traffic accounting
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Unit=grindless-egress-budget-sync.service
+
+[Install]
+WantedBy=timers.target

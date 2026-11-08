@@ -1,0 +1,8 @@
+[Unit]
+Description=Persist outgoing traffic accounting and reset each UTC month
+Requires=grindless-egress-budget.service
+After=grindless-egress-budget.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/sbin/grindless-egress-budget sync
