@@ -1,6 +1,16 @@
 compat:
   energy:
     enableFEConverters: true
+recipes:
+  # Owner direction: every vanilla crafting recipe GTM removes by config is restored. Machine alternatives stay.
+  disableManualCompression: false
+  hardIronRecipes: false
+  hardAdvancedIronRecipes: false
+  hardGlassRecipes: false
+  nerfPaperCrafting: false
+  removeVanillaTNTRecipe: false
+  flintAndSteelRequireSteel: false
+  harderCharcoalRecipe: false
 worldgen:
   oreVeins:
     infiniteBedrockOresFluids: true
